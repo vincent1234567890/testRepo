@@ -1,0 +1,185 @@
+<?xml version="1.0"?>
+<project name="Javascript compress project" basedir="." default="compile_advanced">
+
+    <taskdef name="jscomp" classname="com.google.javascript.jscomp.ant.CompileTask"
+             classpath="${basedir}/../lib/tools/compiler/compiler.jar"/>
+
+    <target name="compile_advanced">
+        <jscomp compilationLevel="advanced" warning="quiet"
+                debug="false" output="KingFisherH5_advanced.js">
+            <externs dir="${basedir}/../lib/cocos2d">
+                <file name="cocos2d_externs.js"/>
+            </externs>
+            <!-- engine classes -->
+            <sources dir="${basedir}/../lib/cocos2d">
+                <file name="platform/CCClass.js"/>
+                <file name="platform/CCCommon.js"/>
+                <file name="platform/platform.js"/>
+                <file name="platform/miniFramework.js"/>
+                <file name="platform/ZipUtils.js"/>
+                <file name="platform/base64.js"/>
+                <file name="platform/gzip.js"/>
+                <file name="platform/CCMacro.js"/>
+                <file name="platform/CCFileUtils.js"/>
+                <file name="platform/CCTypes.js"/>
+                <file name="cocoa/CCGeometry.js"/>
+                <file name="platform/CCConfig.js"/>
+                <file name="cocoa/CCNS.js"/>
+                <file name="cocoa/CCSet.js"/>
+                <file name="cocoa/CCAffineTransform.js"/>
+                <file name="support/CCPointExtension.js"/>
+                <file name="support/CCUserDefault.js"/>
+                <file name="base_nodes/CCNode.js"/>
+                <file name="base_nodes/CCdomNode.js"/>
+                <file name="base_nodes/CCAtlasNode.js"/>
+                <file name="textures/CCTexture2D.js"/>
+                <file name="textures/CCTextureCache.js"/>
+                <file name="textures/CCTextureAtlas.js"/>
+                <file name="misc_nodes/CCRenderTexture.js"/>
+                <file name="misc_nodes/CCProgressTimer.js"/>
+                <file name="actions/CCAction.js"/>
+                <file name="actions/CCActionInterval.js"/>
+                <file name="actions/CCActionInstant.js"/>
+                <file name="actions/CCActionManager.js"/>
+                <file name="actions/CCActionProgressTimer.js"/>
+                <file name="actions/CCActionEase.js"/>
+                <file name="actions/CCActionGrid.js"/>
+                <file name="actions/CCActionTiledGrid.js"/>
+                <file name="actions/CCActionCatmullRom.js"/>
+                <file name="layers_scenes_transitions_nodes/CCScene.js"/>
+                <file name="layers_scenes_transitions_nodes/CCLayer.js"/>
+                <file name="layers_scenes_transitions_nodes/CCTransition.js"/>
+                <file name="layers_scenes_transitions_nodes/CCTransitionProgress.js"/>
+                <file name="layers_scenes_transitions_nodes/CCTransitionPageTurn.js"/>
+                <file name="sprite_nodes/CCSprite.js"/>
+                <file name="sprite_nodes/CCAnimation.js"/>
+                <file name="sprite_nodes/CCAnimationCache.js"/>
+                <file name="sprite_nodes/CCSpriteFrame.js"/>
+                <file name="sprite_nodes/CCSpriteFrameCache.js"/>
+                <file name="sprite_nodes/CCSpriteBatchNode.js"/>
+                <file name="label_nodes/CCLabelAtlas.js"/>
+                <file name="label_nodes/CCLabelTTF.js"/>
+                <file name="label_nodes/CCLabelBMFont.js"/>
+                <file name="particle_nodes/CCParticleSystem.js"/>
+                <file name="particle_nodes/CCParticleBatchNode.js"/>
+                <file name="particle_nodes/CCParticleSystemQuad.js"/>
+                <file name="particle_nodes/CCParticleExamples.js"/>
+                <file name="touch_dispatcher/CCTouchDelegateProtocol.js"/>
+                <file name="touch_dispatcher/CCTouchHandler.js"/>
+                <file name="touch_dispatcher/CCTouchDispatcher.js"/>
+                <file name="keyboard_dispatcher/CCKeyboardDelegate.js"/>
+                <file name="keyboard_dispatcher/CCKeyboardDispatcher.js"/>
+                <file name="text_input_node/CCIMEDispatcher.js"/>
+                <file name="text_input_node/CCTextFieldTTF.js"/>
+                <file name="CCDirector.js"/>
+                <file name="CCCamera.js"/>
+                <file name="CCScheduler.js"/>
+                <file name="CCLoader.js"/>
+                <file name="CCDrawingPrimitives.js"/>
+                <file name="platform/CCApplication.js"/>
+                <file name="platform/CCSAXParser.js"/>
+                <file name="platform/AppControl.js"/>
+                <file name="menu_nodes/CCMenuItem.js"/>
+                <file name="menu_nodes/CCMenu.js"/>
+                <file name="tileMap_parallax_nodes/CCParallaxNode.js"/>
+            </sources>
+            <sources dir="${basedir}/../lib/CocosDenshion">
+                <file name="SimpleAudioEngine.js"/>
+            </sources>
+
+            <!-- game classes -->
+            <sources dir="${basedir}">
+                <file name="SharedClasses/AutoAdapterScreen.js"/>
+                <!-- loading screen -->
+                <file name="SharedClasses/LoadingScreen.js"/>
+                <!-- shared classes -->
+                <file name="SharedClasses/CCResource.js"/>
+                <file name="SharedClasses/GameConfig.js"/>
+                <file name="SharedClasses/ConstantEnum.js"/>
+                <file name="SharedClasses/GameCtrl.js"/>
+                <file name="SharedClasses/CSpriteLayer.js"/>
+                <file name="SharedClasses/ActorFactory.js"/>
+                <file name="SharedClasses/BaseSprite.js"/>
+                <file name="SharedClasses/BaseActor.js"/>
+                <file name="SharedClasses/BaseFishActor.js"/>
+                <file name="SharedClasses/SPReusablePool.js"/>
+                <file name="SharedClasses/GamePreference.js"/>
+                <file name="SharedClasses/GameSetting.js"/>
+                <file name="SharedClasses/CCSessionController.js"/>
+                <file name="SharedClasses/GameSessionController.js"/>
+                <file name="SharedClasses/FishSeasonSessionController.js"/>
+                <file name="SharedClasses/GameMainSessionController.js"/>
+                <file name="SharedClasses/CCLocalizedString.js"/>
+                <file name="SharedClasses/FishNetCollideHandler.js"/>
+                <file name="SharedClasses/ParticleSystemFactory.js"/>
+
+                <!-- platform -->
+                <file name="SharedClasses/wrapper.js"/>
+                <file name="platform/NativeClient/Nacl.js"/>
+
+                <file name="KingFisher/Resource.js"/>
+
+                <!-- scene -->
+                <file name="KingFisher/Classes/LogoScene.js"/>
+                <file name="KingFisher/Classes/MainMenuScene.js"/>
+                <file name="KingFisher/Classes/GameScene.js"/>
+
+                <!-- layer -->
+                <file name="KingFisher/Classes/AboutLayer.js"/>
+                <file name="KingFisher/Classes/OptionsLayer.js"/>
+                <file name="KingFisher/Classes/StartMenuLayer.js"/>
+                <file name="KingFisher/Classes/LogoWaveLayer.js"/>
+                <file name="KingFisher/Classes/HowToPlayLayer.js"/>
+                <file name="KingFisher/Classes/StageSelectLayer.js"/>
+                <file name="KingFisher/Classes/HelpStageSelLayer.js"/>
+                <file name="KingFisher/Classes/StaticGameUI.js"/>
+                <file name="KingFisher/Classes/UnLockStageLayer.js"/>
+                <file name="KingFisher/Classes/GameBackgroundLayer.js"/>
+                <file name="KingFisher/Classes/ScoreBarLayer.js"/>
+                <file name="KingFisher/Classes/PauseMenuLayer.js"/>
+                <file name="KingFisher/Classes/UserInfoLayer.js"/>
+                <file name="KingFisher/Classes/NumberScrollLabel.js"/>
+                <file name="KingFisher/Classes/TouchLayer.js"/>
+                <file name="KingFisher/Classes/SuperWeaponSelectLayer.js"/>
+                <file name="KingFisher/Classes/ShareImageLayer.js"/>
+                <file name="KingFisher/Classes/CompactUserInfo.js"/>
+                <file name="KingFisher/Classes/AchievementShareLayer.js"/>
+                <file name="KingFisher/Classes/ChestGameLayer.js"/>
+                <file name="KingFisher/Classes/IAP.js"/>
+
+                <!-- actor player -->
+                <file name="KingFisher/Classes/PlayerEntity_Wrapper.js"/>
+                <file name="KingFisher/Classes/PlayerActor.js"/>
+                <file name="KingFisher/Classes/FishNetActor.js"/>
+                <file name="KingFisher/Classes/bulletActor.js"/>
+                <file name="KingFisher/Classes/ProcessSprite.js"/>
+                <file name="KingFisher/Classes/GoldPrizeActor.js"/>
+                <file name="KingFisher/Classes/Starfish.js"/>
+
+
+                <!-- weapon -->
+                <file name="KingFisher/Classes/WeaponManager.js"/>
+                <file name="KingFisher/Classes/Weapon.js"/>
+                <file name="KingFisher/Classes/WeaponCannon.js"/>
+                <file name="KingFisher/Classes/WeaponSpecial.js"/>
+                <file name="KingFisher/Classes/WeaponSpecialRay.js"/>
+                <file name="KingFisher/Classes/WeaponSpecialLevinStorm.js"/>
+
+                <!-- Fish -->
+                <file name="KingFisher/Classes/FishGroup.js"/>
+
+                <!-- tutorial -->
+                <file name="KingFisher/Classes/TutorialConfirmLayer.js"/>
+                <file name="KingFisher/Classes/TutorialHintBackLayer.js"/>
+                <file name="KingFisher/Classes/TutorialSessionController.js"/>
+                <file name="KingFisher/Classes/TutorialHintLayer.js"/>
+                <file name="KingFisher/Classes/TutorialAwardAnimation.js"/>
+
+                <!-- punchbox ad -->
+                <file name="SharedClasses/webKingFisherAd.js"/>
+
+                <file name="main.js"/>
+            </sources>
+        </jscomp>
+    </target>
+</project>

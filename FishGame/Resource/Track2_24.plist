@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>Path1</key>
+		<dict>
+			<key>Offset</key>
+			<array>
+				<dict>
+					<key>actorname</key>
+					<string>PufferActor</string>
+					<key>offset</key>
+					<string>{0, 0}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>PufferActor</string>
+					<key>offset</key>
+					<string>{-45, 0}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>PufferActor</string>
+					<key>offset</key>
+					<string>{-90, 0}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>PufferActor</string>
+					<key>offset</key>
+					<string>{-135, 0}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>AngleFishActor</string>
+					<key>offset</key>
+					<string>{-270, 0}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>AngleFishActor</string>
+					<key>offset</key>
+					<string>{-235, 0}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>PufferActor</string>
+					<key>offset</key>
+					<string>{0, 20}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>PufferActor</string>
+					<key>offset</key>
+					<string>{-45, 20}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>PufferActor</string>
+					<key>offset</key>
+					<string>{-90, 20}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>PufferActor</string>
+					<key>offset</key>
+					<string>{-135, 20}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>AngleFishActor</string>
+					<key>offset</key>
+					<string>{-270, 20}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>AngleFishActor</string>
+					<key>offset</key>
+					<string>{-235, 20}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>AngleFishActor</string>
+					<key>offset</key>
+					<string>{-45, -20}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>AngleFishActor</string>
+					<key>offset</key>
+					<string>{-180, -20}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>AngleFishActor</string>
+					<key>offset</key>
+					<string>{-145, -20}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>AngleFishActor</string>
+					<key>offset</key>
+					<string>{-45, 40}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>AngleFishActor</string>
+					<key>offset</key>
+					<string>{-90, 40}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>AngleFishActor</string>
+					<key>offset</key>
+					<string>{-135, 40}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>AngleFishActor</string>
+					<key>offset</key>
+					<string>{-90, -40}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>AngleFishActor</string>
+					<key>offset</key>
+					<string>{-135, -40}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>AngleFishActor</string>
+					<key>offset</key>
+					<string>{-90, 60}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>AngleFishActor</string>
+					<key>offset</key>
+					<string>{-135, 60}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>AngleFishActor</string>
+					<key>offset</key>
+					<string>{-135, -60}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>AngleFishActor</string>
+					<key>offset</key>
+					<string>{-135, 80}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>AngleFishActor</string>
+					<key>offset</key>
+					<string>{-270, 0}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>AngleFishActor</string>
+					<key>offset</key>
+					<string>{-270, 20}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>AngleFishActor</string>
+					<key>offset</key>
+					<string>{-315, 0}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>AngleFishActor</string>
+					<key>offset</key>
+					<string>{-315, 20}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>AngleFishActor</string>
+					<key>offset</key>
+					<string>{-360, 0}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>AngleFishActor</string>
+					<key>offset</key>
+					<string>{-360, 20}</string>
+				</dict>
+			</array>
+			<key>Radius</key>
+			<array>
+				<string>{150, 100}</string>
+			</array>
+			<key>speed</key>
+			<integer>200</integer>
+			<key>MoveDict</key>
+			<integer>0</integer>
+			<key>onTheRrc</key>
+			<integer>1</integer>
+		</dict>
+	</dict>
+	
+</plist>

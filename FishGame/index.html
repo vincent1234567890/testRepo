@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>KingFisher</title>
+    <!--
+    <meta name="description"
+          content="In KingFisher, you’ll be able to enjoy a deep-ocean experience, catching magnificent species of fishes and creatures the eco-friendly way!"/>
+    <meta name="application-name" content="KingFisher"/>
+    <meta name="msapplication-tooltip"
+          content="In KingFisher, you’ll be able to enjoy a deep-ocean experience, catching magnificent species of fishes and creatures the eco-friendly way!"/>
+    <meta name="msapplication-navbutton-color" content="#659729"/>
+    -->
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            overflow: auto;
+            background: #f3f3f3;
+        }
+
+        #KingFisher {
+            margin: 0 auto;
+            position: relative;
+        }
+
+        #KingFisher .ad {
+            width: 728px;
+            height: 90px;
+            position: absolute;
+            top: -5px;
+            right: -36px;
+            -webkit-transform: scale(0.9);
+            text-align: right;
+            overflow: hidden;
+            display: none;
+        }
+
+        #KingFisher #loadingAd {
+            background: url('Resource/loadingLogo.jpg') no-repeat top center;
+            width: 800px;
+            padding-top: 170px;
+            position: absolute;
+            top: 10px;
+            left: 512px;
+            margin-left: -400px;
+            display: none;
+            z-index: 11111111;
+        }
+
+        #KingFisher #Percent {
+            font-family: Tahoma, Geneva, sans-serif;
+            width: 556px;
+            height: 50px;
+            font-size: 24px;
+            text-align: center;
+            font-weight: bold;
+            margin: 0 auto;
+            color: #4b2b03;
+            z-index: 100;
+            line-height: 50px;
+        }
+
+        #KingFisher .content {
+            width: 300px;
+            height: 250px;
+            border: 1px solid #d7d7d7;
+            padding: 8px;
+            box-shadow: 1px 1px 3px #dfdfdf;
+            margin: 0 auto;
+            -webkit-transform: scale(1.4);
+            border-radius: 5px;
+            margin-top: 80px;
+            text-align: center;
+        }
+
+        #listener {
+            height: 0;
+        }
+    </style>
+
+</head>
+<body>
+
+<div id="KingFisher">
+    <div id="loadingAd">
+        <div id="Percent">Loading... 0%</div>
+        <div class="content" id="companion-ad-300-250">
+            <img src="Resource/LoadingAdBg.jpg"/>
+        </div>
+    </div>
+    <canvas id="gameCanvas" width="1024" height="450"></canvas>
+    <div class="ad" id="ad">
+    </div>
+</div>
+<div id="listener">
+    <embed name="nacl_module" id="nacl" width="0" height="0" src="NaclModule/cocos2dnacl.nmf"
+           type="application/x-nacl"/>
+</div>
+<script src="cocos2d.js"></script>
+</body>
+</html>

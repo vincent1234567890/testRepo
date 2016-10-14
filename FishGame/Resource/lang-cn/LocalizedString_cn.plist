@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>Laguage</key>
+        <string>zh</string>
+        <key>You have got</key>
+        <string>渔网已满载！在离线期间， 你获得的金币累积达最高限额</string>
+        <key>coins when you offline!</key>
+        <string>个。金币将不会继续增加。</string>
+        <key>GameTitle</key>
+        <string>捕鱼达人</string>
+        <key>Support</key>
+        <string>支持</string>
+        <key>Write a review comments</key>
+        <string>如果你喜欢我们的游戏请写个评论</string>
+        <key>Advantage</key>
+        <string>好的</string>
+        <key>Disadvantage</key>
+        <string>以后再说</string>
+        <key>Don&apos;t ask again</key>
+        <string>不要再显示</string>
+        <key>Loading</key>
+        <string>正在连接到webstore...</string>
+        <key>Touch to continue</key>
+        <string>点击屏幕取消操作</string>
+        <key>play again</key>
+        <string>您已经很久没有捕鱼了！ 寂寞的鱼儿在深海等着您的光临！</string>
+        <key>offlineget</key>
+        <string>在你离开期间， 鱼群的迁移给你带来了</string>
+        <key>extergain</key>
+        <string>个金币的额外收入。</string>
+        <key>title</key>
+        <string>天上掉馅饼</string>
+        <key>cancel</key>
+        <string>确定</string>
+        <key>Confirm</key>
+        <string>确定</string>
+        <key>OK</key>
+        <string>确定</string>
+        <key>Cancle</key>
+        <string>取消</string>
+        <key>Cancel</key>
+        <string>取消</string>
+        <key>Warning</key>
+        <string>警告</string>
+        <key>Warning Content</key>
+        <string>你正在使用非法数据， 请重新从webstore下载!</string>
+        <key>StageTip</key>
+        <string>请尝试以下方法:</string>
+        <key>Save</key>
+        <string>保存</string>
+        <key>Save Success</key>
+        <string>保存成功</string>
+        <key>Save To PhotosAlbum</key>
+        <string>已保存到相册</string>
+        <key>Unlock this Stage</key>
+        <string>解锁通知：</string>
+        <key>The State have been unlocked</key>
+        <string>恭喜您场景已解锁</string>
+        <key>Sorry</key>
+        <string>很抱歉！</string>
+        <key>Money is not enough</key>
+        <string>您当前金币不足。</string>
+        <key>Use1000Coin</key>
+        <string>Use1000Coin</string>
+        <key>ShareWihtImage</key>
+        <string>你想把截图分享到哪？</string>
+        <key>buy</key>
+        <string>确认使用1000金币购买?</string>
+        <key>download feature app</key>
+        <string>想要获得%d个免费金币吗? 马上安装%@, 你就能获得%d个金币!</string>
+        <key>ResetHelp</key>
+        <string>教学已重置</string>
+        <key>ui_laserwarning.png</key>
+        <string>ui_laserwarning_cn.png</string>
+        <key>Total Awarding</key>
+        <string>累计大奖</string>
+        <key>Buy any package of golden coins, and win an award</key>
+        <string>购买任意额度的金币， 都有机会获得以上大奖</string>
+        <key>PromotionMessage</key>
+        <string>正值金币促销活动之际， 您额外获得%d金币。</string>
+        <key>IAPTITLE</key>
+        <string>连接错误</string>
+        <key>IAPERROR</key>
+        <string>无法连接到 webstore.</string>
+        <key>Continue</key>
+        <string>继续</string>
+        <key>Lottery</key>
+        <string>幸运卡</string>
+        <key>Lottery Explanations</key>
+        <string>每次购买刮刮卡会得到200到5000不等的金币；发起者和Google公司无关，Google公司也没有以任何方式参与活动。</string>
+        <key>New Weapon!</key>
+        <string>获得新武器</string>
+        <key>Outstanding! You get a Thunderbolt Laser Gun!</key>
+        <string>感谢您升级到捕鱼达人1.6版 赠送您一种新的超级武器，您可以在闪电炮和激光炮之间切换</string>
+        <key>Message Center</key>
+        <string>消息中心</string>
+        <key>No Network Connection</key>
+        <string>No Network Connection</string>
+        <key>No Network Tip</key>
+        <string>网络链接失败!</string>
+        <key>Reward Coins From Ad</key>
+        <string>滚滚金币从天降, 您收获%d金币!</string>
+        <key>Flurry Reward Message</key>
+        <string>下载并打开该应用，您将获得%d个金币</string>
+        <key>New Version Available</key>
+        <string>捕鱼达人有最新版本,您是否更新到最新版本?</string>
+        <key>Tutorial Text Begin</key>
+        <string>欢迎进入教学关，我们将教授 您一些捕鱼的简单操作和技巧。 点击“开始”进行教学，如果您 已经学会请点击“跳过”</string>
+        <key>Tutorial Text Confirm Skip</key>
+        <string>跳过教学关后,您只有在设置界面 重置教学关才能再次进入教学关, 您确定跳过?</string>
+        <key>Tutorial Text Step Finish</key>
+        <string>恭喜您完成该教学步骤!</string>
+        <key>Tutorial Text Step 1</key>
+        <string>瞄准小鱼鼠标点击屏幕 发炮撒网，把小鱼 全部捕捉完。</string>
+        <key>Tutorial Text Step 2.1</key>
+        <string>这些鱼很难抓，把它们 全部捕捉完。</string>
+        <key>Tutorial Text Step 2.2</key>
+        <string>点击+号，提高炮到4级， 把它们全部捕捉完。</string>
+        <key>Tutorial Text Step 3</key>
+        <string>大鱼会挡住炮弹路线，等 大鱼游走，把鱼全部抓完。</string>
+        <key>Tutorial Text Step 4</key>
+        <string>７级炮捕捉鱼的几率很高， 在鱼群游走时，尽可能捕 捉到更多的鱼。</string>
+        <key>Tutorial Text Step 5.1</key>
+        <string>能量条蓄满后会激活激光， 点击发射激光捕捉鲨鱼。</string>
+        <key>Tutorial Text Step 5.2</key>
+        <string>激光发射有延迟，请算好 提前量，再试一次。</string>
+        <key>Tutorial Text Step 5.3</key>
+        <string>教学完毕，接下来为您介 绍每种鱼的分值。</string>
+        <key>Tutorial Text OK</key>
+        <string>确定</string>
+        <key>Tutorial Text Cancel</key>
+        <string>取消</string>
+        <key>Tutorial Text Start</key>
+        <string>开始</string>
+        <key>Tutorial Text Skip</key>
+        <string>跳过</string>
+        <key>Tutorial Text Close</key>
+        <string>关闭</string>
+        <key>Please leave your suggestions and advice to us.</key>
+        <string>请您留下宝贵的建议和意见</string>
+        <key>The following information is valuable for us to confirm the problem. Please keep in on.</key>
+        <string>以下信息有助于我们确认您的问题,建议保留。</string>
+        <key>EB Email Subject</key>
+        <string>EB Email Subject</string>
+        <key>EB Email Meaasge Body</key>
+        <string>恭喜您获得的捕鱼，请通过以下地址使用:\n%@</string>
+        <key>EB Email Redeem Limit</key>
+        <string>对不起!您今天的抢购机会已经用完,请明天再试!</string>
+        <key>EB Email Lottery Limit</key>
+        <string>对不起!您今天的抽奖机会已经用完,请明天再试!</string>
+        <key>Message Center Description</key>
+        <string>文字描述</string>
+        <key>Network Is Not Available</key>
+        <string>网络连接失败，请您稍候再试。</string>
+        <key>Read</key>
+        <string>已读</string>
+        <key>Unread</key>
+        <string>未读</string>
+        <key>Connect Server</key>
+        <string>正在连接服务器...</string>
+        <key>Please Enter Redeen Code</key>
+        <string>请输入兑换码</string>
+        <key>Redeem Successful</key>
+        <string>兑换成功，您获得%d金币</string>
+        <key>Redeem Failed</key>
+        <string>兑换失败，请您重新输入!</string>
+        <key>Redeem Code Used</key>
+        <string>该兑换码已被使用过</string>
+        <key>Redeem Time Out</key>
+        <string>网络连接超时。</string>
+        <key>Redeem Retry</key>
+        <string>重试</string>
+        <key>newscene enter</key>
+        <string>去看看</string>
+        <key>newscene</key>
+        <string>加勒比海渔场解锁了哦！ 您可以使用10分炮哦！ 快去看看吧！</string>
+        <key>Quit Game</key>
+        <string>黄金巨鲨马上要进入该海域了哦？|您还差一点马上要升级了哦!|夏威夷渔场是双倍区哦，不打也去看看嘛|夏威夷渔场惊现黄金剑鱼!!快来捕吧</string>
+        <key>Chrome</key>
+        <string>捕鱼达人只支持Chrome浏览器，请下载Chrome! </string>
+    </dict>
+</plist>
