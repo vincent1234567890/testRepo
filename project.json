@@ -89,7 +89,9 @@
         "lib/common/WebSocketClient.js",
         "lib/common/WebSocketService.js",
         "lib/services/game/GameServices.js",
-        "lib/services/player/PlayerServices.js"
+        "lib/services/player/PlayerServices.js",
+        "lib/modules/simpleEmitter.js",
+        "lib/modules/socketUtils.js"
 
     ]
 }
