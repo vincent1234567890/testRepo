@@ -87,6 +87,8 @@ var GameCtrl = cc.Class.extend({
         if (localNames.indexOf(window.location.hostname) >= 0) {
             gameAPIServerUrl = 'ws://localhost:8080';
         }
+        
+        var gameCtrl = this;
 
         //var webSocket = new WebSocket(gameAPIServerUrl);
         //this.setWebSocket(webSocket);
@@ -133,7 +135,19 @@ var GameCtrl = cc.Class.extend({
                 () => {
                     // Start listening for game events
                     var eventReceiver = socketUtils.listenForEvents(client);
+
+                    // Create a function that makes it easy to send events:
+                    eventReceiver.send = function (event, data) {
+                        data._ = event;
+                        client._connection.send(JSON.stringify(data));
+                    };
+
+                    // So this object has on() and off() functions for receiving messages, and send() for sending them.
+                    gameCtrl.setWebSocket(eventReceiver);
+
+                    // Testing
                     eventReceiver.on('u', console.log);
+                    eventReceiver.send('b', {a: Math.PI / 4});
                 }
             ).catch(console.error.bind(console));
         });
