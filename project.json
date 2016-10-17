@@ -84,7 +84,12 @@
         "src/Classes/WeaponManager.js",
         "src/Classes/WeaponSpecial.js",
         "src/Classes/WeaponSpecialLevinStorm.js",
-        "src/Classes/WeaponSpecialRay.js"
+        "src/Classes/WeaponSpecialRay.js",
+
+        "lib/common/WebSocketClient.js",
+        "lib/common/WebSocketService.js",
+        "lib/services/game/GameServices.js",
+        "lib/services/player/PlayerServices.js"
 
     ]
 }
