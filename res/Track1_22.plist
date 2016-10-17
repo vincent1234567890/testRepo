@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>Path1</key>
+		<dict>
+			<key>Offset</key>
+			<array>
+				<dict>
+					<key>actorname</key>
+					<string>AngleFishActor</string>
+					<key>offset</key>
+					<string>{119, 92}</string>
+					<key>radiusOffset</key>
+					<integer>-80</integer>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>AngleFishActor</string>
+					<key>offset</key>
+					<string>{0, 125}</string>
+					<key>radiusOffset</key>
+					<integer>-80</integer>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>AngleFishActor</string>
+					<key>offset</key>
+					<string>{-119, 92}</string>
+					<key>radiusOffset</key>
+					<integer>-80</integer>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>AngleFishActor</string>
+					<key>offset</key>
+					<string>{175, 0}</string>
+					<key>radiusOffset</key>
+					<integer>-80</integer>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>AngleFishActor</string>
+					<key>offset</key>
+					<string>{-175, 0}</string>
+					<key>radiusOffset</key>
+					<integer>-80</integer>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>AngleFishActor</string>
+					<key>offset</key>
+					<string>{119, -92}</string>
+					<key>radiusOffset</key>
+					<integer>-80</integer>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>AngleFishActor</string>
+					<key>offset</key>
+					<string>{0, -125}</string>
+					<key>radiusOffset</key>
+					<integer>-80</integer>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>AngleFishActor</string>
+					<key>offset</key>
+					<string>{-119, -92}</string>
+					<key>radiusOffset</key>
+					<integer>-80</integer>
+				</dict>
+			</array>
+			<key>Radius</key>
+			<array>
+				<string>{150, 105}</string>
+			</array>
+			<key>speed</key>
+			<integer>200</integer>
+			<key>MoveDict</key>
+			<integer>3</integer>
+			<key>onTheRrc</key>
+			<integer>1</integer>
+		</dict>
+	</dict>
+	
+</plist>

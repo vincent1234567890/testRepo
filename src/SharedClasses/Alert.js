@@ -1,0 +1,3 @@
+AlertTip = cc.Class.extend({
+
+});

@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>frames</key>
+	<dict>
+		
+		<key>jindun_40_01.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{2, 252}, {76, 80}}</string>
+			<key>offset</key>
+			<string>{0, 1}</string>
+			<key>sourceColorRect</key>
+			<string>{{26, 23}, {76, 80}}</string>
+			<key>sourceSize</key>
+			<string>{128, 128}</string>
+		</dict>
+		
+		<key>jindun_40_02.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{158, 220}, {76, 80}}</string>
+			<key>offset</key>
+			<string>{0, 1}</string>
+			<key>sourceColorRect</key>
+			<string>{{26, 23}, {76, 80}}</string>
+			<key>sourceSize</key>
+			<string>{128, 128}</string>
+		</dict>
+		
+		<key>jindun_40_03.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{392, 166}, {76, 80}}</string>
+			<key>offset</key>
+			<string>{0, 1}</string>
+			<key>sourceColorRect</key>
+			<string>{{26, 23}, {76, 80}}</string>
+			<key>sourceSize</key>
+			<string>{128, 128}</string>
+		</dict>
+		
+		<key>jindun_40_04.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{314, 138}, {76, 80}}</string>
+			<key>offset</key>
+			<string>{0, 1}</string>
+			<key>sourceColorRect</key>
+			<string>{{26, 23}, {76, 80}}</string>
+			<key>sourceSize</key>
+			<string>{128, 128}</string>
+		</dict>
+		
+		<key>jindun_50_01.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{236, 138}, {76, 80}}</string>
+			<key>offset</key>
+			<string>{0, 1}</string>
+			<key>sourceColorRect</key>
+			<string>{{26, 23}, {76, 80}}</string>
+			<key>sourceSize</key>
+			<string>{128, 128}</string>
+		</dict>
+		
+		<key>jindun_50_02.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{80, 170}, {76, 80}}</string>
+			<key>offset</key>
+			<string>{0, 1}</string>
+			<key>sourceColorRect</key>
+			<string>{{26, 23}, {76, 80}}</string>
+			<key>sourceSize</key>
+			<string>{128, 128}</string>
+		</dict>
+		
+		<key>jindun_50_03.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{2, 170}, {76, 80}}</string>
+			<key>offset</key>
+			<string>{0, 1}</string>
+			<key>sourceColorRect</key>
+			<string>{{26, 23}, {76, 80}}</string>
+			<key>sourceSize</key>
+			<string>{128, 128}</string>
+		</dict>
+		
+		<key>jindun_50_04.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{158, 138}, {76, 80}}</string>
+			<key>offset</key>
+			<string>{0, 1}</string>
+			<key>sourceColorRect</key>
+			<string>{{26, 23}, {76, 80}}</string>
+			<key>sourceSize</key>
+			<string>{128, 128}</string>
+		</dict>
+		
+		<key>jindun_60_01.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{80, 88}, {76, 80}}</string>
+			<key>offset</key>
+			<string>{0, 1}</string>
+			<key>sourceColorRect</key>
+			<string>{{26, 23}, {76, 80}}</string>
+			<key>sourceSize</key>
+			<string>{128, 128}</string>
+		</dict>
+		
+		<key>jindun_60_02.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{2, 88}, {76, 80}}</string>
+			<key>offset</key>
+			<string>{0, 1}</string>
+			<key>sourceColorRect</key>
+			<string>{{26, 23}, {76, 80}}</string>
+			<key>sourceSize</key>
+			<string>{128, 128}</string>
+		</dict>
+		
+		<key>jindun_60_03.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{414, 84}, {76, 80}}</string>
+			<key>offset</key>
+			<string>{0, 1}</string>
+			<key>sourceColorRect</key>
+			<string>{{26, 23}, {76, 80}}</string>
+			<key>sourceSize</key>
+			<string>{128, 128}</string>
+		</dict>
+		
+		<key>jindun_60_04.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{426, 2}, {76, 80}}</string>
+			<key>offset</key>
+			<string>{0, 1}</string>
+			<key>sourceColorRect</key>
+			<string>{{26, 23}, {76, 80}}</string>
+			<key>sourceSize</key>
+			<string>{128, 128}</string>
+		</dict>
+		
+		<key>tishiguang01.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{219, 76}, {193, 60}}</string>
+			<key>offset</key>
+			<string>{0, -1}</string>
+			<key>sourceColorRect</key>
+			<string>{{11, 13}, {193, 60}}</string>
+			<key>sourceSize</key>
+			<string>{215, 84}</string>
+		</dict>
+		
+		<key>tishiguang02.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{219, 2}, {205, 72}}</string>
+			<key>offset</key>
+			<string>{0, -1}</string>
+			<key>sourceColorRect</key>
+			<string>{{5, 7}, {205, 72}}</string>
+			<key>sourceSize</key>
+			<string>{215, 84}</string>
+		</dict>
+		
+		<key>tishiguang03.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{2, 2}, {215, 84}}</string>
+			<key>offset</key>
+			<string>{0, -0}</string>
+			<key>sourceColorRect</key>
+			<string>{{0, 0}, {215, 84}}</string>
+			<key>sourceSize</key>
+			<string>{215, 84}</string>
+		</dict>
+		
+	</dict>
+	<key>metadata</key>
+	<dict>
+		<key>format</key>
+		<integer>1</integer>
+		<key>size</key>
+		<string>{512, 512}</string>
+	</dict>
+</dict>
+</plist>

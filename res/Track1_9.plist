@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>Path1</key>
+		<dict>
+			<key>Offset</key>
+			<array>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{0, 0}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-45, 0}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-90, 0}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-135, 0}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-180, 0}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-225, 0}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{0, 20}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-45, 20}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-90, 20}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-135, 20}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-180, 20}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-225, 20}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-45, -20}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-90, -20}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-135, -20}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-45, 40}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-90, 40}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-135, 40}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-90, -40}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-135, -40}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-90, 60}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-135, 60}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-135, -60}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-135, 80}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-270, 0}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-270, 20}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-315, 0}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-315, 20}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-360, 0}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-405, 0}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-450, 0}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-495, 0}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-540, 0}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-585, 0}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-360, 20}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-405, 20}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-450, 20}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-495, 20}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-540, 20}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-585, 20}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-405, -20}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-450, -20}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-495, -20}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-405, 40}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-450, 40}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-495, 40}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-450, 60}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-495, 60}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-450, -40}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-495, -40}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-495, -60}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-495, 80}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>ChelonianActor</string>
+					<key>offset</key>
+					<string>{-270, -40}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>ChelonianActor</string>
+					<key>offset</key>
+					<string>{-270, 60}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>PorgyActor</string>
+					<key>offset</key>
+					<string>{0, 100}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-75, 100}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>PorgyActor</string>
+					<key>offset</key>
+					<string>{-150, 100}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-225, 100}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>PorgyActor</string>
+					<key>offset</key>
+					<string>{-300, 100}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-375, 100}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>PorgyActor</string>
+					<key>offset</key>
+					<string>{-450, 100}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-525, 100}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>PorgyActor</string>
+					<key>offset</key>
+					<string>{0, -100}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-75, -100}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>PorgyActor</string>
+					<key>offset</key>
+					<string>{-150, -100}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-225, -100}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>PorgyActor</string>
+					<key>offset</key>
+					<string>{-300, -100}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-375, -100}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>PorgyActor</string>
+					<key>offset</key>
+					<string>{-450, -100}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>SmallFishActor</string>
+					<key>offset</key>
+					<string>{-525, -100}</string>
+				</dict>
+			</array>
+			<key>Radius</key>
+			<array>
+				<string>{300, 200}</string>
+			</array>
+			<key>speed</key>
+			<integer>165</integer>
+			<key>MoveDict</key>
+			<integer>0</integer>
+			<key>onTheRrc</key>
+			<integer>1</integer>
+		</dict>
+	</dict>
+	
+</plist>

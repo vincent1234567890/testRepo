@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>stageNumber</key>
+	<integer>1</integer>
+	<key>oddNumber</key>
+	<integer>1</integer>
+	<key>trackFileName</key>
+	<string>newPath.tracklib</string>
+	<key>useNewWeapon</key>
+	<integer>0</integer>
+	<key>useNewPath</key>
+	<integer>0</integer>
+	<key>attackTable</key>
+	<string>attackTable.csv</string>
+	<key>fishTable</key>
+	<string>fishTable.csv</string>
+	<key>incentiveTable</key>
+	<string>stimulateTable.csv</string>
+</dict>
+</plist>

@@ -1,0 +1,929 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>actionCount</key>
+        <integer>2</integer>
+        <key>actionData</key>
+        <array>
+            <dict>
+                <key>frameCount</key>
+                <integer>10</integer>
+                <key>frames</key>
+                <array>
+                    <dict>
+                        <key>delay</key>
+                        <integer>100</integer>
+                        <key>index</key>
+                        <integer>0</integer>
+                    </dict>
+                    <dict>
+                        <key>delay</key>
+                        <integer>100</integer>
+                        <key>index</key>
+                        <integer>1</integer>
+                    </dict>
+                    <dict>
+                        <key>delay</key>
+                        <integer>100</integer>
+                        <key>index</key>
+                        <integer>2</integer>
+                    </dict>
+                    <dict>
+                        <key>delay</key>
+                        <integer>100</integer>
+                        <key>index</key>
+                        <integer>3</integer>
+                    </dict>
+                    <dict>
+                        <key>delay</key>
+                        <integer>100</integer>
+                        <key>index</key>
+                        <integer>4</integer>
+                    </dict>
+                    <dict>
+                        <key>delay</key>
+                        <integer>100</integer>
+                        <key>index</key>
+                        <integer>5</integer>
+                    </dict>
+                    <dict>
+                        <key>delay</key>
+                        <integer>100</integer>
+                        <key>index</key>
+                        <integer>6</integer>
+                    </dict>
+                    <dict>
+                        <key>delay</key>
+                        <integer>100</integer>
+                        <key>index</key>
+                        <integer>7</integer>
+                    </dict>
+                    <dict>
+                        <key>delay</key>
+                        <integer>100</integer>
+                        <key>index</key>
+                        <integer>8</integer>
+                    </dict>
+                    <dict>
+                        <key>delay</key>
+                        <integer>100</integer>
+                        <key>index</key>
+                        <integer>9</integer>
+                    </dict>
+                </array>
+                <key>loop</key>
+                <true/>
+            </dict>
+            <dict>
+                <key>frameCount</key>
+                <integer>8</integer>
+                <key>frames</key>
+                <array>
+                    <dict>
+                        <key>delay</key>
+                        <integer>40</integer>
+                        <key>index</key>
+                        <integer>10</integer>
+                    </dict>
+                    <dict>
+                        <key>delay</key>
+                        <integer>40</integer>
+                        <key>index</key>
+                        <integer>11</integer>
+                    </dict>
+                    <dict>
+                        <key>delay</key>
+                        <integer>40</integer>
+                        <key>index</key>
+                        <integer>12</integer>
+                    </dict>
+                    <dict>
+                        <key>delay</key>
+                        <integer>40</integer>
+                        <key>index</key>
+                        <integer>13</integer>
+                    </dict>
+                    <dict>
+                        <key>delay</key>
+                        <integer>40</integer>
+                        <key>index</key>
+                        <integer>13</integer>
+                    </dict>
+                    <dict>
+                        <key>delay</key>
+                        <integer>40</integer>
+                        <key>index</key>
+                        <integer>12</integer>
+                    </dict>
+                    <dict>
+                        <key>delay</key>
+                        <integer>40</integer>
+                        <key>index</key>
+                        <integer>11</integer>
+                    </dict>
+                    <dict>
+                        <key>delay</key>
+                        <integer>40</integer>
+                        <key>index</key>
+                        <integer>10</integer>
+                    </dict>
+                </array>
+                <key>loop</key>
+                <false/>
+            </dict>
+        </array>
+        <key>frameCount</key>
+        <integer>14</integer>
+        <key>frameData</key>
+        <array>
+            <dict>
+                <key>collision</key>
+                <dict>
+                    <key>boundingBox</key>
+                    <string>{{0, 0}, {0, 0}}</string>
+                    <key>polyCount</key>
+                    <integer>0</integer>
+                    <key>rectCount</key>
+                    <integer>5</integer>
+                    <key>rectData</key>
+                    <array>
+                        <string>{{-121, -7}, {111, 16}}</string>
+                        <string>{{-10, 5}, {69, 22}}</string>
+                        <string>{{-10, -24}, {68, 27}}</string>
+                        <string>{{59, -4}, {50, 36}}</string>
+                        <string>{{109, 4}, {85, 13}}</string>
+                    </array>
+                </dict>
+                <key>invaild</key>
+                <true/>
+                <key>refptCount</key>
+                <integer>0</integer>
+                <key>tileCount</key>
+                <integer>1</integer>
+                <key>tileData</key>
+                <array>
+                    <dict>
+                        <key>anchorPt</key>
+                        <string>{0.5, 0.5}</string>
+                        <key>angle</key>
+                        <real>0.0</real>
+                        <key>color</key>
+                        <dict>
+                            <key>b</key>
+                            <integer>255</integer>
+                            <key>g</key>
+                            <integer>255</integer>
+                            <key>r</key>
+                            <integer>255</integer>
+                        </dict>
+                        <key>flip</key>
+                        <array>
+                            <false/>
+                            <false/>
+                        </array>
+                        <key>opacity</key>
+                        <integer>255</integer>
+                        <key>position</key>
+                        <string>{42, 0}</string>
+                        <key>scale</key>
+                        <array>
+                            <real>1</real>
+                            <real>1</real>
+                        </array>
+                        <key>tileIndex</key>
+                        <integer>0</integer>
+                    </dict>
+                </array>
+            </dict>
+            <dict>
+                <key>collision</key>
+                <dict>
+                    <key>boundingBox</key>
+                    <string>{{0, 0}, {0, 0}}</string>
+                    <key>polyCount</key>
+                    <integer>0</integer>
+                    <key>rectCount</key>
+                    <integer>5</integer>
+                    <key>rectData</key>
+                    <array>
+                        <string>{{-112, -8}, {87, 16}}</string>
+                        <string>{{-26, 4}, {87, 21}}</string>
+                        <string>{{-27, -20}, {88, 22}}</string>
+                        <string>{{59, -5}, {60, 37}}</string>
+                        <string>{{119, 4}, {61, 12}}</string>
+                    </array>
+                </dict>
+                <key>invaild</key>
+                <true/>
+                <key>refptCount</key>
+                <integer>0</integer>
+                <key>tileCount</key>
+                <integer>1</integer>
+                <key>tileData</key>
+                <array>
+                    <dict>
+                        <key>anchorPt</key>
+                        <string>{0.5, 0.5}</string>
+                        <key>angle</key>
+                        <real>0.0</real>
+                        <key>color</key>
+                        <dict>
+                            <key>b</key>
+                            <integer>255</integer>
+                            <key>g</key>
+                            <integer>255</integer>
+                            <key>r</key>
+                            <integer>255</integer>
+                        </dict>
+                        <key>flip</key>
+                        <array>
+                            <false/>
+                            <false/>
+                        </array>
+                        <key>opacity</key>
+                        <integer>255</integer>
+                        <key>position</key>
+                        <string>{40, 0}</string>
+                        <key>scale</key>
+                        <array>
+                            <real>1</real>
+                            <real>1</real>
+                        </array>
+                        <key>tileIndex</key>
+                        <integer>1</integer>
+                    </dict>
+                </array>
+            </dict>
+            <dict>
+                <key>collision</key>
+                <dict>
+                    <key>boundingBox</key>
+                    <string>{{0, 0}, {0, 0}}</string>
+                    <key>polyCount</key>
+                    <integer>0</integer>
+                    <key>rectCount</key>
+                    <integer>5</integer>
+                    <key>rectData</key>
+                    <array>
+                        <string>{{-120, -9}, {78, 16}}</string>
+                        <string>{{-43, 3}, {79, 22}}</string>
+                        <string>{{-45, -17}, {81, 20}}</string>
+                        <string>{{36, -10}, {63, 35}}</string>
+                        <string>{{100, -3}, {70, 25}}</string>
+                    </array>
+                </dict>
+                <key>invaild</key>
+                <true/>
+                <key>refptCount</key>
+                <integer>0</integer>
+                <key>tileCount</key>
+                <integer>1</integer>
+                <key>tileData</key>
+                <array>
+                    <dict>
+                        <key>anchorPt</key>
+                        <string>{0.5, 0.5}</string>
+                        <key>angle</key>
+                        <real>0.0</real>
+                        <key>color</key>
+                        <dict>
+                            <key>b</key>
+                            <integer>255</integer>
+                            <key>g</key>
+                            <integer>255</integer>
+                            <key>r</key>
+                            <integer>255</integer>
+                        </dict>
+                        <key>flip</key>
+                        <array>
+                            <false/>
+                            <false/>
+                        </array>
+                        <key>opacity</key>
+                        <integer>255</integer>
+                        <key>position</key>
+                        <string>{40, 0}</string>
+                        <key>scale</key>
+                        <array>
+                            <real>1</real>
+                            <real>1</real>
+                        </array>
+                        <key>tileIndex</key>
+                        <integer>2</integer>
+                    </dict>
+                </array>
+            </dict>
+            <dict>
+                <key>collision</key>
+                <dict>
+                    <key>boundingBox</key>
+                    <string>{{0, 0}, {0, 0}}</string>
+                    <key>polyCount</key>
+                    <integer>0</integer>
+                    <key>rectCount</key>
+                    <integer>5</integer>
+                    <key>rectData</key>
+                    <array>
+                        <string>{{-125, -12}, {91, 20}}</string>
+                        <string>{{-34, 2}, {83, 24}}</string>
+                        <string>{{-34, -23}, {82, 24}}</string>
+                        <string>{{49, -9}, {67, 25}}</string>
+                        <string>{{116, 3}, {44, 15}}</string>
+                    </array>
+                </dict>
+                <key>invaild</key>
+                <true/>
+                <key>refptCount</key>
+                <integer>0</integer>
+                <key>tileCount</key>
+                <integer>1</integer>
+                <key>tileData</key>
+                <array>
+                    <dict>
+                        <key>anchorPt</key>
+                        <string>{0.5, 0.5}</string>
+                        <key>angle</key>
+                        <real>0.0</real>
+                        <key>color</key>
+                        <dict>
+                            <key>b</key>
+                            <integer>255</integer>
+                            <key>g</key>
+                            <integer>255</integer>
+                            <key>r</key>
+                            <integer>255</integer>
+                        </dict>
+                        <key>flip</key>
+                        <array>
+                            <false/>
+                            <false/>
+                        </array>
+                        <key>opacity</key>
+                        <integer>255</integer>
+                        <key>position</key>
+                        <string>{38, 0}</string>
+                        <key>scale</key>
+                        <array>
+                            <real>1</real>
+                            <real>1</real>
+                        </array>
+                        <key>tileIndex</key>
+                        <integer>3</integer>
+                    </dict>
+                </array>
+            </dict>
+            <dict>
+                <key>collision</key>
+                <dict>
+                    <key>boundingBox</key>
+                    <string>{{0, 0}, {0, 0}}</string>
+                    <key>polyCount</key>
+                    <integer>0</integer>
+                    <key>rectCount</key>
+                    <integer>5</integer>
+                    <key>rectData</key>
+                    <array>
+                        <string>{{-145, -18}, {101, 36}}</string>
+                        <string>{{-48, 8}, {91, 34}}</string>
+                        <string>{{-46, -33}, {86, 40}}</string>
+                        <string>{{40, -24}, {72, 43}}</string>
+                        <string>{{110, -10}, {118, 42}}</string>
+                    </array>
+                </dict>
+                <key>invaild</key>
+                <true/>
+                <key>refptCount</key>
+                <integer>0</integer>
+                <key>tileCount</key>
+                <integer>1</integer>
+                <key>tileData</key>
+                <array>
+                    <dict>
+                        <key>anchorPt</key>
+                        <string>{0.5, 0.5}</string>
+                        <key>angle</key>
+                        <real>0.0</real>
+                        <key>color</key>
+                        <dict>
+                            <key>b</key>
+                            <integer>255</integer>
+                            <key>g</key>
+                            <integer>255</integer>
+                            <key>r</key>
+                            <integer>255</integer>
+                        </dict>
+                        <key>flip</key>
+                        <array>
+                            <false/>
+                            <false/>
+                        </array>
+                        <key>opacity</key>
+                        <integer>255</integer>
+                        <key>position</key>
+                        <string>{40, -1}</string>
+                        <key>scale</key>
+                        <array>
+                            <real>1</real>
+                            <real>1</real>
+                        </array>
+                        <key>tileIndex</key>
+                        <integer>4</integer>
+                    </dict>
+                </array>
+            </dict>
+            <dict>
+                <key>collision</key>
+                <dict>
+                    <key>boundingBox</key>
+                    <string>{{0, 0}, {0, 0}}</string>
+                    <key>polyCount</key>
+                    <integer>0</integer>
+                    <key>rectCount</key>
+                    <integer>5</integer>
+                    <key>rectData</key>
+                    <array>
+                        <string>{{-112, -10}, {69, 17}}</string>
+                        <string>{{-44, 2}, {90, 19}}</string>
+                        <string>{{-44, -25}, {90, 28}}</string>
+                        <string>{{45, -23}, {45, 40}}</string>
+                        <string>{{90, -17}, {73, 23}}</string>
+                    </array>
+                </dict>
+                <key>invaild</key>
+                <true/>
+                <key>refptCount</key>
+                <integer>0</integer>
+                <key>tileCount</key>
+                <integer>1</integer>
+                <key>tileData</key>
+                <array>
+                    <dict>
+                        <key>anchorPt</key>
+                        <string>{0.5, 0.5}</string>
+                        <key>angle</key>
+                        <real>0.0</real>
+                        <key>color</key>
+                        <dict>
+                            <key>b</key>
+                            <integer>255</integer>
+                            <key>g</key>
+                            <integer>255</integer>
+                            <key>r</key>
+                            <integer>255</integer>
+                        </dict>
+                        <key>flip</key>
+                        <array>
+                            <false/>
+                            <false/>
+                        </array>
+                        <key>opacity</key>
+                        <integer>255</integer>
+                        <key>position</key>
+                        <string>{39, 0}</string>
+                        <key>scale</key>
+                        <array>
+                            <real>1</real>
+                            <real>1</real>
+                        </array>
+                        <key>tileIndex</key>
+                        <integer>5</integer>
+                    </dict>
+                </array>
+            </dict>
+            <dict>
+                <key>collision</key>
+                <dict>
+                    <key>boundingBox</key>
+                    <string>{{0, 0}, {0, 0}}</string>
+                    <key>polyCount</key>
+                    <integer>0</integer>
+                    <key>rectCount</key>
+                    <integer>5</integer>
+                    <key>rectData</key>
+                    <array>
+                        <string>{{-119, -9}, {78, 13}}</string>
+                        <string>{{-45, 0}, {93, 19}}</string>
+                        <string>{{-46, -23}, {96, 23}}</string>
+                        <string>{{48, -20}, {49, 35}}</string>
+                        <string>{{100, -22}, {58, 24}}</string>
+                    </array>
+                </dict>
+                <key>invaild</key>
+                <true/>
+                <key>refptCount</key>
+                <integer>0</integer>
+                <key>tileCount</key>
+                <integer>1</integer>
+                <key>tileData</key>
+                <array>
+                    <dict>
+                        <key>anchorPt</key>
+                        <string>{0.5, 0.5}</string>
+                        <key>angle</key>
+                        <real>0.0</real>
+                        <key>color</key>
+                        <dict>
+                            <key>b</key>
+                            <integer>255</integer>
+                            <key>g</key>
+                            <integer>255</integer>
+                            <key>r</key>
+                            <integer>255</integer>
+                        </dict>
+                        <key>flip</key>
+                        <array>
+                            <false/>
+                            <false/>
+                        </array>
+                        <key>opacity</key>
+                        <integer>255</integer>
+                        <key>position</key>
+                        <string>{40, 0}</string>
+                        <key>scale</key>
+                        <array>
+                            <real>1</real>
+                            <real>1</real>
+                        </array>
+                        <key>tileIndex</key>
+                        <integer>6</integer>
+                    </dict>
+                </array>
+            </dict>
+            <dict>
+                <key>collision</key>
+                <dict>
+                    <key>boundingBox</key>
+                    <string>{{0, 0}, {0, 0}}</string>
+                    <key>polyCount</key>
+                    <integer>0</integer>
+                    <key>rectCount</key>
+                    <integer>5</integer>
+                    <key>rectData</key>
+                    <array>
+                        <string>{{-121, -8}, {85, 16}}</string>
+                        <string>{{-39, 1}, {85, 20}}</string>
+                        <string>{{-39, -17}, {87, 18}}</string>
+                        <string>{{42, -17}, {54, 35}}</string>
+                        <string>{{96, -22}, {68, 23}}</string>
+                    </array>
+                </dict>
+                <key>invaild</key>
+                <true/>
+                <key>refptCount</key>
+                <integer>0</integer>
+                <key>tileCount</key>
+                <integer>1</integer>
+                <key>tileData</key>
+                <array>
+                    <dict>
+                        <key>anchorPt</key>
+                        <string>{0.5, 0.5}</string>
+                        <key>angle</key>
+                        <real>0.0</real>
+                        <key>color</key>
+                        <dict>
+                            <key>b</key>
+                            <integer>255</integer>
+                            <key>g</key>
+                            <integer>255</integer>
+                            <key>r</key>
+                            <integer>255</integer>
+                        </dict>
+                        <key>flip</key>
+                        <array>
+                            <false/>
+                            <false/>
+                        </array>
+                        <key>opacity</key>
+                        <integer>255</integer>
+                        <key>position</key>
+                        <string>{37, 1}</string>
+                        <key>scale</key>
+                        <array>
+                            <real>1</real>
+                            <real>1</real>
+                        </array>
+                        <key>tileIndex</key>
+                        <integer>7</integer>
+                    </dict>
+                </array>
+            </dict>
+            <dict>
+                <key>collision</key>
+                <dict>
+                    <key>boundingBox</key>
+                    <string>{{0, 0}, {0, 0}}</string>
+                    <key>polyCount</key>
+                    <integer>0</integer>
+                    <key>rectCount</key>
+                    <integer>5</integer>
+                    <key>rectData</key>
+                    <array>
+                        <string>{{-121, -6}, {79, 13}}</string>
+                        <string>{{-40, 5}, {88, 13}}</string>
+                        <string>{{-42, -18}, {90, 23}}</string>
+                        <string>{{48, -15}, {52, 34}}</string>
+                        <string>{{99, -18}, {57, 26}}</string>
+                    </array>
+                </dict>
+                <key>invaild</key>
+                <true/>
+                <key>refptCount</key>
+                <integer>0</integer>
+                <key>tileCount</key>
+                <integer>1</integer>
+                <key>tileData</key>
+                <array>
+                    <dict>
+                        <key>anchorPt</key>
+                        <string>{0.5, 0.5}</string>
+                        <key>angle</key>
+                        <real>0.0</real>
+                        <key>color</key>
+                        <dict>
+                            <key>b</key>
+                            <integer>255</integer>
+                            <key>g</key>
+                            <integer>255</integer>
+                            <key>r</key>
+                            <integer>255</integer>
+                        </dict>
+                        <key>flip</key>
+                        <array>
+                            <false/>
+                            <false/>
+                        </array>
+                        <key>opacity</key>
+                        <integer>255</integer>
+                        <key>position</key>
+                        <string>{39, -3}</string>
+                        <key>scale</key>
+                        <array>
+                            <real>1</real>
+                            <real>1</real>
+                        </array>
+                        <key>tileIndex</key>
+                        <integer>8</integer>
+                    </dict>
+                </array>
+            </dict>
+            <dict>
+                <key>collision</key>
+                <dict>
+                    <key>boundingBox</key>
+                    <string>{{0, 0}, {0, 0}}</string>
+                    <key>polyCount</key>
+                    <integer>0</integer>
+                    <key>rectCount</key>
+                    <integer>5</integer>
+                    <key>rectData</key>
+                    <array>
+                        <string>{{-113, -7}, {77, 13}}</string>
+                        <string>{{-35, 3}, {86, 17}}</string>
+                        <string>{{-37, -16}, {89, 22}}</string>
+                        <string>{{52, -9}, {56, 29}}</string>
+                        <string>{{108, -9}, {78, 18}}</string>
+                    </array>
+                </dict>
+                <key>invaild</key>
+                <true/>
+                <key>refptCount</key>
+                <integer>0</integer>
+                <key>tileCount</key>
+                <integer>1</integer>
+                <key>tileData</key>
+                <array>
+                    <dict>
+                        <key>anchorPt</key>
+                        <string>{0.5, 0.5}</string>
+                        <key>angle</key>
+                        <real>0.0</real>
+                        <key>color</key>
+                        <dict>
+                            <key>b</key>
+                            <integer>255</integer>
+                            <key>g</key>
+                            <integer>255</integer>
+                            <key>r</key>
+                            <integer>255</integer>
+                        </dict>
+                        <key>flip</key>
+                        <array>
+                            <false/>
+                            <false/>
+                        </array>
+                        <key>opacity</key>
+                        <integer>255</integer>
+                        <key>position</key>
+                        <string>{39, 1}</string>
+                        <key>scale</key>
+                        <array>
+                            <real>1</real>
+                            <real>1</real>
+                        </array>
+                        <key>tileIndex</key>
+                        <integer>9</integer>
+                    </dict>
+                </array>
+            </dict>
+            <dict>
+                <key>invaild</key>
+                <false/>
+                <key>referencePt</key>
+                <array>
+                    <string>{-89, 13}</string>
+                    <string>{-52, 37}</string>
+                    <string>{-44, -6}</string>
+                    <string>{19, -1}</string>
+                    <string>{13, 35}</string>
+                    <string>{89, 8}</string>
+                    <string>{56, 20}</string>
+                </array>
+                <key>refptCount</key>
+                <integer>7</integer>
+                <key>tileCount</key>
+                <integer>1</integer>
+                <key>tileData</key>
+                <array>
+                    <dict>
+                        <key>anchorPt</key>
+                        <string>{0.5, 0.5}</string>
+                        <key>angle</key>
+                        <real>0.0</real>
+                        <key>color</key>
+                        <dict>
+                            <key>b</key>
+                            <integer>255</integer>
+                            <key>g</key>
+                            <integer>255</integer>
+                            <key>r</key>
+                            <integer>255</integer>
+                        </dict>
+                        <key>flip</key>
+                        <array>
+                            <false/>
+                            <false/>
+                        </array>
+                        <key>opacity</key>
+                        <integer>255</integer>
+                        <key>position</key>
+                        <string>{-24, 33}</string>
+                        <key>scale</key>
+                        <array>
+                            <real>1</real>
+                            <real>1</real>
+                        </array>
+                        <key>tileIndex</key>
+                        <integer>10</integer>
+                    </dict>
+                </array>
+            </dict>
+            <dict>
+                <key>invaild</key>
+                <false/>
+                <key>refptCount</key>
+                <integer>0</integer>
+                <key>tileCount</key>
+                <integer>1</integer>
+                <key>tileData</key>
+                <array>
+                    <dict>
+                        <key>anchorPt</key>
+                        <string>{0.5, 0.5}</string>
+                        <key>angle</key>
+                        <real>0.0</real>
+                        <key>color</key>
+                        <dict>
+                            <key>b</key>
+                            <integer>255</integer>
+                            <key>g</key>
+                            <integer>255</integer>
+                            <key>r</key>
+                            <integer>255</integer>
+                        </dict>
+                        <key>flip</key>
+                        <array>
+                            <false/>
+                            <false/>
+                        </array>
+                        <key>opacity</key>
+                        <integer>255</integer>
+                        <key>position</key>
+                        <string>{2, 32}</string>
+                        <key>scale</key>
+                        <array>
+                            <real>1</real>
+                            <real>1</real>
+                        </array>
+                        <key>tileIndex</key>
+                        <integer>11</integer>
+                    </dict>
+                </array>
+            </dict>
+            <dict>
+                <key>invaild</key>
+                <false/>
+                <key>refptCount</key>
+                <integer>0</integer>
+                <key>tileCount</key>
+                <integer>1</integer>
+                <key>tileData</key>
+                <array>
+                    <dict>
+                        <key>anchorPt</key>
+                        <string>{0.5, 0.5}</string>
+                        <key>angle</key>
+                        <real>0.0</real>
+                        <key>color</key>
+                        <dict>
+                            <key>b</key>
+                            <integer>255</integer>
+                            <key>g</key>
+                            <integer>255</integer>
+                            <key>r</key>
+                            <integer>255</integer>
+                        </dict>
+                        <key>flip</key>
+                        <array>
+                            <false/>
+                            <false/>
+                        </array>
+                        <key>opacity</key>
+                        <integer>255</integer>
+                        <key>position</key>
+                        <string>{-26, -2}</string>
+                        <key>scale</key>
+                        <array>
+                            <real>1</real>
+                            <real>1</real>
+                        </array>
+                        <key>tileIndex</key>
+                        <integer>12</integer>
+                    </dict>
+                </array>
+            </dict>
+            <dict>
+                <key>invaild</key>
+                <false/>
+                <key>refptCount</key>
+                <integer>0</integer>
+                <key>tileCount</key>
+                <integer>1</integer>
+                <key>tileData</key>
+                <array>
+                    <dict>
+                        <key>anchorPt</key>
+                        <string>{0.5, 0.5}</string>
+                        <key>angle</key>
+                        <real>0.0</real>
+                        <key>color</key>
+                        <dict>
+                            <key>b</key>
+                            <integer>255</integer>
+                            <key>g</key>
+                            <integer>255</integer>
+                            <key>r</key>
+                            <integer>255</integer>
+                        </dict>
+                        <key>flip</key>
+                        <array>
+                            <false/>
+                            <false/>
+                        </array>
+                        <key>opacity</key>
+                        <integer>255</integer>
+                        <key>position</key>
+                        <string>{-48, -11}</string>
+                        <key>scale</key>
+                        <array>
+                            <real>1</real>
+                            <real>1</real>
+                        </array>
+                        <key>tileIndex</key>
+                        <integer>13</integer>
+                    </dict>
+                </array>
+            </dict>
+        </array>
+        <key>tileCount</key>
+        <integer>14</integer>
+        <key>tileData</key>
+        <array>
+            <string>{{0, 0}, {387, 95}}</string>
+            <string>{{0, 95}, {385, 93}}</string>
+            <string>{{0, 188}, {386, 95}}</string>
+            <string>{{1, 283}, {381, 100}}</string>
+            <string>{{0, 383}, {384, 94}}</string>
+            <string>{{0, 477}, {386, 98}}</string>
+            <string>{{0, 576}, {384, 93}}</string>
+            <string>{{0, 669}, {383, 101}}</string>
+            <string>{{0, 770}, {378, 98}}</string>
+            <string>{{0, 868}, {383, 100}}</string>
+            <string>{{387, 0}, {261, 174}}</string>
+            <string>{{386, 174}, {370, 192}}</string>
+            <string>{{386, 366}, {306, 211}}</string>
+            <string>{{384, 577}, {236, 191}}</string>
+        </array>
+    </dict>
+</plist>
