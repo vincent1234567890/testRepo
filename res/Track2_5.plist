@@ -1,0 +1,605 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>Path1</key>
+		<dict>
+			<key>Offset</key>
+			<array>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{0, 0}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-40, 0}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-80, 0}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-120, 0}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-160, 0}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-200, 0}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-240, 0}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-280, 0}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-320, 0}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-360, 0}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-400, 0}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-440, 0}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{20, 15}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-20, 15}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-460, 15}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-160, 15}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-200, 15}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-240, 15}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-280, 15}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-320, 15}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-360, 15}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-400, 15}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-160, 30}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-200, 30}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-240, 30}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-280, 30}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-320, 30}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-360, 30}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-400, 30}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-160, 45}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-200, 45}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-240, 45}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-280, 45}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-320, 45}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-360, 45}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-400, 45}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-160, 60}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-200, 60}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-240, 60}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-280, 60}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-320, 60}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-360, 60}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-400, 60}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-200, 75}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-240, 75}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-340, 75}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-380, 75}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-200, 90}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-240, 90}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-240, 90}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-380, 90}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-200, 105}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-240, 105}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-340, 105}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-380, 105}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-200, 120}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-240, 120}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-340, 120}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-380, 120}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-20, -15}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-60, -15}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-100, -15}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-140, -15}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-180, -15}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-220, -15}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-260, -15}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-300, -15}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-340, -15}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-380, -15}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-420, -15}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-40, -30}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-80, -30}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-120, -30}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-160, -30}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-200, -30}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-240, -30}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-280, -30}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-320, -30}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-360, -30}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-400, -30}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-60, -45}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-100, -45}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-140, -45}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-180, -45}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-220, -45}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-260, -45}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-300, -45}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-340, -45}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-380, -45}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-80, -60}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-120, -60}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-160, -60}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-200, -60}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-240, -60}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-280, -60}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-320, -60}</string>
+				</dict>
+				<dict>
+					<key>actorname</key>
+					<string>CroakerActor</string>
+					<key>offset</key>
+					<string>{-360, -60}</string>
+				</dict>
+			</array>
+			<key>Radius</key>
+			<array>
+				<string>{150, 100}</string>
+			</array>
+			<key>speed</key>
+			<integer>200</integer>
+			<key>MoveDict</key>
+			<integer>0</integer>
+			<key>onTheRrc</key>
+			<integer>1</integer>
+		</dict>
+	</dict>
+	
+</plist>

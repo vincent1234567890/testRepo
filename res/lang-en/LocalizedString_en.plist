@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>too short</key>
+	<string>Name length must not be less than 4 characters.</string>
+	<key>too long</key>
+	<string>Name length must not exceed 25 characters.</string>
+	<key>Laguage</key>
+	<string>en</string>
+	<key>You have got</key>
+	<string>You have got</string>
+	<key>coins when you offline!</key>
+	<string> coins while you were offline!\nLet&apos;s go fishing!</string>
+	<key>GameTitle</key>
+	<string>KingFisher</string>
+	<key>Support</key>
+	<string>Support</string>
+	<key>Write a review comments</key>
+	<string>If you like KingFisher please rate it</string>
+	<key>Advantage</key>
+	<string>Rate it</string>
+	<key>Disadvantage</key>
+	<string>Maybe later</string>
+	<key>Don&apos;t ask again</key>
+	<string>Never show this again</string>
+	<key>Loading</key>
+	<string>Connecting to iTunes...</string>
+	<key>Touch to continue</key>
+	<string>Click to cancel</string>
+	<key>play again</key>
+	<string>play again</string>
+	<key>offlineget</key>
+	<string>While you were offline you gained </string>
+	<key>extergain</key>
+	<string> coins!</string>
+	<key>title</key>
+	<string>Welcome Back!</string>
+	<key>cancel</key>
+	<string>Confirm</string>
+	<key>Cancle</key>
+	<string>Cancel</string>
+	<key>Warning</key>
+	<string>Warning</string>
+	<key>Warning Content</key>
+	<string>You are running a pirate version, please download new version from the webstore!</string>
+	<key>Confirm</key>
+	<string>Confirm</string>
+	<key>StageTip</key>
+	<string>Or try another way:</string>
+	<key>Save</key>
+	<string>Save</string>
+	<key>Save Success</key>
+	<string>Save Success</string>
+	<key>Save To PhotosAlbum</key>
+	<string>Save To PhotosAlbum</string>
+	<key>Signature not exist</key>
+	<string>Sorry, the signature does not exist.</string>
+	<key>SaveFailed</key>
+	<string>SaveFailed</string>
+	<key>Illegal input</key>
+	<string>Illegal input</string>
+	<key>Get Chinese name</key>
+	<string>Get Chinese name</string>
+	<key>Get Signatrue</key>
+	<string>Get Signature</string>
+	<key>Gender</key>
+	<string>Gender</string>
+	<key>Your Name</key>
+	<string>Your Name</string>
+	<key>Load From Contacts</key>
+	<string>Load from contacts...</string>
+	<key>Get Chinese Name</key>
+	<string>Get Chinese Name</string>
+	<key>Male</key>
+	<string>Male</string>
+	<key>Female</key>
+	<string>Female</string>
+	<key>Your Chinese Name</key>
+	<string>Your Chinese Name:</string>
+	<key>History</key>
+	<string>History</string>
+	<key>Saved Signature</key>
+	<string>Saved Signature</string>
+	<key>No Network Connection</key>
+	<string>No Network Connection</string>
+	<key>No Network Tip</key>
+	<string>Network Connection Error!</string>
+	<key>OK</key>
+	<string>OK</string>
+	<key>ReGet</key>
+	<string>Not Satisfied?</string>
+	<key>Chinese Name</key>
+	<string>Chinese Name</string>
+	<key>Continue</key>
+	<string>Continue</string>
+	<key>Purchase Failed</key>
+	<string>Purchase Failed</string>
+	<key>Can&apos;t get the Chinese name</key>
+	<string>Sorry, you can&apos;t get Chinese Name from the name you input, please change for another.</string>
+	<key>Can&apos;t get the Image</key>
+	<string>Sorry, you can&apos;t get the signature, Please retry later.</string>
+	<key>Can&apos;t get the signature type</key>
+	<string>Sorry, the server has some problem, Please retry later.</string>
+	<key>Signature</key>
+	<string>Signature</string>
+	<key>Saved</key>
+	<string>Saved</string>
+	<key>Signature not enough</key>
+	<string>Sorry, the signature count for this name is less than 3, do you want to continue?</string>
+	<key>Cancel</key>
+	<string>Cancel</string>
+	<key>Signature no exist</key>
+	<string>Sorry, this signature does not exist.</string>
+	<key>Signature is null</key>
+	<string>Sorry, unable to get any signature for this name.</string>
+	<key>At least firstname and lastname</key>
+	<string>Sorry, you must enter both firstname and lastname.</string>
+	<key>Refresh Failed</key>
+	<string>Sorry, the refresh failed, you could not get the product you have got.</string>
+	<key>Server error Name Get</key>
+	<string>Sorry,the server has some problem, you can&apos;t get Chinese Name from the name you input, Please retry later.</string>
+	<key>Server error</key>
+	<string>Sorry,the server has some problem,  Please retry later.</string>
+	<key>Tip of Content</key>
+	<string>We must post your name to our server to generate a Chinese name for you.(We will never save your information in our server or share with third parties.) \nAre you sure? </string>
+	<key>Yes</key>
+	<string>Yes</string>
+	<key>No</key>
+	<string>No</string>
+	<key>Get HandWritten</key>
+	<string>We provide another version which available for unlimited use of , Click to get it.</string>
+	<key>Tip</key>
+	<string>Tip</string>
+	<key>No charge</key>
+	<string>Please ensure your device is connected to the network. If you haven&apos;t received any signature, please retry and we won&apos;t charge you. </string>
+	<key>Failed Get Signature</key>
+	<string>Failed getting signature, transaction failed. Please try again later. (You can freely retry without charging any money)</string>
+	<key>TipNoFee</key>
+	<string>For no signature was provided during the last time, you can get another signature this time for free.</string>
+	<key>HaveUnCompleteTransaction</key>
+	<string>For no signature was provided during the last time, we are trying to verify to the server so that we can provide you another signature for free. Your patience is appreciated.</string>
+	<key>Remain me</key>
+	<string>Remind me later</string>
+	<key>Have a look</key>
+	<string>Get it now</string>
+	<key>ResetHelp</key>
+	<string>Tutorials has been reset</string>
+	<key>Unlock this Stage</key>
+	<string>Unlock the scene：</string>
+	<key>The State have been unlocked</key>
+	<string>The scene have been unlocked</string>
+	<key>Sorry</key>
+	<string>Sorry!</string>
+	<key>Money is not enough</key>
+	<string>Run out of coins.</string>
+	<key>Use1000Coin</key>
+	<string>Use1000Coin</string>
+	<key>ShareWihtImage</key>
+	<string>What would you like to do with the screenshot?</string>
+	<key>buy</key>
+	<string>Confirm your purchase?</string>
+	<key>download feature app</key>
+	<string>Want %d free Coins? Install %@ and you will get %d bonus Coins!</string>
+	<key>Total Awarding</key>
+	<string>Total Award</string>
+	<key>Buy any package of golden coins, and win an award</key>
+	<string>Buy any package of golden coins and win the award</string>
+	<key>IAPTITLE</key>
+	<string>Connect error</string>
+	<key>IAPERROR</key>
+	<string>Sorry,Can&apos;t connect to iTunes.</string>
+	<key>PromotionMessage</key>
+	<string>Receive %d additional Gold with every purchase!</string>
+	<key>Lottery</key>
+	<string>Coupon</string>
+	<key>Lottery Explanations</key>
+	<string> Every coupon purchased rewards users between 200 to 5000 gold coins depending on your luck! This promotional activity is sponsored by PunchBox Games. Apple is not liable for any of our promotional activities.</string>
+	<key>New Weapon!</key>
+	<string>New Weapon Alert!</string>
+	<key>Outstanding! You get a Thunderbolt Laser Gun!</key>
+	<string>Thank you for updating KingFisher! As a reward you get a new weapon: A Lightning Cannon! Enjoy!</string>
+	<key>Reward Coins From Ad</key>
+	<string>%d coins pouring down on you.</string>
+	<key>Flurry Reward Message</key>
+	<string>%d coins</string>
+	<key>New Version Available</key>
+	<string>The latest version of KingFisher is available. Update?</string>
+	<key>Tutorial Text Begin</key>
+	<string>Welcome aboard! Let's do some basic KingFisher training. Click the start button to get started. If you already know how to play, click the skip button.</string>
+	<key>Tutorial Text Confirm Skip</key>
+	<string>You are skipping the tutorial, if you want to go through the tutorial again, you can reset it in settings</string>
+	<key>Tutorial Text Step Finish</key>
+	<string>Congratulations for you finishing the learning session</string>
+	<key>Tutorial Text Step 1</key>
+	<string>Aim at the small fish with your mouse, then left click to shoot. Try to catch them all.</string>
+	<key>Tutorial Text Step 2.1</key>
+	<string>These are harder to catch, just give them your best shot!</string>
+	<key>Tutorial Text Step 2.2</key>
+	<string>Upgrade to a level 4 cannon by clicking the + icon. Now you can easily take care of these fish.</string>
+	<key>Tutorial Text Step 3</key>
+	<string>Sharks are very hard to catch, they might even block your shots. It's probably a good idea to let them pass</string>
+	<key>Tutorial Text Step 4</key>
+	<string>The level 7 cannon shoots out the most powerful nets, try it yourself!</string>
+	<key>Tutorial Text Step 5.1</key>
+	<string>When energy is full, you will be awarded a powerful beam cannon, that can cut through sharks like a knife through butter!</string>
+	<key>Tutorial Text Step 5.2</key>
+	<string>There is a slight delay for the beam cannon, try aiming in front of the target.</string>
+	<key>Tutorial Text Step 5.3</key>
+	<string>Here are the rewards for each type of fish. That's all! We wish you have fun time with KingFisher!</string>
+	<key>Tutorial Text OK</key>
+	<string>OK</string>
+	<key>Tutorial Text Cancel</key>
+	<string>No</string>
+	<key>Tutorial Text Start</key>
+	<string>Start</string>
+	<key>Tutorial Text Skip</key>
+	<string>Skip</string>
+	<key>Tutorial Text Close</key>
+	<string>Close</string>
+	<key>Please leave your suggestions and advice to us.</key>
+	<string>Please leave your suggestions and advice to us.</string>
+	<key>The following information is valuable for us to confirm the problem. Please keep in on.</key>
+	<string>The following information is valuable for us to confirm the problem. Please keep in on.</string>
+	<key>EB Email Subject</key>
+	<string>EB Email Subject</string>
+	<key>EB Email Message Body</key>
+	<string>恭喜您获得的捕鱼，请通过以下地址使用:\n%@</string>
+	<key>EB Email Redeem Limit</key>
+	<string>对不起!您今天的抢购机会已经用完,请明天再试!</string>
+	<key>EB Email Lottery Limit</key>
+	<string>对不起!您今天的抽奖机会已经用完,请明天再试!</string>
+	<key>Message Center Description</key>
+	<string>文字描述</string>
+	<key>Network Is Not Available</key>
+	<string>Connection Failed! Try again later!</string>
+	<key>Read</key>
+	<string>Read</string>
+	<key>Unread</key>
+	<string>Unread</string>
+	<key>Connect Server</key>
+	<string>Connecting to server...</string>
+	<key>Please Enter Redeem Code</key>
+	<string>Please enter the redemption code</string>
+	<key>Redeem Successful</key>
+	<string>Redemption successful! You receive %d Gold!</string>
+	<key>Redeem Failed</key>
+	<string>Redemption failed! Please check redeem code!</string>
+	<key>Redeem Code Used</key>
+	<string>This code has been used already.</string>
+	<key>Redeem Time Out</key>
+	<string>Connection Timed Out!</string>
+	<key>Redeem Retry</key>
+	<string>Retry</string>
+	<key>newscene enter</key>
+	<string>Now</string>
+	<key>newscene</key>
+	<string>The Caribbean has been unlocked! Try out new weapons now!</string>
+    <key>Quit Game</key>
+    <string>Golden Shark is heading this way!|You are few shots away from leveling up!|Hawaii stage doubles the income, don't you want to try out?|Golden Marline just appeared in Hawaii!! Go hunt it down!</string>
+    <key>Chrome</key>
+    <string>KingFisher only supports Chrome!</string>
+</dict>
+</plist>
