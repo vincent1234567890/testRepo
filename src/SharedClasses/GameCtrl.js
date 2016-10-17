@@ -18,6 +18,7 @@ var GameCtrl = cc.Class.extend({
     init:function () {
         this.setIsNewGame(true);
         this.setIsPassStage(false);
+        this.initWebSocket();
         return true;
     },
     runGame:function () {
@@ -79,6 +80,42 @@ var GameCtrl = cc.Class.extend({
         else if (this.loaded) {
 
         }
+    },
+    initWebSocket: function () {
+        var gameAPIServerUrl = 'ws://3dfishing88888.sinonet.sg:8080';
+        var localNames = ['localhost', '127.0.0.1', '127.0.1.1', '0.0.0.0'];
+        if (localNames.indexOf(window.location.hostname) >= 0) {
+            gameAPIServerUrl = 'ws://localhost:8080';
+        }
+
+        //var webSocket = new WebSocket(gameAPIServerUrl);
+        //this.setWebSocket(webSocket);
+        //webSocket.onopen = function () {
+        //    // Do lots of things!
+        //    webSocket.send(JSON.stringify({service: 'game', functionName: 'register', data: {}}));
+        //};
+        //webSocket.onmessage = function (message) {
+        //    console.log("message:", message);
+        //};
+
+        var client = new WebSocketClient(gameAPIServerUrl);
+        var gameService = new GameServices.GameService();
+        client.addService(gameService);
+
+        client.connect();
+        client.addEventListener('open', function () {
+            client.callAPIOnce('game', 'requestServer', {}).then(
+                result => console.log('requestServer result:', result)
+            ).catch(
+                err => console.error('requestServer error:', err)
+            );
+        });
+    },
+    setWebSocket: function (webSocket) {
+        this.webSocket = webSocket;
+    },
+    getWebSocket: function (webSocket) {
+        return this.webSocket;
     },
 
     run:function () {
