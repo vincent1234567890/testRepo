@@ -32,7 +32,7 @@ var StartMenuLayer = cc.Layer.extend({
         cache.addSpriteFrames(res.MainPlist);
         cache.addSpriteFrames(res.TutorialPlist);
 
-        this._bg = new cc.Sprite(ImageName("ui_background_normal.jpg"));
+        this._bg = new cc.Sprite("#ui_background_normal.jpg");
         this.addChild(this._bg, 0);
         this._bg.setPosition(VisibleRect.center());
         this._bg.setScale(Multiple);
@@ -95,26 +95,25 @@ var StartMenuLayer = cc.Layer.extend({
     },
     initStartLayer:function () {
         // item1 = Start button
-        this._newGameItem = new cc.MenuItemSprite(
+        this._newGameItem = cc.MenuItemSprite.create(
             CSpriteLayer.getButtonBoxOffsetY("btn_start_1.png", ImageNameLang("txt_start.png"), PlistAndPlist, 1),
-            // CSpriteLayer
             CSpriteLayer.getButtonBoxOffsetY("btn_start_2.png", ImageNameLang("txt_start.png"), PlistAndPlist, 1),
             this, this._menuNewGame);
 
         // item2 = Scenes select button
-        this._sceneItem = new cc.MenuItemSprite(
+        this._sceneItem = cc.MenuItemSprite.create(
             CSpriteLayer.getButtonBoxOffsetY("btn_scenes_1.png", ImageNameLang("button_other_014.png"), PlistAndPlist, 0),
             CSpriteLayer.getButtonBoxOffsetY("btn_scenes_2.png", ImageNameLang("button_other_014.png"), PlistAndPlist, 0),
             this, this._menuSelectStage);
 
         // item3 = Option button
-        this._settingItem = new cc.MenuItemSprite(
+        this._settingItem = cc.MenuItemSprite.create(
             CSpriteLayer.getButtonBoxOffsetY("btn_bg_1.png", "main_ui_button_05.png", PlistAndPlist, 3),
             CSpriteLayer.getButtonBoxOffsetY("btn_bg_2.png", "main_ui_button_05.png", PlistAndPlist, 3),
             this, this._menuOption);
 
         // leftItem4 = Help button
-        this._helpItem = new cc.MenuItemSprite(
+        this._helpItem = cc.MenuItemSprite.create(
             CSpriteLayer.getButtonBoxOffsetY("btn_bg_1.png", "main_ui_button_03.png", PlistAndPlist, 3),
             CSpriteLayer.getButtonBoxOffsetY("btn_bg_2.png", "main_ui_button_03.png", PlistAndPlist, 3),
             this, this._menuShowHowToPlay);
@@ -126,7 +125,7 @@ var StartMenuLayer = cc.Layer.extend({
             that.resetAllSpritePos();
         });
 
-        var menu = new cc.Menu(this._newGameItem, this._sceneItem, this._settingItem, this._helpItem);
+        var menu = cc.Menu.create(this._newGameItem, this._sceneItem, this._settingItem, this._helpItem);
         menu.setPosition(0, 0);
         this.addChild(menu, eZOrder_MainMenu_StartMenu_menu, eTag_MainMenu_StartMenu_menu);
     },
@@ -142,11 +141,10 @@ var StartMenuLayer = cc.Layer.extend({
     _initWaterAnimation:function () {
         var rightPos = cc.p(VisibleRect.bottomRight().x - 260, VisibleRect.bottomRight().y + 100);
         var leftPos = cc.p(VisibleRect.bottomLeft().x + 157, VisibleRect.bottomLeft().y + 105);
-        // this._particle2 = cc.ParticleSystemQuad.create(ImageName("qipao3.plist"));
-        this._particle2 = new cc.ParticleSystem((ImageName("qipao3.plist")));
+        this._particle2 = new cc.ParticleSystem(ImageName("qipao3.plist"));
         this._particle2._dontTint = true;
         this._particle2.setTotalParticles(100);
-        this._particle2.setDrawMode(cc.PARTICLE_TEXTURE_MODE);
+        this._particle2.setDrawMode(cc.ParticleSystem.TEXTURE_MODE);
         this.addChild(this._particle2);
         this._particle2.setPosition(rightPos);
 
@@ -154,13 +152,13 @@ var StartMenuLayer = cc.Layer.extend({
         this.addChild(this._particle3);
         this._particle3.setTotalParticles(30);
         this._particle3._dontTint = true;
-        this._particle3.setDrawMode(cc.PARTICLE_TEXTURE_MODE);
+        this._particle3.setDrawMode(cc.ParticleSystem.TEXTURE_MODE);
         this._particle3.setPosition(leftPos);
     },
     _moveAction:function () {
-        var moveto = new cc.moveBy(5, cc.p(625, 0));
-        var fadeOut = new cc.FadeOut(5);
-        var spawn = new cc.Spawn(moveto, fadeOut);
+        var moveto = cc.MoveBy.create(5, cc.p(625, 0));
+        var fadeOut = cc.FadeOut.create(5);
+        var spawn = cc.Spawn.create(moveto, fadeOut);
         return spawn;
     },
     _initWaterLight:function (dt) {
@@ -176,7 +174,7 @@ var StartMenuLayer = cc.Layer.extend({
         if (sender) {
             sender.removeFromParentAndCleanup(true);
         }
-        this._spriteLight1 = new cc.Sprite(("#main_ui_other_02.png"));
+        this._spriteLight1 = cc.Sprite.createWithSpriteFrameName(("main_ui_other_02.png"));
         this.addChild(this._spriteLight1, 10);
         this._spriteLight1.setPosition(cc.p(125 + Math.random() * 63, VisibleRect.top().y - this._spriteLight1.getContentSize().height / 2));
     },

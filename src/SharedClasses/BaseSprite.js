@@ -555,7 +555,7 @@ var BaseSprite = cc.Sprite.extend({
             var rect1 = this._sd.frameData[_frame].collisionData.rectData[i];
             //rect1 = cc.RectFromString(rect1);
 
-            var ptCenter1 = cc.pAdd(rect1.origin, cc.p(rect1.width / 2, rect1.height / 2));
+            var ptCenter1 = cc.pAdd(rect1, cc.p(rect1.width / 2, rect1.height / 2));
             var radius1 = Math.sqrt(Math.pow(rect1.width / 2, 2) + Math.pow(rect1.height / 2, 2));
             ptCenter1 = cc.pRotateByAngle(ptCenter1, new cc.Point(0, 0), this.getCurRotation());
             ptCenter1 = cc.pAdd(this.getPosition(), ptCenter1);
@@ -568,7 +568,7 @@ var BaseSprite = cc.Sprite.extend({
             for (var j = 0; j < spxCollides; j++) {
                 var rect2 = plane._sd.frameData[frame].collisionData.rectData[j];
                 //rect2 = cc.RectFromString(rect2);
-                var ptCenter2 = cc.pAdd(rect2.origin, cc.p(rect2.width / 2, rect2.height / 2));
+                var ptCenter2 = cc.pAdd(rect2, cc.p(rect2.width / 2, rect2.height / 2));
                 var radius2 = Math.sqrt(Math.pow(rect2.width / 2, 2) + Math.pow(rect2.height / 2, 2));
                 ptCenter2 = cc.pRotateByAngle(ptCenter2, new cc.Point(0, 0), plane.getCurRotation());
                 ptCenter2 = cc.pAdd(plane.getPosition(), ptCenter2);
@@ -607,7 +607,7 @@ var BaseSprite = cc.Sprite.extend({
         for (var i = 0; i < thisCollides; i++) {
             var rect1 = this._sd.frameData[_frame].collisionData.rectData[i];
             //rect1 = cc.RectFromString(rect1);
-            var ptCenter1 = cc.pAdd(rect1.origin, cc.p(rect1.width / 2, rect1.height / 2));
+            var ptCenter1 = cc.pAdd(rect1, cc.p(rect1.width / 2, rect1.height / 2));
 
             var radius1 = Math.sqrt(Math.pow(rect1.width / 2, 2) + Math.pow(rect1.height / 2, 2));
 
@@ -620,7 +620,7 @@ var BaseSprite = cc.Sprite.extend({
             for (var j = 0; j < spxCollides; j++) {
                 var rect2 = plane._sd.frameData[frame].collisionData.rectData[j];
                 //rect2 = cc.RectFromString(rect2);
-                var ptCenter2 = cc.pAdd(rect2.origin, cc.p(rect2.width / 2, rect2.height / 2));
+                var ptCenter2 = cc.pAdd(rect2, cc.p(rect2.width / 2, rect2.height / 2));
                 var radius2 = Math.sqrt(Math.pow(rect2.width / 2, 2) + Math.pow(rect2.height / 2, 2));
 
                 ptCenter2 = cc.pRotateByAngle(ptCenter2, new cc.Point(0, 0), plane.getCurRotation());
@@ -646,10 +646,10 @@ var BaseSprite = cc.Sprite.extend({
         var xx = rect1.x + this.getPosition().x;
         var yy = rect1.y + this.getPosition().y;
         rect1 = new cc.Rect(xx, yy, rect1.width, rect1.height);
-        return cc.Rect.CCRectIntersectsRect(rect, rect1);
+        return cc.rectIntersectsRect(rect, rect1);
     },
-    setContentSize:function (size) {
-        if (!cc.Size.CCSizeEqualToSize(size, this._contentSize)) {
+    setContentSize:function(size) {
+        if (!cc.sizeEqualToSize(size, this._contentSize)) {
             //save dirty region when before change
             //this._addDirtyRegionToDirector(this.getBoundingBoxToWorld());
             this._contentSize = size;

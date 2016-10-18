@@ -4,7 +4,7 @@ var LOGOSTATEMOVE = 2;
 
 var LogoWaveLayer = cc.Layer.extend({
     ctor:function () {
-        this._super();
+        cc.Layer.prototype.ctor.call(this);
         var spTexture = new cc.Sprite(ImageNameLang("main_ui_title.png"));
         this.addChild(spTexture, 1);
 
