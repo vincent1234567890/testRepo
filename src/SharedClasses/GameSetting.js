@@ -327,10 +327,8 @@ var GameSetting = cc.Class.extend({
         this.normalCoinCount = 1500;
         this.bulletShootCount = 0;
 
-        // this.achieveArray = cc.fileUtils.getInstance().getValueMapFromFile((res.AchievementPlist));
-
-        this.achieveArray = jsb.fileUtils.getValueMapFromFile(res.AchievementPlist);
-        this.chestFishArray = cc.fileUtils.getInstance().dictionaryWithContentsOfFile(ImageName("ChestFish.plist"));
+        this.achieveArray = cc.loader.getRes(res.AchievementPlist);
+        this.chestFishArray = cc.loader.getRes(res.ChestFishPlist);
 
         return true;
 

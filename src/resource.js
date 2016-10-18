@@ -4,6 +4,7 @@ var res = {
     LoadingAdBg : "res/loadingAdBg.jpg",
     LoadingCompanyLogoScreen : "res/MainBG.jpg",
     AchievementPlist :"res/Achievement.plist",
+    ChestFishPlist: "res/ChestFish.plist"
 // {type:"binary", src:"Resource/butterfly.sprite"},
 // {type:"binary", src:"Resource/bullet10.sprite"},
 // {type:"binary", src:"Resource/chelonian.sprite"},

@@ -416,11 +416,11 @@ var GameScene = cc.Scene.extend({
 
         this._bigPrizeExist = true;
 
-        var guang1 = cc.Sprite.createWithSpriteFrameName(("shark_prize_guang_21.png"));
+        var guang1 = new cc.Sprite("#shark_prize_guang_21.png");
         this._prizeSprite.addChild(guang1, kTagPrizeLight1, kTagPrizeLight1);
         guang1.setPosition(cc.p(0, 0));
 
-        var guang2 = cc.Sprite.createWithSpriteFrameName(("shark_prize_guang_22.png"));
+        var guang2 = new cc.Sprite("#shark_prize_guang_22.png");
         this._prizeSprite.addChild(guang2, kTagPrizeLight2, kTagPrizeLight2);
         guang2.setPosition(cc.p(0, 0));
 
