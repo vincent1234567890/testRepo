@@ -281,8 +281,8 @@ var FishGroup = cc.Class.extend({
             this.getScene().addActor(fishAcor);
         }
     },
-    initializeAllTrack:function (plistfile) {
-        this.trackDict = cc.FileUtils.getInstance().dictionaryWithContentsOfFile(ImageName(plistfile));
+    initializeAllTrack:function (plistFile) {
+        this.trackDict = cc.FileUtils.getInstance().dictionaryWithContentsOfFile(ImageName(plistFile));
     },
     init:function () {
         this.sharkCount = 0;
@@ -293,12 +293,11 @@ var FishGroup = cc.Class.extend({
     },
     loadResource:function (stage) {
         stage = stage || this.curStage;
-        var nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 21, 22, 23, 24, 25];
+        var nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 21, 22, 23, 24, 25], trackstr;
         if (stage === 1) {
-            var trackstr = 'Track1_';
-        }
-        else if (stage === 2) {
-            var trackstr = 'Track2_';
+            trackstr = 'Track1_';
+        } else if (stage === 2) {
+            trackstr = 'Track2_';
         }
         var ScaleFactor = 2.5;
         for (var i = 0; i < nums.length; i++) {

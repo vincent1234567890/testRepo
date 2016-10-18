@@ -1,5 +1,6 @@
+var sino = sino || {};
+
 var res = {
-    HelloWorld_png : "res/HelloWorld.png",
     LoadingLogo : "res/loadingLogo.jpg",
     LoadingAdBg : "res/loadingAdBg.jpg",
     LoadingCompanyLogoScreen : "res/MainBG.jpg",
