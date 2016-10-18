@@ -64,7 +64,7 @@ ProcessDef.defaultDef = function () {
     temp.currentValue = 50;
     temp.backgroundImage = "ui_slot_01.png";
     temp.bloodImage = "ui_slot_02.png";
-    temp.offset = cc.SizeMake(0, 0);
+    temp.offset = new cc.Size(0, 0);
     return temp;
 };
 

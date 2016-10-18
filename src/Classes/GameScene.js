@@ -397,7 +397,7 @@ var GameScene = cc.Scene.extend({
         this.addChangeWeaponMenu(cc.p(301, 10), cc.p(17, 17));
 
         var menuItem = cc.MenuItem.create(this, this.changeWeapon);
-        menuItem.setContentSize(cc.SizeMake(80, 50));
+        menuItem.setContentSize(new cc.Size(80, 50));
         var menu = cc.Menu.create(menuItem, null);
         menu.setPosition(cc.p(0, 0));
         this.addChild(menu, 109);

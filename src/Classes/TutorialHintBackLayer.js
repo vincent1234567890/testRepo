@@ -22,7 +22,7 @@ var TutorialHintBackLayer = cc.Sprite.extend({
         cc.spriteFrameCache.addSpriteFrames(ImageName("tutorial.plist"));
         var bg = cc.Sprite.createWithSpriteFrameName(("ui_teach_001.png"));
         this.setHintBg(bg);
-        this.setLabel(cc.LabelTTF.create(hint, "Microsoft YaHei", 18, cc.SizeMake(bg.getContentSize().width * 0.8, bg.getContentSize().height), cc.TEXT_ALIGNMENT_CENTER, cc.VERTICAL_TEXT_ALIGNMENT_CENTER));
+        this.setLabel(cc.LabelTTF.create(hint, "Microsoft YaHei", 18, new cc.Size(bg.getContentSize().width * 0.8, bg.getContentSize().height), cc.TEXT_ALIGNMENT_CENTER, cc.VERTICAL_TEXT_ALIGNMENT_CENTER));
         this.addChild(this.getHintBg());
         this.addChild(this.getLabel());
 

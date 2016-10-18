@@ -18,7 +18,7 @@ var NumberScrollLabel = cc.Layer.extend({
             this._setPreNumber(PlayerActor.sharedActor().getPlayerMoney());
             this._componentNumber = 1;
             this._updateTime = 0.0;
-            this._componentSize = cc.SizeMake(20, 30);
+            this._componentSize = new cc.Size(20, 30);
             this._charMapFile = ImageName("ui_text_01.png");
             this._itemWidth = TextWidth2;
             this._itemHeight = TextHeight2;
@@ -36,7 +36,7 @@ var NumberScrollLabel = cc.Layer.extend({
             this._setPreNumber(PlayerActor.sharedActor().getPlayerMoney());
             this._componentNumber = 1;
             this._updateTime = 0.0;
-            //this.componentSize = cc.SizeMake(TextWidth2+5, TextHeight2);
+            //this.componentSize = new cc.Size(TextWidth2+5, TextHeight2);
             this._componentSize = size;
             this._itemWidth = iWidth;
             this._itemHeight = iHeight;
@@ -49,7 +49,7 @@ var NumberScrollLabel = cc.Layer.extend({
         return true;
     },
     reloadAllComponents:function () {
-        this.setContentSize(cc.SizeMake(this._componentSize.width * this._componentNumber, this._componentSize.height));
+        this.setContentSize(new cc.Size(this._componentSize.width * this._componentNumber, this._componentSize.height));
 
         for (var idx = 0; idx < this._componentNumber; idx++) {
             var temp = this._getPreNumber() / Math.pow(10.0, idx);
@@ -59,7 +59,7 @@ var NumberScrollLabel = cc.Layer.extend({
         }
     },
     initAllComponents:function () {
-        this.setContentSize(cc.SizeMake(this._componentSize.width * this._componentNumber, this._componentSize.height));
+        this.setContentSize(new cc.Size(this._componentSize.width * this._componentNumber, this._componentSize.height));
 
         this._durations = [];
         //this.durations.assign(this.componentNumber, 1.0);

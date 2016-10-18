@@ -33,7 +33,7 @@ var TutorialConfirmLayer = cc.LayerColor.extend({
         var backSize = this.getBackgroundSprite().getContentSize();
 
         var textPos = cc.pAdd(cc.p(backSize.width / 2, backSize.height / 2), cc.p(-20, -40));
-        this.setTextLabel(cc.LabelTTF.create(text, "Microsoft YaHei", 20, cc.SizeMake(backSize.width / 2, backSize.height / 2), cc.TEXT_ALIGNMENT_CENTER, cc.VERTICAL_TEXT_ALIGNMENT_CENTER));
+        this.setTextLabel(cc.LabelTTF.create(text, "Microsoft YaHei", 20, new cc.Size(backSize.width / 2, backSize.height / 2), cc.TEXT_ALIGNMENT_CENTER, cc.VERTICAL_TEXT_ALIGNMENT_CENTER));
         this.getTextLabel().setPosition(textPos);
         this.getBackgroundSprite().addChild(this.getTextLabel());
 

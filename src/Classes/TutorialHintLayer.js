@@ -47,7 +47,7 @@ var TutorialHintLayer = cc.Layer.extend({
         this.addChild(bg);
         bg.setPosition(VisibleRect.center());
 
-        this.hint = cc.LabelTTF.create(this.hintFile, "Arial", 32, cc.SizeMake(320, 150), cc.TEXT_ALIGNMENT_CENTER, cc.VERTICAL_TEXT_ALIGNMENT_CENTER); //todo(cjh) need to modify position
+        this.hint = cc.LabelTTF.create(this.hintFile, "Arial", 32, new cc.Size(320, 150), cc.TEXT_ALIGNMENT_CENTER, cc.VERTICAL_TEXT_ALIGNMENT_CENTER); //todo(cjh) need to modify position
 
         bg.addChild(this.hint);
         this.hint.setPosition(cc.p(bgSizeHalf.width, bgSizeHalf.height));

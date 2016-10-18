@@ -98,7 +98,7 @@ var ScoreBarLayer = cc.Layer.extend({
 
             // 生成按钮菜单
             this.setBulletsLabel(NumberScrollLabel.create());
-            this._bulletsLabel.setComponentSize(cc.SizeMake(25, 28));
+            this._bulletsLabel.setComponentSize(new cc.Size(25, 28));
             this._bulletsLabel.setComponentNumber(6);
             this.addChild(this._bulletsLabel, 60);
             this._bulletsLabel.setPosition(cc.p(-342, 10));
