@@ -22,7 +22,7 @@ var NumberScrollLabel = cc.Layer.extend({
             this._charMapFile = ImageName("ui_text_01.png");
             this._itemWidth = TextWidth2;
             this._itemHeight = TextHeight2;
-            this._scissorRect = cc.RectZero();
+            this._scissorRect = new cc.Rect(0, 0, 0, 0);
             this._components = [];
             this._durations = [];
             this.initAllComponents();
@@ -41,7 +41,7 @@ var NumberScrollLabel = cc.Layer.extend({
             this._itemWidth = iWidth;
             this._itemHeight = iHeight;
             this._charMapFile = mapFile;
-            this._scissorRect = cc.RectZero();
+            this._scissorRect = cc.Rect(0, 0, 0, 0);
             this._components = [];
             this.initAllComponents();
             this.schedule(this.update);

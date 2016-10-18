@@ -181,7 +181,7 @@ var GameScene = cc.Scene.extend({
     ctor:function () {
         this._super();
         wrapper.getBooleanForKey("AskEnterLecel3", false);
-        this._movePoint = cc.PointZero();
+        this._movePoint = new cc.Point(0, 0);
         this._sessionsNeedLoad = [];
         this._sessionControllers = [];
         this._sessionsEnded = [];
@@ -495,7 +495,7 @@ var GameScene = cc.Scene.extend({
         this.addChild(this._userBtn, 101);
 
         var pos = cc.p(VisibleRect.topLeft().x + 135, VisibleRect.topLeft().y - this._itemPause.getContentSize().height / 2);
-        this._userBtn.setPosition(cc.PointZero());
+        this._userBtn.setPosition(0, 0);
     },
     initWithDef:function (def, le) {
         this._layer = cc.Layer.create();
@@ -1443,7 +1443,7 @@ var GameScene = cc.Scene.extend({
         this._userInfoLayer = UserInfoLayer.create(this);
         this._userInfoLayer.setDelegate(this);
         this.addChild(this._userInfoLayer, 10);
-        this._userInfoLayer.setPosition(cc.PointZero());
+        this._userInfoLayer.setPosition(0, 0);
     },
     initChestGameLayer:function () {
         this._chestGameLayer = ChestGameLayer.create();
@@ -1594,7 +1594,7 @@ var GameScene = cc.Scene.extend({
         // this._itemCamera.setPosition(cc.p(VisibleRect.topRight().x - 125, VisibleRect.topRight().y - this._itemCamera.getContentSize().height / 2));
 
         this._camera = cc.Menu.create(this._itemHide/*, this._itemCamera*/);
-        this._camera.setPosition(cc.PointZero());
+        this._camera.setPosition(0, 0);
         this.addChild(this._camera, 101);
     },
     addPrizeNets:function (sender) {

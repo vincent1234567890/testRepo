@@ -41,7 +41,7 @@ var GameBackgroundLayer = cc.Layer.extend({
             bg.setTextureRect(new cc.Rect(0, 0, bg.getTextureRect().width - dt * speedValue, screenHeight));
             if (bg.getTextureRect().width < 0) {
                 this.beChanged = false;
-                bg.setTextureRect(cc.RectZero());
+                bg.setTextureRect(new cc.Rect(0,0,0,0));
                 var sp = this.getChildByTag(990);
                 this.reorderChild(sp, -2);
                 bg.removeFromParentAndCleanup(true);

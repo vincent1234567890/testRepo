@@ -75,11 +75,11 @@ var TutorialConfirmLayer = cc.LayerColor.extend({
         var cancelPos = cc.pAdd(cc.p(backSize.width / 2, confirm.getContentSize().height), cancelPosOffset);
         cancelItem.setPosition(cancelPos);
         var menu = cc.Menu.create(menuItem, cancelItem);
-        menu.setPosition(cc.PointZero());
+        menu.setPosition(0, 0);
         this.getBackgroundSprite().addChild(menu);
 
         this.setVisible(false);
-        this.setPosition(cc.PointZero());
+        this.setPosition(0, 0);
         this.setAnchorPoint(cc.p(0.5, 0.5));
 
         return true;

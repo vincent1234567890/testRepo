@@ -48,7 +48,7 @@ var GoldPrizeActor = BaseActor.extend({
         if (ret) {
             this.playAction(0);
             this._speed = 100;
-            this._dir = cc.PointZero();
+            this._dir = new cc.Point(0, 0);
             this._isAlive = true;
             this._group = GroupGoldPrizeActor;
         }

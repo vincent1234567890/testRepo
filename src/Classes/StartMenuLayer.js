@@ -126,7 +126,7 @@ var StartMenuLayer = cc.Layer.extend({
         });
 
         var menu = cc.Menu.create(this._newGameItem, this._sceneItem, this._settingItem, this._helpItem);
-        menu.setPosition(cc.PointZero());
+        menu.setPosition(0, 0);
         this.addChild(menu, eZOrder_MainMenu_StartMenu_menu, eTag_MainMenu_StartMenu_menu);
     },
     EnterSceneSelect:function () {

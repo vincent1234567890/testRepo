@@ -20,9 +20,9 @@ var FishSeasonPath = FishGroup.extend({
     _pastTime:0,
     _createdCount:0,
     _fishActorName:"",
-    _initPostion:cc.PointZero(),
+    _initPostion:new cc.Point(0, 0),
     _pathDict:null,
-    _offset:cc.PointZero(),
+    _offset:new cc.Point(0, 0),
     _fishSeasonPathDelegate:null,
     init:function (delegate) {
         this._super();
@@ -55,7 +55,7 @@ var FishSeasonPath = FishGroup.extend({
         this._initPostion = cc.PointFromString(dict[kInitPosition]);
         this._pathDict = [];
 
-        this._offset = cc.PointZero();
+        this._offset = new cc.Point(0, 0);
         var value = dict[kPathOffset];
         if (value) {
             this._offset = cc.PointFromString(value);

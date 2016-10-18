@@ -63,7 +63,7 @@ var TutorialHintLayer = cc.Layer.extend({
             this.clickFish);
 
         var menu = cc.Menu.create(close, fish);
-        menu.setPosition(cc.PointZero());
+        menu.setPosition(0, 0);
         close.setPosition(cc.p(bgSizeHalf.width * 2, bgSizeHalf.height * 2));
         var fishSize = fish.getContentSize();
         fish.setPosition(cc.p(bgSizeHalf.width * 2 - fishSize.width, fishSize.height / 2));

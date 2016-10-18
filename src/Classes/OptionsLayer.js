@@ -248,7 +248,7 @@ var OptionsLayer = cc.Layer.extend({
 
         var mOptions = cc.Menu.create(/*this._button_push, this._other_push, */this._button_BGM, this._tutorial, this._button_music);
         this.addChild(mOptions, 30, 35);
-        mOptions.setPosition(cc.PointZero());
+        mOptions.setPosition(0, 0);
     },
     getParentDeleaget:function () {
         return this._parentDeleaget;

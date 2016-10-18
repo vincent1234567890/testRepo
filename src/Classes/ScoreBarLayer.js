@@ -370,7 +370,7 @@ var ScoreBarLayer = cc.Layer.extend({
     convertPointFromSubNode:function (pNode, point) {
         var selfContainNode = false;
         var temp = pNode;
-        var result = cc.PointZero();
+        var result = new cc.Point(0, 0);
         while (temp.getParent() != null) {
             if (temp.getParent() == this) {
                 selfContainNode = true;
@@ -383,7 +383,7 @@ var ScoreBarLayer = cc.Layer.extend({
         if (selfContainNode) {
             return result;
         } else {
-            return cc.PointZero();
+            return new cc.Point(0, 0);
         }
     },
     initTools:function () {

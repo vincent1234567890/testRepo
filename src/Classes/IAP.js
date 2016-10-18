@@ -263,7 +263,7 @@ var ShopLayer = cc.Layer.extend({
             this._itemWidth = iWidth;
             this._itemHeight = iHeight;
             this._charMapFile = mapFile;
-            this._scissorRect = cc.RectZero();
+            this._scissorRect = new cc.Rect(0, 0, 0, 0);
             this._components = [];
             this.initAllComponents();
             this.schedule(this.update);
