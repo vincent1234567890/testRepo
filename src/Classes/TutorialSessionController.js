@@ -689,7 +689,7 @@ var TutorialSessionController = CCSessionController.extend({
         this._currentGameScene.addChild(this.focus, focusZOrder);
         this.getFocus().setVisible(false);
 
-        this._tutorialBlackLayer = cc.LayerColor.create(cc.c4(0, 0, 0, 0));
+        this._tutorialBlackLayer = cc.LayerColor.create(new cc.Color(0, 0, 0, 0));
         this._currentGameScene.addChild(this._tutorialBlackLayer, 1);
         this._tutorialBlackLayer.setVisible(false);
 

@@ -646,10 +646,10 @@ var BaseSprite = cc.Sprite.extend({
         var xx = rect1.x + this.getPosition().x;
         var yy = rect1.y + this.getPosition().y;
         rect1 = new cc.Rect(xx, yy, rect1.width, rect1.height);
-        return cc.Rect.CCRectIntersectsRect(rect, rect1);
+        return cc.rectIntersectsRect(rect, rect1);
     },
-    setContentSize:function (size) {
-        if (!cc.Size.CCSizeEqualToSize(size, this._contentSize)) {
+    setContentSize:function(size) {
+        if (!cc.sizeEqualToSize(size, this._contentSize)) {
             //save dirty region when before change
             //this._addDirtyRegionToDirector(this.getBoundingBoxToWorld());
             this._contentSize = size;
