@@ -32,7 +32,7 @@ var StartMenuLayer = cc.Layer.extend({
         cache.addSpriteFrames(res.MainPlist);
         cache.addSpriteFrames(res.TutorialPlist);
 
-        this._bg = new cc.Sprite("#ui_background_normal.jpg");
+        this._bg = new cc.Sprite("ui_background_normal.jpg");
         this.addChild(this._bg, 0);
         this._bg.setPosition(VisibleRect.center());
         this._bg.setScale(Multiple);
@@ -40,7 +40,7 @@ var StartMenuLayer = cc.Layer.extend({
         //title
         this._title = LogoWaveLayer.create();
         this.addChild(this._title, 1);
-        this._title.setPosition(cc.p(VisibleRect.rect().size.width / 2, VisibleRect.top().y - 140));
+        this._title.setPosition(cc.p(VisibleRect.rect().width / 2, VisibleRect.top().y - 140));
 
         this._initLight1(0);
 
