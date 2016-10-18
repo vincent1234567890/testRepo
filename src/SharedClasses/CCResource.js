@@ -55,6 +55,7 @@ sino.resource = {
         return this._resPath + fileName;
     },
     getNameWithLang:function (fileName, isFrame, lang) {
+
         var resName, path = "";
         var num = fileName.lastIndexOf(".");
         var filePathWithoutExtension = fileName.substring(0, num);
@@ -62,12 +63,13 @@ sino.resource = {
         if (!lang)
             lang = this._curLanguage;
 
-        var langPath = this.getLanguageSuffixList(lang);
-
+        var langPath = this._langForPath(lang);
+        console.log("this._resPath: " + this._resPath + ", langPath: " +langPath+ ", this._curLanguage: " +this._curLanguage+ ", lang: " +lang+ ", num: " +num);
         if (!isFrame)
             path = this._resPath + "lang-" + langPath + "/";
 
         resName = path + filePathWithoutExtension + "_" + langPath + extension;
+        console.log("resName: " + resName + ", path: " +path+ ", filePathWithoutExtension: " +filePathWithoutExtension+ ", langPath: " +langPath+ ", extension: " +extension);
         return resName;
     }
 };

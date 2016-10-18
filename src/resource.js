@@ -21,7 +21,7 @@ var res = {
     MainPlist : "res/main.plist",
     TutorialPlist : "res/tutorial.plist",
 
-    MainUITitle : "res/main_ui_title.png",
+    // MainUITitle : "res/main_ui_title.png",
 
 // {type:"binary", src:"Resource/butterfly.sprite"},
 // {type:"binary", src:"Resource/bullet10.sprite"},

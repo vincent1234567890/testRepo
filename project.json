@@ -13,13 +13,22 @@
 
     "jsList" : [
         "src/resource.js",
+        "src/SharedClasses/CCResource.js",
+        "src/SharedClasses/CCSessionController.js",
         "src/SharedClasses/ConstantEnum.js",
-        "src/SharedClasses/GameCtrl.js",
         "src/SharedClasses/LoadingScreen.js",
+        "src/SharedClasses/GameConfig.js",
+        "src/SharedClasses/GameCtrl.js",
+        "src/SharedClasses/GamePreference.js",
+        "src/SharedClasses/GameSessionController.js",
         "src/SharedClasses/GameSetting.js",
+        "src/SharedClasses/Nacl.js",
+        "src/SharedClasses/wrapper.js",
         "src/Classes/LogoScene.js",
+        "src/Classes/LogoWaveLayer.js",
         "src/Classes/MainMenuScene.js",
         "src/Classes/PlayerActor.js",
+        "src/Classes/PlayerEntity_Wrapper.js",
         "src/Classes/StartMenuLayer.js"
 
     ]
