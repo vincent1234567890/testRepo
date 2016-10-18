@@ -282,13 +282,13 @@ var FishGroup = cc.Class.extend({
         }
     },
     initializeAllTrack:function (plistFile) {
-        this.trackDict = cc.FileUtils.getInstance().dictionaryWithContentsOfFile(ImageName(plistFile));
+        this.trackDict = cc.loader.getRes(ImageName(plistFile));
     },
     init:function () {
         this.sharkCount = 0;
         this.loopCount = 0;
-        this.nameDict = cc.FileUtils.getInstance().dictionaryWithContentsOfFile(ImageName("probability.plist"));
-        this._chestArray = cc.FileUtils.getInstance().dictionaryWithContentsOfFile(ImageName("ChestFish.plist"));
+        this.nameDict = cc.loader.getRes(ImageName("probability.plist"));
+        this._chestArray = cc.loader.getRes(ImageName("ChestFish.plist"));
         return true;
     },
     loadResource:function (stage) {
@@ -301,7 +301,7 @@ var FishGroup = cc.Class.extend({
         }
         var ScaleFactor = 2.5;
         for (var i = 0; i < nums.length; i++) {
-            var oneTrackDict = cc.FileUtils.getInstance().dictionaryWithContentsOfFile(ImageName(trackstr + nums[i] + ".plist"));
+            var oneTrackDict = cc.loader.getRes(ImageName(trackstr + nums[i] + ".plist"));
             //var pathKey = oneTrackDict.allkeys();
             //get all keys from onetrackdict
             for (var pathkey in oneTrackDict) {

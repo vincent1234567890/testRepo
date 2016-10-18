@@ -337,7 +337,8 @@ var GameSetting = cc.Class.extend({
     loadAttackArray:function () {
         //attackTable
         this.attackIdArray = [];
-        var attackTablePath = cc.FileUtils.getInstance().fullPathFromRelativePath(SceneSettingDataModel.sharedSceneSettingDataModel().getAttackTableFileName());
+        var attackTablePath = SceneSettingDataModel.sharedSceneSettingDataModel().getAttackTableFileName();
+
         //KingFisher cc.log("csv path:" + attackTablePath);
         var csvFile = new CSVFile();
         csvFile.Open(attackTablePath);
@@ -513,7 +514,7 @@ var GameSetting = cc.Class.extend({
     loadFishIdArray:function () {
         //fishTable
         this.fishIdArray = [];
-        var fishTablePath = cc.FileUtils.getInstance().fullPathFromRelativePath(SceneSettingDataModel.sharedSceneSettingDataModel().getFishTableFileName());
+        var fishTablePath = SceneSettingDataModel.sharedSceneSettingDataModel().getFishTableFileName();
         //KingFisher cc.log("csv path:" + fishTablePath);
         var csvFile = new CSVFile();
         csvFile.Open(fishTablePath);
@@ -605,8 +606,7 @@ var GameSetting = cc.Class.extend({
     loadStimulateIdArray:function () {
         //stimulateTable
         this.stimulateIdArray = [];
-        var incentiveTablePath = {};
-        // var incentiveTablePath = cc.FileUtils.getInstance().fullPathFromRelativePath(SceneSettingDataModel.sharedSceneSettingDataModel().getIncentiveTableFileName());
+        var incentiveTablePath = SceneSettingDataModel.sharedSceneSettingDataModel().getIncentiveTableFileName();
         //KingFisher cc.log("csv path" + incentiveTablePath);
         var csvFile = new CSVFile();
         csvFile.Open(incentiveTablePath);

@@ -67,8 +67,7 @@ var NSDataStream = cc.Class.extend({
 
     initWithContentsOfMappedFile:function (filePath) {
         this._offset = 0;
-        var size = 0;
-        this._data = cc.FileUtils.getInstance().getFileData(filePath, "rb", size);
+        this._data = cc.loader.getRes(filePath);
         return true;
     },
 
@@ -199,8 +198,8 @@ var SpriteData = cc.Class.extend({
         var i, j, k;
 
         var fullPath = filePath + ".sprite";
+        //todo need to
         //fullPath = ImageName(fullPath);
-        fullPath = cc.FileUtils.getInstance().fullPathFromRelativePath(fullPath);
         var data = NSDataStream.streamWithContentsOfMappedFile(fullPath);
 
         var header = data.readInteger();

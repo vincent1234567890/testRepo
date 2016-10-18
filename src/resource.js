@@ -1,5 +1,7 @@
 var sino = sino || {};
 
+cc.loader.register(["sprite"], cc._binaryLoader); //register sprite file loader.
+
 var res = {
     LoadingLogo : "res/loadingLogo.jpg",
     LoadingAdBg : "res/loadingAdBg.jpg",
