@@ -85,11 +85,12 @@ var FIRE_EFFECT = "bgm_fire";
 var NET_EFFECT = "bgm_net";
 var BUTTON_EFFECT = "bgm_button";
 
-var BACK_MUSIC1 = "music_1";
-var BACK_MUSIC2 = "music_6";
-var BACK_MUSIC3 = "music_3";
-var BACK_MUSIC4 = "music_4";
-var BACK_MUSIC5 = "music_1";
+//ussdfasdfasdfa
+var BACK_MUSIC1 = res.music_1;
+var BACK_MUSIC2 = res.music_6;
+var BACK_MUSIC3 = res.music_3;
+var BACK_MUSIC4 = res.music_4;
+var BACK_MUSIC5 = res.music_1;// originally music 1 too
 
 ////// #pragma mark GameUI
 var ui_box_MenuBox = ImageNameLang("ui_box_05.png");

@@ -605,7 +605,8 @@ var GameSetting = cc.Class.extend({
     loadStimulateIdArray:function () {
         //stimulateTable
         this.stimulateIdArray = [];
-        var incentiveTablePath = cc.FileUtils.getInstance().fullPathFromRelativePath(SceneSettingDataModel.sharedSceneSettingDataModel().getIncentiveTableFileName());
+        var incentiveTablePath = {};
+        // var incentiveTablePath = cc.FileUtils.getInstance().fullPathFromRelativePath(SceneSettingDataModel.sharedSceneSettingDataModel().getIncentiveTableFileName());
         //KingFisher cc.log("csv path" + incentiveTablePath);
         var csvFile = new CSVFile();
         csvFile.Open(incentiveTablePath);

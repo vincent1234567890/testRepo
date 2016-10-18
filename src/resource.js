@@ -4,7 +4,24 @@ var res = {
     LoadingAdBg : "res/loadingAdBg.jpg",
     LoadingCompanyLogoScreen : "res/MainBG.jpg",
     AchievementPlist :"res/Achievement.plist",
-    ChestFishPlist: "res/ChestFish.plist"
+    ChestFishPlist: "res/ChestFish.plist",
+    music_1 : "res/music/music_1.ogg",
+    music_2 : "res/music/music_2.ogg",
+    music_3 : "res/music/music_3.ogg",
+    music_4 : "res/music/music_4.ogg",
+    music_5 : "res/music/music_5.ogg",
+    music_6 : "res/music/music_6.ogg",
+    StartMenuPlist : "res/StartMenuLayer.plist",
+
+    LogoScenePlist : "res/logoscene.plist",
+    ButtonsPlist : "res/buttons.plist",
+    IconsPlist : "res/icons.plist",
+    ChestRewardsPlist : "res/chestreward.plist",
+    MainPlist : "res/main.plist",
+    TutorialPlist : "res/tutorial.plist",
+
+    MainUITitle : "res/main_ui_title.png",
+
 // {type:"binary", src:"Resource/butterfly.sprite"},
 // {type:"binary", src:"Resource/bullet10.sprite"},
 // {type:"binary", src:"Resource/chelonian.sprite"},

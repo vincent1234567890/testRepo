@@ -22,17 +22,17 @@ var StartMenuLayer = cc.Layer.extend({
     },
     onEnter:function () {
         this._super();
-        this.setKeyboardEnabled(true);
-        var cache = cc.SpriteFrameCache.getInstance();
-        cache.addSpriteFrames(ImageName("StartMenuLayer.plist"));
-        cache.addSpriteFrames(ImageName("logoscene.plist"));
-        cache.addSpriteFrames(ImageName("buttons.plist"));
-        cache.addSpriteFrames(ImageName("icons.plist"));
-        cache.addSpriteFrames(ImageName("chestreward.plist"));
-        cache.addSpriteFrames(ImageName("main.plist"));
-        cache.addSpriteFrames(ImageName("tutorial.plist"));
+        // this.setKeyboardEnabled(true);
+        var cache = cc.spriteFrameCache;
+        cache.addSpriteFrames(res.StartMenuPlist);
+        cache.addSpriteFrames(res.LogoScenePlist);
+        cache.addSpriteFrames(res.ButtonsPlist);
+        cache.addSpriteFrames(res.IconsPlist);
+        cache.addSpriteFrames(res.ChestRewardsPlist);
+        cache.addSpriteFrames(res.MainPlist);
+        cache.addSpriteFrames(res.TutorialPlist);
 
-        this._bg = cc.Sprite.create(ImageName("ui_background_normal.jpg"));
+        this._bg = new cc.Sprite("#ui_background_normal.jpg");
         this.addChild(this._bg, 0);
         this._bg.setPosition(VisibleRect.center());
         this._bg.setScale(Multiple);
@@ -49,7 +49,7 @@ var StartMenuLayer = cc.Layer.extend({
         this.initStartLayer();
 
         for (var i = 0; i < 8; i++) {
-            var spriteLight = cc.Sprite.createWithSpriteFrameName("main_ui_other_01.png");
+            var spriteLight = new cc.Sprite("#main_ui_other_01.png");
             this.addChild(spriteLight, 10, kLightTagInit + i);
         }
 
@@ -84,13 +84,13 @@ var StartMenuLayer = cc.Layer.extend({
     onExit:function () {
         this._super();
         var cache = cc.SpriteFrameCache.getInstance();
-        cache.removeSpriteFrameByName(ImageName("StartMenuLayer.plist"));
-        cache.removeSpriteFrameByName(ImageName("logoscene.plist"));
-        cache.removeSpriteFrameByName(ImageName("buttons.plist"));
-        cache.removeSpriteFrameByName(ImageName("icons.plist"));
-        cache.removeSpriteFrameByName(ImageName("chestreward.plist"));
-        cache.removeSpriteFrameByName(ImageName("main.plist"));
-        cache.removeSpriteFrameByName(ImageName("tutorial.plist"));
+        cache.removeSpriteFrameByName(res.StartMenuPlist);
+        cache.removeSpriteFrameByName(res.LogoScenePlist);
+        cache.removeSpriteFrameByName(res.ButtonsPlist);
+        cache.removeSpriteFrameByName(res.IconsPlist);
+        cache.removeSpriteFrameByName(res.ChestRewardsPlist);
+        cache.removeSpriteFrameByName(res.MainPlist);
+        cache.removeSpriteFrameByName(res.TutorialPlist);
 
     },
     initStartLayer:function () {
@@ -245,7 +245,7 @@ var StartMenuLayer = cc.Layer.extend({
         var layer = new cc.Node();
         var versionInfo = g_Version;
         var versionTTFSize = new cc.Size(VisibleRect.rect().size.width, 24);
-        var versionTTF = cc.LabelTTF.create(versionInfo, "Arial Bold", 20, versionTTFSize, cc.TEXT_ALIGNMENT_RIGHT);
+        var versionTTF = new cc.LabelTTF(versionInfo, "Arial Bold", 20, versionTTFSize, cc.TEXT_ALIGNMENT_RIGHT);
         versionTTF.setAnchorPoint(AnchorPointBottomRight);
         versionTTF.setPosition(cc.p(0, 30));
         layer.addChild(versionTTF, 0);
@@ -253,7 +253,7 @@ var StartMenuLayer = cc.Layer.extend({
         //versionTTF.setPosition(cc.pAdd(VisibleRect.bottomRight(),cc.p(0, 30)));
         var buildInfo = "Powered by Cocos2d-html5";
         var buildTTFSize = new cc.Size(VisibleRect.rect().size.width, 24);
-        var buildTTF = cc.LabelTTF.create(buildInfo, "Arial Bold", 20, buildTTFSize, cc.TEXT_ALIGNMENT_RIGHT);
+        var buildTTF = new cc.LabelTTF(buildInfo, "Arial Bold", 20, buildTTFSize, cc.TEXT_ALIGNMENT_RIGHT);
         buildTTF.setAnchorPoint(AnchorPointBottomRight);
         buildTTF.setPosition(cc.p(0, 5));
         layer.addChild(buildTTF, 0);

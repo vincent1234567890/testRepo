@@ -22,7 +22,7 @@ var playMusic = function (musicfile, loop) {
     }
     var ret = GamePreference.getInstance().getPlayMusic();
     if (ret) {
-        var musicid = cc.AudioEngine.getInstance().playBackgroundMusic("Resource/music/" + musicfile, loop);
+        var musicid = cc.audioEngine.playMusic(musicfile, loop);
         return musicid;
     }
 };

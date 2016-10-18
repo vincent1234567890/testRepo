@@ -21,7 +21,7 @@ var GameCtrl = cc.Class.extend({
         return true;
     },
     runGame:function () {
-        cc.Director.getInstance().replaceScene(this.getCurScene());
+        cc.director.runScene(this.getCurScene());
     },
     newGame:function (level) {
         if (level !== null) {
@@ -91,7 +91,7 @@ var GameCtrl = cc.Class.extend({
             }
             this._curScene = s;
             if (this._curScene) {
-                cc.Director.getInstance().replaceScene(s);
+                cc.director.runScene(s);
             }
         }
     },

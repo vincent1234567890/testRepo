@@ -327,7 +327,7 @@ var GameScene = cc.Scene.extend({
 
         for (var j = 0; j < 2; ++j) {
             for (var i = 0; i < 5; ++i) {
-                var guang3 = cc.Sprite.createWithSpriteFrameName("shark_prize_guang_11.png");
+                var guang3 = new cc.Sprite("#shark_prize_guang_11.png");
                 guang3.setOpacity(0);
                 var size = VisibleRect.rect().size;
                 guang3.setPosition(cc.p(size.width / 2 - 39 + i * 19, size.height / 2 + 27 - j * 48));
@@ -354,7 +354,7 @@ var GameScene = cc.Scene.extend({
         ];
 
         for (var i = 0; i < 5; ++i) {
-            var guang4 = cc.Sprite.createWithSpriteFrameName("shark_prize_guang_12.png");
+            var guang4 = new cc.Sprite("#shark_prize_guang_12.png");
             guang4.setAnchorPoint(cc.p(0.5, 0.5));
             guang4.setOpacity(0);
             guang4.setPosition(pos[i]);
@@ -372,14 +372,14 @@ var GameScene = cc.Scene.extend({
 
 
         var framesArray = [];
-        var frame = frameCache.getSpriteFrame("shark_prize_bg_1.png");
+        var frame = frameCache.getSpriteFrame("#shark_prize_bg_1.png");
         framesArray.push(frame);
-        frame = frameCache.getSpriteFrame("shark_prize_bg_2.png");
+        frame = frameCache.getSpriteFrame("#shark_prize_bg_2.png");
         framesArray.push(frame);
-        frame = frameCache.getSpriteFrame("shark_prize_bg_3.png");
+        frame = frameCache.getSpriteFrame("#shark_prize_bg_3.png");
         framesArray.push(frame);
-        var animation2 = cc.Animation.create(framesArray, 0.15);
-        var ac2 = cc.Animate.create(animation2, false);
+        var animation2 = new cc.Animation(framesArray, 0.15);
+        var ac2 = new cc.Animate(animation2, false);
         var repeat = cc.Repeat.create(ac2, 11);
         var final2 = cc.CallFunc.create(this, this.removeNihongDeng);
         this._prizeSprite.getChildByTag(kTagPrizeBG).runAction(cc.Sequence.create(repeat, final2));

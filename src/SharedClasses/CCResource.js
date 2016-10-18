@@ -3,7 +3,8 @@ cc.Resource = cc.Class.extend({
     _resPath:"res/",
     _resourceLanguageSuffixList:{},
     ctor:function () {
-        this._curLangague = (cc.Application.getCurrentLanguage() == cc.LANGUAGE_CHINESE) ? cc.LANGUAGE_CHINESE : cc.LANGUAGE_ENGLISH ;
+        console.log("Resource:_curLangague: " + cc.sys.language, ", cc.LANGUAGE_CHINESE: " + cc.sys.LANGUAGE_CHINESE + ", cc.LANGUAGE_ENGLISH:" + cc.sys.LANGUAGE_ENGLISH);
+        this._curLangague = (cc.sys.language == cc.sys.LANGUAGE_CHINESE) ? cc.sys.LANGUAGE_CHINESE : cc.sys.LANGUAGE_ENGLISH ;
         this._resourceLanguageSuffixList = {
             0:"en",
             1:"cn"
@@ -22,7 +23,7 @@ cc.Resource = cc.Class.extend({
     setLanguageSuffixList:function (/*multi parameter*/) {
         for (var i = 0; i <= arguments.length; i++) {
             var langKey = arguments[i];
-            this._resourceLanguageSuffixList[langKey] = this._langForPath(langKey);
+            this._resourceLanguageSuffixList[langKey] = this._langForPath(langKey);{}
         }
     },
     /**
@@ -58,6 +59,7 @@ cc.Resource = cc.Class.extend({
         return this._resPath + fileName;
     },
     getNameWithLang:function (fileName, isFrame, lang) {
+        // console.log("getNameWithLang:fileName: " + fileName, ", isFrame: " + isFrame + ", lang:" + lang);
         var resName, path = "", langPath = "";
         var num = fileName.lastIndexOf(".");
         var filePathWithoutExtension = fileName.substring(0, num);
@@ -71,8 +73,8 @@ cc.Resource = cc.Class.extend({
         if (!isFrame) {
             path = this._resPath + "lang-" + langPath + "/";
         }
-
         resName = path + filePathWithoutExtension + "_" + langPath + extension;
+        console.log("getNameWithLang:fileName: " + resName, ", isFrame: " + isFrame + ", lang:" + lang);
 
         return resName;
     }

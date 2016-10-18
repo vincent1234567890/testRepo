@@ -353,7 +353,7 @@ PlayerEntity_Wrapper.loadFromLocalStorage = function () {
         playerEntity = this.initData();
     }
 
-    cc.Assert(playerEntity != null, "PlayerEntity_Wrapper must not be null!");
+    // cc.Assert(playerEntity != null, "PlayerEntity_Wrapper must not be null!");
     return playerEntity;
 };
 
