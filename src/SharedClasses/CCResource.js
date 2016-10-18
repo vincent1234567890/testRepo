@@ -1,15 +1,11 @@
-cc.Resource = cc.Class.extend({
-    _curLangague:null,
+sino.resource = {
+    _curLanguage: (cc.sys.language == cc.sys.LANGUAGE_CHINESE) ? cc.sys.LANGUAGE_CHINESE : cc.sys.LANGUAGE_ENGLISH ,
     _resPath:"res/",
-    _resourceLanguageSuffixList:{},
-    ctor:function () {
-        console.log("Resource:_curLangague: " + cc.sys.language, ", cc.LANGUAGE_CHINESE: " + cc.sys.LANGUAGE_CHINESE + ", cc.LANGUAGE_ENGLISH:" + cc.sys.LANGUAGE_ENGLISH);
-        this._curLangague = (cc.sys.language == cc.sys.LANGUAGE_CHINESE) ? cc.sys.LANGUAGE_CHINESE : cc.sys.LANGUAGE_ENGLISH ;
-        this._resourceLanguageSuffixList = {
-            0:"en",
-            1:"cn"
-        };
+    _resourceLanguageSuffixList: {
+        0:"en",
+        1:"cn"
     },
+
     getResPath:function () {
         return this._resPath;
     },
@@ -23,7 +19,7 @@ cc.Resource = cc.Class.extend({
     setLanguageSuffixList:function (/*multi parameter*/) {
         for (var i = 0; i <= arguments.length; i++) {
             var langKey = arguments[i];
-            this._resourceLanguageSuffixList[langKey] = this._langForPath(langKey);{}
+            this._resourceLanguageSuffixList[langKey] = this._langForPath(langKey);
         }
     },
     /**
@@ -37,19 +33,19 @@ cc.Resource = cc.Class.extend({
     },
     _langForPath:function (lang) {
         switch (lang) {
-            case cc.LANGUAGE_ENGLISH:
+            case cc.sys.LANGUAGE_ENGLISH:
                 return "en";
-            case cc.LANGUAGE_CHINESE:
+            case cc.sys.LANGUAGE_CHINESE:
                 return "cn";
-            case cc.LANGUAGE_FRENCH:
+            case cc.sys.LANGUAGE_FRENCH:
                 return "fr";
-            case cc.LANGUAGE_ITALIAN:
+            case cc.sys.LANGUAGE_ITALIAN:
                 return "it";
-            case cc.LANGUAGE_GERMAN:
+            case cc.sys.LANGUAGE_GERMAN:
                 return "de";
-            case cc.LANGUAGE_SPANISH:
+            case cc.sys.LANGUAGE_SPANISH:
                 return "es";
-            case cc.LANGUAGE_RUSSIAN:
+            case cc.sys.LANGUAGE_RUSSIAN:
                 return "ru";
             default:
                 return "";
@@ -59,30 +55,19 @@ cc.Resource = cc.Class.extend({
         return this._resPath + fileName;
     },
     getNameWithLang:function (fileName, isFrame, lang) {
-        // console.log("getNameWithLang:fileName: " + fileName, ", isFrame: " + isFrame + ", lang:" + lang);
-        var resName, path = "", langPath = "";
+        var resName, path = "";
         var num = fileName.lastIndexOf(".");
         var filePathWithoutExtension = fileName.substring(0, num);
         var extension = fileName.substring(num, fileName.length);
-        if (!lang) {
-            lang = this._curLangague;
-        }
+        if (!lang)
+            lang = this._curLanguage;
 
-        langPath = this.getLanguageSuffixList(lang);
+        var langPath = this.getLanguageSuffixList(lang);
 
-        if (!isFrame) {
+        if (!isFrame)
             path = this._resPath + "lang-" + langPath + "/";
-        }
-        resName = path + filePathWithoutExtension + "_" + langPath + extension;
-        console.log("getNameWithLang:fileName: " + resName, ", isFrame: " + isFrame + ", lang:" + lang);
 
+        resName = path + filePathWithoutExtension + "_" + langPath + extension;
         return resName;
     }
-});
-cc.Resource.instance = null;
-cc.Resource.getInstance = function () {
-    if (!cc.Resource.instance) {
-        cc.Resource.instance = new cc.Resource();
-    }
-    return cc.Resource.instance;
 };

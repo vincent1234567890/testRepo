@@ -2,11 +2,11 @@ var g_Path = "Resource/";
 var g_Version = "V1.0.5";
 
 var ImageName = function (fileName) {
-    return cc.Resource.getInstance().getName(fileName)
+    return sino.resource.getName(fileName)
 };
 
 var ImageNameLang = function (fileName, isFrame) {
-    return cc.Resource.getInstance().getNameWithLang(fileName, isFrame);
+    return sino.resource.getNameWithLang(fileName, isFrame);
 };
 //把传人图片_1，返回图片_2
 
