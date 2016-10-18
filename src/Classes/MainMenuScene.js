@@ -9,8 +9,8 @@ var MainMenuScene = cc.Scene.extend({
     _startLayer:0,
     init:function () {
         if (this._super()) {
-            var startLayer = StartMenuLayer.create();
-            this.addChild(startLayer, 10, StartLayerTag);
+            this._startLayer = StartMenuLayer.create();
+            this.addChild( this._startLayer, 10, StartLayerTag);
             this._isSubLayer = false;
         }
         return true;
@@ -67,9 +67,12 @@ var MainMenuScene = cc.Scene.extend({
     },
 
     initWithDef:function (def) {
-        this._startLayer = StartMenuLayer.create();
-        this.addChild(this._startLayer, 10, StartLayerTag);
-        this._isSubLayer = false;
+        if (!this._startLayer) {
+            this._startLayer = StartMenuLayer.create();
+            this.addChild(this._startLayer, 10, StartLayerTag);
+            this._isSubLayer = false;
+        }
+
         this.playBackMusic();
 
         return true;

@@ -94,8 +94,9 @@ var StartMenuLayer = cc.Layer.extend({
 
     },
     initStartLayer:function () {
+        console.log("initStartLayer");
         // item1 = Start button
-        this._newGameItem = cc.MenuItemSprite.create(
+        this._newGameItem = new cc.MenuItemSprite(
             CSpriteLayer.getButtonBoxOffsetY("btn_start_1.png", ImageNameLang("txt_start.png"), PlistAndPlist, 1),
             CSpriteLayer.getButtonBoxOffsetY("btn_start_2.png", ImageNameLang("txt_start.png"), PlistAndPlist, 1),
             this, this._menuNewGame);
@@ -125,7 +126,7 @@ var StartMenuLayer = cc.Layer.extend({
             that.resetAllSpritePos();
         });
 
-        var menu = cc.Menu.create(this._newGameItem, this._sceneItem, this._settingItem, this._helpItem);
+        var menu = new cc.Menu(this._newGameItem, this._sceneItem, this._settingItem, this._helpItem);
         menu.setPosition(0, 0);
         this.addChild(menu, eZOrder_MainMenu_StartMenu_menu, eTag_MainMenu_StartMenu_menu);
     },
@@ -156,9 +157,9 @@ var StartMenuLayer = cc.Layer.extend({
         this._particle3.setPosition(leftPos);
     },
     _moveAction:function () {
-        var moveto = cc.MoveBy.create(5, cc.p(625, 0));
-        var fadeOut = cc.FadeOut.create(5);
-        var spawn = cc.Spawn.create(moveto, fadeOut);
+        var moveto = new cc.MoveBy(5, cc.p(625, 0));
+        var fadeOut = new cc.FadeOut(5);
+        var spawn = new cc.Spawn(moveto, fadeOut);
         return spawn;
     },
     _initWaterLight:function (dt) {
@@ -174,7 +175,7 @@ var StartMenuLayer = cc.Layer.extend({
         if (sender) {
             sender.removeFromParentAndCleanup(true);
         }
-        this._spriteLight1 = cc.Sprite.createWithSpriteFrameName(("main_ui_other_02.png"));
+        this._spriteLight1 = new cc.Sprite(("#main_ui_other_02.png"));
         this.addChild(this._spriteLight1, 10);
         this._spriteLight1.setPosition(cc.p(125 + Math.random() * 63, VisibleRect.top().y - this._spriteLight1.getContentSize().height / 2));
     },
@@ -301,6 +302,7 @@ var StartMenuLayer = cc.Layer.extend({
 });
 
 StartMenuLayer.create = function () {
+    console.log("StartMenuLayer.create");
     var ret = new StartMenuLayer();
     if (ret && ret.init()) {
         return ret;

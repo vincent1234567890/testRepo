@@ -1718,7 +1718,7 @@ var GameScene = cc.Scene.extend({
     loadCannonAtPosition:function (cannonPos) {
 
     },
-    changeMusic:function () {
+    changeMusic:function () { //not using the res.music correctly (currently unused)
         cc.audioEngine.stopMusic(false);
         this._musicIdx = (++this._musicIdx) > 6 ? 1 : this._musicIdx;
         var szMusicFile = "music_" + this._musicIdx;
