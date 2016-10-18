@@ -7,7 +7,7 @@ var ParticleSystemFactory = cc.Class.extend({
 
     createParticle:function (plistPath) {
         if (!this._particleCache.hasOwnProperty(plistPath)){
-            this._particleCache[plistPath] = cc.ParticleSystemQuad.create(plistPath);
+            this._particleCache[plistPath] = new cc.ParticleSystem(plistPath);
             this._particleCache[plistPath].unscheduleAllSelectors();
         }
 

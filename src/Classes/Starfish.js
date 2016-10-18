@@ -102,7 +102,7 @@ var Starfish = BaseActor.extend({
     addGold:function (dt) {
         cc.Director.getInstance().getScheduler().unscheduleSelector(this.addGold, this);
         playEffect(COIN_EFFECT1);
-        var particle = cc.ParticleSystemQuad.create(ImageName("goldlizi.plist"));
+        var particle = new cc.ParticleSystem(ImageName("goldlizi.plist"));
         var goldcoin = ActorFactory.create("GoldPrizeActor");
         goldcoin.setPoint(10 * this.multiple);
         goldcoin.setPosition(this.getPosition());

@@ -40,7 +40,7 @@ var StartMenuLayer = cc.Layer.extend({
         //title
         this._title = LogoWaveLayer.create();
         this.addChild(this._title, 1);
-        this._title.setPosition(cc.p(VisibleRect.rect().size.width / 2, VisibleRect.top().y - 140));
+        this._title.setPosition(cc.p(VisibleRect.rect().width / 2, VisibleRect.top().y - 140));
 
         this._initLight1(0);
 
@@ -141,18 +141,18 @@ var StartMenuLayer = cc.Layer.extend({
     _initWaterAnimation:function () {
         var rightPos = cc.p(VisibleRect.bottomRight().x - 260, VisibleRect.bottomRight().y + 100);
         var leftPos = cc.p(VisibleRect.bottomLeft().x + 157, VisibleRect.bottomLeft().y + 105);
-        this._particle2 = cc.ParticleSystemQuad.create(ImageName("qipao3.plist"));
+        this._particle2 = new cc.ParticleSystem(ImageName("qipao3.plist"));
         this._particle2._dontTint = true;
         this._particle2.setTotalParticles(100);
-        this._particle2.setDrawMode(cc.PARTICLE_TEXTURE_MODE);
+        this._particle2.setDrawMode(cc.ParticleSystem.TEXTURE_MODE);
         this.addChild(this._particle2);
         this._particle2.setPosition(rightPos);
 
-        this._particle3 = cc.ParticleSystemQuad.create(ImageName("qipao4.plist"));
+        this._particle3 = new cc.ParticleSystem(ImageName("qipao4.plist"));
         this.addChild(this._particle3);
         this._particle3.setTotalParticles(30);
         this._particle3._dontTint = true;
-        this._particle3.setDrawMode(cc.PARTICLE_TEXTURE_MODE);
+        this._particle3.setDrawMode(cc.ParticleSystem.TEXTURE_MODE);
         this._particle3.setPosition(leftPos);
     },
     _moveAction:function () {
@@ -244,7 +244,7 @@ var StartMenuLayer = cc.Layer.extend({
     _showVersionBuild:function () {
         var layer = new cc.Node();
         var versionInfo = g_Version;
-        var versionTTFSize = new cc.Size(VisibleRect.rect().size.width, 24);
+        var versionTTFSize = new cc.Size(VisibleRect.rect().width, 24);
         var versionTTF = new cc.LabelTTF(versionInfo, "Arial Bold", 20, versionTTFSize, cc.TEXT_ALIGNMENT_RIGHT);
         versionTTF.setAnchorPoint(AnchorPointBottomRight);
         versionTTF.setPosition(cc.p(0, 30));
@@ -252,7 +252,7 @@ var StartMenuLayer = cc.Layer.extend({
 
         //versionTTF.setPosition(cc.pAdd(VisibleRect.bottomRight(),cc.p(0, 30)));
         var buildInfo = "Powered by Cocos2d-html5";
-        var buildTTFSize = new cc.Size(VisibleRect.rect().size.width, 24);
+        var buildTTFSize = new cc.Size(VisibleRect.rect().width, 24);
         var buildTTF = new cc.LabelTTF(buildInfo, "Arial Bold", 20, buildTTFSize, cc.TEXT_ALIGNMENT_RIGHT);
         buildTTF.setAnchorPoint(AnchorPointBottomRight);
         buildTTF.setPosition(cc.p(0, 5));
@@ -268,14 +268,14 @@ var StartMenuLayer = cc.Layer.extend({
             versionInfo.setPosition(VisibleRect.bottomRight());
         }
 
-        this._title.setPosition(cc.p(VisibleRect.rect().size.width / 2, VisibleRect.top().y - 140));
+        this._title.setPosition(cc.p(VisibleRect.rect().width / 2, VisibleRect.top().y - 140));
         this._bg.setPosition(VisibleRect.center());
-        Multiple = AutoAdapterScreen.getInstance().getScaleMultiple()
+        Multiple = AutoAdapterScreen.getInstance().getScaleMultiple();
         this._bg.setScale(Multiple);
 
         this._spriteLight1.setPosition(cc.p(125 + Math.random() * 63, VisibleRect.top().y - this._spriteLight1.getContentSize().height / 2));
 
-        var winSize = VisibleRect.rect().size;
+        var winSize = VisibleRect.rect();
         var center = VisibleRect.center();
         var goldenSectionY = VisibleRect.bottom().y + winSize.height * (1 - 0.618);
         var selectItemY = Math.min(goldenSectionY / 2, goldenSectionY - (this._newGameItem.getContentSize().height + this._sceneItem.getContentSize().height) / 2);

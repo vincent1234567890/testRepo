@@ -56,7 +56,7 @@ TutorialAwardAnimation.addGoldPrize = function (score, count, target) {
     var coinXInterval = VisibleRect.rect().width / (count + 1);
     for (var idx = 0; idx < count; idx++) {
         var p = cc.p(VisibleRect.left().x + coinXInterval * (idx + 1), VisibleRect.top().y / 2);
-        //var pParticle = cc.ParticleSystemQuad.create(ImageName("goldlizi.plist"));
+        //var pParticle = new cc.ParticleSystem(ImageName("goldlizi.plist"));
 
         var goldcoin = ActorFactory.create("GoldPrizeActor");
         goldcoin.setPoint(perPoint);

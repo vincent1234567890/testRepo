@@ -329,7 +329,7 @@ var GameScene = cc.Scene.extend({
             for (var i = 0; i < 5; ++i) {
                 var guang3 = new cc.Sprite("#shark_prize_guang_11.png");
                 guang3.setOpacity(0);
-                var size = VisibleRect.rect().size;
+                var size = VisibleRect.rect();
                 guang3.setPosition(cc.p(size.width / 2 - 39 + i * 19, size.height / 2 + 27 - j * 48));
                 this._prizeSprite.addChild(guang3, kTagPrizeLight3, kTagPrizeLight3 + (j + 1) * (i + 1));
                 var rotateBy3 = cc.RotateBy.create(3, 360);

@@ -57,7 +57,7 @@ var ChestGameLayer = cc.Layer.extend({
             this.getDelegate().addActor(big);
             big.ChestMove();
         }
-        var parAchieve = cc.ParticleSystemQuad.create(ImageName("kaibaoxiang01.plist"));
+        var parAchieve = new cc.ParticleSystem(ImageName("kaibaoxiang01.plist"));
         this.addChild(parAchieve, 200);
         parAchieve.setPosition(VisibleRect.center());
     },

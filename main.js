@@ -435,7 +435,7 @@ var VisibleRect = {
         return s_ptBottom;
     },
     bottomLeft:function () {
-        return this.rect().origin;
+        return this.rect();
     },
     left:function () {
         if (s_ptLeft.x == 0) {

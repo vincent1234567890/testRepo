@@ -344,7 +344,7 @@ PlayerEntity_Wrapper.getInstance = function () {
 PlayerEntity_Wrapper.loadFromLocalStorage = function () {
     var playerEntity;
     var strEntityInfo = wrapper.getStringForKey(KEY_PLAYER_ENTITY);
-    if (0 != strEntityInfo.length) {
+    if (strEntityInfo) {
         playerEntity = this.loadFromString(strEntityInfo);
     }
 
