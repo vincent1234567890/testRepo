@@ -80,7 +80,7 @@ var OptionsLayer = cc.Layer.extend({
         this._soundOnItem.setVisible(true);
         this._soundOffItem.setVisible(false);
         GamePreference.getInstance().setPlayEffect(true);
-        cc.AudioEngine.getInstance().setEffectsVolume(1);
+        cc.audioEngine.setEffectsVolume(1);
         GamePreference.getInstance().updateSoftPref();
     },
     soundOff:function (sender) {
@@ -91,7 +91,7 @@ var OptionsLayer = cc.Layer.extend({
         this._soundOffItem.setVisible(true);
         this._soundOnItem.setVisible(false);
         GamePreference.getInstance().setPlayEffect(false);
-        cc.AudioEngine.getInstance().setEffectsVolume(0);
+        cc.audioEngine.setEffectsVolume(0);
         GamePreference.getInstance().updateSoftPref();
     },
     musicOn:function (sender) {
@@ -139,15 +139,15 @@ var OptionsLayer = cc.Layer.extend({
     },
     sound:function (sender) {
         GamePreference.getInstance().setPlayEffect(sender.getSelectedIndex() == 1);
-        cc.AudioEngine.getInstance().setEffectsVolume(sender.getSelectedIndex());
+        cc.audioEngine.setEffectsVolume(sender.getSelectedIndex());
         GamePreference.getInstance().updateSoftPref();
     },
     mMusic:function (sender) {
         var selectedItem = sender.getSelectedIndex();
         GamePreference.getInstance().setPlayMusic(selectedItem == 1);
         GamePreference.getInstance().updateSoftPref();
-        cc.AudioEngine.getInstance().setBackgroundMusicVolume(selectedItem);
-        var isPlaying = cc.AudioEngine.getInstance().isBackgroundMusicPlaying();
+        cc.audioEngine.setBackgroundMusicVolume(selectedItem);
+        var isPlaying = cc.audioEngine.isMusicPlaying();
         if(!isPlaying){
             playMusic();
         }

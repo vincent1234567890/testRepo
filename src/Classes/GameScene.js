@@ -1720,7 +1720,7 @@ var GameScene = cc.Scene.extend({
 
     },
     changeMusic:function () {
-        cc.AudioEngine.getInstance().stopBackgroundMusic(false);
+        cc.audioEngine.stopMusic(false);
         this._musicIdx = (++this._musicIdx) > 6 ? 1 : this._musicIdx;
         var szMusicFile = "music_" + this._musicIdx;
         playMusic(szMusicFile, true);
