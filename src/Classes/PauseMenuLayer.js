@@ -235,7 +235,7 @@ var PauseMenuLayer = cc.Layer.extend({
         this._super();
     },
     didReceiveAd:function () {
-        return cc.RectMake(VisibleRect.rect().width / 2 - 160, 0, 320, 50);
+        return new cc.Rect(VisibleRect.rect().width / 2 - 160, 0, 320, 50);
     },
     didFailWithMessage:function () {
         //KingFisher cc.log("No Tapjoy Display Ads available");

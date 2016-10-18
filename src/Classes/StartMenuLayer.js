@@ -83,7 +83,7 @@ var StartMenuLayer = cc.Layer.extend({
     },
     onExit:function () {
         this._super();
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
         cache.removeSpriteFrameByName(res.StartMenuPlist);
         cache.removeSpriteFrameByName(res.LogoScenePlist);
         cache.removeSpriteFrameByName(res.ButtonsPlist);

@@ -564,7 +564,7 @@ var BaseSprite = cc.Sprite.extend({
              var yy = ptCenter1.y - rect1.height / 2;
 
 
-             rect1 = cc.RectMake(xx, yy, rect1.width, rect1.height);*/
+             rect1 = new cc.Rect(xx, yy, rect1.width, rect1.height);*/
             for (var j = 0; j < spxCollides; j++) {
                 var rect2 = plane._sd.frameData[frame].collisionData.rectData[j];
                 //rect2 = cc.RectFromString(rect2);
@@ -576,7 +576,7 @@ var BaseSprite = cc.Sprite.extend({
                 /*xx = ptCenter2.x - rect2.width / 2;
                  yy = ptCenter2.y - rect2.height / 2;
 
-                 rect2 = cc.RectMake(xx, yy, rect2.width, rect2.height);*/
+                 rect2 = new cc.Rect(xx, yy, rect2.width, rect2.height);*/
                 var dis = cc.pDistance(ptCenter1, ptCenter2);
                 if (dis <= (radius1 + radius2)) {
                     return true;
@@ -616,7 +616,7 @@ var BaseSprite = cc.Sprite.extend({
             /*var xx = ptCenter1.x - rect1.width / 2;
              var yy = ptCenter1.y - rect1.height / 2;
 
-             rect1 = cc.RectMake(xx, yy, rect1.width, rect1.height);*/
+             rect1 = new cc.Rect(xx, yy, rect1.width, rect1.height);*/
             for (var j = 0; j < spxCollides; j++) {
                 var rect2 = plane._sd.frameData[frame].collisionData.rectData[j];
                 //rect2 = cc.RectFromString(rect2);
@@ -629,7 +629,7 @@ var BaseSprite = cc.Sprite.extend({
                 /*xx = ptCenter2.x - rect2.width / 2;
                  yy = ptCenter2.y - rect2.height / 2;
 
-                 rect2 = cc.RectMake(xx, yy, rect2.width, rect2.height);*/
+                 rect2 = new cc.Rect(xx, yy, rect2.width, rect2.height);*/
                 var dus = cc.pDistance(ptCenter1, ptCenter2);
                 if (dus <= (radius1 + radius2)) {
                     return j;
@@ -645,7 +645,7 @@ var BaseSprite = cc.Sprite.extend({
         //rect1 = cc.RectFromString(rect1);
         var xx = rect1.x + this.getPosition().x;
         var yy = rect1.y + this.getPosition().y;
-        rect1 = cc.RectMake(xx, yy, rect1.width, rect1.height);
+        rect1 = new cc.Rect(xx, yy, rect1.width, rect1.height);
         return cc.Rect.CCRectIntersectsRect(rect, rect1);
     },
     setContentSize:function (size) {

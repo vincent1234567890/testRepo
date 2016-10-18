@@ -192,8 +192,7 @@ var ChestActor = BaseActor.extend({
     getChestRect:function(){
         var chestWidth =  136.0;
         var chestHeight = 116.0;
-        var ChestRect = cc.RectMake(this.getPosition().x - chestWidth / 2, this.getPosition().y - chestHeight / 2, chestWidth, chestHeight);
-        return ChestRect;
+        return new cc.Rect(this.getPosition().x - chestWidth / 2, this.getPosition().y - chestHeight / 2, chestWidth, chestHeight);
     },
     deleteBigChest:function(SceneSprite){},
     ChestMove:function(){
