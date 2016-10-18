@@ -136,12 +136,6 @@ var GameCtrl = cc.Class.extend({
                     // Start listening for game events
                     var eventReceiver = socketUtils.listenForEvents(client);
 
-                    // Create a function that makes it easy to send events:
-                    eventReceiver.send = function (event, data) {
-                        data._ = event;
-                        client._connection.send(JSON.stringify(data));
-                    };
-
                     // So this object has on() and off() functions for receiving messages, and send() for sending them.
                     gameCtrl.setWebSocket(eventReceiver);
 
