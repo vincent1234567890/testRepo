@@ -217,10 +217,10 @@ var SpriteData = cc.Class.extend({
 
         for (i = 0; i < this.tileCount; i++) {
             this.tileData[i] = new cc.Rect();
-            this.tileData[i].origin.x = (data.readShort()) / _getSpriteScale();
-            this.tileData[i].origin.y = (data.readShort()) / _getSpriteScale();
-            this.tileData[i].size.width = (data.readShort()) / _getSpriteScale();
-            this.tileData[i].size.height = (data.readShort()) / _getSpriteScale();
+            this.tileData[i].x = (data.readShort()) / _getSpriteScale();
+            this.tileData[i].y = (data.readShort()) / _getSpriteScale();
+            this.tileData[i].width = (data.readShort()) / _getSpriteScale();
+            this.tileData[i].height = (data.readShort()) / _getSpriteScale();
         }
 
         //read frame
@@ -255,19 +255,19 @@ var SpriteData = cc.Class.extend({
                 // read boundingBox
                 this.frameData[i].collisionData = new Collision();
                 var col = this.frameData[i].collisionData;
-                col.boundingBox.origin.x = (data.readShort()) / _getSpriteScale();
-                col.boundingBox.origin.y = (data.readShort()) / _getSpriteScale();
-                col.boundingBox.size.width = (data.readShort()) / _getSpriteScale();
-                col.boundingBox.size.height = (data.readShort()) / _getSpriteScale();
+                col.boundingBox.x = (data.readShort()) / _getSpriteScale();
+                col.boundingBox.y = (data.readShort()) / _getSpriteScale();
+                col.boundingBox.width = (data.readShort()) / _getSpriteScale();
+                col.boundingBox.height = (data.readShort()) / _getSpriteScale();
 
                 if ((col.rectCount = data.readInteger()) > 0) {
                     col.rectData = [];
                     for (j = 0; j < col.rectCount; j++) {
                         col.rectData[j] = new cc.Rect();
-                        col.rectData[j].origin.x = (data.readShort()) / _getSpriteScale();
-                        col.rectData[j].origin.y = (data.readShort()) / _getSpriteScale();
-                        col.rectData[j].size.width = (data.readShort()) / _getSpriteScale();
-                        col.rectData[j].size.height = (data.readShort()) / _getSpriteScale();
+                        col.rectData[j].x = (data.readShort()) / _getSpriteScale();
+                        col.rectData[j].y = (data.readShort()) / _getSpriteScale();
+                        col.rectData[j].width = (data.readShort()) / _getSpriteScale();
+                        col.rectData[j].height = (data.readShort()) / _getSpriteScale();
                     }
                 }
                 if ((col.polyCount = data.readInteger()) > 0) {
@@ -483,13 +483,14 @@ var BaseSprite = cc.Sprite.extend({
         //}
     },
 
+    //todo need refactor
     draw:function (ctx, rect, tile) {
         var context = ctx || cc.renderContext;
         //if (cc.renderContextType == cc.CANVAS) {
 
         var mpX = 0, mpY = 0;
-        var width = rect.size.width;
-        var height = rect.size.height;
+        var width = rect.width;
+        var height = rect.height;
 
         this._opacity = tile.opacity;
         context.globalAlpha = this._opacity / 255;
@@ -513,12 +514,12 @@ var BaseSprite = cc.Sprite.extend({
         var posX = 0 | ( -anchorPoint.x * width - mpX);
         var posY = 0 | ( -anchorPoint.y * height + mpY);
 
-        context.drawImage(this._texture, rect.origin.x, rect.origin.y, width, height, posX, -(posY + height), width, height);
+        context.drawImage(this._texture, rect.x, rect.y, width, height, posX, -(posY + height), width, height);
 
         /* if (BaseSpriteDebug) {
          context.strokeStyle = "rgba(0,255,0,1)";
-         var vertices1 = [cc.p(posX, posY), cc.p(posX + rect.size.width, posY), cc.p(posX + rect.size.width, posY + rect.size.height),
-         cc.p(posX, posY + rect.size.height)];
+         var vertices1 = [cc.p(posX, posY), cc.p(posX + rect.width, posY), cc.p(posX + rect.width, posY + rect.height),
+         cc.p(posX, posY + rect.height)];
          cc.drawingUtil.drawPoly(vertices1, 4, true);
 
          var posX1 = 0 | ( -this._anchorPointInPoints.x - 0 + this._offsetPosition.x);
@@ -554,28 +555,28 @@ var BaseSprite = cc.Sprite.extend({
             var rect1 = this._sd.frameData[_frame].collisionData.rectData[i];
             //rect1 = cc.RectFromString(rect1);
 
-            var ptCenter1 = cc.pAdd(rect1.origin, cc.p(rect1.size.width / 2, rect1.size.height / 2));
-            var radius1 = Math.sqrt(Math.pow(rect1.size.width / 2, 2) + Math.pow(rect1.size.height / 2, 2));
+            var ptCenter1 = cc.pAdd(rect1.origin, cc.p(rect1.width / 2, rect1.height / 2));
+            var radius1 = Math.sqrt(Math.pow(rect1.width / 2, 2) + Math.pow(rect1.height / 2, 2));
             ptCenter1 = cc.pRotateByAngle(ptCenter1, cc.PointZero(), this.getCurRotation());
             ptCenter1 = cc.pAdd(this.getPosition(), ptCenter1);
 
-            /*var xx = ptCenter1.x - rect1.size.width / 2;
-             var yy = ptCenter1.y - rect1.size.height / 2;
+            /*var xx = ptCenter1.x - rect1.width / 2;
+             var yy = ptCenter1.y - rect1.height / 2;
 
 
-             rect1 = cc.RectMake(xx, yy, rect1.size.width, rect1.size.height);*/
+             rect1 = cc.RectMake(xx, yy, rect1.width, rect1.height);*/
             for (var j = 0; j < spxCollides; j++) {
                 var rect2 = plane._sd.frameData[frame].collisionData.rectData[j];
                 //rect2 = cc.RectFromString(rect2);
-                var ptCenter2 = cc.pAdd(rect2.origin, cc.p(rect2.size.width / 2, rect2.size.height / 2));
-                var radius2 = Math.sqrt(Math.pow(rect2.size.width / 2, 2) + Math.pow(rect2.size.height / 2, 2));
+                var ptCenter2 = cc.pAdd(rect2.origin, cc.p(rect2.width / 2, rect2.height / 2));
+                var radius2 = Math.sqrt(Math.pow(rect2.width / 2, 2) + Math.pow(rect2.height / 2, 2));
                 ptCenter2 = cc.pRotateByAngle(ptCenter2, cc.PointZero(), plane.getCurRotation());
                 ptCenter2 = cc.pAdd(plane.getPosition(), ptCenter2);
 
-                /*xx = ptCenter2.x - rect2.size.width / 2;
-                 yy = ptCenter2.y - rect2.size.height / 2;
+                /*xx = ptCenter2.x - rect2.width / 2;
+                 yy = ptCenter2.y - rect2.height / 2;
 
-                 rect2 = cc.RectMake(xx, yy, rect2.size.width, rect2.size.height);*/
+                 rect2 = cc.RectMake(xx, yy, rect2.width, rect2.height);*/
                 var dis = cc.pDistance(ptCenter1, ptCenter2);
                 if (dis <= (radius1 + radius2)) {
                     return true;
@@ -606,29 +607,29 @@ var BaseSprite = cc.Sprite.extend({
         for (var i = 0; i < thisCollides; i++) {
             var rect1 = this._sd.frameData[_frame].collisionData.rectData[i];
             //rect1 = cc.RectFromString(rect1);
-            var ptCenter1 = cc.pAdd(rect1.origin, cc.p(rect1.size.width / 2, rect1.size.height / 2));
+            var ptCenter1 = cc.pAdd(rect1.origin, cc.p(rect1.width / 2, rect1.height / 2));
 
-            var radius1 = Math.sqrt(Math.pow(rect1.size.width / 2, 2) + Math.pow(rect1.size.height / 2, 2));
+            var radius1 = Math.sqrt(Math.pow(rect1.width / 2, 2) + Math.pow(rect1.height / 2, 2));
 
             ptCenter1 = cc.pRotateByAngle(ptCenter1, cc.PointZero(), this.getCurRotation());
             ptCenter1 = cc.pAdd(this.getPosition(), ptCenter1);
-            /*var xx = ptCenter1.x - rect1.size.width / 2;
-             var yy = ptCenter1.y - rect1.size.height / 2;
+            /*var xx = ptCenter1.x - rect1.width / 2;
+             var yy = ptCenter1.y - rect1.height / 2;
 
-             rect1 = cc.RectMake(xx, yy, rect1.size.width, rect1.size.height);*/
+             rect1 = cc.RectMake(xx, yy, rect1.width, rect1.height);*/
             for (var j = 0; j < spxCollides; j++) {
                 var rect2 = plane._sd.frameData[frame].collisionData.rectData[j];
                 //rect2 = cc.RectFromString(rect2);
-                var ptCenter2 = cc.pAdd(rect2.origin, cc.p(rect2.size.width / 2, rect2.size.height / 2));
-                var radius2 = Math.sqrt(Math.pow(rect2.size.width / 2, 2) + Math.pow(rect2.size.height / 2, 2));
+                var ptCenter2 = cc.pAdd(rect2.origin, cc.p(rect2.width / 2, rect2.height / 2));
+                var radius2 = Math.sqrt(Math.pow(rect2.width / 2, 2) + Math.pow(rect2.height / 2, 2));
 
                 ptCenter2 = cc.pRotateByAngle(ptCenter2, cc.PointZero(), plane.getCurRotation());
                 ptCenter2 = cc.pAdd(plane.getPosition(), ptCenter2);
 
-                /*xx = ptCenter2.x - rect2.size.width / 2;
-                 yy = ptCenter2.y - rect2.size.height / 2;
+                /*xx = ptCenter2.x - rect2.width / 2;
+                 yy = ptCenter2.y - rect2.height / 2;
 
-                 rect2 = cc.RectMake(xx, yy, rect2.size.width, rect2.size.height);*/
+                 rect2 = cc.RectMake(xx, yy, rect2.width, rect2.height);*/
                 var dus = cc.pDistance(ptCenter1, ptCenter2);
                 if (dus <= (radius1 + radius2)) {
                     return j;
@@ -642,9 +643,9 @@ var BaseSprite = cc.Sprite.extend({
         var _frame = this.getSequenceFrame();
         var rect1 = this._sd.frameData[_frame].collisionData.rectData[collides];
         //rect1 = cc.RectFromString(rect1);
-        var xx = rect1.origin.x + this.getPosition().x;
-        var yy = rect1.origin.y + this.getPosition().y;
-        rect1 = cc.RectMake(xx, yy, rect1.size.width, rect1.size.height);
+        var xx = rect1.x + this.getPosition().x;
+        var yy = rect1.y + this.getPosition().y;
+        rect1 = cc.RectMake(xx, yy, rect1.width, rect1.height);
         return cc.Rect.CCRectIntersectsRect(rect, rect1);
     },
     setContentSize:function (size) {

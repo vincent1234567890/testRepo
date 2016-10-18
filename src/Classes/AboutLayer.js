@@ -79,11 +79,11 @@ var AboutLayer = cc.LayerColor.extend({
 
             this.credits = cc.Layer.create();
             this.addChild(this.credits);
-            this.minY = VisibleRect.rect().size.height * 0.4;
+            this.minY = VisibleRect.rect().height * 0.4;
             this.maxY = this.minY;
             this.speed = 40.0;
             this.isTouching = false;
-            var x = VisibleRect.rect().size.width * 0.5;
+            var x = VisibleRect.rect().width * 0.5;
 
             var pos = cc.p(x, 0);
             var creadit = cc.Sprite.create(ImageNameLang("ui_text_41.png"));

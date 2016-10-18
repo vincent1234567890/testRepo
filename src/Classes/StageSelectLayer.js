@@ -227,7 +227,7 @@ var StageSelectLayer = cc.Layer.extend({
         var touchPoint = touch.getLocation();
         var distance = this._touchBegan.x - touchPoint.x;
 
-        if (Math.abs(distance) > 60 && this._helpLayer.getPosition().x <= 0 && this._helpLayer.getPosition().x >= -(VisibleRect.rect().size.width) * (STAGE_PAGE_NUM - 1)) {
+        if (Math.abs(distance) > 60 && this._helpLayer.getPosition().x <= 0 && this._helpLayer.getPosition().x >= -(VisibleRect.rect().width) * (STAGE_PAGE_NUM - 1)) {
             if (distance < 0) {
                 this.otherLeft(null);
             }
@@ -236,7 +236,7 @@ var StageSelectLayer = cc.Layer.extend({
             }
         }
         else {
-            var x = -(this._currentPage * VisibleRect.rect().size.width);
+            var x = -(this._currentPage * VisibleRect.rect().width);
             var Move = cc.MoveTo.create(0.2, cc.p(x, this._helpLayer.getPosition().y));
             var call = cc.CallFunc.create(this, this.updateCurrentPage);
             this._helpLayer.runAction(cc.Sequence.create(Move, call, 0));

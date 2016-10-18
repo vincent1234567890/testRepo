@@ -85,7 +85,7 @@ var NumberScrollLabel = cc.Layer.extend({
             return;
         }
 
-        if (this._scissorRect.size.width <= 0 && this._scissorRect.size.height <= 0) {
+        if (this._scissorRect.width <= 0 && this._scissorRect.height <= 0) {
             var pos = this.getPosition();
             var cs = this.getContentSize();
             this._scissorRect = cc.RectMake(pos.x, pos.y, cs.width, cs.height);

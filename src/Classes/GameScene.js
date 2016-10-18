@@ -1619,7 +1619,7 @@ var GameScene = cc.Scene.extend({
                 // 新场景没有金鲨
                 FishGroup.shareFishGroup().setGSharkActor();
                 this._chestGameLayer.addMinChest(this._oddsNumber - 1, cc.pAdd(VisibleRect.left(),
-                    cc.p(Math.random() % parseInt(VisibleRect.rect().size.width), Math.random() % parseInt(VisibleRect.rect().size.height))));//添加宝箱
+                    cc.p(Math.random() % parseInt(VisibleRect.rect().width), Math.random() % parseInt(VisibleRect.rect().height))));//添加宝箱
             }
 
             var playerActor = PlayerActor.sharedActor();
@@ -1904,7 +1904,7 @@ var GameScene = cc.Scene.extend({
 
         if (this._camera) {
             var delay1 = cc.DelayTime.create(1);
-            var targetPosX = VisibleRect.rect().size.width - 340; // btnWidth 为四个按钮的宽度
+            var targetPosX = VisibleRect.rect().width - 340; // btnWidth 为四个按钮的宽度
             var camraMove = cc.MoveTo.create(1, cc.p(-targetPosX, this._camera.getPosition().y));
             this._camera.runAction(cc.Sequence.create(delay1, camraMove));
         }

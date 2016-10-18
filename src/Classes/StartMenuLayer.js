@@ -40,7 +40,7 @@ var StartMenuLayer = cc.Layer.extend({
         //title
         this._title = LogoWaveLayer.create();
         this.addChild(this._title, 1);
-        this._title.setPosition(cc.p(VisibleRect.rect().size.width / 2, VisibleRect.top().y - 140));
+        this._title.setPosition(cc.p(VisibleRect.rect().width / 2, VisibleRect.top().y - 140));
 
         this._initLight1(0);
 
@@ -244,7 +244,7 @@ var StartMenuLayer = cc.Layer.extend({
     _showVersionBuild:function () {
         var layer = new cc.Node();
         var versionInfo = g_Version;
-        var versionTTFSize = new cc.Size(VisibleRect.rect().size.width, 24);
+        var versionTTFSize = new cc.Size(VisibleRect.rect().width, 24);
         var versionTTF = cc.LabelTTF.create(versionInfo, "Arial Bold", 20, versionTTFSize, cc.TEXT_ALIGNMENT_RIGHT);
         versionTTF.setAnchorPoint(AnchorPointBottomRight);
         versionTTF.setPosition(cc.p(0, 30));
@@ -252,7 +252,7 @@ var StartMenuLayer = cc.Layer.extend({
 
         //versionTTF.setPosition(cc.pAdd(VisibleRect.bottomRight(),cc.p(0, 30)));
         var buildInfo = "Powered by Cocos2d-html5";
-        var buildTTFSize = new cc.Size(VisibleRect.rect().size.width, 24);
+        var buildTTFSize = new cc.Size(VisibleRect.rect().width, 24);
         var buildTTF = cc.LabelTTF.create(buildInfo, "Arial Bold", 20, buildTTFSize, cc.TEXT_ALIGNMENT_RIGHT);
         buildTTF.setAnchorPoint(AnchorPointBottomRight);
         buildTTF.setPosition(cc.p(0, 5));
@@ -268,9 +268,9 @@ var StartMenuLayer = cc.Layer.extend({
             versionInfo.setPosition(VisibleRect.bottomRight());
         }
 
-        this._title.setPosition(cc.p(VisibleRect.rect().size.width / 2, VisibleRect.top().y - 140));
+        this._title.setPosition(cc.p(VisibleRect.rect().width / 2, VisibleRect.top().y - 140));
         this._bg.setPosition(VisibleRect.center());
-        Multiple = AutoAdapterScreen.getInstance().getScaleMultiple()
+        Multiple = AutoAdapterScreen.getInstance().getScaleMultiple();
         this._bg.setScale(Multiple);
 
         this._spriteLight1.setPosition(cc.p(125 + Math.random() * 63, VisibleRect.top().y - this._spriteLight1.getContentSize().height / 2));
