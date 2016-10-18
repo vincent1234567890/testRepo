@@ -446,8 +446,7 @@ var GameScene = cc.Scene.extend({
         this._prizeSprite.runAction(cc.Sequence.create(scaleTo1, scaleTo2, call));
     },
     loadFishGroup:function () {
-        var path = cc.FileUtils.getInstance().fullPathFromRelativePath(ImageName("TrackPlist/Track.plist"));
-        this._dictionaryFish = cc.FileUtils.dictionaryWithContentsOfFile(path);
+        this._dictionaryFish = cc.loader.getRes(ImageName("TrackPlist/Track.plist"));
     },
     addFishGroupForPlayTutorial:function (fishIdx, startPos) {
 
