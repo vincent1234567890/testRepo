@@ -21,7 +21,7 @@ var playMusic = function (musicfile, loop) {
     }
     var ret = GamePreference.getInstance().getPlayMusic();
     if (ret) {
-        return cc.audioEngine.playBackgroundMusic("res/music/" + musicfile, loop);
+        return cc.audioEngine.playMusic("res/music/" + musicfile, loop);
     }
 };
 

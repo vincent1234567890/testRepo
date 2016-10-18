@@ -4,24 +4,28 @@ var LOGOSTATEMOVE = 2;
 
 var LogoWaveLayer = cc.Layer.extend({
     ctor:function () {
-        var spTexture = cc.Sprite.create(ImageNameLang("main_ui_title.png"));
+        var spTexture = new cc.Sprite(ImageNameLang("main_ui_title.png"));
+        console.log(JSON.stringify(spTexture));
         this.addChild(spTexture, 1);
 
         spTexture.setSkewY(-2);
-        var moveup = cc.MoveBy.create(1.5, cc.p(0, 3));
-        moveup = cc.EaseInOut.create(moveup, 2);
-        var moveupdown = cc.Sequence.create(moveup, moveup.reverse());
-        var repeat = cc.RepeatForever.create(moveupdown);
+        var moveup = new cc.MoveBy(1.5, cc.p(0, 3));
+        moveup = moveup.easing(cc.easeInOut(2.0));
+        // moveup = cc.EaseInOut.create(moveup, 2);
+        var moveupdown = new cc.Sequence(moveup, moveup.reverse());
+        var repeat = new cc.RepeatForever(moveupdown);
 
-        var skewup = cc.SkewBy.create(1.3, 1, 2);
-        skewup = cc.EaseSineInOut.create(skewup);
-        var skewupdown = cc.Sequence.create(skewup, skewup.reverse());
-        var repeat2 = cc.RepeatForever.create(skewupdown);
+        var skewup = new cc.SkewBy(1.3, 1, 2);
+        skewup = skewup.easing(cc.easeInOut());
+        // skewup = cc.EaseSineInOut.create(skewup);
+        var skewupdown = new cc.Sequence(skewup, skewup.reverse());
+        var repeat2 = new cc.RepeatForever(skewupdown);
 
-        var scaleup = cc.ScaleBy.create(1.1, .99, 1);
-        scaleup = cc.EaseSineInOut.create(scaleup);
-        var scaleupdown = cc.Sequence.create(scaleup, scaleup.reverse());
-        var repeat3 = cc.RepeatForever.create(scaleupdown);
+        var scaleup = new cc.ScaleBy(1.1, .99, 1);
+        scaleup = scaleup.easing(cc.easeInOut());
+        // scaleup = cc.EaseSineInOut.create(scaleup);
+        var scaleupdown = new cc.Sequence(scaleup, scaleup.reverse());
+        var repeat3 = new cc.RepeatForever(scaleupdown);
 
         spTexture.runAction(repeat);
         spTexture.runAction(repeat2);

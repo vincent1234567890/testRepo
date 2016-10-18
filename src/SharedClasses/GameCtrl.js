@@ -21,7 +21,7 @@ var GameCtrl = cc.Class.extend({
         return true;
     },
     runGame:function () {
-        cc.Director.getInstance().replaceScene(this.getCurScene());
+        cc.director.runScene(this.getCurScene());
     },
     newGame:function (level) {
         if (level !== null) {
@@ -43,7 +43,7 @@ var GameCtrl = cc.Class.extend({
         gameScene.initWithDef("Scene_Main", this._selectLevel);
         this.setCurScene(gameScene);
 
-        cc.Director.getInstance().replaceScene(this.getCurScene());
+        cc.director.runScene(this.getCurScene());
         wrapper.setIntegerForKey(UserDefaultsKeyPreviousPlayedStage, this._selectLevel);
     },
     home:function () {
@@ -82,7 +82,7 @@ var GameCtrl = cc.Class.extend({
     },
 
     run:function () {
-        cc.Director.getInstance().runWithScene(LogoScene.scene());
+        cc.director.runScene(LogoScene.scene());
     },
     setCurScene:function (s) {
         if (this._curScene != s) {
@@ -91,7 +91,7 @@ var GameCtrl = cc.Class.extend({
             }
             this._curScene = s;
             if (this._curScene) {
-                cc.Director.getInstance().replaceScene(s);
+                cc.director.runScene(s);
             }
         }
     },
@@ -110,7 +110,7 @@ var GameCtrl = cc.Class.extend({
         }
         var def = "Scene_Main";
         this._curScene.initWithDef(def, 1);
-        cc.Director.getInstance().replaceScene(this.getCurScene().getScene());
+        cc.director.runScene(this.getCurScene().getScene());
     },
     getPlanType:function () {
         return this.myPlanType;
