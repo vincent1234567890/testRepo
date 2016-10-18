@@ -60,7 +60,7 @@ var AboutLayer = cc.LayerColor.extend({
     },
     initWithParentMenu:function (_parentMenu) {
         if (this.initWithColor(cc.c4(0, 0, 0, 200))) {
-            cc.SpriteFrameCache.getInstance().addSpriteFrames(ImageName("about.plist"));
+            cc.spriteFrameCache.addSpriteFrames(ImageName("about.plist"));
             this.parentMenu = _parentMenu;
             //background
             this._bg = cc.Sprite.create(ImageName("ui_background_normal.jpg"));
@@ -144,7 +144,7 @@ var AboutLayer = cc.LayerColor.extend({
         this.credits.setPosition(cc.p(x, y));
     },
     goBack:function (sender) {
-        cc.SpriteFrameCache.getInstance().removeSpriteFrameByName(ImageName("about.plist"));
+        cc.spriteFrameCache.removeSpriteFrameByName(ImageName("about.plist"));
         this.parentMenu.setTouchEnabled(true);
         this.parentMenu._isSubLayer = false;
         this.removeAllChildrenWithCleanup(true);

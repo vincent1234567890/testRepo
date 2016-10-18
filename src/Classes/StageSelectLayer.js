@@ -36,7 +36,7 @@ var StageSelectLayer = cc.Layer.extend({
         this._super();
         this.setKeyboardEnabled(true);
 
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
         cache.addSpriteFrames(ImageNameLang("StageSelectLayer.plist"));
         cache.addSpriteFrames(ImageNameLang("StageSelectLayer3.plist"));
 
@@ -52,7 +52,7 @@ var StageSelectLayer = cc.Layer.extend({
     },
     onExit:function(){
         this._super();
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
         cache.removeSpriteFrameByName(ImageNameLang("StageSelectLayer.plist"));
         cache.removeSpriteFrameByName(ImageNameLang("StageSelectLayer3.plist"));
 
@@ -323,8 +323,8 @@ var StageSelectLayer = cc.Layer.extend({
         this._bg.setPosition(VisibleRect.center());
     },
     drawHelpImages:function () {
-        cc.SpriteFrameCache.getInstance().addSpriteFrames(ImageName("buttons.plist"));
-        cc.SpriteFrameCache.getInstance().addSpriteFrames(ImageName("stage.plist"));
+        cc.spriteFrameCache.addSpriteFrames(ImageName("buttons.plist"));
+        cc.spriteFrameCache.addSpriteFrames(ImageName("stage.plist"));
         this._helpLayer = cc.Layer.create();
         this.addChild(this._helpLayer, 8, 30);
 
@@ -427,7 +427,7 @@ var StageSelectLayer = cc.Layer.extend({
         }
     },
     drawReturnButton:function () {
-        cc.SpriteFrameCache.getInstance().addSpriteFrames(ImageName("stage.plist"));
+        cc.spriteFrameCache.addSpriteFrames(ImageName("stage.plist"));
         this._returnButton = cc.MenuItemSprite.create(cc.Sprite.createWithSpriteFrameName("ui_button_17.png"),
             cc.Sprite.createWithSpriteFrameName("ui_button_18.png"),
             this, this.back);

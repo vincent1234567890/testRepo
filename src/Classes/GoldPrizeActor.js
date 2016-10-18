@@ -318,7 +318,7 @@ var MaxChestActor = ChestActor.extend({
         {
             this.getScene().getChestGameLayer().DelChestScoreNumber();
         }
-        cc.SpriteFrameCache.getInstance().addSpriteFrames(ImageName("chestreward.plist"));
+        cc.spriteFrameCache.addSpriteFrames(ImageName("chestreward.plist"));
         if (this.getPrizeType() === "Gold")
         {
             var temp =  this.getPrizeNumber();
@@ -460,7 +460,7 @@ var MaxChestActor = ChestActor.extend({
             this.UPSprite.setPosition(cc.pAdd(this.getPosition(), expPosOffset));
             //this.getScene().getChestGameLayer().addChild(this.UPSprite);
             this.getScene().getChestGameLayer().addChild(this.UPSprite);
-            var FlyingframeCache = cc.SpriteFrameCache.getInstance();
+            var FlyingframeCache = cc.spriteFrameCache;
 
             // @warning 此 plist 在进游戏时预加载了。如有问题可在此重新加载
             FlyingframeCache.addSpriteFrames(ImageName("FlyingBook.plist"));
@@ -549,7 +549,7 @@ var MaxChestActor = ChestActor.extend({
             this.getScene().getChestGameLayer().addChild(RewardSprite, 100);
         }
 
-        var frameCache = cc.SpriteFrameCache.getInstance();
+        var frameCache = cc.spriteFrameCache;
         // @warning 此 plist 在进游戏时预加载了。如有问题可在此重新加载
         frameCache.addSpriteFrames(ImageName("BaoXiangLight.plist"));
 

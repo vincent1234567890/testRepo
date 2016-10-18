@@ -12,8 +12,8 @@ var WeaponSpecialLevinStorm = WeaponSpecial.extend({
     initWeapon:function (pos, energy, shootCost) {
         var strweaponSprite = "weaponLevinStorm.png";
         var strweaponShoot = "weaponLevinStorm.png";
-        cc.SpriteFrameCache.getInstance().addSpriteFrames(ImageName("LevinStorm_xuli1.plist"));
-        cc.SpriteFrameCache.getInstance().addSpriteFrames(ImageName("LevinStorm_xuli2.plist"));
+        cc.spriteFrameCache.addSpriteFrames(ImageName("LevinStorm_xuli1.plist"));
+        cc.spriteFrameCache.addSpriteFrames(ImageName("LevinStorm_xuli2.plist"));
         if (this._super(strweaponSprite, strweaponShoot, pos, 0.5, energy, shootCost)) {
             this.setCannonLevel(FishWeaponType.eWeaponLevel9);
             this._isPowerUp = false;
@@ -25,7 +25,7 @@ var WeaponSpecialLevinStorm = WeaponSpecial.extend({
         return false;
     },
     loadWeaponEffect:function () {
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
         var frames = [];
         for (var i = 1; i <= 5; i++) {
             var frameName = "xl0" + i + ".png";
@@ -81,7 +81,7 @@ var WeaponSpecialLevinStorm = WeaponSpecial.extend({
         this.getWeaponSprite().getChildByTag(LevinStormXuliTag).removeFromParentAndCleanup(true);
     },
     powerUp:function () {
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
         var frames = [];
         for (var i = 1; i <= 5; i++) {
             var frameName = "x0" + i + ".png";

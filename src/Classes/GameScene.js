@@ -315,7 +315,7 @@ var GameScene = cc.Scene.extend({
         ActorFactory.returnActor(actor);
     },
     startAction:function () {
-        var frameCache = cc.SpriteFrameCache.getInstance();
+        var frameCache = cc.spriteFrameCache;
         frameCache.addSpriteFrames(ImageName("jinbi.plist"));
         var rotateBy1 = cc.RotateBy.create(1.4 * 25, 360);
         var repeat1 = cc.Repeat.create(rotateBy1, 20);
@@ -410,7 +410,7 @@ var GameScene = cc.Scene.extend({
         if (this._bigPrizeExist) {
             return;
         }
-        var frameCache = cc.SpriteFrameCache.getInstance();
+        var frameCache = cc.spriteFrameCache;
         frameCache.addSpriteFrames(ImageName("jinbi.plist"));
         playEffect(COIN_EFFECT3);
 
@@ -599,7 +599,7 @@ var GameScene = cc.Scene.extend({
         // 隐藏广告条
         AdsController.forceHideBannerAd();
 
-        cc.SpriteFrameCache.getInstance().removeSpriteFramesFromFile(ImageName("jindun.plist"));
+        cc.spriteFrameCache.removeSpriteFramesFromFile(ImageName("jindun.plist"));
         this._gameover = true;
 
         if (this._backgroundLayer != null) {
@@ -1772,7 +1772,7 @@ var GameScene = cc.Scene.extend({
     },
     onExit:function () {
         this._super();
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
         cache.removeSpriteFrameByName(ImageName("cannon.plist"));
         cache.removeSpriteFrameByName(ImageName("cannon10.plist"));
         cache.removeSpriteFrameByName(ImageName("weaponLevinStorm.plist"));
@@ -1864,7 +1864,7 @@ var GameScene = cc.Scene.extend({
         this.loadSessionController(fishSeasonSessionController);
     },
     initTutorial:function () {
-        cc.SpriteFrameCache.getInstance().addSpriteFrames(ImageName("tutorial.plist"));
+        cc.spriteFrameCache.addSpriteFrames(ImageName("tutorial.plist"));
         if (this._playTutorial) {
             this._tutorialConfirmLayer = new TutorialConfirmLayer();
             this._tutorialConfirmLayer.init();

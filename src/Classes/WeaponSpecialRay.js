@@ -27,7 +27,7 @@ var WeaponSpecialRay = WeaponSpecial.extend({
      The rbPos param determine rainbow postion
      */
     addRainbow:function () {
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
         // @warning 此 plist 在进游戏时预加载了。如有问题可在此重新加载
         cache.addSpriteFrames(ImageName("caihong.plist"));
 

@@ -60,7 +60,7 @@ var PauseMenuLayer = cc.Layer.extend({
         playEffect(BUTTON_EFFECT);
         this._delegate.resumeGame();
 
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
         cache.removeSpriteFrameByName(ImageNameLang("options_other.plist"));
         cache.removeSpriteFrameByName(ImageName("Button_push.plist"));
         cache.removeSpriteFrameByName(ImageName("PauseMenuLayer.plist"));
@@ -261,7 +261,7 @@ var PauseMenuLayer = cc.Layer.extend({
         return this;
     },
     ShowMenu:function (sender) {
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
         cache.addSpriteFrames(ImageNameLang("options_other.plist"));
         cache.addSpriteFrames(ImageName("Button_push.plist"));
         cache.addSpriteFrames(ImageName("PauseMenuLayer.plist"));

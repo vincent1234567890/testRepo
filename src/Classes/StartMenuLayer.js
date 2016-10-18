@@ -23,7 +23,7 @@ var StartMenuLayer = cc.Layer.extend({
     onEnter:function () {
         this._super();
         this.setKeyboardEnabled(true);
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
         cache.addSpriteFrames(ImageName("StartMenuLayer.plist"));
         cache.addSpriteFrames(ImageName("logoscene.plist"));
         cache.addSpriteFrames(ImageName("buttons.plist"));
@@ -83,7 +83,7 @@ var StartMenuLayer = cc.Layer.extend({
     },
     onExit:function () {
         this._super();
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
         cache.removeSpriteFrameByName(ImageName("StartMenuLayer.plist"));
         cache.removeSpriteFrameByName(ImageName("logoscene.plist"));
         cache.removeSpriteFrameByName(ImageName("buttons.plist"));

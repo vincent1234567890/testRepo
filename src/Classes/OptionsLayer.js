@@ -17,7 +17,7 @@ var OptionsLayer = cc.Layer.extend({
     },
     onEnter:function(){
         this._super();
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
         cache.addSpriteFrames(ImageNameLang("options_other.plist"));
         cache.addSpriteFrames(ImageName("Button_push.plist"));
         this.setKeyboardEnabled(true);
@@ -30,7 +30,7 @@ var OptionsLayer = cc.Layer.extend({
     },
     onExit:function(){
         this._super();
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
         cache.removeSpriteFrameByName(ImageNameLang("options_other.plist"));
         cache.removeSpriteFrameByName(ImageName("Button_push.plist"));
     },
