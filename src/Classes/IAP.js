@@ -5,7 +5,7 @@ var paypalSrc = "Resource/shop/paypal.png";
 var IAP_GUIDSTRINGS = "IapGuidStrings";
 
 var paypalButton = cc.$("#submitBtn");
-var paypalForm = cc.$("#paypal_form").remove();
+// var paypalForm = cc.$("#paypal_form").remove();
 
 var server = "http://chrome.KingFisher.com/level3/";
 //var server = "http://localhost:7839/";
