@@ -14,7 +14,7 @@ var AchievementShareLayer = cc.Sprite.extend({
     _achieveTitle:null,
     _achieveDescription:null,
     initWithIndex:function (index, value) {
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
         cache.addSpriteFrames(ImageName("AchieveIconTP.plist"));
         cache.addSpriteFrames(ImageName("achieve.plist"));
 
@@ -68,7 +68,7 @@ var AchievementShareLayer = cc.Sprite.extend({
     },
     onExit:function(){
         this._super();
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
         cache.removeSpriteFrameByName(ImageName("AchieveIconTP.plist"));
         cache.removeSpriteFrameByName(ImageName("achieve.plist"));
     }

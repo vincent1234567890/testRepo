@@ -111,7 +111,7 @@ var Weapon = cc.Node.extend({
 
         this.getWeaponSprite().setPosition(cc.p(this.getContentSize().width / 2, cannon.getContentSize().height / 2 - 58));
 
-        var frameCache = cc.SpriteFrameCache.getInstance();
+        var frameCache = cc.spriteFrameCache;
         var normalSprite = frameCache.getSpriteFrame(spriteName);
         var shootSprite = frameCache.getSpriteFrame(spriteShoot);
         var frames = [];

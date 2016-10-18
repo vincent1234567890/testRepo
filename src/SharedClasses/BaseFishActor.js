@@ -2425,7 +2425,7 @@ var BaseFishActor = BaseActor.extend({
         }
     },
     addJinDunAnimation:function (val, number, type) {
-        var frameCache = cc.SpriteFrameCache.getInstance();
+        var frameCache = cc.spriteFrameCache;
         frameCache.addSpriteFrames(ImageName("jindun.plist"));
         var str = "jindun_" + number + "_01.png";
         var coin = cc.Sprite.createWithSpriteFrameName(str);

@@ -42,7 +42,7 @@ var SuperWeaponSelectLayer = cc.Layer.extend({
         weaponSprite.setPosition(cc.p(xBegin - 1 + buttonWidth, 0));
     },
     loadSelectedIndicator:function () {
-        var frameCache = cc.SpriteFrameCache.getInstance();
+        var frameCache = cc.spriteFrameCache;
         var frames = [];
 
         for (var i = 1; i <= 6; i++) {
@@ -63,7 +63,7 @@ var SuperWeaponSelectLayer = cc.Layer.extend({
         this.setWeaponButtonBackground(tempArray);
 
         // @warning 此 plist 在进游戏时预加载了。如有问题可在此重新加载
-        var frameCache = cc.SpriteFrameCache.getInstance();
+        var frameCache = cc.spriteFrameCache;
         frameCache.addSpriteFrames(ImageName("SuperWeaponSelect.plist"));
         frameCache.addSpriteFrames(ImageName("SuperWeaponSelectedMark.plist"));
         var bg = cc.Sprite.createWithSpriteFrameName("ui_weapon_bg.png");
@@ -108,7 +108,7 @@ var SuperWeaponSelectLayer = cc.Layer.extend({
     },
     onExit:function(){
         this._super();
-        var frameCache = cc.SpriteFrameCache.getInstance();
+        var frameCache = cc.spriteFrameCache;
         frameCache.removeSpriteFrameByName(ImageName("SuperWeaponSelect.plist"));
         frameCache.removeSpriteFrameByName(ImageName("SuperWeaponSelectedMark.plist"));
     },

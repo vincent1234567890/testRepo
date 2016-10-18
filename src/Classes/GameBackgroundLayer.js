@@ -12,7 +12,7 @@ var GameBackgroundLayer = cc.Layer.extend({
         if (this.init()) {
             this._bgIdx = level;
             this.initBackground(this._bgIdx);
-            // cc.SpriteFrameCache.getInstance().addSpriteFrames("npc.plist");
+            // cc.spriteFrameCache.addSpriteFrames("npc.plist");
             this.playMusic(level);
         }
         return true;
@@ -20,7 +20,7 @@ var GameBackgroundLayer = cc.Layer.extend({
 
     transition:function () {
         this.beChanged = false;
-        cc.SpriteFrameCache.getInstance().addSpriteFrames(ImageName("sea.plist"));
+        cc.spriteFrameCache.addSpriteFrames(ImageName("sea.plist"));
         this.schedule(this.updateBg);
         this.playsea();
     },
@@ -38,8 +38,8 @@ var GameBackgroundLayer = cc.Layer.extend({
 
         if (this.beChanged) {
             var bg = this.getChildByTag(991);
-            bg.setTextureRect(cc.RectMake(0, 0, bg.getTextureRect().size.width - dt * speedValue, screenHeight));
-            if (bg.getTextureRect().size.width < 0) {
+            bg.setTextureRect(cc.RectMake(0, 0, bg.getTextureRect().width - dt * speedValue, screenHeight));
+            if (bg.getTextureRect().width < 0) {
                 this.beChanged = false;
                 bg.setTextureRect(cc.RectZero());
                 var sp = this.getChildByTag(990);
@@ -53,7 +53,7 @@ var GameBackgroundLayer = cc.Layer.extend({
                 this.getChildByTag(100 + i).stopAllActions();
                 this.removeChildByTag(100 + i, true);
             }
-            cc.SpriteFrameCache.getInstance().removeSpriteFramesFromFile(ImageName("sea.plist"));
+            cc.spriteFrameCache.removeSpriteFramesFromFile(ImageName("sea.plist"));
 
             this.unschedule(this.updateBg);
         }
@@ -76,7 +76,7 @@ var GameBackgroundLayer = cc.Layer.extend({
         }
     },
     removeFromParentAndCleanup:function (cleanup) {
-        cc.SpriteFrameCache.getInstance().removeSpriteFramesFromFile(ImageName("sea.plist"));
+        cc.spriteFrameCache.removeSpriteFramesFromFile(ImageName("sea.plist"));
         this._super(cleanup);
     },
     getBgIdx:function () {
@@ -293,7 +293,7 @@ var GameBackgroundLayer = cc.Layer.extend({
     },
     haibeiAni:function () {
         var frames = [];
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
 
         for (var i = 0; i < 25; i++) {
             var frame = cache.getSpriteFrame("haibei_001.png");
@@ -320,7 +320,7 @@ var GameBackgroundLayer = cc.Layer.extend({
     },
     pangxieAni:function () {
         var frames = [];
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
 
         for (var i = 1; i < 6; i++) {
             var frame = cache.getSpriteFrame("pangxie_00" + i + ".png");
@@ -346,7 +346,7 @@ var GameBackgroundLayer = cc.Layer.extend({
     },
     haixingAni:function () {
         var frames = [];
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
 
         for (var i = 1; i < 6; i++) {
             var frame = cache.getSpriteFrame("haixing_00" + i + ".png");
@@ -364,7 +364,7 @@ var GameBackgroundLayer = cc.Layer.extend({
     },
     longxiaAni:function () {
         var frames = [];
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
 
         for (var i = 1; i < 6; i++) {
             var frame = cache.getSpriteFrame("longxia_00" + i + ".png");
@@ -377,7 +377,7 @@ var GameBackgroundLayer = cc.Layer.extend({
     },
     jijuxieAni:function () {
         var frames = [];
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
 
         for (var i = 0; i < 15; i++) {
             var frame = cache.getSpriteFrame("jijuxie_005.png");
@@ -405,7 +405,7 @@ var GameBackgroundLayer = cc.Layer.extend({
     },
     haimaAni:function () {
         var frames = [];
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
 
 
         for (var i = 1; i < 5; i++) {
@@ -434,7 +434,7 @@ var GameBackgroundLayer = cc.Layer.extend({
             var sprite = cc.Sprite.createWithSpriteFrameName(firstFrame);
             var p = temp;
             var frames = [];
-            var cache = cc.SpriteFrameCache.getInstance();
+            var cache = cc.spriteFrameCache;
 
             for (var j = 1; j <= 10; j++) {
                 if (p > 10) {
@@ -455,7 +455,7 @@ var GameBackgroundLayer = cc.Layer.extend({
         }
     },
     removeSprite:function (sender) {
-        cc.SpriteFrameCache.getInstance().removeSpriteFramesFromFile(ImageName("sea.plist"));
+        cc.spriteFrameCache.removeSpriteFramesFromFile(ImageName("sea.plist"));
         sender.removeFromParentAndCleanup(true);
     }
 });

@@ -12,7 +12,7 @@ var UserInfoLayer = cc.Layer.extend({
     _menuAchieve:null,
     init:function () {
         if (this._super()) {
-            var frameCache = cc.SpriteFrameCache.getInstance();
+            var frameCache = cc.spriteFrameCache;
             frameCache.addSpriteFrames(ImageNameLang("ui_textbox_30.plist"));
 
             this._curTitle = ImageNameLang(PlayerActor.sharedActor().title(), true);

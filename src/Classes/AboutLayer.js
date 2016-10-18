@@ -60,7 +60,7 @@ var AboutLayer = cc.LayerColor.extend({
     },
     initWithParentMenu:function (_parentMenu) {
         if (this.initWithColor(cc.c4(0, 0, 0, 200))) {
-            cc.SpriteFrameCache.getInstance().addSpriteFrames(ImageName("about.plist"));
+            cc.spriteFrameCache.addSpriteFrames(ImageName("about.plist"));
             this.parentMenu = _parentMenu;
             //background
             this._bg = cc.Sprite.create(ImageName("ui_background_normal.jpg"));
@@ -79,11 +79,11 @@ var AboutLayer = cc.LayerColor.extend({
 
             this.credits = cc.Layer.create();
             this.addChild(this.credits);
-            this.minY = VisibleRect.rect().size.height * 0.4;
+            this.minY = VisibleRect.rect().height * 0.4;
             this.maxY = this.minY;
             this.speed = 40.0;
             this.isTouching = false;
-            var x = VisibleRect.rect().size.width * 0.5;
+            var x = VisibleRect.rect().width * 0.5;
 
             var pos = cc.p(x, 0);
             var creadit = cc.Sprite.create(ImageNameLang("ui_text_41.png"));
@@ -144,7 +144,7 @@ var AboutLayer = cc.LayerColor.extend({
         this.credits.setPosition(cc.p(x, y));
     },
     goBack:function (sender) {
-        cc.SpriteFrameCache.getInstance().removeSpriteFrameByName(ImageName("about.plist"));
+        cc.spriteFrameCache.removeSpriteFrameByName(ImageName("about.plist"));
         this.parentMenu.setTouchEnabled(true);
         this.parentMenu._isSubLayer = false;
         this.removeAllChildrenWithCleanup(true);

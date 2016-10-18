@@ -24,7 +24,7 @@ var HowToPlayLayer = cc.Layer.extend({
     onEnter:function(){
         this._super();
         this.setKeyboardEnabled(true);
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
         cache.addSpriteFrames(ImageNameLang("StageSelectLayer.plist"));
         cache.addSpriteFrames(ImageNameLang("tutorial_uibox.plist"));
 
@@ -40,7 +40,7 @@ var HowToPlayLayer = cc.Layer.extend({
     },
     onExit:function(){
         this._super();
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
         cache.removeSpriteFrameByName(ImageNameLang("StageSelectLayer.plist"));
         cache.removeSpriteFrameByName(ImageNameLang("tutorial_uibox.plist"));
     },

@@ -222,7 +222,7 @@ var ShopLayer = cc.Layer.extend({
         board.setPosition(VisibleRect.center());
         this.addChild(board);
 
-        cc.SpriteFrameCache.getInstance().addSpriteFrames(ImageName("shop/ui_shop.plist"));
+        cc.spriteFrameCache.addSpriteFrames(ImageName("shop/ui_shop.plist"));
         var lang = cc.Application.getCurrentLanguage() === cc.LANGUAGE_CHINESE ? "cn" : "en";
         var awardNotice = cc.Sprite.createWithSpriteFrameName(("shop_awarding_notice_" + lang + ".png"));
         this.addChild(awardNotice);
@@ -277,7 +277,7 @@ var ShopLayer = cc.Layer.extend({
         scene.resumeGame();
         scene.showAllMenu();
         this.removeFromParentAndCleanup(true);
-        cc.SpriteFrameCache.getInstance().removeSpriteFrameByName(ImageName("shop/ui_shop.plist"));
+        cc.spriteFrameCache.removeSpriteFrameByName(ImageName("shop/ui_shop.plist"));
     },
     addLabel:function (gold, usd, p) {
         var coin = cc.Sprite.create(ImageName("shop/ui_pur_buton_01xiao.png"));
