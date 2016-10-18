@@ -134,14 +134,14 @@ var GameCtrl = cc.Class.extend({
             ).then(
                 () => {
                     // Start listening for game events
-                    var eventReceiver = socketUtils.listenForEvents(client);
+                    var ioSocket = socketUtils.getIOSocketFromClient(client);
 
                     // So this object has on() and off() functions for receiving messages, and send() for sending them.
-                    gameCtrl.setWebSocket(eventReceiver);
+                    gameCtrl.setWebSocket(ioSocket);
 
                     // Testing
-                    eventReceiver.on('u', console.log);
-                    eventReceiver.send('b', {a: Math.PI / 4});
+                    ioSocket.on('u', console.log);
+                    ioSocket.send('b', {a: Math.PI / 4});
                 }
             ).catch(console.error.bind(console));
         });
