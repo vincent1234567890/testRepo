@@ -59,7 +59,7 @@ var AboutLayer = cc.LayerColor.extend({
         this.isTouching = false;
     },
     initWithParentMenu:function (_parentMenu) {
-        if (this.initWithColor(cc.c4(0, 0, 0, 200))) {
+        if (this.initWithColor(new cc.Color(0, 0, 0, 200))) {
             cc.spriteFrameCache.addSpriteFrames(ImageName("about.plist"));
             this.parentMenu = _parentMenu;
             //background

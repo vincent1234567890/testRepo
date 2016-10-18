@@ -13,25 +13,29 @@
 
     "jsList" : [
         "src/resource.js",
+
+        "src/SharedClasses/BaseSprite.js",
+        "src/SharedClasses/ConstantEnum.js",
+
         "src/SharedClasses/ActorFactory.js",
         "src/SharedClasses/Alert.js",
         "src/SharedClasses/AutoAdapterScreen.js",
-        "src/SharedClasses/ConstantEnum.js",
-        "src/SharedClasses/BaseSprite.js",
         "src/SharedClasses/BaseActor.js",
         "src/SharedClasses/BaseFishActor.js",
         "src/SharedClasses/CCLocalizedString.js",
         "src/SharedClasses/CCResource.js",
+
         "src/SharedClasses/CCSessionController.js",
-        "src/SharedClasses/ChromeStorage.js",
+        "src/SharedClasses/GameSessionController.js",
+
         "src/SharedClasses/CSpriteLayer.js",
         "src/SharedClasses/FishNetCollideHandler.js",
-        "src/SharedClasses/GameSessionController.js",
         "src/SharedClasses/FishSeasonSessionController.js",
         "src/SharedClasses/GameConfig.js",
         "src/SharedClasses/GameCtrl.js",
         "src/SharedClasses/GameMainSessionController.js",
         "src/SharedClasses/GamePreference.js",
+
         "src/SharedClasses/GameSetting.js",
         "src/SharedClasses/LoadingScreen.js",
         "src/SharedClasses/MoveDataBase.js",
@@ -51,7 +55,7 @@
         "src/Classes/GoldPrizeActor.js",
         "src/Classes/HelpStageSelLayer.js",
         "src/Classes/HowToPlayLayer.js",
-        "src/Classes/IAP.js",
+
         "src/Classes/LogoScene.js",
         "src/Classes/LogoWaveLayer.js",
         "src/Classes/MainMenuScene.js",

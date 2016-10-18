@@ -75,7 +75,7 @@ var WeaponCannon = Weapon.extend({
 
         /*
          currentScene.removeChildByTag(kParticleTag, true);
-         var partic = cc.ParticleSystemQuad.create(ImageName("huanpao02.plist"));
+         var partic = new cc.ParticleSystem(ImageName("huanpao02.plist"));
          partic.setPosition(cc.pAdd(this.getPosition(), cc.p(0, 0)));
          currentScene.addChild(partic, 111, kParticleTag);*/
     },
@@ -107,7 +107,7 @@ var WeaponCannon = Weapon.extend({
         this.getWeaponSprite().stopAction(this.getShootAnimation());
         this.getWeaponSprite().setScale(1.0);
 
-        //var pParticle = cc.ParticleSystemQuad.create(ImageName("_particle.plist"));
+        //var pParticle = new cc.ParticleSystem(ImageName("_particle.plist"));
         //TODO foundn't this file
         var pParticle = ParticleSystemFactory.getInstance().createParticle(ImageName("particle.plist"));
         pParticle.setDrawMode(cc.PARTICLE_SHAPE_MODE);

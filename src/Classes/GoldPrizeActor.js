@@ -172,7 +172,7 @@ var ChestActor = BaseActor.extend({
         this._super();
     },
     addParticleSystem:function(){
-        var tempParticle = cc.ParticleSystemQuad.create(ImageName("kaibaoxiang02.plist"));
+        var tempParticle = new cc.ParticleSystem(ImageName("kaibaoxiang02.plist"));
         tempParticle.setPosition(this.getPosition());
         //self.pParticle = tempParticle;
         this.getScene().addChild(tempParticle, 10);
@@ -373,7 +373,7 @@ var MaxChestActor = ChestActor.extend({
             var perPoint = parseInt(strPrePoint);
             var p = cc.PointFromString(dict["position"]);
             var distpos = cc.PointFromString(dict["distpos"]);
-            var pPParticle = cc.ParticleSystemQuad.create(ImageName("goldlizi.plist"));
+            var pPParticle = new cc.ParticleSystem(ImageName("goldlizi.plist"));
             var goldcoin = ActorFactory.create("GoldPrizeActor");
             goldcoin.setPoint(perPoint);
             var oddsNumber = this.getScene().getOddsNumber();
@@ -396,11 +396,11 @@ var MaxChestActor = ChestActor.extend({
     addGoldPrizeDel:function(dictORdt){
         if((typeof dictORdt) === "object")
         {
-            var dict = dictORdt
+            var dict = dictORdt;
             playEffect(COIN_EFFECT1);
             var strPrePoint = dict["perPoint"];
             var perPoint = parseInt(strPrePoint);
-            var pParticle = cc.ParticleSystemQuad.create(ImageName("goldlizi.plist"));
+            var pParticle = new cc.ParticleSystem(ImageName("goldlizi.plist"));
             var goldcoin  = ActorFactory.create("GoldPrizeActor");
             goldcoin.setPoint(perPoint);
 
@@ -448,7 +448,7 @@ var MaxChestActor = ChestActor.extend({
         this.setPosition(cc.p((this.iDirection+1)*screenWidth/6,VisibleRect.center().y));
     },
     addGameReward:function(){
-        var tempParticle = cc.ParticleSystemQuad.create(ImageName("kaibaoxiang02.plist"));
+        var tempParticle = new cc.ParticleSystem(ImageName("kaibaoxiang02.plist"));
         tempParticle.setPosition(this.getPosition());
         this.setParticle(tempParticle);
         this.addChild(tempParticle, 10);
@@ -577,7 +577,7 @@ var MaxChestActor = ChestActor.extend({
             playEffect(COIN_EFFECT1);
             var strPrePoint = (dict["perPoint"]);
             var perPoint =  parseInt(strPrePoint);
-            var pParticle = cc.ParticleSystemQuad.create(ImageName("goldlizi.plist"));
+            var pParticle = new cc.ParticleSystem(ImageName("goldlizi.plist"));
             var goldcoin = ActorFactory.create("GoldPrizeActor");
             goldcoin.setPoint(perPoint);
 

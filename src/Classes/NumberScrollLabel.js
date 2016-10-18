@@ -91,10 +91,12 @@ var NumberScrollLabel = cc.Layer.extend({
             this._scissorRect = new cc.Rect(pos.x, pos.y, cs.width, cs.height);
         }
     },
+
+    //todo
     draw:function (ctx) {
         if (cc.renderContextType == cc.CANVAS) {
             var context = ctx || cc.renderContext;
-            var size = this._scissorRect.size;
+            var size = this._scissorRect;
             context.beginPath();
             context.moveTo(-size.width / 2, -size.height / 2);
             context.lineTo(size.width / 2, -size.height / 2);
