@@ -64,12 +64,12 @@ sino.resource = {
             lang = this._curLanguage;
 
         var langPath = this._langForPath(lang);
-        console.log("this._resPath: " + this._resPath + ", langPath: " +langPath+ ", this._curLanguage: " +this._curLanguage+ ", lang: " +lang+ ", num: " +num);
+        // console.log("this._resPath: " + this._resPath + ", langPath: " +langPath+ ", this._curLanguage: " +this._curLanguage+ ", lang: " +lang+ ", num: " +num);
         if (!isFrame)
             path = this._resPath + "lang-" + langPath + "/";
 
         resName = path + filePathWithoutExtension + "_" + langPath + extension;
-        console.log("resName: " + resName + ", path: " +path+ ", filePathWithoutExtension: " +filePathWithoutExtension+ ", langPath: " +langPath+ ", extension: " +extension);
+        // console.log("resName: " + resName + ", path: " +path+ ", filePathWithoutExtension: " +filePathWithoutExtension+ ", langPath: " +langPath+ ", extension: " +extension);
         return resName;
     }
 };
