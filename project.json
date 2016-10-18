@@ -13,7 +13,6 @@
 
     "jsList" : [
         "src/resource.js",
-        "src/app.js",
         "src/SharedClasses/ConstantEnum.js",
         "src/SharedClasses/GameCtrl.js",
         "src/SharedClasses/LoadingScreen.js",

@@ -28,8 +28,8 @@ var AchievementShareLayer = cc.Sprite.extend({
         spriteAchImage.setPosition(cc.p(-180, 0));
         this.addChild(spriteAchImage, 1, AchiveUITag.kAchieveImageTag);
 
-        var lang = (cc.Application.getCurrentLanguage() == cc.LANGUAGE_CHINESE) ? cc.LANGUAGE_CHINESE : cc.LANGUAGE_ENGLISH;
-        var suffix = cc.Resource.getInstance().getLanguageSuffixList(lang);
+        var lang = (cc.sys.language == cc.sys.LANGUAGE_CHINESE) ? cc.sys.LANGUAGE_CHINESE : cc.sys.LANGUAGE_ENGLISH;
+        var suffix = sino.resource.getLanguageSuffixList(lang);
 
         var titleKey = "ItemTitle_" + suffix;
         var gainPre = value ? "" : "_none";
