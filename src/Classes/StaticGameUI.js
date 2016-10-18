@@ -1,7 +1,7 @@
 var StaticGameUI = cc.Class.extend({});
 
 StaticGameUI.dowsStaticGameUI = function (backdropSprite, scale) {
-    cc.SpriteFrameCache.getInstance().addSpriteFrames(ImageName("cannon.plist"));
+    cc.spriteFrameCache.addSpriteFrames(ImageName("cannon.plist"));
     // 等级，经验横幅
     // 背景图片
     var w = backdropSprite.getContentSize().width;
@@ -66,8 +66,8 @@ StaticGameUI.dowsStaticGameUI = function (backdropSprite, scale) {
     backdropSprite.addChild(weaponRight);
 
     // 炮弹图片
-    cc.SpriteFrameCache.getInstance().addSpriteFrames(ImageName("cannon10.plist"));
-    cc.SpriteFrameCache.getInstance().addSpriteFrames(ImageName("SuperWeaponButton.plist"));
+    cc.spriteFrameCache.addSpriteFrames(ImageName("cannon10.plist"));
+    cc.spriteFrameCache.addSpriteFrames(ImageName("SuperWeaponButton.plist"));
     var weaponSprite = cc.Sprite.createWithSpriteFrameName("actor_cannon1_11.png");
     weaponSprite.setPosition(cc.p(size.width / 2, 50));
     backdropSprite.addChild(weaponSprite);

@@ -34,7 +34,7 @@ var ScoreBarLayer = cc.Layer.extend({
         if (this._super()) {
             //this.setKeyboardEnabled(true);
             // @warning 此 plist 在进游戏时预加载了。如有问题可在此重新加载
-            var frameCache = cc.SpriteFrameCache.getInstance();
+            var frameCache = cc.spriteFrameCache;
             frameCache.addSpriteFrames(ImageName("SuperWeaponButton.plist"));
             frameCache.addSpriteFrames(ImageName("help_ui.plist"));
 
@@ -98,7 +98,7 @@ var ScoreBarLayer = cc.Layer.extend({
 
             // 生成按钮菜单
             this.setBulletsLabel(NumberScrollLabel.create());
-            this._bulletsLabel.setComponentSize(cc.SizeMake(25, 28));
+            this._bulletsLabel.setComponentSize(new cc.Size(25, 28));
             this._bulletsLabel.setComponentNumber(6);
             this.addChild(this._bulletsLabel, 60);
             this._bulletsLabel.setPosition(cc.p(-342, 10));
@@ -116,7 +116,7 @@ var ScoreBarLayer = cc.Layer.extend({
     },
     onExit:function(){
         this._super();
-        var frameCache = cc.SpriteFrameCache.getInstance();
+        var frameCache = cc.spriteFrameCache;
         frameCache.removeSpriteFrameByName(ImageName("SuperWeaponButton.plist"));
         frameCache.removeSpriteFrameByName(ImageName("help_ui.plist"));
     },
@@ -285,7 +285,7 @@ var ScoreBarLayer = cc.Layer.extend({
         this._isPlayNeedMoney = true;
         this._moneyTip.setVisible(true);
 
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
         // @warning 此 plist 在进游戏时预加载了。如有问题可在此重新加载
         cache.addSpriteFrames(ImageName("jindun.plist"));
 
@@ -370,7 +370,7 @@ var ScoreBarLayer = cc.Layer.extend({
     convertPointFromSubNode:function (pNode, point) {
         var selfContainNode = false;
         var temp = pNode;
-        var result = cc.PointZero();
+        var result = new cc.Point(0, 0);
         while (temp.getParent() != null) {
             if (temp.getParent() == this) {
                 selfContainNode = true;
@@ -383,7 +383,7 @@ var ScoreBarLayer = cc.Layer.extend({
         if (selfContainNode) {
             return result;
         } else {
-            return cc.PointZero();
+            return new cc.Point(0, 0);
         }
     },
     initTools:function () {
@@ -697,7 +697,7 @@ var ScoreBarLayer = cc.Layer.extend({
         var ac1 = cc.Show.action();
 
         var frames = [];
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
         var frameName;
         for (var i = 1; i < 6; ++i) {
             frameName = "circle_000" + i + ".png";
@@ -719,7 +719,7 @@ var ScoreBarLayer = cc.Layer.extend({
         var ac0 = cc.Show.action();
 
         var frames = [];
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
         var frameName;
 
         for (var i = 1; i < 3; ++i) {
@@ -755,7 +755,7 @@ var ScoreBarLayer = cc.Layer.extend({
 
         this._moneyTip.setVisible(true);
 
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
         // @warning 此 plist 在进游戏时预加载了。如有问题可在此重新加载
         cache.addSpriteFrames(ImageName("jindun.plist"));
 

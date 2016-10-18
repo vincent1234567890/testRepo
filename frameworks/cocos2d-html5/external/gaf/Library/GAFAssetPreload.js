@@ -57,7 +57,7 @@ gaf._AssetPreload.prototype.AtlasCreateFrames = function(elements, asset, sprite
 {
     elements.forEach(function (item) {
         var texture = asset._atlases[item.atlasId];
-        var rect = cc.rect(item.origin.x, item.origin.y, item.size.x, item.size.y);
+        var rect = cc.rect(item.x, item.y, item.size.x, item.size.y);
         var frame = new cc.SpriteFrame(texture, rect);
         frame._gafAnchor =
         {

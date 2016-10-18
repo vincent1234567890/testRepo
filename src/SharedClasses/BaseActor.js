@@ -103,10 +103,10 @@ var BaseActor = BaseSprite.extend({
         *//*        if (this._isAlive) {
          var rcEScreenRect = VisibleRect.rect();
          var fishSize = this.getContentSize();
-         rcEScreenRect.origin.x -= fishSize.width / 2;
-         rcEScreenRect.origin.y -= fishSize.height / 2;
-         rcEScreenRect.size.width += fishSize.width;
-         rcEScreenRect.size.height += fishSize.height;
+         rcEScreenRect.x -= fishSize.width / 2;
+         rcEScreenRect.y -= fishSize.height / 2;
+         rcEScreenRect.width += fishSize.width;
+         rcEScreenRect.height += fishSize.height;
          if (!cc.Rect.CCRectContainsPoint(rcEScreenRect, this.getPosition())) {
          this.removeSelfFromScene();
          return;

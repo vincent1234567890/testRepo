@@ -14,7 +14,7 @@ var AchievementShareLayer = cc.Sprite.extend({
     _achieveTitle:null,
     _achieveDescription:null,
     initWithIndex:function (index, value) {
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
         cache.addSpriteFrames(ImageName("AchieveIconTP.plist"));
         cache.addSpriteFrames(ImageName("achieve.plist"));
 
@@ -36,7 +36,7 @@ var AchievementShareLayer = cc.Sprite.extend({
         var tempDict = GameSetting.getInstance().getAchieveArray()[index];
         var titleStr = tempDict[titleKey];
 
-        var title = cc.LabelTTF.create(titleStr, "Microsoft YaHei", 25, cc.SizeMake(300, 30), cc.TEXT_ALIGNMENT_LEFT);
+        var title = cc.LabelTTF.create(titleStr, "Microsoft YaHei", 25, new cc.Size(300, 30), cc.TEXT_ALIGNMENT_LEFT);
         this.addChild(title, 1, AchiveUITag.kAchieveTitleTag);
         title.setPosition(cc.p(-200 + bgSprite.getContentSize().width / 2, 25));
 
@@ -47,7 +47,7 @@ var AchievementShareLayer = cc.Sprite.extend({
             describtionStr = valObj;
         }
 
-        var desLabel = cc.LabelTTF.create(describtionStr, "Microsoft YaHei", 25, cc.SizeMake(300, 30), cc.TEXT_ALIGNMENT_LEFT);
+        var desLabel = cc.LabelTTF.create(describtionStr, "Microsoft YaHei", 25, new cc.Size(300, 30), cc.TEXT_ALIGNMENT_LEFT);
         this.addChild(desLabel, 1, AchiveUITag.kAchieveTitleTag);
         desLabel.setPosition(cc.p(-200 + bgSprite.getContentSize().width / 2, -12));
         desLabel.setColor(cc.black());
@@ -68,7 +68,7 @@ var AchievementShareLayer = cc.Sprite.extend({
     },
     onExit:function(){
         this._super();
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
         cache.removeSpriteFrameByName(ImageName("AchieveIconTP.plist"));
         cache.removeSpriteFrameByName(ImageName("achieve.plist"));
     }

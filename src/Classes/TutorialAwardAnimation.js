@@ -39,7 +39,7 @@ TutorialAwardAnimation.addScoreNumber = function (score, count, target) {
         target.addChild(labelNum, 100);
     }
     else{
-        var coinXInterval = VisibleRect.rect().size.width / (count + 1);
+        var coinXInterval = VisibleRect.rect().width / (count + 1);
         for (var idx = 0; idx < count; idx++) {
             var curScore = score / (count - idx);
             TutorialAwardAnimation.addScoreNumber(curScore, cc.p(VisibleRect.left().x + coinXInterval*(idx+1), VisibleRect.center().y), target);
@@ -53,7 +53,7 @@ TutorialAwardAnimation.addGoldPrize = function (score, count, target) {
     var distpos = cc.p(VisibleRect.bottom().x - 250, VisibleRect.bottom().y);
     var position = cc.p(512, 600);
     var perPoint = score / count;
-    var coinXInterval = VisibleRect.rect().size.width / (count + 1);
+    var coinXInterval = VisibleRect.rect().width / (count + 1);
     for (var idx = 0; idx < count; idx++) {
         var p = cc.p(VisibleRect.left().x + coinXInterval * (idx + 1), VisibleRect.top().y / 2);
         //var pParticle = cc.ParticleSystemQuad.create(ImageName("goldlizi.plist"));

@@ -222,7 +222,7 @@ var ShopLayer = cc.Layer.extend({
         board.setPosition(VisibleRect.center());
         this.addChild(board);
 
-        cc.SpriteFrameCache.getInstance().addSpriteFrames(ImageName("shop/ui_shop.plist"));
+        cc.spriteFrameCache.addSpriteFrames(ImageName("shop/ui_shop.plist"));
         var lang = cc.Application.getCurrentLanguage() === cc.LANGUAGE_CHINESE ? "cn" : "en";
         var awardNotice = cc.Sprite.createWithSpriteFrameName(("shop_awarding_notice_" + lang + ".png"));
         this.addChild(awardNotice);
@@ -258,17 +258,17 @@ var ShopLayer = cc.Layer.extend({
             this._setPreNumber(0);
             this._componentNumber = 5;
             this._updateTime = 0.0;
-            //this.componentSize = cc.SizeMake(TextWidth2+5, TextHeight2);
+            //this.componentSize = new cc.Size(TextWidth2+5, TextHeight2);
             this._componentSize = size;
             this._itemWidth = iWidth;
             this._itemHeight = iHeight;
             this._charMapFile = mapFile;
-            this._scissorRect = cc.RectZero();
+            this._scissorRect = new cc.Rect(0, 0, 0, 0);
             this._components = [];
             this.initAllComponents();
             this.schedule(this.update);
         };
-        number.initWithSize(ImageName("shop/ui_shop_num_02.png"), cc.SizeMake(20, 20), 14, 20);
+        number.initWithSize(ImageName("shop/ui_shop_num_02.png"), new cc.Size(20, 20), 14, 20);
         number.setNumber((0 | (PlayerActor.sharedActor().getTotalGain() * 0.0141583)));
         this.addChild(number);
     },
@@ -277,7 +277,7 @@ var ShopLayer = cc.Layer.extend({
         scene.resumeGame();
         scene.showAllMenu();
         this.removeFromParentAndCleanup(true);
-        cc.SpriteFrameCache.getInstance().removeSpriteFrameByName(ImageName("shop/ui_shop.plist"));
+        cc.spriteFrameCache.removeSpriteFrameByName(ImageName("shop/ui_shop.plist"));
     },
     addLabel:function (gold, usd, p) {
         var coin = cc.Sprite.create(ImageName("shop/ui_pur_buton_01xiao.png"));

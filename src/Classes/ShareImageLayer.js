@@ -57,7 +57,7 @@ var ShareImageLayer = cc.Layer.extend({
             menu = cc.Menu.create(itemFaceBook, itemTwiter, itemCancle);
         }
 
-        menu.setPosition(cc.PointZero());
+        menu.setPosition(0, 0);
         this.addChild(menu, 10, 997);
 
         return true;

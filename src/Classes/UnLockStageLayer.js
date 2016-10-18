@@ -4,7 +4,7 @@ var UnLockStageLayer = cc.Layer.extend({
     _menu:null,
     _scene:null,
     initWithDelegate:function (de, le) {
-        cc.SpriteFrameCache.getInstance().addSpriteFrames(ImageNameLang("UnlockStageLayer.plist"));
+        cc.spriteFrameCache.addSpriteFrames(ImageNameLang("UnlockStageLayer.plist"));
 
             this._stageDelegate = de;
             var bgSprite = cc.Sprite.createWithSpriteFrameName(("ui_other_021.png"));
@@ -85,7 +85,7 @@ var UnLockStageLayer = cc.Layer.extend({
         /*if (le == 3) {
             var strSuffix = cc.Application.getCurrentLanguage();
             var strGainPre = "_none";
-            cc.SpriteFrameCache.getInstance().addSpriteFrames("AchieveIconTP.plist");
+            cc.spriteFrameCache.addSpriteFrames("AchieveIconTP.plist");
             var pBgSprite = cc.Sprite.create("ui_ach_003.png");
             pBgSprite.setPosition(cc.p(VisibleRect.center().x, VisibleRect.center().y + 40));
             pBgSprite.setScale(0.7);
@@ -118,14 +118,14 @@ var UnLockStageLayer = cc.Layer.extend({
         return true;
     },
     initWithLevel:function (scene) {
-        //cc.SpriteFrameCache.getInstance().addSpriteFrames(ImageNameLang("UnlockStageLayer.plist"));
+        //cc.spriteFrameCache.addSpriteFrames(ImageNameLang("UnlockStageLayer.plist"));
         this.m_pScence = scene;
         if (this._super()) {
             var bgSprite = cc.Sprite.createWithSpriteFrameName("ui_other_021.png");
             this.addChild(bgSprite);
             bgSprite.setPosition(VisibleRect.center());
 
-            cc.SpriteFrameCache.getInstance().addSpriteFrames(ImageNameLang("StageSelectLayer.plist"));
+            cc.spriteFrameCache.addSpriteFrames(ImageNameLang("StageSelectLayer.plist"));
             var EnterItem = cc.MenuItemSprite.create(
                 CSpriteLayer.getButtonBoxOffsetY(("ui_button_box03_01.png"), ImageNameLang("UI_select_button_1.png"), PlistAndPlist, 2),
                 CSpriteLayer.getButtonBoxOffsetY(("ui_button_box03_02.png"), ImageNameLang("UI_select_button_2.png"), PlistAndPlist, 2),
@@ -148,7 +148,7 @@ var UnLockStageLayer = cc.Layer.extend({
         return false;
     },
     onExit:function(){
-        cc.SpriteFrameCache.getInstance().removeSpriteFrameByName(ImageNameLang("UnlockStageLayer.plist"));
+        cc.spriteFrameCache.removeSpriteFrameByName(ImageNameLang("UnlockStageLayer.plist"));
     },
     enterNewLevelScence:function (sender) {
         // 返回场景选择
@@ -173,7 +173,7 @@ var UnLockStageLayer = cc.Layer.extend({
     closeself:function (sender) {
         this._stageDelegate.regestTouch();
         this._stageDelegate.setShowBuyLayer(false);
-        cc.SpriteFrameCache.getInstance().removeSpriteFrameByName(ImageNameLang("UnlockStageLayer.plist"));
+        cc.spriteFrameCache.removeSpriteFrameByName(ImageNameLang("UnlockStageLayer.plist"));
         this.removeAllChildrenWithCleanup(true);
         this.removeFromParentAndCleanup(true);
     },

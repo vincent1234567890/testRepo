@@ -181,7 +181,7 @@ var GameScene = cc.Scene.extend({
     ctor:function () {
         this._super();
         wrapper.getBooleanForKey("AskEnterLecel3", false);
-        this._movePoint = cc.PointZero();
+        this._movePoint = new cc.Point(0, 0);
         this._sessionsNeedLoad = [];
         this._sessionControllers = [];
         this._sessionsEnded = [];
@@ -315,7 +315,7 @@ var GameScene = cc.Scene.extend({
         ActorFactory.returnActor(actor);
     },
     startAction:function () {
-        var frameCache = cc.SpriteFrameCache.getInstance();
+        var frameCache = cc.spriteFrameCache;
         frameCache.addSpriteFrames(ImageName("jinbi.plist"));
         var rotateBy1 = cc.RotateBy.create(1.4 * 25, 360);
         var repeat1 = cc.Repeat.create(rotateBy1, 20);
@@ -397,7 +397,7 @@ var GameScene = cc.Scene.extend({
         this.addChangeWeaponMenu(cc.p(301, 10), cc.p(17, 17));
 
         var menuItem = cc.MenuItem.create(this, this.changeWeapon);
-        menuItem.setContentSize(cc.SizeMake(80, 50));
+        menuItem.setContentSize(new cc.Size(80, 50));
         var menu = cc.Menu.create(menuItem, null);
         menu.setPosition(cc.p(0, 0));
         this.addChild(menu, 109);
@@ -410,7 +410,7 @@ var GameScene = cc.Scene.extend({
         if (this._bigPrizeExist) {
             return;
         }
-        var frameCache = cc.SpriteFrameCache.getInstance();
+        var frameCache = cc.spriteFrameCache;
         frameCache.addSpriteFrames(ImageName("jinbi.plist"));
         playEffect(COIN_EFFECT3);
 
@@ -495,7 +495,7 @@ var GameScene = cc.Scene.extend({
         this.addChild(this._userBtn, 101);
 
         var pos = cc.p(VisibleRect.topLeft().x + 135, VisibleRect.topLeft().y - this._itemPause.getContentSize().height / 2);
-        this._userBtn.setPosition(cc.PointZero());
+        this._userBtn.setPosition(0, 0);
     },
     initWithDef:function (def, le) {
         this._layer = cc.Layer.create();
@@ -599,7 +599,7 @@ var GameScene = cc.Scene.extend({
         // 隐藏广告条
         AdsController.forceHideBannerAd();
 
-        cc.SpriteFrameCache.getInstance().removeSpriteFramesFromFile(ImageName("jindun.plist"));
+        cc.spriteFrameCache.removeSpriteFramesFromFile(ImageName("jindun.plist"));
         this._gameover = true;
 
         if (this._backgroundLayer != null) {
@@ -1443,7 +1443,7 @@ var GameScene = cc.Scene.extend({
         this._userInfoLayer = UserInfoLayer.create(this);
         this._userInfoLayer.setDelegate(this);
         this.addChild(this._userInfoLayer, 10);
-        this._userInfoLayer.setPosition(cc.PointZero());
+        this._userInfoLayer.setPosition(0, 0);
     },
     initChestGameLayer:function () {
         this._chestGameLayer = ChestGameLayer.create();
@@ -1594,7 +1594,7 @@ var GameScene = cc.Scene.extend({
         // this._itemCamera.setPosition(cc.p(VisibleRect.topRight().x - 125, VisibleRect.topRight().y - this._itemCamera.getContentSize().height / 2));
 
         this._camera = cc.Menu.create(this._itemHide/*, this._itemCamera*/);
-        this._camera.setPosition(cc.PointZero());
+        this._camera.setPosition(0, 0);
         this.addChild(this._camera, 101);
     },
     addPrizeNets:function (sender) {
@@ -1619,7 +1619,7 @@ var GameScene = cc.Scene.extend({
                 // 新场景没有金鲨
                 FishGroup.shareFishGroup().setGSharkActor();
                 this._chestGameLayer.addMinChest(this._oddsNumber - 1, cc.pAdd(VisibleRect.left(),
-                    cc.p(Math.random() % parseInt(VisibleRect.rect().size.width), Math.random() % parseInt(VisibleRect.rect().size.height))));//添加宝箱
+                    cc.p(Math.random() % parseInt(VisibleRect.rect().width), Math.random() % parseInt(VisibleRect.rect().height))));//添加宝箱
             }
 
             var playerActor = PlayerActor.sharedActor();
@@ -1772,7 +1772,7 @@ var GameScene = cc.Scene.extend({
     },
     onExit:function () {
         this._super();
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
         cache.removeSpriteFrameByName(ImageName("cannon.plist"));
         cache.removeSpriteFrameByName(ImageName("cannon10.plist"));
         cache.removeSpriteFrameByName(ImageName("weaponLevinStorm.plist"));
@@ -1864,7 +1864,7 @@ var GameScene = cc.Scene.extend({
         this.loadSessionController(fishSeasonSessionController);
     },
     initTutorial:function () {
-        cc.SpriteFrameCache.getInstance().addSpriteFrames(ImageName("tutorial.plist"));
+        cc.spriteFrameCache.addSpriteFrames(ImageName("tutorial.plist"));
         if (this._playTutorial) {
             this._tutorialConfirmLayer = new TutorialConfirmLayer();
             this._tutorialConfirmLayer.init();
@@ -1904,7 +1904,7 @@ var GameScene = cc.Scene.extend({
 
         if (this._camera) {
             var delay1 = cc.DelayTime.create(1);
-            var targetPosX = VisibleRect.rect().size.width - 340; // btnWidth 为四个按钮的宽度
+            var targetPosX = VisibleRect.rect().width - 340; // btnWidth 为四个按钮的宽度
             var camraMove = cc.MoveTo.create(1, cc.p(-targetPosX, this._camera.getPosition().y));
             this._camera.runAction(cc.Sequence.create(delay1, camraMove));
         }

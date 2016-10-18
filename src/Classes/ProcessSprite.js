@@ -64,7 +64,7 @@ ProcessDef.defaultDef = function () {
     temp.currentValue = 50;
     temp.backgroundImage = "ui_slot_01.png";
     temp.bloodImage = "ui_slot_02.png";
-    temp.offset = cc.SizeMake(0, 0);
+    temp.offset = new cc.Size(0, 0);
     return temp;
 };
 
@@ -157,7 +157,7 @@ var ProcessSprite = cc.Sprite.extend({
             ratio = 1.0;
         }
 
-        processSprite.setTextureRect(cc.RectMake(0, 0, this.originalBloodSize.width * ratio, this.originalBloodSize.height));
+        processSprite.setTextureRect(new cc.Rect(0, 0, this.originalBloodSize.width * ratio, this.originalBloodSize.height));
 
         var pos = cc.pAdd(this.originalPosition, cc.p(processSprite.getContentSize().width / 2, 0));
         processSprite.setPosition(pos);

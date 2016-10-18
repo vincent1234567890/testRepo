@@ -17,7 +17,7 @@ var OptionsLayer = cc.Layer.extend({
     },
     onEnter:function(){
         this._super();
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
         cache.addSpriteFrames(ImageNameLang("options_other.plist"));
         cache.addSpriteFrames(ImageName("Button_push.plist"));
         this.setKeyboardEnabled(true);
@@ -30,7 +30,7 @@ var OptionsLayer = cc.Layer.extend({
     },
     onExit:function(){
         this._super();
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
         cache.removeSpriteFrameByName(ImageNameLang("options_other.plist"));
         cache.removeSpriteFrameByName(ImageName("Button_push.plist"));
     },
@@ -248,7 +248,7 @@ var OptionsLayer = cc.Layer.extend({
 
         var mOptions = cc.Menu.create(/*this._button_push, this._other_push, */this._button_BGM, this._tutorial, this._button_music);
         this.addChild(mOptions, 30, 35);
-        mOptions.setPosition(cc.PointZero());
+        mOptions.setPosition(0, 0);
     },
     getParentDeleaget:function () {
         return this._parentDeleaget;
@@ -262,7 +262,7 @@ var OptionsLayer = cc.Layer.extend({
         this._bg.setPosition(VisibleRect.center());
         this._temBack.setPosition(cc.pAdd(VisibleRect.topLeft(), cc.p(73, -38)));
         this._menuBg.setPosition(VisibleRect.center());
-        var menuBgTop = VisibleRect.top().y - (VisibleRect.rect().size.height - this._menuBg.getContentSize().height) / 2;
+        var menuBgTop = VisibleRect.top().y - (VisibleRect.rect().height - this._menuBg.getContentSize().height) / 2;
         this._title.setPosition(cc.p(VisibleRect.center().x, menuBgTop - 8 - this._title.getContentSize().height / 2));
 
         /*this._tutorial.setPosition(cc.p(VisibleRect.center().x, VisibleRect.center().y - 125));

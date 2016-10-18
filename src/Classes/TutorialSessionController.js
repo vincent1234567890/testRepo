@@ -605,7 +605,7 @@ var TutorialSessionController = CCSessionController.extend({
         var ac0 = cc.Show.create();
 
         var frams = [];
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
         frams.push(cache.getSpriteFrame("finger_0001.png"));
         frams.push(cache.getSpriteFrame("finger_0002.png"));
 
@@ -638,7 +638,7 @@ var TutorialSessionController = CCSessionController.extend({
 
 
         var frams = [];
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
         frams.push(cache.getSpriteFrame("circle_0001.png"));
         frams.push(cache.getSpriteFrame("circle_0002.png"));
         frams.push(cache.getSpriteFrame("circle_0003.png"));
@@ -675,7 +675,7 @@ var TutorialSessionController = CCSessionController.extend({
         this._showHint = false;
 
         // @warning 此 plist 在进游戏时预加载了。如有问题可在此重新加载
-        cc.SpriteFrameCache.getInstance().addSpriteFrames(ImageName("help_ui.plist"));
+        cc.spriteFrameCache.addSpriteFrames(ImageName("help_ui.plist"));
 
         for (var idx = 0; idx < kTutorialTotalStep; idx++) {
             this._tutorialQueue.push(idx);
