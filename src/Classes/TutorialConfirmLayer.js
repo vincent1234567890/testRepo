@@ -33,7 +33,7 @@ var TutorialConfirmLayer = cc.LayerColor.extend({
         var backSize = this.getBackgroundSprite().getContentSize();
 
         var textPos = cc.pAdd(cc.p(backSize.width / 2, backSize.height / 2), cc.p(-20, -40));
-        this.setTextLabel(cc.LabelTTF.create(text, "Microsoft YaHei", 20, cc.SizeMake(backSize.width / 2, backSize.height / 2), cc.TEXT_ALIGNMENT_CENTER, cc.VERTICAL_TEXT_ALIGNMENT_CENTER));
+        this.setTextLabel(cc.LabelTTF.create(text, "Microsoft YaHei", 20, new cc.Size(backSize.width / 2, backSize.height / 2), cc.TEXT_ALIGNMENT_CENTER, cc.VERTICAL_TEXT_ALIGNMENT_CENTER));
         this.getTextLabel().setPosition(textPos);
         this.getBackgroundSprite().addChild(this.getTextLabel());
 
@@ -75,11 +75,11 @@ var TutorialConfirmLayer = cc.LayerColor.extend({
         var cancelPos = cc.pAdd(cc.p(backSize.width / 2, confirm.getContentSize().height), cancelPosOffset);
         cancelItem.setPosition(cancelPos);
         var menu = cc.Menu.create(menuItem, cancelItem);
-        menu.setPosition(cc.PointZero());
+        menu.setPosition(0, 0);
         this.getBackgroundSprite().addChild(menu);
 
         this.setVisible(false);
-        this.setPosition(cc.PointZero());
+        this.setPosition(0, 0);
         this.setAnchorPoint(cc.p(0.5, 0.5));
 
         return true;

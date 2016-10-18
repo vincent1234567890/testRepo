@@ -38,10 +38,10 @@ var GameBackgroundLayer = cc.Layer.extend({
 
         if (this.beChanged) {
             var bg = this.getChildByTag(991);
-            bg.setTextureRect(cc.RectMake(0, 0, bg.getTextureRect().width - dt * speedValue, screenHeight));
+            bg.setTextureRect(new cc.Rect(0, 0, bg.getTextureRect().width - dt * speedValue, screenHeight));
             if (bg.getTextureRect().width < 0) {
                 this.beChanged = false;
-                bg.setTextureRect(cc.RectZero());
+                bg.setTextureRect(new cc.Rect(0,0,0,0));
                 var sp = this.getChildByTag(990);
                 this.reorderChild(sp, -2);
                 bg.removeFromParentAndCleanup(true);

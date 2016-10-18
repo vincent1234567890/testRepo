@@ -258,17 +258,17 @@ var ShopLayer = cc.Layer.extend({
             this._setPreNumber(0);
             this._componentNumber = 5;
             this._updateTime = 0.0;
-            //this.componentSize = cc.SizeMake(TextWidth2+5, TextHeight2);
+            //this.componentSize = new cc.Size(TextWidth2+5, TextHeight2);
             this._componentSize = size;
             this._itemWidth = iWidth;
             this._itemHeight = iHeight;
             this._charMapFile = mapFile;
-            this._scissorRect = cc.RectZero();
+            this._scissorRect = new cc.Rect(0, 0, 0, 0);
             this._components = [];
             this.initAllComponents();
             this.schedule(this.update);
         };
-        number.initWithSize(ImageName("shop/ui_shop_num_02.png"), cc.SizeMake(20, 20), 14, 20);
+        number.initWithSize(ImageName("shop/ui_shop_num_02.png"), new cc.Size(20, 20), 14, 20);
         number.setNumber((0 | (PlayerActor.sharedActor().getTotalGain() * 0.0141583)));
         this.addChild(number);
     },

@@ -23,8 +23,8 @@ function SPTile(tileIndex, angle, scaleArr, flipArr, position, anchorPt, color, 
     this.angle = angle || 0;
     this.scale = scaleArr || [];
     this.flip = flipArr || [];
-    this.position = position || cc.PointZero();
-    this.anchorPt = anchorPt || cc.PointZero();
+    this.position = position || new cc.Point(0, 0);
+    this.anchorPt = anchorPt || new cc.Point(0, 0);
     this.color = color || cc.white();
     this.opacity = opacity || 0;
 }
@@ -39,7 +39,7 @@ function Collision(rectData, rectCount, polygonData, polyCount, boundingBox) {
     this.rectCount = rectCount || 0;
     this.polygonData = polygonData || [];
     this.polyCount = polyCount || 0;
-    this.boundingBox = boundingBox || cc.RectZero();
+    this.boundingBox = boundingBox || new cc.Rect(0, 0, 0, 0);
 }
 
 function Frame(tileData, tileCount, referencePt, refptCount, collisionData) {
@@ -557,26 +557,26 @@ var BaseSprite = cc.Sprite.extend({
 
             var ptCenter1 = cc.pAdd(rect1.origin, cc.p(rect1.width / 2, rect1.height / 2));
             var radius1 = Math.sqrt(Math.pow(rect1.width / 2, 2) + Math.pow(rect1.height / 2, 2));
-            ptCenter1 = cc.pRotateByAngle(ptCenter1, cc.PointZero(), this.getCurRotation());
+            ptCenter1 = cc.pRotateByAngle(ptCenter1, new cc.Point(0, 0), this.getCurRotation());
             ptCenter1 = cc.pAdd(this.getPosition(), ptCenter1);
 
             /*var xx = ptCenter1.x - rect1.width / 2;
              var yy = ptCenter1.y - rect1.height / 2;
 
 
-             rect1 = cc.RectMake(xx, yy, rect1.width, rect1.height);*/
+             rect1 = new cc.Rect(xx, yy, rect1.width, rect1.height);*/
             for (var j = 0; j < spxCollides; j++) {
                 var rect2 = plane._sd.frameData[frame].collisionData.rectData[j];
                 //rect2 = cc.RectFromString(rect2);
                 var ptCenter2 = cc.pAdd(rect2.origin, cc.p(rect2.width / 2, rect2.height / 2));
                 var radius2 = Math.sqrt(Math.pow(rect2.width / 2, 2) + Math.pow(rect2.height / 2, 2));
-                ptCenter2 = cc.pRotateByAngle(ptCenter2, cc.PointZero(), plane.getCurRotation());
+                ptCenter2 = cc.pRotateByAngle(ptCenter2, new cc.Point(0, 0), plane.getCurRotation());
                 ptCenter2 = cc.pAdd(plane.getPosition(), ptCenter2);
 
                 /*xx = ptCenter2.x - rect2.width / 2;
                  yy = ptCenter2.y - rect2.height / 2;
 
-                 rect2 = cc.RectMake(xx, yy, rect2.width, rect2.height);*/
+                 rect2 = new cc.Rect(xx, yy, rect2.width, rect2.height);*/
                 var dis = cc.pDistance(ptCenter1, ptCenter2);
                 if (dis <= (radius1 + radius2)) {
                     return true;
@@ -611,25 +611,25 @@ var BaseSprite = cc.Sprite.extend({
 
             var radius1 = Math.sqrt(Math.pow(rect1.width / 2, 2) + Math.pow(rect1.height / 2, 2));
 
-            ptCenter1 = cc.pRotateByAngle(ptCenter1, cc.PointZero(), this.getCurRotation());
+            ptCenter1 = cc.pRotateByAngle(ptCenter1, new cc.Point(0, 0), this.getCurRotation());
             ptCenter1 = cc.pAdd(this.getPosition(), ptCenter1);
             /*var xx = ptCenter1.x - rect1.width / 2;
              var yy = ptCenter1.y - rect1.height / 2;
 
-             rect1 = cc.RectMake(xx, yy, rect1.width, rect1.height);*/
+             rect1 = new cc.Rect(xx, yy, rect1.width, rect1.height);*/
             for (var j = 0; j < spxCollides; j++) {
                 var rect2 = plane._sd.frameData[frame].collisionData.rectData[j];
                 //rect2 = cc.RectFromString(rect2);
                 var ptCenter2 = cc.pAdd(rect2.origin, cc.p(rect2.width / 2, rect2.height / 2));
                 var radius2 = Math.sqrt(Math.pow(rect2.width / 2, 2) + Math.pow(rect2.height / 2, 2));
 
-                ptCenter2 = cc.pRotateByAngle(ptCenter2, cc.PointZero(), plane.getCurRotation());
+                ptCenter2 = cc.pRotateByAngle(ptCenter2, new cc.Point(0, 0), plane.getCurRotation());
                 ptCenter2 = cc.pAdd(plane.getPosition(), ptCenter2);
 
                 /*xx = ptCenter2.x - rect2.width / 2;
                  yy = ptCenter2.y - rect2.height / 2;
 
-                 rect2 = cc.RectMake(xx, yy, rect2.width, rect2.height);*/
+                 rect2 = new cc.Rect(xx, yy, rect2.width, rect2.height);*/
                 var dus = cc.pDistance(ptCenter1, ptCenter2);
                 if (dus <= (radius1 + radius2)) {
                     return j;
@@ -645,7 +645,7 @@ var BaseSprite = cc.Sprite.extend({
         //rect1 = cc.RectFromString(rect1);
         var xx = rect1.x + this.getPosition().x;
         var yy = rect1.y + this.getPosition().y;
-        rect1 = cc.RectMake(xx, yy, rect1.width, rect1.height);
+        rect1 = new cc.Rect(xx, yy, rect1.width, rect1.height);
         return cc.Rect.CCRectIntersectsRect(rect, rect1);
     },
     setContentSize:function (size) {

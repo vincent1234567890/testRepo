@@ -48,7 +48,7 @@ var GoldPrizeActor = BaseActor.extend({
         if (ret) {
             this.playAction(0);
             this._speed = 100;
-            this._dir = cc.PointZero();
+            this._dir = new cc.Point(0, 0);
             this._isAlive = true;
             this._group = GroupGoldPrizeActor;
         }
@@ -192,8 +192,7 @@ var ChestActor = BaseActor.extend({
     getChestRect:function(){
         var chestWidth =  136.0;
         var chestHeight = 116.0;
-        var ChestRect = cc.RectMake(this.getPosition().x - chestWidth / 2, this.getPosition().y - chestHeight / 2, chestWidth, chestHeight);
-        return ChestRect;
+        return new cc.Rect(this.getPosition().x - chestWidth / 2, this.getPosition().y - chestHeight / 2, chestWidth, chestHeight);
     },
     deleteBigChest:function(SceneSprite){},
     ChestMove:function(){

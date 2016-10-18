@@ -102,7 +102,7 @@ var WeaponCannon = Weapon.extend({
         if (!this._isShootable)
             return;
 
-        var distance = cc.pDistance(cc.PointZero(), cc.p(30, 23));
+        var distance = cc.pDistance(new cc.Point(0, 0), cc.p(30, 23));
 
         this.getWeaponSprite().stopAction(this.getShootAnimation());
         this.getWeaponSprite().setScale(1.0);
@@ -198,7 +198,7 @@ var WeaponCannonExt = WeaponCannon.extend({
     },
     shootTo:function (targetPosition, type) {
         this.setDirection(targetPosition);
-        var distance = cc.pDistance(cc.PointZero(), cc.p(50, 33));
+        var distance = cc.pDistance(new cc.Point(0, 0), cc.p(50, 33));
         this.getWeaponSprite().stopAction(this.getShootAnimation());
         this.getWeaponSprite().setScale(1.0);
 
