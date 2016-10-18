@@ -161,13 +161,13 @@ var PauseMenuLayer = cc.Layer.extend({
         var pItem = sender;
         GamePreference.getInstance().setPlayEffect(pItem.getSelectedIndex() == 1);
         GamePreference.getInstance().updateSoftPref();
-        cc.AudioEngine.getInstance().setEffectsVolume(pItem.getSelectedIndex());
+        cc.audioEngine.setEffectsVolume(pItem.getSelectedIndex());
     },
     mMusic:function (sender) {
         var pItem = sender;
         GamePreference.getInstance().setPlayMusic(pItem.getSelectedIndex() == 1);
         GamePreference.getInstance().updateSoftPref();
-        cc.AudioEngine.getInstance().setBackgroundMusicVolume(pItem.getSelectedIndex());
+        cc.audioEngine.setBackgroundMusicVolume(pItem.getSelectedIndex());
     },
     alertView:function (alertView, buttonIndex) {
 

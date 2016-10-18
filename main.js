@@ -12,8 +12,7 @@ var PackagedApp = (window.chrome && window.chrome.storage != null);
 var playEffect = function (effectFilePath) {
     var ret = GamePreference.getInstance().getPlayEffect();
     if (ret) {
-        var soundid = cc.AudioEngine.getInstance().playEffect("Resource/sound/" + effectFilePath);
-        return soundid;
+        return  cc.audioEngine.playEffect("res/sound/" + effectFilePath);
     }
 };
 var playMusic = function (musicfile, loop) {
@@ -22,8 +21,7 @@ var playMusic = function (musicfile, loop) {
     }
     var ret = GamePreference.getInstance().getPlayMusic();
     if (ret) {
-        var musicid = cc.AudioEngine.getInstance().playBackgroundMusic("Resource/music/" + musicfile, loop);
-        return musicid;
+        return cc.audioEngine.playBackgroundMusic("res/music/" + musicfile, loop);
     }
 };
 
@@ -184,8 +182,8 @@ var cocos2dApp = cc.game.onStart = function(){
         }
         var bgVolume = GamePreference.getInstance().getPlayMusic() ? 1 : 0;
         var effectVolume = GamePreference.getInstance().getPlayEffect() ? 1 : 0;
-        cc.AudioEngine.getInstance().setBackgroundMusicVolume(bgVolume);
-        cc.AudioEngine.getInstance().setEffectsVolume(effectVolume);
+        cc.audioEngine.setMusicVolume(bgVolume);
+        cc.audioEngine.setEffectsVolume(effectVolume);
 
         // 记录第一次打开游戏的时间
         var time = wrapper.getFloatForKey(kFirstOpenTime, 0);
@@ -218,7 +216,6 @@ var cocos2dApp = cc.game.onStart = function(){
 
         // run
         // director.runWithScene(new this.startScene());
-        debugger
         cc.LoadingScreen.preload(g_resources, function () {
             cc.director.runScene(new LogoScene());
         }, this);

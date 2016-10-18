@@ -45,7 +45,7 @@ var WeaponSpecialLevinStorm = WeaponSpecial.extend({
         frames = [];
     },
     stopLevinStormBulletSoundEffect:function () {
-        cc.AudioEngine.getInstance().stopEffect(this._levinStormBulletSoundEffect);
+        cc.audioEngine.stopEffect(this._levinStormBulletSoundEffect);
     },
     createLevinStormBullet:function (pos) {
         if (GameCtrl.sharedGame().getGameState() != GAMEPLAY)
