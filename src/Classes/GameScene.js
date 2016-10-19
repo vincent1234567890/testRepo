@@ -457,7 +457,7 @@ var GameScene = cc.Scene.extend({
             //KingFisher cc.log("-------removeActoraCaller, param = " + this._removeActoraParam);
             this.removeActora(this._removeActoraParam);
         }
-        cc.director.getScheduler().unscheduleSelector(this.removeActoraCaller, this);
+        cc.director.getScheduler().unschedule(this.removeActoraCaller, this);
     },
     BigPrize:function () {
         if (this._bigPrizeExist) {
@@ -473,7 +473,7 @@ var GameScene = cc.Scene.extend({
         this._removeActoraParam = big;
         //KingFisher cc.log("BigPrize, param = "+ this._removeActoraParam);
         this._bigPrizeExist = true;
-        cc.director.getScheduler().scheduleSelector(this.removeActoraCaller, this, 5.0, false);
+        cc.director.getScheduler().schedule(this.removeActoraCaller, this, 5.0, false);
     },
     initMusicPlay:function () {
         // this._itemMusicPlayer = cc.MenuItemSprite.create(
@@ -928,7 +928,7 @@ var GameScene = cc.Scene.extend({
             star.removeSelfFromScene();
         }
         // 将移除霓虹灯的定时器停止掉
-        cc.director.getScheduler().unscheduleSelector(this.removeActoraCaller, this);
+        cc.director.getScheduler().unschedule(this.removeActoraCaller, this);
     },
     hideAllMenu:function () {
         if (this._cannonActor.getCurrentWeaponLevel() < FishWeaponType.eWeaponLevel8) {
@@ -1646,7 +1646,7 @@ var GameScene = cc.Scene.extend({
             this.addActor(StarfishNode);
             StarfishNode.setPosition(VisibleRect.topRight());
         }
-        cc.director.getScheduler().scheduleSelector(this.delStarfish, this, 15, false);
+        cc.director.getScheduler().schedule(this.delStarfish, this, 15, false);
     },
     addParticleAchieve:function () {
         var pos = cc.p(VisibleRect.center().x, VisibleRect.center().y + 100);
@@ -1662,7 +1662,7 @@ var GameScene = cc.Scene.extend({
 
     },
     delStarfish:function () {
-        cc.director.getScheduler().unscheduleSelector(this.delStarfish, this);
+        cc.director.getScheduler().unschedule(this.delStarfish, this);
 
         var groupStarfishActor = this.getActors(GroupStarfishActor);
         for (var i = groupStarfishActor.length - 1; i >= 0; i--) {
@@ -1937,18 +1937,18 @@ var GameScene = cc.Scene.extend({
         AdsController.actionEnd(1);
 
         // 设置定时器，隐藏广告条
-        cc.director.getScheduler().scheduleSelector(this.hideAdView, this, AD_SHOWN_TIME, false);
+        cc.director.getScheduler().schedule(this.hideAdView, this, AD_SHOWN_TIME, false);
     },
     hideAdActionStart:function () {
         AdsController.actionEnd(0);
     },
     hideAdView:function (dt) {
-        cc.director.getScheduler().unscheduleSelector(this.hideAdView, this);
+        cc.director.getScheduler().unschedule(this.hideAdView, this);
         AdsController.hideBannerAd(BannerAdTyp.BannerAdGame);
     },
     terminateAdMobShown:function () {
         // 停止隐藏广告的定时器
-        cc.director.getScheduler().unscheduleSelector(this.hideAdView, this);
+        cc.director.getScheduler().unschedule(this.hideAdView, this);
 
         // 停止广告相关 UI 的动画
         if (this._camera) {
@@ -1977,7 +1977,7 @@ var GameScene = cc.Scene.extend({
         //this._punchBoxAd.request(fun);
     },
     startCameraAnimation:function () {
-        cc.director.getScheduler().scheduleSelector(this.shakeScreen, this, 0.02, false);
+        cc.director.getScheduler().schedule(this.shakeScreen, this, 0.02, false);
     },
     shakeScreen:function (dt) {
         var body = cc.$("canvas");
@@ -1995,7 +1995,7 @@ var GameScene = cc.Scene.extend({
                 body.translates(0, 0);
             }
             this._shakeTime = 0;
-            cc.director.getScheduler().unscheduleSelector(this.shakeScreen, this);
+            cc.director.getScheduler().unschedule(this.shakeScreen, this);
         }
     },
     EnterSceneSelect:function () {

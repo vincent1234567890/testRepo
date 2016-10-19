@@ -310,7 +310,7 @@ var LevinStormBulletActor = BulletActor.extend({
 
         this.getScene().addChild(this.getExplodeActor(), this.getZOrder() + 1, this.getZOrder() + 1);
 
-        cc.director.getScheduler().scheduleSelector(this.removeSelfFromScene2, this, 2, false);
+        cc.director.getScheduler().schedule(this.removeSelfFromScene2, this, 2, false);
     },
     refreshBulletState:function () {
         var Dir = this.getMoveDirection();
@@ -364,7 +364,7 @@ var LevinStormBulletActor = BulletActor.extend({
         this.setVisible(true);
     },
     removeSelfFromScene2:function (dt) {
-        cc.director.getScheduler().unscheduleSelector(this.removeSelfFromScene2, this);
+        cc.director.getScheduler().unschedule(this.removeSelfFromScene2, this);
         this.removeSelfFromScene();
     },
     collisionEvent:function () {

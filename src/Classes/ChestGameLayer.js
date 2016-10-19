@@ -105,7 +105,7 @@ var ChestGameLayer = cc.Layer.extend({
         this.schedule(this.RandomOvalinit, 1.0);
     },
     RandomOvalinit:function(dt){
-        this.getScheduler().unscheduleSelector(this.RandomOvalinit, this);
+        this.getScheduler().unschedule(this.RandomOvalinit, this);
         while (this.getChildByTag(LUIChestMoveTag)) {
             this.removeChildByTag(LUIChestMoveTag, true);
         }
@@ -120,7 +120,7 @@ var ChestGameLayer = cc.Layer.extend({
         this.iChestMoveNum = 0;
     },
     RandomOval:function(dt){
-        this.getScheduler().unscheduleSelector(this.RandomOval, this);
+        this.getScheduler().unschedule(this.RandomOval, this);
         if (this.iChestMoveNum++<15)
         {
             var iRandom = 0|(Math.random()*4+1);
