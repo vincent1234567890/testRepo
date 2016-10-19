@@ -1554,25 +1554,25 @@ var GameScene = cc.Scene.extend({
             ];
 
         /*        for (var i = 0; i < texList.length; i++) {
-         this._retainedResArray.push(cc.TextureCache.getInstance().addImage(ImageName(texList[i])));
+         this._retainedResArray.push(cc.textureCache.addImage(ImageName(texList[i])));
          }*/
 
         switch (this.getOddsNumber()) {
             case 1:
-                this._retainedResArray.push(cc.TextureCache.getInstance().addImage(ImageName("shayu.png")));
-                this._retainedResArray.push(cc.TextureCache.getInstance().addImage(ImageName("gshayu.png")));
-                this._retainedResArray.push(cc.TextureCache.getInstance().addImage(ImageName("butterfly.png")));
+                this._retainedResArray.push(cc.textureCache.addImage(ImageName("shayu.png")));
+                this._retainedResArray.push(cc.textureCache.addImage(ImageName("gshayu.png")));
+                this._retainedResArray.push(cc.textureCache.addImage(ImageName("butterfly.png")));
                 break;
             case 2:
-                this._retainedResArray.push(cc.TextureCache.getInstance().addImage(ImageName("grouper.png")));
-                this._retainedResArray.push(cc.TextureCache.getInstance().addImage(ImageName("gmarlins.png")));
-                this._retainedResArray.push(cc.TextureCache.getInstance().addImage(ImageName("marlins.png")));
-                this._retainedResArray.push(cc.TextureCache.getInstance().addImage(ImageName("butterfly.png")));
+                this._retainedResArray.push(cc.textureCache.addImage(ImageName("grouper.png")));
+                this._retainedResArray.push(cc.textureCache.addImage(ImageName("gmarlins.png")));
+                this._retainedResArray.push(cc.textureCache.addImage(ImageName("marlins.png")));
+                this._retainedResArray.push(cc.textureCache.addImage(ImageName("butterfly.png")));
                 break;
             case 3:
-                this._retainedResArray.push(cc.TextureCache.getInstance().addImage(ImageName("shayu.png")));
-                this._retainedResArray.push(cc.TextureCache.getInstance().addImage(ImageName("goldentrout.png")));
-                this._retainedResArray.push(cc.TextureCache.getInstance().addImage(ImageName("gshayu.png")));
+                this._retainedResArray.push(cc.textureCache.addImage(ImageName("shayu.png")));
+                this._retainedResArray.push(cc.textureCache.addImage(ImageName("goldentrout.png")));
+                this._retainedResArray.push(cc.textureCache.addImage(ImageName("gshayu.png")));
                 break;
         }
 

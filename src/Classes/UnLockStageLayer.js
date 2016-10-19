@@ -103,7 +103,7 @@ var UnLockStageLayer = cc.Layer.extend({
          var pTitle = cc.LabelTTF.create(strTitle, "Arial", 15);
          this.addChild(pTitle, 1, AchiveUITag.kAchieveTitleTag);
          pTitle.setPosition(cc.p(VisibleRect.center().x - 25, VisibleRect.center().y + 40));
-         pTitle.setColor(cc.black());
+         pTitle.setColor(cc.color.BLACK);
          pTitle.setScale(0.6);
 
          var strDescription = pDic["ItemDescription" + strSuffix + strGainPre];
