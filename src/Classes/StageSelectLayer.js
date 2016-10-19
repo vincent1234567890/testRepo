@@ -343,10 +343,10 @@ var StageSelectLayer = cc.Layer.extend({
             page.setPosition(cc.p(VisibleRect.center().x + (i - 1) * screenWidth - 2.0, VisibleRect.center().y - 30));
             this._helpLayer.addChild(page, 8, i + 2);
 
-            var btnPageIndicator = cc.MenuItemToggle.create(
-                cc.MenuItemSprite.create(
+            var btnPageIndicator = new cc.MenuItemToggle(
+                new cc.MenuItemSprite(
                     new cc.Sprite("#UI_select_slider_2.png"), new cc.Sprite("#UI_select_slider_1.png")),
-                    this, this.indicatorClick);
+                    this.indicatorClick, this);
             this.addChild(btnPageIndicator, 8, i * 30 + i);
             this._curPageIndicator[i - 1] = btnPageIndicator;
             if (1 == i) {
@@ -370,10 +370,10 @@ var StageSelectLayer = cc.Layer.extend({
 
             var PlayerItem, markBackground, markLock;
             if (!value) {
-                PlayerItem = cc.MenuItemSprite.create(
+                PlayerItem = new cc.MenuItemSprite(
                     CSpriteLayer.getButtonBoxOffsetY(("ui_button_box04_01.png"), ImageNameLang("UI_select_button_3.png"), PlistAndPlist, itemOffset),
                     CSpriteLayer.getButtonBoxOffsetY(("ui_button_box04_02.png"), ImageNameLang("UI_select_button_4.png"), PlistAndPlist, itemOffset),
-                    this, this.buyLayer);
+                    this.buyLayer, this);
 
                 markBackground = new cc.Sprite("#map_btn_1.png");
                 markLock = new cc.Sprite("#map_mark_2.png");
@@ -382,14 +382,14 @@ var StageSelectLayer = cc.Layer.extend({
                 PlayerItem = cc.MenuItemSprite.create(
                     CSpriteLayer.getButtonBoxOffsetY(("ui_button_box03_01.png"), ImageNameLang("UI_select_button_1.png"), PlistAndPlist, itemOffset),
                     CSpriteLayer.getButtonBoxOffsetY(("ui_button_box03_02.png"), ImageNameLang("UI_select_button_2.png"), PlistAndPlist, itemOffset),
-                    this, this.playGame);
+                    this.playGame, this);
 
                 markBackground = new cc.Sprite("#map_btn_1.png");
                 markLock = new cc.Sprite("#map_mark_1.png");
             }
 
 
-            var menu = cc.Menu.create(PlayerItem);
+            var menu = new cc.Menu(PlayerItem);
             menu.setContentSize(page.getContentSize());
             menu.setPosition(cc.p(page.getContentSize().width/2,page.getContentSize().height/2));
             page.addChild(menu, 9, i * 20 + 2);
@@ -426,16 +426,16 @@ var StageSelectLayer = cc.Layer.extend({
     },
     drawReturnButton:function () {
         cc.spriteFrameCache.addSpriteFrames(ImageName("stage.plist"));
-        this._returnButton = cc.MenuItemSprite.create(new cc.Sprite("#ui_button_17.png"),
-            new cc.Sprite("#ui_button_18.png"), this, this.back);
+        this._returnButton = new cc.MenuItemSprite(new cc.Sprite("#ui_button_17.png"),
+            new cc.Sprite("#ui_button_18.png"), this.back, this);
 
-        this._otherLeftButton = cc.MenuItemSprite.create(new cc.Sprite("#button_other_033.png"),
-            new cc.Sprite("#button_other_032.png"), this, this.otherLeft);
+        this._otherLeftButton = new cc.MenuItemSprite(new cc.Sprite("#button_other_033.png"),
+            new cc.Sprite("#button_other_032.png"), this.otherLeft, this);
 
-        this._otherRightButton = cc.MenuItemSprite.create(new cc.Sprite("#button_other_033.png"),
-            new cc.Sprite("#button_other_032.png"), this, this.otherRight);
+        this._otherRightButton = new cc.MenuItemSprite(new cc.Sprite("#button_other_033.png"),
+            new cc.Sprite("#button_other_032.png"), this.otherRight, this);
 
-        var mBack = cc.Menu.create(this._returnButton, this._otherLeftButton, this._otherRightButton);
+        var mBack = new cc.Menu(this._returnButton, this._otherLeftButton, this._otherRightButton);
         this.addChild(mBack, 30);
         mBack.setPosition(cc.p(0, 0));
         this._returnButton.setPosition(cc.pAdd(VisibleRect.topLeft(), cc.p(73, -38)));
@@ -452,7 +452,7 @@ var StageSelectLayer = cc.Layer.extend({
         var fontW = 14;
         var fontH = 22;
 
-        this._actorCoinLabel = cc.LabelAtlas.create(ActorStr, ImageName("ui_select_txt_01.png"), fontW, fontH, '0');
+        this._actorCoinLabel = new cc.LabelAtlas(ActorStr, ImageName("ui_select_txt_01.png"), fontW, fontH, '0');
 
         this._textBox = new cc.Sprite("#btn_gold_1.png");
         this._textBox.setAnchorPoint(cc.p(0.5, 0.5));
@@ -485,7 +485,7 @@ var StageSelectLayer = cc.Layer.extend({
         GameCtrl.sharedGame().newGame(this._currentPage + 1);
         cc.Director.getInstance().getTouchDispatcher().removeDelegate(this);
         this.removeAllChildrenWithCleanup(true);
-        this.removeFromParentAndCleanup(true);
+        this.removeFromParent(true);
     },
     buyLayer:function (sender) {
         //this.showPurchaseUI(2);
@@ -496,10 +496,10 @@ var StageSelectLayer = cc.Layer.extend({
         var page = this._helpLayer.getChildByTag(i + 2);
         page.removeChildByTag(i * 20 + 2, true);
 
-        var PlayerItem = cc.MenuItemSprite.create(
+        var PlayerItem = new cc.MenuItemSprite(
             CSpriteLayer.getButtonBoxOffsetY(("ui_button_box03_02.png"), ImageNameLang("UI_select_button_2.png"), PlistAndPlist, 2),
             CSpriteLayer.getButtonBoxOffsetY(("ui_button_box03_01.png"), ImageNameLang("UI_select_button_1.png"), PlistAndPlist, 2),
-            this, this.playGame);
+            this.playGame, this);
 
         page.removeChildByTag(230 + i, true);
         var markLock = new cc.Sprite("#map_mark_1.png");
@@ -507,7 +507,7 @@ var StageSelectLayer = cc.Layer.extend({
         var strMoney = PlayerActor.sharedActor().getPlayerMoney();
         this.getChildByTag(99).setString(strMoney + "");
 
-        var menu = cc.Menu.create(PlayerItem);
+        var menu = new cc.Menu(PlayerItem);
         menu.setContentSize(page.getContentSize());
         menu.setPosition(cc.p(page.getContentSize().width/2,page.getContentSize().height/2));
         page.addChild(menu, 9, i * 20 + 2);

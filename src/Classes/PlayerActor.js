@@ -1125,7 +1125,7 @@ var PlayerActor = cc.Class.extend({
         this._addCoinTime = v;
     },
     getScene:function () {
-        return cc.Director.getInstance().getRunningScene();
+        return cc.director.getRunningScene();
     },
     setScene:function (scene) {
         this.scene = scene

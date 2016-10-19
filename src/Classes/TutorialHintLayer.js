@@ -47,18 +47,18 @@ var TutorialHintLayer = cc.Layer.extend({
         this.addChild(bg);
         bg.setPosition(VisibleRect.center());
 
-        this.hint = cc.LabelTTF.create(this.hintFile, "Arial", 32, new cc.Size(320, 150), cc.TEXT_ALIGNMENT_CENTER, cc.VERTICAL_TEXT_ALIGNMENT_CENTER); //todo(cjh) need to modify position
+        this.hint = new cc.LabelTTF(this.hintFile, "Arial", 32, new cc.Size(320, 150), cc.TEXT_ALIGNMENT_CENTER, cc.VERTICAL_TEXT_ALIGNMENT_CENTER); //todo(cjh) need to modify position
 
         bg.addChild(this.hint);
         this.hint.setPosition(cc.p(bgSizeHalf.width, bgSizeHalf.height));
 
-        var close = cc.MenuItemSprite.create(new cc.Sprite("#button_other_012.png"),
-            new cc.Sprite("#button_other_013.png"), this, this.clickClose);
+        var close = new cc.MenuItemSprite(new cc.Sprite("#button_other_012.png"),
+            new cc.Sprite("#button_other_013.png"), this.clickClose, this);
 
-        var fish = cc.MenuItemSprite.create(new cc.Sprite("button_help_02.png"),
-            new cc.Sprite("#button_help_02.png"), this, this.clickFish);
+        var fish = new cc.MenuItemSprite(new cc.Sprite("button_help_02.png"),
+            new cc.Sprite("#button_help_02.png"), this.clickFish, this);
 
-        var menu = cc.Menu.create(close, fish);
+        var menu = new cc.Menu(close, fish);
         menu.setPosition(0, 0);
         close.setPosition(cc.p(bgSizeHalf.width * 2, bgSizeHalf.height * 2));
         var fishSize = fish.getContentSize();
@@ -71,7 +71,7 @@ var TutorialHintLayer = cc.Layer.extend({
         }
 
         this.removeAllChildrenWithCleanup(true);
-        this.removeFromParentAndCleanup(true);
+        this.removeFromParent(true);
     },
     clickFish:function (sender) {
     }

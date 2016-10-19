@@ -18,22 +18,22 @@ var UnLockStageLayer = cc.Layer.extend({
         if (le < 3) {
 
             if (SUPPORT_UNLOCK_BY_MONEY) {
-                var label = cc.LabelTTF.create(cc.LocalizedString.localizedString("StageTip"), "Microsoft YaHei", 30);
+                var label = new cc.LabelTTF(cc.LocalizedString.localizedString("StageTip"), "Microsoft YaHei", 30);
                 this.addChild(label, 1);
                 label.setPosition(cc.p(VisibleRect.center().x, bgSprite.getPosition().y - 30));
             }
             var coinMenuItem = new cc.Sprite("#" + ImageNameLang("button_other_020.png", true));
             var coinMenuItemd = new cc.Sprite("#" + ImageNameLang("button_other_021.png", true));
-            var coinItem = cc.MenuItemSprite.create(coinMenuItem, coinMenuItemd, this, this.useCoin);
+            var coinItem = new cc.MenuItemSprite(coinMenuItem, coinMenuItemd, this.useCoin, this);
 
             if (SUPPORT_UNLOCK_BY_MONEY) {
                 var moneyMenuItem = new cc.Sprite("#" + ImageNameLang("button_other_023.png", true));
                 var moneyMenuItemd = new cc.Sprite("#" + ImageNameLang("button_other_022.png", true));
-                var moneyItem = cc.MenuItemSprite.create(moneyMenuItem, moneyMenuItemd, this, this.useMoney);
+                var moneyItem = new cc.MenuItemSprite(moneyMenuItem, moneyMenuItemd, this.useMoney, this);
             }
             var cancelMenuItem = new cc.Sprite("#button_other_025.png");
             var cancelMenuItemd = new cc.Sprite("#button_other_024.png");
-            var cancelItem = cc.MenuItemSprite.create(cancelMenuItem, cancelMenuItemd, this, this.closeself);
+            var cancelItem = new cc.MenuItemSprite(cancelMenuItem, cancelMenuItemd, this.closeself, this);
             if (SUPPORT_UNLOCK_BY_MONEY) {
                 coinItem.setPosition(cc.p(-60, -130));
                 moneyItem.setPosition(cc.p(80, -130));
@@ -42,9 +42,9 @@ var UnLockStageLayer = cc.Layer.extend({
             }
             cancelItem.setPosition(cc.p(bgSprite.getContentSize().width / 2, bgSprite.getContentSize().height / 2));
             if (SUPPORT_UNLOCK_BY_MONEY) {
-                this._menu = cc.Menu.create(coinItem, moneyItem, cancelItem);
+                this._menu = new cc.Menu(coinItem, moneyItem, cancelItem);
             } else {
-                this._menu = cc.Menu.create(coinItem, cancelItem);
+                this._menu = new cc.Menu(coinItem, cancelItem);
             }
             this.addChild(this._menu);
         }
@@ -62,9 +62,9 @@ var UnLockStageLayer = cc.Layer.extend({
 //            menu = cc.Menu.create(judgeLevelItem,cancelItem1);
             var cancelMenuItem1 = new cc.Sprite("#button_other_025.png");
             var cancelMenuItemd1 = new cc.Sprite("#button_other_024.png");
-            var cancelItem1 = cc.MenuItemSprite.create(cancelMenuItem1, cancelMenuItemd1, this, this.closeself);
+            var cancelItem1 = new cc.MenuItemSprite(cancelMenuItem1, cancelMenuItemd1, this, this.closeself);
             cancelItem1.setPosition(cc.p(bgSprite.getContentSize().width / 2, bgSprite.getContentSize().height / 2));
-            this._menu = cc.Menu.create(cancelItem1);
+            this._menu = new cc.Menu(cancelItem1);
 
             var shijichengjiu = new cc.Sprite("#10jichengjiu.png");
             this.addChild(shijichengjiu, 1);
@@ -128,18 +128,18 @@ var UnLockStageLayer = cc.Layer.extend({
             bgSprite.setPosition(VisibleRect.center());
 
             cc.spriteFrameCache.addSpriteFrames(ImageNameLang("StageSelectLayer.plist"));
-            var EnterItem = cc.MenuItemSprite.create(
+            var EnterItem = new cc.MenuItemSprite(
                 CSpriteLayer.getButtonBoxOffsetY(("ui_button_box03_01.png"), ImageNameLang("UI_select_button_1.png"), PlistAndPlist, 2),
                 CSpriteLayer.getButtonBoxOffsetY(("ui_button_box03_02.png"), ImageNameLang("UI_select_button_2.png"), PlistAndPlist, 2),
-                this, this.enterNewLevelScence);
+                this.enterNewLevelScence, this);
             EnterItem.setPosition(cc.p(VisibleRect.center().x - 50, VisibleRect.center().y - 80));
             //this.addChild(cc.Menu.create(EnterItem,0), 9, 820+2);
             this.addChild(EnterItem);
 
-            var CloseItem = cc.MenuItemSprite.create(
+            var CloseItem = new cc.MenuItemSprite(
                 CSpriteLayer.getButtonBoxOffsetY(("ui_button_box03_01.png"), ImageNameLang("UI_select_button_1.png"), PlistAndPlist, 2),
                 CSpriteLayer.getButtonBoxOffsetY(("ui_button_box03_02.png"), ImageNameLang("UI_select_button_2.png"), PlistAndPlist, 2),
-                this, this.cancel);
+                this.cancel, this);
             //CloseItem.setAnchorPoint(cc.p(0.5,0.5));
             CloseItem.setPosition(cc.p(VisibleRect.center().x + 50, VisibleRect.center().y - 80));
             this.addChild(CloseItem);

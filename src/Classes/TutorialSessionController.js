@@ -693,18 +693,18 @@ var TutorialSessionController = CCSessionController.extend({
         this._currentGameScene.addChild(this._tutorialBlackLayer, 1);
         this._tutorialBlackLayer.setVisible(false);
 
-        var skip = cc.MenuItemSprite.create(cc.Sprite("#ui_skip_1.png"), null, this, this.skipTutorial);
+        var skip = new cc.MenuItemSprite(cc.Sprite("#ui_skip_1.png"), null, this.skipTutorial, this);
         skip.setTag(kSkipTutorialSkipTag);
         skip.setOpacity(0);
-        var fadeIn = cc.FadeIn.create(1);
+        var fadeIn = new cc.FadeIn(1);
         var reverse = fadeIn.reverse();
-        var sequ = cc.Sequence.create(fadeIn, reverse);
-        skip.runAction(cc.RepeatForever.create(sequ));
-        var done = cc.MenuItemSprite.create(cc.Sprite("#ui_skip_2.png"), null, this, this.skipTutorial);
-        done.runAction(cc.RepeatForever.create(sequ));
+        var sequ = new cc.Sequence(fadeIn, reverse);
+        skip.runAction(new cc.RepeatForever(sequ));
+        var done = new cc.MenuItemSprite(cc.Sprite("#ui_skip_2.png"), null, this.skipTutorial, this);
+        done.runAction(new cc.RepeatForever(sequ));
         done.setTag(kSkipTutorialDoneTag);
         done.setVisible(false);
-        this._skipTutorialButton = cc.Menu.create(skip, done, null);
+        this._skipTutorialButton = new cc.Menu(skip, done, null);
         this._currentGameScene.addChild(this._skipTutorialButton, 116, kSkipTutorialTag);
         this._targetTutorialStep = TutorialStep.TutorialStep3;
         this._skipTutorialButton.setPosition(cc.p(0, 0));
@@ -799,8 +799,8 @@ var TutorialSessionController = CCSessionController.extend({
                 cc.CallFunc.create(this, this.removeHint)));
         }
 
-        this._tutorialBlackLayer.runAction(cc.Sequence.create(cc.FadeTo.create(1, 0),
-            cc.CallFunc.create(this, this.nextTutorial4Call)));
+        this._tutorialBlackLayer.runAction(new cc.Sequence(new cc.FadeTo(1, 0),
+            new cc.CallFunc(this, this.nextTutorial4Call)));
     },
     showFishInfo:function () {
         var zOrder = 204, pos = cc.pSub(VisibleRect.top(), cc.p(0, 265));
@@ -809,14 +809,14 @@ var TutorialSessionController = CCSessionController.extend({
         this._fishInfoBoard.setPosition(pos);
         this._fishInfoBoard.setOpacity(0);
 
-        var moneyhard = cc.Sprite.create(ImageNameLang("ui_teach_003.png"));
+        var moneyhard = new cc.Sprite(ImageNameLang("ui_teach_003.png"));
         moneyhard.setAnchorPoint(cc.p(0.5, 0.5));
         var fontSize = 16;
         moneyhard.setPosition(cc.p(620, 160));
         this._fishInfoBoard.addChild(moneyhard, zOrder + 1);
 
-        var close = cc.MenuItemSprite.create(new cc.Sprite("#btn_teach_001.png"), new cc.Sprite("#btn_teach_002.png"),
-            this, this.goBack);
+        var close = new cc.MenuItemSprite(new cc.Sprite("#btn_teach_001.png"), new cc.Sprite("#btn_teach_002.png"),
+            this.goBack, this);
 
         var closeLabel = cc.LabelTTF.create(cc.LocalizedString.localizedString("Tutorial Text Close"),
             "Helvetica-Bold", fontSize);
@@ -826,18 +826,18 @@ var TutorialSessionController = CCSessionController.extend({
         moneyhard.setScale(0.85);
         close.setScale(0.85);
 
-        var menu = cc.Menu.create(close);
+        var menu = new cc.Menu(close);
         var x = this._fishInfoBoard.getContentSize().width / 2;
         var y = close.getContentSize().height + 10;
         menu.setPosition(cc.p(x, y));
         this._fishInfoBoard.addChild(menu, zOrder + 1);
 
-        this._fishInfoBoard.runAction(cc.FadeIn.create(1));
+        this._fishInfoBoard.runAction(new cc.FadeIn(1));
     },
     hideFishInfo:function () {
-        var fadeOut = cc.FadeOut.create(1);
-        var final1 = cc.CallFunc.create(this, this.step8Finshed);
-        this._fishInfoBoard.runAction(cc.Sequence.create(fadeOut, final1));
+        var fadeOut = new cc.FadeOut(1);
+        var final1 = new cc.CallFunc(this, this.step8Finshed);
+        this._fishInfoBoard.runAction(new cc.Sequence(fadeOut, final1));
     },
     step8Finshed:function () {
         this._fishInfoBoard.removeFromParentAndCleanup(true);
