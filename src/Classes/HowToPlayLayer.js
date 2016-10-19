@@ -18,6 +18,7 @@ var HowToPlayLayer = cc.Layer.extend({
     init:function (){
         this._super();
         this._helpImages = [];
+        //todo use eventManager
         cc.Director.getInstance().getTouchDispatcher().addTargetedDelegate(this, cc.MENU_HANDLER_PRIORITY - 50, false);
         return true;
     },
@@ -45,6 +46,7 @@ var HowToPlayLayer = cc.Layer.extend({
         cache.removeSpriteFrameByName(ImageNameLang("tutorial_uibox.plist"));
     },
     back:function (object) {
+        //todo use eventManager
         cc.Director.getInstance().getTouchDispatcher().removeDelegate(this);
         this.removeAllChildrenWithCleanup(true);
         this.removeFromParentAndCleanup(true);
