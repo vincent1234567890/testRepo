@@ -74,8 +74,7 @@ var ChestGameLayer = cc.Layer.extend({
         var selectedSprite = new cc.Sprite("#ui_box_go_2.png");
         var goButton = cc.MenuItemSprite.create(flashSprite,
             selectedSprite,
-            this,
-            this.GoRandomOval);
+            this.GoRandomOval, this);
 
         var OKMenu = cc.Menu.create(goButton);
         var posOffset = cc.p(0, -100);
