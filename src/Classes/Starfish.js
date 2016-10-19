@@ -97,10 +97,10 @@ var Starfish = BaseActor.extend({
         }
         this.delIng = true;
         this.playAction(1);
-        cc.Director.getInstance().getScheduler().scheduleSelector(this.addGold, this, 0.5, false);
+        cc.director.getScheduler().schedule(this.addGold, this, 0.5, false);
     },
     addGold:function (dt) {
-        cc.Director.getInstance().getScheduler().unscheduleSelector(this.addGold, this);
+        cc.director.getScheduler().unschedule(this.addGold, this);
         playEffect(COIN_EFFECT1);
         var particle = new cc.ParticleSystem(ImageName("goldlizi.plist"));
         var goldcoin = ActorFactory.create("GoldPrizeActor");
@@ -167,7 +167,7 @@ var Starfish = BaseActor.extend({
         return this.handleCollide(plane);
     },
     removeSelfFromScene:function () {
-        cc.Director.getInstance().getScheduler().unscheduleAllSelectorsForTarget(this);
+        cc.director.getScheduler().unscheduleAllSelectorsForTarget(this);
         this._super();
     },
     moveByLine:function (dt) {

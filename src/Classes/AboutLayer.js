@@ -18,10 +18,12 @@ var AboutLayer = cc.LayerColor.extend({
     onEnter:function () {
         this._super();
         this.schedule(this.updateList);
+        //todo use eventManager
         cc.Director.getInstance().getTouchDispatcher().addTargetedDelegate(this, 0, false);
     },
     onExit:function () {
         this._super();
+        //todo use eventManager
         cc.Director.getInstance().getTouchDispatcher().removeDelegate(true);
     },
     onTouchBegan:function (touch, event) {

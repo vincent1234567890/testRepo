@@ -17,7 +17,7 @@ var ShareImageLayer = cc.Layer.extend({
     itemCancel:null,
     pPreview:null,
     init:function () {
-        var winSize = cc.Director.getInstance().getWinSize();
+        var winSize = cc.director.getWinSize();
 
         var spriteLabel = cc.Sprite.create(ImageNameLang("fonts_other_011.png"));
         this.addChild(spriteLabel, 1);

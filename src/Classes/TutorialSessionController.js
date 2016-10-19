@@ -309,13 +309,13 @@ var TutorialSessionController = CCSessionController.extend({
                 this.addCircleFishGroupForPlayTurorial(21);
                 this._pauseFish = false;
                 this._captiveRate = CaptiveRateZero;
-                cc.Director.getInstance().getScheduler().scheduleSelector(this.nextTutorial, this, 1, false);
+                cc.director.getScheduler().scheduleSelector(this.nextTutorial, this, 1, false);
                 break;
             }
 
             case TutorialStep.TutorialStep1:
             {
-                cc.Director.getInstance().getScheduler().unscheduleSelector(this.nextTutorial, this);
+                cc.director.getScheduler().unscheduleSelector(this.nextTutorial, this);
                 this._pauseFish = true;
                 this.showHint(cc.LocalizedString.localizedString("Tutorial Text Step 1"), 0, this.hintClosedForNextTutorial);
                 break;
@@ -334,7 +334,7 @@ var TutorialSessionController = CCSessionController.extend({
             {
                 this.tutorialAward(10);
                 this._targetTutorialStep = TutorialStep.TutorialStep8;
-                cc.Director.getInstance().getScheduler().scheduleSelector(this.nextTutorial, this, 1, false);
+                cc.director.getScheduler().scheduleSelector(this.nextTutorial, this, 1, false);
                 this._captiveRate = CaptiveRateZero;
                 this.addCircleFishGroupForPlayTurorial(22);
                 this.getHintBack().playDisappear();
@@ -343,7 +343,7 @@ var TutorialSessionController = CCSessionController.extend({
 
             case TutorialStep.TutorialStep4:
             {
-                cc.Director.getInstance().getScheduler().unscheduleSelector(this.nextTutorial, this);
+                cc.director.getScheduler().unscheduleSelector(this.nextTutorial, this);
                 this._pauseFish = true;
                 this.showHint(cc.LocalizedString.localizedString("Tutorial Text Step 2.1"), 0, this.hintClosedForNextTutorial);
                 break;
@@ -352,7 +352,7 @@ var TutorialSessionController = CCSessionController.extend({
             {
                 this._pauseFish = false;
                 this._captiveRate = CaptiveRateHundredPercent;
-                cc.Director.getInstance().getScheduler().scheduleSelector(this.checkWeaponAtT5, this, 5, false);
+                cc.director.getScheduler().scheduleSelector(this.checkWeaponAtT5, this, 5, false);
                 this.getHintBack().playAppear();
                 this.getHintBack().setHint(cc.LocalizedString.localizedString("Tutorial Text Step 2.1"));
             }
@@ -383,14 +383,14 @@ var TutorialSessionController = CCSessionController.extend({
                 this._pauseFish = false;
                 this.addFishGroupForPlayTutorial(23);
                 this._pauseSmallFishInT10 = false;
-                cc.Director.getInstance().getScheduler().scheduleSelector(this.nextTutorial, this, 6.5, false);
+                cc.director.getScheduler().scheduleSelector(this.nextTutorial, this, 6.5, false);
                 this._captiveRate = CaptiveRateZero;
                 this.getHintBack().playDisappear();
                 break;
             }
             case TutorialStep.TutorialStep9:
             {
-                cc.Director.getInstance().getScheduler().unscheduleSelector(this.nextTutorial, this);
+                cc.director.getScheduler().unscheduleSelector(this.nextTutorial, this);
                 this._pauseFish = true;
                 this._captiveRate = CaptiveRateZero;
                 this.showHint(cc.LocalizedString.localizedString("Tutorial Text Step 3"), 0, this.hintClosedForNextTutorial);
@@ -431,14 +431,14 @@ var TutorialSessionController = CCSessionController.extend({
                 this._targetTutorialStep = TutorialStep.TutorialStep14;
                 this._captiveRate = CaptiveRateZero;
                 this.addFishGroupForPlayTutorial(24);
-                cc.Director.getInstance().getScheduler().scheduleSelector(this.nextTutorial, this, 5.0, false);
+                cc.director.getScheduler().scheduleSelector(this.nextTutorial, this, 5.0, false);
                 this.getHintBack().playDisappear();
             }
                 break;
 
             case TutorialStep.TutorialStep12:
             {
-                cc.Director.getInstance().getScheduler().unscheduleSelector(this.nextTutorial, this);
+                cc.director.getScheduler().unscheduleSelector(this.nextTutorial, this);
                 this._targetTutorialStep = TutorialStep.TutorialStep14;
                 this._pauseFish = true;
                 this._captiveRate = CaptiveRateZero;
@@ -462,7 +462,7 @@ var TutorialSessionController = CCSessionController.extend({
                 this._pauseFish = false;
                 this._captiveRate = CaptiveRateZero;
                 this.addFishGroupForPlayTutorial(25);
-                cc.Director.getInstance().getScheduler().scheduleSelector(this.nextTutorial, this, 5.0, false);
+                cc.director.getScheduler().scheduleSelector(this.nextTutorial, this, 5.0, false);
                 this.getHintBack().playDisappear();
             }
                 break;
@@ -470,12 +470,12 @@ var TutorialSessionController = CCSessionController.extend({
             case TutorialStep.TutorialStep15:
             {
                 this.m_isNextBreak = false;
-                cc.Director.getInstance().getScheduler().unscheduleSelector(this.nextTutorial, this);
+                cc.director.getScheduler().unscheduleSelector(this.nextTutorial, this);
                 this._pauseFish = true;
                 this._captiveRate = CaptiveRateZero;
                 this.showHint(cc.LocalizedString.localizedString("Tutorial Text Step 5.1"), 0, this.hintClosedForNextTutorial);
                 this._autoAddRayPower = true;
-                cc.Director.getInstance().getScheduler().scheduleSelector(this.increaseNormalGain, this, 0.1, false);
+                cc.director.getScheduler().scheduleSelector(this.increaseNormalGain, this, 0.1, false);
             }
                 break;
 
@@ -507,8 +507,8 @@ var TutorialSessionController = CCSessionController.extend({
             {
                 this._pauseFish = false;
                 this._captiveRate = CaptiveRateStandard;
-                cc.Director.getInstance().getScheduler().scheduleSelector(this.increaseNormalGain, this, 0.1, false);
-                cc.Director.getInstance().getScheduler().scheduleSelector(this.superWeaponPowerUpAgain, this, 3, false);
+                cc.director.getScheduler().scheduleSelector(this.increaseNormalGain, this, 0.1, false);
+                cc.director.getScheduler().scheduleSelector(this.superWeaponPowerUpAgain, this, 3, false);
                 this.getHintBack().playDisappear();
             }
                 break;
@@ -520,7 +520,7 @@ var TutorialSessionController = CCSessionController.extend({
                 break;
 
             case TutorialStep.TutorialStep21:
-                cc.Director.getInstance().getScheduler().scheduleSelector(this.nextTutorial, this, 0.1, false);
+                cc.director.getScheduler().scheduleSelector(this.nextTutorial, this, 0.1, false);
                 break;
 
             case TutorialStep.TutorialStep22:
@@ -534,17 +534,17 @@ var TutorialSessionController = CCSessionController.extend({
                 this._targetTutorialStep = TutorialStep.TutorialStep25;
                 this.tutorialAward(40);
                 this.stopTutorialHint();
-                cc.Director.getInstance().getScheduler().unscheduleSelector(this.nextTutorial, this);
+                cc.director.getScheduler().unscheduleSelector(this.nextTutorial, this);
                 this._showHint = true;
                 this.showFishInfo();
                 this.changeSkipButton();
-                cc.Director.getInstance().getScheduler().scheduleSelector(this.nextTutorial, this, 3, false);
+                cc.director.getScheduler().scheduleSelector(this.nextTutorial, this, 3, false);
             }
                 break;
 
             case TutorialStep.TutorialStep24:
             {
-                cc.Director.getInstance().getScheduler().unscheduleSelector(this.nextTutorial, this);
+                cc.director.getScheduler().unscheduleSelector(this.nextTutorial, this);
                 this.getHintBack().setVisible(false);
             }
                 break;
@@ -569,7 +569,7 @@ var TutorialSessionController = CCSessionController.extend({
         //KingFisher cc.log("tutorialQueue count:" + this._tutorialQueue.length);
 
         if (this._tutorialQueue.length == 0) {
-            cc.Director.getInstance().getScheduler().scheduleSelector(this.changeWeaponEndEndSession, this, 0.1, false);
+            cc.director.getScheduler().scheduleSelector(this.changeWeaponEndEndSession, this, 0.1, false);
         }
     },
     gotoTutorialStep:function (step, remove) {
@@ -584,7 +584,7 @@ var TutorialSessionController = CCSessionController.extend({
             this._showHint = false;
         }
 
-        cc.Director.getInstance().getScheduler().unscheduleSelector(this.nextTutorial, this);
+        cc.director.getScheduler().unscheduleSelector(this.nextTutorial, this);
 
         var tempStep = this._tutorialQueue[0];
         if (tempStep == step) {
@@ -870,16 +870,16 @@ var TutorialSessionController = CCSessionController.extend({
         //todo fixed
     },
     showHintInT20:function () {
-        cc.Director.getInstance().getScheduler().scheduleSelector(this.checkShareImageLayer, this, 0.1, false);
+        cc.director.getScheduler().scheduleSelector(this.checkShareImageLayer, this, 0.1, false);
     },
     checkShareImageLayer:function (dt) {
         if (this.currentTutorialStep != TutorialStep.TutorialStep20) {
-            cc.Director.getInstance().getScheduler().unscheduleSelector(this.checkShareImageLayer, this);
+            cc.director.getScheduler().unscheduleSelector(this.checkShareImageLayer, this);
         }
 
         var share = this._currentGameScene.getChildByTag(kShareToWeiBoTag);
         if (share == null) {
-            cc.Director.getInstance().getScheduler().unscheduleSelector(this.checkShareImageLayer, this);
+            cc.director.getScheduler().unscheduleSelector(this.checkShareImageLayer, this);
             this.showHint(cc.LocalizedString.localizedString("Tutorial Text Step 5.3"), 0, this.hintClosedForNextTutorial);
             this.getHintBack().playDisappear();
         }
@@ -901,7 +901,7 @@ var TutorialSessionController = CCSessionController.extend({
         }
         if (normalGain < normalCoinCount && !this._autoAddRayPower && !isUseRay) {
             if (!this._isInDelay) {
-                cc.Director.getInstance().getScheduler().scheduleSelector(this.superWeaponPowerUpAgain, this, 3, false);
+                cc.director.getScheduler().scheduleSelector(this.superWeaponPowerUpAgain, this, 3, false);
                 this.showHint(cc.LocalizedString.localizedString("Tutorial Text Step 5.2"), 0, this.hintClosed);
                 this._isInDelay = true;
                 this.getHintBack().setVisible(false);
@@ -953,7 +953,7 @@ var TutorialSessionController = CCSessionController.extend({
         }
     },
     checkWeaponAtT5:function (dt) {
-        cc.Director.getInstance().getScheduler().unscheduleSelector(this.checkWeaponAtT5, this);
+        cc.director.getScheduler().unscheduleSelector(this.checkWeaponAtT5, this);
 
         var aliveCount = 0;
         var arrayFish = this._currentGameScene.getActors(GroupFishActor);
@@ -984,7 +984,7 @@ var TutorialSessionController = CCSessionController.extend({
 
         if (curGain >= normalCoinCount) {
             this._autoAddRayPower = false;
-            cc.Director.getInstance().getScheduler().unscheduleSelector(this.increaseNormalGain, this);
+            cc.director.getScheduler().unscheduleSelector(this.increaseNormalGain, this);
             if (!this.finger.isVisible()) {
                 this.playTutorialHint(cc.pSub(VisibleRect.top(), cc.p(100, 100)), false);
             }
@@ -1015,13 +1015,13 @@ var TutorialSessionController = CCSessionController.extend({
                 this.addCircleFishGroupForPlayTurorial(21);
                 this._pauseFish = false;
                 this._captiveRate = CaptiveRateZero;
-                cc.Director.getInstance().getScheduler().scheduleSelector(this.nextTutorial, this, 1, false);
+                cc.director.getScheduler().scheduleSelector(this.nextTutorial, this, 1, false);
             }
                 break;
 
             case TutorialStep.TutorialStep1:
             {
-                cc.Director.getInstance().getScheduler().unscheduleSelector(this.nextTutorial, this);
+                cc.director.getScheduler().unscheduleSelector(this.nextTutorial, this);
                 this._pauseFish = true;
                 this.showHint(ImageNameLang("fontsthis._otherthis._20.png"), 0.0, this.hintClosedForNextTutorial);
                 break;
@@ -1038,7 +1038,7 @@ var TutorialSessionController = CCSessionController.extend({
             {
                 this.tutorialAward(10);
                 this._targetTutorialStep = TutorialStep.TutorialStep8;
-                cc.Director.getInstance().getScheduler().scheduleSelector(this.nextTutorial, this, 1, false);
+                cc.director.getScheduler().scheduleSelector(this.nextTutorial, this, 1, false);
                 this._captiveRate = CaptiveRateZero;
                 this.addCircleFishGroupForPlayTurorial(22);
                 break;
@@ -1046,7 +1046,7 @@ var TutorialSessionController = CCSessionController.extend({
 
             case TutorialStep.TutorialStep4:
             {
-                cc.Director.getInstance().getScheduler().unscheduleSelector(this.nextTutorial, this);
+                cc.director.getScheduler().unscheduleSelector(this.nextTutorial, this);
                 this._pauseFish = true;
                 this.showHint(ImageNameLang("fontsthis._otherthis._21.png"), 0.0, this.hintClosedForNextTutorial);
             }
@@ -1056,7 +1056,7 @@ var TutorialSessionController = CCSessionController.extend({
             {
                 this._pauseFish = false;
                 this._captiveRate = CaptiveRateHundredPercent;
-                cc.Director.getInstance().getScheduler().scheduleSelector(this.checkWeaponAtT5, this, 5.0, false);
+                cc.director.getScheduler().scheduleSelector(this.checkWeaponAtT5, this, 5.0, false);
             }
                 break;
 
@@ -1083,14 +1083,14 @@ var TutorialSessionController = CCSessionController.extend({
                 this._pauseFish = false;
                 this.addFishGroupForPlayTutorial(23);
                 this._pauseSmallFishInT10 = false;
-                cc.Director.getInstance().getScheduler().scheduleSelector(this.nextTutorial, this, 6.5, false);
+                cc.director.getScheduler().scheduleSelector(this.nextTutorial, this, 6.5, false);
                 this._captiveRate = CaptiveRateZero;
             }
                 break;
 
             case TutorialStep.TutorialStep9:
             {
-                cc.Director.getInstance().getScheduler().unscheduleSelector(this.nextTutorial, this);
+                cc.director.getScheduler().unscheduleSelector(this.nextTutorial, this);
                 this._pauseFish = true;
                 this._captiveRate = CaptiveRateZero;
                 this.showHint(ImageNameLang("fontsthis._otherthis._23.png"), 0.0, this.hintClosedForNextTutorial);
@@ -1112,13 +1112,13 @@ var TutorialSessionController = CCSessionController.extend({
                 this._targetTutorialStep = TutorialStep.TutorialStep14;
                 this._captiveRate = CaptiveRateZero;
                 this.addFishGroupForPlayTutorial(24);
-                cc.Director.getInstance().getScheduler().scheduleSelector(this.nextTutorial, this, 5.0, false);
+                cc.director.getScheduler().scheduleSelector(this.nextTutorial, this, 5.0, false);
             }
                 break;
 
             case TutorialStep.TutorialStep12:
             {
-                cc.Director.getInstance().getScheduler().unscheduleSelector(this.nextTutorial, this);
+                cc.director.getScheduler().unscheduleSelector(this.nextTutorial, this);
                 this._targetTutorialStep = TutorialStep.TutorialStep14;
                 this._pauseFish = true;
                 this._captiveRate = CaptiveRateZero;
@@ -1140,18 +1140,18 @@ var TutorialSessionController = CCSessionController.extend({
                 this._pauseFish = false;
                 this._captiveRate = CaptiveRateZero;
                 this.addFishGroupForPlayTutorial(25);
-                cc.Director.getInstance().getScheduler().scheduleSelector(this.nextTutorial, this, 5.0, false);
+                cc.director.getScheduler().scheduleSelector(this.nextTutorial, this, 5.0, false);
             }
                 break;
 
             case TutorialStep.TutorialStep15:
             {
-                cc.Director.getInstance().getScheduler().unscheduleSelector(this.nextTutorial, this);
+                cc.director.getScheduler().unscheduleSelector(this.nextTutorial, this);
                 this._pauseFish = true;
                 this._captiveRate = CaptiveRateZero;
                 this.showHint(ImageNameLang("fontsthis._otherthis._25.png"), 0.0, this.hintClosedForNextTutorial);
                 this._autoAddRayPower = true;
-                cc.Director.getInstance().getScheduler().scheduleSelector(this.increaseNormalGain, this, 0.1, false);
+                cc.director.getScheduler().scheduleSelector(this.increaseNormalGain, this, 0.1, false);
             }
                 break;
 
@@ -1182,7 +1182,7 @@ var TutorialSessionController = CCSessionController.extend({
             {
                 this._pauseFish = false;
                 this._captiveRate = CaptiveRateStandard;
-                cc.Director.getInstance().getScheduler().scheduleSelector(this.increaseNormalGain, this, 0.1, false);
+                cc.director.getScheduler().scheduleSelector(this.increaseNormalGain, this, 0.1, false);
             }
                 break;
 
@@ -1197,7 +1197,7 @@ var TutorialSessionController = CCSessionController.extend({
 
             case TutorialStep.TutorialStep21:
             {
-                cc.Director.getInstance().getScheduler().scheduleSelector(this.nextTutorial
+                cc.director.getScheduler().scheduleSelector(this.nextTutorial
                     , this, 0.1, false);
             }
                 break;
@@ -1212,17 +1212,17 @@ var TutorialSessionController = CCSessionController.extend({
                 this._targetTutorialStep = TutorialStep.TutorialStep25;
                 this.tutorialAward(40);
                 this.stopTutorialHint();
-                cc.Director.getInstance().getScheduler().unscheduleSelector(this.nextTutorial, this);
+                cc.director.getScheduler().unscheduleSelector(this.nextTutorial, this);
                 this._showHint = true;
                 this.showFishInfo();
                 this.changeSkipButton();
-                cc.Director.getInstance().getScheduler().scheduleSelector(this.nextTutorial, this, 3, false);
+                cc.director.getScheduler().scheduleSelector(this.nextTutorial, this, 3, false);
             }
                 break;
 
             case TutorialStep.TutorialStep24:
             {
-                cc.Director.getInstance().getScheduler().unscheduleSelector(this.nextTutorial, this);
+                cc.director.getScheduler().unscheduleSelector(this.nextTutorial, this);
             }
                 break;
 
@@ -1245,11 +1245,11 @@ var TutorialSessionController = CCSessionController.extend({
         }
     },
     superWeaponPowerUpAgain:function (dt) {
-        cc.Director.getInstance().getScheduler().unscheduleSelector(this.superWeaponPowerUpAgain, this);
+        cc.director.getScheduler().unscheduleSelector(this.superWeaponPowerUpAgain, this);
         if (this._sessionRunning) {
             this._isInDelay = false;
             this._autoAddRayPower = true;
-            cc.Director.getInstance().getScheduler().scheduleSelector(this.increaseNormalGain, this, 0.1, false);
+            cc.director.getScheduler().scheduleSelector(this.increaseNormalGain, this, 0.1, false);
         }
     },
     hintClosed:function () {
@@ -1260,7 +1260,7 @@ var TutorialSessionController = CCSessionController.extend({
         }
     },
     willEnd:function () {
-        cc.Director.getInstance().getScheduler().unscheduleSelector(this.increaseNormalGain, this);
+        cc.director.getScheduler().unscheduleSelector(this.increaseNormalGain, this);
         while (GameCtrl.sharedGame().getCurScene().getChildByTag(456 + ActorType.eActorTypeNormal)) {
             var spRainbow = GameCtrl.sharedGame().getCurScene().getChildByTag(456 + ActorType.eActorTypeNormal);
             spRainbow.stopAllActions();
@@ -1307,7 +1307,7 @@ var TutorialSessionController = CCSessionController.extend({
         if (this._currentGameScene.getCannonActor().getIsWeaponSwitching()) {
             return;
         } else {
-            cc.Director.getInstance().getScheduler().unscheduleSelector(this.changeWeaponEndEndSession, this);
+            cc.director.getScheduler().unscheduleSelector(this.changeWeaponEndEndSession, this);
         }
 
         if (!wrapper.getBooleanForKey("NewFishPrompt1")) {

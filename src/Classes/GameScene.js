@@ -457,7 +457,7 @@ var GameScene = cc.Scene.extend({
             //KingFisher cc.log("-------removeActoraCaller, param = " + this._removeActoraParam);
             this.removeActora(this._removeActoraParam);
         }
-        cc.Director.getInstance().getScheduler().unscheduleSelector(this.removeActoraCaller, this);
+        cc.director.getScheduler().unscheduleSelector(this.removeActoraCaller, this);
     },
     BigPrize:function () {
         if (this._bigPrizeExist) {
@@ -473,7 +473,7 @@ var GameScene = cc.Scene.extend({
         this._removeActoraParam = big;
         //KingFisher cc.log("BigPrize, param = "+ this._removeActoraParam);
         this._bigPrizeExist = true;
-        cc.Director.getInstance().getScheduler().scheduleSelector(this.removeActoraCaller, this, 5.0, false);
+        cc.director.getScheduler().scheduleSelector(this.removeActoraCaller, this, 5.0, false);
     },
     initMusicPlay:function () {
         // this._itemMusicPlayer = cc.MenuItemSprite.create(
@@ -590,10 +590,10 @@ var GameScene = cc.Scene.extend({
     },
     clearGameResource:function () {
         // 停掉所有的定时器
-        cc.Director.getInstance().getScheduler().unscheduleAllSelectorsForTarget(this);
+        cc.director.getScheduler().unscheduleAllSelectorsForTarget(this);
         this.stopAllActions();
         if (this._cannonActor) {
-            cc.Director.getInstance().getScheduler().unscheduleAllSelectorsForTarget(this._cannonActor);
+            cc.director.getScheduler().unscheduleAllSelectorsForTarget(this._cannonActor);
         }
 
         // 隐藏广告条
@@ -662,7 +662,7 @@ var GameScene = cc.Scene.extend({
         this.removeChildByTag(kTagMenuPause, true);
 
         if (this._cannonActor) {
-            cc.Director.getInstance().getScheduler().resumeTarget(this._cannonActor.getCurrentWeapon());
+            cc.director.getScheduler().resumeTarget(this._cannonActor.getCurrentWeapon());
         }
     },
     removeBlurBG:function () {
@@ -717,7 +717,7 @@ var GameScene = cc.Scene.extend({
         this.getLayer().addChild(this._blurBackgroundLayer);
 
         if (this._cannonActor) {
-            cc.Director.getInstance().getScheduler().pauseTarget(this._cannonActor.getCurrentWeapon());
+            cc.director.getScheduler().pauseTarget(this._cannonActor.getCurrentWeapon());
         }
     },
     getActors:function (groupTag) {
@@ -928,7 +928,7 @@ var GameScene = cc.Scene.extend({
             star.removeSelfFromScene();
         }
         // 将移除霓虹灯的定时器停止掉
-        cc.Director.getInstance().getScheduler().unscheduleSelector(this.removeActoraCaller, this);
+        cc.director.getScheduler().unscheduleSelector(this.removeActoraCaller, this);
     },
     hideAllMenu:function () {
         if (this._cannonActor.getCurrentWeaponLevel() < FishWeaponType.eWeaponLevel8) {
@@ -1128,7 +1128,7 @@ var GameScene = cc.Scene.extend({
         this.addChild(this._pauseMenuLayer, 120, kTagMenuPause);
 
         if (this._cannonActor) {
-            cc.Director.getInstance().getScheduler().pauseTarget(this._cannonActor.getCurrentWeapon());
+            cc.director.getScheduler().pauseTarget(this._cannonActor.getCurrentWeapon());
         }
     },
     showGetMoneyLayer:function (spbPos) {
@@ -1158,7 +1158,6 @@ var GameScene = cc.Scene.extend({
         PlayerActor.sharedActor().setPlayerMoney(PlayerActor.sharedActor().getPlayerMoney() + point);
     },
     addPrizeNet:function (dt) {
-        //dt = dt | cc.Director.getInstance()._deltatime;
         this._prizeNetCount += dt;
         if (this._prizeNetCount > 5) {
             this.unschedule(this.addPrizeNet);
@@ -1647,7 +1646,7 @@ var GameScene = cc.Scene.extend({
             this.addActor(StarfishNode);
             StarfishNode.setPosition(VisibleRect.topRight());
         }
-        cc.Director.getInstance().getScheduler().scheduleSelector(this.delStarfish, this, 15, false);
+        cc.director.getScheduler().scheduleSelector(this.delStarfish, this, 15, false);
     },
     addParticleAchieve:function () {
         var pos = cc.p(VisibleRect.center().x, VisibleRect.center().y + 100);
@@ -1663,7 +1662,7 @@ var GameScene = cc.Scene.extend({
 
     },
     delStarfish:function () {
-        cc.Director.getInstance().getScheduler().unscheduleSelector(this.delStarfish, this);
+        cc.director.getScheduler().unscheduleSelector(this.delStarfish, this);
 
         var groupStarfishActor = this.getActors(GroupStarfishActor);
         for (var i = groupStarfishActor.length - 1; i >= 0; i--) {
@@ -1938,18 +1937,18 @@ var GameScene = cc.Scene.extend({
         AdsController.actionEnd(1);
 
         // 设置定时器，隐藏广告条
-        cc.Director.getInstance().getScheduler().scheduleSelector(this.hideAdView, this, AD_SHOWN_TIME, false);
+        cc.director.getScheduler().scheduleSelector(this.hideAdView, this, AD_SHOWN_TIME, false);
     },
     hideAdActionStart:function () {
         AdsController.actionEnd(0);
     },
     hideAdView:function (dt) {
-        cc.Director.getInstance().getScheduler().unscheduleSelector(this.hideAdView, this);
+        cc.director.getScheduler().unscheduleSelector(this.hideAdView, this);
         AdsController.hideBannerAd(BannerAdTyp.BannerAdGame);
     },
     terminateAdMobShown:function () {
         // 停止隐藏广告的定时器
-        cc.Director.getInstance().getScheduler().unscheduleSelector(this.hideAdView, this);
+        cc.director.getScheduler().unscheduleSelector(this.hideAdView, this);
 
         // 停止广告相关 UI 的动画
         if (this._camera) {
@@ -1978,7 +1977,7 @@ var GameScene = cc.Scene.extend({
         //this._punchBoxAd.request(fun);
     },
     startCameraAnimation:function () {
-        cc.Director.getInstance().getScheduler().scheduleSelector(this.shakeScreen, this, 0.02, false);
+        cc.director.getScheduler().scheduleSelector(this.shakeScreen, this, 0.02, false);
     },
     shakeScreen:function (dt) {
         var body = cc.$("canvas");
@@ -1996,7 +1995,7 @@ var GameScene = cc.Scene.extend({
                 body.translates(0, 0);
             }
             this._shakeTime = 0;
-            cc.Director.getInstance().getScheduler().unscheduleSelector(this.shakeScreen, this);
+            cc.director.getScheduler().unscheduleSelector(this.shakeScreen, this);
         }
     },
     EnterSceneSelect:function () {
@@ -2064,7 +2063,7 @@ var GameScene = cc.Scene.extend({
          }
          this._savingImage = true;
 
-         var winSize = cc.Director.getInstance().getWinSize();
+         var winSize = cc.director.getWinSize();
          var sprite = cc.Sprite.create(ImageName("mark.png"));
          sprite.setScaleX(winSize.width / sprite.getContentSize().width);
          sprite.setScaleY(winSize.height / sprite.getContentSize().height);

@@ -27,14 +27,16 @@ var StageSelectLayer = cc.Layer.extend({
         this._super();
         this._helpImages = [];
         this._curIndex = 1;
-
+        //todo use event Manager
         cc.Director.getInstance().getTouchDispatcher().addTargetedDelegate(this, 0, false);
 
         return true;
     },
     onEnter:function () {
         this._super();
-        this.setKeyboardEnabled(true);
+
+        //todo use event manager
+        //this.setKeyboardEnabled(true);
 
         var cache = cc.spriteFrameCache;
         cache.addSpriteFrames(ImageNameLang("StageSelectLayer.plist"));
@@ -184,6 +186,7 @@ var StageSelectLayer = cc.Layer.extend({
             }
         }
 
+        //use event manager
         cc.Director.getInstance().getTouchDispatcher().removeDelegate(this);
         this.removeAllChildrenWithCleanup(true);
         this.removeFromParentAndCleanup(true);
@@ -483,6 +486,7 @@ var StageSelectLayer = cc.Layer.extend({
     playGame:function (sender) {
         playEffect(BUTTON_EFFECT);
         GameCtrl.sharedGame().newGame(this._currentPage + 1);
+        //todo use event manager
         cc.Director.getInstance().getTouchDispatcher().removeDelegate(this);
         this.removeAllChildrenWithCleanup(true);
         this.removeFromParent(true);
