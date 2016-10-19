@@ -268,20 +268,20 @@ var PauseMenuLayer = cc.Layer.extend({
 
         var pauseMenuBackground;
         var button_continue = cc.MenuItemSprite.create(
-            cc.Sprite.createWithSpriteFrameName(ImageNameLang("ui_button_13.png",true)),
-            cc.Sprite.createWithSpriteFrameName(ImageNameLang("ui_button_14.png",true)),
+            new cc.Sprite("#" +ImageNameLang("ui_button_13.png",true)),
+            new cc.Sprite("#" +ImageNameLang("ui_button_14.png",true)),
             this, this.resumeGame);
         var button_Other = cc.MenuItemSprite.create(
-            cc.Sprite.createWithSpriteFrameName(ImageNameLang("button_other_026.png",true)),
-            cc.Sprite.createWithSpriteFrameName(ImageNameLang("button_other_027.png",true)),
+            new cc.Sprite("#" +ImageNameLang("button_other_026.png",true)),
+            new cc.Sprite("#" +ImageNameLang("button_other_027.png",true)),
             this, this.SelectOther);
         var button_giveup = cc.MenuItemSprite.create(
-            cc.Sprite.createWithSpriteFrameName(ImageNameLang("ui_button_15.png",true)),
-            cc.Sprite.createWithSpriteFrameName(ImageNameLang("ui_button_16.png",true)),
+            new cc.Sprite("#" +ImageNameLang("ui_button_15.png",true)),
+            new cc.Sprite("#" +ImageNameLang("ui_button_16.png",true)),
             this, this.giveup);
 
         var menu;
-        pauseMenuBackground = cc.Sprite.createWithSpriteFrameName("btn_pause_1.png");
+        pauseMenuBackground = new cc.Sprite("#btn_pause_1.png");
         pauseMenuBackground.setAnchorPoint(cc.p(0.5, 0.5));
         pauseMenuBackground.setPosition(cc.p(0, VisibleRect.top().y / 2));
         this.addChild(pauseMenuBackground, 10, 123);
@@ -290,8 +290,8 @@ var PauseMenuLayer = cc.Layer.extend({
         button_Other.setPosition(cc.p(0, -97));
 
         var button_Option = cc.MenuItemSprite.create(
-            cc.Sprite.createWithSpriteFrameName(ImageNameLang("button_other_037.png", true)),
-            cc.Sprite.createWithSpriteFrameName(ImageNameLang("button_other_038.png", true)),
+            new cc.Sprite("#" +ImageNameLang("button_other_037.png", true)),
+            new cc.Sprite("#" +ImageNameLang("button_other_038.png", true)),
             this, this.OptionFunction);
         button_Option.setPosition(cc.p(0, -187));
         menu = cc.Menu.create(button_Option, button_continue, button_giveup, button_Other);

@@ -40,7 +40,7 @@ var WeaponSpecialRay = WeaponSpecial.extend({
 
         var firstFrame = "caihong_1.png";
         var animation = cc.Animation.create(frames, 0.1);
-        var rainbow = cc.Sprite.createWithSpriteFrameName(firstFrame);
+        var rainbow = new cc.Sprite("#" + firstFrame);
         var rainbowAnimate = cc.Animate.create(animation);
         rainbow.runAction(cc.RepeatForever.create(rainbowAnimate));
         rainbow.setAnchorPoint(cc.p(0.5, 0.5));

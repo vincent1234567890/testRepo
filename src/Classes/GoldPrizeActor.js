@@ -322,7 +322,7 @@ var MaxChestActor = ChestActor.extend({
         {
             var temp =  this.getPrizeNumber();
             var labelNum = cc.LabelAtlas.create(temp, ImageName("prizenum.png"), PrizeNum_TextWidth, PrizeNum_TextHeight, '0');
-            var prizeSprite = cc.Sprite.createWithSpriteFrameName(("prizesign1.png"));
+            var prizeSprite = new cc.Sprite("#prizesign1.png");
             labelNum.setScale(0.5);
             prizeSprite.setScale(0.5);
             var prizeOffset = cc.p(-35,90);
@@ -338,7 +338,7 @@ var MaxChestActor = ChestActor.extend({
         }
         else if (this.getPrizeType() == "Exp")
         {
-            var EXPSprite = cc.Sprite.createWithSpriteFrameName(("EXP.png"));
+            var EXPSprite = new cc.Sprite("#EXP.png");
             EXPSprite.setScale(0.5);
             var expYoffset =110;
             EXPSprite.setPosition(cc.pAdd(this.getPosition(), cc.p(0,expYoffset)));
@@ -355,7 +355,7 @@ var MaxChestActor = ChestActor.extend({
         }
         else if (this.getPrizeType() == "Laser")
         {
-            var RewardSprite = cc.Sprite.createWithSpriteFrameName(("button_prop_Laser.png"));
+            var RewardSprite = new cc.Sprite("#button_prop_Laser.png");
 
             RewardSprite.setScale(0.5);
             var yOffset = 120;
@@ -454,7 +454,7 @@ var MaxChestActor = ChestActor.extend({
         this.addChild(tempParticle, 10);
         if (this.getPrizeType() === "Exp")
         {
-            this.UPSprite = cc.Sprite.createWithSpriteFrameName(("EXP.png"));
+            this.UPSprite = new cc.Sprite("#EXP.png");
             var expPosOffset = cc.p(5,200);
             this.UPSprite.setPosition(cc.pAdd(this.getPosition(), expPosOffset));
             //this.getScene().getChestGameLayer().addChild(this.UPSprite);
@@ -531,13 +531,13 @@ var MaxChestActor = ChestActor.extend({
         {
             playEffect(ACH_EFFECT);
             //应该调用收集到激光的函数
-            this.UPSprite = cc.Sprite.createWithSpriteFrameName(("button_prop_Laser.png"));
+            this.UPSprite = new cc.Sprite("#button_prop_Laser.png");
             this.UPSprite.setScale(0.5);
             var posOffset = cc.p(5,200);
             this.UPSprite.setPosition(cc.pAdd(this.getPosition(), posOffset));
             //this.getScene().getChestGameLayer().addChild(this.UPSprite);
             this.getScene().getChestGameLayer().addChild(this.UPSprite);
-            var RewardSprite = cc.Sprite.createWithSpriteFrameName(("button_prop_Laser.png"));
+            var RewardSprite = new cc.Sprite("#button_prop_Laser.png");
             RewardSprite.setScale(0.5);
             RewardSprite.setPosition(this.getPosition());
 

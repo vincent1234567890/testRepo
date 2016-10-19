@@ -175,7 +175,9 @@ var StartMenuLayer = cc.Layer.extend({
         if (sender) {
             sender.removeFromParentAndCleanup(true);
         }
-        this._spriteLight1 = new cc.Sprite(("#main_ui_other_02.png"));
+
+        this._spriteLight1 = new cc.Sprite("#main_ui_other_02.png");
+
         this.addChild(this._spriteLight1, 10);
         this._spriteLight1.setPosition(cc.p(125 + Math.random() * 63, VisibleRect.top().y - this._spriteLight1.getContentSize().height / 2));
     },

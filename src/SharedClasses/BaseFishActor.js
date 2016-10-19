@@ -337,7 +337,7 @@ var BaseFishActor = BaseActor.extend({
         }
         var str = "" + (this.prizeScore * this.getScene().getOddsNumber());
         var labelNum = cc.LabelAtlas.create(str, ImageName("prizenum.png"), PrizeNum_TextWidth, PrizeNum_TextHeight, '0');
-        var prizeSprite = cc.Sprite.createWithSpriteFrameName(("prizesign1.png"));
+        var prizeSprite = new cc.Sprite("#prizesign1.png");
         var movePoition = cc.p(0, 48);
         var move = cc.p(prizeSprite.getContentSize().width / 2, -prizeSprite.getContentSize().height / 2);
         switch (this.actorType) {
@@ -1191,8 +1191,8 @@ var BaseFishActor = BaseActor.extend({
         var labelNum = cc.LabelAtlas.create("2", ImageName("prizenum.png"), PrizeNum_TextWidth, PrizeNum_TextHeight, '0');
         var prizeScore = "" + this.prizeScore;
         var labelNum1 = cc.LabelAtlas.create(prizeScore, ImageName("prizenum.png"), PrizeNum_TextWidth, PrizeNum_TextHeight, '0');
-        var prizeSprite = cc.Sprite.createWithSpriteFrameName(("prizesign1.png"));
-        var prizeSprite1 = cc.Sprite.createWithSpriteFrameName(("prizesign1.png"));
+        var prizeSprite = new cc.Sprite("#prizesign1.png");
+        var prizeSprite1 = new cc.Sprite("#prizesign1.png");
 
         var move = cc.p(-prizeSprite.getContentSize().width * 4, prizeSprite.getContentSize().height * 0.7);
         var fadeOut = cc.FadeOut.create(0.5);
@@ -2427,8 +2427,8 @@ var BaseFishActor = BaseActor.extend({
     addJinDunAnimation:function (val, number, type) {
         var frameCache = cc.spriteFrameCache;
         frameCache.addSpriteFrames(ImageName("jindun.plist"));
-        var str = "jindun_" + number + "_01.png";
-        var coin = cc.Sprite.createWithSpriteFrameName(str);
+        var str = "#jindun_" + number + "_01.png";
+        var coin = new cc.Sprite(str);
         this.getScene().addChild(coin);
         coin.setPosition(val);
         var frames = [];

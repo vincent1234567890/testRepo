@@ -345,10 +345,8 @@ var StageSelectLayer = cc.Layer.extend({
 
             var btnPageIndicator = cc.MenuItemToggle.create(
                 cc.MenuItemSprite.create(
-                    cc.Sprite.createWithSpriteFrameName("UI_select_slider_2.png"),
-                    cc.Sprite.createWithSpriteFrameName("UI_select_slider_1.png")),
-                    this, this.indicatorClick
-            );
+                    new cc.Sprite("#UI_select_slider_2.png"), new cc.Sprite("#UI_select_slider_1.png")),
+                    this, this.indicatorClick);
             this.addChild(btnPageIndicator, 8, i * 30 + i);
             this._curPageIndicator[i - 1] = btnPageIndicator;
             if (1 == i) {
@@ -377,8 +375,8 @@ var StageSelectLayer = cc.Layer.extend({
                     CSpriteLayer.getButtonBoxOffsetY(("ui_button_box04_02.png"), ImageNameLang("UI_select_button_4.png"), PlistAndPlist, itemOffset),
                     this, this.buyLayer);
 
-                markBackground = cc.Sprite.createWithSpriteFrameName(("map_btn_1.png"));
-                markLock = cc.Sprite.createWithSpriteFrameName(("map_mark_2.png"));
+                markBackground = new cc.Sprite("#map_btn_1.png");
+                markLock = new cc.Sprite("#map_mark_2.png");
             }
             else {
                 PlayerItem = cc.MenuItemSprite.create(
@@ -386,8 +384,8 @@ var StageSelectLayer = cc.Layer.extend({
                     CSpriteLayer.getButtonBoxOffsetY(("ui_button_box03_02.png"), ImageNameLang("UI_select_button_2.png"), PlistAndPlist, itemOffset),
                     this, this.playGame);
 
-                markBackground = cc.Sprite.createWithSpriteFrameName(("map_btn_1.png"));
-                markLock = cc.Sprite.createWithSpriteFrameName(("map_mark_1.png"));
+                markBackground = new cc.Sprite("#map_btn_1.png");
+                markLock = new cc.Sprite("#map_mark_1.png");
             }
 
 
@@ -428,17 +426,14 @@ var StageSelectLayer = cc.Layer.extend({
     },
     drawReturnButton:function () {
         cc.spriteFrameCache.addSpriteFrames(ImageName("stage.plist"));
-        this._returnButton = cc.MenuItemSprite.create(cc.Sprite.createWithSpriteFrameName("ui_button_17.png"),
-            cc.Sprite.createWithSpriteFrameName("ui_button_18.png"),
-            this, this.back);
+        this._returnButton = cc.MenuItemSprite.create(new cc.Sprite("#ui_button_17.png"),
+            new cc.Sprite("#ui_button_18.png"), this, this.back);
 
-        this._otherLeftButton = cc.MenuItemSprite.create(cc.Sprite.createWithSpriteFrameName("button_other_033.png"),
-            cc.Sprite.createWithSpriteFrameName("button_other_032.png"),
-            this, this.otherLeft);
+        this._otherLeftButton = cc.MenuItemSprite.create(new cc.Sprite("#button_other_033.png"),
+            new cc.Sprite("#button_other_032.png"), this, this.otherLeft);
 
-        this._otherRightButton = cc.MenuItemSprite.create(cc.Sprite.createWithSpriteFrameName("button_other_033.png"),
-            cc.Sprite.createWithSpriteFrameName("button_other_032.png"),
-            this, this.otherRight);
+        this._otherRightButton = cc.MenuItemSprite.create(new cc.Sprite("#button_other_033.png"),
+            new cc.Sprite("#button_other_032.png"), this, this.otherRight);
 
         var mBack = cc.Menu.create(this._returnButton, this._otherLeftButton, this._otherRightButton);
         this.addChild(mBack, 30);
@@ -459,7 +454,7 @@ var StageSelectLayer = cc.Layer.extend({
 
         this._actorCoinLabel = cc.LabelAtlas.create(ActorStr, ImageName("ui_select_txt_01.png"), fontW, fontH, '0');
 
-        this._textBox = cc.Sprite.createWithSpriteFrameName(("btn_gold_1.png"));
+        this._textBox = new cc.Sprite("#btn_gold_1.png");
         this._textBox.setAnchorPoint(cc.p(0.5, 0.5));
         this._textBox.setPosition(cc.p(VisibleRect.right().x - this._textBox.getContentSize().width / 2, VisibleRect.top().y - this._textBox.getContentSize().height / 2 - 5));
         this.addChild(this._textBox, 19);
@@ -507,7 +502,7 @@ var StageSelectLayer = cc.Layer.extend({
             this, this.playGame);
 
         page.removeChildByTag(230 + i, true);
-        var markLock = cc.Sprite.createWithSpriteFrameName(("map_mark_1.png"));
+        var markLock = new cc.Sprite("#map_mark_1.png");
 
         var strMoney = PlayerActor.sharedActor().getPlayerMoney();
         this.getChildByTag(99).setString(strMoney + "");

@@ -21,17 +21,16 @@ CSpriteLayer.setButtonBox = function (buttonBoxName, itemName, loadStart, pos, s
     var ButtonItem;
     switch (loadStart) {
         case PlistAndPlist:
-            ButtonBox = new cc.Sprite('#'+ buttonBoxName);
+            ButtonBox = new cc.Sprite("#" + buttonBoxName);
             ButtonItem = new cc.Sprite('#' + itemName);
-            // ButtonItem = cc.Sprite.createWithSpriteFrameName(itemName);
             break;
         case PlistAndSprite:
-            ButtonBox = new cc.Sprite('#' + buttonBoxName);
+            ButtonBox = new cc.Sprite("#" + buttonBoxName);
             ButtonItem = new cc.Sprite(itemName);
             break;
         case SpriteAndPlist:
             ButtonBox = new cc.Sprite(buttonBoxName);
-            ButtonItem = new cc.Sprite('#' + itemName);
+            ButtonItem = new cc.Sprite("#" + itemName);
             break;
         case SpriteAndSprite:
             ButtonBox = new cc.Sprite(buttonBoxName);

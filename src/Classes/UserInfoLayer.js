@@ -16,18 +16,18 @@ var UserInfoLayer = cc.Layer.extend({
             frameCache.addSpriteFrames(ImageNameLang("ui_textbox_30.plist"));
 
             this._curTitle = ImageNameLang(PlayerActor.sharedActor().title(), true);
-            this._bgSprite = cc.Sprite.createWithSpriteFrameName(("ui_box_01.png"));
+            this._bgSprite = new cc.Sprite("#ui_box_01.png");
             this._bgSprite.setAnchorPoint(AnchorPointTop);
             this._bgSprite.setPosition(VisibleRect.top());
             this.addChild(this._bgSprite);
 
-            var menuAchieve = cc.MenuItemSprite.create(cc.Sprite.createWithSpriteFrameName(("ui_box_01-0.png")),
-                cc.Sprite.createWithSpriteFrameName(("ui_box_01-1.png")), this, this.showAchievements);
+            var menuAchieve = cc.MenuItemSprite.create(new cc.Sprite("#ui_box_01-0.png"),
+                new cc.Sprite("#ui_box_01-1.png"), this, this.showAchievements);
             this._menuAchieve = cc.Menu.create(menuAchieve);
             this._menuAchieve.setPosition(cc.pAdd(VisibleRect.top(), cc.p(0, -28)));
             this.addChild(this._menuAchieve);
 
-            this.setUserTitleLabel(cc.Sprite.createWithSpriteFrameName(this._curTitle));
+            this.setUserTitleLabel(new cc.Sprite("#" + this._curTitle));
             this._userTitleLabel.setPosition(cc.p(VisibleRect.top().x - 130, VisibleRect.top().y - 26));
 
             this._curLevel = 1;
@@ -61,7 +61,7 @@ var UserInfoLayer = cc.Layer.extend({
         this.newTitle();
 
         if (this._curTitle != title) {
-            var tempSprite = cc.Sprite.createWithSpriteFrameName(ImageNameLang(title, true));
+            var tempSprite = new cc.Sprite("#" + ImageNameLang(title, true));
             tempSprite.setPosition(cc.pSub(VisibleRect.top(), cc.p(130, 26)));
             this.setUserTitleLabel(tempSprite);
             this._curTitle = title;

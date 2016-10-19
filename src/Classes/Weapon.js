@@ -102,7 +102,7 @@ var Weapon = cc.Node.extend({
         this._weaponPosition = pos;
         this.setVisible(false);
         this.setContentSize(200, 100);
-        var cannon = cc.Sprite.createWithSpriteFrameName(spriteName);
+        var cannon = new cc.Sprite("#" + spriteName);
 
         this.setWeaponSprite(cannon);
 

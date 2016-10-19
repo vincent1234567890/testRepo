@@ -71,7 +71,7 @@ var AboutLayer = cc.LayerColor.extend({
             this.addChild(this._title, 10);
 
             //back
-            this._back = cc.MenuItemSprite.create(cc.Sprite.createWithSpriteFrameName("ui_button_17.png"), cc.Sprite.createWithSpriteFrameName("ui_button_18.png"), this, this.goBackAnimation);
+            this._back = cc.MenuItemSprite.create(new cc.Sprite("#ui_button_17.png"), new cc.Sprite("#ui_button_18.png"), this, this.goBackAnimation);
 
             var mBack = cc.Menu.create(this._back);
             this.addChild(mBack, 30);
@@ -106,11 +106,11 @@ var AboutLayer = cc.LayerColor.extend({
             this.maxY += creadit.getContentSize().height;
             this.credits.addChild(creadit);
 
-            this._header = cc.Sprite.createWithSpriteFrameName(("ui_box_08.png"));
+            this._header = new cc.Sprite(("ui_box_08.png"));
             this._header.setAnchorPoint(cc.p(0.5, 1));
             this.addChild(this._header);
 
-            this._footer = cc.Sprite.createWithSpriteFrameName(("ui_box_09.png"));
+            this._footer = new cc.Sprite("ui_box_09.png");
             this._footer.setAnchorPoint(cc.p(0.5, 0));
             this.addChild(this._footer);
 
