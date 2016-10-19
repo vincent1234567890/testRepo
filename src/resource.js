@@ -541,7 +541,11 @@ var res = {
 };
 
 var g_resources = [
-
+    "res/lang-en/main_ui_title_en.png",
+    "res/lang-cn/main_ui_title_cn.png",
+    "res/qipao3.png",
+    "res/qipao3.plist",
+    "res/qipao4.plist"
 ];
 for (var i in res) {
     g_resources.push(res[i]);
