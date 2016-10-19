@@ -114,7 +114,7 @@ var HowToPlayLayer = cc.Layer.extend({
         var scaleXNum = PAGE_SCALE_FACTOR * Box.getContentSize().width / 1280;
         var scaleYNum = PAGE_SCALE_FACTOR * Box.getContentSize().height / 800;
         for (var i = 1; i <= HELP_PAGE_NUM; i++) {
-            var page = cc.Sprite.create(ImageName("bj01_01.jpg"));
+            var page = new cc.Sprite(ImageName("bj01_01.jpg"));
             page.setScaleX(scaleXNum);
             page.setScaleY(scaleYNum);
             StaticGameUI.dowsStaticGameUI(page, PAGE_SCALE_FACTOR);
@@ -126,9 +126,9 @@ var HowToPlayLayer = cc.Layer.extend({
             tutorial.setPosition(cc.p((i - 0.5) * tmpSize.width * PAGE_SCALE_FACTOR, tmpSize.height * PAGE_SCALE_FACTOR / 2));
             page.setPosition(cc.p((i - 0.5) * tmpSize.width * PAGE_SCALE_FACTOR, tmpSize.height * PAGE_SCALE_FACTOR / 2));
 
-            var btnPageIndicator = cc.MenuItemToggle.create(
-                cc.MenuItemSprite.create(new cc.Sprite("#UI_select_slider_2.png"), new cc.Sprite("#UI_select_slider_1.png")),
-                this, this.indicatorClick);
+            var btnPageIndicator = new cc.MenuItemToggle(
+                new cc.MenuItemSprite(new cc.Sprite("#UI_select_slider_2.png"), new cc.Sprite("#UI_select_slider_1.png")),
+                this.indicatorClick, this);
             var btnPageIndicatorStartPosX = VisibleRect.center().x - (PAGE_INDICATOR_INTERVAL * (HELP_PAGE_NUM - 1) / 2.0);
             btnPageIndicator.setPosition(cc.p(btnPageIndicatorStartPosX + (i - 1) * PAGE_INDICATOR_INTERVAL, VisibleRect.bottom().y + 30));
 
@@ -146,9 +146,9 @@ var HowToPlayLayer = cc.Layer.extend({
         clipLayer.setContentSize(size);
     },
     drawReturnButton:function () {
-        this._returnButton = cc.MenuItemSprite.create(new cc.Sprite("#ui_button_17.png"),
-            new cc.Sprite("#ui_button_18.png"), this, this.back);
-        var mBack = cc.Menu.create(this._returnButton);
+        this._returnButton = new cc.MenuItemSprite(new cc.Sprite("#ui_button_17.png"),
+            new cc.Sprite("#ui_button_18.png"), this.back, this);
+        var mBack = new cc.Menu(this._returnButton);
         this.addChild(mBack, 30);
         mBack.setPosition(cc.p(0, 0));
         this._returnButton.setPosition(cc.pAdd(VisibleRect.topLeft(), cc.p(73, -38)));

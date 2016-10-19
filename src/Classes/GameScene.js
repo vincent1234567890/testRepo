@@ -361,13 +361,13 @@ var GameScene = cc.Scene.extend({
             this._prizeSprite.addChild(guang4, kTagPrizeLight4, kTagPrizeLight4 + i);
 
             var time = (Math.random() % 20 + 2) * 0.1;
-            var delayTime1 = cc.DelayTime.create(time);
-            var fadeTo = cc.FadeTo.create(0.5, 255);
-            var fadeOut = cc.FadeOut.create(0.3);
-            var delayTime2 = cc.DelayTime.create(0.5);
-            var twinkle = cc.Sequence.create(delayTime1, fadeTo, delayTime2, fadeOut);
-            var twinkle1 = cc.Repeat.create(twinkle, 20);
-            guang4.runAction(cc.Sequence.create(twinkle1));
+            var delayTime1 = new cc.DelayTime(time);
+            var fadeTo = new cc.FadeTo(0.5, 255);
+            var fadeOut = new cc.FadeOut(0.3);
+            var delayTime2 = new cc.DelayTime(0.5);
+            var twinkle = new cc.Sequence(delayTime1, fadeTo, delayTime2, fadeOut);
+            var twinkle1 = new cc.Repeat(twinkle, 20);
+            guang4.runAction(new cc.Sequence(twinkle1));
         } // for
 
 
@@ -380,8 +380,8 @@ var GameScene = cc.Scene.extend({
         framesArray.push(frame);
         var animation2 = new cc.Animation(framesArray, 0.15);
         var ac2 = new cc.Animate(animation2, false);
-        var repeat = cc.Repeat.create(ac2, 11);
-        var final2 = cc.CallFunc.create(this, this.removeNihongDeng);
+        var repeat = new cc.Repeat(ac2, 11);
+        var final2 = new cc.CallFunc(this, this.removeNihongDeng);
         this._prizeSprite.getChildByTag(kTagPrizeBG).runAction(cc.Sequence.create(repeat, final2));
     },
     removeNihongDeng:function (sender) {
@@ -396,9 +396,9 @@ var GameScene = cc.Scene.extend({
     addChangeWeaponMenu:function (menuPos, bltPos) {
         this.addChangeWeaponMenu(cc.p(301, 10), cc.p(17, 17));
 
-        var menuItem = cc.MenuItem.create(this, this.changeWeapon);
+        var menuItem = new cc.MenuItem(this, this.changeWeapon);
         menuItem.setContentSize(new cc.Size(80, 50));
-        var menu = cc.Menu.create(menuItem, null);
+        var menu = new cc.Menu(menuItem, null);
         menu.setPosition(cc.p(0, 0));
         this.addChild(menu, 109);
         menuItem.setPosition(menuPos);
@@ -432,7 +432,7 @@ var GameScene = cc.Scene.extend({
         notice.setPosition(cc.p(0, (sharkePrize.getContentSize().height + notice.getContentSize().height) / 2));
         this._prizeSprite.addChild(notice, kTagPrizeNOTICE, kTagPrizeNOTICE);
 
-        var labelNum = cc.LabelAtlas.create(100, ImageName("shark_prize_num.png"), 56, 84, '0');
+        var labelNum = new cc.LabelAtlas(100, ImageName("shark_prize_num.png"), 56, 84, '0');
         labelNum.setAnchorPoint(cc.p(0.5, 0.5));
         labelNum.setPosition(cc.p(0, 0));
         this._prizeSprite.addChild(labelNum, kTagPrizeLABEL, kTagPrizeLABEL);
@@ -440,10 +440,10 @@ var GameScene = cc.Scene.extend({
         this.addChild(this._prizeSprite, kTagPrizeSprite, kTagPrizeSprite);
         this._prizeSprite.setScale(0);
 
-        var scaleTo1 = cc.ScaleTo.create(0.2, 1.1, 1.1);
-        var scaleTo2 = cc.ScaleTo.create(0.1, 1, 1);
-        var call = cc.CallFunc.create(this, this.startAction);
-        this._prizeSprite.runAction(cc.Sequence.create(scaleTo1, scaleTo2, call));
+        var scaleTo1 = new cc.ScaleTo(0.2, 1.1, 1.1);
+        var scaleTo2 = new cc.ScaleTo(0.1, 1, 1);
+        var call = new cc.CallFunc(this, this.startAction);
+        this._prizeSprite.runAction(new cc.Sequence(scaleTo1, scaleTo2, call));
     },
     loadFishGroup:function () {
         this._dictionaryFish = cc.loader.getRes(ImageName("TrackPlist/Track.plist"));
@@ -465,7 +465,7 @@ var GameScene = cc.Scene.extend({
         }
 
         var big = ActorFactory.create("BigPrizeActor");
-        big.setZOrder(BulletActorZValue + 10);
+        big.setLocalZOrder(BulletActorZValue + 10);
         big.setPosition(VisibleRect.center());
         big.replayAction();
         this.addActor(big);
@@ -482,23 +482,23 @@ var GameScene = cc.Scene.extend({
         //     this, this.changeMusic);
 
         //Pause button
-        this._itemPause = cc.MenuItemSprite.create(
+        this._itemPause = new cc.MenuItemSprite(
             new cc.Sprite("#ui_button_01.png"),
             new cc.Sprite("#ui_button_02.png"),
-            this, this.pauseGame);
+            this.pauseGame, this );
 
         // this._itemMusicPlayer.setPosition(cc.p(VisibleRect.topLeft().x + 125, VisibleRect.topLeft().y - this._itemPause.getContentSize().height / 2));
         this._itemPause.setPosition(cc.p(VisibleRect.topLeft().x + 45, VisibleRect.topLeft().y - this._itemPause.getContentSize().height / 2));
 
 
-        this._userBtn = cc.Menu.create(this._itemPause/*, this._itemMusicPlayer*/);
+        this._userBtn = new cc.Menu(this._itemPause/*, this._itemMusicPlayer*/);
         this.addChild(this._userBtn, 101);
 
         var pos = cc.p(VisibleRect.topLeft().x + 135, VisibleRect.topLeft().y - this._itemPause.getContentSize().height / 2);
         this._userBtn.setPosition(0, 0);
     },
     initWithDef:function (def, le) {
-        this._layer = cc.Layer.create();
+        this._layer = new cc.Layer();
         this._layer.setTag(2233);
         this.addChild(this._layer);
 
@@ -519,7 +519,7 @@ var GameScene = cc.Scene.extend({
 
         this.initBgLayer();
 
-        cc.Director.getInstance().getScheduler().scheduleSelector(this.update, this, 0, false);
+        cc.director.getScheduler().schedule(this.update, this, 0, false);
         /*        var pSceneSettingDataModel = SceneSettingDataModel.sharedSceneSettingDataModel();
          if (pSceneSettingDataModel.getCanUseNewPath()) {
          FishFactoryManager.shareFishFactoryManager().setScene(this);
@@ -1065,7 +1065,7 @@ var GameScene = cc.Scene.extend({
     GoRandomOval:function (GoImage, movePos) {
     },
     playGetAchievement:function (index) {
-        cc.Assert(index < AchievementIndex.kAchieveMentCount, "Achievement index out of range");
+        cc.assert(index < AchievementIndex.kAchieveMentCount, "Achievement index out of range");
         playEffect(ACH_EFFECT);
 
         var achieveLayer = new AchievementShareLayer();
@@ -1221,17 +1221,17 @@ var GameScene = cc.Scene.extend({
         duration = 1.2;
         delayDuration = 1.2;
         this.addPrizeNets(null);
-        var levelupSprite = cc.Sprite.create(ImageNameLang("ui_main_LV.png"));
+        var levelupSprite = new cc.Sprite(ImageNameLang("ui_main_LV.png"));
         levelupSprite.setPosition(spritePos);
         this.addChild(levelupSprite, 100);
 
-        var moveBy = cc.MoveBy.create(duration, cc.p(0, 50));
-        var fadeIn = cc.FadeIn.create(0.6);
-        var delay = cc.DelayTime.create(delayDuration);
-        var fadeOut = cc.FadeOut.create(0.6);
-        var final1 = cc.CallFunc.create(this, this.removeSprite);
-        var sequ = cc.Sequence.create(fadeIn, delay, fadeOut, null);
-        var spawn = cc.Spawn.create(sequ, moveBy);
+        var moveBy = new cc.MoveBy(duration, cc.p(0, 50));
+        var fadeIn = new cc.FadeIn(0.6);
+        var delay = new cc.DelayTime(delayDuration);
+        var fadeOut = new cc.FadeOut(0.6);
+        var final1 = new cc.CallFunc(this, this.removeSprite);
+        var sequ = new cc.Sequence(fadeIn, delay, fadeOut, null);
+        var spawn = new cc.Spawn(sequ, moveBy);
 
         levelupSprite.runAction(cc.Sequence.create(spawn, final1));
 
@@ -1510,14 +1510,14 @@ var GameScene = cc.Scene.extend({
         this._scoreBar.setBullet(PlayerActor.sharedActor().getPlayerMoney());
 
         if (this.getOddsNumber() == 2) {
-            var DoubleSprite = cc.Sprite.create(ImageNameLang("fonts_other_40.png"));
-            var addCall = cc.CallFunc.create(this, this.delDouble);
-            var ac = cc.ScaleBy.create(0.5, 1.2);
-            var cc1 = cc.ScaleBy.create(0.5, 0.8);
-            var ccc = cc.ScaleBy.create(0.5, 1);
+            var DoubleSprite = new cc.Sprite(ImageNameLang("fonts_other_40.png"));
+            var addCall = new cc.CallFunc(this, this.delDouble);
+            var ac = new cc.ScaleBy(0.5, 1.2);
+            var cc1 = new cc.ScaleBy(0.5, 0.8);
+            var ccc = new cc.ScaleBy(0.5, 1);
 
-            var fadeOut = cc.FadeOut.create(1);
-            DoubleSprite.runAction(cc.Sequence.create(ac, cc1, ac, cc1, ccc, fadeOut, addCall));
+            var fadeOut = new cc.FadeOut(1);
+            DoubleSprite.runAction(new cc.Sequence(ac, cc1, ac, cc1, ccc, fadeOut, addCall));
             DoubleSprite.setPosition(VisibleRect.center());
             this.addChild(DoubleSprite, 120, DoubleSpriteNum);
         }
@@ -1585,7 +1585,7 @@ var GameScene = cc.Scene.extend({
         this._savingImage = false;
         var spriteHide = new cc.Sprite("#ui_button_25.png");
         var spriteHided = new cc.Sprite("#ui_button_26.png");
-        this._itemHide = cc.MenuItemSprite.create(spriteHide, spriteHided, this, this.hideAllUI);
+        this._itemHide = new cc.MenuItemSprite(spriteHide, spriteHided, this.hideAllUI, this);
         this._itemHide.setPosition(cc.p(VisibleRect.topRight().x - 45, VisibleRect.topRight().y - this._itemHide.getContentSize().height / 2));
 
         // var spriteCamra = new cc.Sprite("#button_other_001.png");
@@ -1593,7 +1593,7 @@ var GameScene = cc.Scene.extend({
         // this._itemCamera = cc.MenuItemSprite.create(spriteCamra, spriteCamrad, this, this.saveImage);
         // this._itemCamera.setPosition(cc.p(VisibleRect.topRight().x - 125, VisibleRect.topRight().y - this._itemCamera.getContentSize().height / 2));
 
-        this._camera = cc.Menu.create(this._itemHide/*, this._itemCamera*/);
+        this._camera = new cc.Menu(this._itemHide/*, this._itemCamera*/);
         this._camera.setPosition(0, 0);
         this.addChild(this._camera, 101);
     },
@@ -1640,7 +1640,7 @@ var GameScene = cc.Scene.extend({
         for (var i = 1; i < 6; i++) {
             var StarfishNode = ActorFactory.create("Starfish");
             StarfishNode.setMultiple(this.getOddsNumber());
-            StarfishNode.setZOrder(BulletActorZValue);
+            StarfishNode.setLocalZOrder(BulletActorZValue);
 
             StarfishNode.initFirstPt(cc.pAdd(cc.p(VisibleRect.bottom().x, VisibleRect.bottom().y + yOffset), cc.p(Math.sin((30 * i - 90) * Math.PI / 180) * roundR, Math.cos((30 * i - 90) * Math.PI / 180) * roundR)));
             StarfishNode.resetState();
@@ -1873,9 +1873,9 @@ var GameScene = cc.Scene.extend({
                 cc.LocalizedString.localizedString("Tutorial Text Start"), cc.LocalizedString.localizedString("Tutorial Text Skip"),
                 this, this.startTutorial, this.skipTutorial);
             this.addChild(this._tutorialConfirmLayer, 120);
-            var delay = cc.DelayTime.create(0.5);
-            var call = cc.CallFunc.create(this._tutorialConfirmLayer, this._tutorialConfirmLayer.show);
-            this._tutorialConfirmLayer.runAction(cc.Sequence.create(delay, call));
+            var delay = new cc.DelayTime(0.5);
+            var call = new cc.CallFunc(this._tutorialConfirmLayer, this._tutorialConfirmLayer.show);
+            this._tutorialConfirmLayer.runAction(new cc.Sequence(delay, call));
         }
         else {
             PlayerActor.sharedActor().setIsGetSpringFestival(true);
@@ -1898,40 +1898,40 @@ var GameScene = cc.Scene.extend({
     },
     actionForAdShow:function () {
         if (this._userInfoLayer) {
-            var userInfoMove = cc.MoveTo.create(1, cc.p(this._userInfoLayer.getPosition().x, VisibleRect.top().y + 50));
+            var userInfoMove = new cc.MoveTo(1, cc.p(this._userInfoLayer.getPosition().x, VisibleRect.top().y + 50));
             this._userInfoLayer.runAction(userInfoMove);
         }
 
         if (this._camera) {
-            var delay1 = cc.DelayTime.create(1);
+            var delay1 = new cc.DelayTime(1);
             var targetPosX = VisibleRect.rect().width - 340; // btnWidth 为四个按钮的宽度
-            var camraMove = cc.MoveTo.create(1, cc.p(-targetPosX, this._camera.getPosition().y));
-            this._camera.runAction(cc.Sequence.create(delay1, camraMove));
+            var camraMove = new cc.MoveTo(1, cc.p(-targetPosX, this._camera.getPosition().y));
+            this._camera.runAction(new cc.Sequence(delay1, camraMove));
         }
 
         if (this._compactUserInfo) {
-            var delay2 = cc.DelayTime.create(1);
-            var compactMove = cc.MoveBy.create(1, cc.p(360, 0));
-            var call = cc.CallFunc.create(this, this.showAdActionEnd);
-            this._compactUserInfo.runAction(cc.Sequence.create(delay2, compactMove, call));
+            var delay2 = new cc.DelayTime(1);
+            var compactMove = new cc.MoveBy(1, cc.p(360, 0));
+            var call = new cc.CallFunc(this, this.showAdActionEnd);
+            this._compactUserInfo.runAction(new cc.Sequence(delay2, compactMove, call));
         }
     },
     actionAfterAdHide:function () {
         if (this._camera) {
-            var camraMove = cc.MoveTo.create(1, cc.PointZero());
+            var camraMove = new cc.MoveTo(1, cc.PointZero());
             this._camera.runAction(camraMove);
         }
 
         if (this._compactUserInfo) {
-            var compactMove = cc.MoveBy.create(1, cc.p(-360, 0));
+            var compactMove = new cc.MoveBy(1, cc.p(-360, 0));
             this._compactUserInfo.runAction(compactMove);
         }
 
         if (this._userInfoLayer) {
-            var delay = cc.DelayTime.create(1);
-            var userInfoMove = cc.MoveTo.create(1, cc.PointZero());
-            var call = cc.CallFunc.create(this, this.hideAdActionStart);
-            this._userInfoLayer.runAction(cc.Sequence.create(call, delay, userInfoMove));
+            var delay = new cc.DelayTime(1);
+            var userInfoMove = new cc.MoveTo(1, cc.PointZero());
+            var call = new cc.CallFunc(this, this.hideAdActionStart);
+            this._userInfoLayer.runAction(new cc.Sequence(call, delay, userInfoMove));
         }
     },
     showAdActionEnd:function () {
@@ -2030,16 +2030,16 @@ var GameScene = cc.Scene.extend({
         ActorFactory.cleanRes();
     },
     saveImageWithDelay:function (delay) {
-        this.runAction(cc.Sequence.create
-            (cc.DelayTime.create(delay)
-                , cc.CallFunc.create(this, this.saveImage, this)
+        this.runAction(new cc.Sequence
+            (new cc.DelayTime(delay)
+                , new cc.CallFunc(this, this.saveImage, this)
             ));
     },
     _stopTutorialHint:function (sender) {
 
     },
     saveImage:function (sender) {
-        var hl = (cc.Application.getCurrentLanguage() == cc.LANGUAGE_CHINESE) ? "zh-CN" : "en-US";
+        var hl = (cc.sys.language == cc.sys.LANGUAGE_CHINESE) ? "zh-CN" : "en-US";
         var gplusHref = "https://plus.google.com/share?url=http://chrome.KingFisher.com/recommend.html&hl=" + hl;
         var heightValue = window.screen.height / 2 - 300;
         var widthValue = window.screen.width / 2 - 300;
@@ -2145,7 +2145,7 @@ var GameScene = cc.Scene.extend({
             this._pauseMenuLayer.setPosition(VisibleRect.bottom());
         }
         //compact user info
-        var act = this._compactUserInfo.numberOfRunningActions();
+        var act = this._compactUserInfo.getNumberOfRunningActions();
         if (!(act > 0)) {
             this._compactUserInfo.setPosition(cc.pAdd(VisibleRect.topLeft(), cc.p(this._compactUserInfo.getPosition().x, -150)));
         }

@@ -267,18 +267,18 @@ var PauseMenuLayer = cc.Layer.extend({
         cache.addSpriteFrames(ImageName("PauseMenuLayer.plist"));
 
         var pauseMenuBackground;
-        var button_continue = cc.MenuItemSprite.create(
+        var button_continue = new cc.MenuItemSprite(
             new cc.Sprite("#" +ImageNameLang("ui_button_13.png",true)),
             new cc.Sprite("#" +ImageNameLang("ui_button_14.png",true)),
-            this, this.resumeGame);
-        var button_Other = cc.MenuItemSprite.create(
+            this.resumeGame, this);
+        var button_Other = new cc.MenuItemSprite(
             new cc.Sprite("#" +ImageNameLang("button_other_026.png",true)),
             new cc.Sprite("#" +ImageNameLang("button_other_027.png",true)),
-            this, this.SelectOther);
-        var button_giveup = cc.MenuItemSprite.create(
+            this.SelectOther, this);
+        var button_giveup = new cc.MenuItemSprite(
             new cc.Sprite("#" +ImageNameLang("ui_button_15.png",true)),
             new cc.Sprite("#" +ImageNameLang("ui_button_16.png",true)),
-            this, this.giveup);
+            this.giveup, this);
 
         var menu;
         pauseMenuBackground = new cc.Sprite("#btn_pause_1.png");
@@ -289,12 +289,12 @@ var PauseMenuLayer = cc.Layer.extend({
         button_giveup.setPosition(cc.p(0, -10));
         button_Other.setPosition(cc.p(0, -97));
 
-        var button_Option = cc.MenuItemSprite.create(
+        var button_Option = new cc.MenuItemSprite(
             new cc.Sprite("#" +ImageNameLang("button_other_037.png", true)),
             new cc.Sprite("#" +ImageNameLang("button_other_038.png", true)),
-            this, this.OptionFunction);
+            this.OptionFunction, this);
         button_Option.setPosition(cc.p(0, -187));
-        menu = cc.Menu.create(button_Option, button_continue, button_giveup, button_Other);
+        menu = new cc.Menu(button_Option, button_continue, button_giveup, button_Other);
 
         menu.setPosition(cc.p(0, VisibleRect.top().y / 2));
         menu.setAnchorPoint(cc.PointZero());
@@ -302,7 +302,7 @@ var PauseMenuLayer = cc.Layer.extend({
         menu.setTag(kTagMenuPause);
 
         this.setTag(kTagLayerResume);
-        menu.runAction(cc.FadeIn.create(0.3));
+        menu.runAction(new cc.FadeIn(0.3));
     },
     restartGame:function (sender) {
         this.removeAdView();

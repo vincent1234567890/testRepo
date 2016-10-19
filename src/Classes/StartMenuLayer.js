@@ -102,22 +102,22 @@ var StartMenuLayer = cc.Layer.extend({
             this._menuNewGame, this);
 
         // item2 = Scenes select button
-        this._sceneItem = cc.MenuItemSprite.create(
+        this._sceneItem = new cc.MenuItemSprite(
             CSpriteLayer.getButtonBoxOffsetY("btn_scenes_1.png", ImageNameLang("button_other_014.png"), PlistAndPlist, 0),
             CSpriteLayer.getButtonBoxOffsetY("btn_scenes_2.png", ImageNameLang("button_other_014.png"), PlistAndPlist, 0),
-            this, this._menuSelectStage);
+            this._menuSelectStage, this );
 
         // item3 = Option button
-        this._settingItem = cc.MenuItemSprite.create(
+        this._settingItem = new cc.MenuItemSprite(
             CSpriteLayer.getButtonBoxOffsetY("btn_bg_1.png", "main_ui_button_05.png", PlistAndPlist, 3),
             CSpriteLayer.getButtonBoxOffsetY("btn_bg_2.png", "main_ui_button_05.png", PlistAndPlist, 3),
-            this, this._menuOption);
+            this._menuOption, this);
 
         // leftItem4 = Help button
-        this._helpItem = cc.MenuItemSprite.create(
+        this._helpItem = new cc.MenuItemSprite(
             CSpriteLayer.getButtonBoxOffsetY("btn_bg_1.png", "main_ui_button_03.png", PlistAndPlist, 3),
             CSpriteLayer.getButtonBoxOffsetY("btn_bg_2.png", "main_ui_button_03.png", PlistAndPlist, 3),
-            this, this._menuShowHowToPlay);
+            this._menuShowHowToPlay, this );
 
         this.resetAllSpritePos();
 
@@ -189,7 +189,8 @@ var StartMenuLayer = cc.Layer.extend({
         }
 
         var startMenu = this.getChildByTag(eTag_MainMenu_StartMenu_menu);
-        startMenu.setTouchEnabled(false);
+        // startMenu.setTouchEnabled(false);
+        startMenu.setEnabled(false);
 
         playEffect(BUTTON_EFFECT);
 

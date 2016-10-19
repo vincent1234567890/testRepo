@@ -189,12 +189,12 @@ var OptionsLayer = cc.Layer.extend({
     initView:function () {
         //background
 
-        this._bg = cc.Sprite.create(ImageName("ui_background_normal.jpg"));
+        this._bg = new cc.Sprite(ImageName("ui_background_normal.jpg"));
         this.addChild(this._bg, 0, 802);
 
         //back
-        this._temBack = cc.MenuItemSprite.create(new cc.Sprite("#ui_button_17.png"), new cc.Sprite("#ui_button_18.png"), this, this.back);
-        var mBack = cc.Menu.create(this._temBack);
+        this._temBack = new cc.MenuItemSprite(new cc.Sprite("#ui_button_17.png"), new cc.Sprite("#ui_button_18.png"), this.back, this);
+        var mBack = new cc.Menu(this._temBack);
         this.addChild(mBack, 20);
         mBack.setPosition(cc.p(0, 0));
 
@@ -216,17 +216,17 @@ var OptionsLayer = cc.Layer.extend({
         var closePush = GamePreference.getInstance().getCloseLocalPush();
         this._button_push.setSelectedIndex(closePush ? 1 : 0);*/
 
-        this._button_BGM = cc.MenuItemToggle.create(
-            cc.MenuItemSprite.create(new cc.Sprite("#ui_button_40_01.png"), new cc.Sprite("#ui_button_40_02.png")),
-            cc.MenuItemSprite.create(new cc.Sprite("#ui_button_39_01.png"), new cc.Sprite("#ui_button_39_02.png")),
-            this, this.mMusic);
+        this._button_BGM = new cc.MenuItemToggle(
+            new cc.MenuItemSprite(new cc.Sprite("#ui_button_40_01.png"), new cc.Sprite("#ui_button_40_02.png")),
+            new cc.MenuItemSprite(new cc.Sprite("#ui_button_39_01.png"), new cc.Sprite("#ui_button_39_02.png")),
+            this.mMusic, this);
         var closeMusic = GamePreference.getInstance().getPlayMusic();
         this._button_BGM.setSelectedIndex(closeMusic ? 1 : 0);
 
-        this._button_music = cc.MenuItemToggle.create(
-            cc.MenuItemSprite.create(new cc.Sprite("#ui_button_38_1.png"), new cc.Sprite("#ui_button_38_2.png")),
-            cc.MenuItemSprite.create(new cc.Sprite("#ui_button_37_1.png"), new cc.Sprite("#ui_button_37_2.png")),
-            this, this.sound);
+        this._button_music = new cc.MenuItemToggle(
+            new cc.MenuItemSprite(new cc.Sprite("#ui_button_38_1.png"), new cc.Sprite("#ui_button_38_2.png")),
+            new cc.MenuItemSprite(new cc.Sprite("#ui_button_37_1.png"), new cc.Sprite("#ui_button_37_2.png")),
+            this.sound, this);
         var closeSound = GamePreference.getInstance().getPlayEffect();
         this._button_music.setSelectedIndex(closeSound ? 1 : 0);
 
@@ -235,14 +235,14 @@ var OptionsLayer = cc.Layer.extend({
         //     CSpriteLayer.getButtonBox(("ui_button_box03_01.png"), ImageNameLang("ui_button_36.png"), PlistAndPlist),
         //     this, this.about);
 
-        this._tutorial = cc.MenuItemSprite.create(
+        this._tutorial = new cc.MenuItemSprite(
             CSpriteLayer.getButtonBox(("ui_button_box03_01.png"), ImageNameLang("button_other_034.png"), PlistAndPlist),
             CSpriteLayer.getButtonBox(("ui_button_box03_02.png"), ImageNameLang("button_other_035.png"), PlistAndPlist),
-            this, this.tutorial);
+            this.tutorial, this);
 
         this.resetAllSpritePos();
 
-        var mOptions = cc.Menu.create(/*this._button_push, this._other_push, */this._button_BGM, this._tutorial, this._button_music);
+        var mOptions = new cc.Menu(/*this._button_push, this._other_push, */this._button_BGM, this._tutorial, this._button_music);
         this.addChild(mOptions, 30, 35);
         mOptions.setPosition(0, 0);
     },

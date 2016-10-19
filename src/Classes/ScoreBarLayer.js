@@ -41,8 +41,8 @@ var ScoreBarLayer = cc.Layer.extend({
             this.setTag(kTagLayerStatusBar);
 
             // Get Coin button
-            var menuItemGetCoin = cc.MenuItemSprite.create(
-                new cc.Sprite("#ui_button_05.png"), new cc.Sprite("#ui_button_06.png"), this, this.getMoreMoney);
+            var menuItemGetCoin = new cc.MenuItemSprite(
+                new cc.Sprite("#ui_button_05.png"), new cc.Sprite("#ui_button_06.png"), this.getMoreMoney, this);
 
             menuItemGetCoin.setPosition(cc.p(/*-VisibleRect.bottomRight().x + */85, 42));
             menuItemGetCoin.setTag(kTagMenuItemGetMoney);
@@ -85,7 +85,7 @@ var ScoreBarLayer = cc.Layer.extend({
             this.setFinger(new cc.Sprite("#finger_0001.png"));
             this._finger.setVisible(false);
             this.addChild(this._finger, 201);
-            this._finger.setFlipX(true);
+            this._finger.flippedX = true;
 
             this.setFocus(new cc.Sprite("#circle_0001.png"));
             this._focus.setVisible(false);
@@ -385,10 +385,10 @@ var ScoreBarLayer = cc.Layer.extend({
         }
     },
     initTools:function () {
-        var laserItem = cc.MenuItemSprite.create(
-            new cc.Sprite("#button_prop_001_1.png"), new cc.Sprite("#button_prop_001_2.png"), this, this.useLaser);
+        var laserItem = new cc.MenuItemSprite(
+            new cc.Sprite("#button_prop_001_1.png"), new cc.Sprite("#button_prop_001_2.png"), this.useLaser, this);
 
-        var menuTool = cc.Menu.create(laserItem);
+        var menuTool = new cc.Menu(laserItem);
         this.addChild(menuTool, 60);
         menuTool.setPosition(cc.p(250, 30));
 
@@ -405,22 +405,22 @@ var ScoreBarLayer = cc.Layer.extend({
 
         var curSuperWeapon = wrapper.getIntegerForKey(CURRENT_SPECIAL_WEAPON_KEY);
         if (FishWeaponType.eWeaponLevel9 == curSuperWeapon) {
-            menuItemSuperWeapon = cc.MenuItemSprite.create(
+            menuItemSuperWeapon = new cc.MenuItemSprite(
                 new cc.Sprite("#button_lightning_1.png"),
                 new cc.Sprite("#button_lightning_2.png"),
-                this, this.chooseSuperWeapon);
+                this.chooseSuperWeapon, this);
         }
         else {
             if (FishWeaponType.eWeaponLevel8 != curSuperWeapon) {
                 wrapper.setIntegerForKey(CURRENT_SPECIAL_WEAPON_KEY, FishWeaponType.eWeaponLevel8);
             }
-            menuItemSuperWeapon = cc.MenuItemSprite.create(
+            menuItemSuperWeapon = new cc.MenuItemSprite(
                 new cc.Sprite("#button_jiguang_1.png"),
                 new cc.Sprite("#button_jiguang_2.png"),
-                this, this.chooseSuperWeapon);
+                this.chooseSuperWeapon, this);
         }
 
-        menuChooseSuperWeapon = cc.Menu.create(menuItemSuperWeapon);
+        menuChooseSuperWeapon = new cc.Menu(menuItemSuperWeapon);
         this.addChild(menuChooseSuperWeapon, 100);
 
         menuChooseSuperWeapon.setPosition(cc.p(160, 30));
@@ -650,19 +650,19 @@ var ScoreBarLayer = cc.Layer.extend({
             locOffset = cc.p(48, 84);
         }
 
-        var reminder = cc.MenuItemSprite.create(new cc.Sprite("#ui_laserwarning_bg.png"), new cc.Sprite("#ui_laserwarning_bg.png"),
-            this, this._removeLazerReminder);
-        var info = cc.Sprite.create(ImageNameLang("ui_laserwarning.png"));
+        var reminder = new cc.MenuItemSprite(new cc.Sprite("#ui_laserwarning_bg.png"), new cc.Sprite("#ui_laserwarning_bg.png"),
+            this._removeLazerReminder, this);
+        var info = new cc.Sprite(ImageNameLang("ui_laserwarning.png"));
         info.setPosition(cc.p(reminder.getContentSize().width / 2, reminder.getContentSize().height / 2));
         reminder.addChild(info);
-        var fadeIn = cc.FadeIn.create(0.4);
-        var blank = cc.MoveBy.create(3, cc.PointZero());
+        var fadeIn = new cc.FadeIn(0.4);
+        var blank = new cc.MoveBy(3, cc.PointZero());
         var reverse = fadeIn.reverse();
 
-        var removeReminder = cc.CallFunc.create(this, this._removeLazerReminder);
-        var actionSequence = cc.Sequence.create(fadeIn, blank, reverse, removeReminder);
+        var removeReminder = new cc.CallFunc(this, this._removeLazerReminder);
+        var actionSequence = new cc.Sequence(fadeIn, blank, reverse, removeReminder);
         reminder.runAction(actionSequence);
-        var OKMenu = cc.Menu.create(reminder);
+        var OKMenu = new cc.Menu(reminder);
 
         OKMenu.setPosition(cc.pAdd(position, locOffset));
         this.addChild(OKMenu, 1000, LUIREMINDERTAG);
@@ -702,14 +702,14 @@ var ScoreBarLayer = cc.Layer.extend({
         }
 
 
-        var animation2 = cc.Animation.create(frames, 0.2);
-        var ac2 = cc.Animate.create(animation2, false);
+        var animation2 = new cc.Animation(frames, 0.2);
+        var ac2 = new cc.Animate(animation2, false);
 
         var ac3 = cc.Hide.action();
-        var ac4 = cc.DelayTime.create(0.5);
+        var ac4 = new cc.DelayTime(0.5);
 
-        var se = cc.Sequence.create(ac0, ac1, ac2, ac3, ac4);
-        return cc.RepeatForever.create(se);
+        var se = new cc.Sequence(ac0, ac1, ac2, ac3, ac4);
+        return new cc.RepeatForever(se);
     },
     _fingerAction:function () {
         var ac0 = cc.Show.action();

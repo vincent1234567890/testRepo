@@ -30,18 +30,18 @@ var WeaponCannon = Weapon.extend({
         if (!this._super(spriteName, shootName, pos, 0.1)) return;
         this._cannonLevel = weaponLevel;
         this.setAnchorPoint(cc.p(0.5, 0.5));
-        var menuLeft = cc.MenuItemSprite.create(new cc.Sprite("#ui_button_63.png"), new cc.Sprite("#ui_button_64.png"), this, this.changeWeapon);
+        var menuLeft = new cc.MenuItemSprite(new cc.Sprite("#ui_button_63.png"), new cc.Sprite("#ui_button_64.png"), this.changeWeapon, this);
         menuLeft.setTag(CannonPowDow);
         menuLeft.setScale(0.7);
 
-        var menuRight = cc.MenuItemSprite.create(new cc.Sprite("#ui_button_65.png"), new cc.Sprite("#ui_button_66.png"), this, this.changeWeapon);
+        var menuRight = new cc.MenuItemSprite(new cc.Sprite("#ui_button_65.png"), new cc.Sprite("#ui_button_66.png"), this.changeWeapon, this);
         menuRight.setTag(CannonPowUp);
         menuRight.setScale(0.7);
 
         menuLeft.setPosition(cc.pAdd(cc.p(this.getContentSize().width / 2, menuLeft.getContentSize().height / 2), cc.p(-70, -20)));
         menuRight.setPosition(cc.pAdd(cc.p(this.getContentSize().width / 2, menuRight.getContentSize().height / 2), cc.p(70, -20)));
 
-        var menu = cc.Menu.create(menuLeft, menuRight);
+        var menu = new cc.Menu(menuLeft, menuRight);
         this.addChild(menu, 10, CannonMenu);
         menu.setPosition(cc.p(0, 0));
 

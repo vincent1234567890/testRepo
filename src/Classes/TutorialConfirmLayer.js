@@ -56,7 +56,7 @@ var TutorialConfirmLayer = cc.LayerColor.extend({
         selectedLabel.setPosition(cc.p(selectedSprite.getContentSize().width / 2, selectedSprite.getContentSize().height / 2));
         selectedSprite.addChild(selectedLabel);
 
-        var menuItem = cc.MenuItemSprite.create(confirm, selectedSprite, this, this.dismiss);
+        var menuItem = new cc.MenuItemSprite(confirm, selectedSprite, this.dismiss, this);
         var confirmPos = cc.pSub(cc.p(backSize.width / 2, confirm.getContentSize().height), confirmPosOffset);
         menuItem.setPosition(confirmPos);
 
@@ -71,10 +71,10 @@ var TutorialConfirmLayer = cc.LayerColor.extend({
         selectedLabel0.setPosition(cc.p(selectedSprite0.getContentSize().width / 2, selectedSprite0.getContentSize().height / 2));
         selectedSprite0.addChild(selectedLabel0);
 
-        var cancelItem = cc.MenuItemSprite.create(cancel, selectedSprite0, this, this.cancel);
+        var cancelItem = new cc.MenuItemSprite(cancel, selectedSprite0, this.cancel, this);
         var cancelPos = cc.pAdd(cc.p(backSize.width / 2, confirm.getContentSize().height), cancelPosOffset);
         cancelItem.setPosition(cancelPos);
-        var menu = cc.Menu.create(menuItem, cancelItem);
+        var menu = new cc.Menu(menuItem, cancelItem);
         menu.setPosition(0, 0);
         this.getBackgroundSprite().addChild(menu);
 
