@@ -22,7 +22,7 @@ var UserInfoLayer = cc.Layer.extend({
             this.addChild(this._bgSprite);
 
             var menuAchieve = new cc.MenuItemSprite(new cc.Sprite("#ui_box_01-0.png"),
-                new cc.Sprite("#ui_box_01-1.png"), this, this.showAchievements);
+                new cc.Sprite("#ui_box_01-1.png"), this.showAchievements, this);
             this._menuAchieve = new cc.Menu(menuAchieve);
             this._menuAchieve.setPosition(cc.pAdd(VisibleRect.top(), cc.p(0, -28)));
             this.addChild(this._menuAchieve);

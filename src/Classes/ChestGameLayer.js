@@ -72,7 +72,7 @@ var ChestGameLayer = cc.Layer.extend({
         flashSprite.addChild(flashGo);
 
         var selectedSprite = new cc.Sprite("#ui_box_go_2.png");
-        var goButton = cc.MenuItemSprite.create(flashSprite,
+        var goButton = new cc.MenuItemSprite(flashSprite,
             selectedSprite,
             this.GoRandomOval, this);
 

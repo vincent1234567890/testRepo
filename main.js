@@ -12,7 +12,7 @@ var PackagedApp = (window.chrome && window.chrome.storage != null);
 var playEffect = function (effectFilePath) {
     var ret = GamePreference.getInstance().getPlayEffect();
     if (ret) {
-        return  cc.audioEngine.playEffect("res/sound/" + effectFilePath);
+        return  cc.audioEngine.playEffect(effectFilePath);
     }
 };
 var playMusic = function (musicfile, loop) {

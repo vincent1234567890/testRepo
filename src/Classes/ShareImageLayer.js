@@ -23,8 +23,8 @@ var ShareImageLayer = cc.Layer.extend({
         this.addChild(spriteLabel, 1);
         spriteLabel.setPosition(cc.p(VisibleRect.center().x, VisibleRect.center().y));
 
-        var itemCancle = cc.MenuItemSprite.create(
-            new cc.Sprite("#button_other_012.png"), new cc.Sprite("#button_other_013.png"), this, this.back);
+        var itemCancle = new cc.MenuItemSprite(
+            new cc.Sprite("#button_other_012.png"), new cc.Sprite("#button_other_013.png"), this.back, this);
         itemCancle.setPosition(cc.p(spriteLabel.getPosition().x + spriteLabel.getContentSize().width / 2 - 12, spriteLabel.getPosition().y + spriteLabel.getContentSize().height / 2 - 4));
 
         this.SaveToPhoto();
@@ -32,27 +32,27 @@ var ShareImageLayer = cc.Layer.extend({
         var menu;
 
         if (true/*kIsChinese*/) {
-            var itemWeibo = cc.MenuItemSprite.create(
-                cc.Sprite.create(ImageName("button_other_030.png")),
-                cc.Sprite.create(ImageName("button_other_031.png")),
-                this, this.ShareToWeibo);
+            var itemWeibo = new cc.MenuItemSprite(
+                new cc.Sprite(ImageName("button_other_030.png")),
+                new cc.Sprite(ImageName("button_other_031.png")),
+                this.ShareToWeibo, this);
             itemWeibo.setPosition(cc.p(VisibleRect.center().x, VisibleRect.center().y - itemWeibo.getContentSize().height / 2));
-            menu = cc.Menu.create(itemWeibo, itemCancle);
+            menu = new cc.Menu(itemWeibo, itemCancle);
         }
         else {
-            var itemFaceBook = cc.MenuItemSprite.create(
-                cc.Sprite.create(ImageName("button_other_006.png")),
-                cc.Sprite.create(ImageName("button_other_007.png")),
-                this, this.ShareToFaceBook);
+            var itemFaceBook = new cc.MenuItemSprite(
+                new cc.Sprite(ImageName("button_other_006.png")),
+                new cc.Sprite(ImageName("button_other_007.png")),
+                this.ShareToFaceBook, this);
 
             var itemTwiter = cc.MenuItemSprite.create(
-                cc.Sprite.create(ImageName("button_other_008.png")),
-                cc.Sprite.create(ImageName("button_other_009.png")),
-                this, this.ShareToTwitter);
+                new cc.Sprite(ImageName("button_other_008.png")),
+                new cc.Sprite(ImageName("button_other_009.png")),
+                this.ShareToTwitter, this);
 
             itemFaceBook.setPosition(cc.p(VisibleRect.center().x - itemFaceBook.getContentSize().width / 2, VisibleRect.center().y - 40));
             itemTwiter.setPosition(cc.p(VisibleRect.center().x + itemTwiter.getContentSize().width / 2, VisibleRect.center().y - 40));
-            menu = cc.Menu.create(itemFaceBook, itemTwiter, itemCancle);
+            menu = new cc.Menu(itemFaceBook, itemTwiter, itemCancle);
         }
 
         menu.setPosition(0, 0);
@@ -105,7 +105,7 @@ var ShareImageLayer = cc.Layer.extend({
     },
     back:function () {
         this.removeAllChildrenWithCleanup(true);
-        this.removeFromParentAndCleanup(true);
+        this.removeFromParent(true);
     },
     getPreviewIamge:function () {
         var strFile = FishGameSnapshotPath();

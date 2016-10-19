@@ -6,23 +6,60 @@ var res = {
     LoadingLogo : "res/loadingLogo.jpg",
     LoadingAdBg : "res/loadingAdBg.jpg",
     LoadingCompanyLogoScreen : "res/MainBG.jpg",
+
     AchievementPlist :"res/Achievement.plist",
     ChestFishPlist: "res/ChestFish.plist",
+
     music_1 : "res/music/music_1.ogg",
     music_2 : "res/music/music_2.ogg",
     music_3 : "res/music/music_3.ogg",
     music_4 : "res/music/music_4.ogg",
     music_5 : "res/music/music_5.ogg",
     music_6 : "res/music/music_6.ogg",
+
+    // TURNPLATE_RUN : "res/sound/turnRun",
+    // TURNPLATE_WIN : "turnSucceed",
+    // TURNPLATE_LOSE : "turnFailed",
+
+    LASER_EFFECT : "res/sound/bgm_laser.ogg",
+    CHANGECANNON_EFFECT : "res/sound/bgm_change_cannon.ogg",
+    CAMERA_EFFECT : "res/sound/bgm_camera.ogg",
+    BOX_EFFECT : "res/sound/bgm_box.ogg",
+
+    LEVINSTORM_EFFECT : "res/sound/LevinStorm_explode_sound.ogg",
+    ACH_EFFECT : "res/sound/bgm_ach.ogg",
+    COUNTDOWN_EFFECT : "res/sound/3secondscountdown.ogg",
+    GO_EFFECT : "res/sound/bgm_go.ogg",
+    SO_EFFECT : "res/sound/bgm_so.ogg",
+    UI_EFFECT_03 : "res/sound/effect_ui_03.ogg",
+    SURF_EFFECT : "res/sound/bgm_surf.ogg",
+
+    kBGM_RUNOUTBULLET : "res/sound/bgm_rayover.ogg",
+    COIN_EFFECT1 : "res/sound/bgm_coin_01.ogg",
+    COIN_EFFECT2 : "res/sound/bgm_coin_02.ogg",
+    COIN_EFFECT3 : "res/sound/bgm_coin_03.ogg",
+    FIRE_EFFECT : "res/sound/bgm_fire.ogg",
+    NET_EFFECT : "res/sound/bgm_net.ogg",
+    BUTTON_EFFECT : "res/sound/bgm_button.ogg",
+
+
+
     startMenuLayerPng: "res/StartMenuLayer.png",
     StartMenuPlist : "res/StartMenuLayer.plist",
-
+    LogoScenePng : "res/logoscene.png",
     LogoScenePlist : "res/logoscene.plist",
+    ButtonsPng : "res/buttons.png",
     ButtonsPlist : "res/buttons.plist",
+    IconsPng : "res/icons.png",
     IconsPlist : "res/icons.plist",
+    ChestRewardsPng : "res/chestreward.png",
     ChestRewardsPlist : "res/chestreward.plist",
+    MainPng : "res/main.png",
     MainPlist : "res/main.plist",
+    TutorialPng : "res/tutorial.png",
     TutorialPlist : "res/tutorial.plist",
+
+
 
     // MainUITitle : "res/main_ui_title.png",
 

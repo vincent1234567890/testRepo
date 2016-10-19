@@ -91,7 +91,9 @@ var MainMenuScene = cc.Scene.extend({
             if (this._startLayer) {
                 var mainMenu = this._startLayer.getChildByTag(eTag_MainMenu_StartMenu_menu);
                 if (mainMenu) {
-                    mainMenu.isTouchEnabled(!this._isSubLayer);
+                    //TODO:FIX
+                    // mainMenu.isTouchEnabled(!this._isSubLayer);
+                    // mainMenu.setTouchEnabled(!this._isSubLayer);
                 }
             }
         }
