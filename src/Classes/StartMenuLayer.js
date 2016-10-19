@@ -99,7 +99,7 @@ var StartMenuLayer = cc.Layer.extend({
         this._newGameItem = new cc.MenuItemSprite(
             CSpriteLayer.getButtonBoxOffsetY("btn_start_1.png", ImageNameLang("txt_start.png"), PlistAndPlist, 1),
             CSpriteLayer.getButtonBoxOffsetY("btn_start_2.png", ImageNameLang("txt_start.png"), PlistAndPlist, 1),
-            this, this._menuNewGame);
+            this._menuNewGame, this);
 
         // item2 = Scenes select button
         this._sceneItem = cc.MenuItemSprite.create(

@@ -14,6 +14,7 @@ var res = {
     music_4 : "res/music/music_4.ogg",
     music_5 : "res/music/music_5.ogg",
     music_6 : "res/music/music_6.ogg",
+    startMenuLayerPng: "res/StartMenuLayer.png",
     StartMenuPlist : "res/StartMenuLayer.plist",
 
     LogoScenePlist : "res/logoscene.plist",
