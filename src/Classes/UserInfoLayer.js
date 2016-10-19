@@ -27,7 +27,7 @@ var UserInfoLayer = cc.Layer.extend({
             this._menuAchieve.setPosition(cc.pAdd(VisibleRect.top(), cc.p(0, -28)));
             this.addChild(this._menuAchieve);
 
-            this.setUserTitleLabel(new cc.Sprite("#" + this._curTitle);
+            this.setUserTitleLabel(new cc.Sprite("#" + this._curTitle));
             this._userTitleLabel.setPosition(cc.p(VisibleRect.top().x - 130, VisibleRect.top().y - 26));
 
             this._curLevel = 1;
