@@ -7,59 +7,59 @@ StaticGameUI.dowsStaticGameUI = function (backdropSprite, scale) {
     var w = backdropSprite.getContentSize().width;
     var h = backdropSprite.getContentSize().height;
     var size = new cc.Size(0.87 * w, 0.88 * h);
-    var lvSpriteBg = cc.Sprite.createWithSpriteFrameName(("ui_box_01.png"));
+    var lvSpriteBg = new cc.Sprite("#ui_box_01.png");
     lvSpriteBg.setAnchorPoint(AnchorPointTop);
     lvSpriteBg.setPosition(cc.p(size.width / 2, size.height));
     backdropSprite.addChild(lvSpriteBg);
 
-    var lvTitleSp = cc.Sprite.createWithSpriteFrameName(("ui_box_01-0.png"));
+    var lvTitleSp = new cc.Sprite("#ui_box_01-0.png");
     lvTitleSp.setPosition(cc.p(size.width / 2, size.height));
     lvTitleSp.setAnchorPoint(AnchorPointTop);
     backdropSprite.addChild(lvTitleSp);
 
     // 暂停音乐图片
-    var pauseSprite = cc.Sprite.createWithSpriteFrameName(("ui_button_01.png"));
+    var pauseSprite = new cc.Sprite("#ui_button_01.png");
     pauseSprite.setAnchorPoint(AnchorPointTopLeft);
     pauseSprite.setPosition(cc.pAdd(cc.p(0, size.height), cc.p(30, 0)));
     backdropSprite.addChild(pauseSprite);
 
-    var spriteMusic = cc.Sprite.createWithSpriteFrameName(("ui_button_music_1.png"));
+    var spriteMusic = new cc.Sprite("#ui_button_music_1.png");
     spriteMusic.setAnchorPoint(AnchorPointTopLeft);
     spriteMusic.setPosition(cc.pAdd(cc.p(0, size.height), cc.p(pauseSprite.getContentSize().width * scale + 30, 0)));
     backdropSprite.addChild(spriteMusic);
 
     // 照相和水族馆
-    var spriteHide = cc.Sprite.createWithSpriteFrameName(("ui_button_25.png"));
+    var spriteHide = new cc.Sprite("#ui_button_25.png");
     spriteHide.setAnchorPoint(AnchorPointTopRight);
     spriteHide.setPosition(cc.pAdd(cc.p(size.width, size.height), cc.p(-30, 0)));
     backdropSprite.addChild(spriteHide);
 
-    var spriteCamra = cc.Sprite.createWithSpriteFrameName(("button_other_001.png"));
+    var spriteCamra = new cc.Sprite("#button_other_001.png");
     spriteCamra.setAnchorPoint(AnchorPointTopRight);
     spriteCamra.setPosition(cc.p(size.width - spriteCamra.getContentSize().width * scale - 30, size.height));
     backdropSprite.addChild(spriteCamra);
 
     // 游戏最下栏
     // 底栏
-    var weaponBase = cc.Sprite.createWithSpriteFrameName(("ui_box_02.png"));
+    var weaponBase = new cc.Sprite("#ui_box_02.png");
     backdropSprite.addChild(weaponBase);
     weaponBase.setAnchorPoint(AnchorPointBottom);
     weaponBase.setPosition(cc.p(size.width / 2, 0));
 
-    var weaponBaseRudder = cc.Sprite.createWithSpriteFrameName(("ui_box_02_rudder.png"));
+    var weaponBaseRudder = new cc.Sprite("#ui_box_02_rudder.png");
     backdropSprite.addChild(weaponBaseRudder);
     weaponBaseRudder.setAnchorPoint(AnchorPointBottomLeft);
     weaponBaseRudder.setPosition(cc.p(0, 0));
 
     // 左调炮弹-
-    var weaponLeft = cc.Sprite.createWithSpriteFrameName(("ui_button_63.png"));
+    var weaponLeft = new cc.Sprite("#ui_button_63.png");
     weaponLeft.setAnchorPoint(AnchorPointBottom);
     weaponLeft.setPosition(cc.pSub(cc.p(size.width / 2, 0), cc.p(71, 15)));
     weaponLeft.setScale(0.8);
     backdropSprite.addChild(weaponLeft);
 
     // 右调炮弹+
-    var weaponRight = cc.Sprite.createWithSpriteFrameName(("ui_button_65.png"));
+    var weaponRight = new cc.Sprite("#ui_button_65.png");
     weaponRight.setAnchorPoint(AnchorPointBottom);
     weaponRight.setPosition(cc.pAdd(cc.p(size.width / 2, 0), cc.p(71, -15)));
     weaponRight.setScale(0.8);
@@ -68,18 +68,18 @@ StaticGameUI.dowsStaticGameUI = function (backdropSprite, scale) {
     // 炮弹图片
     cc.spriteFrameCache.addSpriteFrames(ImageName("cannon10.plist"));
     cc.spriteFrameCache.addSpriteFrames(ImageName("SuperWeaponButton.plist"));
-    var weaponSprite = cc.Sprite.createWithSpriteFrameName("actor_cannon1_11.png");
+    var weaponSprite = new cc.Sprite("#actor_cannon1_11.png");
     weaponSprite.setPosition(cc.p(size.width / 2, 50));
     backdropSprite.addChild(weaponSprite);
 
     // 激光按键
-    var laserSprite = cc.Sprite.createWithSpriteFrameName(("button_prop_001_1.png"));
+    var laserSprite = new cc.Sprite("#button_prop_001_1.png");
     laserSprite.setAnchorPoint(AnchorPointBottom);
     laserSprite.setPosition(cc.p(VisibleRect.bottom().x + 250, VisibleRect.bottom().y));
     backdropSprite.addChild(laserSprite);
 
     // 武器选择按钮
-    var lightSprite = cc.Sprite.createWithSpriteFrameName("button_lightning_1.png");
+    var lightSprite = new cc.Sprite("#button_lightning_1.png");
     lightSprite.setAnchorPoint(AnchorPointBottom);
     lightSprite.setPosition(cc.p(size.width / 2 + 160, 0));
     backdropSprite.addChild(lightSprite);

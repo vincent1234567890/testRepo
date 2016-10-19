@@ -5,10 +5,8 @@ var SuperWeaponSelectLayer = cc.Layer.extend({
     _weaponButtonBackground:null,
     createMenuToggle:function () {
         var button_push = cc.MenuItemToggle.create(
-            cc.MenuItemSprite.create(cc.Sprite.createWithSpriteFrameName("button_weapon_1.png"),
-            cc.Sprite.createWithSpriteFrameName("button_weapon_1.png")),
-            this, this.weaponButtonClicked
-        );
+            cc.MenuItemSprite.create(new cc.Sprite("#button_weapon_1.png"),
+            new cc.Sprite("#button_weapon_1.png")), this, this.weaponButtonClicked);
 
         return button_push;
     },
@@ -33,11 +31,11 @@ var SuperWeaponSelectLayer = cc.Layer.extend({
     createWeaponSprites:function (buttonWidth) {
         var xBegin = -121;
 
-        var weaponSprite = cc.Sprite.createWithSpriteFrameName("tubiao-jiguang.png");
+        var weaponSprite = new cc.Sprite("#tubiao-jiguang.png");
         this.addChild(weaponSprite, 15);
         weaponSprite.setPosition(cc.p(xBegin, 0));
 
-        weaponSprite = cc.Sprite.createWithSpriteFrameName("ui_lightning_1.png");
+        weaponSprite = new cc.Sprite("#ui_lightning_1.png");
         this.addChild(weaponSprite, 15);
         weaponSprite.setPosition(cc.p(xBegin - 1 + buttonWidth, 0));
     },
@@ -52,7 +50,7 @@ var SuperWeaponSelectLayer = cc.Layer.extend({
         }
 
         var animation = cc.Animation.create(frames, 0.1);
-        var selectMark = cc.Sprite.createWithSpriteFrameName("ui_weapon_choice1.png");
+        var selectMark = new cc.Sprite("#ui_weapon_choice1.png");
         selectMark.runAction(cc.RepeatForever.create(cc.Animate.create(animation)));
         this.addChild(selectMark, 20);
         this.setSpriteMark(selectMark);
@@ -66,7 +64,7 @@ var SuperWeaponSelectLayer = cc.Layer.extend({
         var frameCache = cc.spriteFrameCache;
         frameCache.addSpriteFrames(ImageName("SuperWeaponSelect.plist"));
         frameCache.addSpriteFrames(ImageName("SuperWeaponSelectedMark.plist"));
-        var bg = cc.Sprite.createWithSpriteFrameName("ui_weapon_bg.png");
+        var bg = new cc.Sprite("#ui_weapon_bg.png");
         this.addChild(bg, 1);
         this._itemWidth = this.createBackgroundButtons();
 

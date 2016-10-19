@@ -24,9 +24,7 @@ var ShareImageLayer = cc.Layer.extend({
         spriteLabel.setPosition(cc.p(VisibleRect.center().x, VisibleRect.center().y));
 
         var itemCancle = cc.MenuItemSprite.create(
-            cc.Sprite.createWithSpriteFrameName(("button_other_012.png")),
-            cc.Sprite.createWithSpriteFrameName(("button_other_013.png")),
-            this, this.back);
+            new cc.Sprite("#button_other_012.png"), new cc.Sprite("#button_other_013.png"), this, this.back);
         itemCancle.setPosition(cc.p(spriteLabel.getPosition().x + spriteLabel.getContentSize().width / 2 - 12, spriteLabel.getPosition().y + spriteLabel.getContentSize().height / 2 - 4));
 
         this.SaveToPhoto();

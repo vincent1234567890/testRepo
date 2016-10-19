@@ -39,7 +39,7 @@ var TutorialHintLayer = cc.Layer.extend({
     },
     initViews:function () {
         var winSize = cc.Director.getInstance().getWinSize();
-        var bg = cc.Sprite.createWithSpriteFrameName(("ui_other_021.png"));
+        var bg = new cc.Sprite("#ui_other_021.png");
         var bgSizeHalf = bg.getContentSize();
         bgSizeHalf.width /= 2;
         bgSizeHalf.height /= 2;
@@ -52,15 +52,11 @@ var TutorialHintLayer = cc.Layer.extend({
         bg.addChild(this.hint);
         this.hint.setPosition(cc.p(bgSizeHalf.width, bgSizeHalf.height));
 
-        var close = cc.MenuItemSprite.create(cc.Sprite.createWithSpriteFrameName("button_other_012.png"),
-            cc.Sprite.createWithSpriteFrameName("button_other_013.png"),
-            this,
-            this.clickClose);
+        var close = cc.MenuItemSprite.create(new cc.Sprite("#button_other_012.png"),
+            new cc.Sprite("#button_other_013.png"), this, this.clickClose);
 
-        var fish = cc.MenuItemSprite.create(cc.Sprite.createWithSpriteFrameName("button_help_02.png"),
-            cc.Sprite.createWithSpriteFrameName("button_help_02.png"),
-            this,
-            this.clickFish);
+        var fish = cc.MenuItemSprite.create(new cc.Sprite("button_help_02.png"),
+            new cc.Sprite("#button_help_02.png"), this, this.clickFish);
 
         var menu = cc.Menu.create(close, fish);
         menu.setPosition(0, 0);

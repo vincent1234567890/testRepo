@@ -35,7 +35,7 @@ var WeaponSpecialLevinStorm = WeaponSpecial.extend({
 
         var firstFrame = "xl01.png";
         var animation = cc.Animation.create(frames, 0.1);
-        var xuli01 = cc.Sprite.createWithSpriteFrameName(firstFrame);
+        var xuli01 = new cc.Sprite("#" + firstFrame);
         var xuli01Animate = cc.Animate.create(animation);
         xuli01.runAction(cc.RepeatForever.create(xuli01Animate));
         xuli01.setAnchorPoint(cc.p(0.5, 0.5));
@@ -91,7 +91,7 @@ var WeaponSpecialLevinStorm = WeaponSpecial.extend({
 
         var firstFrame = "x01.png";
         var animation = cc.Animation.create(frames, 0.1);
-        var xuli02 = cc.Sprite.createWithSpriteFrameName(firstFrame);
+        var xuli02 = new cc.Sprite("#" + firstFrame);
         var xuli02Animate = cc.Animate.create(animation);
         xuli02.runAction(cc.RepeatForever.create(xuli02Animate));
         xuli02.setAnchorPoint(cc.p(0.5, 0.5));

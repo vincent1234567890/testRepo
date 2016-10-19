@@ -18,13 +18,13 @@ var AchievementShareLayer = cc.Sprite.extend({
         cache.addSpriteFrames(ImageName("AchieveIconTP.plist"));
         cache.addSpriteFrames(ImageName("achieve.plist"));
 
-        var bgSpriteStr = value ? "ui_ach_002.png" : "ui_ach_003.png";
-        var bgSprite = cc.Sprite.createWithSpriteFrameName((bgSpriteStr));
+        var bgSpriteStr = value ? "#ui_ach_002.png" : "#ui_ach_003.png";
+        var bgSprite = new cc.Sprite(bgSpriteStr);
         bgSprite.setPosition(cc.p(0, 0));
         this.addChild(bgSprite, 0, AchiveUITag.kAchieveBgTag);
         var tmpIndex = (index + 1) > 99 ? (index + 1) : "0" + (index + 1);
-        var imageName = "icon_ach_" + tmpIndex + (value ? "" : "_gray") + ".png";
-        var spriteAchImage = cc.Sprite.createWithSpriteFrameName(imageName);
+        var imageName = "#icon_ach_" + tmpIndex + (value ? "" : "_gray") + ".png";
+        var spriteAchImage = new cc.Sprite(imageName);
         spriteAchImage.setPosition(cc.p(-180, 0));
         this.addChild(spriteAchImage, 1, AchiveUITag.kAchieveImageTag);
 
@@ -52,8 +52,8 @@ var AchievementShareLayer = cc.Sprite.extend({
         desLabel.setPosition(cc.p(-200 + bgSprite.getContentSize().width / 2, -12));
         desLabel.setColor(cc.black());
 
-        var scoreBgStr = value ? "ui_ach_010.png" : "ui_ach_005.png";
-        var scoreBgSprite = cc.Sprite.createWithSpriteFrameName((scoreBgStr));
+        var scoreBgStr = value ? "#ui_ach_010.png" : "#ui_ach_005.png";
+        var scoreBgSprite = new cc.Sprite(scoreBgStr);
         this.addChild(scoreBgSprite, 2, AchiveUITag.kAchieveScoreBgTag);
         scoreBgSprite.setPosition(cc.p(170, 0));
 

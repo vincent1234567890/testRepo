@@ -424,11 +424,11 @@ var GameScene = cc.Scene.extend({
         this._prizeSprite.addChild(guang2, kTagPrizeLight2, kTagPrizeLight2);
         guang2.setPosition(cc.p(0, 0));
 
-        var sharkePrize = cc.Sprite.createWithSpriteFrameName("shark_prize_bg_1.png");
+        var sharkePrize = new cc.Sprite("#shark_prize_bg_1.png");
         this._prizeSprite.addChild(sharkePrize, kTagPrizeBG, kTagPrizeBG);
         sharkePrize.setPosition(cc.p(0, 0));
 
-        var notice = cc.Sprite.createWithSpriteFrameName(ImageNameLang("shark_prize_notice.png", true));
+        var notice = new cc.Sprite("#" + ImageNameLang("shark_prize_notice.png", true));
         notice.setPosition(cc.p(0, (sharkePrize.getContentSize().height + notice.getContentSize().height) / 2));
         this._prizeSprite.addChild(notice, kTagPrizeNOTICE, kTagPrizeNOTICE);
 
@@ -477,14 +477,14 @@ var GameScene = cc.Scene.extend({
     },
     initMusicPlay:function () {
         // this._itemMusicPlayer = cc.MenuItemSprite.create(
-        //     cc.Sprite.createWithSpriteFrameName(("ui_button_music_1.png")),
-        //     cc.Sprite.createWithSpriteFrameName(("ui_button_music_2.png")),
+        //     new cc.Sprite(("#ui_button_music_1.png")),
+        //     new cc.Sprite(("#ui_button_music_2.png")),
         //     this, this.changeMusic);
 
         //Pause button
         this._itemPause = cc.MenuItemSprite.create(
-            cc.Sprite.createWithSpriteFrameName(("ui_button_01.png")),
-            cc.Sprite.createWithSpriteFrameName(("ui_button_02.png")),
+            new cc.Sprite("#ui_button_01.png"),
+            new cc.Sprite("#ui_button_02.png"),
             this, this.pauseGame);
 
         // this._itemMusicPlayer.setPosition(cc.p(VisibleRect.topLeft().x + 125, VisibleRect.topLeft().y - this._itemPause.getContentSize().height / 2));
@@ -1344,7 +1344,7 @@ var GameScene = cc.Scene.extend({
             this.addChild(par, 111, kAddCoidParticleTag);
             par.setPosition(parPos);
 
-            var add = cc.Sprite.createWithSpriteFrameName("add5.png");
+            var add = new cc.Sprite("#add5.png");
             add.setPosition(addPos);
             var moveBy = cc.MoveBy.create(1.05, cc.p(0, 48));
             var fadeIn = cc.FadeIn.create(0.35);
@@ -1583,13 +1583,13 @@ var GameScene = cc.Scene.extend({
     },
     loadCameraButton:function () {
         this._savingImage = false;
-        var spriteHide = cc.Sprite.createWithSpriteFrameName(("ui_button_25.png"));
-        var spriteHided = cc.Sprite.createWithSpriteFrameName(("ui_button_26.png"));
+        var spriteHide = new cc.Sprite("#ui_button_25.png");
+        var spriteHided = new cc.Sprite("#ui_button_26.png");
         this._itemHide = cc.MenuItemSprite.create(spriteHide, spriteHided, this, this.hideAllUI);
         this._itemHide.setPosition(cc.p(VisibleRect.topRight().x - 45, VisibleRect.topRight().y - this._itemHide.getContentSize().height / 2));
 
-        // var spriteCamra = cc.Sprite.createWithSpriteFrameName("button_other_001.png");
-        // var spriteCamrad = cc.Sprite.createWithSpriteFrameName(("button_other_002.png"));
+        // var spriteCamra = new cc.Sprite("#button_other_001.png");
+        // var spriteCamrad = new cc.Sprite("#button_other_002.png");
         // this._itemCamera = cc.MenuItemSprite.create(spriteCamra, spriteCamrad, this, this.saveImage);
         // this._itemCamera.setPosition(cc.p(VisibleRect.topRight().x - 125, VisibleRect.topRight().y - this._itemCamera.getContentSize().height / 2));
 

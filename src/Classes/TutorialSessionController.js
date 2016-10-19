@@ -681,11 +681,11 @@ var TutorialSessionController = CCSessionController.extend({
             this._tutorialQueue.push(idx);
         }
 
-        this.setFinger(cc.Sprite.createWithSpriteFrameName("finger_0001.png"));
+        this.setFinger(cc.Sprite("#finger_0001.png"));
         this._currentGameScene.addChild(this.finger, fingerZOrder);
         this.getFinger().setVisible(false);
 
-        this.setFocus(cc.Sprite.createWithSpriteFrameName("circle_0001.png"));
+        this.setFocus(cc.Sprite("#circle_0001.png"));
         this._currentGameScene.addChild(this.focus, focusZOrder);
         this.getFocus().setVisible(false);
 
@@ -693,14 +693,14 @@ var TutorialSessionController = CCSessionController.extend({
         this._currentGameScene.addChild(this._tutorialBlackLayer, 1);
         this._tutorialBlackLayer.setVisible(false);
 
-        var skip = cc.MenuItemSprite.create(cc.Sprite.createWithSpriteFrameName("ui_skip_1.png"), null, this, this.skipTutorial);
+        var skip = cc.MenuItemSprite.create(cc.Sprite("#ui_skip_1.png"), null, this, this.skipTutorial);
         skip.setTag(kSkipTutorialSkipTag);
         skip.setOpacity(0);
         var fadeIn = cc.FadeIn.create(1);
         var reverse = fadeIn.reverse();
         var sequ = cc.Sequence.create(fadeIn, reverse);
         skip.runAction(cc.RepeatForever.create(sequ));
-        var done = cc.MenuItemSprite.create(cc.Sprite.createWithSpriteFrameName("ui_skip_2.png"), null, this, this.skipTutorial);
+        var done = cc.MenuItemSprite.create(cc.Sprite("#ui_skip_2.png"), null, this, this.skipTutorial);
         done.runAction(cc.RepeatForever.create(sequ));
         done.setTag(kSkipTutorialDoneTag);
         done.setVisible(false);
@@ -804,7 +804,7 @@ var TutorialSessionController = CCSessionController.extend({
     },
     showFishInfo:function () {
         var zOrder = 204, pos = cc.pSub(VisibleRect.top(), cc.p(0, 265));
-        this._fishInfoBoard = cc.Sprite.createWithSpriteFrameName(("howtoplay0.png"));
+        this._fishInfoBoard = new cc.Sprite("#howtoplay0.png");
         this._currentGameScene.addChild(this._fishInfoBoard, zOrder);
         this._fishInfoBoard.setPosition(pos);
         this._fishInfoBoard.setOpacity(0);
@@ -815,7 +815,7 @@ var TutorialSessionController = CCSessionController.extend({
         moneyhard.setPosition(cc.p(620, 160));
         this._fishInfoBoard.addChild(moneyhard, zOrder + 1);
 
-        var close = cc.MenuItemSprite.create(cc.Sprite.createWithSpriteFrameName("btn_teach_001.png"), cc.Sprite.createWithSpriteFrameName("btn_teach_002.png"),
+        var close = cc.MenuItemSprite.create(new cc.Sprite("#btn_teach_001.png"), new cc.Sprite("#btn_teach_002.png"),
             this, this.goBack);
 
         var closeLabel = cc.LabelTTF.create(cc.LocalizedString.localizedString("Tutorial Text Close"),
