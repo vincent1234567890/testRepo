@@ -65,7 +65,7 @@ var WeaponSpecial = Weapon.extend({
         }
     },
     specialShootingFinished:function (dt) {
-        cc.Director.getInstance().getScheduler().unscheduleSelector(this.specialShootingFinished, this);
+        cc.director.getScheduler().unscheduleSelector(this.specialShootingFinished, this);
         this._isShooting = false;
         if (this._currentEnergy < this._energyPerShoot) {
             this._delegate.weaponSwitchBackNormal(this);

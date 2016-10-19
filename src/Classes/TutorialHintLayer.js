@@ -38,7 +38,6 @@ var TutorialHintLayer = cc.Layer.extend({
         this.canClose = true;
     },
     initViews:function () {
-        var winSize = cc.Director.getInstance().getWinSize();
         var bg = new cc.Sprite("#ui_other_021.png");
         var bgSizeHalf = bg.getContentSize();
         bgSizeHalf.width /= 2;

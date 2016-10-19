@@ -1206,9 +1206,9 @@ var PlayerActor = cc.Class.extend({
 });
 
 PlayerActor.purgeSharedActor = function () {
-    cc.Director.getInstance().getScheduler().unscheduleAllSelectorsForTarget(this._playerActor);
-    cc.Director.getInstance().getScheduler().unscheduleAllSelectorsForTarget(this._playerActorTL);
-    cc.Director.getInstance().getScheduler().unscheduleAllSelectorsForTarget(this._playerActorTR);
+    cc.director.getScheduler().unscheduleAllCallbacksForTarget(this._playerActor);
+    cc.director.getScheduler().unscheduleAllCallbacksForTarget(this._playerActorTL);
+    cc.director.getScheduler().unscheduleAllCallbacksForTarget(this._playerActorTR);
 };
 
 PlayerActor._playerActor = null;

@@ -168,7 +168,7 @@ var cocos2dApp = cc.game.onStart = function(){
     // },
     applicationDidFinishLaunching = function () {
         // initialize director
-        var director = cc.Director.getInstance();
+        var director = cc.director;
 
         this.checkUserData();
 
@@ -228,7 +228,7 @@ var cocos2dApp = cc.game.onStart = function(){
 
         if (PackagedApp) {
             // cc.Director.getInstance().getScheduler().scheduleSelector(this.pushUserData, this, 12);
-            cc.Director.getInstance().getScheduler().schedule(this.pushUserData, this, 12);
+            cc.director.getScheduler().schedule(this.pushUserData, this, 12);
         }
     },
     checkUserData=function () {
@@ -322,10 +322,10 @@ var cocos2dApp = cc.game.onStart = function(){
         }
     },
     pauseGame=function () {
-        cc.Director.getInstance().pause();
+        cc.director.pause();
         var a = setTimeout(function () {
             clearTimeout(a);
-            cc.Director.getInstance().resume();
+            cc.director.resume();
         }, 100);
     },
     pushUserData=function () {
