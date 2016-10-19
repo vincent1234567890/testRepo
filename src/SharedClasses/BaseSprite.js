@@ -351,17 +351,14 @@ var BaseSprite = cc.Sprite.extend({
     },
 
     _currTimeValue:null,
-    update:function () {
+    update:function (delta) {
         //call cc.Node.update(), but this function do nothing
-        //this._super();
+        //cc.Node.prototype.update.call(this);
 
-        this._currTimeValue = cc.Time.gettimeofdayCocos2d(this._currTimeValue);
-
+        this._currTimeValue = Date.now();
         if (!this._firstUpdate) {
             this._firstUpdate = true;
-            this._lastTime = new cc.timeval();
-            this._lastTime.tv_usec = this._currTimeValue.tv_usec;
-            this._lastTime.tv_sec = this._currTimeValue.tv_sec;
+            this._lastTime = this._currTimeValue;
         }
 
         var currActionData = this._sd.actionData[this._actionIndex];
@@ -369,12 +366,10 @@ var BaseSprite = cc.Sprite.extend({
             return;
 
         var dms = currActionData.frames[this._sequenceIndex].delay / 1000;
-        var subTime = (this._currTimeValue.tv_sec - this._lastTime.tv_sec) + (this._currTimeValue.tv_usec - this._lastTime.tv_usec) / 1000000.0;
-
+        var subTime = (this._currTimeValue - this._lastTime) / 1000;
         if (((subTime >= dms) || (subTime < 0)) && !this._stopByNotLoop) {
             this._sequenceIndex = (this._sequenceIndex + 1) % currActionData.frameCount;
-            this._lastTime.tv_usec = this._currTimeValue.tv_usec;
-            this._lastTime.tv_sec = this._currTimeValue.tv_sec;
+            this._lastTime = this._currTimeValue;
 
             if (!currActionData.loop && ((this._sequenceIndex + 1) == currActionData.frameCount)) {
                 this._stopByNotLoop = true;

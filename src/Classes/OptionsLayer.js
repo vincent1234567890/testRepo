@@ -20,7 +20,7 @@ var OptionsLayer = cc.Layer.extend({
         var cache = cc.spriteFrameCache;
         cache.addSpriteFrames(ImageNameLang("options_other.plist"));
         cache.addSpriteFrames(ImageName("Button_push.plist"));
-        this.setKeyboardEnabled(true);
+        // this.setKeyboardEnabled(true);
         this.initView();
 
         var that = this;

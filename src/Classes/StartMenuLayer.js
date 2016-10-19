@@ -32,7 +32,7 @@ var StartMenuLayer = cc.Layer.extend({
         cache.addSpriteFrames(res.MainPlist);
         cache.addSpriteFrames(res.TutorialPlist);
 
-        this._bg = new cc.Sprite("#ui_background_normal.jpg");
+        this._bg = new cc.Sprite(ImageName("ui_background_normal.jpg"));
         this.addChild(this._bg, 0);
         this._bg.setPosition(VisibleRect.center());
         this._bg.setScale(Multiple);
@@ -94,7 +94,6 @@ var StartMenuLayer = cc.Layer.extend({
 
     },
     initStartLayer:function () {
-        console.log("initStartLayer");
         // item1 = Start button
         this._newGameItem = new cc.MenuItemSprite(
             CSpriteLayer.getButtonBoxOffsetY("btn_start_1.png", ImageNameLang("txt_start.png"), PlistAndPlist, 1),
@@ -143,7 +142,7 @@ var StartMenuLayer = cc.Layer.extend({
         var rightPos = cc.p(VisibleRect.bottomRight().x - 260, VisibleRect.bottomRight().y + 100);
         var leftPos = cc.p(VisibleRect.bottomLeft().x + 157, VisibleRect.bottomLeft().y + 105);
         this._particle2 = new cc.ParticleSystem(ImageName("qipao3.plist"));
-        this._particle2._dontTint = true;
+        this._particle2.ignoreColor(true);
         this._particle2.setTotalParticles(100);
         this._particle2.setDrawMode(cc.ParticleSystem.TEXTURE_MODE);
         this.addChild(this._particle2);
@@ -152,15 +151,14 @@ var StartMenuLayer = cc.Layer.extend({
         this._particle3 = new cc.ParticleSystem(ImageName("qipao4.plist"));
         this.addChild(this._particle3);
         this._particle3.setTotalParticles(30);
-        this._particle3._dontTint = true;
+        this._particle3.ignoreColor(true);
         this._particle3.setDrawMode(cc.ParticleSystem.TEXTURE_MODE);
         this._particle3.setPosition(leftPos);
     },
     _moveAction:function () {
         var moveto = new cc.MoveBy(5, cc.p(625, 0));
         var fadeOut = new cc.FadeOut(5);
-        var spawn = new cc.Spawn(moveto, fadeOut);
-        return spawn;
+        return new cc.Spawn(moveto, fadeOut);
     },
     _initWaterLight:function (dt) {
         for (var i = 0; i < 8; i++) {
@@ -305,7 +303,6 @@ var StartMenuLayer = cc.Layer.extend({
 });
 
 StartMenuLayer.create = function () {
-    console.log("StartMenuLayer.create");
     var ret = new StartMenuLayer();
     if (ret && ret.init()) {
         return ret;

@@ -1554,7 +1554,7 @@ var GameScene = cc.Scene.extend({
             ];
 
         /*        for (var i = 0; i < texList.length; i++) {
-         this._retainedResArray.push(cc.TextureCache.getInstance().addImage(ImageName(texList[i])));
+         this._retainedResArray.push(cc.textureCache.addImage(ImageName(texList[i])));
          }*/
 
         switch (this.getOddsNumber()) {

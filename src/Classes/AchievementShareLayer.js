@@ -50,7 +50,7 @@ var AchievementShareLayer = cc.Sprite.extend({
         var desLabel = cc.LabelTTF.create(describtionStr, "Microsoft YaHei", 25, new cc.Size(300, 30), cc.TEXT_ALIGNMENT_LEFT);
         this.addChild(desLabel, 1, AchiveUITag.kAchieveTitleTag);
         desLabel.setPosition(cc.p(-200 + bgSprite.getContentSize().width / 2, -12));
-        desLabel.setColor(cc.color._getBlack());
+        desLabel.setColor(cc.color.BLACK);
 
         var scoreBgStr = value ? "#ui_ach_010.png" : "#ui_ach_005.png";
         var scoreBgSprite = new cc.Sprite(scoreBgStr);
