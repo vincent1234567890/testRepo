@@ -21,9 +21,9 @@ var UserInfoLayer = cc.Layer.extend({
             this._bgSprite.setPosition(VisibleRect.top());
             this.addChild(this._bgSprite);
 
-            var menuAchieve = cc.MenuItemSprite.create(new cc.Sprite("#ui_box_01-0.png"),
+            var menuAchieve = new cc.MenuItemSprite(new cc.Sprite("#ui_box_01-0.png"),
                 new cc.Sprite("#ui_box_01-1.png"), this, this.showAchievements);
-            this._menuAchieve = cc.Menu.create(menuAchieve);
+            this._menuAchieve = new cc.Menu(menuAchieve);
             this._menuAchieve.setPosition(cc.pAdd(VisibleRect.top(), cc.p(0, -28)));
             this.addChild(this._menuAchieve);
 
@@ -32,7 +32,7 @@ var UserInfoLayer = cc.Layer.extend({
 
             this._curLevel = 1;
 
-            this._levellabel = cc.LabelAtlas.create("1", ImageName("ui_text_03.png"), 14, 20, '0');
+            this._levellabel = new cc.LabelAtlas("1", ImageName("ui_text_03.png"), 14, 20, '0');
             this.addChild(this._levellabel, 200);
             this._levellabel.setAnchorPoint(cc.p(0.5, 0.5));
             this._levellabel.setPosition(cc.pAdd(VisibleRect.top(), cc.p(0, -28)));
