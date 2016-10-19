@@ -62,8 +62,8 @@ var ChestGameLayer = cc.Layer.extend({
         parAchieve.setPosition(VisibleRect.center());
     },
     DelChestScoreNumber:function(){
-        var flashSprite = cc.Sprite.createWithSpriteFrameName(("ui_box_go_bg.png"));
-        var flashGo = cc.Sprite.createWithSpriteFrameName(("ui_box_go_1.png"));
+        var flashSprite = new cc.Sprite("#ui_box_go_bg.png");
+        var flashGo = new cc.Sprite("#ui_box_go_1.png");
         var fadeIn = cc.FadeIn.create(1.0);
         var reverse = fadeIn.reverse();
         var sequ = cc.Sequence.create(fadeIn, reverse);
@@ -71,7 +71,7 @@ var ChestGameLayer = cc.Layer.extend({
         flashGo.setPosition(cc.p(flashSprite.getContentSize().width/2, flashSprite.getContentSize().height/2));
         flashSprite.addChild(flashGo);
 
-        var selectedSprite = cc.Sprite.createWithSpriteFrameName(("ui_box_go_2.png"));
+        var selectedSprite = new cc.Sprite("#ui_box_go_2.png");
         var goButton = cc.MenuItemSprite.create(flashSprite,
             selectedSprite,
             this,

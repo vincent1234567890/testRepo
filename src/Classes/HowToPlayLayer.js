@@ -119,7 +119,7 @@ var HowToPlayLayer = cc.Layer.extend({
             page.setScaleY(scaleYNum);
             StaticGameUI.dowsStaticGameUI(page, PAGE_SCALE_FACTOR);
 
-            var tutorial = cc.Sprite.createWithSpriteFrameName(ImageNameLang("tutorial_ui_text_3" + i + ".png", true));
+            var tutorial = new cc.Sprite("#" + ImageNameLang("tutorial_ui_text_3" + i + ".png", true));
             this._helpLayer.addChild(page);
             this._helpLayer.addChild(tutorial);
             var tmpSize = Box.getContentSize();
@@ -127,8 +127,7 @@ var HowToPlayLayer = cc.Layer.extend({
             page.setPosition(cc.p((i - 0.5) * tmpSize.width * PAGE_SCALE_FACTOR, tmpSize.height * PAGE_SCALE_FACTOR / 2));
 
             var btnPageIndicator = cc.MenuItemToggle.create(
-                cc.MenuItemSprite.create(cc.Sprite.createWithSpriteFrameName("UI_select_slider_2.png"),
-                    cc.Sprite.createWithSpriteFrameName("UI_select_slider_1.png")),
+                cc.MenuItemSprite.create(new cc.Sprite("#UI_select_slider_2.png"), new cc.Sprite("#UI_select_slider_1.png")),
                 this, this.indicatorClick);
             var btnPageIndicatorStartPosX = VisibleRect.center().x - (PAGE_INDICATOR_INTERVAL * (HELP_PAGE_NUM - 1) / 2.0);
             btnPageIndicator.setPosition(cc.p(btnPageIndicatorStartPosX + (i - 1) * PAGE_INDICATOR_INTERVAL, VisibleRect.bottom().y + 30));
@@ -147,8 +146,8 @@ var HowToPlayLayer = cc.Layer.extend({
         clipLayer.setContentSize(size);
     },
     drawReturnButton:function () {
-        this._returnButton = cc.MenuItemSprite.create(cc.Sprite.createWithSpriteFrameName("ui_button_17.png")
-            , cc.Sprite.createWithSpriteFrameName("ui_button_18.png"), this, this.back);
+        this._returnButton = cc.MenuItemSprite.create(new cc.Sprite("#ui_button_17.png"),
+            new cc.Sprite("#ui_button_18.png"), this, this.back);
         var mBack = cc.Menu.create(this._returnButton);
         this.addChild(mBack, 30);
         mBack.setPosition(cc.p(0, 0));

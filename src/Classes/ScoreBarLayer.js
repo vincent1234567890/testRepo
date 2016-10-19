@@ -42,9 +42,7 @@ var ScoreBarLayer = cc.Layer.extend({
 
             // Get Coin button
             var menuItemGetCoin = cc.MenuItemSprite.create(
-                cc.Sprite.createWithSpriteFrameName(("ui_button_05.png")),
-                cc.Sprite.createWithSpriteFrameName(("ui_button_06.png")),
-                this, this.getMoreMoney);
+                new cc.Sprite("#ui_button_05.png"), new cc.Sprite("#ui_button_06.png"), this, this.getMoreMoney);
 
             menuItemGetCoin.setPosition(cc.p(/*-VisibleRect.bottomRight().x + */85, 42));
             menuItemGetCoin.setTag(kTagMenuItemGetMoney);
@@ -60,7 +58,7 @@ var ScoreBarLayer = cc.Layer.extend({
             /*-VisibleRect.bottomRight().x + */
             /*29, 91));*/
 
-            this._moneyTip = cc.Sprite.createWithSpriteFrameName(("tishiguang01.png"));
+            this._moneyTip = new cc.Sprite("#tishiguang01.png");
             var tipOffset = cc.pAdd(cc.p(0, this._moneyTip.getContentSize().height / 2), cc.p(-266, -18));
             this._moneyTip.setPosition(tipOffset);
 
@@ -68,7 +66,7 @@ var ScoreBarLayer = cc.Layer.extend({
 
 
             //rudder
-            this._weaponBaseRudder = cc.Sprite.createWithSpriteFrameName(("ui_box_02_rudder.png"));
+            this._weaponBaseRudder = new cc.Sprite("#ui_box_02_rudder.png");
             this.addChild(this._weaponBaseRudder, 61);
             this._weaponBaseRudder.setAnchorPoint(AnchorPointBottomLeft);
             this._weaponBaseRudder.setPosition(cc.p(-VisibleRect.right().x / 2, 0));
@@ -79,17 +77,17 @@ var ScoreBarLayer = cc.Layer.extend({
             this.addChild(rudderMenu, 91, kTagScoreBar);
 
             //weapon base
-            var weaponBase = cc.Sprite.createWithSpriteFrameName(("ui_box_02.png"));
+            var weaponBase = new cc.Sprite("#ui_box_02.png");
             this.addChild(weaponBase, 20);
             weaponBase.setPosition(cc.p(0, weaponBase.getContentSize().height / 2));
 
             //help
-            this.setFinger(cc.Sprite.createWithSpriteFrameName("finger_0001.png"));
+            this.setFinger(new cc.Sprite("#finger_0001.png"));
             this._finger.setVisible(false);
             this.addChild(this._finger, 201);
             this._finger.setFlipX(true);
 
-            this.setFocus(cc.Sprite.createWithSpriteFrameName("circle_0001.png"));
+            this.setFocus(new cc.Sprite("#circle_0001.png"));
             this._focus.setVisible(false);
             this.addChild(this._focus, 200);
 
@@ -388,9 +386,7 @@ var ScoreBarLayer = cc.Layer.extend({
     },
     initTools:function () {
         var laserItem = cc.MenuItemSprite.create(
-            cc.Sprite.createWithSpriteFrameName(("button_prop_001_1.png")),
-            cc.Sprite.createWithSpriteFrameName(("button_prop_001_2.png")),
-            this, this.useLaser);
+            new cc.Sprite("#button_prop_001_1.png"), new cc.Sprite("#button_prop_001_2.png"), this, this.useLaser);
 
         var menuTool = cc.Menu.create(laserItem);
         this.addChild(menuTool, 60);
@@ -410,8 +406,8 @@ var ScoreBarLayer = cc.Layer.extend({
         var curSuperWeapon = wrapper.getIntegerForKey(CURRENT_SPECIAL_WEAPON_KEY);
         if (FishWeaponType.eWeaponLevel9 == curSuperWeapon) {
             menuItemSuperWeapon = cc.MenuItemSprite.create(
-                cc.Sprite.createWithSpriteFrameName("button_lightning_1.png"),
-                cc.Sprite.createWithSpriteFrameName("button_lightning_2.png"),
+                new cc.Sprite("#button_lightning_1.png"),
+                new cc.Sprite("#button_lightning_2.png"),
                 this, this.chooseSuperWeapon);
         }
         else {
@@ -419,8 +415,8 @@ var ScoreBarLayer = cc.Layer.extend({
                 wrapper.setIntegerForKey(CURRENT_SPECIAL_WEAPON_KEY, FishWeaponType.eWeaponLevel8);
             }
             menuItemSuperWeapon = cc.MenuItemSprite.create(
-                cc.Sprite.createWithSpriteFrameName("button_jiguang_1.png"),
-                cc.Sprite.createWithSpriteFrameName("button_jiguang_2.png"),
+                new cc.Sprite("#button_jiguang_1.png"),
+                new cc.Sprite("#button_jiguang_2.png"),
                 this, this.chooseSuperWeapon);
         }
 
@@ -654,7 +650,7 @@ var ScoreBarLayer = cc.Layer.extend({
             locOffset = cc.p(48, 84);
         }
 
-        var reminder = cc.MenuItemSprite.create(cc.Sprite.createWithSpriteFrameName("ui_laserwarning_bg.png"), cc.Sprite.createWithSpriteFrameName("ui_laserwarning_bg.png"),
+        var reminder = cc.MenuItemSprite.create(new cc.Sprite("#ui_laserwarning_bg.png"), new cc.Sprite("#ui_laserwarning_bg.png"),
             this, this._removeLazerReminder);
         var info = cc.Sprite.create(ImageNameLang("ui_laserwarning.png"));
         info.setPosition(cc.p(reminder.getContentSize().width / 2, reminder.getContentSize().height / 2));
@@ -676,11 +672,11 @@ var ScoreBarLayer = cc.Layer.extend({
             lbScale = 0.8;
         }
 
-        var lightGroove = cc.Sprite.createWithSpriteFrameName(("ui_2p_004.png"));
+        var lightGroove = new cc.Sprite("#ui_2p_004.png");
         this.addChild(lightGroove, 11);
         lightGroove.setPosition(cc.p(-1, 0));
         this._lightValue = -90;
-        this.setLightBlood(cc.Sprite.createWithSpriteFrameName(("ui_2p_005.png")));
+        this.setLightBlood(new cc.Sprite("#ui_2p_005.png"));
         this._lightBlood.setRotation(this._lightValue);
         this._lightBlood.setPosition(cc.p(-1, 0));
         this.addChild(this._lightBlood, 12);

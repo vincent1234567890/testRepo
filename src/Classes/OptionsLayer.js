@@ -193,20 +193,20 @@ var OptionsLayer = cc.Layer.extend({
         this.addChild(this._bg, 0, 802);
 
         //back
-        this._temBack = cc.MenuItemSprite.create(cc.Sprite.createWithSpriteFrameName("ui_button_17.png"), cc.Sprite.createWithSpriteFrameName("ui_button_18.png"), this, this.back);
+        this._temBack = cc.MenuItemSprite.create(new cc.Sprite("#ui_button_17.png"), new cc.Sprite("#ui_button_18.png"), this, this.back);
         var mBack = cc.Menu.create(this._temBack);
         this.addChild(mBack, 20);
         mBack.setPosition(cc.p(0, 0));
 
         //options button
-        this._menuBg = cc.Sprite.createWithSpriteFrameName(("ui_box_12.png"));
+        this._menuBg = new cc.Sprite("#ui_box_12.png");
         this.addChild(this._menuBg, 30);
 
         //title
-        this._title = cc.Sprite.createWithSpriteFrameName(ImageNameLang("button_other_aboutTitle.png", true));
+        this._title = new cc.Sprite("#" + ImageNameLang("button_other_aboutTitle.png", true));
         this.addChild(this._title, 31, 803);
 
-        /*this._other_push = cc.MenuItemSprite.create(cc.Sprite.createWithSpriteFrameName(ImageNameLang("button_other_039.png", true)));
+        /*this._other_push = cc.MenuItemSprite.create(new cc.Sprite("#" + ImageNameLang("button_other_039.png", true)));
         this._button_push = cc.MenuItemToggle.create(
             cc.MenuItemSprite.create(CSpriteLayer.getButtonBox("button_other_040.png", "ui_button_41.png", PlistAndPlist),
                 CSpriteLayer.getButtonBox("button_other_040.png", "ui_button_41.png", PlistAndPlist)),
@@ -217,19 +217,15 @@ var OptionsLayer = cc.Layer.extend({
         this._button_push.setSelectedIndex(closePush ? 1 : 0);*/
 
         this._button_BGM = cc.MenuItemToggle.create(
-            cc.MenuItemSprite.create(cc.Sprite.createWithSpriteFrameName("ui_button_40_01.png"),
-                cc.Sprite.createWithSpriteFrameName("ui_button_40_02.png")),
-            cc.MenuItemSprite.create(cc.Sprite.createWithSpriteFrameName("ui_button_39_01.png"),
-                cc.Sprite.createWithSpriteFrameName("ui_button_39_02.png")),
+            cc.MenuItemSprite.create(new cc.Sprite("#ui_button_40_01.png"), new cc.Sprite("#ui_button_40_02.png")),
+            cc.MenuItemSprite.create(new cc.Sprite("#ui_button_39_01.png"), new cc.Sprite("#ui_button_39_02.png")),
             this, this.mMusic);
         var closeMusic = GamePreference.getInstance().getPlayMusic();
         this._button_BGM.setSelectedIndex(closeMusic ? 1 : 0);
 
         this._button_music = cc.MenuItemToggle.create(
-            cc.MenuItemSprite.create(cc.Sprite.createWithSpriteFrameName("ui_button_38_1.png"),
-                cc.Sprite.createWithSpriteFrameName("ui_button_38_2.png")),
-            cc.MenuItemSprite.create(cc.Sprite.createWithSpriteFrameName("ui_button_37_1.png"),
-                cc.Sprite.createWithSpriteFrameName("ui_button_37_2.png")),
+            cc.MenuItemSprite.create(new cc.Sprite("#ui_button_38_1.png"), new cc.Sprite("#ui_button_38_2.png")),
+            cc.MenuItemSprite.create(new cc.Sprite("#ui_button_37_1.png"), new cc.Sprite("#ui_button_37_2.png")),
             this, this.sound);
         var closeSound = GamePreference.getInstance().getPlayEffect();
         this._button_music.setSelectedIndex(closeSound ? 1 : 0);

@@ -30,11 +30,11 @@ var WeaponCannon = Weapon.extend({
         if (!this._super(spriteName, shootName, pos, 0.1)) return;
         this._cannonLevel = weaponLevel;
         this.setAnchorPoint(cc.p(0.5, 0.5));
-        var menuLeft = cc.MenuItemSprite.create(cc.Sprite.createWithSpriteFrameName("ui_button_63.png"), cc.Sprite.createWithSpriteFrameName("ui_button_64.png"), this, this.changeWeapon);
+        var menuLeft = cc.MenuItemSprite.create(new cc.Sprite("#ui_button_63.png"), new cc.Sprite("#ui_button_64.png"), this, this.changeWeapon);
         menuLeft.setTag(CannonPowDow);
         menuLeft.setScale(0.7);
 
-        var menuRight = cc.MenuItemSprite.create(cc.Sprite.createWithSpriteFrameName("ui_button_65.png"), cc.Sprite.createWithSpriteFrameName("ui_button_66.png"), this, this.changeWeapon);
+        var menuRight = cc.MenuItemSprite.create(new cc.Sprite("#ui_button_65.png"), new cc.Sprite("#ui_button_66.png"), this, this.changeWeapon);
         menuRight.setTag(CannonPowUp);
         menuRight.setScale(0.7);
 

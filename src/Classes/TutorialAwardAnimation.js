@@ -8,7 +8,7 @@ TutorialAwardAnimation.addScoreNumber = function (score, count, target) {
         szLabel = (0 | szLabel);
         var fontSize = 48;
         var labelNum = cc.LabelAtlas.create(szLabel, ImageName("prizenum.png"), fontSize, fontSize, '0');
-        var prizeSprite = cc.Sprite.createWithSpriteFrameName(("prizesign1.png"));
+        var prizeSprite = new cc.Sprite("#prizesign1.png");
         var movePoition = cc.p(0, 48);
         var move = cc.p(prizeSprite.getContentSize().width / 2, -prizeSprite.getContentSize().height / 2);
 

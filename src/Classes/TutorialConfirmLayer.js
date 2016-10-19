@@ -28,7 +28,7 @@ var TutorialConfirmLayer = cc.LayerColor.extend({
         this._selector = selector;
         this._cancelSelector = cancelSelector;
 
-        this.setBackgroundSprite(cc.Sprite.createWithSpriteFrameName(imageName));
+        this.setBackgroundSprite(new cc.Sprite("#" + imageName));
         this.addChild(this.getBackgroundSprite());
         var backSize = this.getBackgroundSprite().getContentSize();
 
@@ -45,13 +45,13 @@ var TutorialConfirmLayer = cc.LayerColor.extend({
         var confirmPosOffset = cc.p(164, 22);
         var cancelPosOffset = cc.p(88, -22);
 
-        var confirm = cc.Sprite.createWithSpriteFrameName(confirmImage);
+        var confirm = new cc.Sprite("#" + confirmImage);
         var confirmLabel = cc.LabelTTF.create(confirmAction, "Microsoft YaHei", btnFontSize);
         confirmLabel.setAnchorPoint(cc.p(0.5, 0.5));
         confirmLabel.setPosition(cc.p(confirm.getContentSize().width / 2, confirm.getContentSize().height / 2));
         confirm.addChild(confirmLabel);
 
-        var selectedSprite = cc.Sprite.createWithSpriteFrameName(selectedImage);
+        var selectedSprite = new cc.Sprite("#" + selectedImage);
         var selectedLabel = cc.LabelTTF.create(confirmAction, "Microsoft YaHei", btnFontSize);
         selectedLabel.setPosition(cc.p(selectedSprite.getContentSize().width / 2, selectedSprite.getContentSize().height / 2));
         selectedSprite.addChild(selectedLabel);
@@ -60,13 +60,13 @@ var TutorialConfirmLayer = cc.LayerColor.extend({
         var confirmPos = cc.pSub(cc.p(backSize.width / 2, confirm.getContentSize().height), confirmPosOffset);
         menuItem.setPosition(confirmPos);
 
-        var cancel = cc.Sprite.createWithSpriteFrameName(confirmImage);
+        var cancel = new cc.Sprite("#" + confirmImage);
         var cancelLabel = cc.LabelTTF.create(cancelAction, "Microsoft YaHei", btnFontSize);
         cancelLabel.setAnchorPoint(cc.p(0.5, 0.5));
         cancelLabel.setPosition(cc.p(confirm.getContentSize().width / 2, confirm.getContentSize().height / 2));
         cancel.addChild(cancelLabel);
 
-        var selectedSprite0 = cc.Sprite.createWithSpriteFrameName(selectedImage);
+        var selectedSprite0 = new cc.Sprite("#" + selectedImage);
         var selectedLabel0 = cc.LabelTTF.create(cancelAction, "Microsoft YaHei", btnFontSize);
         selectedLabel0.setPosition(cc.p(selectedSprite0.getContentSize().width / 2, selectedSprite0.getContentSize().height / 2));
         selectedSprite0.addChild(selectedLabel0);
