@@ -71,7 +71,7 @@ var AboutLayer = cc.LayerColor.extend({
             this.addChild(this._title, 10);
 
             //back
-            this._back = cc.MenuItemSprite.create(new cc.Sprite("#ui_button_17.png"), new cc.Sprite("#ui_button_18.png"), this, this.goBackAnimation);
+            this._back = new cc.MenuItemSprite(new cc.Sprite("#ui_button_17.png"), new cc.Sprite("#ui_button_18.png"), this.goBackAnimation, this);
 
             var mBack = cc.Menu.create(this._back);
             this.addChild(mBack, 30);
