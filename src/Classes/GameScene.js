@@ -1116,9 +1116,9 @@ var GameScene = cc.Scene.extend({
         }
         playEffect(BUTTON_EFFECT);
         var blurImageName = "bgblur0" + this._backgroundLayer.getBgIdx() + "_01.jpg";
-        this._blurBackgroundLayer = cc.Sprite.create(ImageName(blurImageName));
+        this._blurBackgroundLayer = new cc.Sprite(ImageName(blurImageName));
         Multiple = AutoAdapterScreen.getInstance().getScaleMultiple();
-        this._blurBackgroundLayer.runAction(cc.FadeIn.create(0.6));
+        this._blurBackgroundLayer.runAction(new cc.FadeIn(0.6));
         this._blurBackgroundLayer.setPosition(VisibleRect.center());
         this._blurBackgroundLayer.setScale(Multiple);
         this.addChild(this._blurBackgroundLayer);
@@ -1142,8 +1142,8 @@ var GameScene = cc.Scene.extend({
             return;
         }
 
-        var sprite = cc.Sprite.create("guanghuan");
-        var s = cc.SpriteBatchNode.create(ImageName("guanghuan.png"));
+        var sprite = new cc.Sprite("guanghuan");
+        var s = new cc.SpriteBatchNode(ImageName("guanghuan.png"));
         s.setPosition(spbPos);
         sprite.setAction(0);
         sprite.setUpdatebySelf(true);
@@ -1559,20 +1559,20 @@ var GameScene = cc.Scene.extend({
 
         switch (this.getOddsNumber()) {
             case 1:
-                this._retainedResArray.push(cc.TextureCache.getInstance().addImage(ImageName("shayu.png")));
-                this._retainedResArray.push(cc.TextureCache.getInstance().addImage(ImageName("gshayu.png")));
-                this._retainedResArray.push(cc.TextureCache.getInstance().addImage(ImageName("butterfly.png")));
+                this._retainedResArray.push(cc.textureCache.addImage(ImageName("shayu.png")));
+                this._retainedResArray.push(cc.textureCache.addImage(ImageName("gshayu.png")));
+                this._retainedResArray.push(cc.textureCache.addImage(ImageName("butterfly.png")));
                 break;
             case 2:
-                this._retainedResArray.push(cc.TextureCache.getInstance().addImage(ImageName("grouper.png")));
-                this._retainedResArray.push(cc.TextureCache.getInstance().addImage(ImageName("gmarlins.png")));
-                this._retainedResArray.push(cc.TextureCache.getInstance().addImage(ImageName("marlins.png")));
-                this._retainedResArray.push(cc.TextureCache.getInstance().addImage(ImageName("butterfly.png")));
+                this._retainedResArray.push(cc.textureCache.addImage(ImageName("grouper.png")));
+                this._retainedResArray.push(cc.textureCache.addImage(ImageName("gmarlins.png")));
+                this._retainedResArray.push(cc.textureCache.addImage(ImageName("marlins.png")));
+                this._retainedResArray.push(cc.textureCache.addImage(ImageName("butterfly.png")));
                 break;
             case 3:
-                this._retainedResArray.push(cc.TextureCache.getInstance().addImage(ImageName("shayu.png")));
-                this._retainedResArray.push(cc.TextureCache.getInstance().addImage(ImageName("goldentrout.png")));
-                this._retainedResArray.push(cc.TextureCache.getInstance().addImage(ImageName("gshayu.png")));
+                this._retainedResArray.push(cc.textureCache.addImage(ImageName("shayu.png")));
+                this._retainedResArray.push(cc.textureCache.addImage(ImageName("goldentrout.png")));
+                this._retainedResArray.push(cc.textureCache.addImage(ImageName("gshayu.png")));
                 break;
         }
 
