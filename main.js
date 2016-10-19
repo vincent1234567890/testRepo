@@ -17,11 +17,11 @@ var playEffect = function (effectFilePath) {
 };
 var playMusic = function (musicfile, loop) {
     if (!musicfile) {
-        musicfile = "music_1";
+        musicfile = res.music_1;
     }
     var ret = GamePreference.getInstance().getPlayMusic();
     if (ret) {
-        return cc.audioEngine.playMusic("res/music/" + musicfile, loop);
+        return cc.audioEngine.playMusic( musicfile, loop);
     }
 };
 
