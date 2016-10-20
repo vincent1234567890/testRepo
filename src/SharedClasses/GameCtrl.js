@@ -85,7 +85,8 @@ var GameCtrl = cc.Class.extend({
         var gameAPIServerUrl = 'ws://3dfishing88888.sinonet.sg:8080';
         var localNames = ['localhost', '127.0.0.1', '127.0.1.1', '0.0.0.0'];
         if (localNames.indexOf(window.location.hostname) >= 0) {
-            gameAPIServerUrl = 'ws://localhost:8080';
+            //gameAPIServerUrl = 'ws://localhost:8080';
+            gameAPIServerUrl = 'ws://192.168.1.1:8080';
         }
         
         var gameCtrl = this;
@@ -130,18 +131,24 @@ var GameCtrl = cc.Class.extend({
                 // Log in
                 (testPlayer) => client.callAPIOnce('game', 'login', {id: testPlayer.id, password: 'test_password.12345'})
             ).then(
-                () => client.callAPIOnce('game', 'joinGame', {})
-            ).then(
                 () => {
                     // Start listening for game events
                     var ioSocket = socketUtils.getIOSocketFromClient(client);
 
+                    return client.callAPIOnce('game', 'joinGame', {}).then(
+                        joinResponse => console.log("joinResponse:", joinResponse)
+                    ).then(
+                        () => ioSocket
+                    );
+                }
+            ).then(
+                (ioSocket) => {
                     // So this object has on() and off() functions for receiving messages, and send() for sending them.
                     gameCtrl.setWebSocket(ioSocket);
 
                     // Testing
                     ioSocket.on('u', console.log);
-                    ioSocket.send('b', {a: Math.PI / 4});
+                    ioSocket.emit('b', {a: Math.PI / 4});
                 }
             ).catch(console.error.bind(console));
         });
