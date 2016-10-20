@@ -131,7 +131,8 @@ var StartMenuLayer = cc.Layer.extend({
     },
     EnterSceneSelect:function () {
         GameCtrl.sharedGame().homeWithStage();
-        StageSelectLayer.getInstance().SetDefaultPage(3);
+        var stageSelect = new StageSelectLayer();
+        stageSelect.setDefaultPage(3);
     },
     cancelEnterSceneSelect:function () {
         if (this._enterNewLayer) {
