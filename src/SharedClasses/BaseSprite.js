@@ -25,7 +25,7 @@ function SPTile(tileIndex, angle, scaleArr, flipArr, position, anchorPt, color, 
     this.flip = flipArr || [];
     this.position = position || new cc.Point(0, 0);
     this.anchorPt = anchorPt || new cc.Point(0, 0);
-    this.color = color || cc.white();
+    this.color = color || cc.color.WHITE;
     this.opacity = opacity || 0;
 }
 
@@ -64,10 +64,12 @@ function Action(loop, frames, frameCount) {
 var NSDataStream = cc.Class.extend({
     _offset:0,
     _data:null,
+    debugString : null,
 
     initWithContentsOfMappedFile:function (filePath) {
         this._offset = 0;
         this._data = cc.loader.getRes(filePath);
+        this.debugString = filePath;
         return true;
     },
 
@@ -177,7 +179,7 @@ var integerToColor3B = function (intValue) {
     intValue = intValue || 0;
 
     var offset = 0xff;
-    var retColor = new cc.Color3B();
+    var retColor = new cc.color();
     retColor.r = intValue & (offset);
     retColor.g = (intValue >> 8) & offset;
     retColor.b = (intValue >> 16) & offset;
@@ -197,7 +199,7 @@ var SpriteData = cc.Class.extend({
     initWithFile:function (filePath) {
         var i, j, k;
 
-        var fullPath = filePath + ".sprite";
+        var fullPath = filePath;
         //todo need to
         //fullPath = ImageName(fullPath);
         var data = NSDataStream.streamWithContentsOfMappedFile(fullPath);
@@ -339,7 +341,8 @@ var BaseSprite = cc.Sprite.extend({
     getCurRotation:function () {
         return -this._rotationRadians;
     },
-    initWithFile:function (defName, imgName) {
+
+    ctor:function (defName, imgName) {
         this._super(imgName);
         this._actionIndex = 0;
         this._sequenceIndex = 0;
@@ -663,7 +666,7 @@ var BaseSprite = cc.Sprite.extend({
         for (var i = 0; i < this._sd.frameData[frameIndex].tileCount; i++) {
             var tile = this._sd.frameData[frameIndex].tileData[i];
             //var size = cc.RectFromString(this._sd.tileData[tile.tileIndex]).size;
-            var size = this._sd.tileData[tile.tileIndex].size;
+            var size = this._sd.tileData[tile.tileIndex];
             fishSize.width = size.width;
             fishSize.height = size.height;
         }

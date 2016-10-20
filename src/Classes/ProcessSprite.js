@@ -89,7 +89,7 @@ var ProcessSprite = cc.Sprite.extend({
             return false;
         }
         this.needFade = false;
-        if (this.initWithFile(ImageName(def.getBackgroundImage()))) {
+        // if (this.initWithFile(ImageName(def.getBackgroundImage()))) { // Eugene : not supposed to call directly
             this.processDef = def;
             this.fullSprite = new cc.Sprite(ImageName(def.getBloodImage()));
             this.halfSprite = new cc.Sprite(ImageName(def.getBloodImage()));
@@ -101,12 +101,12 @@ var ProcessSprite = cc.Sprite.extend({
             this.originalPosition = cc.p(0/* + def.getOffset().width*/, sprite.getContentSize().height / 2/* + def.getOffset().height*/);
             sprite.setPosition(this.originalPosition);
 
-            var spriteBg = new cc.Sprite(ImageName(def.getBackgroundImage()));
+            var spriteBg = new cc.Sprite(ImageName(def.getBackgroundImage())); //Eugene : took out if (), was commented out in original and also already initialised here
             this.addChild(spriteBg, 2);
             spriteBg.setPosition(cc.p(spriteBg.getContentSize().width / 2, spriteBg.getContentSize().height / 2));
 
             this.updatePosition();
-        }
+        // }
         return true;
     },
     setBloodValue:function (value) {

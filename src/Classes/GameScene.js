@@ -317,12 +317,12 @@ var GameScene = cc.Scene.extend({
     startAction:function () {
         var frameCache = cc.spriteFrameCache;
         frameCache.addSpriteFrames(ImageName("jinbi.plist"));
-        var rotateBy1 = cc.RotateBy.create(1.4 * 25, 360);
-        var repeat1 = cc.Repeat.create(rotateBy1, 20);
+        var rotateBy1 = new cc.RotateBy(1.4 * 25, 360);
+        var repeat1 = new cc.Repeat(rotateBy1, 20);
         this._prizeSprite.getChildByTag(kTagPrizeLight1).runAction(cc.Sequence.create(repeat1));
 
-        var rotateBy2 = cc.RotateBy.create(12.5, 360);
-        var repeat2 = cc.Repeat.create(rotateBy2, 20);
+        var rotateBy2 = new cc.RotateBy(12.5, 360);
+        var repeat2 = new cc.Repeat(rotateBy2, 20);
         this._prizeSprite.getChildByTag(kTagPrizeLight2).runAction(cc.Sequence.create(repeat2));
 
         for (var j = 0; j < 2; ++j) {
@@ -332,15 +332,15 @@ var GameScene = cc.Scene.extend({
                 var size = VisibleRect.rect();
                 guang3.setPosition(cc.p(size.width / 2 - 39 + i * 19, size.height / 2 + 27 - j * 48));
                 this._prizeSprite.addChild(guang3, kTagPrizeLight3, kTagPrizeLight3 + (j + 1) * (i + 1));
-                var rotateBy3 = cc.RotateBy.create(3, 360);
-                var repeat3 = cc.Repeat.create(rotateBy3, 60);
-                var fadeIn = cc.FadeIn.create(0.7);
-                var fadeOut = cc.FadeOut.create(0.5);
-                var delayTime = cc.DelayTime.create(0.5);
-                var twinkle = cc.Sequence.create(fadeIn, delayTime, fadeOut);
-                var twinkle1 = cc.Repeat.create(twinkle, 20);
-                var spawn = cc.Spawn.create(repeat3, twinkle1);
-                guang3.runAction(cc.Sequence.create(spawn));
+                var rotateBy3 = new cc.RotateBy(3, 360);
+                var repeat3 = new cc.Repeat(rotateBy3, 60);
+                var fadeIn = new cc.FadeIn(0.7);
+                var fadeOut = new cc.FadeOut(0.5);
+                var delayTime = new cc.DelayTime(0.5);
+                var twinkle = new cc.Sequence(fadeIn, delayTime, fadeOut);
+                var twinkle1 = new cc.Repeat(twinkle, 20);
+                var spawn = new cc.Spawn(repeat3, twinkle1);
+                guang3.runAction(new cc.Sequence(spawn));
 
             } // for
         } // for
@@ -590,10 +590,10 @@ var GameScene = cc.Scene.extend({
     },
     clearGameResource:function () {
         // 停掉所有的定时器
-        cc.director.getScheduler().unscheduleAllSelectorsForTarget(this);
+        cc.director.getScheduler().unscheduleAllForTarget(this);
         this.stopAllActions();
         if (this._cannonActor) {
-            cc.director.getScheduler().unscheduleAllSelectorsForTarget(this._cannonActor);
+            cc.director.getScheduler().unscheduleAllForTarget(this._cannonActor);
         }
 
         // 隐藏广告条
@@ -690,8 +690,8 @@ var GameScene = cc.Scene.extend({
         }
         playEffect(BUTTON_EFFECT);
         var blurImageName = "bgblur0" + this._backgroundLayer.getBgIdx() + "_01.jpg";
-        this._blurBackgroundLayer = cc.Sprite.create(ImageName(blurImageName));
-        this._blurBackgroundLayer.runAction(cc.FadeIn.create(0.6));
+        this._blurBackgroundLayer = new cc.Sprite(ImageName(blurImageName));
+        this._blurBackgroundLayer.runAction(new cc.FadeIn(0.6));
         this._blurBackgroundLayer.setPosition(bgPos);
         this._blurBackgroundLayer.setScale(Multiple);
         this.getLayer().addChild(this._blurBackgroundLayer, 150);
@@ -709,9 +709,9 @@ var GameScene = cc.Scene.extend({
         }
         playEffect(BUTTON_EFFECT);
         var blurImageName = "bgblur0" + this._backgroundLayer.getBgIdx() + "_01.jpg";
-        this._blurBackgroundLayer = cc.Sprite.create(ImageName(blurImageName));
+        this._blurBackgroundLayer = new cc.Sprite(ImageName(blurImageName));
         Multiple = AutoAdapterScreen.getInstance().getScaleMultiple();
-        this._blurBackgroundLayer.runAction(cc.FadeIn.create(0.6));
+        this._blurBackgroundLayer.runAction(new cc.FadeIn(0.6));
         this._blurBackgroundLayer.setPosition(VisibleRect.center());
         this._blurBackgroundLayer.setScale(Multiple);
         this.getLayer().addChild(this._blurBackgroundLayer);
@@ -2167,10 +2167,10 @@ var GameScene = cc.Scene.extend({
         }
 
         //btn
-        this._itemMusicPlayer.setPosition(cc.p(VisibleRect.topLeft().x + 125, VisibleRect.topLeft().y - this._itemPause.getContentSize().height / 2));
+        // this._itemMusicPlayer.setPosition(cc.p(VisibleRect.topLeft().x + 125, VisibleRect.topLeft().y - this._itemPause.getContentSize().height / 2));
         this._itemPause.setPosition(cc.p(VisibleRect.topLeft().x + 45, VisibleRect.topLeft().y - this._itemPause.getContentSize().height / 2));
         this._itemHide.setPosition(cc.p(VisibleRect.topRight().x - 45, VisibleRect.topRight().y - this._itemHide.getContentSize().height / 2));
-        this._itemCamera.setPosition(cc.p(VisibleRect.topRight().x - 125, VisibleRect.topRight().y - this._itemCamera.getContentSize().height / 2));
+        // this._itemCamera.setPosition(cc.p(VisibleRect.topRight().x - 125, VisibleRect.topRight().y - this._itemCamera.getContentSize().height / 2));
 
         //userinfo layer
         this._userInfoLayer._bgSprite.setPosition(VisibleRect.top());

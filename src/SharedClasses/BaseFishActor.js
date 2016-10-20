@@ -47,7 +47,7 @@ var ccBezierConfig5 = cc.Class.extend({
 });
 
 var BaseFishActor = BaseActor.extend({
-    ctor:function () {
+    ctor:function (defname, imgname) {
         this.offset = {x:0, y:0};
         this.createPosition = {x:0, y:0};
         this.straightDirVec = {x:0, y:0};
@@ -55,6 +55,17 @@ var BaseFishActor = BaseActor.extend({
         this.straightStartPosition = {x:0, y:0};
         this.straightEndPosition = {x:0, y:0};
         this.controlPoint = {x:0, y:0};
+
+        this._super(defname, imgname);
+        this._group = GroupFishActor;
+        this._fishType = FISH.smallFish;
+        this.speed = 100;
+        this.curCollideIndex = -1;
+        this.curAttackState = AttackState.eAttackStateNone;
+        this.HP = 0;
+        this.fishAttackedType = FishAttackedType.eFishAttackedNormal;
+        this.curAction = 0;
+        this.setAction(this.curAction);
     },
     initWithDef:function (def) {
         this.fishSortLevel = ["10", "9", "8", "7", "6", "5", "4", "12", "3", "2", "1", "0", "11"];
@@ -68,20 +79,20 @@ var BaseFishActor = BaseActor.extend({
     setGroup:function (group) {
         this._group = group
     },
-    initWithSpriteName:function (defname, imgname) {
-        this._super(defname, imgname);
-        this._group = GroupFishActor;
-        this._fishType = FISH.smallFish;
-        this.speed = 100;
-        this.curCollideIndex = -1;
-        this.curAttackState = AttackState.eAttackStateNone;
-        this.HP = 0;
-        this.fishAttackedType = FishAttackedType.eFishAttackedNormal;
-        this.curAction = 0;
-        this.setAction(this.curAction);
-        //this.setUpdatebySelf(true);
-        return true;
-    },
+    // initWithSpriteName:function (defname, imgname) {
+    //     this._super(defname, imgname);
+    //     this._group = GroupFishActor;
+    //     this._fishType = FISH.smallFish;
+    //     this.speed = 100;
+    //     this.curCollideIndex = -1;
+    //     this.curAttackState = AttackState.eAttackStateNone;
+    //     this.HP = 0;
+    //     this.fishAttackedType = FishAttackedType.eFishAttackedNormal;
+    //     this.curAction = 0;
+    //     this.setAction(this.curAction);
+    //     //this.setUpdatebySelf(true);
+    //     return true;
+    // },
     resetState:function () {
         this._super();
         this.curAttackState = AttackState.eAttackStateNone;
@@ -2628,10 +2639,10 @@ var BaseFishActor = BaseActor.extend({
 
 
 var LanternActor = BaseFishActor.extend({
-    initWithDef:function (def_) {
+    ctor:function (def_) {
         this._def = def_;
         var bRet = false;
-        bRet = this.initWithSpriteName("lantern", "fish.png");
+        bRet = this._super(res.LanternSprite, res.FishPng);
         if (bRet) {
             this._fishLevel = FishLevel.eFishLevel3;
             this._fishType = FishType.mediumFish;
@@ -2646,10 +2657,10 @@ var LanternActor = BaseFishActor.extend({
 });
 
 var SharkActor = BaseFishActor.extend({
-    initWithDef:function (def_) {
+    ctor:function (def_) {
         this._def = def_;
         var bRet = false;
-        bRet = this.initWithSpriteName("shark", "shayu.png");
+        bRet = this._super(res.SharkSprite, res.FishPng);
         if (bRet) {
             this._fishLevel = FishLevel.eFishLevel1;
             this._fishType = FishType.bigFish;
@@ -2664,10 +2675,10 @@ var SharkActor = BaseFishActor.extend({
 });
 
 var PorgyActor = BaseFishActor.extend({
-    initWithDef:function (def_) {
+    ctor:function (def_) {
         this._def = def_;
         var bRet = false;
-        bRet = this.initWithSpriteName("progy", "fish.png");
+        bRet = this._super(res.ProgySprite, res.FishPng);
         if (bRet) {
             this._fishLevel = FishLevel.eFishLevel5;
             this._fishType = FishType.mediumFish;
@@ -2682,10 +2693,10 @@ var PorgyActor = BaseFishActor.extend({
 });
 
 var AmphiprionActor = BaseFishActor.extend({
-    initWithDef:function (def_) {
+    ctor:function (def_) {
         this._def = def_;
         var bRet = false;
-        bRet = this.initWithSpriteName("amphiprion", "fish.png");
+        bRet = this._super(res.AmphiprionSprite, res.FishPng);
         if (bRet) {
             this._fishLevel = FishLevel.eFishLevel7;
             this._fishType = FishType.smallFish;
@@ -2700,10 +2711,10 @@ var AmphiprionActor = BaseFishActor.extend({
 });
 
 var PufferActor = BaseFishActor.extend({
-    initWithDef:function (def_) {
+    ctor:function (def_) {
         this._def = def_;
         var bRet = false;
-        bRet = this.initWithSpriteName("puffer", "fish.png");
+        bRet = this._super(res.PufferSprite, res.FishPng);
         if (bRet) {
             this._fishLevel = FishLevel.eFishLevel8;
             this._fishType = FishType.balloonfish;
@@ -2718,10 +2729,10 @@ var PufferActor = BaseFishActor.extend({
 });
 
 var CroakerActor = BaseFishActor.extend({
-    initWithDef:function (def_) {
+    ctor:function (def_) {
         this._def = def_;
         var bRet = false;
-        bRet = this.initWithSpriteName("croaker", "fish.png");
+        bRet = this._super(res.CroakerSprite, res.FishPng);
         if (bRet) {
             this._fishLevel = FishLevel.eFishLevel10;
             this._fishType = FishType.smallFish;
@@ -2737,10 +2748,10 @@ var CroakerActor = BaseFishActor.extend({
 
 
 var RayActor = BaseFishActor.extend({
-    initWithDef:function (def_) {
+    ctor:function (def_) {
         this._def = def_;
         var bRet = false;
-        bRet = this.initWithSpriteName("ray", "fish.png");
+        bRet = this._super(res.RaySprite, res.FishPng);
         if (bRet) {
             this._fishLevel = FishLevel.eFishLevel2;
             this._fishType = FishType.mediumFish;
@@ -2755,10 +2766,10 @@ var RayActor = BaseFishActor.extend({
 });
 
 var ChelonianActor = BaseFishActor.extend({
-    initWithDef:function (def_) {
+    ctor:function (def_) {
         this._def = def_;
         var bRet = false;
-        bRet = this.initWithSpriteName("chelonian", "fish.png");
+        bRet = this._super(res.ChelonianSprite, res.FishPng);
         if (bRet) {
             this._fishLevel = FishLevel.eFishLevel4;
             this._fishType = FishType.mediumFish;
@@ -2773,10 +2784,10 @@ var ChelonianActor = BaseFishActor.extend({
 });
 
 var BreamActor = BaseFishActor.extend({
-    initWithDef:function (def_) {
+    ctor:function (def_) {
         this._def = def_;
         var bRet = false;
-        bRet = this.initWithSpriteName("bream", "fish.png");
+        bRet = this._super(res.BreamSprite, res.FishPng);
         if (bRet) {
             this._fishLevel = FishLevel.eFishLevel6;
             this._fishType = FishType.mediumFish;
@@ -2791,10 +2802,10 @@ var BreamActor = BaseFishActor.extend({
 });
 
 var AngleFishActor = BaseFishActor.extend({
-    initWithDef:function (def_) {
+    ctor:function (def_) {
         this._def = def_;
         var bRet = false;
-        bRet = this.initWithSpriteName("angelfish", "fish.png");
+        bRet = this._super(res.AngelfishSprite, res.FishPng);
         if (bRet) {
             this._fishLevel = FishLevel.eFishLevel9;
             this._fishType = FishType.smallFish;
@@ -2809,10 +2820,10 @@ var AngleFishActor = BaseFishActor.extend({
 });
 
 var SmallFishActor = BaseFishActor.extend({
-    initWithDef:function (def_) {
+    ctor:function (def_) {
         this._def = def_;
         var bRet = false;
-        bRet = this.initWithSpriteName("smallfishactor", "fish.png");
+        bRet = this._super(res.SmallFishActorSprite, res.FishPng);
         if (bRet) {
             this._fishLevel = FishLevel.eFishLevel11;
             this._fishType = FishType.smallFish;
@@ -2827,10 +2838,10 @@ var SmallFishActor = BaseFishActor.extend({
 });
 
 var MarlinsFishActor = BaseFishActor.extend({
-    initWithDef:function (def_) {
+    ctor:function (def_) {
         this._def = def_;
         var bRet = false;
-        bRet = this.initWithSpriteName("marlins", "marlins.png");
+        bRet = this._super(res.MarlinSprite, res.MarlinPng);
         if (bRet) {
             this._fishLevel = FishLevel.eFishLevel12;
             this._fishType = FishType.bigFish;
@@ -2845,10 +2856,10 @@ var MarlinsFishActor = BaseFishActor.extend({
 });
 
 var GrouperFishActor = BaseFishActor.extend({
-    initWithDef:function (def_) {
+    ctor:function (def_) {
         this._def = def_;
         var bRet = false;
-        bRet = this.initWithSpriteName("grouper", "grouper.png");
+        bRet = this._super(res.GrouperSprite, res.GrouperPng);
         if (bRet) {
             this._fishLevel = FishLevel.eFishLevel13;
             this._fishType = FishType.mediumFish;
@@ -2863,10 +2874,10 @@ var GrouperFishActor = BaseFishActor.extend({
 });
 
 var GSharkActor = BaseFishActor.extend({
-    initWithDef:function (def_) {
+    ctor:function (def_) {
         this._def = def_;
         var bRet = false;
-        bRet = this.initWithSpriteName("gshayu", "gshayu.png");
+        bRet = this._super(res.GSharkSprite, res.GSharkPng);
         if (bRet) {
             this._fishLevel = FishLevel.eFishLevel1;
             this._fishType = FishType.bigFish;
@@ -2881,10 +2892,10 @@ var GSharkActor = BaseFishActor.extend({
 });
 
 var GMarlinsFishActor = BaseFishActor.extend({
-    initWithDef:function (def_) {
+    ctor:function (def_) {
         this._def = def_;
         var bRet = false;
-        bRet = this.initWithSpriteName("gmarlins", "gmarlins.png");
+        bRet = this._super(res.GMarlinSprite, res.GMarlinPng);
         if (bRet) {
             this._fishLevel = FishLevel.eFishLevel12;
             this._fishType = FishType.bigFish;
@@ -2899,10 +2910,10 @@ var GMarlinsFishActor = BaseFishActor.extend({
 });
 
 var ButterflyActor = BaseFishActor.extend({
-    initWithDef:function (def_) {
+    ctor:function (def_) {
         this._def = def_;
         var bRet = false;
-        bRet = this.initWithSpriteName("butterfly", "butterfly.png");
+        bRet = this._super(res.ButterflySprite, res.ButterflyPng);
         if (bRet) {
             this._fishLevel = FishLevel.eFishLevel7;
             this._fishType = FishType.mediumFish;
@@ -2917,10 +2928,10 @@ var ButterflyActor = BaseFishActor.extend({
 });
 
 var PomfretActor = BaseFishActor.extend({
-    initWithDef:function (def_) {
+    ctor:function (def_) {
         this._def = def_;
         var bRet = false;
-        bRet = this.initWithSpriteName("pomfret", "butterfly.png");
+        bRet = this._super(res.PomfretSprite, res.ButterflyPng);
         if (bRet) {
             this._fishLevel = FishLevel.eFishLevel9;
             this._fishType = FishType.smallFish;
@@ -2935,10 +2946,10 @@ var PomfretActor = BaseFishActor.extend({
 });
 
 var GoldenTroutActor = BaseFishActor.extend({
-    initWithDef:function (def_) {
+    ctor:function (def_) {
         this._def = def_;
         var bRet = false;
-        bRet = this.initWithSpriteName("goldentrout", "goldentrout.png");
+        bRet = this._super(res.GoldenTroutSprite, res.GoldenTroutPng);
         if (bRet) {
             this._fishLevel = FishLevel.eFishLevel5;
             this._fishType = FishType.mediumFish;
