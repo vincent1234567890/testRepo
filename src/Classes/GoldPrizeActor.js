@@ -389,7 +389,7 @@ var MaxChestActor = ChestActor.extend({
             this.deleteBigChest();
         }
         else{
-            this.getScheduler().unscheduleSelector(this.addGoldAt, this);
+            this.getScheduler().unschedule(this.addGoldAt, this);
             this.addGoldAt(this.m_pCallParamDict);
         }
     },
@@ -415,7 +415,7 @@ var MaxChestActor = ChestActor.extend({
             this.getScene().addActor(goldcoin);
         }
         else{
-            this.getScheduler().unscheduleSelector(this.addGoldPrizeDel, this);
+            this.getScheduler().unschedule(this.addGoldPrizeDel, this);
             this.addGoldPrizeDel(this.m_pCallParamDict);
         }
     },
@@ -626,7 +626,7 @@ var MaxChestActor = ChestActor.extend({
                 }
                 else
                 {
-                    this.getScheduler().scheduleSelector(this.addGoldAt, this, 0.5, false);
+                    this.getScheduler().schedule(this.addGoldAt, this, 0.5, false);
                 }
             }
         }

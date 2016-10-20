@@ -70,11 +70,11 @@ var WeaponSpecialLevinStorm = WeaponSpecial.extend({
 
         var currentScene = GameCtrl.sharedGame().getCurScene();
         currentScene.cancelChange();
-        cc.director.getScheduler().scheduleSelector(this.specialShootingFinished, this, 2.0, false);
+        cc.director.getScheduler().schedule(this.specialShootingFinished, this, 2.0, false);
         this._isPowerUp = false;
     },
     addLevinStormBullet:function (dt) {
-        cc.director.getScheduler().unscheduleSelector(this.addLevinStormBullet, this);
+        cc.director.getScheduler().unschedule(this.addLevinStormBullet, this);
         //KingFisher cc.log("Playing add bullet sound.");
         this._levinStormBulletSoundEffect = playEffect(LEVINSTORM_EFFECT);
         this.createLevinStormBullet(this._targetPoint);
@@ -124,7 +124,7 @@ var WeaponSpecialLevinStorm = WeaponSpecial.extend({
         this.checkAndCleanOldNormalGain();
         this.updateEnergy();
         this.powerUp();
-        cc.director.getScheduler().scheduleSelector(this.addLevinStormBullet, this, 2, false);
+        cc.director.getScheduler().schedule(this.addLevinStormBullet, this, 2, false);
 
         this._weaponSprite.runAction(this._shootAnimation);
     }

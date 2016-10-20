@@ -24,15 +24,19 @@ var TouchLayer = cc.Layer.extend({
     setEnable:function (enabled) {
         if (this._enable != enabled) {
             this._enable = enabled;
-            if (this._enable) {
-                cc.Director.getInstance().getTouchDispatcher().addStandardDelegate(this, 0);
-            }
-            else {
-                cc.Director.getInstance().getTouchDispatcher().removeDelegate(this);
-            }
+            // if (this._enable) {
+            //     // cc.Director.getInstance().getTouchDispatcher().addStandardDelegate(this, 0);
+            //     // cc.addTouchEventListener(this.setEnable, this);
+            //
+            // }
+            // else {
+            //     // cc.Director.getInstance().getTouchDispatcher().removeDelegate(this);
+            //     // cc.removeDelegate(this.setEnable, this);
+            // }
         }
     },
     onTouchesBegan:function (touches, event) {
+        if ( ! this._enable) return;
         var touchPoint = touches[0].getLocation();
         var array = [];
 
@@ -48,6 +52,7 @@ var TouchLayer = cc.Layer.extend({
     },
 
     onTouchesMoved:function (touches, event) {
+        if ( ! this._enable) return;
         var touchLocation = touches[0].getLocation();
 
         if (MOUSE_DOWN) {
@@ -68,6 +73,7 @@ var TouchLayer = cc.Layer.extend({
         }
     },
     onTouchesEnded:function (touches, event) {
+        if ( ! this._enable) return;
         if (touches.length != 0) {
             var touchPoint = touches[0].getLocation();
             if (this._delegate) {

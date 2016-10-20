@@ -94,7 +94,6 @@ var StartMenuLayer = cc.Layer.extend({
 
     },
     initStartLayer:function () {
-        console.log("initStartLayer");
         // item1 = Start button
         this._newGameItem = new cc.MenuItemSprite(
             CSpriteLayer.getButtonBoxOffsetY("btn_start_1.png", ImageNameLang("txt_start.png"), PlistAndPlist, 1),
@@ -304,7 +303,6 @@ var StartMenuLayer = cc.Layer.extend({
 });
 
 StartMenuLayer.create = function () {
-    console.log("StartMenuLayer.create");
     var ret = new StartMenuLayer();
     if (ret && ret.init()) {
         return ret;
