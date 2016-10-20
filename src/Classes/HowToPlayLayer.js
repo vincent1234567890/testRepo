@@ -14,6 +14,7 @@ var HowToPlayLayer = cc.Layer.extend({
     _touchListener: null,
 
     ctor:function () {
+        this._super();
         cc.Layer.prototype.ctor.call(this);
 
         this._curPageIndicator = [];
@@ -60,7 +61,7 @@ var HowToPlayLayer = cc.Layer.extend({
     onEnter:function(){
         cc.Layer.prototype.onEnter.call(this);
 
-        this.setKeyboardEnabled(true);
+        // this.setKeyboardEnabled(true);
         var cache = cc.spriteFrameCache;
         cache.addSpriteFrames(ImageNameLang("StageSelectLayer.plist"));
         cache.addSpriteFrames(ImageNameLang("tutorial_uibox.plist"));
@@ -224,11 +225,12 @@ HowToPlayLayer.create = function () {
 var HelpImagesLayer = cc.Layer.extend({
     shadeArray:null,
     ctor:function () {
+        this._super();
         this.shadeArray = [];
     },
     draw:function (ctx) {
-        if (cc.renderContextType == cc.CANVAS) {
-            var context = ctx || cc.renderContext;
+        if (cc._renderType == cc.RENDER_TYPE_CANVAS) {
+            var context = ctx || cc._renderContext;
 
             var size = this.getContentSize();
             context.beginPath();
@@ -243,9 +245,5 @@ var HelpImagesLayer = cc.Layer.extend({
 });
 
 HelpImagesLayer.create = function () {
-    var h = new HelpImagesLayer();
-    if (h.init()) {
-        return h;
-    }
-    return null;
+    return new HelpImagesLayer();
 };
