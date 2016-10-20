@@ -61,7 +61,7 @@ var BulletActor = BaseActor.extend({
             this.addFishNet();
         }
 
-        if (this._gunShootDistance > this._maxShootDistance || !cc.Rect.CCRectContainsPoint(EScreenRect, this.getPosition())) {
+        if (this._gunShootDistance > this._maxShootDistance || !cc.rectContainsPoint(EScreenRect, this.getPosition())) {
             this._isAlive = false;
             this.removeSelfFromScene();
             return;
@@ -109,20 +109,20 @@ var BulletActor = BaseActor.extend({
         var tempPar;
         if (this._curWeaponLevel == FishWeaponType.eWeaponLevel5) {
             tempPar = ParticleSystemFactory.getInstance().createParticle(ImageName("lizibianhua1.plist"));
-            tempPar.setDrawMode(cc.PARTICLE_SHAPE_MODE);
-            tempPar.setShapeType(cc.PARTICLE_STAR_SHAPE);
+            tempPar.setDrawMode(cc.ParticleSystem.SHAPE_MODE);
+            tempPar.setShapeType(cc.ParticleSystem.STAR_SHAPE);
         } else if (this._curWeaponLevel == FishWeaponType.eWeaponLevel6) {
             tempPar = ParticleSystemFactory.getInstance().createParticle(ImageName("lizibianhua2.plist"));
-            tempPar.setDrawMode(cc.PARTICLE_SHAPE_MODE);
-            tempPar.setShapeType(cc.PARTICLE_STAR_SHAPE);
+            tempPar.setDrawMode(cc.ParticleSystem.SHAPE_MODE);
+            tempPar.setShapeType(cc.ParticleSystem.STAR_SHAPE);
         } else if (this._curWeaponLevel == FishWeaponType.eWeaponLevel7) {
             tempPar = ParticleSystemFactory.getInstance().createParticle(ImageName("lizibianhua3.plist"));
-            tempPar.setDrawMode(cc.PARTICLE_SHAPE_MODE);
-            tempPar.setShapeType(cc.PARTICLE_STAR_SHAPE);
+            tempPar.setDrawMode(cc.ParticleSystem.SHAPE_MODE);
+            tempPar.setShapeType(cc.ParticleSystem.STAR_SHAPE);
         } else if (this._curWeaponLevel == FishWeaponType.eWeaponLevel10) {
             tempPar = ParticleSystemFactory.getInstance().createParticle(ImageName("lizibianhua3.plist"));
-            tempPar.setDrawMode(cc.PARTICLE_SHAPE_MODE);
-            tempPar.setShapeType(cc.PARTICLE_STAR_SHAPE);
+            tempPar.setDrawMode(cc.ParticleSystem.SHAPE_MODE);
+            tempPar.setShapeType(cc.ParticleSystem.STAR_SHAPE);
         } else {
             tempPar = ParticleSystemFactory.getInstance().createParticle(ImageName("yuwanglizi.plist"));
         }
@@ -429,7 +429,7 @@ var SwirlBulletActor = BulletActor.extend({
         this.fLiveTime = 0;
     },
     removeSelfFromScene:function () {
-        cc.Scheduler.getInstance().unscheduleAllSelectorsForTarget(this);
+        cc.director.getScheduler().unscheduleAllForTarget(this);
 
         if (this.bExplode) {
             this.getExplodeNode().stopAllActions();
@@ -534,26 +534,23 @@ var RayBulletActor = BulletActor.extend({
         return ret;
     },
     update:function () {
-        var _time = cc.Time.gettimeofdayCocos2d();
+        var _time = Date.now();
 
         if (!this._firstUpdate) {
             this._firstUpdate = true;
             this._lastTime = _time;
         }
 
-
         var dms = this._sd.actionData[this._actionIndex].frames[this._sequenceIndex].delay / 1000;
-        var subTime = (_time.tv_sec - this._lastTime.tv_sec) + (_time.tv_usec - this._lastTime.tv_usec) / 1000000.0;
-
+        var subTime = (_time - this._lastTime) / 1000.0;
         if (((subTime >= dms) || (subTime < 0)) && !this._stopByNotLoop) {
             this._sequenceIndex = (this._sequenceIndex + 1) % this._sd.actionData[this._actionIndex].frameCount;
             this._lastTime = _time;
 
             if (!this._sd.actionData[this._actionIndex].loop && ((this._sequenceIndex + 1) == this._sd.actionData[this._actionIndex].frameCount)) {
                 this._stopByNotLoop = true;
-                if (this._delegate && this._didStopSelector) {
+                if (this._delegate && this._didStopSelector)
                     this._didStopSelector.call(this._delegate);
-                }
             }
         }
     },
@@ -596,7 +593,7 @@ var HarpoonBulletActor = BulletActor.extend({
         if (this._gunShootDistance > this._maxShootDistance) {
            this.addFishNet();
         }
-        if (this._gunShootDistance > this._maxShootDistance || !cc.Rect.CCRectContainsPoint(EScreenRect, this.getPosition())) {
+        if (this._gunShootDistance > this._maxShootDistance || !cc.rectContainsPoint(EScreenRect, this.getPosition())) {
             this._isAlive = false;
             this.removeSelfFromScene();
             return;

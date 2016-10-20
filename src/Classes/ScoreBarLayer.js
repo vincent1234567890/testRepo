@@ -588,16 +588,14 @@ var ScoreBarLayer = cc.Layer.extend({
         var tipLaserZero = cc.LabelTTF.create("not enough laser", tipSize, cc.TEXT_ALIGNMENT_CENTER, "Arial", fontSize);
 
         if (this.getChildByTag(kTagTipLaserZero)) {
-            tipLaserZero.setColor(cc.c3(255, 0, 0));
+            tipLaserZero.setColor(new cc.Color(255, 0, 0));
             this.removeChildByTag(kTagTipLaserZero, true);
         } else {
-            tipLaserZero.setColor(cc.c3(255, 100, 100));
+            tipLaserZero.setColor(new cc.Color(255, 100, 100));
         }
 
         tipLaserZero.setPosition(tipPos);
-        var FadeOut = cc.FadeOut.create(2.0);
-        var CallFun = cc.CallFunc.create(this, this._removeSelf);
-        tipLaserZero.runAction(cc.Sequence.create(FadeOut, CallFun));
+        tipLaserZero.runAction(cc.sequence(cc.fadeOut(2.0), cc.callFunc(this._removeSelf, this)));
         this.addChild(tipLaserZero, 300, kTagTipLaserZero);
     },
     _removeSelf:function (node) {
@@ -656,10 +654,10 @@ var ScoreBarLayer = cc.Layer.extend({
         info.setPosition(cc.p(reminder.getContentSize().width / 2, reminder.getContentSize().height / 2));
         reminder.addChild(info);
         var fadeIn = new cc.FadeIn(0.4);
-        var blank = new cc.MoveBy(3, cc.PointZero());
+        var blank = new cc.MoveBy(3, new cc.Point(0, 0));
         var reverse = fadeIn.reverse();
 
-        var removeReminder = new cc.CallFunc(this, this._removeLazerReminder);
+        var removeReminder = new cc.CallFunc(this._removeLazerReminder, this);
         var actionSequence = new cc.Sequence(fadeIn, blank, reverse, removeReminder);
         reminder.runAction(actionSequence);
         var OKMenu = new cc.Menu(reminder);
@@ -764,12 +762,10 @@ var ScoreBarLayer = cc.Layer.extend({
             frames.push(frame);
         }
 
-        var animation2 = cc.Animation.create(frames, 0.4);
-        var ac2 = cc.Animate.create(animation2, false);
-
-        var callback = cc.CallFunc.create(this, this._setVis);
-        var repeat = cc.Repeat.create(ac2, 2);
-        this._moneyTip.runAction(cc.Sequence.create(repeat, callback));
+        var animation2 = new cc.Animation(frames, 0.4);
+        var ac2 = cc.animate(animation2);
+        ac2.repeat(2);
+        this._moneyTip.runAction(cc.sequence(ac2, cc.callFunc(this._setVis, this)));
     },
     _updatePowerProgressBar:function (percentage) {
         this._powerProgressTimer.setPercentage(percentage);
