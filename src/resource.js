@@ -17,10 +17,6 @@ var res = {
     music_5 : "res/music/music_5.ogg",
     music_6 : "res/music/music_6.ogg",
 
-    // TURNPLATE_RUN : "res/sound/turnRun",
-    // TURNPLATE_WIN : "turnSucceed",
-    // TURNPLATE_LOSE : "turnFailed",
-
     LASER_EFFECT : "res/sound/bgm_laser.ogg",
     CHANGECANNON_EFFECT : "res/sound/bgm_change_cannon.ogg",
     CAMERA_EFFECT : "res/sound/bgm_camera.ogg",
@@ -41,8 +37,6 @@ var res = {
     FIRE_EFFECT : "res/sound/bgm_fire.ogg",
     NET_EFFECT : "res/sound/bgm_net.ogg",
     BUTTON_EFFECT : "res/sound/bgm_button.ogg",
-
-
 
     startMenuLayerPng: "res/StartMenuLayer.png",
     StartMenuPlist : "res/StartMenuLayer.plist",
@@ -150,8 +144,6 @@ var g_resources = [
     "res/qipao3.plist",
     "res/qipao4.plist",
 
-    "res/croaker.sprite",
-    "res/chelonian.sprite"
 ];
 for (var i in res) {
     g_resources.push(res[i]);

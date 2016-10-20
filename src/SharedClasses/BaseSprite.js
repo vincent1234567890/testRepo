@@ -110,7 +110,6 @@ var NSDataStream = cc.Class.extend({
     },
 
     _readByte:function (i, size) {
-        console.log(this.debugString);
         return this._data[this._offset + size - i - 1];
     },
 
