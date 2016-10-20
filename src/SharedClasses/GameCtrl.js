@@ -3,6 +3,7 @@ var GAMELOAD = 1;
 var GAMEPLAY = 2;
 var GAMEOVER = 3;
 
+
 var GameCtrl = cc.Class.extend({
     _curScene:null,
     stage:FishLevel.eFishLevel1,
@@ -85,7 +86,9 @@ var GameCtrl = cc.Class.extend({
         var gameAPIServerUrl = 'ws://3dfishing88888.sinonet.sg:8080';
         var localNames = ['localhost', '127.0.0.1', '127.0.1.1', '0.0.0.0'];
         if (localNames.indexOf(window.location.hostname) >= 0) {
-            gameAPIServerUrl = 'ws://localhost:8080';
+            gameAPIServerUrl = 'ws://192.168.1.1:8080';
+                //'ws://localhost:8080';
+            //'ws://192.168.1.1:8080';
         }
         
         var gameCtrl = this;

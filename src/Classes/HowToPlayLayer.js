@@ -178,18 +178,18 @@ var HowToPlayLayer = cc.Layer.extend({
         if (this._currentPage != 0) {
             this._currentPage--;
             var wp = this.getChildByTag(999);
-            var Move = cc.MoveTo.create(0.2, cc.p(-wp.getContentSize().width * PAGE_SCALE_FACTOR * this._currentPage, this._helpLayer.getPosition().y));
-            var call = cc.CallFunc.create(this, this.updateIndicators);
-            this._helpLayer.runAction(cc.Sequence.create(Move, call));
+            var Move = cc.moveTo(0.2, cc.p(-wp.getContentSize().width * PAGE_SCALE_FACTOR * this._currentPage, this._helpLayer.getPosition().y));
+            var call = cc.callFunc(this.updateIndicators, this);
+            this._helpLayer.runAction(cc.sequence(Move, call));
         }
     },
     movePageRight:function () {
         if (this._currentPage != HELP_PAGE_NUM - 1) {
             this._currentPage++;
             var wp = this.getChildByTag(999);
-            var Move = cc.MoveTo.create(0.2, cc.p(-wp.getContentSize().width * PAGE_SCALE_FACTOR * this._currentPage, this._helpLayer.getPosition().y));
-            var call = cc.CallFunc.create(this, this.updateIndicators);
-            this._helpLayer.runAction(cc.Sequence.create(Move, call));
+            var Move = cc.moveTo(0.2, cc.p(-wp.getContentSize().width * PAGE_SCALE_FACTOR * this._currentPage, this._helpLayer.getPosition().y));
+            var call = cc.callFunc(this.updateIndicators, this);
+            this._helpLayer.runAction(cc.sequence(Move, call));
         }
     },
     resetAllSpritePos:function () {

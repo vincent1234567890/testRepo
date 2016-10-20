@@ -192,7 +192,7 @@ var StartMenuLayer = cc.Layer.extend({
             main.setIsSubLayer(true);
         }
 
-        var how = new HowToPlayLayer();
+        var how = HowToPlayLayer.create();
         this.addChild(how, 100);
         wrapper.logEvent("StartMenu","Tap","How to play button",1);
     },
