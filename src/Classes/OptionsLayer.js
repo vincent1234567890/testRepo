@@ -8,13 +8,14 @@ var OptionsLayer = cc.Layer.extend({
     _musicOnItem:null,
     _musicOffItem:null,
     _optionalMenu:null,
-    _isSubLayer:null,
+    _isSubLayer:false,
     _parentDeleaget:null,
-    init:function () {
-       this._super();
-        this._isSubLayer = false;
-        return true;
+
+    ctor: function(){
+        cc.Layer.prototype.ctor.call(this);
+
     },
+
     onEnter:function(){
         this._super();
         var cache = cc.spriteFrameCache;
@@ -41,8 +42,7 @@ var OptionsLayer = cc.Layer.extend({
         }
         this._isSubLayer = true;
 
-        var about = new AboutLayer();
-        about.initWithParentMenu(this);
+        var about = new AboutLayer(this);
         this.addChild(about, 200, kAboutLayerTag);
     },
     tutorial:function (sender) {

@@ -153,7 +153,7 @@ var AboutLayer = cc.LayerColor.extend({
         this.parentMenu.setTouchEnabled(true);
         this.parentMenu._isSubLayer = false;
         this.removeAllChildrenWithCleanup(true);
-        this.removeFromParentAndCleanup(true);
+        this.removeFromParent(true);
     },
     goBackAnimation:function () {
         this.parentMenu.setTouchEnabled(true);
@@ -184,10 +184,3 @@ var AboutLayer = cc.LayerColor.extend({
         this._back.setPosition(cc.pAdd(VisibleRect.topLeft(), cc.p(73, -38)));
     }
 });
-
-AboutLayer.create = function (parentMenu) {
-    var ret = new AboutLayer();
-    if (ret.initWithParentMenu(parentMenu)) {
-        return ret;
-    }
-};

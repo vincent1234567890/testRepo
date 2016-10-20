@@ -15,14 +15,13 @@ var StartMenuLayer = cc.Layer.extend({
     _bg:null,
     _particle2:null,
     _particle3:null,
-    init:function () {
-        this._super();
+
+    ctor: function(){
+        cc.Layer.prototype.ctor.call(this);
+
         PlayerActor.sharedActor().playerLogin();
-        return true;
-    },
-    onEnter:function () {
-        this._super();
-        // this.setKeyboardEnabled(true);
+
+        //todo it should be load once enough.
         var cache = cc.spriteFrameCache;
         cache.addSpriteFrames(res.StartMenuPlist);
         cache.addSpriteFrames(res.LogoScenePlist);
@@ -58,43 +57,9 @@ var StartMenuLayer = cc.Layer.extend({
         this.schedule(this._initWaterLight, 5.5);
 
         this._showVersionBuild();
-
-        // 判断等级是否大于10级，是否进入过地图3（加勒比海）
-        /*var askEnter = wrapper.getBooleanForKey("AskEnterLevel3");
-         var askByTurnHere = wrapper.getBooleanForKey("AskByTurnHere");
-         if ((!askEnter && PlayerActor.sharedActor().getPlayerLevel() > 9) && !askByTurnHere) {
-         var stageArray = PlayerActor.sharedActor().getStageArray();
-
-         var bValue = (parseInt(stageArray[2]) == 1) ? true : false;
-         if (!bValue) {
-         this._enterNewLayer = new TutorialConfirmLayer();
-         this._enterNewLayer.initWithTitle(null, cc.LocalizedString.localizedString("newscene"),
-         ImageName("ui_teach_002.png"), ImageName("btn_teach_001.png"), ImageName("btn_teach_002.png"),
-         cc.LocalizedString.localizedString("newscene enter"),
-         cc.LocalizedString.localizedString("Tutorial Text Cancel"), this,
-         this.EnterSceneSelect,
-         this.cancelEnterSceneSelect);
-         this.addChild(this._enterNewLayer, 120);
-         this._enterNewLayer.show();
-         wrapper.setBooleanForKey("AskEnterLevel3", true);
-         }
-         }
-         wrapper.setBooleanForKey("AskByTurnHere", false);*/
     },
-    onExit:function () {
-        this._super();
-        var cache = cc.spriteFrameCache;
-        cache.removeSpriteFrameByName(res.StartMenuPlist);
-        cache.removeSpriteFrameByName(res.LogoScenePlist);
-        cache.removeSpriteFrameByName(res.ButtonsPlist);
-        cache.removeSpriteFrameByName(res.IconsPlist);
-        cache.removeSpriteFrameByName(res.ChestRewardsPlist);
-        cache.removeSpriteFrameByName(res.MainPlist);
-        cache.removeSpriteFrameByName(res.TutorialPlist);
 
-    },
     initStartLayer:function () {
-        // item1 = Start button
         this._newGameItem = new cc.MenuItemSprite(
             CSpriteLayer.getButtonBoxOffsetY("btn_start_1.png", ImageNameLang("txt_start.png"), PlistAndPlist, 1),
             CSpriteLayer.getButtonBoxOffsetY("btn_start_2.png", ImageNameLang("txt_start.png"), PlistAndPlist, 1),
@@ -129,6 +94,7 @@ var StartMenuLayer = cc.Layer.extend({
         menu.setPosition(0, 0);
         this.addChild(menu, eZOrder_MainMenu_StartMenu_menu, eTag_MainMenu_StartMenu_menu);
     },
+
     EnterSceneSelect:function () {
         GameCtrl.sharedGame().homeWithStage();
         var stageSelect = new StageSelectLayer();
@@ -302,11 +268,3 @@ var StartMenuLayer = cc.Layer.extend({
         this._particle3.setPosition(leftPos);
     }
 });
-
-StartMenuLayer.create = function () {
-    var ret = new StartMenuLayer();
-    if (ret && ret.init()) {
-        return ret;
-    }
-    return null;
-};
