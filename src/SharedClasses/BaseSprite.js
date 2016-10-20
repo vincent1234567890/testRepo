@@ -434,7 +434,7 @@ var BaseSprite = cc.Sprite.extend({
             return;
         }
 
-        var context = ctx || cc.renderContext;
+        var context = ctx || cc._renderContext;
 
         //if (cc.renderContextType == cc.CANVAS) {
         context.save();
@@ -461,7 +461,7 @@ var BaseSprite = cc.Sprite.extend({
     },
 
     transformForSub:function (ctx, rect, tile) {
-        var context = ctx || cc.renderContext;
+        var context = ctx || cc._renderContext;
         // transformations
         //var _position = cc.PointFromString(tile.position);
         var _position = tile.position;
@@ -483,7 +483,7 @@ var BaseSprite = cc.Sprite.extend({
 
     //todo need refactor
     draw:function (ctx, rect, tile) {
-        var context = ctx || cc.renderContext;
+        var context = ctx || cc._renderContext;
         //if (cc.renderContextType == cc.CANVAS) {
 
         var mpX = 0, mpY = 0;

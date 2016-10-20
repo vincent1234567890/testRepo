@@ -379,10 +379,8 @@ var GameScene = cc.Scene.extend({
         frame = frameCache.getSpriteFrame("#shark_prize_bg_3.png");
         framesArray.push(frame);
         var animation2 = new cc.Animation(framesArray, 0.15);
-        var ac2 = new cc.Animate(animation2, false);
-        var repeat = new cc.Repeat(ac2, 11);
-        var final2 = new cc.CallFunc(this, this.removeNihongDeng);
-        this._prizeSprite.getChildByTag(kTagPrizeBG).runAction(cc.Sequence.create(repeat, final2));
+        var ac2 = cc.animate(animation2).repeat(11);
+        this._prizeSprite.getChildByTag(kTagPrizeBG).runAction(cc.sequence(ac2, new cc.CallFunc(this.removeNihongDeng, this)));
     },
     removeNihongDeng:function (sender) {
         this._bigPrizeExist = false;
@@ -440,10 +438,8 @@ var GameScene = cc.Scene.extend({
         this.addChild(this._prizeSprite, kTagPrizeSprite, kTagPrizeSprite);
         this._prizeSprite.setScale(0);
 
-        var scaleTo1 = new cc.ScaleTo(0.2, 1.1, 1.1);
-        var scaleTo2 = new cc.ScaleTo(0.1, 1, 1);
-        var call = new cc.CallFunc(this, this.startAction);
-        this._prizeSprite.runAction(new cc.Sequence(scaleTo1, scaleTo2, call));
+        this._prizeSprite.runAction(new cc.Sequence(new cc.ScaleTo(0.2, 1.1, 1.1), new cc.ScaleTo(0.1, 1, 1),
+            new cc.CallFunc(this.startAction, this)));
     },
     loadFishGroup:function () {
         this._dictionaryFish = cc.loader.getRes(ImageName("TrackPlist/Track.plist"));
@@ -672,10 +668,7 @@ var GameScene = cc.Scene.extend({
             this._cannonActor.setWeaponButtonEnable(true);
         }
 
-        var fadeout = cc.FadeOut.create(0.8);
-        var callBack = cc.CallFunc.create(this, this.removeSprite);
-
-        this._blurBackgroundLayer.runAction(cc.Sequence.create(fadeout, callBack));
+        this._blurBackgroundLayer.runAction(cc.sequence(cc.fadeOut(0.8), cc.callFunc(this.removeSprite, this)));
         this._blurBackgroundLayer = null;
     },
     pauseGameBG:function (bgPos) {
@@ -792,10 +785,8 @@ var GameScene = cc.Scene.extend({
 
     },
     removeTitle:function () {
-        var scaleto = cc.MoveBy.create(1, cc.p(0, 1000));
-        var callBack = cc.CallFunc.create(this, this.removeLogoWave);
-        this.getChildByTag(kLogeWaveTag).runAction(cc.Sequence.create(scaleto, callBack));
-
+        this.getChildByTag(kLogeWaveTag).runAction(
+            cc.sequence(cc.moveBy(1, cc.p(0, 1000)), cc.callFunc(this.removeLogoWave, this)));
     },
     removeLogoWave:function (node) {
         this.removeChildByTag(kLogeWaveTag, true);
@@ -810,17 +801,12 @@ var GameScene = cc.Scene.extend({
         leveupSprite.setPosition(cc.p(VisibleRect.center().x, VisibleRect.center().y - 50));
         this.addChild(leveupSprite, 100);
 
-        var moveBy = cc.MoveBy.create(1.8, cc.p(0, 180));
-        var fadeIn = cc.FadeIn.create(0.6);
-        var delay = cc.DelayTime.create(0.6);
+        var spawn = cc.spawn(
+            cc.sequence(cc.fadeIn(0.6), cc.delayTime(0.6), cc.fadeOut(0.6)),
+            cc.moveBy(1.8, cc.p(0, 180)));
 
-        var fadeOut = cc.FadeOut.create(0.6);
-        var callb = cc.CallFunc.create(this, this.addPrizeNets);
-        var final1 = cc.CallFunc.create(this, this.removeSprite);
-        var sequ = cc.Sequence.create(fadeIn, delay, fadeOut);
-        var spawn = cc.Spawn.create(sequ, moveBy);
-
-        leveupSprite.runAction(cc.Sequence.create(spawn, callb, final1));
+        leveupSprite.runAction(cc.sequence(spawn,
+            cc.callFunc(this.addPrizeNets, this), cc.callFunc(this.removeSprite, this)));
     },
     addActor:function (actor) {
         this.addActorIntoAllObjects(actor);
@@ -836,7 +822,7 @@ var GameScene = cc.Scene.extend({
         }
 
         //this._aliveActor = cc.ArrayRemoveObject(this._aliveActor, actor);
-        cc.ArrayRemoveObject(this._aliveActor, actor);
+        cc.arrayRemoveObject(this._aliveActor, actor);
 
         this.removeActorFromAllObjects(actor);
     },
@@ -1075,24 +1061,12 @@ var GameScene = cc.Scene.extend({
 
         achieveLayer.setPosition(cc.p(VisibleRect.center().x, VisibleRect.center().y + 50));
 
-        var scaleTo = cc.ScaleTo.create(0.2, 1);
-        var fadeOut = cc.FadeIn.create(0.2);
-        var spawn = cc.Spawn.create(scaleTo, fadeOut);
+        var spawn = cc.spawn(cc.scaleTo(0.2, 1), cc.fadeIn(0.2));
+        var spawn1 = cc.spawn(cc.scaleTo(0.3, 0.1), cc.fadeOut(0.6), cc.moveTo(0.6, cc.p(VisibleRect.center().x, VisibleRect.top().y - 28)));
 
-        var addParticle = cc.CallFunc.create(this, this.addParticleAchieve);
-
-        var scaleTo1 = cc.ScaleTo.create(0.3, 0.1);
-        var fadeIn = cc.FadeOut.create(0.6);
-
-        var moveto = cc.MoveTo.create(0.6, cc.p(VisibleRect.center().x, VisibleRect.top().y - 28));
-
-        var spawn1 = cc.Spawn.create(scaleTo1, fadeIn, moveto);
-        var delay = cc.DelayTime.create(5.0);
-
-        var callBack = cc.CallFunc.create(this, this.removeSpriteChangeWeapon);
-        var removeParicle = cc.CallFunc.create(this, this.removeParticelAchieve);
-
-        var sequ = cc.Sequence.create(spawn, addParticle, delay, spawn1, removeParicle, callBack);
+        var sequ = cc.sequence(spawn, cc.callFunc(this.addParticleAchieve, this), cc.delayTime(5.0), spawn1,
+            cc.callFunc(this.removeParticelAchieve, this),
+            cc.callFunc(this.removeSpriteChangeWeapon, this));
         achieveLayer.runAction(sequ);
         this._achievementShowNum++;
     },
@@ -1173,23 +1147,23 @@ var GameScene = cc.Scene.extend({
 
             var tempPar = null;
             if (weapl == FishWeaponType.eWeaponLevel5) {
-                tempPar = ParticleSystemFactory.getInstance().createParticle(ImageName("lizibianhua1.plist"));
+                tempPar = particleSystemFactory.createParticle(ImageName("lizibianhua1.plist"));
                 tempPar.setDrawMode(cc.PARTICLE_SHAPE_MODE);
                 tempPar.setShapeType(cc.PARTICLE_STAR_SHAPE);
             } else if (weapl == FishWeaponType.eWeaponLevel6) {
-                tempPar = ParticleSystemFactory.getInstance().createParticle(ImageName("lizibianhua2.plist"));
+                tempPar = particleSystemFactory.createParticle(ImageName("lizibianhua2.plist"));
                 tempPar.setDrawMode(cc.PARTICLE_SHAPE_MODE);
                 tempPar.setShapeType(cc.PARTICLE_STAR_SHAPE);
             } else if (weapl == FishWeaponType.eWeaponLevel7) {
-                tempPar = ParticleSystemFactory.getInstance().createParticle(ImageName("lizibianhua3.plist"));
+                tempPar = particleSystemFactory.createParticle(ImageName("lizibianhua3.plist"));
                 tempPar.setDrawMode(cc.PARTICLE_SHAPE_MODE);
                 tempPar.setShapeType(cc.PARTICLE_STAR_SHAPE);
             } else if (weapl == FishWeaponType.eWeaponLevel10) {
-                tempPar = ParticleSystemFactory.getInstance().createParticle(ImageName("lizibianhua3.plist"));
+                tempPar = particleSystemFactory.createParticle(ImageName("lizibianhua3.plist"));
                 tempPar.setDrawMode(cc.PARTICLE_SHAPE_MODE);
                 tempPar.setShapeType(cc.PARTICLE_STAR_SHAPE);
             } else {
-                tempPar = ParticleSystemFactory.getInstance().createParticle(ImageName("yuwanglizi.plist"));
+                tempPar = particleSystemFactory.createParticle(ImageName("yuwanglizi.plist"));
             }
 
             net.setParticle(tempPar);
@@ -1224,15 +1198,10 @@ var GameScene = cc.Scene.extend({
         levelupSprite.setPosition(spritePos);
         this.addChild(levelupSprite, 100);
 
-        var moveBy = new cc.MoveBy(duration, cc.p(0, 50));
-        var fadeIn = new cc.FadeIn(0.6);
-        var delay = new cc.DelayTime(delayDuration);
-        var fadeOut = new cc.FadeOut(0.6);
-        var final1 = new cc.CallFunc(this, this.removeSprite);
-        var sequ = new cc.Sequence(fadeIn, delay, fadeOut, null);
-        var spawn = new cc.Spawn(sequ, moveBy);
+        var sequ = new cc.Sequence(new cc.FadeIn(0.6), new cc.DelayTime(delayDuration), new cc.FadeOut(0.6));
+        var spawn = new cc.Spawn(sequ, new cc.MoveBy(duration, cc.p(0, 50)));
 
-        levelupSprite.runAction(cc.Sequence.create(spawn, final1));
+        levelupSprite.runAction(cc.sequence(spawn, new cc.CallFunc(this.removeSprite, this)));
 
         // 升级为10级的时候 提示进入新地图
         /*if (10 == PlayerActor.sharedActor().getPlayerLevel()) {
@@ -1339,22 +1308,17 @@ var GameScene = cc.Scene.extend({
 
         if (PlayerActor.sharedActor().getNeedAddCoin()) {
             this.removeChildByTag(kAddCoidParticleTag, true);
-            var par = ParticleSystemFactory.getInstance().createParticle(ImageName("addCoin.plist"));
+            var par = particleSystemFactory.createParticle(ImageName("addCoin.plist"));
             this.addChild(par, 111, kAddCoidParticleTag);
             par.setPosition(parPos);
 
             var add = new cc.Sprite("#add5.png");
             add.setPosition(addPos);
-            var moveBy = cc.MoveBy.create(1.05, cc.p(0, 48));
-            var fadeIn = cc.FadeIn.create(0.35);
-            var fadeOut = cc.FadeOut.create(0.35);
-            var delayTime = cc.DelayTime.create(0.35);
 
-            var sequ = cc.Sequence.create(fadeIn, delayTime, fadeOut, null);
-            var spawn = cc.Spawn.create(sequ, moveBy);
+            var sequ = cc.sequence(cc.fadeIn(0.35), cc.delayTime(0.35), cc.fadeOut(0.35));
+            var spawn = cc.spawn(sequ, cc.moveBy(1.05, cc.p(0, 48)));
 
-            var call = cc.CallFunc.create(this, this.removeSprite);
-            add.runAction(cc.Sequence.create(spawn, call, null));
+            add.runAction(cc.sequence(spawn, cc.callFunc(this.removeSprite, this)));
             this.addChild(add, 111);
             PlayerActor.sharedActor().setNeedAddCoin(false);
         }
@@ -1510,7 +1474,7 @@ var GameScene = cc.Scene.extend({
 
         if (this.getOddsNumber() == 2) {
             var DoubleSprite = new cc.Sprite(ImageNameLang("fonts_other_40.png"));
-            var addCall = new cc.CallFunc(this, this.delDouble);
+            var addCall = new cc.CallFunc(this.delDouble, this);
             var ac = new cc.ScaleBy(0.5, 1.2);
             var cc1 = new cc.ScaleBy(0.5, 0.8);
             var ccc = new cc.ScaleBy(0.5, 1);
@@ -1651,7 +1615,7 @@ var GameScene = cc.Scene.extend({
     addParticleAchieve:function () {
         var pos = cc.p(VisibleRect.center().x, VisibleRect.center().y + 100);
 
-        var parAchieve = ParticleSystemFactory.getInstance().createParticle(ImageName("kaibaoxiang01.plist"));
+        var parAchieve = particleSystemFactory.createParticle(ImageName("kaibaoxiang01.plist"));
         this.addChild(parAchieve, 201, kAchieveParticleTag);
         parAchieve.setPosition(pos);
     },
@@ -1873,7 +1837,7 @@ var GameScene = cc.Scene.extend({
                 this, this.startTutorial, this.skipTutorial);
             this.addChild(this._tutorialConfirmLayer, 120);
             var delay = new cc.DelayTime(0.5);
-            var call = new cc.CallFunc(this._tutorialConfirmLayer, this._tutorialConfirmLayer.show);
+            var call = new cc.CallFunc(this._tutorialConfirmLayer.show, this._tutorialConfirmLayer);
             this._tutorialConfirmLayer.runAction(new cc.Sequence(delay, call));
         }
         else {
@@ -1911,7 +1875,7 @@ var GameScene = cc.Scene.extend({
         if (this._compactUserInfo) {
             var delay2 = new cc.DelayTime(1);
             var compactMove = new cc.MoveBy(1, cc.p(360, 0));
-            var call = new cc.CallFunc(this, this.showAdActionEnd);
+            var call = new cc.CallFunc(this.showAdActionEnd, this);
             this._compactUserInfo.runAction(new cc.Sequence(delay2, compactMove, call));
         }
     },
@@ -1928,8 +1892,8 @@ var GameScene = cc.Scene.extend({
 
         if (this._userInfoLayer) {
             var delay = new cc.DelayTime(1);
-            var userInfoMove = new cc.MoveTo(1, cc.PointZero());
-            var call = new cc.CallFunc(this, this.hideAdActionStart);
+            var userInfoMove = new cc.MoveTo(1, cc.p(0,0));
+            var call = new cc.CallFunc(this.hideAdActionStart, this);
             this._userInfoLayer.runAction(new cc.Sequence(call, delay, userInfoMove));
         }
     },
@@ -2032,7 +1996,7 @@ var GameScene = cc.Scene.extend({
     saveImageWithDelay:function (delay) {
         this.runAction(new cc.Sequence
             (new cc.DelayTime(delay)
-                , new cc.CallFunc(this, this.saveImage, this)
+                , new cc.CallFunc(this.saveImage, this,  this)
             ));
     },
     _stopTutorialHint:function (sender) {

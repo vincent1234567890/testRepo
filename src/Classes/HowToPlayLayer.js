@@ -14,7 +14,6 @@ var HowToPlayLayer = cc.Layer.extend({
     _touchListener: null,
 
     ctor:function () {
-        this._super();
         cc.Layer.prototype.ctor.call(this);
 
         this._curPageIndicator = [];
@@ -61,7 +60,7 @@ var HowToPlayLayer = cc.Layer.extend({
     onEnter:function(){
         cc.Layer.prototype.onEnter.call(this);
 
-        // this.setKeyboardEnabled(true);
+        this.setKeyboardEnabled(true);
         var cache = cc.spriteFrameCache;
         cache.addSpriteFrames(ImageNameLang("StageSelectLayer.plist"));
         cache.addSpriteFrames(ImageNameLang("tutorial_uibox.plist"));
@@ -179,8 +178,7 @@ var HowToPlayLayer = cc.Layer.extend({
             this._currentPage--;
             var wp = this.getChildByTag(999);
             var Move = cc.moveTo(0.2, cc.p(-wp.getContentSize().width * PAGE_SCALE_FACTOR * this._currentPage, this._helpLayer.getPosition().y));
-            var call = cc.callFunc(this.updateIndicators, this);
-            this._helpLayer.runAction(cc.sequence(Move, call));
+            this._helpLayer.runAction(cc.sequence(Move, cc.callFunc(this.updateIndicators, this)));
         }
     },
     movePageRight:function () {
@@ -188,8 +186,7 @@ var HowToPlayLayer = cc.Layer.extend({
             this._currentPage++;
             var wp = this.getChildByTag(999);
             var Move = cc.moveTo(0.2, cc.p(-wp.getContentSize().width * PAGE_SCALE_FACTOR * this._currentPage, this._helpLayer.getPosition().y));
-            var call = cc.callFunc(this.updateIndicators, this);
-            this._helpLayer.runAction(cc.sequence(Move, call));
+            this._helpLayer.runAction(cc.sequence(Move, cc.callFunc(this.updateIndicators, this)));
         }
     },
     resetAllSpritePos:function () {
@@ -225,12 +222,11 @@ HowToPlayLayer.create = function () {
 var HelpImagesLayer = cc.Layer.extend({
     shadeArray:null,
     ctor:function () {
-        this._super();
         this.shadeArray = [];
     },
     draw:function (ctx) {
-        if (cc._renderType == cc.RENDER_TYPE_CANVAS) {
-            var context = ctx || cc._renderContext;
+        if (cc.renderContextType == cc.CANVAS) {
+            var context = ctx || cc.renderContext;
 
             var size = this.getContentSize();
             context.beginPath();
@@ -245,5 +241,9 @@ var HelpImagesLayer = cc.Layer.extend({
 });
 
 HelpImagesLayer.create = function () {
-    return new HelpImagesLayer();
+    var h = new HelpImagesLayer();
+    if (h.init()) {
+        return h;
+    }
+    return null;
 };

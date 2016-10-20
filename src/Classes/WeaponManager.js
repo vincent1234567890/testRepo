@@ -366,14 +366,9 @@ var WeaponManager = cc.Class.extend({
 
         GameCtrl.sharedGame().getCurScene().addChild(this.getSpriteMiss(), 150);
         this.getSpriteMiss().setVisible(true);
-        var act1 = cc.ScaleTo.create(0.2, 1.0);
-        var act2 = cc.ScaleTo.create(0.15, 0.8);
-        var act3 = cc.ScaleTo.create(0.15, 1.0);
-        var act4 = cc.DelayTime.create(0.5);
-        var act5 = cc.FadeOut.create(0.4);
-        var callback = cc.CallFunc.create(this, this.clearMissNotice);
-
-        var sequence = cc.Sequence.actions(act1, act2, act3, act4, act5, callback);
+        var sequence = cc.sequence(
+            cc.scaleTo(0.2, 1.0), cc.scaleTo(0.15, 0.8), cc.scaleTo(0.15, 1.0),
+            cc.delayTime(0.5), cc.fadeOut(0.4), cc.callFunc(this.clearMissNotice, this));
         this.getSpriteMiss().runAction(sequence);
     },
 

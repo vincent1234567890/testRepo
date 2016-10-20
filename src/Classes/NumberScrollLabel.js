@@ -189,17 +189,15 @@ var NumberScrollLabel = cc.Layer.extend({
 
                 if (this._dtNum > 0) {
                     newLabel.setPosition(cc.p(this._componentSize.width * (0.5 + (this._componentNumber - 1 - idx)), this._componentSize.height * 1.5));
-                    var oldAction = cc.Sequence.create(cc.MoveTo.create(this._dtTime, cc.p(old.getPosition().x, -this._componentSize.height / 2 * kUiItemScale))
-                        , cc.CallFunc.create(this, this.removeComponent));
-                    old.runAction(oldAction);
-                    newLabel.runAction(cc.MoveTo.create(this._dtTime, cc.p(newLabel.getPosition().x, this._componentSize.height / 2 * kUiItemScale)));
-                }
-                else {
+                    old.runAction(
+                        cc.sequence(cc.moveTo(this._dtTime, cc.p(old.getPosition().x, -this._componentSize.height / 2 * kUiItemScale))
+                        , cc.callFunc(this.removeComponent, this)));
+                    newLabel.runAction(cc.moveTo(this._dtTime, cc.p(newLabel.getPosition().x, this._componentSize.height / 2 * kUiItemScale)));
+                } else {
                     newLabel.setPosition(cc.p(this._componentSize.width * (0.5 + (this._componentNumber - 1 - idx)), this._componentSize.height * (-0.5)));
-                    var oldAction = cc.Sequence.create(cc.MoveTo.create(this._dtTime, cc.p(old.getPosition().x, this._componentSize.height * 1.5))
-                        , cc.CallFunc.create(this, this.removeComponent));
-                    old.runAction(oldAction);
-                    newLabel.runAction(cc.MoveTo.create(this._dtTime, cc.p(newLabel.getPosition().x, this._componentSize.height / 2)));
+                    old.runAction(cc.sequence(cc.moveTo(this._dtTime, cc.p(old.getPosition().x, this._componentSize.height * 1.5))
+                        , cc.callFunc(this.removeComponent, this)));
+                    newLabel.runAction(cc.moveTo(this._dtTime, cc.p(newLabel.getPosition().x, this._componentSize.height / 2)));
                 }
 
             }

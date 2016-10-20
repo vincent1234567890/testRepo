@@ -159,12 +159,10 @@ var AboutLayer = cc.LayerColor.extend({
         this.parentMenu.setTouchEnabled(true);
         var children = this.credits.getChildren();
         for (var i = 0; i < children.length; i++) {
-            children[i].runAction(cc.FadeOut.create(0.3));
+            children[i].runAction(cc.fadeOut(0.3));
         }
 
-        this.runAction(
-            cc.Sequence.create(cc.FadeOut.create(0.4), cc.CallFunc.create(this, this.goBack)
-            ));
+        this.runAction(cc.sequence(cc.fadeOut(0.4), cc.callFunc(this.goBack, this)));
     },
     getTimeInterval:function (beforeTime) {
         return (Date.now() - beforeTime) / 1000.0;

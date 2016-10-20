@@ -59,6 +59,24 @@ var StartMenuLayer = cc.Layer.extend({
         this._showVersionBuild();
     },
 
+    _resizeHandler: function(){
+        this.resetAllSpritePos();
+    },
+    _refResizeHandler: null,
+
+    onEnter: function(){
+        cc.Layer.prototype.onEnter.call(this);
+
+        //add event listener
+        this._refResizeHandler = this._resizeHandler.bind(this);
+        window.addEventListener("resize", this._refResizeHandler);
+    },
+
+    onExit: function(){
+        cc.Layer.prototype.onExit.call(this);
+        window.removeEventListener("resize", this._refResizeHandler);
+    },
+
     initStartLayer:function () {
         this._newGameItem = new cc.MenuItemSprite(
             CSpriteLayer.getButtonBoxOffsetY("btn_start_1.png", ImageNameLang("txt_start.png"), PlistAndPlist, 1),

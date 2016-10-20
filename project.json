@@ -35,12 +35,14 @@
         "src/SharedClasses/GameCtrl.js",
         "src/SharedClasses/GameMainSessionController.js",
         "src/SharedClasses/GamePreference.js",
+        "src/SharedClasses/ParticleSystemFactory.js",
 
         "src/SharedClasses/GameSetting.js",
         "src/SharedClasses/LoadingScreen.js",
         "src/SharedClasses/MoveDataBase.js",
         "src/SharedClasses/Nacl.js",
         "src/SharedClasses/wrapper.js",
+
         "src/Classes/AboutLayer.js",
         "src/Classes/AchievementShareLayer.js",
         "src/Classes/BulletActor.js",

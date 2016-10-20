@@ -98,10 +98,9 @@ var TutorialConfirmLayer = cc.LayerColor.extend({
      },*/
     hide:function () {
         this._active = false;
-        var moveAction = cc.MoveTo.create(0.3, cc.p(this.getContentSize().width / 2, this.getContentSize().height + this.getBackgroundSprite().getContentSize().height));
-        var easeIn = cc.EaseExponentialIn.create(moveAction);
-        var call = cc.CallFunc.create(this, this.removeSelf);
-        var sequnce = cc.Sequence.create(easeIn, call);
+        var moveAction = cc.moveTo(0.3, cc.p(this.getContentSize().width / 2, this.getContentSize().height + this.getBackgroundSprite().getContentSize().height));
+        moveAction.easing(cc.easeExponentialIn());
+        var sequnce = cc.sequence(moveAction, cc.callFunc(this.removeSelf, this));
 
         this.getBackgroundSprite().runAction(sequnce);
     },
@@ -125,11 +124,9 @@ var TutorialConfirmLayer = cc.LayerColor.extend({
     },
     show:function () {
         this.setVisible(true);
-        var moveAction = cc.MoveTo.create(0.3, VisibleRect.center());
-        var easeOut = cc.EaseExponentialOut.create(moveAction);
-        var call = cc.CallFunc.create(this, this.activate);
-
-        this.getBackgroundSprite().runAction(cc.Sequence.create(easeOut, call));
+        this.getBackgroundSprite().runAction(cc.sequence(
+            cc.moveTo(0.3, VisibleRect.center()).easing(cc.easeExponentialOut()),
+            cc.callFunc(this.activate, this)));
     },
     removeSelf:function () {
         this.removeFromParentAndCleanup(true);

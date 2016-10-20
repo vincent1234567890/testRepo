@@ -64,10 +64,9 @@ var ChestGameLayer = cc.Layer.extend({
     DelChestScoreNumber:function(){
         var flashSprite = new cc.Sprite("#ui_box_go_bg.png");
         var flashGo = new cc.Sprite("#ui_box_go_1.png");
-        var fadeIn = cc.FadeIn.create(1.0);
+        var fadeIn = cc.fadeIn(1.0);
         var reverse = fadeIn.reverse();
-        var sequ = cc.Sequence.create(fadeIn, reverse);
-        flashGo.runAction(cc.RepeatForever.create(sequ));
+        flashGo.runAction(cc.sequence(fadeIn, reverse).repeatForever());
         flashGo.setPosition(cc.p(flashSprite.getContentSize().width/2, flashSprite.getContentSize().height/2));
         flashSprite.addChild(flashGo);
 

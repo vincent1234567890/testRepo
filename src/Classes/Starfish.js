@@ -8,18 +8,15 @@ var Starfish = BaseActor.extend({
     centerPt:null,
     moveAgle:0,
     multiple:1,
-    initWithDef:function (def) {
+    ctor:function (def) {
         this._def = def;
-        var ret = this.initWithSpriteName("ghaixing", "ghaixing.png");
-        if (ret) {
-            this.playAction(0);
-            this.setGroup(GroupStarfishActor);
-            this._isMoveToFirst = false;
-            this.delta = cc.pNormalize(cc.p(-512, -384));
-            this.speed = 400;
-            this.delIng = false;
-        }
-        return ret;
+        this._super(res.StarfishSprite, res.StarfishPNG);
+        this.playAction(0);
+        this.setGroup(GroupStarfishActor);
+        this._isMoveToFirst = false;
+        this.delta = cc.pNormalize(cc.p(-512, -384));
+        this.speed = 400;
+        this.delIng = false;
     },
     getDelIng:function () {
         return this.delIng;
@@ -64,29 +61,16 @@ var Starfish = BaseActor.extend({
         var movePoition = cc.p(0, 48);
         var move = cc.p(prizeSprite.getContentSize().width / 2, -prizeSprite.getContentSize().height / 2);
 
-        var moveBy = cc.MoveBy.create(1.05, movePoition);
-        var fadeIn = cc.FadeIn.create(0.35);
-        var fadeOut = cc.FadeOut.create(0.35);
-        var delayTime = cc.DelayTime.create(0.35);
-
-        var sequ = cc.Sequence.create(fadeIn, delayTime, fadeOut);
-        var spawn = cc.Spawn.create(sequ, moveBy);
-
-        var call = cc.CallFunc.create(this.getScene(), this.getScene().removeSprite);
-        prizeSprite.runAction(cc.Sequence.create(spawn, call));
+        var sequ = cc.sequence(cc.fadeIn(0.35), cc.delayTime.create(0.35), cc.fadeOut(0.35));
+        var spawn = cc.spawn(sequ, cc.moveBy(1.05, movePoition));
+        prizeSprite.runAction(cc.sequence(spawn, cc.callFunc(this.getScene().removeSprite, this.getScene())));
         prizeSprite.setPosition(this.getPosition());
         prizeSprite.setScale(1);
 
-        var moveBy1 = cc.MoveBy.create(1.05, movePoition);
-        var fadeIn1 = cc.FadeIn.create(0.35);
-        var fadeOut1 = cc.FadeOut.create(0.35);
-        var delayTime1 = cc.DelayTime.create(0.35);
-        var sequ1 = cc.Sequence.create(fadeIn1, delayTime1, fadeOut1);
-        var spawn1 = cc.Spawn.create(sequ1, moveBy1);
+        var sequ1 = cc.sequence(cc.fadeIn(0.35), cc.delayTime(0.35), cc.fadeOut(0.35));
+        var spawn1 = cc.spawn(sequ1, cc.moveBy(1.05, movePoition));
 
-        var call1 = cc.CallFunc.create(this.getScene(), this.getScene().removeSprite);
-
-        labelNum.runAction(cc.Sequence.create(spawn1, call1));
+        labelNum.runAction(cc.sequence(spawn1, cc.callFunc(this.getScene().removeSprite, this.getScene())));
         labelNum.setPosition(cc.pAdd(this.getPosition(), move));
         this.getScene().addChild(labelNum, 100);
         this.getScene().addChild(prizeSprite, 100);
