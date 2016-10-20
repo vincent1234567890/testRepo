@@ -108,12 +108,9 @@ var WeaponSpecialRay = WeaponSpecial.extend({
         }
 
         GameCtrl.sharedGame().getCurScene().addActor(bullet);
-
-        var delay1 = cc.DelayTime.create(0.8);
-        var callback1 = cc.CallFunc.create(this, this.startCameraAnimation);
-        var delay = cc.DelayTime.create(2.2);
-        var callback = cc.CallFunc.create(this, this.doSpecialShootFinish);
-        this.runAction(cc.Sequence.create(delay1, callback1, delay, callback));
+        this.runAction(cc.sequence(
+            cc.delayTime(0.8), cc.callFunc(this.startCameraAnimation, this),
+            cc.delayTime(2.2), cc.callFunc(this.doSpecialShootFinish, this)));
         this.getWeaponSprite().getChildByTag(999).removeFromParentAndCleanup(true);
 
         var currentScene = GameCtrl.sharedGame().getCurScene();

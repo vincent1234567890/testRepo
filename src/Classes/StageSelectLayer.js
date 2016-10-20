@@ -207,18 +207,18 @@ var StageSelectLayer = cc.Layer.extend({
     otherLeft:function (sender) {
         if (this._currentPage != 0 && !this._showBuyLayer) {
             this._currentPage--;
-            var Move = cc.MoveTo.create(0.2, cc.p(-screenWidth * this._currentPage, this._helpLayer.getPosition().y));
-            var call = cc.CallFunc.create(this, this.updateCurrentPage);
-            this._helpLayer.runAction(cc.Sequence.create(Move, call, 0));
+            this._helpLayer.runAction(cc.sequence(
+                cc.moveTo(0.2, cc.p(-screenWidth * this._currentPage, this._helpLayer.getPosition().y)),
+                cc.callFunc(this.updateCurrentPage, this)));
         }
     },
 
     otherRight:function (sender) {
         if (this._currentPage != STAGE_PAGE_NUM - 1 && !this._showBuyLayer) {
             this._currentPage++;
-            var Move = cc.MoveTo.create(0.2, cc.p(-screenWidth * this._currentPage, this._helpLayer.getPosition().y));
-            var call = cc.CallFunc.create(this, this.updateCurrentPage);
-            this._helpLayer.runAction(cc.Sequence.create(Move, call, 0));
+            this._helpLayer.runAction(cc.sequence(
+                cc.moveTo(0.2, cc.p(-screenWidth * this._currentPage, this._helpLayer.getPosition().y)),
+                cc.callFunc(this.updateCurrentPage, this)));
         }
     },
     back:function (sender) {
@@ -321,9 +321,9 @@ var StageSelectLayer = cc.Layer.extend({
     },
     setCurrentPage:function (curIndex) {
         this._currentPage = curIndex;
-        var Move = cc.MoveTo.create(0.2, cc.p(-screenWidth * this._currentPage, this._helpLayer.getPosition().y));
-        var call = cc.CallFunc.create(this, this.updateCurrentPage);
-        this._helpLayer.runAction(cc.Sequence.create(Move, call, 0));
+        this._helpLayer.runAction(cc.sequence(
+            cc.moveTo(0.2, cc.p(-screenWidth * this._currentPage, this._helpLayer.getPosition().y)),
+            cc.callFunc(this.updateCurrentPage, this), 0));
     },
     drawBackGround:function () {
         this._bg = cc.Sprite.create(ImageName("ui_background_normal.jpg"));

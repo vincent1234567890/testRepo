@@ -515,8 +515,7 @@ var TutorialSessionController = CCSessionController.extend({
 
             case TutorialStep.TutorialStep20:
                 this.stopTutorialHint();
-                this._currentGameScene.runAction(cc.Sequence.create(cc.DelayTime.create(5.0),
-                    cc.CallFunc.create(this, this.showHintInT20)));
+                this._currentGameScene.runAction(cc.sequence(cc.delayTime(5.0), cc.callFunc(this.showHintInT20, this)));
                 break;
 
             case TutorialStep.TutorialStep21:
@@ -739,18 +738,10 @@ var TutorialSessionController = CCSessionController.extend({
         this._tutorialHint.setPosition(cc.pAdd(hintPos, offset));
         this._tutorialHint.setOpacity(0);
 
-        var ac0 = cc.FadeIn.create(1);
+        this._tutorialHint.runAction(cc.fadeIn(1));
+        this._tutorialHint.runAction(cc.sequence(cc.tintTo(0.5, 255, 0, 0), cc.tintTo(0.5, 255, 255, 255)).repeatForever());
 
-        var tintTo = cc.TintTo.create(0.5, 255, 0, 0);
-        var tintBack = cc.TintTo.create(0.5, 255, 255, 255);
-
-        var ac1 = cc.RepeatForever.create(cc.Sequence.create(tintTo, tintBack));
-        this._tutorialHint.runAction(ac0);
-        this._tutorialHint.runAction(ac1);
-
-        var fadeTo = cc.FadeTo.create(1, 120);
-        var final1 = cc.CallFunc.create(this, this.nextTutorial4Call);
-        this._tutorialBlackLayer.runAction(cc.Sequence.create(fadeTo, final1));
+        this._tutorialBlackLayer.runAction(cc.sequence(cc.fadeTo(1, 120), cc.callFunc(this.nextTutorial4Call, this)));
         this._tutorialBlackLayer.setVisible(true);
     },
     showFishInfoHint:function (offset) {
@@ -764,23 +755,10 @@ var TutorialSessionController = CCSessionController.extend({
         this._tutorialHint.setPosition(cc.pAdd(cc.p(VisibleRect.center().x, VisibleRect.center().y), offset));
         this._tutorialHint.setOpacity(0);
 
-        var ac0 = cc.FadeIn.create(1);
-
-
-        var tintTo = cc.TintTo.create(0.5, 255, 0, 0);
-        var tintBack = cc.TintTo.create(0.5, 255, 255, 255);
-
-        var ac1 = cc.Repeat.create(cc.Sequence.create(tintTo, tintBack), 6);
-
-        var scaleTo = cc.ScaleTo.create(1, 5);
-        var fadeOut = cc.FadeOut.create(1);
-        var ac2 = cc.Spawn.create(scaleTo, fadeOut);
-        var ac3 = cc.CallFunc.create(this, this.showFishInfo);
-
-        this._tutorialHint.runAction(cc.Sequence.create(ac0, ac1, ac2, ac3));
-        var fadeTo = cc.FadeTo.create(1, 120);
-        var final1 = cc.CallFunc.create(this, this.nextTutorial4Call);
-        this._tutorialBlackLayer.runAction(cc.Sequence.create(fadeTo, final1));
+        var ac1 = cc.sequence(cc.tintTo(0.5, 255, 0, 0), cc.tintTo(0.5, 255, 255, 255)).repeat(6);
+        var ac2 = cc.spawn(cc.scaleTo(1, 5), cc.fadeOut(1));
+        this._tutorialHint.runAction(cc.sequence(cc.fadeIn(1), ac1, ac2, cc.callFunc(this.showFishInfo, this)));
+        this._tutorialBlackLayer.runAction(cc.sequence(cc.fadeTo(1, 120), cc.callFunc(this.nextTutorial4Call, this)));
         this._tutorialBlackLayer.setVisible(true);
     },
     stopTutorialHint:function () {
@@ -795,12 +773,11 @@ var TutorialSessionController = CCSessionController.extend({
     },
     hideTexts:function () {
         if (this._tutorialHint != null) {
-            this._tutorialHint.runAction(cc.Sequence.create(cc.FadeOut.create(1),
-                cc.CallFunc.create(this, this.removeHint)));
+            this._tutorialHint.runAction(cc.sequence(cc.fadeOut(1), cc.callFunc(this.removeHint, this)));
         }
 
         this._tutorialBlackLayer.runAction(new cc.Sequence(new cc.FadeTo(1, 0),
-            new cc.CallFunc(this, this.nextTutorial4Call)));
+            new cc.CallFunc(this.nextTutorial4Call, this)));
     },
     showFishInfo:function () {
         var zOrder = 204, pos = cc.pSub(VisibleRect.top(), cc.p(0, 265));
@@ -835,9 +812,7 @@ var TutorialSessionController = CCSessionController.extend({
         this._fishInfoBoard.runAction(new cc.FadeIn(1));
     },
     hideFishInfo:function () {
-        var fadeOut = new cc.FadeOut(1);
-        var final1 = new cc.CallFunc(this, this.step8Finshed);
-        this._fishInfoBoard.runAction(new cc.Sequence(fadeOut, final1));
+        this._fishInfoBoard.runAction(new cc.Sequence(new cc.FadeOut(1), new cc.CallFunc(this.step8Finshed, this)));
     },
     step8Finshed:function () {
         this._fishInfoBoard.removeFromParentAndCleanup(true);
@@ -847,18 +822,16 @@ var TutorialSessionController = CCSessionController.extend({
         this._uiInfo.addChild(sprite);
         sprite.setOpacity(0);
         sprite.setPosition(p);
-        sprite.runAction(cc.FadeIn.create(1));
+        sprite.runAction(cc.fadeIn(1));
     },
     hideUIInfo:function () {
         var imgs = this._uiInfo.getChildren();
 
         for (var i = 0; i < imgs.length; i++) {
             var img = imgs[i];
-            img.runAction(cc.FadeOut.create(1));
+            img.runAction(cc.fadeOut(1));
         }
-        var delay = cc.DelayTime.create(1);
-        var final1 = cc.CallFunc.create(this._currentGameScene, this.removeSprite);//cjh
-        this._uiInfo.runAction(cc.Sequence.create(delay, final1));
+        this._uiInfo.runAction(cc.sequence(cc.delayTime(1), cc.callFunc(this.removeSprite, this._currentGameScene)));
     },
     showHint:function (filename, delay, selector) {
         this._showHint = true;
@@ -1179,19 +1152,13 @@ var TutorialSessionController = CCSessionController.extend({
                 break;
 
             case TutorialStep.TutorialStep19:
-            {
                 this._pauseFish = false;
                 this._captiveRate = CaptiveRateStandard;
                 cc.director.getScheduler().schedule(this.increaseNormalGain, this, 0.1, false);
-            }
                 break;
 
             case TutorialStep.TutorialStep20:
-            {
-                this._currentGameScene.runAction(
-                    cc.Sequence.create(cc.DelayTime.create(5.0)
-                        , cc.CallFunc.create(this, this.showHintInT20)));
-            }
+                this._currentGameScene.runAction(cc.sequence(cc.delayTime(5.0), cc.callFunc(this.showHintInT20, this)));
 
                 break;
 

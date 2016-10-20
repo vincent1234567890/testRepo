@@ -24,15 +24,13 @@ var TutorialHintLayer = cc.Layer.extend({
         return false;
     },
     onEnter:function () {
-        this._super();
-        this.runAction(cc.Sequence.create(cc.DelayTime.create(3),
-            cc.CallFunc.create(this, this.permitClose)));
+        cc.Layer.prototype.onEnter.call(this);
+        this.runAction(cc.sequence(cc.delayTime(3), cc.callFunc(this.permitClose, this)));
     },
     setVisible:function (v) {
         this._super();
         this.canClose = false;
-        this.runAction(cc.Sequence.create(cc.DelayTime.create(3),
-            cc.CallFunc.create(this, this.permitClose)));
+        this.runAction(cc.sequence(cc.delayTime(3), cc.callFunc(this.permitClose, this)));
     },
     permitClose:function () {
         this.canClose = true;

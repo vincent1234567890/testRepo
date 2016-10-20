@@ -196,9 +196,7 @@ var ChestActor = BaseActor.extend({
     },
     deleteBigChest:function(SceneSprite){},
     ChestMove:function(){
-        var moveSprite = cc.MoveTo.create(1.00, VisibleRect.center());
-        var call = cc.CallFunc.create(this, this.deleteChest);
-        this.runAction(cc.Sequence.create(moveSprite, call));
+        this.runAction(cc.sequence(cc.moveTo(1.00, VisibleRect.center()), cc.callFunc(this.deleteChest, this)));
     },
     DrawOval:function(){},
     prizeNumber:0,
@@ -421,28 +419,22 @@ var MaxChestActor = ChestActor.extend({
     },
     ChestMove:function(){
         this.setPosition(VisibleRect.center());
-        var moveSprite = cc.MoveTo.create(1.00, cc.p((this.iDirection + 1) * screenWidth / 6, VisibleRect.center().y));
-        var call = cc.CallFunc.create(this, this.initScoreNumber);
-        this.runAction(cc.Sequence.create(moveSprite, call, null));
+        this.runAction(cc.sequence(
+            cc.moveTo(1.00, cc.p((this.iDirection + 1) * screenWidth / 6, VisibleRect.center().y)),
+            cc.callFunc(this.initScoreNumber, this)));
     },
     ChestMoveCenter:function(){
-        var moveSprite1 = cc.MoveTo.create(1.00, VisibleRect.center());
-        var moveSprite2 = cc.MoveTo.create(0.50, cc.p((this.iDirection + 1) * screenWidth / 6, VisibleRect.center().y));
-        if (this.iDirection == 0)
-        {
-            var call = cc.CallFunc.create(this.getScene().getChestGameLayer(), ChestGameLayer.prototype.RandomOvalForCall);
-            this.runAction(cc.Sequence.create(moveSprite1, moveSprite2, call));
-        }
-        else
-        {
-            this.runAction(cc.Sequence.create(moveSprite1, moveSprite2));
+        var moveSprite1 = cc.moveTo(1.00, VisibleRect.center());
+        var moveSprite2 = cc.moveTo(0.50, cc.p((this.iDirection + 1) * screenWidth / 6, VisibleRect.center().y));
+        if (this.iDirection == 0){
+            this.runAction(cc.sequence(moveSprite1, moveSprite2,
+                cc.callFunc(this.getScene().getChestGameLayer(), ChestGameLayer.prototype.RandomOvalForCall)));
+        } else {
+            this.runAction(cc.sequence(moveSprite1, moveSprite2));
         }
     },
     ChestMoveToPos:function(pos, timef){
-        var moveSprite = cc.MoveTo.create(timef, pos);
-        var call = cc.CallFunc.create(this, this.ChestMoveInit);
-
-        this.runAction(cc.Sequence.create(moveSprite,call, 0));
+        this.runAction(cc.sequence(cc.moveTo(timef, pos), cc.callFunc(this.ChestMoveInit, this)));
     },
     ChestMoveInit:function(pNode){
         this.setPosition(cc.p((this.iDirection+1)*screenWidth/6,VisibleRect.center().y));
@@ -486,17 +478,12 @@ var MaxChestActor = ChestActor.extend({
             var angle = cc.pAngleSigned(cc.pAdd(this.getPosition(), pos1), pos2);
             var FlyingAnimation;
             if (angle>=0)
-            {
-                FlyingAnimation = cc.Animation.create(FlyingSpriteNode1, 0.1);
-            }
+                FlyingAnimation = new cc.Animation(FlyingSpriteNode1, 0.1);
             else
-            {
-                FlyingAnimation = cc.Animation.create(FlyingSpriteNode, 0.1);
-            }
+                FlyingAnimation = new cc.Animation(FlyingSpriteNode, 0.1);
 
-            var BookAnimate = cc.Animate.create(FlyingAnimation, false);
-            var RewardSprite = cc.Sprite.createWithSpriteFrame(FlyingframeCache.getSpriteFrame("fb0000.png"));
-            var BookRepeat = cc.RepeatForever.create(BookAnimate);
+            var BookAnimate = new cc.Animate(FlyingAnimation).repeatForever();
+            var RewardSprite = new cc.Sprite(FlyingframeCache.getSpriteFrame("fb0000.png"));
             var yOffset = 190;
 
             var targetPos= cc.p(156, -24);
@@ -504,11 +491,9 @@ var MaxChestActor = ChestActor.extend({
             RewardSprite.setScale(1.0);
 
             RewardSprite.setRotation(angle/Math.PI*180);
-            var moveTo = cc.MoveTo.create(1.0, cc.pAdd(VisibleRect.top(), targetPos));//actionWithDuration: Distance/(kIsPad?200:100) position:cc.p(kIsPad?650:325-RewardSprite.position.x, kIsPad?720:310-RewardSprite.position.y)];
-
-            var call1 = cc.CallFunc.create(this, this.deleteBigChest);
-            RewardSprite.runAction(BookRepeat);
-            RewardSprite.runAction(cc.Sequence.create(moveTo,call1));
+            RewardSprite.runAction(BookAnimate);
+            RewardSprite.runAction(cc.sequence(
+                cc.moveTo(1.0, cc.pAdd(VisibleRect.top(), targetPos)), cc.callFunc(this.deleteBigChest, this)));
 
             this.getScene().getChestGameLayer().addChild(RewardSprite, 100);
 
@@ -542,9 +527,8 @@ var MaxChestActor = ChestActor.extend({
             RewardSprite.setPosition(this.getPosition());
 
             var targetPosX = 700.0;
-            var moveTo = cc.MoveTo.create(1.0, cc.p(targetPosX, VisibleRect.bottom().y));
-            var call1 = cc.CallFunc.create(this, this.deleteBigChest);
-            RewardSprite.runAction(cc.Sequence.create(moveTo, call1));
+            RewardSprite.runAction(cc.sequence(
+                cc.moveTo(1.0, cc.p(targetPosX, VisibleRect.bottom().y)), cc.callFunc(this.deleteBigChest, this)));
             this.getScene().getChestGameLayer().addChild(RewardSprite, 100);
         }
 
@@ -559,14 +543,13 @@ var MaxChestActor = ChestActor.extend({
             frameCache.getSpriteFrame("boxlinght_04.png"),
             frameCache.getSpriteFrame("boxlinght_05.png")];
 
-        var ChestAnimation = cc.Animation.create(ChestSpriteNode, 0.2);
-        var Chest01 = cc.Animate.create(ChestAnimation, false);
-        this.ChestGoldSprite = cc.Sprite.createWithSpriteFrame(frameCache.getSpriteFrame("boxlinght_01.png"));
-        var repeat = cc.RepeatForever.create(Chest01);
+        var chestAnimation = new cc.Animation(ChestSpriteNode, 0.2);
+        var chest01Ani = cc.animate(chestAnimation).repeatForever();
+        this.ChestGoldSprite = new cc.Sprite(frameCache.getSpriteFrame("boxlinght_01.png"));
         var yOffset= 190.0;
         this.ChestGoldSprite.setPosition(cc.pAdd(this.getPosition(), cc.p(5, yOffset)));
         this.ChestGoldSprite.setScale(2.0);
-        this.ChestGoldSprite.runAction(repeat);
+        this.ChestGoldSprite.runAction(chest01Ani);
         this.name = "hello";
         this.getScene().getChestGameLayer().addChild(this.ChestGoldSprite);
         //this.addChild(this.ChestGoldSprite,9999)
