@@ -287,21 +287,19 @@ var FishGroup = cc.Class.extend({
     init:function () {
         this.sharkCount = 0;
         this.loopCount = 0;
-        this.nameDict = cc.loader.getRes(ImageName("probability.plist"));
+        this.nameDict = cc.loader.getRes(res.ProbabilityPlist);
         this._chestArray = cc.loader.getRes(ImageName("ChestFish.plist"));
         return true;
     },
     loadResource:function (stage) {
         stage = stage || this.curStage;
-        var nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 21, 22, 23, 24, 25], trackstr;
-        if (stage === 1) {
-            trackstr = 'Track1_';
-        } else if (stage === 2) {
-            trackstr = 'Track2_';
-        }
+        var nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 21, 22, 23, 24, 25];
+
         var ScaleFactor = 2.5;
         for (var i = 0; i < nums.length; i++) {
-            var oneTrackDict = cc.loader.getRes(ImageName(trackstr + nums[i] + ".plist"));
+            // var oneTrackDict = cc.loader.getRes(ImageName(trackstr + nums[i] + ".plist"));
+
+            var oneTrackDict = cc.loader.getRes(res['Track'+stage+ '_'+ nums[i]]);
             //var pathKey = oneTrackDict.allkeys();
             //get all keys from onetrackdict
             for (var pathkey in oneTrackDict) {
@@ -309,13 +307,15 @@ var FishGroup = cc.Class.extend({
                 var tmpArray = pathDict["Offset"];
                 for (var k = 0; k < tmpArray.length; k++) {
                     var dictionaryFish = tmpArray[k];
-                    var offset = cc.PointFromString(dictionaryFish["offset"]);
+                    // var offset = cc.TMXMapInfo._pointFromString(dictionaryFish["offset"]);
+                    var offset = cc.spriteFrameCache._pointFromString(dictionaryFish["offset"]);
+
                     dictionaryFish["offset"] = cc.p(offset.x * ScaleFactor, offset.y * ScaleFactor);
                 }
                 tmpArray = pathDict["Radius"];
                 for (var l = 0; l < tmpArray.length; l++) {
                     var stringRadius = tmpArray[l];
-                    var controlradius = cc.PointFromString(stringRadius);
+                    var controlradius = cc.spriteFrameCache._pointFromString(stringRadius);
                     tmpArray[l] = cc.p(controlradius.x * ScaleFactor, controlradius.y * ScaleFactor);
                 }
             }
@@ -432,7 +432,7 @@ var FishGroup = cc.Class.extend({
             fishActor = ActorFactory.create(fishActorName);
         }
         var szAssert = 'the actor name ' + fishActorName + ' is not exist';
-        cc.Assert(fishActor, fishActorName);
+        cc.assert(fishActor, fishActorName);
         fishActor.setFishID(fishID);
         fishActor.setOffset(offset);
         fishActor.resetContentSize();
