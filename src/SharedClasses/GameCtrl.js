@@ -18,6 +18,7 @@ var GameCtrl = cc.Class.extend({
     init:function () {
         this.setIsNewGame(true);
         this.setIsPassStage(false);
+        this.initWebSocket();
         return true;
     },
     runGame:function () {
@@ -79,6 +80,77 @@ var GameCtrl = cc.Class.extend({
         else if (this.loaded) {
 
         }
+    },
+    initWebSocket: function () {
+        var gameAPIServerUrl = 'ws://3dfishing88888.sinonet.sg:8080';
+        var localNames = ['localhost', '127.0.0.1', '127.0.1.1', '0.0.0.0'];
+        if (localNames.indexOf(window.location.hostname) >= 0) {
+            gameAPIServerUrl = 'ws://localhost:8080';
+        }
+        
+        var gameCtrl = this;
+
+        //var webSocket = new WebSocket(gameAPIServerUrl);
+        //this.setWebSocket(webSocket);
+        //webSocket.onopen = function () {
+        //    // Do lots of things!
+        //    webSocket.send(JSON.stringify({service: 'game', functionName: 'register', data: {}}));
+        //};
+        //webSocket.onmessage = function (message) {
+        //    console.log("message:", message);
+        //};
+
+        var client = new WebSocketClient(gameAPIServerUrl);
+        var gameService = new GameServices.GameService();
+        client.addService(gameService);
+
+        client.connect();
+        client.addEventListener('open', function () {
+            Promise.resolve().then(
+                () => client.callAPIOnce('game', 'requestServer', {})
+            ).then(
+                (serverList) => {
+                    console.log("serverList:", serverList);
+                    // Future: Maybe ping the servers here, then connect to the closest one
+                }
+            ).then(
+                () => {
+                    // Create a test player
+                    var playerName = "testplayername" + Date.now() + Math.floor(Math.random()*100000000);
+                    var playerData = {
+                        name: playerName,
+                        email: playerName + '@testmail189543.com',
+                        password: 'test_password.12345',
+                    };
+                    return client.callAPIOnce('game', 'registerNewPlayer', playerData).then(
+                        response => response.data
+                    );
+                }
+            ).then(
+                // Log in
+                (testPlayer) => client.callAPIOnce('game', 'login', {id: testPlayer.id, password: 'test_password.12345'})
+            ).then(
+                () => client.callAPIOnce('game', 'joinGame', {})
+            ).then(
+                () => {
+                    // Start listening for game events
+                    var ioSocket = socketUtils.getIOSocketFromClient(client);
+
+                    // So this object has on() and off() functions for receiving messages, and send() for sending them.
+                    gameCtrl.setWebSocket(ioSocket);
+
+                    // Testing
+                    ioSocket.on('u', console.log);
+                    ioSocket.send('b', {a: Math.PI / 4});
+                }
+            ).catch(console.error.bind(console));
+        });
+    },
+    setWebSocket: function (webSocket) {
+        this.webSocket = webSocket;
+    },
+    getWebSocket: function (webSocket) {
+        return this.webSocket;
     },
 
     run:function () {

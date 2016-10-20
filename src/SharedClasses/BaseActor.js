@@ -45,14 +45,14 @@ var BaseActor = BaseSprite.extend({
     getBaseActorType:function () {
         return BaseActorType.eBaseActor
     },
-    initWithSpriteName:function (defName, imgName, pos) {
+    ctor:function (defName, imgName, pos) {
         if (!pos) {
             pos = cc.p(240, 160);
         }
 
         var currentGameScene = this.getCurrentGameScene();
         //this.initWithTexture(currentGameScene.getBatchNodeForKey(imgName, true, 1));
-        this.initWithFile(ImageName(defName), ImageName(imgName));
+        this._super(defName, imgName);
 
         //this.initWithFile(ImageName(imgName));
         //this._curAction = 0;
