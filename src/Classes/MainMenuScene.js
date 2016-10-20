@@ -7,9 +7,10 @@ var ShipRefitTag = 5;
 var MainMenuScene = cc.Scene.extend({
     _isSubLayer:false,
     _startLayer:0,
+
     init:function () {
         if (this._super()) {
-            this._startLayer = StartMenuLayer.create();
+            this._startLayer = new StartMenuLayer();
             this.addChild( this._startLayer, 10, StartLayerTag);
             this._isSubLayer = false;
         }
@@ -68,7 +69,7 @@ var MainMenuScene = cc.Scene.extend({
 
     initWithDef:function (def) {
         if (!this._startLayer) {
-            this._startLayer = StartMenuLayer.create();
+            this._startLayer = new StartMenuLayer();
             this.addChild(this._startLayer, 10, StartLayerTag);
             this._isSubLayer = false;
         }
