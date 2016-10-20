@@ -1147,23 +1147,23 @@ var GameScene = cc.Scene.extend({
 
             var tempPar = null;
             if (weapl == FishWeaponType.eWeaponLevel5) {
-                tempPar = ParticleSystemFactory.getInstance().createParticle(ImageName("lizibianhua1.plist"));
+                tempPar = particleSystemFactory.createParticle(ImageName("lizibianhua1.plist"));
                 tempPar.setDrawMode(cc.PARTICLE_SHAPE_MODE);
                 tempPar.setShapeType(cc.PARTICLE_STAR_SHAPE);
             } else if (weapl == FishWeaponType.eWeaponLevel6) {
-                tempPar = ParticleSystemFactory.getInstance().createParticle(ImageName("lizibianhua2.plist"));
+                tempPar = particleSystemFactory.createParticle(ImageName("lizibianhua2.plist"));
                 tempPar.setDrawMode(cc.PARTICLE_SHAPE_MODE);
                 tempPar.setShapeType(cc.PARTICLE_STAR_SHAPE);
             } else if (weapl == FishWeaponType.eWeaponLevel7) {
-                tempPar = ParticleSystemFactory.getInstance().createParticle(ImageName("lizibianhua3.plist"));
+                tempPar = particleSystemFactory.createParticle(ImageName("lizibianhua3.plist"));
                 tempPar.setDrawMode(cc.PARTICLE_SHAPE_MODE);
                 tempPar.setShapeType(cc.PARTICLE_STAR_SHAPE);
             } else if (weapl == FishWeaponType.eWeaponLevel10) {
-                tempPar = ParticleSystemFactory.getInstance().createParticle(ImageName("lizibianhua3.plist"));
+                tempPar = particleSystemFactory.createParticle(ImageName("lizibianhua3.plist"));
                 tempPar.setDrawMode(cc.PARTICLE_SHAPE_MODE);
                 tempPar.setShapeType(cc.PARTICLE_STAR_SHAPE);
             } else {
-                tempPar = ParticleSystemFactory.getInstance().createParticle(ImageName("yuwanglizi.plist"));
+                tempPar = particleSystemFactory.createParticle(ImageName("yuwanglizi.plist"));
             }
 
             net.setParticle(tempPar);
@@ -1308,7 +1308,7 @@ var GameScene = cc.Scene.extend({
 
         if (PlayerActor.sharedActor().getNeedAddCoin()) {
             this.removeChildByTag(kAddCoidParticleTag, true);
-            var par = ParticleSystemFactory.getInstance().createParticle(ImageName("addCoin.plist"));
+            var par = particleSystemFactory.createParticle(ImageName("addCoin.plist"));
             this.addChild(par, 111, kAddCoidParticleTag);
             par.setPosition(parPos);
 
@@ -1615,7 +1615,7 @@ var GameScene = cc.Scene.extend({
     addParticleAchieve:function () {
         var pos = cc.p(VisibleRect.center().x, VisibleRect.center().y + 100);
 
-        var parAchieve = ParticleSystemFactory.getInstance().createParticle(ImageName("kaibaoxiang01.plist"));
+        var parAchieve = particleSystemFactory.createParticle(ImageName("kaibaoxiang01.plist"));
         this.addChild(parAchieve, 201, kAchieveParticleTag);
         parAchieve.setPosition(pos);
     },
