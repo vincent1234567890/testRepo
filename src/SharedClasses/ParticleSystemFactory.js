@@ -1,16 +1,11 @@
-var ParticleSystemFactory = cc.Class.extend({
-    _particleCache:null,
-
-    ctor:function () {
-        this._particleCache = {};
-    },
+var particleSystemFactory = {
+    _particleCache:{},
 
     createParticle:function (plistPath) {
         if (!this._particleCache.hasOwnProperty(plistPath)){
             this._particleCache[plistPath] = new cc.ParticleSystem(plistPath);
-            this._particleCache[plistPath].unscheduleAllSelectors();
+            this._particleCache[plistPath].unscheduleAllCallbacks();
         }
-
 
         return this._particleCache[plistPath].clone();
     },
@@ -18,12 +13,4 @@ var ParticleSystemFactory = cc.Class.extend({
     clearCache:function () {
         this._particleCache = {};
     }
-});
-
-ParticleSystemFactory._staticFactory = null;
-ParticleSystemFactory.getInstance = function () {
-    if (!ParticleSystemFactory._staticFactory) {
-        ParticleSystemFactory._staticFactory = new ParticleSystemFactory();
-    }
-    return ParticleSystemFactory._staticFactory;
 };

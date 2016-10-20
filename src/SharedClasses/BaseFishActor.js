@@ -451,7 +451,7 @@ var BaseFishActor = BaseActor.extend({
                 var distance = cc.pDistance(p, cc.p());
                 p = cc.p(distance * Math.cos(this.getCurRotation()), distance * Math.sin(this.getCurRotation()));
 
-                var pParticle = ParticleSystemFactory.getInstance().createParticle(ImageName("goldlizi.plist"));
+                var pParticle = particleSystemFactory.createParticle(ImageName("goldlizi.plist"));
                 pParticle._dontTint = true;
 
                 var goldcoin = ActorFactory.create("GoldPrizeActor");
@@ -525,19 +525,19 @@ var BaseFishActor = BaseActor.extend({
         }
         var tempPar;
         if (weaponType === FishWeaponType.eWeaponLevel5) {
-            tempPar = ParticleSystemFactory.getInstance().createParticle(ImageName("lizibianhua1.plist"));
+            tempPar = particleSystemFactory.createParticle(ImageName("lizibianhua1.plist"));
             tempPar.setDrawMode(cc.PARTICLE_SHAPE_MODE);
             tempPar.setShapeType(cc.PARTICLE_STAR_SHAPE);
         } else if (weaponType == FishWeaponType.eWeaponLevel7) {
-            tempPar = ParticleSystemFactory.getInstance().createParticle(ImageName("lizibianhua2.plist"));
+            tempPar = particleSystemFactory.createParticle(ImageName("lizibianhua2.plist"));
             tempPar.setDrawMode(cc.PARTICLE_SHAPE_MODE);
             tempPar.setShapeType(cc.PARTICLE_STAR_SHAPE);
         } else if (weaponType == FishWeaponType.eWeaponLevel10) {
-            tempPar = ParticleSystemFactory.getInstance().createParticle(ImageName("lizibianhua3.plist"));
+            tempPar = particleSystemFactory.createParticle(ImageName("lizibianhua3.plist"));
             tempPar.setDrawMode(cc.PARTICLE_SHAPE_MODE);
             tempPar.setShapeType(cc.PARTICLE_STAR_SHAPE);
         } else {
-            tempPar = ParticleSystemFactory.getInstance().createParticle(ImageName("yuwanglizi.plist"));
+            tempPar = particleSystemFactory.createParticle(ImageName("yuwanglizi.plist"));
         }
         if (net != null) {
             net.setParticle(tempPar);
@@ -697,7 +697,7 @@ var BaseFishActor = BaseActor.extend({
                 case ActorType.eActorTypeNormal:
                 {
                     if (this.getIsChangeColor()) {
-                        var baoixangParticle = ParticleSystemFactory.getInstance().createParticle(ImageName("bianbaoxiangl03.plist"));
+                        var baoixangParticle = particleSystemFactory.createParticle(ImageName("bianbaoxiangl03.plist"));
                         baoixangParticle._dontTint = true;
                         baoixangParticle.setPosition(this.getPosition());
                         this.getScene().addChild(baoixangParticle);
@@ -2340,7 +2340,7 @@ var BaseFishActor = BaseActor.extend({
             case ActorType.eActorTypeTR:
             {
                 if (this.getIsChangeColor()) {
-                    var baoixangParticle = ParticleSystemFactory.getInstance().createParticle(ImageName("bianbaoxiangl03.plist"));
+                    var baoixangParticle = particleSystemFactory.createParticle(ImageName("bianbaoxiangl03.plist"));
                 }
 //            [PlayerActor sharedActorTR].curReturn += self.prizeScore;
 //            [PlayerActor sharedActorTR].totalGain += self.prizeScore;
@@ -2364,7 +2364,7 @@ var BaseFishActor = BaseActor.extend({
                 var playerActor = PlayerActor.sharedActor();
                 if (playerActor.getAutoSave()) {
                     if (this.getIsChangeColor()) {
-                        var baoixangParticle = ParticleSystemFactory.getInstance().createParticle(ImageName("bianbaoxiangl03.plist"));
+                        var baoixangParticle = particleSystemFactory.createParticle(ImageName("bianbaoxiangl03.plist"));
                         baoixangParticle.setPosition(this.getPosition());
                         this.getScene().addChild(baoixangParticle);
 
