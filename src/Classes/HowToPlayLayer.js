@@ -11,19 +11,55 @@ var HowToPlayLayer = cc.Layer.extend({
     scissor:null,
     _returnButton:null,
     _bg:null,
+    _touchListener: null,
+
     ctor:function () {
+        cc.Layer.prototype.ctor.call(this);
+
         this._curPageIndicator = [];
+        this._helpImages = [];
+
+        this._touchListener = cc.EventListener.create({
+            event: cc.EventListener.TOUCH_ONE_BY_ONE,
+            swallowTouches: true,
+            onTouchBegan:function (touch, event) {
+                event.getCurrentTarget()._touchBegan = touch.getLocation();
+                return true;
+            },
+            onTouchMoved:function (touch, event) {
+                var target = event.getCurrentTarget();
+                var touchPoint = touch.getLocation();
+                var touchEnd = touch.getPreviousLocation();
+
+                var offsetX = touchPoint.x - touchEnd.x;
+                var layerX = target._helpLayer.getPositionX() + offsetX;
+
+                target._helpLayer.setPosition(cc.p(layerX, target._helpLayer.getPositionY()));
+            },
+            onTouchEnded:function (touch, event) {
+                var target = event.getCurrentTarget();
+                var touchPoint = touch.getLocation();
+                var distance = target._touchBegan.x - touchPoint.x;
+                var wp = target.getChildByTag(999);
+                if (Math.abs(distance) > 40 && target._helpLayer.getPosition().x <= 0 &&
+                    target._helpLayer.getPosition().x >= -wp.getContentSize().width * PAGE_SCALE_FACTOR * (HELP_PAGE_NUM - 1)) {
+                    if (distance < 0)
+                        target.movePageLeft();
+                    else
+                        target.movePageRight();
+                } else {
+                    var x = -(target._currentPage * wp.getContentSize().width * PAGE_SCALE_FACTOR);
+                    target._helpLayer.runAction(cc.sequence(
+                        cc.moveTo(0.2, x, target._helpLayer.getPositionY()),
+                        cc.callFunc(target.updateIndicators, target)));
+                }
+            }
+        });
     },
 
-    init:function (){
-        this._super();
-        this._helpImages = [];
-        //todo use eventManager
-        cc.Director.getInstance().getTouchDispatcher().addTargetedDelegate(this, cc.MENU_HANDLER_PRIORITY - 50, false);
-        return true;
-    },
     onEnter:function(){
-        this._super();
+        cc.Layer.prototype.onEnter.call(this);
+
         this.setKeyboardEnabled(true);
         var cache = cc.spriteFrameCache;
         cache.addSpriteFrames(ImageNameLang("StageSelectLayer.plist"));
@@ -33,6 +69,8 @@ var HowToPlayLayer = cc.Layer.extend({
         this.drawHelpImages();
         this.drawReturnButton();
 
+        if (this._touchListener && !this._touchListener._isRegistered())
+            cc.eventManager.addListener(this._touchListener, this);
 
         var that = this;
         window.addEventListener("resize", function(event){
@@ -46,59 +84,29 @@ var HowToPlayLayer = cc.Layer.extend({
         cache.removeSpriteFrameByName(ImageNameLang("tutorial_uibox.plist"));
     },
     back:function (object) {
-        //todo use eventManager
-        cc.Director.getInstance().getTouchDispatcher().removeDelegate(this);
         this.removeAllChildrenWithCleanup(true);
-        this.removeFromParentAndCleanup(true);
+        this.removeFromParent(true);
         var main = GameCtrl.sharedGame().getCurScene();
         if (main) {
             main.setIsSubLayer(false);
         }
     },
-    onTouchBegan:function (touch, event) {
-        this._touchBegan = touch.getLocation();
-        return true;
-    },
-    onTouchMoved:function (touch, event) {
-        var touchPoint = touch.getLocation();
-        var touchEnd = touch.getPreviousLocation();
 
-        var offsetX = touchPoint.x - touchEnd.x;
-        var layerX = this._helpLayer.getPosition().x + offsetX;
-
-        this._helpLayer.setPosition(cc.p(layerX, this._helpLayer.getPosition().y));
-    },
-    onTouchEnded:function (touch, event) {
-        var touchPoint = touch.getLocation();
-        var distance = this._touchBegan.x - touchPoint.x;
-        var wp = this.getChildByTag(999);
-        if (Math.abs(distance) > 40 && this._helpLayer.getPosition().x <= 0 && this._helpLayer.getPosition().x >= -wp.getContentSize().width * PAGE_SCALE_FACTOR * (HELP_PAGE_NUM - 1)) {
-            if (distance < 0) {
-                this.movePageLeft();
-            }
-            else {
-                this.movePageRight();
-            }
-        }
-        else {
-            var x = -(this._currentPage * wp.getContentSize().width * PAGE_SCALE_FACTOR);
-            var Move = cc.MoveTo.create(0.2, cc.p(x, this._helpLayer.getPosition().y));
-            var call = cc.CallFunc.create(this, this.updateIndicators);
-            this._helpLayer.runAction(cc.Sequence.create(Move, call));
-        }
-    },
     getCurrentPage:function () {
         return this._currentPage;
     },
+
     setCurrentPage:function (curIndex) {
         this._currentPage = curIndex;
     },
+
     drawBackGround:function () {
         this._bg = cc.Sprite.create(ImageName("ui_background_normal.jpg"));
         this.addChild(this._bg, 7);
         this._bg.setScale(Multiple);
         this._bg.setPosition(VisibleRect.center());
     },
+
     drawHelpImages:function () {
         var clipLayer = HelpImagesLayer.create();
         this.addChild(clipLayer, 10,998);
@@ -209,10 +217,7 @@ var HowToPlayLayer = cc.Layer.extend({
 });
 
 HowToPlayLayer.create = function () {
-    var ret = new HowToPlayLayer();
-    if (ret && ret.init()) {
-        return ret;
-    }
+    return new HowToPlayLayer();
 };
 
 

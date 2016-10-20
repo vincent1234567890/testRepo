@@ -15,121 +15,124 @@ var AboutLayer = cc.LayerColor.extend({
     _back:null,
     _header:null,
     _footer:null,
+    _touchListener: null,
+
+    ctor: function(parentMenu) {
+        cc.LayerColor.prototype.ctor.call(this, new cc.Color(0, 0, 0, 200));
+
+        cc.spriteFrameCache.addSpriteFrames(ImageName("about.plist"));
+        this.parentMenu = parentMenu;
+        //background
+        this._bg = cc.Sprite.create(ImageName("ui_background_normal.jpg"));
+        this.addChild(this._bg, 0);
+
+        //title
+        this._title = cc.Sprite.create(ImageNameLang("ab_ui_text_21.png"));
+        this.addChild(this._title, 10);
+
+        //back
+        this._back = new cc.MenuItemSprite(new cc.Sprite("#ui_button_17.png"), new cc.Sprite("#ui_button_18.png"), this.goBackAnimation, this);
+
+        var mBack = cc.Menu.create(this._back);
+        this.addChild(mBack, 30);
+        mBack.setPosition(cc.p(0, 0));
+
+        this.credits = cc.Layer.create();
+        this.addChild(this.credits);
+        this.minY = VisibleRect.rect().height * 0.4;
+        this.maxY = this.minY;
+        this.speed = 40.0;
+        this.isTouching = false;
+        var x = VisibleRect.rect().width * 0.5;
+
+        var pos = cc.p(x, 0);
+        var creadit = cc.Sprite.create(ImageNameLang("ui_text_41.png"));
+        creadit.setAnchorPoint(cc.p(0.5, 1));
+        creadit.setPosition(pos);
+        this.maxY += creadit.getContentSize().height;
+        this.credits.addChild(creadit);
+
+        pos = cc.pAdd(pos, cc.p(0, -creadit.getContentSize().height));
+        creadit = cc.Sprite.create(ImageNameLang("ui_text_42.png"));
+        creadit.setAnchorPoint(cc.p(0.5, 1));
+        creadit.setPosition(pos);
+        this.maxY += creadit.getContentSize().height;
+        this.credits.addChild(creadit);
+
+        pos = cc.pAdd(pos, cc.p(0, -creadit.getContentSize().height));
+        creadit = cc.Sprite.create(ImageNameLang("ui_text_43.png"));
+        creadit.setAnchorPoint(cc.p(0.5, 1));
+        creadit.setPosition(pos);
+        this.maxY += creadit.getContentSize().height;
+        this.credits.addChild(creadit);
+
+        this._header = new cc.Sprite(("ui_box_08.png"));
+        this._header.setAnchorPoint(cc.p(0.5, 1));
+        this.addChild(this._header);
+
+        this._footer = new cc.Sprite("ui_box_09.png");
+        this._footer.setAnchorPoint(cc.p(0.5, 0));
+        this.addChild(this._footer);
+
+        this.parentMenu.setTouchEnabled(false);
+        //todo event manager
+        this.setKeyboardEnabled(true);
+
+        this.resetAllSpritePos();
+
+        this._touchListener = cc.EventListener.create({
+            event: cc.EventListener.TOUCH_ONE_BY_ONE,
+            swallowTouches: true,
+            onTouchBegan:function (touch, event) {
+                var target = event.getCurrentTarget();
+                target.speed = 0;
+                target.isTouching = true;
+                target.timestamp = Date.now();
+                var location = touch.getLocation();
+                target.lastPos = location.y;
+                return true;
+            },
+            onTouchMoved:function (touch, event) {
+                var target = event.getCurrentTarget();
+                var previousLocation = touch.getPreviousLocation();
+                var location = touch.getLocation();
+
+                var deltaY = location.y - previousLocation.y;
+                var p = target.credits.getPosition();
+                var x = p.x;
+                var y = p.y + deltaY;
+
+                if (y > target.maxY) y = target.maxY;
+                if (y < target.minY) y = target.minY;
+
+                target.credits.setPosition(cc.p(x, y));
+
+                var interval = target.getTimeInterval(target.timestamp);
+                if (interval > 0.2) {
+                    target.timestamp = Date.now();
+                    target.lastPos = location.y;
+                }
+            },
+            onTouchEnded:function (touch, event) {
+                var target = event.getCurrentTarget();
+                var location = touch.getLocation();
+                target.speed = (location.y - target.lastPos) / target.getTimeInterval(target.timestamp) / 4.0;
+                target.isTouching = false;
+            }
+        });
+
+        var that = this;
+        window.addEventListener("resize", function (event) {
+            that.resetAllSpritePos();
+        });
+    },
+
     onEnter:function () {
         this._super();
         this.schedule(this.updateList);
-        //todo use eventManager
-        cc.Director.getInstance().getTouchDispatcher().addTargetedDelegate(this, 0, false);
-    },
-    onExit:function () {
-        this._super();
-        //todo use eventManager
-        cc.Director.getInstance().getTouchDispatcher().removeDelegate(true);
-    },
-    onTouchBegan:function (touch, event) {
-        this.speed = 0;
-        this.isTouching = true;
-        this.timestamp = cc.Time.gettimeofdayCocos2d();
-        var location = touch.getLocation();
-        this.lastPos = location.y;
-        return true;
-    },
-    onTouchMoved:function (touch, event) {
-        var previousLocation = touch.getPreviousLocation();
-        var location = touch.getLocation();
 
-        var deltaY = location.y - previousLocation.y;
-        var p = this.credits.getPosition();
-        var x = p.x;
-        var y = p.y + deltaY;
-
-        if (y > this.maxY) y = this.maxY;
-        if (y < this.minY) y = this.minY;
-
-        this.credits.setPosition(cc.p(x, y));
-
-        var interval = this.getTimeInterval(this.timestamp);
-        if (interval > 0.2) {
-            this.timestamp = cc.Time.gettimeofdayCocos2d();
-            this.lastPos = location.y;
-        }
-    },
-    onTouchEnded:function (touch, event) {
-        var location = touch.getLocation();
-        this.speed = (location.y - this.lastPos) / this.getTimeInterval(this.timestamp) / 4.0;
-
-        this.isTouching = false;
-    },
-    initWithParentMenu:function (_parentMenu) {
-        if (this.initWithColor(new cc.Color(0, 0, 0, 200))) {
-            cc.spriteFrameCache.addSpriteFrames(ImageName("about.plist"));
-            this.parentMenu = _parentMenu;
-            //background
-            this._bg = cc.Sprite.create(ImageName("ui_background_normal.jpg"));
-            this.addChild(this._bg, 0);
-
-            //title
-            this._title = cc.Sprite.create(ImageNameLang("ab_ui_text_21.png"));
-            this.addChild(this._title, 10);
-
-            //back
-            this._back = new cc.MenuItemSprite(new cc.Sprite("#ui_button_17.png"), new cc.Sprite("#ui_button_18.png"), this.goBackAnimation, this);
-
-            var mBack = cc.Menu.create(this._back);
-            this.addChild(mBack, 30);
-            mBack.setPosition(cc.p(0, 0));
-
-            this.credits = cc.Layer.create();
-            this.addChild(this.credits);
-            this.minY = VisibleRect.rect().height * 0.4;
-            this.maxY = this.minY;
-            this.speed = 40.0;
-            this.isTouching = false;
-            var x = VisibleRect.rect().width * 0.5;
-
-            var pos = cc.p(x, 0);
-            var creadit = cc.Sprite.create(ImageNameLang("ui_text_41.png"));
-            creadit.setAnchorPoint(cc.p(0.5, 1));
-            creadit.setPosition(pos);
-            this.maxY += creadit.getContentSize().height;
-            this.credits.addChild(creadit);
-
-            pos = cc.pAdd(pos, cc.p(0, -creadit.getContentSize().height));
-            creadit = cc.Sprite.create(ImageNameLang("ui_text_42.png"));
-            creadit.setAnchorPoint(cc.p(0.5, 1));
-            creadit.setPosition(pos);
-            this.maxY += creadit.getContentSize().height;
-            this.credits.addChild(creadit);
-
-            pos = cc.pAdd(pos, cc.p(0, -creadit.getContentSize().height));
-            creadit = cc.Sprite.create(ImageNameLang("ui_text_43.png"));
-            creadit.setAnchorPoint(cc.p(0.5, 1));
-            creadit.setPosition(pos);
-            this.maxY += creadit.getContentSize().height;
-            this.credits.addChild(creadit);
-
-            this._header = new cc.Sprite(("ui_box_08.png"));
-            this._header.setAnchorPoint(cc.p(0.5, 1));
-            this.addChild(this._header);
-
-            this._footer = new cc.Sprite("ui_box_09.png");
-            this._footer.setAnchorPoint(cc.p(0.5, 0));
-            this.addChild(this._footer);
-
-            this.parentMenu.setTouchEnabled(false);
-            this.setKeyboardEnabled(true);
-            this.setTouchEnabled(true);
-
-            this.resetAllSpritePos();
-
-            var that = this;
-            window.addEventListener("resize", function (event) {
-                that.resetAllSpritePos();
-            });
-
-            return true;
-        }
-        return false;
+        if (this._touchListener && !this._touchListener._isRegistered())
+            cc.eventManager.addListener(this._touchListener, this);
     },
 
     updateList:function (dt) {
@@ -164,9 +167,7 @@ var AboutLayer = cc.LayerColor.extend({
             ));
     },
     getTimeInterval:function (beforeTime) {
-        var now = cc.Time.gettimeofdayCocos2d();
-        var dt = (now.tv_sec - beforeTime.tv_sec) + (now.tv_usec - beforeTime.tv_usec) / 1000000.0;
-        return dt;
+        return (Date.now() - beforeTime) / 1000.0;
     },
     resetAllSpritePos:function () {
         Multiple = AutoAdapterScreen.getInstance().getScaleMultiple();

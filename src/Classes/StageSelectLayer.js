@@ -6,14 +6,14 @@ var StageUITag = {
 };
 
 var StageSelectLayer = cc.Layer.extend({
-    _helpImages:0,
+    _helpImages:null,
     _touchBegan:null,
     _helpLayer:0,
     _dragSpeed:0,
     _curIndex:null,
     _otherLeftButton:0,
     _otherRightButton:0,
-    _curPageIndicator:[],
+    _curPageIndicator:null,
     _parentDeleaget:0,
     _showBuyLayer:false,
     _purchaseConfirmation:false,
@@ -23,17 +23,64 @@ var StageSelectLayer = cc.Layer.extend({
     _returnButton:null,
     _currentPage:0,
     _actorCoinLabel:0,
-    init:function(){
-        this._super();
+    _touchListener: null,
+
+    ctor: function(){
+        cc.Layer.prototype.ctor.call(this);
+
         this._helpImages = [];
         this._curIndex = 1;
-        //todo use event Manager
-        cc.Director.getInstance().getTouchDispatcher().addTargetedDelegate(this, 0, false);
+        this._curPageIndicator = [];
 
-        return true;
+        this._touchListener = cc.EventListener.create({
+            event: cc.EventListener.TOUCH_ONE_BY_ONE,
+            swallowTouches: true,
+            onTouchBegan:function (touch, event) {
+                var target = event.getCurrentTarget();
+                if (target._showBuyLayer) {
+                    return false;
+                }
+
+                target._touchBegan = touch.getLocation();
+                return true;
+            },
+            onTouchMoved:function (touch, event) {
+                var target = event.getCurrentTarget();
+                if (target._showBuyLayer) {
+                    return;
+                }
+                var touchPoint = touch.getLocation();
+                var touchEnd = touch.getPreviousLocation();
+                var offsetX = touchPoint.x - touchEnd.x;
+                var layerX = target._helpLayer.getPosition().x + offsetX;
+
+                target._helpLayer.setPosition(cc.p(layerX, target._helpLayer.getPosition().y));
+            },
+            onTouchEnded:function (touch, event) {
+                var target = event.getCurrentTarget();
+                if (target._showBuyLayer || target._exiting) {
+                    return;
+                }
+                var touchPoint = touch.getLocation();
+                var distance = target._touchBegan.x - touchPoint.x;
+
+                if (Math.abs(distance) > 60 && target._helpLayer.getPosition().x <= 0 && target._helpLayer.getPosition().x >= -(VisibleRect.rect().width) * (STAGE_PAGE_NUM - 1)) {
+                    if (distance < 0)
+                        target.otherLeft(null);
+                    else
+                        target.otherRight(null);
+                } else {
+                    var x = -(target._currentPage * VisibleRect.rect().width);
+                    this._helpLayer.runAction(cc.sequence(
+                        cc.moveTo(0.2, x, target._helpLayer.getPosition().y),
+                        cc.callFunc(target.updateCurrentPage, target)));
+                }
+            }
+        });
     },
+
     onEnter:function () {
-        this._super();
+        cc.Layer.prototype.onEnter.call(this);
 
         //todo use event manager
         //this.setKeyboardEnabled(true);
@@ -47,6 +94,9 @@ var StageSelectLayer = cc.Layer.extend({
         this.drawReturnButton();
         this.drawPageControl();
 
+        if (this._touchListener && !this._touchListener._isRegistered())
+            cc.eventManager.addListener(this._touchListener, this);
+
         var that = this;
         window.addEventListener("resize", function (event) {
             that.resetAllSpritePos();
@@ -58,8 +108,8 @@ var StageSelectLayer = cc.Layer.extend({
         cache.removeSpriteFrameByName(ImageNameLang("StageSelectLayer.plist"));
         cache.removeSpriteFrameByName(ImageNameLang("StageSelectLayer3.plist"));
 
-        this._helpImages = [];
-        this._curPageIndicator = [];
+        this._helpImages.length = 0;
+        this._curPageIndicator.length = 0;
     },
     keyBackClicked:function () {
         if (this._showBuyLayer) {
@@ -181,16 +231,14 @@ var StageSelectLayer = cc.Layer.extend({
         }
         else {
             var scene = GameCtrl.sharedGame().getCurScene();
-            if (scene) {
+            if (scene)
                 scene.setIsSubLayer(false);
-            }
         }
 
-        //use event manager
-        cc.Director.getInstance().getTouchDispatcher().removeDelegate(this);
         this.removeAllChildrenWithCleanup(true);
-        this.removeFromParentAndCleanup(true);
+        this.removeFromParent(true);
     },
+
     showAchievements:function (sender) {
     },
     showHiScore:function (sender) {
@@ -198,52 +246,10 @@ var StageSelectLayer = cc.Layer.extend({
     updateUI:function (dt) {
     },
 
-    SetDefaultPage:function (pageNum) {
+    setDefaultPage:function (pageNum) {
         this._currentPage = pageNum - 1;
         this._helpLayer.setPosition(cc.p(-screenWidth * this._currentPage, this._helpLayer.getPosition().y));
         this.updateCurrentPage();
-    },
-
-    onTouchBegan:function (touch, event) {
-        if (this._showBuyLayer) {
-            return false;
-        }
-
-        this._touchBegan = touch.getLocation();
-        return true;
-    },
-    onTouchMoved:function (touch, event) {
-        if (this._showBuyLayer) {
-            return;
-        }
-        var touchPoint = touch.getLocation();
-        var touchEnd = touch.getPreviousLocation();
-        var offsetX = touchPoint.x - touchEnd.x;
-        var layerX = this._helpLayer.getPosition().x + offsetX;
-
-        this._helpLayer.setPosition(cc.p(layerX, this._helpLayer.getPosition().y));
-    },
-    onTouchEnded:function (touch, event) {
-        if (this._showBuyLayer || this._exiting) {
-            return;
-        }
-        var touchPoint = touch.getLocation();
-        var distance = this._touchBegan.x - touchPoint.x;
-
-        if (Math.abs(distance) > 60 && this._helpLayer.getPosition().x <= 0 && this._helpLayer.getPosition().x >= -(VisibleRect.rect().width) * (STAGE_PAGE_NUM - 1)) {
-            if (distance < 0) {
-                this.otherLeft(null);
-            }
-            else {
-                this.otherRight(null);
-            }
-        }
-        else {
-            var x = -(this._currentPage * VisibleRect.rect().width);
-            var Move = cc.MoveTo.create(0.2, cc.p(x, this._helpLayer.getPosition().y));
-            var call = cc.CallFunc.create(this, this.updateCurrentPage);
-            this._helpLayer.runAction(cc.Sequence.create(Move, call, 0));
-        }
     },
 
     delegateAsObject:function () {
@@ -486,8 +492,6 @@ var StageSelectLayer = cc.Layer.extend({
     playGame:function (sender) {
         playEffect(BUTTON_EFFECT);
         GameCtrl.sharedGame().newGame(this._currentPage + 1);
-        //todo use event manager
-        cc.Director.getInstance().getTouchDispatcher().removeDelegate(this);
         this.removeAllChildrenWithCleanup(true);
         this.removeFromParent(true);
     },
@@ -572,14 +576,6 @@ var StageSelectLayer = cc.Layer.extend({
         }
     }
 });
-
-StageSelectLayer.getInstance = function () {
-    var ret = new StageSelectLayer();
-    if (ret.init()) {
-        return ret;
-    }
-    return null;
-};
 
 var EnterStage = StageSelectLayer.extend({
     clickedButtonAtIndex:function (buttonIndex) {

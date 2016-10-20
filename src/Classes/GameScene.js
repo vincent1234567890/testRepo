@@ -2003,7 +2003,8 @@ var GameScene = cc.Scene.extend({
         wrapper.getBooleanForKey("AskByTurnHere", true);
         this.clearGameResource();
         GameCtrl.sharedGame().homeWithStage();
-        StageSelectLayer.getInstance().SetDefaultPage(3);
+        var stageSelectLayer = new StageSelectLayer();
+        stageSelectLayer.setDefaultPage(3);
     },
     cancelEnterSceneSelect:function () {
         if (this._enterNewLayer) {
