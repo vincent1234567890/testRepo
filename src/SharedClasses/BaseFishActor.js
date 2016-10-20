@@ -389,7 +389,7 @@ var BaseFishActor = BaseActor.extend({
         var sequ = cc.Sequence.create(fadeIn, delayTime, fadeOut);
         var spawn = cc.Spawn.create(sequ, moveBy);
 
-        var call = cc.CallFunc.create(prizeSprite, this.getScene().removeSprite);
+        var call = cc.callFunc(this.getScene().removeSprite, prizeSprite);
         prizeSprite.runAction(cc.Sequence.create(spawn, call));
         prizeSprite.setPosition(Pos);
         prizeSprite.setScale(1.0);
@@ -402,8 +402,8 @@ var BaseFishActor = BaseActor.extend({
         var sequ1 = cc.Sequence.create(fadeIn1, delayTime1, fadeOut1);
         var spawn1 = cc.Spawn.create(sequ1, moveBy1);
 
-        var call1 = cc.CallFunc.create(labelNum, this.getScene().removeSprite);
-        labelNum.runAction(cc.Sequence.create(spawn1, call1));
+        var call1 = cc.callFunc(this.getScene().removeSprite, labelNum );
+        labelNum.runAction(cc.sequence(spawn1, call1));
         labelNum.setPosition(cc.pAdd(Pos, move));
         this.getScene().addChild(labelNum, 130);
     },
@@ -448,7 +448,7 @@ var BaseFishActor = BaseActor.extend({
 
             for (var idx = 0; idx < count; idx++) {
                 var p = this.referencePoint(idx);
-                var distance = cc.pDistance(p, cc.PointZero());
+                var distance = cc.pDistance(p, cc.p());
                 p = cc.p(distance * Math.cos(this.getCurRotation()), distance * Math.sin(this.getCurRotation()));
 
                 var pParticle = ParticleSystemFactory.getInstance().createParticle(ImageName("goldlizi.plist"));
@@ -1210,11 +1210,11 @@ var BaseFishActor = BaseActor.extend({
         var scaleTo = cc.ScaleTo.create(0.5, 0.5);
         var spawnL = cc.Spawn.create(fadeOut, scaleTo);
         var delay = cc.DelayTime.create(0.5);
-        var call = cc.CallFunc.create(this.getScene(), GameScene.removeSprite);
+        var call = cc.callFunc(GameScene.removeSprite, this.getScene());
         var delayTime = cc.DelayTime.create(0.1);
         var sequ = cc.Sequence.create(spawnL, delayTime);
 
-        var addCall = cc.CallFunc.create(this, this.addSprite);
+        var addCall = cc.callFunc(this.addSprite, this);
         prizeSprite.setOpacity(0);
         labelNum.setOpacity(0);
 
@@ -1222,24 +1222,24 @@ var BaseFishActor = BaseActor.extend({
         prizeSprite.setPosition(cc.pAdd(this.getPosition(), move));
         prizeSprite.setScale(1.6);
 
-        var fadeOut1 = cc.FadeOut.create(0.5);
-        var scaleTo1 = cc.ScaleTo.create(0.5, 0.5);
-        var delayTime1 = cc.DelayTime.create(0.05);
-        var spawnL1 = cc.Spawn.create(fadeOut1, scaleTo1);
-        var sequ1 = cc.Sequence.create(spawnL1, delayTime1);
-        var spawn1 = cc.Spawn.create(sequ1, sequ1);
-        var call1 = cc.CallFunc.create(this.getScene(), GameScene.removeSprite);
+        var fadeOut1 = new cc.FadeOut(0.5);
+        var scaleTo1 = new cc.ScaleTo(0.5, 0.5);
+        var delayTime1 = new cc.DelayTime(0.05);
+        var spawnL1 = new cc.Spawn(fadeOut1, scaleTo1);
+        var sequ1 = cc.sequence(spawnL1, delayTime1);
+        var spawn1 = new cc.Spawn(sequ1, sequ1);
+        var call1 = cc.callFunc(GameScene.removeSprite, this.getScene());
 
-        labelNum.runAction(cc.Sequence.create(delay, addCall, sequ1, call1));
+        labelNum.runAction(cc.sequence(delay, addCall, sequ1, call1));
         labelNum.setPosition(this.getPosition());
         labelNum.setScale(1.6);
-        var call2 = cc.CallFunc.create(this, this.DeletelabelScoreNumber);
+        var call2 = cc.callFunc(this.DeletelabelScoreNumber, this);
         var move1 = cc.p(-prizeSprite.getContentSize().width * 0.4, prizeSprite.getContentSize().height * 0.5);
-        var delay1 = cc.DelayTime.create(0.5);
-        labelNum1.runAction(cc.Sequence.create(delay1, call1));
+        var delay1 = cc.delayTime(0.5);
+        labelNum1.runAction(cc.sequence(delay1, call1));
         labelNum1.setPosition(this.getPosition());
         labelNum1.setScale(1.0);
-        prizeSprite1.runAction(cc.Sequence.create(delay1, call2));
+        prizeSprite1.runAction(cc.sequence(delay1, call2));
         prizeSprite1.setPosition(cc.pAdd(this.getPosition(), move1));
         prizeSprite1.setScale(1.0);
 
@@ -2447,11 +2447,11 @@ var BaseFishActor = BaseActor.extend({
             str = "jindun_" + number + "_0" + i + ".png";
             frames.push(frameCache.getSpriteFrame(str));
         }
-        var animation = cc.Animation.create(frames, 0.1);
-        var ac = cc.Animate.create(animation);
-        ac = cc.Repeat.create(ac, 3);
-        var last = cc.CallFunc.create(coin, this.getScene().removeSprite);
-        coin.runAction(cc.Sequence.create(ac, last, 0));
+        var animation = cc.animation(frames, 0.1);
+        var ac = cc.animate(animation);
+        ac = cc.repeat(ac, 3);
+        var last = cc.callFunc(this.getScene().removeSprite, coin );
+        coin.runAction(cc.sequence(ac, last, 0));
 
         switch (type) {
             case ActorType.eActorTypeBL:
