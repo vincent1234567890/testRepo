@@ -93,7 +93,10 @@
         "lib/services/game/GameServices.js",
         "lib/services/player/PlayerServices.js",
         "lib/modules/simpleEmitter.js",
-        "lib/modules/socketUtils.js"
+        "lib/modules/socketUtils.js",
+        "lib/fishgamelogic/serverInformer.js",
+        "lib/fishgamelogic/clientReceiver.js"
+
 
     ]
 }
