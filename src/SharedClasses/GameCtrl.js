@@ -131,23 +131,20 @@ var GameCtrl = cc.Class.extend({
                 // Log in
                 (testPlayer) => client.callAPIOnce('game', 'login', {id: testPlayer.id, password: 'test_password.12345'})
             ).then(
-                () => {
-                    // Start listening for game events
-                    var ioSocket = socketUtils.getIOSocketFromClient(client);
-
+                loginResponse => {
                     return client.callAPIOnce('game', 'joinGame', {}).then(
                         joinResponse => console.log("joinResponse:", joinResponse)
-                    ).then(
-                        () => ioSocket
                     );
                 }
             ).then(
-                (ioSocket) => {
+                joinResponse => {
+                    // Start listening for game events
+                    var ioSocket = socketUtils.getIOSocketFromClient(client);
+
                     // So this object has on() and off() functions for receiving messages, and send() for sending them.
                     gameCtrl.setWebSocket(ioSocket);
 
                     // Testing
-                    ioSocket.on('u', console.log);
                     ioSocket.emit('b', {a: Math.PI / 4});
                 }
             ).catch(console.error.bind(console));
