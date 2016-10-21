@@ -51,19 +51,6 @@ var GameCtrl = cc.Class.extend({
                     console.log("serverList:", serverList);
                     // Future: Maybe ping the servers here, then connect to the closest one
                 }
-            ).then(
-                () => {
-                    // Create a test player
-                    var playerName = "testplayername" + Date.now() + Math.floor(Math.random() * 100000000);
-                    var playerData = {
-                        name: playerName,
-                        email: playerName + '@testmail189543.com',
-                        password: 'test_password.12345',
-                    };
-                    return client.callAPIOnce('game', 'registerNewPlayer', playerData).then(
-                        response => response.data
-                    );
-                }
             ).catch(console.error.bind(console));
         });
     },
@@ -93,6 +80,19 @@ var GameCtrl = cc.Class.extend({
         var client = this.getGameWSClient();
 
         Promise.resolve().then(
+            () => {
+                // Create a test player
+                var playerName = "testplayername" + Date.now() + Math.floor(Math.random() * 100000000);
+                var playerData = {
+                    name: playerName,
+                    email: playerName + '@testmail189543.com',
+                    password: 'test_password.12345',
+                };
+                return client.callAPIOnce('game', 'registerNewPlayer', playerData).then(
+                    response => response.data
+                );
+            }
+        ).then(
             // Log in
             (testPlayer) => client.callAPIOnce('game', 'login', {
                 id: testPlayer.id,
