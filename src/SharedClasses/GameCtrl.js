@@ -15,7 +15,7 @@ var GameCtrl = cc.Class.extend({
     m_nMultiLevel:null,
     m_bIsLoadingFight:null,
     myPlanType:null,
-    init:function () {
+    ctor:function () {
         this.setIsNewGame(true);
         this.setIsPassStage(false);
         this.connectToMasterServer();
@@ -51,19 +51,6 @@ var GameCtrl = cc.Class.extend({
                     console.log("serverList:", serverList);
                     // Future: Maybe ping the servers here, then connect to the closest one
                 }
-            ).then(
-                () => {
-                    // Create a test player
-                    var playerName = "testplayername" + Date.now() + Math.floor(Math.random() * 100000000);
-                    var playerData = {
-                        name: playerName,
-                        email: playerName + '@testmail189543.com',
-                        password: 'test_password.12345',
-                    };
-                    return client.callAPIOnce('game', 'registerNewPlayer', playerData).then(
-                        response => response.data
-                    );
-                }
             ).catch(console.error.bind(console));
         });
     },
@@ -78,19 +65,33 @@ var GameCtrl = cc.Class.extend({
         }
         else {
             this.gameState = GAMEPLAY;
-            var newScene = new GameScene();
-            newScene.initWithDef("Scene_Main", 1);
+            var newScene = new GameScene("Scene_Main", 1);
             this.setCurScene(newScene);
             wrapper.setIntegerForKey(UserDefaultsKeyPreviousPlayedStage, 1);
         }
     },
     startNewGame:function () {
         this.gameState = GAMEPLAY;
-        var gameScene = new GameScene();
-        gameScene.initWithDef("Scene_Main", this._selectLevel);
+        var gameScene = new GameScene("Scene_Main", this._selectLevel);
         this.setCurScene(gameScene);
 
+        var gameCtrl = this;
+        var client = this.getGameWSClient();
+
         Promise.resolve().then(
+            () => {
+                // Create a test player
+                var playerName = "testplayername" + Date.now() + Math.floor(Math.random() * 100000000);
+                var playerData = {
+                    name: playerName,
+                    email: playerName + '@testmail189543.com',
+                    password: 'test_password.12345',
+                };
+                return client.callAPIOnce('game', 'registerNewPlayer', playerData).then(
+                    response => response.data
+                );
+            }
+        ).then(
             // Log in
             (testPlayer) => client.callAPIOnce('game', 'login', {
                 id: testPlayer.id,
@@ -105,7 +106,9 @@ var GameCtrl = cc.Class.extend({
             joinResponse => {
                 console.log("joinResponse:", joinResponse);
 
-                const clientReceiver = clientReceiver(ioSocket, gameCtrl);
+                var ioSocket = gameCtrl.getGameIOSocket();
+
+                var receiver = clientReceiver(ioSocket, gameCtrl);
             }
         ).catch(console.error.bind(console));
 
@@ -113,7 +116,7 @@ var GameCtrl = cc.Class.extend({
         wrapper.setIntegerForKey(UserDefaultsKeyPreviousPlayedStage, this._selectLevel);
     },
     populateNewGame: function (players, fishes, bullets, serverGameTime) {
-        const gameConfig = getGameConfig();
+        const gameConfig = this.getGameConfig();
 
         const arena = new FishGameArena(false, gameConfig);
 
@@ -167,12 +170,6 @@ var GameCtrl = cc.Class.extend({
     },
     getGameIOSocket:function () {
         return this.gameIOSocket;
-    },
-    setGameConfig:function (gameConfig) {
-        this.gameConfig = gameConfig;
-    },
-    getGameConfig:function () {
-        return this.gameConfig;
     },
     setArena:function (arena) {
         this.arena = arena;
@@ -258,13 +255,8 @@ GameCtrl.sharedGame = function () {
     //cc.Assert(this._sharedGame, "Havn't call setSharedGame");
     if (!this._sharedGame) {
         this._sharedGame = new GameCtrl();
-        if (this._sharedGame.init()) {
-            return this._sharedGame;
-        }
-    } else {
-        return this._sharedGame;
     }
-    return null;
+    return this._sharedGame;
 };
 
 GameCtrl._sharedGame = null;

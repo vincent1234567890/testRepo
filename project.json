@@ -57,7 +57,7 @@
         "src/Classes/GoldPrizeActor.js",
         "src/Classes/HelpStageSelLayer.js",
         "src/Classes/HowToPlayLayer.js",
-
+        "src/Classes/IAP.js",
         "src/Classes/LogoScene.js",
         "src/Classes/LogoWaveLayer.js",
         "src/Classes/MainMenuScene.js",
@@ -95,7 +95,8 @@
         "lib/modules/simpleEmitter.js",
         "lib/modules/socketUtils.js",
         "lib/fishgamelogic/serverInformer.js",
-        "lib/fishgamelogic/clientReceiver.js"
+        "lib/fishgamelogic/clientReceiver.js",
+        "lib/fishgamelogic/FishGameArena.js"
 
 
     ]

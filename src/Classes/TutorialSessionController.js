@@ -410,8 +410,7 @@ var TutorialSessionController = CCSessionController.extend({
                 this.tutorialAward(20);
                 // 超级武器下 教程结束不能切换武器的bug
                 if (PlayerActor.sharedActor().getCurWeaponLevel() == 8 || PlayerActor.sharedActor().getCurWeaponLevel() == 9) {
-                    var orgWeapon = new WeaponCannon7();
-                    orgWeapon.initWeapon(this._currentGameScene.getCannonActor().getDefaultWeaponPosition(), ActorType.eActorTypeNormal);
+                    var orgWeapon = new WeaponCannon7(this._currentGameScene.getCannonActor().getDefaultWeaponPosition(), ActorType.eActorTypeNormal);
                     this._currentGameScene.addChild(orgWeapon, 110);
                     orgWeapon.setRotation(this._currentGameScene.getCannonActor().getWeaponRotation());
                     orgWeapon.setDelegate(this._currentGameScene.getCannonActor());

@@ -1,3 +1,10 @@
+cc.timeval = cc.Class.extend(/** @lends cc.timeval# */{
+
+    tv_sec:0,
+
+    tv_usec:0//
+});
+
 var Starfish = BaseActor.extend({
     _isMoveToFirst:false,
     speed:0,
@@ -116,7 +123,13 @@ var Starfish = BaseActor.extend({
         }
 
         this._super();
-        var _time = cc.Time.gettimeofdayCocos2d();
+        // var _time = cc.Timer.gettimeofdayCocos2d();
+
+        var _time = new cc.timeval();
+        var tmp = Date.now();
+        _time.tv_usec = (tmp % 1000) * 1000;
+        _time.tv_sec = Math.floor(tmp / 1000);
+
 
         if (!this._firstUpdate) {
             this._firstUpdate = true;
@@ -151,7 +164,7 @@ var Starfish = BaseActor.extend({
         return this.handleCollide(plane);
     },
     removeSelfFromScene:function () {
-        cc.director.getScheduler().unscheduleAllSelectorsForTarget(this);
+        cc.director.getScheduler().unscheduleAllForTarget(this);
         this._super();
     },
     moveByLine:function (dt) {

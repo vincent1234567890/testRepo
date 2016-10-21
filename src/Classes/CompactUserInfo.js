@@ -37,8 +37,7 @@ var CompactUserInfo = cc.Layer.extend({
         spriteTemp.setPosition(cc.pAdd(spriteTemp.getPosition(), cc.p(spriteTemp.getContentSize().width + 6, 0)));
 
         var processDef = ProcessDef.defaultDef();
-        var proSprite = new ProcessSprite();
-        proSprite.initWithDef(processDef);
+        var proSprite = new ProcessSprite(processDef);
         this.setExperienceProcess(proSprite);
         this._experienceProcess.setPosition(cc.pAdd(spriteTemp.getPosition(), cc.p(-1, 3)));
         this.setScale(0.85);

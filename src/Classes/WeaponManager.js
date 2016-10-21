@@ -11,9 +11,26 @@ var WeaponManager = cc.Class.extend({
     _isWeaponSwitching:false, // 当前是否正在切换武器
     _curScene:null, // 当前场景
     _spriteMiss:null,
-    ctor:function () {
+    ctor:function (pos, rotation, parentScene) {
+        // @warning 此 plist 在进游戏时预加载了。如有问题可在此重新加载
+        // this._super();
+        var cache = cc.spriteFrameCache;
+        cache.addSpriteFrames(ImageName("cannon.plist"));
+        cache.addSpriteFrames(ImageName("cannon10.plist"));
+        cache.addSpriteFrames(ImageName("weaponLevinStorm.plist"));
+
+        this._defaultWeaponPosition = pos;
+        this._weaponRotation = rotation;
+        this.setCurScene(parentScene);
+        this._isChangeToSpecialWeapon = false;
+        this._isWeaponVisible = true;
+        this._isShootable = true;
+        this.resetWeapon();
         //this._curScene = GameCtrl.sharedGame().getCurScene();
+        // console.log("WeaponManager");
+        // debugger
     },
+
     getIsSpecialChangeBackNormal:function () {
         return this._isSpecialChangeBackNormal;
     },
@@ -100,23 +117,10 @@ var WeaponManager = cc.Class.extend({
      The pos param determine default weapon position
      The rotation param determine weapon rotation angle
      */
-    initWithDefaults:function (pos, rotation, parentScene) {
-        // @warning 此 plist 在进游戏时预加载了。如有问题可在此重新加载
-        var cache = cc.spriteFrameCache;
-        cache.addSpriteFrames(ImageName("cannon.plist"));
-        cache.addSpriteFrames(ImageName("cannon10.plist"));
-        cache.addSpriteFrames(ImageName("weaponLevinStorm.plist"));
-
-        this._defaultWeaponPosition = pos;
-        this._weaponRotation = rotation;
-        this.setCurScene(parentScene);
-        this._isChangeToSpecialWeapon = false;
-        this._isWeaponVisible = true;
-        this._isShootable = true;
-        this.resetWeapon();
-
-        return true;
-    },
+    // initWithDefaults:function
+    //
+    //     return true;
+    // },
 
     /**
      Implement the swithing between normal cannon levels
@@ -134,36 +138,28 @@ var WeaponManager = cc.Class.extend({
 
         switch (newLevel) {
             case FishWeaponType.eWeaponLevel1:
-                weaponTemp = new WeaponCannon1();
-                weaponTemp.initWeapon(this._defaultWeaponPosition, ActorType.eActorTypeNormal);
+                weaponTemp = new WeaponCannon1(this._defaultWeaponPosition, ActorType.eActorTypeNormal);
                 break;
             case FishWeaponType.eWeaponLevel2:
-                weaponTemp = new WeaponCannon2();
-                weaponTemp.initWeapon(this._defaultWeaponPosition, ActorType.eActorTypeNormal);
+                weaponTemp = new WeaponCannon2(this._defaultWeaponPosition, ActorType.eActorTypeNormal);
                 break;
             case FishWeaponType.eWeaponLevel3:
-                weaponTemp = new WeaponCannon3();
-                weaponTemp.initWeapon(this._defaultWeaponPosition, ActorType.eActorTypeNormal);
+                weaponTemp = new WeaponCannon3(this._defaultWeaponPosition, ActorType.eActorTypeNormal);
                 break;
             case FishWeaponType.eWeaponLevel4:
-                weaponTemp = new WeaponCannon4();
-                weaponTemp.initWeapon(this._defaultWeaponPosition, ActorType.eActorTypeNormal);
+                weaponTemp = new WeaponCannon4(this._defaultWeaponPosition, ActorType.eActorTypeNormal);
                 break;
             case FishWeaponType.eWeaponLevel5:
-                weaponTemp = new WeaponCannon5();
-                weaponTemp.initWeapon(this._defaultWeaponPosition, ActorType.eActorTypeNormal);
+                weaponTemp = new WeaponCannon5(this._defaultWeaponPosition, ActorType.eActorTypeNormal);
                 break;
             case FishWeaponType.eWeaponLevel6:
-                weaponTemp = new WeaponCannon6();
-                weaponTemp.initWeapon(this._defaultWeaponPosition, ActorType.eActorTypeNormal);
+                weaponTemp = new WeaponCannon6(this._defaultWeaponPosition, ActorType.eActorTypeNormal);
                 break;
             case FishWeaponType.eWeaponLevel7:
-                weaponTemp = new WeaponCannon7();
-                weaponTemp.initWeapon(this._defaultWeaponPosition, ActorType.eActorTypeNormal);
+                weaponTemp = new WeaponCannon7(this._defaultWeaponPosition, ActorType.eActorTypeNormal);
                 break;
             case FishWeaponType.eWeaponLevel10:
-                weaponTemp = new WeaponCannon10();
-                weaponTemp.initWeapon(this._defaultWeaponPosition, ActorType.eActorTypeNormal);
+                weaponTemp = new WeaponCannon10(this._defaultWeaponPosition, ActorType.eActorTypeNormal);
                 break;
             default:
                 break;
@@ -213,14 +209,14 @@ var WeaponManager = cc.Class.extend({
 
         // 判断如果地图为3 即：加勒比海 则默认开启10级炮
         if (this.getCurScene().getCurStage() == 3) {
-            curWeapon = new WeaponCannon10();
+            curWeapon = new WeaponCannon10(this._defaultWeaponPosition, ActorType.eActorTypeNormal);
             this.setCurrentWeapon(curWeapon);
             PlayerActor.sharedActor().setCurWeaponLevel(FishWeaponType.eWeaponLevel10);
         }
         else
-            curWeapon = new WeaponCannon1();
+            curWeapon = new WeaponCannon1(this._defaultWeaponPosition, ActorType.eActorTypeNormal);
 
-        curWeapon.initWeapon(this._defaultWeaponPosition, ActorType.eActorTypeNormal);
+        // curWeapon.initWeapon(this._defaultWeaponPosition, ActorType.eActorTypeNormal);
 
         this.setCurrentWeapon(curWeapon);
 
@@ -250,8 +246,7 @@ var WeaponManager = cc.Class.extend({
             this.setIsWeaponSwitching(true);
             this.setIsShootable(false);
             this.setWeaponButtonEnable(false);
-            var weapon = new WeaponSpecialRay();
-            weapon.initWeapon(this._defaultWeaponPosition, 1500, 1500);
+            var weapon = new WeaponSpecialRay(this._defaultWeaponPosition, 1500, 1500);
             weapon.setActorType(ActorType.eActorTypeNormal);
             this.setChangeToWeapon(weapon);
             this.getChangeToWeapon().addRainbow();
@@ -269,8 +264,7 @@ var WeaponManager = cc.Class.extend({
             this.setIsShootable(false);
             this.setWeaponButtonEnable(false);
             this.setIsShootable(false);
-            var levinStorm = new WeaponSpecialLevinStorm();
-            levinStorm.initWeapon(this.getDefaultWeaponPosition(), 1500, 1500);
+            var levinStorm = new WeaponSpecialLevinStorm(this.getDefaultWeaponPosition(), 1500, 1500);
 
             this.setChangeToWeapon(levinStorm);
             this.getChangeToWeapon().setDelegate(this);
@@ -400,8 +394,7 @@ var WeaponManager = cc.Class.extend({
         if (this.getIsSpecialChangeBackNormal()) {
             var orgWeapon = this.getOldWeapon();
             if (orgWeapon == null) {
-                orgWeapon = new WeaponCannon1();
-                orgWeapon.initWeapon(this._defaultWeaponPosition, ActorType.eActorTypeNormal);
+                orgWeapon = new WeaponCannon1(this._defaultWeaponPosition, ActorType.eActorTypeNormal);
                 this.getCurScene().addChild(orgWeapon, 110);
                 orgWeapon.setRotation(this.getWeaponRotation());
                 orgWeapon.setDelegate(this);
