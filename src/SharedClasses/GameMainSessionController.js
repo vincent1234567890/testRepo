@@ -41,6 +41,9 @@ var GameMainSessionController = GameSessionController.extend({
         }
     },
     addFishGroup:function (startPos, delay) {
+        // Don't do it!  We will only add fish to the scene when the server tells us to.
+        return;
+
         if (!startPos || !delay) {
             var fishStartPosition = (cc.p(VisibleRect.right().x + 5.0, Math.random() * 10 + VisibleRect.bottom().y + VisibleRect.rect().height / 2 + INIT_POS_Y_STEP));
             this.addFishGroup(fishStartPosition, 0.5);
