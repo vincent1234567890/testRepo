@@ -118,7 +118,7 @@ var GameCtrl = cc.Class.extend({
         wrapper.setIntegerForKey(UserDefaultsKeyPreviousPlayedStage, this._selectLevel);
     },
     populateNewGame: function (players, fishes, bullets, serverGameTime) {
-        const gameConfig = getGameConfig();
+        const gameConfig = this.getGameConfig();
 
         const arena = new FishGameArena(false, gameConfig);
 
@@ -172,12 +172,6 @@ var GameCtrl = cc.Class.extend({
     },
     getGameIOSocket:function () {
         return this.gameIOSocket;
-    },
-    setGameConfig:function (gameConfig) {
-        this.gameConfig = gameConfig;
-    },
-    getGameConfig:function () {
-        return this.gameConfig;
     },
     setArena:function (arena) {
         this.arena = arena;
