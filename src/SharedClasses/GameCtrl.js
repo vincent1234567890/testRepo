@@ -77,6 +77,7 @@ var GameCtrl = cc.Class.extend({
         gameScene.initWithDef("Scene_Main", this._selectLevel);
         this.setCurScene(gameScene);
 
+        var gameCtrl = this;
         var client = this.getGameWSClient();
 
         Promise.resolve().then(
@@ -107,7 +108,9 @@ var GameCtrl = cc.Class.extend({
             joinResponse => {
                 console.log("joinResponse:", joinResponse);
 
-                const clientReceiver = clientReceiver(ioSocket, gameCtrl);
+                var ioSocket = gameCtrl.getGameIOSocket();
+
+                var receiver = clientReceiver(ioSocket, gameCtrl);
             }
         ).catch(console.error.bind(console));
 
