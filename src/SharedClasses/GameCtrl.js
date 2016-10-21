@@ -90,6 +90,8 @@ var GameCtrl = cc.Class.extend({
         gameScene.initWithDef("Scene_Main", this._selectLevel);
         this.setCurScene(gameScene);
 
+        var client = this.getGameWSClient();
+
         Promise.resolve().then(
             // Log in
             (testPlayer) => client.callAPIOnce('game', 'login', {
