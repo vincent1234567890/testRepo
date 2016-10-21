@@ -85,8 +85,7 @@ var GameCtrl = cc.Class.extend({
     },
     startNewGame:function () {
         this.gameState = GAMEPLAY;
-        var gameScene = new GameScene();
-        gameScene.initWithDef("Scene_Main", this._selectLevel);
+        var gameScene = new GameScene("Scene_Main", this._selectLevel);
         this.setCurScene(gameScene);
 
         Promise.resolve().then(
