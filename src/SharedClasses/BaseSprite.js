@@ -343,7 +343,8 @@ var BaseSprite = cc.Sprite.extend({
     },
 
     ctor:function (defName, imgName) {
-        this._super(imgName);
+        cc.Sprite.prototype.ctor.call(imgName);
+
         this._actionIndex = 0;
         this._sequenceIndex = 0;
         this._disableUpdate = true;
@@ -513,21 +514,6 @@ var BaseSprite = cc.Sprite.extend({
         var posY = 0 | ( -anchorPoint.y * height + mpY);
 
         context.drawImage(this._texture, rect.x, rect.y, width, height, posX, -(posY + height), width, height);
-
-        /* if (BaseSpriteDebug) {
-         context.strokeStyle = "rgba(0,255,0,1)";
-         var vertices1 = [cc.p(posX, posY), cc.p(posX + rect.width, posY), cc.p(posX + rect.width, posY + rect.height),
-         cc.p(posX, posY + rect.height)];
-         cc.drawingUtil.drawPoly(vertices1, 4, true);
-
-         var posX1 = 0 | ( -this._anchorPointInPoints.x - 0 + this._offsetPosition.x);
-         var posY1 = 0 | ( -this._anchorPointInPoints.y + 0 + this._offsetPosition.y);
-         context.strokeStyle = "rgba(255,28,28,1)";
-         var vertices1 = [cc.p(posX1, posY1), cc.p(posX1 + this._contentSize.width, posY1), cc.p(posX1 + this._contentSize.width, posY1 + this._contentSize.height),
-         cc.p(posX1, posY1 + this._contentSize.height)];
-         cc.drawingUtil.drawPoly(vertices1, 4, true);
-         }*/
-        //}
     },
 
     collidesWith:function (plane) {
@@ -584,6 +570,7 @@ var BaseSprite = cc.Sprite.extend({
         }
         return false;
     },
+
     collideIndexWith:function (plane) {
         if (!this._isAlive || !plane.getIsAlive()) {
             return -1;
@@ -637,6 +624,7 @@ var BaseSprite = cc.Sprite.extend({
         }
         return -1;
     },
+
     collidesWithRect:function (rect, collides) {
         var _frame = this.getSequenceFrame();
         var rect1 = this._sd.frameData[_frame].collisionData.rectData[collides];
@@ -646,6 +634,7 @@ var BaseSprite = cc.Sprite.extend({
         rect1 = new cc.Rect(xx, yy, rect1.width, rect1.height);
         return cc.rectIntersectsRect(rect, rect1);
     },
+
     setContentSize:function(size) {
         if (!cc.sizeEqualToSize(size, this._contentSize)) {
             //save dirty region when before change
@@ -659,6 +648,7 @@ var BaseSprite = cc.Sprite.extend({
             this.setNodeDirty();
         }
     },
+
     resetContentSize:function () {
         // 计算鱼的大小，乌龟比较麻烦，把所有的小图都加起来
         var frameIndex = this._sd.actionData[this._actionIndex].frames[this._sequenceIndex].index;
@@ -672,14 +662,17 @@ var BaseSprite = cc.Sprite.extend({
         }
         this.setContentSize(fishSize);
     },
+
     getSpriteTileRect:function () {
         var frameIndex = this._sd.actionData[this._actionIndex].frames[0].index;
         var tile = this._sd.frameData[frameIndex].tileData[0];
         return this._sd.tileData[tile.tileIndex];
     },
+
     getSequenceFrame:function () {
         return this._sd.actionData[this._actionIndex].frames[this._sequenceIndex].index;
     },
+
     getCollidesCount:function () {
         var frameIndex = this._sd.actionData[this._actionIndex].frames[this._sequenceIndex].index;
         if (this._sd.frameData[frameIndex].collisionData) {
@@ -687,6 +680,7 @@ var BaseSprite = cc.Sprite.extend({
         }
         return 0;
     },
+
     getSize:function () {
         return this.getContentSize();
     }

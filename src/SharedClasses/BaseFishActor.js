@@ -327,7 +327,7 @@ var BaseFishActor = BaseActor.extend({
         this.moveOut = false;
     },
     removeSelfFromScene:function () {
-        this.getScheduler().unscheduleAllSelectorsForTarget(this);
+        this.getScheduler().unscheduleAllForTarget(this);
         this._super();
     },
     getBaseActorType:function () {
