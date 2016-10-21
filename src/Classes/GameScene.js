@@ -822,7 +822,7 @@ var GameScene = cc.Scene.extend({
         }
 
         //this._aliveActor = cc.ArrayRemoveObject(this._aliveActor, actor);
-        cc.ArrayRemoveObject(this._aliveActor, actor);
+        cc.arrayRemoveObject(this._aliveActor, actor);
 
         this.removeActorFromAllObjects(actor);
     },

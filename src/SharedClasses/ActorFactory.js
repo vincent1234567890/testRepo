@@ -117,9 +117,9 @@ var ActorFactory = cc.Class.extend({
             this._actor = new GoldenTroutActor();
         }
 
-        if (this._actor) {
-            this._actor.initWithDef(this._def);
-        }
+        // if (this._actor) {
+        //     this._actor.initWithDef(this._def);
+        // }
 
        return true;
     }
