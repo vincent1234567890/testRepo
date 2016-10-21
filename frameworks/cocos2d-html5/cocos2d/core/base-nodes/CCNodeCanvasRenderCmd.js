@@ -210,8 +210,7 @@ cc.Node.RenderCmd.prototype = {
                 wt.tx = t.tx;
                 wt.ty = t.ty;
             }
-        }
-        else {
+        } else {
             t.a = sx;
             t.b = 0;
             t.c = 0;
