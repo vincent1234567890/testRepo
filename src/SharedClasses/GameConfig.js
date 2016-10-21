@@ -2,7 +2,6 @@ var g_Path = "Resource/";
 var g_Version = "V1.0.5";
 
 var ImageName = function (fileName) {
-    console.log(sino.resource.getName(fileName));
     return sino.resource.getName(fileName);
 };
 

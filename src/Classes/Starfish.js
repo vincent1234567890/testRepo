@@ -8,18 +8,15 @@ var Starfish = BaseActor.extend({
     centerPt:null,
     moveAgle:0,
     multiple:1,
-    initWithDef:function (def) {
+    ctor:function (def) {
         this._def = def;
-        var ret = this.initWithSpriteName("ghaixing", "ghaixing.png");
-        if (ret) {
-            this.playAction(0);
-            this.setGroup(GroupStarfishActor);
-            this._isMoveToFirst = false;
-            this.delta = cc.pNormalize(cc.p(-512, -384));
-            this.speed = 400;
-            this.delIng = false;
-        }
-        return ret;
+        this._super(res.StarfishSprite, res.StarfishPNG);
+        this.playAction(0);
+        this.setGroup(GroupStarfishActor);
+        this._isMoveToFirst = false;
+        this.delta = cc.pNormalize(cc.p(-512, -384));
+        this.speed = 400;
+        this.delIng = false;
     },
     getDelIng:function () {
         return this.delIng;

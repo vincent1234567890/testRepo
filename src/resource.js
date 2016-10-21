@@ -129,7 +129,10 @@ var res = {
     PomfretSprite : "res/pomfret.sprite",
 
     GoldenTroutPng : "res/goldentrout.png",
-    GoldenTroutSprite: "res/goldentrout.sprite"
+    GoldenTroutSprite: "res/goldentrout.sprite",
+
+    StarfishPNG : "res/ghaixing.png",
+    StarfishSprite : "res/ghaixing.sprite",
 
 
     // MainUITitle : "res/main_ui_title.png",

@@ -76,7 +76,7 @@ var AboutLayer = cc.LayerColor.extend({
 
         this.parentMenu.setTouchEnabled(false);
         //todo event manager
-        this.setKeyboardEnabled(true);
+        // this.setKeyboardEnabled(true);
 
         this.resetAllSpritePos();
 
