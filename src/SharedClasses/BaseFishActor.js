@@ -1215,8 +1215,6 @@ var BaseFishActor = BaseActor.extend({
         }
     },
 
-
-
     setMoveData:function (data) {
         this.moveData = data;
         //nut
@@ -1225,6 +1223,7 @@ var BaseFishActor = BaseActor.extend({
         this.bezieratTime_total = 0;
         this.comagesId = 0;
     },
+
     unwindMoveData:function () {
         if (!this.isCompages) {
             this.curMoveType = this.moveData.dataType;
@@ -1381,6 +1380,7 @@ var BaseFishActor = BaseActor.extend({
                 break;
         }
     },
+
     runStraightNormalLogic:function (dt) {
         this.runStraight(dt, this.straightDirVec);
     },

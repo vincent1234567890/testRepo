@@ -384,6 +384,7 @@ var BaseSprite = (function() {
                     }
                 }
             }
+            this._renderCmd.setDirtyFlag(cc.Node._dirtyFlags.transformDirty);
         },
 
         setUpdatebySelf: function (enable) {
@@ -438,6 +439,7 @@ var BaseSprite = (function() {
             return this._sequenceIndex;
         },
 
+        /**
         visit: function (ctx) {
             // quick return if not visible
             if (!this._isVisible) {
@@ -517,6 +519,7 @@ var BaseSprite = (function() {
 
             context.drawImage(this._texture, rect.x, rect.y, width, height, posX, -(posY + height), width, height);
         },
+        */
 
         collidesWith: function (plane) {
             if (!this._isAlive || !plane.getIsAlive()) {
@@ -697,7 +700,6 @@ var BaseSprite = (function() {
     BaseSprite.CanvasRenderCmd = function(renderable) {
         cc.Sprite.CanvasRenderCmd.call(this, renderable);
 
-        //add some variable
         this._tileTransform = {a: 1, b: 0, c: 0, d: 1, tx: 0, ty: 0};
         this._tileWorldTransform = {a: 1, b: 0, c: 0, d: 1, tx: 0, ty: 0};
     };
@@ -823,9 +825,9 @@ var BaseSprite = (function() {
         var frameIdx = spriteData.actionData[node._actionIndex].frames[node._sequenceIndex].index;
         var tiles = spriteData.frameData[frameIdx];
 
-        for(var i = 0; i < tiles.length; i++){
+        for(var i = 0; i < tiles.tileCount; i++){
             var tile = tiles.tileData[i];
-            var rect = spriteData.tileData[tile.index];
+            var rect = spriteData.tileData[tile.tileIndex];
             this._transformForSub(rect, tile);
             wrapper.setTransform(this._tileWorldTransform, scaleX, scaleY);
             this._drawSprite(wrapper, texture, rect, tile);
@@ -834,14 +836,27 @@ var BaseSprite = (function() {
         cc.g_NumberOfDraws++;
     };
 
-
     // Base Sprite of fishes WebGL render command
     BaseSprite.WebGLRenderCmd = function(renderable){
         cc.Sprite.WebGLRenderCmd.call(this, renderable);
+
+        this._tileTransform = {a: 1, b: 0, c: 0, d: 1, tx: 0, ty: 0};
+        this._tileWorldTransform = {a: 1, b: 0, c: 0, d: 1, tx: 0, ty: 0};
     };
 
     var webGLProto = BaseSprite.WebGLRenderCmd.prototype = Object.create(cc.Sprite.WebGLRenderCmd.prototype);
     webGLProto.constructor = BaseSprite.WebGLRenderCmd;
+
+/*    webGLProto.transform = function(parentCmd, recursive){
+        this.originTransform(parentCmd, recursive);
+
+
+
+    };
+
+    webGLProto.uploadData = function(f32Buffer, ui32Buffer, vertexDataOffset){
+
+    };*/
 
     return BaseSprite;
 })();

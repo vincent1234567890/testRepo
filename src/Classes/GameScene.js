@@ -130,7 +130,6 @@ var GameScene = cc.Scene.extend({
     _processsprite:null,
     _addPrizeFishGroupFinish:false,
     _addCoinTime:0,
-    _punchBoxAd:null,
 
     _bigPrizeExist:false,
     _layer:null,
@@ -178,7 +177,10 @@ var GameScene = cc.Scene.extend({
     _tutorialSessionController:null,
     _shakeTime:0,
     _swingRadio:5,
+
     ctor:function (def, le) {
+        cc.Scene.prototype.ctor.call(this);
+
         this._layer = new cc.Layer();
         this._layer.setTag(2233);
         this.addChild(this._layer);
@@ -247,7 +249,7 @@ var GameScene = cc.Scene.extend({
             PlayerActor.sharedActor().setCurWeaponLevel(FishWeaponType.eWeaponLevel10);
         }
 
-        this._super();
+
         wrapper.getBooleanForKey("AskEnterLecel3", false);
         this._movePoint = new cc.Point(0, 0);
         this._sessionsNeedLoad = [];
@@ -1257,11 +1259,6 @@ var GameScene = cc.Scene.extend({
         if (!this._playTutorial && ((this._firstInGame && this._timeAdMob >= 30) || (this._timeAdMob >= AD_INTERVEL))) {
             this._firstInGame = false;
             this._timeAdMob = 0;
-
-            // 显示 AdMob 广告条
-            // this._punchBoxAd.request(function () {
-            //    // AdsController.showBannerAd(BannerAdTyp.BannerAdGame);
-            // });
         }
 
         if ((this._curStage == 1 && PlayerActor.sharedActor().getPlayerMoney() == 0) ||
@@ -1932,13 +1929,7 @@ var GameScene = cc.Scene.extend({
         // 强制隐藏游戏界面的广告条
         AdsController.forceHideBannerAd(BannerAdTyp.BannerAdGame);
     },
-    initPunchBoxAd:function () {
-        //this._punchBoxAd = new webKingFisherAd();
-        //this._punchBoxAd.init("ad");
-    },
-    punchBoxAdUpdate:function (fun) {
-        //this._punchBoxAd.request(fun);
-    },
+
     startCameraAnimation:function () {
         cc.director.getScheduler().schedule(this.shakeScreen, this, 0.02, false);
     },
