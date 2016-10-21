@@ -51,19 +51,6 @@ var GameCtrl = cc.Class.extend({
                     console.log("serverList:", serverList);
                     // Future: Maybe ping the servers here, then connect to the closest one
                 }
-            ).then(
-                () => {
-                    // Create a test player
-                    var playerName = "testplayername" + Date.now() + Math.floor(Math.random() * 100000000);
-                    var playerData = {
-                        name: playerName,
-                        email: playerName + '@testmail189543.com',
-                        password: 'test_password.12345',
-                    };
-                    return client.callAPIOnce('game', 'registerNewPlayer', playerData).then(
-                        response => response.data
-                    );
-                }
             ).catch(console.error.bind(console));
         });
     },
@@ -90,7 +77,23 @@ var GameCtrl = cc.Class.extend({
         gameScene.initWithDef("Scene_Main", this._selectLevel);
         this.setCurScene(gameScene);
 
+        var gameCtrl = this;
+        var client = this.getGameWSClient();
+
         Promise.resolve().then(
+            () => {
+                // Create a test player
+                var playerName = "testplayername" + Date.now() + Math.floor(Math.random() * 100000000);
+                var playerData = {
+                    name: playerName,
+                    email: playerName + '@testmail189543.com',
+                    password: 'test_password.12345',
+                };
+                return client.callAPIOnce('game', 'registerNewPlayer', playerData).then(
+                    response => response.data
+                );
+            }
+        ).then(
             // Log in
             (testPlayer) => client.callAPIOnce('game', 'login', {
                 id: testPlayer.id,
@@ -105,7 +108,9 @@ var GameCtrl = cc.Class.extend({
             joinResponse => {
                 console.log("joinResponse:", joinResponse);
 
-                const clientReceiver = clientReceiver(ioSocket, gameCtrl);
+                var ioSocket = gameCtrl.getGameIOSocket();
+
+                var receiver = clientReceiver(ioSocket, gameCtrl);
             }
         ).catch(console.error.bind(console));
 
@@ -113,7 +118,7 @@ var GameCtrl = cc.Class.extend({
         wrapper.setIntegerForKey(UserDefaultsKeyPreviousPlayedStage, this._selectLevel);
     },
     populateNewGame: function (players, fishes, bullets, serverGameTime) {
-        const gameConfig = getGameConfig();
+        const gameConfig = this.getGameConfig();
 
         const arena = new FishGameArena(false, gameConfig);
 
@@ -167,12 +172,6 @@ var GameCtrl = cc.Class.extend({
     },
     getGameIOSocket:function () {
         return this.gameIOSocket;
-    },
-    setGameConfig:function (gameConfig) {
-        this.gameConfig = gameConfig;
-    },
-    getGameConfig:function () {
-        return this.gameConfig;
     },
     setArena:function (arena) {
         this.arena = arena;

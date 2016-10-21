@@ -95,7 +95,8 @@
         "lib/modules/simpleEmitter.js",
         "lib/modules/socketUtils.js",
         "lib/fishgamelogic/serverInformer.js",
-        "lib/fishgamelogic/clientReceiver.js"
+        "lib/fishgamelogic/clientReceiver.js",
+        "lib/fishgamelogic/FishGameArena.js"
 
 
     ]
