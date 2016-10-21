@@ -74,7 +74,7 @@ var AutoAdapterScreen = cc.Class.extend({
         //     if (cc._renderType == cc.game.RENDER_TYPE_CANVAS) {
         //         cc._renderContext.translate(0, cc._canvas.height);
         //     }else if (cc._renderType == cc.game.RENDER_TYPE_WEBGL){
-                cc._renderContext.viewport(0, 0, cc._canvas.width, cc._canvas.height);
+                //cc._renderContext.viewport(0, 0, cc._canvas.width, cc._canvas.height);
             // }
         // }
     },
