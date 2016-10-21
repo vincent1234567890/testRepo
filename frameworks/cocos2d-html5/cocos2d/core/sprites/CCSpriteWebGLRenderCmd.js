@@ -231,7 +231,6 @@
         if (node._batchNode) {
             if(node._batchNode.texture !== texture){
                 cc.log(cc._LogInfos.Sprite_setTexture);
-                return;
             }
         } else {
             if(node._texture !== texture){

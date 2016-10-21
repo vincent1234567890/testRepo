@@ -63,7 +63,7 @@ function updateQuadBuffer (numQuads) {
         var indices = new Uint16Array(numQuads * 6);
         var currentQuad = 0;
         for (var i = 0, len = numQuads * 6; i < len; i += 6) {
-            indices[i] = currentQuad + 0;
+            indices[i] = currentQuad;
             indices[i + 1] = currentQuad + 1;
             indices[i + 2] = currentQuad + 2;
             indices[i + 3] = currentQuad + 1;
@@ -97,8 +97,7 @@ function initQuadBuffer (numQuads) {
         _quadIndexBuffer = gl.createBuffer();
 
         updateQuadBuffer(numQuads);
-    }
-    else {
+    } else {
         updateQuadBuffer(numQuads);
     }
 }
@@ -137,7 +136,6 @@ return {
     },
 
     getRenderCmd: function (renderableObject) {
-        //TODO Add renderCmd pool here
         return renderableObject._createRenderCmd();
     },
 
@@ -146,8 +144,7 @@ return {
         renderTextureID = renderTextureID || 0;
         if (!this._cacheToBufferCmds[renderTextureID]) {
             this._cacheToBufferCmds[renderTextureID] = [];
-        }
-        else {
+        } else {
             this._cacheToBufferCmds[renderTextureID].length = 0;
         }
         if (this._cacheInstanceIds.indexOf(renderTextureID) === -1) {
@@ -359,8 +356,7 @@ return {
 
             if (cmd.uploadData) {
                 this._uploadBufferData(cmd);
-            }
-            else {
+            } else {
                 if (_batchingSize > 0) {
                     this._batchRendering();
                 }

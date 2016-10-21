@@ -1,3 +1,4 @@
+//鱼的种类
 var FISH = {
     Base:0,
     Shark:1,
@@ -19,35 +20,186 @@ var FISH = {
     Pomfret:17,
     GoldenTrout:18
 };
+
 var valueOfDropShell = [80, 50, 30, 20, 10];
+
 var valueOfSecKilling = [
     [500, 1000, 1200, 1500, 2000],
     [500, 1000, 1200, 1500, 2000]
 ];
 var kOneAngleMore = 361.0;
+
 var SCARE_MODE = {
     runAway:0,
     pop:1,
     runWithGroup:2
 };
 
-var ccBezierConfig5 = cc.Class.extend({
-    endPoint:null,
-    control1:null,
-    control2:null,
-    control3:null,
-    control4:null,
-    ctor:function () {
-        this.endPoint = {x:0, y:0};
-        this.control1 = {x:0, y:0};
-        this.control2 = {x:0, y:0};
-        this.control3 = {x:0, y:0};
-        this.control4 = {x:0, y:0};
-    }
-});
-
 var BaseFishActor = BaseActor.extend({
+    prizeScore:0,
+    getPrizeScore:function () {
+        return this.prizeScore
+    },
+    setPrizeScore:function (prizeScore) {
+        this.prizeScore = prizeScore
+    },
+
+    offset:null, //point
+    getOffset:function () {
+        return new cc.Point(this.offset.x, this.offset.y);
+    },
+    setOffset:function (offset) {
+        this.offset.x = offset.x;
+        this.offset.y = offset.y;
+    },
+
+    GoldPos:null,
+    getGoldPos:function () {
+        return {x:this.GoldPos.x, y:this.GoldPos.y}
+    },
+    setGoldPos:function (GoldPos) {
+        this.GoldPos.x = GoldPos.x;
+        this.GoldPos.y = Goldpos.y;
+    },
+
+    curCollideIndex:0,
+    getCurCollideIndex:function () {
+        return this.curCollideIndex
+    },
+    setCurCollideIndex:function (curCollideIndex) {
+        this.curCollideIndex = curCollideIndex
+    },
+
+    beRightDir:false,
+    getBeRightDir:function () {
+        return this.beRightDir
+    },
+    setBeRightDir:function (beRightDir) {
+        this.beRightDir = beRightDir
+    },
+
+    _fishType:FISH.smallFish,
+    getFishType:function () {
+        return this._fishType
+    },
+    setFishType:function (fishType) {
+        this._fishType = fishType
+    },
+
+    radiusOffset:0,
+    getRadiusOffset:function () {
+        return this.radiusOffset
+    },
+    setRadiusOffset:function (radiusOffset) {
+        this.radiusOffset = radiusOffset
+    },
+
+    _fishLevel:FishLevel.eFishLevel1,
+    getFishLevel:function () {
+        return this._fishLevel
+    },
+
+    _actorType:ActorType.eActorTypeTL,
+    getActorType:function () {
+        return this._actorType
+    },
+    setActorType:function (actorType) {
+        this._actorType = actorType
+    },
+
+    FishID:0,
+    getFishID:function () {
+        return this.FishID
+    },
+    setFishID:function (FishID) {
+        this.FishID = FishID
+    },
+
+    IsChangeColor:false,
+    getIsChangeColor:function () {
+        return this.IsChangeColor
+    },
+    setIsChangeColor:function (IsChangeColor) {
+        this.IsChangeColor = IsChangeColor
+    },
+
+    HP:0,
+    getHP:function () {
+        return this.HP
+    },
+    setHP:function (HP) {
+        this.HP = HP
+    },
+
+    CaptureRandom:0,
+    getCaptureRandom:function () {
+        return this.CaptureRandom
+    },
+    setCaptureRandom:function (CaptureRandom) {
+        this.CaptureRandom = CaptureRandom
+    },
+
+    ChestFishID:0,
+    getChestFishID:function () {
+        return this.ChestFishID
+    },
+    setChestFishID:function (ChestFishID) {
+        this.ChestFishID = ChestFishID
+    },
+
+    stimulateId:null,
+    getStimulateId:function () {
+        return this.stimulateId
+    },
+    setStimulateId:function (stimulateId) {
+        this.stimulateId = stimulateId
+    },
+
+    noFeedBackPro:null,
+    getNoFeedBackPro:function () {
+        return this.noFeedBackPro
+    },
+    setNoFeedBackPro:function (noFeedBackPro) {
+        this.noFeedBackPro = noFeedBackPro
+    },
+
+    fishAttackedType:FishAttackedType.eFishAttackedNormal,
+    getFishAttackedType:function () {
+        return this.fishAttackedType
+    },
+    setFishAttackedType:function (fishAttackedType) {
+        this.fishAttackedType = fishAttackedType
+    },
+
+    mortality:false,
+    getMortality:function () {
+        return this.mortality
+    },
+    setMortality:function (mortality) {
+        this.mortality = mortality
+    },
+
+    createPosition:null,
+    getCreatePosition:function () {
+        return {x:this.createPosition.x, y:this.createPosition.y}
+    },
+    setCreatePosition:function (createPosition) {
+        this.createPosition.x = createPosition.x;
+        this.createPosition.y = createPosition.y;
+    },
+
+    expectation:0.1,
+    getExpectation:function () {
+        return this.expectation
+    },
+    setExpectation:function (expectation) {
+        this.expectation = expectation
+    },
+
     ctor:function (defname, imgname) {
+        this.fishSortLevel = ["10", "9", "8", "7", "6", "5", "4", "12", "3", "2", "1", "0", "11"];
+        this._super(defname, imgname);
+
         this.offset = {x:0, y:0};
         this.createPosition = {x:0, y:0};
         this.straightDirVec = {x:0, y:0};
@@ -56,7 +208,7 @@ var BaseFishActor = BaseActor.extend({
         this.straightEndPosition = {x:0, y:0};
         this.controlPoint = {x:0, y:0};
 
-        this._super(defname, imgname);
+
         this._group = GroupFishActor;
         this._fishType = FISH.smallFish;
         this.speed = 100;
@@ -67,11 +219,7 @@ var BaseFishActor = BaseActor.extend({
         this.curAction = 0;
         this.setAction(this.curAction);
     },
-    initWithDef:function (def) {
-        this.fishSortLevel = ["10", "9", "8", "7", "6", "5", "4", "12", "3", "2", "1", "0", "11"];
 
-        return true;
-    },
     _group:null,
     getGroup:function () {
         return this._group
@@ -79,20 +227,7 @@ var BaseFishActor = BaseActor.extend({
     setGroup:function (group) {
         this._group = group
     },
-    // initWithSpriteName:function (defname, imgname) {
-    //     this._super(defname, imgname);
-    //     this._group = GroupFishActor;
-    //     this._fishType = FISH.smallFish;
-    //     this.speed = 100;
-    //     this.curCollideIndex = -1;
-    //     this.curAttackState = AttackState.eAttackStateNone;
-    //     this.HP = 0;
-    //     this.fishAttackedType = FishAttackedType.eFishAttackedNormal;
-    //     this.curAction = 0;
-    //     this.setAction(this.curAction);
-    //     //this.setUpdatebySelf(true);
-    //     return true;
-    // },
+
     resetState:function () {
         this._super();
         this.curAttackState = AttackState.eAttackStateNone;
@@ -174,131 +309,15 @@ var BaseFishActor = BaseActor.extend({
                     break;
             }
         }
-        //this is new update, dont run
-        /*if (!this.getIsAlive()) {
-         if (this.moveData) {
-         if (this.moveData.actorName == 7) {
-         if (this.getAction() != 1) {
-         this.playAction(1);
-         }
-         if (!this.getUpdatebySelfValue()) {
-         this.setUpdatebySelf(true);
-         }
-         }
-         }
-         return;
-         }
-
-         //    if (bPulled)
-         //    {
-         //        this.passivityMoveToRoundPositon(dt);
-         //    }
-         //    else
-         //    {
-         //        if (curAttackState == eAttackStateHited)
-         //        {
-         //            stateChangeTime += dt;
-         //            if (this.getFishType() == bigFish)
-         //            {
-         //                speedScale = 0.6f;
-         //            }
-         //            else  if(this.getFishType() == mediumFish)
-         //            {
-         //                speedScale = 0.8f;
-         //            }
-         //            else if(this.getFishType() == smallFish)
-         //            {
-         //                speedScale = 1.2f;
-         //            }
-         //            else
-         //            {
-         //                speedScale = 0.6f;
-         //            }
-         //        }
-         //
-         //        if (stateChangeTime >= 3.0f)
-         //        {
-         //            curAttackState = eAttackStateNone;
-         //            stateChangeTime = 0.0f;
-         //            speedScale = curSpeedScale;
-         //
-         //            if(this.getFishActorType() == eFishPuffer)
-         //            {
-         //                this.playAction(4);
-         //                this.getKSprite().setActionDidStopSelector((ActorCallBackFunc)(&BaseFishActorBase.backToNormalState), this);
-         //            }
-         //        }
-
-         if (this.runningAway) {
-         this.handleRunAway(dt);
-         }
-         else if (this.afterRunAway) {
-         this.handleAfterRunAway(dt);
-         }
-         else {
-         switch (this.curMoveType) {
-         case SW_MOVETYPE.MOVETYPE_STRAIGHT:
-         this.runStraightNormalLogic(dt);
-         break;
-         case SW_MOVETYPE.MOVETYPE_ELLIPSE:
-         this.runEllipseNormalLogic(dt);
-         break;
-         case SW_MOVETYPE.MOVETYPE_UTYPE:
-         this.runUTypeNormalLogic(dt);
-         break;
-         case SW_MOVETYPE.MOVETYPE_CUTTLESTYLE:
-         this.runCuttleStyleLogic(dt);
-         break;
-         case SW_MOVETYPE.MOVETYPE_COMPAGES:
-         this.runCompagesLogic(dt);
-         break;
-         case SW_MOVETYPE.MOVETYPE_BEZIERAT:
-         this.runBezierLogic(dt);
-         break;
-         case SW_MOVETYPE.MOVETYPE_RETURN:
-         //nil
-         break;
-         }
-         }
-         this.checkMoveEnd();*/
     },
     updateInfo:function () {
-        /*        if (SceneSettingDataModel.sharedSceneSettingDataModel().getCanUseNewPath())
-         {
-         updateNewInfo();
-         }
-         else
-         {
-         updateOldInfo();
-         } // */
         this.updateOldInfo();
     },
+
     updateNewInfo:function () {
     },
+
     updateOldInfo:function () {
-        /*var tempScore = 0;
-         for (var i = 0; i < 11; i++) {
-         tempScore += (GameSetting.getInstance().getPrizeScoreArray())[i];
-         }
-         var temp = 53479978;
-         var sScore = tempScore + "";
-         if (temp == PlayerActor.sign(sScore)) {
-         this.prizeScore = GameSetting.getInstance().getPrizeScoreArray()[this._fishLevel];
-         this.expectation = GameSetting.getInstance().getExpectationArray()[this._fishLevel];
-         }
-         else {
-         // @to do
-         // 		UIAlertView*alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", nil)
-         // 														   message:NSLocalizedString(@"Warning Content", nil)
-         // 														  delegate:self
-         // 												 cancelButtonTitle:NSLocalizedString(@"cancel", nil)
-         // 												 otherButtonTitles:nil] ;
-         // 		[alertView show] ;
-         // 		[alertView release] ;
-         return;
-
-         }   */
-
         this.prizeScore = GameSetting.getInstance().getPrizeScoreArray()[this._fishLevel];
         this.expectation = GameSetting.getInstance().getExpectationArray()[this._fishLevel];
 
@@ -326,6 +345,7 @@ var BaseFishActor = BaseActor.extend({
         this.circlesAngle = ang / Math.PI * 180.0;
         this.moveOut = false;
     },
+
     removeSelfFromScene:function () {
         this.getScheduler().unscheduleAllForTarget(this);
         this._super();
@@ -641,9 +661,7 @@ var BaseFishActor = BaseActor.extend({
         if (BulletType.eRayBullet == bullet.getBulletType() ||
             BulletType.eLevinStormBullet == bullet.getBulletType()) {
             if (BulletType.eLevinStormBullet == bullet.getBulletType()) {
-                if (bullet.finalEvent()) {
-                }
-                else {
+                if (!bullet.finalEvent()) {
                     if (this.getFishLevel() != FishLevel.eFishLevel13 && this.getFishLevel() != FishLevel.eFishLevel12 && this.getFishLevel() > FishLevel.eFishLevel7) {
                         return false;
                     }
@@ -654,40 +672,14 @@ var BaseFishActor = BaseActor.extend({
             this.setActorType(bullet.getActorType());
             switch (bullet.getActorType()) {
                 case ActorType.eActorTypeTL:
-                {
                     PlayerActor.sharedActorTL().updateCatchMoney(this.getPrizeScore(), true, false, false);
+                    PlayerActor.sharedActorTL().catchFish(this.getDef());
 
-                    //
-                    if (1)//FightWithEachOther
-                    {
-                        PlayerActor.sharedActorTL().catchFish(this.getDef());
-                        // @todo
-// 					if (getScene().GetGameCenterGCHelper())
-// 					{
-// 						getScene().massageFish(true, FishID);
-// 					}
-                    }
-                    else {
-                    }
-                }
                     break;
                 case ActorType.eActorTypeTR:
-                {
                     PlayerActor.sharedActorTR().updateCatchMoney(this.getPrizeScore(), true, false, false);
-                    if (1)//FightWithEachOther
-                    {
-                        PlayerActor.sharedActorTR().catchFish(this.getDef());
-                        // @todo
-// 					if (getScene().GetGameCenterGCHelper())
-// 					{
-// 						getScene().massageFish(true, FishID);
-// 					}
-                    }
-                    else {
-                    }
-                }
+                    PlayerActor.sharedActorTR().catchFish(this.getDef());
                     break;
-
                 case ActorType.eActorTypeBL:
                     break;
 
@@ -695,13 +687,12 @@ var BaseFishActor = BaseActor.extend({
                     break;
 
                 case ActorType.eActorTypeNormal:
-                {
                     if (this.getIsChangeColor()) {
                         var baoixangParticle = particleSystemFactory.createParticle(ImageName("bianbaoxiangl03.plist"));
                         baoixangParticle._dontTint = true;
                         baoixangParticle.setPosition(this.getPosition());
                         this.getScene().addChild(baoixangParticle);
-                        this.getScene().getChestGameLayer().addMinChest(this.getChestFishID(), this.getPosition());//TODO chest game layer
+                        this.getScene().getChestGameLayer().addMinChest(this.getChestFishID(), this.getPosition());    //TODO chest game layer
                     }
 
                     PlayerActor.sharedActor().updateCatchMoney(this.getPrizeScore(), false, false, true);
@@ -717,67 +708,19 @@ var BaseFishActor = BaseActor.extend({
                         }
                     }
                     PlayerActor.sharedActor().catchFish(this.getDef(), this.getShootFlag());
-                }
                     break;
                 default:
                     break;
             }
 
-            //CCLOG(@"the catchedFishes is %@", [[[PlayerActor sharedActor] catchedFishes] description]);
             this.setActionDidStopSelector(this.actionAfterArrested, this);
             this._isAlive = false;
             return true;
-        }
-        else if (BulletType.eHarpoonBullet == bullet.getBulletType()) {
+        } else if (BulletType.eHarpoonBullet == bullet.getBulletType()) {
             this.playAction(1);
             this.setActorType(bullet.getActorType());
             switch (bullet.getActorType()) {
-                //Multiplayer
-                /*                case ActorType.eActorTypeTL:
-                 {
-                 PlayerActor.sharedActorTL().updateCatchMoney(prizeScore, true, true, false);
-                 //
-                 if(FightWithEachOther)
-                 {
-                 PlayerActor.sharedActorTL().catchFish(getDef().c_str());
-                 // @todo
-                 // 					if (getScene().GetGameCenterGCHelper())
-                 // 					{
-                 // 						getScene().massageFish(true, FishID);
-                 // 					}
-                 }
-                 else
-                 {
-                 }
-                 }
-
-                 break;
-                 case eActorTypeTR:
-                 {
-                 PlayerActor.sharedActorTR().updateCatchMoney(prizeScore, true, true, false);
-                 if (FightWithEachOther)
-                 {
-                 PlayerActor.sharedActorTR().catchFish(getDef().c_str());
-                 // @todo
-                 // 					if (getScene().GetGameCenterGCHelper())
-                 // 					{
-                 // 						getScene().massageFish(true, FishID);
-                 // 					}
-                 }
-                 else
-                 {
-                 }
-                 }
-                 break;
-
-                 case eActorTypeBL:
-                 break;
-
-                 case eActorTypeBR:
-                 break;*/
-
                 case ActorType.eActorTypeNormal:
-                {
                     PlayerActor.sharedActor().updateCatchMoney(this.prizeScore, false, true, true);
                     if (FISH.Shark == this.getFishActorType()) {
                         if (PlayerActor.sharedActor().getAutoSave()) {
@@ -786,35 +729,30 @@ var BaseFishActor = BaseActor.extend({
                         }
                     }
                     PlayerActor.sharedActor().catchFish(this.getDef(), this.getShootFlag());
-                }
                     break;
 
                 default:
                     break;
             }
 
-            //CCLOG(@"the catchedFishes is %@", [[[PlayerActor sharedActor] catchedFishes] description]);
             this.setActionDidStopSelector(this.actionAfterArrested, this);
             this._isAlive = false;
             return true;
-        }
-        else if (BulletType.eSwirlBullet == bullet.getBulletType()) {
+        } else if (BulletType.eSwirlBullet == bullet.getBulletType()) {
             this.bPassivityToRound(bullet.getPosition());
-            // @todo if (bullet.finalEvent())
-            {
-                PlayerActor.sharedActor().updateCatchMoney(this.prizeScore, false, true, true);
-                if (FISH.Shark == this.getFishActorType()) {
-                    if (PlayerActor.sharedActor().getAutoSave()) {
-                        PlayerActor.sharedActor().setCatchSharkWithRay(true);
-                        PlayerActor.sharedActor().submitAchievement(0.0);
-                    }
-                }
-                PlayerActor.sharedActor().catchFish(this.getDef());
 
-                this.playAction(1);
-                this.setActionDidStopSelector(this.actionAfterArrested, this);
-                this.setIsAlive(false);
+            PlayerActor.sharedActor().updateCatchMoney(this.prizeScore, false, true, true);
+            if (FISH.Shark == this.getFishActorType()) {
+                if (PlayerActor.sharedActor().getAutoSave()) {
+                    PlayerActor.sharedActor().setCatchSharkWithRay(true);
+                    PlayerActor.sharedActor().submitAchievement(0.0);
+                }
             }
+            PlayerActor.sharedActor().catchFish(this.getDef());
+
+            this.playAction(1);
+            this.setActionDidStopSelector(this.actionAfterArrested, this);
+            this.setIsAlive(false);
             return true;
         }
 
@@ -823,36 +761,22 @@ var BaseFishActor = BaseActor.extend({
                 this.playAction(2);
                 this.setActionDidStopSelector(this.backToNormalState, this);
             }
-            if (this.curAttackState == AttackState.eAttackStateNone) {
+            if (this.curAttackState == AttackState.eAttackStateNone)
                 this.curAttackState = AttackState.eAttackStateHited;
-            }
         }
 
         this.addFishNetAt(bullet.getPosition(), bullet.getCurWeaponLevel(), bullet.getActorType(), bullet.getShootFlag());
         bullet.collisionEvent();
         return false;
     },
-    handleCollideWithNet:function (netActor) {
-        //var random = Math.random() * 10000;
 
-        //var finalRandom = this.getFinalRandom(netActor);
+    handleCollideWithNet:function (netActor) {
         this.getFinalRandom(netActor);
 
         if (FISH.Puffer == this.getFishActorType()) {
-            if (this.curAttackState == AttackState.eAttackStateHited) {
+            if (this.curAttackState == AttackState.eAttackStateHited)
                 return false;
-            }
         }
-
-        /* var iFinalRadom = Math.ceil(finalRandom);
-         //cc.log(iFinalRadom);
-         //cc.log(finalRandom + " : "+random);
-         if (random < iFinalRadom || this.HP < 0) {
-         cc.log("true");
-         // It uses Nacl to process the result.
-         //this.grapedByFishNet(netActor);
-         //return true;
-         } */
 
         return false;
     },
@@ -872,56 +796,35 @@ var BaseFishActor = BaseActor.extend({
     canSecKilling:function () {
         var prizeScoreAvailable = this.prizeScore >= 30;
         var attackTaupeAvailable = this.fishAttackedType != FishAttackedType.eFishAttackedNone;
-        var ret = prizeScoreAvailable && attackTaupeAvailable;
-        return ret;
+        return prizeScoreAvailable && attackTaupeAvailable;
     },
+
     handleSecKillingWith:function (fishnet) {
         var secKillingValue = Math.random() * 10000;
         switch (this.fishAttackedType) {
             case FishAttackedType.eFishAttackedNormal:
-            {
                 this.fishAttackedType = FishAttackedType.eFishAttackedFirst;
-                if (secKillingValue <= valueOfSecKilling[0][this._fishLevel]) {
-                    return true;
-                }
-                else {
-                    return false;
-                }
-
-            }
-
+                return secKillingValue <= valueOfSecKilling[0][this._fishLevel];
                 break;
             case FishAttackedType.eFishAttackedFirst:
-            {
                 this.fishAttackedType = FishAttackedType.eFishAttackedSecond;
-                if (secKillingValue <= valueOfSecKilling[1][this._fishLevel]) {
-                    return true;
-                }
-                else {
-                    return false;
-                }
-            }
-
+                return (secKillingValue <= valueOfSecKilling[1][this._fishLevel]);
                 break;
             case FishAttackedType.eFishAttackedSecond:
-            {
                 this.fishAttackedType = FishAttackedType.eFishAttackedNone;
-
-            }
-
                 break;
             case FishAttackedType.eFishAttackedNone:
-
                 break;
             default:
                 break;
         }
-
         return false;
     },
+
     canDropShell:function () {
         return false;
     },
+
     dropShellActor:function () {
         if (!this.canDropShell()) {
             return;
@@ -936,12 +839,7 @@ var BaseFishActor = BaseActor.extend({
     fishMoveByBeeline:function (dt, right) {
         var nextStep = cc.p(0, 0);
         if (this._moveAngle >= kOneAngleMore) {
-            if (right) {
-                this._moveAngle = 360;
-            }
-            else {
-                this._moveAngle = 180;
-            }
+            this._moveAngle = right?360: 180;
         }
 
 
@@ -963,35 +861,25 @@ var BaseFishActor = BaseActor.extend({
             if (pos.x < VisibleRect.left().x - fishSize.width)
                 this.removeSelfFromScene();
 
-        }
-
-        else if (this._moveAngle == 360) {
+        } else if (this._moveAngle == 360) {
             if (pos.x > VisibleRect.right().x + fishSize.width)
                 this.removeSelfFromScene();
-        }
-
-        else if (this._moveAngle < 180) {
-            if (pos.y > VisibleRect.right().x + fishSize.width) {
+        } else if (this._moveAngle < 180) {
+            if (pos.y > VisibleRect.right().x + fishSize.width)
                 this.removeSelfFromScene();
-            }
-        }
-
-        else if (this._moveAngle > 180) {
-            if (pos.y < VisibleRect.bottom().y - fishSize.height) {
+        } else if (this._moveAngle > 180) {
+            if (pos.y < VisibleRect.bottom().y - fishSize.height)
                 this.removeSelfFromScene();
-            }
         }
     },
+
     turningInCircles:function (dt, right, count) {
         if (count != null) {
             var controlradius = this.getControlRadius(this.controlIndex);
             this.controlPoint = this.createPosition;
             if (this.turningCount > count) {
-
                 this.removeSelfFromScene();
-
-            }
-            else {
+            } else {
                 var l = this.getEllipsePerimeter(this.controlPoint.x, this.controlPoint.y);
 
                 this.circlesAngle -= (this.speed * 180.0) * dt / l;
@@ -1016,8 +904,7 @@ var BaseFishActor = BaseActor.extend({
                 this.setRotation(ang / Math.PI * 180.0);
                 this.setPosition(nextStep);
             }
-        }
-        else {
+        } else {
             var controlradius = this.getControlRadius(this.controlIndex);
             this.controlPoint = VisibleRect.center();
 
@@ -1043,8 +930,7 @@ var BaseFishActor = BaseActor.extend({
                     this.removeSelfFromScene();
                 }
 
-            }
-            else {
+            } else {
                 var l = this.getEllipsePerimeter(controlradius.x, controlradius.y);
 
                 this.circlesAngle -= (this.speed * 180.0) * dt / l;
@@ -1062,7 +948,8 @@ var BaseFishActor = BaseActor.extend({
                 //220-190
                 var angle = this.circlesAngle / 180.0 * Math.PI;
 
-                var nextStep = cc.p(this.controlPoint.x + (controlradius.x + this.radiusOffset) * Math.cos(angle), this.controlPoint.y + (controlradius.y + this.radiusOffset) * Math.sin(angle));
+                var nextStep = cc.p(this.controlPoint.x + (controlradius.x + this.radiusOffset) * Math.cos(angle),
+                    this.controlPoint.y + (controlradius.y + this.radiusOffset) * Math.sin(angle));
                 var curPos = this.getPosition();
                 var Dir = cc.pSub(nextStep, curPos);
                 Dir = cc.pNormalize(Dir);
@@ -1073,6 +960,7 @@ var BaseFishActor = BaseActor.extend({
             }
         }
     },
+
     fishWheelMove:function (dt, right) {
         var controlradius = this.getControlRadius(this.controlIndex);
         var l = this.getEllipsePerimeter(controlradius.x, controlradius.y);
@@ -1098,7 +986,6 @@ var BaseFishActor = BaseActor.extend({
         this.setPosition(nextStep);
         if (this.wheelAngle < -180) {
             this.removeSelfFromScene();
-            return;
         }
     },
 
@@ -1152,6 +1039,7 @@ var BaseFishActor = BaseActor.extend({
 
     handleCollideForRequired:function (target, gainGold) {
     },
+
     passivityMoveToRoundPositon:function (dt) {
         this.roundPos = Pos;
         if (!this.bPulled) {
@@ -1218,7 +1106,7 @@ var BaseFishActor = BaseActor.extend({
         prizeSprite.setOpacity(0);
         labelNum.setOpacity(0);
 
-        prizeSprite.runAction(cc.Sequence.create(delay, addCall, sequ, call));
+        prizeSprite.runAction(cc.sequence(delay, addCall, sequ, call));
         prizeSprite.setPosition(cc.pAdd(this.getPosition(), move));
         prizeSprite.setScale(1.6);
 
@@ -1245,7 +1133,6 @@ var BaseFishActor = BaseActor.extend({
 
         this.getScene().getScene().addChild(labelNum1, 100);
         this.getScene().getScene().addChild(prizeSprite1, 100);
-        //[self.scene.scene addChild:labelOddNumber z:120];
         this.setGoldPos(this.getPosition());
     },
     removeParticle:function () {
@@ -1328,162 +1215,7 @@ var BaseFishActor = BaseActor.extend({
         }
     },
 
-    prizeScore:0,
-    getPrizeScore:function () {
-        return this.prizeScore
-    },
-    setPrizeScore:function (prizeScore) {
-        this.prizeScore = prizeScore
-    },
-    offset:null, //point
-    getOffset:function () {
-        return {x:this.offset.x, y:this.offset.y}
-    },
-    setOffset:function (offset) {
-        this.offset.x = offset.x;
-        this.offset.y = offset.y;
-    },
-    GoldPos:null,
-    getGoldPos:function () {
-        return {x:this.GoldPos.x, y:this.GoldPos.y}
-    },
-    setGoldPos:function (GoldPos) {
-        this.GoldPos.x = GoldPos.x;
-        this.GoldPos.y = Goldpos.y;
-    },
-    curCollideIndex:0,
-    getCurCollideIndex:function () {
-        return this.curCollideIndex
-    },
-    setCurCollideIndex:function (curCollideIndex) {
-        this.curCollideIndex = curCollideIndex
-    },
 
-    beRightDir:false,
-    getBeRightDir:function () {
-        return this.beRightDir
-    },
-    setBeRightDir:function (beRightDir) {
-        this.beRightDir = beRightDir
-    },
-
-    _fishType:FISH.smallFish,
-    getFishType:function () {
-        return this._fishType
-    },
-    setFishType:function (fishType) {
-        this._fishType = fishType
-    },
-
-    radiusOffset:0,
-    getRadiusOffset:function () {
-        return this.radiusOffset
-    },
-    setRadiusOffset:function (radiusOffset) {
-        this.radiusOffset = radiusOffset
-    },
-
-    _fishLevel:FishLevel.eFishLevel1,
-    getFishLevel:function () {
-        return this._fishLevel
-    },
-
-    _actorType:ActorType.eActorTypeTL,
-    getActorType:function () {
-        return this._actorType
-    },
-    setActorType:function (actorType) {
-        this._actorType = actorType
-    },
-
-    FishID:0,
-    getFishID:function () {
-        return this.FishID
-    },
-    setFishID:function (FishID) {
-        this.FishID = FishID
-    },
-
-    IsChangeColor:false,
-    getIsChangeColor:function () {
-        return this.IsChangeColor
-    },
-    setIsChangeColor:function (IsChangeColor) {
-        this.IsChangeColor = IsChangeColor
-    },
-
-    HP:0,
-    getHP:function () {
-        return this.HP
-    },
-    setHP:function (HP) {
-        this.HP = HP
-    },
-
-    CaptureRandom:0,
-    getCaptureRandom:function () {
-        return this.CaptureRandom
-    },
-    setCaptureRandom:function (CaptureRandom) {
-        this.CaptureRandom = CaptureRandom
-    },
-
-    ChestFishID:0,
-    getChestFishID:function () {
-        return this.ChestFishID
-    },
-    setChestFishID:function (ChestFishID) {
-        this.ChestFishID = ChestFishID
-    },
-
-    stimulateId:null,
-    getStimulateId:function () {
-        return this.stimulateId
-    },
-    setStimulateId:function (stimulateId) {
-        this.stimulateId = stimulateId
-    },
-
-    noFeedBackPro:null,
-    getNoFeedBackPro:function () {
-        return this.noFeedBackPro
-    },
-    setNoFeedBackPro:function (noFeedBackPro) {
-        this.noFeedBackPro = noFeedBackPro
-    },
-
-    fishAttackedType:FishAttackedType.eFishAttackedNormal,
-    getFishAttackedType:function () {
-        return this.fishAttackedType
-    },
-    setFishAttackedType:function (fishAttackedType) {
-        this.fishAttackedType = fishAttackedType
-    },
-
-    mortality:false,
-    getMortality:function () {
-        return this.mortality
-    },
-    setMortality:function (mortality) {
-        this.mortality = mortality
-    },
-
-    createPosition:null,
-    getCreatePosition:function () {
-        return {x:this.createPosition.x, y:this.createPosition.y}
-    },
-    setCreatePosition:function (createPosition) {
-        this.createPosition.x = createPosition.x;
-        this.createPosition.y = createPosition.y;
-    },
-
-    expectation:0.1,
-    getExpectation:function () {
-        return this.expectation
-    },
-    setExpectation:function (expectation) {
-        this.expectation = expectation
-    },
 
     setMoveData:function (data) {
         this.moveData = data;
@@ -1724,8 +1456,6 @@ var BaseFishActor = BaseActor.extend({
             : (nextStep = cc.p(this.controlPoint.x + controlradius.x * Math.cos(angle), this.controlPoint.y + controlradius.y * Math.sin(angle)) );
         var Dir = cc.pSub(nextStep, this.position);
         Dir = cc.pNormalize(Dir);
-        //	var ang = atan2f(Dir.x, Dir.y) + M_PI/2;
-        //    this.handleActorRotation(ang/M_PI*180.0f);
         this.handleActorRotation(Dir);
         this.setPosition(nextStep);
     },
@@ -1760,9 +1490,6 @@ var BaseFishActor = BaseActor.extend({
                 var Dir = cc.pSub(nextStep, this.position);
                 Dir = cc.pNormalize(Dir);
                 this.handleActorRotation(Dir);
-                //            var ang = atan2f(Dir.x, Dir.y) + Math.PI/2;
-                //
-                //            this.handleActorRotation(ang/Math.PI*180.0f);
                 this.setPosition(nextStep);
                 if (this.wheelAngle < this.endAngle) {
 
@@ -1934,20 +1661,8 @@ var BaseFishActor = BaseActor.extend({
                 }
                 var endpo = this.position;
                 var ep = this.runAwayData.endPosition;
-                if (!this.runWithGroup) {
-                    //                MoveDataBezier* groupDest = FishGroupInfoDataManager.shareFishGroupInfoDataManager().getHasGroupInScreen(this.groupInfo.groupType);
-                    //                if (groupDest == null)
-                    {
-                        this.createMoveDataAfterRunAway();
-                    }
-                    //                else
-                    {
-                        //                    this.cloneSimilarMoveData(groupDest);
-                    }
-                }
-                else {
-
-                }
+                if (!this.runWithGroup)
+                    this.createMoveDataAfterRunAway();
             }
             return;
         }
@@ -2102,7 +1817,7 @@ var BaseFishActor = BaseActor.extend({
                         break;
                 }
                 break;
-            case 1://TODO
+            case 1:
                 switch (this.getForwardDir()) {
                     case 0:
                     case 2:
@@ -2219,12 +1934,10 @@ var BaseFishActor = BaseActor.extend({
         var halfSize = this.getSize();
         halfSize.width /= 2;
         halfSize.height /= 2;
-        if (this.position.x > VisibleRect.right().x + halfSize.width || this.position.x < VisibleRect.left().x - halfSize.width ||
-            this.position.y > VisibleRect.top().y + halfSize.height || this.position.y < VisibleRect.bottom().y - halfSize.height) {
-            return true;
-        }
-        return false;
+        return (this.position.x > VisibleRect.right().x + halfSize.width || this.position.x < VisibleRect.left().x - halfSize.width ||
+        this.position.y > VisibleRect.top().y + halfSize.height || this.position.y < VisibleRect.bottom().y - halfSize.height);
     },
+
     createMoveDataAfterRunAway:function () {
         this.afterRunAwayData = new MoveDataBezier();
         switch (this.getForwardDir()) {
@@ -2329,9 +2042,7 @@ var BaseFishActor = BaseActor.extend({
                 if (this.getIsChangeColor()) {
                     /*CCParticleSystem *baoixangParticle=[CCParticleSystemQuad particleWithFile:@"bianbaoxiangl03.plist"];*/
                 }
-//            [PlayerActor sharedActorTL].curReturn += self.prizeScore;
-//            [PlayerActor sharedActorTL].totalGain += self.prizeScore;
-//            [PlayerActor sharedActorTL].normalGain += self.prizeScore;
+
                 PlayerActor.sharedActorTL().updateCatchMoney(this.prizeScore, true, true, false);
                 //
                 PlayerActor.sharedActorTL().catchFish(this.getDef());
@@ -2342,9 +2053,7 @@ var BaseFishActor = BaseActor.extend({
                 if (this.getIsChangeColor()) {
                     var baoixangParticle = particleSystemFactory.createParticle(ImageName("bianbaoxiangl03.plist"));
                 }
-//            [PlayerActor sharedActorTR].curReturn += self.prizeScore;
-//            [PlayerActor sharedActorTR].totalGain += self.prizeScore;
-//            [PlayerActor sharedActorTR].normalGain += self.prizeScore;
+
                 PlayerActor.sharedActorTR().updateCatchMoney(this.prizeScore, true, true, false);
                 PlayerActor.sharedActorTR().catchFish(this.getDef());
                 var curScene = this.getScene();
@@ -2492,7 +2201,7 @@ var BaseFishActor = BaseActor.extend({
             this.fish = that;
             this.netActor = netActor;
             this.index = naclFishIndex;
-        }
+        };
         var tempUnit = new naclUnit(this);
         naclFishPool.push(tempUnit);
         (naclFishIndex > 100) ? (naclFishIndex = 0) : naclFishIndex++;
@@ -2500,53 +2209,9 @@ var BaseFishActor = BaseActor.extend({
             netActor.getCurRatio(), this.getScene().getOddsNumber(), PlayerActor.sharedActor().getPlayerMoney(),
             gameSetting.getExperienceRatio(), gameSetting.getPreReturnRatio());
 
-        /*var bulletRandom = gameSetting.getBulletRandomArray()[netActorCurWeaponLecel - 1];
-         var fishNetRandom = gameSetting.getNetRandomArray()[netActorCurWeaponLecel - 1];
-         var cannonRandom = gameSetting.getCannonRandomArray()[netActorCurWeaponLecel - 1];
-         var bulletFishRandom = gameSetting.getBulletFishRandomArray()[netActorCurWeaponLecel - 1][this._fishLevel];
-
-         var independRadom = gameSetting.getIndependRandomArray()[this._fishLevel];
-         var departRandom = gameSetting.getFishDepartRandomArray()[this._fishLevel][this.getCurCollideIndex()];
-
-
-         fishNetRandom = fishNetRandom * netActor.getCurRatio() / 100.0;
-
-         var finalRandom = fishRandom * fishNetRandom / 100.0;
-         finalRandom = finalRandom * bulletRandom / 100.0;
-         finalRandom = finalRandom * cannonRandom / 100.0;
-         finalRandom = finalRandom * independRadom / (100.0);
-         finalRandom = finalRandom * departRandom / 100;
-         if (this.getScene().getOddsNumber() == 2) {
-         finalRandom = finalRandom * bulletFishRandom / 100.0;
-         if (PlayerActor.sharedActor().getPlayerMoney() > 100000) {
-         finalRandom *= 0.7;
-         }
-         else {
-         var parmb = 1.1 - Math.pow(PlayerActor.sharedActor().getPlayerMoney(), 1.0 / 5.0) / 15;
-         finalRandom *= parmb;
-         }
-         }
-         var expRatio = gameSetting.getExperienceRatio() * 10000 / 10000;
-         finalRandom = finalRandom * expRatio;
-
-         if (PlayerActor.sharedActor().getPlayerMoney() < 30) {
-         finalRandom = finalRandom * (1.2 * 10000) / 10000;
-         }
-         else {
-         finalRandom = finalRandom * (gameSetting.getPreReturnRatio() * 10000) / 10000;
-         }
-
-         cc.log("finalRandom:"+finalRandom); */
-
         gameSetting.setBulletShootCount(gameSetting.getBulletShootCount() + 1);
-        /*        var bulletShootCount = gameSetting.getBulletShootCount();
-         if (bulletShootCount < 12) {
-         if (bulletShootCount < 3 || bulletShootCount % 2) {
-         finalRandom = 10000;
-         }
-         }*/
-        //return  finalRandom;
     },
+
     curAttackState:AttackState.eAttackStateNone, //EAttackState
     stateChangeTime:0,
     speedScale:0,
@@ -2745,7 +2410,6 @@ var CroakerActor = BaseFishActor.extend({
         return FISH.Croaker
     }
 });
-
 
 var RayActor = BaseFishActor.extend({
     ctor:function (def_) {

@@ -163,7 +163,8 @@ var cocos2dApp = cc.game.onStart = function(){
         // Multiple = AutoAdapterScreen.getInstance().getScaleMultiple();
 
     cc.LoadingScreen.preload(g_resources, function () {
-        cc.director.runScene(new LogoScene());
+        //cc.director.runScene(new LogoScene());
+        cc.director.runScene(new StartMenuLayer());
     }, this);
     // },
     applicationDidFinishLaunching = function () {

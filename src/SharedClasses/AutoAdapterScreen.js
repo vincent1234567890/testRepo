@@ -70,13 +70,13 @@ var AutoAdapterScreen = cc.Class.extend({
         }
 
         // cc._renderContext.translate(0, cc._canvas.height);
-        if (cc._renderType == cc.game.RENDER_TYPE_WEBGL) {
-            if (cc._renderType == cc.game.RENDER_TYPE_CANVAS) {
-                cc._renderContext.translate(0, cc._canvas.height);
-            }else if (cc._renderType == cc.game.RENDER_TYPE_WEBGL){
-                cc._renderContext.viewport(0, 0, cc._canvas.width, cc._canvas.height);
-            }
-        }
+        // if (cc._renderType == cc.game.RENDER_TYPE_WEBGL) {
+        //     if (cc._renderType == cc.game.RENDER_TYPE_CANVAS) {
+        //         cc._renderContext.translate(0, cc._canvas.height);
+        //     }else if (cc._renderType == cc.game.RENDER_TYPE_WEBGL){
+                //cc._renderContext.viewport(0, 0, cc._canvas.width, cc._canvas.height);
+            // }
+        // }
     },
 
     setWinSize:function (tag) {
@@ -133,9 +133,10 @@ var AutoAdapterScreen = cc.Class.extend({
 
 AutoAdapterScreen.getInstance = function () {
     if (!this._instance) {
-        this._instance = new AutoAdapterScreen();
+        var ret = new AutoAdapterScreen();
+        return ret;
     }
     return this._instance;
 };
 
-// AutoAdapterScreen._instance = null;
+AutoAdapterScreen._instance = null;

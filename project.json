@@ -6,7 +6,7 @@
     "frameRate" : 60,
     "noCache" : false,
     "id" : "gameCanvas",
-    "renderMode" : 0,
+    "renderMode" : 1,
     "engineDir":"frameworks/cocos2d-html5",
 
     "modules" : ["cocos2d"],
@@ -93,7 +93,10 @@
         "lib/services/game/GameServices.js",
         "lib/services/player/PlayerServices.js",
         "lib/modules/simpleEmitter.js",
-        "lib/modules/socketUtils.js"
+        "lib/modules/socketUtils.js",
+        "lib/fishgamelogic/serverInformer.js",
+        "lib/fishgamelogic/clientReceiver.js"
+
 
     ]
 }
