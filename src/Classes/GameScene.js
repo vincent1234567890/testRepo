@@ -178,7 +178,75 @@ var GameScene = cc.Scene.extend({
     _tutorialSessionController:null,
     _shakeTime:0,
     _swingRadio:5,
-    ctor:function () {
+    ctor:function (def, le) {
+        this._layer = new cc.Layer();
+        this._layer.setTag(2233);
+        this.addChild(this._layer);
+
+        //FishNetCollideHandler.shareFishNetCollideHandler().checkLocallyData(le);
+
+        // 重置是否可以显示 redeem 窗口的参数，防止兑换金币时异常退出导致无法打开redeem 窗口
+        wrapper.setBooleanForKey(kCanShowRedeem, true);
+
+        this._prizeSprite = new cc.Node();
+        this._prizeSprite.setAnchorPoint(cc.p(0.5, 0.5));
+        this._prizeSprite.setPosition(VisibleRect.center());
+
+        this._gameover = false;
+        this._isPause = false;
+        this._isPLayGameMainSessionController = false;
+
+        this._musicIdx = this._curStage = le;
+
+        this.initBgLayer();
+
+        cc.director.getScheduler().schedule(this.update, this, 0, false);
+        /*        var pSceneSettingDataModel = SceneSettingDataModel.sharedSceneSettingDataModel();
+         if (pSceneSettingDataModel.getCanUseNewPath()) {
+         FishFactoryManager.shareFishFactoryManager().setScene(this);
+         }
+         else {*/
+        FishGroup.shareFishGroup().setScene(this);
+        //FishGroup.shareFishGroup().initAllTrack(le);
+        //}
+
+        GameSetting.getInstance().loadData(this._curStage);
+
+        //this._oddsNumber = SceneSettingDataModel.sharedSceneSettingDataModel().getOddNumber();
+
+        // 双倍区 设置倍数  五倍区设置
+        if (le == 2) {
+            this.setOddsNumber(2);
+        }
+        else if (le == 3) {
+            this.setOddsNumber(5);
+        }
+        else {
+            this.setOddsNumber(1);
+        }
+
+        var stage;
+        switch (this._curStage){
+            case 1:
+                stage = "Maldives";
+                break;
+            case 2:
+                stage = "Hawaii";
+                break;
+            default:
+                stage = "Err";
+        }
+
+        wrapper.logEvent("Stage", "Select", stage, this._curStage);
+
+        this._adMobBannerProcessType = kNoAdBanner;
+        this._retainedResArray = [];
+
+        // 加勒比海场景 武器初始化为10级
+        if (le == 3) {
+            PlayerActor.sharedActor().setCurWeaponLevel(FishWeaponType.eWeaponLevel10);
+        }
+
         this._super();
         wrapper.getBooleanForKey("AskEnterLecel3", false);
         this._movePoint = new cc.Point(0, 0);
@@ -190,6 +258,7 @@ var GameScene = cc.Scene.extend({
         this._retainedResArray = [];
         this._shootPosList = []
     },
+
     getLayer:function () {
         return this._layer;
     },
@@ -493,77 +562,7 @@ var GameScene = cc.Scene.extend({
         var pos = cc.p(VisibleRect.topLeft().x + 135, VisibleRect.topLeft().y - this._itemPause.getContentSize().height / 2);
         this._userBtn.setPosition(0, 0);
     },
-    initWithDef:function (def, le) {
-        this._layer = new cc.Layer();
-        this._layer.setTag(2233);
-        this.addChild(this._layer);
 
-        //FishNetCollideHandler.shareFishNetCollideHandler().checkLocallyData(le);
-
-        // 重置是否可以显示 redeem 窗口的参数，防止兑换金币时异常退出导致无法打开redeem 窗口
-        wrapper.setBooleanForKey(kCanShowRedeem, true);
-
-        this._prizeSprite = new cc.Node();
-        this._prizeSprite.setAnchorPoint(cc.p(0.5, 0.5));
-        this._prizeSprite.setPosition(VisibleRect.center());
-
-        this._gameover = false;
-        this._isPause = false;
-        this._isPLayGameMainSessionController = false;
-
-        this._musicIdx = this._curStage = le;
-
-        this.initBgLayer();
-
-        cc.director.getScheduler().schedule(this.update, this, 0, false);
-        /*        var pSceneSettingDataModel = SceneSettingDataModel.sharedSceneSettingDataModel();
-         if (pSceneSettingDataModel.getCanUseNewPath()) {
-         FishFactoryManager.shareFishFactoryManager().setScene(this);
-         }
-         else {*/
-        FishGroup.shareFishGroup().setScene(this);
-        //FishGroup.shareFishGroup().initAllTrack(le);
-        //}
-
-        GameSetting.getInstance().loadData(this._curStage);
-
-        //this._oddsNumber = SceneSettingDataModel.sharedSceneSettingDataModel().getOddNumber();
-
-        // 双倍区 设置倍数  五倍区设置
-        if (le == 2) {
-            this.setOddsNumber(2);
-        }
-        else if (le == 3) {
-            this.setOddsNumber(5);
-        }
-        else {
-            this.setOddsNumber(1);
-        }
-
-        var stage;
-        switch (this._curStage){
-            case 1:
-                stage = "Maldives";
-                break;
-            case 2:
-                stage = "Hawaii";
-                break;
-            default:
-                stage = "Err";
-        }
-
-        wrapper.logEvent("Stage", "Select", stage, this._curStage);
-
-        this._adMobBannerProcessType = kNoAdBanner;
-        this._retainedResArray = [];
-
-        // 加勒比海场景 武器初始化为10级
-        if (le == 3) {
-            PlayerActor.sharedActor().setCurWeaponLevel(FishWeaponType.eWeaponLevel10);
-        }
-
-        return true;
-    },
     planMoveIn:function () {
 
     },
@@ -742,6 +741,7 @@ var GameScene = cc.Scene.extend({
         if (this._playTutorial && this._showHint) {
             return;
         }
+        debugger
 
         if (PlayerActor.sharedActor().canSendWeapon()) {
             if (!this._isPause) {
@@ -948,8 +948,7 @@ var GameScene = cc.Scene.extend({
 
     },
     loadCannon:function () {
-        this._cannonActor = new WeaponManager();
-        this._cannonActor.initWithDefaults(cc.pAdd(VisibleRect.bottom(), cc.p(0, 50)), 0.0, this);
+        this._cannonActor = new WeaponManager(cc.pAdd(VisibleRect.bottom(), cc.p(0, 50)), 0.0, this);
     },
     updateTutorial:function (dt) {
         var showBuyItem = GameSetting.getInstance().getShowBuyItem() && this.getChildByTag(999);

@@ -17,8 +17,9 @@ var StartMenuLayer = cc.Layer.extend({
     _particle3:null,
 
     ctor: function(){
-        cc.Layer.prototype.ctor.call(this);
+        // cc.Layer.prototype.ctor.call(this);
 
+        this._super();
         PlayerActor.sharedActor().playerLogin();
 
         //todo it should be load once enough.

@@ -14,7 +14,7 @@ var WeaponCannon = Weapon.extend({
      The weaponLevel param is normal cannon weapon level
      The pos param determine base point of sprite
      */
-    initWeapon:function (weaponLevel, pos) {
+    ctor:function (weaponLevel, pos) {
         if (arguments.length < 2) {
             return true;
         }
@@ -27,7 +27,7 @@ var WeaponCannon = Weapon.extend({
 
         var spriteName = "actor_cannon1_" + weaponLevel + "1.png";
         var shootName = "actor_cannon1_" + weaponLevel + "2.png";
-        if (!this._super(spriteName, shootName, pos, 0.1)) return;
+        this._super(spriteName, shootName, pos, 0.1);
         this._cannonLevel = weaponLevel;
         this.setAnchorPoint(cc.p(0.5, 0.5));
         var menuLeft = new cc.MenuItemSprite(new cc.Sprite("#ui_button_63.png"), new cc.Sprite("#ui_button_64.png"), this.changeWeapon, this);
@@ -188,7 +188,7 @@ var WeaponCannonExt = WeaponCannon.extend({
             this.setWeaponDirection(newDirection);
         }
     },
-    initWeapon:function (weaponLevel, pos, actorType) {
+    ctor:function (weaponLevel, pos, actorType) {
         var bRet = this._super(weaponLevel, pos);
         if (bRet) {
             this.setCurrentActorType(actorType);
@@ -274,49 +274,49 @@ var WeaponCannonExt = WeaponCannon.extend({
 
 
 var WeaponCannon1 = WeaponCannonExt.extend({
-    initWeapon:function (pos, actorType) {
+    ctor:function (pos, actorType) {
         return this._super(FishWeaponType.eWeaponLevel1, pos, actorType);
     }
 });
 
 var WeaponCannon2 = WeaponCannonExt.extend({
-    initWeapon:function (pos, actorType) {
+    ctor:function (pos, actorType) {
         return this._super(FishWeaponType.eWeaponLevel2, pos, actorType);
     }
 });
 
 var WeaponCannon3 = WeaponCannonExt.extend({
-    initWeapon:function (pos, actorType) {
+    ctor:function (pos, actorType) {
         return this._super(FishWeaponType.eWeaponLevel3, pos, actorType);
     }
 });
 
 var WeaponCannon4 = WeaponCannonExt.extend({
-    initWeapon:function (pos, actorType) {
+    ctor:function (pos, actorType) {
         return this._super(FishWeaponType.eWeaponLevel4, pos, actorType);
     }
 });
 
 var WeaponCannon5 = WeaponCannonExt.extend({
-    initWeapon:function (pos, actorType) {
+    ctor:function (pos, actorType) {
         return this._super(FishWeaponType.eWeaponLevel5, pos, actorType);
     }
 });
 
 var WeaponCannon6 = WeaponCannonExt.extend({
-    initWeapon:function (pos, actorType) {
+    ctor:function (pos, actorType) {
         return this._super(FishWeaponType.eWeaponLevel6, pos, actorType);
     }
 });
 
 var WeaponCannon7 = WeaponCannonExt.extend({
-    initWeapon:function (pos, actorType) {
+    ctor:function (pos, actorType) {
         return this._super(FishWeaponType.eWeaponLevel7, pos, actorType);
     }
 });
 
 var WeaponCannon10 = WeaponCannonExt.extend({
-    initWeapon:function (pos, actorType) {
+    ctor:function (pos, actorType) {
         return this._super(FishWeaponType.eWeaponLevel10, pos, actorType);
     }
 });

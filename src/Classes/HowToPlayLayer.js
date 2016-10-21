@@ -60,7 +60,7 @@ var HowToPlayLayer = cc.Layer.extend({
     onEnter:function(){
         cc.Layer.prototype.onEnter.call(this);
 
-        this.setKeyboardEnabled(true);
+        // this.setKeyboardEnabled(true);
         var cache = cc.spriteFrameCache;
         cache.addSpriteFrames(ImageNameLang("StageSelectLayer.plist"));
         cache.addSpriteFrames(ImageNameLang("tutorial_uibox.plist"));
@@ -215,18 +215,21 @@ var HowToPlayLayer = cc.Layer.extend({
 });
 
 HowToPlayLayer.create = function () {
+
     return new HowToPlayLayer();
 };
 
 
 var HelpImagesLayer = cc.Layer.extend({
     shadeArray:null,
+
     ctor:function () {
+        this._super();
         this.shadeArray = [];
     },
     draw:function (ctx) {
-        if (cc.renderContextType == cc.CANVAS) {
-            var context = ctx || cc.renderContext;
+        if (cc._renderType == cc.sys.RENDER_TYPE_CANVAS) {
+            var context = ctx || cc._renderType;
 
             var size = this.getContentSize();
             context.beginPath();
@@ -239,11 +242,11 @@ var HelpImagesLayer = cc.Layer.extend({
         }
     }
 });
+HelpImagesLayer._instance = null;
 
 HelpImagesLayer.create = function () {
-    var h = new HelpImagesLayer();
-    if (h.init()) {
-        return h;
+    if (!this._instance){
+        this._instance = new HelpImagesLayer();
     }
-    return null;
+    return this._instance;
 };

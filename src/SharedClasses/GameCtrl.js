@@ -15,7 +15,7 @@ var GameCtrl = cc.Class.extend({
     m_nMultiLevel:null,
     m_bIsLoadingFight:null,
     myPlanType:null,
-    init:function () {
+    ctor:function () {
         this.setIsNewGame(true);
         this.setIsPassStage(false);
         this.connectToMasterServer();
@@ -65,16 +65,14 @@ var GameCtrl = cc.Class.extend({
         }
         else {
             this.gameState = GAMEPLAY;
-            var newScene = new GameScene();
-            newScene.initWithDef("Scene_Main", 1);
+            var newScene = new GameScene("Scene_Main", 1);
             this.setCurScene(newScene);
             wrapper.setIntegerForKey(UserDefaultsKeyPreviousPlayedStage, 1);
         }
     },
     startNewGame:function () {
         this.gameState = GAMEPLAY;
-        var gameScene = new GameScene();
-        gameScene.initWithDef("Scene_Main", this._selectLevel);
+        var gameScene = new GameScene("Scene_Main", this._selectLevel);
         this.setCurScene(gameScene);
 
         var gameCtrl = this;
@@ -257,13 +255,8 @@ GameCtrl.sharedGame = function () {
     //cc.Assert(this._sharedGame, "Havn't call setSharedGame");
     if (!this._sharedGame) {
         this._sharedGame = new GameCtrl();
-        if (this._sharedGame.init()) {
-            return this._sharedGame;
-        }
-    } else {
-        return this._sharedGame;
     }
-    return null;
+    return this._sharedGame;
 };
 
 GameCtrl._sharedGame = null;

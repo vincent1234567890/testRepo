@@ -40,11 +40,11 @@ var GoldPrizeActor = BaseActor.extend({
         }
     },
 
-    initWithDef:function (def) {
+    ctor:function (def) {
         this._def = def;
 
         this.setBDeleteBigChest(false);
-        var ret = this.initWithSpriteName("coin", "GoldItem.png");
+        var ret = this._super("coin", "GoldItem.png");
         if (ret) {
             this.playAction(0);
             this._speed = 100;
@@ -83,7 +83,7 @@ var GoldPrizeActor = BaseActor.extend({
         }
 
         if (this.getIsAlive()) {
-            if (!cc.Rect.CCRectContainsPoint(EScreenRect, this.getPosition())) {
+            if (!cc.rectContainsPoint(EScreenRect, this.getPosition())) {
                 if (this._deleteBigChest) {
                     //by now, there should only be 1 max chest
                     var chest = this.getScene().getActors(GroupMaxChestActor)[0];
@@ -121,8 +121,7 @@ var GoldPrizeActor = BaseActor.extend({
 
 GoldPrizeActor.sharedActor = function () {
     if (!this._sharedActor) {
-        this._sharedActor = new GoldPrizeActor();
-        this._sharedActor.initWithDef("");
+        this._sharedActor = new GoldPrizeActor("");
     }
 
     return this._sharedActor;
@@ -131,8 +130,8 @@ GoldPrizeActor.sharedActor = function () {
 GoldPrizeActor._sharedActor = null;
 
 var BigPrizeActor = BaseActor.extend({
-    initWithDef:function (def_) {
-        var ret = this.initWithSpriteName("nihongdeng", "SmallItem.png");
+    ctor:function (def_) {
+        var ret = this._super("nihongdeng", "SmallItem.png");
         if (ret) {
             this.playAction(0);
             this._group = GroupBigGoldPrizeActor;
@@ -150,9 +149,9 @@ var BigPrizeActor = BaseActor.extend({
 });
 
 var ChestActor = BaseActor.extend({
-    initWithDef:function(def_){
+    ctor:function(def_){
         this._def = def_;
-        var bRet = this.initWithSpriteName("chest", "chest.png");
+        var bRet = this._super("chest", "chest.png");
         if (bRet)
         {
             this.playAction(0);
@@ -164,7 +163,7 @@ var ChestActor = BaseActor.extend({
     },
     getBaseActorType:function(){return ActorType.eChestActor},
     removeSelfFromScene:function(){
-        this.getScheduler().unscheduleAllSelectorsForTarget(this);
+        this.getScheduler().unscheduleAllForTarget(this);
         this._super();
     },
     resetState:function(){
@@ -262,12 +261,10 @@ var ChestActor = BaseActor.extend({
 ChestActor.OvalCiShu = -1;
 
 var MaxChestActor = ChestActor.extend({
-    ctor:function(){
+    ctor:function(def_){
         this.prizeType = "";
-    },
-    initWithDef:function(def_){
         this._def = def_;
-        var bRet = this.initWithSpriteName("chest", "chest.png");
+        var bRet = this._super("chest", "chest.png");
 
         if (bRet)
         {

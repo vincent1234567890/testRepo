@@ -9,20 +9,17 @@ var WeaponSpecialLevinStorm = WeaponSpecial.extend({
     _targetPoint:null,
     _isPowerUp:false,
     _levinStormBulletSoundEffect:0,
-    initWeapon:function (pos, energy, shootCost) {
+    ctor:function (pos, energy, shootCost) {
         var strweaponSprite = "weaponLevinStorm.png";
         var strweaponShoot = "weaponLevinStorm.png";
         cc.spriteFrameCache.addSpriteFrames(ImageName("LevinStorm_xuli1.plist"));
         cc.spriteFrameCache.addSpriteFrames(ImageName("LevinStorm_xuli2.plist"));
-        if (this._super(strweaponSprite, strweaponShoot, pos, 0.5, energy, shootCost)) {
-            this.setCannonLevel(FishWeaponType.eWeaponLevel9);
-            this._isPowerUp = false;
-            this.setAnchorPoint(cc.p(0.5, 0.5));
-            this.loadWeaponEffect();
-            this._weaponSprite.setAnchorPoint(cc.p(0.5, 0.34));
-            return true;
-        }
-        return false;
+        this._super(strweaponSprite, strweaponShoot, pos, 0.5, energy, shootCost)
+        this.setCannonLevel(FishWeaponType.eWeaponLevel9);
+        this._isPowerUp = false;
+        this.setAnchorPoint(cc.p(0.5, 0.5));
+        this.loadWeaponEffect();
+        this._weaponSprite.setAnchorPoint(cc.p(0.5, 0.34));
     },
     loadWeaponEffect:function () {
         var cache = cc.spriteFrameCache;

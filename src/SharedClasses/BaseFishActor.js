@@ -197,6 +197,7 @@ var BaseFishActor = BaseActor.extend({
     },
 
     ctor:function (defname, imgname) {
+        this.fishSortLevel = ["10", "9", "8", "7", "6", "5", "4", "12", "3", "2", "1", "0", "11"];
         this._super(defname, imgname);
 
         this.offset = {x:0, y:0};
@@ -218,11 +219,7 @@ var BaseFishActor = BaseActor.extend({
         this.curAction = 0;
         this.setAction(this.curAction);
     },
-    initWithDef:function (def) {
-        this.fishSortLevel = ["10", "9", "8", "7", "6", "5", "4", "12", "3", "2", "1", "0", "11"];
 
-        return true;
-    },
     _group:null,
     getGroup:function () {
         return this._group

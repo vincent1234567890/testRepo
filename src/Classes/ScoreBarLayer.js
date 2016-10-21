@@ -101,7 +101,7 @@ var ScoreBarLayer = cc.Layer.extend({
             this.addChild(this._bulletsLabel, 60);
             this._bulletsLabel.setPosition(cc.p(-342, 10));
             this.setBullet(PlayerActor.sharedActor().getPlayerMoney());
-            this.setDownTimeLabel(cc.LabelAtlas.create("60", ImageName("ui_number_time.png"), 18, 26, '0'));
+            this.setDownTimeLabel(new cc.LabelAtlas("60", ImageName("ui_number_time.png"), 18, 26, '0'));
             this.addChild(this._downTimeLabel, 21);
             this._downTimeLabel.setPosition(cc.p(-168, 13));
 
@@ -259,17 +259,17 @@ var ScoreBarLayer = cc.Layer.extend({
         }
         this._isPlayTip = true;
         var dua = 0.2;
-        var fadein = cc.FadeIn.create(dua);
+        var fadein = cc.fadeIn(dua);
         var fadeRev = fadein.reverse();
-        var sequ1 = cc.Sequence.create(fadein, fadeRev);
+        var sequ1 = cc.sequence(fadein, fadeRev);
 
-        var scaleby = cc.ScaleBy.create(dua, 1.2);
+        var scaleby = cc.scaleBy(dua, 1.2);
         var scaleRev = scaleby.reverse();
-        var sequ2 = cc.Sequence.create(scaleby, scaleRev);
+        var sequ2 = cc.sequence(scaleby, scaleRev);
 
-        var spawn = cc.Spawn.create(sequ1, sequ2);
+        var spawn = cc.spawn(sequ1, sequ2);
 
-        var repeat = cc.RepeatForever.create(spawn);
+        var repeat = cc.repeatForever(spawn);
 
         moneyItem.setScale(1.0);
         moneyItem.runAction(repeat);
@@ -296,10 +296,10 @@ var ScoreBarLayer = cc.Layer.extend({
             frames.push(frame);
         }
 
-        var animation2 = cc.Animation.create(frames, 0.2);
-        var ac2 = cc.Animate.create(animation2, false);
+        var animation2 = cc.animation(frames, 0.2);
+        var ac2 = cc.animate(animation2, false);
 
-        var repeat = cc.RepeatForever.create(ac2);
+        var repeat = cc.repeatForever(ac2);
         this._moneyTip.runAction(repeat);
     },
     showNotEnouth:function () {
@@ -585,7 +585,7 @@ var ScoreBarLayer = cc.Layer.extend({
             tipPos = cc.p(430, 40)
         }
 
-        var tipLaserZero = cc.LabelTTF.create("not enough laser", tipSize, cc.TEXT_ALIGNMENT_CENTER, "Arial", fontSize);
+        var tipLaserZero = new cc.LabelTTF("not enough laser", tipSize, cc.TEXT_ALIGNMENT_CENTER, "Arial", fontSize);
 
         if (this.getChildByTag(kTagTipLaserZero)) {
             tipLaserZero.setColor(new cc.Color(255, 0, 0));
@@ -629,7 +629,7 @@ var ScoreBarLayer = cc.Layer.extend({
                 LaserNum--;
         }
 
-        var skip3 = cc.LabelAtlas.create(LaserNum, ImageName("fonts_laser_num.png"), 30, 40, '0');
+        var skip3 = new cc.LabelAtlas(LaserNum, ImageName("fonts_laser_num.png"), 30, 40, '0');
         skip3.setScale(0.8);
         var num = 1;
         while (true) {
