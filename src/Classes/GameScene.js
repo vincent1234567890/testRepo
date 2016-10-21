@@ -742,6 +742,7 @@ var GameScene = cc.Scene.extend({
         if (this._playTutorial && this._showHint) {
             return;
         }
+        debugger
 
         if (PlayerActor.sharedActor().canSendWeapon()) {
             if (!this._isPause) {
@@ -948,8 +949,7 @@ var GameScene = cc.Scene.extend({
 
     },
     loadCannon:function () {
-        this._cannonActor = new WeaponManager();
-        this._cannonActor.initWithDefaults(cc.pAdd(VisibleRect.bottom(), cc.p(0, 50)), 0.0, this);
+        this._cannonActor = new WeaponManager(cc.pAdd(VisibleRect.bottom(), cc.p(0, 50)), 0.0, this);
     },
     updateTutorial:function (dt) {
         var showBuyItem = GameSetting.getInstance().getShowBuyItem() && this.getChildByTag(999);

@@ -13,14 +13,12 @@ var WeaponSpecialRay = WeaponSpecial.extend({
      The energy param determine init energy count
      The shootCost determine energy cost per shoot
      */
-    initWeapon:function (pos, energy, shootCost) {
-        if (this._super("actor_cannon_jiguang_02.png", "actor_cannon_jiguang_01.png", pos, 0.5, energy, shootCost)) {
-            this.setCannonLevel(FishWeaponType.eWeaponLevel8);
-            this.setAnchorPoint(cc.p(0.5, 0.5));
-            this._weaponSprite.setAnchorPoint(cc.p(0.5, 75.0 / 180.0));
-            return true;
-        }
-        return false;
+    ctor:function (pos, energy, shootCost) {
+        this._super("actor_cannon_jiguang_02.png", "actor_cannon_jiguang_01.png", pos, 0.5, energy, shootCost);
+        this.setCannonLevel(FishWeaponType.eWeaponLevel8);
+        this.setAnchorPoint(cc.p(0.5, 0.5));
+        this._weaponSprite.setAnchorPoint(cc.p(0.5, 75.0 / 180.0));
+
     },
     /**
      Add rainbow effect for ray weapon at special position

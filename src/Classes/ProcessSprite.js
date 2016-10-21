@@ -84,7 +84,8 @@ var ProcessSprite = cc.Sprite.extend({
     setNeedFade:function (v) {
         this.needFade = v;
     },
-    initWithDef:function (def) {
+    ctor:function (def) {
+        this._super();
         if (def == 0) {
             return false;
         }

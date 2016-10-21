@@ -93,10 +93,11 @@ var Weapon = cc.Node.extend({
      The shootAnimationDelay param determine delay time between shooting animation
      images
      */
-    initWeapon:function (spriteName, spriteShoot, pos, shootAnimationDelay) {
+    ctor:function (spriteName, spriteShoot, pos, shootAnimationDelay) {
         if (arguments.length < 4) {
             return true;
         }
+        this._super();
         this._isShootable = false;
         this._isSwitching = false;
         this._weaponPosition = pos;
