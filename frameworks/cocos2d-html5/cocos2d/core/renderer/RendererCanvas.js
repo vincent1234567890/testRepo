@@ -46,8 +46,7 @@ cc.rendererCanvas = {
     _dirtyRegionCountThreshold: 10,
 
     getRenderCmd: function (renderableObject) {
-        //TODO Add renderCmd pool here
-        return renderableObject._createRenderCmd();
+        return renderableObject._createRenderCmd(); //TODO Add renderCmd pool here
     },
 
     enableDirtyRegion: function (enabled) {
@@ -135,7 +134,7 @@ cc.rendererCanvas = {
     },
     /**
      * drawing all renderer command to context (default is cc._renderContext)
-     * @param {cc.CanvasContextWrapper} [ctx=cc._renderContext]
+     * @param {cc.CanvasContextWrapper} [ctxWrapper=cc._renderContext]
      */
     rendering: function (ctxWrapper) {
         var dirtyRegion = this._dirtyRegion = this._dirtyRegion || new cc.DirtyRegion();

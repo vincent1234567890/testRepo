@@ -439,6 +439,7 @@ var BaseSprite = (function() {
             return this._sequenceIndex;
         },
 
+        /**
         visit: function (ctx) {
             // quick return if not visible
             if (!this._isVisible) {
@@ -518,6 +519,7 @@ var BaseSprite = (function() {
 
             context.drawImage(this._texture, rect.x, rect.y, width, height, posX, -(posY + height), width, height);
         },
+        */
 
         collidesWith: function (plane) {
             if (!this._isAlive || !plane.getIsAlive()) {
@@ -823,9 +825,9 @@ var BaseSprite = (function() {
         var frameIdx = spriteData.actionData[node._actionIndex].frames[node._sequenceIndex].index;
         var tiles = spriteData.frameData[frameIdx];
 
-        for(var i = 0; i < tiles.length; i++){
+        for(var i = 0; i < tiles.tileCount; i++){
             var tile = tiles.tileData[i];
-            var rect = spriteData.tileData[tile.index];
+            var rect = spriteData.tileData[tile.tileIndex];
             this._transformForSub(rect, tile);
             wrapper.setTransform(this._tileWorldTransform, scaleX, scaleY);
             this._drawSprite(wrapper, texture, rect, tile);
