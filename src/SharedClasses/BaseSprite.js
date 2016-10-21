@@ -384,6 +384,7 @@ var BaseSprite = (function() {
                     }
                 }
             }
+            this._renderCmd.setDirtyFlag(cc.Node._dirtyFlags.transformDirty);
         },
 
         setUpdatebySelf: function (enable) {
@@ -697,7 +698,6 @@ var BaseSprite = (function() {
     BaseSprite.CanvasRenderCmd = function(renderable) {
         cc.Sprite.CanvasRenderCmd.call(this, renderable);
 
-        //add some variable
         this._tileTransform = {a: 1, b: 0, c: 0, d: 1, tx: 0, ty: 0};
         this._tileWorldTransform = {a: 1, b: 0, c: 0, d: 1, tx: 0, ty: 0};
     };
@@ -834,14 +834,27 @@ var BaseSprite = (function() {
         cc.g_NumberOfDraws++;
     };
 
-
     // Base Sprite of fishes WebGL render command
     BaseSprite.WebGLRenderCmd = function(renderable){
         cc.Sprite.WebGLRenderCmd.call(this, renderable);
+
+        this._tileTransform = {a: 1, b: 0, c: 0, d: 1, tx: 0, ty: 0};
+        this._tileWorldTransform = {a: 1, b: 0, c: 0, d: 1, tx: 0, ty: 0};
     };
 
     var webGLProto = BaseSprite.WebGLRenderCmd.prototype = Object.create(cc.Sprite.WebGLRenderCmd.prototype);
     webGLProto.constructor = BaseSprite.WebGLRenderCmd;
+
+/*    webGLProto.transform = function(parentCmd, recursive){
+        this.originTransform(parentCmd, recursive);
+
+
+
+    };
+
+    webGLProto.uploadData = function(f32Buffer, ui32Buffer, vertexDataOffset){
+
+    };*/
 
     return BaseSprite;
 })();
