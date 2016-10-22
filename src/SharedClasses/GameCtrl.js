@@ -113,6 +113,9 @@ var GameCtrl = cc.Class.extend({
                     var ioSocket = gameCtrl.getGameIOSocket();
 
                     var receiver = clientReceiver(ioSocket, gameCtrl);
+
+                    var informServer = serverInformer(ioSocket);
+                    GameCtrl.informServer = informServer;
                 }
             ).catch(console.error.bind(console));
 
@@ -182,6 +185,12 @@ var GameCtrl = cc.Class.extend({
     },
     getArena:function () {
         return this.arena;
+    },
+    setMyPlayerId:function (myPlayerId) {
+        this.myPlayerId = myPlayerId;
+    },
+    getMyPlayerId:function () {
+        return this.myPlayerId;
     },
 
     run:function () {

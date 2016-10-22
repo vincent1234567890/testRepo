@@ -122,6 +122,14 @@ var GameMainSessionController = GameSessionController.extend({
             if (GameCtrl.sharedGame().getArena()) {
                 GameCtrl.sharedGame().getArena().updateEverything();
             }
+
+            var gameScene = GameCtrl.sharedGame().getCurScene();
+            this.updateBullets(dt, gameScene.getActors(GroupHeroBullet), []);
+            this.updateBullets(dt, gameScene.getActors(GroupEnemyBullet), []);
+
+            // This shifts from the _shootPosList, i.e. fired pending bullets
+            this.updateBullets(dt);
+
             return;
         }
 
