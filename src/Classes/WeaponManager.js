@@ -26,6 +26,7 @@ var WeaponManager = cc.Class.extend({
         this._isWeaponVisible = true;
         this._isShootable = true;
         this.resetWeapon();
+        this._nextBulletId = 0;
         //this._curScene = GameCtrl.sharedGame().getCurScene();
         // console.log("WeaponManager");
         // debugger
@@ -83,6 +84,10 @@ var WeaponManager = cc.Class.extend({
     },
     setIsShootable:function (v) {
         this._isShootable = v;
+    },
+
+    getNextBulletId:function () {
+        return this._nextBulletId++;
     },
 
     getIsWeaponVisible:function () {
@@ -308,6 +313,17 @@ var WeaponManager = cc.Class.extend({
      Use current weapon shoot to target position
      */
     shootTo:function (pos, type) {
+        if (GameCtrl.isOnlineGame()) {
+            const playerGameId = GameCtrl.sharedGame().getMyPlayerId();
+            const bulletId = playerGameId + ':' + this.getNextBulletId();
+            //const angle = Math.PI - this.getWeaponRotation() * Math.PI / 180;
+            const direction = cc.v2fsub(pos, this.getDefaultWeaponPosition());
+            const angle = Math.atan(direction.x, direction.y);
+            GameCtrl.informServer.bulletFired(bulletId, angle);
+            playEffect(FIRE_EFFECT);
+            return;
+        }
+
         //if (this.getCurrentWeapon().getIsShootable()) {
         if (true) {
 

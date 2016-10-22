@@ -4,6 +4,11 @@ var GameSessionController = CCSessionController.extend({
             for (var i = 0; i < allBulletsOnScreen.length; i++) {
                 var bullet = allBulletsOnScreen[i];
                 bullet.update(dt);
+
+                if (GameCtrl.isOnlineGame()) {
+                    continue;
+                }
+
                 if (bullet.getCurWeaponLevel() == FishWeaponType.eWeaponLevel9) {
                     var pFish;
                     for (var j = 0; j < fishesOnScreen.length; j++) {

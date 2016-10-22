@@ -118,6 +118,21 @@ var GameMainSessionController = GameSessionController.extend({
         return true;
     },
     update:function (dt) {
+        if (GameCtrl.isOnlineGame()) {
+            if (GameCtrl.sharedGame().getArena()) {
+                GameCtrl.sharedGame().getArena().updateEverything();
+            }
+
+            var gameScene = GameCtrl.sharedGame().getCurScene();
+            this.updateBullets(dt, gameScene.getActors(GroupHeroBullet), []);
+            this.updateBullets(dt, gameScene.getActors(GroupEnemyBullet), []);
+
+            // This shifts from the _shootPosList, i.e. fired pending bullets
+            this.updateBullets(dt);
+
+            return;
+        }
+
         if (this._sessionRunning) {
             this.updateAllActors(dt);
             this.updateStarFish(dt);

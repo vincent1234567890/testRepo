@@ -18,7 +18,9 @@ var GameCtrl = cc.Class.extend({
     ctor:function () {
         this.setIsNewGame(true);
         this.setIsPassStage(false);
-        this.connectToMasterServer();
+        if (GameCtrl.isOnlineGame()) {
+            this.connectToMasterServer();
+        }
         return true;
     },
     connectToMasterServer:function () {
@@ -75,42 +77,49 @@ var GameCtrl = cc.Class.extend({
         var gameScene = new GameScene("Scene_Main", this._selectLevel);
         this.setCurScene(gameScene);
 
-        var gameCtrl = this;
-        var client = this.getGameWSClient();
+        if (GameCtrl.isOnlineGame()) {
 
-        Promise.resolve().then(
-            () => {
-                // Create a test player
-                var playerName = "testplayername" + Date.now() + Math.floor(Math.random() * 100000000);
-                var playerData = {
-                    name: playerName,
-                    email: playerName + '@testmail189543.com',
-                    password: 'test_password.12345',
-                };
-                return client.callAPIOnce('game', 'registerNewPlayer', playerData).then(
-                    response => response.data
-                );
-            }
-        ).then(
-            // Log in
-            (testPlayer) => client.callAPIOnce('game', 'login', {
-                id: testPlayer.id,
-                password: 'test_password.12345'
-            })
-        ).then(
-            loginResponse => {
-                console.log("loginResponse:", loginResponse);
-                return client.callAPIOnce('game', 'joinGame', {})
-            }
-        ).then(
-            joinResponse => {
-                console.log("joinResponse:", joinResponse);
+            var gameCtrl = this;
+            var client = this.getGameWSClient();
 
-                var ioSocket = gameCtrl.getGameIOSocket();
+            Promise.resolve().then(
+                () => {
+                    // Create a test player
+                    var playerName = "testplayername" + Date.now() + Math.floor(Math.random() * 100000000);
+                    var playerData = {
+                        name: playerName,
+                        email: playerName + '@testmail189543.com',
+                        password: 'test_password.12345',
+                    };
+                    return client.callAPIOnce('game', 'registerNewPlayer', playerData).then(
+                        response => response.data
+                    );
+                }
+            ).then(
+                // Log in
+                (testPlayer) => client.callAPIOnce('game', 'login', {
+                    id: testPlayer.id,
+                    password: 'test_password.12345'
+                })
+            ).then(
+                loginResponse => {
+                    console.log("loginResponse:", loginResponse);
+                    return client.callAPIOnce('game', 'joinGame', {})
+                }
+            ).then(
+                joinResponse => {
+                    console.log("joinResponse:", joinResponse);
 
-                var receiver = clientReceiver(ioSocket, gameCtrl);
-            }
-        ).catch(console.error.bind(console));
+                    var ioSocket = gameCtrl.getGameIOSocket();
+
+                    var receiver = clientReceiver(ioSocket, gameCtrl);
+
+                    var informServer = serverInformer(ioSocket);
+                    GameCtrl.informServer = informServer;
+                }
+            ).catch(console.error.bind(console));
+
+        }
 
         cc.director.runScene(this.getCurScene());
         wrapper.setIntegerForKey(UserDefaultsKeyPreviousPlayedStage, this._selectLevel);
@@ -176,6 +185,12 @@ var GameCtrl = cc.Class.extend({
     },
     getArena:function () {
         return this.arena;
+    },
+    setMyPlayerId:function (myPlayerId) {
+        this.myPlayerId = myPlayerId;
+    },
+    getMyPlayerId:function () {
+        return this.myPlayerId;
     },
 
     run:function () {
@@ -257,6 +272,18 @@ GameCtrl.sharedGame = function () {
         this._sharedGame = new GameCtrl();
     }
     return this._sharedGame;
+};
+GameCtrl.isOnlineGame = function () {
+    // This allows us to switch the game back into offline play mode.
+    //
+    // But its other purpose is simply to explain parts of the code:
+    //
+    //     if (GameCtrl.isOnlineGame()) {
+    //         // online code
+    //     } else {
+    //         // offline code
+    //     }
+    return true;
 };
 
 GameCtrl._sharedGame = null;
