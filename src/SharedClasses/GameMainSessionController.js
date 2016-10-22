@@ -118,6 +118,13 @@ var GameMainSessionController = GameSessionController.extend({
         return true;
     },
     update:function (dt) {
+        if (GameCtrl.isOnlineGame()) {
+            if (GameCtrl.sharedGame().getArena()) {
+                GameCtrl.sharedGame().getArena().updateEverything();
+            }
+            return;
+        }
+
         if (this._sessionRunning) {
             this.updateAllActors(dt);
             this.updateStarFish(dt);
