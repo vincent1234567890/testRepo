@@ -121,6 +121,8 @@ var res = {
     GrouperPng : "res/grouper.png",
     GrouperSprite : "res/grouper.sprite",
 
+
+    SharkPng : "res/shayu.png",
     GSharkPng : "res/gshayu.png",
     GSharkSprite : "res/gshayu.sprite",
 
@@ -137,6 +139,22 @@ var res = {
     StarfishPNG : "res/ghaixing.png",
     StarfishSprite : "res/ghaixing.sprite",
 
+    CannonPlist : "res/cannon.plist",
+    CannonPng : "res/cannon.png",
+
+    BulletSprite : "res/bullet.sprite",
+    SmallItemPng : "res/smallItem.png",
+
+    JindunPlist : "res/jindun.plist",
+    JindunPng : "res/jindun.png",
+
+    SuperWeaponButtonPList : "res/SuperWeaponButton.plist",
+    SuperWeaponButtonPNG : "res/SuperWeaponButton.png",
+
+    HelpUIPlist : "res/help_ui.plist",
+    HelpUIPng : "res/help_ui.png",
+
+    LaserFonts : "res/fonts_laser_num.png",
 
     // MainUITitle : "res/main_ui_title.png",
 

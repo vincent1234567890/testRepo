@@ -596,7 +596,7 @@ var GameScene = cc.Scene.extend({
         // 隐藏广告条
         AdsController.forceHideBannerAd();
 
-        cc.spriteFrameCache.removeSpriteFramesFromFile(ImageName("jindun.plist"));
+        cc.spriteFrameCache.removeSpriteFramesFromFile(res.JindunPlist);
         this._gameover = true;
 
         if (this._backgroundLayer != null) {
@@ -743,7 +743,6 @@ var GameScene = cc.Scene.extend({
         if (this._playTutorial && this._showHint) {
             return;
         }
-        debugger
 
         if (PlayerActor.sharedActor().canSendWeapon()) {
             if (!this._isPause) {
@@ -855,7 +854,7 @@ var GameScene = cc.Scene.extend({
                 return;
             }
         }
-        cc.Assert(0, "can not find actor array!");
+        cc.assert(0, "can not find actor array!");
     },
     removeAllActor:function () {
         var i;
@@ -1375,8 +1374,7 @@ var GameScene = cc.Scene.extend({
         this._addPrizeGroup = true;
     },
     initBgLayer:function () {
-        this._backgroundLayer = new GameBackgroundLayer();
-        this._backgroundLayer.initWith(this._curStage);
+        this._backgroundLayer = new GameBackgroundLayer(this._curStage);
         this.addChild(this._backgroundLayer, -1, kBackGoundLayerTag);
     },
     loadScoreLayer:function () {
@@ -1385,7 +1383,6 @@ var GameScene = cc.Scene.extend({
         this._achievementShowNum = 0;
 
         this._scoreBar = new ScoreBarLayer();
-        this._scoreBar.init();
 
         this._scoreBar.setDelegate(this);
         this.addChild(this._scoreBar, 109);
@@ -1518,20 +1515,20 @@ var GameScene = cc.Scene.extend({
 
         switch (this.getOddsNumber()) {
             case 1:
-                this._retainedResArray.push(cc.textureCache.addImage(ImageName("shayu.png")));
-                this._retainedResArray.push(cc.textureCache.addImage(ImageName("gshayu.png")));
-                this._retainedResArray.push(cc.textureCache.addImage(ImageName("butterfly.png")));
+                this._retainedResArray.push(cc.textureCache.addImage(res.SharkPng));
+                this._retainedResArray.push(cc.textureCache.addImage(res.GSharkPng));
+                this._retainedResArray.push(cc.textureCache.addImage(res.ButterflyPng));
                 break;
             case 2:
-                this._retainedResArray.push(cc.textureCache.addImage(ImageName("grouper.png")));
-                this._retainedResArray.push(cc.textureCache.addImage(ImageName("gmarlins.png")));
-                this._retainedResArray.push(cc.textureCache.addImage(ImageName("marlins.png")));
-                this._retainedResArray.push(cc.textureCache.addImage(ImageName("butterfly.png")));
+                this._retainedResArray.push(cc.textureCache.addImage(res.GrouperPng));
+                this._retainedResArray.push(cc.textureCache.addImage(res.GMarlinPng));
+                this._retainedResArray.push(cc.textureCache.addImage(res.MarlinPng));
+                this._retainedResArray.push(cc.textureCache.addImage(res.ButterflyPng));//Eugene : was originally also butterfly
                 break;
             case 3:
-                this._retainedResArray.push(cc.textureCache.addImage(ImageName("shayu.png")));
-                this._retainedResArray.push(cc.textureCache.addImage(ImageName("goldentrout.png")));
-                this._retainedResArray.push(cc.textureCache.addImage(ImageName("gshayu.png")));
+                this._retainedResArray.push(cc.textureCache.addImage(res.SharkPng));//was orignally also shark
+                this._retainedResArray.push(cc.textureCache.addImage(res.GoldenTroutPng));
+                this._retainedResArray.push(cc.textureCache.addImage(res.GSharkPng));//was orignally also gshark
                 break;
         }
 
@@ -1732,7 +1729,7 @@ var GameScene = cc.Scene.extend({
     onExit:function () {
         this._super();
         var cache = cc.spriteFrameCache;
-        cache.removeSpriteFrameByName(ImageName("cannon.plist"));
+        cache.removeSpriteFrameByName(ImageName(res.CannonPlist));
         cache.removeSpriteFrameByName(ImageName("cannon10.plist"));
         cache.removeSpriteFrameByName(ImageName("weaponLevinStorm.plist"));
         cache.removeSpriteFrameByName(ImageName("LevinStorm_xuli1.plist"));
@@ -1816,6 +1813,7 @@ var GameScene = cc.Scene.extend({
         var mainSessionController = new GameMainSessionController();
         mainSessionController.initWithDelegate(this, this);
         this.loadSessionController(mainSessionController);
+        this._mainSessionController = mainSessionController;
     },
     loadFishSeasonSessionController:function () {
         var fishSeasonSessionController = new FishSeasonSessionController();
