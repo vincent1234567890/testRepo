@@ -8,13 +8,12 @@ var GameBackgroundLayer = cc.Layer.extend({
     _bg:null,
     _spsprite:false,
     beChanged:null,
-    initWith:function (level) {
-        if (this.init()) {
-            this._bgIdx = level;
-            this.initBackground(this._bgIdx);
-            // cc.spriteFrameCache.addSpriteFrames("npc.plist");
-            this.playMusic(level);
-        }
+    ctor:function (level) {
+        this._super();
+        this._bgIdx = level;
+        this.initBackground(this._bgIdx);
+        // cc.spriteFrameCache.addSpriteFrames("npc.plist");
+        this.playMusic(level);
         return true;
     },
 
