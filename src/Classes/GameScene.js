@@ -1813,6 +1813,7 @@ var GameScene = cc.Scene.extend({
         var mainSessionController = new GameMainSessionController();
         mainSessionController.initWithDelegate(this, this);
         this.loadSessionController(mainSessionController);
+        this._mainSessionController = mainSessionController;
     },
     loadFishSeasonSessionController:function () {
         var fishSeasonSessionController = new FishSeasonSessionController();
