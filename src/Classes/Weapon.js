@@ -118,8 +118,8 @@ var Weapon = cc.Node.extend({
         var frames = [];
         frames.push(normalSprite, shootSprite);
 
-        var animation = cc.Animation.create(frames, shootAnimationDelay);
-        this.setShootAnimation(cc.Animate.create(animation));
+        var animation = new cc.Animation(frames, shootAnimationDelay);
+        this.setShootAnimation(new cc.Animate(animation));
         this.getShootAnimation().setTag(SHOOT_ANIMATIONTAG);
 
         return true;

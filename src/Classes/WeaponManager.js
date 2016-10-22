@@ -15,7 +15,7 @@ var WeaponManager = cc.Class.extend({
         // @warning 此 plist 在进游戏时预加载了。如有问题可在此重新加载
         // this._super();
         var cache = cc.spriteFrameCache;
-        cache.addSpriteFrames(ImageName("cannon.plist"));
+        cache.addSpriteFrames(res.CannonPlist);
         cache.addSpriteFrames(ImageName("cannon10.plist"));
         cache.addSpriteFrames(ImageName("weaponLevinStorm.plist"));
 
