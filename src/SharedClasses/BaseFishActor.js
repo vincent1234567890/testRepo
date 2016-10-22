@@ -679,6 +679,10 @@ var BaseFishActor = BaseActor.extend({
      * @return {Boolean}
      */
     handleCollideWithBullet:function (bullet) {
+        if (this.controlledByServer) {
+            return;
+        }
+
         if (BulletType.eRayBullet == bullet.getBulletType() ||
             BulletType.eLevinStormBullet == bullet.getBulletType()) {
             if (BulletType.eLevinStormBullet == bullet.getBulletType()) {
