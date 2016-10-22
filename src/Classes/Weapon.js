@@ -119,8 +119,11 @@ var Weapon = cc.Node.extend({
         frames.push(normalSprite, shootSprite);
 
         var animation = new cc.Animation(frames, shootAnimationDelay);
-        this.setShootAnimation(new cc.Animate(animation));
-        this.getShootAnimation().setTag(SHOOT_ANIMATIONTAG);
+
+        var animate= new cc.Animate( animation );
+        animate.setOriginalTarget(this);
+        this.setShootAnimation(animate);
+        this.getShootAnimation().setTag(SHOOT_ANIMATIONTAG); // Eugene: currently unused tag
 
         return true;
     },

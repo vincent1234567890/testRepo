@@ -24,7 +24,7 @@ var BulletActor = BaseActor.extend({
     _gunShootDistance:null,
     _maxShootDistance:null,
     ctor:function (def) {
-        var ret = this._super("bullet", "SmallItem.png");
+        var ret = this._super(res.BulletSprite, res.SmallItemPng);
 
         if (ret) {
             this._group = GroupHeroBullet;
