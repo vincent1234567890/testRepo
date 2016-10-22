@@ -249,6 +249,11 @@ var BaseFishActor = BaseActor.extend({
             return;
         }
 
+        if (this.controlledByServer) {
+            this.copyPositionFromModel();
+            return;
+        }
+
         if (this.bPulled) {
             this.passivityMoveToRoundPositon(dt);
         }
@@ -330,6 +335,11 @@ var BaseFishActor = BaseActor.extend({
         this.time1 = length / this.speed;
         this.speedScale = 0.6;
 
+        // When we create server-spawned fish without a path descriptor, the following code will not work.
+        // It is not enough to check `this.controlledByServer` because it has not yet been set (because this function is called from the constructor).
+        if (this.controlledByServer || !this.controlValues) {
+            return;
+        }
         this.controlIndex = 0;
         var controlradius = this.getControlRadius(this.controlIndex);
         if (!this.beRightDir) {
@@ -344,6 +354,17 @@ var BaseFishActor = BaseActor.extend({
         var ang = Math.atan2(Dir.x, Dir.y);
         this.circlesAngle = ang / Math.PI * 180.0;
         this.moveOut = false;
+    },
+
+    copyPositionFromModel:function () {
+        var arena = GameCtrl.sharedGame().getArena();
+        var fishModel = arena.getFish(this.FishID);
+        if (fishModel) {
+            //console.log(`Moving fish ${this.FishID} to ${fishModel.position}`);
+            this.setPositionX(fishModel.position[0]);
+            this.setPositionY(fishModel.position[1]);
+            this.setRotation(180 - fishModel.angle * 180 / Math.PI);
+        }
     },
 
     removeSelfFromScene:function () {
