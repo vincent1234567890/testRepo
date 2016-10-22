@@ -24,15 +24,12 @@ var BulletActor = BaseActor.extend({
     _gunShootDistance:null,
     _maxShootDistance:null,
     ctor:function (def) {
-        var ret = this._super("bullet", "SmallItem.png");
+        this._super(res.BulletSprite, res.SmallItemPng);
 
-        if (ret) {
-            this._group = GroupHeroBullet;
-            this._curWeaponLevel = FishWeaponType.eWeaponLevel1;
-            this.playAction(this._curWeaponLevel + 8);
-        }
+        this._group = GroupHeroBullet;
+        this._curWeaponLevel = FishWeaponType.eWeaponLevel1;
+        this.playAction(this._curWeaponLevel + 8);
 
-        return ret;
     },
     resetState:function () {
         this._super();

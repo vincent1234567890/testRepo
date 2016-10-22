@@ -1,7 +1,7 @@
 var StaticGameUI = cc.Class.extend({});
 
 StaticGameUI.dowsStaticGameUI = function (backdropSprite, scale) {
-    cc.spriteFrameCache.addSpriteFrames(ImageName("cannon.plist"));
+    cc.spriteFrameCache.addSpriteFrames(res.CannonPlist);
     // 等级，经验横幅
     // 背景图片
     var w = backdropSprite.getContentSize().width;

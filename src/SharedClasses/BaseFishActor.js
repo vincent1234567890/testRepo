@@ -2146,7 +2146,7 @@ var BaseFishActor = BaseActor.extend({
     },
     addJinDunAnimation:function (val, number, type) {
         var frameCache = cc.spriteFrameCache;
-        frameCache.addSpriteFrames(ImageName("jindun.plist"));
+        frameCache.addSpriteFrames(res.JindunPlist);
         var str = "#jindun_" + number + "_01.png";
         var coin = new cc.Sprite(str);
         this.getScene().addChild(coin);
@@ -2325,7 +2325,7 @@ var SharkActor = BaseFishActor.extend({
     ctor:function (def_) {
         this._def = def_;
         var bRet = false;
-        bRet = this._super(res.SharkSprite, res.FishPng);
+        bRet = this._super(res.SharkSprite, res.SharkPng);
         if (bRet) {
             this._fishLevel = FishLevel.eFishLevel1;
             this._fishType = FishType.bigFish;
