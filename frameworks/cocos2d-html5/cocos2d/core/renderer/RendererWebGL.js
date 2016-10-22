@@ -342,6 +342,7 @@ return {
     /**
      * drawing all renderer command to context (default is cc._renderContext)
      * @param {WebGLRenderingContext} [ctx=cc._renderContext]
+     * @param {Array} cmds
      */
     rendering: function (ctx, cmds) {
         var locCmds = cmds || this._renderCmds,

@@ -6,7 +6,7 @@
     "frameRate" : 60,
     "noCache" : false,
     "id" : "gameCanvas",
-    "renderMode" : 1,
+    "renderMode" : 0,
     "engineDir":"frameworks/cocos2d-html5",
 
     "modules" : ["cocos2d"],
@@ -87,6 +87,7 @@
         "src/Classes/WeaponSpecial.js",
         "src/Classes/WeaponSpecialLevinStorm.js",
         "src/Classes/WeaponSpecialRay.js",
+        "src/TestScene.js",
 
         "lib/common/WebSocketClient.js",
         "lib/common/WebSocketService.js",

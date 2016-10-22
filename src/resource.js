@@ -104,13 +104,16 @@ var res = {
     ChelonianSprite : "res/chelonian.sprite",
     LanternSprite : "res/lantern.sprite",
     AngelfishSprite : "res/angelfish.sprite",
-    SharkSprite : "res/shark.sprite",
+
     ProgySprite : "res/progy.sprite",
     AmphiprionSprite : "res/amphiprion.sprite",
     PufferSprite : "res/puffer.sprite",
     RaySprite : "res/ray.sprite",
     BreamSprite : "res/bream.sprite",
     SmallFishActorSprite : "res/smallfishactor.sprite",
+
+    SharkPng: "res/shayu.png",
+    SharkSprite : "res/shark.sprite",
 
     MarlinPng : "res/marlins.png",
     MarlinSprite : "res/marlins.sprite",
