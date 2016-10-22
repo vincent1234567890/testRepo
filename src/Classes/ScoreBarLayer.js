@@ -30,93 +30,92 @@ var ScoreBarLayer = cc.Layer.extend({
     _moneyTip:0,
     _powerProgressTo:0,
     _powerProgressTimer:0,
-    init:function () {
-        if (this._super()) {
-            //this.setKeyboardEnabled(true);
-            // @warning 此 plist 在进游戏时预加载了。如有问题可在此重新加载
-            var frameCache = cc.spriteFrameCache;
-            frameCache.addSpriteFrames(ImageName("SuperWeaponButton.plist"));
-            frameCache.addSpriteFrames(ImageName("help_ui.plist"));
+    ctor:function () {
+        this._super();
+        //this.setKeyboardEnabled(true);
+        // @warning 此 plist 在进游戏时预加载了。如有问题可在此重新加载
+        var frameCache = cc.spriteFrameCache;
+        frameCache.addSpriteFrames(res.SuperWeaponButtonPList);
+        frameCache.addSpriteFrames(res.HelpUIPlist);
 
-            this.setTag(kTagLayerStatusBar);
+        this.setTag(kTagLayerStatusBar);
 
-            // Get Coin button
-            var menuItemGetCoin = new cc.MenuItemSprite(
-                new cc.Sprite("#ui_button_05.png"), new cc.Sprite("#ui_button_06.png"), this.getMoreMoney, this);
+        // Get Coin button
+        var menuItemGetCoin = new cc.MenuItemSprite(
+            new cc.Sprite("#ui_button_05.png"), new cc.Sprite("#ui_button_06.png"), this.getMoreMoney, this);
 
-            menuItemGetCoin.setPosition(cc.p(/*-VisibleRect.bottomRight().x + */85, 42));
-            menuItemGetCoin.setTag(kTagMenuItemGetMoney);
-            this._ptItemTapjoy = menuItemGetCoin.getPosition();
+        menuItemGetCoin.setPosition(cc.p(/*-VisibleRect.bottomRight().x + */85, 42));
+        menuItemGetCoin.setTag(kTagMenuItemGetMoney);
+        this._ptItemTapjoy = menuItemGetCoin.getPosition();
 
-            //Redeem
-            /*var menuItemRedeem = cc.MenuItemSprite.create(
-             cc.Sprite.create(ImageNameLang("ui_btn_redeem_normal.png")),
-             cc.Sprite.create(ImageNameLang("ui_btn_redeem_select.png")),
-             this, this.showRedeemView);
-             menuItemRedeem.setScale(kUiItemScale);
-             menuItemRedeem.setPosition(cc.p(*/
-            /*-VisibleRect.bottomRight().x + */
-            /*29, 91));*/
+        //Redeem
+        /*var menuItemRedeem = cc.MenuItemSprite.create(
+         cc.Sprite.create(ImageNameLang("ui_btn_redeem_normal.png")),
+         cc.Sprite.create(ImageNameLang("ui_btn_redeem_select.png")),
+         this, this.showRedeemView);
+         menuItemRedeem.setScale(kUiItemScale);
+         menuItemRedeem.setPosition(cc.p(*/
+        /*-VisibleRect.bottomRight().x + */
+        /*29, 91));*/
 
-            this._moneyTip = new cc.Sprite("#tishiguang01.png");
-            var tipOffset = cc.pAdd(cc.p(0, this._moneyTip.getContentSize().height / 2), cc.p(-266, -18));
-            this._moneyTip.setPosition(tipOffset);
+        this._moneyTip = new cc.Sprite("#tishiguang01.png");
+        var tipOffset = cc.pAdd(cc.p(0, this._moneyTip.getContentSize().height / 2), cc.p(-266, -18));
+        this._moneyTip.setPosition(tipOffset);
 
-            this.addChild(this._moneyTip, 60);
+        this.addChild(this._moneyTip, 60);
 
 
-            //rudder
-            this._weaponBaseRudder = new cc.Sprite("#ui_box_02_rudder.png");
-            this.addChild(this._weaponBaseRudder, 61);
-            this._weaponBaseRudder.setAnchorPoint(AnchorPointBottomLeft);
-            this._weaponBaseRudder.setPosition(cc.p(-VisibleRect.right().x / 2, 0));
+        //rudder
+        this._weaponBaseRudder = new cc.Sprite("#ui_box_02_rudder.png");
+        this.addChild(this._weaponBaseRudder, 61);
+        this._weaponBaseRudder.setAnchorPoint(AnchorPointBottomLeft);
+        this._weaponBaseRudder.setPosition(cc.p(-VisibleRect.right().x / 2, 0));
 
-            // pause Menu
-            var rudderMenu = cc.Menu.create(menuItemGetCoin/*,menuItemRedeem*/);
-            rudderMenu.setPosition(cc.p(-VisibleRect.right().x / 2, 0));
-            this.addChild(rudderMenu, 91, kTagScoreBar);
+        // pause Menu
+        var rudderMenu = cc.Menu.create(menuItemGetCoin/*,menuItemRedeem*/);
+        rudderMenu.setPosition(cc.p(-VisibleRect.right().x / 2, 0));
+        this.addChild(rudderMenu, 91, kTagScoreBar);
 
-            //weapon base
-            var weaponBase = new cc.Sprite("#ui_box_02.png");
-            this.addChild(weaponBase, 20);
-            weaponBase.setPosition(cc.p(0, weaponBase.getContentSize().height / 2));
+        //weapon base
+        var weaponBase = new cc.Sprite("#ui_box_02.png");
+        this.addChild(weaponBase, 20);
+        weaponBase.setPosition(cc.p(0, weaponBase.getContentSize().height / 2));
 
-            //help
-            this.setFinger(new cc.Sprite("#finger_0001.png"));
-            this._finger.setVisible(false);
-            this.addChild(this._finger, 201);
-            this._finger.flippedX = true;
+        //help
+        this.setFinger(new cc.Sprite("#finger_0001.png"));
+        this._finger.setVisible(false);
+        this.addChild(this._finger, 201);
+        this._finger.flippedX = true;
 
-            this.setFocus(new cc.Sprite("#circle_0001.png"));
-            this._focus.setVisible(false);
-            this.addChild(this._focus, 200);
+        this.setFocus(new cc.Sprite("#circle_0001.png"));
+        this._focus.setVisible(false);
+        this.addChild(this._focus, 200);
 
-            this._initLightBlood();
-            this.superWeaponChanged();
+        this._initLightBlood();
+        this.superWeaponChanged();
 
-            // 生成按钮菜单
-            this.setBulletsLabel(NumberScrollLabel.create());
-            this._bulletsLabel.setComponentSize(new cc.Size(25, 28));
-            this._bulletsLabel.setComponentNumber(6);
-            this.addChild(this._bulletsLabel, 60);
-            this._bulletsLabel.setPosition(cc.p(-342, 10));
-            this.setBullet(PlayerActor.sharedActor().getPlayerMoney());
-            this.setDownTimeLabel(new cc.LabelAtlas("60", ImageName("ui_number_time.png"), 18, 26, '0'));
-            this.addChild(this._downTimeLabel, 21);
-            this._downTimeLabel.setPosition(cc.p(-168, 13));
+        // 生成按钮菜单
+        this.setBulletsLabel(NumberScrollLabel.create());
+        this._bulletsLabel.setComponentSize(new cc.Size(25, 28));
+        this._bulletsLabel.setComponentNumber(6);
+        this.addChild(this._bulletsLabel, 60);
+        this._bulletsLabel.setPosition(cc.p(-342, 10));
+        this.setBullet(PlayerActor.sharedActor().getPlayerMoney());
+        this.setDownTimeLabel(new cc.LabelAtlas("60", ImageName("ui_number_time.png"), 18, 26, '0'));
+        this.addChild(this._downTimeLabel, 21);
+        this._downTimeLabel.setPosition(cc.p(-168, 13));
 
-            this.initTools();
-            this.ccbLoadCompleted = true;
+        this.initTools();
+        this.ccbLoadCompleted = true;
 
-            return true;
-        }
-        return false;
+
+
     },
     onExit:function(){
         this._super();
         var frameCache = cc.spriteFrameCache;
-        frameCache.removeSpriteFrameByName(ImageName("SuperWeaponButton.plist"));
-        frameCache.removeSpriteFrameByName(ImageName("help_ui.plist"));
+        frameCache.removeSpriteFrameByName(res.SuperWeaponButtonPList);
+        frameCache.removeSpriteFrameByName(res.HelpUIPlist);
     },
     getHiScore:function () {
         return this._hiScore;
@@ -285,18 +284,18 @@ var ScoreBarLayer = cc.Layer.extend({
 
         var cache = cc.spriteFrameCache;
         // @warning 此 plist 在进游戏时预加载了。如有问题可在此重新加载
-        cache.addSpriteFrames(ImageName("jindun.plist"));
+        cache.addSpriteFrames(res.JindunPlist);
 
         var frames = [];
         var frameName;
 
         for (var i = 1; i < 3; ++i) {
-            frameName = "tishiguang0" + i + ".png";
+            frameName = "#tishiguang0" + i + ".png";
             var frame = cache.getSpriteFrame(frameName);
             frames.push(frame);
         }
 
-        var animation2 = cc.animation(frames, 0.2);
+        var animation2 = new cc.Animation(frames, 0.2);
         var ac2 = cc.animate(animation2, false);
 
         var repeat = cc.repeatForever(ac2);
@@ -445,7 +444,7 @@ var ScoreBarLayer = cc.Layer.extend({
         if (this._delegate.getIsPause()) {
             return;
         }
-        cc.Assert(0, "havn't implement yet.");
+        cc.assert(0, "havn't implement yet.");
     },
     showGamecenter:function (sender) {
         if (GameCenterManager.isGameCenterAvailable()) {
@@ -629,7 +628,7 @@ var ScoreBarLayer = cc.Layer.extend({
                 LaserNum--;
         }
 
-        var skip3 = new cc.LabelAtlas(LaserNum, ImageName("fonts_laser_num.png"), 30, 40, '0');
+        var skip3 = new cc.LabelAtlas(LaserNum, res.LaserFonts, 30, 40, '0');
         skip3.setScale(0.8);
         var num = 1;
         while (true) {
@@ -751,13 +750,13 @@ var ScoreBarLayer = cc.Layer.extend({
 
         var cache = cc.spriteFrameCache;
         // @warning 此 plist 在进游戏时预加载了。如有问题可在此重新加载
-        cache.addSpriteFrames(ImageName("jindun.plist"));
+        cache.addSpriteFrames(res.JindunPlist);
 
         var frames = [];
         var frameName;
 
         for (var i = 1; i < 3; ++i) {
-            frameName = "tishiguang0" + i + ".png";
+            frameName = "#tishiguang0" + i + ".png";
             var frame = cache.getSpriteFrame(frameName);
             frames.push(frame);
         }
