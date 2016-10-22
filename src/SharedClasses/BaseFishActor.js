@@ -1094,19 +1094,15 @@ var BaseFishActor = BaseActor.extend({
         var prizeSprite1 = new cc.Sprite("#prizesign1.png");
 
         var move = cc.p(-prizeSprite.getContentSize().width * 4, prizeSprite.getContentSize().height * 0.7);
-        var fadeOut = cc.FadeOut.create(0.5);
-        var scaleTo = cc.ScaleTo.create(0.5, 0.5);
-        var spawnL = cc.Spawn.create(fadeOut, scaleTo);
-        var delay = cc.DelayTime.create(0.5);
+        var spawnL = cc.spawn(cc.fadeOut(0.5), cc.scaleTo(0.5, 0.5));
         var call = cc.callFunc(GameScene.removeSprite, this.getScene());
-        var delayTime = cc.DelayTime.create(0.1);
-        var sequ = cc.Sequence.create(spawnL, delayTime);
+        var sequ = cc.sequence(spawnL, cc.delayTime(0.1));
 
         var addCall = cc.callFunc(this.addSprite, this);
         prizeSprite.setOpacity(0);
         labelNum.setOpacity(0);
 
-        prizeSprite.runAction(cc.sequence(delay, addCall, sequ, call));
+        prizeSprite.runAction(cc.sequence(cc.delayTime(0.5), addCall, sequ, call));
         prizeSprite.setPosition(cc.pAdd(this.getPosition(), move));
         prizeSprite.setScale(1.6);
 
@@ -2325,7 +2321,7 @@ var SharkActor = BaseFishActor.extend({
     ctor:function (def_) {
         this._def = def_;
         var bRet = false;
-        bRet = this._super(res.SharkSprite, res.FishPng);
+        bRet = this._super(res.SharkSprite, res.SharkPng);
         if (bRet) {
             this._fishLevel = FishLevel.eFishLevel1;
             this._fishType = FishType.bigFish;

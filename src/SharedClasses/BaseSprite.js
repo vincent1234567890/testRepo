@@ -439,88 +439,6 @@ var BaseSprite = (function() {
             return this._sequenceIndex;
         },
 
-        /**
-        visit: function (ctx) {
-            // quick return if not visible
-            if (!this._isVisible) {
-                return;
-            }
-
-            var context = ctx || cc._renderContext;
-
-            //if (cc.renderContextType == cc.CANVAS) {
-            context.save();
-            this.transform(context);
-
-            var frameIndex = this._sd.actionData[this._actionIndex].frames[this._sequenceIndex].index;
-            var tiles = this._sd.frameData[frameIndex];
-
-            for (var i = 0; i < tiles.tileCount; i++) {
-                var tile = tiles.tileData[i];
-                var rect = this._sd.tileData[tile.tileIndex];
-
-                context.save();
-                this.transformForSub(context, rect, tile);
-                this.draw(context, rect, tile);
-                context.restore();
-            }
-
-            this._orderOfArrival = 0;
-            context.restore();
-            //}
-            cc.g_NumberOfDraws++;
-        },
-
-        transformForSub: function (ctx, rect, tile) {
-            var context = ctx || cc._renderContext;
-            // transformations
-            var _position = tile.position;
-
-            context.translate(0 | _position.x, -(0 | _position.y));
-
-            var _rotation = tile.angle * (Math.PI / 180);
-
-            if (_rotation != 0)
-                context.rotate(_rotation);
-
-            if ((tile.scale[0] != 1) || (tile.scale[1] != 1)) {
-                context.scale(tile.scale[0], tile.scale[1]);
-            }
-        },
-
-        draw: function (ctx, rect, tile) {
-            var context = ctx || cc._renderContext;
-
-            var mpX = 0, mpY = 0;
-            var width = rect.width;
-            var height = rect.height;
-
-            this._opacity = tile.opacity;
-            context.globalAlpha = this._opacity / 255;
-
-            //var anchorPoint = cc.PointFromString(tile.anchorPt);
-            var anchorPoint = tile.anchorPt;
-
-            var _filpX = tile.flip[0];
-            if (_filpX) {
-                mpX = 0 | (width / 2 - anchorPoint.x * width);
-                context.translate(mpX, 0);
-                context.scale(-1, 1);
-            }
-            var _filpY = tile.flip[1];
-            if (_filpY) {
-                mpY = -(0 | (height / 2 - anchorPoint.y * height));
-                context.translate(0, mpY);
-                context.scale(1, -1);
-            }
-
-            var posX = 0 | ( -anchorPoint.x * width - mpX);
-            var posY = 0 | ( -anchorPoint.y * height + mpY);
-
-            context.drawImage(this._texture, rect.x, rect.y, width, height, posX, -(posY + height), width, height);
-        },
-        */
-
         collidesWith: function (plane) {
             if (!this._isAlive || !plane.getIsAlive()) {
                 return false;
@@ -688,8 +606,8 @@ var BaseSprite = (function() {
             return this.getContentSize();
         },
 
-        _createRenderCmd: function(){
-            if(cc._renderType === cc.game.RENDER_TYPE_CANVAS)
+        _createRenderCmd: function () {
+            if (cc._renderType === cc.game.RENDER_TYPE_CANVAS)
                 return new BaseSprite.CanvasRenderCmd(this);
             else
                 return new BaseSprite.WebGLRenderCmd(this);
@@ -697,7 +615,7 @@ var BaseSprite = (function() {
     });
 
     //Base Sprite Canvas render command
-    BaseSprite.CanvasRenderCmd = function(renderable) {
+    BaseSprite.CanvasRenderCmd = function (renderable) {
         cc.Sprite.CanvasRenderCmd.call(this, renderable);
 
         this._tileTransform = {a: 1, b: 0, c: 0, d: 1, tx: 0, ty: 0};
@@ -707,41 +625,35 @@ var BaseSprite = (function() {
     var canvasProto = BaseSprite.CanvasRenderCmd.prototype = Object.create(cc.Sprite.CanvasRenderCmd.prototype);
     canvasProto.constructor = BaseSprite.CanvasRenderCmd;
 
-    canvasProto._drawSprite = function(wrapper, texture, rect, tile){
+    canvasProto._drawSprite = function (wrapper, texture, rect, tile) {
         var _flipX = tile.flip[0], _flipY = tile.flip[1], context = wrapper.getContext();
 
         var width = rect.width, height = rect.height;
-        var anchorPoint = tile.anchorPt;
+        var locX = 0, locY = -height;
 
-        var mpX = 0, mpY = 0;
-        if(_flipX || _flipY)
+        if (_flipX || _flipY)
             wrapper.save();
         if (_flipX) {
-            mpX = 0 | (width / 2 - anchorPoint.x * width);
-            context.translate(mpX, 0);
+            locX = -rect.width;
             context.scale(-1, 1);
         }
         if (_flipY) {
-            mpY = -(0 | (height / 2 - anchorPoint.y * height));
-            context.translate(0, mpY);
+            locY = 0;
             context.scale(1, -1);
         }
-
-        var posX = 0 | ( -anchorPoint.x * width - mpX);
-        var posY = 0 | ( -anchorPoint.y * height + mpY);
 
         if (texture && texture._htmlElementObj) {
             var image = texture._htmlElementObj;
             context.drawImage(image,
                 rect.x, rect.y, width, height,
-                posX, -(posY + height), width, height);
+                locX, locY, width, height);
         }
 
-        if(_flipX || _flipY)
+        if (_flipX || _flipY)
             wrapper.restore();
     };
 
-    canvasProto._transformForSub = function(rect, tile){
+    canvasProto._transformForSub = function (tile,rect) {
         var pt = this._worldTransform;
         var anchorPoint = tile.anchorPt;
 
@@ -752,7 +664,7 @@ var BaseSprite = (function() {
 
         var hasRotation = rotation !== 0;
         var sx = tile.scale[0], sy = tile.scale[1];
-        var appX = anchorPoint.x, appY = anchorPoint.y;
+        var appX = anchorPoint.x * rect.width, appY = anchorPoint.y * rect.height;
 
         if (hasRotation) {
             // position
@@ -808,7 +720,7 @@ var BaseSprite = (function() {
         }
     };
 
-    canvasProto.rendering = function(ctx, scaleX, scaleY){
+    canvasProto.rendering = function (ctx, scaleX, scaleY) {
         var node = this._node;
         var alpha = (this._displayedOpacity / 255);
         var texture = this._textureToRender || node._texture;
@@ -825,10 +737,10 @@ var BaseSprite = (function() {
         var frameIdx = spriteData.actionData[node._actionIndex].frames[node._sequenceIndex].index;
         var tiles = spriteData.frameData[frameIdx];
 
-        for(var i = 0; i < tiles.tileCount; i++){
+        for (var i = 0; i < tiles.tileCount; i++) {
             var tile = tiles.tileData[i];
             var rect = spriteData.tileData[tile.tileIndex];
-            this._transformForSub(rect, tile);
+            this._transformForSub(tile, rect);
             wrapper.setTransform(this._tileWorldTransform, scaleX, scaleY);
             this._drawSprite(wrapper, texture, rect, tile);
         }
@@ -837,7 +749,7 @@ var BaseSprite = (function() {
     };
 
     // Base Sprite of fishes WebGL render command
-    BaseSprite.WebGLRenderCmd = function(renderable){
+    BaseSprite.WebGLRenderCmd = function (renderable) {
         cc.Sprite.WebGLRenderCmd.call(this, renderable);
 
         this._tileTransform = {a: 1, b: 0, c: 0, d: 1, tx: 0, ty: 0};
@@ -847,16 +759,173 @@ var BaseSprite = (function() {
     var webGLProto = BaseSprite.WebGLRenderCmd.prototype = Object.create(cc.Sprite.WebGLRenderCmd.prototype);
     webGLProto.constructor = BaseSprite.WebGLRenderCmd;
 
-/*    webGLProto.transform = function(parentCmd, recursive){
-        this.originTransform(parentCmd, recursive);
+    webGLProto.uploadData = function (f32Buffer, ui32Buffer, vertexDataOffset) {
+        var node = this._node, locTexture = node._texture;
+        if (!(locTexture && locTexture._textureLoaded && node._rect.width && node._rect.height) || !this._displayedOpacity)
+            return false;
 
+        // Fill in vertex data with quad information (4 vertices for sprite)
+        var opacity = this._displayedOpacity;
+        var r = this._displayedColor.r,
+            g = this._displayedColor.g,
+            b = this._displayedColor.b;
+        if (node._opacityModifyRGB) {
+            var a = opacity / 255;
+            r *= a;
+            g *= a;
+            b *= a;
+        }
+        this._color[0] = ((opacity<<24) | (b<<16) | (g<<8) | r);
+        var z = node._vertexZ;
 
+        var spriteData = node._sd;
+        var frameIdx = spriteData.actionData[node._actionIndex].frames[node._sequenceIndex].index;
+        var tiles = spriteData.frameData[frameIdx];
 
+        var len = 0, vertices = this._vertices, offset = vertexDataOffset, vertex;
+        for (var i = 0; i < tiles.tileCount; i++) {
+            var tile = tiles.tileData[i];
+            var rect = spriteData.tileData[tile.tileIndex];
+
+            this._setTextureCoordsForSub(tile, rect);
+            this._transformForSub(tile, rect);
+
+            var vLen = vertices.length;
+            for(var j = 0; j < vLen; j++) {
+                vertex = vertices[j];
+                f32Buffer[offset] = vertex.x;
+                f32Buffer[offset + 1] = vertex.y;
+                f32Buffer[offset + 2] = z;
+                ui32Buffer[offset + 3] = this._color[0];
+                f32Buffer[offset + 4] = vertex.u;
+                f32Buffer[offset + 5] = vertex.v;
+                offset += 6;
+            }
+            len += vLen;
+        }
+        return len;
     };
 
-    webGLProto.uploadData = function(f32Buffer, ui32Buffer, vertexDataOffset){
+    webGLProto._transformForSub = function (tile, rect) {
+        var pt = this._worldTransform;
+        var anchorPoint = tile.anchorPt;
 
-    };*/
+        var t = this._tileTransform,
+            wt = this._tileWorldTransform;         //get the world transform
 
+        var position = tile.position, rotation = tile.angle;
+
+        var hasRotation = rotation !== 0;
+        var sx = tile.scale[0], sy = tile.scale[1];
+        var appX = anchorPoint.x * rect.width, appY = anchorPoint.y * rect.height;
+
+        if (hasRotation) {
+            // position
+            t.tx = position.x;
+            t.ty = position.y;
+
+            // rotation
+            if (hasRotation) {
+                var rotationRadiansX = rotation * 0.017453292519943295;  //0.017453292519943295 = (Math.PI / 180);   for performance
+                t.c = Math.sin(rotationRadiansX);
+                t.d = Math.cos(rotationRadiansX);
+                t.a = t.d;
+                t.b = -t.c;
+            }
+
+            // scale
+            t.a *= sx;
+            t.b *= sx;
+            t.c *= sy;
+            t.d *= sy;
+
+            if (appX || appY) {
+                t.tx -= t.a * appX + t.c * appY;
+                t.ty -= t.b * appX + t.d * appY;
+            }
+
+            // cc.AffineTransformConcat is incorrect at get world transform
+            wt.a = t.a * pt.a + t.b * pt.c;                               //a
+            wt.b = t.a * pt.b + t.b * pt.d;                               //b
+            wt.c = t.c * pt.a + t.d * pt.c;                               //c
+            wt.d = t.c * pt.b + t.d * pt.d;                               //d
+            wt.tx = pt.a * t.tx + pt.c * t.ty + pt.tx;
+            wt.ty = pt.d * t.ty + pt.ty + pt.b * t.tx;
+        } else {
+            t.a = sx;
+            t.b = 0;
+            t.c = 0;
+            t.d = sy;
+            t.tx = position.x;
+            t.ty = position.y;
+
+            if (appX || appY) {
+                t.tx -= t.a * appX;
+                t.ty -= t.d * appY;
+            }
+
+            wt.a = t.a * pt.a + t.b * pt.c;
+            wt.b = t.a * pt.b + t.b * pt.d;
+            wt.c = t.c * pt.a + t.d * pt.c;
+            wt.d = t.c * pt.b + t.d * pt.d;
+            wt.tx = t.tx * pt.a + t.ty * pt.c + pt.tx;
+            wt.ty = t.tx * pt.b + t.ty * pt.d + pt.ty;
+        }
+
+        var node = this._node,
+            lx = node._offsetPosition.x, rx = lx + rect.width,
+            by = node._offsetPosition.y, ty = by + rect.height;
+
+        var vertices = this._vertices;
+        vertices[0].x = lx * wt.a + ty * wt.c + wt.tx; // tl
+        vertices[0].y = lx * wt.b + ty * wt.d + wt.ty;
+        vertices[1].x = lx * wt.a + by * wt.c + wt.tx; // bl
+        vertices[1].y = lx * wt.b + by * wt.d + wt.ty;
+        vertices[2].x = rx * wt.a + ty * wt.c + wt.tx; // tr
+        vertices[2].y = rx * wt.b + ty * wt.d + wt.ty;
+        vertices[3].x = rx * wt.a + by * wt.c + wt.tx; // br
+        vertices[3].y = rx * wt.b + by * wt.d + wt.ty;
+    };
+
+    webGLProto._setTextureCoordsForSub = function (tile, rect) {
+        //rect = cc.rectPointsToPixels(rect);  //todo need test
+        var node = this._node;
+
+        var tex = node._batchNode ? node.textureAtlas.texture : node._texture;
+        var uvs = this._vertices;
+        if (!tex)
+            return;
+
+        var atlasWidth = tex.pixelsWidth;
+        var atlasHeight = tex.pixelsHeight;
+
+        var left, right, top, bottom, tempSwap;
+        left = rect.x / atlasWidth;
+        right = (rect.x + rect.width) / atlasWidth;
+        top = rect.y / atlasHeight;
+        bottom = (rect.y + rect.height) / atlasHeight;
+
+        var _flippedX = tile.flip[0], _flippedY = tile.flip[1];
+        if (_flippedX) {
+            tempSwap = left;
+            left = right;
+            right = tempSwap;
+        }
+
+        if (_flippedY) {
+            tempSwap = top;
+            top = bottom;
+            bottom = tempSwap;
+        }
+
+        uvs[0].u = left;   // tl
+        uvs[0].v = top;    // tl
+        uvs[1].u = left;   // bl
+        uvs[1].v = bottom; // bl
+        uvs[2].u = right;  // tr
+        uvs[2].v = top;    // tr
+        uvs[3].u = right;  // br
+        uvs[3].v = bottom; // br
+    };
     return BaseSprite;
 })();
