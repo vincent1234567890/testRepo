@@ -11,6 +11,15 @@ var TouchLayer = cc.Layer.extend({
         window.addEventListener("mouseup", function () {
             MOUSE_DOWN = false;
         });
+
+    var touchListener = cc.EventListener.create({
+        event: cc.EventListener.TOUCH_ONE_BY_ONE,
+        swallowTouches: true,
+        onTouchBegan: this.onTouchesBegan.bind(this),
+        onTouchMoved: this.onTouchesMoved.bind(this),
+        onTouchEnded: this.onTouchesEnded.bind(this)
+    });
+    cc.eventManager.addListener(touchListener, this);
     },
     getDelegate:function () {
         return this._delegate;
@@ -37,7 +46,7 @@ var TouchLayer = cc.Layer.extend({
     },
     onTouchesBegan:function (touches, event) {
         if ( ! this._enable) return;
-        var touchPoint = touches[0].getLocation();
+        var touchPoint = touches.getLocation();
         var array = [];
 
         for (var i = 0; i < touches.length; i++) {

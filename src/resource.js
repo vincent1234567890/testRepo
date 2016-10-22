@@ -134,6 +134,11 @@ var res = {
     StarfishPNG : "res/ghaixing.png",
     StarfishSprite : "res/ghaixing.sprite",
 
+    CannonPlist : "res/cannon.plist",
+    CannonPng : "res/cannon.png",
+
+    BulletSprite : "res/bullet.sprite",
+    SmallItemPng : "res/smallItem.png"
 
     // MainUITitle : "res/main_ui_title.png",
 

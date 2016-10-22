@@ -743,7 +743,6 @@ var GameScene = cc.Scene.extend({
         if (this._playTutorial && this._showHint) {
             return;
         }
-        debugger
 
         if (PlayerActor.sharedActor().canSendWeapon()) {
             if (!this._isPause) {
@@ -855,7 +854,7 @@ var GameScene = cc.Scene.extend({
                 return;
             }
         }
-        cc.Assert(0, "can not find actor array!");
+        cc.assert(0, "can not find actor array!");
     },
     removeAllActor:function () {
         var i;
@@ -1732,7 +1731,7 @@ var GameScene = cc.Scene.extend({
     onExit:function () {
         this._super();
         var cache = cc.spriteFrameCache;
-        cache.removeSpriteFrameByName(ImageName("cannon.plist"));
+        cache.removeSpriteFrameByName(ImageName(res.CannonPlist));
         cache.removeSpriteFrameByName(ImageName("cannon10.plist"));
         cache.removeSpriteFrameByName(ImageName("weaponLevinStorm.plist"));
         cache.removeSpriteFrameByName(ImageName("LevinStorm_xuli1.plist"));
