@@ -200,7 +200,7 @@ var BaseFishActor = BaseActor.extend({
 
     ctor:function (defname, imgname) {
         this.fishSortLevel = ["10", "9", "8", "7", "6", "5", "4", "12", "3", "2", "1", "0", "11"];
-        this._super(defname, imgname);
+        BaseActor.prototype.ctor.call(this, defname, imgname);
 
         this.offset = {x:0, y:0};
         this.createPosition = {x:0, y:0};
@@ -231,7 +231,7 @@ var BaseFishActor = BaseActor.extend({
     },
 
     resetState:function () {
-        this._super();
+        BaseActor.prototype.resetState.call(this);
         this.curAttackState = AttackState.eAttackStateNone;
         this.stateChangeTime = 0.0;
         this.speedScale = 0.6;
