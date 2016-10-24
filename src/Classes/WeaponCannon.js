@@ -269,6 +269,9 @@ var WeaponCannonExt = WeaponCannon.extend({
         }
 
         playEffect(FIRE_EFFECT);
+
+        // So we can set bulletId
+        return bullet;
     }
 });
 

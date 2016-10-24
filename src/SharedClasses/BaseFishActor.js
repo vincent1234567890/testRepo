@@ -495,6 +495,10 @@ var BaseFishActor = BaseActor.extend({
                 var pParticle = particleSystemFactory.createParticle(ImageName("goldlizi.plist"));
                 pParticle._dontTint = true;
 
+                // @todo REMOVE THIS
+                console.warn("Creation of GoldPrizeActor temporarily disabled (because it throws an error)")
+                continue;
+
                 var goldcoin = ActorFactory.create("GoldPrizeActor");
                 goldcoin.setPoint(perPoint);
                 goldcoin.setPosition(cc.pAdd(this.getPosition(), p));

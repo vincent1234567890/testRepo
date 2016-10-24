@@ -127,7 +127,7 @@ var GameMainSessionController = GameSessionController.extend({
             this.updateBullets(dt, gameScene.getActors(GroupHeroBullet), []);
             this.updateBullets(dt, gameScene.getActors(GroupEnemyBullet), []);
 
-            // This shifts from the _shootPosList, i.e. fired pending bullets
+            // This fires pending bullets by shifting them from the _shootPosList
             this.updateBullets(dt);
 
             return;
