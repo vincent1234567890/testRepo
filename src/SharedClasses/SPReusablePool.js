@@ -257,8 +257,9 @@ var SPReusablePool = cc.Class.extend({
 //     }
 
         if (obj) {
-            obj.initWithDef(this._def);
+            // obj.initWithDef(this._def); //Eugene potential legacy breakage
             //obj.gameObjectDidLoad();
+            obj = new BaseActor();
         }
 
         return obj;

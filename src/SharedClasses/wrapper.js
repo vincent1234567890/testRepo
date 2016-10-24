@@ -115,10 +115,14 @@ var AdsController = {
     // 显示游戏中广告时，界面动画播放完成了
     actionEnd:function (type) {
         if (type == 1) {
-            cc.$("#ad").style.display = "block";
+            var ad = cc.$("#ad");
+            if (ad)
+                ad.style.display = "block";
         }
         else {
-            cc.$("#ad").style.display = "none";
+            var ad = cc.$("#ad");
+            if (ad)
+                ad.style.display = "none";
         }
     },
 
@@ -128,7 +132,9 @@ var AdsController = {
             return;
         }
 
-        cc.$("#ad").style.display = "none";
+        var ad = cc.$("#ad");
+        if (ad)
+            ad.style.display = "none";
     }
 };
 
