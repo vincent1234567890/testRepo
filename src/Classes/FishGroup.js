@@ -39,10 +39,9 @@ sino.fishGroup = (function() {
                     var tmpArray = pathDict["Offset"];
                     for (var k = 0; k < tmpArray.length; k++) {
                         var dictionaryFish = tmpArray[k];
-                        // var offset = cc.TMXMapInfo._pointFromString(dictionaryFish["offset"]);
                         var offset = cc.spriteFrameCache._pointFromString(dictionaryFish["offset"]);
 
-                        dictionaryFish["offset"] = cc.p(offset.x * ScaleFactor, offset.y * ScaleFactor);
+                        dictionaryFish["offset"] = new cc.Point(offset.x * ScaleFactor, offset.y * ScaleFactor);
                     }
                     tmpArray = pathDict["Radius"];
                     for (var l = 0; l < tmpArray.length; l++) {
@@ -61,6 +60,7 @@ sino.fishGroup = (function() {
         setFishActorMortality: function (fishActorMortality) {
             this.fishActorMortality = fishActorMortality
         },
+
         scene: null,
         getScene: function () {
             return this.scene
@@ -68,6 +68,7 @@ sino.fishGroup = (function() {
         setScene: function (scene) {
             this.scene = scene
         },
+
         initPoint: null,
         getInitPoint: function () {
             return this.initPoint
@@ -99,7 +100,7 @@ sino.fishGroup = (function() {
                 fishAcor.setRadiusOffset(fishRadiusOffset);
                 fishAcor.setOffset(offset);
 
-                fishAcor.setCreatePosition(cc.p(VisibleRect.center().x, VisibleRect.center().y));
+                fishAcor.setCreatePosition(new cc.Point(VisibleRect.center().x, VisibleRect.center().y));
                 fishAcor.setPosition(cc.pAdd(VisibleRect.center(), offset));
                 fishAcor.updatePath(Pathdict);
                 fishAcor.updateInfo();
@@ -549,3 +550,5 @@ sino.fishGroup = (function() {
         }
     };
 })();
+
+sino.fishGroup.loadResource();
