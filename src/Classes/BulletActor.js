@@ -83,15 +83,17 @@ var BulletActor = BaseActor.extend({
             return;
         }
 
-        this._gunShootDistance += this._speed * dt;
-        if (this._gunShootDistance > this._maxShootDistance) {
-            this.addFishNet();
-        }
+        if (!GameCtrl.isOnlineGame()) {
+            this._gunShootDistance += this._speed * dt;
+            if (this._gunShootDistance > this._maxShootDistance) {
+                this.addFishNet();
+            }
 
-        if (this._gunShootDistance > this._maxShootDistance || !cc.rectContainsPoint(EScreenRect, this.getPosition())) {
-            this._isAlive = false;
-            this.removeSelfFromScene();
-            return;
+            if (this._gunShootDistance > this._maxShootDistance || !cc.rectContainsPoint(EScreenRect, this.getPosition())) {
+                this._isAlive = false;
+                this.removeSelfFromScene();
+                return;
+            }
         }
 
         var nextStep = cc.pAdd(this.getPosition(), cc.p(this._speed * dt * this._moveDirection.x, this._speed * dt * this._moveDirection.y));
