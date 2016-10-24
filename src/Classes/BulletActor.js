@@ -56,9 +56,29 @@ var BulletActor = BaseActor.extend({
 
         if (GameCtrl.isOnlineGame()) {
             const arena = GameCtrl.sharedGame().getArena();
-            const bulletModel = arena.getBullet(this.bulletId);
-            console.log("bulletModel:", bulletModel);
-            this.setPosition(cc.Point(bulletModel.position[0], bulletModel.position[1]));
+            if (!arena) {
+                console.warn("Arena does not exist yet!");
+                // Sadly the arena does not exist for a few moments after the scene has started, because we are waiting for the server to send initial data.
+                // In the final version, there should be no bullets at that time, but it may be a problem elsewhere in the code, if the user takes actions before the arena has been created.
+                // Ideally we will not switch scene until the arena has been created.
+            }
+
+            const bulletModel = arena && arena.getBullet(this.bulletId);
+            if (!bulletModel) {
+                // Only happens if we fire bullets without going through the server/arena
+                console.warn("No bullet found in arena with id:", this.bulletId);
+            }
+
+            if (bulletModel && !bulletModel.position) {
+                console.warn("bulletModel does not have a position!", bulletModel);
+            }
+
+            //console.log("bulletModel:", bulletModel);
+            if (bulletModel && bulletModel.position) {
+                //console.log("bulletModel.position:", bulletModel.position);
+                //this.setPosition(new cc.Point(bulletModel.position[0], bulletModel.position[1]));
+                this.setPosition(bulletModel.position[0], bulletModel.position[1]);
+            }
         }
 
         this._gunShootDistance += this._speed * dt;
