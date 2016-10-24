@@ -78,7 +78,9 @@ var BulletActor = BaseActor.extend({
                 //console.log("bulletModel.position:", bulletModel.position);
                 //this.setPosition(new cc.Point(bulletModel.position[0], bulletModel.position[1]));
                 this.setPosition(bulletModel.position[0], bulletModel.position[1]);
+                this.setRotation(bulletModel.angle / Math.PI * 180);
             }
+            return;
         }
 
         this._gunShootDistance += this._speed * dt;
