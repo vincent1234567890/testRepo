@@ -161,7 +161,7 @@ var BaseSprite = (function() {
         }
     });
 
-    NSDataStream.streamWithContentsOfMappedFile = function (filePath) {
+    NSDataStream.getSpriteData = function (filePath) {
         var pRet = new NSDataStream();
         if (pRet && pRet.initWithContentsOfMappedFile(filePath)) {
             return pRet
@@ -169,21 +169,13 @@ var BaseSprite = (function() {
         return null;
     };
 
-    var _SPData_cache = null;
-
-    function purgeSpriteDataCache() {
-        _SPData_cache = null;
-    }
+    var _SPData_cache = {};
 
     var integerToColor3B = function (intValue) {
         intValue = intValue || 0;
 
         var offset = 0xff;
-        var retColor = new cc.color();
-        retColor.r = intValue & (offset);
-        retColor.g = (intValue >> 8) & offset;
-        retColor.b = (intValue >> 16) & offset;
-        return retColor;
+        return new cc.Color(intValue & (offset), (intValue >> 8) & offset, (intValue >> 16) & offset);
     };
 
     var SpriteData = cc.Class.extend({
@@ -201,7 +193,7 @@ var BaseSprite = (function() {
 
             //var fullPath = filePath;
             //fullPath = ImageName(fullPath);
-            var data = NSDataStream.streamWithContentsOfMappedFile(filePath);
+            var data = NSDataStream.getSpriteData(filePath);
 
             var header = data.readInteger();
             if (header != ANI_HEADER)
@@ -264,7 +256,7 @@ var BaseSprite = (function() {
                     if ((col.rectCount = data.readInteger()) > 0) {
                         col.rectData = [];
                         for (j = 0; j < col.rectCount; j++) {
-                            col.rectData[j] = new cc.Rect();
+                            col.rectData[j] = new cc.Rect(0, 0, 0, 0);
                             col.rectData[j].x = (data.readShort()) / _getSpriteScale();
                             col.rectData[j].y = (data.readShort()) / _getSpriteScale();
                             col.rectData[j].width = (data.readShort()) / _getSpriteScale();
@@ -276,7 +268,7 @@ var BaseSprite = (function() {
                             col.polygonData[j] = new SPPolygon();
                             if ((col.polygonData[j].count = data.readInteger()) > 0) {
                                 for (k = 0; k < col.polygonData[j].count; k++) {
-                                    col.polygonData[j].vertex[k] = new cc.Point();
+                                    col.polygonData[j].vertex[k] = new cc.Point(0, 0);
                                     col.polygonData[j].vertex[k].x = (data.readShort()) / _getSpriteScale();
                                     col.polygonData[j].vertex[k].y = (data.readShort()) / _getSpriteScale();
                                 }
@@ -317,9 +309,6 @@ var BaseSprite = (function() {
     });
 
     SpriteData.fromCache = function (filePath) {
-        if (!_SPData_cache)
-            _SPData_cache = {};
-
         if (!_SPData_cache.hasOwnProperty(filePath)) {
             var sd = new SpriteData();
             sd.initWithFile(filePath);
