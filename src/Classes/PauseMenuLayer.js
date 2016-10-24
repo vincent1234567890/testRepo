@@ -32,17 +32,19 @@ var PauseMenuLayer = cc.Layer.extend({
     _musicOffItem:null,
     _isSubLayer:null,
     _delegate:null,
-    ctor:function () {
-        this._delegate = null;
+    ctor:function (delegate) {
+        this._super();
         this._isSubLayer = false;
+        this._delegate = delegate;
+        this.ShowMenu();
     },
-    init:function () {
-        if (this._super()) {
-            this.setKeyboardEnabled(true);
-        }
-
-        return true;
-    },
+    // init:function () {
+    //     if (this._super()) {
+    //         this.setKeyboardEnabled(true);
+    //     }
+    //
+    //     return true;
+    // },
     didLoadFromCCB:function () {
         this.init();
         this.addPunchBox();
@@ -250,15 +252,7 @@ var PauseMenuLayer = cc.Layer.extend({
 
     },
     initWithDelegate:function (delegate) {
-        if (this.init()) {
-            this.setKeyboardEnabled(true);
 
-            this._delegate = delegate;
-            this.ShowMenu();
-        }
-
-        this._isSubLayer = false;
-        return this;
     },
     ShowMenu:function (sender) {
         var cache = cc.spriteFrameCache;
@@ -297,7 +291,7 @@ var PauseMenuLayer = cc.Layer.extend({
         menu = new cc.Menu(button_Option, button_continue, button_giveup, button_Other);
 
         menu.setPosition(cc.p(0, VisibleRect.top().y / 2));
-        menu.setAnchorPoint(cc.PointZero());
+        menu.setAnchorPoint(cc.p());
         this.addChild(menu, 10, kTagMenuPause);
         menu.setTag(kTagMenuPause);
 
@@ -318,7 +312,6 @@ var PauseMenuLayer = cc.Layer.extend({
 });
 
 PauseMenuLayer.create = function (delegate) {
-    var layer = new PauseMenuLayer();
-    layer.initWithDelegate(delegate);
+    var layer = new PauseMenuLayer(delegate);
     return layer;
 };

@@ -137,14 +137,14 @@ var GameCtrl = cc.Class.extend({
     home:function () {
         this.gameState = GAMEHOME;
         var mainMenuScene = MainMenuScene.create();
-        mainMenuScene.initWithDef("");
+        // mainMenuScene.initWithDef("");
         this.setCurScene(mainMenuScene);
         this.runGame();
     },
     option:function () {
         this.gameState = GAMEHOME;
         var mainMenuScene = MainMenuScene.create();
-        mainMenuScene.initWithDef("");
+        // mainMenuScene.initWithDef("");
         this.setCurScene(mainMenuScene);
         this.getCurScene().showSelectStage();
         this.runGame();
@@ -153,7 +153,7 @@ var GameCtrl = cc.Class.extend({
         this.gameState = GAMEHOME;
 
         var mainMenuScene = new MainMenuScene();
-        mainMenuScene.initWithDef("");
+        // mainMenuScene.initWithDef("");
         this.setCurScene(mainMenuScene);
         this.getCurScene().showSelectStage();
 

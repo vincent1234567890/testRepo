@@ -28,27 +28,33 @@ var AutoAdapterScreen = cc.Class.extend({
     getWinSize:function () {
         var width = document.documentElement.clientWidth;
         var height = document.documentElement.clientHeight;
+        console.log(document.documentElement.clientWidth);
+        console.log( document.documentElement.clientHeight);
 
-        if (width > this._maxWidth) {
-            this._width = this._maxWidth;
-        }
-        else if (width < this._minWidth) {
-            this._width = this._minWidth;
-        }
-        else {
-            this._width = width;
-        }
+        // if (width > this._maxWidth) {
+        //     this._width = this._maxWidth;
+        // }
+        // else if (width < this._minWidth) {
+        //     this._width = this._minWidth;
+        // }
+        // else {
+        //     this._width = width;
+        // }
+        //
+        // if (height > this._maxHeight) {
+        //     this._height = this._maxHeight;
+        // }
+        // else if (height < this._minHeight) {
+        //     this._height = this._minHeight;
+        // }
+        // else {
+        //     this._height = height;
+        // }
 
-        if (height > this._maxHeight) {
-            this._height = this._maxHeight;
-        }
-        else if (height < this._minHeight) {
-            this._height = this._minHeight;
-        }
-        else {
-            this._height = height;
-        }
+        this._width = width;
+        this._height = height;
 
+        console.trace();
         return new cc.Size(this._width, this._height);
     },
     adjustSize:function () {

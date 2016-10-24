@@ -1423,7 +1423,9 @@ var GameScene = cc.Scene.extend({
 
     },
     initUI:function (dsPos) {
-        AutoAdapterScreen.getInstance().adjustSize();
+        // AutoAdapterScreen.getInstance().adjustSize();
+        // AutoAdapterScreen.getInstance().setVisibleRect();
+        EScreenRect = cc.rect(1.0, 1.0, document.documentElement.clientWidth + 10, document.documentElement.clientHeight + 10);
         this._timeScale = 1;
         this._playTutorial = !wrapper.getBooleanForKey(kTutorialPlayed);
 
@@ -1875,7 +1877,7 @@ var GameScene = cc.Scene.extend({
     },
     actionAfterAdHide:function () {
         if (this._camera) {
-            var camraMove = new cc.MoveTo(1, cc.PointZero());
+            var camraMove = new cc.MoveTo(1, cc.p());
             this._camera.runAction(camraMove);
         }
 
