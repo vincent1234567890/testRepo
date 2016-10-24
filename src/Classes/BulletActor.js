@@ -53,6 +53,14 @@ var BulletActor = BaseActor.extend({
         if (!this.getIsAlive()) {
             return;
         }
+
+        if (GameCtrl.isOnlineGame()) {
+            const arena = GameCtrl.sharedGame().getArena();
+            const bulletModel = arena.getBullet(this.bulletId);
+            console.log("bulletModel:", bulletModel);
+            this.setPosition(cc.Point(bulletModel.position[0], bulletModel.position[1]));
+        }
+
         this._gunShootDistance += this._speed * dt;
         if (this._gunShootDistance > this._maxShootDistance) {
             this.addFishNet();
