@@ -78,18 +78,22 @@ var BulletActor = BaseActor.extend({
                 //console.log("bulletModel.position:", bulletModel.position);
                 //this.setPosition(new cc.Point(bulletModel.position[0], bulletModel.position[1]));
                 this.setPosition(bulletModel.position[0], bulletModel.position[1]);
+                this.setRotation(bulletModel.angle / Math.PI * 180);
             }
-        }
-
-        this._gunShootDistance += this._speed * dt;
-        if (this._gunShootDistance > this._maxShootDistance) {
-            this.addFishNet();
-        }
-
-        if (this._gunShootDistance > this._maxShootDistance || !cc.rectContainsPoint(EScreenRect, this.getPosition())) {
-            this._isAlive = false;
-            this.removeSelfFromScene();
             return;
+        }
+
+        if (!GameCtrl.isOnlineGame()) {
+            this._gunShootDistance += this._speed * dt;
+            if (this._gunShootDistance > this._maxShootDistance) {
+                this.addFishNet();
+            }
+
+            if (this._gunShootDistance > this._maxShootDistance || !cc.rectContainsPoint(EScreenRect, this.getPosition())) {
+                this._isAlive = false;
+                this.removeSelfFromScene();
+                return;
+            }
         }
 
         var nextStep = cc.pAdd(this.getPosition(), cc.p(this._speed * dt * this._moveDirection.x, this._speed * dt * this._moveDirection.y));
@@ -125,7 +129,9 @@ var BulletActor = BaseActor.extend({
     },
     finalEvent:function () {
     },
-    addFishNet:function () {
+    addFishNet:function (explodePosition) {
+        explodePosition = explodePosition || this.getPosition();
+
         playEffect(NET_EFFECT);
 
         var cNetName = "FishNetActor" + this._curWeaponLevel;
@@ -153,7 +159,7 @@ var BulletActor = BaseActor.extend({
         }
 
         net.setParticle(tempPar);
-        tempPar.setPosition(this.getPosition());
+        tempPar.setPosition(explodePosition);
 
         //tempPar._dontTint = true;
         GameCtrl.sharedGame().getCurScene().addChild(tempPar, BulletActorZValue + 1);
@@ -161,7 +167,7 @@ var BulletActor = BaseActor.extend({
         net.setGroup(GroupFishNetActor);
         net.resetState();
         net.updateInfo();
-        net.setPosition(this.getPosition());
+        net.setPosition(explodePosition);
         net.setZOrder(BulletActorZValue);
         net.playCatchAction();
         net.setActorType(this._actorType);
