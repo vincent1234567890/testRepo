@@ -129,7 +129,9 @@ var BulletActor = BaseActor.extend({
     },
     finalEvent:function () {
     },
-    addFishNet:function () {
+    addFishNet:function (explodePosition) {
+        explodePosition = explodePosition || this.getPosition();
+
         playEffect(NET_EFFECT);
 
         var cNetName = "FishNetActor" + this._curWeaponLevel;
@@ -157,7 +159,7 @@ var BulletActor = BaseActor.extend({
         }
 
         net.setParticle(tempPar);
-        tempPar.setPosition(this.getPosition());
+        tempPar.setPosition(explodePosition);
 
         //tempPar._dontTint = true;
         GameCtrl.sharedGame().getCurScene().addChild(tempPar, BulletActorZValue + 1);
@@ -165,7 +167,7 @@ var BulletActor = BaseActor.extend({
         net.setGroup(GroupFishNetActor);
         net.resetState();
         net.updateInfo();
-        net.setPosition(this.getPosition());
+        net.setPosition(explodePosition);
         net.setZOrder(BulletActorZValue);
         net.playCatchAction();
         net.setActorType(this._actorType);
