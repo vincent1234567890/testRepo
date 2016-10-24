@@ -64,8 +64,8 @@ var GameMainSessionController = GameSessionController.extend({
     },
     addFishAtPosition:function (startPos) {
         var tempGameScene = this._currentScene;
-        FishGroup.shareFishGroup().setInitPoint(startPos);
-        FishGroup.shareFishGroup().createFishGroup(tempGameScene.getCurStage());
+        sino.fishGroup.setInitPoint(startPos);
+        sino.fishGroup.createFishGroup(tempGameScene.getCurStage());
     },
     nextWave:function () {
         alert('next wave');

@@ -267,13 +267,13 @@ var TutorialSessionController = CCSessionController.extend({
         }
     },
     addCircleFishGroupForPlayTurorial:function (index) {
-        FishGroup.shareFishGroup().setInitPoint(cc.p(VisibleRect.center().x, VisibleRect.center().y));
-        FishGroup.shareFishGroup().createCircleTutorialFishGroup(index);
+        sino.fishGroup.setInitPoint(cc.p(VisibleRect.center().x, VisibleRect.center().y));
+        sino.fishGroup.createCircleTutorialFishGroup(index);
     },
     addFishGroupForPlayTutorial:function (fishIdx) {
         var startPos = cc.p(VisibleRect.right().x, VisibleRect.right().y);
-        FishGroup.shareFishGroup().setInitPoint(startPos);
-        FishGroup.shareFishGroup().createTutorialFishGroup(fishIdx);
+        sino.fishGroup.setInitPoint(startPos);
+        sino.fishGroup.createTutorialFishGroup(fishIdx);
     },
     controlNewPosition:function (control, pos) {
         if (this.currentTutorialStep == TutorialStep.TutorialStep24) {
