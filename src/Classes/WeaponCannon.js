@@ -196,13 +196,23 @@ var WeaponCannonExt = WeaponCannon.extend({
 
         return bRet;
     },
-    shootTo:function (targetPosition, type) {
-        this.setDirection(targetPosition);
-        var distance = cc.pDistance(new cc.Point(0, 0), cc.p(50, 33));
-        this.getWeaponSprite().stopAction(this.getShootAnimation());
-        this.getWeaponSprite().setScale(1.0);
+    shootTo:function (targetPosition, type, showCannonAnimation) {
+        // Defaults:
+        if (showCannonAnimation === undefined) {
+            showCannonAnimation = true;
+        }
 
-        this.getWeaponSprite().runAction(this.getShootAnimation());
+        //var particleDistance = cc.pDistance(new cc.Point(0, 0), cc.p(50, 33));
+        var particleDistance = 60;
+
+        if (showCannonAnimation) {
+            this.setDirection(targetPosition);
+
+            this.getWeaponSprite().stopAction(this.getShootAnimation());
+            this.getWeaponSprite().setScale(1.0);
+
+            this.getWeaponSprite().runAction(this.getShootAnimation());
+        }
 
         var bullet;
         if (this.getCannonLevel() == 10) {
@@ -227,7 +237,7 @@ var WeaponCannonExt = WeaponCannon.extend({
         var direction = cc.pNormalize(cc.pSub(targetPosition, bulletPos));
         bullet.setMoveDirection(direction);
         bullet.setPosition(bulletPos);
-        particle.setPosition(cc.pAdd(this.getPosition(), cc.pMult(direction, distance)));
+        particle.setPosition(cc.pAdd(this.getPosition(), cc.pMult(direction, particleDistance)));
 
         bullet.setTargetPosition(targetPosition);
         var speedSetArray = GameSetting.getInstance().getBulletSpeedArray();

@@ -60,69 +60,62 @@ var GameCtrl = cc.Class.extend({
         cc.director.runScene(this.getCurScene());
     },
     newGame:function (level) {
-        if (level !== null) {
-            this._selectLevel = level;
-            //this.m_bIsLoadingFight = false;
-            this.startNewGame();
+        if (!level) {
+            level = 1;
         }
-        else {
-            this.gameState = GAMEPLAY;
-            var newScene = new GameScene("Scene_Main", 1);
-            this.setCurScene(newScene);
-            wrapper.setIntegerForKey(UserDefaultsKeyPreviousPlayedStage, 1);
-        }
-    },
-    startNewGame:function () {
-        this.gameState = GAMEPLAY;
-        var gameScene = new GameScene("Scene_Main", this._selectLevel);
-        this.setCurScene(gameScene);
+        //this.m_bIsLoadingFight = false;
+        this._selectLevel = level;
 
         if (GameCtrl.isOnlineGame()) {
-
-            var gameCtrl = this;
-            var client = this.getGameWSClient();
-
-            Promise.resolve().then(
-                () => {
-                    // Create a test player
-                    var playerName = "testplayername" + Date.now() + Math.floor(Math.random() * 100000000);
-                    var playerData = {
-                        name: playerName,
-                        email: playerName + '@testmail189543.com',
-                        password: 'test_password.12345',
-                    };
-                    return client.callAPIOnce('game', 'registerNewPlayer', playerData).then(
-                        response => response.data
-                    );
-                }
-            ).then(
-                // Log in
-                (testPlayer) => client.callAPIOnce('game', 'login', {
-                    id: testPlayer.id,
-                    password: 'test_password.12345'
-                })
-            ).then(
-                loginResponse => {
-                    console.log("loginResponse:", loginResponse);
-                    return client.callAPIOnce('game', 'joinGame', {})
-                }
-            ).then(
-                joinResponse => {
-                    console.log("joinResponse:", joinResponse);
-
-                    var ioSocket = gameCtrl.getGameIOSocket();
-
-                    var receiver = clientReceiver(ioSocket, gameCtrl);
-
-                    var informServer = serverInformer(ioSocket);
-                    GameCtrl.informServer = informServer;
-                }
-            ).catch(console.error.bind(console));
-
+            this.joinOnlineGame();
+        } else {
+            this.startGameScene();
         }
+    },
+    joinOnlineGame:function () {
+        var gameCtrl = this;
+        var client = this.getGameWSClient();
 
-        cc.director.runScene(this.getCurScene());
-        wrapper.setIntegerForKey(UserDefaultsKeyPreviousPlayedStage, this._selectLevel);
+        Promise.resolve().then(
+            () => {
+                // Create a test player
+                var playerName = "testplayername" + Date.now() + Math.floor(Math.random() * 100000000);
+                var playerData = {
+                    name: playerName,
+                    email: playerName + '@testmail189543.com',
+                    password: 'test_password.12345',
+                };
+                return client.callAPIOnce('game', 'registerNewPlayer', playerData).then(
+                    response => response.data
+                );
+            }
+        ).then(
+            // Log in
+            (testPlayer) => client.callAPIOnce('game', 'login', {
+                id: testPlayer.id,
+                password: 'test_password.12345'
+            })
+        ).then(
+            loginResponse => {
+                console.log("loginResponse:", loginResponse);
+                return client.callAPIOnce('game', 'joinGame', {})
+            }
+        ).then(
+            joinResponse => {
+                console.log("joinResponse:", joinResponse);
+
+                var ioSocket = gameCtrl.getGameIOSocket();
+
+                socketUtils.simulateNetworkLatency(ioSocket, 200);
+
+                var receiver = clientReceiver(ioSocket, gameCtrl);
+
+                var informServer = serverInformer(ioSocket);
+                GameCtrl.informServer = informServer;
+
+                // gameCtrl.startGameScene() will be run by populateNewGame, when everything is ready.
+            }
+        ).catch(console.error.bind(console));
     },
     populateNewGame: function (players, fishes, bullets, serverGameTime) {
         const gameConfig = this.getGameConfig();
@@ -131,20 +124,30 @@ var GameCtrl = cc.Class.extend({
 
         this.setArena(arena);
 
+        this.startGameScene();
+
         // @todo To get up-to-date, create the cannons for the other players,
         // @todo add all the fishes (and maybe even add some in-transit bullets)
+    },
+    startGameScene: function () {
+        this.gameState = GAMEPLAY;
+        var gameScene = new GameScene("Scene_Main", this._selectLevel);
+        this.setCurScene(gameScene);
+
+        cc.director.runScene(this.getCurScene());
+        wrapper.setIntegerForKey(UserDefaultsKeyPreviousPlayedStage, this._selectLevel);
     },
     home:function () {
         this.gameState = GAMEHOME;
         var mainMenuScene = MainMenuScene.create();
-        mainMenuScene.initWithDef("");
+        // mainMenuScene.initWithDef("");
         this.setCurScene(mainMenuScene);
         this.runGame();
     },
     option:function () {
         this.gameState = GAMEHOME;
         var mainMenuScene = MainMenuScene.create();
-        mainMenuScene.initWithDef("");
+        // mainMenuScene.initWithDef("");
         this.setCurScene(mainMenuScene);
         this.getCurScene().showSelectStage();
         this.runGame();
@@ -153,7 +156,7 @@ var GameCtrl = cc.Class.extend({
         this.gameState = GAMEHOME;
 
         var mainMenuScene = new MainMenuScene();
-        mainMenuScene.initWithDef("");
+        // mainMenuScene.initWithDef("");
         this.setCurScene(mainMenuScene);
         this.getCurScene().showSelectStage();
 

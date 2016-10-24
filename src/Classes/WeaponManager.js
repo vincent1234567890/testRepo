@@ -314,10 +314,10 @@ var WeaponManager = cc.Class.extend({
      */
     shootTo:function (pos, type) {
         if (GameCtrl.isOnlineGame()) {
-            console.log("pos:", pos);
+            //console.log("pos:", pos);
             const playerGameId = GameCtrl.sharedGame().getMyPlayerId();
             const bulletId = playerGameId + ':' + this.getNextBulletId();
-            console.log("this.getWeaponRotation():", this.getWeaponRotation());
+            //console.log("this.getWeaponRotation():", this.getWeaponRotation());
             const weapon = this.getCurrentWeapon();
             weapon.setDirection(pos);
             const clockAngle = weapon.getWeaponSprite().getRotation();
@@ -326,12 +326,12 @@ var WeaponManager = cc.Class.extend({
             //weapon.setDirection(direction);
             //const direction = cc.v2fsub(pos, this.getDefaultWeaponPosition());
             //const angle = Math.atan(direction.x, direction.y);
-            console.log("Weapon angle:", clockAngle);
+            //console.log("Weapon angle:", clockAngle);
             GameCtrl.informServer.bulletFired(bulletId, angle);
 
-            //weapon.getWeaponSprite().stopAction(weapon.getShootAnimation());
-            //weapon.getWeaponSprite().setScale(1.0);
-            //weapon.getWeaponSprite().runAction(weapon.getShootAnimation());
+            weapon.getWeaponSprite().stopAction(weapon.getShootAnimation());
+            weapon.getWeaponSprite().setScale(1.0);
+            weapon.getWeaponSprite().runAction(weapon.getShootAnimation());
 
             //playEffect(FIRE_EFFECT);
             //var clock = (new Date()).getTime();
