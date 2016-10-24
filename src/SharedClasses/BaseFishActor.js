@@ -59,9 +59,10 @@ var BaseFishActor = BaseActor.extend({
     },
     setGoldPos:function (GoldPos) {
         this.GoldPos.x = GoldPos.x;
-        this.GoldPos.y = Goldpos.y;
+        this.GoldPos.y = GoldPos.y;
     },
 
+    //当前碰撞索引
     curCollideIndex:0,
     getCurCollideIndex:function () {
         return this.curCollideIndex
@@ -78,6 +79,7 @@ var BaseFishActor = BaseActor.extend({
         this.beRightDir = beRightDir
     },
 
+    //鱼类型
     _fishType:FISH.smallFish,
     getFishType:function () {
         return this._fishType
