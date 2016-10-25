@@ -139,23 +139,23 @@ var BulletActor = BaseActor.extend({
 
         var tempPar;
         if (this._curWeaponLevel == FishWeaponType.eWeaponLevel5) {
-            tempPar = particleSystemFactory.createParticle(ImageName("lizibianhua1.plist"));
+            tempPar = particleSystemFactory.createParticle(res.lizibianhua1Plist);
             tempPar.setDrawMode(cc.ParticleSystem.SHAPE_MODE);
             tempPar.setShapeType(cc.ParticleSystem.STAR_SHAPE);
         } else if (this._curWeaponLevel == FishWeaponType.eWeaponLevel6) {
-            tempPar = particleSystemFactory.createParticle(ImageName("lizibianhua2.plist"));
+            tempPar = particleSystemFactory.createParticle(res.lizibianhua2Plist);
             tempPar.setDrawMode(cc.ParticleSystem.SHAPE_MODE);
             tempPar.setShapeType(cc.ParticleSystem.STAR_SHAPE);
         } else if (this._curWeaponLevel == FishWeaponType.eWeaponLevel7) {
-            tempPar = particleSystemFactory.createParticle(ImageName("lizibianhua3.plist"));
+            tempPar = particleSystemFactory.createParticle(res.lizibianhua3Plist);
             tempPar.setDrawMode(cc.ParticleSystem.SHAPE_MODE);
             tempPar.setShapeType(cc.ParticleSystem.STAR_SHAPE);
         } else if (this._curWeaponLevel == FishWeaponType.eWeaponLevel10) {
-            tempPar = particleSystemFactory.createParticle(ImageName("lizibianhua3.plist"));
+            tempPar = particleSystemFactory.createParticle(res.lizibianhua3Plist);
             tempPar.setDrawMode(cc.ParticleSystem.SHAPE_MODE);
             tempPar.setShapeType(cc.ParticleSystem.STAR_SHAPE);
         } else {
-            tempPar = particleSystemFactory.createParticle(ImageName("yuwanglizi.plist"));
+            tempPar = particleSystemFactory.createParticle(res.yuwangliziPlist);
         }
 
         net.setParticle(tempPar);

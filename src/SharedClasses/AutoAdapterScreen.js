@@ -54,7 +54,7 @@ var AutoAdapterScreen = cc.Class.extend({
         this._width = width;
         this._height = height;
 
-        console.trace();
+        // console.trace();
         return new cc.Size(this._width, this._height);
     },
     adjustSize:function () {

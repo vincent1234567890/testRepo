@@ -48,7 +48,6 @@
         "src/Classes/BulletActor.js",
         "src/Classes/ChestGameLayer.js",
         "src/Classes/CompactUserInfo.js",
-        "src/Classes/dg.js",
         "src/Classes/FishCatalog.js",
         "src/Classes/FishGroup.js",
         "src/Classes/FishNetActor.js",
