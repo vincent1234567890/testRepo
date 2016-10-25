@@ -6,10 +6,11 @@ var PARAM_Y = screenHeight / 752.0;
 var GameBackgroundLayer = cc.Layer.extend({
     _bgIdx:0,
     _bg:null,
-    _spsprite:false,
+    _spSprite:false,
     beChanged:null,
+
     ctor:function (level) {
-        this._super();
+        cc.Layer.prototype.ctor.call(this);
         this._bgIdx = level;
         this.initBackground(this._bgIdx);
         // cc.spriteFrameCache.addSpriteFrames("npc.plist");
@@ -85,10 +86,10 @@ var GameBackgroundLayer = cc.Layer.extend({
         this._bgIdx = v;
     },
     getSpsprite:function () {
-        return this._spsprite;
+        return this._spSprite;
     },
     setSpsprite:function (v) {
-        this._spsprite = v;
+        this._spSprite = v;
     },
     addSpriteX:function (file, imageFile, p, r, sc) {
         var sprite = new SPSprite();
