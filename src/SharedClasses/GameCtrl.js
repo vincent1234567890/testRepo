@@ -123,6 +123,9 @@ var GameCtrl = cc.Class.extend({
         this.setCurScene(gameScene);
 
         cc.director.runScene(this.getCurScene());
+        sino.fishGroup.loadResource(this.getCurScene());
+        sino.fishGroup.init();
+
         wrapper.setIntegerForKey(UserDefaultsKeyPreviousPlayedStage, this._selectLevel);
     },
     home:function () {

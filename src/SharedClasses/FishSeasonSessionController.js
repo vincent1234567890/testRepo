@@ -136,8 +136,8 @@ var FishSeasonSessionController = GameSessionController.extend({
             startPos = cc.p(x, VisibleRect.center().y);
         }
         this._time = 0;
-        FishGroup.shareFishGroup().setInitPoint(startPos);
-        FishGroup.shareFishGroup().createPrizeFishGroup(bLeft);
+        sino.fishGroup.setInitPoint(startPos);
+        sino.fishGroup.createPrizeFishGroup(bLeft);
     },
     loadFishSeasonPaths:function (index) {
 
@@ -152,7 +152,7 @@ var FishSeasonSessionController = GameSessionController.extend({
                     X = PlayerActor.sharedActor().getCurReturn() / nConsume;
                 }
                 if (X < 0.6) {
-                    this._addPrizeFishGroupFinish = FishGroup.shareFishGroup().createCirclePrize();
+                    this._addPrizeFishGroupFinish = sino.fishGroup.createCirclePrize();
                     this._addPrizeFlag = 3;
                 }
                 else {

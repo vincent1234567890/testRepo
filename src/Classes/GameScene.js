@@ -208,8 +208,8 @@ var GameScene = cc.Scene.extend({
          FishFactoryManager.shareFishFactoryManager().setScene(this);
          }
          else {*/
-        FishGroup.shareFishGroup().setScene(this);
-        //FishGroup.shareFishGroup().initAllTrack(le);
+        sino.fishGroup.setScene(this);
+        //sino.fishGroup.initAllTrack(le);
         //}
 
         GameSetting.getInstance().loadData(this._curStage);
@@ -1147,23 +1147,23 @@ var GameScene = cc.Scene.extend({
 
             var tempPar = null;
             if (weapl == FishWeaponType.eWeaponLevel5) {
-                tempPar = particleSystemFactory.createParticle(ImageName("lizibianhua1.plist"));
+                tempPar = particleSystemFactory.createParticle(res.lizibianhua1Plist);
                 tempPar.setDrawMode(cc.PARTICLE_SHAPE_MODE);
                 tempPar.setShapeType(cc.PARTICLE_STAR_SHAPE);
             } else if (weapl == FishWeaponType.eWeaponLevel6) {
-                tempPar = particleSystemFactory.createParticle(ImageName("lizibianhua2.plist"));
+                tempPar = particleSystemFactory.createParticle(res.lizibianhua2Plist);
                 tempPar.setDrawMode(cc.PARTICLE_SHAPE_MODE);
                 tempPar.setShapeType(cc.PARTICLE_STAR_SHAPE);
             } else if (weapl == FishWeaponType.eWeaponLevel7) {
-                tempPar = particleSystemFactory.createParticle(ImageName("lizibianhua3.plist"));
+                tempPar = particleSystemFactory.createParticle(res.lizibianhua3Plist);
                 tempPar.setDrawMode(cc.PARTICLE_SHAPE_MODE);
                 tempPar.setShapeType(cc.PARTICLE_STAR_SHAPE);
             } else if (weapl == FishWeaponType.eWeaponLevel10) {
-                tempPar = particleSystemFactory.createParticle(ImageName("lizibianhua3.plist"));
+                tempPar = particleSystemFactory.createParticle(res.lizibianhua3Plist);
                 tempPar.setDrawMode(cc.PARTICLE_SHAPE_MODE);
                 tempPar.setShapeType(cc.PARTICLE_STAR_SHAPE);
             } else {
-                tempPar = particleSystemFactory.createParticle(ImageName("yuwanglizi.plist"));
+                tempPar = particleSystemFactory.createParticle(res.yuwangliziPlist);
             }
 
             net.setParticle(tempPar);
@@ -1347,8 +1347,8 @@ var GameScene = cc.Scene.extend({
     },
     addPrizeFishGroup:function (bLeft) {
         this._time = 0;
-        FishGroup.shareFishGroup().setInitPoint(startPos);
-        FishGroup.shareFishGroup().createPrizeFishGroup(bLeft);
+        sino.fishGroup.setInitPoint(startPos);
+        sino.fishGroup.createPrizeFishGroup(bLeft);
     },
     addFishGroup:function (startPos, delay) {
     },
@@ -1575,7 +1575,7 @@ var GameScene = cc.Scene.extend({
         if (debug) {
             if (this._curStage < 3) {
                 // 新场景没有金鲨
-                FishGroup.shareFishGroup().setGSharkActor();
+                sino.fishGroup.setGSharkActor();
                 this._chestGameLayer.addMinChest(this._oddsNumber - 1, cc.pAdd(VisibleRect.left(),
                     cc.p(Math.random() % parseInt(VisibleRect.rect().width), Math.random() % parseInt(VisibleRect.rect().height))));//添加宝箱
             }
@@ -1610,7 +1610,7 @@ var GameScene = cc.Scene.extend({
     addParticleAchieve:function () {
         var pos = cc.p(VisibleRect.center().x, VisibleRect.center().y + 100);
 
-        var parAchieve = particleSystemFactory.createParticle(ImageName("kaibaoxiang01.plist"));
+        var parAchieve = particleSystemFactory.createParticle(res.ChestOpeningParticlePlist);
         this.addChild(parAchieve, 201, kAchieveParticleTag);
         parAchieve.setPosition(pos);
     },

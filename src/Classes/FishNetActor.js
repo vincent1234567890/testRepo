@@ -12,8 +12,9 @@ var FishNetActor = BaseActor.extend({
     _shootFlag:null,
     _actorType:null,
     _netLevel:null,
+
     ctor:function (def, weaponType) {
-        this._super(res.BulletSprite, res.SmallItemPng);
+        BaseActor.prototype.ctor.call(this, res.BulletSprite, res.SmallItemPng);
 
         this.setGroup(GroupFishNetActor);
         this.setCurWeaponLevel(FishWeaponType.eWeaponLevel1);
@@ -25,7 +26,7 @@ var FishNetActor = BaseActor.extend({
     },
 
     resetState:function () {
-        this._super();
+        BaseActor.prototype.resetState.call(this);
         this.setBeginAnimation(true);
         this._passTime = 0.0;
         this._curAction = 0;
@@ -40,31 +41,33 @@ var FishNetActor = BaseActor.extend({
             this._particle.setVisible(false);
             this._particle.removeFromParentAndCleanup(true);
         }
-
-        this.setParticle(null);
+        this._particle = null;
 
         if (PlayerActor.sharedActor().getCurConsume() >= GameSetting.getInstance().getConsumeMoney()) {
             var scene = PlayerActor.sharedActor().getScene();
             var stage = scene.getOddsNumber();
             GameSetting.getInstance().computeReturnRatio(stage);
         }
-        this._super();
+        BaseActor.prototype.removeSelfFromScene.call(this);
     },
+
     getBaseActortype:function () {
         return BaseActorType.eFishNetActor;
     },
+
     getHitRandomFromLevel:function (level) {
         return 1;
     },
+
     playCatchAction:function () {
         this.playAction(this._curWeaponLevel - 1);
         this.setActionDidStopSelector(this.removeSelfFromScene, this);
     },
+
     canSecKilling:function () {
         var levelAvaliable = (this.getCurWeaponLevel() == FishWeaponType.eWeaponLevel7);
         var sourceAvaliable = (this.getFishNetSource() == FishNetSource.eFishNetSourceBullet);
-        var ret = levelAvaliable && sourceAvaliable;
-        return ret;
+        return levelAvaliable && sourceAvaliable;
     },
 
     getParticle:function () {
@@ -128,11 +131,10 @@ var FishNetActor = BaseActor.extend({
     }
 });
 
-
 var FishNetActor1 = FishNetActor.extend({
     ctor:function (def) {
         //return this._super(def, FishWeaponType.eWeaponLevel1);
-        this._super(res.BulletSprite, res.SmallItemPng);
+        FishNetActor.prototype.ctor.call(this, res.BulletSprite, res.SmallItemPng);
         this.setCurWeaponLevel(FishWeaponType.eWeaponLevel1);
         this._aliveTime = 1.0;
         this.setGroup(GroupFishNetActor);
@@ -142,8 +144,7 @@ var FishNetActor1 = FishNetActor.extend({
 
 var FishNetActor2 = FishNetActor.extend({
     ctor:function (def, weaponType) {
-        //return this._super(def, FishWeaponType.eWeaponLevel2);
-        this._super(res.BulletSprite, res.SmallItemPng);
+        FishNetActor.prototype.ctor.call(this, res.BulletSprite, res.SmallItemPng);
         this.setCurWeaponLevel(FishWeaponType.eWeaponLevel2);
         this._aliveTime = 1.0;
         this.setGroup(GroupFishNetActor);
@@ -153,8 +154,7 @@ var FishNetActor2 = FishNetActor.extend({
 
 var FishNetActor3 = FishNetActor.extend({
     ctor:function (def, weaponType) {
-        //return this._super(def, FishWeaponType.eWeaponLevel3);
-        this._super(res.BulletSprite, res.SmallItemPng);
+        FishNetActor.prototype.ctor.call(this, res.BulletSprite, res.SmallItemPng);
         this.setCurWeaponLevel(FishWeaponType.eWeaponLevel3);
         this._aliveTime = 1.0;
         this.setGroup(GroupFishNetActor);
@@ -164,8 +164,7 @@ var FishNetActor3 = FishNetActor.extend({
 
 var FishNetActor4 = FishNetActor.extend({
     ctor:function (def, weaponType) {
-        //return this._super(def, FishWeaponType.eWeaponLevel4);
-        this._super(res.BulletSprite, res.SmallItemPng);
+        FishNetActor.prototype.ctor.call(this, res.BulletSprite, res.SmallItemPng);
         this.setCurWeaponLevel(FishWeaponType.eWeaponLevel4);
         this._aliveTime = 1.0;
         this.setGroup(GroupFishNetActor);
@@ -175,8 +174,7 @@ var FishNetActor4 = FishNetActor.extend({
 
 var FishNetActor5 = FishNetActor.extend({
     ctor:function (def, weaponType) {
-        //return this._super(def, FishWeaponType.eWeaponLevel5);
-        this._super(res.BulletSprite, res.SmallItemPng);
+        FishNetActor.prototype.ctor.call(this, res.BulletSprite, res.SmallItemPng);
         this.setCurWeaponLevel(FishWeaponType.eWeaponLevel5);
         this._aliveTime = 1.0;
         this.setGroup(GroupFishNetActor);
@@ -186,8 +184,7 @@ var FishNetActor5 = FishNetActor.extend({
 
 var FishNetActor6 = FishNetActor.extend({
     ctor:function (def, weaponType) {
-        //return this._super(def, FishWeaponType.eWeaponLevel6);
-        this._super(res.BulletSprite, res.SmallItemPng);
+        FishNetActor.prototype.ctor.call(this, res.BulletSprite, res.SmallItemPng);
         this.setCurWeaponLevel(FishWeaponType.eWeaponLevel6);
         this._aliveTime = 1.0;
         this.setGroup(GroupFishNetActor);
@@ -197,8 +194,7 @@ var FishNetActor6 = FishNetActor.extend({
 
 var FishNetActor7 = FishNetActor.extend({
     ctor:function (def, weaponType) {
-        //return this._super(def, FishWeaponType.eWeaponLevel7);
-        this._super(res.BulletSprite, res.SmallItemPng);
+        FishNetActor.prototype.ctor.call(this, res.BulletSprite, res.SmallItemPng);
         this.setCurWeaponLevel(FishWeaponType.eWeaponLevel7);
         this._aliveTime = 1.0;
         this.setGroup(GroupFishNetActor);
@@ -208,8 +204,7 @@ var FishNetActor7 = FishNetActor.extend({
 
 var FishNetActor10 = FishNetActor.extend({
     ctor:function (def, weaponType) {
-        //return this._super(def, FishWeaponType.eWeaponLevel10);
-        this._super(res.BulletSprite, res.SmallItemPng);
+        FishNetActor.prototype.ctor.call(this, res.BulletSprite, res.SmallItemPng);
         this.setCurWeaponLevel(FishWeaponType.eWeaponLevel10);
         this._aliveTime = 1.0;
         this.setGroup(GroupFishNetActor);
