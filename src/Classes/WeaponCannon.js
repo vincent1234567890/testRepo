@@ -110,8 +110,8 @@ var WeaponCannon = Weapon.extend({
         //var pParticle = new cc.ParticleSystem(ImageName("_particle.plist"));
         //TODO foundn't this file
         var pParticle = particleSystemFactory.createParticle(res.ParticlePlist);
-        pParticle.setDrawMode(cc.PARTICLE_SHAPE_MODE);
-        pParticle.setShapeType(cc.PARTICLE_STAR_SHAPE);
+        pParticle.setDrawMode(cc.ParticleSystem.SHAPE_MODE);
+        pParticle.setShapeType(cc.ParticleSystem.STAR_SHAPE);
         var sourcePos = cc.pAdd(this.getPosition(), cc.p(-25, 0));
         var direction = cc.pNormalize(cc.pSub(targetPos, sourcePos));
 
@@ -196,13 +196,23 @@ var WeaponCannonExt = WeaponCannon.extend({
 
         return bRet;
     },
-    shootTo:function (targetPosition, type) {
-        this.setDirection(targetPosition);
-        var distance = cc.pDistance(new cc.Point(0, 0), cc.p(50, 33));
-        this.getWeaponSprite().stopAction(this.getShootAnimation());
-        this.getWeaponSprite().setScale(1.0);
+    shootTo:function (targetPosition, type, showCannonAnimation) {
+        // Defaults:
+        if (showCannonAnimation === undefined) {
+            showCannonAnimation = true;
+        }
 
-        this.getWeaponSprite().runAction(this.getShootAnimation());
+        //var particleDistance = cc.pDistance(new cc.Point(0, 0), cc.p(50, 33));
+        var particleDistance = 60;
+
+        if (showCannonAnimation) {
+            this.setDirection(targetPosition);
+
+            this.getWeaponSprite().stopAction(this.getShootAnimation());
+            this.getWeaponSprite().setScale(1.0);
+
+            this.getWeaponSprite().runAction(this.getShootAnimation());
+        }
 
         var bullet;
         if (this.getCannonLevel() == 10) {
@@ -227,7 +237,7 @@ var WeaponCannonExt = WeaponCannon.extend({
         var direction = cc.pNormalize(cc.pSub(targetPosition, bulletPos));
         bullet.setMoveDirection(direction);
         bullet.setPosition(bulletPos);
-        particle.setPosition(cc.pAdd(this.getPosition(), cc.pMult(direction, distance)));
+        particle.setPosition(cc.pAdd(this.getPosition(), cc.pMult(direction, particleDistance)));
 
         bullet.setTargetPosition(targetPosition);
         var speedSetArray = GameSetting.getInstance().getBulletSpeedArray();
@@ -269,6 +279,9 @@ var WeaponCannonExt = WeaponCannon.extend({
         }
 
         playEffect(FIRE_EFFECT);
+
+        // So we can set bulletId
+        return bullet;
     }
 });
 

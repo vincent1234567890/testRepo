@@ -41,8 +41,10 @@ var GameMainSessionController = GameSessionController.extend({
         }
     },
     addFishGroup:function (startPos, delay) {
-        // Don't do it!  We will only add fish to the scene when the server tells us to.
-        return;
+        if (GameCtrl.isOnlineGame()) {
+            // New fish will be triggered by the server
+            return;
+        }
 
         if (!startPos || !delay) {
             var fishStartPosition = (cc.p(VisibleRect.right().x + 5.0, Math.random() * 10 + VisibleRect.bottom().y + VisibleRect.rect().height / 2 + INIT_POS_Y_STEP));
@@ -62,8 +64,8 @@ var GameMainSessionController = GameSessionController.extend({
     },
     addFishAtPosition:function (startPos) {
         var tempGameScene = this._currentScene;
-        FishGroup.shareFishGroup().setInitPoint(startPos);
-        FishGroup.shareFishGroup().createFishGroup(tempGameScene.getCurStage());
+        sino.fishGroup.setInitPoint(startPos);
+        sino.fishGroup.createFishGroup(tempGameScene.getCurStage());
     },
     nextWave:function () {
         alert('next wave');
@@ -127,7 +129,7 @@ var GameMainSessionController = GameSessionController.extend({
             this.updateBullets(dt, gameScene.getActors(GroupHeroBullet), []);
             this.updateBullets(dt, gameScene.getActors(GroupEnemyBullet), []);
 
-            // This shifts from the _shootPosList, i.e. fired pending bullets
+            // This fires pending bullets by shifting them from the _shootPosList
             this.updateBullets(dt);
 
             return;

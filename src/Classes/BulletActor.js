@@ -56,20 +56,44 @@ var BulletActor = BaseActor.extend({
 
         if (GameCtrl.isOnlineGame()) {
             const arena = GameCtrl.sharedGame().getArena();
-            const bulletModel = arena.getBullet(this.bulletId);
-            console.log("bulletModel:", bulletModel);
-            this.setPosition(cc.Point(bulletModel.position[0], bulletModel.position[1]));
-        }
+            if (!arena) {
+                console.warn("Arena does not exist yet!");
+                // Sadly the arena does not exist for a few moments after the scene has started, because we are waiting for the server to send initial data.
+                // In the final version, there should be no bullets at that time, but it may be a problem elsewhere in the code, if the user takes actions before the arena has been created.
+                // Ideally we will not switch scene until the arena has been created.
+            }
 
-        this._gunShootDistance += this._speed * dt;
-        if (this._gunShootDistance > this._maxShootDistance) {
-            this.addFishNet();
-        }
+            const bulletModel = arena && arena.getBullet(this.bulletId);
+            if (!bulletModel) {
+                // Only happens if we fire bullets without going through the server/arena
+                console.warn("No bullet found in arena with id:", this.bulletId);
+            }
 
-        if (this._gunShootDistance > this._maxShootDistance || !cc.rectContainsPoint(EScreenRect, this.getPosition())) {
-            this._isAlive = false;
-            this.removeSelfFromScene();
+            if (bulletModel && !bulletModel.position) {
+                console.warn("bulletModel does not have a position!", bulletModel);
+            }
+
+            //console.log("bulletModel:", bulletModel);
+            if (bulletModel && bulletModel.position) {
+                //console.log("bulletModel.position:", bulletModel.position);
+                //this.setPosition(new cc.Point(bulletModel.position[0], bulletModel.position[1]));
+                this.setPosition(bulletModel.position[0], bulletModel.position[1]);
+                this.setRotation(bulletModel.angle / Math.PI * 180);
+            }
             return;
+        }
+
+        if (!GameCtrl.isOnlineGame()) {
+            this._gunShootDistance += this._speed * dt;
+            if (this._gunShootDistance > this._maxShootDistance) {
+                this.addFishNet();
+            }
+
+            if (this._gunShootDistance > this._maxShootDistance || !cc.rectContainsPoint(EScreenRect, this.getPosition())) {
+                this._isAlive = false;
+                this.removeSelfFromScene();
+                return;
+            }
         }
 
         var nextStep = cc.pAdd(this.getPosition(), cc.p(this._speed * dt * this._moveDirection.x, this._speed * dt * this._moveDirection.y));
@@ -105,7 +129,9 @@ var BulletActor = BaseActor.extend({
     },
     finalEvent:function () {
     },
-    addFishNet:function () {
+    addFishNet:function (explodePosition) {
+        explodePosition = explodePosition || this.getPosition();
+
         playEffect(NET_EFFECT);
 
         var cNetName = "FishNetActor" + this._curWeaponLevel;
@@ -133,7 +159,7 @@ var BulletActor = BaseActor.extend({
         }
 
         net.setParticle(tempPar);
-        tempPar.setPosition(this.getPosition());
+        tempPar.setPosition(explodePosition);
 
         //tempPar._dontTint = true;
         GameCtrl.sharedGame().getCurScene().addChild(tempPar, BulletActorZValue + 1);
@@ -141,7 +167,7 @@ var BulletActor = BaseActor.extend({
         net.setGroup(GroupFishNetActor);
         net.resetState();
         net.updateInfo();
-        net.setPosition(this.getPosition());
+        net.setPosition(explodePosition);
         net.setZOrder(BulletActorZValue);
         net.playCatchAction();
         net.setActorType(this._actorType);

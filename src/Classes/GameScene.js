@@ -208,8 +208,8 @@ var GameScene = cc.Scene.extend({
          FishFactoryManager.shareFishFactoryManager().setScene(this);
          }
          else {*/
-        FishGroup.shareFishGroup().setScene(this);
-        //FishGroup.shareFishGroup().initAllTrack(le);
+        sino.fishGroup.setScene(this);
+        //sino.fishGroup.initAllTrack(le);
         //}
 
         GameSetting.getInstance().loadData(this._curStage);
@@ -1347,8 +1347,8 @@ var GameScene = cc.Scene.extend({
     },
     addPrizeFishGroup:function (bLeft) {
         this._time = 0;
-        FishGroup.shareFishGroup().setInitPoint(startPos);
-        FishGroup.shareFishGroup().createPrizeFishGroup(bLeft);
+        sino.fishGroup.setInitPoint(startPos);
+        sino.fishGroup.createPrizeFishGroup(bLeft);
     },
     addFishGroup:function (startPos, delay) {
     },
@@ -1575,7 +1575,7 @@ var GameScene = cc.Scene.extend({
         if (debug) {
             if (this._curStage < 3) {
                 // 新场景没有金鲨
-                FishGroup.shareFishGroup().setGSharkActor();
+                sino.fishGroup.setGSharkActor();
                 this._chestGameLayer.addMinChest(this._oddsNumber - 1, cc.pAdd(VisibleRect.left(),
                     cc.p(Math.random() % parseInt(VisibleRect.rect().width), Math.random() % parseInt(VisibleRect.rect().height))));//添加宝箱
             }
