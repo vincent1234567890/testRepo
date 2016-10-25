@@ -6,6 +6,7 @@ sino.fishGroup = (function() {
         "AmphiprionActor", "ButterflyActor", "PomfretActor", "GoldenTroutActor"
     ];
 
+
     return {
         _chestArray: null, //array
         controlPoints: null, //array
@@ -24,7 +25,10 @@ sino.fishGroup = (function() {
         fishActorMortality: null,
         curStage: 1,
 
+
+
         loadResource: function (stage) {
+
             stage = stage || this.curStage;
             var nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 21, 22, 23, 24, 25];
 
@@ -551,4 +555,4 @@ sino.fishGroup = (function() {
     };
 })();
 
-sino.fishGroup.loadResource();
+

@@ -113,21 +113,9 @@ var GameCtrl = cc.Class.extend({
                 var informServer = serverInformer(ioSocket);
                 GameCtrl.informServer = informServer;
 
-                // gameCtrl.startGameScene() will be run by populateNewGame, when everything is ready.
+                // gameCtrl.startGameScene() will be run by clientReceiver when everything is ready.
             }
         ).catch(console.error.bind(console));
-    },
-    populateNewGame: function (players, fishes, bullets, serverGameTime) {
-        const gameConfig = this.getGameConfig();
-
-        const arena = new FishGameArena(false, gameConfig);
-
-        this.setArena(arena);
-
-        this.startGameScene();
-
-        // @todo To get up-to-date, create the cannons for the other players,
-        // @todo add all the fishes (and maybe even add some in-transit bullets)
     },
     startGameScene: function () {
         this.gameState = GAMEPLAY;
@@ -135,6 +123,9 @@ var GameCtrl = cc.Class.extend({
         this.setCurScene(gameScene);
 
         cc.director.runScene(this.getCurScene());
+        sino.fishGroup.loadResource(this.getCurScene());
+        sino.fishGroup.init();
+
         wrapper.setIntegerForKey(UserDefaultsKeyPreviousPlayedStage, this._selectLevel);
     },
     home:function () {

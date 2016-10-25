@@ -109,9 +109,9 @@ var WeaponCannon = Weapon.extend({
 
         //var pParticle = new cc.ParticleSystem(ImageName("_particle.plist"));
         //TODO foundn't this file
-        var pParticle = particleSystemFactory.createParticle(ImageName("particle.plist"));
-        pParticle.setDrawMode(cc.PARTICLE_SHAPE_MODE);
-        pParticle.setShapeType(cc.PARTICLE_STAR_SHAPE);
+        var pParticle = particleSystemFactory.createParticle(res.ParticlePlist);
+        pParticle.setDrawMode(cc.ParticleSystem.SHAPE_MODE);
+        pParticle.setShapeType(cc.ParticleSystem.STAR_SHAPE);
         var sourcePos = cc.pAdd(this.getPosition(), cc.p(-25, 0));
         var direction = cc.pNormalize(cc.pSub(targetPos, sourcePos));
 
@@ -222,7 +222,7 @@ var WeaponCannonExt = WeaponCannon.extend({
             bullet = ActorFactory.create("BulletActor");
         }
 
-        var particle = particleSystemFactory.createParticle(ImageName("particle.plist"));
+        var particle = particleSystemFactory.createParticle(res.ParticlePlist);
         particle.setDrawMode(cc.PARTICLE_SHAPE_MODE);
         particle.setShapeType(cc.PARTICLE_STAR_SHAPE);
 
