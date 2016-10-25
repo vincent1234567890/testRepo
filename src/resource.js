@@ -170,6 +170,10 @@ var res = {
 
     // MainUITitle : "res/main_ui_title.png",
 
+    //New
+    GameUIPng : "res/New/gameui.png",
+    GameUIPlist : "res/New/gameui.plist",
+
 
 };
 

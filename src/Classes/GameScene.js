@@ -259,6 +259,10 @@ var GameScene = cc.Scene.extend({
         this._aliveActor = [];
         this._retainedResArray = [];
         this._shootPosList = []
+
+
+        var testCannon = new CannonView();
+        this.addChild(testCannon,99999999);
     },
 
     getLayer:function () {

@@ -88,6 +88,9 @@
         "src/Classes/WeaponSpecialRay.js",
         "src/TestScene.js",
 
+        "src/New/ReferenceName.js",
+        "src/New/CannonView.js",
+
         "lib/common/WebSocketClient.js",
         "lib/common/WebSocketService.js",
         "lib/services/game/GameServices.js",
@@ -97,6 +100,8 @@
         "lib/fishgamelogic/serverInformer.js",
         "lib/fishgamelogic/clientReceiver.js",
         "lib/fishgamelogic/FishGameArena.js"
+
+
 
 
     ]
