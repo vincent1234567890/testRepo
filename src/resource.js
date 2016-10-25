@@ -156,6 +156,18 @@ var res = {
 
     LaserFonts : "res/fonts_laser_num.png",
 
+    ParticlePlist : "res/particle.plist",
+
+    lizibianhua1Plist : "res/lizibianhua1.plist",
+    lizibianhua1Png : "res/lizibianhua1.png",
+    lizibianhua2Plist : "res/lizibianhua2.plist",
+    lizibianhua3Plist : "res/lizibianhua3.plist",
+    lizibianhua3Png : "res/lizibianhua3.png",
+
+    yuwangliziPlist : "res/yuwanglizi.plist",
+    ChestOpeningParticlePlist : "res/kaibaoxiang01.plist",
+
+
     // MainUITitle : "res/main_ui_title.png",
 
 

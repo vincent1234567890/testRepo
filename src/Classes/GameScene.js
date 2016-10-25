@@ -1147,23 +1147,23 @@ var GameScene = cc.Scene.extend({
 
             var tempPar = null;
             if (weapl == FishWeaponType.eWeaponLevel5) {
-                tempPar = particleSystemFactory.createParticle(ImageName("lizibianhua1.plist"));
+                tempPar = particleSystemFactory.createParticle(res.lizibianhua1Plist);
                 tempPar.setDrawMode(cc.PARTICLE_SHAPE_MODE);
                 tempPar.setShapeType(cc.PARTICLE_STAR_SHAPE);
             } else if (weapl == FishWeaponType.eWeaponLevel6) {
-                tempPar = particleSystemFactory.createParticle(ImageName("lizibianhua2.plist"));
+                tempPar = particleSystemFactory.createParticle(res.lizibianhua2Plist);
                 tempPar.setDrawMode(cc.PARTICLE_SHAPE_MODE);
                 tempPar.setShapeType(cc.PARTICLE_STAR_SHAPE);
             } else if (weapl == FishWeaponType.eWeaponLevel7) {
-                tempPar = particleSystemFactory.createParticle(ImageName("lizibianhua3.plist"));
+                tempPar = particleSystemFactory.createParticle(res.lizibianhua3Plist);
                 tempPar.setDrawMode(cc.PARTICLE_SHAPE_MODE);
                 tempPar.setShapeType(cc.PARTICLE_STAR_SHAPE);
             } else if (weapl == FishWeaponType.eWeaponLevel10) {
-                tempPar = particleSystemFactory.createParticle(ImageName("lizibianhua3.plist"));
+                tempPar = particleSystemFactory.createParticle(res.lizibianhua3Plist);
                 tempPar.setDrawMode(cc.PARTICLE_SHAPE_MODE);
                 tempPar.setShapeType(cc.PARTICLE_STAR_SHAPE);
             } else {
-                tempPar = particleSystemFactory.createParticle(ImageName("yuwanglizi.plist"));
+                tempPar = particleSystemFactory.createParticle(res.yuwangliziPlist);
             }
 
             net.setParticle(tempPar);
@@ -1610,7 +1610,7 @@ var GameScene = cc.Scene.extend({
     addParticleAchieve:function () {
         var pos = cc.p(VisibleRect.center().x, VisibleRect.center().y + 100);
 
-        var parAchieve = particleSystemFactory.createParticle(ImageName("kaibaoxiang01.plist"));
+        var parAchieve = particleSystemFactory.createParticle(res.ChestOpeningParticlePlist);
         this.addChild(parAchieve, 201, kAchieveParticleTag);
         parAchieve.setPosition(pos);
     },
