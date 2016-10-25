@@ -66,6 +66,8 @@ var GameCtrl = cc.Class.extend({
         //this.m_bIsLoadingFight = false;
         this._selectLevel = level;
 
+        sino.fishGroup.init();
+
         if (GameCtrl.isOnlineGame()) {
             this.joinOnlineGame();
         } else {
