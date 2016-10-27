@@ -88,6 +88,16 @@
         "src/Classes/WeaponSpecialRay.js",
         "src/TestScene.js",
 
+        "src/New/ReferenceName.js",
+        "src/New/CannonView.js",
+        "src/New/CannonManager.js",
+        "src/New/PlayerViewStaticPrefab.js",
+        "src/New/PlayerView.js",
+        "src/New/PlayerViewManager.js",
+        "src/New/GameView.js",
+        "src/New/GameManager.js",
+
+
         "lib/common/WebSocketClient.js",
         "lib/common/WebSocketService.js",
         "lib/services/game/GameServices.js",
@@ -97,6 +107,8 @@
         "lib/fishgamelogic/serverInformer.js",
         "lib/fishgamelogic/clientReceiver.js",
         "lib/fishgamelogic/FishGameArena.js"
+
+
 
 
     ]
