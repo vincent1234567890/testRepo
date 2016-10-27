@@ -67,6 +67,7 @@ var BulletActor = BaseActor.extend({
             if (!bulletModel) {
                 // Only happens if we fire bullets without going through the server/arena
                 console.warn("No bullet found in arena with id:", this.bulletId);
+                console.trace();
             }
 
             if (bulletModel && !bulletModel.position) {

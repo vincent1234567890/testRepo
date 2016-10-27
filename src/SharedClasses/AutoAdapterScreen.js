@@ -28,8 +28,8 @@ var AutoAdapterScreen = cc.Class.extend({
     getWinSize:function () {
         var width = document.documentElement.clientWidth;
         var height = document.documentElement.clientHeight;
-        console.log(document.documentElement.clientWidth);
-        console.log( document.documentElement.clientHeight);
+        // console.log(document.documentElement.clientWidth);
+        // console.log( document.documentElement.clientHeight);
 
         // if (width > this._maxWidth) {
         //     this._width = this._maxWidth;

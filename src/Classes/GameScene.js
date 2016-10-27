@@ -261,8 +261,7 @@ var GameScene = cc.Scene.extend({
         this._shootPosList = []
 
 
-        var testCannon = new CannonView();
-        this.addChild(testCannon,99999999);
+
     },
 
     getLayer:function () {
@@ -751,8 +750,9 @@ var GameScene = cc.Scene.extend({
         if (PlayerActor.sharedActor().canSendWeapon()) {
             if (!this._isPause) {
                 if (this._cannonActor) {
-                    this._cannonActor.shootTo(pos);
+                    // this._cannonActor.shootTo(pos);
                 }
+
                 this._shootCount++;
                 this._scoreBar.setBullet(PlayerActor.sharedActor().getPlayerMoney());
 
@@ -953,6 +953,10 @@ var GameScene = cc.Scene.extend({
 
     },
     loadCannon:function () {
+        // this._testCannonManager = CannonManager;
+        GameManager.initialise(this);
+        // this._testCannon = new CannonView(this,{x:300, y:300} );
+        // this.addChild(CannonManager);
         this._cannonActor = new WeaponManager(cc.pAdd(VisibleRect.bottom(), cc.p(0, 50)), 0.0, this);
     },
     updateTutorial:function (dt) {
@@ -1542,6 +1546,8 @@ var GameScene = cc.Scene.extend({
         window.addEventListener("resize", function (event) {
             that.resetAllSpritePos();
         });
+
+
     },
     loadCameraButton:function () {
         this._savingImage = false;

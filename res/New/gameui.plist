@@ -19,7 +19,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Canon.png</key>
+            <key>Cannon.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -34,7 +34,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>CanonDW.png</key>
+            <key>CannonDW.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
