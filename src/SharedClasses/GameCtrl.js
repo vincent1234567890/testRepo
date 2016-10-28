@@ -26,12 +26,12 @@ var GameCtrl = cc.Class.extend({
     connectToMasterServer:function () {
         const useJoeysServerDuringDevelopment = true;
 
-        let gameAPIServerUrl = 'ws://3dfishing88888.sinonet.sg:8080';
+        let gameAPIServerUrl = 'ws://3dfishing88888.sinonet.sg:8088';
 
         const localNames = ['localhost', '127.0.0.1', '127.0.1.1', '0.0.0.0'];
         const doingDevelopment = (localNames.indexOf(window.location.hostname) >= 0);
         if (doingDevelopment && useJoeysServerDuringDevelopment) {
-            gameAPIServerUrl = 'ws://192.168.1.1:8080';
+            gameAPIServerUrl = 'ws://192.168.1.1:8088';
         }
 
         var gameCtrl = this;
