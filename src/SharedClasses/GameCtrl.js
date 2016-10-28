@@ -109,7 +109,7 @@ var GameCtrl = cc.Class.extend({
 
                 var ioSocket = gameCtrl.getGameIOSocket();
 
-                socketUtils.simulateNetworkLatency(ioSocket, 200);
+                socketUtils.simulateNetworkLatency(ioSocket, 100);
 
                 var receiver = clientReceiver(ioSocket, gameCtrl);
 
