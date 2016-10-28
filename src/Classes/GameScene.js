@@ -754,7 +754,7 @@ var GameScene = cc.Scene.extend({
                 }
 
                 this._shootCount++;
-                this._scoreBar.setBullet(PlayerActor.sharedActor().getPlayerMoney());
+                // this._scoreBar.setBullet(PlayerActor.sharedActor().getPlayerMoney());
 
                 if (0 == PlayerActor.sharedActor().getPlayerMoney() &&
                     this.getCannonActor().getCurrentWeapon().getCannonLevel() < 8) {
@@ -1277,37 +1277,37 @@ var GameScene = cc.Scene.extend({
             }
         }
 
-        this._scoreBar.backToNormal();
+        // this._scoreBar.backToNormal();
 
-        if (PlayerActor.sharedActor().getPlayerMoney() <= 50 * this.getOddsNumber()) {
-            this._scoreBar.moneyNotEnough();
-        }
-        else if (PlayerActor.sharedActor().getPlayerMoney() <= 100 * this.getOddsNumber()) {
-            this._scoreBar.moneyIsEnough();
-            this._scoreBar.setIsLessThan150(false);
-            this._scoreBar.showNotEnough();
-            this._scoreBar.setIsLessThan100(true);
-        }
-        else if (PlayerActor.sharedActor().getPlayerMoney() <= 150 * this.getOddsNumber()) {
-            this._scoreBar.showNotEnough();
-            this._scoreBar.setIsLessThan150(true);
-            this._scoreBar.setIsLessThan100(false);
-        }
-        else {
-            this._scoreBar.moneyIsEnough();
-            this._scoreBar.setIsLessThan150(false);
-            this._scoreBar.setIsLessThan100(false);
-        }
+        // if (PlayerActor.sharedActor().getPlayerMoney() <= 50 * this.getOddsNumber()) {
+        //     this._scoreBar.moneyNotEnough();
+        // }
+        // else if (PlayerActor.sharedActor().getPlayerMoney() <= 100 * this.getOddsNumber()) {
+        //     this._scoreBar.moneyIsEnough();
+        //     this._scoreBar.setIsLessThan150(false);
+        //     this._scoreBar.showNotEnough();
+        //     this._scoreBar.setIsLessThan100(true);
+        // }
+        // else if (PlayerActor.sharedActor().getPlayerMoney() <= 150 * this.getOddsNumber()) {
+        //     this._scoreBar.showNotEnough();
+        //     this._scoreBar.setIsLessThan150(true);
+        //     this._scoreBar.setIsLessThan100(false);
+        // }
+        // else {
+        //     // this._scoreBar.moneyIsEnough();
+        //     // this._scoreBar.setIsLessThan150(false);
+        //     // this._scoreBar.setIsLessThan100(false);
+        // }
 
         PlayerActor.sharedActor().update(dt);
-        if (/*this._playTutorial || */PlayerActor.sharedActor().getPlayerMoney() >= GameSetting.getInstance().getPlayerMoney()) {
-            this._scoreBar.setDownTime(PlayerActor.sharedActor().getAddCoinNeedTime());
-            PlayerActor.sharedActor().setAddCoinTime(0);
-        }
-        else {
-            var time = parseInt(PlayerActor.sharedActor().getAddCoinNeedTime() - PlayerActor.sharedActor().getAddCoinTime());
-            this._scoreBar.setDownTime(time);
-        }
+        // if (/*this._playTutorial || */PlayerActor.sharedActor().getPlayerMoney() >= GameSetting.getInstance().getPlayerMoney()) {
+        //     this._scoreBar.setDownTime(PlayerActor.sharedActor().getAddCoinNeedTime());
+        //     PlayerActor.sharedActor().setAddCoinTime(0);
+        // }
+        // else {
+        //     var time = parseInt(PlayerActor.sharedActor().getAddCoinNeedTime() - PlayerActor.sharedActor().getAddCoinTime());
+        //     this._scoreBar.setDownTime(time);
+        // }
 
         if (PlayerActor.sharedActor().getNeedAddCoin()) {
             this.removeChildByTag(kAddCoidParticleTag, true);
@@ -1328,25 +1328,25 @@ var GameScene = cc.Scene.extend({
 
         this._userInfoLayer.updateUserInfo();
         this._compactUserInfo.updateUserInfo();
-        this._scoreBar.setLightValue(-60.0 + 115.0 * PlayerActor.sharedActor().getNormalGain() / (GameSetting.getInstance().getNormalCoinCount() * this.getOddsNumber()));
-        if (this._scoreBar.getLightValue() >= 55)
-            this._scoreBar.setLightValue(-60);
-        this._scoreBar.getLightBlood().setRotation(this._scoreBar.getLightValue());
-
-        this._scoreBar.setBullet(PlayerActor.sharedActor().getPlayerMoney());
+        // this._scoreBar.setLightValue(-60.0 + 115.0 * PlayerActor.sharedActor().getNormalGain() / (GameSetting.getInstance().getNormalCoinCount() * this.getOddsNumber()));
+        // if (this._scoreBar.getLightValue() >= 55)
+        //     this._scoreBar.setLightValue(-60);
+        // this._scoreBar.getLightBlood().setRotation(this._scoreBar.getLightValue());
+        //
+        // this._scoreBar.setBullet(PlayerActor.sharedActor().getPlayerMoney());
 
         var useLaser = wrapper.getIntegerForKey(kUseLaser);
         var isUseSpecialWeapon = this.getCannonActor().getIsChangeToSpecialWeapon();
 
-        if ((useLaser == 1 || PlayerActor.sharedActor().getNormalGain() >= GameSetting.getInstance().getNormalCoinCount() * this.getOddsNumber()) && !isUseSpecialWeapon) {
-            var curSpecialWeapon = wrapper.getIntegerForKey(CURRENT_SPECIAL_WEAPON_KEY);
-            this._scoreBar.superWeaponChanged();
-            this.getCannonActor().changeToSpecialWeapon(curSpecialWeapon);
-
-            if (useLaser == 1) {
-                wrapper.setIntegerForKey(kUseLaser, 2);
-            }
-        }
+        // if ((useLaser == 1 || PlayerActor.sharedActor().getNormalGain() >= GameSetting.getInstance().getNormalCoinCount() * this.getOddsNumber()) && !isUseSpecialWeapon) {
+        //     var curSpecialWeapon = wrapper.getIntegerForKey(CURRENT_SPECIAL_WEAPON_KEY);
+        //     this._scoreBar.superWeaponChanged();
+        //     this.getCannonActor().changeToSpecialWeapon(curSpecialWeapon);
+        //
+        //     if (useLaser == 1) {
+        //         wrapper.setIntegerForKey(kUseLaser, 2);
+        //     }
+        // }
 
 
     },
@@ -1390,18 +1390,18 @@ var GameScene = cc.Scene.extend({
         this._controlChesh = false;
         this._achievementShowNum = 0;
 
-        this._scoreBar = new ScoreBarLayer();
+        // this._scoreBar = new ScoreBarLayer();
 
-        this._scoreBar.setDelegate(this);
-        this.addChild(this._scoreBar, 109);
+        // this._scoreBar.setDelegate(this);
+        // this.addChild(this._scoreBar, 109);
         var useLaser = wrapper.getIntegerForKey(kUseLaser);
         if (useLaser == 2 || useLaser == 3) {
             wrapper.setIntegerForKey(kUseLaser, 0);
         }
 
-        this._scoreBar.setBullet(PlayerActor.sharedActor().getPlayerMoney());
-        this._scoreBar.setAnchorPoint(AnchorPointBottom);
-        this._scoreBar.setPosition(VisibleRect.bottom());
+        // this._scoreBar.setBullet(PlayerActor.sharedActor().getPlayerMoney());
+        // this._scoreBar.setAnchorPoint(AnchorPointBottom);
+        // this._scoreBar.setPosition(VisibleRect.bottom());
     },
     loadUserInfoLayer:function () {
         this._userInfoLayer = UserInfoLayer.create(this);
@@ -1473,7 +1473,7 @@ var GameScene = cc.Scene.extend({
         }
 
         this._isShowAllMenu = true;
-        this._scoreBar.setBullet(PlayerActor.sharedActor().getPlayerMoney());
+        // this._scoreBar.setBullet(PlayerActor.sharedActor().getPlayerMoney());
 
         if (this.getOddsNumber() == 2) {
             var DoubleSprite = new cc.Sprite(ImageNameLang("fonts_other_40.png"));
