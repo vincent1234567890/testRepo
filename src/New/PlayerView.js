@@ -7,10 +7,6 @@ var PlayerView = (function () {
     var PlayerView = function (parent,pos, cannonPositions, slot) {
         cc.spriteFrameCache.addSpriteFrames(res.GameUIPlist);
         this.playerViewStaticPrefabInstance = new PlayerViewStaticPrefab(parent, pos, undefined, undefined, cannonPositions,slot);
-
-
-
-
     }
 
     // PlayerView.prototype.

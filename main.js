@@ -59,7 +59,7 @@ var cocos2dApp = cc.game.onStart = function() {
     // cc.view.setOrientation(cc.ORIENTATION_PORTRAIT);
 
     // Setup the resolution policy and design resolution size
-    cc.view.setDesignResolutionSize(1400, 980, cc.ResolutionPolicy.SHOW_ALL);
+    cc.view.setDesignResolutionSize(1365, 768, cc.ResolutionPolicy.SHOW_ALL);
 
     // The game will be resized when browser size change
     cc.view.resizeWithBrowserSize(true);
@@ -94,6 +94,7 @@ var cocos2dApp = cc.game.onStart = function() {
 
     cc.LoadingScreen.preload(g_resources, function () {
         cc.director.runScene(new LogoScene());
+        // cc.director.runScene(new TestScene());
         // cc.director.runScene(new StartMenuLayer());
     }, this);
     // },

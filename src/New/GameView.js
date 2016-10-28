@@ -2,10 +2,7 @@
  * Created by eugeneseah on 25/10/16.
  */
 
-/*
-    Current structure - > GameView -> x PlayerViews -> CannonManager -> CannonView
-                                                    -> PlayerViewStaticPrefab
- */
+
 
 var GameView = function(){
 
