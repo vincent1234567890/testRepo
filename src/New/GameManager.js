@@ -1,6 +1,13 @@
 /**
  * Created by eugeneseah on 27/10/16.
  */
+
+/*
+ Current structure : GameManager    -> GameView
+                                    -> x PlayerViewManager  -> CannonManager -> CannonView
+                                                            -> PlayerView -> PlayerViewStaticPrefab
+ */
+
 "use strict";
 
 var GameManager = function(){
@@ -26,13 +33,14 @@ var GameManager = function(){
     //callback for touchlayer
     //bad : refactor touchlayer
     var controlNewPosition = function (control, pos, yPos) {
-        var rot = this._playerViewManager.turnTo(pos);
+        // change this to current player position
+        var rot = this._bottomLeft.turnTo(pos);
         const bulletId = _playerId + ':' + getPlayerBulletId();
         GameCtrl.informServer.bulletFired(bulletId, rot);
     }
 
     var getPlayerBulletId = function(){
-        return GameManager._playerViewManager.getNextBulletId();
+        return GameManager._bottomLeft.getNextBulletId();
     }
 
     var initialise = function (parent) {
@@ -41,24 +49,29 @@ var GameManager = function(){
         parent.addChild(_parentNode,99999);
         GameView.initialise(_parentNode);
 
-        //for testing
-        // _gameConfig.cannonPositions[1] = [cc.winSize.width - 125, 56];
-        _gameConfig.cannonPositions[0] = [125,56];
-        _gameConfig.cannonPositions[1] = [1400 - 125,56];
-        _gameConfig.cannonPositions[2] = [125,56];
-        _gameConfig.cannonPositions[3] = [125,56];
+        // _gameConfig = {}
+        // _gameConfig.cannonPositions = [];
+        //
+        // //for testing
+        // // _gameConfig.cannonPositions[1] = [cc.winSize.width - 125, 56];
+        // _gameConfig.cannonPositions[0] = [125,56];
+        // _gameConfig.cannonPositions[1] = [1400 - 125,56];
+        // _gameConfig.cannonPositions[2] = [125,980-56];
+        // _gameConfig.cannonPositions[3] = [1400 - 125,980-56];
 
 
 
-        this.bottomLeft = new PlayerViewManager(_parentNode, _gameConfig.cannonPositions, 0);
-        // this.bottomRight = new PlayerViewManager(_parentNode, _gameConfig.cannonPositions, 1);
+        this._bottomLeft = new PlayerViewManager(_parentNode, _gameConfig.cannonPositions, 0);
+        this._bottomRight = new PlayerViewManager(_parentNode, _gameConfig.cannonPositions, 1);
+        this._topLeft = new PlayerViewManager(_parentNode, _gameConfig.cannonPositions, 2);
+        this._topRight = new PlayerViewManager(_parentNode, _gameConfig.cannonPositions, 3);
 
         // this._cannonManager = new CannonManager(this._playerViewStaticPrefab, cc.p(150,60));
         initialiseTouch(this);
     }
 
     var shootTo = function(pos){
-        return this._playerViewManager.shootTo(pos);
+        return this._bottomLeft.shootTo(pos);
     }
 
     var setGameConfig = function (config) {
