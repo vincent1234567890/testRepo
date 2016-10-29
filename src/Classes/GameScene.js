@@ -1725,16 +1725,22 @@ var GameScene = cc.Scene.extend({
         //init touch event
         this.initTouchEvent();
 
-
-        // 新场景 加勒比海 不进行游戏教学
-        if (this._playTutorial == true && this.getCurStage() == 3) {
-            wrapper.setBooleanForKey(kTutorialPlayed, false);
-            this._playTutorial = false;
-        }
-
-        this.initTutorial();
-        if (!this._playTutorial) {
+        var DISABLE_TUTORIAL = true;
+        if (DISABLE_TUTORIAL) {
+            console.warn('Not loading tutorial because it breaks!  Please remove this warning when it is fixed.');
             this.loadGameMainSessionController();
+        } else {
+            // 新场景 加勒比海 不进行游戏教学
+            if (this._playTutorial == true && this.getCurStage() == 3) {
+                wrapper.setBooleanForKey(kTutorialPlayed, false);
+                this._playTutorial = false;
+            }
+
+            this.initTutorial();
+            if (!this._playTutorial) {
+                this.loadGameMainSessionController();
+            }
+
         }
         //PaymentPopUp.checkPaypal();
     },

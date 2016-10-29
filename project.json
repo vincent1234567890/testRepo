@@ -78,7 +78,7 @@
         "src/Classes/TutorialConfirmLayer.js",
         "src/Classes/TutorialHintBackLayer.js",
         "src/Classes/TutorialSessionController.js",
-        "src/Classes/UnlockStageLayer.js",
+        "src/Classes/UnLockStageLayer.js",
         "src/Classes/UserInfoLayer.js",
         "src/Classes/Weapon.js",
         "src/Classes/WeaponCannon.js",

@@ -4,8 +4,8 @@ cc.loader.register(["sprite"], cc._binaryLoader); //register sprite file loader.
 
 var res = {
     LoadingLogo : "res/loadingLogo.jpg",
-    LoadingAdBg : "res/loadingAdBg.jpg",
-    LoadingCompanyLogoScreen : "res/MainBG.jpg",
+    LoadingAdBg : "res/LoadingAdBg.jpg",
+    LoadingCompanyLogoScreen : "res/MainBg.jpg",
 
     AchievementPlist :"res/Achievement.plist",
     ChestFishPlist: "res/ChestFish.plist",
@@ -143,7 +143,7 @@ var res = {
     CannonPng : "res/cannon.png",
 
     BulletSprite : "res/bullet.sprite",
-    SmallItemPng : "res/smallItem.png",
+    SmallItemPng : "res/SmallItem.png",
 
     JindunPlist : "res/jindun.plist",
     JindunPng : "res/jindun.png",
