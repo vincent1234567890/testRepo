@@ -12,11 +12,10 @@ var CannonView = (function () {
         //@param {node} parent
         //@param {array[2]} pos
         ctor: function (parent, pos) {
-
             // var cannon = "#" + ReferenceName.Cannon;
             cc.Sprite.prototype.ctor.call(this, ReferenceName.Cannon);
             // this.setPosition(300, 300);
-            parent.addChild(this,999999);
+            parent.addChild(this,20);
 
             this.setPosition({x:pos[0], y:pos[1]});
 
