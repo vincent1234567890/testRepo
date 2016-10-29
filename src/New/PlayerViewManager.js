@@ -5,12 +5,12 @@
 var PlayerViewManager = (function () {
     var _bulletId;
 
-    var PlayerViewManager = function (parent, cannonPositions, slot) {
+    var PlayerViewManager = function (parent, cannonPositions, slot, isPlayer) {
         _bulletId = 0;
         this._cannonManager = new CannonManager( parent, cannonPositions[slot]);
         // this._cannonManager = new CannonManager( parent, [125,56]);
 
-        this._playerView = new PlayerView(parent, cc.p(250,56), cannonPositions, slot);
+        this._playerView = new PlayerView(parent, cannonPositions, slot, isPlayer, this._cannonManager);// not ideal
 
     };
 

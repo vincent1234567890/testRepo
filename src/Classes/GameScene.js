@@ -957,7 +957,7 @@ var GameScene = cc.Scene.extend({
         GameManager.initialise(this);
         // this._testCannon = new CannonView(this,{x:300, y:300} );
         // this.addChild(CannonManager);
-        this._cannonActor = new WeaponManager(cc.pAdd(VisibleRect.bottom(), cc.p(0, 50)), 0.0, this);
+        // this._cannonActor = new WeaponManager(cc.pAdd(VisibleRect.bottom(), cc.p(0, 50)), 0.0, this);
     },
     updateTutorial:function (dt) {
         var showBuyItem = GameSetting.getInstance().getShowBuyItem() && this.getChildByTag(999);
@@ -1326,7 +1326,7 @@ var GameScene = cc.Scene.extend({
             PlayerActor.sharedActor().setNeedAddCoin(false);
         }
 
-        this._userInfoLayer.updateUserInfo();
+        // this._userInfoLayer.updateUserInfo();
         this._compactUserInfo.updateUserInfo();
         // this._scoreBar.setLightValue(-60.0 + 115.0 * PlayerActor.sharedActor().getNormalGain() / (GameSetting.getInstance().getNormalCoinCount() * this.getOddsNumber()));
         // if (this._scoreBar.getLightValue() >= 55)
@@ -1336,7 +1336,7 @@ var GameScene = cc.Scene.extend({
         // this._scoreBar.setBullet(PlayerActor.sharedActor().getPlayerMoney());
 
         var useLaser = wrapper.getIntegerForKey(kUseLaser);
-        var isUseSpecialWeapon = this.getCannonActor().getIsChangeToSpecialWeapon();
+        // var isUseSpecialWeapon = this.getCannonActor().getIsChangeToSpecialWeapon();
 
         // if ((useLaser == 1 || PlayerActor.sharedActor().getNormalGain() >= GameSetting.getInstance().getNormalCoinCount() * this.getOddsNumber()) && !isUseSpecialWeapon) {
         //     var curSpecialWeapon = wrapper.getIntegerForKey(CURRENT_SPECIAL_WEAPON_KEY);
@@ -1404,10 +1404,10 @@ var GameScene = cc.Scene.extend({
         // this._scoreBar.setPosition(VisibleRect.bottom());
     },
     loadUserInfoLayer:function () {
-        this._userInfoLayer = UserInfoLayer.create(this);
-        this._userInfoLayer.setDelegate(this);
-        this.addChild(this._userInfoLayer, 10);
-        this._userInfoLayer.setPosition(0, 0);
+        // this._userInfoLayer = UserInfoLayer.create(this);
+        // this._userInfoLayer.setDelegate(this);
+        // this.addChild(this._userInfoLayer, 10);
+        // this._userInfoLayer.setPosition(0, 0);
     },
     initChestGameLayer:function () {
         this._chestGameLayer = ChestGameLayer.create();
@@ -1463,7 +1463,7 @@ var GameScene = cc.Scene.extend({
 
         PlayerActor.sharedActor().reset();
         // 使玩家武器等级与武器管理中设置的当前武器等级相同
-        PlayerActor.sharedActor().setCurWeaponLevel(this.getCannonActor().getCurrentWeaponLevel());
+        // PlayerActor.sharedActor().setCurWeaponLevel(this.getCannonActor().getCurrentWeaponLevel());
         PlayerActor.sharedActor().loadStates();
         PlayerActor.sharedActor().setScene(this);
         PlayerActor.sharedActor().setPreMoney(PlayerActor.sharedActor().getPlayerMoney());
@@ -2120,16 +2120,16 @@ var GameScene = cc.Scene.extend({
             this._compactUserInfo.setPosition(cc.pAdd(VisibleRect.topLeft(), cc.p(this._compactUserInfo.getPosition().x, -150)));
         }
         //weapon
-        this._cannonActor.getCurrentWeapon().setPosition(cc.pAdd(VisibleRect.bottom(), cc.p(0, 50)));
-        this._cannonActor._defaultWeaponPosition = cc.pAdd(VisibleRect.bottom(), cc.p(0, 50));
+        // this._cannonActor.getCurrentWeapon().setPosition(cc.pAdd(VisibleRect.bottom(), cc.p(0, 50)));
+        // this._cannonActor._defaultWeaponPosition = cc.pAdd(VisibleRect.bottom(), cc.p(0, 50));
 
         //scoreBar
-        this._scoreBar.setPosition(VisibleRect.bottom());
-
-        this._scoreBar._weaponBaseRudder.setPosition(cc.p(-VisibleRect.right().x / 2, 0));
-        if (this._scoreBar.getChildByTag(kTagScoreBar)) {
-            this._scoreBar.getChildByTag(kTagScoreBar).setPosition(cc.p(-VisibleRect.right().x / 2, 0));
-        }
+        // this._scoreBar.setPosition(VisibleRect.bottom());
+        //
+        // this._scoreBar._weaponBaseRudder.setPosition(cc.p(-VisibleRect.right().x / 2, 0));
+        // if (this._scoreBar.getChildByTag(kTagScoreBar)) {
+        //     this._scoreBar.getChildByTag(kTagScoreBar).setPosition(cc.p(-VisibleRect.right().x / 2, 0));
+        // }
 
         var rainbow = this.getChildByTag(461);
         if (rainbow) {
@@ -2143,11 +2143,11 @@ var GameScene = cc.Scene.extend({
         // this._itemCamera.setPosition(cc.p(VisibleRect.topRight().x - 125, VisibleRect.topRight().y - this._itemCamera.getContentSize().height / 2));
 
         //userinfo layer
-        this._userInfoLayer._bgSprite.setPosition(VisibleRect.top());
-        this._userInfoLayer._menuAchieve.setPosition(cc.pAdd(VisibleRect.top(), cc.p(0, -28)));
-        this._userInfoLayer._userTitleLabel.setPosition(cc.p(VisibleRect.top().x - 130, VisibleRect.top().y - 26));
-        this._userInfoLayer._levellabel.setPosition(cc.pAdd(VisibleRect.top(), cc.p(0, -28)));
-        this._userInfoLayer._processsprite.setPosition(cc.p(VisibleRect.top().x + 156, VisibleRect.top().y - 24));
+        // this._userInfoLayer._bgSprite.setPosition(VisibleRect.top());
+        // this._userInfoLayer._menuAchieve.setPosition(cc.pAdd(VisibleRect.top(), cc.p(0, -28)));
+        // this._userInfoLayer._userTitleLabel.setPosition(cc.p(VisibleRect.top().x - 130, VisibleRect.top().y - 26));
+        // this._userInfoLayer._levellabel.setPosition(cc.pAdd(VisibleRect.top(), cc.p(0, -28)));
+        // this._userInfoLayer._processsprite.setPosition(cc.p(VisibleRect.top().x + 156, VisibleRect.top().y - 24));
 
         //prize sprite
         this._prizeSprite.setPosition(VisibleRect.center());

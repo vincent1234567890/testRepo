@@ -8,5 +8,6 @@ var ReferenceName = {
     IncreaseCannon_Down : "#PlusDw.png",
     DecreaseCannon : "#Minus.png",
     DecreaseCannon_Down : "#MinusDw.png",
+    CannonPower : "#CoinDeck.png"
 
 }
