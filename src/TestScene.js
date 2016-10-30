@@ -13,5 +13,18 @@ var TestScene = cc.Scene.extend({
         this.addChild(shark);
         shark.setPosition(winSize.width * 0.5, winSize.height * 0.5);
         shark.scheduleUpdate();
+
+        // var cannonlayer = new CanonLayer();
+        GameManager.initialise(this);
     }
 });
+
+var CanonLayer = cc.Layer.extend({
+    ctor: function(){
+        cc.Layer.prototype.ctor.call(this);
+
+        GameManager.initialise(this);
+
+
+    }
+})

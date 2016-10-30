@@ -197,6 +197,7 @@ var WeaponCannonExt = WeaponCannon.extend({
         return bRet;
     },
     shootTo:function (targetPosition, type, showCannonAnimation) {
+        return;
         // Defaults:
         if (showCannonAnimation === undefined) {
             showCannonAnimation = true;

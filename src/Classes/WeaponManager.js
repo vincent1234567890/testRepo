@@ -313,6 +313,7 @@ var WeaponManager = cc.Class.extend({
      Use current weapon shoot to target position
      */
     shootTo:function (pos, type) {
+        return;
         if (GameCtrl.isOnlineGame()) {
             //console.log("pos:", pos);
             const playerGameId = GameCtrl.sharedGame().getMyPlayerId();

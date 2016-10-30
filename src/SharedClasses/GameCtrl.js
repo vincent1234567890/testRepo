@@ -24,11 +24,14 @@ var GameCtrl = cc.Class.extend({
         return true;
     },
     connectToMasterServer:function () {
-        var gameAPIServerUrl = 'ws://3dfishing88888.sinonet.sg:8080';
-        var localNames = ['localhost', '127.0.0.1', '127.0.1.1', '0.0.0.0'];
-        if (localNames.indexOf(window.location.hostname) >= 0) {
-            //gameAPIServerUrl = 'ws://localhost:8080';
-            gameAPIServerUrl = 'ws://192.168.1.1:8080';
+        const useJoeysServerDuringDevelopment = true;
+
+        let gameAPIServerUrl = 'ws://3dfishing88888.sinonet.sg:8088';
+
+        const localNames = ['localhost', '127.0.0.1', '127.0.1.1', '0.0.0.0'];
+        const doingDevelopment = (localNames.indexOf(window.location.hostname) >= 0);
+        if (doingDevelopment && useJoeysServerDuringDevelopment) {
+            gameAPIServerUrl = 'ws://192.168.1.1:8088';
         }
 
         var gameCtrl = this;
@@ -106,7 +109,7 @@ var GameCtrl = cc.Class.extend({
 
                 var ioSocket = gameCtrl.getGameIOSocket();
 
-                socketUtils.simulateNetworkLatency(ioSocket, 200);
+                socketUtils.simulateNetworkLatency(ioSocket, 100);
 
                 var receiver = clientReceiver(ioSocket, gameCtrl);
 
