@@ -81,6 +81,19 @@ var BulletActor = BaseActor.extend({
                 this.setPosition(bulletModel.position[0], bulletModel.position[1]);
                 this.setRotation(bulletModel.angle / Math.PI * 180);
             }
+
+            var nextStep = cc.pAdd(this.getPosition(), cc.p(this._speed * dt * this._moveDirection.x, this._speed * dt * this._moveDirection.y));
+            var Dir = cc.pSub(nextStep, this.getPosition());
+            var ang = Math.atan2(Dir.x, Dir.y);
+            if (this._particle) {
+                this._particle.setPosition(this.getPosition());
+                if (ang < 0) {
+                    this._particle.setAngle(270 - ang / Math.PI * 180);
+                }
+                else {
+                    this._particle.setAngle(270 - ang / Math.PI * 180);
+                }
+            }
             return;
         }
 

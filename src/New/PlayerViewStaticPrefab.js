@@ -7,53 +7,89 @@ var PlayerViewStaticPrefab = (function () {
 
     var PlayerViewStaticPrefab = cc.Sprite.extend({
         _className: "PlayerViewStaticPrefab",
-        _cannonPowerLabel : null,
+        _playerName : cc.LabelTTF,
 
         //@param {node} parent
         //@param {Vector2} pos
         //@param {function} callback for cannon down
         //@param {function} callback for cannon up
-        ctor: function (parent, cannonPositions, slot) {
+        ctor: function (parent, pos) {
 
             //Base
             cc.Sprite.prototype.ctor.call(this, ReferenceName.Base);
-
-            var CannonPower = new cc.Sprite(ReferenceName.CannonPower);
-
-            CannonPower.y = CannonPower.getContentSize().height/2;
-            parent.addChild(CannonPower,25);
-
-
             parent.addChild(this,10);
 
+            //coin icon
+            var coinIcon = new cc.Sprite(ReferenceName.CoinIcon);
+            this.addChild(coinIcon);
 
-            if (cannonPositions[slot][0] > cannonPositions[0][0]) {
+
+            var fontDef = new cc.FontDefinition();
+            fontDef.fontName = "Arial";
+            fontDef.fontSize = 32;
+            fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
+
+            this._playerName = new cc.LabelTTF('', fontDef);
+            this._playerName.setDimensions(cc.size(170,35));
+            this.addChild(this._playerName,1);
+
+            this._gold = new cc.LabelTTF('', fontDef);
+            this._gold.setDimensions(cc.size(170,35));
+            this.addChild(this._gold,1);
+
+            this._gem = new cc.LabelTTF('', fontDef);
+            this._gem.setDimensions(cc.size(60,35));
+            this.addChild(this._gem,1);
+
+            var midX = cc.view.getDesignResolutionSize().width / 2;
+            var midY = cc.view.getDesignResolutionSize().height /2;
+            var thisSizeX = this.getContentSize().width;
+            var thisSizeY = this.getContentSize().height;
+            if (pos[0] > midX) {
                 this.flippedX = true;
-                this.x = cc.view.getDesignResolutionSize().width / 2 + this.getContentSize().width - 65;
-                CannonPower.x = CannonPower.getContentSize().width/2 + 1;
+                this.x = midX + thisSizeX - 65;
+                coinIcon.x = thisSizeX -300;
+                this._playerName.x = midX - thisSizeX - 75;
+                this._gold.x = midX - thisSizeX - 60;
+                this._gem.x = midX - thisSizeX + 80;
             } else {
-                this.x = cc.view.getDesignResolutionSize().width / 2 - this.getContentSize().width + 65;
-                CannonPower.x = cc.view.getDesignResolutionSize().width - CannonPower.getContentSize().width/2 + 1;
+                this.x = midX  - thisSizeX + 65;
+                coinIcon.x = 300;
+                this._playerName.x = thisSizeX - 75;
+                this._gold.x = thisSizeX - 80;
+                this._gem.x = thisSizeX - 180;
             }
 
-            if (cannonPositions[slot][1] > cannonPositions[0][1]){
+            if (pos[1] > midY){
                 this.flippedY = true;
-                this.y = cc.view.getDesignResolutionSize().height - this.getContentSize().height + 57;
-                CannonPower.flippedY = true;
-                CannonPower.y = cc.view.getDesignResolutionSize().height - CannonPower.getContentSize().height/2 + 1;
+                this.y = midY *2 - thisSizeY + 57;
+                coinIcon.y = thisSizeY - 25;
+                this._playerName.y = thisSizeY - 80;
+                this._gold.y = thisSizeY - 25;
             }else {
-                this.y = this.getContentSize().height - 57;
-                CannonPower.y = CannonPower.getContentSize().height/2 - 1;
+                this.y = thisSizeY - 57;
+                coinIcon.y = 25;
+                this._playerName.y = 80;
+                this._gold.y = 25;
             }
+            this._gem.y = this._playerName.y;
 
-            this._cannonPowerLabel = new cc.LabelAtlas("1", ImageName("ui_text_03.png"), 14, 20, '0');
-            this.addChild(this._cannonPowerLabel);
-            this._cannonPowerLabel.setPosition(0,0);
+            // coinIcon.setPosition( this.getContentSize() + cc.p(-));
+
+
+
+
         },
 
-        updateCannonPowerLabel : function (cannonPower) {
-            this._cannonPowerLabel.setString(cannonPower);
+        updatePlayerData: function (playerData) {
+            console.log(JSON.stringify(playerData));
+            this._playerName.setString(playerData.playerName);
+            this._gold.setString(playerData.score);
+            this._gem.setString(0);
+            console.log(playerData.score);
+            console.log(this._playerName.getString());
         }
+
 
     });
 
