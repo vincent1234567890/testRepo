@@ -40,13 +40,12 @@ var GameManager = function(){
     };
 
     var initialise = function (parent) {
-        console.log(parent.getPosition());
         _parentNode = new cc.Node();
         parent.addChild(_parentNode,99999);
         GameView.initialise(_parentNode);
 
         for (var i = 0; i < _gameConfig.maxPlayers ; i++){
-            _playerViews[i] = new PlayerViewManager(_parentNode, _gameConfig.cannonPositions, i, i == _playerSlot);
+            _playerViews[i] = new PlayerViewManager(_parentNode, _gameConfig.cannonPositions[i], i == _playerSlot);
         }
 
         initialiseTouch(this);
@@ -67,8 +66,11 @@ var GameManager = function(){
         _playerSlot = playerSlot;
     };
 
-    var updateMultiplayerState = function(playerId, playerName, playerSlot){
-        _playerPositions[playerSlot] = {"playerId" : playerId, "playerName" : playerName, "playerSlot" : playerSlot};
+    var updateMultiplayerState = function(playerData){
+        console.log(playerData);
+        //{playerId : playerId, playerName : playerName, playerSlot : playerSlot}
+        _playerPositions[playerData.playerSlot] = playerData;
+        _playerViews[playerData.playerSlot].updatePlayerData(playerData);
     }
 
 
