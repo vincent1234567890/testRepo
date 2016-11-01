@@ -260,7 +260,7 @@ var GameScene = cc.Scene.extend({
         this._retainedResArray = [];
         this._shootPosList = []
 
-
+        GameManager.initialise(this);
 
     },
 
@@ -954,7 +954,7 @@ var GameScene = cc.Scene.extend({
     },
     loadCannon:function () {
         // this._testCannonManager = CannonManager;
-        GameManager.initialise(this);
+        // GameManager.initialise(this);
         // this._testCannon = new CannonView(this,{x:300, y:300} );
         // this.addChild(CannonManager);
         // this._cannonActor = new WeaponManager(cc.pAdd(VisibleRect.bottom(), cc.p(0, 50)), 0.0, this);

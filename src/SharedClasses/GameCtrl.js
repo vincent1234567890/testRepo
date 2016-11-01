@@ -31,7 +31,7 @@ var GameCtrl = cc.Class.extend({
         const localNames = ['localhost', '127.0.0.1', '127.0.1.1', '0.0.0.0'];
         const doingDevelopment = (localNames.indexOf(window.location.hostname) >= 0);
         if (doingDevelopment && useJoeysServerDuringDevelopment) {
-            gameAPIServerUrl = 'ws://192.168.1.1:8088';
+            gameAPIServerUrl = 'ws://192.168.1.3:8088';
         }
 
         var gameCtrl = this;

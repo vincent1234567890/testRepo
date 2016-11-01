@@ -5,26 +5,37 @@
 var PlayerViewManager = (function () {
     var _bulletId;
 
-    var PlayerViewManager = function (parent, cannonPositions, slot, isPlayer) {
+    var PlayerViewManager = function (parent, pos, isPlayer) {
         _bulletId = 0;
-        this._cannonManager = new CannonManager( parent, cannonPositions[slot]);
+        this._playerId = '';
+        this._playerName = '';
+
+        this._cannonManager = new CannonManager( parent, pos, isPlayer);
         // this._cannonManager = new CannonManager( parent, [125,56]);
 
-        this._playerView = new PlayerView(parent, cannonPositions, slot, isPlayer, this._cannonManager);// not ideal
+        this._playerView = new PlayerView(parent, pos);// not ideal
 
     };
 
-    PlayerViewManager.prototype.turnTo = function(pos){
+    var proto = PlayerViewManager.prototype;
+
+    proto.turnTo = function(pos){
         return this._cannonManager.turnTo(pos);
     };
 
-    PlayerViewManager.prototype.shootTo = function(pos){
+    proto.shootTo = function(pos){
         return this._cannonManager.shootTo(pos);
     };
 
-    PlayerViewManager.prototype.getNextBulletId = function(){
+    proto.getNextBulletId = function(){
         return _bulletId++;
-    }
+    };
+
+    proto.updatePlayerData = function(playerData){
+        this._playerId = playerData.playerId;
+        this._playerName = playerData.playerName;
+        this._playerView.updateView(playerData);
+    };
 
     // var PlayerView = function () {
     //     initialise : initialise,
