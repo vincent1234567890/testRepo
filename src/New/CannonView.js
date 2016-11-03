@@ -14,6 +14,10 @@ var CannonView = (function () {
         //@param {array[2]} pos
         ctor: function (parent, pos) {
             // var cannon = "#" + ReferenceName.Cannon;
+
+            // var pinfo = new cc.auto(ReferenceName.Cannon);
+            // var pinfo = new cc.polygo
+
             cc.Sprite.prototype.ctor.call(this, ReferenceName.Cannon);
             // this.setPosition(300, 300);
             parent.addChild(this,20);

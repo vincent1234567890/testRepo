@@ -11,8 +11,16 @@
 
 var GameManager = function(){
     var _gameConfig;
+
+    // var fishGameArena;
+    var _fishGameArena;
+
+    //player
     var _playerSlot;
     var _playerId;
+    var _lastShotTime;
+
+    //parent node for UI parenting
     var _parentNode;
 
     var _playerViews = [];
@@ -21,17 +29,30 @@ var GameManager = function(){
     var _playerPositions = [];
 
     var initialiseTouch = function (gameManager) {
-        gameManager._touchLayer = TouchLayer.create();
-        gameManager._touchLayer.setDelegate(gameManager);
+        gameManager._touchLayer = new TouchLayerRefactored(controlNewPosition);
+        // gameManager._touchLayer.setDelegate(gameManager);
         _parentNode.addChild(gameManager._touchLayer, 1000);
     };
 
     //callback for touchlayer
     //bad : refactor touchlayer
     var controlNewPosition = function (control, pos, yPos) {
+
+        const lastShootTime = this._lastShotTime || -Infinity;
+        const now = this._fishGameArena.getGameTime();
+        const timeSinceLastShot = now - lastShootTime;
+        if (timeSinceLastShot < 0.98 * _gameConfig.shootInterval) {
+            // console.log("TOOFAST");
+            return;
+        }
+
+        this._lastShotTime = now;
+
         // change this to current player position
         var rot = _playerViews[_playerSlot].turnTo(pos);
         const bulletId = _playerId + ':' + getPlayerBulletId();
+
+
         GameCtrl.informServer.bulletFired(bulletId, rot);
     };
 
@@ -39,9 +60,12 @@ var GameManager = function(){
         return _playerViews[_playerSlot].getNextBulletId();
     };
 
-    var initialise = function (parent) {
+    var initialise = function (parent, fishGameArena) {
         _parentNode = new cc.Node();
         parent.addChild(_parentNode,99999);
+        this._fishGameArena = fishGameArena;
+        this._lastShotTime = -Infinity;
+
         GameView.initialise(_parentNode);
 
         for (var i = 0; i < _gameConfig.maxPlayers ; i++){
@@ -82,7 +106,7 @@ var GameManager = function(){
         shootTo : shootTo, //sliohtly unsatisfactory
 
         //change to callback strategy instead of reverse public call
-        controlNewPosition : controlNewPosition,
+        // controlNewPosition : controlNewPosition,
     };
 
     return GameManager;

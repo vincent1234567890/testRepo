@@ -260,7 +260,7 @@ var GameScene = cc.Scene.extend({
         this._retainedResArray = [];
         this._shootPosList = []
 
-        GameManager.initialise(this);
+        // GameManager.initialise(this);
 
     },
 

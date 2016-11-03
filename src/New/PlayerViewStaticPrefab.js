@@ -65,13 +65,12 @@ var PlayerViewStaticPrefab = (function () {
                 this.y = midY *2 - thisSizeY + 57;
                 coinIcon.y = thisSizeY - 25;
                 this._playerName.y = thisSizeY - 80;
-                this._gold.y = thisSizeY - 25;
             }else {
                 this.y = thisSizeY - 57;
                 coinIcon.y = 25;
                 this._playerName.y = 80;
-                this._gold.y = 25;
             }
+            this._gold.y = coinIcon.y;
             this._gem.y = this._playerName.y;
 
             // coinIcon.setPosition( this.getContentSize() + cc.p(-));

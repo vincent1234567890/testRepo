@@ -120,12 +120,14 @@ var GameCtrl = cc.Class.extend({
             }
         ).catch(console.error.bind(console));
     },
-    startGameScene: function () {
+    startGameScene: function (fishGameArena) {
+        this.setArena(fishGameArena);
         this.gameState = GAMEPLAY;
         var gameScene = new GameScene("Scene_Main", this._selectLevel);
         this.setCurScene(gameScene);
 
         cc.director.runScene(this.getCurScene());
+        GameManager.initialise(gameScene, fishGameArena);
         sino.fishGroup.loadResource(this.getCurScene());
         sino.fishGroup.init();
 
