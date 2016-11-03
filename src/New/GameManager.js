@@ -92,7 +92,7 @@ var GameManager = function(){
 
     var updateMultiplayerState = function(playerData){
         console.log(playerData);
-        //{playerId : playerId, playerName : playerName, playerSlot : playerSlot}
+        //{id: playerId, name: playerName, slot: playerSlot}
         _playerPositions[playerData.slot] = playerData;
         _playerViews[playerData.slot].updatePlayerData(playerData);
     }
