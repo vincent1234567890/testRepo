@@ -304,6 +304,9 @@ var BaseSprite = (function() {
                     }
                 }
             }
+            // console.log(filePath);
+            // console.log(JSON.stringify(this));
+            // console.log(this.tile[j]);
             return true;
         }
     });
