@@ -53,8 +53,8 @@ var GameManager = function(){
 
     var shootTo = function(playerId,pos){
         for (var p of _playerPositions){
-            if(p && p.playerId == playerId){
-                return _playerViews[p.playerSlot].shootTo(pos);
+            if(p && p.id == playerId){
+                return _playerViews[p.slot].shootTo(pos);
             }
         };
     };
@@ -69,8 +69,8 @@ var GameManager = function(){
     var updateMultiplayerState = function(playerData){
         console.log(playerData);
         //{playerId : playerId, playerName : playerName, playerSlot : playerSlot}
-        _playerPositions[playerData.playerSlot] = playerData;
-        _playerViews[playerData.playerSlot].updatePlayerData(playerData);
+        _playerPositions[playerData.slot] = playerData;
+        _playerViews[playerData.slot].updatePlayerData(playerData);
     }
 
 
