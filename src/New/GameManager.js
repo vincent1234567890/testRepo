@@ -42,7 +42,7 @@ var GameManager = function(){
         const lastShootTime = this._lastShotTime || -Infinity;
         const now = _fishGameArena.getGameTime();
         const timeSinceLastShot = now - lastShootTime;
-        if (timeSinceLastShot < 0.98 * _gameConfig.shootInterval) {
+        if (timeSinceLastShot < _gameConfig.shootInterval) {
             // console.log("TOO FAST!");
             return;
         }
