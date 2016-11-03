@@ -32,8 +32,8 @@ var PlayerViewManager = (function () {
     };
 
     proto.updatePlayerData = function(playerData){
-        this._playerId = playerData.playerId;
-        this._playerName = playerData.playerName;
+        this._playerId = playerData.id;
+        this._playerName = playerData.name;
         this._playerView.updateView(playerData);
     };
 
