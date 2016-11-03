@@ -15,6 +15,8 @@ var GameManager = function(){
     // var fishGameArena;
     var _fishGameArena;
 
+    var _touchLayer;
+
     //player
     var _playerSlot;
     var _playerId;
@@ -28,30 +30,27 @@ var GameManager = function(){
     //to be refactored in to player object?
     var _playerPositions = [];
 
-    var initialiseTouch = function (gameManager) {
-        gameManager._touchLayer = new TouchLayerRefactored(controlNewPosition);
-        // gameManager._touchLayer.setDelegate(gameManager);
-        _parentNode.addChild(gameManager._touchLayer, 1000);
+    var initialiseTouch = function () {
+        if(!_touchLayer) {
+            _touchLayer = new TouchLayerRefactored(touchAt);
+            _parentNode.addChild(_touchLayer, -1);
+        }
     };
 
-    //callback for touchlayer
-    //bad : refactor touchlayer
-    var controlNewPosition = function (control, pos, yPos) {
+    var touchAt = function (pos) {
 
         const lastShootTime = this._lastShotTime || -Infinity;
-        const now = this._fishGameArena.getGameTime();
+        const now = _fishGameArena.getGameTime();
         const timeSinceLastShot = now - lastShootTime;
         if (timeSinceLastShot < 0.98 * _gameConfig.shootInterval) {
-            // console.log("TOOFAST");
+            // console.log("TOO FAST!");
             return;
         }
 
         this._lastShotTime = now;
 
-        // change this to current player position
         var rot = _playerViews[_playerSlot].turnTo(pos);
         const bulletId = _playerId + ':' + getPlayerBulletId();
-
 
         GameCtrl.informServer.bulletFired(bulletId, rot);
     };
@@ -63,8 +62,9 @@ var GameManager = function(){
     var initialise = function (parent, fishGameArena) {
         _parentNode = new cc.Node();
         parent.addChild(_parentNode,99999);
-        this._fishGameArena = fishGameArena;
-        this._lastShotTime = -Infinity;
+        console.log(fishGameArena);
+        _fishGameArena = fishGameArena;
+        _lastShotTime = -Infinity;
 
         GameView.initialise(_parentNode);
 
@@ -72,13 +72,13 @@ var GameManager = function(){
             _playerViews[i] = new PlayerViewManager(_parentNode, _gameConfig.cannonPositions[i], i == _playerSlot);
         }
 
-        initialiseTouch(this);
+        initialiseTouch();
     };
 
     var shootTo = function(playerId,pos){
         for (var p of _playerPositions){
-            if(p && p.playerId == playerId){
-                return _playerViews[p.playerSlot].shootTo(pos);
+            if(p && p.id == playerId){
+                return _playerViews[p.slot].shootTo(pos);
             }
         };
     };
@@ -93,8 +93,8 @@ var GameManager = function(){
     var updateMultiplayerState = function(playerData){
         console.log(playerData);
         //{playerId : playerId, playerName : playerName, playerSlot : playerSlot}
-        _playerPositions[playerData.playerSlot] = playerData;
-        _playerViews[playerData.playerSlot].updatePlayerData(playerData);
+        _playerPositions[playerData.slot] = playerData;
+        _playerViews[playerData.slot].updatePlayerData(playerData);
     }
 
 
@@ -102,11 +102,7 @@ var GameManager = function(){
         initialise : initialise,
         setGameState : setGameState,
         updateMultiplayerState : updateMultiplayerState,
-        // setPlayerId : setPlayerId,
         shootTo : shootTo, //sliohtly unsatisfactory
-
-        //change to callback strategy instead of reverse public call
-        // controlNewPosition : controlNewPosition,
     };
 
     return GameManager;

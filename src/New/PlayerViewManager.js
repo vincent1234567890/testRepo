@@ -8,11 +8,7 @@ var PlayerViewManager = (function () {
     var PlayerViewManager = function (parent, pos, isPlayer) {
         _bulletId = 0;
 
-        // this._playerId = '';
-        // this._playerName = '';
-
         this._cannonManager = new CannonManager(parent, pos, isPlayer);
-        // this._cannonManager = new CannonManager( parent, [125,56]);
 
         this._playerView = new PlayerView(parent, pos);// not ideal
 
@@ -25,12 +21,9 @@ var PlayerViewManager = (function () {
     };
 
     proto.shootTo = function (pos) {
-
         if (this._playerData.score > this._cannonManager.getCurrentValue()) {
             return this._cannonManager.shootTo(pos);
         }
-
-        // this.playerData;
     };
 
     proto.getNextBulletId = function () {
@@ -43,9 +36,6 @@ var PlayerViewManager = (function () {
         this._playerView.updateView(playerData);
     };
 
-    // var PlayerView = function () {
-    //     initialise : initialise,
-    // }
 
     return PlayerViewManager;
 }());
