@@ -123,6 +123,7 @@ var GameMainSessionController = GameSessionController.extend({
         if (GameCtrl.isOnlineGame()) {
             if (GameCtrl.sharedGame().getArena()) {
                 GameCtrl.sharedGame().getArena().updateEverything();
+                GameManager.updateEverything();
             }
 
             var gameScene = GameCtrl.sharedGame().getCurScene();

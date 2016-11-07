@@ -174,6 +174,10 @@ var res = {
     GameUIPng : "res/New/gameui.png",
     GameUIPlist : "res/New/gameui.plist",
 
+    //testing
+    StingrayPNG : "res/New/testing/stingray_test.png",
+    StingrayPlist : "res/New/testing/stingray_test.plist",
+
 
 };
 

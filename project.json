@@ -88,6 +88,7 @@
         "src/Classes/WeaponSpecialRay.js",
         "src/TestScene.js",
 
+        "src/New/TouchLayerRefactored.js",
         "src/New/ReferenceName.js",
         "src/New/CannonView.js",
         "src/New/CannonManager.js",
@@ -95,6 +96,8 @@
         "src/New/PlayerView.js",
         "src/New/PlayerViewManager.js",
         "src/New/GameView.js",
+        "src/New/FishView.js",
+        "src/New/FishViewManager.js",
         "src/New/GameManager.js",
 
 
