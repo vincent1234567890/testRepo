@@ -18,7 +18,7 @@ var CannonView = (function () {
             // var pinfo = new cc.auto(ReferenceName.Cannon);
             // var pinfo = new cc.polygo
 
-            cc.Sprite.prototype.ctor.call(this, ReferenceName.Cannon);
+            this._super(ReferenceName.Cannon);
             // this.setPosition(300, 300);
             parent.addChild(this, 20);
 
