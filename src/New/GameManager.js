@@ -25,7 +25,9 @@ var GameManager = function(){
     //parent node for UI parenting
     var _parentNode;
 
+    //Managers
     var _playerViews = [];
+    var _fishManager;
 
     //to be refactored in to player object?
     var _playerPositions = [];
@@ -62,9 +64,9 @@ var GameManager = function(){
     var initialise = function (parent, fishGameArena) {
         _parentNode = new cc.Node();
         parent.addChild(_parentNode,99999);
-        console.log(fishGameArena);
         _fishGameArena = fishGameArena;
         _lastShotTime = -Infinity;
+        _fishManager = new FishViewManager(_parentNode, _fishGameArena);
 
         GameView.initialise(_parentNode);
 
@@ -95,6 +97,18 @@ var GameManager = function(){
         //{id: playerId, name: playerName, slot: playerSlot}
         _playerPositions[playerData.slot] = playerData;
         _playerViews[playerData.slot].updatePlayerData(playerData);
+    };
+
+    var createFish = function(fishId, fishType){
+        return _fishManager.addFish(fishId,fishType);
+    };
+    
+    var removeFish = function (fishId) {
+        return _fishManager.removeFish(fishId);
+    };
+
+    var updateEverything = function () {
+        _fishManager.update();
     }
 
 
@@ -103,6 +117,9 @@ var GameManager = function(){
         setGameState : setGameState,
         updateMultiplayerState : updateMultiplayerState,
         shootTo : shootTo, //sliohtly unsatisfactory
+        createFish : createFish,
+        removeFish : removeFish,
+        updateEverything : updateEverything,
     };
 
     return GameManager;
