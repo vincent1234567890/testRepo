@@ -27,7 +27,7 @@ var PlayerViewManager = (function () {
     };
 
     proto.getNextBulletId = function () {
-        return _bulletId++;
+        return (_bulletId++).toString(36);
     };
 
     proto.updatePlayerData = function (playerData) {
