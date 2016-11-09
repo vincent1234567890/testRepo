@@ -4,7 +4,7 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>Sting ray_00000.png</key>
+            <key>Ray_00000.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -25,7 +25,7 @@
                 <key>verticesUV</key>
                 <string>576 1161 648 1244 732 1256 766 1281 779 1318 761 1361 726 1382 656 1387 636 1402 588 1466 551 1480 509 1480 481 1471 450 1447 412 1399 397 1365 391 1324 395 1273 410 1240 442 1198 476 1169 516 1155</string>
             </dict>
-            <key>Sting ray_00001.png</key>
+            <key>Ray_00001.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -46,7 +46,7 @@
                 <key>verticesUV</key>
                 <string>563 706 635 789 719 801 753 826 766 863 748 906 713 927 643 932 623 947 575 1011 538 1025 496 1025 468 1016 437 992 399 944 384 910 378 869 382 818 397 785 429 743 463 714 503 700</string>
             </dict>
-            <key>Sting ray_00002.png</key>
+            <key>Ray_00002.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -67,7 +67,7 @@
                 <key>verticesUV</key>
                 <string>196 17 252 91 332 105 373 122 388 168 377 205 345 229 257 241 197 314 152 336 93 329 60 303 11 233 1 180 4 116 36 64 71 22 103 7 145 1</string>
             </dict>
-            <key>Sting ray_00003.png</key>
+            <key>Ray_00003.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -88,7 +88,7 @@
                 <key>verticesUV</key>
                 <string>196 354 252 428 332 442 373 459 388 505 377 542 345 566 257 578 197 651 152 673 93 666 60 640 11 570 1 517 4 453 36 401 71 359 103 344 145 338</string>
             </dict>
-            <key>Sting ray_00004.png</key>
+            <key>Ray_00004.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -109,7 +109,7 @@
                 <key>verticesUV</key>
                 <string>169 683 202 706 250 766 326 790 358 808 377 856 342 908 254 921 199 990 162 1013 119 1019 79 1011 49 989 30 949 8 884 1 818 44 711 77 678 132 674</string>
             </dict>
-            <key>Sting ray_00005.png</key>
+            <key>Ray_00005.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -130,7 +130,7 @@
                 <key>verticesUV</key>
                 <string>355 927 388 950 436 1010 512 1034 544 1052 563 1100 528 1152 440 1165 385 1234 348 1257 305 1263 265 1255 235 1233 216 1193 194 1128 187 1062 230 955 263 922 318 918</string>
             </dict>
-            <key>Sting ray_00006.png</key>
+            <key>Ray_00006.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -151,7 +151,7 @@
                 <key>verticesUV</key>
                 <string>591 383 618 431 657 458 728 473 758 516 742 568 702 593 634 598 580 672 537 695 441 695 407 661 388 524 405 381 440 349 540 349</string>
             </dict>
-            <key>Sting ray_00007.png</key>
+            <key>Ray_00007.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -172,7 +172,7 @@
                 <key>verticesUV</key>
                 <string>593 35 620 83 659 110 730 125 760 168 744 220 704 245 636 250 582 324 539 347 443 347 409 313 390 176 407 33 442 1 542 1</string>
             </dict>
-            <key>Sting ray_00008.png</key>
+            <key>Ray_00008.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -193,7 +193,7 @@
                 <key>verticesUV</key>
                 <string>816 1430 860 1492 935 1525 955 1545 967 1580 945 1621 907 1639 865 1642 852 1654 817 1707 786 1731 765 1741 653 1741 632 1720 621 1693 624 1549 620 1450 628 1418 653 1395 775 1395</string>
             </dict>
-            <key>Sting ray_00009.png</key>
+            <key>Ray_00009.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -214,7 +214,7 @@
                 <key>verticesUV</key>
                 <string>904 949 948 1011 1023 1044 1043 1064 1055 1099 1033 1140 995 1158 953 1161 940 1173 905 1226 874 1250 853 1260 741 1260 720 1239 709 1212 712 1068 708 969 716 937 741 914 863 914</string>
             </dict>
-            <key>Sting ray_00010.png</key>
+            <key>Ray_00010.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -235,7 +235,7 @@
                 <key>verticesUV</key>
                 <string>528 1644 560 1657 592 1686 620 1730 721 1771 743 1813 731 1849 704 1881 634 1889 571 1968 522 1988 474 1988 443 1978 414 1949 389 1843 390 1785 412 1685 433 1653 469 1643 481 1642 513 1642</string>
             </dict>
-            <key>Sting ray_00011.png</key>
+            <key>Ray_00011.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -256,7 +256,7 @@
                 <key>verticesUV</key>
                 <string>140 1634 172 1647 204 1676 232 1720 333 1761 355 1803 343 1839 316 1871 246 1879 183 1958 134 1978 86 1978 55 1968 26 1939 1 1833 2 1775 24 1675 45 1643 81 1633 93 1632 125 1632</string>
             </dict>
-            <key>Sting ray_00012.png</key>
+            <key>Ray_00012.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -277,7 +277,7 @@
                 <key>verticesUV</key>
                 <string>912 561 958 619 1028 643 1049 664 1066 698 1045 740 1020 757 961 772 910 834 873 860 836 866 802 861 764 843 728 776 715 733 710 659 752 569 777 543 807 530 873 530</string>
             </dict>
-            <key>Sting ray_00013.png</key>
+            <key>Ray_00013.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -298,7 +298,7 @@
                 <key>verticesUV</key>
                 <string>900 221 946 279 1016 303 1037 324 1054 358 1033 400 1008 417 949 432 898 494 861 520 824 526 790 521 752 503 716 436 703 393 698 319 740 229 765 203 795 190 861 190</string>
             </dict>
-            <key>Sting ray_00014.png</key>
+            <key>Ray_00014.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -319,7 +319,7 @@
                 <key>verticesUV</key>
                 <string>158 1175 200 1190 244 1251 266 1266 341 1275 367 1293 388 1319 388 1352 365 1386 336 1400 260 1410 196 1485 158 1502 95 1499 62 1471 26 1423 1 1367 6 1298 18 1262 61 1205 90 1184 118 1174</string>
             </dict>
-            <key>Sting ray_00015.png</key>
+            <key>Ray_00015.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
