@@ -13,14 +13,5 @@ var PlayerView = (function () {
         this._playerViewStaticPrefabInstance.updatePlayerData(playerData);
     };
 
-
-
-
-    // PlayerView.prototype.
-
-    // var PlayerView = function () {
-    //     initialise : initialise,
-    // }
-
     return PlayerView;
 }());

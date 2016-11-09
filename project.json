@@ -96,6 +96,8 @@
         "src/New/PlayerView.js",
         "src/New/PlayerViewManager.js",
         "src/New/GameView.js",
+        "src/New/Data/FishAnimationEnum.js",
+        "src/New/Data/FishData.js",
         "src/New/FishView.js",
         "src/New/FishViewManager.js",
         "src/New/GameManager.js",

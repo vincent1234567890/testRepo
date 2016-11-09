@@ -116,7 +116,7 @@ var GameManager = function(){
         initialise : initialise,
         setGameState : setGameState,
         updateMultiplayerState : updateMultiplayerState,
-        shootTo : shootTo, //sliohtly unsatisfactory
+        shootTo : shootTo, //slightly unsatisfactory
         createFish : createFish,
         removeFish : removeFish,
         updateEverything : updateEverything,

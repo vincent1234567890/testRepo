@@ -175,8 +175,13 @@ var res = {
     GameUIPlist : "res/New/gameui.plist",
 
     //testing
-    StingrayPNG : "res/New/testing/stingray_test.png",
-    StingrayPlist : "res/New/testing/stingray_test.plist",
+    StingrayPNG : "res/New/testing/ray.png",
+    StingrayPlist : "res/New/testing/ray.plist",
+    SquidPNG : "res/New/testing/Squid.png",
+    SquidPlist : "res/New/testing/Squid.plist",
+    PufferfishPlist : "res/New/testing/Pufferfish.plist",
+    PufferfishPNG : "res/New/testing/Pufferfish.png",
+
 
 
 };
@@ -189,6 +194,7 @@ var g_resources = [
     "res/qipao4.plist",
 
 ];
+
 for (var i in res) {
     g_resources.push(res[i]);
 }

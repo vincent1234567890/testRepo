@@ -5,7 +5,13 @@
 var FishViewManager = (function(){
 
     var FishViewManager = function(parent, fishGameArena){
+        // console.log
         cc.spriteFrameCache.addSpriteFrames(res.StingrayPlist);
+        cc.spriteFrameCache.addSpriteFrames(res.SquidPlist);
+        cc.spriteFrameCache.addSpriteFrames(res.PufferfishPlist);
+        // FishAnimationData();
+        FishAnimationData.initialise();
+
         this._parent = parent;
         this._fishes = {};
         this._fishGameArena = fishGameArena;
@@ -27,7 +33,7 @@ var FishViewManager = (function(){
     };
     
     proto.removeFish = function (id) {
-        this._parent.removeChild(this._fishes[id])
+        this._parent.removeChild(this._fishes[id]);
         delete this._fishes[id];
     };
 
