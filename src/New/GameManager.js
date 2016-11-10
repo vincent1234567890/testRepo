@@ -111,6 +111,10 @@ var GameManager = function(){
         _fishManager.update();
     }
 
+    var getGameConfig = function () {
+        return _gameConfig;
+    }
+
 
     var GameManager = {
         initialise : initialise,
@@ -120,6 +124,9 @@ var GameManager = function(){
         createFish : createFish,
         removeFish : removeFish,
         updateEverything : updateEverything,
+
+        //hack-ish for debug
+        getGameConfig : getGameConfig,
     };
 
     return GameManager;
