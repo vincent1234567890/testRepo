@@ -11,11 +11,29 @@ var FishView = (function () {
 
         ctor: function (parent, fishType) {
             this.type = fishType;
-            this.doAnimation(FishAnimationEnum.default)
+
+
+            // var number = '0';
+            // while (number.length < 5){
+            //     number = '0' + number;
+            // }
+            // var frameName = fishType + '_' + number + '.png';
+            // console.log(frameName);
+            // this._super(frameName);
 
             this._super();
+
+
+            this.doAnimation(FishAnimationEnum.default);
+
+
+
+
+            // this.setAnchorPoint(0.5,0.5);
             this.setScale(0.5);
             parent.addChild(this, -1);
+
+
         },
 
         doAnimation : function(fishAnimationEnum) {
@@ -29,6 +47,8 @@ var FishView = (function () {
             this.runAction(this._currentAnimationAction);
 
         },
+
+
 
 
     });

@@ -175,12 +175,13 @@ var res = {
     GameUIPlist : "res/New/gameui.plist",
 
     //testing
-    StingrayPNG : "res/New/testing/ray.png",
-    StingrayPlist : "res/New/testing/ray.plist",
+    StingrayPNG : "res/New/testing/Ray.png",
+    StingrayPlist : "res/New/testing/Ray.plist",
     SquidPNG : "res/New/testing/Squid.png",
     SquidPlist : "res/New/testing/Squid.plist",
     PufferfishPlist : "res/New/testing/Pufferfish.plist",
     PufferfishPNG : "res/New/testing/Pufferfish.png",
+    DebugCircle : "res/New/testing/circle.png",
 
 
 
