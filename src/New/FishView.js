@@ -11,11 +11,23 @@ var FishView = (function () {
 
         ctor: function (parent, fishType) {
             this.type = fishType;
-            this.doAnimation(FishAnimationEnum.default)
 
-            this._super();
+
+            //seems only useful to set and initialise rect/sprite box for sprite (otherwise it would be 0)
+            //can be removed for production
+            var number = '0';
+            while (number.length < 5){
+                number = '0' + number;
+            }
+            var frameName = '#' + fishType + '_' + number + '.png';
+            this._super(frameName);
+
+            this.doAnimation(FishAnimationEnum.default);
+
+
             this.setScale(0.5);
             parent.addChild(this, -1);
+
         },
 
         doAnimation : function(fishAnimationEnum) {
@@ -23,12 +35,18 @@ var FishView = (function () {
                 this.stopAction(this._currentAnimationAction);
             }
             var data = FishAnimationData[this.type][fishAnimationEnum];
+            if (data.pivot){
+                this.setAnchorPoint(data.pivot);
+            }
+            console.log(this.getAnchorPoint());
 
             var sequence = new cc.Sequence(data.animation.clone(), new cc.DelayTime(data.animationInterval));
             this._currentAnimationAction = new cc.RepeatForever(sequence);
             this.runAction(this._currentAnimationAction);
 
         },
+
+
 
 
     });

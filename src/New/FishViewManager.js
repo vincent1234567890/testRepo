@@ -6,9 +6,11 @@ var FishViewManager = (function(){
 
     var FishViewManager = function(parent, fishGameArena){
         // console.log
-        cc.spriteFrameCache.addSpriteFrames(res.StingrayPlist);
         cc.spriteFrameCache.addSpriteFrames(res.SquidPlist);
         cc.spriteFrameCache.addSpriteFrames(res.PufferfishPlist);
+        cc.spriteFrameCache.addSpriteFrames(res.TurtlePlist);
+        cc.spriteFrameCache.addSpriteFrames(res.PorgyPlist);
+        cc.spriteFrameCache.addSpriteFrames(res.StingrayPlist);
         // FishAnimationData();
         FishAnimationData.initialise();
 
@@ -24,8 +26,16 @@ var FishViewManager = (function(){
     var proto = FishViewManager.prototype;
 
     proto.addFish = function(fishId, fishType){
-        this._fishes[fishId] = new FishView(this._parent, fishType);
+        // this._fishes[fishId] = new FishView(this._parent, fishType);
+        // return this._fishes[fishId];
+
+        //debug version:
+        var parent = new cc.Node();
+        this._parent.addChild(parent);
+        new FishView(parent, fishType);
+        this._fishes[fishId] = parent;
         return this._fishes[fishId];
+
     };
 
     proto.getFish = function(id){
