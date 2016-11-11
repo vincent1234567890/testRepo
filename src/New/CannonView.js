@@ -26,7 +26,7 @@ var CannonView = (function () {
             CannonPower.y = CannonPower.getContentSize().height / 2;
             parent.addChild(CannonPower, 25);
 
-
+            this.setAnchorPoint(0.5,0.4);
             this.setPosition({x: pos[0], y: pos[1]});
 
             var fontDef = new cc.FontDefinition();

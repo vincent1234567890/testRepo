@@ -1,7 +1,7 @@
 {
     "project_type": "javascript",
 
-    "debugMode" : 2,
+    "debugMode" : 3,
     "showFPS" : true,
     "frameRate" : 60,
     "noCache" : false,
@@ -97,7 +97,7 @@
         "src/New/PlayerViewManager.js",
         "src/New/GameView.js",
         "src/New/Data/FishAnimationEnum.js",
-        "src/New/Data/FishData.js",
+        "src/New/Data/FishAnimationData.js",
         "src/New/FishView.js",
         "src/New/FishViewManager.js",
         "src/New/GameManager.js",
