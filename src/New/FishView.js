@@ -13,8 +13,8 @@ var FishView = (function () {
             this.type = fishType;
 
 
-            //seems only useful to set and initialise rect/sprite box for sprite (otherwise it would be 0)
-            //can be removed for production
+            // seems only useful to set and initialise rect/sprite box for sprite (otherwise it would be 0)
+            // can be removed for production
             var number = '0';
             while (number.length < 5){
                 number = '0' + number;

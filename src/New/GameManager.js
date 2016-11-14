@@ -18,6 +18,8 @@ var GameManager = function(){
 
     var _touchLayer;
 
+    var _serverInformer;
+
     //player
     var _playerSlot;
     var _playerId;

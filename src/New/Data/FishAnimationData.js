@@ -10,14 +10,14 @@ var FishAnimationData = function () {
     let _hasInitialised = false;
 
     var FishRawData = {
-        // Ray: {
-        //     animationInterval: [0,0],
-        //     frameOrders: [
-        //         [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1],
-        //         [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-        //     ],
-        //     pivot: [{x:0.3,y:0.5},{x:0.3,y:0.5}]
-        // },
+        Ray: {
+            animationInterval: [0,0],
+            frameOrders: [
+                [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1],
+                [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+            ],
+            pivot: [{x:0.3,y:0.5},{x:0.3,y:0.5}]
+        },
         Squid: {
             animationInterval: [5,5],
             frameOrders: [
