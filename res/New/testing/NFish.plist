@@ -4,78 +4,78 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>Squid_00000.png</key>
+            <key>Porgy_00000.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{204,76}</string>
+                <string>{176,76}</string>
                 <key>spriteSourceSize</key>
-                <string>{204,76}</string>
+                <string>{176,76}</string>
                 <key>textureRect</key>
-                <string>{{403,1},{204,76}}</string>
+                <string>{{1,1},{176,76}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Squid_00001.png</key>
+            <key>Porgy_00001.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{176,68}</string>
+                <string>{174,80}</string>
                 <key>spriteSourceSize</key>
-                <string>{176,68}</string>
+                <string>{174,80}</string>
                 <key>textureRect</key>
-                <string>{{609,1},{176,68}}</string>
+                <string>{{1,79},{174,80}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Squid_00002.png</key>
+            <key>Porgy_00002.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{150,88}</string>
+                <string>{172,62}</string>
                 <key>spriteSourceSize</key>
-                <string>{150,88}</string>
+                <string>{172,62}</string>
                 <key>textureRect</key>
-                <string>{{251,1},{150,88}}</string>
+                <string>{{1,281},{172,62}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Squid_00003.png</key>
+            <key>Porgy_00003.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{124,100}</string>
+                <string>{174,56}</string>
                 <key>spriteSourceSize</key>
-                <string>{124,100}</string>
+                <string>{174,56}</string>
                 <key>textureRect</key>
-                <string>{{1,1},{124,100}}</string>
+                <string>{{1,223},{174,56}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Squid_00004.png</key>
+            <key>Porgy_00004.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{122,96}</string>
+                <string>{174,60}</string>
                 <key>spriteSourceSize</key>
-                <string>{122,96}</string>
+                <string>{174,60}</string>
                 <key>textureRect</key>
-                <string>{{127,1},{122,96}}</string>
+                <string>{{1,161},{174,60}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -89,13 +89,13 @@
             <key>premultiplyAlpha</key>
             <false/>
             <key>realTextureFileName</key>
-            <string>Squid.png</string>
+            <string>NFish.png</string>
             <key>size</key>
-            <string>{786,102}</string>
+            <string>{178,344}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:d4ef3cf97903da1cf1b35a07c8434f30:76ecf45c5b3125f4a3acda2fc687f871:c3868ea6e23cb52161dc9d1dcd27aae5$</string>
+            <string>$TexturePacker:SmartUpdate:f264748d927fe3e15eecb2d4f1ff4c0c:4c064455020c1241fb7a26af10aea200:cfc464baec529d5f0c4267b68196139b$</string>
             <key>textureFileName</key>
-            <string>Squid.png</string>
+            <string>NFish.png</string>
         </dict>
     </dict>
 </plist>

@@ -4,168 +4,123 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>Ray_00000.png</key>
+            <key>Turtle_00000.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{398,188}</string>
+                <string>{200,138}</string>
                 <key>spriteSourceSize</key>
-                <string>{398,188}</string>
+                <string>{200,138}</string>
                 <key>textureRect</key>
-                <string>{{463,1},{398,188}}</string>
+                <string>{{1,623},{200,138}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Ray_00001.png</key>
+            <key>Turtle_00001.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{412,210}</string>
+                <string>{202,154}</string>
                 <key>spriteSourceSize</key>
-                <string>{412,210}</string>
+                <string>{202,154}</string>
                 <key>textureRect</key>
-                <string>{{443,375},{412,210}}</string>
+                <string>{{1,467},{202,154}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Ray_00002.png</key>
+            <key>Turtle_00002.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{426,224}</string>
+                <string>{206,192}</string>
                 <key>spriteSourceSize</key>
-                <string>{426,224}</string>
+                <string>{206,192}</string>
                 <key>textureRect</key>
-                <string>{{437,791},{426,224}}</string>
+                <string>{{209,435},{206,192}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Ray_00003.png</key>
+            <key>Turtle_00003.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{432,238}</string>
+                <string>{206,232}</string>
                 <key>spriteSourceSize</key>
-                <string>{432,238}</string>
+                <string>{206,232}</string>
                 <key>textureRect</key>
-                <string>{{1,1027},{432,238}}</string>
+                <string>{{211,1},{206,232}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Ray_00004.png</key>
+            <key>Turtle_00004.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{440,250}</string>
+                <string>{208,230}</string>
                 <key>spriteSourceSize</key>
-                <string>{440,250}</string>
+                <string>{208,230}</string>
                 <key>textureRect</key>
-                <string>{{1,283},{440,250}}</string>
+                <string>{{1,1},{208,230}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Ray_00005.png</key>
+            <key>Turtle_00005.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{460,280}</string>
+                <string>{238,158}</string>
                 <key>spriteSourceSize</key>
-                <string>{460,280}</string>
+                <string>{238,158}</string>
                 <key>textureRect</key>
-                <string>{{1,1},{460,280}}</string>
+                <string>{{203,629},{238,158}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Ray_00006.png</key>
+            <key>Turtle_00006.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{440,250}</string>
+                <string>{206,232}</string>
                 <key>spriteSourceSize</key>
-                <string>{440,250}</string>
+                <string>{206,232}</string>
                 <key>textureRect</key>
-                <string>{{1,535},{440,250}}</string>
+                <string>{{1,233},{206,232}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Ray_00007.png</key>
+            <key>Turtle_00007.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{434,238}</string>
+                <string>{202,198}</string>
                 <key>spriteSourceSize</key>
-                <string>{434,238}</string>
+                <string>{202,198}</string>
                 <key>textureRect</key>
-                <string>{{1,787},{434,238}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>Ray_00008.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{426,222}</string>
-                <key>spriteSourceSize</key>
-                <string>{426,222}</string>
-                <key>textureRect</key>
-                <string>{{437,1017},{426,222}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>Ray_00009.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{410,202}</string>
-                <key>spriteSourceSize</key>
-                <string>{410,202}</string>
-                <key>textureRect</key>
-                <string>{{443,587},{410,202}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>Ray_00010.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{398,182}</string>
-                <key>spriteSourceSize</key>
-                <string>{398,182}</string>
-                <key>textureRect</key>
-                <string>{{463,191},{398,182}}</string>
+                <string>{{209,235},{202,198}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -179,13 +134,13 @@
             <key>premultiplyAlpha</key>
             <false/>
             <key>realTextureFileName</key>
-            <string>Ray.png</string>
+            <string>Turtle.png</string>
             <key>size</key>
-            <string>{864,1266}</string>
+            <string>{442,788}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:3e491559c6c8eb6463a328f61bd0921e:d54c959e560b8a57e4f59133cd53453e:bcd7ac130a47077cee34e08333822b40$</string>
+            <string>$TexturePacker:SmartUpdate:ca9b07075b722a37bc8c0598b70d5dae:6baaf946058194be6f8d84baa331d4d5:4301d10ea4bd16d85b15966841a7ebce$</string>
             <key>textureFileName</key>
-            <string>Ray.png</string>
+            <string>Turtle.png</string>
         </dict>
     </dict>
 </plist>

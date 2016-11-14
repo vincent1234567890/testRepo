@@ -10,12 +10,15 @@
 "use strict";
 
 var GameManager = function(){
+    var debug = false;
+
     var _gameConfig;
 
-    // var fishGameArena;
     var _fishGameArena;
 
     var _touchLayer;
+
+    var _serverInformer;
 
     //player
     var _playerSlot;
@@ -28,8 +31,6 @@ var GameManager = function(){
     //Managers
     var _playerViews = [];
     var _fishManager;
-
-    //to be refactored in to player object?
     var _playerPositions = [];
 
     var initialiseTouch = function () {
@@ -125,7 +126,10 @@ var GameManager = function(){
         removeFish : removeFish,
         updateEverything : updateEverything,
 
-        //hack-ish for debug
+        //debug
+        debug : debug,
+
+        //hack-ish for debug, to be removed
         getGameConfig : getGameConfig,
     };
 
