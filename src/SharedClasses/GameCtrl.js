@@ -33,7 +33,7 @@ var GameCtrl = cc.Class.extend({
         if (doingDevelopment) {
             gameAPIServerUrl = 'ws://127.0.0.1:8088';
             if (useJoeysServerDuringDevelopment) {
-                gameAPIServerUrl = 'ws://192.168.1.3:8088';
+                gameAPIServerUrl = 'ws://192.168.1.18:8088';
             }
         }
 
