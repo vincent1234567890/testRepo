@@ -19,7 +19,7 @@ var ReferenceName = {
     LobbyBackground : "#BG.jpg",
     ScrollArrow : "#Arrow.png",
     BonusPlaceHolder : "#Bonus.png",
-    BuyButton : "#BuyButton.png",
+    BuyButton : "#Buy.png",
     LobbyCoinsBG : "#Coins Base.png",
     LobbyCoinIcon : "#Coins.png",
     GameSelectBox : "#Game.png",
