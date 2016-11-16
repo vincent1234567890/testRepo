@@ -82,7 +82,7 @@ var GameManager = function(){
         var rot = _playerViews[_playerSlot].turnTo(pos);
         const bulletId = _playerId + ':' + getPlayerBulletId();
 
-        ClientServerConnect.serverInformer.bulletFired(bulletId, rot);
+        ClientServerConnect.getServerInformer().bulletFired(bulletId, rot);
     };
 
     var getPlayerBulletId = function(){

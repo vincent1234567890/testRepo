@@ -4,7 +4,7 @@
 
 var ClientServerConnect = function () {
     let _hasConnected = false;
-    let informServer;
+    let _informServer ;
 
 
     var connectToMasterServer = function () {
@@ -105,6 +105,7 @@ var ClientServerConnect = function () {
         var client = getGameWSClient();
         Promise.resolve().then(
             () => {
+                console.log("Join Game");
                 return client.callAPIOnce('game', 'joinGame', {})
             }
         ).then(
@@ -117,7 +118,8 @@ var ClientServerConnect = function () {
 
                 var receiver = clientReceiver(ioSocket, GameCtrl.sharedGame()); // @TODO : move to GameManager?
 
-                informServer = serverInformer(ioSocket);
+                setServerInformer(serverInformer(ioSocket));
+                // _informServer = serverInformer(ioSocket);
 
                 // GameManager.setServerInformer(informServer);
 
@@ -143,12 +145,20 @@ var ClientServerConnect = function () {
         return this.gameIOSocket;
     };
 
+    var setServerInformer = function (informer) {
+        _informServer = informer;
+    };
+
+    var getServerInformer = function () {
+        return _informServer;
+    }
+
 
     var ClientServerConnect = {
         connectToMasterServer : connectToMasterServer,
         login : login,
         joinGame : joinGame,
-        serverInformer : informServer,
+        getServerInformer : getServerInformer,
     };
 
     return ClientServerConnect;

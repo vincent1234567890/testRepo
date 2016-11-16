@@ -175,6 +175,10 @@ var res = {
     GameUIPlist : "res/New/gameui.plist",
     LoginUIPlist : "res/New/Lobby/Lobby.plist",
     LoginUIPng : "res/New/Lobby/Lobby.png",
+    SettingsUIPlist : "res/New/Options/settings.plist",
+    SettingsUIPng : "res/New/Options/settings.png",
+    ScoreboardPlist : "res/New/Scoreboard/summary.plist",
+    ScoreboardPng : "res/New/Scoreboard/summary.png",
 
     //testing
     StingrayPNG : "res/New/testing/Ray.png",

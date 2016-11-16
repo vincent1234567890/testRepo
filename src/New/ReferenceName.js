@@ -32,4 +32,23 @@ var ReferenceName = {
     SettingsButton : "#setting.png",
     TopBg : "#TopBase.png",
 
+    ScoreboardBG : "#SummaryBase.png",
+    CannonIcon : "#Cannon shot.png",
+    CoinSpentIcon : "#Coin Spend.png",
+    CoinEarnedIcon : "#Coins earn.png",
+    GoldenFishIcon : "#GoldenFish.png",
+    HitRateIcon : "#Hit rate.png",
+    PlayButton : "#GreenButton.png",
+    LobbyButton : "#RedButton.png",
+    MultiCatchIcon : "Multi Caught.png",
+    SkillUseButton : "Skill uses.png",
+    BottomScrollBarBG : "BrownTransBGBox.png",
+    TimePlayed : "Time play.png",
+    TotalFishIcon : "TotalFish.png",
+    InfoSlotBG : "Yellow Bar.png",
+
+
+    FishPlaceholder : "#Fish Paceholder.png",
+
+
 };
