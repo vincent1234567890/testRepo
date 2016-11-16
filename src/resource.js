@@ -173,6 +173,8 @@ var res = {
     //New
     GameUIPng : "res/New/gameui.png",
     GameUIPlist : "res/New/gameui.plist",
+    LoginUIPlist : "res/New/Lobby/Lobby.plist",
+    LoginUIPng : "res/New/Lobby/Lobby.png",
 
     //testing
     StingrayPNG : "res/New/testing/Ray.png",

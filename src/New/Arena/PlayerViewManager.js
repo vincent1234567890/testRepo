@@ -39,3 +39,4 @@ var PlayerViewManager = (function () {
 
     return PlayerViewManager;
 }());
+

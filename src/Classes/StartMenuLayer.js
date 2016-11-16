@@ -82,7 +82,8 @@ var StartMenuLayer = cc.Layer.extend({
         this._newGameItem = new cc.MenuItemSprite(
             CSpriteLayer.getButtonBoxOffsetY("btn_start_1.png", ImageNameLang("txt_start.png"), PlistAndPlist, 1),
             CSpriteLayer.getButtonBoxOffsetY("btn_start_2.png", ImageNameLang("txt_start.png"), PlistAndPlist, 1),
-            this._menuNewGame, this);
+            // this._menuNewGame, this);
+            this._menuGoToLobby, this);
 
         // item2 = Scenes select button
         this._sceneItem = new cc.MenuItemSprite(
@@ -165,6 +166,17 @@ var StartMenuLayer = cc.Layer.extend({
         this.addChild(this._spriteLight1, 10);
         this._spriteLight1.setPosition(cc.p(125 + Math.random() * 63, VisibleRect.top().y - this._spriteLight1.getContentSize().height / 2));
     },
+
+    _menuGoToLobby : function () {
+        //legacy boilerplate
+        playEffect(BUTTON_EFFECT);
+        var startMenu = this.getChildByTag(eTag_MainMenu_StartMenu_menu);
+        startMenu.setEnabled(false);
+
+        GameManager.login();
+        GameManager.goToLobby(this);
+    },
+
     _menuNewGame:function (sender) {
         AutoAdapterScreen.getInstance().enterFullScreen();
         var mainMenu = GameCtrl.sharedGame().getCurScene();

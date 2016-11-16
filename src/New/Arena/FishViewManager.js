@@ -6,6 +6,7 @@ var FishViewManager = (function(){
 
     var FishViewManager = function(parent, fishGameArena){
         // console.log
+
         cc.spriteFrameCache.addSpriteFrames(res.SquidPlist);
         cc.spriteFrameCache.addSpriteFrames(res.PufferfishPlist);
         cc.spriteFrameCache.addSpriteFrames(res.TurtlePlist);

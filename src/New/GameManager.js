@@ -18,7 +18,7 @@ var GameManager = function(){
 
     var _touchLayer;
 
-    var _serverInformer;
+    // var _serverInformer;
 
     //player
     var _playerSlot;
@@ -29,9 +29,36 @@ var GameManager = function(){
     var _parentNode;
 
     //Managers
+    var _loginManager;
     var _playerViews = [];
     var _fishManager;
     var _playerPositions = [];
+    var _lobbyManager;
+
+    function initialiseLogin(parent){
+        _parentNode = new cc.Node();
+        parent.addChild(_parentNode,99999);
+        _loginManager = new LoginManager(_parentNode);
+    }
+
+    var initialiseGame = function (parent, fishGameArena) {
+
+        _parentNode = new cc.Node();
+        parent.addChild(_parentNode,99999);
+
+        GameView.initialise(_parentNode);
+
+        _fishGameArena = fishGameArena;
+        _lastShotTime = -Infinity;
+        _fishManager = new FishViewManager(_parentNode, _fishGameArena);
+
+
+        for (var i = 0; i < _gameConfig.maxPlayers ; i++){
+            _playerViews[i] = new PlayerViewManager(_parentNode, _gameConfig.cannonPositions[i], i == _playerSlot);
+        }
+
+        initialiseTouch();
+    };
 
     var initialiseTouch = function () {
         if(!_touchLayer) {
@@ -55,28 +82,14 @@ var GameManager = function(){
         var rot = _playerViews[_playerSlot].turnTo(pos);
         const bulletId = _playerId + ':' + getPlayerBulletId();
 
-        GameCtrl.informServer.bulletFired(bulletId, rot);
+        ClientServerConnect.serverInformer.bulletFired(bulletId, rot);
     };
 
     var getPlayerBulletId = function(){
         return _playerViews[_playerSlot].getNextBulletId();
     };
 
-    var initialise = function (parent, fishGameArena) {
-        _parentNode = new cc.Node();
-        parent.addChild(_parentNode,99999);
-        _fishGameArena = fishGameArena;
-        _lastShotTime = -Infinity;
-        _fishManager = new FishViewManager(_parentNode, _fishGameArena);
 
-        GameView.initialise(_parentNode);
-
-        for (var i = 0; i < _gameConfig.maxPlayers ; i++){
-            _playerViews[i] = new PlayerViewManager(_parentNode, _gameConfig.cannonPositions[i], i == _playerSlot);
-        }
-
-        initialiseTouch();
-    };
 
     var shootTo = function(playerId,pos){
         for (var p of _playerPositions){
@@ -91,6 +104,7 @@ var GameManager = function(){
         _gameConfig = config;
         _playerId = playerId;
         _playerSlot = playerSlot;
+
     };
 
     var updateMultiplayerState = function(playerData){
@@ -110,21 +124,48 @@ var GameManager = function(){
 
     var updateEverything = function () {
         _fishManager.update();
-    }
+    };
 
     var getGameConfig = function () {
         return _gameConfig;
-    }
+    };
+
+    var goToLogin = function () {
+        _loginManager.goToLogin();
+    };
+
+    var login = function () {
+        var loginInfo = _loginManager.getLogin();
+        ClientServerConnect.login(loginInfo.name,loginInfo.pass);
+    };
+
+    var goTolobby = function (parent) {
+        var parent = _parentNode.parent;
+        parent.removeChild(_parentNode);
+        _parentNode = new cc.Node();
+        parent.addChild(_parentNode,99999);
+        // cc.director.runScene(_parentNode);
+
+        _lobbyManager = new LobbyManager(_parentNode);
+
+
+    };
 
 
     var GameManager = {
-        initialise : initialise,
+        initialiseLogin : initialiseLogin,
+        initialiseGame : initialiseGame,
         setGameState : setGameState,
         updateMultiplayerState : updateMultiplayerState,
         shootTo : shootTo, //slightly unsatisfactory
         createFish : createFish,
         removeFish : removeFish,
         updateEverything : updateEverything,
+        // setServerInformer : setServerInformer,
+        goToLogin : goToLogin,
+        login : login,
+        goToLobby : goTolobby,
+
 
         //debug
         debug : debug,

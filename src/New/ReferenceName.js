@@ -11,4 +11,25 @@ var ReferenceName = {
     CannonPower : "#CoinDeck.png",
     CoinIcon : "#Coin icon.png",
 
-}
+    Login9Slice : "9 slice square.png",
+
+    LoginNamePlaceHolder : "Name",
+    LoginPassPlaceHolder : "Password",
+
+    LobbyBackground : "#BG.jpg",
+    ScrollArrow : "#Arrow.png",
+    BonusPlaceHolder : "#Bonus.png",
+    BuyButton : "#BuyButton.png",
+    LobbyCoinsBG : "#Coins Base.png",
+    LobbyCoinIcon : "#Coins.png",
+    GameSelectBox : "#Game.png",
+    Star : "#level Star.png",
+    LevelBG : "#LevelBarBase.png",
+    MessageButton : "#Message.png",
+    NameBG : "#Name Bar.png",
+    ProfileFrame : "#Profile Frame.png",
+    ProfileImage : "#Profile Image.png",
+    SettingsButton : "#setting.png",
+    TopBg : "#TopBase.png",
+
+};
