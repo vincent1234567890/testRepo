@@ -174,7 +174,7 @@ var StartMenuLayer = cc.Layer.extend({
         startMenu.setEnabled(false);
 
         GameManager.login();
-        GameManager.goToLobby(this);
+        GameManager.goToLobby();
     },
 
     _menuNewGame:function (sender) {

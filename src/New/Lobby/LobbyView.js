@@ -72,8 +72,8 @@ var LobbyView = function() {
         var rightArrowDown = new cc.Sprite(ReferenceName.ScrollArrow);
         rightArrowDown.flippedX = true;
 
-        var menuLeft = new cc.MenuItemSprite(arrow, arrowDown, undefined, scrollLeft, LobbyView);
-        var menuRight = new cc.MenuItemSprite(rightArrow,rightArrowDown, undefined, scrollRight, LobbyView);
+        var menuLeft = new cc.MenuItemSprite(arrow, arrowDown, undefined, scrollLeft);
+        var menuRight = new cc.MenuItemSprite(rightArrow,rightArrowDown, undefined, scrollRight);
 
 
         var menu = new cc.Menu(menuLeft, menuRight);
@@ -86,7 +86,7 @@ var LobbyView = function() {
 
     function setupGameList(parent){
         var game = new cc.Sprite(ReferenceName.GameSelectBox);
-        var gameButton = new cc.MenuItemSprite(game, undefined, undefined, gameSelected, LobbyView);
+        var gameButton = new cc.MenuItemSprite(game, undefined, undefined, gameSelected);
         var menu = new cc.Menu(gameButton);
         gameButton.setPosition(cc.pAdd(cc.p(menu.getContentSize().width / 2, gameButton.getContentSize().height / 2), cc.p(0, 0)));
         parent.addChild(menu,1);
@@ -101,8 +101,8 @@ var LobbyView = function() {
         var Settings = new cc.Sprite(ReferenceName.SettingsButton);
         var SettingsDown = new cc.Sprite(ReferenceName.SettingsButton);
 
-        var messageButton = new cc.MenuItemSprite(Message, MessageDown, undefined, messageButtonPressed, LobbyView);
-        var settingsButton = new cc.MenuItemSprite(Settings,SettingsDown, undefined, settingsButtonPressed, LobbyView);
+        var messageButton = new cc.MenuItemSprite(Message, MessageDown, undefined, messageButtonPressed);
+        var settingsButton = new cc.MenuItemSprite(Settings,SettingsDown, undefined, settingsButtonPressed);
 
 
         var menu = new cc.Menu(messageButton, settingsButton);
@@ -117,7 +117,7 @@ var LobbyView = function() {
         var Buy = new cc.Sprite(ReferenceName.BuyButton);
         var BuyDown = new cc.Sprite(ReferenceName.BuyButton);
 
-        var buyButton = new cc.MenuItemSprite(Buy, BuyDown, undefined, buyButtonPressed, LobbyView);
+        var buyButton = new cc.MenuItemSprite(Buy, BuyDown, undefined, buyButtonPressed);
         var menu = new cc.Menu(buyButton);
         buyButton.setPosition(cc.pAdd(cc.p(menu.getContentSize().width / 2, buyButton.getContentSize().height / 2), cc.p(0, 0)));
         menu.setPosition(0,300);

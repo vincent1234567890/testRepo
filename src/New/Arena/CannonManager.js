@@ -28,17 +28,17 @@ var CannonManager = (function () {
         this._currentValue++;
         this._cannon.updateCannonPowerLabel(this._currentValue);
         GameCtrl.informServer.gunSelected(this._currentValue);
-    }
+    };
 
     CannonManager.prototype.decreaseCannon = function () {
         this._currentValue--;
         this._cannon.updateCannonPowerLabel(this._currentValue);
         GameCtrl.informServer.gunSelected(this._currentValue);
-    }
+    };
 
     CannonManager.prototype.getCurrentValue = function () {
         return this._currentValue;
-    }
+    };
 
     return CannonManager;
 }());

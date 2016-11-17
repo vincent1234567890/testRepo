@@ -34,17 +34,27 @@ var GameManager = function(){
     var _fishManager;
     var _playerPositions = [];
     var _lobbyManager;
+    var _scoreboardManager;
 
-    function initialiseLogin(parent){
+    function initialiseParent(parent){
+        if (parent === undefined && _parentNode && _parentNode.parent) {
+            parent = _parentNode.parent;
+        }
+        if(_parentNode && _parentNode.parent){
+            _parentNode.parent.removeChild(_parentNode);
+        }
         _parentNode = new cc.Node();
         parent.addChild(_parentNode,99999);
+    }
+
+    function initialiseLogin(parent){
+        initialiseParent(parent);
         _loginManager = new LoginManager(_parentNode);
     }
 
     var initialiseGame = function (parent, fishGameArena) {
 
-        _parentNode = new cc.Node();
-        parent.addChild(_parentNode,99999);
+        initialiseParent(parent);
 
         GameView.initialise(_parentNode);
 
@@ -139,17 +149,40 @@ var GameManager = function(){
         ClientServerConnect.login(loginInfo.name,loginInfo.pass);
     };
 
-    var goTolobby = function (parent) {
-        var parent = _parentNode.parent;
-        parent.removeChild(_parentNode);
-        _parentNode = new cc.Node();
-        parent.addChild(_parentNode,99999);
+    var goTolobby = function () {
+        // var parent = _parentNode.parent;
+        // parent.removeChild(_parentNode);
+        // _parentNode = new cc.Node();
+        // parent.addChild(_parentNode,99999);
+        initialiseParent();
+
         // cc.director.runScene(_parentNode);
 
         _lobbyManager = new LobbyManager(_parentNode);
 
 
     };
+
+    function goToScoreboard(){
+        _scoreboardManager = new ScoreboardManager(_parentNode, goToLobby, goToNewRoom);
+        // _parentNode.addChild(_scoreboardManager);
+    }
+
+    function goToLobby(){
+        _parentNode.removeChild(this._scoreboard);
+        _parentNode.parent.backToMenu();
+    }
+
+    function goToNewRoom(){
+        console.log("Joey, I'm going to a new room!");
+
+    }
+
+    function scoreboarDevelopment(parent){
+        initialiseParent(parent);
+        goToScoreboard();
+    }
+
 
 
     var GameManager = {
@@ -172,6 +205,9 @@ var GameManager = function(){
 
         //hack-ish for debug, to be removed
         getGameConfig : getGameConfig,
+
+        //for development positioning
+        goToScoreboardDevelopement : scoreboarDevelopment,
     };
 
     return GameManager;

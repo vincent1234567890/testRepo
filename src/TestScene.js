@@ -15,16 +15,7 @@ var TestScene = cc.Scene.extend({
         shark.scheduleUpdate();
 
         // var cannonlayer = new CanonLayer();
-        GameManager.initialise(this);
+        // GameManager.initialise(this);
+        GameManager.goToScoreboardDevelopement(this);
     }
 });
-
-var CanonLayer = cc.Layer.extend({
-    ctor: function(){
-        cc.Layer.prototype.ctor.call(this);
-
-        GameManager.initialise(this);
-
-
-    }
-})
