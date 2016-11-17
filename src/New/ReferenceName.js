@@ -13,13 +13,12 @@ var ReferenceName = {
 
     Login9Slice : "9 slice square.png",
 
-    LoginNamePlaceHolder : "Name",
-    LoginPassPlaceHolder : "Password",
+
 
     LobbyBackground : "#BG.jpg",
     ScrollArrow : "#Arrow.png",
     BonusPlaceHolder : "#Bonus.png",
-    BuyButton : "#BuyButton.png",
+    BuyButton : "#Buy.png",
     LobbyCoinsBG : "#Coins Base.png",
     LobbyCoinIcon : "#Coins.png",
     GameSelectBox : "#Game.png",
@@ -38,17 +37,31 @@ var ReferenceName = {
     CoinEarnedIcon : "#Coins earn.png",
     GoldenFishIcon : "#GoldenFish.png",
     HitRateIcon : "#Hit rate.png",
-    PlayButton : "#GreenButton.png",
-    LobbyButton : "#RedButton.png",
     MultiCatchIcon : "Multi Caught.png",
     SkillUseButton : "Skill uses.png",
     BottomScrollBarBG : "BrownTransBGBox.png",
-    TimePlayed : "Time play.png",
+    TimeSpentIcon : "Time play.png",
     TotalFishIcon : "TotalFish.png",
     InfoSlotBG : "Yellow Bar.png",
+    PlayButton : "#GreenButton.png",
+    LobbyButton : "#RedButton.png",
 
 
     FishPlaceholder : "#Fish Paceholder.png",
 
+//localisable
+    //@TODO: move to seperate file
+    LoginNamePlaceHolder : "Name",
+    LoginPassPlaceHolder : "Password",
+
+    SessionTime : "Session Time",
+    GoldSpent : "Gold Spent",
+    GoldEarned : "Gold Earned",
+    FishCaught : "Fish Caught",
+    GoldenFishCaught : "Golden Fish Caught",
+    MultiCatch : "Multi-Catches",
+    BulletsFired : "Bullets Fired",
+    SkillsUsed : "Skills Used",
+    CatchSuccessRate : "Hit//Caught %",
 
 };

@@ -15,60 +15,39 @@ var ScoreboardView = function() {
         bg.setPosition(midX,midY);
         this._parent.addChild(bg);
 
-
-
-        var star = new cc.Sprite(ReferenceName.Star);
-        star.setPosition(midX,midY);
-        this._parent.addChild(star);
-
-        var coin = new cc.Sprite(ReferenceName.LobbyCoinIcon);
-        coin.setPosition(midX,midY);
-        this._parent.addChild(coin);
-
-        var coinBG = new cc.Sprite(ReferenceName.LobbyCoinsBG);
-        coinBG.setPosition(midX,midY);
-        this._parent.addChild(coinBG);
-
-        var BonusPlaceHolder = new cc.Sprite(ReferenceName.BonusPlaceHolder);
-        BonusPlaceHolder.setPosition(midX,midY);
-        this._parent.addChild(BonusPlaceHolder);
-
-        var LevelBG = new cc.Sprite(ReferenceName.LevelBG);
-        LevelBG.setPosition(midX,midY);
-        this._parent.addChild(LevelBG);
-
-        var NameBG = new cc.Sprite(ReferenceName.NameBG);
-        NameBG.setPosition(midX,midY);
-        this._parent.addChild(NameBG);
-
-        var ProfileFrame = new cc.Sprite(ReferenceName.ProfileFrame);
-        ProfileFrame.setPosition(midX,midY);
-        this._parent.addChild(ProfileFrame);
-
-        var ProfileImage = new cc.Sprite(ReferenceName.ProfileImage);
-        ProfileImage.setPosition(midX,midY);
-        this._parent.addChild(ProfileImage);
-
-        var TopBg = new cc.Sprite(ReferenceName.TopBg);
-        TopBg.setPosition(midX,midY);
-        this._parent.addChild(TopBg);
-
-        setupGameScroll(this._parent);
-
-        setupGameList (this._parent);
-
-        setupProfileMenu (this._parent);
-
-        setupLobbyButtons (this._parent);
+        var sessionTime = createGridObject(ReferenceName.SessionTime, ReferenceName.TimeSpentIcon);
+        var goldSpent = createGridObject(ReferenceName.GoldSpent, ReferenceName.CoinSpentIcon );
+        var goldSpent =
 
     };
 
-    function createGridObject(name){
+    function createGridObject(labelText, spriteName){
         var fontDef = new cc.FontDefinition();
         fontDef.fontName = "Arial";
         fontDef.fontSize = "32";
         fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
-        var label = new cc.LabelTTF('', fontDef);
+        var label = new cc.LabelTTF(labelText, fontDef);
+
+        fontDef.fontSize = "20";
+
+        var info = new cc.LabelTTF(labelText,fontDef);
+
+        var icon = new cc.Sprite(spriteName);
+
+
+        var bg = new cc.Sprite(ReferenceName.InfoSlotBG);
+
+        bg.addChild(label);
+        bg.addChild(icon);
+        bg.addChild(info);
+
+        label.setPosition(0,10);
+        icon.setPosition(-10,0);
+        info.setPosition(10,0);
+
+
+
+
     }
 
 
