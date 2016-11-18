@@ -114,7 +114,7 @@ var ScoreboardView = function() {
         playButton.setPosition(cc.pAdd(cc.p(menu.getContentSize().width / 2, playButton.getContentSize().height / 2), cc.p(150, -20)));
         menu.setPosition(0,20);
         parent.addChild(menu);
-        
+
 
     }
 
