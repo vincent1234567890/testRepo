@@ -6,7 +6,10 @@
 
 var GameView = function(){
 
-    var initialise = function (parent) {
+    var _parentNode;
+
+    var initialise = function (parentNode) {
+        _parentNode = parentNode;
         cc.spriteFrameCache.addSpriteFrames(res.GameUIPlist);
 
         // this._playerView = new PlayerView(parent);
@@ -14,6 +17,7 @@ var GameView = function(){
 
     var GameView = {
         initialise : initialise,
+        parentNode : _parentNode,
     }
 
     return GameView;

@@ -27,18 +27,23 @@ var CannonManager = (function () {
     CannonManager.prototype.increaseCannon = function () {
         this._currentValue++;
         this._cannon.updateCannonPowerLabel(this._currentValue);
-        GameCtrl.informServer.gunSelected(this._currentValue);
-    }
+        ClientServerConnect.getServerInformer().gunSelected(this._currentValue);
+    };
 
     CannonManager.prototype.decreaseCannon = function () {
         this._currentValue--;
         this._cannon.updateCannonPowerLabel(this._currentValue);
-        GameCtrl.informServer.gunSelected(this._currentValue);
-    }
+        ClientServerConnect.getServerInformer().gunSelected(this._currentValue);
+    };
 
     CannonManager.prototype.getCurrentValue = function () {
         return this._currentValue;
-    }
+    };
+
+    CannonManager.prototype.destroyView = function () {
+        this._cannon.parent.removeChild(this._cannon);
+        this._cannon = null;
+    };
 
     return CannonManager;
 }());

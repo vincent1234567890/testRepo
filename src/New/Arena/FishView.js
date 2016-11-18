@@ -38,7 +38,6 @@ var FishView = (function () {
             if (data.pivot){
                 this.setAnchorPoint(data.pivot);
             }
-            console.log(this.getAnchorPoint());
 
             var sequence = new cc.Sequence(data.animation.clone(), new cc.DelayTime(data.animationInterval));
             this._currentAnimationAction = new cc.RepeatForever(sequence);

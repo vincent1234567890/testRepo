@@ -9,7 +9,10 @@
     "renderMode" : 0,
     "engineDir":"frameworks/cocos2d-html5",
 
-    "modules" : ["cocos2d"],
+    "modules" : [
+        "cocos2d",
+        "extensions"
+    ],
 
     "jsList" : [
         "src/resource.js",
@@ -88,19 +91,29 @@
         "src/Classes/WeaponSpecialRay.js",
         "src/TestScene.js",
 
-        "src/New/TouchLayerRefactored.js",
-        "src/New/ReferenceName.js",
-        "src/New/CannonView.js",
-        "src/New/CannonManager.js",
-        "src/New/PlayerViewStaticPrefab.js",
-        "src/New/PlayerView.js",
-        "src/New/PlayerViewManager.js",
-        "src/New/GameView.js",
+        "src/New/Server/ClientServerConnect.js",
+        "src/New/LoginView.js",
+        "src/New/LoginManager.js",
+        "src/New/Lobby/LobbyManager.js",
+        "src/New/Lobby/LobbyView.js",
+
+        "src/New/Arena/OptionsView.js",
+        "src/New/Arena/OptionsManager.js",
         "src/New/Data/FishAnimationEnum.js",
         "src/New/Data/FishAnimationData.js",
-        "src/New/FishView.js",
-        "src/New/FishViewManager.js",
+        "src/New/TouchLayerRefactored.js",
+        "src/New/ReferenceName.js",
+        "src/New/Arena/CannonView.js",
+        "src/New/Arena/CannonManager.js",
+        "src/New/Arena/PlayerViewStaticPrefab.js",
+        "src/New/Arena/PlayerView.js",
+        "src/New/Arena/PlayerViewManager.js",
+        "src/New/Arena/FishView.js",
+        "src/New/Arena/FishViewManager.js",
+        "src/New/Arena/ScoreboardView.js",
+        "src/New/Arena/ScoreboardManager.js",
         "src/New/GameManager.js",
+        "src/New/GameView.js",
 
 
         "lib/common/WebSocketClient.js",
