@@ -78,10 +78,13 @@ var GameManager = function () {
     };
 
     var initialiseTouch = function () {
-        if (!_touchLayer) {
-            _touchLayer = new TouchLayerRefactored(touchAt);
-            _parentNode.addChild(_touchLayer, -1);
+        if(_touchLayer){
+            _parentNode.removeChild(_touchLayer);
         }
+        // if (!_touchLayer) {
+        _touchLayer = new TouchLayerRefactored(touchAt);
+        _parentNode.addChild(_touchLayer, -1);
+        // }
     };
 
     var touchAt = function (pos) {

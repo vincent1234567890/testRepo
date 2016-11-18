@@ -168,7 +168,7 @@ var ClientServerConnect = function () {
 
     var setClientReceiver = function (receiver) {
         _clientReceiver = receiver;
-    }
+    };
 
     var setServerInformer = function (informer) {
         _informServer = informer;
