@@ -93,8 +93,8 @@ var cocos2dApp = cc.game.onStart = function() {
     var self = this;
 
     cc.LoadingScreen.preload(g_resources, function () {
-        // cc.director.runScene(new LogoScene());
-        cc.director.runScene(new TestScene());
+        cc.director.runScene(new LogoScene());
+        // cc.director.runScene(new TestScene());
         // cc.director.runScene(new StartMenuLayer());
     }, this);
     // },
