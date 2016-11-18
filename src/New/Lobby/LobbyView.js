@@ -98,8 +98,8 @@ var LobbyView = function() {
     function setupProfileMenu(parent) {
         var Message = new cc.Sprite(ReferenceName.MessageButton);
         var MessageDown = new cc.Sprite(ReferenceName.MessageButton);
-        var Settings = new cc.Sprite(ReferenceName.SettingsButton);
-        var SettingsDown = new cc.Sprite(ReferenceName.SettingsButton);
+        var Settings = new cc.Sprite(ReferenceName.LobbySettingsButton);
+        var SettingsDown = new cc.Sprite(ReferenceName.LobbySettingsButton);
 
         var messageButton = new cc.MenuItemSprite(Message, MessageDown, undefined, messageButtonPressed);
         var settingsButton = new cc.MenuItemSprite(Settings,SettingsDown, undefined, settingsButtonPressed);

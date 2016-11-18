@@ -179,6 +179,8 @@ var res = {
     SettingsUIPng : "res/New/Options/settings.png",
     ScoreboardPlist : "res/New/Scoreboard/summary.plist",
     ScoreboardPng : "res/New/Scoreboard/summary.png",
+    SideMenuPlist : "res/New/Options/SideMenu.plist",
+    SideMenuPng : "res/New/Options/SideMenu.png",
 
     //testing
     StingrayPNG : "res/New/testing/Ray.png",

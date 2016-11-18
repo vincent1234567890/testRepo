@@ -14,7 +14,7 @@ var ReferenceName = {
     Login9Slice : "9 slice square.png",
 
 
-
+    //Lobby
     LobbyBackground : "#BG.jpg",
     ScrollArrow : "#Arrow.png",
     BonusPlaceHolder : "#Bonus.png",
@@ -28,9 +28,10 @@ var ReferenceName = {
     NameBG : "#Name Bar.png",
     ProfileFrame : "#Profile Frame.png",
     ProfileImage : "#Profile Image.png",
-    SettingsButton : "#setting.png",
+    LobbySettingsButton : "#setting.png",
     TopBg : "#TopBase.png",
 
+    //Scoreboard
     ScoreboardBG : "#SummaryBase.png",
     CannonIcon : "#Cannon shot.png",
     CoinSpentIcon : "#Coin Spend.png",
@@ -46,14 +47,28 @@ var ReferenceName = {
     PlayButton : "#GreenButton.png",
     LobbyButton : "#RedButton.png",
 
+    //SideMenu
+    SideMenuBG : "#SideMenu.png",
+    SideMenuSettingsButton : "#Setting.png",
+    FishListButton : "#Fishes.png",
+    ExitButton : "#Exit.png",
+
+    //OptionsMenu
+    OptionsBG : "#setting-21.png",
+    OptionBarBG : "#setting-23.png",
+    OptionsBarNegative : "#setting-22.png",
+    FishSliderButton : "#setting-24.png",
 
     FishPlaceholder : "#Fish Paceholder.png",
 
-//localisable
+    //localisable
     //@TODO: move to seperate file
+
+    //Login
     LoginNamePlaceHolder : "Name",
     LoginPassPlaceHolder : "Password",
 
+    //Scoreboard
     SessionTime : "Session Time",
     GoldSpent : "Gold Spent",
     GoldEarned : "Gold Earned",
@@ -63,5 +78,7 @@ var ReferenceName = {
     BulletsFired : "Bullets Fired",
     SkillsUsed : "Skills Used",
     CatchSuccessRate : "Hit//Caught %",
+    GoToLobby : "Lobby",
+    GoToNewGame : "Play",
 
 };

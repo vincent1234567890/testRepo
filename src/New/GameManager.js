@@ -35,6 +35,7 @@ var GameManager = function(){
     var _playerPositions = [];
     var _lobbyManager;
     var _scoreboardManager;
+    var _optionsManager;
 
     function initialiseParent(parent){
         if (parent === undefined && _parentNode && _parentNode.parent) {
@@ -66,6 +67,8 @@ var GameManager = function(){
         for (var i = 0; i < _gameConfig.maxPlayers ; i++){
             _playerViews[i] = new PlayerViewManager(_parentNode, _gameConfig.cannonPositions[i], i == _playerSlot);
         }
+
+        _optionsManager = new OptionsManager(_parentNode);
 
         initialiseTouch();
     };
@@ -178,9 +181,12 @@ var GameManager = function(){
 
     }
 
-    function scoreboarDevelopment(parent){
+
+    function development(parent){
+        console.log("GameManager");
         initialiseParent(parent);
-        goToScoreboard();
+        // goToScoreboard()
+        _optionsManager = new OptionsManager(_parentNode);
     }
 
 
@@ -207,7 +213,7 @@ var GameManager = function(){
         getGameConfig : getGameConfig,
 
         //for development positioning
-        goToScoreboardDevelopement : scoreboarDevelopment,
+        development : development,
     };
 
     return GameManager;

@@ -97,6 +97,8 @@
         "src/New/Lobby/LobbyManager.js",
         "src/New/Lobby/LobbyView.js",
 
+        "src/New/Arena/OptionsView.js",
+        "src/New/Arena/OptionsManager.js",
         "src/New/Data/FishAnimationEnum.js",
         "src/New/Data/FishAnimationData.js",
         "src/New/TouchLayerRefactored.js",

@@ -16,6 +16,6 @@ var TestScene = cc.Scene.extend({
 
         // var cannonlayer = new CanonLayer();
         // GameManager.initialise(this);
-        GameManager.goToScoreboardDevelopement(this);
+        GameManager.development(this);
     }
 });
