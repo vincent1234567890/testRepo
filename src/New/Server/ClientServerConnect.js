@@ -5,6 +5,7 @@
 var ClientServerConnect = function () {
     let _hasConnected = false;
     let _informServer ;
+    let _clientReceiver;
 
 
     var connectToMasterServer = function () {
@@ -134,7 +135,9 @@ var ClientServerConnect = function () {
 
                 socketUtils.simulateNetworkLatency(ioSocket, 100);
 
-                var receiver = clientReceiver(ioSocket, GameCtrl.sharedGame()); // @TODO : move to GameManager?
+                var receiver =(clientReceiver(ioSocket, GameCtrl.sharedGame())); // @TODO : move to GameManager?
+
+                setClientReceiver(receiver);
 
                 setServerInformer(serverInformer(ioSocket));
                 // _informServer = serverInformer(ioSocket);
@@ -163,6 +166,10 @@ var ClientServerConnect = function () {
         return this.gameIOSocket;
     };
 
+    var setClientReceiver = function (receiver) {
+        _clientReceiver = receiver;
+    }
+
     var setServerInformer = function (informer) {
         _informServer = informer;
     };
@@ -171,12 +178,17 @@ var ClientServerConnect = function () {
         return _informServer;
     }
 
+    var resetArena = function () {
+        _clientReceiver.resetArena();
+    }
+
 
     var ClientServerConnect = {
         connectToMasterServer : connectToMasterServer,
         login : login,
         joinGame : joinGame,
         getServerInformer : getServerInformer,
+        resetArena : resetArena,
     };
 
     return ClientServerConnect;

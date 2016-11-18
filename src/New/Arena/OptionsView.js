@@ -70,5 +70,10 @@ var OptionsView = (function(){
 
     }
 
+    OptionsView.prototype.destroy = function () {
+        this._parent.removeChild(this._sideMenu);
+    };
+
+
     return OptionsView;
 })();

@@ -14,15 +14,18 @@ var LoginManager = (function (){
 
     proto.goToLogin = function(){
         if (!this._view){
+            console.log("goToLogin");
             this._view = new LoginView(this._parent);
         }
     };
     
     proto.getLogin = function () {
+
         return this._view.GetLoginInfo();
     };
 
     proto.destroyView = function () {
+        console.log("destroyView");
         this._parent.removeChild(this._view);
         this.view = null;
     };

@@ -60,6 +60,7 @@ var GameManager = function () {
 
         initialiseParent(parent);
 
+
         GameView.initialise(_parentNode);
 
         _fishGameArena = fishGameArena;
@@ -162,6 +163,8 @@ var GameManager = function () {
         // parent.removeChild(_parentNode);
         // _parentNode = new cc.Node();
         // parent.addChild(_parentNode,99999);
+        _loginManager.destroyView();
+        _loggedIn = true;
 
         initialiseParent();
 
@@ -176,6 +179,8 @@ var GameManager = function () {
     };
 
     function onLeaveArena() {
+        ClientServerConnect.getServerInformer().leaveGame();
+        // ClientServerConnect.resetArena();
         goToScoreboard();
         // createLobby();
     }
@@ -189,7 +194,7 @@ var GameManager = function () {
     }
 
     function exitToLobby() {
-        ClientServerConnect.getServerInformer().leaveGame();
+        destroyArena();
         _parentNode.parent.backToMenu();
         createLobby();
     }
@@ -203,14 +208,6 @@ var GameManager = function () {
         // _parentNode.addChild(_scoreboardManager);
     }
 
-    // function goToLobby(success){
-    //     if (!success){
-    //         console.log("LoginFailed!");
-    //     }else {
-    //         _parentNode.parent.backToMenu();
-    //     }
-    // }
-
     function goToNewRoom() {
         console.log("Joey, I'm going to a new room!");
 
@@ -222,6 +219,17 @@ var GameManager = function () {
         initialiseParent(parent);
         // goToScoreboard()
         _optionsManager = new OptionsManager(_parentNode);
+    }
+
+    function destroyArena(){
+        _fishManager.destroyView();
+        for (var i = 0; i < _gameConfig.maxPlayers; i++) {
+            _playerViews[i].destroyView();
+            delete _playerViews[i];
+        }
+        _fishGameArena = null;
+        _lastShotTime = -Infinity;
+        _optionsManager.destroyView();
     }
 
 

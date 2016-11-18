@@ -34,6 +34,10 @@ var OptionsManager = (function (){
             _exitCallBack ();
         }
     }
+    
+    OptionsManager.prototype.destroyView = function () {
+        this.view.destroy();
+    };
 
     return OptionsManager;
 })();
