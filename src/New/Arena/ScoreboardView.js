@@ -13,7 +13,7 @@ var ScoreboardView = function() {
 
         var bg = new cc.Sprite(ReferenceName.ScoreboardBG);
         bg.setPosition(midX,midY);
-        this._parent.addChild(bg);
+        this._parent.addChild(bg,99);
 
         var sessionTime = createGridObject(ReferenceName.SessionTime, ReferenceName.TimeSpentIcon, "NA");
         sessionTime.setPosition(282 , cc.view.getDesignResolutionSize().height - 183);
@@ -114,6 +114,7 @@ var ScoreboardView = function() {
         playButton.setPosition(cc.pAdd(cc.p(menu.getContentSize().width / 2, playButton.getContentSize().height / 2), cc.p(150, -20)));
         menu.setPosition(0,20);
         parent.addChild(menu);
+        
 
     }
 

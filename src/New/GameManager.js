@@ -4,12 +4,12 @@
 
 /*
  Current structure : GameManager    -> GameView
-                                    -> x PlayerViewManager  -> CannonManager -> CannonView
-                                                            -> PlayerView -> PlayerViewStaticPrefab
+ -> x PlayerViewManager  -> CannonManager -> CannonView
+ -> PlayerView -> PlayerViewStaticPrefab
  */
 "use strict";
 
-var GameManager = function(){
+var GameManager = function () {
     var debug = false;
 
     var _gameConfig;
@@ -17,6 +17,9 @@ var GameManager = function(){
     var _fishGameArena;
 
     var _touchLayer;
+
+    //convenience
+    var _loggedIn = false;
 
     // var _serverInformer;
 
@@ -37,18 +40,18 @@ var GameManager = function(){
     var _scoreboardManager;
     var _optionsManager;
 
-    function initialiseParent(parent){
+    function initialiseParent(parent) {
         if (parent === undefined && _parentNode && _parentNode.parent) {
             parent = _parentNode.parent;
         }
-        if(_parentNode && _parentNode.parent){
+        if (_parentNode && _parentNode.parent) {
             _parentNode.parent.removeChild(_parentNode);
         }
         _parentNode = new cc.Node();
-        parent.addChild(_parentNode,99999);
+        parent.addChild(_parentNode, 99999);
     }
 
-    function initialiseLogin(parent){
+    function initialiseLogin(parent) {
         initialiseParent(parent);
         _loginManager = new LoginManager(_parentNode);
     }
@@ -64,17 +67,17 @@ var GameManager = function(){
         _fishManager = new FishViewManager(_parentNode, _fishGameArena);
 
 
-        for (var i = 0; i < _gameConfig.maxPlayers ; i++){
+        for (var i = 0; i < _gameConfig.maxPlayers; i++) {
             _playerViews[i] = new PlayerViewManager(_parentNode, _gameConfig.cannonPositions[i], i == _playerSlot);
         }
 
-        _optionsManager = new OptionsManager(_parentNode);
+        _optionsManager = new OptionsManager(_parentNode, undefined, undefined, onLeaveArena);
 
         initialiseTouch();
     };
 
     var initialiseTouch = function () {
-        if(!_touchLayer) {
+        if (!_touchLayer) {
             _touchLayer = new TouchLayerRefactored(touchAt);
             _parentNode.addChild(_touchLayer, -1);
         }
@@ -98,18 +101,18 @@ var GameManager = function(){
         ClientServerConnect.getServerInformer().bulletFired(bulletId, rot);
     };
 
-    var getPlayerBulletId = function(){
+    var getPlayerBulletId = function () {
         return _playerViews[_playerSlot].getNextBulletId();
     };
 
 
-
-    var shootTo = function(playerId,pos){
-        for (var p of _playerPositions){
-            if(p && p.id == playerId){
+    var shootTo = function (playerId, pos) {
+        for (var p of _playerPositions) {
+            if (p && p.id == playerId) {
                 return _playerViews[p.slot].shootTo(pos);
             }
-        };
+        }
+        ;
     };
 
     var setGameState = function (config, playerId, playerSlot) {
@@ -120,17 +123,17 @@ var GameManager = function(){
 
     };
 
-    var updateMultiplayerState = function(playerData){
+    var updateMultiplayerState = function (playerData) {
         console.log(playerData);
         //{id: playerId, name: playerName, slot: playerSlot}
         _playerPositions[playerData.slot] = playerData;
         _playerViews[playerData.slot].updatePlayerData(playerData);
     };
 
-    var createFish = function(fishId, fishType){
-        return _fishManager.addFish(fishId,fishType);
+    var createFish = function (fishId, fishType) {
+        return _fishManager.addFish(fishId, fishType);
     };
-    
+
     var removeFish = function (fishId) {
         return _fishManager.removeFish(fishId);
     };
@@ -144,45 +147,77 @@ var GameManager = function(){
     };
 
     var goToLogin = function () {
-        _loginManager.goToLogin();
+        if (!_loggedIn) {
+            _loginManager.goToLogin();
+        }
     };
 
     var login = function () {
         var loginInfo = _loginManager.getLogin();
-        ClientServerConnect.login(loginInfo.name,loginInfo.pass);
+        ClientServerConnect.login(loginInfo.name, loginInfo.pass, goToLobby);
     };
 
-    var goTolobby = function () {
+    function goToLobby(success) {
         // var parent = _parentNode.parent;
         // parent.removeChild(_parentNode);
         // _parentNode = new cc.Node();
         // parent.addChild(_parentNode,99999);
+
         initialiseParent();
 
+        if (!success) {
+            console.log("LoginFailed!");
+        } else {
+            createLobby();
+            // _parentNode.parent.backToMenu();
+        }
+
         // cc.director.runScene(_parentNode);
-
-        _lobbyManager = new LobbyManager(_parentNode);
-
-
     };
 
-    function goToScoreboard(){
-        _scoreboardManager = new ScoreboardManager(_parentNode, goToLobby, goToNewRoom);
+    function onLeaveArena() {
+        goToScoreboard();
+        // createLobby();
+    }
+
+    function createLobby() {
+        if (!_lobbyManager)
+            _lobbyManager = new LobbyManager(_parentNode);
+        else {
+            _lobbyManager.doView(_parentNode);
+        }
+    }
+
+    function exitToLobby() {
+        ClientServerConnect.getServerInformer().leaveGame();
+        _parentNode.parent.backToMenu();
+        createLobby();
+    }
+
+    function goToScoreboard() {
+        if (!_scoreboardManager) {
+            _scoreboardManager = new ScoreboardManager(_parentNode, exitToLobby, goToNewRoom);
+        } else {
+            _scoreboardManager.doView(_parentNode);
+        }
         // _parentNode.addChild(_scoreboardManager);
     }
 
-    function goToLobby(){
-        _parentNode.removeChild(this._scoreboard);
-        _parentNode.parent.backToMenu();
-    }
+    // function goToLobby(success){
+    //     if (!success){
+    //         console.log("LoginFailed!");
+    //     }else {
+    //         _parentNode.parent.backToMenu();
+    //     }
+    // }
 
-    function goToNewRoom(){
+    function goToNewRoom() {
         console.log("Joey, I'm going to a new room!");
 
     }
 
 
-    function development(parent){
+    function development(parent) {
         console.log("GameManager");
         initialiseParent(parent);
         // goToScoreboard()
@@ -190,30 +225,29 @@ var GameManager = function(){
     }
 
 
-
     var GameManager = {
-        initialiseLogin : initialiseLogin,
-        initialiseGame : initialiseGame,
-        setGameState : setGameState,
-        updateMultiplayerState : updateMultiplayerState,
-        shootTo : shootTo, //slightly unsatisfactory
-        createFish : createFish,
-        removeFish : removeFish,
-        updateEverything : updateEverything,
+        initialiseLogin: initialiseLogin,
+        initialiseGame: initialiseGame,
+        setGameState: setGameState,
+        updateMultiplayerState: updateMultiplayerState,
+        shootTo: shootTo, //slightly unsatisfactory
+        createFish: createFish,
+        removeFish: removeFish,
+        updateEverything: updateEverything,
         // setServerInformer : setServerInformer,
-        goToLogin : goToLogin,
-        login : login,
-        goToLobby : goTolobby,
+        goToLogin: goToLogin,
+        login: login,
+        goToLobby: goToLobby,
 
 
         //debug
-        debug : debug,
+        debug: debug,
 
         //hack-ish for debug, to be removed
-        getGameConfig : getGameConfig,
+        getGameConfig: getGameConfig,
 
         //for development positioning
-        development : development,
+        development: development,
     };
 
     return GameManager;

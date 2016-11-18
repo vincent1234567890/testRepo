@@ -65,7 +65,7 @@ var ReferenceName = {
     //@TODO: move to seperate file
 
     //Login
-    LoginNamePlaceHolder : "Name",
+    LoginNamePlaceHolder : "Email",
     LoginPassPlaceHolder : "Password",
 
     //Scoreboard

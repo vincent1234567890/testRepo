@@ -22,6 +22,12 @@ var LoginManager = (function (){
         return this._view.GetLoginInfo();
     };
 
+    proto.destroyView = function () {
+        this._parent.removeChild(this._view);
+        this.view = null;
+    };
+
+
 
     proto.register = function(){
 

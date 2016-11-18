@@ -48,38 +48,54 @@ var ClientServerConnect = function () {
         });
     };
 
-    var login = function ( name, pass) {
+    var login = function ( name, pass, callback) {
         var client = getGameWSClient();
 
         Promise.resolve().then(
             () => {
                 // Create a test player
-                var playerName = name + "testplayername" + Date.now() + Math.floor(Math.random() * 100000000);
+                // var playerName = "player" + Date.now() + Math.floor(Math.random() * 100000000);
+                //
+                // var playerData = {
+                //     // name: playerName,
+                //     // email: playerName + '@testmail189543.com',
+                //     // password: 'test_password.12345',
+                //     // password: password,
+                //     name : playerName,
+                //     email : name,
+                //     password: pass,
+                // };
+                // return client.callAPIOnce('game', 'registerNewPlayer', playerData).then(
+                //     response => response.data
+                // );
 
-                var playerData = {
-                    name: playerName,
-                    email: playerName + '@testmail189543.com',
-                    password: 'test_password.12345',
-                    // password: password,
-                };
-                return client.callAPIOnce('game', 'registerNewPlayer', playerData).then(
-                    response => response.data
-                );
+                return client.callAPIOnce('game', 'login', {
+                            email: name,
+                            password : pass,
+                        })
+
             }
-        ).then
-        (
-            // Log in
-            (testPlayer) => client.callAPIOnce('game', 'login', {
-                id: testPlayer.id,
-                password: 'test_password.12345'
-            })
         )
+        //     .then
+        // (
+        //     // Log in
+        //     (testPlayer) => client.callAPIOnce('game', 'login', {
+        //         id: testPlayer.id,
+        //         // password: 'test_password.12345'
+        //         password : pass,
+        //     })
+        // )
             .then(
             loginResponse => {
                 console.log("loginResponse:", loginResponse);
-
+                callback(true);
                 // return client.callAPIOnce('game', 'joinGame', {})
-            }
+            }, error => {
+                    console.log(error);
+                    callback(false);
+                }
+
+
         )
             // .then(
         //     joinResponse => {
@@ -98,7 +114,9 @@ var ClientServerConnect = function () {
         //         // clientServerConnect.startGameScene() will be run by clientReceiver when everything is ready.
         //     }
         // )
-            .catch(console.error.bind(console));
+            .catch( error => {
+                console.error(error);
+            });
     };
 
     var joinGame = function (gameId) {
