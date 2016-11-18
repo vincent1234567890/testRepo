@@ -22,24 +22,25 @@ var OptionsView = (function(){
         var midY = cc.view.getDesignResolutionSize().height / 2;
 
         var bg = new cc.Sprite(ReferenceName.SideMenuBG);
-        bg.setPosition(midX,midY);
+        bg.setPosition(1297,midY);
+        //bg.setPosition(1297,midY);
         // this._parent.addChild(bg);
 
         var settings = new cc.Sprite(ReferenceName.SideMenuSettingsButton);
         var settingsButton = new cc.MenuItemSprite(settings, undefined, undefined, onSettingsEvent);
-        bg.setPosition(midX,midY);
+      //  bg.setPosition(midX,midY);
 
         var fishList = new cc.Sprite(ReferenceName.FishListButton);
         var fishListButton = new cc.MenuItemSprite(fishList, undefined, undefined, onFishListEvent);
 
-        var exit = new cc.Sprite(ReferenceName.FishListButton);
+        var exit = new cc.Sprite(ReferenceName.ExitButton);
         var exitButton = new cc.MenuItemSprite(exit, undefined, undefined, onExitEvent);
 
         var menu = new cc.Menu(settingsButton, fishListButton, exitButton);
-        settingsButton.setPosition(cc.pAdd(cc.p(menu.getContentSize().width / 2, settingsButton.getContentSize().height / 2), cc.p(0, 0)));
-        fishListButton.setPosition(cc.pAdd(cc.p(menu.getContentSize().width / 2, fishListButton.getContentSize().height / 2), cc.p(0, 0)));
-        exitButton.setPosition(cc.pAdd(cc.p(menu.getContentSize().width / 2, exitButton.getContentSize().height / 2), cc.p(0, 0)));
-        menu.setPosition(0,0);
+        settingsButton.setPosition(cc.pAdd(cc.p(menu.getContentSize().width / 2, settingsButton.getContentSize().height / 2), cc.p(0, 140)));
+        fishListButton.setPosition(cc.pAdd(cc.p(menu.getContentSize().width / 2, fishListButton.getContentSize().height / 2), cc.p(0, 60)));
+        exitButton.setPosition(cc.pAdd(cc.p(menu.getContentSize().width / 2, exitButton.getContentSize().height / 2), cc.p(0, -20)));
+        menu.setPosition(-580,80);
         bg.addChild(menu);
 
         return bg;
