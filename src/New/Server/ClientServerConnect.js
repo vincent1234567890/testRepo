@@ -133,7 +133,7 @@ var ClientServerConnect = function () {
 
                 var ioSocket = getGameIOSocket();
 
-                GameCtrl.debugGhosts = true;
+                GameCtrl.debugGhosts = false;
                 if (GameCtrl.debugGhosts) {
                     clientReceiver.ghostActors(ioSocket, 2000);
                 }
