@@ -133,7 +133,11 @@ var ClientServerConnect = function () {
 
                 var ioSocket = getGameIOSocket();
 
-                socketUtils.simulateNetworkLatency(ioSocket, 100);
+                GameCtrl.debugGhosts = true;
+                if (GameCtrl.debugGhosts) {
+                    clientReceiver.ghostActors(ioSocket, 2000);
+                }
+                //socketUtils.simulateNetworkLatency(ioSocket, 100);
 
                 var receiver =(clientReceiver(ioSocket, GameCtrl.sharedGame())); // @TODO : move to GameManager?
 
