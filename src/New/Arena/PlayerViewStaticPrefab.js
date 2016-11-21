@@ -81,12 +81,9 @@ var PlayerViewStaticPrefab = (function () {
         },
 
         updatePlayerData: function (playerData) {
-            console.log(JSON.stringify(playerData));
             this._playerName.setString(playerData.name);
             this._gold.setString(playerData.score);
             this._gem.setString(0);
-            console.log(playerData.score);
-            console.log(this._playerName.getString());
         }
 
 

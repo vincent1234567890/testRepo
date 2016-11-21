@@ -46,6 +46,7 @@ var TouchLayerRefactored = cc.Layer.extend({
     },
     onTouchesEnded: function (touches, event) {
         if (!this._enable) return;
+        var touchPoint = touches.getLocation();
         if (this._callback) {
             this._callback(touchPoint);
         }

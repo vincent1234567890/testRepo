@@ -6,6 +6,7 @@ var FishViewManager = (function(){
 
     var FishViewManager = function(parent, fishGameArena){
         // console.log
+
         cc.spriteFrameCache.addSpriteFrames(res.SquidPlist);
         cc.spriteFrameCache.addSpriteFrames(res.PufferfishPlist);
         cc.spriteFrameCache.addSpriteFrames(res.TurtlePlist);
@@ -57,6 +58,17 @@ var FishViewManager = (function(){
                 this._fishes[fishId].setRotation(180 - fishModel.angle * 180 / Math.PI);
             }
         }
-    }
+    };
+
+    proto.destroyView = function(){
+        for ( var fishId in this._fishes){
+            var fishModel = this._fishGameArena.getFish(fishId);
+            if (fishModel) {
+                this._parent.removeChild(fishModel);
+                delete fishModel;
+            }
+        }
+
+    };
     return FishViewManager;
 })();

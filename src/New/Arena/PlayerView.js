@@ -13,5 +13,10 @@ var PlayerView = (function () {
         this._playerViewStaticPrefabInstance.updatePlayerData(playerData);
     };
 
+    PlayerView.prototype.destroyView = function () {
+        this._playerViewStaticPrefabInstance.parent.removeChild(this._playerViewStaticPrefabInstance);
+        this._playerViewStaticPrefabInstance = null;
+    };
+
     return PlayerView;
 }());
