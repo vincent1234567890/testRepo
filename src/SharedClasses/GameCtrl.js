@@ -126,6 +126,11 @@ var GameCtrl = cc.Class.extend({
     //     ).catch(console.error.bind(console));
     // },
     startGameScene: function (fishGameArena) {
+        // Sometimes for testing, I want to create lag on the game packets but not on the initial packets.
+        // So I only start simulating the network latency here, not earlier.
+        //var ioSocket = ClientServerConnect.getGameIOSocket();
+        //socketUtils.simulateNetworkLatency(ioSocket, 500);
+
         this.setArena(fishGameArena);
         this.gameState = GAMEPLAY;
         var gameScene = new GameScene("Scene_Main", this._selectLevel);

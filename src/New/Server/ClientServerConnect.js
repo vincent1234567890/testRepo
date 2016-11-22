@@ -2,10 +2,15 @@
  * Created by eugeneseah on 15/11/16.
  */
 
+"use strict";
+
 var ClientServerConnect = function () {
+
     let _hasConnected = false;
     let _informServer ;
     let _clientReceiver;
+    let _gameWSClient;
+    let _gameIOSocket;
 
 
     var connectToMasterServer = function () {
@@ -133,6 +138,10 @@ var ClientServerConnect = function () {
 
                 var ioSocket = getGameIOSocket();
 
+                GameCtrl.debugGhosts = false;
+                if (GameCtrl.debugGhosts) {
+                    clientReceiver.ghostActors(ioSocket, 2000);
+                }
                 socketUtils.simulateNetworkLatency(ioSocket, 100);
 
                 var receiver =(clientReceiver(ioSocket, GameCtrl.sharedGame())); // @TODO : move to GameManager?
@@ -152,18 +161,18 @@ var ClientServerConnect = function () {
 
 
     var setGameWSClient = function (client) {
-        this.gameWSClient = client;
+        _gameWSClient = client;
     };
 
     var getGameWSClient = function () {
-        return this.gameWSClient;
+        return _gameWSClient;
     };
 
     var setGameIOSocket = function (ioSocket) {
-        this.gameIOSocket = ioSocket;
+        _gameIOSocket = ioSocket;
     };
     var getGameIOSocket = function () {
-        return this.gameIOSocket;
+        return _gameIOSocket;
     };
 
     var setClientReceiver = function (receiver) {
@@ -189,6 +198,7 @@ var ClientServerConnect = function () {
         joinGame : joinGame,
         getServerInformer : getServerInformer,
         resetArena : resetArena,
+        getGameIOSocket: getGameIOSocket,
     };
 
     return ClientServerConnect;
