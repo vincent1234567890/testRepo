@@ -37,9 +37,7 @@ var ScoreboardView = function() {
 
         // data.multiCatches :
         var count = 0;
-        console.log(data.multiCatches)
         if (data.multiCatches) {
-            console.log(data.multiCatches)
             for (multiCatch in data.multiCatches) {
                 count += data.multiCatches[multiCatch].count * multiCatch;
             }
