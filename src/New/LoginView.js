@@ -35,13 +35,33 @@ var LoginView = function() {
         this._parent.addChild(textPass);
         this.textPass = textPass;
 
-
+        if (cc.sys.localStorage) {
+            var old_username = cc.sys.localStorage.getItem('persistent_username');
+            if (old_username) {
+                textName.setString(old_username);
+            }
+            var old_password = cc.sys.localStorage.getItem('persistent_password');
+            if (old_password) {
+                textPass.setString(old_password);
+            }
+        }
     };
 
     var proto = LoginView.prototype;
 
     proto.GetLoginInfo = function () {
-        return {name : this.textName.getString(), pass : this.textPass.getString()}
+        var username = this.textName.getString();
+        var password = this.textPass.getString();
+
+        if (cc.sys.localStorage) {
+            cc.sys.localStorage.setItem('persistent_username', username);
+            cc.sys.localStorage.setItem('persistent_password', password);
+        }
+
+        return {
+            name: username,
+            pass: password
+        };
     };
 
     return LoginView;
