@@ -54,21 +54,6 @@ var ClientServerConnect = function () {
 
         Promise.resolve().then(
             () => {
-                // Create a test player
-                // var playerName = "player" + Date.now() + Math.floor(Math.random() * 100000000);
-                //
-                // var playerData = {
-                //     // name: playerName,
-                //     // email: playerName + '@testmail189543.com',
-                //     // password: 'test_password.12345',
-                //     // password: password,
-                //     name : playerName,
-                //     email : name,
-                //     password: pass,
-                // };
-                // return client.callAPIOnce('game', 'registerNewPlayer', playerData).then(
-                //     response => response.data
-                // );
 
                 return client.callAPIOnce('game', 'login', {
                             email: name,
@@ -76,17 +61,7 @@ var ClientServerConnect = function () {
                         })
 
             }
-        )
-        //     .then
-        // (
-        //     // Log in
-        //     (testPlayer) => client.callAPIOnce('game', 'login', {
-        //         id: testPlayer.id,
-        //         // password: 'test_password.12345'
-        //         password : pass,
-        //     })
-        // )
-            .then(
+        ).then(
             loginResponse => {
                 console.log("loginResponse:", loginResponse);
                 callback(true);
@@ -130,6 +105,8 @@ var ClientServerConnect = function () {
         ).then(
             joinResponse => {
                 console.log("joinResponse:", joinResponse);
+
+                if (getServerInformer()) return;
 
                 var ioSocket = getGameIOSocket();
 
@@ -176,11 +153,16 @@ var ClientServerConnect = function () {
 
     var getServerInformer = function () {
         return _informServer;
-    }
+    };
 
     var resetArena = function () {
         _clientReceiver.resetArena();
+    };
+
+    function requestStats() {
+        return getGameWSClient().callAPIOnce('game','getMyStats', {});
     }
+
 
 
     var ClientServerConnect = {
@@ -189,6 +171,7 @@ var ClientServerConnect = function () {
         joinGame : joinGame,
         getServerInformer : getServerInformer,
         resetArena : resetArena,
+        requestStats : requestStats,
     };
 
     return ClientServerConnect;

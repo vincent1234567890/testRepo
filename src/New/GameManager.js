@@ -183,9 +183,16 @@ var GameManager = function () {
 
     function onLeaveArena() {
         ClientServerConnect.getServerInformer().leaveGame();
-        // ClientServerConnect.resetArena();
-        goToScoreboard();
-        // createLobby();
+
+        ClientServerConnect.requestStats()
+            .then(
+                stats => {
+                    console.log("stats:" + JSON.stringify(stats));
+                    goToScoreboard(stats);
+                }
+            );
+        // ClientServerConnect.getServerInformer().requestStatsForThisGame();
+        // ClientServerConnect.resetArena(); <---?
     }
 
     function createLobby() {
@@ -202,11 +209,11 @@ var GameManager = function () {
         createLobby();
     }
 
-    function goToScoreboard() {
+    function goToScoreboard(stats) {
         if (!_scoreboardManager) {
-            _scoreboardManager = new ScoreboardManager(_parentNode, exitToLobby, goToNewRoom);
+            _scoreboardManager = new ScoreboardManager(_parentNode, stats.data.recentGames[0], exitToLobby, goToNewRoom);
         } else {
-            _scoreboardManager.doView(_parentNode);
+            _scoreboardManager.doView(_parentNode, stats.data.recentGames[0]);
         }
         // _parentNode.addChild(_scoreboardManager);
     }
@@ -218,7 +225,7 @@ var GameManager = function () {
 
 
     function development(parent) {
-        console.log("GameManager");
+        console.log("GameManager:development");
         initialiseParent(parent);
         // goToScoreboard()
         _optionsManager = new OptionsManager(_parentNode);
@@ -245,6 +252,7 @@ var GameManager = function () {
         createFish: createFish,
         removeFish: removeFish,
         updateEverything: updateEverything,
+        // goToScoreboard : goToScoreboard,
         // setServerInformer : setServerInformer,
         goToLogin: goToLogin,
         login: login,
