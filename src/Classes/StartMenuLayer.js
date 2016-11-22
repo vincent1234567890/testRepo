@@ -173,8 +173,18 @@ var StartMenuLayer = cc.Layer.extend({
         var startMenu = this.getChildByTag(eTag_MainMenu_StartMenu_menu);
         startMenu.setEnabled(false);
 
-        GameManager.login();
-        // GameManager.goToLobby();
+        GameManager.login(
+            function onSuccess () {
+                GameManager.goToLobby();
+            },
+            function onFailure () {
+                console.log("Login failed.");
+                // @todo Display message to the user
+
+                // Let the user try again
+                startMenu.setEnabled(true);
+            }
+        );
     },
 
     _menuNewGame:function (sender) {

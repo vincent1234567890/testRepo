@@ -21,7 +21,7 @@ var LoginView = function() {
         textName.setFontSize(50);
         textName.setPlaceholderFontSize(50);
         textName.setPlaceHolder(ReferenceName.LoginNamePlaceHolder);
-        textName.setAnchorPoint(cc.p());
+        //textName.setAnchorPoint(cc.p());
         textName.needsLayout();
         this._parent.addChild(textName);
         this.textName = textName;
@@ -35,33 +35,23 @@ var LoginView = function() {
         this._parent.addChild(textPass);
         this.textPass = textPass;
 
-        if (cc.sys.localStorage) {
-            var old_username = cc.sys.localStorage.getItem('persistent_username');
-            if (old_username) {
-                textName.setString(old_username);
-            }
-            var old_password = cc.sys.localStorage.getItem('persistent_password');
-            if (old_password) {
-                textPass.setString(old_password);
-            }
-        }
     };
 
     var proto = LoginView.prototype;
 
-    proto.GetLoginInfo = function () {
+    proto.getLoginInfo = function () {
         var username = this.textName.getString();
         var password = this.textPass.getString();
-
-        if (cc.sys.localStorage) {
-            cc.sys.localStorage.setItem('persistent_username', username);
-            cc.sys.localStorage.setItem('persistent_password', password);
-        }
 
         return {
             name: username,
             pass: password
         };
+    };
+
+    proto.setLoginInfo = function (name, pass) {
+        this.textName.setString(name);
+        this.textPass.setString(pass);
     };
 
     return LoginView;
