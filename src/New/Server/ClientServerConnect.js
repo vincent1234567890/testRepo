@@ -142,7 +142,7 @@ var ClientServerConnect = function () {
                 if (GameCtrl.debugGhosts) {
                     clientReceiver.ghostActors(ioSocket, 2000);
                 }
-                //socketUtils.simulateNetworkLatency(ioSocket, 100);
+                socketUtils.simulateNetworkLatency(ioSocket, 100);
 
                 var receiver =(clientReceiver(ioSocket, GameCtrl.sharedGame())); // @TODO : move to GameManager?
 
@@ -198,6 +198,7 @@ var ClientServerConnect = function () {
         joinGame : joinGame,
         getServerInformer : getServerInformer,
         resetArena : resetArena,
+        getGameIOSocket: getGameIOSocket,
     };
 
     return ClientServerConnect;
