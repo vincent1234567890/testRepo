@@ -2,10 +2,15 @@
  * Created by eugeneseah on 15/11/16.
  */
 
+"use strict";
+
 var ClientServerConnect = function () {
+
     let _hasConnected = false;
     let _informServer ;
     let _clientReceiver;
+    let _gameWSClient;
+    let _gameIOSocket;
 
 
     var connectToMasterServer = function () {
@@ -156,18 +161,18 @@ var ClientServerConnect = function () {
 
 
     var setGameWSClient = function (client) {
-        this.gameWSClient = client;
+        _gameWSClient = client;
     };
 
     var getGameWSClient = function () {
-        return this.gameWSClient;
+        return _gameWSClient;
     };
 
     var setGameIOSocket = function (ioSocket) {
-        this.gameIOSocket = ioSocket;
+        _gameIOSocket = ioSocket;
     };
     var getGameIOSocket = function () {
-        return this.gameIOSocket;
+        return _gameIOSocket;
     };
 
     var setClientReceiver = function (receiver) {
