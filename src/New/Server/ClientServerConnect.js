@@ -172,6 +172,10 @@ var ClientServerConnect = function () {
         return getGameWSClient().callAPIOnce('game','getMyStats', {});
     }
 
+    function leaveGame () {
+        return getGameWSClient().callAPIOnce('game','leaveGame', {});
+    }
+
 
 
     var ClientServerConnect = {
@@ -180,9 +184,9 @@ var ClientServerConnect = function () {
         joinGame : joinGame,
         getServerInformer : getServerInformer,
         resetArena : resetArena,
+        leaveGame : leaveGame,
         requestStats : requestStats,
         getGameIOSocket: getGameIOSocket,
-
     };
 
     return ClientServerConnect;

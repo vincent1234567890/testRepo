@@ -180,19 +180,18 @@ var GameManager = function () {
     }
 
     function onLeaveArena() {
-        // @todo Turn this into a promise, to avoid the dodgy setTimeout below
-        ClientServerConnect.getServerInformer().leaveGame();
+        //ClientServerConnect.getServerInformer().leaveGame();
+        Promise.resolve().then(
+            () => ClientServerConnect.leaveGame()
+        ).then(
+            () => ClientServerConnect.requestStats()
+        ).then(
+            stats => {
+                console.log("stats:" + JSON.stringify(stats));
+                goToScoreboard(stats);
+            }
+        ).catch(console.error);
 
-        // Leave time for the server to save the stats.
-        setTimeout(function () {
-            ClientServerConnect.requestStats()
-                .then(
-                    stats => {
-                        console.log("stats:" + JSON.stringify(stats));
-                        goToScoreboard(stats);
-                    }
-                ).catch(console.error);
-        }, 1000);
         // ClientServerConnect.getServerInformer().requestStatsForThisGame();
         // ClientServerConnect.resetArena(); <---?
     }
