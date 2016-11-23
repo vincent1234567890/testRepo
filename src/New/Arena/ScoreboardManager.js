@@ -4,25 +4,23 @@
 
 var ScoreboardManager = (function () {
 
-    var ScoreboardManager = function (parent, parentGoToLobby, parentGoToNewRoom) {
+    var ScoreboardManager = function (parent, data, parentGoToLobby, parentGoToNewRoom) {
         cc.spriteFrameCache.addSpriteFrames(res.ScoreboardPlist);
         this._parentGoToLobby = parentGoToLobby;
         this._parentGoToNewRoom = parentGoToNewRoom;
-        this.doView(parent)
+        this.doView(parent, data)
     };
 
-    ScoreboardManager.prototype.doView = function(parent){
-        this._view = new ScoreboardView(parent, this, goToLobby, goToNewRoom);
+    ScoreboardManager.prototype.doView = function(parent, data){
+        this._view = new ScoreboardView(parent, this, data, goToLobby, goToNewRoom);
     };
 
     function goToLobby() {
         this._parentGoToLobby();
-        // this._view.parent.removeChild(this._view);
     }
 
     function goToNewRoom() {
         this._parentGoToNewRoom();
-        this._view.parent.removeChild(this._view);
     }
 
     return ScoreboardManager;

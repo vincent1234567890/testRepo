@@ -2102,23 +2102,23 @@ var GameScene = cc.Scene.extend({
     },
     resetAllSpritePos:function () {
 
-        Multiple = AutoAdapterScreen.getInstance().getScaleMultiple();
-        this._backgroundLayer._bg.setScale(Multiple);
+        // Multiple = AutoAdapterScreen.getInstance().getScaleMultiple();
+        // this._backgroundLayer._bg.setScale(Multiple);
         this._backgroundLayer._bg.setPosition(VisibleRect.center());
         if (this._blurBackgroundLayer) {
-            this._blurBackgroundLayer.setScale(Multiple);
+            // this._blurBackgroundLayer.setScale(Multiple);
             this._blurBackgroundLayer.setPosition(VisibleRect.center());
         }
 
         //pause menu
-        if (this._pauseMenuLayer) {
-            this._pauseMenuLayer.setPosition(VisibleRect.bottom());
-        }
+        // if (this._pauseMenuLayer) {
+        //     this._pauseMenuLayer.setPosition(VisibleRect.bottom());
+        // }
         //compact user info
-        var act = this._compactUserInfo.getNumberOfRunningActions();
-        if (!(act > 0)) {
-            this._compactUserInfo.setPosition(cc.pAdd(VisibleRect.topLeft(), cc.p(this._compactUserInfo.getPosition().x, -150)));
-        }
+        // var act = this._compactUserInfo.getNumberOfRunningActions();
+        // if (!(act > 0)) {
+        //     this._compactUserInfo.setPosition(cc.pAdd(VisibleRect.topLeft(), cc.p(this._compactUserInfo.getPosition().x, -150)));
+        // }
         //weapon
         // this._cannonActor.getCurrentWeapon().setPosition(cc.pAdd(VisibleRect.bottom(), cc.p(0, 50)));
         // this._cannonActor._defaultWeaponPosition = cc.pAdd(VisibleRect.bottom(), cc.p(0, 50));
@@ -2131,15 +2131,15 @@ var GameScene = cc.Scene.extend({
         //     this._scoreBar.getChildByTag(kTagScoreBar).setPosition(cc.p(-VisibleRect.right().x / 2, 0));
         // }
 
-        var rainbow = this.getChildByTag(461);
-        if (rainbow) {
-            rainbow.setPosition(cc.pAdd(VisibleRect.bottom(), cc.p(0, -7)));
-        }
+        // var rainbow = this.getChildByTag(461);
+        // if (rainbow) {
+        //     rainbow.setPosition(cc.pAdd(VisibleRect.bottom(), cc.p(0, -7)));
+        // }
 
         //btn
         // this._itemMusicPlayer.setPosition(cc.p(VisibleRect.topLeft().x + 125, VisibleRect.topLeft().y - this._itemPause.getContentSize().height / 2));
-        this._itemPause.setPosition(cc.p(VisibleRect.topLeft().x + 45, VisibleRect.topLeft().y - this._itemPause.getContentSize().height / 2));
-        this._itemHide.setPosition(cc.p(VisibleRect.topRight().x - 45, VisibleRect.topRight().y - this._itemHide.getContentSize().height / 2));
+        // this._itemPause.setPosition(cc.p(VisibleRect.topLeft().x + 45, VisibleRect.topLeft().y - this._itemPause.getContentSize().height / 2));
+        // this._itemHide.setPosition(cc.p(VisibleRect.topRight().x - 45, VisibleRect.topRight().y - this._itemHide.getContentSize().height / 2));
         // this._itemCamera.setPosition(cc.p(VisibleRect.topRight().x - 125, VisibleRect.topRight().y - this._itemCamera.getContentSize().height / 2));
 
         //userinfo layer
@@ -2150,6 +2150,6 @@ var GameScene = cc.Scene.extend({
         // this._userInfoLayer._processsprite.setPosition(cc.p(VisibleRect.top().x + 156, VisibleRect.top().y - 24));
 
         //prize sprite
-        this._prizeSprite.setPosition(VisibleRect.center());
+        // this._prizeSprite.setPosition(VisibleRect.center());
     }
 });
