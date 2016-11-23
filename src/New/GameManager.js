@@ -156,30 +156,28 @@ var GameManager = function () {
         }
     };
 
-    var login = function () {
+    var login = function (onSuccess, onFailure) {
         var loginInfo = _loginManager.getLogin();
-        ClientServerConnect.login(loginInfo.name, loginInfo.pass, goToLobby);
+        ClientServerConnect.login(loginInfo.name, loginInfo.pass, function (success) {
+            if (success) {
+                onSuccess();
+            } else {
+                onFailure();
+            }
+        });
     };
 
-    function goToLobby(success) {
-        // var parent = _parentNode.parent;
-        // parent.removeChild(_parentNode);
-        // _parentNode = new cc.Node();
-        // parent.addChild(_parentNode,99999);
-        _loginManager.destroyView();
-        _loggedIn = true;
-
+    function goToLobby() {
         initialiseParent();
 
-        if (!success) {
-            console.log("LoginFailed!");
-        } else {
-            createLobby();
-            // _parentNode.parent.backToMenu();
-        }
+        _loggedIn = true;
 
-        // cc.director.runScene(_parentNode);
-    };
+        // Login was successful, so save the user's details
+        _loginManager.saveLoginInfo();
+        _loginManager.destroyView();
+
+        createLobby();
+    }
 
     function onLeaveArena() {
         ClientServerConnect.getServerInformer().leaveGame();

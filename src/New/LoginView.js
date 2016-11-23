@@ -21,7 +21,7 @@ var LoginView = function() {
         textName.setFontSize(50);
         textName.setPlaceholderFontSize(50);
         textName.setPlaceHolder(ReferenceName.LoginNamePlaceHolder);
-        textName.setAnchorPoint(cc.p());
+        //textName.setAnchorPoint(cc.p());
         textName.needsLayout();
         this._parent.addChild(textName);
         this.textName = textName;
@@ -35,13 +35,23 @@ var LoginView = function() {
         this._parent.addChild(textPass);
         this.textPass = textPass;
 
-
     };
 
     var proto = LoginView.prototype;
 
-    proto.GetLoginInfo = function () {
-        return {name : this.textName.getString(), pass : this.textPass.getString()}
+    proto.getLoginInfo = function () {
+        var username = this.textName.getString();
+        var password = this.textPass.getString();
+
+        return {
+            name: username,
+            pass: password
+        };
+    };
+
+    proto.setLoginInfo = function (name, pass) {
+        this.textName.setString(name);
+        this.textPass.setString(pass);
     };
 
     return LoginView;
