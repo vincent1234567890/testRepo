@@ -75,6 +75,7 @@ var ScoreboardView = function() {
         fontDef.fillStyle = new cc.Color(0,0,0,255);
 
         var label = new cc.LabelTTF(labelText, fontDef);
+        label.setAnchorPoint(0, 0.5);
 
         fontDef.fontSize = "36";
         //fontDef.fontWeight = "normal";
@@ -92,7 +93,7 @@ var ScoreboardView = function() {
         bg.addChild(icon);
         bg.addChild(info);
 
-        label.setPosition(100,74);
+        label.setPosition(30,74);
         icon.setPosition(44,32);
         info.setPosition(200,32);
 
