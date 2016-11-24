@@ -38,9 +38,9 @@ var ClientServerConnect = function () {
 
         client.connect();
         client.addEventListener('open', function () {
-            Promise.resolve().then(
-                () => client.callAPIOnce('game', 'requestServer', {})
-            ).then(
+            _hasConnected = true;
+
+            client.callAPIOnce('game', 'requestServer', {}).then(
                 (serverList) => {
                     console.log("serverList:", serverList);
                     // Future: Maybe ping the servers here, then connect to the closest one
@@ -138,21 +138,20 @@ var ClientServerConnect = function () {
     };
 
     function leaveGame () {
-        const client = getGameWSClient();
-
-        return getGameWSClient().callAPIOnce('game','leaveGame', {}).then(
-            () => {
-                const ioSocket = _gameIOSocket;
-                socketUtils.disengageIOSocketFromClient(ioSocket, client);
-
-                _informServer = undefined;
-                //_clientReceiver = undefined;
-            }
+        return _gameWSClient.callAPIOnce('game','leaveGame', {}).then(
+            () => postGameCleanup()
         );
     }
 
+    function postGameCleanup () {
+        socketUtils.disengageIOSocketFromClient(_gameIOSocket, _gameWSClient);
+
+        _informServer = undefined;
+        //_clientReceiver = undefined;
+    }
+
     function requestStats() {
-        return getGameWSClient().callAPIOnce('game','getMyStats', {});
+        return _gameWSClient.callAPIOnce('game','getMyStats', {});
     }
 
 
@@ -199,6 +198,7 @@ var ClientServerConnect = function () {
         leaveGame : leaveGame,
         requestStats : requestStats,
         //getGameIOSocket: getGameIOSocket,
+        postGameCleanup: postGameCleanup,
     };
 
     return ClientServerConnect;

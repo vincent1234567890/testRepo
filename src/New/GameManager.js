@@ -131,7 +131,7 @@ var GameManager = function () {
     };
 
     var updateMultiplayerState = function (playerData) {
-        console.log(playerData);
+        //console.log(playerData);
         //{id: playerId, name: playerName, slot: playerSlot}
         //_playerPositions[playerData.slot] = playerData;
         _playerViews[playerData.slot].updatePlayerData(playerData);
@@ -187,14 +187,8 @@ var GameManager = function () {
         Promise.resolve().then(
             () => ClientServerConnect.leaveGame()
         ).then(
-            () => ClientServerConnect.requestStats()
-        ).then(
-            stats => {
-                console.log("stats:" + JSON.stringify(stats));
-                goToScoreboard(stats);
-            }
+            () => showPostGameStats()
         ).catch(console.error);
-
         // ClientServerConnect.getServerInformer().requestStatsForThisGame();
         // ClientServerConnect.resetArena(); <---?
     }
@@ -213,6 +207,15 @@ var GameManager = function () {
         createLobby();
     }
 
+    function showPostGameStats () {
+        ClientServerConnect.requestStats().then(
+            stats => {
+                console.log("stats:" + JSON.stringify(stats));
+                goToScoreboard(stats);
+            }
+        ).catch(console.error);
+    }
+
     function goToScoreboard(stats) {
         if (!_scoreboardManager) {
             _scoreboardManager = new ScoreboardManager(_parentNode, stats.data.recentGames[0], exitToLobby, goToNewRoom);
@@ -223,8 +226,7 @@ var GameManager = function () {
     }
 
     function goToNewRoom() {
-        console.log("Joey, I'm going to a new room!");
-
+        ClientServerConnect.joinGame(0).catch(console.error);
     }
 
 
@@ -256,6 +258,7 @@ var GameManager = function () {
         createFish: createFish,
         removeFish: removeFish,
         updateEverything: updateEverything,
+        showPostGameStats: showPostGameStats,
         // goToScoreboard : goToScoreboard,
         // setServerInformer : setServerInformer,
         goToLogin: goToLogin,
