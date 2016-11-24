@@ -69,12 +69,18 @@ var ScoreboardView = function() {
     function createGridObject(labelText, spriteName, data){
         var fontDef = new cc.FontDefinition();
         fontDef.fontName = "Arial";
-        fontDef.fontSize = "20";
+        //fontDef.fontWeight = "bold";
+        fontDef.fontSize = "26";
         fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
         fontDef.fillStyle = new cc.Color(0,0,0,255);
-        var label = new cc.LabelTTF(labelText, fontDef);
 
-        fontDef.fontSize = "20";
+        var label = new cc.LabelTTF(labelText, fontDef);
+        label.setAnchorPoint(0, 0.5);
+
+        fontDef.fontSize = "36";
+        //fontDef.fontWeight = "normal";
+        //fontDef.fontWeight = "bold";
+        fontDef.fontName = "Impact";
 
         var info = new cc.LabelTTF(data || 0,fontDef);
 
@@ -87,9 +93,9 @@ var ScoreboardView = function() {
         bg.addChild(icon);
         bg.addChild(info);
 
-        label.setPosition(100,70);
+        label.setPosition(30,74);
         icon.setPosition(44,32);
-        info.setPosition(200,30);
+        info.setPosition(200,32);
 
         return bg;
     }
@@ -105,6 +111,7 @@ var ScoreboardView = function() {
         var fontDef = new cc.FontDefinition();
         fontDef.fontName = "Arial";
         fontDef.fontSize = "50";
+        fontDef.fontWeight = "bold";
         fontDef.fillStyle = new cc.Color(0,0,0,255);
 
         var lobbyLabel = new cc.LabelTTF(ReferenceName.GoToLobby, fontDef);
