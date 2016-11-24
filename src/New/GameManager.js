@@ -35,7 +35,7 @@ var GameManager = function () {
     var _loginManager;
     var _playerViews = [];
     var _fishManager;
-    var _playerPositions = [];
+    //var _playerPositions = [];
     var _lobbyManager;
     var _scoreboardManager;
     var _optionsManager;
@@ -111,12 +111,15 @@ var GameManager = function () {
 
 
     var shootTo = function (playerId, pos) {
-        for (var p of _playerPositions) {
-            if (p && p.id == playerId) {
-                return _playerViews[p.slot].shootTo(pos);
-            }
-        }
-        ;
+        //for (var p of _playerPositions) {
+        //    if (p && p.id == playerId) {
+        //        return _playerViews[p.slot].shootTo(pos);
+        //    }
+        //}
+
+        var arenaPlayer = _fishGameArena.getPlayer(playerId);
+        var playerView = _playerViews[arenaPlayer.slot];
+        return playerView.shootTo(pos);
     };
 
     var setGameState = function (config, playerId, playerSlot) {
@@ -130,7 +133,7 @@ var GameManager = function () {
     var updateMultiplayerState = function (playerData) {
         console.log(playerData);
         //{id: playerId, name: playerName, slot: playerSlot}
-        _playerPositions[playerData.slot] = playerData;
+        //_playerPositions[playerData.slot] = playerData;
         _playerViews[playerData.slot].updatePlayerData(playerData);
     };
 
