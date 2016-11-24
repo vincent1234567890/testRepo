@@ -2,7 +2,7 @@
  * Created by eugeneseah on 14/11/16.
  */
 
-var LoginView = function() {
+var LoginView = (function() {
 
     var LoginView = function ( parent) {
 
@@ -55,5 +55,5 @@ var LoginView = function() {
     };
 
     return LoginView;
-}();
+}());
 

@@ -91,6 +91,7 @@
         "src/Classes/WeaponSpecialRay.js",
         "src/TestScene.js",
 
+        "src/New/PlayerPreferences.js",
         "src/New/Server/ClientServerConnect.js",
         "src/New/LoginView.js",
         "src/New/LoginManager.js",
@@ -98,6 +99,7 @@
         "src/New/Lobby/LobbyView.js",
 
         "src/New/Arena/OptionsView.js",
+        "src/New/Arena/OptionsSideMenuView.js",
         "src/New/Arena/OptionsManager.js",
         "src/New/Data/FishAnimationEnum.js",
         "src/New/Data/FishAnimationData.js",

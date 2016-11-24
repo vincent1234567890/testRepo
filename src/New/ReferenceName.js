@@ -54,10 +54,10 @@ var ReferenceName = {
     ExitButton : "#Exit.png",
 
     //OptionsMenu
-    OptionsBG : "#setting-21.png",
-    OptionBarBG : "#setting-23.png",
-    OptionsBarNegative : "#setting-22.png",
-    FishSliderButton : "#setting-24.png",
+    OptionsBG : "#Setting-21.png",
+    OptionBarBG : "#Setting-23.png",
+    OptionsBarNegative : "#Setting-22.png",
+    FishSliderButton : "#Setting-24.png",
 
     FishPlaceholder : "#Fish Paceholder.png",
 

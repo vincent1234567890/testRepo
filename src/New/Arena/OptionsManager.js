@@ -13,11 +13,14 @@ var OptionsManager = (function (){
         _fishListCallBack = fishListCallback;
         _exitCallBack = exitCallback;
         console.log("OptionsManager");
-        cc.spriteFrameCache.addSpriteFrames(res.SideMenuPlist);
-        this.view = new OptionsView(parent, onSettings, onFishList, onExitButton);
+        // cc.spriteFrameCache.addSpriteFrames(res.SideMenuPlist);
+        cc.spriteFrameCache.addSpriteFrames(res.SettingsUIPlist);
+        // this.view = new OptionsSideMenuView(parent, onSettings, onFishList, onExitButton);
+        this.settingsView = new OptionsView(parent);
     }
 
     function onSettings(){
+
         if (_settingsCallback) {
             _settingsCallback();
         }
