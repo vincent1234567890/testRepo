@@ -10,9 +10,7 @@ var CannonManager = (function () {
         if (isPlayer) {
             this._cannon.setupCannonChangeMenu(parent, this, pos, this.decreaseCannon, this.increaseCannon);
         }
-        this._currentValue = 1;
-        this._cannon.updateCannonPowerLabel(this._currentValue);
-        // this._posDebug = pos;
+        this.selectGun(0);
     };
 
     CannonManager.prototype.shootTo = function (pos) {
@@ -25,19 +23,32 @@ var CannonManager = (function () {
     };
 
     CannonManager.prototype.increaseCannon = function () {
-        this._currentValue++;
-        this._cannon.updateCannonPowerLabel(this._currentValue);
-        ClientServerConnect.getServerInformer().gunSelected(this._currentValue);
+        this.selectGun(this._currentGunId + 1);
     };
 
     CannonManager.prototype.decreaseCannon = function () {
-        this._currentValue--;
-        this._cannon.updateCannonPowerLabel(this._currentValue);
-        ClientServerConnect.getServerInformer().gunSelected(this._currentValue);
+        this.selectGun(this._currentGunId - 1);
+    };
+
+    CannonManager.prototype.selectGun = function (nextGunId) {
+        const nextGunClass = GameManager.getGameConfig().gunClasses[nextGunId];
+
+        if (!nextGunClass) {
+            // Cannot select that gun - it doesn't exist!
+            return;
+        }
+
+        this._currentGunId = nextGunId;
+        this._cannon.updateCannonPowerLabel(nextGunClass.value);
+        ClientServerConnect.getServerInformer().gunSelected(this._currentGunId);
+    };
+
+    CannonManager.prototype.getCurrentGunClass = function () {
+        return GameManager.getGameConfig().gunClasses[this._currentGunId];
     };
 
     CannonManager.prototype.getCurrentValue = function () {
-        return this._currentValue;
+        return this.getCurrentGunClass().value;
     };
 
     CannonManager.prototype.destroyView = function () {
