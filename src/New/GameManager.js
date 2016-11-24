@@ -131,7 +131,7 @@ var GameManager = function () {
     };
 
     var updateMultiplayerState = function (playerData) {
-        console.log(playerData);
+        //console.log(playerData);
         //{id: playerId, name: playerName, slot: playerSlot}
         //_playerPositions[playerData.slot] = playerData;
         _playerViews[playerData.slot].updatePlayerData(playerData);
@@ -187,14 +187,8 @@ var GameManager = function () {
         Promise.resolve().then(
             () => ClientServerConnect.leaveGame()
         ).then(
-            () => ClientServerConnect.requestStats()
-        ).then(
-            stats => {
-                console.log("stats:" + JSON.stringify(stats));
-                goToScoreboard(stats);
-            }
+            () => showPostGameStats()
         ).catch(console.error);
-
         // ClientServerConnect.getServerInformer().requestStatsForThisGame();
         // ClientServerConnect.resetArena(); <---?
     }
@@ -211,6 +205,15 @@ var GameManager = function () {
         destroyArena();
         _parentNode.parent.backToMenu();
         createLobby();
+    }
+
+    function showPostGameStats () {
+        ClientServerConnect.requestStats().then(
+            stats => {
+                console.log("stats:" + JSON.stringify(stats));
+                goToScoreboard(stats);
+            }
+        ).catch(console.error);
     }
 
     function goToScoreboard(stats) {
@@ -256,6 +259,7 @@ var GameManager = function () {
         createFish: createFish,
         removeFish: removeFish,
         updateEverything: updateEverything,
+        showPostGameStats: showPostGameStats,
         // goToScoreboard : goToScoreboard,
         // setServerInformer : setServerInformer,
         goToLogin: goToLogin,
