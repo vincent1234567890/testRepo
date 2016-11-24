@@ -226,8 +226,7 @@ var GameManager = function () {
     }
 
     function goToNewRoom() {
-        console.log("Joey, I'm going to a new room!");
-
+        ClientServerConnect.joinGame(0).catch(console.error);
     }
 
 

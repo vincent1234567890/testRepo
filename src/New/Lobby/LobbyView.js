@@ -154,7 +154,7 @@ var LobbyView = function() {
 
     function gameSelected(){
         console.log("gameSelected");
-        ClientServerConnect.joinGame(0).catch(console.error.bind(console));
+        ClientServerConnect.joinGame(0).catch(console.error);
     }
 
 
