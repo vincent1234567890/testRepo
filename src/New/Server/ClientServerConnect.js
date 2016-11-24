@@ -8,7 +8,7 @@ var ClientServerConnect = function () {
 
     let _hasConnected = false;
     let _informServer ;
-    let _clientReceiver;
+    //let _clientReceiver;
     let _gameWSClient;
     let _gameIOSocket;
 
@@ -38,14 +38,9 @@ var ClientServerConnect = function () {
 
         client.connect();
         client.addEventListener('open', function () {
-            // Wrapper which listens for game events
-            var ioSocket = socketUtils.getIOSocketFromClient(client);
-            // This object has on() and off() functions for receiving messages, and send() for sending them.
-            setGameIOSocket(ioSocket);
+            _hasConnected = true;
 
-            Promise.resolve().then(
-                () => client.callAPIOnce('game', 'requestServer', {})
-            ).then(
+            client.callAPIOnce('game', 'requestServer', {}).then(
                 (serverList) => {
                     console.log("serverList:", serverList);
                     // Future: Maybe ping the servers here, then connect to the closest one
@@ -101,19 +96,26 @@ var ClientServerConnect = function () {
     };
 
     var joinGame = function (gameId) {
-        var client = getGameWSClient();
-        Promise.resolve().then(
+        const client = getGameWSClient();
+
+        return Promise.resolve().then(
             () => {
-                console.log("Join Game");
-                return client.callAPIOnce('game', 'joinGame', {})
+                if (getServerInformer()) {
+                    //registered events triggering multiple times are source of error.
+                    throw Error("You are already in a game!");
+                }
+
+                console.log("Joining game");
+                return client.callAPIOnce('game', 'joinGame', {gameId: gameId});
             }
         ).then(
             joinResponse => {
                 console.log("joinResponse:", joinResponse);
 
-                if (getServerInformer()) return; //registered events triggering multiple times are source of error.
-
-                var ioSocket = getGameIOSocket();
+                // Wrapper which listens for game events
+                var ioSocket = socketUtils.getIOSocketFromClient(client);
+                // This object has on() and off() functions for receiving messages, and send() for sending them.
+                //setGameIOSocket(ioSocket);
 
                 GameCtrl.debugGhosts = false;
                 if (GameCtrl.debugGhosts) {
@@ -121,9 +123,9 @@ var ClientServerConnect = function () {
                 }
                 socketUtils.simulateNetworkLatency(ioSocket, 100);
 
-                var receiver =(clientReceiver(ioSocket, GameCtrl.sharedGame())); // @TODO : move to GameManager?
+                var receiver = clientReceiver(ioSocket, GameCtrl.sharedGame()); // @TODO : move to GameManager?
 
-                setClientReceiver(receiver);
+                //setClientReceiver(receiver);
 
                 setServerInformer(serverInformer(ioSocket));
                 // _informServer = serverInformer(ioSocket);
@@ -132,8 +134,25 @@ var ClientServerConnect = function () {
 
                 // clientServerConnect.startGameScene() will be run by clientReceiver when everything is ready.
             }
-        ).catch(console.error.bind(console));
+        );
     };
+
+    function leaveGame () {
+        return _gameWSClient.callAPIOnce('game','leaveGame', {}).then(
+            () => postGameCleanup()
+        );
+    }
+
+    function postGameCleanup () {
+        socketUtils.disengageIOSocketFromClient(_gameIOSocket, _gameWSClient);
+
+        _informServer = undefined;
+        //_clientReceiver = undefined;
+    }
+
+    function requestStats() {
+        return _gameWSClient.callAPIOnce('game','getMyStats', {});
+    }
 
 
 
@@ -145,16 +164,16 @@ var ClientServerConnect = function () {
         return _gameWSClient;
     };
 
-    var setGameIOSocket = function (ioSocket) {
-        _gameIOSocket = ioSocket;
-    };
-    var getGameIOSocket = function () {
-        return _gameIOSocket;
-    };
+    //var setGameIOSocket = function (ioSocket) {
+    //    _gameIOSocket = ioSocket;
+    //};
+    //var getGameIOSocket = function () {
+    //    return _gameIOSocket;
+    //};
 
-    var setClientReceiver = function (receiver) {
-        _clientReceiver = receiver;
-    };
+    //var setClientReceiver = function (receiver) {
+    //    _clientReceiver = receiver;
+    //};
 
     var setServerInformer = function (informer) {
         _informServer = informer;
@@ -168,10 +187,6 @@ var ClientServerConnect = function () {
         _clientReceiver.resetArena();
     };
 
-    function requestStats() {
-        return getGameWSClient().callAPIOnce('game','getMyStats', {});
-    }
-
 
 
     var ClientServerConnect = {
@@ -180,9 +195,10 @@ var ClientServerConnect = function () {
         joinGame : joinGame,
         getServerInformer : getServerInformer,
         resetArena : resetArena,
+        leaveGame : leaveGame,
         requestStats : requestStats,
-        getGameIOSocket: getGameIOSocket,
-
+        //getGameIOSocket: getGameIOSocket,
+        postGameCleanup: postGameCleanup,
     };
 
     return ClientServerConnect;

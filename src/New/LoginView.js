@@ -12,15 +12,15 @@ var LoginView = (function() {
         var midX = cc.view.getDesignResolutionSize().width / 2;
         var midY = cc.view.getDesignResolutionSize().height / 2;
 
-        var frame = cc.spriteFrameCache.getSpriteFrame(ReferenceName.Login9Slice);
-        var sprite = new cc.Scale9Sprite(frame );
+        //var frame = cc.spriteFrameCache.getSpriteFrame(ReferenceName.Login9Slice);
+        var sprite = new cc.Scale9Sprite(ReferenceName.Login9Slice);
         sprite.setAnchorPoint(0.0,0.0);
 
         var textName = new cc.EditBox(cc.size(300,70), sprite);
-        textName.setPosition(midX,midY+100);
-        textName.setFontSize(50);
-        textName.setPlaceholderFontSize(50);
         textName.setPlaceHolder(ReferenceName.LoginNamePlaceHolder);
+        textName.setPosition(midX, midY + 100);
+        textName.setFontSize(40);
+        textName.setPlaceholderFontSize(40);
         //textName.setAnchorPoint(cc.p());
         textName.needsLayout();
         this._parent.addChild(textName);
@@ -28,10 +28,11 @@ var LoginView = (function() {
 
         var textPass = new cc.EditBox(cc.size(300,70), new cc.Scale9Sprite(ReferenceName.Login9Slice));
         textPass.setPlaceHolder(ReferenceName.LoginPassPlaceHolder);
-        textPass.setPosition(midX,midY);
-        textPass.setFontSize(50);
-        textPass.setPlaceholderFontSize(50);
+        textPass.setPosition(midX, midY + 14);
+        textPass.setFontSize(40);
+        textPass.setPlaceholderFontSize(40);
         textPass.setInputFlag(cc.EDITBOX_INPUT_FLAG_PASSWORD);
+        textPass.needsLayout();
         this._parent.addChild(textPass);
         this.textPass = textPass;
 

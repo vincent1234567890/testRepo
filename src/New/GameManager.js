@@ -9,7 +9,7 @@
  */
 "use strict";
 
-let GameManager = function () {
+const GameManager = function () {
     let debug = false;
 
     let _gameConfig;
@@ -35,7 +35,7 @@ let GameManager = function () {
     let _loginManager;
     let _playerViews = [];
     let _fishManager;
-    let _playerPositions = [];
+    // let _playerPositions = [];
     let _lobbyManager;
     let _scoreboardManager;
     let _optionsManager;
@@ -56,7 +56,7 @@ let GameManager = function () {
         _loginManager = new LoginManager(_parentNode);
     }
 
-    let initialiseGame = function (parent, fishGameArena) {
+    const initialiseGame = function (parent, fishGameArena) {
 
         initialiseParent(parent);
 
@@ -77,7 +77,7 @@ let GameManager = function () {
         initialiseTouch();
     };
 
-    let initialiseTouch = function () {
+    const initialiseTouch = function () {
         if(_touchLayer){
             _parentNode.removeChild(_touchLayer);
         }
@@ -87,7 +87,7 @@ let GameManager = function () {
         // }
     };
 
-    let touchAt = function (pos) {
+    const touchAt = function (pos) {
 
         const lastShootTime = this._lastShotTime || -Infinity;
         const now = _fishGameArena.getGameTime();
@@ -105,21 +105,25 @@ let GameManager = function () {
         ClientServerConnect.getServerInformer().bulletFired(bulletId, rot);
     };
 
-    let getPlayerBulletId = function () {
+    const getPlayerBulletId = function () {
         return _playerViews[_playerSlot].getNextBulletId();
     };
 
 
-    let shootTo = function (playerId, pos) {
-        for (let p of _playerPositions) {
-            if (p && p.id == playerId) {
-                return _playerViews[p.slot].shootTo(pos);
-            }
-        }
-        ;
+
+    const shootTo = function (playerId, pos) {
+        //for (var p of _playerPositions) {
+        //    if (p && p.id == playerId) {
+        //        return _playerViews[p.slot].shootTo(pos);
+        //    }
+        //}
+
+        let arenaPlayer = _fishGameArena.getPlayer(playerId);
+        var playerView = _playerViews[arenaPlayer.slot];
+        return playerView.shootTo(pos);
     };
 
-    let setGameState = function (config, playerId, playerSlot) {
+    const setGameState = function (config, playerId, playerSlot) {
         console.log(JSON.stringify(config));
         _gameConfig = config;
         _playerId = playerId;
@@ -127,36 +131,33 @@ let GameManager = function () {
 
     };
 
-    let updateMultiplayerState = function (playerData) {
-        console.log(playerData);
-        //{id: playerId, name: playerName, slot: playerSlot}
-        _playerPositions[playerData.slot] = playerData;
+    const updateMultiplayerState = function (playerData) {
         _playerViews[playerData.slot].updatePlayerData(playerData);
     };
 
-    let createFish = function (fishId, fishType) {
+    const createFish = function (fishId, fishType) {
         return _fishManager.addFish(fishId, fishType);
     };
 
-    let removeFish = function (fishId) {
+    const removeFish = function (fishId) {
         return _fishManager.removeFish(fishId);
     };
 
-    let updateEverything = function () {
+    const updateEverything = function () {
         _fishManager.update();
     };
 
-    let getGameConfig = function () {
+    const getGameConfig = function () {
         return _gameConfig;
     };
 
-    let goToLogin = function () {
+    const goToLogin = function () {
         if (!_loggedIn) {
             _loginManager.goToLogin();
         }
     };
 
-    let login = function (onSuccess, onFailure) {
+    const login = function (onSuccess, onFailure) {
         let loginInfo = _loginManager.getLoginInfo();
         ClientServerConnect.login(loginInfo.name, loginInfo.pass, function (success) {
             if (success) {
@@ -181,15 +182,12 @@ let GameManager = function () {
     }
 
     function onLeaveArena() {
-        ClientServerConnect.getServerInformer().leaveGame();
-
-        ClientServerConnect.requestStats()
-            .then(
-                stats => {
-                    console.log("stats:" + JSON.stringify(stats));
-                    goToScoreboard(stats);
-                }
-            );
+        //ClientServerConnect.getServerInformer().leaveGame();
+        Promise.resolve().then(
+            () => ClientServerConnect.leaveGame()
+        ).then(
+            () => showPostGameStats()
+        ).catch(console.error);
         // ClientServerConnect.getServerInformer().requestStatsForThisGame();
         // ClientServerConnect.resetArena(); <---?
     }
@@ -208,6 +206,15 @@ let GameManager = function () {
         createLobby();
     }
 
+    function showPostGameStats () {
+        ClientServerConnect.requestStats().then(
+            stats => {
+                console.log("stats:" + JSON.stringify(stats));
+                goToScoreboard(stats);
+            }
+        ).catch(console.error);
+    }
+
     function goToScoreboard(stats) {
         if (!_scoreboardManager) {
             _scoreboardManager = new ScoreboardManager(_parentNode, stats.data.recentGames[0], exitToLobby, goToNewRoom);
@@ -218,8 +225,7 @@ let GameManager = function () {
     }
 
     function goToNewRoom() {
-        console.log("Joey, I'm going to a new room!");
-
+        ClientServerConnect.joinGame(0).catch(console.error);
     }
 
 
@@ -251,6 +257,7 @@ let GameManager = function () {
         createFish: createFish,
         removeFish: removeFish,
         updateEverything: updateEverything,
+        showPostGameStats: showPostGameStats,
         // goToScoreboard : goToScoreboard,
         // setServerInformer : setServerInformer,
         goToLogin: goToLogin,
