@@ -34,6 +34,10 @@ var PlayerViewManager = (function () {
         this._playerView.updateView(playerData);
     };
 
+    proto.clearPlayerData = function () {
+        this._playerView.clearPlayerData();
+    }
+
     proto.destroyView = function(){
         this._playerView.destroyView();
         this._playerView = null;

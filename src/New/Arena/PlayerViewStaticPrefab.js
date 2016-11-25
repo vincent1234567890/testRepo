@@ -88,8 +88,13 @@ var PlayerViewStaticPrefab = (function () {
             this._playerName.setString(nameToShow);
             this._gold.setString(Math.floor(playerData.score));
             this._gem.setString(0);
-        }
+        },
 
+        clearPlayerData: function () {
+            this._playerName.setString('');
+            this._gold.setString('');
+            this._gem.setString('');
+        },
 
     });
 
