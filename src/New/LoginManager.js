@@ -2,51 +2,49 @@
  * Created by eugeneseah on 14/11/16.
  */
 
-var LoginManager = (function (){
+let LoginManager = (function (){
+
+    let _view;
 
     function LoginManager(parent) {
         this._parent = parent;
         cc.spriteFrameCache.addSpriteFrames(res.LoginUIPlist);
     }
 
-    var proto = LoginManager.prototype;
+    let proto = LoginManager.prototype;
 
     proto.goToLogin = function(){
-        if (!this._view){
+        if (!_view){
             console.log("goToLogin");
-            this._view = new LoginView(this._parent);
-            this.restoreLoginInfo();
+            _view = new LoginView(this._parent);
+            restoreLoginInfo();
         }
     };
 
-    proto.getLogin = function () {
-        return this._view.getLoginInfo();
+    proto.getLoginInfo = function () {
+        return _view.getLoginInfo();
     };
 
     proto.register = function(){
 
     };
 
-    proto.restoreLoginInfo = function () {
-        if (cc.sys.localStorage) {
-            var old_username = cc.sys.localStorage.getItem('persistent_username');
-            var old_password = cc.sys.localStorage.getItem('persistent_password');
-            this._view.setLoginInfo(old_username, old_password);
+    let restoreLoginInfo = function () {
+        let data = PlayerPreferences.getLoginDetails();
+        if (data){
+            _view.setLoginInfo(data.username, data.password);
         }
     };
 
     proto.saveLoginInfo = function () {
-        if (cc.sys.localStorage) {
-            var loginDetails = this._view.getLoginInfo();
-            cc.sys.localStorage.setItem('persistent_username', loginDetails.name);
-            cc.sys.localStorage.setItem('persistent_password', loginDetails.pass);
-        }
+        let loginDetails = _view.getLoginInfo();
+        PlayerPreferences.setLoginDetails(loginDetails);
     };
 
     proto.destroyView = function () {
         console.log("destroyView");
-        this._parent.removeChild(this._view);
-        this.view = null;
+        this._parent.removeChild(_view);
+        _view = null;
     };
 
     return LoginManager;
