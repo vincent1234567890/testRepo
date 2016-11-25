@@ -41,8 +41,8 @@ var CannonManager = (function () {
             return;
         }
 
-        this.forceSetGun(nextGunId);
-        ClientServerConnect.getServerInformer().gunSelected(this._currentGunId);
+        ClientServerConnect.getServerInformer().gunSelected(nextGunId);
+        //this.forceSetGun(nextGunId);
     };
 
     /**
