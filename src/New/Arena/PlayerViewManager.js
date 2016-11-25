@@ -21,9 +21,7 @@ var PlayerViewManager = (function () {
     };
 
     proto.shootTo = function (pos) {
-        if (this._playerData.score > this._cannonManager.getCurrentValue()) {
-            return this._cannonManager.shootTo(pos);
-        }
+        return this._cannonManager.shootTo(pos);
     };
 
     proto.getNextBulletId = function () {

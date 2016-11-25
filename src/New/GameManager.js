@@ -97,6 +97,10 @@ const GameManager = function () {
             return;
         }
 
+        //if (this._playerData.score >= this._cannonManager.getCurrentValue()) {
+        //    return;
+        //}
+
         this._lastShotTime = now;
 
         let rot = _playerViews[_playerSlot].turnTo(pos);
