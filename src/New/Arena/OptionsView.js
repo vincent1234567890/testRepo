@@ -2,7 +2,7 @@
  * Created by eugeneseah on 23/11/16.
  */
 
-var OptionsView = (function () {
+const OptionsView = (function () {
     const ENDOFFSET = 0.05;
     function OptionsView (parent){
         "use strict";
@@ -11,10 +11,13 @@ var OptionsView = (function () {
         this._background.setPosition(cc.view.getDesignResolutionSize().width/2, cc.view.getDesignResolutionSize().height / 2);
 
         this._music = createSlider("Music", musicValueChangedEvent);
-        this._sound = createSlider("Sound");
+        this._sound = createSlider("Sound", soundValueChangedEvent);
 
         this._music.setPosition(this._background.getContentSize().width/2 + 60,this._background.getContentSize().height/2 + 80);
         this._sound.setPosition(this._background.getContentSize().width/2 + 60,this._background.getContentSize().height/2 + 10);
+
+        let layer = new TouchLayerRefactored();
+
 
         this._background.addChild(this._music);
         this._background.addChild(this._sound);
@@ -23,7 +26,7 @@ var OptionsView = (function () {
 
     function createSlider(labelText, callback){
         "use strict";
-        var slider = new cc.ControlSlider(ReferenceName.OptionBarBG, ReferenceName.OptionsBarNegative, ReferenceName.FishSliderButton);
+        let slider = new cc.ControlSlider(ReferenceName.OptionBarBG, ReferenceName.OptionsBarNegative, ReferenceName.FishSliderButton);
         slider._thumbSprite.setFlippedX(true);
         slider._thumbSprite.setFlippedY(true);
         slider._progressSprite.setFlippedX(true);
@@ -36,13 +39,13 @@ var OptionsView = (function () {
         slider.setMaximumValue(1+ENDOFFSET); // Sets the max value of range
         slider.setRotation(180);
 
-        var fontDef = new cc.FontDefinition();
+        let fontDef = new cc.FontDefinition();
         fontDef.fontName = "Arial";
         fontDef.fontSize = "30";
         fontDef.fontStyle = "bold";
         fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
         fontDef.fillStyle = new cc.Color(0,0,0,255);
-        var label = new cc.LabelTTF(labelText, fontDef);
+        let label = new cc.LabelTTF(labelText, fontDef);
         label.setPosition(slider.getContentSize().width +130, slider.getContentSize().height/2);
         label.setAnchorPoint(0,0.5);
         label.setRotation(180);
@@ -56,7 +59,12 @@ var OptionsView = (function () {
 
     function musicValueChangedEvent(sender, controlEvent){
         "use strict";
-        cc.audioEngine.setEffectsVolume(sender.getValue().toFixed(2)-ENDOFFSET);
+        cc.audioEngine.setMusicVolume(1 - (sender.getValue().toFixed(2)-ENDOFFSET)); // because it is flipped
+    }
+
+    function soundValueChangedEvent(sender, controlEvent){
+        "use strict";
+        cc.audioEngine.setEffectsVolume(1 - (sender.getValue().toFixed(2)-ENDOFFSET)); // because it is flipped
     }
 
     return OptionsView;

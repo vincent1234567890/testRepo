@@ -2,26 +2,26 @@
  * Created by eugeneseah on 17/11/16.
  */
 "use strict";
-var OptionsSideMenuView = (function () {
+const OptionsSideMenuView = (function () {
 
     const SHOWTHRESHOLD = 40;
     const HIDETHRESHOLD = 20;
     const MOVELIMIT = 80;
 
-    var _menuPos;
+    let _menuPos;
 
-    var _settingsCallback;
-    var _fishCallBack;
-    var _exitCallBack;
-    var _touchLayer;
+    let _settingsCallback;
+    let _fishCallBack;
+    let _exitCallBack;
+    let _touchLayer;
 
-    var _isShowing;
-    var background;
+    let _isShowing;
+    let background;
 
-    var _showSequence;
-    var _hideSequence;
+    let _showSequence;
+    let _hideSequence;
 
-    var _isAnimating;
+    let _isAnimating;
 
 
 
@@ -55,11 +55,11 @@ var OptionsSideMenuView = (function () {
         _menuPos = background.getPosition();
         // console.log(background.getPosition());
 
-        var showAction = new cc.MoveTo(0.5, cc.p(_menuPos.x - MOVELIMIT, _menuPos.y));
+        let showAction = new cc.MoveTo(0.5, cc.p(_menuPos.x - MOVELIMIT, _menuPos.y));
         showAction.easing(cc.easeExponentialIn());
         _showSequence = new cc.Sequence(showAction,cc.callFunc(animationCallback));
 
-        var hideAction = new cc.MoveTo(0.5, cc.p(_menuPos.x, _menuPos.y));
+        let hideAction = new cc.MoveTo(0.5, cc.p(_menuPos.x, _menuPos.y));
         hideAction.easing(cc.easeExponentialIn());
         _hideSequence = new cc.Sequence(hideAction,cc.callFunc(animationCallback));
 
@@ -76,17 +76,17 @@ var OptionsSideMenuView = (function () {
         // var bg = new cc.Sprite(ReferenceName.SideMenuBG);
         // var bgButton =  new cc.MenuItemSprite(bg, undefined, undefined, onMenuClicked);
 
-        var settings = new cc.Sprite(ReferenceName.SideMenuSettingsButton);
-        var settingsButton = new cc.MenuItemSprite(settings, undefined, undefined, onSettingsEvent);
+        let settings = new cc.Sprite(ReferenceName.SideMenuSettingsButton);
+        let settingsButton = new cc.MenuItemSprite(settings, undefined, undefined, onSettingsEvent);
 
-        var fishList = new cc.Sprite(ReferenceName.FishListButton);
-        var fishListButton = new cc.MenuItemSprite(fishList, undefined, undefined, onFishListEvent);
+        let fishList = new cc.Sprite(ReferenceName.FishListButton);
+        let fishListButton = new cc.MenuItemSprite(fishList, undefined, undefined, onFishListEvent);
 
-        var exit = new cc.Sprite(ReferenceName.ExitButton);
-        var exitButton = new cc.MenuItemSprite(exit, undefined, undefined, onExitEvent);
+        let exit = new cc.Sprite(ReferenceName.ExitButton);
+        let exitButton = new cc.MenuItemSprite(exit, undefined, undefined, onExitEvent);
 
 
-        var menu = new cc.Menu(settingsButton, fishListButton, exitButton);
+        let menu = new cc.Menu(settingsButton, fishListButton, exitButton);
         settingsButton.setPosition(0, 80);
         fishListButton.setPosition(0, 0);
         exitButton.setPosition(0, -80);
@@ -127,13 +127,13 @@ var OptionsSideMenuView = (function () {
             return;
         }
 
-        var newPoint = background.convertToWorldSpace(background.convertToNodeSpace(touch));
-        if (!cc.rectContainsPoint(getViewRect(), newPoint)) {
+        let newPoint = background.convertToWorldSpace(background.convertToNodeSpace(touch));
+        if (!cc.rectContainsPoint(guiFunctions.getHitBox(background), newPoint)) {
             return;
         }
 
-        var showDistance = _menuPos.x - background.getPosition().x;
-        var hideDistance = _menuPos.x + MOVELIMIT - background.getPosition().x;
+        let showDistance = _menuPos.x - background.getPosition().x;
+        let hideDistance = _menuPos.x + MOVELIMIT - background.getPosition().x;
         // console.log("absoluteDistance.x: " + showDistance);
         // console.log("relativeDistance.x: " + hideDistance);
         // console.log(_isShowing);
@@ -163,29 +163,29 @@ var OptionsSideMenuView = (function () {
     }
 
     //modified from CCScrollView
-    function getViewRect() {
-        var screenPos = background.convertToWorldSpace(cc.p());
-        // var locViewSize = this._viewSize;
-
-        var scaleX = background.getScaleX();
-        var scaleY = background.getScaleY();
-
-        for (var p = background._parent; p != null; p = p.getParent()) {
-            scaleX *= p.getScaleX();
-            scaleY *= p.getScaleY();
-        }
-
-        if (scaleX < 0) {
-            screenPos.x += background.width * scaleX;
-            scaleX = -scaleX;
-        }
-        if (scaleY < 0) {
-            screenPos.y += background.height * scaleY;
-            scaleY = -scaleY;
-        }
-
-        return new cc.rect(screenPos.x, screenPos.y, background.width * scaleX, background.height * scaleY);
-    }
+    // function getViewRect() {
+    //     let screenPos = background.convertToWorldSpace(cc.p());
+    //     // var locViewSize = this._viewSize;
+    //
+    //     let scaleX = background.getScaleX();
+    //     let scaleY = background.getScaleY();
+    //
+    //     for (let p = background._parent; p != null; p = p.getParent()) {
+    //         scaleX *= p.getScaleX();
+    //         scaleY *= p.getScaleY();
+    //     }
+    //
+    //     if (scaleX < 0) {
+    //         screenPos.x += background.width * scaleX;
+    //         scaleX = -scaleX;
+    //     }
+    //     if (scaleY < 0) {
+    //         screenPos.y += background.height * scaleY;
+    //         scaleY = -scaleY;
+    //     }
+    //
+    //     return new cc.rect(screenPos.x, screenPos.y, background.width * scaleX, background.height * scaleY);
+    // }
 
     function animationCallback(){
         _isAnimating = false;
