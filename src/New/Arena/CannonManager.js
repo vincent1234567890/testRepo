@@ -42,7 +42,7 @@ var CannonManager = (function () {
         }
 
         ClientServerConnect.getServerInformer().gunSelected(nextGunId);
-        //this.forceSetGun(nextGunId);
+        this.forceSetGun(nextGunId);
     };
 
     /**
