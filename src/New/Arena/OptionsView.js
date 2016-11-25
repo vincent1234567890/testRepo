@@ -3,29 +3,32 @@
  */
 
 const OptionsView = (function () {
+    "use strict";
     const ENDOFFSET = 0.05;
+    let _background;
+    let _touchlayer;
+
     function OptionsView (parent){
-        "use strict";
         this._parent = parent;
-        this._background = new cc.Sprite(ReferenceName.OptionsBG);
-        this._background.setPosition(cc.view.getDesignResolutionSize().width/2, cc.view.getDesignResolutionSize().height / 2);
+        _background = new cc.Sprite(ReferenceName.OptionsBG);
+        _background.setPosition(cc.view.getDesignResolutionSize().width/2, cc.view.getDesignResolutionSize().height / 2);
 
         this._music = createSlider("Music", musicValueChangedEvent);
         this._sound = createSlider("Sound", soundValueChangedEvent);
 
-        this._music.setPosition(this._background.getContentSize().width/2 + 60,this._background.getContentSize().height/2 + 80);
-        this._sound.setPosition(this._background.getContentSize().width/2 + 60,this._background.getContentSize().height/2 + 10);
+        this._music.setPosition(_background.getContentSize().width/2 + 60,_background.getContentSize().height/2 + 80);
+        this._sound.setPosition(_background.getContentSize().width/2 + 60,_background.getContentSize().height/2 + 10);
 
-        let layer = new TouchLayerRefactored();
+        _touchlayer = new TouchLayerRefactored(dismissCallback);
+        _touchlayer.setSwallowTouches(true);
 
-
-        this._background.addChild(this._music);
-        this._background.addChild(this._sound);
-        this._parent.addChild(this._background);
+        _background.addChild(_touchlayer,1);
+        _background.addChild(this._music);
+        _background.addChild(this._sound);
+        this._parent.addChild(_background,1);
     }
 
     function createSlider(labelText, callback){
-        "use strict";
         let slider = new cc.ControlSlider(ReferenceName.OptionBarBG, ReferenceName.OptionsBarNegative, ReferenceName.FishSliderButton);
         slider._thumbSprite.setFlippedX(true);
         slider._thumbSprite.setFlippedY(true);
@@ -58,14 +61,29 @@ const OptionsView = (function () {
     }
 
     function musicValueChangedEvent(sender, controlEvent){
-        "use strict";
         cc.audioEngine.setMusicVolume(1 - (sender.getValue().toFixed(2)-ENDOFFSET)); // because it is flipped
     }
 
     function soundValueChangedEvent(sender, controlEvent){
-        "use strict";
         cc.audioEngine.setEffectsVolume(1 - (sender.getValue().toFixed(2)-ENDOFFSET)); // because it is flipped
     }
 
+    function dismissCallback(touch){
+        if (GUIFunctions.isSpriteTouched(_background,touch)) {
+            return;
+        }
+        _touchlayer.setSwallowTouches(false);
+        _touchlayer.setEnable(false);
+        _background.setVisible(false);
+
+    }
+
+    let proto = OptionsView.prototype;
+
+    proto.show = function(){
+        _touchlayer.setSwallowTouches(true);
+        _touchlayer.setEnable(true);
+        _background.setVisible(true);
+    };
     return OptionsView;
 }());

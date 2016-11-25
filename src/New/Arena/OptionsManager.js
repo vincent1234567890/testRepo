@@ -22,7 +22,11 @@ const OptionsManager = (function (){
     }
 
     function onSettings(){
-        this.settingsView = new OptionsView(_parent);
+        if (!this._settingsView)
+            this.settingsView = new OptionsView(_parent);
+        else{
+            this.settingsView.show();
+        }
         if (_settingsCallback) {
             _settingsCallback();
         }

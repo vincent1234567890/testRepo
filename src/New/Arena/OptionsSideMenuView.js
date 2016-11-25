@@ -3,7 +3,6 @@
  */
 "use strict";
 const OptionsSideMenuView = (function () {
-
     const SHOWTHRESHOLD = 40;
     const HIDETHRESHOLD = 20;
     const MOVELIMIT = 80;
@@ -23,8 +22,6 @@ const OptionsSideMenuView = (function () {
 
     let _isAnimating;
 
-
-
     function OptionsView(parent, settingsCallback, fishListCallback, exitCallback) {
         this._parent = parent;
 
@@ -34,10 +31,6 @@ const OptionsSideMenuView = (function () {
 
         _isShowing = false;
 
-
-        // var midX = cc.view.getDesignResolutionSize().width / 2;
-        // var midY = cc.view.getDesignResolutionSize().height / 2;
-
         background = new cc.Sprite(ReferenceName.SideMenuBG);
 
         _touchLayer = new TouchLayerRefactored(dragMenu);
@@ -45,15 +38,10 @@ const OptionsSideMenuView = (function () {
         this._sideMenu = setupSideMenu();
 
         this._sideMenu.setPosition(100, 140);
-        // this._sideMenu._touchListener._setFixedPriority(_touchLayer.getTouchPriority()-100);
-        // console.log(_touchLayer.getTouchPriority());
-        // console.log(this._sideMenu._touchListener._getFixedPriority());
-
-        // this._sideMenu.setPosition(midX-50,midY);
 
         background.setPosition(cc.view.getDesignResolutionSize().width + 15, cc.view.getDesignResolutionSize().height / 2);
+
         _menuPos = background.getPosition();
-        // console.log(background.getPosition());
 
         let showAction = new cc.MoveTo(0.5, cc.p(_menuPos.x - MOVELIMIT, _menuPos.y));
         showAction.easing(cc.easeExponentialIn());
@@ -66,16 +54,9 @@ const OptionsSideMenuView = (function () {
         background.addChild(_touchLayer,1);
         background.addChild(this._sideMenu, 2);
         this._parent.addChild(background,1);
-
-        // background.runAction(_showSequence);
     }
 
     function setupSideMenu() {
-
-
-        // var bg = new cc.Sprite(ReferenceName.SideMenuBG);
-        // var bgButton =  new cc.MenuItemSprite(bg, undefined, undefined, onMenuClicked);
-
         let settings = new cc.Sprite(ReferenceName.SideMenuSettingsButton);
         let settingsButton = new cc.MenuItemSprite(settings, undefined, undefined, onSettingsEvent);
 
@@ -84,7 +65,6 @@ const OptionsSideMenuView = (function () {
 
         let exit = new cc.Sprite(ReferenceName.ExitButton);
         let exitButton = new cc.MenuItemSprite(exit, undefined, undefined, onExitEvent);
-
 
         let menu = new cc.Menu(settingsButton, fishListButton, exitButton);
         settingsButton.setPosition(0, 80);
@@ -113,8 +93,9 @@ const OptionsSideMenuView = (function () {
     }
 
     function dragMenu(touch, hasEnded) {
+        _touchLayer.setSwallowTouches(false);
         if (hasEnded) {
-            _touchLayer.setSwallowTouches(false);
+            // _touchLayer.setSwallowTouches(false);
             if (_isShowing){
                 background.runAction(_showSequence);
             }else{
@@ -123,27 +104,23 @@ const OptionsSideMenuView = (function () {
             return;
         }
 
-        if (_isAnimating){
+        if (!GUIFunctions.isSpriteTouched(background,touch)) {
             return;
         }
 
-        let newPoint = background.convertToWorldSpace(background.convertToNodeSpace(touch));
-        if (!cc.rectContainsPoint(guiFunctions.getHitBox(background), newPoint)) {
+        _touchLayer.setSwallowTouches(true);
+
+        if (_isAnimating){
             return;
         }
 
         let showDistance = _menuPos.x - background.getPosition().x;
         let hideDistance = _menuPos.x + MOVELIMIT - background.getPosition().x;
-        // console.log("absoluteDistance.x: " + showDistance);
-        // console.log("relativeDistance.x: " + hideDistance);
-        // console.log(_isShowing);
 
-        if ((background.getPosition().x - newPoint.x > 0 && _isShowing) || (background.getPosition().x - newPoint.x < 0 && !_isShowing)) {
-            return;
-        }
-        _touchLayer.setSwallowTouches(true);
-
-        // console.log(background.getContentSize());
+        let newPoint = background.convertToWorldSpace(background.convertToNodeSpace(touch));
+        // if ((background.getPosition().x - newPoint.x > 0 && _isShowing) || (background.getPosition().x - newPoint.x < 0 && !_isShowing)) {
+        //     return;
+        // }
 
         if (showDistance > SHOWTHRESHOLD && !_isShowing) {
             //auto show
@@ -158,34 +135,8 @@ const OptionsSideMenuView = (function () {
             return;
         }
 
-
         background.setPosition(newPoint.x, _menuPos.y);
     }
-
-    //modified from CCScrollView
-    // function getViewRect() {
-    //     let screenPos = background.convertToWorldSpace(cc.p());
-    //     // var locViewSize = this._viewSize;
-    //
-    //     let scaleX = background.getScaleX();
-    //     let scaleY = background.getScaleY();
-    //
-    //     for (let p = background._parent; p != null; p = p.getParent()) {
-    //         scaleX *= p.getScaleX();
-    //         scaleY *= p.getScaleY();
-    //     }
-    //
-    //     if (scaleX < 0) {
-    //         screenPos.x += background.width * scaleX;
-    //         scaleX = -scaleX;
-    //     }
-    //     if (scaleY < 0) {
-    //         screenPos.y += background.height * scaleY;
-    //         scaleY = -scaleY;
-    //     }
-    //
-    //     return new cc.rect(screenPos.x, screenPos.y, background.width * scaleX, background.height * scaleY);
-    // }
 
     function animationCallback(){
         _isAnimating = false;

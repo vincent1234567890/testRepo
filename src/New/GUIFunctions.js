@@ -2,7 +2,7 @@
  * Created by eugeneseah on 25/11/16.
  */
 //modified from CCScrollView
-const guiFunctions = function () {
+const GUIFunctions = function () {
     "use strict";
     function getHitBox(sprite) {
         let screenPos = sprite.convertToWorldSpace(cc.p());
@@ -28,8 +28,14 @@ const guiFunctions = function () {
         return new cc.rect(screenPos.x, screenPos.y, sprite.width * scaleX, sprite.height * scaleY);
     }
 
+    function isSpriteTouched(sprite, touch){
+        let newPoint = sprite.convertToWorldSpace(sprite.convertToNodeSpace(touch));
+        return cc.rectContainsPoint(getHitBox(sprite), newPoint)
+    }
+
 
     return {
         getHitBox : getHitBox,
+        isSpriteTouched : isSpriteTouched,
     }
-};
+}();
