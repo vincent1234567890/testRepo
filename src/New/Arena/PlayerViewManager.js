@@ -32,10 +32,14 @@ var PlayerViewManager = (function () {
         this._playerData = playerData;
         // this._playerName = playerData.playerName;
         this._playerView.updateView(playerData);
+        if (typeof playerData.gunId === 'number') {
+            this._cannonManager.forceSetGun(playerData.gunId);
+        }
     };
 
     proto.clearPlayerData = function () {
         this._playerView.clearPlayerData();
+        this._cannonManager.forceClearGun();
     }
 
     proto.destroyView = function(){

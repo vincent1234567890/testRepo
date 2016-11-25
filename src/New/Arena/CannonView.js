@@ -62,6 +62,10 @@ var CannonView = (function () {
             this._cannonPowerLabel.setString(String(cannonPower));
         },
 
+        clearCannonPowerLabel: function () {
+            this._cannonPowerLabel.setString('');
+        },
+
         turnTo: function (newDirection) {
             var direction = cc.pNormalize(cc.pSub(newDirection, this.getPosition()));
             var ang = Math.atan2(direction.x, direction.y);
