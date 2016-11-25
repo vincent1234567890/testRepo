@@ -139,6 +139,10 @@ const GameManager = function () {
         _playerViews[playerData.slot].updatePlayerData(playerData);
     };
 
+    const clearPlayerState = function (slot) {
+        _playerViews[slot].clearPlayerData();
+    };
+
     const createFish = function (fishId, fishType) {
         return _fishManager.addFish(fishId, fishType);
     };
@@ -257,6 +261,7 @@ const GameManager = function () {
         initialiseGame: initialiseGame,
         setGameState: setGameState,
         updateMultiplayerState: updateMultiplayerState,
+        clearPlayerState: clearPlayerState,
         shootTo: shootTo, //slightly unsatisfactory
         createFish: createFish,
         removeFish: removeFish,
