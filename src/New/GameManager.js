@@ -21,8 +21,6 @@ const GameManager = function () {
     //convenience
     let _loggedIn = false;
 
-    // var _serverInformer;
-
     //player
     let _playerSlot;
     let _playerId;
@@ -57,9 +55,7 @@ const GameManager = function () {
     }
 
     const initialiseGame = function (parent, fishGameArena) {
-
         initialiseParent(parent);
-
 
         GameView.initialise(_parentNode);
 
@@ -67,9 +63,13 @@ const GameManager = function () {
         _lastShotTime = -Infinity;
         _fishManager = new FishViewManager(_parentNode, _fishGameArena);
 
-
         for (let i = 0; i < _gameConfig.maxPlayers; i++) {
             _playerViews[i] = new PlayerViewManager(_parentNode, _gameConfig.cannonPositions[i], i == _playerSlot);
+            if (i == _playerSlot && _gameConfig.cannonPositions[i][1] > cc.view.getDesignResolutionSize().height / 2){
+                console.log(_gameConfig.cannonPositions[i]);
+                console.log("player" + _playerSlot);
+                // cc._canvas.rotate(180);
+            }
         }
 
         _optionsManager = new OptionsManager(_parentNode, undefined, undefined, onLeaveArena);
@@ -81,10 +81,9 @@ const GameManager = function () {
         if(_touchLayer){
             _parentNode.removeChild(_touchLayer);
         }
-        // if (!_touchLayer) {
+
         _touchLayer = new TouchLayerRefactored(touchAt);
         _parentNode.addChild(_touchLayer, -1);
-        // }
     };
 
     const touchAt = function (pos) {
@@ -123,12 +122,12 @@ const GameManager = function () {
         //}
 
         let arenaPlayer = _fishGameArena.getPlayer(playerId);
-        var playerView = _playerViews[arenaPlayer.slot];
+        let playerView = _playerViews[arenaPlayer.slot];
         return playerView.shootTo(pos);
     };
 
     const setGameState = function (config, playerId, playerSlot) {
-        console.log(JSON.stringify(config));
+        // console.log(JSON.stringify(config));
         _gameConfig = config;
         _playerId = playerId;
         _playerSlot = playerSlot;
@@ -217,7 +216,7 @@ const GameManager = function () {
     function showPostGameStats () {
         ClientServerConnect.requestStats().then(
             stats => {
-                console.log("stats:" + JSON.stringify(stats));
+                // console.log("stats:" + JSON.stringify(stats));
                 goToScoreboard(stats);
             }
         ).catch(console.error);
@@ -262,17 +261,14 @@ const GameManager = function () {
         setGameState: setGameState,
         updateMultiplayerState: updateMultiplayerState,
         clearPlayerState: clearPlayerState,
-        shootTo: shootTo, //slightly unsatisfactory
+        shootTo: shootTo,
         createFish: createFish,
         removeFish: removeFish,
         updateEverything: updateEverything,
         showPostGameStats: showPostGameStats,
-        // goToScoreboard : goToScoreboard,
-        // setServerInformer : setServerInformer,
         goToLogin: goToLogin,
         login: login,
         goToLobby: goToLobby,
-
 
         //debug
         debug: debug,

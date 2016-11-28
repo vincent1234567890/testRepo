@@ -77,7 +77,7 @@ var ReferenceName = {
     MultiCatch : "Multi-Catches",
     BulletsFired : "Bullets Fired",
     SkillsUsed : "Skills Used",
-    CatchSuccessRate : "Hit//Caught %",
+    CatchSuccessRate : "Hit / Caught %",
     GoToLobby : "Lobby",
     GoToNewGame : "Play",
 

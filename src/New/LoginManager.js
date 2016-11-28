@@ -15,7 +15,7 @@ let LoginManager = (function (){
 
     proto.goToLogin = function(){
         if (!_view){
-            console.log("goToLogin");
+            // console.log("goToLogin");
             _view = new LoginView(this._parent);
             restoreLoginInfo();
         }
@@ -42,7 +42,7 @@ let LoginManager = (function (){
     };
 
     proto.destroyView = function () {
-        console.log("destroyView");
+        // console.log("destroyView");
         this._parent.removeChild(_view);
         _view = null;
     };
