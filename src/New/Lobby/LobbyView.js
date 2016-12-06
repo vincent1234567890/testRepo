@@ -1,7 +1,7 @@
 /**
  * Created by eugeneseah on 15/11/16.
  */
-var LobbyView = function() {
+const LobbyView = (function() {
 
     var LobbyView = function ( parent) {
 
@@ -19,39 +19,39 @@ var LobbyView = function() {
         var star = new cc.Sprite(ReferenceName.Star);
       //  star.setPosition(midX,midY);
         star.setPosition(166 , cc.view.getDesignResolutionSize().height - 66);
-        this._parent.addChild(star,1);
+        bg.addChild(star,2);
 
         var coin = new cc.Sprite(ReferenceName.LobbyCoinIcon);
         coin.setPosition(971,cc.view.getDesignResolutionSize().height - 46);
-        this._parent.addChild(coin,1);
+        bg.addChild(coin,2);
 
         var coinBG = new cc.Sprite(ReferenceName.LobbyCoinsBG);
         coinBG.setPosition(1136,cc.view.getDesignResolutionSize().height - 47);
-        this._parent.addChild(coinBG,-1);
+        bg.addChild(coinBG,1);
 
         var BonusPlaceHolder = new cc.Sprite(ReferenceName.BonusPlaceHolder);
         BonusPlaceHolder.setPosition(685,cc.view.getDesignResolutionSize().height - 49);
-        this._parent.addChild(BonusPlaceHolder,1);
+        bg.addChild(BonusPlaceHolder,2);
 
         var LevelBG = new cc.Sprite(ReferenceName.LevelBG);
         LevelBG.setPosition(233,cc.view.getDesignResolutionSize().height - 79);
-        this._parent.addChild(LevelBG,-1);
+        bg.addChild(LevelBG,1);
 
         var NameBG = new cc.Sprite(ReferenceName.NameBG);
         NameBG.setPosition(279,cc.view.getDesignResolutionSize().height - 24);
-        this._parent.addChild(NameBG,-1);
+        bg.addChild(NameBG,1);
 
         var ProfileFrame = new cc.Sprite(ReferenceName.ProfileFrame);
         ProfileFrame.setPosition(59,cc.view.getDesignResolutionSize().height - 46);
-        this._parent.addChild(ProfileFrame,-1);
+        bg.addChild(ProfileFrame,1);
 
         var ProfileImage = new cc.Sprite(ReferenceName.ProfileImage);
         ProfileImage.setPosition(59,cc.view.getDesignResolutionSize().height - 47);
-        this._parent.addChild(ProfileImage,1);
+        bg.addChild(ProfileImage,2);
 
         var TopBg = new cc.Sprite(ReferenceName.TopBg);
         TopBg.setPosition(683,cc.view.getDesignResolutionSize().height - 52);
-        this._parent.addChild(TopBg,-2);
+        bg.addChild(TopBg,0);
 
         setupGameScroll(this._parent);
 
@@ -60,6 +60,11 @@ var LobbyView = function() {
         setupProfileMenu (this._parent);
 
         setupLobbyButtons (coinBG);
+
+        // this._touchlayer = new TouchLayerRefactored();
+        // this._touchlayer.setSwallowTouches(true);
+        //
+        // bg.addChild(this._touchlayer,-2);
 
     };
 
@@ -130,7 +135,7 @@ var LobbyView = function() {
         parent.addChild(menu,5);
     }
 
-    var proto = LobbyView.prototype;
+    let proto = LobbyView.prototype;
 
     function scrollLeft() {
         console.log("scroll left");
@@ -161,4 +166,4 @@ var LobbyView = function() {
 
 
     return LobbyView;
-}();
+}());

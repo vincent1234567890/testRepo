@@ -14,13 +14,13 @@ var CannonManager = (function () {
     }
 
     CannonManager.prototype.shootTo = function (pos) {
-        this._cannon.turnTo(pos);
-        return this._cannon.spawnBullet(pos);
+        this._cannon.shootTo(pos);
+        // return this._cannon.spawnBullet(pos);
     };
 
-    CannonManager.prototype.turnTo = function (pos) {
-        return this._cannon.turnTo(pos);
-    };
+    // CannonManager.prototype.turnTo = function (pos) {
+    //     return this._cannon.turnTo(pos);
+    // };
 
     CannonManager.prototype.increaseCannon = function () {
         this.selectGun(this._currentGunId + 1);

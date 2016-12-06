@@ -13,8 +13,8 @@ const OptionsView = (function () {
         _background = new cc.Sprite(ReferenceName.OptionsBG);
         _background.setPosition(cc.view.getDesignResolutionSize().width/2, cc.view.getDesignResolutionSize().height / 2);
 
-        this._music = createSlider("Music", musicValueChangedEvent);
-        this._sound = createSlider("Sound", soundValueChangedEvent);
+        this._music = createSlider("Music", musicValueChangedEvent, PlayerPreferences.getMusicVolume());
+        this._sound = createSlider("Sound", soundValueChangedEvent, PlayerPreferences.getSoundVolume());
 
         this._music.setPosition(_background.getContentSize().width/2 + 60,_background.getContentSize().height/2 + 80);
         this._sound.setPosition(_background.getContentSize().width/2 + 60,_background.getContentSize().height/2 + 10);
@@ -22,13 +22,13 @@ const OptionsView = (function () {
         _touchlayer = new TouchLayerRefactored(dismissCallback);
         _touchlayer.setSwallowTouches(true);
 
-        _background.addChild(_touchlayer,1);
+        _background.addChild(_touchlayer);
         _background.addChild(this._music);
         _background.addChild(this._sound);
         this._parent.addChild(_background,1);
     }
 
-    function createSlider(labelText, callback){
+    function createSlider(labelText, callback, value){
         let slider = new cc.ControlSlider(ReferenceName.OptionBarBG, ReferenceName.OptionsBarNegative, ReferenceName.FishSliderButton);
         slider._thumbSprite.setFlippedX(true);
         slider._thumbSprite.setFlippedY(true);
@@ -38,7 +38,7 @@ const OptionsView = (function () {
         slider._backgroundSprite.setFlippedY(true);
         slider.setMinimumValue(0.0); // Sets the min value of range
         slider.setMinimumAllowedValue(ENDOFFSET);
-        slider.setValue(ENDOFFSET);
+        slider.setValue(value || ENDOFFSET);
         slider.setMaximumValue(1+ENDOFFSET); // Sets the max value of range
         slider.setRotation(180);
 
@@ -61,10 +61,12 @@ const OptionsView = (function () {
     }
 
     function musicValueChangedEvent(sender, controlEvent){
-        cc.audioEngine.setMusicVolume(1 - (sender.getValue().toFixed(2)-ENDOFFSET)); // because it is flipped
+        PlayerPreferences.setMusicVolume(sender.getValue()); // because it saves convert on load
+        cc.audioEngine.setMusicVolume(sender.getValue().toFixed(2)-ENDOFFSET);// because it is flipped
     }
 
     function soundValueChangedEvent(sender, controlEvent){
+        PlayerPreferences.setSoundVolume(sender.getValue());
         cc.audioEngine.setEffectsVolume(1 - (sender.getValue().toFixed(2)-ENDOFFSET)); // because it is flipped
     }
 
@@ -75,7 +77,6 @@ const OptionsView = (function () {
         _touchlayer.setSwallowTouches(false);
         _touchlayer.setEnable(false);
         _background.setVisible(false);
-
     }
 
     let proto = OptionsView.prototype;

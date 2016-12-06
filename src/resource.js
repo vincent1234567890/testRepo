@@ -173,14 +173,14 @@ var res = {
     //New
     GameUIPng : "res/New/gameui.png",
     GameUIPlist : "res/New/gameui.plist",
-    LoginUIPlist : "res/New/Lobby/Lobby.plist",
-    LoginUIPng : "res/New/Lobby/Lobby.png",
+    LoginUIPlist : "res/New/Lobby/lobby.plist",
+    LoginUIPng : "res/New/Lobby/lobby.png",
     SettingsUIPlist : "res/New/Options/settings.plist",
     SettingsUIPng : "res/New/Options/settings.png",
     ScoreboardPlist : "res/New/Scoreboard/summary.plist",
     ScoreboardPng : "res/New/Scoreboard/summary.png",
-    SideMenuPlist : "res/New/Options/SideMenu.plist",
-    SideMenuPng : "res/New/Options/SideMenu.png",
+    SideMenuPlist : "res/New/Options/sidemenu.plist",
+    SideMenuPng : "res/New/Options/sidemenu.png",
 
     //testing
     StingrayPNG : "res/New/testing/Ray.png",
@@ -192,7 +192,9 @@ var res = {
     TurtlePlist : "res/New/testing/Turtle.plist",
     TurtlePNG : "res/New/testing/Turtle.png",
     PorgyPlist : "res/New/testing/NFish.plist",
-    PorgyPNG : "res/New/testing/NFish.PNG",
+    PorgyPNG : "res/New/testing/NFish.png",
+
+    BulletPNG: "res/New/testing/bullet.png",
 
     //debug
     DebugCircle : "res/New/testing/circle.png",

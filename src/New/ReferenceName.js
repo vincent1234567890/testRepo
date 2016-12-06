@@ -1,7 +1,7 @@
 /**
  * Created by eugeneseah on 25/10/16.
  */
-var ReferenceName = {
+const ReferenceName = {
     Cannon : "#Cannon.png",
     Base : "#Base.png",
     IncreaseCannon : "#plus.png",
@@ -61,6 +61,8 @@ var ReferenceName = {
 
     FishPlaceholder : "#Fish Paceholder.png",
 
+
+
     //localisable
     //@TODO: move to seperate file
 
@@ -77,7 +79,7 @@ var ReferenceName = {
     MultiCatch : "Multi-Catches",
     BulletsFired : "Bullets Fired",
     SkillsUsed : "Skills Used",
-    CatchSuccessRate : "Hit//Caught %",
+    CatchSuccessRate : "Hit / Caught %",
     GoToLobby : "Lobby",
     GoToNewGame : "Play",
 

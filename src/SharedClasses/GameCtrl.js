@@ -18,50 +18,9 @@ var GameCtrl = cc.Class.extend({
     ctor:function () {
         this.setIsNewGame(true);
         this.setIsPassStage(false);
-        // if (GameCtrl.isOnlineGame()) {
-        //     this.connectToMasterServer();
-        // }
         return true;
     },
-    // connectToMasterServer:function () {
-    //     const useJoeysServerDuringDevelopment = true;
-    //
-    //     let gameAPIServerUrl = 'ws://3dfishing88888.sinonet.sg:8088';
-    //
-    //     const localNames = ['localhost', '127.0.0.1', '127.0.1.1', '0.0.0.0'];
-    //     const doingDevelopment = (localNames.indexOf(window.location.hostname) >= 0);
-    //     if (doingDevelopment) {
-    //         gameAPIServerUrl = 'ws://127.0.0.1:8088';
-    //         if (useJoeysServerDuringDevelopment) {
-    //             gameAPIServerUrl = 'ws://192.168.1.3:8088';
-    //         }
-    //     }
-    //
-    //     var gameCtrl = this;
-    //
-    //     var client = new WebSocketClient(gameAPIServerUrl);
-    //     var gameService = new GameServices.GameService();
-    //     client.addService(gameService);
-    //
-    //     gameCtrl.setGameWSClient(client);
-    //
-    //     client.connect();
-    //     client.addEventListener('open', function () {
-    //         // Wrapper which listens for game events
-    //         var ioSocket = socketUtils.getIOSocketFromClient(client);
-    //         // This object has on() and off() functions for receiving messages, and send() for sending them.
-    //         gameCtrl.setGameIOSocket(ioSocket);
-    //
-    //         Promise.resolve().then(
-    //             () => client.callAPIOnce('game', 'requestServer', {})
-    //         ).then(
-    //             (serverList) => {
-    //                 console.log("serverList:", serverList);
-    //                 // Future: Maybe ping the servers here, then connect to the closest one
-    //             }
-    //         ).catch(console.error.bind(console));
-    //     });
-    // },
+
     runGame:function () {
         cc.director.runScene(this.getCurScene());
     },
@@ -79,52 +38,7 @@ var GameCtrl = cc.Class.extend({
             this.startGameScene();
         }
     },
-    // joinOnlineGame:function () {
-    //     var gameCtrl = this;
-    //     var client = this.getGameWSClient();
-    //
-    //     Promise.resolve().then(
-    //         () => {
-    //             // Create a test player
-    //             var playerName = "testplayername" + Date.now() + Math.floor(Math.random() * 100000000);
-    //             var playerData = {
-    //                 name: playerName,
-    //                 email: playerName + '@testmail189543.com',
-    //                 password: 'test_password.12345',
-    //             };
-    //             return client.callAPIOnce('game', 'registerNewPlayer', playerData).then(
-    //                 response => response.data
-    //             );
-    //         }
-    //     ).then(
-    //         // Log in
-    //         (testPlayer) => client.callAPIOnce('game', 'login', {
-    //             id: testPlayer.id,
-    //             password: 'test_password.12345'
-    //         })
-    //     ).then(
-    //         loginResponse => {
-    //             console.log("loginResponse:", loginResponse);
-    //             return client.callAPIOnce('game', 'joinGame', {})
-    //         }
-    //     ).then(
-    //         joinResponse => {
-    //             console.log("joinResponse:", joinResponse);
-    //
-    //             var ioSocket = gameCtrl.getGameIOSocket();
-    //
-    //             socketUtils.simulateNetworkLatency(ioSocket, 100);
-    //
-    //             var receiver = clientReceiver(ioSocket, gameCtrl);
-    //
-    //             var informServer = serverInformer(ioSocket);
-    //             GameCtrl.informServer = informServer;
-    //             GameManager.setServerInformer(informServer);
-    //
-    //             // gameCtrl.startGameScene() will be run by clientReceiver when everything is ready.
-    //         }
-    //     ).catch(console.error.bind(console));
-    // },
+
     startGameScene: function (fishGameArena) {
         // Sometimes for testing, I want to create lag on the game packets but not on the initial packets.
         // So I only start simulating the network latency here, not earlier.
@@ -179,18 +93,6 @@ var GameCtrl = cc.Class.extend({
 
         }
     },
-    // setGameWSClient:function (client) {
-    //     this.gameWSClient = client;
-    // },
-    // getGameWSClient:function () {
-    //     return this.gameWSClient;
-    // },
-    // setGameIOSocket:function (ioSocket) {
-    //     this.gameIOSocket = ioSocket;
-    // },
-    // getGameIOSocket:function () {
-    //     return this.gameIOSocket;
-    // },
     setArena:function (arena) {
         this.arena = arena;
     },

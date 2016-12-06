@@ -4,9 +4,9 @@
 
 "use strict";
 
-var CannonView = (function () {
+const CannonView = (function () {
 
-    var CannonView = cc.Sprite.extend({
+    let CannonView = cc.Sprite.extend({
         _className: "CannonView",
         _cannonPowerLabel: cc.LabelTTF,
 
@@ -22,14 +22,14 @@ var CannonView = (function () {
             // this.setPosition(300, 300);
             parent.addChild(this, 20);
 
-            var CannonPower = new cc.Sprite(ReferenceName.CannonPower);
+            let CannonPower = new cc.Sprite(ReferenceName.CannonPower);
             CannonPower.y = CannonPower.getContentSize().height / 2;
             parent.addChild(CannonPower, 25);
 
             this.setAnchorPoint(0.5,0.4);
             this.setPosition({x: pos[0], y: pos[1]});
 
-            var fontDef = new cc.FontDefinition();
+            let fontDef = new cc.FontDefinition();
             fontDef.fontName = "Arial";
             fontDef.fontSize = "32";
             fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
@@ -37,8 +37,8 @@ var CannonView = (function () {
             // CannonPower.addChild(this._cannonPowerLabel,1);
 
             parent.addChild(this._cannonPowerLabel, 29);
-            var midX = cc.view.getDesignResolutionSize().width / 2;
-            var midY = cc.view.getDesignResolutionSize().height / 2;
+            const midX = cc.view.getDesignResolutionSize().width / 2;
+            const midY = cc.view.getDesignResolutionSize().height / 2;
 
             if (pos[0] < midX) {
                 CannonPower.x = CannonPower.getContentSize().width / 2;
@@ -55,7 +55,7 @@ var CannonView = (function () {
 
             this._cannonPowerLabel.setPosition(CannonPower.getPosition());
 
-            this.turnTo({x: cc.winSize.width / 2, y: cc.winSize.height / 2});
+            // this.turnTo({x: cc.winSize.width / 2, y: cc.winSize.height / 2});
         },
 
         updateCannonPowerLabel: function (cannonPower) {
@@ -66,39 +66,42 @@ var CannonView = (function () {
             this._cannonPowerLabel.setString('');
         },
 
-        turnTo: function (newDirection) {
-            var direction = cc.pNormalize(cc.pSub(newDirection, this.getPosition()));
-            var ang = Math.atan2(direction.x, direction.y);
-            this.setRotation(ang / Math.PI * 180.0);
-            var clockAngle = this.getRotation();
-            return Math.PI / 2 - clockAngle * Math.PI / 180;
-            ;
-        },
+        // turnTo: function (newDirection) {
+        //     const direction = cc.pNormalize(cc.pSub(newDirection, this.getPosition()));
+        //     const ang = Math.atan2(direction.x, direction.y);
+        //     console.log("turnto:" + ang);
+        //
+        //     // const rot = GameManager.getRotatedView(undefined, ang);
+        //     // this.setRotation(rot.rotation);
+        //     this.setRotation(ang);
+        //     // const clockAngle = this.getRotation();
+        //     // return rot.rotation * Math.PI / 180;
+        //     return ang * Math.PI / 180;
+        // },
 
-        shootTo: function (pos) {
-            this.turnTo(pos);
+        shootTo: function (angle) {
+            console.log("shootTo:" + angle);
+            // const rot = GameManager.getRotatedView(undefined, angle);
+            this.setRotation( angle);
             //shoot bullet
         },
 
         setupCannonChangeMenu: function (parent, cannonManager, pos, callbackCannonDown, callbackCannonUp) {
-            var menuLeft = new cc.MenuItemSprite(new cc.Sprite(ReferenceName.DecreaseCannon), new cc.Sprite(ReferenceName.DecreaseCannon_Down), callbackCannonDown, cannonManager);
-            var menuRight = new cc.MenuItemSprite(new cc.Sprite(ReferenceName.IncreaseCannon), new cc.Sprite(ReferenceName.IncreaseCannon_Down), callbackCannonUp, cannonManager);
+            let menuLeft = new cc.MenuItemSprite(new cc.Sprite(ReferenceName.DecreaseCannon), new cc.Sprite(ReferenceName.DecreaseCannon_Down), callbackCannonDown, cannonManager);
+            let menuRight = new cc.MenuItemSprite(new cc.Sprite(ReferenceName.IncreaseCannon), new cc.Sprite(ReferenceName.IncreaseCannon_Down), callbackCannonUp, cannonManager);
 
 
-            var menu = new cc.Menu(menuLeft, menuRight);
+            let menu = new cc.Menu(menuLeft, menuRight);
             menuLeft.setPosition(cc.pAdd(cc.p(menu.getContentSize().width / 2, menuLeft.getContentSize().height / 2), cc.p(-92, -20)));
             menuRight.setPosition(cc.pAdd(cc.p(menu.getContentSize().width / 2, menuRight.getContentSize().height / 2), cc.p(92, -20)));
             parent.addChild(menu, 50);
 
             // menu.y = this.getContentSize().height / 2 - 30;
-            var midX = cc.view.getDesignResolutionSize().width / 2;
-            var midY = cc.view.getDesignResolutionSize().height / 2;
+            const midX = cc.view.getDesignResolutionSize().width / 2;
+            const midY = cc.view.getDesignResolutionSize().height / 2;
             if (pos[0] > midX) {
-                // menu.x = playerViewStaticPrefabInstance.getContentSize().width / 2 ;
                 menu.x = midX - 137;
             } else {
-                // menu.x = playerViewStaticPrefabInstance.x + playerViewStaticPrefabInstance.getContentSize().width;
-
                 menu.x = -midX + 137;
             }
 
@@ -110,46 +113,48 @@ var CannonView = (function () {
         },
 
         //to refactor : from WeaponCannonExt
-        spawnBullet: function (pos) {
-            //temp
-            var currentCannonLevel = 1;
-
-
-            var bullet = ActorFactory.create("BulletActor");
-            var bulletPos = this.convertToWorldSpace(this.getPosition());
-            var direction = cc.pNormalize(cc.pSub(pos, bulletPos));
-
-            var particle = particleSystemFactory.create(res.ParticlePlist, cc.pAdd(this.getPosition(), cc.pMult(direction, 60)), true);
-
-            bullet.setParticle(particle);
-
-            bullet.setShootFlag((new Date()).getTime());
-            bullet.setCurWeaponLevel(currentCannonLevel);
-            bullet.resetState();
-            bullet.updateInfo();
-            bullet.setGroup(GroupHeroBullet);
-            bullet.setMoveDirection(direction);
-            bullet.setPosition(bulletPos);
-
-
-            bullet.setTargetPosition(pos);
-            var speedSetArray = GameSetting.getInstance().getBulletSpeedArray();
-            var bulletSpeed = speedSetArray[currentCannonLevel];
-            bullet.setSpeed(bulletSpeed);
-
-            bullet.playAction(7 + currentCannonLevel - 1);
-
-            bullet.setZOrder(BulletActorZValue);
-
-            GameCtrl.sharedGame().getCurScene().addChild(particle, 10);
-            GameCtrl.sharedGame().getCurScene().addActor(bullet);
-
-
-            playEffect(FIRE_EFFECT);
-
-            // So we can set bulletId
-            return bullet;
-        },
+        // spawnBullet: function (pos) {
+        //     //temp
+        //     const currentCannonLevel = 1;
+        //
+        //
+        //     let bullet = ActorFactory.create("BulletActor");
+        //     const bulletPos = this.convertToWorldSpace(this.getPosition());
+        //     const direction = cc.pNormalize(cc.pSub(pos, bulletPos));
+        //
+        //     let particle = particleSystemFactory.create(res.ParticlePlist, cc.pAdd(this.getPosition(), cc.pMult(direction, 60)), true);
+        //
+        //     bullet.setParticle(particle);
+        //
+        //     bullet.setShootFlag((new Date()).getTime());
+        //     bullet.setCurWeaponLevel(currentCannonLevel);
+        //     bullet.resetState();
+        //     bullet.updateInfo();
+        //     bullet.setGroup(GroupHeroBullet);
+        //     bullet.setMoveDirection(direction);
+        //     bullet.setPosition(bulletPos);
+        //
+        //
+        //     bullet.setTargetPosition(pos);
+        //     const speedSetArray = GameSetting.getInstance().getBulletSpeedArray();
+        //     const bulletSpeed = speedSetArray[currentCannonLevel];
+        //     bullet.setSpeed(bulletSpeed);
+        //
+        //     bullet.playAction(7 + currentCannonLevel - 1);
+        //
+        //     bullet.setZOrder(BulletActorZValue);
+        //
+        //     GameCtrl.sharedGame().getCurScene().addChild(particle, 10);
+        //     GameCtrl.sharedGame().getCurScene().addActor(bullet);
+        //
+        //
+        //     playEffect(FIRE_EFFECT);
+        //
+        //     console.log(bullet);
+        //
+        //     // So we can set bulletId
+        //     return bullet;
+        // },
 
 
     });

@@ -15,7 +15,7 @@ var ClientServerConnect = function () {
 
     var connectToMasterServer = function () {
         if (_hasConnected) return;
-        const useJoeysServerDuringDevelopment = true;
+        const useJoeysServerDuringDevelopment = false;
 
         let gameAPIServerUrl = 'ws://3dfishing88888.sinonet.sg:8088';
 

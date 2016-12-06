@@ -1,14 +1,18 @@
 /**
  * Created by eugeneseah on 15/11/16.
  */
-var LobbyManager = function () {
-    var LobbyManager = function (parent) {
+const LobbyManager = (function () {
+    let LobbyManager = function (parent) {
         this._parent = parent;
         this.doView(parent);
     };
 
     LobbyManager.prototype.doView = function(parent){
+        if (this._view){
+            this._parent.removeChild(this._view);
+        }
         this._view = new LobbyView(parent);
     };
+
     return LobbyManager;
-}();
+}());

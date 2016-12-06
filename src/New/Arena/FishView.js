@@ -2,9 +2,9 @@
  * Created by eugeneseah on 3/11/16.
  */
 
-var FishView = (function () {
+const FishView = (function () {
 
-    var FishView = cc.Sprite.extend({
+    return cc.Sprite.extend({
         _className: "FishView",
         _currentAnimationAction: null,
         // type : -1,
@@ -15,11 +15,11 @@ var FishView = (function () {
 
             // seems only useful to set and initialise rect/sprite box for sprite (otherwise it would be 0)
             // can be removed for production
-            var number = '0';
+            let number = '0';
             while (number.length < 5){
                 number = '0' + number;
             }
-            var frameName = '#' + fishType + '_' + number + '.png';
+            const frameName = '#' + fishType + '_' + number + '.png';
             this._super(frameName);
 
             this.doAnimation(FishAnimationEnum.default);
@@ -34,12 +34,12 @@ var FishView = (function () {
             if (this._currentAnimationAction) {
                 this.stopAction(this._currentAnimationAction);
             }
-            var data = FishAnimationData[this.type][fishAnimationEnum];
+            const data = FishAnimationData[this.type][fishAnimationEnum];
             if (data.pivot){
                 this.setAnchorPoint(data.pivot);
             }
 
-            var sequence = new cc.Sequence(data.animation.clone(), new cc.DelayTime(data.animationInterval));
+            const sequence = new cc.Sequence(data.animation.clone(), new cc.DelayTime(data.animationInterval));
             this._currentAnimationAction = new cc.RepeatForever(sequence);
             this.runAction(this._currentAnimationAction);
 
@@ -49,5 +49,4 @@ var FishView = (function () {
 
 
     });
-    return FishView;
 })();

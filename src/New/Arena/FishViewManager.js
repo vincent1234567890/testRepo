@@ -2,9 +2,9 @@
  * Created by eugeneseah on 3/11/16.
  */
 
-var FishViewManager = (function(){
+const FishViewManager = (function(){
 
-    var FishViewManager = function(parent, fishGameArena){
+    const FishViewManager = function(parent, fishGameArena){
         // console.log
 
         cc.spriteFrameCache.addSpriteFrames(res.SquidPlist);
@@ -24,14 +24,14 @@ var FishViewManager = (function(){
 
     };
 
-    var proto = FishViewManager.prototype;
+    const proto = FishViewManager.prototype;
 
     proto.addFish = function(fishId, fishType){
         // this._fishes[fishId] = new FishView(this._parent, fishType);
         // return this._fishes[fishId];
 
         //debug version:
-        var parent = new cc.Node();
+        const parent = new cc.Node();
         this._parent.addChild(parent);
         new FishView(parent, fishType);
         this._fishes[fishId] = parent;
@@ -49,20 +49,21 @@ var FishViewManager = (function(){
     };
 
     proto.update = function () {
-        for ( var fishId in this._fishes){
-            var fishModel = this._fishGameArena.getFish(fishId);
+        for ( let fishId in this._fishes){
+            const fishModel = this._fishGameArena.getFish(fishId);
             if (fishModel) {
                 //console.log(`Moving fish ${this.FishID} to ${fishModel.position}`);
-                this._fishes[fishId].setPositionX(fishModel.position[0]);
-                this._fishes[fishId].setPositionY(fishModel.position[1]);
-                this._fishes[fishId].setRotation(180 - fishModel.angle * 180 / Math.PI);
+
+                const model = GameManager.getRotatedView(fishModel.position, fishModel.angle);
+                this._fishes[fishId].setPosition(cc.p(model.position[0],model.position[1]));
+                this._fishes[fishId].setRotation(model.rotation + 90);
             }
         }
     };
 
     proto.destroyView = function(){
-        for ( var fishId in this._fishes){
-            var fishModel = this._fishGameArena.getFish(fishId);
+        for ( let fishId in this._fishes){
+            const fishModel = this._fishGameArena.getFish(fishId);
             if (fishModel) {
                 this._parent.removeChild(fishModel);
                 delete fishModel;
