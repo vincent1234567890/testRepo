@@ -4,22 +4,28 @@
 
 
 
-var GameView = function(){
+const GameView = function(){
 
-    var _parentNode;
+    let _parentNode;
+    let _curretBKG;
 
-    var initialise = function (parentNode) {
+    let initialise = function (parentNode) {
         _parentNode = parentNode;
         cc.spriteFrameCache.addSpriteFrames(res.GameUIPlist);
 
-        // this._playerView = new PlayerView(parent);
-    }
 
-    var GameView = {
+        // this._playerView = new PlayerView(parent);
+    };
+
+    let goToGame = function () {
+        _curretBKG = new cc.Sprite()
+    };
+
+    return {
         initialise : initialise,
         parentNode : _parentNode,
+        goToGame :goToGame,
     }
 
-    return GameView;
 
 }();

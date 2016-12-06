@@ -3,6 +3,7 @@
  */
 const LobbyManager = (function () {
     let LobbyManager = function (parent) {
+        cc.spriteFrameCache.addSpriteFrames(res.LobbyUIPlist);
         this._parent = parent;
         this.doView(parent);
     };

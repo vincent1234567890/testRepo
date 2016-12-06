@@ -73,13 +73,17 @@ const GameManager = function () {
         for (let i = 0; i < _gameConfig.maxPlayers; i++) {
             const index = getPlayerSlot(i);
             // console.log(index);
-            _playerViews[index] = new PlayerViewManager(_parentNode, _gameConfig.cannonPositions[index], i == _playerSlot);
+            _playerViews[index] = new PlayerViewManager(_parentNode, _gameConfig, index, i == _playerSlot);
+
+            const direction = cc.pNormalize(cc.pSub({x: cc.winSize.width / 2, y: cc.winSize.height / 2}, new cc.p(_gameConfig.cannonPositions[index][0], _gameConfig.cannonPositions[index][1])));
+            const rot = Math.atan2(direction.x, direction.y);
+            _playerViews[index].shootTo(rot * 180 / Math.PI);
         }
-        _fishManager = new FishViewManager(_parentNode, _fishGameArena);
+        _fishManager = new FishViewManager(_parentNode, _fishGameArena, getRotatedView);
 
         _optionsManager = new OptionsManager(_parentNode, undefined, undefined, onLeaveArena);
 
-        _bulletManager = new BulletManager(_parentNode, _fishGameArena);
+        _bulletManager = new BulletManager(_parentNode, _fishGameArena, getRotatedView);
 
         initialiseTouch();
     };
@@ -115,7 +119,7 @@ const GameManager = function () {
 
         const bulletId = _playerId + ':' + getPlayerBulletId();
 
-        ClientServerConnect.getServerInformer().bulletFired(bulletId, info.rotation / 180 * Math.PI);
+        ClientServerConnect.getServerInformer().bulletFired(bulletId, (info.rotation - 90) / 180 * Math.PI);
     };
 
     const getPlayerBulletId = function () {
@@ -131,7 +135,7 @@ const GameManager = function () {
         let slot = getPlayerSlot(arenaPlayer.slot);
 
         let info = getRotatedView(undefined, angle );
-        _playerViews[slot].shootTo(info.rotation ); //here
+        _playerViews[slot].shootTo(info.rotation - 90);
 
         return _bulletManager.createBullet(_gameConfig.cannonPositions[slot], angle, bulletId);
     };
@@ -302,7 +306,7 @@ const GameManager = function () {
                 y = cc.view.getDesignResolutionSize().height - position[1];
             }
             if (rotation) {
-                rot = 270 - (rotation * 180 / Math.PI);
+                rot = - (rotation * 180 / Math.PI);
 
             }
         }else {
@@ -311,7 +315,7 @@ const GameManager = function () {
                 y = position[1];
             }
             if (rotation) {
-                rot = 90 -rotation * 180 / Math.PI;
+                rot = 180 - rotation * 180 / Math.PI;
             }
         }
         return {position : [x,y], rotation : rot}
@@ -333,8 +337,6 @@ const GameManager = function () {
         goToLogin: goToLogin,
         login: login,
         goToLobby: goToLobby,
-
-        getRotatedView : getRotatedView,
 
         //debug
         debug: debug,

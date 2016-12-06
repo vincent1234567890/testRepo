@@ -4,7 +4,8 @@
 
 const FishViewManager = (function(){
 
-    const FishViewManager = function(parent, fishGameArena){
+
+    const FishViewManager = function(parent, fishGameArena, rotationFunction){
         // console.log
 
         cc.spriteFrameCache.addSpriteFrames(res.SquidPlist);
@@ -12,6 +13,7 @@ const FishViewManager = (function(){
         cc.spriteFrameCache.addSpriteFrames(res.TurtlePlist);
         cc.spriteFrameCache.addSpriteFrames(res.PorgyPlist);
         cc.spriteFrameCache.addSpriteFrames(res.StingrayPlist);
+        cc.spriteFrameCache.addSpriteFrames(res.LanternPlist);
         // FishAnimationData();
         FishAnimationData.initialise();
 
@@ -19,6 +21,7 @@ const FishViewManager = (function(){
         this._fishes = {};
         this._fishGameArena = fishGameArena;
 
+        this.rotationFunction = rotationFunction;
 
 
 
@@ -54,9 +57,9 @@ const FishViewManager = (function(){
             if (fishModel) {
                 //console.log(`Moving fish ${this.FishID} to ${fishModel.position}`);
 
-                const model = GameManager.getRotatedView(fishModel.position, fishModel.angle);
+                const model = this.rotationFunction(fishModel.position, fishModel.angle);
                 this._fishes[fishId].setPosition(cc.p(model.position[0],model.position[1]));
-                this._fishes[fishId].setRotation(model.rotation + 90);
+                this._fishes[fishId].setRotation(model.rotation);
             }
         }
     };

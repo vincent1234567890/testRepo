@@ -3,17 +3,22 @@
  */
 "use strict";
 
-var CannonManager = (function () {
+const CannonManager = (function () {
 
-    function CannonManager(parent, pos, isPlayer) {
-        this._cannon = new CannonView(parent, pos);
+    let _gameConfig;
+
+    function CannonManager(parent, gameConfig, index, isPlayer) {
+        _gameConfig = gameConfig;
+        this._cannon = new CannonView(parent, gameConfig.cannonPositions[index]);
         if (isPlayer) {
-            this._cannon.setupCannonChangeMenu(parent, this, pos, this.decreaseCannon, this.increaseCannon);
+            this._cannon.setupCannonChangeMenu(parent, this, gameConfig.cannonPositions[index], this.decreaseCannon, this.increaseCannon);
             this.forceSetGun(0);
         }
     }
 
-    CannonManager.prototype.shootTo = function (pos) {
+    let proto = CannonManager.prototype;
+
+    proto.shootTo = function (pos) {
         this._cannon.shootTo(pos);
         // return this._cannon.spawnBullet(pos);
     };
@@ -22,19 +27,19 @@ var CannonManager = (function () {
     //     return this._cannon.turnTo(pos);
     // };
 
-    CannonManager.prototype.increaseCannon = function () {
+    proto.increaseCannon = function () {
         this.selectGun(this._currentGunId + 1);
     };
 
-    CannonManager.prototype.decreaseCannon = function () {
+    proto.decreaseCannon = function () {
         this.selectGun(this._currentGunId - 1);
     };
 
     /**
      * Try to switch to another gun (for the current player only).
      */
-    CannonManager.prototype.selectGun = function (nextGunId) {
-        const nextGunClass = GameManager.getGameConfig().gunClasses[nextGunId];
+    proto.selectGun = function (nextGunId) {
+        const nextGunClass = _gameConfig.gunClasses[nextGunId];
 
         if (!nextGunClass) {
             // Cannot select that gun - it doesn't exist!
@@ -49,25 +54,25 @@ var CannonManager = (function () {
      * Switch to another gun.  Used when the server tells us that another player has changed gun, or when the current
      * player has successfully changed gun.
      */
-    CannonManager.prototype.forceSetGun = function (gunId) {
-        const gunClass = GameManager.getGameConfig().gunClasses[gunId];
+    proto.forceSetGun = function (gunId) {
+        const gunClass = _gameConfig.gunClasses[gunId];
         this._currentGunId = gunId;
         this._cannon.updateCannonPowerLabel(gunClass.value);
     };
 
-    CannonManager.prototype.forceClearGun = function () {
+    proto.forceClearGun = function () {
         this._cannon.clearCannonPowerLabel();
     };
 
-    CannonManager.prototype.getCurrentGunClass = function () {
-        return GameManager.getGameConfig().gunClasses[this._currentGunId];
+    proto.getCurrentGunClass = function () {
+        return _gameConfig.gunClasses[this._currentGunId];
     };
 
-    CannonManager.prototype.getCurrentValue = function () {
+    proto.getCurrentValue = function () {
         return this.getCurrentGunClass().value;
     };
 
-    CannonManager.prototype.destroyView = function () {
+    proto.destroyView = function () {
         this._cannon.parent.removeChild(this._cannon);
         this._cannon = null;
     };

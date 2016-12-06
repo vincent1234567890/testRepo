@@ -4,13 +4,14 @@
 "use strict";
 const PlayerViewManager = (function () {
     let _bulletId;
+    let _gameConfig;
 
-    const PlayerViewManager = function (parent, pos, isPlayer) {
+    const PlayerViewManager = function (parent, gameConfig, index, isPlayer) {
         _bulletId = 0;
 
-        this._cannonManager = new CannonManager(parent, pos, isPlayer);
+        this._cannonManager = new CannonManager(parent, gameConfig, index, isPlayer);
 
-        this._playerView = new PlayerView(parent, pos);// not ideal
+        this._playerView = new PlayerView(parent, gameConfig.cannonPositions[index]);// not ideal
 
     };
 

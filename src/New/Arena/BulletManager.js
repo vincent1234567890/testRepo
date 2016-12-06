@@ -7,10 +7,12 @@ const BulletManager = (function(){
     let _parent;
     let _fishGameArena;
     let _bulletCache = [];
+    let _rotationFunction;
 
-    const BulletManager = function (parent, fishGameArena) {
+    const BulletManager = function (parent, fishGameArena, rotationFunction) {
         _parent = parent;
         _fishGameArena = fishGameArena;
+        _rotationFunction = rotationFunction;
     };
 
     const proto = BulletManager.prototype;
@@ -43,10 +45,10 @@ const BulletManager = (function(){
                 //console.log("bulletModel.position:", bulletModel.position);
                 //this.setPosition(new cc.Point(bulletModel.position[0], bulletModel.position[1]));
 
-                const model = GameManager.getRotatedView(bulletModel.position, bulletModel.angle);
+                const model = _rotationFunction(bulletModel.position, bulletModel.angle);
                 // console.log(JSON.stringify(model));
                 bulletView.setPosition(model.position[0], model.position[1]);
-                bulletView.setRotation(90 - model.rotation);
+                bulletView.setRotation(180 - model.rotation);
             }
 
             //for particle
