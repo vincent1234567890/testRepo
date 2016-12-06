@@ -107,6 +107,8 @@
         "src/New/Data/FishAnimationData.js",
         "src/New/TouchLayerRefactored.js",
         "src/New/ReferenceName.js",
+        "src/New/Arena/BulletView.js",
+        "src/New/Arena/BulletManager.js",
         "src/New/Arena/CannonView.js",
         "src/New/Arena/CannonManager.js",
         "src/New/Arena/PlayerViewStaticPrefab.js",

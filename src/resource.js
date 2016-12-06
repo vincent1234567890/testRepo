@@ -194,6 +194,8 @@ var res = {
     PorgyPlist : "res/New/testing/NFish.plist",
     PorgyPNG : "res/New/testing/NFish.png",
 
+    BulletPNG: "res/New/testing/bullet.png",
+
     //debug
     DebugCircle : "res/New/testing/circle.png",
 
