@@ -271,8 +271,7 @@ const GameManager = function () {
 
     function destroyArena(){
         resetArena();
-        _fishManager.destroyView();
-        _bulletManager.destroyView();
+
         for (let i = 0; i < _gameConfig.maxPlayers; i++) {
             _playerViews[i].destroyView();
             delete _playerViews[i];
@@ -284,6 +283,8 @@ const GameManager = function () {
 
     function resetArena(){
         _isRotated = false;
+        _fishManager.destroyView();
+        _bulletManager.destroyView();
         for (let i = 0; i < _gameConfig.maxPlayers; i++) {
             clearPlayerState(i);
         }

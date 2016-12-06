@@ -3,7 +3,7 @@
  */
 
 const ScoreboardView = (function() {
-
+    "use strict";
     return function ( parent, target, data, goToLobby, goToNewRoom) {
 
         this._parent = parent;
@@ -38,7 +38,7 @@ const ScoreboardView = (function() {
         // data.multiCatches :
         let count = 0;
         if (data.multiCatches) {
-            for (fmultiCatch in data.multiCatches) {
+            for (let fmultiCatch in data.multiCatches) {
                 count += data.multiCatches[fmultiCatch].count * multiCatch;
             }
         }
@@ -63,6 +63,11 @@ const ScoreboardView = (function() {
         bg.addChild(scrollBoxBG);
 
         setupScoreboardMenu(bg, goToLobby, goToNewRoom, target);
+
+        let touchlayer = new TouchLayerRefactored(touchEater);
+        touchlayer.setSwallowTouches(true);
+
+        bg.addChild(touchlayer,-1);
 
     };
 
@@ -140,6 +145,11 @@ const ScoreboardView = (function() {
         playButton.setPosition(cc.pAdd(cc.p(menu.getContentSize().width / 2, playButton.getContentSize().height / 2), cc.p(150, -20)));
         menu.setPosition(0,20);
         parent.addChild(menu);
+
+
+    }
+
+    function touchEater (){
 
 
     }
