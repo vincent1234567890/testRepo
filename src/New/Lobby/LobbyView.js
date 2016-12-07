@@ -3,7 +3,7 @@
  */
 const LobbyView = (function() {
 
-    var LobbyView = function ( parent) {
+    const LobbyView = function ( parent) {
 
         this._parent = parent;
 
@@ -21,13 +21,13 @@ const LobbyView = (function() {
         star.setPosition(166 , cc.view.getDesignResolutionSize().height - 66);
         bg.addChild(star,2);
 
-        var coin = new cc.Sprite(ReferenceName.LobbyCoinIcon);
-        coin.setPosition(971,cc.view.getDesignResolutionSize().height - 46);
-        bg.addChild(coin,2);
+        // var coin = new cc.Sprite(ReferenceName.LobbyCoinIcon);
+        // coin.setPosition(971,cc.view.getDesignResolutionSize().height - 46);
+        // bg.addChild(coin,2);
 
         var coinBG = new cc.Sprite(ReferenceName.LobbyCoinsBG);
         coinBG.setPosition(1136,cc.view.getDesignResolutionSize().height - 47);
-        bg.addChild(coinBG,1);
+        bg.addChild(coinBG,99);
 
         var BonusPlaceHolder = new cc.Sprite(ReferenceName.BonusPlaceHolder);
         BonusPlaceHolder.setPosition(685,cc.view.getDesignResolutionSize().height - 49);

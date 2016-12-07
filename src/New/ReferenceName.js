@@ -15,21 +15,21 @@ const ReferenceName = {
     GameBackground : "#BG.png",
 
     //Lobby
-    LobbyBackground : "#BG.jpg",
-    ScrollArrow : "#Arrow.png",
-    BonusPlaceHolder : "#Bonus.png",
+    LobbyBackground : "#BG.png",
+    ScrollArrow : "#Arrow.png",//
+    BonusPlaceHolder : "#Bonus.png",//
     BuyButton : "#Buy.png",
     LobbyCoinsBG : "#Coins Base.png",
-    LobbyCoinIcon : "#Coins.png",
-    GameSelectBox : "#Game.png",
-    Star : "#level Star.png",
+    LobbyCoinIcon : "#Coins.png",//
+    GameSelectBox : "#GameFrame.png",
+    Star : "#level Star.png",//
     LevelBG : "#LevelBarBase.png",
-    MessageButton : "#Message.png",
+    MessageButton : "#Log.png",
     NameBG : "#Name Bar.png",
     ProfileFrame : "#Profile Frame.png",
     ProfileImage : "#Profile Image.png",
-    LobbySettingsButton : "#setting.png",
-    TopBg : "#TopBase.png",
+    LobbySettingsButton : "#Setting.png",
+    TopBg : "#Top Base.png",
 
     //Scoreboard
     ScoreboardBG : "#SummaryBase.png",
