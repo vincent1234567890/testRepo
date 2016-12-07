@@ -4,7 +4,7 @@
 
 "use strict";
 
-var ClientServerConnect = function () {
+const ClientServerConnect = function () {
 
     let _hasConnected = false;
     let _informServer ;
@@ -13,7 +13,7 @@ var ClientServerConnect = function () {
     let _gameIOSocket;
 
 
-    var connectToMasterServer = function () {
+    const connectToMasterServer = function () {
         if (_hasConnected) return;
         const useJoeysServerDuringDevelopment = false;
 
@@ -24,14 +24,14 @@ var ClientServerConnect = function () {
         if (doingDevelopment) {
             gameAPIServerUrl = 'ws://127.0.0.1:8088';
             if (useJoeysServerDuringDevelopment) {
-                gameAPIServerUrl = 'ws://192.168.1.18:8088';
+                gameAPIServerUrl = 'ws://192.168.1.16:8088';
             }
         }
 
-        var clientServerConnect = this;
+        // var clientServerConnect = this;
 
-        var client = new WebSocketClient(gameAPIServerUrl);
-        var gameService = new GameServices.GameService();
+        const client = new WebSocketClient(gameAPIServerUrl);
+        const gameService = new GameServices.GameService();
         client.addService(gameService);
 
         setGameWSClient(client);
@@ -49,8 +49,8 @@ var ClientServerConnect = function () {
         });
     };
 
-    var login = function ( name, pass, callback) {
-        var client = getGameWSClient();
+    const login = function ( name, pass, callback) {
+        const client = getGameWSClient();
 
         Promise.resolve().then(
             () => {
@@ -95,7 +95,7 @@ var ClientServerConnect = function () {
             });
     };
 
-    var joinGame = function (gameId) {
+    const joinGame = function (gameId) {
         const client = getGameWSClient();
 
         return Promise.resolve().then(
@@ -113,7 +113,7 @@ var ClientServerConnect = function () {
                 console.log("joinResponse:", joinResponse);
 
                 // Wrapper which listens for game events
-                var ioSocket = socketUtils.getIOSocketFromClient(client);
+                const ioSocket = socketUtils.getIOSocketFromClient(client);
                 // This object has on() and off() functions for receiving messages, and send() for sending them.
                 //setGameIOSocket(ioSocket);
 
@@ -123,7 +123,7 @@ var ClientServerConnect = function () {
                 }
                 socketUtils.simulateNetworkLatency(ioSocket, 100);
 
-                var receiver = clientReceiver(ioSocket, GameCtrl.sharedGame()); // @TODO : move to GameManager?
+                const receiver = clientReceiver(ioSocket, GameCtrl.sharedGame()); // @TODO : move to GameManager?
 
                 //setClientReceiver(receiver);
 
@@ -154,15 +154,13 @@ var ClientServerConnect = function () {
         return _gameWSClient.callAPIOnce('game','getMyStats', {});
     }
 
-
-
-    var setGameWSClient = function (client) {
+    function setGameWSClient (client) {
         _gameWSClient = client;
-    };
+    }
 
-    var getGameWSClient = function () {
+    function getGameWSClient () {
         return _gameWSClient;
-    };
+    }
 
     //var setGameIOSocket = function (ioSocket) {
     //    _gameIOSocket = ioSocket;
@@ -175,21 +173,19 @@ var ClientServerConnect = function () {
     //    _clientReceiver = receiver;
     //};
 
-    var setServerInformer = function (informer) {
+    function setServerInformer (informer) {
         _informServer = informer;
-    };
+    }
 
-    var getServerInformer = function () {
+    function getServerInformer() {
         return _informServer;
-    };
+    }
 
-    var resetArena = function () {
+    function resetArena() {
         _clientReceiver.resetArena();
-    };
+    }
 
-
-
-    var ClientServerConnect = {
+    return {
         connectToMasterServer : connectToMasterServer,
         login : login,
         joinGame : joinGame,
@@ -200,6 +196,4 @@ var ClientServerConnect = function () {
         //getGameIOSocket: getGameIOSocket,
         postGameCleanup: postGameCleanup,
     };
-
-    return ClientServerConnect;
 }();

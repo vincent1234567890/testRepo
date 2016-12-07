@@ -195,8 +195,8 @@ var res = {
     //testing
     SquidPNG : "res/New/testing/Squid.png",
     SquidPlist : "res/New/testing/Squid.plist",
-    TurtlePlist : "res/New/testing/Turtle.plist",
-    TurtlePNG : "res/New/testing/Turtle.png",
+    TurtlePlist : "res/New/testing/Chelonian.plist",
+    TurtlePNG : "res/New/testing/Chelonian.png",
     BulletPNG: "res/New/testing/bullet.png",
     LanternPlist : "res/New/testing/Lantern.plist",
     LanternPng : "res/New/testing/Lantern.png",

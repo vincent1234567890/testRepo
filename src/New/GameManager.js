@@ -126,18 +126,13 @@ const GameManager = function () {
         return _playerViews[getPlayerSlot(_playerSlot)].getNextBulletId();
     };
 
-
-
     const shootTo = function (playerId, angle, bulletId) {
 
         let arenaPlayer = _fishGameArena.getPlayer(playerId);
-        console.log(arenaPlayer.slot);
         let slot = getPlayerSlot(arenaPlayer.slot);
-
         let info = getRotatedView(undefined, angle );
         _playerViews[slot].shootTo(info.rotation - 90);
-
-        return _bulletManager.createBullet(_gameConfig.cannonPositions[slot], angle, bulletId);
+        return _bulletManager.createBullet(bulletId);
     };
 
     const explodeBullet = function(bulletId){
@@ -149,7 +144,6 @@ const GameManager = function () {
         _gameConfig = config;
         _playerId = playerId;
         _playerSlot = playerSlot;
-
     };
 
     const updateMultiplayerState = function (playerData) {

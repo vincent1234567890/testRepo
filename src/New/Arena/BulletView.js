@@ -4,15 +4,9 @@
 
 const BulletView = (function () {
     "use strict";
-    // let _startPosition;
-    // let _target;
-    // let _parent;
-    // let _view;
 
-    const BulletView = function (parent, startPos, target) {
+    const BulletView = function (parent) {
         this._parent = parent;
-        // _startPosition = startPos;
-        // _target = target;
 
         this._view = new cc.Sprite(res.BulletPNG);
         this._parent.addChild(this._view);

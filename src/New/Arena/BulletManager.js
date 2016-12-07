@@ -17,8 +17,8 @@ const BulletManager = (function(){
 
     const proto = BulletManager.prototype;
 
-    proto.createBullet = function (start, pos, bulletId) {
-        _bulletCache[bulletId] = new BulletView(_parent, start, pos);
+    proto.createBullet = function (bulletId) {
+        _bulletCache[bulletId] = new BulletView(_parent);
         // console.log(_bulletCache);
     };
 
