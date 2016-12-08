@@ -74,13 +74,13 @@
             <key>premultiplyAlpha</key>
             <false/>
             <key>realTextureFileName</key>
-            <string>sidemenu.png</string>
+            <string>Options Menu.png</string>
             <key>size</key>
             <string>{402,139}</string>
             <key>smartupdate</key>
             <string>$TexturePacker:SmartUpdate:fb6b76f880a5d8db291c95166e9544fb:516ee417917d9f2e7a015fcdfbefefd3:4209396712f88d0635f3f3ee20ca3042$</string>
             <key>textureFileName</key>
-            <string>sidemenu.png</string>
+            <string>Options Menu.png</string>
         </dict>
     </dict>
 </plist>

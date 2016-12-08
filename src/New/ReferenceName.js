@@ -12,7 +12,7 @@ const ReferenceName = {
     CoinIcon : "#Coin icon.png",
 
     Login9Slice : "9 slice square.png",
-    GameBackground : "#BG.png",
+
 
     //Lobby
     LobbyBackground : "#BG.jpg",

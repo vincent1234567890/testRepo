@@ -12,13 +12,16 @@ const GameView = function(){
     let initialise = function (parentNode) {
         _parentNode = parentNode;
         cc.spriteFrameCache.addSpriteFrames(res.GameUIPlist);
-
-
         // this._playerView = new PlayerView(parent);
     };
 
     let goToGame = function () {
-        _curretBKG = new cc.Sprite()
+        if (_curretBKG){
+            _parentNode.removeChild(_curretBKG);
+        }
+        _curretBKG = new cc.Sprite(res.GameBackground1);
+        _curretBKG.setPosition(cc.view.getDesignResolutionSize().width/2, cc.view.getDesignResolutionSize().height/2);
+        _parentNode.addChild(_curretBKG,-5);
     };
 
     return {
