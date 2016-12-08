@@ -9,11 +9,13 @@ const LobbyView = (function() {
 
         //var width = cc.view.getDesignResolutionSize().width;
 
-        var midX = cc.view.getDesignResolutionSize().width / 2;
-        var midY = cc.view.getDesignResolutionSize().height / 2;
+        // var midX = cc.view.getDesignResolutionSize().width / 2;
+        // var midY = cc.view.getDesignResolutionSize().height / 2;
+        const length = cc.view.getDesignResolutionSize().width;
+        const height = cc.view.getDesignResolutionSize().height;
 
         var bg = new cc.Sprite(ReferenceName.LobbyBackground);
-        bg.setPosition(midX , midY);
+        bg.setPosition(length/2 , height/2);
         this._parent.addChild(bg,-3);
 
         var star = new cc.Sprite(ReferenceName.Star);
@@ -25,32 +27,46 @@ const LobbyView = (function() {
         // coin.setPosition(971,cc.view.getDesignResolutionSize().height - 46);
         // bg.addChild(coin,2);
 
-        var coinBG = new cc.Sprite(ReferenceName.LobbyCoinsBG);
-        coinBG.setPosition(1136,cc.view.getDesignResolutionSize().height - 47);
-        bg.addChild(coinBG,99);
+        let coinBG = new cc.Sprite(ReferenceName.LobbyCoinsBG);
+        // coinBG.setPosition(1136,cc.view.getDesignResolutionSize().height - 47);
+        let size = coinBG.getContentSize();
+        coinBG.setPosition(length - size.width/2,height - size.height/2);
+        bg.addChild(coinBG,2);
 
-        var BonusPlaceHolder = new cc.Sprite(ReferenceName.BonusPlaceHolder);
-        BonusPlaceHolder.setPosition(685,cc.view.getDesignResolutionSize().height - 49);
+        let BonusPlaceHolder = new cc.Sprite(ReferenceName.BonusPlaceHolder);
+        // BonusPlaceHolder.setPosition(685,cc.view.getDesignResolutionSize().height - 49);
+        size = BonusPlaceHolder.getContentSize();
+        BonusPlaceHolder.setPosition(length/2 - size.width/2,height - size.height/2);
         bg.addChild(BonusPlaceHolder,2);
 
         var LevelBG = new cc.Sprite(ReferenceName.LevelBG);
-        LevelBG.setPosition(233,cc.view.getDesignResolutionSize().height - 79);
+        // LevelBG.setPosition(233,cc.view.getDesignResolutionSize().height - 79);
+        size = LevelBG.getContentSize();
+        LevelBG.setPosition(length - size.width/2,height - size.height/2);
         bg.addChild(LevelBG,1);
 
         var NameBG = new cc.Sprite(ReferenceName.NameBG);
-        NameBG.setPosition(279,cc.view.getDesignResolutionSize().height - 24);
+        // NameBG.setPosition(279,cc.view.getDesignResolutionSize().height - 24);
+        size = NameBG.getContentSize();
+        NameBG.setPosition(length - size.width/2,height - size.height/2);
         bg.addChild(NameBG,1);
 
         var ProfileFrame = new cc.Sprite(ReferenceName.ProfileFrame);
-        ProfileFrame.setPosition(59,cc.view.getDesignResolutionSize().height - 46);
+        // ProfileFrame.setPosition(59,cc.view.getDesignResolutionSize().height - 46);
+        size = ProfileFrame.getContentSize();
+        ProfileFrame.setPosition(length - size.width/2,height - size.height/2);
         bg.addChild(ProfileFrame,1);
 
         var ProfileImage = new cc.Sprite(ReferenceName.ProfileImage);
-        ProfileImage.setPosition(59,cc.view.getDesignResolutionSize().height - 47);
+        // ProfileImage.setPosition(59,cc.view.getDesignResolutionSize().height - 47);
+        size = ProfileImage.getContentSize();
+        ProfileImage.setPosition(length - size.width/2,height - size.height/2);
         bg.addChild(ProfileImage,2);
 
         var TopBg = new cc.Sprite(ReferenceName.TopBg);
-        TopBg.setPosition(683,cc.view.getDesignResolutionSize().height - 52);
+        // TopBg.setPosition(683,cc.view.getDesignResolutionSize().height - 52);
+        size = TopBg.getContentSize();
+        TopBg.setPosition(length - size.width/2,height - size.height/2);
         bg.addChild(TopBg,0);
 
         setupGameScroll(this._parent);
