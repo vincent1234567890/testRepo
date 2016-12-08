@@ -103,7 +103,7 @@ var GameScene = cc.Scene.extend({
     _shootCount:0,
     _dictionaryFish:null,
     //bg
-    _backgroundLayer:null,
+    // _backgroundLayer:null,
     _gamepassTime:0,
     _items:null,
     _time:0,
@@ -200,7 +200,7 @@ var GameScene = cc.Scene.extend({
 
         this._musicIdx = this._curStage = le;
 
-        this.initBgLayer();
+        // this.initBgLayer();
 
         cc.director.getScheduler().schedule(this.update, this, 0, false);
         /*        var pSceneSettingDataModel = SceneSettingDataModel.sharedSceneSettingDataModel();
@@ -602,10 +602,10 @@ var GameScene = cc.Scene.extend({
         cc.spriteFrameCache.removeSpriteFramesFromFile(res.JindunPlist);
         this._gameover = true;
 
-        if (this._backgroundLayer != null) {
-            this._backgroundLayer.removeAllChildrenWithCleanup(true);
-            this._backgroundLayer.removeFromParentAndCleanup(true);
-        }
+        // if (this._backgroundLayer != null) {
+        //     this._backgroundLayer.removeAllChildrenWithCleanup(true);
+        //     this._backgroundLayer.removeFromParentAndCleanup(true);
+        // }
 
         if (this._blurBackgroundLayer != null) {
             this._blurBackgroundLayer.removeAllChildrenWithCleanup(true);
@@ -686,12 +686,12 @@ var GameScene = cc.Scene.extend({
             this._cannonActor.setWeaponButtonEnable(false);
         }
         playEffect(BUTTON_EFFECT);
-        var blurImageName = "bgblur0" + this._backgroundLayer.getBgIdx() + "_01.jpg";
-        this._blurBackgroundLayer = new cc.Sprite(ImageName(blurImageName));
-        this._blurBackgroundLayer.runAction(new cc.FadeIn(0.6));
-        this._blurBackgroundLayer.setPosition(bgPos);
-        this._blurBackgroundLayer.setScale(Multiple);
-        this.getLayer().addChild(this._blurBackgroundLayer, 150);
+        // var blurImageName = "bgblur0" + this._backgroundLayer.getBgIdx() + "_01.jpg";
+        // this._blurBackgroundLayer = new cc.Sprite(ImageName(blurImageName));
+        // this._blurBackgroundLayer.runAction(new cc.FadeIn(0.6));
+        // this._blurBackgroundLayer.setPosition(bgPos);
+        // this._blurBackgroundLayer.setScale(Multiple);
+        // this.getLayer().addChild(this._blurBackgroundLayer, 150);
     },
     pauseGameForShop:function () {
         if (this._isPause || this._gameover || this._playTutorial) {
@@ -705,13 +705,13 @@ var GameScene = cc.Scene.extend({
             this._cannonActor.setWeaponButtonEnable(false);
         }
         playEffect(BUTTON_EFFECT);
-        var blurImageName = "bgblur0" + this._backgroundLayer.getBgIdx() + "_01.jpg";
-        this._blurBackgroundLayer = new cc.Sprite(ImageName(blurImageName));
-        Multiple = AutoAdapterScreen.getInstance().getScaleMultiple();
-        this._blurBackgroundLayer.runAction(new cc.FadeIn(0.6));
-        this._blurBackgroundLayer.setPosition(VisibleRect.center());
-        this._blurBackgroundLayer.setScale(Multiple);
-        this.getLayer().addChild(this._blurBackgroundLayer);
+        // var blurImageName = "bgblur0" + this._backgroundLayer.getBgIdx() + "_01.jpg";
+        // this._blurBackgroundLayer = new cc.Sprite(ImageName(blurImageName));
+        // Multiple = AutoAdapterScreen.getInstance().getScaleMultiple();
+        // this._blurBackgroundLayer.runAction(new cc.FadeIn(0.6));
+        // this._blurBackgroundLayer.setPosition(VisibleRect.center());
+        // this._blurBackgroundLayer.setScale(Multiple);
+        // this.getLayer().addChild(this._blurBackgroundLayer);
 
         if (this._cannonActor) {
             cc.director.getScheduler().pauseTarget(this._cannonActor.getCurrentWeapon());
@@ -1097,13 +1097,13 @@ var GameScene = cc.Scene.extend({
             this._cannonActor.setWeaponButtonEnable(false);
         }
         playEffect(BUTTON_EFFECT);
-        var blurImageName = "bgblur0" + this._backgroundLayer.getBgIdx() + "_01.jpg";
-        this._blurBackgroundLayer = new cc.Sprite(ImageName(blurImageName));
-        Multiple = AutoAdapterScreen.getInstance().getScaleMultiple();
-        this._blurBackgroundLayer.runAction(new cc.FadeIn(0.6));
-        this._blurBackgroundLayer.setPosition(VisibleRect.center());
-        this._blurBackgroundLayer.setScale(Multiple);
-        this.addChild(this._blurBackgroundLayer);
+        // var blurImageName = "bgblur0" + this._backgroundLayer.getBgIdx() + "_01.jpg";
+        // this._blurBackgroundLayer = new cc.Sprite(ImageName(blurImageName));
+        // Multiple = AutoAdapterScreen.getInstance().getScaleMultiple();
+        // this._blurBackgroundLayer.runAction(new cc.FadeIn(0.6));
+        // this._blurBackgroundLayer.setPosition(VisibleRect.center());
+        // this._blurBackgroundLayer.setScale(Multiple);
+        // this.addChild(this._blurBackgroundLayer);
 
         this._pauseMenuLayer = PauseMenuLayer.create(this);
         this._pauseMenuLayer.setPosition(VisibleRect.bottom());
@@ -1378,13 +1378,13 @@ var GameScene = cc.Scene.extend({
         this._time = this._maxTime;
         this._curWaveTime = 0;
 
-        this._backgroundLayer.transition();
+        // this._backgroundLayer.transition();
         this._addPrizeGroup = true;
     },
-    initBgLayer:function () {
-        this._backgroundLayer = new GameBackgroundLayer(this._curStage);
-        this.addChild(this._backgroundLayer, -1, kBackGoundLayerTag);
-    },
+    // initBgLayer:function () {
+    //     this._backgroundLayer = new GameBackgroundLayer(this._curStage);
+    //     this.addChild(this._backgroundLayer, -1, kBackGoundLayerTag);
+    // },
     loadScoreLayer:function () {
         this._shootCount = 0;
         this._controlChesh = false;
@@ -2104,11 +2104,11 @@ var GameScene = cc.Scene.extend({
 
         // Multiple = AutoAdapterScreen.getInstance().getScaleMultiple();
         // this._backgroundLayer._bg.setScale(Multiple);
-        this._backgroundLayer._bg.setPosition(VisibleRect.center());
-        if (this._blurBackgroundLayer) {
-            // this._blurBackgroundLayer.setScale(Multiple);
-            this._blurBackgroundLayer.setPosition(VisibleRect.center());
-        }
+        // this._backgroundLayer._bg.setPosition(VisibleRect.center());
+        // if (this._blurBackgroundLayer) {
+        //     // this._blurBackgroundLayer.setScale(Multiple);
+        //     this._blurBackgroundLayer.setPosition(VisibleRect.center());
+        // }
 
         //pause menu
         // if (this._pauseMenuLayer) {

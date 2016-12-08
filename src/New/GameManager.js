@@ -85,6 +85,8 @@ const GameManager = function () {
 
         _bulletManager = new BulletManager(_parentNode, _fishGameArena, getRotatedView);
 
+        GameView.goToGame();
+
         initialiseTouch();
     };
 

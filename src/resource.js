@@ -121,8 +121,6 @@ var res = {
     GrouperPng : "res/grouper.png",
     GrouperSprite : "res/grouper.sprite",
 
-
-    SharkPng : "res/shayu.png",
     GSharkPng : "res/gshayu.png",
     GSharkSprite : "res/gshayu.sprite",
 
@@ -171,18 +169,21 @@ var res = {
     // MainUITitle : "res/main_ui_title.png",
 
     //New
-    GameUIPng : "res/New/gameui.png",
-    GameUIPlist : "res/New/gameui.plist",
+    GameUIPng : "res/New/Game UI.png",
+    GameUIPlist : "res/New/Game UI.plist",
     LobbyUIPlist : "res/New/Lobby/lobby.plist",
     LobbyUIPng : "res/New/Lobby/lobby.png",
     SettingsUIPlist : "res/New/Options/settings.plist",
     SettingsUIPng : "res/New/Options/settings.png",
     ScoreboardPlist : "res/New/Scoreboard/summary.plist",
     ScoreboardPng : "res/New/Scoreboard/summary.png",
-    SideMenuPlist : "res/New/Options/sidemenu.plist",
-    SideMenuPng : "res/New/Options/sidemenu.png",
+    SideMenuPlist : "res/New/Options/Options Menu.plist",
+    SideMenuPng : "res/New/Options/Options Menu.png",
     LoginUIPlist : "res/New/Lobby/Login.plist",
     LoginUIPng : "res/New/Lobby/Login.png",
+
+    //GameBackgrounds
+    GameBackground1 : "res/New/Game BG/Game BG 1.png",
 
     //Fish
     StingrayPNG : "res/New/Fish/Ray.png",
