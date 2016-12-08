@@ -15,7 +15,7 @@ const ReferenceName = {
     GameBackground : "#BG.png",
 
     //Lobby
-    LobbyBackground : "#BG.png",
+    LobbyBackground : "#Lobby BG 1.png",
     ScrollArrow : "#Arrow.png",//
     BonusPlaceHolder : "#Bonus.png",//
     BuyButton : "#Buy.png",

@@ -4,7 +4,7 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>BG.png</key>
+            <key>Lobby BG 1.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -79,7 +79,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Level slider HL.png</key>
+            <key>Level Slider HL.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
