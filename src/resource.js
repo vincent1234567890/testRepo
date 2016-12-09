@@ -171,8 +171,8 @@ var res = {
     //New
     GameUIPng : "res/New/Game UI.png",
     GameUIPlist : "res/New/Game UI.plist",
-    LobbyUIPlist : "res/New/Lobby/lobby.plist",
-    LobbyUIPng : "res/New/Lobby/lobby.png",
+    LobbyUIPlist : "res/New/Lobby/Lobby.plist",
+    LobbyUIPng : "res/New/Lobby/Lobby.png",
     SettingsUIPlist : "res/New/Options/settings.plist",
     SettingsUIPng : "res/New/Options/settings.png",
     ScoreboardPlist : "res/New/Scoreboard/summary.plist",

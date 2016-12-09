@@ -64,11 +64,11 @@ const ClientServerConnect = function () {
         ).then(
             loginResponse => {
                 console.log("loginResponse:", loginResponse);
-                callback(true);
+                callback(loginResponse.data.player);
                 // return client.callAPIOnce('game', 'joinGame', {})
             }, error => {
                     console.log(error);
-                    callback(false);
+                    callback();
                 }
 
 

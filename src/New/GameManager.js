@@ -13,10 +13,11 @@ const GameManager = function () {
     let debug = false;
 
     let _gameConfig;
-
     let _fishGameArena;
+    let _playerData;
 
-    let _touchLayer;
+    let _touchLayer; // should go to view
+
 
     //convenience
     let _loggedIn = false;
@@ -185,13 +186,15 @@ const GameManager = function () {
 
     const login = function (onSuccess, onFailure) {
         let loginInfo = _loginManager.getLoginInfo();
-        ClientServerConnect.login(loginInfo.name, loginInfo.pass, function (success) {
-            if (success) {
+        ClientServerConnect.login(loginInfo.name, loginInfo.pass, function (data) {
+            if (data) {
+                _playerData = data;
                 onSuccess();
             } else {
                 onFailure();
             }
         });
+        console.log(_playerData);
     };
 
     function goToLobby() {
@@ -220,9 +223,9 @@ const GameManager = function () {
 
     function createLobby() {
         if (!_lobbyManager)
-            _lobbyManager = new LobbyManager(_parentNode);
+            _lobbyManager = new LobbyManager(_parentNode, _playerData);
         else {
-            _lobbyManager.doView(_parentNode);
+            _lobbyManager.doView(_parentNode, _playerData);
         }
     }
 
@@ -259,10 +262,11 @@ const GameManager = function () {
 
 
     function development(parent) {
-        console.log("GameManager:development");
+        // console.log("GameManager:development");
         initialiseParent(parent);
         // goToScoreboard()
-        _optionsManager = new OptionsManager(_parentNode);
+        // _optionsManager = new OptionsManager(_parentNode);
+        createLobby();
     }
 
     function destroyArena(){

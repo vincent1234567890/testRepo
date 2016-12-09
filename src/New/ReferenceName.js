@@ -21,14 +21,14 @@ const ReferenceName = {
     BuyButton : "#Buy.png",
     LobbyCoinsBG : "#Coins Base.png",
     LobbyCoinIcon : "#Coins.png",//
-    GameSelectBox : "#GameFrame.png",
+    GameSelectBox : "#Game Frame.png",
     Star : "#level Star.png",//
-    LevelBG : "#LevelBarBase.png",
+    LevelBG : "#Level Bar.png",
     MessageButton : "#Log.png",
     NameBG : "#Name Bar.png",
     ProfileFrame : "#Profile Frame.png",
     ProfileImage : "#Profile Image.png",
-    LobbySettingsButton : "#Setting.png",
+    LobbySettingsButton : "#Lobby Setting.png",
     TopBg : "#Top Base.png",
 
     //Scoreboard
@@ -81,5 +81,8 @@ const ReferenceName = {
     CatchSuccessRate : "Hit / Caught %",
     GoToLobby : "Lobby",
     GoToNewGame : "Play",
+
+    //lobby
+    LobbyBuyButton : "Buy",
 
 };
