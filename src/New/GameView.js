@@ -4,22 +4,31 @@
 
 
 
-var GameView = function(){
+const GameView = function(){
 
-    var _parentNode;
+    let _parentNode;
+    let _curretBKG;
 
-    var initialise = function (parentNode) {
+    let initialise = function (parentNode) {
         _parentNode = parentNode;
         cc.spriteFrameCache.addSpriteFrames(res.GameUIPlist);
-
         // this._playerView = new PlayerView(parent);
-    }
+    };
 
-    var GameView = {
+    let goToGame = function () {
+        if (_curretBKG){
+            _parentNode.removeChild(_curretBKG);
+        }
+        _curretBKG = new cc.Sprite(res.GameBackground1);
+        _curretBKG.setPosition(cc.view.getDesignResolutionSize().width/2, cc.view.getDesignResolutionSize().height/2);
+        _parentNode.addChild(_curretBKG,-5);
+    };
+
+    return {
         initialise : initialise,
         parentNode : _parentNode,
+        goToGame :goToGame,
     }
 
-    return GameView;
 
 }();

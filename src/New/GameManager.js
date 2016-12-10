@@ -13,10 +13,11 @@ const GameManager = function () {
     let debug = false;
 
     let _gameConfig;
-
     let _fishGameArena;
+    let _playerData;
 
-    let _touchLayer;
+    let _touchLayer; // should go to view
+
 
     //convenience
     let _loggedIn = false;
@@ -73,13 +74,19 @@ const GameManager = function () {
         for (let i = 0; i < _gameConfig.maxPlayers; i++) {
             const index = getPlayerSlot(i);
             // console.log(index);
-            _playerViews[index] = new PlayerViewManager(_parentNode, _gameConfig.cannonPositions[index], i == _playerSlot);
+            _playerViews[index] = new PlayerViewManager(_parentNode, _gameConfig, index, i == _playerSlot);
+
+            const direction = cc.pNormalize(cc.pSub({x: cc.winSize.width / 2, y: cc.winSize.height / 2}, new cc.p(_gameConfig.cannonPositions[index][0], _gameConfig.cannonPositions[index][1])));
+            const rot = Math.atan2(direction.x, direction.y);
+            _playerViews[index].shootTo(rot * 180 / Math.PI);
         }
-        _fishManager = new FishViewManager(_parentNode, _fishGameArena);
+        _fishManager = new FishViewManager(_parentNode, _fishGameArena, getRotatedView);
 
         _optionsManager = new OptionsManager(_parentNode, undefined, undefined, onLeaveArena);
 
-        _bulletManager = new BulletManager(_parentNode, _fishGameArena);
+        _bulletManager = new BulletManager(_parentNode, _fishGameArena, getRotatedView);
+
+        GameView.goToGame();
 
         initialiseTouch();
     };
@@ -115,25 +122,20 @@ const GameManager = function () {
 
         const bulletId = _playerId + ':' + getPlayerBulletId();
 
-        ClientServerConnect.getServerInformer().bulletFired(bulletId, info.rotation / 180 * Math.PI);
+        ClientServerConnect.getServerInformer().bulletFired(bulletId, (info.rotation - 90) / 180 * Math.PI);
     };
 
     const getPlayerBulletId = function () {
         return _playerViews[getPlayerSlot(_playerSlot)].getNextBulletId();
     };
 
-
-
     const shootTo = function (playerId, angle, bulletId) {
 
         let arenaPlayer = _fishGameArena.getPlayer(playerId);
-        console.log(arenaPlayer.slot);
         let slot = getPlayerSlot(arenaPlayer.slot);
-
         let info = getRotatedView(undefined, angle );
-        _playerViews[slot].shootTo(info.rotation ); //here
-
-        return _bulletManager.createBullet(_gameConfig.cannonPositions[slot], angle, bulletId);
+        _playerViews[slot].shootTo(info.rotation - 90);
+        return _bulletManager.createBullet(bulletId);
     };
 
     const explodeBullet = function(bulletId){
@@ -145,7 +147,6 @@ const GameManager = function () {
         _gameConfig = config;
         _playerId = playerId;
         _playerSlot = playerSlot;
-
     };
 
     const updateMultiplayerState = function (playerData) {
@@ -185,13 +186,15 @@ const GameManager = function () {
 
     const login = function (onSuccess, onFailure) {
         let loginInfo = _loginManager.getLoginInfo();
-        ClientServerConnect.login(loginInfo.name, loginInfo.pass, function (success) {
-            if (success) {
+        ClientServerConnect.login(loginInfo.name, loginInfo.pass, function (data) {
+            if (data) {
+                _playerData = data;
                 onSuccess();
             } else {
                 onFailure();
             }
         });
+        console.log(_playerData);
     };
 
     function goToLobby() {
@@ -220,9 +223,9 @@ const GameManager = function () {
 
     function createLobby() {
         if (!_lobbyManager)
-            _lobbyManager = new LobbyManager(_parentNode);
+            _lobbyManager = new LobbyManager(_parentNode, _playerData);
         else {
-            _lobbyManager.doView(_parentNode);
+            _lobbyManager.doView(_parentNode, _playerData);
         }
     }
 
@@ -259,16 +262,16 @@ const GameManager = function () {
 
 
     function development(parent) {
-        console.log("GameManager:development");
+        // console.log("GameManager:development");
         initialiseParent(parent);
         // goToScoreboard()
-        _optionsManager = new OptionsManager(_parentNode);
+        // _optionsManager = new OptionsManager(_parentNode);
+        createLobby();
     }
 
     function destroyArena(){
         resetArena();
-        _fishManager.destroyView();
-        _bulletManager.destroyView();
+
         for (let i = 0; i < _gameConfig.maxPlayers; i++) {
             _playerViews[i].destroyView();
             delete _playerViews[i];
@@ -280,6 +283,8 @@ const GameManager = function () {
 
     function resetArena(){
         _isRotated = false;
+        _fishManager.destroyView();
+        _bulletManager.destroyView();
         for (let i = 0; i < _gameConfig.maxPlayers; i++) {
             clearPlayerState(i);
         }
@@ -302,7 +307,7 @@ const GameManager = function () {
                 y = cc.view.getDesignResolutionSize().height - position[1];
             }
             if (rotation) {
-                rot = 270 - (rotation * 180 / Math.PI);
+                rot = - (rotation * 180 / Math.PI);
 
             }
         }else {
@@ -311,7 +316,7 @@ const GameManager = function () {
                 y = position[1];
             }
             if (rotation) {
-                rot = 90 -rotation * 180 / Math.PI;
+                rot = 180 - rotation * 180 / Math.PI;
             }
         }
         return {position : [x,y], rotation : rot}
@@ -333,8 +338,6 @@ const GameManager = function () {
         goToLogin: goToLogin,
         login: login,
         goToLobby: goToLobby,
-
-        getRotatedView : getRotatedView,
 
         //debug
         debug: debug,

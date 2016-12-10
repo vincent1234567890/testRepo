@@ -80,7 +80,7 @@ const CannonView = (function () {
         // },
 
         shootTo: function (angle) {
-            console.log("shootTo:" + angle);
+            // console.log("shootTo:" + angle);
             // const rot = GameManager.getRotatedView(undefined, angle);
             this.setRotation( angle);
             //shoot bullet

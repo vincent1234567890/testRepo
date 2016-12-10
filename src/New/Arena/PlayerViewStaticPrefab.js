@@ -3,9 +3,9 @@
  */
 "use strict";
 
-var PlayerViewStaticPrefab = (function () {
+const PlayerViewStaticPrefab = (function () {
 
-    var PlayerViewStaticPrefab = cc.Sprite.extend({
+    const PlayerViewStaticPrefab = cc.Sprite.extend({
         _className: "PlayerViewStaticPrefab",
         _playerName : cc.LabelTTF,
 
@@ -20,11 +20,11 @@ var PlayerViewStaticPrefab = (function () {
             parent.addChild(this,10);
 
             //coin icon
-            var coinIcon = new cc.Sprite(ReferenceName.CoinIcon);
+            const coinIcon = new cc.Sprite(ReferenceName.CoinIcon);
             this.addChild(coinIcon);
 
 
-            var fontDef = new cc.FontDefinition();
+            const fontDef = new cc.FontDefinition();
             fontDef.fontName = "Arial";
             fontDef.fontSize = 32;
             fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
@@ -41,8 +41,8 @@ var PlayerViewStaticPrefab = (function () {
             this._gem.setDimensions(cc.size(60,35));
             this.addChild(this._gem,1);
 
-            var midX = cc.view.getDesignResolutionSize().width / 2;
-            var midY = cc.view.getDesignResolutionSize().height /2;
+            const midX = cc.view.getDesignResolutionSize().width / 2;
+            const midY = cc.view.getDesignResolutionSize().height /2;
             var thisSizeX = this.getContentSize().width;
             var thisSizeY = this.getContentSize().height;
             if (pos[0] > midX) {

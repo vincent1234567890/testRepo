@@ -121,8 +121,6 @@ var res = {
     GrouperPng : "res/grouper.png",
     GrouperSprite : "res/grouper.sprite",
 
-
-    SharkPng : "res/shayu.png",
     GSharkPng : "res/gshayu.png",
     GSharkSprite : "res/gshayu.sprite",
 
@@ -171,35 +169,42 @@ var res = {
     // MainUITitle : "res/main_ui_title.png",
 
     //New
-    GameUIPng : "res/New/gameui.png",
-    GameUIPlist : "res/New/gameui.plist",
-    LoginUIPlist : "res/New/Lobby/lobby.plist",
-    LoginUIPng : "res/New/Lobby/lobby.png",
+    GameUIPng : "res/New/Game UI.png",
+    GameUIPlist : "res/New/Game UI.plist",
+    LobbyUIPlist : "res/New/Lobby/Lobby.plist",
+    LobbyUIPng : "res/New/Lobby/Lobby.png",
     SettingsUIPlist : "res/New/Options/settings.plist",
     SettingsUIPng : "res/New/Options/settings.png",
     ScoreboardPlist : "res/New/Scoreboard/summary.plist",
     ScoreboardPng : "res/New/Scoreboard/summary.png",
-    SideMenuPlist : "res/New/Options/sidemenu.plist",
-    SideMenuPng : "res/New/Options/sidemenu.png",
+    SideMenuPlist : "res/New/Options/Options Menu.plist",
+    SideMenuPng : "res/New/Options/Options Menu.png",
+    LoginUIPlist : "res/New/Lobby/Login.plist",
+    LoginUIPng : "res/New/Lobby/Login.png",
+
+    //GameBackgrounds
+    GameBackground1 : "res/New/Game BG/Game BG 1.png",
+
+    //Fish
+    StingrayPNG : "res/New/Fish/Ray.png",
+    StingrayPlist : "res/New/Fish/Ray.plist",
+    PorgyPlist : "res/New/Fish/NFish.plist",
+    PorgyPNG : "res/New/Fish/NFish.png",
+    PufferfishPlist : "res/New/Fish/Puffer.plist",
+    PufferfishPNG : "res/New/Fish/Puffer.png",
 
     //testing
-    StingrayPNG : "res/New/testing/Ray.png",
-    StingrayPlist : "res/New/testing/Ray.plist",
     SquidPNG : "res/New/testing/Squid.png",
     SquidPlist : "res/New/testing/Squid.plist",
-    PufferfishPlist : "res/New/testing/Puffer.plist",
-    PufferfishPNG : "res/New/testing/Puffer.png",
-    TurtlePlist : "res/New/testing/Turtle.plist",
-    TurtlePNG : "res/New/testing/Turtle.png",
-    PorgyPlist : "res/New/testing/NFish.plist",
-    PorgyPNG : "res/New/testing/NFish.png",
-
+    TurtlePlist : "res/New/testing/Chelonian.plist",
+    TurtlePNG : "res/New/testing/Chelonian.png",
     BulletPNG: "res/New/testing/bullet.png",
+    LanternPlist : "res/New/testing/Lantern.plist",
+    LanternPng : "res/New/testing/Lantern.png",
+
 
     //debug
     DebugCircle : "res/New/testing/circle.png",
-
-
 
 };
 

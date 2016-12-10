@@ -15,21 +15,21 @@ const ReferenceName = {
 
 
     //Lobby
-    LobbyBackground : "#BG.jpg",
-    ScrollArrow : "#Arrow.png",
-    BonusPlaceHolder : "#Bonus.png",
+    LobbyBackground : "#Lobby BG 1.png",
+    ScrollArrow : "#Arrow.png",//
+    BonusPlaceHolder : "#Bonus.png",//
     BuyButton : "#Buy.png",
     LobbyCoinsBG : "#Coins Base.png",
-    LobbyCoinIcon : "#Coins.png",
-    GameSelectBox : "#Game.png",
-    Star : "#level Star.png",
-    LevelBG : "#LevelBarBase.png",
-    MessageButton : "#Message.png",
+    LobbyCoinIcon : "#Coins.png",//
+    GameSelectBox : "#Game Frame.png",
+    Star : "#level Star.png",//
+    LevelBG : "#Level Bar.png",
+    MessageButton : "#Log.png",
     NameBG : "#Name Bar.png",
     ProfileFrame : "#Profile Frame.png",
     ProfileImage : "#Profile Image.png",
-    LobbySettingsButton : "#setting.png",
-    TopBg : "#TopBase.png",
+    LobbySettingsButton : "#Lobby Setting.png",
+    TopBg : "#Top Base.png",
 
     //Scoreboard
     ScoreboardBG : "#SummaryBase.png",
@@ -62,7 +62,6 @@ const ReferenceName = {
     FishPlaceholder : "#Fish Paceholder.png",
 
 
-
     //localisable
     //@TODO: move to seperate file
 
@@ -82,5 +81,8 @@ const ReferenceName = {
     CatchSuccessRate : "Hit / Caught %",
     GoToLobby : "Lobby",
     GoToNewGame : "Play",
+
+    //lobby
+    LobbyBuyButton : "Buy",
 
 };
