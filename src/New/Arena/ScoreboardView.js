@@ -36,12 +36,8 @@ const ScoreboardView = (function() {
         bg.addChild(goldenFishCaught);
 
         // data.multiCatches :
-        let count = 0;
-        if (data.multiCatches) {
-            for (let fmultiCatch in data.multiCatches) {
-                count += data.multiCatches[fmultiCatch].count * multiCatch;
-            }
-        }
+        const sumArray = array => array.reduce((a, b) => a + b, 0);
+        const count = sumArray( Object.values(data.multiCatches || {}).map(mCatch => mCatch.count) );
         let multiCatch = createGridObject(ReferenceName.MultiCatch, ReferenceName.MultiCatchIcon, count);
         multiCatch.setPosition(1082 , cc.view.getDesignResolutionSize().height - 273);
         bg.addChild(multiCatch);
