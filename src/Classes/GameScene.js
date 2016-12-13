@@ -1525,18 +1525,18 @@ var GameScene = cc.Scene.extend({
 
         switch (this.getOddsNumber()) {
             case 1:
-                this._retainedResArray.push(cc.textureCache.addImage(res.SharkPng));
+                this._retainedResArray.push(cc.textureCache.addImage(res.OldSharkPng));
                 this._retainedResArray.push(cc.textureCache.addImage(res.GSharkPng));
-                this._retainedResArray.push(cc.textureCache.addImage(res.ButterflyPng));
+                this._retainedResArray.push(cc.textureCache.addImage(res.OldButterflyPng));
                 break;
             case 2:
                 this._retainedResArray.push(cc.textureCache.addImage(res.GrouperPng));
                 this._retainedResArray.push(cc.textureCache.addImage(res.GMarlinPng));
                 this._retainedResArray.push(cc.textureCache.addImage(res.MarlinPng));
-                this._retainedResArray.push(cc.textureCache.addImage(res.ButterflyPng));//Eugene : was originally also butterfly
+                this._retainedResArray.push(cc.textureCache.addImage(res.OldButterflyPng));//Eugene : was originally also butterfly
                 break;
             case 3:
-                this._retainedResArray.push(cc.textureCache.addImage(res.SharkPng));//was orignally also shark
+                this._retainedResArray.push(cc.textureCache.addImage(res.OldSharkPng));//was orignally also shark
                 this._retainedResArray.push(cc.textureCache.addImage(res.GoldenTroutPng));
                 this._retainedResArray.push(cc.textureCache.addImage(res.GSharkPng));//was orignally also gshark
                 break;
