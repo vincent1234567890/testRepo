@@ -322,7 +322,6 @@ const GameManager = function () {
         return {position : [x,y], rotation : rot}
     }
 
-
     return {
         initialiseLogin: initialiseLogin,
         initialiseGame: initialiseGame,

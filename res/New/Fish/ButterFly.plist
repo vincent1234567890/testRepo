@@ -4,123 +4,123 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>Chelonian_00000.png</key>
+            <key>ButterFly_00000.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{200,138}</string>
+                <string>{189,89}</string>
                 <key>spriteSourceSize</key>
-                <string>{200,138}</string>
+                <string>{189,89}</string>
                 <key>textureRect</key>
-                <string>{{1,623},{200,138}}</string>
+                <string>{{1,1},{189,89}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Chelonian_00001.png</key>
+            <key>ButterFly_00001.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,0}</string>
+                <string>{-1,0}</string>
                 <key>spriteSize</key>
-                <string>{202,154}</string>
+                <string>{187,87}</string>
                 <key>spriteSourceSize</key>
-                <string>{202,154}</string>
+                <string>{189,89}</string>
                 <key>textureRect</key>
-                <string>{{1,467},{202,154}}</string>
+                <string>{{1,345},{187,87}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Chelonian_00002.png</key>
+            <key>ButterFly_00002.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,0}</string>
+                <string>{-2,-1}</string>
                 <key>spriteSize</key>
-                <string>{206,192}</string>
+                <string>{185,85}</string>
                 <key>spriteSourceSize</key>
-                <string>{206,192}</string>
+                <string>{189,89}</string>
                 <key>textureRect</key>
-                <string>{{209,435},{206,192}}</string>
+                <string>{{1,523},{185,85}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Chelonian_00003.png</key>
+            <key>ButterFly_00003.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{206,232}</string>
+                <string>{189,83}</string>
                 <key>spriteSourceSize</key>
-                <string>{206,232}</string>
+                <string>{189,89}</string>
                 <key>textureRect</key>
-                <string>{{211,1},{206,232}}</string>
+                <string>{{1,92},{189,83}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Chelonian_00004.png</key>
+            <key>ButterFly_00004.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{208,230}</string>
+                <string>{189,81}</string>
                 <key>spriteSourceSize</key>
-                <string>{208,230}</string>
+                <string>{189,89}</string>
                 <key>textureRect</key>
-                <string>{{1,1},{208,230}}</string>
+                <string>{{1,262},{189,81}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Chelonian_00005.png</key>
+            <key>ButterFly_00005.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,0}</string>
+                <string>{0,1}</string>
                 <key>spriteSize</key>
-                <string>{238,158}</string>
+                <string>{189,83}</string>
                 <key>spriteSourceSize</key>
-                <string>{238,158}</string>
+                <string>{189,89}</string>
                 <key>textureRect</key>
-                <string>{{203,629},{238,158}}</string>
+                <string>{{1,177},{189,83}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Chelonian_00006.png</key>
+            <key>ButterFly_00006.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,0}</string>
+                <string>{-2,1}</string>
                 <key>spriteSize</key>
-                <string>{206,232}</string>
+                <string>{185,85}</string>
                 <key>spriteSourceSize</key>
-                <string>{206,232}</string>
+                <string>{189,89}</string>
                 <key>textureRect</key>
-                <string>{{1,233},{206,232}}</string>
+                <string>{{1,610},{185,85}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Chelonian_00007.png</key>
+            <key>ButterFly_00007.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,0}</string>
+                <string>{-1,0}</string>
                 <key>spriteSize</key>
-                <string>{202,198}</string>
+                <string>{187,87}</string>
                 <key>spriteSourceSize</key>
-                <string>{202,198}</string>
+                <string>{189,89}</string>
                 <key>textureRect</key>
-                <string>{{209,235},{202,198}}</string>
+                <string>{{1,434},{187,87}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -134,13 +134,13 @@
             <key>premultiplyAlpha</key>
             <false/>
             <key>realTextureFileName</key>
-            <string>Turtle.png</string>
+            <string>ButterFly.png</string>
             <key>size</key>
-            <string>{442,788}</string>
+            <string>{191,696}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:ca9b07075b722a37bc8c0598b70d5dae:6baaf946058194be6f8d84baa331d4d5:4301d10ea4bd16d85b15966841a7ebce$</string>
+            <string>$TexturePacker:SmartUpdate:e4ebc4196e08ffbad85b79e2310e9a44:e2b9f2b26121ef4f40737b8dd0a4416b:d45e80a08066d7ddd5e2bfd8cf3528bd$</string>
             <key>textureFileName</key>
-            <string>Turtle.png</string>
+            <string>ButterFly.png</string>
         </dict>
     </dict>
 </plist>

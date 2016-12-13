@@ -14,6 +14,9 @@ const FishViewManager = (function(){
         cc.spriteFrameCache.addSpriteFrames(res.PorgyPlist);
         cc.spriteFrameCache.addSpriteFrames(res.StingrayPlist);
         cc.spriteFrameCache.addSpriteFrames(res.LanternPlist);
+        cc.spriteFrameCache.addSpriteFrames(res.ButterflyPlist);
+        cc.spriteFrameCache.addSpriteFrames(res.GoldSharkPlist);
+        cc.spriteFrameCache.addSpriteFrames(res.SharkPlist);
         // FishAnimationData();
         FishAnimationData.initialise();
 

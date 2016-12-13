@@ -112,7 +112,7 @@ var res = {
     BreamSprite : "res/bream.sprite",
     SmallFishActorSprite : "res/smallfishactor.sprite",
 
-    SharkPng: "res/shayu.png",
+    OldSharkPng: "res/shayu.png",
     SharkSprite : "res/shark.sprite",
 
     MarlinPng : "res/marlins.png",
@@ -127,7 +127,7 @@ var res = {
     GMarlinPng : "res/gmarlins.png",
     GMarlinSprite : "res/gmarlins.sprite",
 
-    ButterflyPng : "res/butterfly.png",
+    OldButterflyPng : "res/butterfly.png",
     ButterflySprite : "res/butterfly.sprite",
     PomfretSprite : "res/pomfret.sprite",
 
@@ -192,15 +192,22 @@ var res = {
     PorgyPNG : "res/New/Fish/NFish.png",
     PufferfishPlist : "res/New/Fish/Puffer.plist",
     PufferfishPNG : "res/New/Fish/Puffer.png",
+    LanternPlist : "res/New/Fish/Lantern.plist",
+    LanternPng : "res/New/Fish/Lantern.png",
+    SquidPNG : "res/New/Fish/Squid.png",
+    SquidPlist : "res/New/Fish/Squid.plist",
+    TurtlePlist : "res/New/Fish/Chelonian.plist",
+    TurtlePNG : "res/New/Fish/Chelonian.png",
+    SharkPlist : "res/New/Fish/Shark.plist",
+    SharkPng : "res/New/Fish/Shark.png",
+    ButterflyPlist : "res/New/Fish/ButterFly.plist",
+    ButterflyPng : "res/New/Fish/ButterFly.png",
+    GoldSharkPng : "res/New/Fish/GoldShark.png",
+    GoldSharkPlist : "res/New/Fish/GoldShark.plist",
+
 
     //testing
-    SquidPNG : "res/New/testing/Squid.png",
-    SquidPlist : "res/New/testing/Squid.plist",
-    TurtlePlist : "res/New/testing/Chelonian.plist",
-    TurtlePNG : "res/New/testing/Chelonian.png",
     BulletPNG: "res/New/testing/bullet.png",
-    LanternPlist : "res/New/testing/Lantern.plist",
-    LanternPng : "res/New/testing/Lantern.png",
 
 
     //debug

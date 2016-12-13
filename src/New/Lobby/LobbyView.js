@@ -155,7 +155,6 @@ const LobbyView = (function() {
         // parent.addChild(menu,1);
         return menu;
         // menu.setPosition(-450,110);
-
     }
 
 
@@ -175,7 +174,7 @@ const LobbyView = (function() {
         // menu.setPosition(-295,691);
         // parent.addChild(menu,1);
         return menu;
-    };
+    }
 
     function setupLobbyButtons (){
         const Buy = new cc.Sprite(ReferenceName.BuyButton);

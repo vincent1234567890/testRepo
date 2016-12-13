@@ -9,6 +9,9 @@ const FishAnimationData = function () {
     const padding = 5;
     let _hasInitialised = false;
 
+    // pivot
+    // y -> 1 => move fish right relative to hitbox
+    // x -> 1 => move fish forward relative to hitbox
     const FishRawData = {
         Ray: {
             animationInterval: [0, 0],
@@ -33,7 +36,7 @@ const FishAnimationData = function () {
                 [5, 6, 7], // shrinking
                 [],// death
             ],
-            pivot: [{x: 0.3, y: 0.55}, {x: 0.3, y: 0.55}]
+            pivot: [{x: 0.35, y: 0.5}, {x: 0.35, y: 0.5}]
         },
         Chelonian: {
             animationInterval: [0],
@@ -54,8 +57,29 @@ const FishAnimationData = function () {
             frameOrders: [
                 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
             ],
-
-        }
+            pivot: [{x: 0.55, y: 0.5}]
+        },
+        Shark:{
+            animationInterval: [0],
+            frameOrders: [
+                [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+            ],
+            pivot: [{x: 0.40, y: 0.5}]
+        },
+        GoldShark:{
+            animationInterval: [0],
+            frameOrders: [
+                [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+            ],
+            pivot: [{x: 0.40, y: 0.5}]
+        },
+        ButterFly:{
+            animationInterval: [0],
+            frameOrders: [
+                [0, 1, 2, 3, 4, 5, 6, 7,]
+            ],
+            pivot: [{x: 0.45, y: 0.5}]
+        },
     };
 
     let FishAnimationData = new Array(FishRawData.length);
