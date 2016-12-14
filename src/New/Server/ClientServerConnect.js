@@ -117,11 +117,14 @@ const ClientServerConnect = function () {
                 // This object has on() and off() functions for receiving messages, and send() for sending them.
                 //setGameIOSocket(ioSocket);
 
+                GameCtrl.debugSimulateLag = true;
                 GameCtrl.debugGhosts = false;
+                if (GameCtrl.debugSimulateLag) {
+                    socketUtils.simulateNetworkLatency(ioSocket, 100);
+                }
                 if (GameCtrl.debugGhosts) {
                     clientReceiver.ghostActors(ioSocket, 2000);
                 }
-                socketUtils.simulateNetworkLatency(ioSocket, 100);
 
                 const receiver = clientReceiver(ioSocket, GameCtrl.sharedGame()); // @TODO : move to GameManager?
 
