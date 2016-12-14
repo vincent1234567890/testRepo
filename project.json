@@ -109,6 +109,8 @@
         "src/New/ReferenceName.js",
         "src/New/Arena/BulletView.js",
         "src/New/Arena/BulletManager.js",
+        "src/New/Arena/NetManager.js",
+        "src/New/Arena/NetPrefab.js",
         "src/New/Arena/CannonView.js",
         "src/New/Arena/CannonManager.js",
         "src/New/Arena/PlayerViewStaticPrefab.js",

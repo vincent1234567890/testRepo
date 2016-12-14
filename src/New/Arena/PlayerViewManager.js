@@ -4,7 +4,6 @@
 "use strict";
 const PlayerViewManager = (function () {
     let _bulletId;
-    let _gameConfig;
 
     const PlayerViewManager = function (parent, gameConfig, index, isPlayer) {
         _bulletId = 0;
@@ -30,7 +29,7 @@ const PlayerViewManager = (function () {
     };
 
     proto.updatePlayerData = function (playerData) {
-        this._playerData = playerData;
+        // this._playerData = playerData;
         // this._playerName = playerData.playerName;
         this._playerView.updateView(playerData);
         if (typeof playerData.gunId === 'number') {

@@ -40,6 +40,7 @@ const GameManager = function () {
     let _scoreboardManager;
     let _optionsManager;
     let _bulletManager;
+    let _netManager;
 
     function initialiseParent(parent) {
         if (parent === undefined && _parentNode && _parentNode.parent) {
@@ -85,6 +86,8 @@ const GameManager = function () {
         _optionsManager = new OptionsManager(_parentNode, undefined, undefined, onLeaveArena);
 
         _bulletManager = new BulletManager(_parentNode, _fishGameArena, getRotatedView);
+
+        _netManager = new NetManager(_parentNode);
 
         GameView.goToGame();
 
@@ -139,7 +142,11 @@ const GameManager = function () {
     };
 
     const explodeBullet = function(bulletId){
-        _bulletManager.explodeBullet(bulletId);
+        const pos = _bulletManager.explodeBullet(bulletId);
+        if (pos) {
+            const rotPos = getRotatedView(pos).position;
+            _netManager.explodeAt(rotPos[0],rotPos[1]);
+        }
     };
 
     const setGameState = function (config, playerId, playerSlot) {
@@ -247,6 +254,7 @@ const GameManager = function () {
     }
 
     function goToScoreboard(stats) {
+        console.log(stats);
         if (!_scoreboardManager) {
             _scoreboardManager = new ScoreboardManager(_parentNode, stats.data.recentGames[0], exitToLobby, goToNewRoom);
         } else {
@@ -285,6 +293,7 @@ const GameManager = function () {
         _isRotated = false;
         _fishManager.destroyView();
         _bulletManager.destroyView();
+
         for (let i = 0; i < _gameConfig.maxPlayers; i++) {
             clearPlayerState(i);
         }
