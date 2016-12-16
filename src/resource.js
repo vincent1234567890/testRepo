@@ -208,6 +208,7 @@ var res = {
 
     //testing
     BulletPNG: "res/New/testing/bullet.png",
+    NetPng : "res/New/testing/Net.png",
 
 
     //debug
