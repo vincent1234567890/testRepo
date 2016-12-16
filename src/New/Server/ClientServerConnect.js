@@ -154,7 +154,7 @@ const ClientServerConnect = function () {
     }
 
     function requestStats() {
-        return _gameWSClient.callAPIOnce('game','getMyStats', {});
+        return _gameWSClient.callAPIOnce('game','getMyGameStats', {});
     }
 
     function setGameWSClient (client) {

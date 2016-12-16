@@ -70,12 +70,18 @@ const BulletManager = (function(){
     proto.explodeBullet = function (bulletId) {
         //@TODO:add fish nets
         const bullet = _bulletCache[bulletId];
+
         if (bullet){
             bullet.destroyView();
             delete _bulletCache[bulletId];
+            const bulletModel = _fishGameArena && _fishGameArena.getBullet(bulletId);
+            if (bulletModel){
+                return bulletModel.position;
+            }
         }else{
             console.warn("Could not find bulletView with id: " + bulletId + ".  Unable to show net explosion!")
         }
+        return null;
     };
 
     proto.destroyView = function () {
