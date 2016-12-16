@@ -4,9 +4,9 @@
 "use strict";
 var PlayerView = (function () {
 
-    var PlayerView = function (parent, pos) {
+    var PlayerView = function (parent, gameConfig, slot) {
         cc.spriteFrameCache.addSpriteFrames(res.GameUIPlist);
-        this._playerViewStaticPrefabInstance = new PlayerViewStaticPrefab(parent, pos);
+        this._playerViewStaticPrefabInstance = new PlayerViewStaticPrefab(parent, gameConfig, slot);
     };
 
     PlayerView.prototype.updateView = function(playerData){

@@ -10,7 +10,7 @@ const PlayerViewManager = (function () {
 
         this._cannonManager = new CannonManager(parent, gameConfig, index, isPlayer);
 
-        this._playerView = new PlayerView(parent, gameConfig.cannonPositions[index]);// not ideal
+        this._playerView = new PlayerView(parent, gameConfig, index);// not ideal
 
     };
 

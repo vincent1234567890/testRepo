@@ -93,7 +93,6 @@ const LobbyView = (function() {
         label = new cc.LabelTTF(formatWithCommas(playerData.score), fontDef);
         // label = new cc.LabelTTF("99999999999999999999999", fontDef);
         LobbyCoinsBG.addChild(label);
-        console.log(LobbyCoinsBG.getContentSize())
         label.setPosition(LobbyCoinsBG.getContentSize().width - 250,LobbyCoinsBG.getContentSize().height - 50);
         // label.setPosition(0,0);
         label.setDimensions(cc.size(240,45));
