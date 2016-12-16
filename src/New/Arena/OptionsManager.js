@@ -14,7 +14,6 @@ const OptionsManager = (function (){
         _settingsCallback = settingsCallback;
         _fishListCallBack = fishListCallback;
         _exitCallBack = exitCallback;
-        console.log("OptionsManager");
         cc.spriteFrameCache.addSpriteFrames(res.SideMenuPlist);
         cc.spriteFrameCache.addSpriteFrames(res.SettingsUIPlist);
         this.view = new OptionsSideMenuView(parent, onSettings, onFishList, onExitButton);

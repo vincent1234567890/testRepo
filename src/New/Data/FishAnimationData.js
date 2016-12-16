@@ -19,7 +19,8 @@ const FishAnimationData = function () {
                 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1],
                 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]// unused
             ],
-            pivot: [{x: 0.3, y: 0.5}, {x: 0.3, y: 0.5}]
+            pivot: [{x: 0.3, y: 0.5}, {x: 0.3, y: 0.5}],
+            animationSpeed: 0.075,
         },
         Squid: {
             animationInterval: [5, 5],
@@ -105,7 +106,11 @@ const FishAnimationData = function () {
                             return cc.spriteFrameCache.getSpriteFrame(resolveName(frame, fishType));
                         }
                     );
-                    let animation = new cc.Animation(frameArray, animationSpeed);
+                    let speed = animationSpeed;
+                    if (data.animationSpeed){
+                        speed = data.animationSpeed;
+                    }
+                    let animation = new cc.Animation(frameArray, speed);
                     return new cc.Animate(animation);
                 }
             );

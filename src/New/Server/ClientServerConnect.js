@@ -17,16 +17,16 @@ const ClientServerConnect = function () {
         if (_hasConnected) return;
         const useJoeysServerDuringDevelopment = false;
 
-        let gameAPIServerUrl = 'ws://3dfishing88888.sinonet.sg:8088';
+        let gameAPIServerUrl = 'ws://' + document.location.hostname + ':8088';
 
-        const localNames = ['localhost', '127.0.0.1', '127.0.1.1', '0.0.0.0'];
-        const doingDevelopment = (localNames.indexOf(window.location.hostname) >= 0);
-        if (doingDevelopment) {
-            gameAPIServerUrl = 'ws://127.0.0.1:8088';
-            if (useJoeysServerDuringDevelopment) {
-                gameAPIServerUrl = 'ws://192.168.1.16:8088';
-            }
-        }
+        // const localNames = ['localhost', '127.0.0.1', '127.0.1.1', '0.0.0.0'];
+        // const doingDevelopment = (localNames.indexOf(window.location.hostname) >= 0);
+        // if (doingDevelopment) {
+        //     gameAPIServerUrl = 'ws://127.0.0.1:8088';
+        //     if (useJoeysServerDuringDevelopment) {
+        //         gameAPIServerUrl = 'ws://192.168.1.16:8088';
+        //     }
+        // }
 
         // var clientServerConnect = this;
 

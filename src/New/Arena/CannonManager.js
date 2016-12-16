@@ -9,9 +9,9 @@ const CannonManager = (function () {
 
     function CannonManager(parent, gameConfig, index, isPlayer) {
         _gameConfig = gameConfig;
-        this._cannon = new CannonView(parent, gameConfig.cannonPositions[index]);
+        this._cannon = new CannonView(parent, gameConfig, index);
         if (isPlayer) {
-            this._cannon.setupCannonChangeMenu(parent, this, gameConfig.cannonPositions[index], this.decreaseCannon, this.increaseCannon);
+            this._cannon.setupCannonChangeMenu(parent, this, gameConfig, index, this.decreaseCannon, this.increaseCannon);
             this.forceSetGun(0);
         }
     }

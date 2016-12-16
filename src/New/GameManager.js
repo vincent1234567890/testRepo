@@ -201,7 +201,6 @@ const GameManager = function () {
                 onFailure();
             }
         });
-        console.log(_playerData);
     };
 
     function goToLobby() {
@@ -300,7 +299,7 @@ const GameManager = function () {
     }
 
     function getPlayerSlot(slot){
-        if (_isRotated)
+        if (_isRotated && _gameConfig.isUsingOldCannonPositions)
             return _gameConfig.maxPlayers- slot-1;
         return slot;
     }
@@ -309,17 +308,17 @@ const GameManager = function () {
         let x;
         let y;
         let rot = 0;
-        if (_isRotated){
+        if (_isRotated && _gameConfig.isUsingOldCannonPositions) {
             // console.log("isrotate");
             if (position) {
                 x = cc.view.getDesignResolutionSize().width - position[0];
                 y = cc.view.getDesignResolutionSize().height - position[1];
             }
             if (rotation) {
-                rot = - (rotation * 180 / Math.PI);
+                rot = -(rotation * 180 / Math.PI);
 
             }
-        }else {
+        } else {
             if (position) {
                 x = position[0];
                 y = position[1];
@@ -328,7 +327,7 @@ const GameManager = function () {
                 rot = 180 - rotation * 180 / Math.PI;
             }
         }
-        return {position : [x,y], rotation : rot}
+        return {position: [x, y], rotation: rot}
     }
 
     return {
