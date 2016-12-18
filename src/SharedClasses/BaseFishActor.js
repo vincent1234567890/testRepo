@@ -2352,7 +2352,7 @@ var SharkActor = BaseFishActor.extend({
     ctor:function (def_) {
         this._def = def_;
         var bRet = false;
-        bRet = this._super(res.SharkSprite, res.SharkPng);
+        bRet = this._super(res.SharkSprite, res.OldSharkPng);
         if (bRet) {
             this._fishLevel = FishLevel.eFishLevel1;
             this._fishType = FishType.bigFish;
@@ -2604,7 +2604,7 @@ var ButterflyActor = BaseFishActor.extend({
     ctor:function (def_) {
         this._def = def_;
         var bRet = false;
-        bRet = this._super(res.ButterflySprite, res.ButterflyPng);
+        bRet = this._super(res.ButterflySprite, res.OldButterflyPng);
         if (bRet) {
             this._fishLevel = FishLevel.eFishLevel7;
             this._fishType = FishType.mediumFish;
@@ -2622,7 +2622,7 @@ var PomfretActor = BaseFishActor.extend({
     ctor:function (def_) {
         this._def = def_;
         var bRet = false;
-        bRet = this._super(res.PomfretSprite, res.ButterflyPng);
+        bRet = this._super(res.PomfretSprite, res.OldButterflyPng);
         if (bRet) {
             this._fishLevel = FishLevel.eFishLevel9;
             this._fishType = FishType.smallFish;

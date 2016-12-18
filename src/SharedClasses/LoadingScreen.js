@@ -83,9 +83,6 @@ cc.LoadingScreen.preload = function(resources, cb, target){
     if(!cc.loadingScreen) {
         cc.loadingScreen = new cc.LoadingScreen();
         cc.loadingScreen.init();
-        cc.eventManager.addCustomListener(cc.Director.EVENT_PROJECTION_CHANGED, function(){
-            cc.loadingScreen._updateTransform();
-        });
     }
     cc.loadingScreen.initWithResources(resources, cb, target);
 

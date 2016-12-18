@@ -21,42 +21,42 @@ var GameBackgroundLayer = cc.Layer.extend({
     transition:function () {
         this.beChanged = false;
         cc.spriteFrameCache.addSpriteFrames(ImageName("sea.plist"));
-        this.schedule(this.updateBg);
+        // this.schedule(this.updateBg);
         this.playsea();
     },
     updateBg:function (dt) {
-        var s = this.getChildByTag(100);
-        var x = s.getPosition().x - dt * 200;
-        for (var i = 0; i < 12; i++) {
-            var sp = this.getChildByTag(100 + i);
-            sp.setPosition(cc.pAdd(sp.getPosition(), cc.p(-dt * speedValue, 0)));
-        }
-
-        var w = screenWidth - x;
-        if (w <= 0) w = 0;
-        if (w >= screenWidth) w = screenWidth;
-
-        if (this.beChanged) {
-            var bg = this.getChildByTag(991);
-            bg.setTextureRect(new cc.Rect(0, 0, bg.getTextureRect().width - dt * speedValue, screenHeight));
-            if (bg.getTextureRect().width < 0) {
-                this.beChanged = false;
-                bg.setTextureRect(new cc.Rect(0,0,0,0));
-                var sp = this.getChildByTag(990);
-                this.reorderChild(sp, -2);
-                bg.removeFromParentAndCleanup(true);
-            }
-        }
-
-        if (x <= -s.getContentSize().width / 2) {
-            for (var i = 0; i < 12; i++) {
-                this.getChildByTag(100 + i).stopAllActions();
-                this.removeChildByTag(100 + i, true);
-            }
-            cc.spriteFrameCache.removeSpriteFramesFromFile(ImageName("sea.plist"));
-
-            this.unschedule(this.updateBg);
-        }
+        // var s = this.getChildByTag(100);
+        // var x = s.getPosition().x - dt * 200;
+        // for (var i = 0; i < 12; i++) {
+        //     var sp = this.getChildByTag(100 + i);
+        //     sp.setPosition(cc.pAdd(sp.getPosition(), cc.p(-dt * speedValue, 0)));
+        // }
+        //
+        // var w = screenWidth - x;
+        // if (w <= 0) w = 0;
+        // if (w >= screenWidth) w = screenWidth;
+        //
+        // if (this.beChanged) {
+        //     var bg = this.getChildByTag(991);
+        //     bg.setTextureRect(new cc.Rect(0, 0, bg.getTextureRect().width - dt * speedValue, screenHeight));
+        //     if (bg.getTextureRect().width < 0) {
+        //         this.beChanged = false;
+        //         bg.setTextureRect(new cc.Rect(0,0,0,0));
+        //         var sp = this.getChildByTag(990);
+        //         this.reorderChild(sp, -2);
+        //         bg.removeFromParentAndCleanup(true);
+        //     }
+        // }
+        //
+        // if (x <= -s.getContentSize().width / 2) {
+        //     for (var i = 0; i < 12; i++) {
+        //         this.getChildByTag(100 + i).stopAllActions();
+        //         this.removeChildByTag(100 + i, true);
+        //     }
+        //     cc.spriteFrameCache.removeSpriteFramesFromFile(ImageName("sea.plist"));
+        //
+        //     this.unschedule(this.updateBg);
+        // }
     },
     shakeScreen:function () {
     },
@@ -287,8 +287,8 @@ var GameBackgroundLayer = cc.Layer.extend({
 
         this._bg.setPosition(VisibleRect.center());
         this.addChild(this._bg, -2, 990);
-        Multiple = AutoAdapterScreen.getInstance().getScaleMultiple();
-        this._bg.setScale(Multiple);
+        // Multiple = AutoAdapterScreen.getInstance().getScaleMultiple();
+        // this._bg.setScale(Multiple);
 
     },
     haibeiAni:function () {
@@ -462,9 +462,9 @@ var GameBackgroundLayer = cc.Layer.extend({
 
 
 GameBackgroundLayer.create = function (level) {
-    var ret = new GameBackgroundLayer();
-    if (ret.initWith(level)) {
-        return ret;
-    }
-    return null;
+    // var ret = new GameBackgroundLayer();
+    // if (ret.initWith(level)) {
+    //     return ret;
+    // }
+    return new GameBackgroundLayer();
 };

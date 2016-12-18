@@ -25,6 +25,7 @@ var BulletActor = BaseActor.extend({
     _maxShootDistance:null,
     ctor:function (def) {
         this._super(res.BulletSprite, res.SmallItemPng);
+        console.log(this._sd);
 
         this._group = GroupHeroBullet;
         this._curWeaponLevel = FishWeaponType.eWeaponLevel1;

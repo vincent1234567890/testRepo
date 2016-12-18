@@ -121,9 +121,10 @@ var GameMainSessionController = GameSessionController.extend({
     },
     update:function (dt) {
         if (GameCtrl.isOnlineGame()) {
-            if (GameCtrl.sharedGame().getArena()) {
-                GameCtrl.sharedGame().getArena().updateEverything();
-            }
+            // if (GameCtrl.sharedGame().getArena()) {
+            //     GameCtrl.sharedGame().getArena().updateEverything();
+            // }
+            GameManager.updateEverything();
 
             var gameScene = GameCtrl.sharedGame().getCurScene();
             this.updateBullets(dt, gameScene.getActors(GroupHeroBullet), []);

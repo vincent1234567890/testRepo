@@ -35,7 +35,7 @@ var StartMenuLayer = cc.Layer.extend({
         this._bg = new cc.Sprite(ImageName("ui_background_normal.jpg"));
         this.addChild(this._bg, 0);
         this._bg.setPosition(VisibleRect.center());
-        this._bg.setScale(Multiple);
+        // this._bg.setScale(Multiple);
 
         //title
         this._title = LogoWaveLayer.create();
@@ -82,7 +82,8 @@ var StartMenuLayer = cc.Layer.extend({
         this._newGameItem = new cc.MenuItemSprite(
             CSpriteLayer.getButtonBoxOffsetY("btn_start_1.png", ImageNameLang("txt_start.png"), PlistAndPlist, 1),
             CSpriteLayer.getButtonBoxOffsetY("btn_start_2.png", ImageNameLang("txt_start.png"), PlistAndPlist, 1),
-            this._menuNewGame, this);
+            // this._menuNewGame, this);
+            this._menuGoToLobby, this);
 
         // item2 = Scenes select button
         this._sceneItem = new cc.MenuItemSprite(
@@ -165,6 +166,27 @@ var StartMenuLayer = cc.Layer.extend({
         this.addChild(this._spriteLight1, 10);
         this._spriteLight1.setPosition(cc.p(125 + Math.random() * 63, VisibleRect.top().y - this._spriteLight1.getContentSize().height / 2));
     },
+
+    _menuGoToLobby : function () {
+        //legacy boilerplate
+        playEffect(BUTTON_EFFECT);
+        var startMenu = this.getChildByTag(eTag_MainMenu_StartMenu_menu);
+        startMenu.setEnabled(false);
+
+        GameManager.login(
+            function onSuccess () {
+                GameManager.goToLobby();
+            },
+            function onFailure () {
+                console.log("Login failed.");
+                // @todo Display message to the user
+
+                // Let the user try again
+                startMenu.setEnabled(true);
+            }
+        );
+    },
+
     _menuNewGame:function (sender) {
         AutoAdapterScreen.getInstance().enterFullScreen();
         var mainMenu = GameCtrl.sharedGame().getCurScene();
@@ -258,8 +280,8 @@ var StartMenuLayer = cc.Layer.extend({
 
         this._title.setPosition(cc.p(VisibleRect.rect().width / 2, VisibleRect.top().y - 140));
         this._bg.setPosition(VisibleRect.center());
-        Multiple = AutoAdapterScreen.getInstance().getScaleMultiple();
-        this._bg.setScale(Multiple);
+        // Multiple = AutoAdapterScreen.getInstance().getScaleMultiple();
+        // this._bg.setScale(Multiple);
 
         this._spriteLight1.setPosition(cc.p(125 + Math.random() * 63, VisibleRect.top().y - this._spriteLight1.getContentSize().height / 2));
 

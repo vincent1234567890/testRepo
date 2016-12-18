@@ -1,7 +1,7 @@
 /**
  * Created by eugeneseah on 25/10/16.
  */
-var ReferenceName = {
+const ReferenceName = {
     Cannon : "#Cannon.png",
     Base : "#Base.png",
     IncreaseCannon : "#plus.png",
@@ -11,4 +11,78 @@ var ReferenceName = {
     CannonPower : "#CoinDeck.png",
     CoinIcon : "#Coin icon.png",
 
-}
+    Login9Slice : "9 slice square.png",
+
+
+    //Lobby
+    LobbyBackground : "#Lobby BG 1.png",
+    ScrollArrow : "#Arrow.png",//
+    BonusPlaceHolder : "#Bonus.png",//
+    BuyButton : "#Buy.png",
+    LobbyCoinsBG : "#Coins Base.png",
+    LobbyCoinIcon : "#Coins.png",//
+    GameSelectBox : "#Game Frame.png",
+    Star : "#level Star.png",//
+    LevelBG : "#Level Bar.png",
+    MessageButton : "#Log.png",
+    NameBG : "#Name Bar.png",
+    ProfileFrame : "#Profile Frame.png",
+    ProfileImage : "#Profile Image.png",
+    LobbySettingsButton : "#Lobby Setting.png",
+    TopBg : "#Top Base.png",
+
+    //Scoreboard
+    ScoreboardBG : "#SummaryBase.png",
+    CannonIcon : "#Cannon shot.png",
+    CoinSpentIcon : "#Coin Spend.png",
+    CoinEarnedIcon : "#Coins earn.png",
+    GoldenFishIcon : "#GoldenFish.png",
+    HitRateIcon : "#Hit rate.png",
+    MultiCatchIcon : "#Multi Caught.png",
+    SkillUsedButton : "#Skill uses.png",
+    BottomScrollBarBG : "#BrownTransBGBox.png",
+    TimeSpentIcon : "#Time play.png",
+    TotalFishIcon : "#TotalFish.png",
+    InfoSlotBG : "#Yellow Bar.png",
+    PlayButton : "#GreenButton.png",
+    LobbyButton : "#RedButton.png",
+
+    //SideMenu
+    SideMenuBG : "#SideMenu.png",
+    SideMenuSettingsButton : "#Setting.png",
+    FishListButton : "#Fishes.png",
+    ExitButton : "#Exit.png",
+
+    //OptionsMenu
+    OptionsBG : "#Setting-21.png",
+    OptionBarBG : "#Setting-23.png",
+    OptionsBarNegative : "#Setting-22.png",
+    FishSliderButton : "#Setting-24.png",
+
+    FishPlaceholder : "#Fish Paceholder.png",
+
+
+    //localisable
+    //@TODO: move to seperate file
+
+    //Login
+    LoginNamePlaceHolder : "Email",
+    LoginPassPlaceHolder : "Password",
+
+    //Scoreboard
+    SessionTime : "Session Time",
+    GoldSpent : "Gold Spent",
+    GoldEarned : "Gold Earned",
+    FishCaught : "Fish Caught",
+    GoldenFishCaught : "Golden Fish Caught",
+    MultiCatch : "Multi-Catches",
+    BulletsFired : "Bullets Fired",
+    SkillsUsed : "Skills Used",
+    CatchSuccessRate : "Hit / Caught %",
+    GoToLobby : "Lobby",
+    GoToNewGame : "Play",
+
+    //lobby
+    LobbyBuyButton : "Buy",
+
+};

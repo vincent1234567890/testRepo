@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>frames</key>
+        <dict>
+            <key>Ray_00000.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-7.5,1.5}</string>
+                <key>spriteSize</key>
+                <string>{388,325}</string>
+                <key>spriteSourceSize</key>
+                <string>{421,346}</string>
+                <key>textureRect</key>
+                <string>{{391,1155},{388,325}}</string>
+                <key>textureRotated</key>
+                <false/>
+                <key>triangles</key>
+                <string>1 20 21 16 1 8 18 1 16 16 17 18 15 8 14 15 16 8 18 19 1 8 9 10 11 12 13 10 11 13 8 10 13 8 13 14 1 7 8 2 5 6 7 1 2 3 4 5 2 3 5 2 6 7 1 19 20 0 1 21</string>
+                <key>vertices</key>
+                <string>194 15 266 98 350 110 384 135 397 172 379 215 344 236 274 241 254 256 206 320 169 334 127 334 99 325 68 301 30 253 15 219 9 178 13 127 28 94 60 52 94 23 134 9</string>
+                <key>verticesUV</key>
+                <string>576 1161 648 1244 732 1256 766 1281 779 1318 761 1361 726 1382 656 1387 636 1402 588 1466 551 1480 509 1480 481 1471 450 1447 412 1399 397 1365 391 1324 395 1273 410 1240 442 1198 476 1169 516 1155</string>
+            </dict>
+            <key>Ray_00001.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-7.5,1.5}</string>
+                <key>spriteSize</key>
+                <string>{388,325}</string>
+                <key>spriteSourceSize</key>
+                <string>{421,346}</string>
+                <key>textureRect</key>
+                <string>{{378,700},{388,325}}</string>
+                <key>textureRotated</key>
+                <false/>
+                <key>triangles</key>
+                <string>1 20 21 16 1 8 18 1 16 16 17 18 15 8 14 15 16 8 18 19 1 8 9 10 11 12 13 10 11 13 8 10 13 8 13 14 1 7 8 2 5 6 7 1 2 3 4 5 2 3 5 2 6 7 1 19 20 0 1 21</string>
+                <key>vertices</key>
+                <string>194 15 266 98 350 110 384 135 397 172 379 215 344 236 274 241 254 256 206 320 169 334 127 334 99 325 68 301 30 253 15 219 9 178 13 127 28 94 60 52 94 23 134 9</string>
+                <key>verticesUV</key>
+                <string>563 706 635 789 719 801 753 826 766 863 748 906 713 927 643 932 623 947 575 1011 538 1025 496 1025 468 1016 437 992 399 944 384 910 378 869 382 818 397 785 429 743 463 714 503 700</string>
+            </dict>
+            <key>Ray_00002.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-8,-0.5}</string>
+                <key>spriteSize</key>
+                <string>{387,335}</string>
+                <key>spriteSourceSize</key>
+                <string>{421,346}</string>
+                <key>textureRect</key>
+                <string>{{1,1},{387,335}}</string>
+                <key>textureRotated</key>
+                <false/>
+                <key>triangles</key>
+                <string>0 17 18 15 16 17 0 1 15 13 14 15 1 7 13 12 13 7 8 9 11 9 10 11 7 8 11 12 7 11 6 2 4 7 1 2 6 4 5 2 3 4 2 6 7 1 13 15 0 15 17</string>
+                <key>vertices</key>
+                <string>204 22 260 96 340 110 381 127 396 173 385 210 353 234 265 246 205 319 160 341 101 334 68 308 19 238 9 185 12 121 44 69 79 27 111 12 153 6</string>
+                <key>verticesUV</key>
+                <string>196 17 252 91 332 105 373 122 388 168 377 205 345 229 257 241 197 314 152 336 93 329 60 303 11 233 1 180 4 116 36 64 71 22 103 7 145 1</string>
+            </dict>
+            <key>Ray_00003.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-8,-0.5}</string>
+                <key>spriteSize</key>
+                <string>{387,335}</string>
+                <key>spriteSourceSize</key>
+                <string>{421,346}</string>
+                <key>textureRect</key>
+                <string>{{1,338},{387,335}}</string>
+                <key>textureRotated</key>
+                <false/>
+                <key>triangles</key>
+                <string>0 17 18 15 16 17 0 1 15 13 14 15 1 7 13 12 13 7 8 9 11 9 10 11 7 8 11 12 7 11 6 2 4 7 1 2 6 4 5 2 3 4 2 6 7 1 13 15 0 15 17</string>
+                <key>vertices</key>
+                <string>204 22 260 96 340 110 381 127 396 173 385 210 353 234 265 246 205 319 160 341 101 334 68 308 19 238 9 185 12 121 44 69 79 27 111 12 153 6</string>
+                <key>verticesUV</key>
+                <string>196 354 252 428 332 442 373 459 388 505 377 542 345 566 257 578 197 651 152 673 93 666 60 640 11 570 1 517 4 453 36 401 71 359 103 344 145 338</string>
+            </dict>
+            <key>Ray_00004.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-8.5,-0.5}</string>
+                <key>spriteSize</key>
+                <string>{376,345}</string>
+                <key>spriteSourceSize</key>
+                <string>{421,346}</string>
+                <key>textureRect</key>
+                <string>{{1,674},{376,345}}</string>
+                <key>textureRotated</key>
+                <false/>
+                <key>triangles</key>
+                <string>16 17 18 1 16 18 1 2 15 2 7 14 8 9 13 11 12 13 10 11 13 9 10 13 7 8 13 7 13 14 7 2 3 4 5 6 3 4 6 7 3 6 2 14 15 1 15 16 0 1 18</string>
+                <key>vertices</key>
+                <string>182 10 215 33 263 93 339 117 371 135 390 183 355 235 267 248 212 317 175 340 132 346 92 338 62 316 43 276 21 211 14 145 57 38 90 5 145 1</string>
+                <key>verticesUV</key>
+                <string>169 683 202 706 250 766 326 790 358 808 377 856 342 908 254 921 199 990 162 1013 119 1019 79 1011 49 989 30 949 8 884 1 818 44 711 77 678 132 674</string>
+            </dict>
+            <key>Ray_00005.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-8.5,-0.5}</string>
+                <key>spriteSize</key>
+                <string>{376,345}</string>
+                <key>spriteSourceSize</key>
+                <string>{421,346}</string>
+                <key>textureRect</key>
+                <string>{{187,918},{376,345}}</string>
+                <key>textureRotated</key>
+                <false/>
+                <key>triangles</key>
+                <string>16 17 18 1 16 18 1 2 15 2 7 14 8 9 13 11 12 13 10 11 13 9 10 13 7 8 13 7 13 14 7 2 3 4 5 6 3 4 6 7 3 6 2 14 15 1 15 16 0 1 18</string>
+                <key>vertices</key>
+                <string>182 10 215 33 263 93 339 117 371 135 390 183 355 235 267 248 212 317 175 340 132 346 92 338 62 316 43 276 21 211 14 145 57 38 90 5 145 1</string>
+                <key>verticesUV</key>
+                <string>355 927 388 950 436 1010 512 1034 544 1052 563 1100 528 1152 440 1165 385 1234 348 1257 305 1263 265 1255 235 1233 216 1193 194 1128 187 1062 230 955 263 922 318 918</string>
+            </dict>
+            <key>Ray_00006.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-7.5,0}</string>
+                <key>spriteSize</key>
+                <string>{370,346}</string>
+                <key>spriteSourceSize</key>
+                <string>{421,346}</string>
+                <key>textureRect</key>
+                <string>{{388,349},{370,346}}</string>
+                <key>textureRotated</key>
+                <false/>
+                <key>triangles</key>
+                <string>13 14 15 12 13 15 7 8 12 11 12 9 11 9 10 8 9 12 1 7 12 6 2 3 7 1 2 3 4 5 6 3 5 2 6 7 0 1 12 0 12 15</string>
+                <key>vertices</key>
+                <string>221 34 248 82 287 109 358 124 388 167 372 219 332 244 264 249 210 323 167 346 71 346 37 312 18 175 35 32 70 0 170 0</string>
+                <key>verticesUV</key>
+                <string>591 383 618 431 657 458 728 473 758 516 742 568 702 593 634 598 580 672 537 695 441 695 407 661 388 524 405 381 440 349 540 349</string>
+            </dict>
+            <key>Ray_00007.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-7.5,0}</string>
+                <key>spriteSize</key>
+                <string>{370,346}</string>
+                <key>spriteSourceSize</key>
+                <string>{421,346}</string>
+                <key>textureRect</key>
+                <string>{{390,1},{370,346}}</string>
+                <key>textureRotated</key>
+                <false/>
+                <key>triangles</key>
+                <string>13 14 15 12 13 15 7 8 12 11 12 9 11 9 10 8 9 12 1 7 12 6 2 3 7 1 2 3 4 5 6 3 5 2 6 7 0 1 12 0 12 15</string>
+                <key>vertices</key>
+                <string>221 34 248 82 287 109 358 124 388 167 372 219 332 244 264 249 210 323 167 346 71 346 37 312 18 175 35 32 70 0 170 0</string>
+                <key>verticesUV</key>
+                <string>593 35 620 83 659 110 730 125 760 168 744 220 704 245 636 250 582 324 539 347 443 347 409 313 390 176 407 33 442 1 542 1</string>
+            </dict>
+            <key>Ray_00008.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-8,0}</string>
+                <key>spriteSize</key>
+                <string>{347,346}</string>
+                <key>spriteSourceSize</key>
+                <string>{421,346}</string>
+                <key>textureRect</key>
+                <string>{{620,1395},{347,346}}</string>
+                <key>textureRotated</key>
+                <false/>
+                <key>triangles</key>
+                <string>16 18 19 16 17 18 15 16 19 9 10 15 14 15 10 14 12 13 14 11 12 14 10 11 8 9 15 1 7 8 1 8 15 2 5 6 7 1 2 3 4 5 2 3 5 2 6 7 0 1 15 0 15 19</string>
+                <key>vertices</key>
+                <string>225 35 269 97 344 130 364 150 376 185 354 226 316 244 274 247 261 259 226 312 195 336 174 346 62 346 41 325 30 298 33 154 29 55 37 23 62 0 184 0</string>
+                <key>verticesUV</key>
+                <string>816 1430 860 1492 935 1525 955 1545 967 1580 945 1621 907 1639 865 1642 852 1654 817 1707 786 1731 765 1741 653 1741 632 1720 621 1693 624 1549 620 1450 628 1418 653 1395 775 1395</string>
+            </dict>
+            <key>Ray_00009.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-8,0}</string>
+                <key>spriteSize</key>
+                <string>{347,346}</string>
+                <key>spriteSourceSize</key>
+                <string>{421,346}</string>
+                <key>textureRect</key>
+                <string>{{708,914},{347,346}}</string>
+                <key>textureRotated</key>
+                <false/>
+                <key>triangles</key>
+                <string>16 18 19 16 17 18 15 16 19 9 10 15 14 15 10 14 12 13 14 11 12 14 10 11 8 9 15 1 7 8 1 8 15 2 5 6 7 1 2 3 4 5 2 3 5 2 6 7 0 1 15 0 15 19</string>
+                <key>vertices</key>
+                <string>225 35 269 97 344 130 364 150 376 185 354 226 316 244 274 247 261 259 226 312 195 336 174 346 62 346 41 325 30 298 33 154 29 55 37 23 62 0 184 0</string>
+                <key>verticesUV</key>
+                <string>904 949 948 1011 1023 1044 1043 1064 1055 1099 1033 1140 995 1158 953 1161 940 1173 905 1226 874 1250 853 1260 741 1260 720 1239 709 1212 712 1068 708 969 716 937 741 914 863 914</string>
+            </dict>
+            <key>Ray_00010.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-7.5,0}</string>
+                <key>spriteSize</key>
+                <string>{354,346}</string>
+                <key>spriteSourceSize</key>
+                <string>{421,346}</string>
+                <key>textureRect</key>
+                <string>{{389,1642},{354,346}}</string>
+                <key>textureRotated</key>
+                <false/>
+                <key>triangles</key>
+                <string>16 19 20 16 18 19 16 17 18 2 16 20 14 3 8 9 10 14 13 14 10 13 11 12 13 10 11 8 9 14 14 15 3 4 6 7 8 3 4 4 5 6 4 7 8 2 3 15 2 15 16 1 2 20 0 1 20</string>
+                <key>vertices</key>
+                <string>165 2 197 15 229 44 257 88 358 129 380 171 368 207 341 239 271 247 208 326 159 346 111 346 80 336 51 307 26 201 27 143 49 43 70 11 106 1 118 0 150 0</string>
+                <key>verticesUV</key>
+                <string>528 1644 560 1657 592 1686 620 1730 721 1771 743 1813 731 1849 704 1881 634 1889 571 1968 522 1988 474 1988 443 1978 414 1949 389 1843 390 1785 412 1685 433 1653 469 1643 481 1642 513 1642</string>
+            </dict>
+            <key>Ray_00011.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-7.5,0}</string>
+                <key>spriteSize</key>
+                <string>{354,346}</string>
+                <key>spriteSourceSize</key>
+                <string>{421,346}</string>
+                <key>textureRect</key>
+                <string>{{1,1632},{354,346}}</string>
+                <key>textureRotated</key>
+                <false/>
+                <key>triangles</key>
+                <string>16 19 20 16 18 19 16 17 18 2 16 20 14 3 8 9 10 14 13 14 10 13 11 12 13 10 11 8 9 14 14 15 3 4 6 7 8 3 4 4 5 6 4 7 8 2 3 15 2 15 16 1 2 20 0 1 20</string>
+                <key>vertices</key>
+                <string>165 2 197 15 229 44 257 88 358 129 380 171 368 207 341 239 271 247 208 326 159 346 111 346 80 336 51 307 26 201 27 143 49 43 70 11 106 1 118 0 150 0</string>
+                <key>verticesUV</key>
+                <string>140 1634 172 1647 204 1676 232 1720 333 1761 355 1803 343 1839 316 1871 246 1879 183 1958 134 1978 86 1978 55 1968 26 1939 1 1833 2 1775 24 1675 45 1643 81 1633 93 1632 125 1632</string>
+            </dict>
+            <key>Ray_00012.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-9.5,-2}</string>
+                <key>spriteSize</key>
+                <string>{356,336}</string>
+                <key>spriteSourceSize</key>
+                <string>{421,346}</string>
+                <key>textureRect</key>
+                <string>{{710,530},{356,336}}</string>
+                <key>textureRotated</key>
+                <false/>
+                <key>triangles</key>
+                <string>0 18 19 16 17 18 0 16 18 0 15 16 1 7 14 10 8 9 11 12 13 11 13 8 11 8 10 7 8 13 7 13 14 6 2 3 7 1 2 3 4 5 6 3 5 2 6 7 15 0 1 15 1 14</string>
+                <key>vertices</key>
+                <string>225 38 271 96 341 120 362 141 379 175 358 217 333 234 274 249 223 311 186 337 149 343 115 338 77 320 41 253 28 210 23 136 65 46 90 20 120 7 186 7</string>
+                <key>verticesUV</key>
+                <string>912 561 958 619 1028 643 1049 664 1066 698 1045 740 1020 757 961 772 910 834 873 860 836 866 802 861 764 843 728 776 715 733 710 659 752 569 777 543 807 530 873 530</string>
+            </dict>
+            <key>Ray_00013.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-9.5,-2}</string>
+                <key>spriteSize</key>
+                <string>{356,336}</string>
+                <key>spriteSourceSize</key>
+                <string>{421,346}</string>
+                <key>textureRect</key>
+                <string>{{698,190},{356,336}}</string>
+                <key>textureRotated</key>
+                <false/>
+                <key>triangles</key>
+                <string>0 18 19 16 17 18 0 16 18 0 15 16 1 7 14 10 8 9 11 12 13 11 13 8 11 8 10 7 8 13 7 13 14 6 2 3 7 1 2 3 4 5 6 3 5 2 6 7 15 0 1 15 1 14</string>
+                <key>vertices</key>
+                <string>225 38 271 96 341 120 362 141 379 175 358 217 333 234 274 249 223 311 186 337 149 343 115 338 77 320 41 253 28 210 23 136 65 46 90 20 120 7 186 7</string>
+                <key>verticesUV</key>
+                <string>900 221 946 279 1016 303 1037 324 1054 358 1033 400 1008 417 949 432 898 494 861 520 824 526 790 521 752 503 716 436 703 393 698 319 740 229 765 203 795 190 861 190</string>
+            </dict>
+            <key>Ray_00014.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-9,0}</string>
+                <key>spriteSize</key>
+                <string>{387,328}</string>
+                <key>spriteSourceSize</key>
+                <string>{421,346}</string>
+                <key>textureRect</key>
+                <string>{{1,1174},{387,328}}</string>
+                <key>textureRotated</key>
+                <false/>
+                <key>triangles</key>
+                <string>0 20 21 0 2 19 2 18 19 2 17 18 15 16 17 2 10 15 11 12 14 12 13 14 15 10 11 15 11 14 3 9 10 5 7 8 9 3 4 5 6 7 5 8 9 9 4 5 2 3 10 2 15 17 0 1 2 0 19 20</string>
+                <key>vertices</key>
+                <string>165 10 207 25 251 86 273 101 348 110 374 128 395 154 395 187 372 221 343 235 267 245 203 320 165 337 102 334 69 306 33 258 8 202 13 133 25 97 68 40 97 19 125 9</string>
+                <key>verticesUV</key>
+                <string>158 1175 200 1190 244 1251 266 1266 341 1275 367 1293 388 1319 388 1352 365 1386 336 1400 260 1410 196 1485 158 1502 95 1499 62 1471 26 1423 1 1367 6 1298 18 1262 61 1205 90 1184 118 1174</string>
+            </dict>
+            <key>Ray_00015.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-9,0}</string>
+                <key>spriteSize</key>
+                <string>{387,328}</string>
+                <key>spriteSourceSize</key>
+                <string>{421,346}</string>
+                <key>textureRect</key>
+                <string>{{178,1408},{387,328}}</string>
+                <key>textureRotated</key>
+                <false/>
+                <key>triangles</key>
+                <string>0 20 21 0 2 19 2 18 19 2 17 18 15 16 17 2 10 15 11 12 14 12 13 14 15 10 11 15 11 14 3 9 10 5 7 8 9 3 4 5 6 7 5 8 9 9 4 5 2 3 10 2 15 17 0 1 2 0 19 20</string>
+                <key>vertices</key>
+                <string>165 10 207 25 251 86 273 101 348 110 374 128 395 154 395 187 372 221 343 235 267 245 203 320 165 337 102 334 69 306 33 258 8 202 13 133 25 97 68 40 97 19 125 9</string>
+                <key>verticesUV</key>
+                <string>335 1409 377 1424 421 1485 443 1500 518 1509 544 1527 565 1553 565 1586 542 1620 513 1634 437 1644 373 1719 335 1736 272 1733 239 1705 203 1657 178 1601 183 1532 195 1496 238 1439 267 1418 295 1408</string>
+            </dict>
+        </dict>
+        <key>metadata</key>
+        <dict>
+            <key>format</key>
+            <integer>3</integer>
+            <key>pixelFormat</key>
+            <string>RGBA8888</string>
+            <key>premultiplyAlpha</key>
+            <false/>
+            <key>realTextureFileName</key>
+            <string>stingray_test.png</string>
+            <key>size</key>
+            <string>{1067,1989}</string>
+            <key>smartupdate</key>
+            <string>$TexturePacker:SmartUpdate:beda0ba4b16933f9b93049fd2b6a6442:e7efbb603136cb671887b7bc8a9c6da3:e3f40c1f8eb96e162796de7aea674334$</string>
+            <key>textureFileName</key>
+            <string>stingray_test.png</string>
+        </dict>
+    </dict>
+</plist>

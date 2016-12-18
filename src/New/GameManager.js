@@ -4,40 +4,106 @@
 
 /*
  Current structure : GameManager    -> GameView
-                                    -> x PlayerViewManager  -> CannonManager -> CannonView
-                                                            -> PlayerView -> PlayerViewStaticPrefab
+ -> x PlayerViewManager  -> CannonManager -> CannonView
+ -> PlayerView -> PlayerViewStaticPrefab
  */
 "use strict";
 
-var GameManager = function(){
-    var _gameConfig;
+const GameManager = function () {
+    let debug = false;
 
-    // var fishGameArena;
-    var _fishGameArena;
+    let _gameConfig;
+    let _fishGameArena;
+    let _playerData;
 
-    var _touchLayer;
+    let _touchLayer; // should go to view
+
+
+    //convenience
+    let _loggedIn = false;
 
     //player
-    var _playerSlot;
-    var _playerId;
-    var _lastShotTime;
+    let _playerSlot;
+    let _playerId;
+    let _lastShotTime;
+    let _isRotated = false;
 
     //parent node for UI parenting
-    var _parentNode;
+    let _parentNode;
 
-    var _playerViews = [];
+    //Managers
+    let _loginManager;
+    let _playerViews = [];
+    let _fishManager;
+    // let _playerPositions = [];
+    let _lobbyManager;
+    let _scoreboardManager;
+    let _optionsManager;
+    let _bulletManager;
+    let _netManager;
 
-    //to be refactored in to player object?
-    var _playerPositions = [];
-
-    var initialiseTouch = function () {
-        if(!_touchLayer) {
-            _touchLayer = new TouchLayerRefactored(touchAt);
-            _parentNode.addChild(_touchLayer, -1);
+    function initialiseParent(parent) {
+        if (parent === undefined && _parentNode && _parentNode.parent) {
+            parent = _parentNode.parent;
         }
+        if (_parentNode && _parentNode.parent) {
+            _parentNode.parent.removeChild(_parentNode);
+        }
+        _parentNode = new cc.Node();
+        parent.addChild(_parentNode, 99999);
+    }
+
+    function initialiseLogin(parent) {
+        initialiseParent(parent);
+        _loginManager = new LoginManager(_parentNode);
+    }
+
+    const initialiseGame = function (parent, fishGameArena) {
+        initialiseParent(parent);
+
+        GameView.initialise(_parentNode);
+
+        _fishGameArena = fishGameArena;
+        _lastShotTime = -Infinity;
+
+        if (_gameConfig.cannonPositions[_playerSlot][1] > cc.view.getDesignResolutionSize().height / 2){
+            console.log(_gameConfig.cannonPositions[_playerSlot]);
+            console.log("player" + _playerSlot);
+            // cc._canvas.rotate(180);
+            _isRotated = true;
+        }
+        for (let i = 0; i < _gameConfig.maxPlayers; i++) {
+            const index = getPlayerSlot(i);
+            // console.log(index);
+            _playerViews[index] = new PlayerViewManager(_parentNode, _gameConfig, index, i == _playerSlot);
+
+            const direction = cc.pNormalize(cc.pSub({x: cc.winSize.width / 2, y: cc.winSize.height / 2}, new cc.p(_gameConfig.cannonPositions[index][0], _gameConfig.cannonPositions[index][1])));
+            const rot = Math.atan2(direction.x, direction.y);
+            _playerViews[index].shootTo(rot * 180 / Math.PI);
+        }
+        _fishManager = new FishViewManager(_parentNode, _fishGameArena, getRotatedView);
+
+        _optionsManager = new OptionsManager(_parentNode, undefined, undefined, onLeaveArena);
+
+        _bulletManager = new BulletManager(_parentNode, _fishGameArena, getRotatedView);
+
+        _netManager = new NetManager(_parentNode);
+
+        GameView.goToGame();
+
+        initialiseTouch();
     };
 
-    var touchAt = function (pos) {
+    const initialiseTouch = function () {
+        if(_touchLayer){
+            _parentNode.removeChild(_touchLayer);
+        }
+
+        _touchLayer = new TouchLayerRefactored(touchAt);
+        _parentNode.addChild(_touchLayer, -1);
+    };
+
+    const touchAt = function (pos) {
 
         const lastShootTime = this._lastShotTime || -Infinity;
         const now = _fishGameArena.getGameTime();
@@ -49,61 +115,246 @@ var GameManager = function(){
 
         this._lastShotTime = now;
 
-        var rot = _playerViews[_playerSlot].turnTo(pos);
+        let slot = getPlayerSlot(_playerSlot);
+
+        const direction = cc.pNormalize(cc.pSub(pos, new cc.p(_gameConfig.cannonPositions[slot][0], _gameConfig.cannonPositions[slot][1])));
+        const rot = Math.atan2(direction.x, direction.y);
+        _playerViews[slot].shootTo(rot * 180 / Math.PI);
+
+        let info = getRotatedView(undefined,rot);
+
         const bulletId = _playerId + ':' + getPlayerBulletId();
 
-        GameCtrl.informServer.bulletFired(bulletId, rot);
+        ClientServerConnect.getServerInformer().bulletFired(bulletId, (info.rotation - 90) / 180 * Math.PI);
     };
 
-    var getPlayerBulletId = function(){
-        return _playerViews[_playerSlot].getNextBulletId();
+    const getPlayerBulletId = function () {
+        return _playerViews[getPlayerSlot(_playerSlot)].getNextBulletId();
     };
 
-    var initialise = function (parent, fishGameArena) {
-        _parentNode = new cc.Node();
-        parent.addChild(_parentNode,99999);
-        console.log(fishGameArena);
-        _fishGameArena = fishGameArena;
-        _lastShotTime = -Infinity;
+    const shootTo = function (playerId, angle, bulletId) {
 
-        GameView.initialise(_parentNode);
+        let arenaPlayer = _fishGameArena.getPlayer(playerId);
+        let slot = getPlayerSlot(arenaPlayer.slot);
+        let info = getRotatedView(undefined, angle );
+        _playerViews[slot].shootTo(info.rotation - 90);
+        return _bulletManager.createBullet(bulletId);
+    };
 
-        for (var i = 0; i < _gameConfig.maxPlayers ; i++){
-            _playerViews[i] = new PlayerViewManager(_parentNode, _gameConfig.cannonPositions[i], i == _playerSlot);
+    const explodeBullet = function(bulletId){
+        const pos = _bulletManager.explodeBullet(bulletId);
+        if (pos) {
+            const rotPos = getRotatedView(pos).position;
+            _netManager.explodeAt(rotPos[0],rotPos[1]);
         }
-
-        initialiseTouch();
     };
 
-    var shootTo = function(playerId,pos){
-        for (var p of _playerPositions){
-            if(p && p.id == playerId){
-                return _playerViews[p.slot].shootTo(pos);
-            }
-        };
-    };
-
-    var setGameState = function (config, playerId, playerSlot) {
-        console.log(JSON.stringify(config));
+    const setGameState = function (config, playerId, playerSlot) {
+        // console.log(JSON.stringify(config));
         _gameConfig = config;
         _playerId = playerId;
         _playerSlot = playerSlot;
     };
 
-    var updateMultiplayerState = function(playerData){
-        console.log(playerData);
-        //{id: playerId, name: playerName, slot: playerSlot}
-        _playerPositions[playerData.slot] = playerData;
-        _playerViews[playerData.slot].updatePlayerData(playerData);
+    const updateMultiplayerState = function (playerData) {
+        // console.log("SLOT: "+playerData.slot);
+        const slot = getPlayerSlot(playerData.slot);
+
+        _playerViews[slot].updatePlayerData(playerData);
+    };
+
+    const clearPlayerState = function (slot) {
+        _playerViews[slot].clearPlayerData();
+    };
+
+    const createFish = function (fishId, fishType) {
+        return _fishManager.addFish(fishId, fishType);
+    };
+
+    const removeFish = function (fishId) {
+        return _fishManager.removeFish(fishId);
+    };
+
+    const updateEverything = function () {
+        _fishGameArena.updateEverything();
+        _fishManager.update();
+        _bulletManager.update();
+    };
+
+    const getGameConfig = function () {
+        return _gameConfig;
+    };
+
+    const goToLogin = function () {
+        if (!_loggedIn) {
+            _loginManager.goToLogin();
+        }
+    };
+
+    const login = function (onSuccess, onFailure) {
+        let loginInfo = _loginManager.getLoginInfo();
+        ClientServerConnect.login(loginInfo.name, loginInfo.pass, function (data) {
+            if (data) {
+                _playerData = data;
+                onSuccess();
+            } else {
+                onFailure();
+            }
+        });
+    };
+
+    function goToLobby() {
+        initialiseParent();
+
+        _loggedIn = true;
+
+        // Login was successful, so save the user's details
+        // _loginManager.saveLoginInfo();
+        PlayerPreferences.setLoginDetails(_loginManager.getLoginInfo());
+        _loginManager.destroyView();
+
+        createLobby();
+    }
+
+    function onLeaveArena() {
+        //ClientServerConnect.getServerInformer().leaveGame();
+        Promise.resolve().then(
+            () => ClientServerConnect.leaveGame()
+        ).then(
+            () => showPostGameStats()
+        ).catch(console.error);
+        // ClientServerConnect.getServerInformer().requestStatsForThisGame();
+        // ClientServerConnect.resetArena(); <---?
+    }
+
+    function createLobby() {
+        if (!_lobbyManager)
+            _lobbyManager = new LobbyManager(_parentNode, _playerData);
+        else {
+            _lobbyManager.doView(_parentNode, _playerData);
+        }
+    }
+
+    function exitToLobby() {
+        destroyArena();
+        _parentNode.parent.backToMenu();
+
+
+        createLobby();
+    }
+
+    function showPostGameStats () {
+        ClientServerConnect.requestStats().then(
+            stats => {
+                // console.log("stats:" + JSON.stringify(stats));
+                goToScoreboard(stats);
+            }
+        ).catch(console.error);
+    }
+
+    function goToScoreboard(stats) {
+        console.log(stats);
+        if (!_scoreboardManager) {
+            _scoreboardManager = new ScoreboardManager(_parentNode, stats.data.recentGames[0], exitToLobby, goToNewRoom);
+        } else {
+            _scoreboardManager.doView(_parentNode, stats.data.recentGames[0]);
+        }
+        // _parentNode.addChild(_scoreboardManager);
+    }
+
+    function goToNewRoom() {
+        resetArena();
+        ClientServerConnect.joinGame(0).catch(console.error);
     }
 
 
-    var GameManager = {
-        initialise : initialise,
-        setGameState : setGameState,
-        updateMultiplayerState : updateMultiplayerState,
-        shootTo : shootTo, //sliohtly unsatisfactory
+    function development(parent) {
+        // console.log("GameManager:development");
+        initialiseParent(parent);
+        // goToScoreboard()
+        // _optionsManager = new OptionsManager(_parentNode);
+        createLobby();
+    }
+
+    function destroyArena(){
+        resetArena();
+
+        for (let i = 0; i < _gameConfig.maxPlayers; i++) {
+            _playerViews[i].destroyView();
+            delete _playerViews[i];
+        }
+        _fishGameArena = null;
+        _lastShotTime = -Infinity;
+        _optionsManager.destroyView();
+    }
+
+    function resetArena(){
+        _isRotated = false;
+        _fishManager.destroyView();
+        _bulletManager.destroyView();
+
+        for (let i = 0; i < _gameConfig.maxPlayers; i++) {
+            clearPlayerState(i);
+        }
+    }
+
+    function getPlayerSlot(slot){
+        if (_isRotated && _gameConfig.isUsingOldCannonPositions)
+            return _gameConfig.maxPlayers- slot-1;
+        return slot;
+    }
+
+    function getRotatedView(position, rotation){ //position in array, rotation in radians, output in degrees
+        let x;
+        let y;
+        let rot = 0;
+        if (_isRotated && _gameConfig.isUsingOldCannonPositions) {
+            // console.log("isrotate");
+            if (position) {
+                x = cc.view.getDesignResolutionSize().width - position[0];
+                y = cc.view.getDesignResolutionSize().height - position[1];
+            }
+            if (rotation) {
+                rot = -(rotation * 180 / Math.PI);
+
+            }
+        } else {
+            if (position) {
+                x = position[0];
+                y = position[1];
+            }
+            if (rotation) {
+                rot = 180 - rotation * 180 / Math.PI;
+            }
+        }
+        return {position: [x, y], rotation: rot}
+    }
+
+    return {
+        initialiseLogin: initialiseLogin,
+        initialiseGame: initialiseGame,
+        setGameState: setGameState,
+        updateMultiplayerState: updateMultiplayerState,
+        clearPlayerState: clearPlayerState,
+        shootTo: shootTo,
+        explodeBullet: explodeBullet,
+        createFish: createFish,
+        removeFish: removeFish,
+        updateEverything: updateEverything,
+        showPostGameStats: showPostGameStats,
+        goToLogin: goToLogin,
+        login: login,
+        goToLobby: goToLobby,
+
+        //debug
+        debug: debug,
+
+        //hack-ish for debug, to be removed
+        getGameConfig: getGameConfig,
+
+        //for development positioning
+        development: development,
     };
 
-    return GameManager;
+    // return GameManager;
 }();

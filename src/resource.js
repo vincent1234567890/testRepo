@@ -112,7 +112,7 @@ var res = {
     BreamSprite : "res/bream.sprite",
     SmallFishActorSprite : "res/smallfishactor.sprite",
 
-    SharkPng: "res/shayu.png",
+    OldSharkPng: "res/shayu.png",
     SharkSprite : "res/shark.sprite",
 
     MarlinPng : "res/marlins.png",
@@ -121,15 +121,13 @@ var res = {
     GrouperPng : "res/grouper.png",
     GrouperSprite : "res/grouper.sprite",
 
-
-    SharkPng : "res/shayu.png",
     GSharkPng : "res/gshayu.png",
     GSharkSprite : "res/gshayu.sprite",
 
     GMarlinPng : "res/gmarlins.png",
     GMarlinSprite : "res/gmarlins.sprite",
 
-    ButterflyPng : "res/butterfly.png",
+    OldButterflyPng : "res/butterfly.png",
     ButterflySprite : "res/butterfly.sprite",
     PomfretSprite : "res/pomfret.sprite",
 
@@ -171,9 +169,50 @@ var res = {
     // MainUITitle : "res/main_ui_title.png",
 
     //New
-    GameUIPng : "res/New/gameui.png",
-    GameUIPlist : "res/New/gameui.plist",
+    GameUIPng : "res/New/Game UI.png",
+    GameUIPlist : "res/New/Game UI.plist",
+    LobbyUIPlist : "res/New/Lobby/Lobby.plist",
+    LobbyUIPng : "res/New/Lobby/Lobby.png",
+    SettingsUIPlist : "res/New/Options/settings.plist",
+    SettingsUIPng : "res/New/Options/settings.png",
+    ScoreboardPlist : "res/New/Scoreboard/summary.plist",
+    ScoreboardPng : "res/New/Scoreboard/summary.png",
+    SideMenuPlist : "res/New/Options/Options Menu.plist",
+    SideMenuPng : "res/New/Options/Options Menu.png",
+    LoginUIPlist : "res/New/Lobby/Login.plist",
+    LoginUIPng : "res/New/Lobby/Login.png",
 
+    //GameBackgrounds
+    GameBackground1 : "res/New/Game BG/Game BG 1.png",
+
+    //Fish
+    StingrayPNG : "res/New/Fish/Ray.png",
+    StingrayPlist : "res/New/Fish/Ray.plist",
+    PorgyPlist : "res/New/Fish/NFish.plist",
+    PorgyPNG : "res/New/Fish/NFish.png",
+    PufferfishPlist : "res/New/Fish/Puffer.plist",
+    PufferfishPNG : "res/New/Fish/Puffer.png",
+    LanternPlist : "res/New/Fish/Lantern.plist",
+    LanternPng : "res/New/Fish/Lantern.png",
+    SquidPNG : "res/New/Fish/Squid.png",
+    SquidPlist : "res/New/Fish/Squid.plist",
+    TurtlePlist : "res/New/Fish/Chelonian.plist",
+    TurtlePNG : "res/New/Fish/Chelonian.png",
+    SharkPlist : "res/New/Fish/Shark.plist",
+    SharkPng : "res/New/Fish/Shark.png",
+    ButterflyPlist : "res/New/Fish/ButterFly.plist",
+    ButterflyPng : "res/New/Fish/ButterFly.png",
+    GoldSharkPng : "res/New/Fish/GoldShark.png",
+    GoldSharkPlist : "res/New/Fish/GoldShark.plist",
+
+
+    //testing
+    BulletPNG: "res/New/testing/bullet.png",
+    NetPng : "res/New/testing/Net.png",
+
+
+    //debug
+    DebugCircle : "res/New/testing/circle.png",
 
 };
 
@@ -185,6 +224,7 @@ var g_resources = [
     "res/qipao4.plist",
 
 ];
+
 for (var i in res) {
     g_resources.push(res[i]);
 }

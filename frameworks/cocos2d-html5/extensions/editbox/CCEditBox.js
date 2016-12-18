@@ -320,10 +320,21 @@ cc.EditBox = cc.ControlButton.extend({
         tmpDOMSprite.dom.style.width = (size.width - 6) + "px";
         tmpDOMSprite.dom.style.height = (size.height - 6) + "px";
 
-        //this._domInputSprite.dom.style.borderWidth = "1px";
-        //this._domInputSprite.dom.style.borderStyle = "solid";
-        //this._domInputSprite.dom.style.borderRadius = "8px";
+        // this._domInputSprite.dom.style.borderWidth = "1px";
+        // this._domInputSprite.dom.style.borderStyle = "solid";
+        // this._domInputSprite.dom.style.borderRadius = "8px";
         tmpDOMSprite.canvas.remove();
+
+        // Joey's styling fixes
+        // tmpEdTxt.style.height = '100%';
+        // tmpEdTxt.style.width = '90%';
+        // tmpEdTxt.style.padding = '0% 5%';
+        // var deltax = -size.width / 2;
+        // var deltay = +size.height / 4;
+        // setTimeout(() => {
+        //     var extraTransform = "translate(" + deltax + "px, " + deltay + "px)";
+        //     tmpEdTxt.parentNode.parentNode.style.transform = tmpEdTxt.parentNode.parentNode.style.transform + " " + extraTransform;
+        // }, 1);
 
         if (this.initWithSizeAndBackgroundSprite(size, normal9SpriteBg)) {
             if (press9SpriteBg)
