@@ -2,8 +2,10 @@
  * Created by eugeneseah on 15/11/16.
  */
 const LobbyView = (function() {
+    let isGameSelected;
 
     const LobbyView = function ( parent, playerData) {
+        // this.gameSelected = false;
 
         this._parent = parent;
 
@@ -228,9 +230,18 @@ const LobbyView = (function() {
         console.log("settingsButtonPressed");
     }
 
-    function gameSelected(){
-        console.log("gameSelected");
-        ClientServerConnect.joinGame(0).catch(console.error);
+    function gameSelected(menubutton){
+        console.log("gameSelected", this, arguments);
+        // if (isGameSelected){
+        //     return;
+        // }
+        menubutton.setEnabled(false);
+        // isGameSelected = true;
+        // if (!isGameSelected) {
+        //     isGameSelected = true;
+            ClientServerConnect.joinGame(0).catch(console.error);
+        // }
+
     }
 
     function formatWithCommas(x) {
