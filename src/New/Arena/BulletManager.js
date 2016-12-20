@@ -18,7 +18,8 @@ const BulletManager = (function(){
     const proto = BulletManager.prototype;
 
     proto.createBullet = function (bulletId) {
-        _bulletCache[bulletId] = new BulletView(_parent);
+        // cc.spriteFrameCache.addSpriteFrames(res.bull);
+        _bulletCache[bulletId] = new BulletView(_parent, ReferenceName.Bullet1);
         // console.log(_bulletCache);
     };
 

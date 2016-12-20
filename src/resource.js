@@ -173,8 +173,8 @@ var res = {
     GameUIPlist : "res/New/Game UI.plist",
     LobbyUIPlist : "res/New/Lobby/Lobby.plist",
     LobbyUIPng : "res/New/Lobby/Lobby.png",
-    SettingsUIPlist : "res/New/Options/settings.plist",
-    SettingsUIPng : "res/New/Options/settings.png",
+    SettingsUIPlist : "res/New/Options/Setting.plist",
+    SettingsUIPng : "res/New/Options/Setting.png",
     ScoreboardPlist : "res/New/Scoreboard/summary.plist",
     ScoreboardPng : "res/New/Scoreboard/summary.png",
     SideMenuPlist : "res/New/Options/Options Menu.plist",
@@ -204,11 +204,16 @@ var res = {
     ButterflyPng : "res/New/Fish/ButterFly.png",
     GoldSharkPng : "res/New/Fish/GoldShark.png",
     GoldSharkPlist : "res/New/Fish/GoldShark.plist",
+    SmallFishPlist : "res/New/Fish/SmallFish.plist",
+    SmallFishPng : "res/New/Fish/SmallFish.png",
 
+    //Weapons
+    Weapon1Plist : "res/New/Weapons/Weapon 1.plist",
+    Weapon1Png : "res/New/Weapons/Weapon 1.png",
 
     //testing
-    BulletPNG: "res/New/testing/bullet.png",
-    NetPng : "res/New/testing/Net.png",
+    // BulletPNG: "res/New/testing/bullet.png",
+    // NetPng : "res/New/testing/Net.png",
 
 
     //debug

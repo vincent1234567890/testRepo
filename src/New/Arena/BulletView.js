@@ -5,10 +5,10 @@
 const BulletView = (function () {
     "use strict";
 
-    const BulletView = function (parent) {
+    const BulletView = function (parent, resource) {
         this._parent = parent;
 
-        this._view = new cc.Sprite(res.BulletPNG);
+        this._view = new cc.Sprite(resource);
         this._parent.addChild(this._view);
     };
 

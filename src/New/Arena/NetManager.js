@@ -12,7 +12,8 @@ const NetManager = (function (){
     const proto = NetManager.prototype;
 
     proto.explodeAt= function(x,y){
-        let net = new NetPrefab(this.parent, x,y);
+        // cc.spriteFrameCache.addSpriteFrames(res.Net1);
+        const net = new NetPrefab(this.parent, x,y, ReferenceName.Net1);
     };
 
     return NetManager;

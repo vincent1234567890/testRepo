@@ -231,17 +231,8 @@ const LobbyView = (function() {
     }
 
     function gameSelected(menubutton){
-        console.log("gameSelected", this, arguments);
-        // if (isGameSelected){
-        //     return;
-        // }
         menubutton.setEnabled(false);
-        // isGameSelected = true;
-        // if (!isGameSelected) {
-        //     isGameSelected = true;
-            ClientServerConnect.joinGame(0).catch(console.error);
-        // }
-
+        ClientServerConnect.joinGame(0).catch(console.error);
     }
 
     function formatWithCommas(x) {

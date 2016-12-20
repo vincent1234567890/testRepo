@@ -9,11 +9,13 @@ const CannonManager = (function () {
 
     function CannonManager(parent, gameConfig, index, isPlayer) {
         _gameConfig = gameConfig;
+        cc.spriteFrameCache.addSpriteFrames(res.Weapon1Plist);
         this._cannon = new CannonView(parent, gameConfig, index);
         if (isPlayer) {
             this._cannon.setupCannonChangeMenu(parent, this, gameConfig, index, this.decreaseCannon, this.increaseCannon);
             this.forceSetGun(0);
         }
+
     }
 
     let proto = CannonManager.prototype;

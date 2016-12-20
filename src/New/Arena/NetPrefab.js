@@ -7,19 +7,19 @@ const NetPrefab = (function () {
     // const scale3 = new cc.ScaleTo(0.5,0.9);
     // const scale1 = new cc.ScaleTo(0.5,0.9);
     // let sequence = new cc.Sequence (scale1,scale2,scale1,scale2,destroyView);
-    const NetPrefab = function (parent, x,y) {
+    const NetPrefab = function (parent, x,y, resource) {
 
         this.node = new cc.Node();
         this._parent = parent;
         this._parent.addChild(this.node);
 
-        const topLeft = new cc.Sprite(res.NetPng);
+        const topLeft = new cc.Sprite(resource);
         topLeft.setAnchorPoint(0,0);
-        const topRight = new cc.Sprite(res.NetPng);
+        const topRight = new cc.Sprite(resource);
         topRight.setAnchorPoint(0,0);
-        const bottomLeft = new cc.Sprite(res.NetPng);
+        const bottomLeft = new cc.Sprite(resource);
         bottomLeft.setAnchorPoint(0,0);
-        const bottomRight = new cc.Sprite(res.NetPng);
+        const bottomRight = new cc.Sprite(resource);
         bottomRight.setAnchorPoint(0,0);
 
         this.node.addChild(topLeft);
