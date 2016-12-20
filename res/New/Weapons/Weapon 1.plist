@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>frames</key>
+        <dict>
+            <key>Bullet 1.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{19,42}</string>
+                <key>spriteSourceSize</key>
+                <string>{19,42}</string>
+                <key>textureRect</key>
+                <string>{{1,416},{19,42}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>Cannon 1 DW.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{100,185}</string>
+                <key>spriteSourceSize</key>
+                <string>{100,185}</string>
+                <key>textureRect</key>
+                <string>{{1,1},{100,185}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>Cannon 1.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,1}</string>
+                <key>spriteSize</key>
+                <string>{104,134}</string>
+                <key>spriteSourceSize</key>
+                <string>{104,136}</string>
+                <key>textureRect</key>
+                <string>{{1,188},{104,134}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>Net 1.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{90,90}</string>
+                <key>spriteSourceSize</key>
+                <string>{90,90}</string>
+                <key>textureRect</key>
+                <string>{{1,324},{90,90}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+        </dict>
+        <key>metadata</key>
+        <dict>
+            <key>format</key>
+            <integer>3</integer>
+            <key>pixelFormat</key>
+            <string>RGBA8888</string>
+            <key>premultiplyAlpha</key>
+            <false/>
+            <key>realTextureFileName</key>
+            <string>Weapon 1.png</string>
+            <key>size</key>
+            <string>{106,436}</string>
+            <key>smartupdate</key>
+            <string>$TexturePacker:SmartUpdate:11d176097f67d6f9bbd42a6f7320c261:9d8beeda71f890588d88785d9a1454ad:89d87c224ff114fc490c3025e4205a5b$</string>
+            <key>textureFileName</key>
+            <string>Weapon 1.png</string>
+        </dict>
+    </dict>
+</plist>

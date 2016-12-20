@@ -24,7 +24,7 @@ const CannonView = (function () {
                 markerPos = gameConfig.cannonPositions[0]
             }
 
-            this._super(ReferenceName.Cannon);
+            this._super(ReferenceName.Cannon1);
             parent.addChild(this, 20);
 
             this._cannonPowerBG = new cc.Sprite(ReferenceName.CannonPower);

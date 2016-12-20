@@ -9,13 +9,13 @@
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-27,1}</string>
+                <string>{-27,0}</string>
                 <key>spriteSize</key>
-                <string>{486,281}</string>
+                <string>{486,273}</string>
                 <key>spriteSourceSize</key>
                 <string>{540,341}</string>
                 <key>textureRect</key>
-                <string>{{1057,567},{486,281}}</string>
+                <string>{{1394,1},{486,273}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -26,120 +26,45 @@
                 <key>spriteOffset</key>
                 <string>{-13,1}</string>
                 <key>spriteSize</key>
-                <string>{514,281}</string>
+                <string>{514,275}</string>
                 <key>spriteSourceSize</key>
                 <string>{540,341}</string>
                 <key>textureRect</key>
-                <string>{{541,284},{514,281}}</string>
+                <string>{{840,1},{514,275}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GoldShark_00002.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-2,0}</string>
+                <string>{-2,1}</string>
                 <key>spriteSize</key>
-                <string>{536,281}</string>
+                <string>{536,277}</string>
                 <key>spriteSourceSize</key>
                 <string>{540,341}</string>
                 <key>textureRect</key>
-                <string>{{543,1},{536,281}}</string>
+                <string>{{561,1},{536,277}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GoldShark_00003.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,0}</string>
+                <string>{0,1}</string>
                 <key>spriteSize</key>
-                <string>{540,281}</string>
+                <string>{540,279}</string>
                 <key>spriteSourceSize</key>
                 <string>{540,341}</string>
                 <key>textureRect</key>
-                <string>{{1,1},{540,281}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>GoldShark_00004.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-13,-1}</string>
-                <key>spriteSize</key>
-                <string>{514,281}</string>
-                <key>spriteSourceSize</key>
-                <string>{540,341}</string>
-                <key>textureRect</key>
-                <string>{{541,567},{514,281}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>GoldShark_00005.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-29,-2}</string>
-                <key>spriteSize</key>
-                <string>{482,281}</string>
-                <key>spriteSourceSize</key>
-                <string>{540,341}</string>
-                <key>textureRect</key>
-                <string>{{1569,284},{482,281}}</string>
+                <string>{{1,1},{540,279}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>GoldShark_00006.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-15,-1}</string>
-                <key>spriteSize</key>
-                <string>{510,281}</string>
-                <key>spriteSourceSize</key>
-                <string>{540,341}</string>
-                <key>textureRect</key>
-                <string>{{1057,284},{510,281}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>GoldShark_00007.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-1,0}</string>
-                <key>spriteSize</key>
-                <string>{538,281}</string>
-                <key>spriteSourceSize</key>
-                <string>{540,341}</string>
-                <key>textureRect</key>
-                <string>{{1,284},{538,281}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>GoldShark_00008.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-1,0}</string>
-                <key>spriteSize</key>
-                <string>{538,281}</string>
-                <key>spriteSourceSize</key>
-                <string>{540,341}</string>
-                <key>textureRect</key>
-                <string>{{1,567},{538,281}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>GoldShark_00009.png</key>
+            <key>GoldShark_00004.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -150,9 +75,84 @@
                 <key>spriteSourceSize</key>
                 <string>{540,341}</string>
                 <key>textureRect</key>
-                <string>{{1081,1},{514,281}}</string>
+                <string>{{541,541},{514,281}}</string>
                 <key>textureRotated</key>
                 <false/>
+            </dict>
+            <key>GoldShark_00005.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-29,1}</string>
+                <key>spriteSize</key>
+                <string>{482,283}</string>
+                <key>spriteSourceSize</key>
+                <string>{540,341}</string>
+                <key>textureRect</key>
+                <string>{{1057,517},{482,283}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>GoldShark_00006.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-15,1}</string>
+                <key>spriteSize</key>
+                <string>{510,281}</string>
+                <key>spriteSourceSize</key>
+                <string>{540,341}</string>
+                <key>textureRect</key>
+                <string>{{1541,276},{510,281}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>GoldShark_00007.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-1,1}</string>
+                <key>spriteSize</key>
+                <string>{538,279}</string>
+                <key>spriteSourceSize</key>
+                <string>{540,341}</string>
+                <key>textureRect</key>
+                <string>{{1,543},{538,279}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>GoldShark_00008.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-1,1}</string>
+                <key>spriteSize</key>
+                <string>{538,277}</string>
+                <key>spriteSourceSize</key>
+                <string>{540,341}</string>
+                <key>textureRect</key>
+                <string>{{282,1},{538,277}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>GoldShark_00009.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-13,1}</string>
+                <key>spriteSize</key>
+                <string>{514,275}</string>
+                <key>spriteSourceSize</key>
+                <string>{540,341}</string>
+                <key>textureRect</key>
+                <string>{{1117,1},{514,275}}</string>
+                <key>textureRotated</key>
+                <true/>
             </dict>
         </dict>
         <key>metadata</key>
@@ -166,9 +166,9 @@
             <key>realTextureFileName</key>
             <string>GoldShark.png</string>
             <key>size</key>
-            <string>{1851,849}</string>
+            <string>{1881,823}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:b2738911f6b4f8d6fded1936ff48abba:9f1ab84f629bd19b269e67c9930659fd:afbcbb55d069ed0a39f39d7b4d933581$</string>
+            <string>$TexturePacker:SmartUpdate:5050733248ccae5b2bc09b22e2305225:a1b002d7402709847cba4f210e8f3ebc:afbcbb55d069ed0a39f39d7b4d933581$</string>
             <key>textureFileName</key>
             <string>GoldShark.png</string>
         </dict>

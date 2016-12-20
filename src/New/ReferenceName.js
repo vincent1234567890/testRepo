@@ -2,7 +2,7 @@
  * Created by eugeneseah on 25/10/16.
  */
 const ReferenceName = {
-    Cannon : "#Cannon.png",
+
     Base : "#Base.png",
     IncreaseCannon : "#plus.png",
     IncreaseCannon_Down : "#PlusDw.png",
@@ -54,12 +54,17 @@ const ReferenceName = {
     ExitButton : "#Exit.png",
 
     //OptionsMenu
-    OptionsBG : "#Setting-21.png",
-    OptionBarBG : "#Setting-23.png",
-    OptionsBarNegative : "#Setting-22.png",
-    FishSliderButton : "#Setting-24.png",
+    OptionsBG : "#Setting BG.png",
+    OptionBarBG : "#Setting Bar Full.png",
+    OptionsBarNegative : "#Setting Bar Empty.png",
+    FishSliderButton : "#Setting Slider Button.png",
 
     FishPlaceholder : "#Fish Paceholder.png",
+
+    //Cannon/nets
+    Cannon1 : "#Cannon 1.png",
+    Net1 : "#Net 1.png",
+    Bullet1 : "#Bullet 1.png",
 
 
     //localisable

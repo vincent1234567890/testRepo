@@ -15,37 +15,7 @@
                 <key>spriteSourceSize</key>
                 <string>{499,114}</string>
                 <key>textureRect</key>
-                <string>{{1,1},{497,114}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>Cannon.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,1}</string>
-                <key>spriteSize</key>
-                <string>{104,134}</string>
-                <key>spriteSourceSize</key>
-                <string>{104,136}</string>
-                <key>textureRect</key>
-                <string>{{775,1},{104,134}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>CannonDW.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{97,115}</string>
-                <key>spriteSourceSize</key>
-                <string>{97,115}</string>
-                <key>textureRect</key>
-                <string>{{911,1},{97,115}}</string>
+                <string>{{1,56},{497,114}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -60,9 +30,9 @@
                 <key>spriteSourceSize</key>
                 <string>{34,35}</string>
                 <key>textureRect</key>
-                <string>{{676,56},{34,35}}</string>
+                <string>{{1,1},{34,35}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>CoinDeck.png</key>
             <dict>
@@ -75,7 +45,7 @@
                 <key>spriteSourceSize</key>
                 <string>{273,53}</string>
                 <key>textureRect</key>
-                <string>{{500,1},{273,53}}</string>
+                <string>{{214,1},{273,53}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -90,7 +60,7 @@
                 <key>spriteSourceSize</key>
                 <string>{42,40}</string>
                 <key>textureRect</key>
-                <string>{{500,56},{42,40}}</string>
+                <string>{{38,1},{42,40}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -105,7 +75,7 @@
                 <key>spriteSourceSize</key>
                 <string>{42,40}</string>
                 <key>textureRect</key>
-                <string>{{544,56},{42,40}}</string>
+                <string>{{82,1},{42,40}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -120,7 +90,7 @@
                 <key>spriteSourceSize</key>
                 <string>{42,40}</string>
                 <key>textureRect</key>
-                <string>{{588,56},{42,40}}</string>
+                <string>{{126,1},{42,40}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -135,7 +105,7 @@
                 <key>spriteSourceSize</key>
                 <string>{42,40}</string>
                 <key>textureRect</key>
-                <string>{{632,56},{42,40}}</string>
+                <string>{{170,1},{42,40}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -151,9 +121,9 @@
             <key>realTextureFileName</key>
             <string>Game UI.png</string>
             <key>size</key>
-            <string>{1009,117}</string>
+            <string>{499,171}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:a66d3c4da62858f1e0ac415ef02d3556:7a6dad6d7a71f0b4605fb36f29eab933:587edb7fc7c60d46667dfa1c3926b6a7$</string>
+            <string>$TexturePacker:SmartUpdate:40223b93890da08ddfe594b6fea8dfd8:65ab56e37979a61ecc388a1c451c1b24:587edb7fc7c60d46667dfa1c3926b6a7$</string>
             <key>textureFileName</key>
             <string>Game UI.png</string>
         </dict>

@@ -16,8 +16,8 @@ const OptionsView = (function () {
         this._music = createSlider("Music", musicValueChangedEvent, PlayerPreferences.getMusicVolume());
         this._sound = createSlider("Sound", soundValueChangedEvent, PlayerPreferences.getSoundVolume());
 
-        this._music.setPosition(_background.getContentSize().width/2 + 60,_background.getContentSize().height/2 + 80);
-        this._sound.setPosition(_background.getContentSize().width/2 + 60,_background.getContentSize().height/2 + 10);
+        this._music.setPosition(_background.getContentSize().width/2 + 47.5,_background.getContentSize().height/2 + 69.2);
+        this._sound.setPosition(_background.getContentSize().width/2 + 47.5,_background.getContentSize().height/2 + 4.1);
 
         _touchlayer = new TouchLayerRefactored(dismissCallback);
         _touchlayer.setSwallowTouches(true);
@@ -56,6 +56,7 @@ const OptionsView = (function () {
         slider.addChild(label);
         slider.addTargetWithActionForControlEvents(OptionsView, callback, cc.CONTROL_EVENT_VALUECHANGED);
 
+        slider.setScaleX(1.01);
 
         return slider;
     }
@@ -74,7 +75,7 @@ const OptionsView = (function () {
         if (GUIFunctions.isSpriteTouched(_background,touch)) {
             return;
         }
-        _touchlayer.setSwallowTouches(false);
+        // _touchlayer.setSwallowTouches(false);
         _touchlayer.setEnable(false);
         _background.setVisible(false);
     }
@@ -82,7 +83,7 @@ const OptionsView = (function () {
     let proto = OptionsView.prototype;
 
     proto.show = function(){
-        _touchlayer.setSwallowTouches(true);
+        // _touchlayer.setSwallowTouches(true);
         _touchlayer.setEnable(true);
         _background.setVisible(true);
     };

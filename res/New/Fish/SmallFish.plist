@@ -4,153 +4,123 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>Lantern_00000.png</key>
+            <key>SmallFish_00000.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{12,-6}</string>
+                <string>{0,1}</string>
                 <key>spriteSize</key>
-                <string>{338,164}</string>
+                <string>{96,74}</string>
                 <key>spriteSourceSize</key>
-                <string>{370,200}</string>
+                <string>{100,90}</string>
                 <key>textureRect</key>
-                <string>{{1407,1},{338,164}}</string>
+                <string>{{1,395},{96,74}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Lantern_00001.png</key>
+            <key>SmallFish_00001.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,-12}</string>
+                <string>{-1,-2}</string>
                 <key>spriteSize</key>
-                <string>{356,162}</string>
+                <string>{96,76}</string>
                 <key>spriteSourceSize</key>
-                <string>{370,200}</string>
+                <string>{100,90}</string>
                 <key>textureRect</key>
-                <string>{{343,173},{356,162}}</string>
+                <string>{{1,161},{96,76}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Lantern_00002.png</key>
+            <key>SmallFish_00002.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-3,-15}</string>
+                <string>{-2,-4}</string>
                 <key>spriteSize</key>
-                <string>{364,164}</string>
+                <string>{94,80}</string>
                 <key>spriteSourceSize</key>
-                <string>{370,200}</string>
+                <string>{100,90}</string>
                 <key>textureRect</key>
-                <string>{{1043,171},{364,164}}</string>
+                <string>{{1,471},{94,80}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Lantern_00003.png</key>
+            <key>SmallFish_00003.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{18,-15}</string>
+                <string>{-1,-2}</string>
                 <key>spriteSize</key>
-                <string>{322,164}</string>
+                <string>{96,78}</string>
                 <key>spriteSourceSize</key>
-                <string>{370,200}</string>
+                <string>{100,90}</string>
                 <key>textureRect</key>
-                <string>{{1,1},{322,164}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>Lantern_00004.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{9,-12}</string>
-                <key>spriteSize</key>
-                <string>{340,162}</string>
-                <key>spriteSourceSize</key>
-                <string>{370,200}</string>
-                <key>textureRect</key>
-                <string>{{701,173},{340,162}}</string>
+                <string>{{1,1},{96,78}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Lantern_00005.png</key>
+            <key>SmallFish_00004.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{12,-6}</string>
+                <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{338,164}</string>
+                <string>{96,76}</string>
                 <key>spriteSourceSize</key>
-                <string>{370,200}</string>
+                <string>{100,90}</string>
                 <key>textureRect</key>
-                <string>{{1409,167},{338,164}}</string>
+                <string>{{1,239},{96,76}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Lantern_00006.png</key>
+            <key>SmallFish_00005.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{1,3}</string>
+                <string>{-1,3}</string>
                 <key>spriteSize</key>
-                <string>{356,168}</string>
+                <string>{96,78}</string>
                 <key>spriteSourceSize</key>
-                <string>{370,200}</string>
+                <string>{100,90}</string>
                 <key>textureRect</key>
-                <string>{{709,1},{356,168}}</string>
+                <string>{{1,81},{96,78}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Lantern_00007.png</key>
+            <key>SmallFish_00006.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-3,11}</string>
+                <string>{-1,5}</string>
                 <key>spriteSize</key>
-                <string>{364,170}</string>
+                <string>{94,80}</string>
                 <key>spriteSourceSize</key>
-                <string>{370,200}</string>
+                <string>{100,90}</string>
                 <key>textureRect</key>
-                <string>{{343,1},{364,170}}</string>
+                <string>{{1,553},{94,80}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Lantern_00008.png</key>
+            <key>SmallFish_00007.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{18,13}</string>
+                <string>{-1,3}</string>
                 <key>spriteSize</key>
-                <string>{320,174}</string>
+                <string>{96,76}</string>
                 <key>spriteSourceSize</key>
-                <string>{370,200}</string>
+                <string>{100,90}</string>
                 <key>textureRect</key>
-                <string>{{167,1},{320,174}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>Lantern_00009.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{9,2}</string>
-                <key>spriteSize</key>
-                <string>{338,166}</string>
-                <key>spriteSourceSize</key>
-                <string>{370,200}</string>
-                <key>textureRect</key>
-                <string>{{1067,1},{338,166}}</string>
+                <string>{{1,317},{96,76}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -164,13 +134,13 @@
             <key>premultiplyAlpha</key>
             <false/>
             <key>realTextureFileName</key>
-            <string>lantern.png</string>
+            <string>SmallFish.png</string>
             <key>size</key>
-            <string>{1748,336}</string>
+            <string>{98,634}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:9c6dbf14276bb4521f3745dfb1ff2a31:884be5a82e1e5bdf2983485ae9b375ca:f14dddbb60a3963ef985ef775416bb13$</string>
+            <string>$TexturePacker:SmartUpdate:facb2a4696e7abe9cb2f74dcc845953e:dc88b4719af0bc0d89b8a5f5739acf82:013fe3e4a81e666863a61839f13a3f9a$</string>
             <key>textureFileName</key>
-            <string>lantern.png</string>
+            <string>SmallFish.png</string>
         </dict>
     </dict>
 </plist>
