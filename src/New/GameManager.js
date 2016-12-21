@@ -142,10 +142,10 @@ const GameManager = function () {
     };
 
     const explodeBullet = function(bulletId){
-        const pos = _bulletManager.explodeBullet(bulletId);
-        if (pos) {
-            const rotPos = getRotatedView(pos).position;
-            _netManager.explodeAt(rotPos[0],rotPos[1]);
+        const bulletData = _bulletManager.explodeBullet(bulletId);
+        if (bulletData) {
+            const rotPos = getRotatedView(bulletData.position).position;
+            _netManager.explodeAt(rotPos[0],rotPos[1], bulletData.gunId);
         }
     };
 

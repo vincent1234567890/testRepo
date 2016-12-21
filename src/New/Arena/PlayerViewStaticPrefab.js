@@ -18,7 +18,7 @@ const PlayerViewStaticPrefab = (function () {
 
             //Base
             cc.Sprite.prototype.ctor.call(this, ReferenceName.Base);
-            parent.addChild(this,10);
+            parent.addChild(this,1);
 
             //coin icon
             const coinIcon = new cc.Sprite(ReferenceName.CoinIcon);
