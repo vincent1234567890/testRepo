@@ -65,6 +65,7 @@ const ReferenceName = {
     Cannon1 : "#Cannon 1.png",
     Net1 : "#Net 1.png",
     Bullet1 : "#Bullet 1.png",
+    CannonDown1 : "#Cannon 1 DW.png",
 
 
     //localisable

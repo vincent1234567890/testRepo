@@ -77,7 +77,7 @@ const BulletManager = (function(){
             delete _bulletCache[bulletId];
             const bulletModel = _fishGameArena && _fishGameArena.getBullet(bulletId);
             if (bulletModel){
-                return bulletModel.position;
+                return { position:bulletModel.position, gunId : bulletModel.gunId}
             }
         }else{
             console.warn("Could not find bulletView with id: " + bulletId + ".  Unable to show net explosion!")
