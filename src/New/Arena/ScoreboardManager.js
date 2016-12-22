@@ -4,11 +4,15 @@
 
 var ScoreboardManager = (function () {
 
-    var ScoreboardManager = function (parent, data, parentGoToLobby, parentGoToNewRoom) {
+    var ScoreboardManager = function (data, parentGoToLobby, parentGoToNewRoom) {
+        this.parent = new cc.Node();
         cc.spriteFrameCache.addSpriteFrames(res.ScoreboardPlist);
         this._parentGoToLobby = parentGoToLobby;
         this._parentGoToNewRoom = parentGoToNewRoom;
-        this.doView(parent, data)
+        this.doView(this.parent, data)
+    };
+    ScoreboardManager.prototype.getView = function(parent, data){
+        return this.parent;
     };
 
     ScoreboardManager.prototype.doView = function(parent, data){

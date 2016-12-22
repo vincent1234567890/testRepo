@@ -42,26 +42,15 @@ const GameManager = function () {
     let _bulletManager;
     let _netManager;
 
-    function initialiseParent(parent) {
-        if (parent === undefined && _parentNode && _parentNode.parent) {
-            parent = _parentNode.parent;
-        }
-        if (_parentNode && _parentNode.parent) {
-            _parentNode.parent.removeChild(_parentNode);
-        }
-        _parentNode = new cc.Node();
-        parent.addChild(_parentNode, 99999);
-    }
-
     function initialiseLogin(parent) {
-        initialiseParent(parent);
-        _loginManager = new LoginManager(_parentNode);
+        // initialiseParent(parent);
+        GameView.initialise(parent);
+        _loginManager = new LoginManager();
     }
 
     const initialiseGame = function (parent, fishGameArena) {
-        initialiseParent(parent);
 
-        GameView.initialise(_parentNode);
+        GameView.initialise(parent);
 
         _fishGameArena = fishGameArena;
         _lastShotTime = -Infinity;
@@ -75,33 +64,31 @@ const GameManager = function () {
         for (let i = 0; i < _gameConfig.maxPlayers; i++) {
             const index = getPlayerSlot(i);
             // console.log(index);
-            _playerViews[index] = new PlayerViewManager(_parentNode, _gameConfig, index, i == _playerSlot);
+            _playerViews[index] = new PlayerViewManager(_gameConfig, index, i == _playerSlot);
+            GameView.addView(_playerViews[index].getView());
 
             const direction = cc.pNormalize(cc.pSub({x: cc.winSize.width / 2, y: cc.winSize.height / 2}, new cc.p(_gameConfig.cannonPositions[index][0], _gameConfig.cannonPositions[index][1])));
             const rot = Math.atan2(direction.x, direction.y);
             _playerViews[index].shootTo(rot * 180 / Math.PI);
         }
-        _fishManager = new FishViewManager(_parentNode, _fishGameArena, getRotatedView);
 
-        _optionsManager = new OptionsManager(_parentNode, undefined, undefined, onLeaveArena);
+        _fishManager = new FishViewManager(_fishGameArena, getRotatedView);
+        GameView.addView(_fishManager.getView());
 
-        _bulletManager = new BulletManager(_parentNode, _fishGameArena, getRotatedView);
+        _optionsManager = new OptionsManager(undefined, undefined, onLeaveArena);
+        GameView.addView(_optionsManager.getView());
 
-        _netManager = new NetManager(_parentNode);
+        _bulletManager = new BulletManager(_fishGameArena, getRotatedView);
+        GameView.addView(_bulletManager.getView());
 
-        GameView.goToGame();
+        _netManager = new NetManager();
+        GameView.addView(_netManager.getView());
 
-        initialiseTouch();
+        GameView.goToGame(touchAt);
+
     };
 
-    const initialiseTouch = function () {
-        if(_touchLayer){
-            _parentNode.removeChild(_touchLayer);
-        }
 
-        _touchLayer = new TouchLayerRefactored(touchAt);
-        _parentNode.addChild(_touchLayer, -1);
-    };
 
     const touchAt = function (pos) {
 
@@ -187,7 +174,7 @@ const GameManager = function () {
 
     const goToLogin = function () {
         if (!_loggedIn) {
-            _loginManager.goToLogin();
+            GameView.addView(_loginManager.goToLogin());
         }
     };
 
@@ -204,7 +191,8 @@ const GameManager = function () {
     };
 
     function goToLobby() {
-        initialiseParent();
+        // initialiseParent();
+        GameView.initialise();
 
         _loggedIn = true;
 
@@ -228,10 +216,11 @@ const GameManager = function () {
     }
 
     function createLobby() {
-        if (!_lobbyManager)
-            _lobbyManager = new LobbyManager(_parentNode, _playerData);
-        else {
-            _lobbyManager.doView(_parentNode, _playerData);
+        if (!_lobbyManager) {
+            _lobbyManager = new LobbyManager(_playerData);
+            GameView.addView(_lobbyManager.getView());
+        }else {
+            _lobbyManager.doView(_playerData);
         }
     }
 
@@ -255,9 +244,10 @@ const GameManager = function () {
     function goToScoreboard(stats) {
         console.log(stats);
         if (!_scoreboardManager) {
-            _scoreboardManager = new ScoreboardManager(_parentNode, stats.data.recentGames[0], exitToLobby, goToNewRoom);
+            _scoreboardManager = new ScoreboardManager(stats.data.recentGames[0], exitToLobby, goToNewRoom);
+            GameView.addView(_scoreboardManager.getView());
         } else {
-            _scoreboardManager.doView(_parentNode, stats.data.recentGames[0]);
+            _scoreboardManager.doView(stats.data.recentGames[0]);
         }
         // _parentNode.addChild(_scoreboardManager);
     }
@@ -300,7 +290,7 @@ const GameManager = function () {
 
     function getPlayerSlot(slot){
         if (_isRotated && _gameConfig.isUsingOldCannonPositions)
-            return _gameConfig.maxPlayers- slot-1;
+            return _gameConfig.maxPlayers - slot - 1;
         return slot;
     }
 

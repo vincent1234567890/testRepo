@@ -9,8 +9,8 @@ const BulletManager = (function(){
     let _bulletCache = [];
     let _rotationFunction;
 
-    const BulletManager = function (parent, fishGameArena, rotationFunction) {
-        _parent = parent;
+    const BulletManager = function (fishGameArena, rotationFunction) {
+        _parent = new cc.Node();
         _fishGameArena = fishGameArena;
         _rotationFunction = rotationFunction;
     };
@@ -83,6 +83,10 @@ const BulletManager = (function(){
             console.warn("Could not find bulletView with id: " + bulletId + ".  Unable to show net explosion!")
         }
         return null;
+    };
+
+    proto.getView = function () {
+        return _parent;
     };
 
     proto.destroyView = function () {

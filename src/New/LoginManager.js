@@ -6,8 +6,8 @@ let LoginManager = (function (){
 
     let _view;
 
-    function LoginManager(parent) {
-        this._parent = parent;
+    function LoginManager() {
+        this._parent = new cc.Node();
         cc.spriteFrameCache.addSpriteFrames(res.LoginUIPlist);
     }
 
@@ -16,9 +16,10 @@ let LoginManager = (function (){
     proto.goToLogin = function(){
         if (!_view){
             // console.log("goToLogin");
-            _view = new LoginView(this._parent);
+            _view = new LoginView();
             restoreLoginInfo();
         }
+        return _view.getView();
     };
 
     proto.getLoginInfo = function () {
@@ -29,7 +30,7 @@ let LoginManager = (function (){
 
     };
 
-    let restoreLoginInfo = function () {
+    const restoreLoginInfo = function () {
         let data = PlayerPreferences.getLoginDetails();
         if (data){
             _view.setLoginInfo(data.username, data.password);
@@ -40,6 +41,10 @@ let LoginManager = (function (){
         let loginDetails = _view.getLoginInfo();
         PlayerPreferences.setLoginDetails(loginDetails);
     };
+
+    // proto.getView = function () {
+    //     return _view.getView();
+    // };
 
     proto.destroyView = function () {
         // console.log("destroyView");

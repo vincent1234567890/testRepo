@@ -5,7 +5,7 @@
 const FishViewManager = (function(){
 
 
-    const FishViewManager = function(parent, fishGameArena, rotationFunction){
+    const FishViewManager = function(fishGameArena, rotationFunction){
         // console.log
 
         cc.spriteFrameCache.addSpriteFrames(res.SquidPlist);
@@ -21,13 +21,11 @@ const FishViewManager = (function(){
         // FishAnimationData();
         FishAnimationData.initialise();
 
-        this._parent = parent;
+        this._parent = new cc.Node();
         this._fishes = {};
         this._fishGameArena = fishGameArena;
 
         this.rotationFunction = rotationFunction;
-
-
 
     };
 
@@ -77,6 +75,10 @@ const FishViewManager = (function(){
             }
         }
 
+    };
+
+    proto.getView = function () {
+        return this._parent;
     };
     return FishViewManager;
 })();

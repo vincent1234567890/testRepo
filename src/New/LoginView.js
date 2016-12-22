@@ -4,10 +4,10 @@
 
 var LoginView = (function() {
 
-    var LoginView = function ( parent) {
+    var LoginView = function () {
 
-        this._parent = parent;
-
+        // this._parent = parent;
+        this.parent = new cc.Node();
 
         var midX = cc.view.getDesignResolutionSize().width / 2;
         var midY = cc.view.getDesignResolutionSize().height / 2;
@@ -23,7 +23,7 @@ var LoginView = (function() {
         textName.setPlaceholderFontSize(40);
         //textName.setAnchorPoint(cc.p());
         textName.needsLayout();
-        this._parent.addChild(textName);
+        this.parent.addChild(textName);
         this.textName = textName;
 
         var textPass = new cc.EditBox(cc.size(300,70), new cc.Scale9Sprite(ReferenceName.Login9Slice));
@@ -33,9 +33,8 @@ var LoginView = (function() {
         textPass.setPlaceholderFontSize(40);
         textPass.setInputFlag(cc.EDITBOX_INPUT_FLAG_PASSWORD);
         textPass.needsLayout();
-        this._parent.addChild(textPass);
+        this.parent.addChild(textPass);
         this.textPass = textPass;
-
     };
 
     var proto = LoginView.prototype;
@@ -54,6 +53,10 @@ var LoginView = (function() {
         this.textName.setString(name);
         this.textPass.setString(pass);
     };
+
+    proto.getView = function () {
+        return this.parent;
+    }
 
     return LoginView;
 }());

@@ -9,14 +9,14 @@ const OptionsManager = (function (){
     let _exitCallBack;
     let _parent;
 
-    function OptionsManager(parent, settingsCallback, fishListCallback, exitCallback) {
-        _parent = parent;
+    function OptionsManager(settingsCallback, fishListCallback, exitCallback) {
+        _parent = new cc.Node();
         _settingsCallback = settingsCallback;
         _fishListCallBack = fishListCallback;
         _exitCallBack = exitCallback;
         cc.spriteFrameCache.addSpriteFrames(res.SideMenuPlist);
         cc.spriteFrameCache.addSpriteFrames(res.SettingsUIPlist);
-        this.view = new OptionsSideMenuView(parent, onSettings, onFishList, onExitButton);
+        this.view = new OptionsSideMenuView(_parent, onSettings, onFishList, onExitButton);
 
     }
 
@@ -42,6 +42,11 @@ const OptionsManager = (function (){
             _exitCallBack ();
         }
     }
+
+    OptionsManager.prototype.getView = function () {
+        return _parent;
+    }
+
     
     OptionsManager.prototype.destroyView = function () {
         this.view.destroy();
