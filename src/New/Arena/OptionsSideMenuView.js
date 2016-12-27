@@ -65,10 +65,10 @@ const OptionsSideMenuView = (function () {
         let settings = new cc.Sprite(ReferenceName.SideMenuSettingsButton);
         let settingsButton = new cc.MenuItemSprite(settings, undefined, undefined, onSettingsEvent);
 
-        let fishList = new cc.Sprite(ReferenceName.FishListButton);
+        let fishList = new cc.Sprite(ReferenceName.SideMenuFishListButton);
         let fishListButton = new cc.MenuItemSprite(fishList, undefined, undefined, onFishListEvent);
 
-        let exit = new cc.Sprite(ReferenceName.ExitButton);
+        let exit = new cc.Sprite(ReferenceName.SideMenuExitButton);
         let exitButton = new cc.MenuItemSprite(exit, undefined, undefined, onExitEvent);
 
         let backGround = new cc.Sprite(ReferenceName.SideMenuBG);

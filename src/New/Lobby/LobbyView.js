@@ -146,17 +146,48 @@ const LobbyView = (function() {
     // };
 
     function setupGameList(){
-        // const length = cc.view.getDesignResolutionSize().width;
-        // const height = cc.view.getDesignResolutionSize().height;
-
         const game = new cc.Sprite(ReferenceName.GameSelectBox);
         const gameButton = new cc.MenuItemSprite(game, undefined, undefined, gameSelected);
         const menu = new cc.Menu(gameButton);
         gameButton.setPosition(cc.pAdd(cc.p(menu.getContentSize().width / 2, gameButton.getContentSize().height / 2), cc.p(0, 0)));
-        // parent.addChild(menu,1);
         return menu;
-        // menu.setPosition(-450,110);
+
+        // var midX = cc.view.getDesignResolutionSize().width / 2;
+        // var midY = cc.view.getDesignResolutionSize().height / 2;
+        //
+        // var listView = new ccui.ListView();
+        // listView.setDirection(ccui.ScrollView.DIR_HORIZONTAL);
+        // listView.setTouchEnabled(true);
+        // listView.setBounceEnabled(true);
+        // // listView.setBackGroundImage(res.HelloWorld_png);
+        // listView.setContentSize(cc.size(cc.view.getDesignResolutionSize().width, cc.view.getDesignResolutionSize().height - 250));
+        // // listView.setInnerContainerSize(200,200)
+        // listView.setAnchorPoint(cc.p(0.5, 0.5));
+        // listView.setPosition(midX, midY);
+        //
+        // for ( var i = 0; i < 50; i++ )
+        // {
+        //     var button = new ccui.Button();
+        //     button.setName("TextButton");
+        //     button.setTouchEnabled(true);
+        //     button.loadTextures(ReferenceName.GameSelectBox,undefined, undefined, ccui.Widget.PLIST_TEXTURE);
+        //     button.gameData = i;
+        //     button.setContentSize(cc.size(600,500));
+        //     listView.pushBackCustomItem(button);
+        // }
+        //
+        // function touchEvent(sender, type) {
+        //     switch (type) {
+        //         case ccui.Widget.TOUCH_ENDED:
+        //             gameSelected(sender);
+        //             break;
+        //     }
+        // }
+        //
+        // return listView;
     }
+    
+    
 
 
     function setupProfileMenu() {
@@ -230,9 +261,11 @@ const LobbyView = (function() {
         console.log("settingsButtonPressed");
     }
 
-    function gameSelected(menubutton){
-        menubutton.setEnabled(false);
+    function gameSelected(sender){
+        // menubutton.setEnabled(false);
         ClientServerConnect.joinGame(0).catch(console.error);
+        sender.setEnabled(false);
+        // ClientServerConnect.joinGame(sender.gameData).catch(console.error);
     }
 
     function formatWithCommas(x) {

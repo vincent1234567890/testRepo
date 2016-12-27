@@ -9,22 +9,28 @@ const OptionsManager = (function (){
     let _exitCallBack;
     let _parent;
 
-    function OptionsManager(parent, settingsCallback, fishListCallback, exitCallback) {
+    function OptionsManager(parent, settingsCallback, fishListCallback, exitCallback, gameConfig) {
         _parent = parent;
         _settingsCallback = settingsCallback;
         _fishListCallBack = fishListCallback;
         _exitCallBack = exitCallback;
         cc.spriteFrameCache.addSpriteFrames(res.SideMenuPlist);
+        cc.spriteFrameCache.addSpriteFrames(res.BottomMenuPlist);
         cc.spriteFrameCache.addSpriteFrames(res.SettingsUIPlist);
-        this.view = new OptionsSideMenuView(parent, onSettings, onFishList, onExitButton);
+
+        if (gameConfig && gameConfig.isUsingOldCannonPositions)
+            this.view = new OptionsSideMenuView(parent, onSettings, onFishList, onExitButton);
+        else{
+            this.view = new OptionsMenuViewBottom(parent, onSettings, onFishList, onExitButton);
+        }
 
     }
 
     function onSettings(){
         if (!this._settingsView)
-            this.settingsView = new OptionsView(_parent);
+            this._settingsView = new OptionsView(_parent);
         else{
-            this.settingsView.show();
+            this._settingsView.show();
         }
         if (_settingsCallback) {
             _settingsCallback();

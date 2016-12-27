@@ -179,6 +179,8 @@ var res = {
     ScoreboardPng : "res/New/Scoreboard/summary.png",
     SideMenuPlist : "res/New/Options/Options Menu.plist",
     SideMenuPng : "res/New/Options/Options Menu.png",
+    BottomMenuPlist : "res/New/Options/Option Menu V2.plist",
+    BottomMenuPng : "res/New/Options/Option Menu V2.png",
     LoginUIPlist : "res/New/Lobby/Login.plist",
     LoginUIPng : "res/New/Lobby/Login.png",
 

@@ -22,6 +22,7 @@ const ReferenceName = {
     LobbyCoinsBG : "#Coins Base.png",
     LobbyCoinIcon : "#Coins.png",//
     GameSelectBox : "#Game Frame.png",
+    // GameSelectBox : "Game Frame.png",
     Star : "#level Star.png",//
     LevelBG : "#Level Bar.png",
     MessageButton : "#Log.png",
@@ -50,8 +51,15 @@ const ReferenceName = {
     //SideMenu
     SideMenuBG : "#SideMenu.png",
     SideMenuSettingsButton : "#Setting.png",
-    FishListButton : "#Fishes.png",
-    ExitButton : "#Exit.png",
+    SideMenuFishListButton : "#Fishes.png",
+    SideMenuExitButton : "#Exit.png",
+
+    //BottomMenu
+    BottomMenuButton : "#Option.png",
+    BottomMenuSettingsButton : "#Setting V2.png",
+    BottomMenuFishListButton : "#Fish V2.png",
+    BottomMenuExitButton : "#Exit V2.png",
+
 
     //OptionsMenu
     OptionsBG : "#Setting BG.png",
