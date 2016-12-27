@@ -83,7 +83,7 @@ const GameManager = function () {
         }
         _fishManager = new FishViewManager(_parentNode, _fishGameArena, getRotatedView);
 
-        _optionsManager = new OptionsManager(_parentNode, undefined, undefined, onLeaveArena);
+        _optionsManager = new OptionsManager(_parentNode, undefined, undefined, onLeaveArena, _gameConfig);
 
         _bulletManager = new BulletManager(_parentNode, _fishGameArena, getRotatedView);
 
@@ -272,8 +272,8 @@ const GameManager = function () {
         // console.log("GameManager:development");
         initialiseParent(parent);
         // goToScoreboard()
-        // _optionsManager = new OptionsManager(_parentNode);
-        createLobby();
+        _optionsManager = new OptionsManager(_parentNode);
+        // createLobby();
     }
 
     function destroyArena(){
@@ -285,11 +285,12 @@ const GameManager = function () {
         }
         _fishGameArena = null;
         _lastShotTime = -Infinity;
-        _optionsManager.destroyView();
+
     }
 
     function resetArena(){
         _isRotated = false;
+        _optionsManager.destroyView();
         _fishManager.destroyView();
         _bulletManager.destroyView();
 
