@@ -15,7 +15,7 @@
                 <key>spriteSourceSize</key>
                 <string>{19,42}</string>
                 <key>textureRect</key>
-                <string>{{1,416},{19,42}}</string>
+                <string>{{1,417},{19,42}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -39,13 +39,13 @@
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,1}</string>
+                <string>{0,-25}</string>
                 <key>spriteSize</key>
-                <string>{104,134}</string>
+                <string>{100,135}</string>
                 <key>spriteSourceSize</key>
-                <string>{104,136}</string>
+                <string>{100,185}</string>
                 <key>textureRect</key>
-                <string>{{1,188},{104,134}}</string>
+                <string>{{1,188},{100,135}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -60,7 +60,7 @@
                 <key>spriteSourceSize</key>
                 <string>{90,90}</string>
                 <key>textureRect</key>
-                <string>{{1,324},{90,90}}</string>
+                <string>{{1,325},{90,90}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -76,9 +76,9 @@
             <key>realTextureFileName</key>
             <string>Weapon 1.png</string>
             <key>size</key>
-            <string>{106,436}</string>
+            <string>{102,437}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:11d176097f67d6f9bbd42a6f7320c261:9d8beeda71f890588d88785d9a1454ad:89d87c224ff114fc490c3025e4205a5b$</string>
+            <string>$TexturePacker:SmartUpdate:871bf5026b12d71cd682242c83f93894:5e45476d50bf0c8e53a7da75701d5ce5:89d87c224ff114fc490c3025e4205a5b$</string>
             <key>textureFileName</key>
             <string>Weapon 1.png</string>
         </dict>

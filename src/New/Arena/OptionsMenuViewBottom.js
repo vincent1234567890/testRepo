@@ -60,8 +60,6 @@ const OptionsMenuViewBottom = (function (){
         // const initial = new cc.FadeTo(0, 0);
         // _menu.runAction(new cc.Sequence(initial));
 
-
-
         parent.addChild(this._parent,10);
     }
 
@@ -93,18 +91,22 @@ const OptionsMenuViewBottom = (function (){
 
     function onSettingsEvent() {
         if (_settingsCallback) {
+            onMenuClicked();
+            console.log("onSettingsEvent");
             _settingsCallback();
         }
     }
 
     function onFishListEvent() {
         if (_fishCallBack) {
+            onMenuClicked();
             _fishCallBack();
         }
     }
 
     function onExitEvent() {
         if (_exitCallBack) {
+            onMenuClicked();
             _exitCallBack();
         }
     }

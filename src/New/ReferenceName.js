@@ -21,8 +21,8 @@ const ReferenceName = {
     BuyButton : "#Buy.png",
     LobbyCoinsBG : "#Coins Base.png",
     LobbyCoinIcon : "#Coins.png",//
-    GameSelectBox : "#Game Frame.png",
-    // GameSelectBox : "Game Frame.png",
+    // GameSelectBox : "#Game Frame.png",
+    GameSelectBox : "Game Frame.png",
     Star : "#level Star.png",//
     LevelBG : "#Level Bar.png",
     MessageButton : "#Log.png",
