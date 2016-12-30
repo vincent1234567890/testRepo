@@ -24,8 +24,8 @@ const FishView = (function () {
         this._sprite.setScale(0.5);
         parent.addChild(this._parent, -1);
 
-        const testLayer = new cc.LayerColor();
-        testLayer.setBlendFunc()
+        // const testLayer = new cc.LayerColor();
+        // testLayer.setBlendFunc()
     };
 
     const proto = FishView.prototype;
@@ -54,7 +54,7 @@ const FishView = (function () {
         const notify = new cc.Sequence(new cc.DelayTime(5), new cc.CallFunc(callback, target, id));
         this._sprite.runAction(deathAnimation);
         // this._sprite.runAction(deathAnimationAlpha);
-        this._sprite.setBlendFunc()
+        // this._sprite.setBlendFunc()
 
         this._sprite.runAction(notify);
     };
