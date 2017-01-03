@@ -76,7 +76,7 @@ const LobbyView = (function() {
         fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
         fontDef.fillStyle = new cc.Color(0,0,0,255);
 
-        let label = new cc.LabelTTF(playerData.name , fontDef);
+        let label = new cc.LabelTTF(playerData.playerState.name , fontDef);
         label.setAnchorPoint(0, 0.5);
 
         NameBG.addChild(label);
@@ -92,7 +92,7 @@ const LobbyView = (function() {
         fontDef.fillStyle = new cc.Color(255,255,0,255);
         fontDef.textAlign = cc.TEXT_ALIGNMENT_RIGHT;
 
-        label = new cc.LabelTTF(formatWithCommas(playerData.score), fontDef);
+        label = new cc.LabelTTF(formatWithCommas(playerData.playerState.score), fontDef);
         // label = new cc.LabelTTF("99999999999999999999999", fontDef);
         LobbyCoinsBG.addChild(label);
         label.setPosition(LobbyCoinsBG.getContentSize().width - 250,LobbyCoinsBG.getContentSize().height - 50);
@@ -102,8 +102,8 @@ const LobbyView = (function() {
         // setupGameScroll(this._parent);
 
         const gameListMenu = setupGameList ();
-        size = gameListMenu.getContentSize();
-        gameListMenu.setPosition(- length/2 +size.height/2 - 200 , -height/2 + size.height/2 + 100);
+        // size = gameListMenu.getContentSize();
+        // gameListMenu.setPosition(- length/2 +size.height/2 - 200 , -height/2 + size.height/2 + 100);
         bg.addChild(gameListMenu,2);
 
         const profileMenu = setupProfileMenu ();
@@ -146,45 +146,51 @@ const LobbyView = (function() {
     // };
 
     function setupGameList(){
-        const game = new cc.Sprite(ReferenceName.GameSelectBox);
-        const gameButton = new cc.MenuItemSprite(game, undefined, undefined, gameSelected);
-        const menu = new cc.Menu(gameButton);
-        gameButton.setPosition(cc.pAdd(cc.p(menu.getContentSize().width / 2, gameButton.getContentSize().height / 2), cc.p(0, 0)));
-        return menu;
+        // const game = new cc.Sprite(ReferenceName.GameSelectBox);
+        // const gameButton = new cc.MenuItemSprite(game, undefined, undefined, gameSelected);
+        // const menu = new cc.Menu(gameButton);
+        // gameButton.setPosition(cc.pAdd(cc.p(menu.getContentSize().width / 2, gameButton.getContentSize().height / 2), cc.p(0, 0)));
+        // return menu;
 
-        // var midX = cc.view.getDesignResolutionSize().width / 2;
-        // var midY = cc.view.getDesignResolutionSize().height / 2;
-        //
-        // var listView = new ccui.ListView();
-        // listView.setDirection(ccui.ScrollView.DIR_HORIZONTAL);
-        // listView.setTouchEnabled(true);
-        // listView.setBounceEnabled(true);
-        // // listView.setBackGroundImage(res.HelloWorld_png);
-        // listView.setContentSize(cc.size(cc.view.getDesignResolutionSize().width, cc.view.getDesignResolutionSize().height - 250));
-        // // listView.setInnerContainerSize(200,200)
-        // listView.setAnchorPoint(cc.p(0.5, 0.5));
-        // listView.setPosition(midX, midY);
-        //
-        // for ( var i = 0; i < 50; i++ )
-        // {
-        //     var button = new ccui.Button();
-        //     button.setName("TextButton");
-        //     button.setTouchEnabled(true);
-        //     button.loadTextures(ReferenceName.GameSelectBox,undefined, undefined, ccui.Widget.PLIST_TEXTURE);
-        //     button.gameData = i;
-        //     button.setContentSize(cc.size(600,500));
-        //     listView.pushBackCustomItem(button);
-        // }
-        //
-        // function touchEvent(sender, type) {
-        //     switch (type) {
-        //         case ccui.Widget.TOUCH_ENDED:
-        //             gameSelected(sender);
-        //             break;
-        //     }
-        // }
-        //
-        // return listView;
+        const width = cc.view.getDesignResolutionSize().width;
+        const height = cc.view.getDesignResolutionSize().height;
+
+        const listView = new ccui.ListView();
+        listView.setDirection(ccui.ScrollView.DIR_HORIZONTAL);
+        listView.setTouchEnabled(true);
+        listView.setBounceEnabled(true);
+        // listView.setBackGroundImage(res.HelloWorld_png);
+        listView.setContentSize(cc.size(width, height ));
+        // listView.setInnerContainerSize(200,200)
+        listView.setAnchorPoint(cc.p(0.5, 0.5));
+        listView.setPosition(width/2, height/2 -150);
+
+        for ( var i = 0; i < 10; i++ )
+        {
+            let button = new ccui.Button();
+            button.setTouchEnabled(true);
+            button.loadTextures(ReferenceName.GameSelectBox,undefined, undefined, ccui.Widget.PLIST_TEXTURE);
+            button.gameData = i;
+            button.setPosition(button.getContentSize().width/2 + 40, button.getContentSize().height/2 + 75);
+            button.addTouchEventListener(touchEvent)
+            // button.setContentSize(cc.size(300,500));
+
+            let content = new ccui.Widget();
+            content.setContentSize(width/4,button.getContentSize().height);
+            content.addChild(button);
+
+            listView.pushBackCustomItem(content);
+        }
+
+        function touchEvent(sender, type) {
+            switch (type) {
+                case ccui.Widget.TOUCH_ENDED:
+                    gameSelected(sender);
+                    break;
+            }
+        }
+
+        return listView;
     }
     
     
@@ -263,7 +269,7 @@ const LobbyView = (function() {
 
     function gameSelected(sender){
         // menubutton.setEnabled(false);
-        ClientServerConnect.joinGame(0).catch(console.error);
+        ClientServerConnect.joinGame(sender.gameData).catch(console.error);
         sender.setEnabled(false);
         // ClientServerConnect.joinGame(sender.gameData).catch(console.error);
     }

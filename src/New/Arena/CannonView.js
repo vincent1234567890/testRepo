@@ -90,7 +90,7 @@ const CannonView = (function(){
         this._cannonNode.runAction(sequence);
 
         function swapSpriteVisibility (){
-            sprite1.setVisible(!sprite1.isVisible());
+            sprite1.setVisible(false);
             sprite2.setVisible(!sprite1.isVisible());
         }
 

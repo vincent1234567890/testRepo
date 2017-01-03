@@ -32,7 +32,7 @@ const NetPrefab = (function () {
         bottomLeft.setRotation(180 + baseRotation);
         bottomRight.setRotation(90 + baseRotation);
 
-        this.sequence = new cc.Sequence (scale1,scale2,scale1,scale2, cc.callFunc(this.destroyView, this));
+        this.sequence = new cc.Sequence (scale1,scale2,scale1,scale2, new cc.callFunc(this.destroyView, this));
 
 
         this.node.setPosition(x,y);

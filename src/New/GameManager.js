@@ -171,8 +171,12 @@ const GameManager = function () {
         return _fishManager.addFish(fishId, fishType);
     };
 
+    const caughtFish = function (fishId){
+        _fishManager.caughtFish(fishId);
+    };
+
     const removeFish = function (fishId) {
-        return _fishManager.removeFish(fishId);
+        _fishManager.removeFish(undefined,fishId);
     };
 
     const updateEverything = function () {
@@ -213,7 +217,14 @@ const GameManager = function () {
         PlayerPreferences.setLoginDetails(_loginManager.getLoginInfo());
         _loginManager.destroyView();
 
-        createLobby();
+        ClientServerConnect.requestMyData().then(
+            stats => {
+                console.log(stats);
+                _playerData = stats.data;
+                createLobby();
+            }
+        );
+
     }
 
     function onLeaveArena() {
@@ -228,6 +239,7 @@ const GameManager = function () {
     }
 
     function createLobby() {
+
         if (!_lobbyManager)
             _lobbyManager = new LobbyManager(_parentNode, _playerData);
         else {
@@ -341,6 +353,7 @@ const GameManager = function () {
         explodeBullet: explodeBullet,
         createFish: createFish,
         removeFish: removeFish,
+        caughtFish: caughtFish,
         updateEverything: updateEverything,
         showPostGameStats: showPostGameStats,
         goToLogin: goToLogin,

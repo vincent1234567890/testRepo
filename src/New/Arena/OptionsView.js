@@ -25,7 +25,7 @@ const OptionsView = (function () {
         _background.addChild(_touchlayer);
         _background.addChild(this._music);
         _background.addChild(this._sound);
-        this._parent.addChild(_background,1);
+        this._parent.addChild(_background,20);
     }
 
     function createSlider(labelText, callback, value){

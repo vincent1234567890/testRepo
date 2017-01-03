@@ -157,6 +157,10 @@ const ClientServerConnect = function () {
         return _gameWSClient.callAPIOnce('game','getMyGameStats', {});
     }
 
+    function requestMyData(){
+        return _gameWSClient.callAPIOnce('game', 'getMyStatus', {});
+    }
+
     function setGameWSClient (client) {
         _gameWSClient = client;
     }
@@ -196,6 +200,7 @@ const ClientServerConnect = function () {
         resetArena : resetArena,
         leaveGame : leaveGame,
         requestStats : requestStats,
+        requestMyData : requestMyData,
         //getGameIOSocket: getGameIOSocket,
         postGameCleanup: postGameCleanup,
     };
