@@ -92,7 +92,7 @@ const OptionsMenuViewBottom = (function (){
     function onSettingsEvent() {
         if (_settingsCallback) {
             onMenuClicked();
-            console.log("onSettingsEvent");
+            // console.log("onSettingsEvent");
             _settingsCallback();
         }
     }

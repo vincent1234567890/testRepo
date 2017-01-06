@@ -24,7 +24,7 @@
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-13,1}</string>
+                <string>{-13,0}</string>
                 <key>spriteSize</key>
                 <string>{514,275}</string>
                 <key>spriteSourceSize</key>
@@ -39,7 +39,7 @@
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-2,1}</string>
+                <string>{-2,0}</string>
                 <key>spriteSize</key>
                 <string>{536,277}</string>
                 <key>spriteSourceSize</key>
@@ -129,7 +129,7 @@
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-1,1}</string>
+                <string>{-1,0}</string>
                 <key>spriteSize</key>
                 <string>{538,277}</string>
                 <key>spriteSourceSize</key>
@@ -144,7 +144,7 @@
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-13,1}</string>
+                <string>{-13,0}</string>
                 <key>spriteSize</key>
                 <string>{514,275}</string>
                 <key>spriteSourceSize</key>
@@ -168,7 +168,7 @@
             <key>size</key>
             <string>{1881,823}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:5050733248ccae5b2bc09b22e2305225:a1b002d7402709847cba4f210e8f3ebc:afbcbb55d069ed0a39f39d7b4d933581$</string>
+            <string>$TexturePacker:SmartUpdate:b9314b9744f6a9baa04247a35c3e8d09:359d1e3ff164911d6e38d011266383b5:afbcbb55d069ed0a39f39d7b4d933581$</string>
             <key>textureFileName</key>
             <string>GoldShark.png</string>
         </dict>

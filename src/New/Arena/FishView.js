@@ -7,8 +7,8 @@ const FishView = (function () {
     const deathScaleSmall = new cc.ScaleTo(0.3, 0.3);
     const deathScaleLarge = new cc.ScaleTo(0.3, 0.5);
 
-    // const alphaFadeOut = new cc.FadeTo(0.2, 77);
-    // const alphaFadeIn = new cc.FadeTo(0.2, 230);
+    const alphaFadeOut = new cc.FadeTo(0.2, 77);
+    const alphaFadeIn = new cc.FadeTo(0.2, 230);
 
     // const deathTint = new cc.TintTo (0.3, 196,196,196)
 
@@ -45,15 +45,15 @@ const FishView = (function () {
     };
 
     proto.killFish = function (target, callback, id) {
-        console.log("killFish", id)
+        // console.log("killFish", id)
         this._sprite.setColor(new cc.Color(32,32,128,128));
         // this._sprite.runAction(deathTint);
 
         const deathAnimation = new cc.RepeatForever( new cc.Sequence ( deathScaleSmall, deathScaleLarge ));
-        // const deathAnimationAlpha = new cc.RepeatForever( new cc.Sequence ( alphaFadeOut, alphaFadeIn ));
+        const deathAnimationAlpha = new cc.RepeatForever( new cc.Sequence ( alphaFadeOut, alphaFadeIn ));
         const notify = new cc.Sequence(new cc.DelayTime(5), new cc.CallFunc(callback, target, id));
         this._sprite.runAction(deathAnimation);
-        // this._sprite.runAction(deathAnimationAlpha);
+        this._sprite.runAction(deathAnimationAlpha);
         // this._sprite.setBlendFunc()
 
         this._sprite.runAction(notify);
