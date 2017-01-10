@@ -83,7 +83,8 @@ const GameManager = function () {
         }
         _fishManager = new FishViewManager(_parentNode, _fishGameArena, getRotatedView);
 
-        _optionsManager = new OptionsManager(_parentNode, undefined, undefined, onLeaveArena, _gameConfig);
+        _optionsManager = new OptionsManager(_parentNode, onSettingsButton, undefined, onLeaveArena);
+        _optionsManager.doView(_gameConfig);
 
         _bulletManager = new BulletManager(_parentNode, _fishGameArena, getRotatedView);
 
@@ -240,9 +241,10 @@ const GameManager = function () {
 
     function createLobby() {
 
-        if (!_lobbyManager)
-            _lobbyManager = new LobbyManager(_parentNode, _playerData);
-        else {
+        if (!_lobbyManager) {
+            _lobbyManager = new LobbyManager(_parentNode, _playerData, onSettingsButton);
+            _optionsManager = new OptionsManager(_parentNode, undefined, undefined, onLeaveArena);
+        }else {
             _lobbyManager.doView(_parentNode, _playerData);
         }
     }
@@ -287,6 +289,8 @@ const GameManager = function () {
         _optionsManager = new OptionsManager(_parentNode);
         // createLobby();
     }
+
+
 
     function destroyArena(){
         resetArena();
@@ -341,6 +345,10 @@ const GameManager = function () {
             }
         }
         return {position: [x, y], rotation: rot}
+    }
+
+    function onSettingsButton(){
+        _optionsManager.showSettings();
     }
 
     return {
