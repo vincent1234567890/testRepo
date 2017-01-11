@@ -140,6 +140,7 @@ const OptionsMenuViewBottom = (function (){
     function animationCallback(){
         _isAnimating = false;
         _isShowing = !_isShowing;
+        _menu.setEnabled(_isShowing);
     }
 
     const proto = OptionsMenuViewBottom.prototype;
