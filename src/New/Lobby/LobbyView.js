@@ -2,12 +2,22 @@
  * Created by eugeneseah on 15/11/16.
  */
 const LobbyView = (function() {
-    let isGameSelected;
+    "use strict";
+    // let isGameSelected;
+    let touchLayer;
 
-    const LobbyView = function ( parent, playerData) {
+    const profileArea = new cc.Rect(0,0,200,100);
+
+    let _settingsCallback;
+
+    const LobbyView = function (playerData, settingsCallback) {
         // this.gameSelected = false;
 
-        this._parent = parent;
+        this._parent = new cc.Node();
+
+        GameView.addView(this._parent);
+
+        _settingsCallback = settingsCallback;
 
         //var width = cc.view.getDesignResolutionSize().width;
 
@@ -117,12 +127,19 @@ const LobbyView = (function() {
         lobbyMenu.setPosition(size.width/2 - 70,height - 80);
         LobbyCoinsBG.addChild(lobbyMenu,2);
 
-        // this._touchlayer = new TouchLayerRefactored();
-        // this._touchlayer.setSwallowTouches(true);
+        // this._touchlayer = new TouchLayerRefactored(onProfileclick);
+        // this._touchlayer.setSwallowTouches(false);
         //
-        // bg.addChild(this._touchlayer,-2);
+        // profileMenu.addChild(this._touchlayer,-1);
 
     };
+
+    function onProfileclick(touch) {
+        if(cc.rectContainsPoint(profileArea,touch)){
+            //profileview
+
+        }
+    }
 
 
     // function setupGameScroll(parent) {
@@ -144,6 +161,11 @@ const LobbyView = (function() {
     //     menu.setPosition(0,300);
     //
     // };
+
+    function setupProfileClick(){
+
+
+    }
 
     function setupGameList(){
         // const game = new cc.Sprite(ReferenceName.GameSelectBox);
@@ -264,7 +286,8 @@ const LobbyView = (function() {
     }
 
     function settingsButtonPressed () {
-        console.log("settingsButtonPressed");
+        _settingsCallback();
+        // console.log("settingsButtonPressed");
     }
 
     function gameSelected(sender){
@@ -279,6 +302,9 @@ const LobbyView = (function() {
     }
 
 
+    proto.destroyView = function () {
+        GameView.destroyView(this._parent);
+    };
 
 
     return LobbyView;

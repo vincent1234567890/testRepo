@@ -7,10 +7,10 @@ const OptionsManager = (function (){
     let _settingsCallback;
     let _fishListCallBack;
     let _exitCallBack;
-    let _parent;
+    // let _parent;
 
-    function OptionsManager(parent, settingsCallback, fishListCallback, exitCallback, gameConfig) {
-        _parent = parent;
+    function OptionsManager(settingsCallback, fishListCallback, exitCallback) {
+        // _parent = new cc.Node();
         _settingsCallback = settingsCallback;
         _fishListCallBack = fishListCallback;
         _exitCallBack = exitCallback;
@@ -18,20 +18,17 @@ const OptionsManager = (function (){
         cc.spriteFrameCache.addSpriteFrames(res.BottomMenuPlist);
         cc.spriteFrameCache.addSpriteFrames(res.SettingsUIPlist);
 
-        if (gameConfig && gameConfig.isUsingOldCannonPositions)
-            this.view = new OptionsSideMenuView(parent, onSettings, onFishList, onExitButton);
-        else{
-            this.view = new OptionsMenuViewBottom(parent, onSettings, onFishList, onExitButton);
-        }
+        // this.view = new OptionsSideMenuView(onSettings, onFishList, onExitButton);
+
+        // if (gameConfig && gameConfig.isUsingOldCannonPositions)
+        //     this.view = new OptionsSideMenuView(parent, onSettings, onFishList, onExitButton);
+        // else{
+        //     this.view = new OptionsMenuViewBottom(parent, onSettings, onFishList, onExitButton);
+        // }
 
     }
 
     function onSettings(){
-        if (!this._settingsView)
-            this._settingsView = new OptionsView(_parent);
-        else{
-            this._settingsView.show();
-        }
         if (_settingsCallback) {
             _settingsCallback();
         }
@@ -48,10 +45,33 @@ const OptionsManager = (function (){
             _exitCallBack ();
         }
     }
-    
-    OptionsManager.prototype.destroyView = function () {
-        this.view.destroy();
+
+    const proto = OptionsManager.prototype;
+
+    proto.destroyView = function () {
+        this._view.destroy();
+        if(this._settingsView){
+            this._settingsView.destroyView();
+        }
     };
+
+    proto.showSettings = function(){
+        if (!this._settingsView)
+            this._settingsView = new OptionsView();
+        else{
+            this._settingsView.show();
+        }
+    };
+
+    proto.doView = function (gameConfig) {
+        if (gameConfig && gameConfig.isUsingOldCannonPositions)
+            this._view = new OptionsSideMenuView(onSettings, onFishList, onExitButton);
+        else{
+            this._view = new OptionsMenuViewBottom(onSettings, onFishList, onExitButton);
+        }
+    };
+
+
 
     return OptionsManager;
 })();

@@ -7,11 +7,13 @@ const NetPrefab = (function () {
     // const scale3 = new cc.ScaleTo(0.5,0.9);
     // const scale1 = new cc.ScaleTo(0.5,0.9);
     // let sequence = new cc.Sequence (scale1,scale2,scale1,scale2,destroyView);
-    const NetPrefab = function (parent, x,y, resource) {
+    const NetPrefab = function (x,y, resource) {
 
-        this.node = new cc.Node();
-        this._parent = parent;
-        this._parent.addChild(this.node);
+        this._parent = new cc.Node();
+        GameView.addView(this._parent);
+        // this._parent = parent;
+        // this._parent.addChild(this.node);
+
 
         const topLeft = new cc.Sprite(resource);
         topLeft.setAnchorPoint(0,0);
@@ -22,10 +24,10 @@ const NetPrefab = (function () {
         const bottomRight = new cc.Sprite(resource);
         bottomRight.setAnchorPoint(0,0);
 
-        this.node.addChild(topLeft);
-        this.node.addChild(topRight);
-        this.node.addChild(bottomLeft);
-        this.node.addChild(bottomRight);
+        this._parent.addChild(topLeft);
+        this._parent.addChild(topRight);
+        this._parent.addChild(bottomLeft);
+        this._parent.addChild(bottomRight);
 
         topLeft.setRotation(-90 + baseRotation);
         topRight.setRotation(baseRotation);
@@ -35,8 +37,8 @@ const NetPrefab = (function () {
         this.sequence = new cc.Sequence (scale1,scale2,scale1,scale2, new cc.callFunc(this.destroyView, this));
 
 
-        this.node.setPosition(x,y);
-        this.node.runAction(this.sequence);
+        this._parent.setPosition(x,y);
+        this._parent.runAction(this.sequence);
     };
 
     const proto = NetPrefab.prototype;
@@ -51,8 +53,9 @@ const NetPrefab = (function () {
         // console.log(this);
 
         // if (this) {
-            this._parent.removeChild(this.node);
-            this.node = null;
+        //     this._parent.removeChild(this.node);
+            GameView.destroyView(this._parent);
+            this._parent = null;
         // }
     };
 

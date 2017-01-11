@@ -18,7 +18,8 @@ var PlayerView = (function () {
     }
 
     PlayerView.prototype.destroyView = function () {
-        this._playerViewStaticPrefabInstance.parent.removeChild(this._playerViewStaticPrefabInstance);
+        // this._playerViewStaticPrefabInstance.parent.removeChild(this._playerViewStaticPrefabInstance);
+        this._playerViewStaticPrefabInstance.destroyView();
         this._playerViewStaticPrefabInstance = null;
     };
 
