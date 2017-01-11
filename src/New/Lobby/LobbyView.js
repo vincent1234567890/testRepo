@@ -10,10 +10,13 @@ const LobbyView = (function() {
 
     let _settingsCallback;
 
-    const LobbyView = function ( parent, playerData, settingsCallback) {
+    const LobbyView = function (playerData, settingsCallback) {
         // this.gameSelected = false;
 
-        this._parent = parent;
+        this._parent = new cc.Node();
+
+        GameView.addView(this._parent);
+
         _settingsCallback = settingsCallback;
 
         //var width = cc.view.getDesignResolutionSize().width;
@@ -299,6 +302,9 @@ const LobbyView = (function() {
     }
 
 
+    proto.destroyView = function () {
+        GameView.destroyView(this._parent);
+    };
 
 
     return LobbyView;

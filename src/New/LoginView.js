@@ -3,11 +3,12 @@
  */
 
 var LoginView = (function() {
+    "use strict";
+    var LoginView = function () {
 
-    var LoginView = function ( parent) {
-
-        this._parent = parent;
-
+        // this._parent = parent;
+        this._parent = new cc.Node();
+        GameView.addView(this._parent);
 
         var midX = cc.view.getDesignResolutionSize().width / 2;
         var midY = cc.view.getDesignResolutionSize().height / 2;
@@ -35,7 +36,6 @@ var LoginView = (function() {
         textPass.needsLayout();
         this._parent.addChild(textPass);
         this.textPass = textPass;
-
     };
 
     var proto = LoginView.prototype;
@@ -53,6 +53,14 @@ var LoginView = (function() {
     proto.setLoginInfo = function (name, pass) {
         this.textName.setString(name);
         this.textPass.setString(pass);
+    };
+
+    // proto.getView = function () {
+    //     return this.parent;
+    // }
+    proto.destroyView = function(){
+
+        GameView.destroyView(this._parent);
     };
 
     return LoginView;

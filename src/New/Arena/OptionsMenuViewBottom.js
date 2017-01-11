@@ -24,8 +24,9 @@ const OptionsMenuViewBottom = (function (){
 
     let thisParent;
 
-    function OptionsMenuViewBottom(parent, settingsCallback, fishListCallback, exitCallback) {
+    function OptionsMenuViewBottom(settingsCallback, fishListCallback, exitCallback) {
         thisParent = this._parent = new cc.Node();
+        GameView.addView(this._parent, 9);
 
         _settingsCallback = settingsCallback;
         _fishCallBack = fishListCallback;
@@ -43,7 +44,7 @@ const OptionsMenuViewBottom = (function (){
         _touchlayer = new TouchLayerRefactored(onMenuClicked);
         _touchlayer.setSwallowTouches(true);
         _touchlayer.setEnable(false);
-        this._parent.addChild(_touchlayer);
+        this._parent.addChild(_touchlayer,-1);
 
         // let option = new cc.Sprite(ReferenceName.BottomMenuButton);
         // let optionButton = new cc.MenuItemSprite(option, undefined, undefined, onMenuClicked);
@@ -60,7 +61,8 @@ const OptionsMenuViewBottom = (function (){
         // const initial = new cc.FadeTo(0, 0);
         // _menu.runAction(new cc.Sequence(initial));
 
-        parent.addChild(this._parent,10);
+        // parent.addChild(this._parent,10);
+
     }
 
     function setupSideMenu() {
@@ -92,7 +94,7 @@ const OptionsMenuViewBottom = (function (){
     function onSettingsEvent() {
         if (_settingsCallback) {
             onMenuClicked();
-            // console.log("onSettingsEvent");
+            console.log("onSettingsEvent");
             _settingsCallback();
         }
     }
@@ -100,6 +102,7 @@ const OptionsMenuViewBottom = (function (){
     function onFishListEvent() {
         if (_fishCallBack) {
             onMenuClicked();
+            console.log("onFishListEvent");
             _fishCallBack();
         }
     }
@@ -107,11 +110,13 @@ const OptionsMenuViewBottom = (function (){
     function onExitEvent() {
         if (_exitCallBack) {
             onMenuClicked();
+            console.log("onExitEvent");
             _exitCallBack();
         }
     }
 
-    function onMenuClicked(){
+    function onMenuClicked(point){
+
         if (!_menu) {
             _menu = setupSideMenu();
             _menu.setPosition(cc.view.getDesignResolutionSize().width / 2, 0);
@@ -141,6 +146,7 @@ const OptionsMenuViewBottom = (function (){
         _isAnimating = false;
         _isShowing = !_isShowing;
         _menu.setEnabled(_isShowing);
+        console.log(_menu.isEnabled());
     }
 
     const proto = OptionsMenuViewBottom.prototype;
@@ -150,7 +156,9 @@ const OptionsMenuViewBottom = (function (){
         _fishCallBack = null;
         _exitCallBack = null;
         _menu=null;
-       this._parent.parent.removeChild(this._parent);
+       // this._parent.parent.removeChild(this._parent);
+        GameView.destroyView(thisParent);
+        thisParent = this._parent = null;
     };
 
 

@@ -22,6 +22,7 @@ const FishView = (function () {
 
         this.doAnimation(FishAnimationEnum.default);
         this._sprite.setScale(0.5);
+        // GameView.addView(this._parent);
         parent.addChild(this._parent, -1);
 
         // const testLayer = new cc.LayerColor();

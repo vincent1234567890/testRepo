@@ -6,7 +6,7 @@
 
 const CannonView = (function(){
     "use strict";
-    const CannonView = function (parent, gameConfig, slot) {
+    const CannonView = function (gameConfig, slot) {
         let pos;
         let markerPos;
         this._gameConfig = gameConfig;
@@ -27,8 +27,7 @@ const CannonView = (function(){
         this._cannonNode.addChild(this._spriteDown, 20);
 
         this._cannonPowerBG = new cc.Sprite(ReferenceName.CannonPower);
-        this._cannonPowerBG.y = this._cannonPowerBG.getContentSize().height / 2;
-        this._cannonNode.addChild(this._cannonPowerBG, 25);
+        this._cannonNode.addChild(this._cannonPowerBG, 27);
 
         this._sprite.setAnchorPoint(0.5,0.4);
         this._sprite.setPosition({x: pos[0], y: pos[1]});
@@ -59,7 +58,10 @@ const CannonView = (function(){
             this._cannonPowerBG.y = pos[1] - 40;
         }
 
-        parent.addChild(this._cannonNode,2);
+        GameView.addView(this._cannonNode,2);
+
+
+        // parent.addChild(this._cannonNode,2);
         // this._cannonPowerLabel.setPosition(CannonPower.getPosition());
     };
 
@@ -94,7 +96,7 @@ const CannonView = (function(){
 
 
 
-    proto.setupCannonChangeMenu = function (parent, cannonManager, gameConfig, slot, callbackCannonDown, callbackCannonUp) {
+    proto.setupCannonChangeMenu = function (cannonManager, gameConfig, slot, callbackCannonDown, callbackCannonUp) {
         let menuLeft = new cc.MenuItemSprite(new cc.Sprite(ReferenceName.DecreaseCannon), new cc.Sprite(ReferenceName.DecreaseCannon_Down), callbackCannonDown, cannonManager);
         let menuRight = new cc.MenuItemSprite(new cc.Sprite(ReferenceName.IncreaseCannon), new cc.Sprite(ReferenceName.IncreaseCannon_Down), callbackCannonUp, cannonManager);
 
@@ -117,6 +119,10 @@ const CannonView = (function(){
         // }
         menu.x = -545;
         menu.y = 23 ;
+    };
+
+    proto.destroyView = function () {
+        GameView.destroyView(this._cannonNode);
     };
 
     return CannonView;

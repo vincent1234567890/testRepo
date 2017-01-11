@@ -2,6 +2,11 @@
  * Created by eugeneseah on 30/11/16.
  */
 
+/*
+currently does not conform to new structure of GameManaager -> GameView -> GameView.addView
+@TODO : refactor to include BulletManagerView
+ */
+
 const BulletManager = (function(){
     "use strict";
     let _parent;
@@ -9,10 +14,11 @@ const BulletManager = (function(){
     let _bulletCache = [];
     let _rotationFunction;
 
-    const BulletManager = function (parent, fishGameArena, rotationFunction) {
-        _parent = parent;
+    const BulletManager = function (fishGameArena, rotationFunction) {
+        _parent = new cc.Node();
         _fishGameArena = fishGameArena;
         _rotationFunction = rotationFunction;
+        GameView.addView(_parent);
     };
 
     const proto = BulletManager.prototype;
@@ -85,6 +91,10 @@ const BulletManager = (function(){
         return null;
     };
 
+    proto.getView = function () {
+        return _parent;
+    };
+
     proto.destroyView = function () {
         for ( let bulletId in _bulletCache){
             const bullet = _bulletCache[bulletId];
@@ -94,6 +104,8 @@ const BulletManager = (function(){
             }
         }
         _bulletCache = [];
+        GameView.destroyView(_parent);
+        _parent = null;
     };
 
 

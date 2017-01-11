@@ -24,8 +24,9 @@ const OptionsSideMenuView = (function () {
 
     let _isAnimating;
 
-    function OptionsView(parent, settingsCallback, fishListCallback, exitCallback) {
-        this._parent = parent;
+    function OptionsView(settingsCallback, fishListCallback, exitCallback) {
+        this._parent = new cc.Node();
+        GameView.addView(this._parent);
 
         _settingsCallback = settingsCallback;
         _fishCallBack = fishListCallback;
@@ -168,7 +169,9 @@ const OptionsSideMenuView = (function () {
         _settingsCallback  = null;
         _fishCallBack = null;
         _exitCallBack = null;
-        this._parent.removeChild(_menu);
+        GameView.destroyView(this._parent);
+        this._parent = null;
+        // this._parent.removeChild(_menu);
     };
 
 

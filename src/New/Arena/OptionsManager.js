@@ -7,16 +7,18 @@ const OptionsManager = (function (){
     let _settingsCallback;
     let _fishListCallBack;
     let _exitCallBack;
-    let _parent;
+    // let _parent;
 
-    function OptionsManager(parent, settingsCallback, fishListCallback, exitCallback) {
-        _parent = parent;
+    function OptionsManager(settingsCallback, fishListCallback, exitCallback) {
+        // _parent = new cc.Node();
         _settingsCallback = settingsCallback;
         _fishListCallBack = fishListCallback;
         _exitCallBack = exitCallback;
         cc.spriteFrameCache.addSpriteFrames(res.SideMenuPlist);
         cc.spriteFrameCache.addSpriteFrames(res.BottomMenuPlist);
         cc.spriteFrameCache.addSpriteFrames(res.SettingsUIPlist);
+
+        // this.view = new OptionsSideMenuView(onSettings, onFishList, onExitButton);
 
         // if (gameConfig && gameConfig.isUsingOldCannonPositions)
         //     this.view = new OptionsSideMenuView(parent, onSettings, onFishList, onExitButton);
@@ -47,12 +49,15 @@ const OptionsManager = (function (){
     const proto = OptionsManager.prototype;
 
     proto.destroyView = function () {
-        this.view.destroy();
+        this._view.destroy();
+        if(this._settingsView){
+            this._settingsView.destroyView();
+        }
     };
 
     proto.showSettings = function(){
         if (!this._settingsView)
-            this._settingsView = new OptionsView(_parent);
+            this._settingsView = new OptionsView();
         else{
             this._settingsView.show();
         }
@@ -60,9 +65,9 @@ const OptionsManager = (function (){
 
     proto.doView = function (gameConfig) {
         if (gameConfig && gameConfig.isUsingOldCannonPositions)
-            this.view = new OptionsSideMenuView(parent, onSettings, onFishList, onExitButton);
+            this._view = new OptionsSideMenuView(onSettings, onFishList, onExitButton);
         else{
-            this.view = new OptionsMenuViewBottom(parent, onSettings, onFishList, onExitButton);
+            this._view = new OptionsMenuViewBottom(onSettings, onFishList, onExitButton);
         }
     };
 
