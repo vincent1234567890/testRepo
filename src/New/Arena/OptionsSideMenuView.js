@@ -24,8 +24,9 @@ const OptionsSideMenuView = (function () {
 
     let _isAnimating;
 
-    function OptionsView(parent, settingsCallback, fishListCallback, exitCallback) {
-        this._parent = parent;
+    function OptionsView(settingsCallback, fishListCallback, exitCallback) {
+        this._parent = new cc.Node();
+        GameView.addView(this._parent);
 
         _settingsCallback = settingsCallback;
         _fishCallBack = fishListCallback;
@@ -65,10 +66,10 @@ const OptionsSideMenuView = (function () {
         let settings = new cc.Sprite(ReferenceName.SideMenuSettingsButton);
         let settingsButton = new cc.MenuItemSprite(settings, undefined, undefined, onSettingsEvent);
 
-        let fishList = new cc.Sprite(ReferenceName.FishListButton);
+        let fishList = new cc.Sprite(ReferenceName.SideMenuFishListButton);
         let fishListButton = new cc.MenuItemSprite(fishList, undefined, undefined, onFishListEvent);
 
-        let exit = new cc.Sprite(ReferenceName.ExitButton);
+        let exit = new cc.Sprite(ReferenceName.SideMenuExitButton);
         let exitButton = new cc.MenuItemSprite(exit, undefined, undefined, onExitEvent);
 
         let backGround = new cc.Sprite(ReferenceName.SideMenuBG);
@@ -168,7 +169,9 @@ const OptionsSideMenuView = (function () {
         _settingsCallback  = null;
         _fishCallBack = null;
         _exitCallBack = null;
-        this._parent.removeChild(_menu);
+        GameView.destroyView(this._parent);
+        this._parent = null;
+        // this._parent.removeChild(_menu);
     };
 
 

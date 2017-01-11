@@ -8,11 +8,11 @@ const PlayerViewManager = (function () {
 
     const PlayerViewManager = function (gameConfig, index, isPlayer) {
         _bulletId = 0;
-        this._parent = new cc.Node();
+        // this._parent = new cc.Node();
 
-        this._cannonManager = new CannonManager(this._parent, gameConfig, index, isPlayer);
+        this._cannonManager = new CannonManager(gameConfig, index, isPlayer);
 
-        this._playerView = new PlayerView(this._parent, gameConfig, index);// not ideal
+        this._playerView = new PlayerView(gameConfig, index);// not ideal
 
     };
 
@@ -44,14 +44,16 @@ const PlayerViewManager = (function () {
         this._cannonManager.forceClearGun();
     };
 
-    proto.getView = function () {
-        return this._parent;
-    };
+    // proto.getView = function () {
+    //     return this._parent;
+    // };
 
 
     proto.destroyView = function(){
         this._playerView.destroyView();
         this._playerView = null;
+        this._cannonManager.destroyView();
+        this._cannonManager = null;
     };
 
 

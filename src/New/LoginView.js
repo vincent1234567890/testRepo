@@ -3,11 +3,12 @@
  */
 
 var LoginView = (function() {
-
+    "use strict";
     var LoginView = function () {
 
         // this._parent = parent;
-        this.parent = new cc.Node();
+        this._parent = new cc.Node();
+        GameView.addView(this._parent);
 
         var midX = cc.view.getDesignResolutionSize().width / 2;
         var midY = cc.view.getDesignResolutionSize().height / 2;
@@ -23,7 +24,7 @@ var LoginView = (function() {
         textName.setPlaceholderFontSize(40);
         //textName.setAnchorPoint(cc.p());
         textName.needsLayout();
-        this.parent.addChild(textName);
+        this._parent.addChild(textName);
         this.textName = textName;
 
         var textPass = new cc.EditBox(cc.size(300,70), new cc.Scale9Sprite(ReferenceName.Login9Slice));
@@ -33,7 +34,7 @@ var LoginView = (function() {
         textPass.setPlaceholderFontSize(40);
         textPass.setInputFlag(cc.EDITBOX_INPUT_FLAG_PASSWORD);
         textPass.needsLayout();
-        this.parent.addChild(textPass);
+        this._parent.addChild(textPass);
         this.textPass = textPass;
     };
 
@@ -54,9 +55,13 @@ var LoginView = (function() {
         this.textPass.setString(pass);
     };
 
-    proto.getView = function () {
-        return this.parent;
-    }
+    // proto.getView = function () {
+    //     return this.parent;
+    // }
+    proto.destroyView = function(){
+
+        GameView.destroyView(this._parent);
+    };
 
     return LoginView;
 }());

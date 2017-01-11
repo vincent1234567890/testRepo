@@ -19,6 +19,7 @@ const GameView = function(){
     }
 
     function initialiseParent(parent) {
+        cc.spriteFrameCache.addSpriteFrames(res.GameUIPlist);
         if (parent === undefined && _parentNode && _parentNode.parent) {
             parent = _parentNode.parent;
         }
@@ -30,7 +31,7 @@ const GameView = function(){
     }
 
     function goToGame (touchAt) {
-        cc.spriteFrameCache.addSpriteFrames(res.GameUIPlist);
+
         if (_curretBKG){
             _parentNode.removeChild(_curretBKG);
         }
@@ -41,12 +42,20 @@ const GameView = function(){
         initialiseTouch(touchAt);
     }
 
-    function addView(view, parent){
-        if (parent){
-            initialiseParent(parent);
-        }
+    function goBackToLobby() {//hack
+        _parentNode.parent.backToMenu();
+    }
 
-        _parentNode.addChild(view);
+    function addView(view, depth){
+        // if (parent){
+        //     initialiseParent(parent);
+        // }
+
+        _parentNode.addChild(view, depth);
+    }
+
+    function destroyView(view){
+        _parentNode.removeChild(view);
     }
 
     const initialiseTouch = function (touchAt) {
@@ -62,7 +71,9 @@ const GameView = function(){
         initialise : initialise,
         // parentNode : _parentNode,
         goToGame : goToGame,
+        goBackToLobby : goBackToLobby,
         addView : addView,
+        destroyView : destroyView,
     }
 
 

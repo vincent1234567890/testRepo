@@ -7,12 +7,12 @@ const CannonManager = (function () {
 
     let _gameConfig;
 
-    function CannonManager(parent, gameConfig, index, isPlayer) {
+    function CannonManager(gameConfig, index, isPlayer) {
         _gameConfig = gameConfig;
         cc.spriteFrameCache.addSpriteFrames(res.Weapon1Plist);
-        this._cannon = new CannonView(parent, gameConfig, index);
+        this._cannon = new CannonView(gameConfig, index);
         if (isPlayer) {
-            this._cannon.setupCannonChangeMenu(parent, this, gameConfig, index, this.decreaseCannon, this.increaseCannon);
+            this._cannon.setupCannonChangeMenu(this, gameConfig, index, this.decreaseCannon, this.increaseCannon);
             this.forceSetGun(0);
         }
 
@@ -75,7 +75,8 @@ const CannonManager = (function () {
     };
 
     proto.destroyView = function () {
-        this._cannon.parent.removeChild(this._cannon);
+        // this._cannon.parent.removeChild(this._cannon);
+        this._cannon.destroyView();
         this._cannon = null;
     };
 

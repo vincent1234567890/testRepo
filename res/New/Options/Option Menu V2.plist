@@ -4,63 +4,63 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>Bullet 1.png</key>
+            <key>Exit V2.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{19,42}</string>
+                <string>{94,94}</string>
                 <key>spriteSourceSize</key>
-                <string>{19,42}</string>
+                <string>{94,94}</string>
                 <key>textureRect</key>
-                <string>{{1,417},{19,42}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>Cannon 1 DW.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{100,185}</string>
-                <key>spriteSourceSize</key>
-                <string>{100,185}</string>
-                <key>textureRect</key>
-                <string>{{1,1},{100,185}}</string>
+                <string>{{1,97},{94,94}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Cannon 1.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,-25}</string>
-                <key>spriteSize</key>
-                <string>{100,135}</string>
-                <key>spriteSourceSize</key>
-                <string>{100,185}</string>
-                <key>textureRect</key>
-                <string>{{1,188},{100,135}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>Net 1.png</key>
+            <key>Fish V2.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{90,90}</string>
+                <string>{95,94}</string>
                 <key>spriteSourceSize</key>
-                <string>{90,90}</string>
+                <string>{95,94}</string>
                 <key>textureRect</key>
-                <string>{{1,325},{90,90}}</string>
+                <string>{{1,1},{95,94}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>Option.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,-5}</string>
+                <key>spriteSize</key>
+                <string>{89,79}</string>
+                <key>spriteSourceSize</key>
+                <string>{89,89}</string>
+                <key>textureRect</key>
+                <string>{{1,289},{89,79}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>Setting V2.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{94,94}</string>
+                <key>spriteSourceSize</key>
+                <string>{94,94}</string>
+                <key>textureRect</key>
+                <string>{{1,193},{94,94}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -74,13 +74,13 @@
             <key>premultiplyAlpha</key>
             <false/>
             <key>realTextureFileName</key>
-            <string>Weapon 1.png</string>
+            <string>Option Menu V2.png</string>
             <key>size</key>
-            <string>{102,437}</string>
+            <string>{97,369}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:871bf5026b12d71cd682242c83f93894:5e45476d50bf0c8e53a7da75701d5ce5:89d87c224ff114fc490c3025e4205a5b$</string>
+            <string>$TexturePacker:SmartUpdate:58b5d21d2549353e69e734b5febca3ae:04beee7b903c904d1dbb0cd4bc567aaf:ba6a588eb04ec8c52557b323902693fc$</string>
             <key>textureFileName</key>
-            <string>Weapon 1.png</string>
+            <string>Option Menu V2.png</string>
         </dict>
     </dict>
 </plist>

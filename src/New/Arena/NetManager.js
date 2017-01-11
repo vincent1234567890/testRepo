@@ -6,7 +6,7 @@ const NetManager = (function (){
         "use strict";
 
     function NetManager (){
-        this.parent = new cc.Node();
+        // this.parent = new cc.Node();
     }
 
     const proto = NetManager.prototype;
@@ -15,11 +15,7 @@ const NetManager = (function (){
         // cc.spriteFrameCache.addSpriteFrames(res.Net1);
 
         //get resource from gunId
-        const net = new NetPrefab(this.parent, x,y, ReferenceName.Net1);
-    };
-
-    proto.getView = function () {
-        return this.parent;
+        const net = new NetPrefab(x, y, ReferenceName.Net1);
     };
 
     return NetManager;

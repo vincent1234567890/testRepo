@@ -2,11 +2,11 @@
  * Created by eugeneseah on 25/10/16.
  */
 
-"use strict";
+
 
 const CannonView = (function(){
-
-    const CannonView = function (parent, gameConfig, slot) {
+    "use strict";
+    const CannonView = function (gameConfig, slot) {
         let pos;
         let markerPos;
         this._gameConfig = gameConfig;
@@ -27,8 +27,7 @@ const CannonView = (function(){
         this._cannonNode.addChild(this._spriteDown, 20);
 
         this._cannonPowerBG = new cc.Sprite(ReferenceName.CannonPower);
-        this._cannonPowerBG.y = this._cannonPowerBG.getContentSize().height / 2;
-        this._cannonNode.addChild(this._cannonPowerBG, 25);
+        this._cannonNode.addChild(this._cannonPowerBG, 27);
 
         this._sprite.setAnchorPoint(0.5,0.4);
         this._sprite.setPosition({x: pos[0], y: pos[1]});
@@ -59,7 +58,10 @@ const CannonView = (function(){
             this._cannonPowerBG.y = pos[1] - 40;
         }
 
-        parent.addChild(this._cannonNode,2);
+        GameView.addView(this._cannonNode,2);
+
+
+        // parent.addChild(this._cannonNode,2);
         // this._cannonPowerLabel.setPosition(CannonPower.getPosition());
     };
 
@@ -76,29 +78,25 @@ const CannonView = (function(){
 
 
     proto.shootTo = function (angle) {
-
-        const sprite1 = this._spriteDown;
-        const sprite2 = this._sprite;
-        // console.log(ReferenceName["CannonDown1"]);
-        //Assumes Updated cannon;
-
-        // this._sprite.setTexture(ReferenceName["CannonDown1"]);
-        const sequence = new cc.Sequence (  new cc.CallFunc(swapSpriteVisibility, this)
-                                            ,new cc.DelayTime(this._gameConfig.shootInterval/2000)
-                                            // ,new cc.CallFunc(swapSpriteVisibility, this)
+        const swapData = [ this._sprite, this._spriteDown];
+        const sequence = new cc.Sequence(new cc.CallFunc(swapSpriteVisibility, this, swapData)
+            , new cc.DelayTime(this._gameConfig.shootInterval / 2000)
+            ,new cc.CallFunc(swapSpriteVisibility, this, swapData)
         );
         this._cannonNode.runAction(sequence);
 
-        function swapSpriteVisibility (){
-            sprite1.setVisible(!sprite1.isVisible());
-            sprite2.setVisible(!sprite1.isVisible());
-        }
-
-        this._sprite.setRotation( angle);
+        this._sprite.setRotation(angle);
         this._spriteDown.setRotation(angle);
+
+        function swapSpriteVisibility (sender, data) {
+            data[0].setVisible(!data[0].isVisible());
+            data[1].setVisible(!data[0].isVisible());
+        }
     };
 
-    proto.setupCannonChangeMenu = function (parent, cannonManager, gameConfig, slot, callbackCannonDown, callbackCannonUp) {
+
+
+    proto.setupCannonChangeMenu = function (cannonManager, gameConfig, slot, callbackCannonDown, callbackCannonUp) {
         let menuLeft = new cc.MenuItemSprite(new cc.Sprite(ReferenceName.DecreaseCannon), new cc.Sprite(ReferenceName.DecreaseCannon_Down), callbackCannonDown, cannonManager);
         let menuRight = new cc.MenuItemSprite(new cc.Sprite(ReferenceName.IncreaseCannon), new cc.Sprite(ReferenceName.IncreaseCannon_Down), callbackCannonUp, cannonManager);
 
@@ -110,17 +108,21 @@ const CannonView = (function(){
 
         // menu.y = this.getContentSize().height / 2 - 30;
 
-        let pos;
-        let markerPos;
-        if (gameConfig.isUsingOldCannonPositions) {
-            pos = gameConfig.oldCannonPositions[slot];
-            markerPos = gameConfig.oldCannonPositions[0];
-        }else{
-            pos = gameConfig.cannonPositions[slot];
-            markerPos = gameConfig.cannonPositions[0]
-        }
+        // let pos;
+        // let markerPos;
+        // if (gameConfig.isUsingOldCannonPositions) {
+        //     pos = gameConfig.oldCannonPositions[slot];
+        //     markerPos = gameConfig.oldCannonPositions[0];
+        // }else{
+        //     pos = gameConfig.cannonPositions[slot];
+        //     markerPos = gameConfig.cannonPositions[0]
+        // }
         menu.x = -545;
         menu.y = 23 ;
+    };
+
+    proto.destroyView = function () {
+        GameView.destroyView(this._cannonNode);
     };
 
     return CannonView;

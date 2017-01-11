@@ -4,9 +4,10 @@
 
 const ScoreboardView = (function() {
     "use strict";
-    return function ( parent, target, data, goToLobby, goToNewRoom) {
+    function ScoreboardView(target, data, goToLobby, goToNewRoom) {
 
-        this._parent = parent;
+        this._parent = new cc.Node();
+        GameView.addView(this._parent,100);
 
         const midX = cc.view.getDesignResolutionSize().width / 2;
         const midY = cc.view.getDesignResolutionSize().height / 2;
@@ -24,47 +25,47 @@ const ScoreboardView = (function() {
 
         const sessionTime = createGridObject(ReferenceName.SessionTime, ReferenceName.TimeSpentIcon, timeFormatter(data.secondsInGame));
         sessionTime.setPosition(282 , cc.view.getDesignResolutionSize().height - 183);
-        bg.addChild(sessionTime);
+        bg.addChild(sessionTime,1);
 
         const goldSpent = createGridObject(ReferenceName.GoldSpent, ReferenceName.CoinSpentIcon, data.bulletsCost);
         goldSpent.setPosition(682 , cc.view.getDesignResolutionSize().height - 183);
-        bg.addChild(goldSpent);
+        bg.addChild(goldSpent,1);
 
         const goldEarned = createGridObject(ReferenceName.GoldEarned, ReferenceName.CoinEarnedIcon, data.fishWinnings);
         goldEarned.setPosition(1082 , cc.view.getDesignResolutionSize().height - 183);
-        bg.addChild(goldEarned);
+        bg.addChild(goldEarned,1);
 
         const fishCaught = createGridObject(ReferenceName.FishCaught, ReferenceName.TotalFishIcon, data.fishCaught);
         fishCaught.setPosition(282 , cc.view.getDesignResolutionSize().height - 273);
-        bg.addChild(fishCaught);
+        bg.addChild(fishCaught,1);
 
         const goldenFishCaught = createGridObject(ReferenceName.GoldenFishCaught, ReferenceName.GoldenFishIcon, data.goldenFishCaught);
         goldenFishCaught.setPosition(682 , cc.view.getDesignResolutionSize().height - 273);
-        bg.addChild(goldenFishCaught);
+        bg.addChild(goldenFishCaught,1);
 
         const sumArray = array => array.reduce((a, b) => a + b, 0);
         const count = sumArray( Object.values(data.multiCatches || {}).map(mCatch => mCatch.count) );
         let multiCatch = createGridObject(ReferenceName.MultiCatch, ReferenceName.MultiCatchIcon, count);
         multiCatch.setPosition(1082 , cc.view.getDesignResolutionSize().height - 273);
-        bg.addChild(multiCatch);
+        bg.addChild(multiCatch,1);
 
         const bulletsFired = createGridObject(ReferenceName.BulletsFired, ReferenceName.CannonIcon, data.bulletsFired);
         bulletsFired.setPosition(282 , cc.view.getDesignResolutionSize().height - 363);
-        bg.addChild(bulletsFired);
+        bg.addChild(bulletsFired,1);
 
         const skillsUsed = createGridObject(ReferenceName.SkillsUsed, ReferenceName.SkillUsedButton, data.skillsUsed);
         skillsUsed.setPosition(682 , cc.view.getDesignResolutionSize().height - 363);
-        bg.addChild(skillsUsed);
+        bg.addChild(skillsUsed,1);
 
         const catchSuccessRate = createGridObject(ReferenceName.CatchSuccessRate, ReferenceName.HitRateIcon, Math.round(data.fishCaught / data.fishHit * 100));
         catchSuccessRate.setPosition(1082 , cc.view.getDesignResolutionSize().height - 363);
-        bg.addChild(catchSuccessRate);
+        bg.addChild(catchSuccessRate,1);
 
         const scrollBoxBG = new cc.Sprite(ReferenceName.BottomScrollBarBG);
         scrollBoxBG.setPosition(679 , cc.view.getDesignResolutionSize().height - 550);
-        bg.addChild(scrollBoxBG);
+        bg.addChild(scrollBoxBG,1);
 
-    };
+    }
 
     function createGridObject(labelText, spriteName, data){
         let fontDef = new cc.FontDefinition();
@@ -141,14 +142,19 @@ const ScoreboardView = (function() {
         menu.setPosition(0,20);
 
         return menu;
-
-
-
     }
 
     function touchEater (){
 
 
     }
+
+    const proto = ScoreboardView.prototype;
+
+    proto.destroyView = function () {
+        GameView.destroyView(this._parent);
+    };
+
+    return ScoreboardView;
 
 }());

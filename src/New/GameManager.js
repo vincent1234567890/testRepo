@@ -65,7 +65,7 @@ const GameManager = function () {
             const index = getPlayerSlot(i);
             // console.log(index);
             _playerViews[index] = new PlayerViewManager(_gameConfig, index, i == _playerSlot);
-            GameView.addView(_playerViews[index].getView());
+            // GameView.addView(_playerViews[index].getView());
 
             const direction = cc.pNormalize(cc.pSub({x: cc.winSize.width / 2, y: cc.winSize.height / 2}, new cc.p(_gameConfig.cannonPositions[index][0], _gameConfig.cannonPositions[index][1])));
             const rot = Math.atan2(direction.x, direction.y);
@@ -73,16 +73,14 @@ const GameManager = function () {
         }
 
         _fishManager = new FishViewManager(_fishGameArena, getRotatedView);
-        GameView.addView(_fishManager.getView());
 
-        _optionsManager = new OptionsManager(undefined, undefined, onLeaveArena);
-        GameView.addView(_optionsManager.getView());
+        _optionsManager = new OptionsManager(onSettingsButton, undefined, onLeaveArena);
+        _optionsManager.doView(_gameConfig);
 
         _bulletManager = new BulletManager(_fishGameArena, getRotatedView);
-        GameView.addView(_bulletManager.getView());
 
         _netManager = new NetManager();
-        GameView.addView(_netManager.getView());
+        // GameView.addView(_netManager.getView());
 
         GameView.goToGame(touchAt);
 
@@ -106,7 +104,7 @@ const GameManager = function () {
 
         const direction = cc.pNormalize(cc.pSub(pos, new cc.p(_gameConfig.cannonPositions[slot][0], _gameConfig.cannonPositions[slot][1])));
         const rot = Math.atan2(direction.x, direction.y);
-        _playerViews[slot].shootTo(rot * 180 / Math.PI);
+        // _playerViews[slot].shootTo(rot * 180 / Math.PI);
 
         let info = getRotatedView(undefined,rot);
 
@@ -125,6 +123,8 @@ const GameManager = function () {
         let slot = getPlayerSlot(arenaPlayer.slot);
         let info = getRotatedView(undefined, angle );
         _playerViews[slot].shootTo(info.rotation - 90);
+
+
         return _bulletManager.createBullet(bulletId);
     };
 
@@ -158,8 +158,12 @@ const GameManager = function () {
         return _fishManager.addFish(fishId, fishType);
     };
 
+    const caughtFish = function (fishId){
+        _fishManager.caughtFish(fishId);
+    };
+
     const removeFish = function (fishId) {
-        return _fishManager.removeFish(fishId);
+        _fishManager.removeFish(undefined,fishId);
     };
 
     const updateEverything = function () {
@@ -174,7 +178,7 @@ const GameManager = function () {
 
     const goToLogin = function () {
         if (!_loggedIn) {
-            GameView.addView(_loginManager.goToLogin());
+            _loginManager.goToLogin();
         }
     };
 
@@ -201,7 +205,14 @@ const GameManager = function () {
         PlayerPreferences.setLoginDetails(_loginManager.getLoginInfo());
         _loginManager.destroyView();
 
-        createLobby();
+        ClientServerConnect.requestMyData().then(
+            stats => {
+                console.log(stats);
+                _playerData = stats.data;
+                createLobby();
+            }
+        );
+
     }
 
     function onLeaveArena() {
@@ -216,18 +227,26 @@ const GameManager = function () {
     }
 
     function createLobby() {
+// <<<<<<< HEAD
+//         if (!_lobbyManager) {
+//             _lobbyManager = new LobbyManager(_playerData);
+//             GameView.addView(_lobbyManager.getView());
+//         }else {
+//             _lobbyManager.doView(_playerData);
+// =======
+
         if (!_lobbyManager) {
-            _lobbyManager = new LobbyManager(_playerData);
-            GameView.addView(_lobbyManager.getView());
+            _lobbyManager = new LobbyManager(_playerData, onSettingsButton);
+            _optionsManager = new OptionsManager(undefined, undefined, onLeaveArena);
         }else {
-            _lobbyManager.doView(_playerData);
+            _lobbyManager.doView(_playerData, onSettingsButton);
         }
     }
 
     function exitToLobby() {
         destroyArena();
-        _parentNode.parent.backToMenu();
-
+        // _parentNode.parent.backToMenu();
+        GameView.goBackToLobby();
 
         createLobby();
     }
@@ -245,7 +264,6 @@ const GameManager = function () {
         console.log(stats);
         if (!_scoreboardManager) {
             _scoreboardManager = new ScoreboardManager(stats.data.recentGames[0], exitToLobby, goToNewRoom);
-            GameView.addView(_scoreboardManager.getView());
         } else {
             _scoreboardManager.doView(stats.data.recentGames[0]);
         }
@@ -262,9 +280,11 @@ const GameManager = function () {
         // console.log("GameManager:development");
         initialiseParent(parent);
         // goToScoreboard()
-        // _optionsManager = new OptionsManager(_parentNode);
-        createLobby();
+        _optionsManager = new OptionsManager(_parentNode);
+        // createLobby();
     }
+
+
 
     function destroyArena(){
         resetArena();
@@ -275,13 +295,15 @@ const GameManager = function () {
         }
         _fishGameArena = null;
         _lastShotTime = -Infinity;
-        _optionsManager.destroyView();
+
     }
 
     function resetArena(){
         _isRotated = false;
+        _optionsManager.destroyView();
         _fishManager.destroyView();
         _bulletManager.destroyView();
+        _scoreboardManager.destroyView();
 
         for (let i = 0; i < _gameConfig.maxPlayers; i++) {
             clearPlayerState(i);
@@ -320,6 +342,10 @@ const GameManager = function () {
         return {position: [x, y], rotation: rot}
     }
 
+    function onSettingsButton(){
+        _optionsManager.showSettings();
+    }
+
     return {
         initialiseLogin: initialiseLogin,
         initialiseGame: initialiseGame,
@@ -330,6 +356,7 @@ const GameManager = function () {
         explodeBullet: explodeBullet,
         createFish: createFish,
         removeFish: removeFish,
+        caughtFish: caughtFish,
         updateEverything: updateEverything,
         showPostGameStats: showPostGameStats,
         goToLogin: goToLogin,

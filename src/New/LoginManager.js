@@ -7,7 +7,7 @@ let LoginManager = (function (){
     let _view;
 
     function LoginManager() {
-        this._parent = new cc.Node();
+        // this._parent = new cc.Node();
         cc.spriteFrameCache.addSpriteFrames(res.LoginUIPlist);
     }
 
@@ -18,8 +18,9 @@ let LoginManager = (function (){
             // console.log("goToLogin");
             _view = new LoginView();
             restoreLoginInfo();
+            // GameView.addView(this.)
         }
-        return _view.getView();
+        // return _view.getView();
     };
 
     proto.getLoginInfo = function () {
@@ -48,7 +49,7 @@ let LoginManager = (function (){
 
     proto.destroyView = function () {
         // console.log("destroyView");
-        this._parent.removeChild(_view);
+        // this._parent.removeChild(_view);
         _view = null;
     };
 

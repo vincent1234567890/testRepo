@@ -5,11 +5,16 @@
 const OptionsView = (function () {
     "use strict";
     const ENDOFFSET = 0.05;
+    let thisParent;
+    const ZORDER = 10;
     let _background;
     let _touchlayer;
 
-    function OptionsView (parent){
-        this._parent = parent;
+
+    function OptionsView (){
+        // this._parent = parent;
+        thisParent = this._parent = new cc.Node();
+
         _background = new cc.Sprite(ReferenceName.OptionsBG);
         _background.setPosition(cc.view.getDesignResolutionSize().width/2, cc.view.getDesignResolutionSize().height / 2);
 
@@ -22,10 +27,13 @@ const OptionsView = (function () {
         _touchlayer = new TouchLayerRefactored(dismissCallback);
         _touchlayer.setSwallowTouches(true);
 
-        _background.addChild(_touchlayer);
+        _background.addChild(_touchlayer,-1);
         _background.addChild(this._music);
         _background.addChild(this._sound);
-        this._parent.addChild(_background,1);
+
+        this._parent.addChild(_background);
+
+        GameView.addView(this._parent,10);
     }
 
     function createSlider(labelText, callback, value){
@@ -72,12 +80,15 @@ const OptionsView = (function () {
     }
 
     function dismissCallback(touch){
+        console.log(touch);
         if (GUIFunctions.isSpriteTouched(_background,touch)) {
             return;
         }
         // _touchlayer.setSwallowTouches(false);
         _touchlayer.setEnable(false);
+        thisParent.setLocalZOrder(-1000);
         _background.setVisible(false);
+        console.log("disable!", thisParent.getLocalZOrder());
     }
 
     let proto = OptionsView.prototype;
@@ -85,7 +96,13 @@ const OptionsView = (function () {
     proto.show = function(){
         // _touchlayer.setSwallowTouches(true);
         _touchlayer.setEnable(true);
+        thisParent.setLocalZOrder(ZORDER);
         _background.setVisible(true);
     };
+
+    proto.destroyView = function () {
+        GameView.destroyView(this._parent);
+    };
+
     return OptionsView;
 }());

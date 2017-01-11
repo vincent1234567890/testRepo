@@ -27,20 +27,21 @@ const FishViewManager = (function(){
 
         this.rotationFunction = rotationFunction;
 
+        GameView.addView(this._parent);
     };
 
     const proto = FishViewManager.prototype;
 
     proto.addFish = function(fishId, fishType){
-        // this._fishes[fishId] = new FishView(this._parent, fishType);
-        // return this._fishes[fishId];
+        this._fishes[fishId] = new FishView(this._parent, fishType);
+        return this._fishes[fishId];
 
         //debug version:
-        const parent = new cc.Node();
-        this._parent.addChild(parent);
-        new FishView(parent, fishType);
-        this._fishes[fishId] = parent;
-        return this._fishes[fishId];
+        // const parent = new cc.Node();
+        // this._parent.addChild(parent);
+        // new FishView(parent, fishType);
+        // this._fishes[fishId] = parent;
+        // return this._fishes[fishId];
 
     };
 
@@ -48,8 +49,14 @@ const FishViewManager = (function(){
         return this._fishes[id];
     };
     
-    proto.removeFish = function (id) {
-        this._parent.removeChild(this._fishes[id]);
+    proto.caughtFish = function (id) {
+        // console.log("caughtFish : id", id);
+        this._fishes[id].killFish(this, this.removeFish, id);
+    };
+
+    proto.removeFish = function (reference, id) {
+        // console.log("removeFish: ", reference, "id", id);
+        this._fishes[id].destroyView(this._parent);
         delete this._fishes[id];
     };
 
@@ -60,8 +67,8 @@ const FishViewManager = (function(){
                 //console.log(`Moving fish ${this.FishID} to ${fishModel.position}`);
 
                 const model = this.rotationFunction(fishModel.position, fishModel.angle);
-                this._fishes[fishId].setPosition(cc.p(model.position[0],model.position[1]));
-                this._fishes[fishId].setRotation(model.rotation);
+                this._fishes[fishId].updateView(cc.p(model.position[0],model.position[1]), model.rotation);
+                // this._fishes[fishId].setRotation(model.rotation);
             }
         }
     };
@@ -74,11 +81,9 @@ const FishViewManager = (function(){
                 delete fishModel;
             }
         }
-
+        GameView.destroyView(this._parent);
+        this._parent = null;
     };
 
-    proto.getView = function () {
-        return this._parent;
-    };
     return FishViewManager;
 })();
