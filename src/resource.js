@@ -185,7 +185,8 @@ var res = {
     LoginUIPng : "res/New/Lobby/Login.png",
 
     //GameBackgrounds
-    GameBackground1 : "res/New/Game BG/Game BG 1.png",
+    GameBackground0 : "res/New/Game BG/Game BG 1.png",
+    GameBackground1 : "res/New/Game BG/Game Bg 2.jpg",
 
     //Fish
     StingrayPNG : "res/New/Fish/Ray.png",
@@ -208,6 +209,8 @@ var res = {
     GoldSharkPlist : "res/New/Fish/GoldShark.plist",
     SmallFishPlist : "res/New/Fish/SmallFish.plist",
     SmallFishPng : "res/New/Fish/SmallFish.png",
+    DemoFishPlist : "res/New/Fish/DemoFish.plist",
+    DemoFishPng : "res/New/Fish/DemoFish.png",
 
     //Weapons
     Weapon1Plist : "res/New/Weapons/Weapon 1.plist",

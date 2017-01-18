@@ -32,6 +32,10 @@ const ReferenceName = {
     LobbySettingsButton : "#Lobby Setting.png",
     TopBg : "#Top Base.png",
 
+    //Profile
+    ProfileBackground : "Profile POut BG.png",
+
+
     //Scoreboard
     ScoreboardBG : "#SummaryBase.png",
     CannonIcon : "#Cannon shot.png",

@@ -4,7 +4,9 @@
 const ProfileView = (function () {
     "use strict";
     function ProfileView() {
-
+        cc.spriteFrameCache.addSpriteFrames(res.Weapon1Plist);
+        this._parent = new cc.Node();
+        this._bkg =
     }
     proto = ProfileView.prototype;
 

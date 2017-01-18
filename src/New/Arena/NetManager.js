@@ -11,11 +11,11 @@ const NetManager = (function (){
 
     const proto = NetManager.prototype;
 
-    proto.explodeAt= function(x,y,gunId){
+    proto.explodeAt= function(bulletData){
         // cc.spriteFrameCache.addSpriteFrames(res.Net1);
-
+        const rotPos = GameView.getRotatedView(bulletData.position).position;
         //get resource from gunId
-        const net = new NetPrefab(x, y, ReferenceName.Net1);
+        const net = new NetPrefab(rotPos[0], rotPos[1], ReferenceName.Net1);
     };
 
     return NetManager;

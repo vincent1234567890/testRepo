@@ -12,23 +12,19 @@ const BulletManager = (function(){
     let _parent;
     let _fishGameArena;
     let _bulletCache = [];
-    let _rotationFunction;
 
-    const BulletManager = function (fishGameArena, rotationFunction) {
+    const BulletManager = function (fishGameArena) {
         _parent = new cc.Node();
         _fishGameArena = fishGameArena;
-        _rotationFunction = rotationFunction;
         GameView.addView(_parent);
     };
 
     const proto = BulletManager.prototype;
 
     proto.createBullet = function (bulletId) {
-        // cc.spriteFrameCache.addSpriteFrames(res.bull);
         _bulletCache[bulletId] = new BulletView(_parent, ReferenceName.Bullet1);
         // console.log(_bulletCache);
     };
-
 
     proto.update = function () {
         for (let bulletId in _bulletCache) {
@@ -52,7 +48,7 @@ const BulletManager = (function(){
                 //console.log("bulletModel.position:", bulletModel.position);
                 //this.setPosition(new cc.Point(bulletModel.position[0], bulletModel.position[1]));
 
-                const model = _rotationFunction(bulletModel.position, bulletModel.angle);
+                const model = GameView.getRotatedView(bulletModel.position, bulletModel.angle);
                 // console.log(JSON.stringify(model));
                 bulletView.setPosition(model.position[0], model.position[1]);
                 bulletView.setRotation(180 - model.rotation);
@@ -75,7 +71,6 @@ const BulletManager = (function(){
     };
 
     proto.explodeBullet = function (bulletId) {
-        //@TODO:add fish nets
         const bullet = _bulletCache[bulletId];
 
         if (bullet){
