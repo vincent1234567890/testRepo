@@ -46,34 +46,51 @@ const ClientServerConnect = function () {
                     // Future: Maybe ping the servers here, then connect to the closest one
                 }
             ).catch(console.error.bind(console));
+
+            if (typeof document !== 'undefined' && document.location.search) {
+                var queryParams = parseQueryParams();
+                if (queryParams.token && (queryParams.playerId || queryParams.email)) {
+                    loginWithToken(queryParams.token, queryParams.playerId, queryParams.email, function () {
+                        // If successful, remove the query parameters from the URL
+                        window.history.pushState({where: 'start', search: document.location.search}, '', document.location.pathname);
+                        // Start the game!
+                        GameManager.goToLobby();
+                    });
+                }
+            }
         });
     };
 
-    const login = function ( name, pass, callback) {
+    function parseQueryParams () {
+        var queryParams = {};
+        document.location.search.substring(1).split('&').forEach(
+            pair => {
+                var splitPair = pair.split('=');
+                var key = decodeURIComponent(splitPair[0]);
+                var val = decodeURIComponent(splitPair[1]);
+                queryParams[key] = val;
+            }
+        )
+        return queryParams;
+    }
+
+    const login = function (name, pass, onSuccess, onFailure) {
         const client = getGameWSClient();
 
         Promise.resolve().then(
             () => {
-
                 return client.callAPIOnce('game', 'login', {
-                            email: name,
-                            password : pass,
-                        })
-
+                    email: name,
+                    password : pass,
+                });
             }
         ).then(
             loginResponse => {
                 console.log("loginResponse:", loginResponse);
-                callback(loginResponse.data.player);
+                onSuccess(loginResponse.data.player);
                 // return client.callAPIOnce('game', 'joinGame', {})
-            }, error => {
-                    console.log(error);
-                    callback();
-                }
-
-
-        )
-            // .then(
+            }
+        //).then(
         //     joinResponse => {
         //         console.log("joinResponse:", joinResponse);
         //
@@ -90,9 +107,39 @@ const ClientServerConnect = function () {
         //         // clientServerConnect.startGameScene() will be run by clientReceiver when everything is ready.
         //     }
         // )
-            .catch( error => {
-                console.error(error);
-            });
+        ).catch(
+            error => {
+                console.log(error);
+                if (onFailure) {
+                    onFailure(error);
+                } else {
+                    console.error(error);
+                }
+            }
+        );
+    };
+
+    const loginWithToken = function (token, playerId, email, onSuccess, onFailure) {
+        const client = getGameWSClient();
+
+        client.callAPIOnce('game', 'login', {
+            id: playerId,
+            email: email,
+            token: token,
+        }).then(
+            loginResponse => {
+                console.log("loginResponse:", loginResponse);
+                onSuccess(loginResponse.data.player);
+            }
+        ).catch(
+            error => {
+                if (onFailure) {
+                    onFailure(error);
+                } else {
+                    console.error(error);
+                }
+            }
+        );
     };
 
     const joinGame = function (gameId) {
