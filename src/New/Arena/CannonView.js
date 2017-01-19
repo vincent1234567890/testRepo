@@ -29,7 +29,7 @@ const CannonView = (function(){
         this._cannonPowerBG = new cc.Sprite(ReferenceName.CannonPower);
         this._cannonNode.addChild(this._cannonPowerBG, 27);
 
-        this._sprite.setAnchorPoint(0.5,0.4);
+        this._sprite.setAnchorPoint(0.5,0.27);
         this._sprite.setPosition({x: pos[0], y: pos[1]});
         this._spriteDown.setAnchorPoint(this._sprite.getAnchorPoint());
         this._spriteDown.setPosition(this._sprite.getPosition());
@@ -63,6 +63,14 @@ const CannonView = (function(){
 
         // parent.addChild(this._cannonNode,2);
         // this._cannonPowerLabel.setPosition(CannonPower.getPosition());
+        const direction = cc.pNormalize(cc.pSub({x: cc.winSize.width / 2, y: cc.winSize.height / 2}, new cc.p(this._gameConfig.cannonPositions[slot][0], this._gameConfig.cannonPositions[slot][1])));
+        const rot = Math.atan2(direction.x, -direction.y);
+        let angle = (GameView.getRotatedView(undefined, rot )).rotation ;
+        this._sprite.setRotation(angle);
+        this._spriteDown.setRotation(angle);
+        this._spriteDown.setVisible(false);
+        // this.shootTo(rot * 180 / Math.PI);
+
     };
 
     const proto = CannonView.prototype;
@@ -76,7 +84,6 @@ const CannonView = (function(){
         this._cannonPowerLabel.setString('');
     };
 
-
     proto.shootTo = function (angle) {
         const swapData = [ this._sprite, this._spriteDown];
         const sequence = new cc.Sequence(new cc.CallFunc(swapSpriteVisibility, this, swapData)
@@ -85,8 +92,10 @@ const CannonView = (function(){
         );
         this._cannonNode.runAction(sequence);
 
-        this._sprite.setRotation(angle);
-        this._spriteDown.setRotation(angle);
+        let modifiedAngle = (GameView.getRotatedView(undefined, angle )).rotation - 90;
+
+        this._sprite.setRotation(modifiedAngle);
+        this._spriteDown.setRotation(modifiedAngle);
 
         function swapSpriteVisibility (sender, data) {
             data[0].setVisible(!data[0].isVisible());

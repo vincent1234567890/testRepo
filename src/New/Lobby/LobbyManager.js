@@ -20,18 +20,18 @@ const LobbyManager = (function () {
 //         }
 //         this._view = new LobbyView(this._parent, playerData);
 // =======
-    const LobbyManager = function (playerData, settingsCallback) {
+    const LobbyManager = function (playerData, settingsCallback, onGameSelectedCallback) {
         cc.spriteFrameCache.addSpriteFrames(res.LobbyUIPlist);
         this._parent = parent;
-        this.doView(playerData, settingsCallback);
+        this.doView(playerData, settingsCallback,onGameSelectedCallback);
     };
 
-    LobbyManager.prototype.doView = function(playerData, settingsCallback){
+    LobbyManager.prototype.doView = function(playerData, settingsCallback,onGameSelectedCallback){
         if (this._view){
             // this._parent.removeChild(this._view);
             this._view.destroyView();
         }
-        this._view = new LobbyView(playerData, settingsCallback);
+        this._view = new LobbyView(playerData, settingsCallback,onGameSelectedCallback);
     };
 
     return LobbyManager;

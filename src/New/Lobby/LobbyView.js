@@ -4,13 +4,14 @@
 const LobbyView = (function() {
     "use strict";
     // let isGameSelected;
-    let touchLayer;
+    let _touchLayer;
 
     const profileArea = new cc.Rect(0,0,200,100);
 
     let _settingsCallback;
+    let _onGameSelectedCallback;
 
-    const LobbyView = function (playerData, settingsCallback) {
+    const LobbyView = function (playerData, settingsCallback, onGameSelectedCallback) {
         // this.gameSelected = false;
 
         this._parent = new cc.Node();
@@ -18,6 +19,7 @@ const LobbyView = (function() {
         GameView.addView(this._parent);
 
         _settingsCallback = settingsCallback;
+        _onGameSelectedCallback = onGameSelectedCallback;
 
         //var width = cc.view.getDesignResolutionSize().width;
 
@@ -117,30 +119,46 @@ const LobbyView = (function() {
         bg.addChild(gameListMenu,2);
 
         const profileMenu = setupProfileMenu ();
+        const parent = new cc.Node();
+        parent.addChild(profileMenu);
         size = profileMenu.getContentSize();
         // profileMenu.setPosition(length - size.width/2,height - size.height/2);
-        profileMenu.setPosition(size.width - length - 300, size.height/2 + height/2 - 80);
-        bg.addChild(profileMenu,2);
+        // parent.setPosition(- 300, height - 80);
+        bg.addChild(parent,2);
+        parent.setPosition(-length/2-300, height/2-80);
+        // bg.addChild(parent,2);
+        _touchLayer = new TouchLayerRefactored(onProfileclick);
+        _touchLayer.setSwallowTouches(false);
+        parent.addChild(_touchLayer,1);
+
+        const testLayer = new cc.LayerColor(0,0,0,196);
+
+
+        profileArea.x = parent.getPositionX() ;
+        profileArea.y = parent.getPositionY() ;
+        profileArea.height = size.height;
+        profileMenu.width = size.width;
+
+        testLayer.setContentSize(profileArea);
+        // testLayer.setContentSize(new cc.rect(500,-500,1000,1000));
+        parent.addChild((testLayer),99);
+        testLayer.setPosition(1000,-1000);
 
         const lobbyMenu = setupLobbyButtons ();
         size = lobbyMenu.getContentSize();
         lobbyMenu.setPosition(size.width/2 - 70,height - 80);
         LobbyCoinsBG.addChild(lobbyMenu,2);
 
-        // this._touchlayer = new TouchLayerRefactored(onProfileclick);
-        // this._touchlayer.setSwallowTouches(false);
-        //
-        // profileMenu.addChild(this._touchlayer,-1);
+
 
     };
 
     function onProfileclick(touch) {
         if(cc.rectContainsPoint(profileArea,touch)){
             //profileview
-
+            console.log("profile");
         }
     }
-
 
     // function setupGameScroll(parent) {
     //     const arrow = new cc.Sprite(ReferenceName.ScrollArrow);
@@ -194,7 +212,7 @@ const LobbyView = (function() {
             button.loadTextures(ReferenceName.GameSelectBox,undefined, undefined, ccui.Widget.PLIST_TEXTURE);
             button.gameData = i;
             button.setPosition(button.getContentSize().width/2 + 40, button.getContentSize().height/2 + 75);
-            button.addTouchEventListener(touchEvent)
+            button.addTouchEventListener(touchEvent);
             // button.setContentSize(cc.size(300,500));
 
             let content = new ccui.Widget();
@@ -214,11 +232,10 @@ const LobbyView = (function() {
 
         return listView;
     }
-    
-    
-
 
     function setupProfileMenu() {
+
+
         const Message = new cc.Sprite(ReferenceName.MessageButton);
         const MessageDown = new cc.Sprite(ReferenceName.MessageButton);
         const Settings = new cc.Sprite(ReferenceName.LobbySettingsButton);
@@ -232,7 +249,7 @@ const LobbyView = (function() {
         messageButton.setPosition(cc.pAdd(cc.p(menu.getContentSize().width / 2, messageButton.getContentSize().height / 2), cc.p(-31, -20)));
         settingsButton.setPosition(cc.pAdd(cc.p(menu.getContentSize().width / 2, settingsButton.getContentSize().height / 2), cc.p(32, -20)));
         // menu.setPosition(-295,691);
-        // parent.addChild(menu,1);
+
         return menu;
     }
 
@@ -287,12 +304,13 @@ const LobbyView = (function() {
 
     function settingsButtonPressed () {
         _settingsCallback();
-        // console.log("settingsButtonPressed");
+        console.log("settingsButtonPressed");
     }
 
     function gameSelected(sender){
         // menubutton.setEnabled(false);
-        ClientServerConnect.joinGame(sender.gameData).catch(console.error);
+        // ClientServerConnect.joinGame(sender.gameData).catch(console.error);
+        _onGameSelectedCallback(sender.gameData);
         sender.setEnabled(false);
         // ClientServerConnect.joinGame(sender.gameData).catch(console.error);
     }

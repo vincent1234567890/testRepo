@@ -9,13 +9,13 @@
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{1,0}</string>
+                <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{668,395}</string>
+                <string>{670,395}</string>
                 <key>spriteSourceSize</key>
                 <string>{670,395}</string>
                 <key>textureRect</key>
-                <string>{{1,87},{668,395}}</string>
+                <string>{{1,87},{670,395}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -76,9 +76,9 @@
             <key>realTextureFileName</key>
             <string>Setting.png</string>
             <key>size</key>
-            <string>{397,756}</string>
+            <string>{397,758}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:6734d554b569405df13d393fefb3c3da:cfe8bca73ebd24d489bbeca98a22ccb7:5a08a6c663804ce26081699a96476fa2$</string>
+            <string>$TexturePacker:SmartUpdate:c5acd995a231ab31846e20e891f2f521:a466c7f9c4d7022fd6e5a721edd66345:5a08a6c663804ce26081699a96476fa2$</string>
             <key>textureFileName</key>
             <string>Setting.png</string>
         </dict>
