@@ -3,13 +3,14 @@
  */
 
 const ProfileManager = (function () {
+    let _profile;
     function ProfileManager() {
 
     }
 
     const proto = ProfileManager.prototype;
-    proto.showProfile= function(parent, data){
-
+    proto.doView= function(parent, data){
+        _profile = new ProfileView();
     };
 
     return ProfileManager;
