@@ -33,7 +33,9 @@ const ReferenceName = {
     TopBg : "#Top Base.png",
 
     //Profile
-    ProfileBackground : "Profile POut BG.png",
+    ProfileBackground : "#Profile POut BG.png",
+    ProfileFishBackground : "#Profile POut Fish Box.png",
+    ProfileFishStatsBackground : "#Profile POut Fish Detail.png",
 
 
     //Scoreboard

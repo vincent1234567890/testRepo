@@ -52,12 +52,12 @@ const GameView = function(){
         if (_curretBKG){
             _parentNode.removeChild(_curretBKG);
         }
-        // if (choice == 1 ){
-            _curretBKG = new cc.Sprite(res['GameBackground' + choice.toString()])
-        // }
-        // else {
-        //     _curretBKG = new cc.Sprite(res.GameBackground1);
-        // }
+        if (choice < 3 ){
+            _curretBKG = new cc.Sprite(res['GameBackground' + choice.toString()]);
+        }
+        else {
+            _curretBKG = new cc.Sprite(res.GameBackground1);
+        }
         _curretBKG.setPosition(cc.view.getDesignResolutionSize().width/2, cc.view.getDesignResolutionSize().height/2);
         _parentNode.addChild(_curretBKG,-5);
 

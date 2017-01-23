@@ -173,6 +173,8 @@ var res = {
     GameUIPlist : "res/New/Game UI.plist",
     LobbyUIPlist : "res/New/Lobby/Lobby.plist",
     LobbyUIPng : "res/New/Lobby/Lobby.png",
+    ProfileUIPlist : "res/New/Lobby/Profile POut.plist",
+    ProfileUIPng : "res/New/Lobby/Profile POut.png",
     SettingsUIPlist : "res/New/Options/Setting.plist",
     SettingsUIPng : "res/New/Options/Setting.png",
     ScoreboardPlist : "res/New/Scoreboard/summary.plist",
@@ -186,7 +188,8 @@ var res = {
 
     //GameBackgrounds
     GameBackground0 : "res/New/Game BG/Game BG 1.png",
-    GameBackground1 : "res/New/Game BG/Game Bg 2.jpg",
+    GameBackground1 : "res/New/Game BG/Game BG 2.jpg",
+    GameBackground2 : "res/New/Game BG/Game BG 3.jpg",
 
     //Fish
     StingrayPNG : "res/New/Fish/Ray.png",

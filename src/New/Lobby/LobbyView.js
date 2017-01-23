@@ -6,12 +6,13 @@ const LobbyView = (function() {
     // let isGameSelected;
     let _touchLayer;
 
-    const profileArea = new cc.Rect(0,0,200,100);
+    const profileArea = new cc.Rect(0,0,450,120);
 
     let _settingsCallback;
     let _onGameSelectedCallback;
+    let _profileCallback;
 
-    const LobbyView = function (playerData, settingsCallback, onGameSelectedCallback) {
+    const LobbyView = function (playerData, settingsCallback, onGameSelectedCallback, profileCallback) {
         // this.gameSelected = false;
 
         this._parent = new cc.Node();
@@ -20,6 +21,7 @@ const LobbyView = (function() {
 
         _settingsCallback = settingsCallback;
         _onGameSelectedCallback = onGameSelectedCallback;
+        _profileCallback = profileCallback;
 
         //var width = cc.view.getDesignResolutionSize().width;
 
@@ -131,18 +133,20 @@ const LobbyView = (function() {
         _touchLayer.setSwallowTouches(false);
         parent.addChild(_touchLayer,1);
 
-        const testLayer = new cc.LayerColor(0,0,0,196);
+        // const testLayer = new cc.LayerColor(0,0,0,196);
 
 
-        profileArea.x = parent.getPositionX() ;
-        profileArea.y = parent.getPositionY() ;
-        profileArea.height = size.height;
-        profileMenu.width = size.width;
-
-        testLayer.setContentSize(profileArea);
-        // testLayer.setContentSize(new cc.rect(500,-500,1000,1000));
-        parent.addChild((testLayer),99);
-        testLayer.setPosition(1000,-1000);
+        // profileArea.x = parent.getPositionX() ;
+        // profileArea.y = parent.getPositionY() ;
+        // profileArea.x = 0 ;
+        profileArea.y = height - profileArea.height ;
+        // profileArea.height = size.height;
+        // profileArea.width = size.width;
+        //
+        // testLayer.setContentSize(profileArea);
+        // // testLayer.setContentSize(new cc.rect(500,-500,1000,1000));
+        // parent.addChild((testLayer),99);
+        // testLayer.setPosition(1000,-1000);
 
         const lobbyMenu = setupLobbyButtons ();
         size = lobbyMenu.getContentSize();
@@ -154,9 +158,11 @@ const LobbyView = (function() {
     };
 
     function onProfileclick(touch) {
+        // console.log(touch,profileArea);
         if(cc.rectContainsPoint(profileArea,touch)){
             //profileview
-            console.log("profile");
+            // console.log("profile");
+            _profileCallback();
         }
     }
 
@@ -205,7 +211,7 @@ const LobbyView = (function() {
         listView.setAnchorPoint(cc.p(0.5, 0.5));
         listView.setPosition(width/2, height/2 -150);
 
-        for ( var i = 0; i < 10; i++ )
+        for ( let i = 0; i < 10; i++ )
         {
             let button = new ccui.Button();
             button.setTouchEnabled(true);
