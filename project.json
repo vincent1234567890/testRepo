@@ -94,6 +94,8 @@
         "src/New/PlayerPreferences.js",
         "src/New/Server/ClientServerConnect.js",
         "src/New/GUIFunctions.js",
+        "src/New/BlockingManager.js",
+        "src/New/BlockingView.js",
 
         "src/New/LoginView.js",
         "src/New/LoginManager.js",

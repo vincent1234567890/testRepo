@@ -65,7 +65,7 @@ const GameView = function(){
     }
 
     function goBackToLobby() {//hack
-        _parentNode.parent.backToMenu();
+        _parentNode._parent.backToMenu();
     }
 
     function addView(view, depth){
@@ -183,6 +183,8 @@ const GameView = function(){
     function updateArena() {
         _fishGameArena.updateEverything();
     }
+
+
 
     return {
         initialise : initialise,
