@@ -2,136 +2,137 @@
  * Created by eugeneseah on 25/10/16.
  */
 
-"use strict";
 
-const CannonView = (function () {
 
-    let CannonView = cc.Sprite.extend({
-        _className: "CannonView",
-        _cannonPowerBG : null,
-        _cannonPowerLabel: cc.LabelTTF,
+const CannonView = (function(){
+    "use strict";
+    const CannonView = function (gameConfig, slot) {
+        let pos;
+        let markerPos;
+        this._gameConfig = gameConfig;
+        this._cannonNode = new cc.Node();
 
-        //@param {node} parent
-        //@param {array[2]} pos
-        ctor: function (parent, gameConfig, slot) {
-            let pos;
-            let markerPos;
-            if (gameConfig.isUsingOldCannonPositions) {
-                pos = gameConfig.oldCannonPositions[slot];
-                markerPos = gameConfig.oldCannonPositions[0];
-            }else{
-                pos = gameConfig.cannonPositions[slot];
-                markerPos = gameConfig.cannonPositions[0]
+        if (gameConfig.isUsingOldCannonPositions) {
+            pos = gameConfig.oldCannonPositions[slot];
+            markerPos = gameConfig.oldCannonPositions[0];
+        }else{
+            pos = gameConfig.cannonPositions[slot];
+            markerPos = gameConfig.cannonPositions[0]
+        }
+
+        this._sprite = new cc.Sprite(ReferenceName.Cannon1);
+        this._spriteDown = new cc.Sprite(ReferenceName.CannonDown1);
+        // this._spriteDown.setVisible(false);
+        this._cannonNode.addChild(this._sprite, 20);
+        this._cannonNode.addChild(this._spriteDown, 20);
+
+        this._cannonPowerBG = new cc.Sprite(ReferenceName.CannonPower);
+        this._cannonNode.addChild(this._cannonPowerBG, 27);
+
+        this._sprite.setAnchorPoint(0.5,0.27);
+        this._sprite.setPosition({x: pos[0], y: pos[1]});
+        this._spriteDown.setAnchorPoint(this._sprite.getAnchorPoint());
+        this._spriteDown.setPosition(this._sprite.getPosition());
+
+        let fontDef = new cc.FontDefinition();
+        fontDef.fontName = "Arial";
+        fontDef.fontSize = "32";
+        fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
+        this._cannonPowerLabel = new cc.LabelTTF('', fontDef);
+
+        this._cannonPowerBG.addChild(this._cannonPowerLabel, 29);
+        this._cannonPowerLabel.setPosition(this._cannonPowerBG.getContentSize().width/2 , this._cannonPowerBG.getContentSize().height/2 - 5);
+
+
+        if (pos[1] > markerPos[1]){
+            let multiplier = 1;
+            let diff = -30;
+            if (pos[0] > markerPos[0]){
+                multiplier = -1;
             }
+            this._cannonPowerBG.x = pos[0] + (diff * multiplier);
+            this._cannonPowerBG.y = pos[1];
+            this._cannonPowerBG.setRotation( multiplier * 90);
+        }else{
+            this._cannonPowerBG.x = pos[0];
+            this._cannonPowerBG.y = pos[1] - 40;
+        }
 
-            this._super(ReferenceName.Cannon);
-            parent.addChild(this, 20);
-
-            this._cannonPowerBG = new cc.Sprite(ReferenceName.CannonPower);
-            this._cannonPowerBG.y = this._cannonPowerBG.getContentSize().height / 2;
-            parent.addChild(this._cannonPowerBG, 25);
-
-            this.setAnchorPoint(0.5,0.4);
-            this.setPosition({x: pos[0], y: pos[1]});
-            // console.log(this.getPosition());
-
-            let fontDef = new cc.FontDefinition();
-            fontDef.fontName = "Arial";
-            fontDef.fontSize = "32";
-            fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
-            this._cannonPowerLabel = new cc.LabelTTF('', fontDef);
-
-            this._cannonPowerBG.addChild(this._cannonPowerLabel, 29);
-            this._cannonPowerLabel.setPosition(this._cannonPowerBG.getContentSize().width/2 , this._cannonPowerBG.getContentSize().height/2 - 5)
-            // const midX = cc.view.getDesignResolutionSize().width / 2;
-            // const midY = cc.view.getDesignResolutionSize().height / 2;
-
-            // if (pos[0] > markerPos[0]) {
-            //     CannonPower.x = midX * 2 - CannonPower.getContentSize().width / 2 + 1;
-            // } else {
-            //     CannonPower.x = CannonPower.getContentSize().width / 2;
-            // }
-            //
-            // if (pos[1] > markerPos[1]) {
-            //     CannonPower.flippedY = true;
-            //     CannonPower.y = cc.view.getDesignResolutionSize().height - CannonPower.getContentSize().height / 2 + 1;
-            // } else {
-            //     CannonPower.y = CannonPower.getContentSize().height / 2 - 1;
-            // }
-
-            // const labelOffset = 30;
-
-            if (pos[1] > markerPos[1]){
-                let multiplier = 1;
-                let diff = -30;
-                if (pos[0] > markerPos[0]){
-                    multiplier = -1;
-                }
-                this._cannonPowerBG.x = pos[0] + (diff * multiplier);
-                this._cannonPowerBG.y = pos[1];
-                this._cannonPowerBG.setRotation( multiplier * 90);
-            }else{
-                this._cannonPowerBG.x = pos[0];
-                this._cannonPowerBG.y = pos[1] - 40;
-            }
+        GameView.addView(this._cannonNode,2);
 
 
-            // this._cannonPowerLabel.setPosition(CannonPower.getPosition());
-        },
+        // parent.addChild(this._cannonNode,2);
+        // this._cannonPowerLabel.setPosition(CannonPower.getPosition());
+        const direction = cc.pNormalize(cc.pSub({x: cc.winSize.width / 2, y: cc.winSize.height / 2}, new cc.p(this._gameConfig.cannonPositions[slot][0], this._gameConfig.cannonPositions[slot][1])));
+        const rot = Math.atan2(direction.x, -direction.y);
+        let angle = (GameView.getRotatedView(undefined, rot )).rotation ;
+        this._sprite.setRotation(angle);
+        this._spriteDown.setRotation(angle);
+        this._spriteDown.setVisible(false);
+        // this.shootTo(rot * 180 / Math.PI);
 
-        updateCannonPowerLabel: function (cannonPower) {
-            this._cannonPowerLabel.setString(String(cannonPower));
-        },
+    };
 
-        clearCannonPowerLabel: function () {
-            this._cannonPowerLabel.setString('');
-        },
+    const proto = CannonView.prototype;
 
-        shootTo: function (angle) {
-            this.setRotation( angle);
-        },
+    proto.updateCannonPowerLabel = function (cannonPower) {
+        this._cannonPowerLabel.setString(String(cannonPower));
+        //Update cannon changes....
+    };
 
-        setupCannonChangeMenu: function (parent, cannonManager, gameConfig, slot, callbackCannonDown, callbackCannonUp) {
-            let menuLeft = new cc.MenuItemSprite(new cc.Sprite(ReferenceName.DecreaseCannon), new cc.Sprite(ReferenceName.DecreaseCannon_Down), callbackCannonDown, cannonManager);
-            let menuRight = new cc.MenuItemSprite(new cc.Sprite(ReferenceName.IncreaseCannon), new cc.Sprite(ReferenceName.IncreaseCannon_Down), callbackCannonUp, cannonManager);
+    proto.clearCannonPowerLabel = function () {
+        this._cannonPowerLabel.setString('');
+    };
+
+    proto.shootTo = function (angle) {
+        const swapData = [ this._sprite, this._spriteDown];
+        const sequence = new cc.Sequence(new cc.CallFunc(swapSpriteVisibility, this, swapData)
+            , new cc.DelayTime(this._gameConfig.shootInterval / 2000)
+            ,new cc.CallFunc(swapSpriteVisibility, this, swapData)
+        );
+        this._cannonNode.runAction(sequence);
+
+        let modifiedAngle = (GameView.getRotatedView(undefined, angle )).rotation - 90;
+
+        this._sprite.setRotation(modifiedAngle);
+        this._spriteDown.setRotation(modifiedAngle);
+
+        function swapSpriteVisibility (sender, data) {
+            data[0].setVisible(!data[0].isVisible());
+            data[1].setVisible(!data[0].isVisible());
+        }
+    };
 
 
-            let menu = new cc.Menu(menuLeft, menuRight);
-            menuLeft.setPosition(cc.pAdd(cc.p(menu.getContentSize().width / 2, menuLeft.getContentSize().height / 2), cc.p(-92, -20)));
-            menuRight.setPosition(cc.pAdd(cc.p(menu.getContentSize().width / 2, menuRight.getContentSize().height / 2), cc.p(92, -20)));
-            this._cannonPowerBG.addChild(menu, 50);
 
-            // menu.y = this.getContentSize().height / 2 - 30;
+    proto.setupCannonChangeMenu = function (cannonManager, gameConfig, slot, callbackCannonDown, callbackCannonUp) {
+        let menuLeft = new cc.MenuItemSprite(new cc.Sprite(ReferenceName.DecreaseCannon), new cc.Sprite(ReferenceName.DecreaseCannon_Down), callbackCannonDown, cannonManager);
+        let menuRight = new cc.MenuItemSprite(new cc.Sprite(ReferenceName.IncreaseCannon), new cc.Sprite(ReferenceName.IncreaseCannon_Down), callbackCannonUp, cannonManager);
 
-            let pos;
-            let markerPos;
-            if (gameConfig.isUsingOldCannonPositions) {
-                pos = gameConfig.oldCannonPositions[slot];
-                markerPos = gameConfig.oldCannonPositions[0];
-            }else{
-                pos = gameConfig.cannonPositions[slot];
-                markerPos = gameConfig.cannonPositions[0]
-            }
-            menu.x = -545;
-            menu.y = 23 ;
 
-            // menu.setPosition(this._cannonPowerLabel.getContentSize().width/2 , this._cannonPowerLabel.getContentSize().height/2)
+        let menu = new cc.Menu(menuLeft, menuRight);
+        menuLeft.setPosition(cc.pAdd(cc.p(menu.getContentSize().width / 2, menuLeft.getContentSize().height / 2), cc.p(-92, -20)));
+        menuRight.setPosition(cc.pAdd(cc.p(menu.getContentSize().width / 2, menuRight.getContentSize().height / 2), cc.p(92, -20)));
+        this._cannonPowerBG.addChild(menu, 50);
 
-            // const midX = cc.view.getDesignResolutionSize().width / 2;
-            // const midY = cc.view.getDesignResolutionSize().height / 2;
-            // if (pos[0] > markerPos[0]) {
-            //     menu.x = markerPos[0];
-            // } else {
-            //     menu.x = markerPos[0];
-            // }
-            //
-            // if (pos[1] > markerPos[1]) {
-            //     menu.y = midY * 2 - 22;
-            // } else {
-            //     menu.y = 22;
-            // }
-        },
-    });
+        // menu.y = this.getContentSize().height / 2 - 30;
+
+        // let pos;
+        // let markerPos;
+        // if (gameConfig.isUsingOldCannonPositions) {
+        //     pos = gameConfig.oldCannonPositions[slot];
+        //     markerPos = gameConfig.oldCannonPositions[0];
+        // }else{
+        //     pos = gameConfig.cannonPositions[slot];
+        //     markerPos = gameConfig.cannonPositions[0]
+        // }
+        menu.x = -545;
+        menu.y = 23 ;
+    };
+
+    proto.destroyView = function () {
+        GameView.destroyView(this._cannonNode);
+    };
 
     return CannonView;
 }());

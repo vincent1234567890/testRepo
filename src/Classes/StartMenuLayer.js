@@ -177,8 +177,8 @@ var StartMenuLayer = cc.Layer.extend({
             function onSuccess () {
                 GameManager.goToLobby();
             },
-            function onFailure () {
-                console.log("Login failed.");
+            function onFailure (error) {
+                console.log("Login failed:", error);
                 // @todo Display message to the user
 
                 // Let the user try again

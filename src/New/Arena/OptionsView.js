@@ -5,27 +5,35 @@
 const OptionsView = (function () {
     "use strict";
     const ENDOFFSET = 0.05;
+    let thisParent;
+    const ZORDER = 10;
     let _background;
     let _touchlayer;
 
-    function OptionsView (parent){
-        this._parent = parent;
+
+    function OptionsView (){
+        // this._parent = parent;
+        thisParent = this._parent = new cc.Node();
+
         _background = new cc.Sprite(ReferenceName.OptionsBG);
         _background.setPosition(cc.view.getDesignResolutionSize().width/2, cc.view.getDesignResolutionSize().height / 2);
 
         this._music = createSlider("Music", musicValueChangedEvent, PlayerPreferences.getMusicVolume());
         this._sound = createSlider("Sound", soundValueChangedEvent, PlayerPreferences.getSoundVolume());
 
-        this._music.setPosition(_background.getContentSize().width/2 + 60,_background.getContentSize().height/2 + 80);
-        this._sound.setPosition(_background.getContentSize().width/2 + 60,_background.getContentSize().height/2 + 10);
+        this._music.setPosition(_background.getContentSize().width/2 + 47.5,_background.getContentSize().height/2 + 69.2);
+        this._sound.setPosition(_background.getContentSize().width/2 + 47.5,_background.getContentSize().height/2 + 4.1);
 
         _touchlayer = new TouchLayerRefactored(dismissCallback);
         _touchlayer.setSwallowTouches(true);
 
-        _background.addChild(_touchlayer);
+        _background.addChild(_touchlayer,-1);
         _background.addChild(this._music);
         _background.addChild(this._sound);
-        this._parent.addChild(_background,1);
+
+        this._parent.addChild(_background);
+
+        GameView.addView(this._parent,10);
     }
 
     function createSlider(labelText, callback, value){
@@ -56,6 +64,7 @@ const OptionsView = (function () {
         slider.addChild(label);
         slider.addTargetWithActionForControlEvents(OptionsView, callback, cc.CONTROL_EVENT_VALUECHANGED);
 
+        slider.setScaleX(1.01);
 
         return slider;
     }
@@ -71,20 +80,29 @@ const OptionsView = (function () {
     }
 
     function dismissCallback(touch){
+        console.log(touch);
         if (GUIFunctions.isSpriteTouched(_background,touch)) {
             return;
         }
-        _touchlayer.setSwallowTouches(false);
+        // _touchlayer.setSwallowTouches(false);
         _touchlayer.setEnable(false);
+        thisParent.setLocalZOrder(-1000);
         _background.setVisible(false);
+        console.log("disable!", thisParent.getLocalZOrder());
     }
 
     let proto = OptionsView.prototype;
 
     proto.show = function(){
-        _touchlayer.setSwallowTouches(true);
+        // _touchlayer.setSwallowTouches(true);
         _touchlayer.setEnable(true);
+        thisParent.setLocalZOrder(ZORDER);
         _background.setVisible(true);
     };
+
+    proto.destroyView = function () {
+        GameView.destroyView(this._parent);
+    };
+
     return OptionsView;
 }());

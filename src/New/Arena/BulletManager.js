@@ -2,26 +2,29 @@
  * Created by eugeneseah on 30/11/16.
  */
 
+/*
+currently does not conform to new structure of GameManaager -> GameView -> GameView.addView
+@TODO : refactor to include BulletManagerView
+ */
+
 const BulletManager = (function(){
     "use strict";
     let _parent;
     let _fishGameArena;
     let _bulletCache = [];
-    let _rotationFunction;
 
-    const BulletManager = function (parent, fishGameArena, rotationFunction) {
-        _parent = parent;
+    const BulletManager = function (fishGameArena) {
+        _parent = new cc.Node();
         _fishGameArena = fishGameArena;
-        _rotationFunction = rotationFunction;
+        GameView.addView(_parent);
     };
 
     const proto = BulletManager.prototype;
 
     proto.createBullet = function (bulletId) {
-        _bulletCache[bulletId] = new BulletView(_parent);
+        _bulletCache[bulletId] = new BulletView(_parent, ReferenceName.Bullet1);
         // console.log(_bulletCache);
     };
-
 
     proto.update = function () {
         for (let bulletId in _bulletCache) {
@@ -45,7 +48,7 @@ const BulletManager = (function(){
                 //console.log("bulletModel.position:", bulletModel.position);
                 //this.setPosition(new cc.Point(bulletModel.position[0], bulletModel.position[1]));
 
-                const model = _rotationFunction(bulletModel.position, bulletModel.angle);
+                const model = GameView.getRotatedView(bulletModel.position, bulletModel.angle);
                 // console.log(JSON.stringify(model));
                 bulletView.setPosition(model.position[0], model.position[1]);
                 bulletView.setRotation(180 - model.rotation);
@@ -68,7 +71,6 @@ const BulletManager = (function(){
     };
 
     proto.explodeBullet = function (bulletId) {
-        //@TODO:add fish nets
         const bullet = _bulletCache[bulletId];
 
         if (bullet){
@@ -76,12 +78,16 @@ const BulletManager = (function(){
             delete _bulletCache[bulletId];
             const bulletModel = _fishGameArena && _fishGameArena.getBullet(bulletId);
             if (bulletModel){
-                return bulletModel.position;
+                return { position:bulletModel.position, gunId : bulletModel.gunId}
             }
         }else{
             console.warn("Could not find bulletView with id: " + bulletId + ".  Unable to show net explosion!")
         }
         return null;
+    };
+
+    proto.getView = function () {
+        return _parent;
     };
 
     proto.destroyView = function () {
@@ -93,6 +99,8 @@ const BulletManager = (function(){
             }
         }
         _bulletCache = [];
+        GameView.destroyView(_parent);
+        _parent = null;
     };
 
 

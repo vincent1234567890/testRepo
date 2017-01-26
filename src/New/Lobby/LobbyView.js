@@ -2,10 +2,26 @@
  * Created by eugeneseah on 15/11/16.
  */
 const LobbyView = (function() {
+    "use strict";
+    // let isGameSelected;
+    let _touchLayer;
 
-    const LobbyView = function ( parent, playerData) {
+    const profileArea = new cc.Rect(0,0,450,120);
 
-        this._parent = parent;
+    let _settingsCallback;
+    let _onGameSelectedCallback;
+    let _profileCallback;
+
+    const LobbyView = function (playerData, settingsCallback, onGameSelectedCallback, profileCallback) {
+        // this.gameSelected = false;
+
+        this._parent = new cc.Node();
+
+        GameView.addView(this._parent);
+
+        _settingsCallback = settingsCallback;
+        _onGameSelectedCallback = onGameSelectedCallback;
+        _profileCallback = profileCallback;
 
         //var width = cc.view.getDesignResolutionSize().width;
 
@@ -74,7 +90,7 @@ const LobbyView = (function() {
         fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
         fontDef.fillStyle = new cc.Color(0,0,0,255);
 
-        let label = new cc.LabelTTF(playerData.name , fontDef);
+        let label = new cc.LabelTTF(playerData.playerState.name , fontDef);
         label.setAnchorPoint(0, 0.5);
 
         NameBG.addChild(label);
@@ -90,7 +106,7 @@ const LobbyView = (function() {
         fontDef.fillStyle = new cc.Color(255,255,0,255);
         fontDef.textAlign = cc.TEXT_ALIGNMENT_RIGHT;
 
-        label = new cc.LabelTTF(formatWithCommas(playerData.score), fontDef);
+        label = new cc.LabelTTF(formatWithCommas(playerData.playerState.score), fontDef);
         // label = new cc.LabelTTF("99999999999999999999999", fontDef);
         LobbyCoinsBG.addChild(label);
         label.setPosition(LobbyCoinsBG.getContentSize().width - 250,LobbyCoinsBG.getContentSize().height - 50);
@@ -100,28 +116,55 @@ const LobbyView = (function() {
         // setupGameScroll(this._parent);
 
         const gameListMenu = setupGameList ();
-        size = gameListMenu.getContentSize();
-        gameListMenu.setPosition(- length/2 +size.height/2 - 200 , -height/2 + size.height/2 + 100);
+        // size = gameListMenu.getContentSize();
+        // gameListMenu.setPosition(- length/2 +size.height/2 - 200 , -height/2 + size.height/2 + 100);
         bg.addChild(gameListMenu,2);
 
         const profileMenu = setupProfileMenu ();
+        const parent = new cc.Node();
+        parent.addChild(profileMenu);
         size = profileMenu.getContentSize();
         // profileMenu.setPosition(length - size.width/2,height - size.height/2);
-        profileMenu.setPosition(size.width - length - 300, size.height/2 + height/2 - 80);
-        bg.addChild(profileMenu,2);
+        // parent.setPosition(- 300, height - 80);
+        bg.addChild(parent,2);
+        parent.setPosition(-length/2-300, height/2-80);
+        // bg.addChild(parent,2);
+        _touchLayer = new TouchLayerRefactored(onProfileclick);
+        _touchLayer.setSwallowTouches(false);
+        parent.addChild(_touchLayer,1);
+
+        // const testLayer = new cc.LayerColor(0,0,0,196);
+
+
+        // profileArea.x = parent.getPositionX() ;
+        // profileArea.y = parent.getPositionY() ;
+        // profileArea.x = 0 ;
+        profileArea.y = height - profileArea.height ;
+        // profileArea.height = size.height;
+        // profileArea.width = size.width;
+        //
+        // testLayer.setContentSize(profileArea);
+        // // testLayer.setContentSize(new cc.rect(500,-500,1000,1000));
+        // parent.addChild((testLayer),99);
+        // testLayer.setPosition(1000,-1000);
 
         const lobbyMenu = setupLobbyButtons ();
         size = lobbyMenu.getContentSize();
         lobbyMenu.setPosition(size.width/2 - 70,height - 80);
         LobbyCoinsBG.addChild(lobbyMenu,2);
 
-        // this._touchlayer = new TouchLayerRefactored();
-        // this._touchlayer.setSwallowTouches(true);
-        //
-        // bg.addChild(this._touchlayer,-2);
+
 
     };
 
+    function onProfileclick(touch) {
+        // console.log(touch,profileArea);
+        if(cc.rectContainsPoint(profileArea,touch)){
+            //profileview
+            // console.log("profile");
+            _profileCallback();
+        }
+    }
 
     // function setupGameScroll(parent) {
     //     const arrow = new cc.Sprite(ReferenceName.ScrollArrow);
@@ -143,21 +186,62 @@ const LobbyView = (function() {
     //
     // };
 
-    function setupGameList(){
-        // const length = cc.view.getDesignResolutionSize().width;
-        // const height = cc.view.getDesignResolutionSize().height;
+    function setupProfileClick(){
 
-        const game = new cc.Sprite(ReferenceName.GameSelectBox);
-        const gameButton = new cc.MenuItemSprite(game, undefined, undefined, gameSelected);
-        const menu = new cc.Menu(gameButton);
-        gameButton.setPosition(cc.pAdd(cc.p(menu.getContentSize().width / 2, gameButton.getContentSize().height / 2), cc.p(0, 0)));
-        // parent.addChild(menu,1);
-        return menu;
-        // menu.setPosition(-450,110);
+
     }
 
+    function setupGameList(){
+        // const game = new cc.Sprite(ReferenceName.GameSelectBox);
+        // const gameButton = new cc.MenuItemSprite(game, undefined, undefined, gameSelected);
+        // const menu = new cc.Menu(gameButton);
+        // gameButton.setPosition(cc.pAdd(cc.p(menu.getContentSize().width / 2, gameButton.getContentSize().height / 2), cc.p(0, 0)));
+        // return menu;
+
+        const width = cc.view.getDesignResolutionSize().width;
+        const height = cc.view.getDesignResolutionSize().height;
+
+        const listView = new ccui.ListView();
+        listView.setDirection(ccui.ScrollView.DIR_HORIZONTAL);
+        listView.setTouchEnabled(true);
+        listView.setBounceEnabled(true);
+        // listView.setBackGroundImage(res.HelloWorld_png);
+        listView.setContentSize(cc.size(width, height ));
+        // listView.setInnerContainerSize(200,200)
+        listView.setAnchorPoint(cc.p(0.5, 0.5));
+        listView.setPosition(width/2, height/2 -150);
+
+        for ( let i = 0; i < 10; i++ )
+        {
+            let button = new ccui.Button();
+            button.setTouchEnabled(true);
+            button.loadTextures(ReferenceName.GameSelectBox,undefined, undefined, ccui.Widget.PLIST_TEXTURE);
+            button.gameData = i;
+            button.setPosition(button.getContentSize().width/2 + 40, button.getContentSize().height/2 + 75);
+            button.addTouchEventListener(touchEvent);
+            // button.setContentSize(cc.size(300,500));
+
+            let content = new ccui.Widget();
+            content.setContentSize(width/4,button.getContentSize().height);
+            content.addChild(button);
+
+            listView.pushBackCustomItem(content);
+        }
+
+        function touchEvent(sender, type) {
+            switch (type) {
+                case ccui.Widget.TOUCH_ENDED:
+                    gameSelected(sender);
+                    break;
+            }
+        }
+
+        return listView;
+    }
 
     function setupProfileMenu() {
+
+
         const Message = new cc.Sprite(ReferenceName.MessageButton);
         const MessageDown = new cc.Sprite(ReferenceName.MessageButton);
         const Settings = new cc.Sprite(ReferenceName.LobbySettingsButton);
@@ -171,7 +255,7 @@ const LobbyView = (function() {
         messageButton.setPosition(cc.pAdd(cc.p(menu.getContentSize().width / 2, messageButton.getContentSize().height / 2), cc.p(-31, -20)));
         settingsButton.setPosition(cc.pAdd(cc.p(menu.getContentSize().width / 2, settingsButton.getContentSize().height / 2), cc.p(32, -20)));
         // menu.setPosition(-295,691);
-        // parent.addChild(menu,1);
+
         return menu;
     }
 
@@ -225,12 +309,16 @@ const LobbyView = (function() {
     }
 
     function settingsButtonPressed () {
+        _settingsCallback();
         console.log("settingsButtonPressed");
     }
 
-    function gameSelected(){
-        console.log("gameSelected");
-        ClientServerConnect.joinGame(0).catch(console.error);
+    function gameSelected(sender){
+        // menubutton.setEnabled(false);
+        // ClientServerConnect.joinGame(sender.gameData).catch(console.error);
+        _onGameSelectedCallback(sender.gameData);
+        sender.setEnabled(false);
+        // ClientServerConnect.joinGame(sender.gameData).catch(console.error);
     }
 
     function formatWithCommas(x) {
@@ -238,6 +326,9 @@ const LobbyView = (function() {
     }
 
 
+    proto.destroyView = function () {
+        GameView.destroyView(this._parent);
+    };
 
 
     return LobbyView;

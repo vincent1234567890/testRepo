@@ -4,63 +4,63 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>Setting-21.png</key>
+            <key>Exit V2.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{670,395}</string>
+                <string>{94,94}</string>
                 <key>spriteSourceSize</key>
-                <string>{670,395}</string>
+                <string>{94,94}</string>
                 <key>textureRect</key>
-                <string>{{1,1},{670,395}}</string>
+                <string>{{1,97},{94,94}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Setting-22.png</key>
+            <key>Fish V2.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{356,44}</string>
+                <string>{95,94}</string>
                 <key>spriteSourceSize</key>
-                <string>{358,48}</string>
+                <string>{95,94}</string>
                 <key>textureRect</key>
-                <string>{{673,1},{356,44}}</string>
+                <string>{{1,1},{95,94}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
-            <key>Setting-23.png</key>
+            <key>Option.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,0}</string>
+                <string>{0,-5}</string>
                 <key>spriteSize</key>
-                <string>{356,44}</string>
+                <string>{89,79}</string>
                 <key>spriteSourceSize</key>
-                <string>{356,44}</string>
+                <string>{89,89}</string>
                 <key>textureRect</key>
-                <string>{{719,1},{356,44}}</string>
+                <string>{{1,289},{89,79}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
-            <key>Setting-24.png</key>
+            <key>Setting V2.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{65,55}</string>
+                <string>{94,94}</string>
                 <key>spriteSourceSize</key>
-                <string>{65,55}</string>
+                <string>{94,94}</string>
                 <key>textureRect</key>
-                <string>{{673,359},{65,55}}</string>
+                <string>{{1,193},{94,94}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -74,13 +74,13 @@
             <key>premultiplyAlpha</key>
             <false/>
             <key>realTextureFileName</key>
-            <string>settings.png</string>
+            <string>Option Menu V2.png</string>
             <key>size</key>
-            <string>{764,415}</string>
+            <string>{97,369}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:8f21c167091ad3128a29e860e87ee2f0:d4a2b5f34c8c78cec3ff6df9e7e03952:b272f908d41fd8e3cdf1bdfb80736dbb$</string>
+            <string>$TexturePacker:SmartUpdate:58b5d21d2549353e69e734b5febca3ae:04beee7b903c904d1dbb0cd4bc567aaf:ba6a588eb04ec8c52557b323902693fc$</string>
             <key>textureFileName</key>
-            <string>settings.png</string>
+            <string>Option Menu V2.png</string>
         </dict>
     </dict>
 </plist>

@@ -2,7 +2,7 @@
  * Created by eugeneseah on 25/10/16.
  */
 const ReferenceName = {
-    Cannon : "#Cannon.png",
+
     Base : "#Base.png",
     IncreaseCannon : "#plus.png",
     IncreaseCannon_Down : "#PlusDw.png",
@@ -21,7 +21,8 @@ const ReferenceName = {
     BuyButton : "#Buy.png",
     LobbyCoinsBG : "#Coins Base.png",
     LobbyCoinIcon : "#Coins.png",//
-    GameSelectBox : "#Game Frame.png",
+    // GameSelectBox : "#Game Frame.png",
+    GameSelectBox : "Game Frame.png",
     Star : "#level Star.png",//
     LevelBG : "#Level Bar.png",
     MessageButton : "#Log.png",
@@ -30,6 +31,12 @@ const ReferenceName = {
     ProfileImage : "#Profile Image.png",
     LobbySettingsButton : "#Lobby Setting.png",
     TopBg : "#Top Base.png",
+
+    //Profile
+    ProfileBackground : "#Profile POut BG.png",
+    ProfileFishBackground : "#Profile POut Fish Box.png",
+    ProfileFishStatsBackground : "#Profile POut Fish Detail.png",
+
 
     //Scoreboard
     ScoreboardBG : "#SummaryBase.png",
@@ -50,16 +57,29 @@ const ReferenceName = {
     //SideMenu
     SideMenuBG : "#SideMenu.png",
     SideMenuSettingsButton : "#Setting.png",
-    FishListButton : "#Fishes.png",
-    ExitButton : "#Exit.png",
+    SideMenuFishListButton : "#Fishes.png",
+    SideMenuExitButton : "#Exit.png",
+
+    //BottomMenu
+    BottomMenuButton : "#Option.png",
+    BottomMenuSettingsButton : "#Setting V2.png",
+    BottomMenuFishListButton : "#Fish V2.png",
+    BottomMenuExitButton : "#Exit V2.png",
+
 
     //OptionsMenu
-    OptionsBG : "#Setting-21.png",
-    OptionBarBG : "#Setting-23.png",
-    OptionsBarNegative : "#Setting-22.png",
-    FishSliderButton : "#Setting-24.png",
+    OptionsBG : "#Setting BG.png",
+    OptionBarBG : "#Setting Bar Full.png",
+    OptionsBarNegative : "#Setting Bar Empty.png",
+    FishSliderButton : "#Setting Slider Button.png",
 
     FishPlaceholder : "#Fish Paceholder.png",
+
+    //Cannon/nets
+    Cannon1 : "#Cannon 1.png",
+    Net1 : "#Net 1.png",
+    Bullet1 : "#Bullet 1.png",
+    CannonDown1 : "#Cannon 1 DW.png",
 
 
     //localisable

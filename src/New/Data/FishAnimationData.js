@@ -16,7 +16,7 @@ const FishAnimationData = function () {
         Ray: {
             animationInterval: [0, 0],
             frameOrders: [
-                [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1],
+                [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21],
                 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]// unused
             ],
             pivot: [{x: 0.3, y: 0.5}, {x: 0.3, y: 0.5}],
@@ -32,9 +32,9 @@ const FishAnimationData = function () {
         Puffer: {
             animationInterval: [0, 0],
             frameOrders: [
-                [8, 9, 10, 11, 12, 11, 10, 9], //swim
-                [0, 1, 2, 3, 4], //bloated
-                [5, 6, 7], // shrinking
+                [0, 1, 2, 3, 4], //swim
+                [7, 8, 9, 10, 11], //bloated
+                [2, 5, 6], // shrinking
                 [],// death
             ],
             pivot: [{x: 0.35, y: 0.5}, {x: 0.35, y: 0.5}]
@@ -80,6 +80,20 @@ const FishAnimationData = function () {
                 [0, 1, 2, 3, 4, 5, 6, 7,]
             ],
             pivot: [{x: 0.45, y: 0.5}]
+        },
+        SmallFish:{
+            animationInterval: [0],
+            frameOrders: [
+                [0, 1, 2, 3, 4, 5, 6, 7,]
+            ],
+            pivot: [{x: 0.45, y: 0.5}]
+        },
+        DemoFish:{
+            animationInterval: [0],
+            frameOrders: [
+                [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
+            ],
+            pivot: [{x: 0.5, y: 0.5}]
         },
     };
 

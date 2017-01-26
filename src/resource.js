@@ -173,17 +173,23 @@ var res = {
     GameUIPlist : "res/New/Game UI.plist",
     LobbyUIPlist : "res/New/Lobby/Lobby.plist",
     LobbyUIPng : "res/New/Lobby/Lobby.png",
-    SettingsUIPlist : "res/New/Options/settings.plist",
-    SettingsUIPng : "res/New/Options/settings.png",
+    ProfileUIPlist : "res/New/Lobby/Profile POut.plist",
+    ProfileUIPng : "res/New/Lobby/Profile POut.png",
+    SettingsUIPlist : "res/New/Options/Setting.plist",
+    SettingsUIPng : "res/New/Options/Setting.png",
     ScoreboardPlist : "res/New/Scoreboard/summary.plist",
     ScoreboardPng : "res/New/Scoreboard/summary.png",
     SideMenuPlist : "res/New/Options/Options Menu.plist",
     SideMenuPng : "res/New/Options/Options Menu.png",
+    BottomMenuPlist : "res/New/Options/Option Menu V2.plist",
+    BottomMenuPng : "res/New/Options/Option Menu V2.png",
     LoginUIPlist : "res/New/Lobby/Login.plist",
     LoginUIPng : "res/New/Lobby/Login.png",
 
     //GameBackgrounds
-    GameBackground1 : "res/New/Game BG/Game BG 1.png",
+    GameBackground0 : "res/New/Game BG/Game BG 1.png",
+    GameBackground1 : "res/New/Game BG/Game BG 2.jpg",
+    GameBackground2 : "res/New/Game BG/Game BG 3.jpg",
 
     //Fish
     StingrayPNG : "res/New/Fish/Ray.png",
@@ -204,11 +210,18 @@ var res = {
     ButterflyPng : "res/New/Fish/ButterFly.png",
     GoldSharkPng : "res/New/Fish/GoldShark.png",
     GoldSharkPlist : "res/New/Fish/GoldShark.plist",
+    SmallFishPlist : "res/New/Fish/SmallFish.plist",
+    SmallFishPng : "res/New/Fish/SmallFish.png",
+    DemoFishPlist : "res/New/Fish/DemoFish.plist",
+    DemoFishPng : "res/New/Fish/DemoFish.png",
 
+    //Weapons
+    Weapon1Plist : "res/New/Weapons/Weapon 1.plist",
+    Weapon1Png : "res/New/Weapons/Weapon 1.png",
 
     //testing
-    BulletPNG: "res/New/testing/bullet.png",
-    NetPng : "res/New/testing/Net.png",
+    // BulletPNG: "res/New/testing/bullet.png",
+    // NetPng : "res/New/testing/Net.png",
 
 
     //debug
