@@ -99,6 +99,8 @@
         "src/New/LoginManager.js",
         "src/New/Lobby/LobbyManager.js",
         "src/New/Lobby/LobbyView.js",
+        "src/New/Lobby/ProfileManager.js",
+        "src/New/Lobby/ProfileView.js",
 
         "src/New/Arena/OptionsView.js",
         "src/New/Arena/OptionsSideMenuView.js",

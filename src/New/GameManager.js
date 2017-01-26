@@ -18,7 +18,7 @@ const GameManager = function () {
     //GameState
     let _gameConfig;
     let _playerData;
-    let _currentLevel;
+    let _currentScene;
 
     //convenience
     let _loggedIn = false;
@@ -46,7 +46,7 @@ const GameManager = function () {
         _bulletManager = new BulletManager(fishGameArena);
         _netManager = new NetManager();
 
-        GameView.goToGame(_currentLevel);
+        GameView.goToGame(_currentScene);
     };
 
     const shootTo = function (playerId, angle, bulletId) {
@@ -143,10 +143,11 @@ const GameManager = function () {
 
     function createLobby() {
         if (!_lobbyManager) {
-            _lobbyManager = new LobbyManager(_playerData, onSettingsButton, onGameSelected);
+            _lobbyManager = new LobbyManager(_playerData, onSettingsButton, onGameSelected,onRequestShowProfile);
+            // _profileManger = new ProfileManager();
             _optionsManager = new OptionsManager(onSettingsButton, undefined, onLeaveArena);
         }else {
-            _lobbyManager.doView(_playerData, onSettingsButton, onGameSelected);
+            _lobbyManager.doView(_playerData, onSettingsButton, onGameSelected,onRequestShowProfile);
         }
     }
 
@@ -174,7 +175,7 @@ const GameManager = function () {
 
     function goToNewRoom() {
         resetArena();
-        ClientServerConnect.joinGame(_currentLevel).catch(console.error);
+        ClientServerConnect.joinGame(_currentScene).catch(console.error);
     }
 
     function destroyArena(){
@@ -195,15 +196,21 @@ const GameManager = function () {
         _optionsManager.showSettings();
     }
 
-    function onGameSelected(gameId){
-        _currentLevel = gameId;
-        ClientServerConnect.joinGame(_currentLevel).catch(console.error);
+    function onGameSelected(chosenScene){
+        _currentScene = chosenScene;
+        ClientServerConnect.joinGame(_currentScene).catch(console.error);
+    }
+
+    function onRequestShowProfile(){
+
     }
 
     //dev for dev scene
     function development(parent) {
         _optionsManager = new OptionsManager(onSettingsButton);
     }
+
+
 
     return {
         initialiseLogin: initialiseLogin,

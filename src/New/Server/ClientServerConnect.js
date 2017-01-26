@@ -142,7 +142,7 @@ const ClientServerConnect = function () {
         );
     };
 
-    const joinGame = function (gameId) {
+    const joinGame = function (chosenScene) {
         const client = getGameWSClient();
 
         return Promise.resolve().then(
@@ -153,7 +153,7 @@ const ClientServerConnect = function () {
                 }
 
                 console.log("Joining game");
-                return client.callAPIOnce('game', 'joinGame', {gameId: gameId});
+                return client.callAPIOnce('game', 'joinGame', {scene: chosenScene});
             }
         ).then(
             joinResponse => {
