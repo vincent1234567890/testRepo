@@ -23,7 +23,7 @@ const FishAnimationData = function () {
             animationSpeed: 0.075,
         },
         Squid: {
-            animationInterval: [3, 3],
+            animationInterval: [5, 5],
             frameOrders: [
                 [0, 1, 2, 3, 4, 3, 0],
                 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]//unused
@@ -88,6 +88,36 @@ const FishAnimationData = function () {
             ],
             pivot: [{x: 0.45, y: 0.5}]
         },
+        Amphiprion:{
+            animationInterval: [0],
+            frameOrders: [
+                [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+            ],
+        },
+        AmphiprionBW:{
+            animationInterval: [0],
+            frameOrders: [
+                [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+            ],
+        },
+        GrouperFish:{
+            animationInterval: [0],
+            frameOrders: [
+                [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+            ],
+        },
+        MarlinsFish:{
+            animationInterval: [0],
+            frameOrders: [
+                [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+            ],
+        },
+        AngelFish:{
+            animationInterval: [0],
+            frameOrders: [
+                [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+            ],
+        },
         DemoFish:{
             animationInterval: [0],
             frameOrders: [
@@ -96,6 +126,92 @@ const FishAnimationData = function () {
             pivot: [{x: 0.5, y: 0.5}],
             animationSpeed: 0.03,
         },
+
+
+        //new
+        AngelFish2:{
+            animationInterval: [0],
+            frameOrders: [
+                [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
+            ],
+            pivot: [{x: 0.5, y: 0.5}],
+            animationSpeed: 0.03,
+        },
+
+        BlackWhiteYellowFish:{
+            animationInterval: [0],
+            frameOrders: [
+                [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
+            ],
+            pivot: [{x: 0.5, y: 0.5}],
+            animationSpeed: 0.03,
+        },
+
+        BlackYellowButterflyFish:{
+            animationInterval: [0],
+            frameOrders: [
+                [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
+            ],
+            pivot: [{x: 0.5, y: 0.5}],
+            animationSpeed: 0.03,
+        },
+        BlueTang2:{
+            animationInterval: [0],
+            frameOrders: [
+                [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
+            ],
+            pivot: [{x: 0.5, y: 0.5}],
+            animationSpeed: 0.03,
+        },
+        ButterflyFish2:{
+            animationInterval: [0],
+            frameOrders: [
+                [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
+            ],
+            pivot: [{x: 0.5, y: 0.5}],
+            animationSpeed: 0.03,
+        },
+        BWNemo:{
+            animationInterval: [0],
+            frameOrders: [
+                [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
+            ],
+            pivot: [{x: 0.5, y: 0.5}],
+            animationSpeed: 0.03,
+        },
+        KissingFish:{
+            animationInterval: [0],
+            frameOrders: [
+                [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
+            ],
+            pivot: [{x: 0.5, y: 0.5}],
+            animationSpeed: 0.03,
+        },
+        Seahorse:{
+            animationInterval: [0],
+            frameOrders: [
+                [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
+            ],
+            pivot: [{x: 0.5, y: 0.5}],
+            animationSpeed: 0.03,
+        },
+        Turtle2:{
+            animationInterval: [0],
+            frameOrders: [
+                [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
+            ],
+            pivot: [{x: 0.5, y: 0.5}],
+            animationSpeed: 0.03,
+        },
+        YellowFish:{
+            animationInterval: [0],
+            frameOrders: [
+                [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
+            ],
+            pivot: [{x: 0.5, y: 0.5}],
+            animationSpeed: 0.03,
+        },
+
     };
 
     let FishAnimationData = new Array(FishRawData.length);
