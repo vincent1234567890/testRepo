@@ -68,6 +68,12 @@ const FishView = (function () {
     proto.updateView = function(pos,rot){
         this._sprite.setPosition(pos);
         this._sprite.setRotation(rot);
+        // console.log(this.type,rot);
+        if (rot%360 >= 90 || rot%360 <=270){
+            this._sprite.flippedY = true;
+        }else{
+            this._sprite.flippedY = false;
+        }
     };
 
     return FishView;

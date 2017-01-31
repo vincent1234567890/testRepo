@@ -19,6 +19,28 @@ const FishViewManager = (function(){
         cc.spriteFrameCache.addSpriteFrames(res.SharkPlist);
         cc.spriteFrameCache.addSpriteFrames(res.SmallFishPlist);
         cc.spriteFrameCache.addSpriteFrames(res.DemoFishPlist);
+        cc.spriteFrameCache.addSpriteFrames(res.AmphiprionPlist);
+        cc.spriteFrameCache.addSpriteFrames(res.AmphiprionBWPlist);
+        cc.spriteFrameCache.addSpriteFrames(res.GrouperFishPlist);
+        cc.spriteFrameCache.addSpriteFrames(res.MarlinsFishPlist);
+        cc.spriteFrameCache.addSpriteFrames(res.AngelFishPlist);
+        cc.spriteFrameCache.addSpriteFrames(res.ButterflyPlist);
+
+
+        //new game
+        cc.spriteFrameCache.addSpriteFrames(res.AngelFish2Plist);
+        cc.spriteFrameCache.addSpriteFrames(res.BlackWhiteYellowFishPlist);
+        cc.spriteFrameCache.addSpriteFrames(res.BlackYellowButterflyFishPlist);
+        cc.spriteFrameCache.addSpriteFrames(res.BlueTang2Plist);
+        cc.spriteFrameCache.addSpriteFrames(res.BlueTang2Plist);
+        cc.spriteFrameCache.addSpriteFrames(res.BWNemoPlist);
+        cc.spriteFrameCache.addSpriteFrames(res.KissingFishPlist);
+        cc.spriteFrameCache.addSpriteFrames(res.SeahorsePlist);
+        cc.spriteFrameCache.addSpriteFrames(res.Turtle2Plist);
+        cc.spriteFrameCache.addSpriteFrames(res.YellowFishPlist);
+
+
+
         // FishAnimationData();
         FishAnimationData.initialise();
 
