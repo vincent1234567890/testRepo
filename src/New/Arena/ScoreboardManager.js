@@ -4,11 +4,13 @@
 
 var ScoreboardManager = (function () {
     "use strict";
+    let _parentGoToLobby;
+    let _parentGoToNewRoom;
     var ScoreboardManager = function (data, parentGoToLobby, parentGoToNewRoom) {
         // this.parent = new cc.Node();
         cc.spriteFrameCache.addSpriteFrames(res.ScoreboardPlist);
-        this._parentGoToLobby = parentGoToLobby;
-        this._parentGoToNewRoom = parentGoToNewRoom;
+        _parentGoToLobby = parentGoToLobby;
+        _parentGoToNewRoom = parentGoToNewRoom;
         this.doView(data)
     };
     // ScoreboardManager.prototype.getView = function(parent, data){
@@ -18,11 +20,11 @@ var ScoreboardManager = (function () {
 
 
     function goToLobby() {
-        this._parentGoToLobby();
+        _parentGoToLobby();
     }
 
     function goToNewRoom() {
-        this._parentGoToNewRoom();
+        _parentGoToNewRoom();
     }
 
     const proto = ScoreboardManager.prototype;

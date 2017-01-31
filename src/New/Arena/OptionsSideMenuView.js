@@ -99,6 +99,7 @@ const OptionsSideMenuView = (function () {
     function onExitEvent() {
         // console.log("onExitEvent:" + _exitCallBack);
         if (_exitCallBack) {
+            BlockingManager.deregisterBlock(onMenuClicked);
             _exitCallBack();
         }
     }

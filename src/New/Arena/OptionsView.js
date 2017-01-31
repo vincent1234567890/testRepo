@@ -8,7 +8,7 @@ const OptionsView = (function () {
     let thisParent;
     const ZORDER = 10;
     let _background;
-    let _touchlayer;
+    // let _touchlayer;
 
 
     function OptionsView (){
@@ -24,16 +24,17 @@ const OptionsView = (function () {
         this._music.setPosition(_background.getContentSize().width/2 + 47.5,_background.getContentSize().height/2 + 69.2);
         this._sound.setPosition(_background.getContentSize().width/2 + 47.5,_background.getContentSize().height/2 + 4.1);
 
-        _touchlayer = new TouchLayerRefactored(dismissCallback);
-        _touchlayer.setSwallowTouches(true);
+        // _touchlayer = new TouchLayerRefactored(dismissCallback);
+        // _touchlayer.setSwallowTouches(true);
 
-        _background.addChild(_touchlayer,-1);
+        // _background.addChild(_touchlayer,-1);
         _background.addChild(this._music);
         _background.addChild(this._sound);
 
         this._parent.addChild(_background);
 
         GameView.addView(this._parent,10);
+        BlockingManager.registerBlock(dismissCallback);
     }
 
     function createSlider(labelText, callback, value){
@@ -85,9 +86,10 @@ const OptionsView = (function () {
             return;
         }
         // _touchlayer.setSwallowTouches(false);
-        _touchlayer.setEnable(false);
+        // _touchlayer.setEnable(false);
         thisParent.setLocalZOrder(-1000);
         _background.setVisible(false);
+        BlockingManager.deregisterBlock(dismissCallback);
         console.log("disable!", thisParent.getLocalZOrder());
     }
 
@@ -95,7 +97,9 @@ const OptionsView = (function () {
 
     proto.show = function(){
         // _touchlayer.setSwallowTouches(true);
-        _touchlayer.setEnable(true);
+        // _touchlayer.setEnable(true);
+        console.log("optionsview Show");
+        BlockingManager.registerBlock(dismissCallback);
         thisParent.setLocalZOrder(ZORDER);
         _background.setVisible(true);
     };

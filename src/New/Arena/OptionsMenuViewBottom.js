@@ -16,9 +16,9 @@ const OptionsMenuViewBottom = (function (){
     let _isAnimating;
     let _isShowing;
 
-    let _touchlayer;
+    // let _touchlayer;
 
-    let _colourBG;
+    // let _colourBG;
     const hideColour = cc.color(0,0,0,0);
     const showColour = cc.color(0,0,0,196);
 
@@ -26,7 +26,7 @@ const OptionsMenuViewBottom = (function (){
 
     function OptionsMenuViewBottom(settingsCallback, fishListCallback, exitCallback) {
         thisParent = this._parent = new cc.Node();
-        GameView.addView(this._parent, 9);
+        GameView.addView(this._parent, 10);
 
         _settingsCallback = settingsCallback;
         _fishCallBack = fishListCallback;
@@ -41,10 +41,10 @@ const OptionsMenuViewBottom = (function (){
         _hideSequence = new cc.Sequence(hideAction,cc.callFunc(animationCallback));
 
 
-        _touchlayer = new TouchLayerRefactored(onMenuClicked);
-        _touchlayer.setSwallowTouches(true);
-        _touchlayer.setEnable(false);
-        this._parent.addChild(_touchlayer,-1);
+        // _touchlayer = new TouchLayerRefactored(onMenuClicked);
+        // _touchlayer.setSwallowTouches(true);
+        // _touchlayer.setEnable(false);
+        // this._parent.addChild(_touchlayer,-1);
 
         // let option = new cc.Sprite(ReferenceName.BottomMenuButton);
         // let optionButton = new cc.MenuItemSprite(option, undefined, undefined, onMenuClicked);
@@ -53,10 +53,12 @@ const OptionsMenuViewBottom = (function (){
         optionButton.setPosition(cc.view.getDesignResolutionSize().width/2, 35);
         this._parent.addChild(optionButton,1);
 
-        _colourBG = new cc.LayerColor(hideColour);
-        this._parent.addChild(_colourBG,-1);
+        // _colourBG = new cc.LayerColor(hideColour);
+        // this._parent.addChild(_colourBG,-1);
 
         _isAnimating = _isShowing = false;
+
+
 
         // const initial = new cc.FadeTo(0, 0);
         // _menu.runAction(new cc.Sequence(initial));
@@ -80,6 +82,7 @@ const OptionsMenuViewBottom = (function (){
         settingsButton.setPosition(-150, cc.view.getDesignResolutionSize().height / 2);
         fishListButton.setPosition(0, cc.view.getDesignResolutionSize().height / 2);
         exitButton.setPosition(150, cc.view.getDesignResolutionSize().height / 2);
+
 
         return menu;
     }
@@ -110,6 +113,7 @@ const OptionsMenuViewBottom = (function (){
     function onExitEvent() {
         if (_exitCallBack) {
             onMenuClicked();
+            // BlockingManager.deregisterBlock(onMenuClicked);
             console.log("onExitEvent");
             _exitCallBack();
         }
@@ -127,19 +131,23 @@ const OptionsMenuViewBottom = (function (){
         }
         _isAnimating = true;
         if (!_isShowing){
-            _touchlayer.setEnable(true);
-            _colourBG.init(showColour);
+            console.log("!_isShowing");
+            // _touchlayer.setEnable(true);
+            // _colourBG.init(showColour);
+            BlockingManager.registerBlock(onMenuClicked);
             _menu.runAction(_showSequence);
         }else{
             // _menu.runAction(_hideSequence);
-            dismissCallback();
+            dismissCallback(point);
         }
     }
 
     function dismissCallback(touch){
-        _touchlayer.setEnable(false);
-        _colourBG.init(hideColour);
+        // _touchlayer.setEnable(false);
+        // _colourBG.init(hideColour);
+        BlockingManager.deregisterBlock(onMenuClicked);
         _menu.runAction(_hideSequence);
+
     }
 
     function animationCallback(){

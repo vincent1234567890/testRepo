@@ -4,7 +4,13 @@
 
 const ScoreboardView = (function() {
     "use strict";
+
+    let _goToLobby;
+    let _goToNewRoom;
     function ScoreboardView(target, data, goToLobby, goToNewRoom) {
+
+        _goToLobby = goToLobby;
+        _goToNewRoom = goToNewRoom;
 
         this._parent = new cc.Node();
         GameView.addView(this._parent,100);
@@ -16,12 +22,12 @@ const ScoreboardView = (function() {
         bg.setPosition(midX,midY);
         this._parent.addChild(bg,99);
 
-        const menu = setupScoreboardMenu(goToLobby, goToNewRoom, target);
+        const menu = setupScoreboardMenu(target);
         bg.addChild(menu,1);
 
-        const touchlayer = new TouchLayerRefactored(touchEater);
-        touchlayer.setSwallowTouches(true);
-        bg.addChild(touchlayer,-1);
+        // const touchlayer = new TouchLayerRefactored(touchEater);
+        // touchlayer.setSwallowTouches(true);
+        // bg.addChild(touchlayer,-1);
 
         const sessionTime = createGridObject(ReferenceName.SessionTime, ReferenceName.TimeSpentIcon, timeFormatter(data.secondsInGame));
         sessionTime.setPosition(282 , cc.view.getDesignResolutionSize().height - 183);
@@ -64,6 +70,8 @@ const ScoreboardView = (function() {
         const scrollBoxBG = new cc.Sprite(ReferenceName.BottomScrollBarBG);
         scrollBoxBG.setPosition(679 , cc.view.getDesignResolutionSize().height - 550);
         bg.addChild(scrollBoxBG,1);
+
+        BlockingManager.registerBlock(touchEater);
 
     }
 
@@ -114,12 +122,12 @@ const ScoreboardView = (function() {
     }
 
 
-    function setupScoreboardMenu(goToLobby, goToNewRoom, target) {
+    function setupScoreboardMenu(target) {
         let lobby = new cc.Sprite(ReferenceName.LobbyButton);
         let play = new cc.Sprite(ReferenceName.PlayButton);
 
-        let lobbyButton = new cc.MenuItemSprite(lobby, undefined, undefined, goToLobby, target);
-        let playButton = new cc.MenuItemSprite(play, undefined, undefined, goToNewRoom, target);
+        let lobbyButton = new cc.MenuItemSprite(lobby, undefined, undefined, localGoToLobby, target);
+        let playButton = new cc.MenuItemSprite(play, undefined, undefined, localGoToNewRoom, target);
 
         let fontDef = new cc.FontDefinition();
         fontDef.fontName = "Arial";
@@ -147,6 +155,16 @@ const ScoreboardView = (function() {
     function touchEater (){
 
 
+    }
+
+    function localGoToLobby(){
+        BlockingManager.deregisterBlock(touchEater);
+        _goToLobby();
+    }
+
+    function localGoToNewRoom(){
+        BlockingManager.deregisterBlock(touchEater);
+        _goToNewRoom();
     }
 
     const proto = ScoreboardView.prototype;

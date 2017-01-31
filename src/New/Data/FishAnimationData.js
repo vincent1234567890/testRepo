@@ -23,7 +23,7 @@ const FishAnimationData = function () {
             animationSpeed: 0.075,
         },
         Squid: {
-            animationInterval: [5, 5],
+            animationInterval: [3, 3],
             frameOrders: [
                 [0, 1, 2, 3, 4, 3, 0],
                 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]//unused
@@ -93,7 +93,8 @@ const FishAnimationData = function () {
             frameOrders: [
                 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
             ],
-            pivot: [{x: 0.5, y: 0.5}]
+            pivot: [{x: 0.5, y: 0.5}],
+            animationSpeed: 0.03,
         },
     };
 

@@ -45,6 +45,7 @@ const GameManager = function () {
         _optionsManager.doView(_gameConfig);
         _bulletManager = new BulletManager(fishGameArena);
         _netManager = new NetManager();
+        BlockingManager.destroyView();
 
         GameView.goToGame(_currentScene);
     };
@@ -188,6 +189,7 @@ const GameManager = function () {
         _fishManager.destroyView();
         _bulletManager.destroyView();
         _scoreboardManager.destroyView();
+        BlockingManager.destroyView();
         GameView.resetArena();
     }
 
