@@ -18,7 +18,7 @@ const GameManager = function () {
     //GameState
     let _gameConfig;
     let _playerData;
-    let _currentLevel;
+    let _currentScene;
 
     //convenience
     let _loggedIn = false;
@@ -47,7 +47,7 @@ const GameManager = function () {
         _netManager = new NetManager();
         BlockingManager.destroyView();
 
-        GameView.goToGame(_currentLevel);
+        GameView.goToGame(_currentScene);
     };
 
     const shootTo = function (playerId, angle, bulletId) {
@@ -176,7 +176,7 @@ const GameManager = function () {
 
     function goToNewRoom() {
         resetArena();
-        ClientServerConnect.joinGame(_currentLevel).catch(console.error);
+        ClientServerConnect.joinGame(_currentScene).catch(console.error);
     }
 
     function destroyArena(){
@@ -198,9 +198,9 @@ const GameManager = function () {
         _optionsManager.showSettings();
     }
 
-    function onGameSelected(gameId){
-        _currentLevel = gameId;
-        ClientServerConnect.joinGame(_currentLevel).catch(console.error);
+    function onGameSelected(chosenScene){
+        _currentScene = chosenScene;
+        ClientServerConnect.joinGame(_currentScene).catch(console.error);
     }
 
     function onRequestShowProfile(){

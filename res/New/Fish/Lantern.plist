@@ -164,13 +164,13 @@
             <key>premultiplyAlpha</key>
             <false/>
             <key>realTextureFileName</key>
-            <string>lantern.png</string>
+            <string>Lantern.png</string>
             <key>size</key>
             <string>{1748,336}</string>
             <key>smartupdate</key>
             <string>$TexturePacker:SmartUpdate:9c6dbf14276bb4521f3745dfb1ff2a31:884be5a82e1e5bdf2983485ae9b375ca:f14dddbb60a3963ef985ef775416bb13$</string>
             <key>textureFileName</key>
-            <string>lantern.png</string>
+            <string>Lantern.png</string>
         </dict>
     </dict>
 </plist>
