@@ -40,7 +40,7 @@ const GameManager = function () {
     const initialiseGame = function (parent, fishGameArena) {
         GameView.initialise(parent, _gameConfig, fishGameArena);
 
-        _fishManager = new FishViewManager(fishGameArena);
+        _fishManager = new FishViewManager(fishGameArena, _gameConfig);
         _optionsManager = new OptionsManager(onSettingsButton, undefined, onLeaveArena);
         _optionsManager.doView(_gameConfig);
         _bulletManager = new BulletManager(fishGameArena);

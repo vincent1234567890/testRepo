@@ -11,8 +11,9 @@ const FishView = (function () {
     const alphaFadeIn = new cc.FadeTo(0.2, 230);
 
     // const deathTint = new cc.TintTo (0.3, 196,196,196)
+    let debugReported = false;
 
-    const FishView = function (parent, fishType) {
+    const FishView = function (parent, fishClass, fishType) {
         this._parent = new cc.Node();
 
         this._sprite = new cc.Sprite();
@@ -27,6 +28,17 @@ const FishView = (function () {
 
         // const testLayer = new cc.LayerColor();
         // testLayer.setBlendFunc()
+        if (GameManager.debug) {
+
+            const debugCircle = new cc.Sprite(res.DebugCircle);
+
+            debugCircle.setScaleX(fishClass.length * 2 / 100);
+            debugCircle.setScaleY(fishClass.breadth * 2/ 100);
+
+            this._parent.addChild(debugCircle, 1);
+            // console.log("debug:", debugCircle, fishClass, fishType);
+        }
+
     };
 
     const proto = FishView.prototype;
@@ -43,6 +55,7 @@ const FishView = (function () {
         const sequence = new cc.Sequence(data.animation.clone(), new cc.DelayTime(data.animationInterval));
         this._currentAnimationAction = new cc.RepeatForever(sequence);
         this._sprite.runAction(this._currentAnimationAction);
+
     };
 
     proto.killFish = function (target, callback, id) {
@@ -64,15 +77,21 @@ const FishView = (function () {
         parent.removeChild(this._parent);
     };
 
-
     proto.updateView = function(pos,rot){
-        this._sprite.setPosition(pos);
-        this._sprite.setRotation(rot);
-        // console.log(this.type,rot);
-        if (rot%360 >= 90 || rot%360 <=270){
+
+
+        this._parent.setPosition(pos);
+        this._parent.setRotation(rot);
+
+        if (rot%360 > 90 && rot%360 <=270){
             this._sprite.flippedY = true;
         }else{
             this._sprite.flippedY = false;
+        }
+
+        if (!debugReported && this._sprite.getContentSize().width == 0){
+            debugReported = true;
+            console.warn("Fish missing atlas :", this.type);
         }
     };
 

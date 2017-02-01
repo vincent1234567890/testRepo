@@ -93,12 +93,14 @@ const FishAnimationData = function () {
             frameOrders: [
                 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
             ],
+            pivot: [{x: 0.45, y: 0.5}]
         },
         AmphiprionBW:{
             animationInterval: [0],
             frameOrders: [
                 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
             ],
+            pivot: [{x: 0.45, y: 0.5}]
         },
         GrouperFish:{
             animationInterval: [0],
@@ -112,7 +114,7 @@ const FishAnimationData = function () {
                 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
             ],
         },
-        AngelFish:{
+        Angelfish:{
             animationInterval: [0],
             frameOrders: [
                 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -198,10 +200,10 @@ const FishAnimationData = function () {
         Turtle2:{
             animationInterval: [0],
             frameOrders: [
-                [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
+                [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
             ],
             pivot: [{x: 0.5, y: 0.5}],
-            animationSpeed: 0.03,
+            animationSpeed: 0.15,
         },
         YellowFish:{
             animationInterval: [0],

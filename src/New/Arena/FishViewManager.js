@@ -5,7 +5,7 @@
 const FishViewManager = (function(){
 
 
-    const FishViewManager = function(fishGameArena){
+    const FishViewManager = function(fishGameArena, gameConfig){
         // console.log
 
         cc.spriteFrameCache.addSpriteFrames(res.SquidPlist);
@@ -32,7 +32,7 @@ const FishViewManager = (function(){
         cc.spriteFrameCache.addSpriteFrames(res.BlackWhiteYellowFishPlist);
         cc.spriteFrameCache.addSpriteFrames(res.BlackYellowButterflyFishPlist);
         cc.spriteFrameCache.addSpriteFrames(res.BlueTang2Plist);
-        cc.spriteFrameCache.addSpriteFrames(res.BlueTang2Plist);
+        cc.spriteFrameCache.addSpriteFrames(res.ButterflyFish2Plist);
         cc.spriteFrameCache.addSpriteFrames(res.BWNemoPlist);
         cc.spriteFrameCache.addSpriteFrames(res.KissingFishPlist);
         cc.spriteFrameCache.addSpriteFrames(res.SeahorsePlist);
@@ -47,6 +47,7 @@ const FishViewManager = (function(){
         this._parent = new cc.Node();
         this._fishes = {};
         this._fishGameArena = fishGameArena;
+        this._gameConfig = gameConfig;
 
         // this.rotationFunction = rotationFunction;
 
@@ -56,7 +57,7 @@ const FishViewManager = (function(){
     const proto = FishViewManager.prototype;
 
     proto.addFish = function(fishId, fishType){
-        this._fishes[fishId] = new FishView(this._parent, fishType);
+        this._fishes[fishId] = new FishView(this._parent, this._gameConfig.fishClasses[fishType], fishType);
         return this._fishes[fishId];
 
         //debug version:

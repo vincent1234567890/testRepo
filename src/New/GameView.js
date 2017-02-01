@@ -52,7 +52,7 @@ const GameView = function(){
         if (_curretBKG){
             _parentNode.removeChild(_curretBKG);
         }
-        if (choice < 3 ){
+        if (choice < 4 ){
             _curretBKG = new cc.Sprite(res['GameBackground' + choice.toString()]);
         }
         else {
@@ -189,6 +189,7 @@ const GameView = function(){
     return {
         initialise : initialise,
         // parentNode : _parentNode,
+        clearPlayerState : clearPlayerState,
         goToGame : goToGame,
         goBackToLobby : goBackToLobby,
         addView : addView,
