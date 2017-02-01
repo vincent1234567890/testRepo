@@ -4,80 +4,80 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>NFIsh_00000.png</key>
+            <key>Porgy_00000.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{2,1}</string>
+                <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{860,365}</string>
+                <string>{176,76}</string>
                 <key>spriteSourceSize</key>
-                <string>{1232,1191}</string>
+                <string>{200,100}</string>
                 <key>textureRect</key>
-                <string>{{1,386},{860,365}}</string>
+                <string>{{1,203},{176,76}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>NFIsh_00001.png</key>
+            <key>Porgy_00001.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,1}</string>
                 <key>spriteSize</key>
-                <string>{862,383}</string>
+                <string>{174,80}</string>
                 <key>spriteSourceSize</key>
-                <string>{1232,1191}</string>
+                <string>{200,100}</string>
                 <key>textureRect</key>
-                <string>{{1,1},{862,383}}</string>
+                <string>{{1,121},{174,80}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>NFIsh_00002.png</key>
+            <key>Porgy_00002.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{172,62}</string>
+                <key>spriteSourceSize</key>
+                <string>{200,100}</string>
+                <key>textureRect</key>
+                <string>{{177,1},{172,62}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>Porgy_00003.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,1}</string>
                 <key>spriteSize</key>
-                <string>{848,301}</string>
+                <string>{174,56}</string>
                 <key>spriteSourceSize</key>
-                <string>{1232,1191}</string>
+                <string>{200,100}</string>
                 <key>textureRect</key>
-                <string>{{555,753},{848,301}}</string>
+                <string>{{1,1},{174,56}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
-            <key>NFIsh_00003.png</key>
+            <key>Porgy_00004.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,1}</string>
+                <string>{0,4}</string>
                 <key>spriteSize</key>
-                <string>{854,263}</string>
+                <string>{174,60}</string>
                 <key>spriteSourceSize</key>
-                <string>{1232,1191}</string>
+                <string>{200,100}</string>
                 <key>textureRect</key>
-                <string>{{290,753},{854,263}}</string>
+                <string>{{1,59},{174,60}}</string>
                 <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>NFIsh_00004.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,21}</string>
-                <key>spriteSize</key>
-                <string>{854,287}</string>
-                <key>spriteSourceSize</key>
-                <string>{1232,1191}</string>
-                <key>textureRect</key>
-                <string>{{1,753},{854,287}}</string>
-                <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
         </dict>
         <key>metadata</key>
@@ -89,13 +89,13 @@
             <key>premultiplyAlpha</key>
             <false/>
             <key>realTextureFileName</key>
-            <string>NFish.png</string>
+            <string>Porgy.png</string>
             <key>size</key>
-            <string>{864,1608}</string>
+            <string>{240,280}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:5a2645423f14e7d61c660482b2ca3916:e525fb37389f877685e4096b7d282139:cfc464baec529d5f0c4267b68196139b$</string>
+            <string>$TexturePacker:SmartUpdate:39a083c85cccb324c2679135309d0ecb:235fde9f415e8bccd371af3460e8c142:8ac1b1bf503c89371b9496c0f168afc2$</string>
             <key>textureFileName</key>
-            <string>NFish.png</string>
+            <string>Porgy.png</string>
         </dict>
     </dict>
 </plist>

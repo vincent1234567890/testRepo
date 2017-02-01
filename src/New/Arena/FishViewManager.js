@@ -32,7 +32,7 @@ const FishViewManager = (function(){
         cc.spriteFrameCache.addSpriteFrames(res.BlackWhiteYellowFishPlist);
         cc.spriteFrameCache.addSpriteFrames(res.BlackYellowButterflyFishPlist);
         cc.spriteFrameCache.addSpriteFrames(res.BlueTang2Plist);
-        cc.spriteFrameCache.addSpriteFrames(res.BlueTang2Plist);
+        cc.spriteFrameCache.addSpriteFrames(res.ButterflyFish2Plist);
         cc.spriteFrameCache.addSpriteFrames(res.BWNemoPlist);
         cc.spriteFrameCache.addSpriteFrames(res.KissingFishPlist);
         cc.spriteFrameCache.addSpriteFrames(res.SeahorsePlist);

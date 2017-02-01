@@ -190,12 +190,13 @@ var res = {
     GameBackground0 : "res/New/Game BG/Game BG 1.png",
     GameBackground1 : "res/New/Game BG/Game BG 2.jpg",
     GameBackground2 : "res/New/Game BG/Game BG 3.jpg",
+    GameBackground3 : "res/New/Game BG/Game BG 4.jpg",
 
     //Fish
     StingrayPNG : "res/New/Fish/Ray.png",
     StingrayPlist : "res/New/Fish/Ray.plist",
-    PorgyPlist : "res/New/Fish/NFish.plist",
-    PorgyPNG : "res/New/Fish/NFish.png",
+    PorgyPlist : "res/New/Fish/Porgy.plist",
+    PorgyPNG : "res/New/Fish/Porgy.png",
     PufferfishPlist : "res/New/Fish/Puffer.plist",
     PufferfishPNG : "res/New/Fish/Puffer.png",
     LanternPlist : "res/New/Fish/Lantern.plist",

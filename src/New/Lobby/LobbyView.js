@@ -154,6 +154,7 @@ const LobbyView = (function() {
         LobbyCoinsBG.addChild(lobbyMenu,2);
 
 
+        // console.log("debug:", debugCircle, fishClass, fishType);
 
     };
 
