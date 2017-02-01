@@ -5,7 +5,7 @@
 const FishViewManager = (function(){
 
 
-    const FishViewManager = function(fishGameArena){
+    const FishViewManager = function(fishGameArena, gameConfig){
         // console.log
 
         cc.spriteFrameCache.addSpriteFrames(res.SquidPlist);
@@ -47,6 +47,7 @@ const FishViewManager = (function(){
         this._parent = new cc.Node();
         this._fishes = {};
         this._fishGameArena = fishGameArena;
+        this._gameConfig = gameConfig;
 
         // this.rotationFunction = rotationFunction;
 
@@ -56,7 +57,7 @@ const FishViewManager = (function(){
     const proto = FishViewManager.prototype;
 
     proto.addFish = function(fishId, fishType){
-        this._fishes[fishId] = new FishView(this._parent, fishType);
+        this._fishes[fishId] = new FishView(this._parent, this._gameConfig.fishClasses[fishType], fishType);
         return this._fishes[fishId];
 
         //debug version:

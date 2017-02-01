@@ -189,6 +189,7 @@ const GameView = function(){
     return {
         initialise : initialise,
         // parentNode : _parentNode,
+        clearPlayerState : clearPlayerState,
         goToGame : goToGame,
         goBackToLobby : goBackToLobby,
         addView : addView,
