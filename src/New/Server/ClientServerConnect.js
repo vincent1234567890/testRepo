@@ -235,6 +235,16 @@ const ClientServerConnect = function () {
         return _informServer;
     }
 
+    function listenForEvent (wsFuncName, callback) {
+        // Listens for the specified message to be pushed from the server, without any request being made first.
+        const service = _gameWSClient.getService('game');
+        const wsFunc = service[wsFuncName];
+        if (!wsFunc) {
+            throw Error("The wsFunc '" + wsFuncName + "' that was passed to listenForEvent() does not exist!");
+        }
+        wsFunc.addListener(callback);
+    }
+
     function resetArena() {
         _clientReceiver.resetArena();
     }
@@ -250,5 +260,6 @@ const ClientServerConnect = function () {
         requestMyData : requestMyData,
         //getGameIOSocket: getGameIOSocket,
         postGameCleanup: postGameCleanup,
+        listenForEvent: listenForEvent,
     };
 }();

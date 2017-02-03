@@ -132,6 +132,20 @@ const GameManager = function () {
                 createLobby();
             }
         );
+
+        // These are things we should do immediately after logging in:
+        // Listen for a creditChangeEvent (e.g. caused by an external /recharge request, gift from grandma, etc.)
+        ClientServerConnect.listenForEvent('creditChangeEvent', data => {
+            //assertEqual(typeof data.scoreChange, 'number');
+            _playerData.playerState.score += data.amount;
+            // Now we want to update the view
+            // We need to update this label in the LobbyView: new cc.LabelTTF(formatWithCommas(playerData.playerState.score), fontDef);
+            // This would probably be a nice solution:
+            //LobbyManager._view.updatePlayerData(_playerData);
+            // But for now:
+            createLobby();
+            // We could also notify the player, either with an alert box, or just some flashing / bouncing / animation on the score label
+        });
     }
 
     function onLeaveArena() {
