@@ -32,7 +32,7 @@ const FishAnimationData = function () {
         Puffer: {
             animationInterval: [0, 0],
             frameOrders: [
-                [0, 1, 2, 3, 4], //swim
+                [0, 1, 2, 3, 4, 5], //swim
                 [7, 8, 9, 10, 11], //bloated
                 [2, 5, 6], // shrinking
                 [],// death
@@ -120,6 +120,24 @@ const FishAnimationData = function () {
                 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
             ],
         },
+
+        HorseshoeCrab:{
+            animationInterval: [0],
+            frameOrders: [
+                [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+            ],
+            pivot: [{x: 0.375, y: 0.5}],
+        },
+
+        PaddleFish:{
+            animationInterval: [0],
+            frameOrders: [
+                [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+            ],
+            pivot: [{x: 0.375, y: 0.5}],
+        },
+
+        //
         DemoFish:{
             animationInterval: [0],
             frameOrders: [
