@@ -11,13 +11,13 @@
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{160,65}</string>
+                <string>{80,33}</string>
                 <key>spriteSourceSize</key>
-                <string>{160,65}</string>
+                <string>{80,33}</string>
                 <key>textureRect</key>
-                <string>{{163,1},{160,65}}</string>
+                <string>{{1,1},{80,33}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>Angelfish_00001.png</key>
             <dict>
@@ -26,13 +26,13 @@
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{160,65}</string>
+                <string>{80,33}</string>
                 <key>spriteSourceSize</key>
-                <string>{160,65}</string>
+                <string>{80,33}</string>
                 <key>textureRect</key>
-                <string>{{163,163},{160,65}}</string>
+                <string>{{1,36},{80,33}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>Angelfish_00002.png</key>
             <dict>
@@ -41,11 +41,11 @@
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{160,65}</string>
+                <string>{80,33}</string>
                 <key>spriteSourceSize</key>
-                <string>{160,65}</string>
+                <string>{80,33}</string>
                 <key>textureRect</key>
-                <string>{{1,284},{160,65}}</string>
+                <string>{{1,71},{80,33}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -56,11 +56,11 @@
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{160,61}</string>
+                <string>{80,33}</string>
                 <key>spriteSourceSize</key>
-                <string>{160,65}</string>
+                <string>{80,33}</string>
                 <key>textureRect</key>
-                <string>{{1,158},{160,61}}</string>
+                <string>{{1,106},{80,33}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -71,13 +71,13 @@
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{160,51}</string>
+                <string>{80,27}</string>
                 <key>spriteSourceSize</key>
-                <string>{160,65}</string>
+                <string>{80,33}</string>
                 <key>textureRect</key>
-                <string>{{1,50},{160,51}}</string>
+                <string>{{83,83},{80,27}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>Angelfish_00005.png</key>
             <dict>
@@ -86,28 +86,28 @@
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{160,47}</string>
+                <string>{80,25}</string>
                 <key>spriteSourceSize</key>
-                <string>{160,65}</string>
+                <string>{80,33}</string>
                 <key>textureRect</key>
-                <string>{{1,1},{160,47}}</string>
+                <string>{{83,165},{80,25}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>Angelfish_00006.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,-1}</string>
+                <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{160,53}</string>
+                <string>{80,29}</string>
                 <key>spriteSourceSize</key>
-                <string>{160,65}</string>
+                <string>{80,33}</string>
                 <key>textureRect</key>
-                <string>{{1,103},{160,53}}</string>
+                <string>{{83,1},{80,29}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>Angelfish_00007.png</key>
             <dict>
@@ -116,11 +116,11 @@
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{160,61}</string>
+                <string>{80,33}</string>
                 <key>spriteSourceSize</key>
-                <string>{160,65}</string>
+                <string>{80,33}</string>
                 <key>textureRect</key>
-                <string>{{1,221},{160,61}}</string>
+                <string>{{1,141},{80,33}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -131,11 +131,11 @@
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{160,65}</string>
+                <string>{80,33}</string>
                 <key>spriteSourceSize</key>
-                <string>{160,65}</string>
+                <string>{80,33}</string>
                 <key>textureRect</key>
-                <string>{{1,351},{160,65}}</string>
+                <string>{{1,176},{80,33}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -146,11 +146,11 @@
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{160,65}</string>
+                <string>{80,33}</string>
                 <key>spriteSourceSize</key>
-                <string>{160,65}</string>
+                <string>{80,33}</string>
                 <key>textureRect</key>
-                <string>{{1,418},{160,65}}</string>
+                <string>{{1,211},{80,33}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -166,9 +166,9 @@
             <key>realTextureFileName</key>
             <string>Angelfish.png</string>
             <key>size</key>
-            <string>{229,484}</string>
+            <string>{113,246}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:95f0a9bdd2a58f8430cf5dbb2bd8fe7e:91d5d17d312cfd11309e8bbbc4ae3378:e9a08a7fd79c8ba4ab85547bbf1bca7e$</string>
+            <string>$TexturePacker:SmartUpdate:188fa17f947968b359157b104c17d251:16950822e79a95eba5f717487acc06c4:e9a08a7fd79c8ba4ab85547bbf1bca7e$</string>
             <key>textureFileName</key>
             <string>Angelfish.png</string>
         </dict>

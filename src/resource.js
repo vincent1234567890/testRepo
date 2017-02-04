@@ -186,6 +186,9 @@ var res = {
     LoginUIPlist : "res/New/Lobby/Login.plist",
     LoginUIPng : "res/New/Lobby/Login.png",
 
+    //GameFrame
+    GameFrame : "res/New/InGameFrame.png",
+
     //GameBackgrounds
     GameBackground0 : "res/New/Game BG/Game BG 1.png",
     GameBackground1 : "res/New/Game BG/Game BG 2.jpg",
@@ -227,6 +230,10 @@ var res = {
     MarlinsFishPng : "res/New/Fish/MarlinsFish.png",
     DemoFishPlist : "res/New/Fish/DemoFish.plist",
     DemoFishPng : "res/New/Fish/DemoFish.png",
+    HorseshoeCrabPlist : "res/New/Fish/HorseshoeCrab.plist",
+    HorseshoeCrabPng : "res/New/Fish/HorseshoeCrab.png",
+    PaddleFishPlist : "res/New/Fish/PaddleFish.plist",
+    PaddleFishPng : "res/New/Fish/PaddleFish.png",
 
     //New Game
     AngelFish2Plist : "res/New/Fish/New/AngelFish2.plist",
