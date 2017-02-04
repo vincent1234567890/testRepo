@@ -11,9 +11,7 @@ const BulletView = (function () {
         this._view = new cc.Sprite(resource);
         this._parent.addChild(this._view);
 
-        var particle = particleSystemFactory.createParticle(res.ParticlePlist);
-        particle.setDrawMode(cc.ParticleSystem.SHAPE_MODE);
-        particle.setShapeType(cc.ParticleSystem.STAR_SHAPE);
+        var particle = particleSystemFactory.create(res.ParticlePlist, undefined, true);
 
         this._view.addChild(particle);
     };
