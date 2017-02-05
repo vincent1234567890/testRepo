@@ -4,123 +4,153 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>ButterFly_00000.png</key>
+            <key>PaddleFish_00000.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-1,-6}</string>
+                <key>spriteSize</key>
+                <string>{319,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{321,98}</string>
+                <key>textureRect</key>
+                <string>{{324,1},{319,72}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>PaddleFish_00001.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{95,45}</string>
+                <string>{321,58}</string>
                 <key>spriteSourceSize</key>
-                <string>{95,45}</string>
+                <string>{321,98}</string>
                 <key>textureRect</key>
-                <string>{{1,1},{95,45}}</string>
+                <string>{{1,1},{321,58}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>ButterFly_00001.png</key>
+            <key>PaddleFish_00002.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{95,45}</string>
+                <string>{321,56}</string>
                 <key>spriteSourceSize</key>
-                <string>{95,45}</string>
+                <string>{321,98}</string>
                 <key>textureRect</key>
-                <string>{{1,48},{95,45}}</string>
+                <string>{{1,121},{321,56}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>ButterFly_00002.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-1,0}</string>
-                <key>spriteSize</key>
-                <string>{93,45}</string>
-                <key>spriteSourceSize</key>
-                <string>{95,45}</string>
-                <key>textureRect</key>
-                <string>{{1,275},{93,45}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>ButterFly_00003.png</key>
+            <key>PaddleFish_00003.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{95,43}</string>
+                <string>{321,56}</string>
                 <key>spriteSourceSize</key>
-                <string>{95,45}</string>
+                <string>{321,98}</string>
                 <key>textureRect</key>
-                <string>{{1,142},{95,43}}</string>
+                <string>{{1,179},{321,56}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>ButterFly_00004.png</key>
+            <key>PaddleFish_00004.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{95,41}</string>
+                <string>{321,56}</string>
                 <key>spriteSourceSize</key>
-                <string>{95,45}</string>
+                <string>{321,98}</string>
                 <key>textureRect</key>
-                <string>{{1,232},{95,41}}</string>
+                <string>{{1,237},{321,56}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>ButterFly_00005.png</key>
+            <key>PaddleFish_00005.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-1,5}</string>
+                <key>spriteSize</key>
+                <string>{319,64}</string>
+                <key>spriteSourceSize</key>
+                <string>{321,98}</string>
+                <key>textureRect</key>
+                <string>{{398,1},{319,64}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>PaddleFish_00006.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{95,43}</string>
+                <string>{321,56}</string>
                 <key>spriteSourceSize</key>
-                <string>{95,45}</string>
+                <string>{321,98}</string>
                 <key>textureRect</key>
-                <string>{{1,187},{95,43}}</string>
+                <string>{{1,295},{321,56}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>ButterFly_00006.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-1,0}</string>
-                <key>spriteSize</key>
-                <string>{93,45}</string>
-                <key>spriteSourceSize</key>
-                <string>{95,45}</string>
-                <key>textureRect</key>
-                <string>{{1,322},{93,45}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>ButterFly_00007.png</key>
+            <key>PaddleFish_00007.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{95,45}</string>
+                <string>{321,56}</string>
                 <key>spriteSourceSize</key>
-                <string>{95,45}</string>
+                <string>{321,98}</string>
                 <key>textureRect</key>
-                <string>{{1,95},{95,45}}</string>
+                <string>{{1,353},{321,56}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>PaddleFish_00008.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{321,56}</string>
+                <key>spriteSourceSize</key>
+                <string>{321,98}</string>
+                <key>textureRect</key>
+                <string>{{1,411},{321,56}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>PaddleFish_00009.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{321,58}</string>
+                <key>spriteSourceSize</key>
+                <string>{321,98}</string>
+                <key>textureRect</key>
+                <string>{{1,61},{321,58}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -134,13 +164,13 @@
             <key>premultiplyAlpha</key>
             <false/>
             <key>realTextureFileName</key>
-            <string>ButterFly.png</string>
+            <string>PaddleFish.png</string>
             <key>size</key>
-            <string>{97,368}</string>
+            <string>{463,468}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:205ac6c2fa428703b95178c10a60ec69:8b7c9a4ee8ceba4ee25a664c5b7a58c0:d45e80a08066d7ddd5e2bfd8cf3528bd$</string>
+            <string>$TexturePacker:SmartUpdate:cfbbaa51b5a4467851929d12989250aa:6b208c700b0861d60ba1dd9391e14a85:1048d245b997da23866d89fd2912834a$</string>
             <key>textureFileName</key>
-            <string>ButterFly.png</string>
+            <string>PaddleFish.png</string>
         </dict>
     </dict>
 </plist>

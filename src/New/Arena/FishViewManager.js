@@ -25,6 +25,8 @@ const FishViewManager = (function(){
         cc.spriteFrameCache.addSpriteFrames(res.MarlinsFishPlist);
         cc.spriteFrameCache.addSpriteFrames(res.AngelFishPlist);
         cc.spriteFrameCache.addSpriteFrames(res.ButterflyPlist);
+        cc.spriteFrameCache.addSpriteFrames(res.HorseshoeCrabPlist);
+        cc.spriteFrameCache.addSpriteFrames(res.PaddleFishPlist);
 
 
         //new game

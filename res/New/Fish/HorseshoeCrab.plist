@@ -4,153 +4,168 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>Amphiprion_00000.png</key>
+            <key>HorseshoeCrab_00000.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-5,-5}</string>
+                <string>{-5,-1}</string>
                 <key>spriteSize</key>
-                <string>{84,55}</string>
+                <string>{136,86}</string>
                 <key>spriteSourceSize</key>
-                <string>{94,65}</string>
+                <string>{150,100}</string>
                 <key>textureRect</key>
-                <string>{{1,163},{84,55}}</string>
+                <string>{{735,1},{136,86}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
-            <key>Amphiprion_00001.png</key>
+            <key>HorseshoeCrab_00001.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{-2,-1}</string>
                 <key>spriteSize</key>
-                <string>{90,43}</string>
+                <string>{142,86}</string>
                 <key>spriteSourceSize</key>
-                <string>{94,65}</string>
+                <string>{150,100}</string>
                 <key>textureRect</key>
-                <string>{{1,77},{90,43}}</string>
+                <string>{{447,1},{142,86}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Amphiprion_00002.png</key>
+            <key>HorseshoeCrab_00002.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,0}</string>
+                <string>{0,-1}</string>
                 <key>spriteSize</key>
-                <string>{94,37}</string>
+                <string>{146,86}</string>
                 <key>spriteSourceSize</key>
-                <string>{94,65}</string>
+                <string>{150,100}</string>
                 <key>textureRect</key>
-                <string>{{1,1},{94,37}}</string>
+                <string>{{151,1},{146,86}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Amphiprion_00003.png</key>
+            <key>HorseshoeCrab_00003.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,0}</string>
+                <string>{0,-1}</string>
                 <key>spriteSize</key>
-                <string>{94,35}</string>
+                <string>{148,86}</string>
                 <key>spriteSourceSize</key>
-                <string>{94,65}</string>
+                <string>{150,100}</string>
                 <key>textureRect</key>
-                <string>{{1,40},{94,35}}</string>
+                <string>{{1,1},{148,86}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Amphiprion_00004.png</key>
+            <key>HorseshoeCrab_00004.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-2,3}</string>
+                <string>{0,-1}</string>
                 <key>spriteSize</key>
-                <string>{90,39}</string>
+                <string>{146,86}</string>
                 <key>spriteSourceSize</key>
-                <string>{94,65}</string>
+                <string>{150,100}</string>
                 <key>textureRect</key>
-                <string>{{1,122},{90,39}}</string>
+                <string>{{299,1},{146,86}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Amphiprion_00005.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-5,8}</string>
-                <key>spriteSize</key>
-                <string>{84,49}</string>
-                <key>spriteSourceSize</key>
-                <string>{94,65}</string>
-                <key>textureRect</key>
-                <string>{{58,163},{84,49}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>Amphiprion_00006.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-2,3}</string>
-                <key>spriteSize</key>
-                <string>{90,39}</string>
-                <key>spriteSourceSize</key>
-                <string>{94,65}</string>
-                <key>textureRect</key>
-                <string>{{1,122},{90,39}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>Amphiprion_00007.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{94,35}</string>
-                <key>spriteSourceSize</key>
-                <string>{94,65}</string>
-                <key>textureRect</key>
-                <string>{{1,40},{94,35}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>Amphiprion_00008.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{94,37}</string>
-                <key>spriteSourceSize</key>
-                <string>{94,65}</string>
-                <key>textureRect</key>
-                <string>{{1,1},{94,37}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>Amphiprion_00009.png</key>
+            <key>HorseshoeCrab_00005.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{-2,-1}</string>
                 <key>spriteSize</key>
-                <string>{90,43}</string>
+                <string>{142,86}</string>
                 <key>spriteSourceSize</key>
-                <string>{94,65}</string>
+                <string>{150,100}</string>
                 <key>textureRect</key>
-                <string>{{1,77},{90,43}}</string>
+                <string>{{591,1},{142,86}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>HorseshoeCrab_00006.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-5,-1}</string>
+                <key>spriteSize</key>
+                <string>{136,86}</string>
+                <key>spriteSourceSize</key>
+                <string>{150,100}</string>
+                <key>textureRect</key>
+                <string>{{873,1},{136,86}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>HorseshoeCrab_00007.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-2,-1}</string>
+                <key>spriteSize</key>
+                <string>{142,86}</string>
+                <key>spriteSourceSize</key>
+                <string>{150,100}</string>
+                <key>textureRect</key>
+                <string>{{591,1},{142,86}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>HorseshoeCrab_00008.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,-1}</string>
+                <key>spriteSize</key>
+                <string>{146,86}</string>
+                <key>spriteSourceSize</key>
+                <string>{150,100}</string>
+                <key>textureRect</key>
+                <string>{{299,1},{146,86}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>HorseshoeCrab_00009.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,-1}</string>
+                <key>spriteSize</key>
+                <string>{148,86}</string>
+                <key>spriteSourceSize</key>
+                <string>{150,100}</string>
+                <key>textureRect</key>
+                <string>{{1,1},{148,86}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>HorseshoeCrab_00010.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,-1}</string>
+                <key>spriteSize</key>
+                <string>{146,86}</string>
+                <key>spriteSourceSize</key>
+                <string>{150,100}</string>
+                <key>textureRect</key>
+                <string>{{151,1},{146,86}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -164,13 +179,13 @@
             <key>premultiplyAlpha</key>
             <false/>
             <key>realTextureFileName</key>
-            <string>Amphiprion.png</string>
+            <string>HorseshoeCrab.png</string>
             <key>size</key>
-            <string>{108,248}</string>
+            <string>{1010,88}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:b062a271a509e3f1c7794615a638c891:03cb08d67a41c10cc08b301555437c7f:56e828cf6dbf5c0efca6db70b68d8063$</string>
+            <string>$TexturePacker:SmartUpdate:496cda9fd8172f1f6c3b6443e9b38e24:fed31d6ed57bbc414e2cbb63c4477fd5:4823bb768a196e05728b652322ceb9a4$</string>
             <key>textureFileName</key>
-            <string>Amphiprion.png</string>
+            <string>HorseshoeCrab.png</string>
         </dict>
     </dict>
 </plist>

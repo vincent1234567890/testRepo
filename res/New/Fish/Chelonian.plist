@@ -9,13 +9,13 @@
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{15,0}</string>
+                <string>{7,0}</string>
                 <key>spriteSize</key>
-                <string>{200,138}</string>
+                <string>{103,70}</string>
                 <key>spriteSourceSize</key>
-                <string>{250,252}</string>
+                <string>{125,126}</string>
                 <key>textureRect</key>
-                <string>{{1,605},{200,138}}</string>
+                <string>{{1,312},{103,70}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -24,13 +24,13 @@
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{14,0}</string>
+                <string>{7,0}</string>
                 <key>spriteSize</key>
-                <string>{202,154}</string>
+                <string>{103,78}</string>
                 <key>spriteSourceSize</key>
-                <string>{250,252}</string>
+                <string>{125,126}</string>
                 <key>textureRect</key>
-                <string>{{209,577},{202,154}}</string>
+                <string>{{108,297},{103,78}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -39,13 +39,13 @@
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{13,0}</string>
+                <string>{6,0}</string>
                 <key>spriteSize</key>
-                <string>{206,192}</string>
+                <string>{105,98}</string>
                 <key>spriteSourceSize</key>
-                <string>{250,252}</string>
+                <string>{125,126}</string>
                 <key>textureRect</key>
-                <string>{{1,411},{206,192}}</string>
+                <string>{{1,212},{105,98}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -54,13 +54,13 @@
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{12,0}</string>
+                <string>{6,0}</string>
                 <key>spriteSize</key>
-                <string>{206,232}</string>
+                <string>{105,118}</string>
                 <key>spriteSourceSize</key>
-                <string>{250,252}</string>
+                <string>{125,126}</string>
                 <key>textureRect</key>
-                <string>{{233,1},{206,232}}</string>
+                <string>{{119,1},{105,118}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -69,13 +69,13 @@
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{11,0}</string>
+                <string>{5,0}</string>
                 <key>spriteSize</key>
-                <string>{208,230}</string>
+                <string>{107,116}</string>
                 <key>spriteSourceSize</key>
-                <string>{250,252}</string>
+                <string>{125,126}</string>
                 <key>textureRect</key>
-                <string>{{1,1},{208,230}}</string>
+                <string>{{1,1},{107,116}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -84,13 +84,13 @@
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-4,0}</string>
+                <string>{-2,0}</string>
                 <key>spriteSize</key>
-                <string>{238,158}</string>
+                <string>{121,80}</string>
                 <key>spriteSourceSize</key>
-                <string>{250,252}</string>
+                <string>{125,126}</string>
                 <key>textureRect</key>
-                <string>{{209,417},{238,158}}</string>
+                <string>{{108,215},{121,80}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -99,13 +99,13 @@
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{16,0}</string>
+                <string>{8,0}</string>
                 <key>spriteSize</key>
-                <string>{206,232}</string>
+                <string>{105,118}</string>
                 <key>spriteSourceSize</key>
-                <string>{250,252}</string>
+                <string>{125,126}</string>
                 <key>textureRect</key>
-                <string>{{233,209},{206,232}}</string>
+                <string>{{119,108},{105,118}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -114,13 +114,13 @@
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{16,0}</string>
+                <string>{8,0}</string>
                 <key>spriteSize</key>
-                <string>{202,198}</string>
+                <string>{103,100}</string>
                 <key>spriteSourceSize</key>
-                <string>{250,252}</string>
+                <string>{125,126}</string>
                 <key>textureRect</key>
-                <string>{{1,211},{202,198}}</string>
+                <string>{{1,110},{103,100}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -136,9 +136,9 @@
             <key>realTextureFileName</key>
             <string>Chelonian.png</string>
             <key>size</key>
-            <string>{466,744}</string>
+            <string>{238,383}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:64d73929a8bc061844230c0a1a66088a:cb65718249f3e181de0e461993d31098:4842b6f25db40e218a1c56ca79b94ca8$</string>
+            <string>$TexturePacker:SmartUpdate:e28db107c33d7b6c091406e89ede150a:f5d665c763292a8d725b4d1ecf520a71:4842b6f25db40e218a1c56ca79b94ca8$</string>
             <key>textureFileName</key>
             <string>Chelonian.png</string>
         </dict>
