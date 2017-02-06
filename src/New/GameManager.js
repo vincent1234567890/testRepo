@@ -24,7 +24,7 @@ const GameManager = function () {
     let _loggedIn = false;
 
     //Managers
-    let _loginManager;
+    // let _loginManager;
     let _fishManager;
     let _lobbyManager;
     let _scoreboardManager;
@@ -34,7 +34,7 @@ const GameManager = function () {
 
     function initialiseLogin(parent) {
         GameView.initialise(parent);
-        _loginManager = new LoginManager();
+        // _loginManager = new LoginManager();
     }
 
     const initialiseGame = function (parent, fishGameArena) {
@@ -98,23 +98,23 @@ const GameManager = function () {
         return _gameConfig;
     };
 
-    const goToLogin = function () {
-        if (!_loggedIn) {
-            _loginManager.goToLogin();
-        }
-    };
+    // const goToLogin = function () {
+    //     if (!_loggedIn) {
+    //         _loginManager.goToLogin();
+    //     }
+    // };
 
-    const login = function (onSuccess, onFailure) {
-        let loginInfo = _loginManager.getLoginInfo();
-        ClientServerConnect.login(loginInfo.name, loginInfo.pass, function (data) {
-            if (data) {
-                _playerData = data;
-                onSuccess();
-            } else {
-                onFailure();
-            }
-        });
-    };
+    // const login = function (onSuccess, onFailure) {
+    //     let loginInfo = _loginManager.getLoginInfo();
+    //     ClientServerConnect.login(loginInfo.name, loginInfo.pass, function (data) {
+    //         if (data) {
+    //             _playerData = data;
+    //             onSuccess();
+    //         } else {
+    //             onFailure();
+    //         }
+    //     });
+    // };
 
     function goToLobby() {
         GameView.initialise();
@@ -122,8 +122,8 @@ const GameManager = function () {
 
         // Login was successful, so save the user's details
         // _loginManager.saveLoginInfo();
-        PlayerPreferences.setLoginDetails(_loginManager.getLoginInfo());
-        _loginManager.destroyView();
+        // PlayerPreferences.setLoginDetails(_loginManager.getLoginInfo());
+        // _loginManager.destroyView();
 
         ClientServerConnect.requestMyData().then(
             stats => {
@@ -132,6 +132,8 @@ const GameManager = function () {
                 createLobby();
             }
         );
+
+        // createLobby();
 
         // These are things we should do immediately after logging in:
         // Listen for a creditChangeEvent (e.g. caused by an external /recharge request, gift from grandma, etc.)
@@ -241,8 +243,8 @@ const GameManager = function () {
         caughtFish: caughtFish,
         updateEverything: updateEverything,
         showPostGameStats: showPostGameStats,
-        goToLogin: goToLogin,
-        login: login,
+        // goToLogin: goToLogin,
+        // login: login,
         goToLobby: goToLobby,
 
         //debug
