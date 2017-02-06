@@ -12,6 +12,9 @@ const ClientServerConnect = function () {
     let _gameWSClient;
     let _gameIOSocket;
 
+    let _debugSimulateLag = true;
+    let _debugGhosts = false;
+
 
     const connectToMasterServer = function () {
         if (_hasConnected) return;
@@ -54,7 +57,7 @@ const ClientServerConnect = function () {
                         // If successful, remove the query parameters from the URL
                         window.history.pushState({where: 'start', search: document.location.search}, '', document.location.pathname);
                         // Start the game!
-                        GameManager.goToLobby();
+                        AppManager.goToLobby();
                     });
                 }
             }
@@ -164,16 +167,15 @@ const ClientServerConnect = function () {
                 // This object has on() and off() functions for receiving messages, and send() for sending them.
                 //setGameIOSocket(ioSocket);
 
-                GameCtrl.debugSimulateLag = true;
-                GameCtrl.debugGhosts = false;
-                if (GameCtrl.debugSimulateLag) {
+
+                if (_debugSimulateLag) {
                     socketUtils.simulateNetworkLatency(ioSocket, 100);
                 }
-                if (GameCtrl.debugGhosts) {
+                if (_debugGhosts) {
                     clientReceiver.ghostActors(ioSocket, 2000);
                 }
 
-                const receiver = clientReceiver(ioSocket, GameCtrl.sharedGame()); // @TODO : move to GameManager?
+                const receiver = clientReceiver(ioSocket);
 
                 //setClientReceiver(receiver);
 

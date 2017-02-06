@@ -17,7 +17,9 @@ const GameView = function(){
     let _lastShotTime = -Infinity;
 
     function initialise (parentNode, gameConfig, fishGameArena) {
+
         initialiseParent(parentNode);
+        console.log("initialise:gameconfig:",gameConfig);
         if (gameConfig) {
             _fishGameArena = fishGameArena;
             _gameConfig = gameConfig;
@@ -28,7 +30,7 @@ const GameView = function(){
                 // cc._canvas.rotate(180);
                 _isRotated = true;
             }
-
+            console.log("initialised");
             for (let i = 0; i < _gameConfig.maxPlayers; i++) {
                 const index = getPlayerSlot(i);
                 _playerViews[index] = new PlayerViewManager(_gameConfig, index, i == _playerSlot);

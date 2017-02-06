@@ -97,7 +97,8 @@ var cocos2dApp = cc.game.onStart = function() {
         // cc.director.runScene(new TestScene());
         // cc.director.runScene(new StartMenuLayer());
         ClientServerConnect.connectToMasterServer();
-        GameCtrl.sharedGame().home();
+        // GameCtrl.sharedGame().home();
+        // AppManager.goToLobby();
     }, this);
     // },
    // var  applicationDidFinishLaunching = function () {
