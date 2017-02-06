@@ -11,11 +11,11 @@
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{176,76}</string>
+                <string>{90,40}</string>
                 <key>spriteSourceSize</key>
-                <string>{200,100}</string>
+                <string>{100,50}</string>
                 <key>textureRect</key>
-                <string>{{1,203},{176,76}}</string>
+                <string>{{1,1},{90,40}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -26,11 +26,11 @@
                 <key>spriteOffset</key>
                 <string>{0,1}</string>
                 <key>spriteSize</key>
-                <string>{174,80}</string>
+                <string>{88,42}</string>
                 <key>spriteSourceSize</key>
-                <string>{200,100}</string>
+                <string>{100,50}</string>
                 <key>textureRect</key>
-                <string>{{1,121},{174,80}}</string>
+                <string>{{1,43},{88,42}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -41,13 +41,13 @@
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{172,62}</string>
+                <string>{88,32}</string>
                 <key>spriteSourceSize</key>
-                <string>{200,100}</string>
+                <string>{100,50}</string>
                 <key>textureRect</key>
-                <string>{{177,1},{172,62}}</string>
+                <string>{{1,87},{88,32}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>Porgy_00003.png</key>
             <dict>
@@ -56,11 +56,11 @@
                 <key>spriteOffset</key>
                 <string>{0,1}</string>
                 <key>spriteSize</key>
-                <string>{174,56}</string>
+                <string>{88,30}</string>
                 <key>spriteSourceSize</key>
-                <string>{200,100}</string>
+                <string>{100,50}</string>
                 <key>textureRect</key>
-                <string>{{1,1},{174,56}}</string>
+                <string>{{1,155},{88,30}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -69,13 +69,13 @@
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,4}</string>
+                <string>{0,2}</string>
                 <key>spriteSize</key>
-                <string>{174,60}</string>
+                <string>{88,32}</string>
                 <key>spriteSourceSize</key>
-                <string>{200,100}</string>
+                <string>{100,50}</string>
                 <key>textureRect</key>
-                <string>{{1,59},{174,60}}</string>
+                <string>{{1,121},{88,32}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -91,9 +91,9 @@
             <key>realTextureFileName</key>
             <string>Porgy.png</string>
             <key>size</key>
-            <string>{240,280}</string>
+            <string>{92,186}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:39a083c85cccb324c2679135309d0ecb:235fde9f415e8bccd371af3460e8c142:8ac1b1bf503c89371b9496c0f168afc2$</string>
+            <string>$TexturePacker:SmartUpdate:f7db3bf22e7cdc2d3ec2201f8e70e550:d388e0bef29f29406ff11a82be2a471d:8ac1b1bf503c89371b9496c0f168afc2$</string>
             <key>textureFileName</key>
             <string>Porgy.png</string>
         </dict>
