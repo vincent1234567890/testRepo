@@ -97,7 +97,7 @@ const OptionsMenuViewBottom = (function (){
     function onSettingsEvent() {
         if (_settingsCallback) {
             onMenuClicked();
-            console.log("onSettingsEvent");
+            // console.log("onSettingsEvent");
             _settingsCallback();
         }
     }
@@ -105,7 +105,7 @@ const OptionsMenuViewBottom = (function (){
     function onFishListEvent() {
         if (_fishCallBack) {
             onMenuClicked();
-            console.log("onFishListEvent");
+            // console.log("onFishListEvent");
             _fishCallBack();
         }
     }
@@ -114,7 +114,7 @@ const OptionsMenuViewBottom = (function (){
         if (_exitCallBack) {
             onMenuClicked();
             // BlockingManager.deregisterBlock(onMenuClicked);
-            console.log("onExitEvent");
+            // console.log("onExitEvent");
             _exitCallBack();
         }
     }
@@ -131,7 +131,7 @@ const OptionsMenuViewBottom = (function (){
         }
         _isAnimating = true;
         if (!_isShowing){
-            console.log("!_isShowing");
+            // console.log("!_isShowing");
             // _touchlayer.setEnable(true);
             // _colourBG.init(showColour);
             BlockingManager.registerBlock(onMenuClicked);
@@ -154,7 +154,7 @@ const OptionsMenuViewBottom = (function (){
         _isAnimating = false;
         _isShowing = !_isShowing;
         _menu.setEnabled(_isShowing);
-        console.log(_menu.isEnabled());
+        // console.log(_menu.isEnabled());
     }
 
     const proto = OptionsMenuViewBottom.prototype;

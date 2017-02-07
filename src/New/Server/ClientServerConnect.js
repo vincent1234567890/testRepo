@@ -12,8 +12,8 @@ const ClientServerConnect = function () {
     let _gameWSClient;
     let _gameIOSocket;
 
-    let _debugSimulateLag = true;
-    let _debugGhosts = false;
+    // let _debugSimulateLag = true;
+    // let _debugGhosts = false;
 
 
     const connectToMasterServer = function () {
@@ -166,12 +166,13 @@ const ClientServerConnect = function () {
                 const ioSocket = socketUtils.getIOSocketFromClient(client);
                 // This object has on() and off() functions for receiving messages, and send() for sending them.
                 //setGameIOSocket(ioSocket);
+                AppManager.debugSimulateLag = true;
+                AppManager.debugGhosts = false;
 
-
-                if (_debugSimulateLag) {
+                if (AppManager.debugSimulateLag) {
                     socketUtils.simulateNetworkLatency(ioSocket, 100);
                 }
-                if (_debugGhosts) {
+                if (AppManager.debugGhosts) {
                     clientReceiver.ghostActors(ioSocket, 2000);
                 }
 

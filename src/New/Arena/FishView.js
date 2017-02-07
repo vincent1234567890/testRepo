@@ -63,8 +63,8 @@ const FishView = (function () {
         this._sprite.setColor(new cc.Color(32,32,128,128));
         // this._sprite.runAction(deathTint);
 
-        const deathAnimation = new cc.RepeatForever( new cc.Sequence ( deathScaleSmall, deathScaleLarge ));
-        const deathAnimationAlpha = new cc.RepeatForever( new cc.Sequence ( alphaFadeOut, alphaFadeIn ));
+        const deathAnimation = new cc.RepeatForever( new cc.Sequence ( deathScaleSmall.clone(), deathScaleLarge.clone() ));
+        const deathAnimationAlpha = new cc.RepeatForever( new cc.Sequence ( alphaFadeOut.clone(), alphaFadeIn.clone() ));
         const notify = new cc.Sequence(new cc.DelayTime(5), new cc.CallFunc(callback, target, id));
         this._sprite.runAction(deathAnimation);
         this._sprite.runAction(deathAnimationAlpha);

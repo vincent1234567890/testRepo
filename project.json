@@ -18,6 +18,7 @@
         "src/resource.js",
 
         "src/SharedClasses/LoadingScreen.js",
+        "src/SharedClasses/ParticleSystemFactory.js",
 
         "src/New/PlayerPreferences.js",
         "src/New/Server/ClientServerConnect.js",
@@ -55,6 +56,7 @@
         "src/New/Arena/ScoreboardManager.js",
         "src/New/GameManager.js",
         "src/New/GameView.js",
+        "src/New/GameTicker.js",
 
         "src/New/AppManager.js",
 
