@@ -47,7 +47,7 @@ const ClientServerConnect = function () {
                 }
             ).catch(console.error.bind(console));
 
-            if (typeof document !== 'undefined' && document.location.search) {
+            if (typeof document !== 'undefined') {
                 var queryParams = getCurrentOrCachedQueryParams();
                 if (queryParams.token && (queryParams.playerId || queryParams.email)) {
                     loginWithToken(queryParams.token, queryParams.playerId, queryParams.email, function () {
