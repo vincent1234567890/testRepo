@@ -228,13 +228,15 @@ var res = {
     GrouperFishPng : "res/New/Fish/GrouperFish.png",
     MarlinsFishPlist : "res/New/Fish/MarlinsFish.plist",
     MarlinsFishPng : "res/New/Fish/MarlinsFish.png",
-    DemoFishPlist : "res/New/Fish/DemoFish.plist",
-    DemoFishPng : "res/New/Fish/DemoFish.png",
+
     HorseshoeCrabPlist : "res/New/Fish/HorseshoeCrab.plist",
     HorseshoeCrabPng : "res/New/Fish/HorseshoeCrab.png",
     PaddleFishPlist : "res/New/Fish/PaddleFish.plist",
     PaddleFishPng : "res/New/Fish/PaddleFish.png",
 
+
+    DemoFishPlist : "res/New/Fish/New/DemoFish.plist",
+    DemoFishPng : "res/New/Fish/New/DemoFish.png",
     //New Game
     AngelFish2Plist : "res/New/Fish/New/AngelFish2.plist",
     AngelFish2Png : "res/New/Fish/New/AngelFish2.png",
