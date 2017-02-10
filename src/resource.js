@@ -1,9 +1,10 @@
-var sino = sino || {};
 
 cc.loader.register(["sprite"], cc._binaryLoader); //register sprite file loader.
 
 var res = {
     LoadingLogo : "res/loadingLogo.jpg",
+    waterCausticsFSH : "src/New/Shaders/WaterCaustics/waterCaustics.fsh",
+    waterCausticsVSH : "src/New/Shaders/WaterCaustics/waterCaustics.vsh",
     // LoadingAdBg : "res/LoadingAdBg.jpg",
     // LoadingCompanyLogoScreen : "res/MainBg.jpg",
     //
@@ -276,11 +277,11 @@ var res = {
 };
 
 var g_resources = [
-    "res/lang-en/main_ui_title_en.png",
-    "res/lang-cn/main_ui_title_cn.png",
-    "res/qipao3.png",
-    "res/qipao3.plist",
-    "res/qipao4.plist",
+    // "res/lang-en/main_ui_title_en.png",
+    // "res/lang-cn/main_ui_title_cn.png",
+    // "res/qipao3.png",
+    // "res/qipao3.plist",
+    // "res/qipao4.plist",
 
 ];
 

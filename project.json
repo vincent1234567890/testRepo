@@ -20,6 +20,9 @@
         "src/SharedClasses/LoadingScreen.js",
         "src/SharedClasses/ParticleSystemFactory.js",
 
+        "src/New/Shaders/WaterCaustics/WaterCaustics.js",
+        "src/New/Shaders/WaterCaustics/WaterCausticsLayer.js",
+
         "src/New/PlayerPreferences.js",
         "src/New/Server/ClientServerConnect.js",
         "src/New/GUIFunctions.js",
@@ -69,10 +72,10 @@
         "lib/modules/socketUtils.js",
         "lib/fishgamelogic/serverInformer.js",
         "lib/fishgamelogic/clientReceiver.js",
-        "lib/fishgamelogic/FishGameArena.js"
+        "lib/fishgamelogic/FishGameArena.js",
 
 
-
+        "src/TestScene.js"
 
     ]
 }

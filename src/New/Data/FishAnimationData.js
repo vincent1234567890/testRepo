@@ -194,7 +194,7 @@ const FishAnimationData = function () {
                 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21],
                 [],
                 [],
-                [22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32],
+                [22, 23, 24, 25, 26],
             ],
             animationSpeed: 0.03,
         },
@@ -262,47 +262,6 @@ const FishAnimationData = function () {
         return fishType + '_' + number + '.png';
     }
 
-    //have to use initialise _after_ assets have been loaded.
-    // FishAnimationData.initialise = function () {
-    //     if (_hasInitialised) return;
-    //     for (let fishType in FishRawData) {
-    //         let data = FishRawData[fishType];
-    //
-    //         let animationArray = data.frameOrders.map(
-    //             animationSequence => {
-    //                 let frameArray = animationSequence.map(
-    //                     frame => {
-    //                         return cc.spriteFrameCache.getSpriteFrame(resolveName(frame, fishType));
-    //                     }
-    //                 );
-    //                 let speed = animationSpeed;
-    //                 if (data.animationSpeed){
-    //                     speed = data.animationSpeed;
-    //                 }
-    //                 let animation = new cc.Animation(frameArray, speed);
-    //                 return new cc.Animate(animation);
-    //             }
-    //         );
-    //         let fishDataArray = new Array(animationArray.length);
-    //
-    //         for (let i = 0; i < animationArray.length; i++) {
-    //             let pivot = undefined;
-    //             if (data.pivot) {
-    //                 pivot = data.pivot[i];
-    //             }
-    //             fishDataArray[i] = {
-    //                 animation: animationArray[i],
-    //                 animationInterval: FishRawData[fishType].animationInterval[i],
-    //                 pivot: pivot
-    //             };
-    //         }
-    //
-    //         // FishAnimationData[fishType] = { animation: animationArray, animationInterval: FishRawData[fishType].animationInterval}; //refactor to single?
-    //         FishAnimationData[fishType] = fishDataArray;
-    //     }
-    //     _hasInitialised = true;
-    // };
-
     FishAnimationData.initialise = function () {
         if (_hasInitialised) return;
         for (let fishType in FishRawData) {
@@ -312,8 +271,7 @@ const FishAnimationData = function () {
                 animationSequence => {
                     let frameArray = animationSequence.map(
                         frame => {
-                            let frame2 = cc.spriteFrameCache.getSpriteFrame(resolveName(frame, fishType));
-                            return frame2;
+                            return cc.spriteFrameCache.getSpriteFrame(resolveName(frame, fishType));
                         }
                     );
                     let speed = animationSpeed;
@@ -324,22 +282,25 @@ const FishAnimationData = function () {
                     return new cc.Animate(animation);
                 }
             );
+
             let fishDataArray = new Array(animationArray.length);
 
             for (let i = 0; i < animationArray.length; i++) {
-                let pivot = undefined;
-                if (data.pivot) {
-                    pivot = data.pivot[i];
-                }
-                let animationInterval = 0;
-                if (FishRawData[fishType].animationInterval && FishRawData[fishType].animationInterval[i]){
-                    animationInterval = FishRawData[fishType].animationInterval[i]
-                }
-                fishDataArray[i] = {
-                    animation: animationArray[i],
-                    animationInterval: animationInterval,
-                    pivot: pivot
-                };
+                // if (animationArray[i]._animation && animationArray[i]._animation._frames.length > 0) {
+                    let pivot = undefined;
+                    if (data.pivot) {
+                        pivot = data.pivot[i];
+                    }
+                    let animationInterval = 0;
+                    if (FishRawData[fishType].animationInterval && FishRawData[fishType].animationInterval[i]) {
+                        animationInterval = FishRawData[fishType].animationInterval[i]
+                    }
+                    fishDataArray[i] = {
+                        animation: animationArray[i],
+                        animationInterval: animationInterval,
+                        pivot: pivot
+                    };
+                // }
             }
 
             // FishAnimationData[fishType] = { animation: animationArray, animationInterval: FishRawData[fishType].animationInterval}; //refactor to single?

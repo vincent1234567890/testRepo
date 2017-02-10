@@ -59,8 +59,12 @@ const FishView = (function () {
     };
 
     proto.killFish = function (target, callback, id) {
-        console.log("killFish:", this.type, FishAnimationData[this.type], FishAnimationData[this.type][FishAnimationEnum.death], FishAnimationData[this.type][FishAnimationEnum.death]&&FishAnimationData[this.type][FishAnimationEnum.death].length);
-        if (FishAnimationData[this.type][FishAnimationEnum.death] && FishAnimationData[this.type][FishAnimationEnum.death].animation){
+        //console.log("killFish:", this.type, FishAnimationData[this.type], FishAnimationData[this.type][FishAnimationEnum.death], FishAnimationData[this.type][FishAnimationEnum.death]&&FishAnimationData[this.type][FishAnimationEnum.death].length);
+        if (FishAnimationData[this.type][FishAnimationEnum.death]
+            && FishAnimationData[this.type][FishAnimationEnum.death].animation
+            && FishAnimationData[this.type][FishAnimationEnum.death].animation._animation
+            && FishAnimationData[this.type][FishAnimationEnum.death].animation._animation._frames
+            && FishAnimationData[this.type][FishAnimationEnum.death].animation._animation._frames.length > 0){
             this.doAnimation(FishAnimationEnum.death);
         }else {
             // console.log("killFish", id)
