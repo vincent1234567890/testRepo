@@ -44,33 +44,44 @@ const FishView = (function () {
     const proto = FishView.prototype;
     
     proto.doAnimation = function(fishAnimationEnum) {
-        if (this._currentAnimationAction) {
-            this._sprite.stopAction(this._currentAnimationAction);
-        }
-        const data = FishAnimationData[this.type][fishAnimationEnum];
-        if (data.pivot){
-            this._sprite.setAnchorPoint(data.pivot);
-        }
-
-        const sequence = new cc.Sequence(data.animation.clone(), new cc.DelayTime(data.animationInterval));
-        this._currentAnimationAction = new cc.RepeatForever(sequence);
-        this._sprite.runAction(this._currentAnimationAction);
-
+        // if (FishAnimationData[this.type][fishAnimationEnum] && FishAnimationData[this.type][fishAnimationEnum].length>0) {
+            if (this._currentAnimationAction) {
+                this._sprite.stopAction(this._currentAnimationAction);
+            }
+            const data = FishAnimationData[this.type][fishAnimationEnum];
+            if (data.pivot) {
+                this._sprite.setAnchorPoint(data.pivot);
+            }
+            const sequence = new cc.Sequence(data.animation.clone(), new cc.DelayTime(data.animationInterval));
+            this._currentAnimationAction = new cc.RepeatForever(sequence);
+            this._sprite.runAction(this._currentAnimationAction);
+        // }
     };
 
     proto.killFish = function (target, callback, id) {
-        // console.log("killFish", id)
-        this._sprite.setColor(new cc.Color(32,32,128,128));
-        // this._sprite.runAction(deathTint);
+        //console.log("killFish:", this.type, FishAnimationData[this.type], FishAnimationData[this.type][FishAnimationEnum.death], FishAnimationData[this.type][FishAnimationEnum.death]&&FishAnimationData[this.type][FishAnimationEnum.death].length);
+        if (FishAnimationData[this.type][FishAnimationEnum.death]
+            && FishAnimationData[this.type][FishAnimationEnum.death].animation
+            && FishAnimationData[this.type][FishAnimationEnum.death].animation._animation
+            && FishAnimationData[this.type][FishAnimationEnum.death].animation._animation._frames
+            && FishAnimationData[this.type][FishAnimationEnum.death].animation._animation._frames.length > 0){
+            this.doAnimation(FishAnimationEnum.death);
+        }else {
+            // console.log("killFish", id)
+            this._sprite.setColor(new cc.Color(32, 32, 128, 128));
+            // this._sprite.runAction(deathTint);
 
-        const deathAnimation = new cc.RepeatForever( new cc.Sequence ( deathScaleSmall, deathScaleLarge ));
-        const deathAnimationAlpha = new cc.RepeatForever( new cc.Sequence ( alphaFadeOut, alphaFadeIn ));
+            const deathAnimation = new cc.RepeatForever(new cc.Sequence(deathScaleSmall.clone(), deathScaleLarge.clone()));
+            const deathAnimationAlpha = new cc.RepeatForever(new cc.Sequence(alphaFadeOut.clone(), alphaFadeIn.clone()));
+
+            this._sprite.runAction(deathAnimation);
+            this._sprite.runAction(deathAnimationAlpha);
+            // this._sprite.setBlendFunc()
+        }
+
         const notify = new cc.Sequence(new cc.DelayTime(5), new cc.CallFunc(callback, target, id));
-        this._sprite.runAction(deathAnimation);
-        this._sprite.runAction(deathAnimationAlpha);
-        // this._sprite.setBlendFunc()
-
         this._sprite.runAction(notify);
+
     };
 
     proto.destroyView = function (parent) {

@@ -11,7 +11,7 @@ const BlockingView = (function() {
     const hideColour = cc.color(0,0,0,0);
     const showColour = cc.color(0,0,0,196);
     function BlockingView (touchCallback) {
-        console.log("new!");
+        // console.log("new!");
         this._parent = new cc.Node();
 
         GameView.addView(this._parent, 9);
@@ -39,7 +39,7 @@ const BlockingView = (function() {
     };
     
     proto.showView = function() {
-        console.log("show!");
+        // console.log("show!");
         _touchlayer.setEnable(true);
         _colourBG.init(showColour);
     };

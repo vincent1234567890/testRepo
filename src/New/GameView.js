@@ -18,7 +18,9 @@ const GameView = function(){
     let _lastShotTime = -Infinity;
 
     function initialise (parentNode, gameConfig, fishGameArena) {
+
         initialiseParent(parentNode);
+        // console.log("initialise:gameconfig:",gameConfig);
         if (gameConfig) {
             _fishGameArena = fishGameArena;
             _gameConfig = gameConfig;
@@ -29,7 +31,7 @@ const GameView = function(){
                 // cc._canvas.rotate(180);
                 _isRotated = true;
             }
-
+            // console.log("initialised");
             for (let i = 0; i < _gameConfig.maxPlayers; i++) {
                 const index = getPlayerSlot(i);
                 _playerViews[index] = new PlayerViewManager(_gameConfig, index, i == _playerSlot);
@@ -67,10 +69,6 @@ const GameView = function(){
         _parentNode.addChild(_curretBKG,-5);
 
         initialiseTouch(touchAt);
-    }
-
-    function goBackToLobby() {//hack
-        _parentNode._parent.backToMenu();
     }
 
     function addView(view, depth){
@@ -166,6 +164,7 @@ const GameView = function(){
         }
     }
 
+
     const getPlayerBulletId = function () {
         return _playerViews[0].getNextBulletId(); //currently bulletId is static no need to convert player slot
     };
@@ -194,6 +193,7 @@ const GameView = function(){
         if (_touchedPos!=null){
             touchAt(_touchedPos,TouchType.Moved);
         }
+
         _fishGameArena.updateEverything();
     }
 
@@ -204,7 +204,6 @@ const GameView = function(){
         // parentNode : _parentNode,
         clearPlayerState : clearPlayerState,
         goToGame : goToGame,
-        goBackToLobby : goBackToLobby,
         addView : addView,
         destroyView : destroyView,
         getRotatedView : getRotatedView,

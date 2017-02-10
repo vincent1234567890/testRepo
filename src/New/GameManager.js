@@ -21,10 +21,10 @@ const GameManager = function () {
     let _currentScene;
 
     //convenience
-    let _loggedIn = false;
+    let _loggedIn = false; //can remove
 
     //Managers
-    let _loginManager;
+    // let _loginManager;
     let _fishManager;
     let _lobbyManager;
     let _scoreboardManager;
@@ -32,9 +32,16 @@ const GameManager = function () {
     let _bulletManager;
     let _netManager;
 
+    //?? only use is for clientReceiver to query if playerId == player
+    let _playerId;
+
+    //Callback to AppManager
+    let _goToLobbyCallback;
+
+
     function initialiseLogin(parent) {
         GameView.initialise(parent);
-        _loginManager = new LoginManager();
+        // _loginManager = new LoginManager();
     }
 
     const initialiseGame = function (parent, fishGameArena) {
@@ -58,13 +65,14 @@ const GameManager = function () {
     const explodeBullet = function(bulletId){
         const bulletData = _bulletManager.explodeBullet(bulletId);
         if (bulletData) {
-            _netManager.explodeAt(bulletData);
+            _netManager.explodeAt(_gameConfig,bulletData);
         }
     };
 
     const setGameState = function (config, playerId, playerSlot) {
         // console.log(JSON.stringify(config));
         _gameConfig = config;
+        _playerId = playerId;
         GameView.setMyPlayerData(playerId,playerSlot)
     };
 
@@ -81,6 +89,7 @@ const GameManager = function () {
     };
 
     const caughtFish = function (fishId){
+        // console.log("caught fish :" ,fishId);
         _fishManager.caughtFish(fishId);
     };
 
@@ -98,32 +107,33 @@ const GameManager = function () {
         return _gameConfig;
     };
 
-    const goToLogin = function () {
-        if (!_loggedIn) {
-            _loginManager.goToLogin();
-        }
-    };
+    // const goToLogin = function () {
+    //     if (!_loggedIn) {
+    //         _loginManager.goToLogin();
+    //     }
+    // };
 
-    const login = function (onSuccess, onFailure) {
-        let loginInfo = _loginManager.getLoginInfo();
-        ClientServerConnect.login(loginInfo.name, loginInfo.pass, function (data) {
-            if (data) {
-                _playerData = data;
-                onSuccess();
-            } else {
-                onFailure();
-            }
-        });
-    };
+    // const login = function (onSuccess, onFailure) {
+    //     let loginInfo = _loginManager.getLoginInfo();
+    //     ClientServerConnect.login(loginInfo.name, loginInfo.pass, function (data) {
+    //         if (data) {
+    //             _playerData = data;
+    //             onSuccess();
+    //         } else {
+    //             onFailure();
+    //         }
+    //     });
+    // };
 
-    function goToLobby() {
+    function goToLobby(goToLobbyCallback) {
+        _goToLobbyCallback = goToLobbyCallback;
         GameView.initialise();
         _loggedIn = true;
 
         // Login was successful, so save the user's details
         // _loginManager.saveLoginInfo();
-        PlayerPreferences.setLoginDetails(_loginManager.getLoginInfo());
-        _loginManager.destroyView();
+        // PlayerPreferences.setLoginDetails(_loginManager.getLoginInfo());
+        // _loginManager.destroyView();
 
         ClientServerConnect.requestMyData().then(
             stats => {
@@ -132,6 +142,8 @@ const GameManager = function () {
                 createLobby();
             }
         );
+
+        // createLobby();
 
         // These are things we should do immediately after logging in:
         // Listen for a creditChangeEvent (e.g. caused by an external /recharge request, gift from grandma, etc.)
@@ -148,6 +160,7 @@ const GameManager = function () {
         });
     }
 
+
     function onLeaveArena() {
         Promise.resolve().then(
             () => ClientServerConnect.leaveGame()
@@ -158,7 +171,7 @@ const GameManager = function () {
 
     function createLobby() {
         if (!_lobbyManager) {
-            _lobbyManager = new LobbyManager(_playerData, onSettingsButton, onGameSelected,onRequestShowProfile);
+            _lobbyManager = new LobbyManager(_playerData, onSettingsButton, onGameSelected, onRequestShowProfile);
             // _profileManger = new ProfileManager();
             _optionsManager = new OptionsManager(onSettingsButton, undefined, onLeaveArena);
         }else {
@@ -167,9 +180,11 @@ const GameManager = function () {
     }
 
     function exitToLobby() {
+
         destroyArena();
-        GameView.goBackToLobby();
+        _goToLobbyCallback();
         createLobby();
+
     }
 
     function showPostGameStats () {
@@ -217,6 +232,10 @@ const GameManager = function () {
         ClientServerConnect.joinGame(_currentScene).catch(console.error);
     }
 
+    function isCurrentPlayer (playerId) {
+        return playerId === _playerId;
+    }
+
     function onRequestShowProfile(){
 
     }
@@ -241,9 +260,8 @@ const GameManager = function () {
         caughtFish: caughtFish,
         updateEverything: updateEverything,
         showPostGameStats: showPostGameStats,
-        goToLogin: goToLogin,
-        login: login,
         goToLobby: goToLobby,
+        isCurrentPlayer : isCurrentPlayer,
 
         //debug
         debug: debug,

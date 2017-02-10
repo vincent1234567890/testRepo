@@ -11,9 +11,10 @@ const BulletView = (function () {
         this._view = new cc.Sprite(resource);
         this._parent.addChild(this._view);
 
-        var particle = particleSystemFactory.create(res.ParticlePlist, undefined, true);
+        this._particle = particleSystemFactory.create(res.ParticlePlist, undefined, true);
+        this._particle.setPosition (this._view.getContentSize().width/2, this._view.getContentSize().height/2);
 
-        this._view.addChild(particle);
+        this._view.addChild(this._particle);
     };
 
     const proto = BulletView.prototype;
@@ -24,6 +25,7 @@ const BulletView = (function () {
 
     proto.setRotation = function (rot){
         this._view.setRotation(rot);
+        this._particle.setRotation(-rot);
     };
 
     proto.destroyView = function () {
