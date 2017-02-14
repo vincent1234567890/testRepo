@@ -1,9 +1,7 @@
 
 cc.loader.register(["sprite"], cc._binaryLoader); //register sprite file loader.
 
-const dynamicRes = {
 
-};
 
 var res = {
     LoadingLogo : "res/loadingLogo.jpg",
@@ -243,6 +241,8 @@ var res = {
     DemoFishPlist : "res/CompanyA/Fish/DemoFish.plist",
     DemoFishPng : "res/CompanyA/Fish/DemoFish.png",
     //New Game
+    AnemoneFish2Plist : "res/CompanyA/Fish/AnemoneFish.plist",
+    AnemoneFish2Png : "res/CompanyA/Fish/AnemoneFish.png",
     AngelFish2Plist : "res/CompanyA/Fish/AngelFish2.plist",
     AngelFish2Png : "res/CompanyA/Fish/AngelFish2.png",
     BlackWhiteYellowFishPlist : "res/CompanyA/Fish/BlackWhiteYellowFish.plist",
@@ -257,6 +257,8 @@ var res = {
     BWNemoPng : "res/CompanyA/Fish/BWNemo.png",
     KissingFishPlist : "res/CompanyA/Fish/KissingFish.plist",
     KissingFishPng : "res/CompanyA/Fish/KissingFish.png",
+    Marlins2Plist : "res/CompanyA/Fish/Marlins2.plist",
+    Marlins2FishPng : "res/CompanyA/Fish/Marlins2.png",
     SeahorsePlist : "res/CompanyA/Fish/Seahorse.plist",
     SeahorsePng : "res/CompanyA/Fish/Seahorse.png",
     Turtle2Plist : "res/CompanyA/Fish/Turtle2.plist",
@@ -288,6 +290,12 @@ var g_resources = [
     // "res/qipao4.plist",
 
 ];
+
+let addResource = function (company, type, name) {
+    const constructedName = "res/" + company + "/" + type + "/" + name;
+    g_resources[constructedName+"Plist"] = constructedName + ".plist";
+    g_resources[constructedName+"Plist"] = constructedName + ".png";
+};
 
 for (var i in res) {
     g_resources.push(res[i]);
