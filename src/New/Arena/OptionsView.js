@@ -81,7 +81,7 @@ const OptionsView = (function () {
     }
 
     function dismissCallback(touch){
-        console.log(touch);
+        // console.log(touch);
         if (GUIFunctions.isSpriteTouched(_background,touch)) {
             return;
         }
@@ -90,7 +90,7 @@ const OptionsView = (function () {
         thisParent.setLocalZOrder(-1000);
         _background.setVisible(false);
         BlockingManager.deregisterBlock(dismissCallback);
-        console.log("disable!", thisParent.getLocalZOrder());
+        // console.log("disable!", thisParent.getLocalZOrder());
     }
 
     let proto = OptionsView.prototype;
@@ -98,7 +98,7 @@ const OptionsView = (function () {
     proto.show = function(){
         // _touchlayer.setSwallowTouches(true);
         // _touchlayer.setEnable(true);
-        console.log("optionsview Show");
+        // console.log("optionsview Show");
         BlockingManager.registerBlock(dismissCallback);
         thisParent.setLocalZOrder(ZORDER);
         _background.setVisible(true);

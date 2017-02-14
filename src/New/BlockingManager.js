@@ -10,9 +10,9 @@ const BlockingManager = (function(){
     let _view;
 
     function showView(){
-        console.log("showView");
+        // console.log("showView");
         if (!_view){
-            console.log("!_view");
+            // console.log("!_view");
             _view = new BlockingView(onClick);
         }
         _view.showView();
@@ -21,9 +21,9 @@ const BlockingManager = (function(){
     // const proto = BlockingManager.prototype;
 
     function registerBlock (callback) {
-        console.log("registerBlock:",_callbackStack);
+        // console.log("registerBlock:",_callbackStack);
         if (_callbackStack.length == 0){
-            console.log("0 show");
+            // console.log("0 show");
             showView();
         }
         _callbackStack.push(callback);
@@ -41,7 +41,7 @@ const BlockingManager = (function(){
         if(_callbackStack.length == 0){
             _view.hideView();
         }
-        console.log("deregisterBlock:",_callbackStack);
+        // console.log("deregisterBlock:",_callbackStack);
     }
 
     function onClick(touch){

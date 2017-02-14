@@ -153,6 +153,9 @@ const LobbyView = (function() {
         lobbyMenu.setPosition(size.width/2 - 70,height - 80);
         LobbyCoinsBG.addChild(lobbyMenu,2);
 
+        //testing
+        // const waterCausticsLayer = new WaterCausticsLayer();
+        // parent.addChild(waterCausticsLayer,999);
 
         // console.log("debug:", debugCircle, fishClass, fishType);
 
