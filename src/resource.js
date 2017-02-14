@@ -3,8 +3,8 @@ cc.loader.register(["sprite"], cc._binaryLoader); //register sprite file loader.
 
 var res = {
     LoadingLogo : "res/loadingLogo.jpg",
-    waterCausticsFSH : "src/New/Shaders/WaterCaustics/waterCaustics.fsh",
-    waterCausticsVSH : "src/New/Shaders/WaterCaustics/waterCaustics.vsh",
+    waterCausticsFSH : "src/New/Shaders/WaterCaustics/WaterCaustics.fsh",
+    waterCausticsVSH : "src/New/Shaders/WaterCaustics/WaterCaustics.vsh",
     // LoadingAdBg : "res/LoadingAdBg.jpg",
     // LoadingCompanyLogoScreen : "res/MainBg.jpg",
     //
