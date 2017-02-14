@@ -50,8 +50,8 @@ const ClientServerConnect = function () {
                 }
             ).catch(console.error.bind(console));
 
-            if (typeof document !== 'undefined' && document.location.search) {
-                var queryParams = parseQueryParams();
+            if (typeof document !== 'undefined') {
+                var queryParams = getCurrentOrCachedQueryParams();
                 if (queryParams.token && (queryParams.playerId || queryParams.email)) {
                     loginWithToken(queryParams.token, queryParams.playerId, queryParams.email, function () {
                         // If successful, remove the query parameters from the URL
@@ -64,9 +64,12 @@ const ClientServerConnect = function () {
         });
     };
 
-    function parseQueryParams () {
+    function parseQueryParams (searchString) {
+        if (searchString === undefined) {
+            searchString = document.location.search;
+        }
         var queryParams = {};
-        document.location.search.substring(1).split('&').forEach(
+        searchString.substring(1).split('&').forEach(
             pair => {
                 var splitPair = pair.split('=');
                 var key = decodeURIComponent(splitPair[0]);
@@ -75,6 +78,22 @@ const ClientServerConnect = function () {
             }
         )
         return queryParams;
+    }
+
+    // If there are no current queryParams, then look for previous queryParams in localStorage
+    // This allows us or the player to reload the page, even after the queryParams have been removed from the URL.
+    function getCurrentOrCachedQueryParams () {
+        let searchString = document.location.search;
+
+        if (window.localStorage) {
+            if (searchString) {
+                localStorage['FishGame_Cached_Query_Params'] = searchString;
+            } else {
+                searchString = localStorage['FishGame_Cached_Query_Params'] || '';
+            }
+        }
+
+        return parseQueryParams(searchString);
     }
 
     const login = function (name, pass, onSuccess, onFailure) {
