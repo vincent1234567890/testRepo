@@ -7,19 +7,35 @@
 const CannonView = (function(){
     "use strict";
     const CannonView = function (gameConfig, slot) {
-        let pos;
-        let markerPos;
+
         this._gameConfig = gameConfig;
         this._cannonNode = new cc.Node();
 
-        if (gameConfig.isUsingOldCannonPositions) {
-            pos = gameConfig.oldCannonPositions[slot];
-            markerPos = gameConfig.oldCannonPositions[0];
-        }else{
-            pos = gameConfig.cannonPositions[slot];
-            markerPos = gameConfig.cannonPositions[0]
-        }
+        this.createView(slot);
+        this.setDirection(slot);
 
+        GameView.addView(this._cannonNode,2);
+
+
+        // parent.addChild(this._cannonNode,2);
+        // this._cannonPowerLabel.setPosition(CannonPower.getPosition());
+
+        // this.shootTo(rot * 180 / Math.PI);
+
+    };
+
+    const proto = CannonView.prototype;
+
+    proto.createView = function(slot){
+        let pos;
+        let markerPos;
+        if (this._gameConfig.isUsingOldCannonPositions) {
+            pos = this._gameConfig.oldCannonPositions[slot];
+            markerPos = this._gameConfig.oldCannonPositions[0];
+        }else{
+            pos = this._gameConfig.cannonPositions[slot];
+            markerPos = this._gameConfig.cannonPositions[0]
+        }
         this._sprite = new cc.Sprite(ReferenceName.Cannon1);
         this._spriteDown = new cc.Sprite(ReferenceName.CannonDown1);
         // this._spriteDown.setVisible(false);
@@ -57,23 +73,33 @@ const CannonView = (function(){
             this._cannonPowerBG.x = pos[0];
             this._cannonPowerBG.y = pos[1] - 40;
         }
+    };
 
-        GameView.addView(this._cannonNode,2);
+    proto.getCannonAnimation = function(cannonPower){
+        let animationArray = [];
+        while (true) {
+            let count = 0;
+            number = count + '';
+            while (number.length < padding) {
+                number = '0' + number;
+            }
+            const frame = cc.spriteFrameCache.getSpriteFrame("Cannon" + cannonPower + "_" + number + ".png");
+            if (!frame){
+                break;
+            }
+            animationArray.push(frame)
+        }
+        this._sprite = new cc.Animation(animationArray,this._gameConfig.shootInterval/animationArray.length);
+    };
 
-
-        // parent.addChild(this._cannonNode,2);
-        // this._cannonPowerLabel.setPosition(CannonPower.getPosition());
+    proto.setDirection= function(slot){
         const direction = cc.pNormalize(cc.pSub({x: cc.winSize.width / 2, y: cc.winSize.height / 2}, new cc.p(this._gameConfig.cannonPositions[slot][0], this._gameConfig.cannonPositions[slot][1])));
         const rot = Math.atan2(direction.x, -direction.y);
         let angle = (GameView.getRotatedView(undefined, rot )).rotation ;
         this._sprite.setRotation(angle);
         this._spriteDown.setRotation(angle);
         this._spriteDown.setVisible(false);
-        // this.shootTo(rot * 180 / Math.PI);
-
     };
-
-    const proto = CannonView.prototype;
 
     proto.updateCannonPowerLabel = function (cannonPower) {
         this._cannonPowerLabel.setString(String(cannonPower));
@@ -85,6 +111,16 @@ const CannonView = (function(){
     };
 
     proto.shootTo = function (angle) {
+        let modifiedAngle = (GameView.getRotatedView(undefined, angle )).rotation - 90;
+
+        this._sprite.setRotation(modifiedAngle);
+        this._spriteDown.setRotation(modifiedAngle);
+
+        this.animateShootTo();
+
+    };
+
+    proto.animateShootTo = function () {
         const swapData = [ this._sprite, this._spriteDown];
         const sequence = new cc.Sequence(new cc.CallFunc(swapSpriteVisibility, this, swapData)
             , new cc.DelayTime(this._gameConfig.shootInterval / 2000)
@@ -92,16 +128,12 @@ const CannonView = (function(){
         );
         this._cannonNode.runAction(sequence);
 
-        let modifiedAngle = (GameView.getRotatedView(undefined, angle )).rotation - 90;
-
-        this._sprite.setRotation(modifiedAngle);
-        this._spriteDown.setRotation(modifiedAngle);
-
         function swapSpriteVisibility (sender, data) {
             data[0].setVisible(!data[0].isVisible());
             data[1].setVisible(!data[0].isVisible());
         }
     };
+
 
 
 

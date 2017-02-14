@@ -1,9 +1,13 @@
 
 cc.loader.register(["sprite"], cc._binaryLoader); //register sprite file loader.
 
+const dynamicRes = {
+
+};
+
 var res = {
     LoadingLogo : "res/loadingLogo.jpg",
-    waterCausticsFSH : "src/New/Shaders/WaterCaustics/waterCaustics.fsh",
+    waterCausticsFSH : `src/New/Shaders/WaterCaustics/waterCaustics.fsh`,
     waterCausticsVSH : "src/New/Shaders/WaterCaustics/waterCaustics.vsh",
     // LoadingAdBg : "res/LoadingAdBg.jpg",
     // LoadingCompanyLogoScreen : "res/MainBg.jpg",
@@ -236,29 +240,29 @@ var res = {
     PaddleFishPng : "res/New/Fish/PaddleFish.png",
 
 
-    DemoFishPlist : "res/New/Fish/New/DemoFish.plist",
-    DemoFishPng : "res/New/Fish/New/DemoFish.png",
+    DemoFishPlist : "res/CompanyA/Fish/DemoFish.plist",
+    DemoFishPng : "res/CompanyA/Fish/DemoFish.png",
     //New Game
-    AngelFish2Plist : "res/New/Fish/New/AngelFish2.plist",
-    AngelFish2Png : "res/New/Fish/New/AngelFish2.png",
-    BlackWhiteYellowFishPlist : "res/New/Fish/New/BlackWhiteYellowFish.plist",
-    BlackWhiteYellowFishPng : "res/New/Fish/New/BlackWhiteYellowFish.png",
-    BlackYellowButterflyFishPlist : "res/New/Fish/New/BlackYellowButterflyFish.plist",
-    BlackYellowButterflyFishPng : "res/New/Fish/New/BlackYellowButterflyFish.png",
-    BlueTang2Plist : "res/New/Fish/New/BlueTang2.plist",
-    BlueTang2Png : "res/New/Fish/New/BlueTang2.png",
-    ButterflyFish2Plist : "res/New/Fish/New/ButterflyFish2.plist",
-    ButterflyFish2Png : "res/New/Fish/New/ButterflyFish2.png",
-    BWNemoPlist : "res/New/Fish/New/BWNemo.plist",
-    BWNemoPng : "res/New/Fish/New/BWNemo.png",
-    KissingFishPlist : "res/New/Fish/New/KissingFish.plist",
-    KissingFishPng : "res/New/Fish/New/KissingFish.png",
-    SeahorsePlist : "res/New/Fish/New/Seahorse.plist",
-    SeahorsePng : "res/New/Fish/New/Seahorse.png",
-    Turtle2Plist : "res/New/Fish/New/Turtle2.plist",
-    Turtle2Png : "res/New/Fish/New/Turtle2.png",
-    YellowFishPlist : "res/New/Fish/New/YellowFish.plist",
-    YellowFishPng : "res/New/Fish/New/YellowFish.png",
+    AngelFish2Plist : "res/CompanyA/Fish/AngelFish2.plist",
+    AngelFish2Png : "res/CompanyA/Fish/AngelFish2.png",
+    BlackWhiteYellowFishPlist : "res/CompanyA/Fish/BlackWhiteYellowFish.plist",
+    BlackWhiteYellowFishPng : "res/CompanyA/Fish/BlackWhiteYellowFish.png",
+    BlackYellowButterflyFishPlist : "res/CompanyA/Fish/BlackYellowButterflyFish.plist",
+    BlackYellowButterflyFishPng : "res/CompanyA/Fish/BlackYellowButterflyFish.png",
+    BlueTang2Plist : "res/CompanyA/Fish/BlueTang2.plist",
+    BlueTang2Png : "res/CompanyA/Fish/BlueTang2.png",
+    ButterflyFish2Plist : "res/CompanyA/Fish/ButterflyFish2.plist",
+    ButterflyFish2Png : "res/CompanyA/Fish/ButterflyFish2.png",
+    BWNemoPlist : "res/CompanyA/Fish/BWNemo.plist",
+    BWNemoPng : "res/CompanyA/Fish/BWNemo.png",
+    KissingFishPlist : "res/CompanyA/Fish/KissingFish.plist",
+    KissingFishPng : "res/CompanyA/Fish/KissingFish.png",
+    SeahorsePlist : "res/CompanyA/Fish/Seahorse.plist",
+    SeahorsePng : "res/CompanyA/Fish/Seahorse.png",
+    Turtle2Plist : "res/CompanyA/Fish/Turtle2.plist",
+    Turtle2Png : "res/CompanyA/Fish/Turtle2.png",
+    YellowFishPlist : "res/CompanyA/Fish/YellowFish.plist",
+    YellowFishPng : "res/CompanyA/Fish/YellowFish.png",
 
 
 

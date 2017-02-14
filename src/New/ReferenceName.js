@@ -81,6 +81,8 @@ const ReferenceName = {
     Bullet1 : "#Bullet 1.png",
     CannonDown1 : "#Cannon 1 DW.png",
 
+    // Cannon1Animated : "#Cannon1",
+
 
     //localisable
     //@TODO: move to seperate file

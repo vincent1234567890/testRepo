@@ -10,7 +10,7 @@ const ProfileManager = (function () {
     }
 
     const proto = ProfileManager.prototype;
-    proto.doView= function(parent, data){
+    proto.displayView= function(parent, data){
         if(!_profile) {
             _profile = new ProfileView();
         }else{

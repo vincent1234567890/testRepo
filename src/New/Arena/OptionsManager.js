@@ -63,7 +63,7 @@ const OptionsManager = (function (){
         }
     };
 
-    proto.doView = function (gameConfig) {
+    proto.displayView = function (gameConfig) {
         if (gameConfig && gameConfig.isUsingOldCannonPositions)
             this._view = new OptionsSideMenuView(onSettings, onFishList, onExitButton);
         else{

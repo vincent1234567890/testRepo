@@ -63,6 +63,9 @@
 
         "src/New/AppManager.js",
 
+        "src/CompanyA/CompanyANameSpace.js",
+        "src/CompanyA/CannonView.js",
+
 
         "lib/common/WebSocketClient.js",
         "lib/common/WebSocketService.js",

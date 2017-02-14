@@ -286,24 +286,21 @@ const FishAnimationData = function () {
             let fishDataArray = new Array(animationArray.length);
 
             for (let i = 0; i < animationArray.length; i++) {
-                // if (animationArray[i]._animation && animationArray[i]._animation._frames.length > 0) {
-                    let pivot = undefined;
-                    if (data.pivot) {
-                        pivot = data.pivot[i];
-                    }
-                    let animationInterval = 0;
-                    if (FishRawData[fishType].animationInterval && FishRawData[fishType].animationInterval[i]) {
-                        animationInterval = FishRawData[fishType].animationInterval[i]
-                    }
-                    fishDataArray[i] = {
-                        animation: animationArray[i],
-                        animationInterval: animationInterval,
-                        pivot: pivot
-                    };
-                // }
+                let pivot = undefined;
+                if (data.pivot) {
+                    pivot = data.pivot[i];
+                }
+                let animationInterval = 0;
+                if (FishRawData[fishType].animationInterval && FishRawData[fishType].animationInterval[i]) {
+                    animationInterval = FishRawData[fishType].animationInterval[i]
+                }
+                fishDataArray[i] = {
+                    animation: animationArray[i],
+                    animationInterval: animationInterval,
+                    pivot: pivot
+                };
             }
 
-            // FishAnimationData[fishType] = { animation: animationArray, animationInterval: FishRawData[fishType].animationInterval}; //refactor to single?
             FishAnimationData[fishType] = fishDataArray;
         }
         _hasInitialised = true;
