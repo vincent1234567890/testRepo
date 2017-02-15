@@ -100,7 +100,7 @@ const ReferenceName = {
     MultiCatch : "Multi-Catches",
     BulletsFired : "Bullets Fired",
     SkillsUsed : "Skills Used",
-    CatchSuccessRate : "Hit / Caught %",
+    ReturnRate : "Return Rate",
     GoToLobby : "Lobby",
     GoToNewGame : "Play",
 

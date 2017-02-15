@@ -63,9 +63,9 @@ const ScoreboardView = (function() {
         skillsUsed.setPosition(682 , cc.view.getDesignResolutionSize().height - 363);
         bg.addChild(skillsUsed,1);
 
-        const catchSuccessRate = createGridObject(ReferenceName.CatchSuccessRate, ReferenceName.HitRateIcon, Math.round(data.fishCaught / data.fishHit * 100));
-        catchSuccessRate.setPosition(1082 , cc.view.getDesignResolutionSize().height - 363);
-        bg.addChild(catchSuccessRate,1);
+        const returnRate = createGridObject(ReferenceName.ReturnRate, ReferenceName.HitRateIcon, Math.round(data.fishCaught / data.fishHit * 100));
+        returnRate.setPosition(1082 , cc.view.getDesignResolutionSize().height - 363);
+        bg.addChild(returnRate,1);
 
         const scrollBoxBG = new cc.Sprite(ReferenceName.BottomScrollBarBG);
         scrollBoxBG.setPosition(679 , cc.view.getDesignResolutionSize().height - 550);
@@ -91,7 +91,8 @@ const ScoreboardView = (function() {
         //fontDef.fontWeight = "bold";
         fontDef.fontName = "Impact";
 
-        let info = new cc.LabelTTF(data || 0,fontDef);
+        let info = new cc.LabelTTF(data && (data * 1.5).toFixed(2).replace(/[.,]00$/, "")|| 0,fontDef);
+
 
         let icon = new cc.Sprite(spriteName);
 

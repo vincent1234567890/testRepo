@@ -4,63 +4,63 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>Exit V2.png</key>
+            <key>Setting BG.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{94,94}</string>
+                <string>{670,395}</string>
                 <key>spriteSourceSize</key>
-                <string>{94,94}</string>
+                <string>{670,395}</string>
                 <key>textureRect</key>
-                <string>{{1,97},{94,94}}</string>
+                <string>{{1,87},{670,395}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
-            <key>Fish V2.png</key>
+            <key>Setting Bar Empty.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{95,94}</string>
+                <string>{315,41}</string>
                 <key>spriteSourceSize</key>
-                <string>{95,94}</string>
+                <string>{315,41}</string>
                 <key>textureRect</key>
-                <string>{{1,1},{95,94}}</string>
+                <string>{{1,1},{315,41}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Option.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,-5}</string>
-                <key>spriteSize</key>
-                <string>{89,79}</string>
-                <key>spriteSourceSize</key>
-                <string>{89,89}</string>
-                <key>textureRect</key>
-                <string>{{1,289},{89,79}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>Setting V2.png</key>
+            <key>Setting Bar Full.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{94,94}</string>
+                <string>{315,41}</string>
                 <key>spriteSourceSize</key>
-                <string>{94,94}</string>
+                <string>{315,41}</string>
                 <key>textureRect</key>
-                <string>{{1,193},{94,94}}</string>
+                <string>{{1,44},{315,41}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>Setting Slider Button.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{65,55}</string>
+                <key>spriteSourceSize</key>
+                <string>{65,55}</string>
+                <key>textureRect</key>
+                <string>{{318,1},{65,55}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -74,13 +74,13 @@
             <key>premultiplyAlpha</key>
             <false/>
             <key>realTextureFileName</key>
-            <string>Option Menu V2.png</string>
+            <string>SettingUI.png</string>
             <key>size</key>
-            <string>{97,369}</string>
+            <string>{397,758}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:58b5d21d2549353e69e734b5febca3ae:04beee7b903c904d1dbb0cd4bc567aaf:ba6a588eb04ec8c52557b323902693fc$</string>
+            <string>$TexturePacker:SmartUpdate:9300a707c0da0e433ae4d9ad780a10cb:5e843af625ddcb0d2c27ad1ceafcfef3:8d0797fbfa748d92714a13569548099a$</string>
             <key>textureFileName</key>
-            <string>Option Menu V2.png</string>
+            <string>SettingUI.png</string>
         </dict>
     </dict>
 </plist>

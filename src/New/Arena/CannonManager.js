@@ -9,7 +9,7 @@ const CannonManager = (function () {
 
     function CannonManager(gameConfig, index, isPlayer) {
         _gameConfig = gameConfig;
-        cc.spriteFrameCache.addSpriteFrames(res.Weapon1Plist);
+        cc.spriteFrameCache.addSpriteFrames(res.Cannon1Plist);
         this._cannon = new CannonView(gameConfig, index);
         if (isPlayer) {
             this._cannon.setupCannonChangeMenu(this, gameConfig, index, this.decreaseCannon, this.increaseCannon);

@@ -172,22 +172,22 @@ var res = {
     // MainUITitle : "res/main_ui_title.png",
 
     //New
-    GameUIPng : "res/New/Game UI.png",
-    GameUIPlist : "res/New/Game UI.plist",
-    LobbyUIPlist : "res/New/Lobby/Lobby.plist",
-    LobbyUIPng : "res/New/Lobby/Lobby.png",
-    ProfileUIPlist : "res/New/Lobby/Profile POut.plist",
-    ProfileUIPng : "res/New/Lobby/Profile POut.png",
-    SettingsUIPlist : "res/New/Options/Setting.plist",
-    SettingsUIPng : "res/New/Options/Setting.png",
-    ScoreboardPlist : "res/New/Scoreboard/summary.plist",
-    ScoreboardPng : "res/New/Scoreboard/summary.png",
-    SideMenuPlist : "res/New/Options/Options Menu.plist",
-    SideMenuPng : "res/New/Options/Options Menu.png",
-    BottomMenuPlist : "res/New/Options/Option Menu V2.plist",
-    BottomMenuPng : "res/New/Options/Option Menu V2.png",
-    LoginUIPlist : "res/New/Lobby/Login.plist",
-    LoginUIPng : "res/New/Lobby/Login.png",
+    GameUIPng : "res/New/GameUI.png",
+    GameUIPlist : "res/New/GameUI.plist",
+    LobbyUIPlist : "res/New/Lobby/LobbyUI.plist",
+    LobbyUIPng : "res/New/Lobby/LobbyUI.png",
+    ProfileUIPlist : "res/New/Lobby/ProfileUI.plist",
+    ProfileUIPng : "res/New/Lobby/ProfileUI.png",
+    SettingUIPlist : "res/New/Options/SettingUI.plist",
+    SettingUIPng : "res/New/Options/SettingUI.png",
+    ScoreboardPlist : "res/New/Scoreboard/Scoreboard.plist",
+    ScoreboardPng : "res/New/Scoreboard/Scoreboard.png",
+    // SideMenuPlist : "res/New/Options/Options Menu.plist",
+    // SideMenuPng : "res/New/Options/Options Menu.png",
+    BottomMenuPlist : "res/New/Options/BottomMenu.plist",
+    BottomMenuPng : "res/New/Options/BottomMenu.png",
+    // LoginUIPlist : "res/New/Lobby/Login.plist",
+    // LoginUIPng : "res/New/Lobby/Login.png",
 
     //GameFrame
     GameFrame : "res/New/InGameFrame.png",
@@ -241,8 +241,8 @@ var res = {
     DemoFishPlist : "res/CompanyA/Fish/DemoFish.plist",
     DemoFishPng : "res/CompanyA/Fish/DemoFish.png",
     //New Game
-    AnemoneFish2Plist : "res/CompanyA/Fish/AnemoneFish.plist",
-    AnemoneFish2Png : "res/CompanyA/Fish/AnemoneFish.png",
+    AnemoneFishPlist : "res/CompanyA/Fish/AnemoneFish.plist",
+    AnemoneFishPng : "res/CompanyA/Fish/AnemoneFish.png",
     AngelFish2Plist : "res/CompanyA/Fish/AngelFish2.plist",
     AngelFish2Png : "res/CompanyA/Fish/AngelFish2.png",
     BlackWhiteYellowFishPlist : "res/CompanyA/Fish/BlackWhiteYellowFish.plist",
@@ -271,6 +271,10 @@ var res = {
     //Weapons
     Weapon1Plist : "res/New/Weapons/Weapon 1.plist",
     Weapon1Png : "res/New/Weapons/Weapon 1.png",
+
+    //
+    Cannon1Plist : "res/CompanyA/Weapons/Cannon1.plist",
+    Cannon1Png : "res/CompanyA/Weapons/Cannon1.png",
 
     //testing
     // BulletPNG: "res/New/testing/bullet.png",

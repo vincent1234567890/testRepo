@@ -30,6 +30,7 @@ const FishViewManager = (function(){
 
 
         //new game
+        cc.spriteFrameCache.addSpriteFrames(res.AnemoneFishPlist);
         cc.spriteFrameCache.addSpriteFrames(res.AngelFish2Plist);
         cc.spriteFrameCache.addSpriteFrames(res.BlackWhiteYellowFishPlist);
         cc.spriteFrameCache.addSpriteFrames(res.BlackYellowButterflyFishPlist);
@@ -37,6 +38,7 @@ const FishViewManager = (function(){
         cc.spriteFrameCache.addSpriteFrames(res.ButterflyFish2Plist);
         cc.spriteFrameCache.addSpriteFrames(res.BWNemoPlist);
         cc.spriteFrameCache.addSpriteFrames(res.KissingFishPlist);
+        cc.spriteFrameCache.addSpriteFrames(res.Marlins2FishPng);
         cc.spriteFrameCache.addSpriteFrames(res.SeahorsePlist);
         cc.spriteFrameCache.addSpriteFrames(res.Turtle2Plist);
         cc.spriteFrameCache.addSpriteFrames(res.YellowFishPlist);

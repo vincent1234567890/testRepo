@@ -79,7 +79,7 @@ const FishView = (function () {
             // this._sprite.setBlendFunc()
         }
 
-        const notify = new cc.Sequence(new cc.DelayTime(5), new cc.CallFunc(callback, target, id));
+        const notify = new cc.Sequence(new cc.DelayTime(3), new cc.CallFunc(callback, target, id));
         this._sprite.runAction(notify);
 
     };

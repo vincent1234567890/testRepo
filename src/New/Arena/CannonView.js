@@ -36,19 +36,23 @@ const CannonView = (function(){
             pos = this._gameConfig.cannonPositions[slot];
             markerPos = this._gameConfig.cannonPositions[0]
         }
-        this._sprite = new cc.Sprite(ReferenceName.Cannon1);
-        this._spriteDown = new cc.Sprite(ReferenceName.CannonDown1);
+
+        this._sprite = new cc.Sprite("#Cannon1_0.png");
+        this._sequence = new cc.Sequence(this.getCannonAnimation(1),new cc.CallFunc(this.onAnimateShootEnd,this));
+        this._isAnimating = false;
+        // this._sprite = new cc.Sprite(ReferenceName.Cannon1);
+        // this._spriteDown = new cc.Sprite(ReferenceName.CannonDown1);
         // this._spriteDown.setVisible(false);
         this._cannonNode.addChild(this._sprite, 20);
-        this._cannonNode.addChild(this._spriteDown, 20);
+        // this._cannonNode.addChild(this._spriteDown, 20);
 
         this._cannonPowerBG = new cc.Sprite(ReferenceName.CannonPower);
         this._cannonNode.addChild(this._cannonPowerBG, 27);
 
         this._sprite.setAnchorPoint(0.5,0.27);
         this._sprite.setPosition({x: pos[0], y: pos[1]});
-        this._spriteDown.setAnchorPoint(this._sprite.getAnchorPoint());
-        this._spriteDown.setPosition(this._sprite.getPosition());
+        // this._spriteDown.setAnchorPoint(this._sprite.getAnchorPoint());
+        // this._spriteDown.setPosition(this._sprite.getPosition());
 
         let fontDef = new cc.FontDefinition();
         fontDef.fontName = "Arial";
@@ -77,19 +81,17 @@ const CannonView = (function(){
 
     proto.getCannonAnimation = function(cannonPower){
         let animationArray = [];
+        let count = 0;
         while (true) {
-            let count = 0;
-            number = count + '';
-            while (number.length < padding) {
-                number = '0' + number;
-            }
-            const frame = cc.spriteFrameCache.getSpriteFrame("Cannon" + cannonPower + "_" + number + ".png");
+            const frame = cc.spriteFrameCache.getSpriteFrame("Cannon" + cannonPower + "_" + count + ".png");
             if (!frame){
                 break;
             }
-            animationArray.push(frame)
+            animationArray.push(frame);
+            count++;
         }
-        this._sprite = new cc.Animation(animationArray,this._gameConfig.shootInterval/animationArray.length);
+        return new cc.Animate(new cc.Animation(animationArray,this._gameConfig.shootInterval/1000/animationArray.length));
+
     };
 
     proto.setDirection= function(slot){
@@ -97,8 +99,8 @@ const CannonView = (function(){
         const rot = Math.atan2(direction.x, -direction.y);
         let angle = (GameView.getRotatedView(undefined, rot )).rotation ;
         this._sprite.setRotation(angle);
-        this._spriteDown.setRotation(angle);
-        this._spriteDown.setVisible(false);
+        // this._spriteDown.setRotation(angle);
+        // this._spriteDown.setVisible(false);
     };
 
     proto.updateCannonPowerLabel = function (cannonPower) {
@@ -114,24 +116,36 @@ const CannonView = (function(){
         let modifiedAngle = (GameView.getRotatedView(undefined, angle )).rotation - 90;
 
         this._sprite.setRotation(modifiedAngle);
-        this._spriteDown.setRotation(modifiedAngle);
+        // this._spriteDown.setRotation(modifiedAngle);
 
         this.animateShootTo();
-
     };
 
     proto.animateShootTo = function () {
-        const swapData = [ this._sprite, this._spriteDown];
-        const sequence = new cc.Sequence(new cc.CallFunc(swapSpriteVisibility, this, swapData)
-            , new cc.DelayTime(this._gameConfig.shootInterval / 2000)
-            ,new cc.CallFunc(swapSpriteVisibility, this, swapData)
-        );
-        this._cannonNode.runAction(sequence);
-
-        function swapSpriteVisibility (sender, data) {
-            data[0].setVisible(!data[0].isVisible());
-            data[1].setVisible(!data[0].isVisible());
+        if (this._isAnimating) {
+            this._sprite.stopAction(this._sequence);
         }
+
+        // const sequence = new cc.Sequence(data.animation.clone(), new cc.DelayTime(data.animationInterval));
+        // this._currentAnimationAction = new cc.RepeatForever(sequence);
+        this._isAnimating = true;
+        this._sprite.runAction(this._sequence);
+        // const swapData = [ this._sprite, this._spriteDown];
+        // const sequence = new cc.Sequence(new cc.CallFunc(swapSpriteVisibility, this, swapData)
+        //     , new cc.DelayTime(this._gameConfig.shootInterval / 2000)
+        //     ,new cc.CallFunc(swapSpriteVisibility, this, swapData)
+        // );
+        // this._cannonNode.runAction(sequence);
+        //
+        // function swapSpriteVisibility (sender, data) {
+        //     data[0].setVisible(!data[0].isVisible());
+        //     data[1].setVisible(!data[0].isVisible());
+        // }
+    };
+
+    proto.onAnimateShootEnd = function(){
+        console.log("end");
+        this._isAnimating = false;
     };
 
 

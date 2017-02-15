@@ -14,9 +14,9 @@ const OptionsManager = (function (){
         _settingsCallback = settingsCallback;
         _fishListCallBack = fishListCallback;
         _exitCallBack = exitCallback;
-        cc.spriteFrameCache.addSpriteFrames(res.SideMenuPlist);
+        // cc.spriteFrameCache.addSpriteFrames(res.SideMenuPlist);
         cc.spriteFrameCache.addSpriteFrames(res.BottomMenuPlist);
-        cc.spriteFrameCache.addSpriteFrames(res.SettingsUIPlist);
+        cc.spriteFrameCache.addSpriteFrames(res.SettingUIPlist);
 
         // this.view = new OptionsSideMenuView(onSettings, onFishList, onExitButton);
 
