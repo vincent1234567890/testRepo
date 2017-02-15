@@ -18,10 +18,10 @@ const ClientServerConnect = function () {
 
     const connectToMasterServer = function () {
         if (_hasConnected) return;
-        const useJoeysServerDuringDevelopment = false;
 
         let gameAPIServerUrl = 'ws://' + document.location.hostname + ':8088';
 
+        // const useJoeysServerDuringDevelopment = false;
         // const localNames = ['localhost', '127.0.0.1', '127.0.1.1', '0.0.0.0'];
         // const doingDevelopment = (localNames.indexOf(window.location.hostname) >= 0);
         // if (doingDevelopment) {
@@ -61,6 +61,15 @@ const ClientServerConnect = function () {
                     });
                 }
             }
+        });
+
+        client.addEventListener('close', function () {
+            console.log("Disconnect detected.  Will attempt reconnection soon...");
+            setTimeout(connectToMasterServer, 2000);
+            _hasConnected = false;
+            ClientServerConnect.postGameCleanup();
+            //GameManager.destroyArena();
+            AppManager.goBackToLobby();
         });
     };
 
@@ -216,6 +225,10 @@ const ClientServerConnect = function () {
     }
 
     function postGameCleanup () {
+        if (!_informServer) {
+            return;
+        }
+
         socketUtils.disengageIOSocketFromClient(_gameIOSocket, _gameWSClient);
 
         _informServer = undefined;

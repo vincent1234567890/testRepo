@@ -31,8 +31,10 @@ const AppManager = (function () {
     }
 
     function goBackToLobby(){
-        _gameTicker.pauseTicker();
-        _currentScene.removeChild(_gameTicker,false);
+        if (_gameTicker) {
+            _gameTicker.pauseTicker();
+            _currentScene.removeChild(_gameTicker, false);
+        }
         _currentScene = new cc.Scene();
         cc.director.runScene(_currentScene);
         GameManager.initialiseLogin(_currentScene);
@@ -47,6 +49,7 @@ const AppManager = (function () {
     return{
         goToLobby : goToLobby,
         goToGame : goToGame,
+        goBackToLobby : goBackToLobby,
     }
 
 }());
