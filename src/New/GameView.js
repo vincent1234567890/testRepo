@@ -123,6 +123,10 @@ const GameView = function(){
     }
 
     function destroyArena(){
+        if (!_fishGameArena) {
+            return;
+        }
+
         for (let i = 0; i < _gameConfig.maxPlayers; i++) {
             _playerViews[i].destroyView();
             delete _playerViews[i];
