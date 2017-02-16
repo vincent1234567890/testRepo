@@ -40,6 +40,7 @@ const FishViewManager = (function(){
         cc.spriteFrameCache.addSpriteFrames(res.KissingFishPlist);
         cc.spriteFrameCache.addSpriteFrames(res.Marlins2FishPng);
         cc.spriteFrameCache.addSpriteFrames(res.SeahorsePlist);
+        cc.spriteFrameCache.addSpriteFrames(res.Shark2Plist);
         cc.spriteFrameCache.addSpriteFrames(res.Turtle2Plist);
         cc.spriteFrameCache.addSpriteFrames(res.YellowFishPlist);
 

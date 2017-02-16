@@ -261,6 +261,8 @@ var res = {
     Marlins2FishPng : "res/CompanyA/Fish/Marlins2.png",
     SeahorsePlist : "res/CompanyA/Fish/Seahorse.plist",
     SeahorsePng : "res/CompanyA/Fish/Seahorse.png",
+    Shark2Plist : "res/CompanyA/Fish/Shark2.plist",
+    Shark2Png : "res/CompanyA/Fish/Shark2.png",
     Turtle2Plist : "res/CompanyA/Fish/Turtle2.plist",
     Turtle2Png : "res/CompanyA/Fish/Turtle2.png",
     YellowFishPlist : "res/CompanyA/Fish/YellowFish.plist",

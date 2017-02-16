@@ -78,7 +78,7 @@ const ReferenceName = {
     //Cannon/nets
     Cannon1 : "#Cannon 1.png",
     Net1 : "#Net 1.png",
-    Bullet1 : "#Bullet 1.png",
+    Bullet1 : "#Bullet1.png",
     CannonDown1 : "#Cannon 1 DW.png",
 
     // Cannon1Animated : "#Cannon1",

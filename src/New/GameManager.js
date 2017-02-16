@@ -57,9 +57,9 @@ const GameManager = function () {
         GameView.goToGame(_currentScene);
     };
 
-    const shootTo = function (playerId, angle, bulletId) {
+    const shootTo = function (playerId, gunId, angle, bulletId) {
         GameView.shootTo(playerId, angle);
-        return _bulletManager.createBullet(bulletId);
+        return _bulletManager.createBullet(gunId, bulletId);
     };
 
     const explodeBullet = function(bulletId){
