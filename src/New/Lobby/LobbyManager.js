@@ -8,14 +8,14 @@ const LobbyManager = (function () {
 //         this._parent = new cc.Node();
 //         cc.spriteFrameCache.addSpriteFrames(res.LobbyUIPlist);
 //         // this._parent = parent;
-//         this.doView(playerData);
+//         this.displayView(playerData);
 //     };
 //
 //     LobbyManager.prototype.getView = function () {
 //         return this._parent;
 //     };
 //
-//     LobbyManager.prototype.doView = function(playerData){
+//     LobbyManager.prototype.displayView = function(playerData){
 //         if (this._view){
 //             this._parent.removeChild(this._view);
 //         }
@@ -28,10 +28,10 @@ const LobbyManager = (function () {
         cc.spriteFrameCache.addSpriteFrames(res.LobbyUIPlist);
         this._parent = parent;
         _profileManager = new ProfileManager();
-        this.doView(playerData, settingsCallback,onGameSelectedCallback);
+        this.displayView(playerData, settingsCallback,onGameSelectedCallback);
     };
 
-    LobbyManager.prototype.doView = function(playerData, settingsCallback,onGameSelectedCallback){
+    LobbyManager.prototype.displayView = function(playerData, settingsCallback, onGameSelectedCallback){
         if (this._view){
             // this._parent.removeChild(this._view);
             this._view.destroyView();
@@ -40,7 +40,7 @@ const LobbyManager = (function () {
     };
 
     function onRequestShowProfile(){
-        _profileManager.doView();
+        _profileManager.displayView();
 
 
     }

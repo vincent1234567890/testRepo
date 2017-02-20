@@ -14,9 +14,9 @@ const OptionsManager = (function (){
         _settingsCallback = settingsCallback;
         _fishListCallBack = fishListCallback;
         _exitCallBack = exitCallback;
-        cc.spriteFrameCache.addSpriteFrames(res.SideMenuPlist);
+        // cc.spriteFrameCache.addSpriteFrames(res.SideMenuPlist);
         cc.spriteFrameCache.addSpriteFrames(res.BottomMenuPlist);
-        cc.spriteFrameCache.addSpriteFrames(res.SettingsUIPlist);
+        cc.spriteFrameCache.addSpriteFrames(res.SettingUIPlist);
 
         // this.view = new OptionsSideMenuView(onSettings, onFishList, onExitButton);
 
@@ -49,7 +49,8 @@ const OptionsManager = (function (){
     const proto = OptionsManager.prototype;
 
     proto.destroyView = function () {
-        this._view.destroy();
+        if (this._view)
+            this._view.destroy();
         if(this._settingsView){
             this._settingsView.destroyView();
         }
@@ -63,7 +64,7 @@ const OptionsManager = (function (){
         }
     };
 
-    proto.doView = function (gameConfig) {
+    proto.displayView = function (gameConfig) {
         if (gameConfig && gameConfig.isUsingOldCannonPositions)
             this._view = new OptionsSideMenuView(onSettings, onFishList, onExitButton);
         else{

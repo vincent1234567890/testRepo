@@ -149,7 +149,7 @@ const FishAnimationData = function () {
                 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21],
                 [],
                 [],
-                [22, 23, 24, 25, 26, 27, 28],
+                [22, 23, 24, 25, 26, 27, ],
             ],
             animationSpeed: 0.03,
         },
@@ -158,7 +158,7 @@ const FishAnimationData = function () {
                 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21],
                 [],
                 [],
-                [22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32],
+                [22, 23, 24, 25, 26, 27, 28, 29, 30, 31],
             ],
             animationSpeed: 0.03,
         },
@@ -167,7 +167,7 @@ const FishAnimationData = function () {
                 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21],
                 [],
                 [],
-                [22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32],
+                [22, 23, 24, 25, 26, 27, 28, 29, 30, 31],
             ],
             animationSpeed: 0.03,
         },
@@ -185,7 +185,7 @@ const FishAnimationData = function () {
                 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21],
                 [],
                 [],
-                [22, 23, 24, 25, 26, 27, 28],
+                [22, 23, 24, 25, 26, 27],
             ],
             animationSpeed: 0.03,
         },
@@ -201,6 +201,18 @@ const FishAnimationData = function () {
         BWNemo:{
             frameOrders: [
                 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21],
+                [],
+                [],
+                [22,23,24,25,26,27,28,29,30,31],
+            ],
+            animationSpeed: 0.03,
+        },
+        JellyFish:{
+            frameOrders: [
+                [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+                [],
+                [],
+                [21,22,23,24,25,26,27,28],
             ],
             animationSpeed: 0.03,
         },
@@ -208,6 +220,27 @@ const FishAnimationData = function () {
             animationInterval: [],
             frameOrders: [
                 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21],
+                [],
+                [],
+                [22,23,24,25,26,27],
+            ],
+            animationSpeed: 0.03,
+        },
+        Lantern2:{
+            frameOrders: [
+                [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21],
+                [],
+                [],
+                [22,23,24,25,26,27],
+            ],
+            animationSpeed: 0.03,
+        },
+        LionFish2:{
+            frameOrders: [
+                [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21],
+                [],
+                [],
+                [22,23,24,25,26,27],
             ],
             animationSpeed: 0.03,
         },
@@ -219,10 +252,30 @@ const FishAnimationData = function () {
                 [22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32],
             ],
             animationSpeed: 0.03,
-    },
+        },
+        Octopus:{
+            frameOrders: [
+                [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, ],
+                [],
+                [],
+                [17, 18, 19, 20, 21, 22, 23, 24, 25, 26, ],
+            ],
+            animationSpeed: 0.1,
+        },
+        PaddleFish2:{
+            frameOrders: [
+                [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21],
+                [],
+                [],
+                [22, 23, 24, 25, 26, 27,],
+            ],
+        },
         Seahorse:{
             frameOrders: [
                 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21],
+                [],
+                [],
+                [22, 23, 24, 25, 26, 27,],
             ],
             animationSpeed: 0.03,
         },
@@ -231,12 +284,15 @@ const FishAnimationData = function () {
                 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21],
                 [],
                 [],
-                [22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32],
+                [22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34],
             ],
         },
         Turtle2:{
             frameOrders: [
                 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+                [],
+                [],
+                [21, 22, 23, 24, 25, 26, 27, 28, 29, 30,],
             ],
             animationSpeed: 0.15,
         },
@@ -286,24 +342,21 @@ const FishAnimationData = function () {
             let fishDataArray = new Array(animationArray.length);
 
             for (let i = 0; i < animationArray.length; i++) {
-                // if (animationArray[i]._animation && animationArray[i]._animation._frames.length > 0) {
-                    let pivot = undefined;
-                    if (data.pivot) {
-                        pivot = data.pivot[i];
-                    }
-                    let animationInterval = 0;
-                    if (FishRawData[fishType].animationInterval && FishRawData[fishType].animationInterval[i]) {
-                        animationInterval = FishRawData[fishType].animationInterval[i]
-                    }
-                    fishDataArray[i] = {
-                        animation: animationArray[i],
-                        animationInterval: animationInterval,
-                        pivot: pivot
-                    };
-                // }
+                let pivot = undefined;
+                if (data.pivot) {
+                    pivot = data.pivot[i];
+                }
+                let animationInterval = 0;
+                if (FishRawData[fishType].animationInterval && FishRawData[fishType].animationInterval[i]) {
+                    animationInterval = FishRawData[fishType].animationInterval[i]
+                }
+                fishDataArray[i] = {
+                    animation: animationArray[i],
+                    animationInterval: animationInterval,
+                    pivot: pivot
+                };
             }
 
-            // FishAnimationData[fishType] = { animation: animationArray, animationInterval: FishRawData[fishType].animationInterval}; //refactor to single?
             FishAnimationData[fishType] = fishDataArray;
         }
         _hasInitialised = true;
