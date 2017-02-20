@@ -4,7 +4,7 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>lantern2_00000.png</key>
+            <key>Lantern2_00000.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -19,7 +19,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>lantern2_00001.png</key>
+            <key>Lantern2_00001.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -34,7 +34,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>lantern2_00002.png</key>
+            <key>Lantern2_00002.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -49,7 +49,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>lantern2_00003.png</key>
+            <key>Lantern2_00003.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -64,7 +64,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>lantern2_00004.png</key>
+            <key>Lantern2_00004.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -79,7 +79,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>lantern2_00005.png</key>
+            <key>Lantern2_00005.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -94,7 +94,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>lantern2_00006.png</key>
+            <key>Lantern2_00006.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -109,7 +109,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>lantern2_00007.png</key>
+            <key>Lantern2_00007.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -124,7 +124,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>lantern2_00008.png</key>
+            <key>Lantern2_00008.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -139,7 +139,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>lantern2_00009.png</key>
+            <key>Lantern2_00009.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -154,7 +154,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>lantern2_00010.png</key>
+            <key>Lantern2_00010.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -169,7 +169,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>lantern2_00011.png</key>
+            <key>Lantern2_00011.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -184,7 +184,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>lantern2_00012.png</key>
+            <key>Lantern2_00012.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -199,7 +199,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>lantern2_00013.png</key>
+            <key>Lantern2_00013.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -214,7 +214,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>lantern2_00014.png</key>
+            <key>Lantern2_00014.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -229,7 +229,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>lantern2_00015.png</key>
+            <key>Lantern2_00015.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -244,7 +244,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>lantern2_00016.png</key>
+            <key>Lantern2_00016.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -259,7 +259,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>lantern2_00017.png</key>
+            <key>Lantern2_00017.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -274,7 +274,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>lantern2_00018.png</key>
+            <key>Lantern2_00018.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -289,7 +289,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>lantern2_00019.png</key>
+            <key>Lantern2_00019.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -304,7 +304,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>lantern2_00020.png</key>
+            <key>Lantern2_00020.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -319,7 +319,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>lantern2_00021.png</key>
+            <key>Lantern2_00021.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -334,7 +334,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>lantern2_00022.png</key>
+            <key>Lantern2_00022.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -349,7 +349,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>lantern2_00023.png</key>
+            <key>Lantern2_00023.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -364,7 +364,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>lantern2_00024.png</key>
+            <key>Lantern2_00024.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -379,7 +379,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>lantern2_00025.png</key>
+            <key>Lantern2_00025.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -394,7 +394,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>lantern2_00026.png</key>
+            <key>Lantern2_00026.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -409,7 +409,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>lantern2_00027.png</key>
+            <key>Lantern2_00027.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -438,7 +438,7 @@
             <key>size</key>
             <string>{500,736}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:3041b89a9237f4042fda290e8588ebf3:bd0e38e78195826b37da2d6dd965a25b:cb4a27bcbd13822b0f0853d37240df79$</string>
+            <string>$TexturePacker:SmartUpdate:6cc37c8db57da6d73a231337ee726a82:bd0e38e78195826b37da2d6dd965a25b:cb4a27bcbd13822b0f0853d37240df79$</string>
             <key>textureFileName</key>
             <string>Lantern2.png</string>
         </dict>
