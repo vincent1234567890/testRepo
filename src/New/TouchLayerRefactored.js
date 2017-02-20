@@ -18,6 +18,11 @@ var TouchLayerRefactored = cc.Layer.extend({
             onTouchMoved: this.onTouchesMoved.bind(this),
             onTouchEnded: this.onTouchesEnded.bind(this)
         });
+
+        // this._hideListener = cc
+        //cc.game.EVENT_HIDE
+        // var lstnr = cc.EventListenerCustom.create("game_on_show", this.gameShowingFunc);
+        // cc.eventManager.addListener(lstnr, this);
         cc.eventManager.addListener(this._listener, this);
     },
 

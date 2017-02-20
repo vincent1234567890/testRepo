@@ -5,7 +5,6 @@
 var PlayerView = (function () {
 
     var PlayerView = function (parent, gameConfig, slot) {
-        cc.spriteFrameCache.addSpriteFrames(res.GameUIPlist);
         this._playerViewStaticPrefabInstance = new PlayerViewStaticPrefab(parent, gameConfig, slot);
     };
 

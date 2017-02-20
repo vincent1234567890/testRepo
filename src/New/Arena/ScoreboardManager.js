@@ -11,7 +11,7 @@ var ScoreboardManager = (function () {
         cc.spriteFrameCache.addSpriteFrames(res.ScoreboardPlist);
         _parentGoToLobby = parentGoToLobby;
         _parentGoToNewRoom = parentGoToNewRoom;
-        this.doView(data)
+        this.displayView(data)
     };
     // ScoreboardManager.prototype.getView = function(parent, data){
     //     return this.parent;
@@ -29,7 +29,7 @@ var ScoreboardManager = (function () {
 
     const proto = ScoreboardManager.prototype;
 
-    proto.doView = function(data){
+    proto.displayView = function(data){
         this._view = new ScoreboardView(this, data, goToLobby, goToNewRoom);
     };
 

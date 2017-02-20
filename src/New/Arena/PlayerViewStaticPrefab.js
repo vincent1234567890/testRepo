@@ -12,6 +12,8 @@ const PlayerViewStaticPrefab = (function () {
         this._parent = new cc.Node();
         GameView.addView(this._parent,1);
 
+        const themeData = ThemeDataManager.getThemeDataList("cannonPlatformPositions");
+
         const base = new cc.Sprite(ReferenceName.Base);
         this._parent.addChild(base);
 
@@ -22,7 +24,7 @@ const PlayerViewStaticPrefab = (function () {
 
         const fontDef = new cc.FontDefinition();
         fontDef.fontName = "Arial";
-        fontDef.fontSize = 32;
+        fontDef.fontSize = 20;
         fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
 
         this._playerName = new cc.LabelTTF('', fontDef);
@@ -55,49 +57,91 @@ const PlayerViewStaticPrefab = (function () {
             markerPos = gameConfig.cannonPositions[0]
         }
 
+        // if (pos[0] > markerPos[0]) {
+        //     // this.flippedX = true;
+        //     base.x = midX + thisSizeX - 65;
+        //     coinIcon.x = 300;
+        //     this._gold.x = thisSizeX - 165;
+        //     this._playerName.x = thisSizeX - 245;
+        //     // this._gem.x = midX - thisSizeX + 80;
+        //
+        //     // base.x =  pos[0] - themeData["Base"][0];
+        //     // this._playerName.x = pos[0] -themeData["PlayerName"][0] + pos[0];
+        // } else {
+        //     base.flippedX = true;
+        //     base.x = midX - thisSizeX + 65;
+        //
+        //     coinIcon.x = thisSizeX - 300;
+        //     this._gold.x = midX - thisSizeX - 145;
+        //     this._playerName.x = this._gold.x;
+        //
+        //
+        //     // base.x =  pos[0]+ themeData["Base"][0];
+        //     // this._playerName.x = pos[0] themeData["PlayerName"][0] + pos[0];
+        //     // this._gem.x = thisSizeX - 180;
+        // }
+        //
+        //
+        //
+        // if (pos[1] > markerPos[1]) {
+        //     if (gameConfig.isUsingOldCannonPositions) {
+        //         base.flippedY = true;
+        //         base.y = midY * 2 - thisSizeY + 57;
+        //         coinIcon.y = thisSizeY - 25;
+        //         this._playerName.y = thisSizeY - 80;
+        //     }else{
+        //         if (pos[0] > midX){
+        //             base.setRotation(-90);
+        //             base.x = midX * 2 - thisSizeY/2;
+        //         }else {
+        //             base.setRotation(90);
+        //             base.x = thisSizeY/2;
+        //         }
+        //         base.y = midY - thisSizeY + 180;
+        //         coinIcon.y = 25;
+        //         this._playerName.y = 80;
+        //     }
+        // } else {
+        //     base.y = thisSizeY - 57;
+        //     coinIcon.y = 25;
+        //     this._playerName.y = 80;
+        // }
+
+        base.x = pos[0]+ themeData["Base"][0];
+        base.y = pos[1]+ themeData["Base"][1];
+        this._gold.x = themeData["Gold"][0];
+        this._gold.y = themeData["Gold"][1];
+        this._playerName.x = themeData["PlayerName"][0];
+        this._playerName.y = themeData["PlayerName"][1];
+
         if (pos[0] > markerPos[0]) {
-            // this.flippedX = true;
-            base.x = midX + thisSizeX - 65;
-            coinIcon.x = 300;
-            this._gold.x = thisSizeX - 165;
-            this._playerName.x = thisSizeX - 245;
-            // this._gem.x = midX - thisSizeX + 80;
-        } else {
-            base.flippedX = true;
-            base.x = midX - thisSizeX + 65;
 
-            coinIcon.x = thisSizeX - 300;
-            this._gold.x = midX - thisSizeX - 145;
-            this._playerName.x = this._gold.x;
+        }else{
 
-            // this._gem.x = thisSizeX - 180;
         }
 
         if (pos[1] > markerPos[1]) {
-            if (gameConfig.isUsingOldCannonPositions) {
-                base.flippedY = true;
-                base.y = midY * 2 - thisSizeY + 57;
-                coinIcon.y = thisSizeY - 25;
-                this._playerName.y = thisSizeY - 80;
-            }else{
-                if (pos[0] > midX){
-                    base.setRotation(-90);
-                    base.x = midX * 2 - thisSizeY/2;
-                }else {
-                    base.setRotation(90);
-                    base.x = thisSizeY/2;
-                }
-                base.y = midY - thisSizeY + 180;
-                coinIcon.y = 25;
-                this._playerName.y = 80;
-            }
-        } else {
-            base.y = thisSizeY - 57;
-            coinIcon.y = 25;
-            this._playerName.y = 80;
-        }
-        this._gold.y = coinIcon.y;
+            base.y = pos[1]+ themeData["Base"][0];
+            if (pos[0] > markerPos[0]){
+                base.x = pos[0]- themeData["Base"][1];
+                base.setRotation(-90);
+            }else {
+                base.setRotation(90);
+                base.x = pos[0]+ themeData["Base"][1];
 
+            }
+        }else{
+
+            // base.flippedY = true;
+        }
+
+
+
+        // console.log(themeData["Base"]);
+        // base.setPosition(themeData["Base"][0],themeData["Base"][1]);
+        // this._gold.y = coinIcon.y;
+
+        // console.log("base:", base.getPosition(), "this._playerName:", this._playerName.getPosition(), "this._gold:", this._gold.getPosition());
 
         // this._gem.y = this._playerName.y;
 

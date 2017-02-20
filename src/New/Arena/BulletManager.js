@@ -21,8 +21,9 @@ const BulletManager = (function(){
 
     const proto = BulletManager.prototype;
 
-    proto.createBullet = function (bulletId) {
-        _bulletCache[bulletId] = new BulletView(_parent, ReferenceName.Bullet1);
+    proto.createBullet = function (gunId, bulletId) {
+        if (gunId >5) gunId = 4; // temp fix
+        _bulletCache[bulletId] = new BulletView(_parent, "#Bullet"+(gunId+1)+".png");
         // console.log(_bulletCache);
     };
 

@@ -17,26 +17,28 @@ const NetPrefab = (function () {
         this._netParent = new cc.Node();
         this._parent.addChild(this._netParent);
 
-        const topLeft = new cc.Sprite(resource);
-        topLeft.setAnchorPoint(0,0);
-        const topRight = new cc.Sprite(resource);
-        topRight.setAnchorPoint(0,0);
-        const bottomLeft = new cc.Sprite(resource);
-        bottomLeft.setAnchorPoint(0,0);
-        const bottomRight = new cc.Sprite(resource);
-        bottomRight.setAnchorPoint(0,0);
+        // const topLeft = new cc.Sprite(resource);
+        // topLeft.setAnchorPoint(0,0);
+        // const topRight = new cc.Sprite(resource);
+        // topRight.setAnchorPoint(0,0);
+        // const bottomLeft = new cc.Sprite(resource);
+        // bottomLeft.setAnchorPoint(0,0);
+        // const bottomRight = new cc.Sprite(resource);
+        // bottomRight.setAnchorPoint(0,0);
+        //
+        // this._netParent.addChild(topLeft);
+        // this._netParent.addChild(topRight);
+        // this._netParent.addChild(bottomLeft);
+        // this._netParent.addChild(bottomRight);
+        //
+        // topLeft.setRotation(-90 + baseRotation);
+        // topRight.setRotation(baseRotation);
+        // bottomLeft.setRotation(180 + baseRotation);
+        // bottomRight.setRotation(90 + baseRotation);
+        this._net = new cc.Sprite(resource);
+        this._netParent.addChild(this._net);
 
-        this._netParent.addChild(topLeft);
-        this._netParent.addChild(topRight);
-        this._netParent.addChild(bottomLeft);
-        this._netParent.addChild(bottomRight);
-
-        topLeft.setRotation(-90 + baseRotation);
-        topRight.setRotation(baseRotation);
-        bottomLeft.setRotation(180 + baseRotation);
-        bottomRight.setRotation(90 + baseRotation);
-
-        const width = topLeft.getContentSize().width;
+        const width = this._net.getContentSize().width;
 
         this._parent.setScale(scale/width);
 

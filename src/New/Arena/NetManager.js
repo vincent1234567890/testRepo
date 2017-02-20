@@ -16,7 +16,7 @@ const NetManager = (function (){
         const rotPos = GameView.getRotatedView(bulletData.position).position;
         //get resource from gunId
         let scale = gameConfig.gunClasses[bulletData.gunId].explosionRadius;
-        const net = new NetPrefab(scale, rotPos[0], rotPos[1], ReferenceName.Net1);
+        const net = new NetPrefab(scale, rotPos[0], rotPos[1], "#Net1.png");
     };
 
     return NetManager;

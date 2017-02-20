@@ -49,7 +49,7 @@ const GameManager = function () {
 
         _fishManager = new FishViewManager(fishGameArena, _gameConfig);
         _optionsManager = new OptionsManager(onSettingsButton, undefined, onLeaveArena);
-        _optionsManager.doView(_gameConfig);
+        _optionsManager.displayView(_gameConfig);
         _bulletManager = new BulletManager(fishGameArena);
         _netManager = new NetManager();
         BlockingManager.destroyView();
@@ -57,9 +57,9 @@ const GameManager = function () {
         GameView.goToGame(_currentScene);
     };
 
-    const shootTo = function (playerId, angle, bulletId) {
+    const shootTo = function (playerId, gunId, angle, bulletId) {
         GameView.shootTo(playerId, angle);
-        return _bulletManager.createBullet(bulletId);
+        return _bulletManager.createBullet(gunId, bulletId);
     };
 
     const explodeBullet = function(bulletId){
@@ -175,7 +175,7 @@ const GameManager = function () {
             // _profileManger = new ProfileManager();
             _optionsManager = new OptionsManager(onSettingsButton, undefined, onLeaveArena);
         }else {
-            _lobbyManager.doView(_playerData, onSettingsButton, onGameSelected,onRequestShowProfile);
+            _lobbyManager.displayView(_playerData, onSettingsButton, onGameSelected,onRequestShowProfile);
         }
     }
 
@@ -199,7 +199,7 @@ const GameManager = function () {
         if (!_scoreboardManager) {
             _scoreboardManager = new ScoreboardManager(stats.data.recentGames[0], exitToLobby, goToNewRoom);
         } else {
-            _scoreboardManager.doView(stats.data.recentGames[0]);
+            _scoreboardManager.displayView(stats.data.recentGames[0]);
         }
     }
 

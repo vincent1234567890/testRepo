@@ -9,11 +9,15 @@ const CannonManager = (function () {
 
     function CannonManager(gameConfig, index, isPlayer) {
         _gameConfig = gameConfig;
-        cc.spriteFrameCache.addSpriteFrames(res.Weapon1Plist);
+        // cc.spriteFrameCache.addSpriteFrames(res.Cannon1Plist);
+        const plists = ResourceLoader.getPlists("Weapons");
+        for ( let list in plists){
+            cc.spriteFrameCache.addSpriteFrames(plists[list]);
+        }
         this._cannon = new CannonView(gameConfig, index);
         if (isPlayer) {
             this._cannon.setupCannonChangeMenu(this, gameConfig, index, this.decreaseCannon, this.increaseCannon);
-            this.forceSetGun(0);
+            // this.forceSetGun(0);
         }
 
     }
@@ -58,8 +62,10 @@ const CannonManager = (function () {
      */
     proto.forceSetGun = function (gunId) {
         const gunClass = _gameConfig.gunClasses[gunId];
+        if (this._currentGunId != gunId) {
+            this._cannon.updateCannonPowerLabel(gunClass.value);
+        }
         this._currentGunId = gunId;
-        this._cannon.updateCannonPowerLabel(gunClass.value);
     };
 
     proto.forceClearGun = function () {
