@@ -9,28 +9,28 @@
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-3,-1}</string>
+                <string>{-4,-1}</string>
                 <key>spriteSize</key>
-                <string>{49,84}</string>
+                <string>{51,91}</string>
                 <key>spriteSourceSize</key>
-                <string>{67,86}</string>
+                <string>{105,105}</string>
                 <key>textureRect</key>
-                <string>{{1,529},{49,84}}</string>
+                <string>{{1,101},{51,91}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>Seahorse_00001.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-3,-1}</string>
+                <string>{-4,-1}</string>
                 <key>spriteSize</key>
-                <string>{49,84}</string>
+                <string>{51,91}</string>
                 <key>spriteSourceSize</key>
-                <string>{67,86}</string>
+                <string>{105,105}</string>
                 <key>textureRect</key>
-                <string>{{1,615},{49,84}}</string>
+                <string>{{94,103},{51,91}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -39,60 +39,60 @@
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-3,-1}</string>
+                <string>{-4,-1}</string>
                 <key>spriteSize</key>
-                <string>{49,84}</string>
+                <string>{51,91}</string>
                 <key>spriteSourceSize</key>
-                <string>{67,86}</string>
+                <string>{105,105}</string>
                 <key>textureRect</key>
-                <string>{{1,701},{49,84}}</string>
+                <string>{{1,154},{51,91}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>Seahorse_00003.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-3,-1}</string>
+                <string>{-4,-1}</string>
                 <key>spriteSize</key>
-                <string>{49,84}</string>
+                <string>{51,91}</string>
                 <key>spriteSourceSize</key>
-                <string>{67,86}</string>
+                <string>{105,105}</string>
                 <key>textureRect</key>
-                <string>{{1,787},{49,84}}</string>
+                <string>{{147,155},{51,91}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>Seahorse_00004.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-3,0}</string>
+                <string>{-4,0}</string>
                 <key>spriteSize</key>
-                <string>{49,86}</string>
+                <string>{51,91}</string>
                 <key>spriteSourceSize</key>
-                <string>{67,86}</string>
+                <string>{105,105}</string>
                 <key>textureRect</key>
-                <string>{{1,1},{49,86}}</string>
+                <string>{{1,207},{51,91}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>Seahorse_00005.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-3,0}</string>
+                <string>{-4,0}</string>
                 <key>spriteSize</key>
-                <string>{49,86}</string>
+                <string>{51,91}</string>
                 <key>spriteSourceSize</key>
-                <string>{67,86}</string>
+                <string>{105,105}</string>
                 <key>textureRect</key>
-                <string>{{1,89},{49,86}}</string>
+                <string>{{94,208},{51,91}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>Seahorse_00006.png</key>
             <dict>
@@ -101,11 +101,11 @@
                 <key>spriteOffset</key>
                 <string>{-3,0}</string>
                 <key>spriteSize</key>
-                <string>{49,86}</string>
+                <string>{51,91}</string>
                 <key>spriteSourceSize</key>
-                <string>{67,86}</string>
+                <string>{105,105}</string>
                 <key>textureRect</key>
-                <string>{{1,177},{49,86}}</string>
+                <string>{{187,208},{51,91}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -114,73 +114,73 @@
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-3,0}</string>
+                <string>{-4,1}</string>
                 <key>spriteSize</key>
-                <string>{49,86}</string>
+                <string>{51,91}</string>
                 <key>spriteSourceSize</key>
-                <string>{67,86}</string>
+                <string>{105,105}</string>
                 <key>textureRect</key>
-                <string>{{1,265},{49,86}}</string>
+                <string>{{1,260},{51,91}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>Seahorse_00008.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-3,1}</string>
+                <string>{-4,1}</string>
                 <key>spriteSize</key>
-                <string>{49,84}</string>
+                <string>{51,91}</string>
                 <key>spriteSourceSize</key>
-                <string>{67,86}</string>
+                <string>{105,105}</string>
                 <key>textureRect</key>
-                <string>{{1,873},{49,84}}</string>
+                <string>{{94,261},{51,91}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>Seahorse_00009.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-2,1}</string>
+                <string>{-4,2}</string>
                 <key>spriteSize</key>
-                <string>{47,84}</string>
+                <string>{51,91}</string>
                 <key>spriteSourceSize</key>
-                <string>{67,86}</string>
+                <string>{105,105}</string>
                 <key>textureRect</key>
-                <string>{{1,1475},{47,84}}</string>
+                <string>{{1,313},{51,91}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>Seahorse_00010.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-2,1}</string>
+                <string>{-4,2}</string>
                 <key>spriteSize</key>
-                <string>{47,84}</string>
+                <string>{51,91}</string>
                 <key>spriteSourceSize</key>
-                <string>{67,86}</string>
+                <string>{105,105}</string>
                 <key>textureRect</key>
-                <string>{{1,1561},{47,84}}</string>
+                <string>{{94,314},{51,91}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>Seahorse_00011.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-2,1}</string>
+                <string>{-3,2}</string>
                 <key>spriteSize</key>
-                <string>{47,84}</string>
+                <string>{51,91}</string>
                 <key>spriteSourceSize</key>
-                <string>{67,86}</string>
+                <string>{105,105}</string>
                 <key>textureRect</key>
-                <string>{{1,1647},{47,84}}</string>
+                <string>{{187,301},{51,91}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -189,73 +189,73 @@
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-2,1}</string>
+                <string>{-3,3}</string>
                 <key>spriteSize</key>
-                <string>{47,84}</string>
+                <string>{51,91}</string>
                 <key>spriteSourceSize</key>
-                <string>{67,86}</string>
+                <string>{105,105}</string>
                 <key>textureRect</key>
-                <string>{{1,1733},{47,84}}</string>
+                <string>{{1,366},{51,91}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>Seahorse_00013.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-2,1}</string>
+                <string>{-4,2}</string>
                 <key>spriteSize</key>
-                <string>{47,84}</string>
+                <string>{51,91}</string>
                 <key>spriteSourceSize</key>
-                <string>{67,86}</string>
+                <string>{105,105}</string>
                 <key>textureRect</key>
-                <string>{{1,1819},{47,84}}</string>
+                <string>{{94,367},{51,91}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>Seahorse_00014.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-3,1}</string>
+                <string>{-4,2}</string>
                 <key>spriteSize</key>
-                <string>{49,84}</string>
+                <string>{51,91}</string>
                 <key>spriteSourceSize</key>
-                <string>{67,86}</string>
+                <string>{105,105}</string>
                 <key>textureRect</key>
-                <string>{{1,959},{49,84}}</string>
+                <string>{{1,419},{51,91}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>Seahorse_00015.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-3,1}</string>
+                <string>{-4,2}</string>
                 <key>spriteSize</key>
-                <string>{49,84}</string>
+                <string>{51,91}</string>
                 <key>spriteSourceSize</key>
-                <string>{67,86}</string>
+                <string>{105,105}</string>
                 <key>textureRect</key>
-                <string>{{1,1045},{49,84}}</string>
+                <string>{{94,420},{51,91}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>Seahorse_00016.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-3,1}</string>
+                <string>{-4,2}</string>
                 <key>spriteSize</key>
-                <string>{49,84}</string>
+                <string>{51,91}</string>
                 <key>spriteSourceSize</key>
-                <string>{67,86}</string>
+                <string>{105,105}</string>
                 <key>textureRect</key>
-                <string>{{1,1131},{49,84}}</string>
+                <string>{{187,394},{51,91}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -264,75 +264,165 @@
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-3,0}</string>
+                <string>{-3,1}</string>
                 <key>spriteSize</key>
-                <string>{49,86}</string>
+                <string>{51,91}</string>
                 <key>spriteSourceSize</key>
-                <string>{67,86}</string>
+                <string>{105,105}</string>
                 <key>textureRect</key>
-                <string>{{1,353},{49,86}}</string>
+                <string>{{1,472},{51,91}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>Seahorse_00018.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-3,0}</string>
+                <string>{-4,0}</string>
                 <key>spriteSize</key>
-                <string>{49,84}</string>
+                <string>{51,91}</string>
                 <key>spriteSourceSize</key>
-                <string>{67,86}</string>
+                <string>{105,105}</string>
                 <key>textureRect</key>
-                <string>{{1,1217},{49,84}}</string>
+                <string>{{94,473},{51,91}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>Seahorse_00019.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-3,0}</string>
+                <string>{-4,0}</string>
                 <key>spriteSize</key>
-                <string>{49,86}</string>
+                <string>{51,91}</string>
                 <key>spriteSourceSize</key>
-                <string>{67,86}</string>
+                <string>{105,105}</string>
                 <key>textureRect</key>
-                <string>{{1,441},{49,86}}</string>
+                <string>{{1,525},{51,91}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>Seahorse_00020.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-3,-1}</string>
+                <string>{-4,0}</string>
                 <key>spriteSize</key>
-                <string>{49,84}</string>
+                <string>{51,91}</string>
                 <key>spriteSourceSize</key>
-                <string>{67,86}</string>
+                <string>{105,105}</string>
                 <key>textureRect</key>
-                <string>{{1,1303},{49,84}}</string>
+                <string>{{94,526},{51,91}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>Seahorse_00021.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-3,-1}</string>
+                <string>{-4,-1}</string>
                 <key>spriteSize</key>
-                <string>{49,84}</string>
+                <string>{51,91}</string>
                 <key>spriteSourceSize</key>
-                <string>{67,86}</string>
+                <string>{105,105}</string>
                 <key>textureRect</key>
-                <string>{{1,1389},{49,84}}</string>
+                <string>{{187,487},{51,91}}</string>
                 <key>textureRotated</key>
                 <false/>
+            </dict>
+            <key>Seahorse_00022.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-3,0}</string>
+                <key>spriteSize</key>
+                <string>{49,95}</string>
+                <key>spriteSourceSize</key>
+                <string>{105,105}</string>
+                <key>textureRect</key>
+                <string>{{1,50},{49,95}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>Seahorse_00023.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-4,2}</string>
+                <key>spriteSize</key>
+                <string>{47,91}</string>
+                <key>spriteSourceSize</key>
+                <string>{105,105}</string>
+                <key>textureRect</key>
+                <string>{{1,1},{47,91}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>Seahorse_00024.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-5,9}</string>
+                <key>spriteSize</key>
+                <string>{51,79}</string>
+                <key>spriteSourceSize</key>
+                <string>{105,105}</string>
+                <key>textureRect</key>
+                <string>{{187,1},{51,79}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>Seahorse_00025.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-7,14}</string>
+                <key>spriteSize</key>
+                <string>{55,71}</string>
+                <key>spriteSourceSize</key>
+                <string>{105,105}</string>
+                <key>textureRect</key>
+                <string>{{179,82},{55,71}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>Seahorse_00026.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-5,9}</string>
+                <key>spriteSize</key>
+                <string>{51,79}</string>
+                <key>spriteSourceSize</key>
+                <string>{105,105}</string>
+                <key>textureRect</key>
+                <string>{{98,50},{51,79}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>Seahorse_00027.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-4,2}</string>
+                <key>spriteSize</key>
+                <string>{47,91}</string>
+                <key>spriteSourceSize</key>
+                <string>{105,105}</string>
+                <key>textureRect</key>
+                <string>{{94,1},{47,91}}</string>
+                <key>textureRotated</key>
+                <true/>
             </dict>
         </dict>
         <key>metadata</key>
@@ -346,9 +436,9 @@
             <key>realTextureFileName</key>
             <string>Seahorse.png</string>
             <key>size</key>
-            <string>{51,1904}</string>
+            <string>{239,579}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:597bdea4f81a6ca4114e6b2682e8b296:b3f5fac47b5dc0c5df4928f448d663c9:4b75e7c624eeec591734554b4b7aa71d$</string>
+            <string>$TexturePacker:SmartUpdate:c02e44a98f48e202be93825df89ef1ec:83880ab9f84166b2b17f4bc1ff88fd49:4b75e7c624eeec591734554b4b7aa71d$</string>
             <key>textureFileName</key>
             <string>Seahorse.png</string>
         </dict>

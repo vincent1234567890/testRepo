@@ -40,7 +40,11 @@ const GameView = function(){
     }
 
     function initialiseParent(parent) {
-        cc.spriteFrameCache.addSpriteFrames(res.GameUIPlist);
+        // cc.spriteFrameCache.addSpriteFrames(res.GameUIPlist);
+        const plists = ResourceLoader.getPlists("Game");
+        for ( let list in plists){
+            cc.spriteFrameCache.addSpriteFrames(plists[list]);
+        }
         if (parent === undefined && _parentNode && _parentNode.parent) {
             parent = _parentNode.parent;
         }
@@ -116,13 +120,19 @@ const GameView = function(){
 
     function resetArena() {
         _isRotated = false;
-        for (let i = 0; i < _gameConfig.maxPlayers; i++) {
-            clearPlayerState(i);
+        if(_gameConfig) {
+            for (let i = 0; i < _gameConfig.maxPlayers; i++) {
+                clearPlayerState(i);
+            }
         }
         _lastShotTime = -Infinity
     }
 
     function destroyArena(){
+        if (!_fishGameArena) {
+            return;
+        }
+
         for (let i = 0; i < _gameConfig.maxPlayers; i++) {
             _playerViews[i].destroyView();
             delete _playerViews[i];

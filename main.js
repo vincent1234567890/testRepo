@@ -91,16 +91,44 @@ var cocos2dApp = cc.game.onStart = function() {
     //
     // LoadingDuration = Date.now();
     // var self = this;
+    ClientServerConnect.connectToMasterServer().then(
+        data => {
+            const themeConfig = data.themeConfig;
+            console.log(themeConfig);
+            for (let i = 0; i < themeConfig.resourceList.length; i++) {
+                for (let j = 0; j < themeConfig[themeConfig.resourceList[i]].length; j++) {
+                    // console.log("themeConfig.resourceList.length:", themeConfig.resourceList.length, "themeConfig[themeConfig.resourceList[i]].length", themeConfig[themeConfig.resourceList[i]].length,i,j,themeConfig[themeConfig.resourceList[i]], themeConfig[themeConfig.resourceList[i]][j]);
+                    ResourceLoader.addResource(themeConfig.folderName, themeConfig.resourceList[i], themeConfig[themeConfig.resourceList[i]][j]);
+                    // ThemeDataManager.setThemeData()
+                }
+            }
+
+            for (let i = 0; i < themeConfig.resourceList.length; i++) {
+                // for (let j = 0; j < themeConfig[themeConfig.resourceList[i]].length; j++) {
+                for (let j in themeConfig[themeConfig.themeList[i]] ){
+                    // console.log("themeConfig.resourceList.length:", themeConfig.resourceList.length, "themeConfig[themeConfig.resourceList[i]].length", themeConfig[themeConfig.resourceList[i]].length,i,j,themeConfig[themeConfig.resourceList[i]], themeConfig[themeConfig.resourceList[i]][j]);
+                    // ResourceLoader.addResource(themeConfig.folderName, themeConfig.resourceList[i], themeConfig[themeConfig.resourceList[i]][j]);
+                    // console.log(i,j,themeConfig.themeList[i],themeConfig[themeConfig.themeList[i]],themeConfig[themeConfig.themeList[i]][j]);
+                    ThemeDataManager.setThemeData(themeConfig.themeList[i],themeConfig[themeConfig.themeList[i]]);
+                }
+            }
+
+            ResourceLoader.finaliseResources();
+
+            cc.LoadingScreen.preload(ResourceLoader.getResourceList(), function () {
+                // cc.director.runScene(new LogoScene());
+                // cc.director.runScene(new TestScene());
+                // cc.director.runScene(new StartMenuLayer());
+                AppManager.goToLobby();
+                // GameCtrl.sharedGame().home();
+                // AppManager.goToLobby();
+            }, this);
+        }
+    ).catch(console.error.bind(console));
 
 
-    cc.LoadingScreen.preload(g_resources, function () {
-        // cc.director.runScene(new LogoScene());
-        // cc.director.runScene(new TestScene());
-        // cc.director.runScene(new StartMenuLayer());
-        ClientServerConnect.connectToMasterServer();
-        // GameCtrl.sharedGame().home();
-        // AppManager.goToLobby();
-    }, this);
+
+
     // },
    // var  applicationDidFinishLaunching = function () {
    //      // initialize director

@@ -17,51 +17,65 @@ const ClientServerConnect = function () {
 
 
     const connectToMasterServer = function () {
-        if (_hasConnected) return;
-        const useJoeysServerDuringDevelopment = false;
+        return new Promise((resolve, reject) => {
+            if (_hasConnected) return;
 
-        let gameAPIServerUrl = 'ws://' + document.location.hostname + ':8088';
+            let gameAPIServerUrl = 'ws://' + document.location.hostname + ':8088';
 
-        // const localNames = ['localhost', '127.0.0.1', '127.0.1.1', '0.0.0.0'];
-        // const doingDevelopment = (localNames.indexOf(window.location.hostname) >= 0);
-        // if (doingDevelopment) {
-        //     gameAPIServerUrl = 'ws://127.0.0.1:8088';
-        //     if (useJoeysServerDuringDevelopment) {
-        //         gameAPIServerUrl = 'ws://192.168.1.16:8088';
-        //     }
-        // }
+            // const useJoeysServerDuringDevelopment = false;
+            // const localNames = ['localhost', '127.0.0.1', '127.0.1.1', '0.0.0.0'];
+            // const doingDevelopment = (localNames.indexOf(window.location.hostname) >= 0);
+            // if (doingDevelopment) {
+            //     gameAPIServerUrl = 'ws://127.0.0.1:8088';
+            //     if (useJoeysServerDuringDevelopment) {
+            //         gameAPIServerUrl = 'ws://192.168.1.16:8088';
+            //     }
+            // }
 
-        // var clientServerConnect = this;
+            // var clientServerConnect = this;
 
-        const client = new WebSocketClient(gameAPIServerUrl);
-        const gameService = new GameServices.GameService();
-        client.addService(gameService);
+            const client = new WebSocketClient(gameAPIServerUrl);
+            const gameService = new GameServices.GameService();
+            client.addService(gameService);
 
-        setGameWSClient(client);
+            setGameWSClient(client);
 
-        client.connect();
-        client.addEventListener('open', function () {
-            _hasConnected = true;
+            client.connect();
+            client.addEventListener('open', function () {
+                _hasConnected = true;
 
-            client.callAPIOnce('game', 'requestServer', {}).then(
-                (serverList) => {
-                    console.log("serverList:", serverList);
-                    // Future: Maybe ping the servers here, then connect to the closest one
+                client.callAPIOnce('game', 'requestServer', {}).then(
+                    (serverList) => {
+                        console.log("serverList:", serverList);
+                        // Future: Maybe ping the servers here, then connect to the closest one
+                    }
+                ).catch(console.error.bind(console));
+
+                if (typeof document !== 'undefined') {
+                    var queryParams = getCurrentOrCachedQueryParams();
+                    if (queryParams.token && (queryParams.playerId || queryParams.email)) {
+                        loginWithToken(queryParams.token, queryParams.playerId, queryParams.email, function (loginData) {
+                            // If successful, remove the query parameters from the URL
+                            window.history.pushState({where: 'start', search: document.location.search}, '', document.location.pathname);
+                            // Start the game!
+                            // AppManager.goToLobby();
+                            // console.log(client);
+                            resolve(loginData);
+                        });
+                    }
                 }
-            ).catch(console.error.bind(console));
+            });
 
-            if (typeof document !== 'undefined') {
-                var queryParams = getCurrentOrCachedQueryParams();
-                if (queryParams.token && (queryParams.playerId || queryParams.email)) {
-                    loginWithToken(queryParams.token, queryParams.playerId, queryParams.email, function () {
-                        // If successful, remove the query parameters from the URL
-                        window.history.pushState({where: 'start', search: document.location.search}, '', document.location.pathname);
-                        // Start the game!
-                        AppManager.goToLobby();
-                    });
-                }
-            }
+            client.addEventListener('close', function () {
+                console.log("Disconnect detected.  Will attempt reconnection soon...");
+                setTimeout(connectToMasterServer, 2000);
+                _hasConnected = false;
+                ClientServerConnect.postGameCleanup();
+                // GameManager.destroyArena();
+                AppManager.goBackToLobby();
+            });
         });
+
     };
 
     function parseQueryParams (searchString) {
@@ -151,7 +165,7 @@ const ClientServerConnect = function () {
         }).then(
             loginResponse => {
                 console.log("loginResponse:", loginResponse);
-                onSuccess(loginResponse.data.player);
+                onSuccess(loginResponse.data);
             }
         ).catch(
             error => {
@@ -216,6 +230,10 @@ const ClientServerConnect = function () {
     }
 
     function postGameCleanup () {
+        if (!_informServer) {
+            return;
+        }
+
         socketUtils.disengageIOSocketFromClient(_gameIOSocket, _gameWSClient);
 
         _informServer = undefined;

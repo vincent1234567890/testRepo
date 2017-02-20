@@ -214,10 +214,18 @@ const GameManager = function () {
     }
 
     function resetArena(){
-        _optionsManager.destroyView();
-        _fishManager.destroyView();
-        _bulletManager.destroyView();
-        _scoreboardManager.destroyView();
+        if (_optionsManager) {
+            _optionsManager.destroyView();
+        }
+        if (_fishManager) {
+            _fishManager.destroyView();
+        }
+        if (_bulletManager) {
+            _bulletManager.destroyView();
+        }
+        if (_scoreboardManager) {
+            _scoreboardManager.destroyView();
+        }
         BlockingManager.destroyView();
         GameView.resetArena();
     }
@@ -261,7 +269,7 @@ const GameManager = function () {
         updateEverything: updateEverything,
         showPostGameStats: showPostGameStats,
         goToLobby: goToLobby,
-        isCurrentPlayer : isCurrentPlayer,
+        isCurrentPlayer: isCurrentPlayer,
 
         //debug
         debug: debug,
