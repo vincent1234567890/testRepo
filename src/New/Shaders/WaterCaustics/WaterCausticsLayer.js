@@ -18,7 +18,7 @@ const WaterCausticsLayer = cc.Layer.extend({
         this.shader._usesTime = true;
 
         sprite.setShaderProgram(this.shader);
-        this._valueUniform = this.shader.getUniformLocationForName('u_value');
+        // this._valueUniform = this.shader.getUniformLocationForName('u_value');
         this.shader.use();
 
         // }
@@ -32,9 +32,11 @@ const WaterCausticsLayer = cc.Layer.extend({
 
         return true;
     },
-    update: function() {
-        this.shader.setUniformsForBuiltins();
 
-        this.shader.setUniformLocationWith1f(this._valueUniform, Math.random());
+    update: function() {
+        // this.shader.setUniformsForBuiltins();
+        //
+        // this.shader.setUniformLocationWith1f(this._valueUniform, Math.random());
+        this.shader.updateUniforms();
     }
 });
