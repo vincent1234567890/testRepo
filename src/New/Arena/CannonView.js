@@ -185,7 +185,7 @@ const CannonView = (function(){
         // }else {
         //
         // }
-        this._cannonSprite.setAnchorPoint(0.5,0.27);
+        this._cannonSprite.setAnchorPoint(0.5,0.5);
         this._cannonSprite.setPosition({x: this.pos[0], y: this.pos[1]});
 
         this._sequence = new cc.Sequence(this.getCannonAnimation(cannonPower),new cc.CallFunc(this.onAnimateShootEnd,this));
@@ -195,6 +195,7 @@ const CannonView = (function(){
         const size = this._cannonSprite.getContentSize();
 
         const cannonLabelPos = new cc.p(size.width/2 + this._theme["CannonLabelPosition"][0], size.height/2 + this._theme["CannonLabelPosition"][1]);
+        this._cannonPowerLabel.setAnchorPoint(0.5,0.5);
         this._cannonPowerLabel.setPosition(cannonLabelPos);
 
         this.setSparkSprite();
