@@ -90,8 +90,12 @@ const ScoreboardView = (function() {
         //fontDef.fontWeight = "normal";
         //fontDef.fontWeight = "bold";
         fontDef.fontName = "Impact";
-
-        let info = new cc.LabelTTF(data && (data * 1.5).toFixed(2).replace(/[.,]00$/, "")|| 0,fontDef);
+        let info;
+        if (cc.isNumber(data) || data === undefined) {
+            info = new cc.LabelTTF(data && (data * 1.5).toFixed(2).replace(/[.,]00$/, "") || 0, fontDef);
+        }else{
+            info = new cc.LabelTTF(data, fontDef);
+        }
 
 
         let icon = new cc.Sprite(spriteName);

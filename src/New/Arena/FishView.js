@@ -64,7 +64,7 @@ const FishView = (function () {
             && FishAnimationData[this.type][FishAnimationEnum.death].animation
             && FishAnimationData[this.type][FishAnimationEnum.death].animation._animation
             && FishAnimationData[this.type][FishAnimationEnum.death].animation._animation._frames
-            && FishAnimationData[this.type][FishAnimationEnum.death].animation._animation._frames.length > 0){
+            && FishAnimationData[this.type][FishAnimationEnum.death].animation._animation._frames.length > 0){//lulwut? maybe need to find a better way
             this.doAnimation(FishAnimationEnum.death);
         }else {
             // console.log("killFish", id)
@@ -81,7 +81,7 @@ const FishView = (function () {
 
         const notify = new cc.Sequence(new cc.DelayTime(3), new cc.CallFunc(callback, target, id));
         this._sprite.runAction(notify);
-
+        return {position : this._parent.getPosition(), type : this.type};
     };
 
     proto.destroyView = function (parent) {

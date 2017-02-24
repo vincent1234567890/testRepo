@@ -12,6 +12,7 @@ const BulletManager = (function(){
     let _parent;
     let _fishGameArena;
     let _bulletCache = [];
+    let _bulletPool = new ObjectPool(BulletView);
 
     const BulletManager = function (fishGameArena) {
         _parent = new cc.Node();
@@ -22,8 +23,9 @@ const BulletManager = (function(){
     const proto = BulletManager.prototype;
 
     proto.createBullet = function (gunId, bulletId) {
-        if (gunId >5) gunId = 4; // temp fix
-        _bulletCache[bulletId] = new BulletView(_parent, "#Bullet"+(gunId+1)+".png");
+        if (gunId > 4) gunId = 4; // temp fix
+        // _bulletCache[bulletId] = new BulletView(_parent, "#Bullet"+(gunId+1)+".png");
+        _bulletCache[bulletId] = _bulletPool.alloc(_parent, "#Bullet"+(gunId+1)+".png");
         // console.log(_bulletCache);
     };
 
@@ -75,7 +77,8 @@ const BulletManager = (function(){
         const bullet = _bulletCache[bulletId];
 
         if (bullet){
-            bullet.destroyView();
+            bullet.reclaimView();
+            _bulletPool.free(bullet);
             delete _bulletCache[bulletId];
             const bulletModel = _fishGameArena && _fishGameArena.getBullet(bulletId);
             if (bulletModel){
@@ -100,6 +103,7 @@ const BulletManager = (function(){
             }
         }
         _bulletCache = [];
+        _bulletPool.collect();
         GameView.destroyView(_parent);
         _parent = null;
     };

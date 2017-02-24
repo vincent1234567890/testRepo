@@ -19,136 +19,136 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>Cannon4_0.png</key>
+            <key>Cannon4_00000.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{5,-4}</string>
+                <string>{5,0}</string>
                 <key>spriteSize</key>
                 <string>{116,150}</string>
                 <key>spriteSourceSize</key>
-                <string>{160,160}</string>
+                <string>{150,150}</string>
                 <key>textureRect</key>
                 <string>{{1,859},{116,150}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Cannon4_1.png</key>
+            <key>Cannon4_00001.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{5,-8}</string>
+                <string>{5,-3}</string>
                 <key>spriteSize</key>
                 <string>{120,144}</string>
                 <key>spriteSourceSize</key>
-                <string>{160,160}</string>
+                <string>{150,150}</string>
                 <key>textureRect</key>
                 <string>{{1,421},{120,144}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Cannon4_2.png</key>
+            <key>Cannon4_00002.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{5,-11}</string>
+                <string>{5,-6}</string>
                 <key>spriteSize</key>
                 <string>{124,138}</string>
                 <key>spriteSourceSize</key>
-                <string>{160,160}</string>
+                <string>{150,150}</string>
                 <key>textureRect</key>
                 <string>{{1,1},{124,138}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Cannon4_3.png</key>
+            <key>Cannon4_00003.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{5,-4}</string>
+                <string>{5,0}</string>
                 <key>spriteSize</key>
                 <string>{116,150}</string>
                 <key>spriteSourceSize</key>
-                <string>{160,160}</string>
+                <string>{150,150}</string>
                 <key>textureRect</key>
                 <string>{{1,1011},{116,150}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Cannon4_4.png</key>
+            <key>Cannon4_00004.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{5,-8}</string>
+                <string>{5,-3}</string>
                 <key>spriteSize</key>
                 <string>{120,144}</string>
                 <key>spriteSourceSize</key>
-                <string>{160,160}</string>
+                <string>{150,150}</string>
                 <key>textureRect</key>
                 <string>{{1,567},{120,144}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Cannon4_5.png</key>
+            <key>Cannon4_00005.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{5,-11}</string>
+                <string>{5,-6}</string>
                 <key>spriteSize</key>
                 <string>{124,138}</string>
                 <key>spriteSourceSize</key>
-                <string>{160,160}</string>
+                <string>{150,150}</string>
                 <key>textureRect</key>
                 <string>{{1,141},{124,138}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Cannon4_6.png</key>
+            <key>Cannon4_00006.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{5,-4}</string>
+                <string>{5,0}</string>
                 <key>spriteSize</key>
                 <string>{116,150}</string>
                 <key>spriteSourceSize</key>
-                <string>{160,160}</string>
+                <string>{150,150}</string>
                 <key>textureRect</key>
                 <string>{{1,1163},{116,150}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Cannon4_7.png</key>
+            <key>Cannon4_00007.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{5,-8}</string>
+                <string>{5,-3}</string>
                 <key>spriteSize</key>
                 <string>{120,144}</string>
                 <key>spriteSourceSize</key>
-                <string>{160,160}</string>
+                <string>{150,150}</string>
                 <key>textureRect</key>
                 <string>{{1,713},{120,144}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Cannon4_8.png</key>
+            <key>Cannon4_00008.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{5,-11}</string>
+                <string>{5,-6}</string>
                 <key>spriteSize</key>
                 <string>{124,138}</string>
                 <key>spriteSourceSize</key>
-                <string>{160,160}</string>
+                <string>{150,150}</string>
                 <key>textureRect</key>
                 <string>{{1,281},{124,138}}</string>
                 <key>textureRotated</key>
@@ -168,7 +168,7 @@
             <key>size</key>
             <string>{126,1338}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:6908048c79cae8a90414c1bb94e5f881:e785a1984c80de0df5adba8a78bb4f2d:75eb83df4dcedde27a0a97751584bbfe$</string>
+            <string>$TexturePacker:SmartUpdate:83dec89077a56627cbceeca8413e87b8:fbacb804e36f84b75677c49bab0e5fb6:75eb83df4dcedde27a0a97751584bbfe$</string>
             <key>textureFileName</key>
             <string>Cannon4.png</string>
         </dict>
