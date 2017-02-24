@@ -40,13 +40,15 @@ const NetPrefab = (function () {
 
         const width = this._net.getContentSize().width;
 
-        this._parent.setScale(scale/width);
+        this._parent.setScale(scale*2/width);
 
         this.sequence = new cc.Sequence (scale1,scale2,scale1,scale2, new cc.callFunc(this.destroyView, this));
 
 
         this._parent.setPosition(x,y);
         this._netParent.runAction(this.sequence);
+
+
     };
 
     const proto = NetPrefab.prototype;

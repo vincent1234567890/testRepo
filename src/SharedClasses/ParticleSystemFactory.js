@@ -16,6 +16,9 @@ var particleSystemFactory = {
 
     //Eugene:
     create : function (plistPath, pos, isShaped){
+        if (!this._particleCache){
+            this._particleCache = {};
+        }
         if (!this._particleCache.hasOwnProperty(plistPath)){
             this._particleCache[plistPath] = new cc.ParticleSystem(plistPath);
             this._particleCache[plistPath].unscheduleAllCallbacks();
@@ -27,7 +30,7 @@ var particleSystemFactory = {
             particle.setPosition(pos);
         }
 
-        if (isShaped !== undefined){
+        if (isShaped !== undefined && isShaped){
             particle.setDrawMode(cc.ParticleSystem.SHAPE_MODE);
             particle.setShapeType(cc.ParticleSystem.STAR_SHAPE);
         }

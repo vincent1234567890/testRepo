@@ -31,6 +31,7 @@ const GameManager = function () {
     let _optionsManager;
     let _bulletManager;
     let _netManager;
+    let _effectsManager;
 
     //?? only use is for clientReceiver to query if playerId == player
     let _playerId;
@@ -52,7 +53,10 @@ const GameManager = function () {
         _optionsManager.displayView(_gameConfig);
         _bulletManager = new BulletManager(fishGameArena);
         _netManager = new NetManager();
+        _effectsManager = new EffectsManager();
         BlockingManager.destroyView();
+
+
 
         GameView.goToGame(_currentScene);
     };
@@ -67,6 +71,7 @@ const GameManager = function () {
         if (bulletData) {
             _netManager.explodeAt(_gameConfig,bulletData);
         }
+
     };
 
     const setGameState = function (config, playerId, playerSlot) {
@@ -88,9 +93,10 @@ const GameManager = function () {
         return _fishManager.addFish(fishId, fishType);
     };
 
-    const caughtFish = function (fishId){
+    const caughtFish = function (playerSlot,fishId){
         // console.log("caught fish :" ,fishId);
-        _fishManager.caughtFish(fishId);
+        const data = _fishManager.caughtFish(fishId);
+        _effectsManager.doCapturePrizeEffect(data.position, _gameConfig.cannonPositions[playerSlot], _gameConfig.fishClasses[data.type].value);
     };
 
     const removeFish = function (fishId) {

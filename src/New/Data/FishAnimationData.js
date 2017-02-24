@@ -1,9 +1,10 @@
 /**
  * Created by eugeneseah on 7/11/16.
  */
-"use strict"
+
 
 const FishAnimationData = function () {
+    "use strict";
     // const paddingName = "padding";
     const animationSpeed = 0.1;
     const padding = 5;
@@ -12,6 +13,7 @@ const FishAnimationData = function () {
     // pivot
     // y -> 1 => move fish right relative to hitbox
     // x -> 1 => move fish forward relative to hitbox
+    /*
     const FishRawData = {
         // Ray: {
         //     animationInterval: [5,5],
@@ -309,6 +311,9 @@ const FishAnimationData = function () {
     };
 
     let FishAnimationData = new Array(FishRawData.length);
+    */
+    let FishRawData = {};
+    let FishAnimationData = [];
 
     function resolveName(number, fishType) {
         number = number + '';
@@ -317,6 +322,11 @@ const FishAnimationData = function () {
         }
         return fishType + '_' + number + '.png';
     }
+
+    FishAnimationData.setData = function(data){
+        FishRawData = data;
+        // FishAnimationData = new Array(FishRawData.length);
+    };
 
     FishAnimationData.initialise = function () {
         if (_hasInitialised) return;
