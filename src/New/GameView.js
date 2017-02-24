@@ -219,11 +219,14 @@ const GameView = function(){
         getRotatedView : getRotatedView,
         resetArena : resetArena,
         destroyArena : destroyArena,
-        getPlayerSlot : getPlayerSlot,
+        // getPlayerSlot : getPlayerSlot,
         setMyPlayerData : setMyPlayerData,
         shootTo : shootTo,
         updateMultiplayerState : updateMultiplayerState,
         updateArena : updateArena,
+
+        //???
+        getMyPlayerSlot : ()=>  _playerSlot,
     }
 
 

@@ -17,7 +17,7 @@ const CannonManager = (function () {
         this._cannon = new CannonView(gameConfig, index);
         if (isPlayer) {
             this._cannon.setupCannonChangeMenu(this, gameConfig, index, this.decreaseCannon, this.increaseCannon);
-            // this.forceSetGun(0);
+            this.forceSetGun(0);
         }
 
     }

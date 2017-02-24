@@ -87,7 +87,7 @@ const FishViewManager = (function(){
     
     proto.caughtFish = function (id) {
         // console.log("caughtFish : id", id);
-        this._fishes[id].killFish(this, this.removeFish, id);
+        return this._fishes[id].killFish(this, this.removeFish, id);
     };
 
     proto.removeFish = function (reference, id) {
