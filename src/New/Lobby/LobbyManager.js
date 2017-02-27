@@ -41,9 +41,11 @@ const LobbyManager = (function () {
 
     function onRequestShowProfile(){
         _profileManager.displayView();
-
-
     }
+
+    LobbyManager.prototype.resetView = function(){
+        this._view.resetView();
+    };
 
     return LobbyManager;
 }());

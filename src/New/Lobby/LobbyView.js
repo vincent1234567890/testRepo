@@ -12,6 +12,8 @@ const LobbyView = (function() {
     let _onGameSelectedCallback;
     let _profileCallback;
 
+    let _gameButtonsForReset = [];
+
     const LobbyView = function (playerData, settingsCallback, onGameSelectedCallback, profileCallback) {
         // this.gameSelected = false;
 
@@ -135,7 +137,6 @@ const LobbyView = (function() {
 
         // const testLayer = new cc.LayerColor(0,0,0,196);
 
-
         // profileArea.x = parent.getPositionX() ;
         // profileArea.y = parent.getPositionY() ;
         // profileArea.x = 0 ;
@@ -158,7 +159,6 @@ const LobbyView = (function() {
         // parent.addChild(waterCausticsLayer,999);
 
         // console.log("debug:", debugCircle, fishClass, fishType);
-
     };
 
     function onProfileclick(touch) {
@@ -244,8 +244,6 @@ const LobbyView = (function() {
     }
 
     function setupProfileMenu() {
-
-
         const Message = new cc.Sprite(ReferenceName.MessageButton);
         const MessageDown = new cc.Sprite(ReferenceName.MessageButton);
         const Settings = new cc.Sprite(ReferenceName.LobbySettingsButton);
@@ -253,7 +251,6 @@ const LobbyView = (function() {
 
         const messageButton = new cc.MenuItemSprite(Message, MessageDown, undefined, messageButtonPressed);
         const settingsButton = new cc.MenuItemSprite(Settings,SettingsDown, undefined, settingsButtonPressed);
-
 
         const menu = new cc.Menu(messageButton, settingsButton);
         messageButton.setPosition(cc.pAdd(cc.p(menu.getContentSize().width / 2, messageButton.getContentSize().height / 2), cc.p(-31, -20)));
@@ -318,17 +315,23 @@ const LobbyView = (function() {
     }
 
     function gameSelected(sender){
-        // menubutton.setEnabled(false);
-        // ClientServerConnect.joinGame(sender.gameData).catch(console.error);
         _onGameSelectedCallback(sender.gameData);
         sender.setEnabled(false);
-        // ClientServerConnect.joinGame(sender.gameData).catch(console.error);
+        _gameButtonsForReset.push(sender);
     }
 
     function formatWithCommas(x) {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 
+
+    proto.resetView = function(){
+        const length = _gameButtonsForReset.length;
+        for (let i = 0; i < length; i++){
+            _gameButtonsForReset[i].setEnabled(true);
+        }
+        _gameButtonsForReset = [];
+    };
 
     proto.destroyView = function () {
         GameView.destroyView(this._parent);

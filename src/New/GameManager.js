@@ -46,6 +46,7 @@ const GameManager = function () {
     }
 
     const initialiseGame = function (parent, fishGameArena) {
+        _lobbyManager.resetView();
         GameView.initialise(parent, _gameConfig, fishGameArena);
 
         _fishManager = new FishViewManager(fishGameArena, _gameConfig);
@@ -234,6 +235,7 @@ const GameManager = function () {
         }
         BlockingManager.destroyView();
         GameView.resetArena();
+
     }
 
     function onSettingsButton(){
@@ -243,7 +245,13 @@ const GameManager = function () {
 
     function onGameSelected(chosenScene){
         _currentScene = chosenScene;
-        ClientServerConnect.joinGame(_currentScene).catch(console.error);
+            ClientServerConnect.joinGame(_currentScene).catch(
+                function (error) {
+                    _lobbyManager.resetView();
+                    console.log(error);
+                }
+            );
+
     }
 
     function isCurrentPlayer (playerId) {
@@ -276,6 +284,8 @@ const GameManager = function () {
         showPostGameStats: showPostGameStats,
         goToLobby: goToLobby,
         isCurrentPlayer: isCurrentPlayer,
+
+        //current only used to reset
 
         //debug
         debug: debug,

@@ -48,9 +48,9 @@ const GameView = function(){
         if (parent === undefined && _parentNode && _parentNode.parent) {
             parent = _parentNode.parent;
         }
-        if (_parentNode && _parentNode.parent) {
-            _parentNode.parent.removeChild(_parentNode);
-        }
+        // if (_parentNode && _parentNode.parent) {
+        //     _parentNode.parent.removeChild(_parentNode);
+        // }
         _parentNode = new cc.Node();
         parent.addChild(_parentNode, 99999);
     }
