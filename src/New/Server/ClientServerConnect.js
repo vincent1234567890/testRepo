@@ -2,10 +2,10 @@
  * Created by eugeneseah on 15/11/16.
  */
 
-"use strict";
+
 
 const ClientServerConnect = function () {
-
+    "use strict";
     let _hasConnected = false;
     let _informServer ;
     //let _clientReceiver;
