@@ -4,23 +4,26 @@
 const ProfileView = (function () {
     "use strict";
 
-    const listSize = new cc.size(600,300);
+    const listSize = new cc.size(900,650);
+    const _parent = new cc.Node();
     function ProfileView() {
         cc.spriteFrameCache.addSpriteFrames(res.ProfileUIPlist);
-        this._parent = new cc.Node();
-        GameView.addView(this._parent,99);
+        GameView.addView(_parent,10);
         this._bkg = new cc.Sprite(ReferenceName.ProfileBackground);
-        this._parent.addChild(this._bkg);
+        _parent.addChild(this._bkg);
         this._bkg.setPosition(this._bkg.getContentSize().width/2 + 35,this._bkg.getContentSize().height/2);
         // const statitemTest = createStatItem();
         // this._bkg.addChild(statitemTest);
         // statitemTest.setPosition(this._bkg.getContentSize().width/2 + 40,this._bkg.getContentSize().height/2);
 
         const list = createFishList();
-        this._parent.addChild(list,99);
-        list.setPosition(this._bkg.getContentSize().width/2 + 35,this._bkg.getContentSize().height/2);
+        _parent.addChild(list,1);
+        list.setPosition(this._bkg.getContentSize().width/2 + 200,this._bkg.getContentSize().height/2-20);
+
+        BlockingManager.registerBlock(hideView);
     }
-    const proto = ProfileView.prototype;
+
+
 
     function loadProfilePicture(){
 
@@ -43,12 +46,12 @@ const ProfileView = (function () {
     function createRowItem(arrayOfNames) {
         if (arrayOfNames) {
             let content = new ccui.Widget();
-            content.setContentSize(listSize);
+            content.setContentSize(listSize.width,220);
 
             for (let i = 0; i < arrayOfNames.length; i++) {
                 let statItem =createStatItem(arrayOfNames[i]);
                 content.addChild(statItem);
-                statItem.setPosition(i * statItem.getContentSize().width)
+                statItem.setPosition(i * 220 + 105, 130);
             }
             return content;
         }
@@ -69,10 +72,23 @@ const ProfileView = (function () {
         for(let i = 0; i < 4; i++){
             let rowItem = createRowItem(["","","",""]);
             listView.pushBackCustomItem(rowItem);
+
         }
 
         return listView
     }
+
+    const proto = ProfileView.prototype;
+
+    function hideView(){
+        BlockingManager.deregisterBlock(hideView);
+        _parent.setVisible(false);
+    }
+
+    proto.showView = function(){
+        BlockingManager.registerBlock(hideView);
+        _parent.setVisible(true);
+    };
 
     return ProfileView;
 }());

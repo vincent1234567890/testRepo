@@ -5,7 +5,7 @@
 const FishViewManager = (function(){
 
 
-    const FishViewManager = function(fishGameArena){
+    const FishViewManager = function(fishGameArena, gameConfig){
         // console.log
 
         cc.spriteFrameCache.addSpriteFrames(res.SquidPlist);
@@ -18,13 +18,48 @@ const FishViewManager = (function(){
         cc.spriteFrameCache.addSpriteFrames(res.GoldSharkPlist);
         cc.spriteFrameCache.addSpriteFrames(res.SharkPlist);
         cc.spriteFrameCache.addSpriteFrames(res.SmallFishPlist);
-        cc.spriteFrameCache.addSpriteFrames(res.DemoFishPlist);
+
+        cc.spriteFrameCache.addSpriteFrames(res.AmphiprionPlist);
+        cc.spriteFrameCache.addSpriteFrames(res.AmphiprionBWPlist);
+        cc.spriteFrameCache.addSpriteFrames(res.GrouperFishPlist);
+        cc.spriteFrameCache.addSpriteFrames(res.MarlinsFishPlist);
+        cc.spriteFrameCache.addSpriteFrames(res.AngelFishPlist);
+        cc.spriteFrameCache.addSpriteFrames(res.ButterflyPlist);
+        cc.spriteFrameCache.addSpriteFrames(res.HorseshoeCrabPlist);
+        cc.spriteFrameCache.addSpriteFrames(res.PaddleFishPlist);
+
+
+        //new game
+
+        // cc.spriteFrameCache.addSpriteFrames(res.AnemoneFishPlist);
+        // cc.spriteFrameCache.addSpriteFrames(res.AngelFish2Plist);
+        // cc.spriteFrameCache.addSpriteFrames(res.BlackWhiteYellowFishPlist);
+        // cc.spriteFrameCache.addSpriteFrames(res.BlackYellowButterflyFishPlist);
+        // cc.spriteFrameCache.addSpriteFrames(res.BlueTang2Plist);
+        // cc.spriteFrameCache.addSpriteFrames(res.ButterflyFish2Plist);
+        // cc.spriteFrameCache.addSpriteFrames(res.BWNemoPlist);
+        // cc.spriteFrameCache.addSpriteFrames(res.DemoFishPlist);
+        // cc.spriteFrameCache.addSpriteFrames(res.KissingFishPlist);
+        // cc.spriteFrameCache.addSpriteFrames(res.Marlins2Plist);
+        // cc.spriteFrameCache.addSpriteFrames(res.SeahorsePlist);
+        // cc.spriteFrameCache.addSpriteFrames(res.Shark2Plist);
+        // cc.spriteFrameCache.addSpriteFrames(res.Turtle2Plist);
+        // cc.spriteFrameCache.addSpriteFrames(res.YellowFishPlist);
+
+        const plists = ResourceLoader.getPlists("Fish");
+        for ( let list in plists){
+            cc.spriteFrameCache.addSpriteFrames(plists[list]);
+        }
+
+
+
         // FishAnimationData();
         FishAnimationData.initialise();
 
         this._parent = new cc.Node();
         this._fishes = {};
         this._fishGameArena = fishGameArena;
+        this._gameConfig = gameConfig;
 
         // this.rotationFunction = rotationFunction;
 
@@ -34,7 +69,7 @@ const FishViewManager = (function(){
     const proto = FishViewManager.prototype;
 
     proto.addFish = function(fishId, fishType){
-        this._fishes[fishId] = new FishView(this._parent, fishType);
+        this._fishes[fishId] = new FishView(this._parent, this._gameConfig.fishClasses[fishType], fishType);
         return this._fishes[fishId];
 
         //debug version:
@@ -52,7 +87,7 @@ const FishViewManager = (function(){
     
     proto.caughtFish = function (id) {
         // console.log("caughtFish : id", id);
-        this._fishes[id].killFish(this, this.removeFish, id);
+        return this._fishes[id].killFish(this, this.removeFish, id);
     };
 
     proto.removeFish = function (reference, id) {

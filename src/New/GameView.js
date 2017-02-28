@@ -14,10 +14,13 @@ const GameView = function(){
     let _playerSlot;
     let _playerViews = [];
     let _fishGameArena;
+    let _touchedPos;
     let _lastShotTime = -Infinity;
 
     function initialise (parentNode, gameConfig, fishGameArena) {
+
         initialiseParent(parentNode);
+        // console.log("initialise:gameconfig:",gameConfig);
         if (gameConfig) {
             _fishGameArena = fishGameArena;
             _gameConfig = gameConfig;
@@ -28,7 +31,7 @@ const GameView = function(){
                 // cc._canvas.rotate(180);
                 _isRotated = true;
             }
-
+            // console.log("initialised");
             for (let i = 0; i < _gameConfig.maxPlayers; i++) {
                 const index = getPlayerSlot(i);
                 _playerViews[index] = new PlayerViewManager(_gameConfig, index, i == _playerSlot);
@@ -37,7 +40,11 @@ const GameView = function(){
     }
 
     function initialiseParent(parent) {
-        cc.spriteFrameCache.addSpriteFrames(res.GameUIPlist);
+        // cc.spriteFrameCache.addSpriteFrames(res.GameUIPlist);
+        const plists = ResourceLoader.getPlists("Game");
+        for ( let list in plists){
+            cc.spriteFrameCache.addSpriteFrames(plists[list]);
+        }
         if (parent === undefined && _parentNode && _parentNode.parent) {
             parent = _parentNode.parent;
         }
@@ -52,20 +59,20 @@ const GameView = function(){
         if (_curretBKG){
             _parentNode.removeChild(_curretBKG);
         }
-        if (choice < 3 ){
+        if (choice < 4 ){
             _curretBKG = new cc.Sprite(res['GameBackground' + choice.toString()]);
         }
         else {
             _curretBKG = new cc.Sprite(res.GameBackground1);
         }
+        const frame = new cc.Sprite(res.GameFrame);
+        frame.setPosition(cc.view.getDesignResolutionSize().width/2, cc.view.getDesignResolutionSize().height/2);
+        _parentNode.addChild(frame,99);
+
         _curretBKG.setPosition(cc.view.getDesignResolutionSize().width/2, cc.view.getDesignResolutionSize().height/2);
         _parentNode.addChild(_curretBKG,-5);
 
         initialiseTouch(touchAt);
-    }
-
-    function goBackToLobby() {//hack
-        _parentNode.parent.backToMenu();
     }
 
     function addView(view, depth){
@@ -113,13 +120,19 @@ const GameView = function(){
 
     function resetArena() {
         _isRotated = false;
-        for (let i = 0; i < _gameConfig.maxPlayers; i++) {
-            clearPlayerState(i);
+        if(_gameConfig) {
+            for (let i = 0; i < _gameConfig.maxPlayers; i++) {
+                clearPlayerState(i);
+            }
         }
         _lastShotTime = -Infinity
     }
 
     function destroyArena(){
+        if (!_fishGameArena) {
+            return;
+        }
+
         for (let i = 0; i < _gameConfig.maxPlayers; i++) {
             _playerViews[i].destroyView();
             delete _playerViews[i];
@@ -133,28 +146,34 @@ const GameView = function(){
         return slot;
     }
 
-    function touchAt  (pos) {
-        const now = _fishGameArena.getGameTime();
-        const timeSinceLastShot = now - _lastShotTime;
-        if (timeSinceLastShot < _gameConfig.shootInterval) {
-            // console.log("TOO FAST!");
-            return;
+    function touchAt  (pos, touchType) {
+        if (touchType === TouchType.Began || touchType === TouchType.Moved) {
+            _touchedPos = pos;
+            const now = _fishGameArena.getGameTime();
+            const timeSinceLastShot = now - _lastShotTime;
+            if (timeSinceLastShot < _gameConfig.shootInterval) {
+                // console.log("TOO FAST!");
+                return;
+            }
+
+            _lastShotTime = now;
+
+            let slot = getPlayerSlot(_playerSlot);
+
+            const direction = cc.pNormalize(cc.pSub(pos, new cc.p(_gameConfig.cannonPositions[slot][0], _gameConfig.cannonPositions[slot][1])));
+            const rot = Math.atan2(direction.x, direction.y);
+            // _playerViews[slot].shootTo(rot * 180 / Math.PI);
+
+            let info = getRotatedView(undefined, rot);
+
+            const bulletId = _playerId + ':' + getPlayerBulletId();
+
+            ClientServerConnect.getServerInformer().bulletFired(bulletId, (info.rotation - 90) / 180 * Math.PI);
+        }else{
+            _touchedPos = null;
         }
+    }
 
-        _lastShotTime = now;
-
-        let slot = getPlayerSlot(_playerSlot);
-
-        const direction = cc.pNormalize(cc.pSub(pos, new cc.p(_gameConfig.cannonPositions[slot][0], _gameConfig.cannonPositions[slot][1])));
-        const rot = Math.atan2(direction.x, direction.y);
-        // _playerViews[slot].shootTo(rot * 180 / Math.PI);
-
-        let info = getRotatedView(undefined,rot);
-
-        const bulletId = _playerId + ':' + getPlayerBulletId();
-
-        ClientServerConnect.getServerInformer().bulletFired(bulletId, (info.rotation - 90) / 180 * Math.PI);
-    };
 
     const getPlayerBulletId = function () {
         return _playerViews[0].getNextBulletId(); //currently bulletId is static no need to convert player slot
@@ -181,24 +200,33 @@ const GameView = function(){
     }
     
     function updateArena() {
+        if (_touchedPos!=null){
+            touchAt(_touchedPos,TouchType.Moved);
+        }
+
         _fishGameArena.updateEverything();
     }
+
+
 
     return {
         initialise : initialise,
         // parentNode : _parentNode,
+        clearPlayerState : clearPlayerState,
         goToGame : goToGame,
-        goBackToLobby : goBackToLobby,
         addView : addView,
         destroyView : destroyView,
         getRotatedView : getRotatedView,
         resetArena : resetArena,
         destroyArena : destroyArena,
-        getPlayerSlot : getPlayerSlot,
+        // getPlayerSlot : getPlayerSlot,
         setMyPlayerData : setMyPlayerData,
         shootTo : shootTo,
         updateMultiplayerState : updateMultiplayerState,
         updateArena : updateArena,
+
+        //???
+        getMyPlayerSlot : ()=>  _playerSlot,
     }
 
 

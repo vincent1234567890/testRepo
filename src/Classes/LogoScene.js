@@ -62,7 +62,7 @@ var LogoSceneLayer = cc.LayerGradient.extend({
     },
 
     goMainMenuScene:function (sender, data) {
-        ClientServerConnect.connectToMasterServer();
+        // ClientServerConnect.connectToMasterServer();
         GameCtrl.sharedGame().home();
     }
 });

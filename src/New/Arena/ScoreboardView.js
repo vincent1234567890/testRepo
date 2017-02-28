@@ -4,7 +4,13 @@
 
 const ScoreboardView = (function() {
     "use strict";
+
+    let _goToLobby;
+    let _goToNewRoom;
     function ScoreboardView(target, data, goToLobby, goToNewRoom) {
+
+        _goToLobby = goToLobby;
+        _goToNewRoom = goToNewRoom;
 
         this._parent = new cc.Node();
         GameView.addView(this._parent,100);
@@ -16,54 +22,56 @@ const ScoreboardView = (function() {
         bg.setPosition(midX,midY);
         this._parent.addChild(bg,99);
 
-        const menu = setupScoreboardMenu(goToLobby, goToNewRoom, target);
+        const menu = setupScoreboardMenu(target);
         bg.addChild(menu,1);
 
-        const touchlayer = new TouchLayerRefactored(touchEater);
-        touchlayer.setSwallowTouches(true);
-        bg.addChild(touchlayer,-1);
+        // const touchlayer = new TouchLayerRefactored(touchEater);
+        // touchlayer.setSwallowTouches(true);
+        // bg.addChild(touchlayer,-1);
 
         const sessionTime = createGridObject(ReferenceName.SessionTime, ReferenceName.TimeSpentIcon, timeFormatter(data.secondsInGame));
-        sessionTime.setPosition(282 , cc.view.getDesignResolutionSize().height - 183);
+        sessionTime.setPosition(270 , cc.view.getDesignResolutionSize().height - 183);
         bg.addChild(sessionTime,1);
 
         const goldSpent = createGridObject(ReferenceName.GoldSpent, ReferenceName.CoinSpentIcon, data.bulletsCost);
-        goldSpent.setPosition(682 , cc.view.getDesignResolutionSize().height - 183);
+        goldSpent.setPosition(660 , cc.view.getDesignResolutionSize().height - 183);
         bg.addChild(goldSpent,1);
 
         const goldEarned = createGridObject(ReferenceName.GoldEarned, ReferenceName.CoinEarnedIcon, data.fishWinnings);
-        goldEarned.setPosition(1082 , cc.view.getDesignResolutionSize().height - 183);
+        goldEarned.setPosition(1050 , cc.view.getDesignResolutionSize().height - 183);
         bg.addChild(goldEarned,1);
 
         const fishCaught = createGridObject(ReferenceName.FishCaught, ReferenceName.TotalFishIcon, data.fishCaught);
-        fishCaught.setPosition(282 , cc.view.getDesignResolutionSize().height - 273);
+        fishCaught.setPosition(270 , cc.view.getDesignResolutionSize().height - 273);
         bg.addChild(fishCaught,1);
 
         const goldenFishCaught = createGridObject(ReferenceName.GoldenFishCaught, ReferenceName.GoldenFishIcon, data.goldenFishCaught);
-        goldenFishCaught.setPosition(682 , cc.view.getDesignResolutionSize().height - 273);
+        goldenFishCaught.setPosition(660 , cc.view.getDesignResolutionSize().height - 273);
         bg.addChild(goldenFishCaught,1);
 
         const sumArray = array => array.reduce((a, b) => a + b, 0);
         const count = sumArray( Object.values(data.multiCatches || {}).map(mCatch => mCatch.count) );
         let multiCatch = createGridObject(ReferenceName.MultiCatch, ReferenceName.MultiCatchIcon, count);
-        multiCatch.setPosition(1082 , cc.view.getDesignResolutionSize().height - 273);
+        multiCatch.setPosition(1050 , cc.view.getDesignResolutionSize().height - 273);
         bg.addChild(multiCatch,1);
 
         const bulletsFired = createGridObject(ReferenceName.BulletsFired, ReferenceName.CannonIcon, data.bulletsFired);
-        bulletsFired.setPosition(282 , cc.view.getDesignResolutionSize().height - 363);
+        bulletsFired.setPosition(270 , cc.view.getDesignResolutionSize().height - 363);
         bg.addChild(bulletsFired,1);
 
         const skillsUsed = createGridObject(ReferenceName.SkillsUsed, ReferenceName.SkillUsedButton, data.skillsUsed);
-        skillsUsed.setPosition(682 , cc.view.getDesignResolutionSize().height - 363);
+        skillsUsed.setPosition(660 , cc.view.getDesignResolutionSize().height - 363);
         bg.addChild(skillsUsed,1);
 
-        const catchSuccessRate = createGridObject(ReferenceName.CatchSuccessRate, ReferenceName.HitRateIcon, Math.round(data.fishCaught / data.fishHit * 100));
-        catchSuccessRate.setPosition(1082 , cc.view.getDesignResolutionSize().height - 363);
-        bg.addChild(catchSuccessRate,1);
+        const returnRate = createGridObject(ReferenceName.ReturnRate, ReferenceName.HitRateIcon, Math.round(data.fishCaught / data.fishHit * 100));
+        returnRate.setPosition(1050 , cc.view.getDesignResolutionSize().height - 363);
+        bg.addChild(returnRate,1);
 
         const scrollBoxBG = new cc.Sprite(ReferenceName.BottomScrollBarBG);
-        scrollBoxBG.setPosition(679 , cc.view.getDesignResolutionSize().height - 550);
+        scrollBoxBG.setPosition(660 , cc.view.getDesignResolutionSize().height - 550);
         bg.addChild(scrollBoxBG,1);
+
+        BlockingManager.registerBlock(touchEater);
 
     }
 
@@ -72,7 +80,7 @@ const ScoreboardView = (function() {
         fontDef.fontName = "Arial";
         //fontDef.fontWeight = "bold";
         fontDef.fontSize = "26";
-        fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
+        fontDef.textAlign = cc.TEXT_ALIGNMENT_CENTER;
         fontDef.fillStyle = new cc.Color(0,0,0,255);
 
         let label = new cc.LabelTTF(labelText, fontDef);
@@ -82,8 +90,13 @@ const ScoreboardView = (function() {
         //fontDef.fontWeight = "normal";
         //fontDef.fontWeight = "bold";
         fontDef.fontName = "Impact";
+        let info;
+        if (cc.isNumber(data) || data === undefined) {
+            info = new cc.LabelTTF(data && (data * 1.5).toFixed(2).replace(/[.,]00$/, "") || 0, fontDef);
+        }else{
+            info = new cc.LabelTTF(data, fontDef);
+        }
 
-        let info = new cc.LabelTTF(data || 0,fontDef);
 
         let icon = new cc.Sprite(spriteName);
 
@@ -114,12 +127,12 @@ const ScoreboardView = (function() {
     }
 
 
-    function setupScoreboardMenu(goToLobby, goToNewRoom, target) {
+    function setupScoreboardMenu(target) {
         let lobby = new cc.Sprite(ReferenceName.LobbyButton);
         let play = new cc.Sprite(ReferenceName.PlayButton);
 
-        let lobbyButton = new cc.MenuItemSprite(lobby, undefined, undefined, goToLobby, target);
-        let playButton = new cc.MenuItemSprite(play, undefined, undefined, goToNewRoom, target);
+        let lobbyButton = new cc.MenuItemSprite(lobby, undefined, undefined, localGoToLobby, target);
+        let playButton = new cc.MenuItemSprite(play, undefined, undefined, localGoToNewRoom, target);
 
         let fontDef = new cc.FontDefinition();
         fontDef.fontName = "Arial";
@@ -147,6 +160,16 @@ const ScoreboardView = (function() {
     function touchEater (){
 
 
+    }
+
+    function localGoToLobby(){
+        BlockingManager.deregisterBlock(touchEater);
+        _goToLobby();
+    }
+
+    function localGoToNewRoom(){
+        BlockingManager.deregisterBlock(touchEater);
+        _goToNewRoom();
     }
 
     const proto = ScoreboardView.prototype;

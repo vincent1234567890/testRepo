@@ -11,7 +11,7 @@ const ReferenceName = {
     CannonPower : "#CoinDeck.png",
     CoinIcon : "#Coin icon.png",
 
-    Login9Slice : "9 slice square.png",
+    // Login9Slice : "9 slice square.png",
 
 
     //Lobby
@@ -76,10 +76,12 @@ const ReferenceName = {
     FishPlaceholder : "#Fish Paceholder.png",
 
     //Cannon/nets
-    Cannon1 : "#Cannon 1.png",
-    Net1 : "#Net 1.png",
-    Bullet1 : "#Bullet 1.png",
-    CannonDown1 : "#Cannon 1 DW.png",
+    // Cannon1 : "#Cannon 1.png",
+    Net1 : "#Net1.png",
+    // Bullet1 : "#Bullet1.png",
+    // CannonDown1 : "#Cannon 1 DW.png",
+
+    // Cannon1Animated : "#Cannon1",
 
 
     //localisable
@@ -98,7 +100,7 @@ const ReferenceName = {
     MultiCatch : "Multi-Catches",
     BulletsFired : "Bullets Fired",
     SkillsUsed : "Skills Used",
-    CatchSuccessRate : "Hit / Caught %",
+    ReturnRate : "Return Rate",
     GoToLobby : "Lobby",
     GoToNewGame : "Play",
 

@@ -7,38 +7,48 @@ const NetPrefab = (function () {
     // const scale3 = new cc.ScaleTo(0.5,0.9);
     // const scale1 = new cc.ScaleTo(0.5,0.9);
     // let sequence = new cc.Sequence (scale1,scale2,scale1,scale2,destroyView);
-    const NetPrefab = function (x,y, resource) {
+    const NetPrefab = function (scale, x,y, resource) {
+
 
         this._parent = new cc.Node();
         GameView.addView(this._parent);
         // this._parent = parent;
         // this._parent.addChild(this.node);
+        this._netParent = new cc.Node();
+        this._parent.addChild(this._netParent);
 
+        // const topLeft = new cc.Sprite(resource);
+        // topLeft.setAnchorPoint(0,0);
+        // const topRight = new cc.Sprite(resource);
+        // topRight.setAnchorPoint(0,0);
+        // const bottomLeft = new cc.Sprite(resource);
+        // bottomLeft.setAnchorPoint(0,0);
+        // const bottomRight = new cc.Sprite(resource);
+        // bottomRight.setAnchorPoint(0,0);
+        //
+        // this._netParent.addChild(topLeft);
+        // this._netParent.addChild(topRight);
+        // this._netParent.addChild(bottomLeft);
+        // this._netParent.addChild(bottomRight);
+        //
+        // topLeft.setRotation(-90 + baseRotation);
+        // topRight.setRotation(baseRotation);
+        // bottomLeft.setRotation(180 + baseRotation);
+        // bottomRight.setRotation(90 + baseRotation);
+        this._net = new cc.Sprite(resource);
+        this._netParent.addChild(this._net);
 
-        const topLeft = new cc.Sprite(resource);
-        topLeft.setAnchorPoint(0,0);
-        const topRight = new cc.Sprite(resource);
-        topRight.setAnchorPoint(0,0);
-        const bottomLeft = new cc.Sprite(resource);
-        bottomLeft.setAnchorPoint(0,0);
-        const bottomRight = new cc.Sprite(resource);
-        bottomRight.setAnchorPoint(0,0);
+        const width = this._net.getContentSize().width;
 
-        this._parent.addChild(topLeft);
-        this._parent.addChild(topRight);
-        this._parent.addChild(bottomLeft);
-        this._parent.addChild(bottomRight);
-
-        topLeft.setRotation(-90 + baseRotation);
-        topRight.setRotation(baseRotation);
-        bottomLeft.setRotation(180 + baseRotation);
-        bottomRight.setRotation(90 + baseRotation);
+        this._parent.setScale(scale*2/width);
 
         this.sequence = new cc.Sequence (scale1,scale2,scale1,scale2, new cc.callFunc(this.destroyView, this));
 
 
         this._parent.setPosition(x,y);
-        this._parent.runAction(this.sequence);
+        this._netParent.runAction(this.sequence);
+
+
     };
 
     const proto = NetPrefab.prototype;
