@@ -102,7 +102,7 @@ const GameView = function(){
                 x = cc.view.getDesignResolutionSize().width - position[0];
                 y = cc.view.getDesignResolutionSize().height - position[1];
             }
-            if (rotation) {
+            if (rotation != null) {
                 rot = -(rotation * 180 / Math.PI);
 
             }
@@ -111,7 +111,7 @@ const GameView = function(){
                 x = position[0];
                 y = position[1];
             }
-            if (rotation) {
+            if (rotation != null) {
                 rot = 180 - rotation * 180 / Math.PI;
             }
         }
