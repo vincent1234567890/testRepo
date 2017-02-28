@@ -176,7 +176,7 @@ const CannonView = (function(){
             this._cannonNode.removeChild(this._cannonSprite);
         }
         this._cannonSprite = new cc.Sprite("#Cannon"+(cannonPower)+"_00000.png");
-
+        console.log(this._cannonSprite);
         // if (this._cannonSprite._rect.width === 0){
         //     this._cannonSprite = new cc.Sprite("#Cannon5_0.png");
         // }
