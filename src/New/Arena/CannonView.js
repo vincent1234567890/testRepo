@@ -48,7 +48,7 @@ const CannonView = (function(){
         this.pos = [];
         let markerPos;
 
-        this._theme = ThemeDataManager.getThemeDataList("cannonMenuPositions");
+        this._theme = ThemeDataManager.getThemeDataList("CannonMenuPositions");
 
 
 

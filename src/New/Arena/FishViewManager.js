@@ -8,25 +8,25 @@ const FishViewManager = (function(){
     const FishViewManager = function(fishGameArena, gameConfig){
         // console.log
 
-        // cc.spriteFrameCache.addSpriteFrames(res.SquidPlist);
-        // cc.spriteFrameCache.addSpriteFrames(res.PufferfishPlist);
-        // cc.spriteFrameCache.addSpriteFrames(res.TurtlePlist);
-        // cc.spriteFrameCache.addSpriteFrames(res.PorgyPlist);
-        // cc.spriteFrameCache.addSpriteFrames(res.StingrayPlist);
-        // cc.spriteFrameCache.addSpriteFrames(res.LanternPlist);
-        // cc.spriteFrameCache.addSpriteFrames(res.ButterflyPlist);
-        // cc.spriteFrameCache.addSpriteFrames(res.GoldSharkPlist);
-        // cc.spriteFrameCache.addSpriteFrames(res.SharkPlist);
-        // cc.spriteFrameCache.addSpriteFrames(res.SmallFishPlist);
-        //
-        // cc.spriteFrameCache.addSpriteFrames(res.AmphiprionPlist);
-        // cc.spriteFrameCache.addSpriteFrames(res.AmphiprionBWPlist);
-        // cc.spriteFrameCache.addSpriteFrames(res.GrouperFishPlist);
-        // cc.spriteFrameCache.addSpriteFrames(res.MarlinsFishPlist);
-        // cc.spriteFrameCache.addSpriteFrames(res.AngelFishPlist);
-        // cc.spriteFrameCache.addSpriteFrames(res.ButterflyPlist);
-        // cc.spriteFrameCache.addSpriteFrames(res.HorseshoeCrabPlist);
-        // cc.spriteFrameCache.addSpriteFrames(res.PaddleFishPlist);
+        cc.spriteFrameCache.addSpriteFrames(res.SquidPlist);
+        cc.spriteFrameCache.addSpriteFrames(res.PufferfishPlist);
+        cc.spriteFrameCache.addSpriteFrames(res.TurtlePlist);
+        cc.spriteFrameCache.addSpriteFrames(res.PorgyPlist);
+        cc.spriteFrameCache.addSpriteFrames(res.StingrayPlist);
+        cc.spriteFrameCache.addSpriteFrames(res.LanternPlist);
+        cc.spriteFrameCache.addSpriteFrames(res.ButterflyPlist);
+        cc.spriteFrameCache.addSpriteFrames(res.GoldSharkPlist);
+        cc.spriteFrameCache.addSpriteFrames(res.SharkPlist);
+        cc.spriteFrameCache.addSpriteFrames(res.SmallFishPlist);
+
+        cc.spriteFrameCache.addSpriteFrames(res.AmphiprionPlist);
+        cc.spriteFrameCache.addSpriteFrames(res.AmphiprionBWPlist);
+        cc.spriteFrameCache.addSpriteFrames(res.GrouperFishPlist);
+        cc.spriteFrameCache.addSpriteFrames(res.MarlinsFishPlist);
+        cc.spriteFrameCache.addSpriteFrames(res.AngelFishPlist);
+        cc.spriteFrameCache.addSpriteFrames(res.ButterflyPlist);
+        cc.spriteFrameCache.addSpriteFrames(res.HorseshoeCrabPlist);
+        cc.spriteFrameCache.addSpriteFrames(res.PaddleFishPlist);
 
 
         //new game

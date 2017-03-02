@@ -12,7 +12,7 @@ const PlayerViewStaticPrefab = (function () {
         this._parent = new cc.Node();
         GameView.addView(this._parent,1);
 
-        const themeData = ThemeDataManager.getThemeDataList("cannonPlatformPositions");
+        const themeData = ThemeDataManager.getThemeDataList("CannonPlatformPositions");
 
         const base = new cc.Sprite(ReferenceName.Base);
         this._parent.addChild(base);
