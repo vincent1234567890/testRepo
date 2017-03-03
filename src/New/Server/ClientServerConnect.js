@@ -298,6 +298,7 @@ const ClientServerConnect = function () {
         leaveGame : leaveGame,
         requestStats : requestStats,
         requestMyData : requestMyData,
+        getGameWSClient: getGameWSClient,
         //getGameIOSocket: getGameIOSocket,
         postGameCleanup: postGameCleanup,
         listenForEvent: listenForEvent,
