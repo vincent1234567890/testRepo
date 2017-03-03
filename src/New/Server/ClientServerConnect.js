@@ -2,10 +2,10 @@
  * Created by eugeneseah on 15/11/16.
  */
 
-"use strict";
+
 
 const ClientServerConnect = function () {
-
+    "use strict";
     let _hasConnected = false;
     let _informServer ;
     //let _clientReceiver;
@@ -189,8 +189,14 @@ const ClientServerConnect = function () {
                 }
 
                 console.log("Joining game");
+                // self._connection.readyState != WebSocket.OPEN
+                if (!client.isOpen()) {
+                    throw Error("Socket is closed");
+                }
                 return client.callAPIOnce('game', 'joinGame', {scene: chosenScene});
+
             }
+
         ).then(
             joinResponse => {
                 console.log("joinResponse:", joinResponse);

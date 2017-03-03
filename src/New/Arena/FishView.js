@@ -90,7 +90,6 @@ const FishView = (function () {
 
     proto.updateView = function(pos,rot){
 
-
         this._parent.setPosition(pos);
         this._parent.setRotation(rot);
 

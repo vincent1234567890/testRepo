@@ -64,6 +64,21 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
+            <key>DeckCoins.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{44,8}</string>
+                <key>spriteSourceSize</key>
+                <string>{44,8}</string>
+                <key>textureRect</key>
+                <string>{{521,28},{44,8}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
             <key>Minus.png</key>
             <dict>
                 <key>aliases</key>
@@ -168,7 +183,7 @@
             <key>size</key>
             <string>{534,104}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:4eeedcbce1833b95bc080b452a79bfdb:14224cb694ac757c1d99b1740d60186d:2531ce2a050ca5e2ac51e04161e77adb$</string>
+            <string>$TexturePacker:SmartUpdate:877c7dee9358dd531bcda9c57bc60120:1669a453689c756eaea0a70ceb9421f7:2531ce2a050ca5e2ac51e04161e77adb$</string>
             <key>textureFileName</key>
             <string>GameUI.png</string>
         </dict>
