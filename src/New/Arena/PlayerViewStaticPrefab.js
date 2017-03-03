@@ -12,6 +12,8 @@ const PlayerViewStaticPrefab = (function () {
     const PlayerViewStaticPrefab = function(gameConfig, slot){
         this._parent = new cc.Node();
         GameView.addView(this._parent,1);
+        this._parent.setPosition(300,300);
+
 
         const themeData = ThemeDataManager.getThemeDataList("CannonPlatformPositions");
 
@@ -66,6 +68,7 @@ const PlayerViewStaticPrefab = (function () {
 
             }
         }
+        this._coinStackManager = new CoinStackManager(this._parent);
     };
 
     const proto = PlayerViewStaticPrefab.prototype;
@@ -98,7 +101,10 @@ const PlayerViewStaticPrefab = (function () {
         // const coinStack = [];
         // const deckStacks = [];
 
-        const coinStack = new CoinStackEffect(this._parent, 15,increase);
+        // const coinStack = new CoinStackEffect(this._parent, 15, increase);
+
+
+        this._coinStackManager.addStack(15,increase);
     };
 
 

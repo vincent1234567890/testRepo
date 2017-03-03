@@ -76,16 +76,17 @@ const CaptureCoinEffectManager = (function () {
         function PrizeLabelObject(parent, value) {
             //prize amount font def
             if (!this._label) {
-                this._parent = parent;
+
                 let fontDef = new cc.FontDefinition();
                 fontDef.fontName = "Imapct";
                 fontDef.fontWeight = "bold";
                 fontDef.fontSize = "32";
                 fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
-                fontDef.fillStyle = new cc.Color(96, 64, 0, 255);
+                fontDef.fillStyle = new cc.Color(255, 192, 0, 255);
 
                 this._label = new cc.LabelTTF("", fontDef);
-                this._parent.addChild(this._label,1);
+                this._label.enableStroke(new cc.Color(96, 64, 0, 255),2);
+
 
                 // this._label._explodeLifeTime = explodeLifetime * 10;
                 // this._label._collectionLifetime = collectLifetime * 10;
@@ -97,10 +98,14 @@ const CaptureCoinEffectManager = (function () {
             // this._label._labelStartTime = Date.now();
             // this._label._target = target;
             // this._label.setPosition(pos);
+            this._parent = parent;
+            this._parent.addChild(this._label,1);
+
             this._label.setString(value);
             this._label.setVisible(true);
             // this._label.scheduleUpdate();
             // this._label.update = labelMovement;
+
         }
 
         const proto = PrizeLabelObject.prototype;
@@ -146,6 +151,7 @@ const CaptureCoinEffectManager = (function () {
         proto.reclaimView = function(){
             this._label.unscheduleAllCallbacks();//experimental
             this._label.setVisible(false);
+            this._parent.removeChild(this._label,false);
         };
 
         return PrizeLabelObject;

@@ -18,6 +18,8 @@
         "src/New/ThemeDataManager.js",
         "src/resource.js",
 
+        "src/New/Utilities/Queue.js",
+
         "src/SharedClasses/LoadingScreen.js",
         "src/SharedClasses/ParticleSystemFactory.js",
         "src/New/ObjectPool.js",
@@ -37,6 +39,8 @@
         "src/New/Lobby/LobbyView.js",
         "src/New/Lobby/ProfileManager.js",
         "src/New/Lobby/ProfileView.js",
+
+
 
         "src/New/Arena/OptionsView.js",
         "src/New/Arena/OptionsSideMenuView.js",
@@ -64,6 +68,7 @@
         "src/New/Arena/Effects/SpinningCoinView.js",
         "src/New/Arena/Effects/CoinStackCoinView.js",
         "src/New/Arena/Effects/CoinStackEffect.js",
+        "src/New/Arena/Effects/CoinStackManager.js",
         "src/New/GameManager.js",
         "src/New/GameView.js",
         "src/New/GameTicker.js",

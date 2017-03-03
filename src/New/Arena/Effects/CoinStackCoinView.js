@@ -11,7 +11,7 @@ const CoinStackCoinView = (function () {
         }
 
         this._coinSprite.setPosition(0, positionInArray * this._coinSprite.getContentSize().height);
-        console.log(this._coinSprite.getPosition(), positionInArray, this._coinSprite.getContentSize(), positionInArray * this._coinSprite.getContentSize().height);
+        // console.log(this._coinSprite.getContentSize(), positionInArray, this._coinSprite.getContentSize(), positionInArray * this._coinSprite.getContentSize().height);
         this._parent = parent;
         this._coinSprite.stopAllActions();
         this._coinSprite.setOpacity(255);
@@ -20,19 +20,19 @@ const CoinStackCoinView = (function () {
 
     const proto = CoinStackCoinView.prototype;
 
-    proto.GetSpriteSize = function () {
+    proto.getSpriteSize = function () {
         return this._coinSprite.getContentSize();
     };
 
-    proto.GetSpritePosition = function () {
+    proto.getSpritePosition = function () {
         return this._coinSprite.getPosition();
     };
 
-    proto.ReclaimView = function () {
+    proto.reclaimView = function () {
         this._parent.removeChild(this._coinSprite,false);
     };
 
-    proto.RunAction = function(sequence){
+    proto.runAction = function(sequence){
         this._coinSprite.runAction(sequence);
     };
 
