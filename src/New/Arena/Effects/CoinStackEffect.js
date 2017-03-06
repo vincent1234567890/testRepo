@@ -36,9 +36,7 @@ const CoinStackEffect = (function () {
             fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
             fontDef.fillStyle = new cc.Color(255, 192, 0, 255);
 
-
             this._coinValueLabel = new cc.LabelTTF(valueToDisplay.toFixed(0), fontDef);
-            // this._coinValueLabel = new cc.LabelTTF(this._parent.__instanceId, fontDef);
             this._coinValueLabel.enableStroke(new cc.Color(96, 64, 0, 255),2);
             this._parent.addChild(this._coinValueLabel);
             this._coinValueLabel.setAnchorPoint(0.5, 0);
@@ -49,9 +47,7 @@ const CoinStackEffect = (function () {
         const parentNode = this._parent;
 
         parentNode.update = function (dt) {
-            // console.log("the");
             if (callbackTarget._moveAmount > 0){
-                // console.log("id:", parentNode.__instanceId, ", moveAmount: ", callbackTarget._moveAmount );
                 parentNode.x -= MoveSpeed;
                 callbackTarget._moveAmount -= MoveSpeed;
             }
@@ -61,7 +57,6 @@ const CoinStackEffect = (function () {
                     for (let coin in coinStack) {
                         coinStack[coin].runAction(new cc.Sequence(new cc.FadeOut(FadeTime)));
                     }
-                    // console.log("fading:", parentNode.__instanceId);
                     parentNode.runAction(new cc.Sequence(new cc.DelayTime(FadeTime), new cc.CallFunc(callbackTarget.onStackAnimationEnded, callbackTarget)));
                 }
                 isFadingOut = true;
@@ -69,22 +64,22 @@ const CoinStackEffect = (function () {
             }
             if (currentCoinCount < noOfCoins && elapsed - PerCoinTiming * currentCoinCount > 0) {
                 const coin = _coinPool.alloc(parentNode, currentCoinCount++);
-                // console.log("coin added", currentCoinCount, noOfCoins, elapsed, elapsed - PerCoinTiming * currentCoinCount);
                 coinStack.push(coin);
                 //spinning coin effect here
             } else if (currentCoinCount >= noOfCoins) { //remove if() for label moving effect
                 coinValueLabel.setPosition(coinStack[coinStack.length - 1].getSpritePosition());
                 coinValueLabel.setVisible(true);
             }
-
         };
 
         this.onStackAnimationEnded = ()=> {
-
-            const spriteSize = this._coinStack[0].getSpriteSize();
-            for (let coin in this._coinStack) {
-                this._coinStack[coin].reclaimView();
-                _coinPool.free(this._coinStack[coin]);
+            let spriteSize = theme.CoinStackWidth;
+            if(this._coinStack.length > 0) {
+                spriteSize = this._coinStack[0].getSpriteSize();
+                for (let coin in this._coinStack) {
+                    this._coinStack[coin].reclaimView();
+                    _coinPool.free(this._coinStack[coin]);
+                }
             }
             this._coinValueLabel.setVisible(false);
             this._coinStack = [];
@@ -104,15 +99,6 @@ const CoinStackEffect = (function () {
     };
 
     const proto = CoinStackEffect.prototype;
-
-
-
-
-
-
-    // proto.getCoinWidth = function () {
-    //     return this._coinStack
-    // };
 
     proto.Move = function (moveAmount) {
         if (this._moveAmount <= 0) {
