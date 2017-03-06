@@ -65,9 +65,10 @@ const GameView = function () {
         else {
             _curretBKG = new cc.Sprite(res.GameBackground1);
         }
-        const frame = new cc.Sprite(res.GameFrame);
-        frame.setPosition(cc.view.getDesignResolutionSize().width / 2, cc.view.getDesignResolutionSize().height / 2);
-        _parentNode.addChild(frame, 99);
+        //Request to remove frame
+        // const frame = new cc.Sprite(res.GameFrame);
+        // frame.setPosition(cc.view.getDesignResolutionSize().width / 2, cc.view.getDesignResolutionSize().height / 2);
+        // _parentNode.addChild(frame, 99);
 
         _curretBKG.setPosition(cc.view.getDesignResolutionSize().width / 2, cc.view.getDesignResolutionSize().height / 2);
         _parentNode.addChild(_curretBKG, -5);
