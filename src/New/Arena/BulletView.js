@@ -31,6 +31,19 @@ const BulletView = (function () {
 
         this._particle.setVisible(true);
         this._view.setVisible(true);
+
+        if (GameManager.debug) {
+
+            const debugCircle = new cc.Sprite(res.DebugCircle);
+
+            const bulletSetting = GameManager.getGameConfig().gunClasses.collisionRadius;
+            // debugCircle.setScaleX(fishClass.length * 2 / 100);
+            // debugCircle.setScaleY(fishClass.breadth * 2/ 100);
+            debugCircle.setScale(bulletSetting * 2/ 100);
+
+            this._view.addChild(debugCircle, 1);
+            // console.log("debug:", debugCircle, fishClass, fishType);
+        }
     };
 
     const proto = BulletView.prototype;
