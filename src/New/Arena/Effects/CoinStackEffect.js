@@ -37,7 +37,8 @@ const CoinStackEffect = (function () {
             fontDef.fillStyle = new cc.Color(255, 192, 0, 255);
 
 
-            this._coinValueLabel = new cc.LabelTTF(valueToDisplay, fontDef);
+            this._coinValueLabel = new cc.LabelTTF(valueToDisplay.toFixed(0), fontDef);
+            // this._coinValueLabel = new cc.LabelTTF(this._parent.__instanceId, fontDef);
             this._coinValueLabel.enableStroke(new cc.Color(96, 64, 0, 255),2);
             this._parent.addChild(this._coinValueLabel);
             this._coinValueLabel.setAnchorPoint(0.5, 0);
@@ -50,7 +51,7 @@ const CoinStackEffect = (function () {
         parentNode.update = function (dt) {
             // console.log("the");
             if (callbackTarget._moveAmount > 0){
-                console.log("id:", parentNode.__instanceId, ", moveAmount: ", callbackTarget._moveAmount );
+                // console.log("id:", parentNode.__instanceId, ", moveAmount: ", callbackTarget._moveAmount );
                 parentNode.x -= MoveSpeed;
                 callbackTarget._moveAmount -= MoveSpeed;
             }
