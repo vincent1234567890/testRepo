@@ -38,6 +38,10 @@ function Queue(){
      * item - the item to enqueue
      */
     this.enqueue = function(item){
+        // for (let i in queue) {
+        //     console.log("enqueue:", queue[i]._parent.__instanceId, ", i: ", i, ", queue[i]._moveAmount", queue[i]._moveAmount );
+        // }
+        console.log("enqueue:");
         queue.push(item);
     };
 
@@ -57,7 +61,7 @@ function Queue(){
             queue  = queue.slice(offset);
             offset = 0;
         }
-
+        console.log("dequeue:offset:", offset, ", this.getLength()", this.getLength());
         // return the dequeued item
         return item;
 
@@ -71,7 +75,17 @@ function Queue(){
     };
 
     this.getQueue = function(){
-        return queue.slice(offset - 1, offset + this.getLength());
+        // console.log()
+        for (let i in queue) {
+            console.log("getQueue:", queue[i]._parent.__instanceId, ", i: ", i, ", queue[i]._moveAmount", queue[i]._moveAmount );
+        }
+        const temp = queue.slice(offset - 1, offset + this.getLength());
+        console.log("offset:", offset, ", this.getLength()", this.getLength() );
+        for (let i in temp) {
+            console.log("getQueue2:", temp[i]._parent.__instanceId, ", i: ", i, ", queue[i]._moveAmount", temp[i]._moveAmount );
+        }
+        return queue.slice(offset, queue.length);
+
     }
 }
 
