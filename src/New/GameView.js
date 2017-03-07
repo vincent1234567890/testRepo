@@ -2,7 +2,7 @@
  * Created by eugeneseah on 25/10/16.
  */
 
-const GameView = function(){
+const GameView = function () {
     "use strict";
 
     let _parentNode;
@@ -17,7 +17,7 @@ const GameView = function(){
     let _touchedPos;
     let _lastShotTime = -Infinity;
 
-    function initialise (parentNode, gameConfig, fishGameArena) {
+    function initialise(parentNode, gameConfig, fishGameArena) {
 
         initialiseParent(parentNode);
         // console.log("initialise:gameconfig:",gameConfig);
@@ -42,49 +42,49 @@ const GameView = function(){
     function initialiseParent(parent) {
         // cc.spriteFrameCache.addSpriteFrames(res.GameUIPlist);
         const plists = ResourceLoader.getPlists("Game");
-        for ( let list in plists){
+        for (let list in plists) {
             cc.spriteFrameCache.addSpriteFrames(plists[list]);
         }
         if (parent === undefined && _parentNode && _parentNode.parent) {
             parent = _parentNode.parent;
         }
-        if (_parentNode && _parentNode.parent) {
-            _parentNode.parent.removeChild(_parentNode);
-        }
+        // if (_parentNode && _parentNode.parent) {
+        //     _parentNode.parent.removeChild(_parentNode);
+        // }
         _parentNode = new cc.Node();
         parent.addChild(_parentNode, 99999);
     }
 
-    function goToGame (choice) {//temporary
-        if (_curretBKG){
+    function goToGame(choice) {//temporary
+        if (_curretBKG) {
             _parentNode.removeChild(_curretBKG);
         }
-        if (choice < 4 ){
+        if (choice < 4) {
             _curretBKG = new cc.Sprite(res['GameBackground' + choice.toString()]);
         }
         else {
             _curretBKG = new cc.Sprite(res.GameBackground1);
         }
         const frame = new cc.Sprite(res.GameFrame);
-        frame.setPosition(cc.view.getDesignResolutionSize().width/2, cc.view.getDesignResolutionSize().height/2);
-        _parentNode.addChild(frame,99);
+        frame.setPosition(cc.view.getDesignResolutionSize().width / 2, cc.view.getDesignResolutionSize().height / 2);
+        _parentNode.addChild(frame, 99);
 
-        _curretBKG.setPosition(cc.view.getDesignResolutionSize().width/2, cc.view.getDesignResolutionSize().height/2);
-        _parentNode.addChild(_curretBKG,-5);
+        _curretBKG.setPosition(cc.view.getDesignResolutionSize().width / 2, cc.view.getDesignResolutionSize().height / 2);
+        _parentNode.addChild(_curretBKG, -5);
 
         initialiseTouch(touchAt);
     }
 
-    function addView(view, depth){
+    function addView(view, depth) {
         _parentNode.addChild(view, depth);
     }
 
-    function destroyView(view){
+    function destroyView(view) {
         _parentNode.removeChild(view);
     }
 
     const initialiseTouch = function (touchAt) {
-        if(_touchLayer){
+        if (_touchLayer) {
             _parentNode.removeChild(_touchLayer);
         }
 
@@ -92,7 +92,7 @@ const GameView = function(){
         _parentNode.addChild(_touchLayer, -1);
     };
 
-    function getRotatedView(position, rotation){ //position in array, rotation in radians, output in degrees
+    function getRotatedView(position, rotation) { //position in array, rotation in radians, output in degrees
         let x;
         let y;
         let rot = 0;
@@ -102,7 +102,7 @@ const GameView = function(){
                 x = cc.view.getDesignResolutionSize().width - position[0];
                 y = cc.view.getDesignResolutionSize().height - position[1];
             }
-            if (rotation) {
+            if (rotation != null) {
                 rot = -(rotation * 180 / Math.PI);
 
             }
@@ -111,7 +111,7 @@ const GameView = function(){
                 x = position[0];
                 y = position[1];
             }
-            if (rotation) {
+            if (rotation != null) {
                 rot = 180 - rotation * 180 / Math.PI;
             }
         }
@@ -120,7 +120,7 @@ const GameView = function(){
 
     function resetArena() {
         _isRotated = false;
-        if(_gameConfig) {
+        if (_gameConfig) {
             for (let i = 0; i < _gameConfig.maxPlayers; i++) {
                 clearPlayerState(i);
             }
@@ -128,7 +128,7 @@ const GameView = function(){
         _lastShotTime = -Infinity
     }
 
-    function destroyArena(){
+    function destroyArena() {
         if (!_fishGameArena) {
             return;
         }
@@ -140,13 +140,13 @@ const GameView = function(){
         _fishGameArena = null;
     }
 
-    function getPlayerSlot(slot){
+    function getPlayerSlot(slot) {
         if (_isRotated && _gameConfig.isUsingOldCannonPositions)
             return _gameConfig.maxPlayers - slot - 1;
         return slot;
     }
 
-    function touchAt  (pos, touchType) {
+    function touchAt(pos, touchType) {
         if (touchType === TouchType.Began || touchType === TouchType.Moved) {
             _touchedPos = pos;
             const now = _fishGameArena.getGameTime();
@@ -169,7 +169,7 @@ const GameView = function(){
             const bulletId = _playerId + ':' + getPlayerBulletId();
 
             ClientServerConnect.getServerInformer().bulletFired(bulletId, (info.rotation - 90) / 180 * Math.PI);
-        }else{
+        } else {
             _touchedPos = null;
         }
     }
@@ -179,12 +179,12 @@ const GameView = function(){
         return _playerViews[0].getNextBulletId(); //currently bulletId is static no need to convert player slot
     };
 
-    function setMyPlayerData (playerId,slot){
+    function setMyPlayerData(playerId, slot) {
         _playerId = playerId;
         _playerSlot = slot;
     }
 
-    function shootTo (playerId, angle){
+    function shootTo(playerId, angle) {
         let slot = _fishGameArena.getPlayer(playerId).slot;
         let modifiedSlot = getPlayerSlot(slot);
         _playerViews[modifiedSlot].shootTo(angle);
@@ -195,40 +195,38 @@ const GameView = function(){
         _playerViews[slot].updatePlayerData(playerData);
     }
 
-    function clearPlayerState (slot) {
+    function clearPlayerState(slot) {
         _playerViews[slot].clearPlayerData();
     }
-    
+
     function updateArena() {
-        if (_touchedPos!=null){
-            touchAt(_touchedPos,TouchType.Moved);
+        if (_touchedPos != null) {
+            touchAt(_touchedPos, TouchType.Moved);
         }
 
         _fishGameArena.updateEverything();
     }
 
 
-
     return {
-        initialise : initialise,
+        initialise: initialise,
         // parentNode : _parentNode,
-        clearPlayerState : clearPlayerState,
-        goToGame : goToGame,
-        addView : addView,
-        destroyView : destroyView,
-        getRotatedView : getRotatedView,
-        resetArena : resetArena,
-        destroyArena : destroyArena,
+        clearPlayerState: clearPlayerState,
+        goToGame: goToGame,
+        addView: addView,
+        destroyView: destroyView,
+        getRotatedView: getRotatedView,
+        resetArena: resetArena,
+        destroyArena: destroyArena,
         // getPlayerSlot : getPlayerSlot,
-        setMyPlayerData : setMyPlayerData,
-        shootTo : shootTo,
-        updateMultiplayerState : updateMultiplayerState,
-        updateArena : updateArena,
+        setMyPlayerData: setMyPlayerData,
+        shootTo: shootTo,
+        updateMultiplayerState: updateMultiplayerState,
+        updateArena: updateArena,
 
         //???
-        getMyPlayerSlot : ()=>  _playerSlot,
+        getMyPlayerSlot: ()=> _playerSlot,
     }
-
 
 
 }();
