@@ -56,6 +56,7 @@ const GameView = function () {
     }
 
     function goToGame(choice) {//temporary
+        console.log("goToGame");
         if (_curretBKG) {
             _parentNode.removeChild(_curretBKG);
         }
@@ -65,6 +66,7 @@ const GameView = function () {
         else {
             _curretBKG = new cc.Sprite(res.GameBackground1);
         }
+        //Request to remove frame
         const frame = new cc.Sprite(res.GameFrame);
         frame.setPosition(cc.view.getDesignResolutionSize().width / 2, cc.view.getDesignResolutionSize().height / 2);
         _parentNode.addChild(frame, 99);
@@ -84,10 +86,11 @@ const GameView = function () {
     }
 
     const initialiseTouch = function (touchAt) {
+        console.log("initialiseTouch");
         if (_touchLayer) {
             _parentNode.removeChild(_touchLayer);
         }
-
+        console.log("initialiseTouch");
         _touchLayer = new TouchLayerRefactored(touchAt);
         _parentNode.addChild(_touchLayer, -1);
     };

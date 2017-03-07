@@ -45,6 +45,11 @@ const CannonManager = (function () {
      * Try to switch to another gun (for the current player only).
      */
     proto.selectGun = function (nextGunId) {
+        // @todo Pass the arena or serviceLocator down to this cannon, so it can check the following
+        //if (!getArena().canSwitchGun()) {
+        //    return;
+        //}
+
         const nextGunClass = _gameConfig.gunClasses[nextGunId];
 
         if (!nextGunClass) {

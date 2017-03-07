@@ -10,6 +10,7 @@ const ReferenceName = {
     DecreaseCannon_Down : "#MinusDw.png",
     CannonPower : "#CoinDeck.png",
     CoinIcon : "#Coin icon.png",
+    CoinStackCoin : "#DeckCoins.png",
 
     // Login9Slice : "9 slice square.png",
 
@@ -83,8 +84,9 @@ const ReferenceName = {
 
     // Cannon1Animated : "#Cannon1",
 
-
-    //localisable
+    //------------
+    //Localisable
+    //------------
     //@TODO: move to seperate file
 
     //Login
