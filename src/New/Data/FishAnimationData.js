@@ -72,7 +72,7 @@ const FishAnimationData = function () {
             for (let i = 0; i < animationArray.length; i++) {
                 let pivot = undefined;
                 if (data.pivot) {
-                    pivot = data.pivot[i];
+                    pivot = data.pivot[i] || data.pivot[0];
                 }
                 let animationInterval = 0;
                 if (FishRawData[fishType].animationInterval && FishRawData[fishType].animationInterval[i]) {

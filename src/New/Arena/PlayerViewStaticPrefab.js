@@ -79,9 +79,9 @@ const PlayerViewStaticPrefab = (function () {
             nameToShow = nameToShow.substring(0,10) + "..";
         }
         this._playerName.setString(nameToShow);
-        const goldAmount = parseFloat(this._gold.getString());
-        if ( playerData.score > goldAmount){
-            this.AnimateCoinStack(playerData.score - goldAmount);
+        // const goldAmount = parseFloat(this._gold.getString());
+        if ( playerData.scoreChange && playerData.scoreChange > 0){
+            this.AnimateCoinStack(playerData.scoreChange);
         }
         this._gold.setString(Math.floor(playerData.score));
         // this._gem.setString(0);
