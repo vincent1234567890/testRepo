@@ -32,11 +32,11 @@ const CoinStackEffect = (function () {
             let fontDef = new cc.FontDefinition();
             fontDef.fontName = "Arial";
             //fontDef.fontWeight = "bold";
-            fontDef.fontSize = "26";
+            fontDef.fontSize = 20;
             fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
             fontDef.fillStyle = new cc.Color(255, 192, 0, 255);
 
-            this._coinValueLabel = new cc.LabelTTF(valueToDisplay.toFixed(0), fontDef);
+            this._coinValueLabel = new cc.LabelTTF("", fontDef);
             this._coinValueLabel.enableStroke(new cc.Color(96, 64, 0, 255),2);
             this._parent.addChild(this._coinValueLabel);
             this._coinValueLabel.setAnchorPoint(0.5, 0);
@@ -44,6 +44,7 @@ const CoinStackEffect = (function () {
         }
         const coinValueLabel = this._coinValueLabel;
         coinValueLabel.setVisible(false);
+        this._coinValueLabel.setString(valueToDisplay.toFixed(2));
         const parentNode = this._parent;
 
         parentNode.update = function (dt) {

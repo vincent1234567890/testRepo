@@ -38,10 +38,6 @@ function Queue(){
      * item - the item to enqueue
      */
     this.enqueue = function(item){
-        // for (let i in queue) {
-        //     console.log("enqueue:", queue[i]._parent.__instanceId, ", i: ", i, ", queue[i]._moveAmount", queue[i]._moveAmount );
-        // }
-        console.log("enqueue:");
         queue.push(item);
     };
 

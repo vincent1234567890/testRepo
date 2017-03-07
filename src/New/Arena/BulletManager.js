@@ -25,7 +25,7 @@ const BulletManager = (function(){
     proto.createBullet = function (gunId, bulletId) {
         if (gunId > 4) gunId = 4; // temp fix
         // _bulletCache[bulletId] = new BulletView(_parent, "#Bullet"+(gunId+1)+".png");
-        _bulletCache[bulletId] = _bulletPool.alloc(_parent, "#Bullet"+(gunId+1)+".png");
+        _bulletCache[bulletId] = _bulletPool.alloc(_parent, gunId);
         // console.log(_bulletCache);
     };
 

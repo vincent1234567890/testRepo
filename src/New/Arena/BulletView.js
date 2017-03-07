@@ -5,10 +5,10 @@
 const BulletView = (function () {
     "use strict";
 
-    const BulletView = function (parent, resource) {
+    const BulletView = function (parent, gunId) {
         this._parent = parent;
-        if (this.resource != resource) {
-            this.resource = resource;
+        if (this.gunId != gunId) {
+            this.gunId = gunId;
 
             if (this._particle){
                 this._view.removeChild(this._particle,false);
@@ -17,7 +17,8 @@ const BulletView = (function () {
                 // this._parent.addChild(this._view);
                 this._parent.removeChild(this._view);
             }
-            this._view = new cc.Sprite(resource);
+            this._view = new cc.Sprite("#Bullet"+(gunId+1)+".png");
+            this._view.setAnchorPoint(0.3,0.5);
 
 
             if (!this._particle) {
@@ -32,16 +33,16 @@ const BulletView = (function () {
         this._particle.setVisible(true);
         this._view.setVisible(true);
 
-        if (GameManager.debug) {
+        if (GameManager.debug && !this.debugCircle) {
 
-            const debugCircle = new cc.Sprite(res.DebugCircle);
+            this.debugCircle = new cc.Sprite(res.DebugCircle);
 
-            const bulletSetting = GameManager.getGameConfig().gunClasses.collisionRadius;
+            const bulletSetting = GameManager.getGameConfig().gunClasses[gunId].collisionRadius;
             // debugCircle.setScaleX(fishClass.length * 2 / 100);
             // debugCircle.setScaleY(fishClass.breadth * 2/ 100);
-            debugCircle.setScale(bulletSetting * 2/ 100);
-
-            this._view.addChild(debugCircle, 1);
+            this.debugCircle.setScale(bulletSetting * 2/ 100);
+            this.debugCircle.setAnchorPoint(0.5,0.5);
+            this._parent.addChild(this.debugCircle, 1);
             // console.log("debug:", debugCircle, fishClass, fishType);
         }
     };
@@ -50,6 +51,9 @@ const BulletView = (function () {
 
     proto.setPosition = function (x,y) {
         this._view.setPosition(x,y);
+        if (this.debugCircle ) {
+            this.debugCircle.setPosition(x,y);
+        }
     };
 
     proto.setRotation = function (rot){
