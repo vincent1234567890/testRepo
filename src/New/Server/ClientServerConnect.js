@@ -211,11 +211,12 @@ const ClientServerConnect = function () {
                 if (AppManager.debugSimulateLag) {
                     socketUtils.simulateNetworkLatency(ioSocket, 100);
                 }
-                if (AppManager.debugGhosts) {
-                    clientReceiver.ghostActors(ioSocket, 2000);
-                }
 
                 const receiver = clientReceiver(ioSocket);
+
+                if (AppManager.debugGhosts) {
+                    receiver.setupGhostingForSocket(ioSocket, 2000);
+                }
 
                 //setClientReceiver(receiver);
 
