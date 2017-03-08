@@ -187,6 +187,7 @@ var res = {
 
     //GameFrame
     GameFrame: "res/New/InGameFrame.png",
+    GameFrame2: "res/New/InGameFrame2.png",
 
     //GameBackgrounds
     GameBackground0: "res/New/Game BG/Game BG 1.png",
@@ -232,6 +233,17 @@ var res = {
     HorseshoeCrabPng: "res/New/Fish/HorseshoeCrab.png",
     PaddleFishPlist: "res/New/Fish/PaddleFish.plist",
     PaddleFishPng: "res/New/Fish/PaddleFish.png",
+
+    GoldenNumbersPlist : "res/Fonts/GoldNumber.plist",
+    GoldNumberPng : "res/Fonts/GoldNumber.png",
+
+    TestFont : "res/Fonts/test-export.fnt",
+    TestFontPNG : "res/Fonts/test-export.png",
+
+    GunCockSound : "res/New/Sound/gun-cocking-01.mp3",
+    GunShotSound : "res/New/Sound/gun-gunshot-01.mp3",
+
+    // Custom_font : {type:"font", name:"GoldenNumbersPlist", srcs:["res/CustomName.ttf"]}
 
 
     // DemoFishPlist: "res/CompanyA/Fish/DemoFish.plist",
@@ -279,6 +291,8 @@ var res = {
 
     //debug
     DebugCircle: "res/New/testing/circle.png",
+
+
 };
 
 const ResourceLoader = (function () {

@@ -8,7 +8,7 @@ const PlayerViewManager = (function () {
     const PlayerViewManager = function (gameConfig, index, isPlayer) {
         _bulletId = 0;
         this._cannonManager = new CannonManager(gameConfig, index, isPlayer);
-        this._playerView = new PlayerView(gameConfig, index);// not ideal : could have been parented to cannon and rotated accordingly
+        this._playerView = new PlayerView(gameConfig, index, isPlayer);// not ideal : could have been parented to cannon and rotated accordingly
     };
 
     const proto = PlayerViewManager.prototype;

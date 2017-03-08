@@ -4,8 +4,8 @@
 "use strict";
 var PlayerView = (function () {
 
-    var PlayerView = function (parent, gameConfig, slot) {
-        this._playerViewStaticPrefabInstance = new PlayerViewStaticPrefab(parent, gameConfig, slot);
+    var PlayerView = function (gameConfig, slot, isPlayer) {
+        this._playerViewStaticPrefabInstance = new PlayerViewStaticPrefab(gameConfig, slot, isPlayer);
     };
 
     PlayerView.prototype.updateView = function(playerData){
