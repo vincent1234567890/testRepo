@@ -32,10 +32,16 @@ const GUIFunctions = function () {
         let newPoint = sprite.convertToWorldSpace(sprite.convertToNodeSpace(touch));
         return cc.rectContainsPoint(getHitBox(sprite), newPoint)
     }
+    
+    function shrinkNumberString(maxLength , number) {
+        // const length = Math.log(number) * Math.LOG10E + 1 | 0;
+        // console.log(length);
+    }
 
 
     return {
         getHitBox : getHitBox,
         isSpriteTouched : isSpriteTouched,
+        shrinkNumberString : shrinkNumberString,
     }
 }();

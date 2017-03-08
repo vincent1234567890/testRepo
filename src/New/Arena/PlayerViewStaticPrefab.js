@@ -9,7 +9,7 @@ const PlayerViewStaticPrefab = (function () {
     //@param {Vector2} pos
     //@param {function} callback for cannon down
     //@param {function} callback for cannon up
-    const PlayerViewStaticPrefab = function(gameConfig, slot){
+    const PlayerViewStaticPrefab = function(gameConfig, slot, isPlayer){
         this._parent = new cc.Node();
         GameView.addView(this._parent,1);
         this._parent.setPosition(300,300);
@@ -20,9 +20,14 @@ const PlayerViewStaticPrefab = (function () {
         const base = this._base = new cc.Sprite(ReferenceName.Base);
         this._parent.addChild(base);
 
-        //coin icon
         const coinIcon = new cc.Sprite(ReferenceName.CoinIcon);
+        coinIcon.setPosition(themeData.CoinIcon[0],themeData.CoinIcon[1]);
         base.addChild(coinIcon);
+
+        this.playerIcon = new cc.Sprite(ReferenceName.PlayerIcon);
+        this.playerIcon.setPosition(themeData.PlayerIcon[0],themeData.PlayerIcon[1]);
+        this.playerIcon.setVisible(false);
+        base.addChild(this.playerIcon);
 
         const fontDef = new cc.FontDefinition();
         fontDef.fontName = "Arial";
@@ -30,16 +35,15 @@ const PlayerViewStaticPrefab = (function () {
         fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
 
         this._playerName = new cc.LabelTTF('', fontDef);
-        this._playerName.setDimensions(cc.size(210,35));
+        this._playerName.setDimensions(cc.size(themeData.PlayerName[1][0],themeData.PlayerName[1][1]));
         this._playerName.setAnchorPoint(0,0.5);
         base.addChild(this._playerName,1);
 
         this._gold = new cc.LabelTTF('', fontDef);
-        this._gold.setDimensions(cc.size(170,35));
+        this._gold.setDimensions(cc.size(themeData.Gold[1][0],themeData.Gold[1][1]));
         this._gold.setAnchorPoint(0,0.5);
         base.addChild(this._gold,1);
 
-        //
         let pos;
         let markerPos;
         if (gameConfig.isUsingOldCannonPositions) {
@@ -52,10 +56,10 @@ const PlayerViewStaticPrefab = (function () {
 
         this._parent.x = pos[0]+ themeData["Base"][0];
         this._parent.y = pos[1]+ themeData["Base"][1];
-        this._gold.x = themeData["Gold"][0];
-        this._gold.y = themeData["Gold"][1];
-        this._playerName.x = themeData["PlayerName"][0];
-        this._playerName.y = themeData["PlayerName"][1];
+        this._gold.x = themeData["Gold"][0][0];
+        this._gold.y = themeData["Gold"][0][1];
+        this._playerName.x = themeData["PlayerName"][0][0];
+        this._playerName.y = themeData["PlayerName"][0][1];
 
         if (pos[1] > markerPos[1]) {
             this._parent.y = pos[1]+ themeData["Base"][0];
@@ -69,6 +73,10 @@ const PlayerViewStaticPrefab = (function () {
             }
         }
         this._coinStackManager = new CoinStackManager(this._parent);
+
+        if (isPlayer){
+            this.setPlayer();
+        }
     };
 
     const proto = PlayerViewStaticPrefab.prototype;
@@ -83,7 +91,13 @@ const PlayerViewStaticPrefab = (function () {
         if ( playerData.scoreChange && playerData.scoreChange > 0){
             this.AnimateCoinStack(playerData.scoreChange);
         }
-        this._gold.setString(Math.floor(playerData.score));
+        let gold = Math.floor(playerData.score).toString();
+        if (gold.length > 9) {
+            gold = gold.substring(0,8) + "..";
+        }
+
+        this._gold.setString(gold);
+        GUIFunctions.shrinkNumberString(playerData.score);
         // this._gem.setString(0);
     };
 
@@ -96,7 +110,7 @@ const PlayerViewStaticPrefab = (function () {
     proto.destroyView = function () {
         GameView.destroyView(this._parent);
     };
-    
+
     proto.AnimateCoinStack = function ( increase ) {
         // const coinStack = [];
         // const deckStacks = [];
@@ -106,6 +120,11 @@ const PlayerViewStaticPrefab = (function () {
 
         this._coinStackManager.addStack(15,increase);
     };
+
+    proto.setPlayer = function () {
+        this.playerIcon.setVisible(true);
+    };
+
 
 
     return PlayerViewStaticPrefab;

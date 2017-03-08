@@ -63,7 +63,10 @@ const ScoreboardView = (function() {
         skillsUsed.setPosition(660 , cc.view.getDesignResolutionSize().height - 363);
         bg.addChild(skillsUsed,1);
 
-        const returnRate = createGridObject(ReferenceName.ReturnRate, ReferenceName.HitRateIcon, Math.round(data.fishCaught / data.fishHit * 100));
+        // const returnRate = createGridObject(ReferenceName.ReturnRate, ReferenceName.HitRateIcon, Math.round(data.fishCaught / data.fishHit * 100));
+        // returnRate.setPosition(1050 , cc.view.getDesignResolutionSize().height - 363);
+        // bg.addChild(returnRate,1);
+        const returnRate = createGridObject(ReferenceName.ReturnRate, ReferenceName.HitRateIcon, Math.round(data.fishWinnings / data.bulletsCost * 100));
         returnRate.setPosition(1050 , cc.view.getDesignResolutionSize().height - 363);
         bg.addChild(returnRate,1);
 

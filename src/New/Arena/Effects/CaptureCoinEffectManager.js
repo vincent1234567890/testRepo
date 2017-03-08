@@ -77,13 +77,15 @@ const CaptureCoinEffectManager = (function () {
             if (!this._label) {
 
                 let fontDef = new cc.FontDefinition();
-                fontDef.fontName = "Imapct";
+                fontDef.fontName = "Impact";
                 fontDef.fontWeight = "bold";
                 fontDef.fontSize = "32";
                 fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
                 fontDef.fillStyle = new cc.Color(255, 192, 0, 255);
 
                 this._label = new cc.LabelTTF("", fontDef);
+                // this._label = new cc.LabelBMFont("", res.GoldenNumbersPlist);
+                // this._label = new cc.LabelBMFont("",res.TestFont);
                 this._label.enableStroke(new cc.Color(96, 64, 0, 255), 2);
 
 
@@ -101,6 +103,7 @@ const CaptureCoinEffectManager = (function () {
             this._parent.addChild(this._label, 1);
 
             this._label.setString(value);
+            // this._label.setString("HELLO");
             this._label.setVisible(true);
             // this._label.scheduleUpdate();
             // this._label.update = labelMovement;

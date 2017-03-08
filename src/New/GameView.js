@@ -67,7 +67,7 @@ const GameView = function () {
             _curretBKG = new cc.Sprite(res.GameBackground1);
         }
         //Request to remove frame
-        const frame = new cc.Sprite(res.GameFrame);
+        const frame = new cc.Sprite(res.GameFrame2);
         frame.setPosition(cc.view.getDesignResolutionSize().width / 2, cc.view.getDesignResolutionSize().height / 2);
         _parentNode.addChild(frame, 99);
 

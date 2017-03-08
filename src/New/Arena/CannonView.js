@@ -202,18 +202,22 @@ const CannonView = (function () {
     proto.animateShootTo = function () { //Request to remove spark sprite.
         if (this._isAnimating) {
             this._cannonSprite.stopAction(this._sequence);
+            cc.audioEngine.playEffect(res.GunShotSound);
             // this._sparkSprite.stopAction(this._sparkSequence);
         }
         // this._sparkSprite.setVisible(true);
 
         this._isAnimating = true;
         this._cannonSprite.runAction(this._sequence);
+
+        cc.audioEngine.playEffect(res.GunCockSound);
         // this._sparkSprite.runAction(this._sparkSequence);
     };
 
     proto.onAnimateShootEnd = function () {
         this._isAnimating = false;
         // this._sparkSprite.setVisible(false);
+        cc.audioEngine.playEffect(res.GunShotSound);
     };
 
     proto.setupCannonChangeMenu = function (cannonManager, gameConfig, slot, callbackCannonDown, callbackCannonUp) {

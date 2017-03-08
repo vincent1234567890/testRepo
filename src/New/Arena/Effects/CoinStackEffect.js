@@ -37,14 +37,14 @@ const CoinStackEffect = (function () {
             fontDef.fillStyle = new cc.Color(255, 192, 0, 255);
 
             this._coinValueLabel = new cc.LabelTTF("", fontDef);
+
             this._coinValueLabel.enableStroke(new cc.Color(96, 64, 0, 255),2);
             this._parent.addChild(this._coinValueLabel);
             this._coinValueLabel.setAnchorPoint(0.5, 0);
-            // parentNode.setCascadeOpacityEnabled(true);
+            this._coinValueLabel.setOpacity(0);
         }
         const coinValueLabel = this._coinValueLabel;
-        coinValueLabel.setVisible(false);
-        this._coinValueLabel.setString(valueToDisplay.toFixed(2));
+        this._coinValueLabel.setString(valueToDisplay.toFixed(1));
         const parentNode = this._parent;
 
         parentNode.update = function (dt) {
@@ -59,6 +59,7 @@ const CoinStackEffect = (function () {
                         coinStack[coin].runAction(new cc.Sequence(new cc.FadeOut(FadeTime)));
                     }
                     parentNode.runAction(new cc.Sequence(new cc.DelayTime(FadeTime), new cc.CallFunc(callbackTarget.onStackAnimationEnded, callbackTarget)));
+                    coinValueLabel.runAction(new cc.Sequence(new cc.FadeOut(FadeTime)));
                 }
                 isFadingOut = true;
                 return;
@@ -69,7 +70,7 @@ const CoinStackEffect = (function () {
                 //spinning coin effect here
             } else if (currentCoinCount >= noOfCoins) { //remove if() for label moving effect
                 coinValueLabel.setPosition(coinStack[coinStack.length - 1].getSpritePosition());
-                coinValueLabel.setVisible(true);
+                coinValueLabel.setOpacity(255);
             }
         };
 
@@ -82,7 +83,7 @@ const CoinStackEffect = (function () {
                     _coinPool.free(this._coinStack[coin]);
                 }
             }
-            this._coinValueLabel.setVisible(false);
+            this._coinValueLabel.stopAllActions();
             this._coinStack = [];
             this.__parent.removeChild(this._parent,false);
             this._parent.unscheduleUpdate();
@@ -109,7 +110,6 @@ const CoinStackEffect = (function () {
             this._moveAmount += moveAmount;
         }
     };
-
 
     return CoinStackEffect;
 })();

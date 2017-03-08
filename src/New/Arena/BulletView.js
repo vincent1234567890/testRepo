@@ -18,7 +18,7 @@ const BulletView = (function () {
                 this._parent.removeChild(this._view);
             }
             this._view = new cc.Sprite("#Bullet"+(gunId+1)+".png");
-            this._view.setAnchorPoint(0.3,0.5);
+            this._view.setAnchorPoint(0.5,0.55);
 
 
             if (!this._particle) {
@@ -38,12 +38,12 @@ const BulletView = (function () {
             this.debugCircle = new cc.Sprite(res.DebugCircle);
 
             const bulletSetting = GameManager.getGameConfig().gunClasses[gunId].collisionRadius;
-            // debugCircle.setScaleX(fishClass.length * 2 / 100);
-            // debugCircle.setScaleY(fishClass.breadth * 2/ 100);
-            this.debugCircle.setScale(bulletSetting * 2/ 100);
             this.debugCircle.setAnchorPoint(0.5,0.5);
             this._parent.addChild(this.debugCircle, 1);
-            // console.log("debug:", debugCircle, fishClass, fishType);
+        }
+        if(this.debugCircle){
+            const bulletSetting = GameManager.getGameConfig().gunClasses[gunId].collisionRadius;
+            this.debugCircle.setScale(bulletSetting * 2/ 100);
         }
     };
 
