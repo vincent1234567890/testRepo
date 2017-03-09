@@ -32,6 +32,7 @@ const GameManager = function () {
     let _bulletManager;
     let _netManager;
     let _effectsManager;
+    let _lobbyWaterCausticsManager;
 
     //?? only use is for clientReceiver to query if playerId == player
     let _playerId;
@@ -181,6 +182,7 @@ const GameManager = function () {
             _lobbyManager = new LobbyManager(_playerData, onSettingsButton, onGameSelected, onRequestShowProfile);
             // _profileManger = new ProfileManager();
             _optionsManager = new OptionsManager(onSettingsButton, undefined, onLeaveArena);
+            _lobbyWaterCausticsManager = new LobbyWaterCaustics();
         }else {
             _lobbyManager.displayView(_playerData, onSettingsButton, onGameSelected,onRequestShowProfile);
         }
@@ -266,7 +268,6 @@ const GameManager = function () {
     function development(parent) {
         _optionsManager = new OptionsManager(onSettingsButton);
     }
-
 
 
     return {
