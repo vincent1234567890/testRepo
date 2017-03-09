@@ -52,8 +52,6 @@ const FishViewManager = (function(){
             cc.spriteFrameCache.addSpriteFrames(plists[list]);
         }
 
-
-
         // FishAnimationData();
         FishAnimationData.initialise();
 
@@ -72,14 +70,6 @@ const FishViewManager = (function(){
     proto.addFish = function(fishId, fishType){
         this._fishes[fishId] = new FishView(this._parent, this._gameConfig.fishClasses[fishType], fishType);
         return this._fishes[fishId];
-
-        //debug version:
-        // const parent = new cc.Node();
-        // this._parent.addChild(parent);
-        // new FishView(parent, fishType);
-        // this._fishes[fishId] = parent;
-        // return this._fishes[fishId];
-
     };
 
     proto.getFish = function(id){

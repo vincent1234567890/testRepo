@@ -313,6 +313,7 @@ var WeaponManager = cc.Class.extend({
      Use current weapon shoot to target position
      */
     shootTo:function (pos, type) {
+        /*
         return;
         if (GameCtrl.isOnlineGame()) {
             //console.log("pos:", pos);
@@ -364,6 +365,7 @@ var WeaponManager = cc.Class.extend({
         else {
             this.getCurrentWeapon().setDirection(pos);
         }
+        */
     },
 
     /**

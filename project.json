@@ -18,6 +18,8 @@
         "src/New/ThemeDataManager.js",
         "src/resource.js",
 
+        "src/New/Utilities/Queue.js",
+
         "src/SharedClasses/LoadingScreen.js",
         "src/SharedClasses/ParticleSystemFactory.js",
         "src/New/ObjectPool.js",
@@ -31,12 +33,16 @@
         "src/New/BlockingManager.js",
         "src/New/BlockingView.js",
 
+        "src/New/Lobby/GameListButtonPrefab.js",
+        "src/New/Lobby/LobbyWaterCausticInstance.js",
+        "src/New/Lobby/LobbyWaterCaustics.js",
         "src/New/LoginView.js",
         "src/New/LoginManager.js",
         "src/New/Lobby/LobbyManager.js",
         "src/New/Lobby/LobbyView.js",
         "src/New/Lobby/ProfileManager.js",
         "src/New/Lobby/ProfileView.js",
+
 
         "src/New/Arena/OptionsView.js",
         "src/New/Arena/OptionsSideMenuView.js",
@@ -59,9 +65,12 @@
         "src/New/Arena/FishViewManager.js",
         "src/New/Arena/ScoreboardView.js",
         "src/New/Arena/ScoreboardManager.js",
-        "src/New/Arena/EffectsManager.js",
-        "src/New/Arena/CaptureCoinEffectManager.js",
-        "src/New/Arena/SpinningCoinView.js",
+        "src/New/Arena/Effects/EffectsManager.js",
+        "src/New/Arena/Effects/CaptureCoinEffectManager.js",
+        "src/New/Arena/Effects/SpinningCoinView.js",
+        "src/New/Arena/Effects/CoinStackCoinView.js",
+        "src/New/Arena/Effects/CoinStackEffect.js",
+        "src/New/Arena/Effects/CoinStackManager.js",
         "src/New/GameManager.js",
         "src/New/GameView.js",
         "src/New/GameTicker.js",

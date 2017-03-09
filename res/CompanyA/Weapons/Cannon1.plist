@@ -15,41 +15,11 @@
                 <key>spriteSourceSize</key>
                 <string>{15,28}</string>
                 <key>textureRect</key>
-                <string>{{1,927},{15,28}}</string>
+                <string>{{1,409},{15,28}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
             <key>Cannon1_00000.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,7}</string>
-                <key>spriteSize</key>
-                <string>{58,96}</string>
-                <key>spriteSourceSize</key>
-                <string>{58,128}</string>
-                <key>textureRect</key>
-                <string>{{1,633},{58,96}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>Cannon1_00001.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,10}</string>
-                <key>spriteSize</key>
-                <string>{58,102}</string>
-                <key>spriteSourceSize</key>
-                <string>{58,128}</string>
-                <key>textureRect</key>
-                <string>{{1,217},{58,102}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>Cannon1_00002.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -64,93 +34,48 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
+            <key>Cannon1_00001.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,10}</string>
+                <key>spriteSize</key>
+                <string>{58,102}</string>
+                <key>spriteSourceSize</key>
+                <string>{58,128}</string>
+                <key>textureRect</key>
+                <string>{{1,109},{58,102}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>Cannon1_00002.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,7}</string>
+                <key>spriteSize</key>
+                <string>{58,96}</string>
+                <key>spriteSourceSize</key>
+                <string>{58,128}</string>
+                <key>textureRect</key>
+                <string>{{1,213},{58,96}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
             <key>Cannon1_00003.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,10}</string>
-                <key>spriteSize</key>
-                <string>{58,102}</string>
-                <key>spriteSourceSize</key>
-                <string>{58,128}</string>
-                <key>textureRect</key>
-                <string>{{1,321},{58,102}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>Cannon1_00004.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
                 <string>{0,7}</string>
                 <key>spriteSize</key>
                 <string>{58,96}</string>
                 <key>spriteSourceSize</key>
                 <string>{58,128}</string>
                 <key>textureRect</key>
-                <string>{{1,731},{58,96}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>Cannon1_00005.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,7}</string>
-                <key>spriteSize</key>
-                <string>{58,96}</string>
-                <key>spriteSourceSize</key>
-                <string>{58,128}</string>
-                <key>textureRect</key>
-                <string>{{1,829},{58,96}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>Cannon1_00006.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,10}</string>
-                <key>spriteSize</key>
-                <string>{58,102}</string>
-                <key>spriteSourceSize</key>
-                <string>{58,128}</string>
-                <key>textureRect</key>
-                <string>{{1,425},{58,102}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>Cannon1_00007.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,11}</string>
-                <key>spriteSize</key>
-                <string>{58,106}</string>
-                <key>spriteSourceSize</key>
-                <string>{58,128}</string>
-                <key>textureRect</key>
-                <string>{{1,109},{58,106}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>Cannon1_00008.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,10}</string>
-                <key>spriteSize</key>
-                <string>{58,102}</string>
-                <key>spriteSourceSize</key>
-                <string>{58,128}</string>
-                <key>textureRect</key>
-                <string>{{1,529},{58,102}}</string>
+                <string>{{1,311},{58,96}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -166,9 +91,9 @@
             <key>realTextureFileName</key>
             <string>Cannon1.png</string>
             <key>size</key>
-            <string>{60,943}</string>
+            <string>{60,425}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:ae4c7d8d2e2d5ed92abaf993193e20ab:a360318d0cd7a7fefe70413d6baf7469:3b36d7b2d3207e6d67174f9962d7e8b6$</string>
+            <string>$TexturePacker:SmartUpdate:be9f0c4ce5b8f2314b8021d4ae75cdfc:6ad58607cfabbe8416e65680d7ee8427:3b36d7b2d3207e6d67174f9962d7e8b6$</string>
             <key>textureFileName</key>
             <string>Cannon1.png</string>
         </dict>

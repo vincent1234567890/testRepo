@@ -5,7 +5,7 @@ const CaptureCoinEffectManager = (function () {
     "use strict";
     const padding = 7;
     const animationPerFrameSpeed = 0.05;
-    const numberOfCoins= 8;
+    const numberOfCoins = 8;
 
     const explodeLifetime = 1; // seconds
     const collectLifetime = 1;
@@ -29,35 +29,34 @@ const CaptureCoinEffectManager = (function () {
         let animationFrames = 0;
         while (true) {
             let frameCount = String(animationFrames);
-            while (frameCount.length < padding){
+            while (frameCount.length < padding) {
                 frameCount = '0' + frameCount;
             }
             const frame = cc.spriteFrameCache.getSpriteFrame("Coin" + frameCount + ".png");
-            if (!frame){
+            if (!frame) {
                 break;
             }
             animationArray.push(frame);
             animationFrames++;
         }
         // animationArray.push(cc.spriteFrameCache.getSpriteFrame("Coin" + frameCount + ".png"));
-        this.animation = new cc.Animate(new cc.Animation(animationArray,animationPerFrameSpeed));
+        this.animation = new cc.Animate(new cc.Animation(animationArray, animationPerFrameSpeed));
 
 
     };
-    
+
     const proto = CaptureCoinEffectManager.prototype;
 
     proto.triggerCoins = function (pos, target, value) {
         // console.log(pos);
         const label = _prizeLabelPool.alloc(this._parent, value);
-        setupView(label, label.getTargetNode(), pos, Math.PI / 2 , target, undefined, collectLabel, velocity, explodeLifetime *10 , collectLifetime *10, gravity);
-        for(let i = 0; i < numberOfCoins; i++){
-            const coin = _coinViewPool.alloc(this._parent,this.animation.clone());
+        setupView(label, label.getTargetNode(), pos, Math.PI / 2, target, undefined, collectLabel, velocity, explodeLifetime * 10, collectLifetime * 10, gravity);
+        for (let i = 0; i < numberOfCoins; i++) {
+            const coin = _coinViewPool.alloc(this._parent, this.animation.clone());
             // coin.startCoinAnimation(pos,(180/(numberOfCoins+2))*(i+1), target, collectCoins);
-            setupView(coin, coin.getTargetNode(),pos, 2*Math.PI/(numberOfCoins)*(i+1) , target, this.animation.clone(), collectCoins, velocity*10, explodeLifetime *10 , collectLifetime *10, gravity);
+            setupView(coin, coin.getTargetNode(), pos, 2 * Math.PI / (numberOfCoins) * (i + 1), target, this.animation.clone(), collectCoins, velocity * 10, explodeLifetime * 10, collectLifetime * 10, gravity);
         }
     };
-
 
 
     function collectCoins(coin) {
@@ -66,7 +65,7 @@ const CaptureCoinEffectManager = (function () {
         _coinViewPool.free(coin);
     }
 
-    function collectLabel(label){
+    function collectLabel(label) {
         label.reclaimView();
         _prizeLabelPool.free(label);
     }
@@ -76,16 +75,19 @@ const CaptureCoinEffectManager = (function () {
         function PrizeLabelObject(parent, value) {
             //prize amount font def
             if (!this._label) {
-                this._parent = parent;
+
                 let fontDef = new cc.FontDefinition();
-                fontDef.fontName = "Imapct";
+                fontDef.fontName = "Impact";
                 fontDef.fontWeight = "bold";
                 fontDef.fontSize = "32";
                 fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
-                fontDef.fillStyle = new cc.Color(96, 64, 0, 255);
+                fontDef.fillStyle = new cc.Color(255, 192, 0, 255);
 
                 this._label = new cc.LabelTTF("", fontDef);
-                this._parent.addChild(this._label,1);
+                // this._label = new cc.LabelBMFont("", res.GoldenNumbersPlist);
+                // this._label = new cc.LabelBMFont("",res.TestFont);
+                this._label.enableStroke(new cc.Color(96, 64, 0, 255), 2);
+
 
                 // this._label._explodeLifeTime = explodeLifetime * 10;
                 // this._label._collectionLifetime = collectLifetime * 10;
@@ -97,10 +99,15 @@ const CaptureCoinEffectManager = (function () {
             // this._label._labelStartTime = Date.now();
             // this._label._target = target;
             // this._label.setPosition(pos);
+            this._parent = parent;
+            this._parent.addChild(this._label, 1);
+
             this._label.setString(value);
+            // this._label.setString("HELLO");
             this._label.setVisible(true);
             // this._label.scheduleUpdate();
             // this._label.update = labelMovement;
+
         }
 
         const proto = PrizeLabelObject.prototype;
@@ -143,9 +150,10 @@ const CaptureCoinEffectManager = (function () {
         //     }
         // }
 
-        proto.reclaimView = function(){
+        proto.reclaimView = function () {
             this._label.unscheduleAllCallbacks();//experimental
             this._label.setVisible(false);
+            this._parent.removeChild(this._label, false);
         };
 
         return PrizeLabelObject;
@@ -154,15 +162,7 @@ const CaptureCoinEffectManager = (function () {
     function setupView(viewObject, viewTarget, pos, angle, target, animation, callback, velocity, explodeLifetime, collectLifetime, gravity) {
         const startTime = Date.now();
 
-        // const startTime = this.startTime;
-        //
-        // this.coinSprite.setPositionX(pos.x);
-        // this.coinSprite.setPositionY(pos.y);
         viewTarget.setPosition(pos);
-
-        // console.log(viewTarget);
-
-        // let thisCoinSprite = this.coinSprite;
 
         let endingStartTime = undefined;
         let endingStartX = undefined;
@@ -170,34 +170,28 @@ const CaptureCoinEffectManager = (function () {
         let xLength = undefined;
         let yLength = undefined;
 
-        // const that = this;
-        // console.log("start", pos, angle);
-
         viewTarget.update = function (dt) {
-            // console.log("the");
-            const elapsed = (Date.now() - startTime)/100;
+            const elapsed = (Date.now() - startTime) / 100;
 
             if (elapsed <= explodeLifetime) {
                 this.x = pos.x + velocity * elapsed * Math.cos(angle);
                 this.y = pos.y + velocity * elapsed * Math.sin(angle) - gravity / 2 * Math.pow(elapsed, 2);
-            }else{ // animate move to player
-                if (endingStartTime === undefined){
+            } else { // animate move to player
+                if (endingStartTime === undefined) {
                     endingStartTime = Date.now();
                     endingStartX = this.x;
                     endingStartY = this.y;
                     xLength = target[0] - this.x;
                     yLength = target[1] - this.y;
-                    // console.log(thisCoinSprite.x, thisCoinSprite.y, target.x, target.y);
-                    // debugger;
                 }
 
-                const endingElapsed = (Date.now() - endingStartTime)/100;
-                if (endingElapsed > collectLifetime){
+                const endingElapsed = (Date.now() - endingStartTime) / 100;
+                if (endingElapsed > collectLifetime) {
                     //handle callback
                     callback(viewObject);
                     return;
                 }
-                const endingPercentage = endingElapsed/collectLifetime;
+                const endingPercentage = endingElapsed / collectLifetime;
                 // console.log(xLength, yLength, endingPercentage, endingElapsed);
                 this.x = endingStartX + endingPercentage * (xLength);
                 this.y = endingStartY + endingPercentage * (yLength);
@@ -205,6 +199,7 @@ const CaptureCoinEffectManager = (function () {
                 //     endingPercentage, endingPercentage * (xLength), endingPercentage * (yLength));
             }
         };
+
         viewTarget.scheduleUpdate();
         if (animation) {
             viewTarget.runAction(cc.repeatForever(animation));

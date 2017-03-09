@@ -168,6 +168,8 @@ var res = {
     // MainUITitle : "res/main_ui_title.png",
 
     //New
+
+    //Lobby
     // GameUIPng: "res/New/Game/GameUI.png",
     // GameUIPlist: "res/New/Game/GameUI.plist",
     LobbyUIPlist: "res/New/Lobby/LobbyUI.plist",
@@ -185,14 +187,30 @@ var res = {
     // LoginUIPlist : "res/New/Lobby/Login.plist",
     // LoginUIPng : "res/New/Lobby/Login.png",
 
+    //new lobby
+    GameType1XPlist : "res/New/Lobby/1X.plist",
+    GameType1XPng : "res/New/Lobby/1X.png",
+    GameType10XPlist : "res/New/Lobby/10X.plist",
+    GameType10XPng : "res/New/Lobby/10X.png",
+    GameType100XPlist : "res/New/Lobby/100X.plist",
+    GameType100XPng : "res/New/Lobby/100X.png",
+
+
+    WaterCaustic0 : "res/New/Lobby/Caustic1.png",
+    WaterCaustic1 : "res/New/Lobby/Caustic2.png",
+    WaterCaustic2 : "res/New/Lobby/Caustic3.png",
+    WaterCaustic3 : "res/New/Lobby/Caustic4.png",
+    WaterCaustic4 : "res/New/Lobby/Caustic5.png",
+
     //GameFrame
     GameFrame: "res/New/InGameFrame.png",
+    GameFrame2: "res/New/InGameFrame2.png",
 
     //GameBackgrounds
     GameBackground0: "res/New/Game BG/Game BG 1.png",
-    GameBackground1: "res/New/Game BG/Game BG 2.jpg",
-    GameBackground2: "res/New/Game BG/Game BG 3.jpg",
-    GameBackground3: "res/New/Game BG/Game BG 4.jpg",
+    GameBackground1: "res/New/Game BG/Game BG 2.png",
+    GameBackground2: "res/New/Game BG/Game BG 3.png",
+    GameBackground3: "res/New/Game BG/Game BG 4.png",
 
     //Fish
     StingrayPNG: "res/New/Fish/Ray.png",
@@ -232,6 +250,19 @@ var res = {
     HorseshoeCrabPng: "res/New/Fish/HorseshoeCrab.png",
     PaddleFishPlist: "res/New/Fish/PaddleFish.plist",
     PaddleFishPng: "res/New/Fish/PaddleFish.png",
+
+    //
+
+    GoldenNumbersPlist : "res/New/Fonts/GoldNumber.plist",
+    GoldNumberPng : "res/New/Fonts/GoldNumber.png",
+
+    TestFont : "res/New/Fonts/test-export.fnt",
+    TestFontPNG : "res/New/Fonts/test-export.png",
+
+    GunCockSound : "res/New/Sound/gun-cocking-01.mp3",
+    GunShotSound : "res/New/Sound/gun-gunshot-01.mp3",
+
+    // Custom_font : {type:"font", name:"GoldenNumbersPlist", srcs:["res/CustomName.ttf"]}
 
 
     // DemoFishPlist: "res/CompanyA/Fish/DemoFish.plist",
@@ -279,6 +310,8 @@ var res = {
 
     //debug
     DebugCircle: "res/New/testing/circle.png",
+
+
 };
 
 const ResourceLoader = (function () {

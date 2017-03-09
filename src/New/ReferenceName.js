@@ -9,10 +9,9 @@ const ReferenceName = {
     DecreaseCannon : "#Minus.png",
     DecreaseCannon_Down : "#MinusDw.png",
     CannonPower : "#CoinDeck.png",
-    CoinIcon : "#Coin icon.png",
-
-    // Login9Slice : "9 slice square.png",
-
+    CoinIcon : "#CoinIcon.png",
+    CoinStackCoin : "#DeckCoins.png",
+    PlayerIcon : "#PlayerIcon.png",
 
     //Lobby
     LobbyBackground : "#Lobby BG 1.png",
@@ -36,7 +35,6 @@ const ReferenceName = {
     ProfileBackground : "#Profile POut BG.png",
     ProfileFishBackground : "#Profile POut Fish Box.png",
     ProfileFishStatsBackground : "#Profile POut Fish Detail.png",
-
 
     //Scoreboard
     ScoreboardBG : "#SummaryBase.png",
@@ -83,8 +81,9 @@ const ReferenceName = {
 
     // Cannon1Animated : "#Cannon1",
 
-
-    //localisable
+    //------------
+    //Localisable
+    //------------
     //@TODO: move to seperate file
 
     //Login
