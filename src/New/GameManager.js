@@ -50,7 +50,7 @@ const GameManager = function () {
         _lobbyManager.resetView();
         GameView.initialise(parent, _gameConfig, fishGameArena);
 
-        _fishManager = new FishViewManager(fishGameArena, _gameConfig);
+        _fishManager = new FishViewManager(fishGameArena, _gameConfig, caughtFishAnimationEnd);
         _optionsManager = new OptionsManager(onSettingsButton, undefined, onLeaveArena);
         _optionsManager.displayView(_gameConfig);
         _bulletManager = new BulletManager(fishGameArena);
@@ -97,12 +97,16 @@ const GameManager = function () {
 
     const caughtFish = function (playerSlot,fishId){
         // console.log("caught fish :" ,fishId);
-        const data = _fishManager.caughtFish(fishId);
-        _effectsManager.doCapturePrizeEffect(data.position, _gameConfig.cannonPositions[playerSlot], _gameConfig.fishClasses[data.type].value);
+        _fishManager.caughtFish(fishId, playerSlot);
+
+    };
+
+    const caughtFishAnimationEnd = function (data) {
+        _effectsManager.doCapturePrizeEffect(data.position, _gameConfig.cannonPositions[data.playerSlot], _gameConfig.fishClasses[data.type].value);
     };
 
     const removeFish = function (fishId) {
-        _fishManager.removeFish(undefined,fishId);
+        _fishManager.removeFish(undefined,{id:fishId});
     };
 
     const updateEverything = function () {

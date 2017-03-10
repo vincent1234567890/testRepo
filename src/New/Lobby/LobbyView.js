@@ -332,7 +332,8 @@ const LobbyView = (function () {
     }
 
     function formatWithCommas(x) {
-        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        // return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+        return x.toLocaleString('en-US', {maximumFractionDigits: 2});
     }
 
 

@@ -36,8 +36,6 @@ const GameListButtonPrefab = (function () {
 
     };
 
-
-
     const proto = GameListButtonPrefab.prototype;
 
     proto.getContent = function () {

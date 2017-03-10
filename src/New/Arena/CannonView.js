@@ -188,6 +188,7 @@ const CannonView = (function () {
 
     proto.clearCannonPowerLabel = function () {
         this._cannonPowerLabel.setString('');
+        this.setCannonSprite(1);
     };
 
     proto.shootTo = function (angle) {

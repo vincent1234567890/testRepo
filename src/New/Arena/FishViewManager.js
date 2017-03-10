@@ -5,28 +5,28 @@
 const FishViewManager = (function(){
 
 
-    const FishViewManager = function(fishGameArena, gameConfig){
+    const FishViewManager = function(fishGameArena, gameConfig, animationEndEvent){
         // console.log
 
-        cc.spriteFrameCache.addSpriteFrames(res.SquidPlist);
-        cc.spriteFrameCache.addSpriteFrames(res.PufferfishPlist);
-        cc.spriteFrameCache.addSpriteFrames(res.TurtlePlist);
-        cc.spriteFrameCache.addSpriteFrames(res.PorgyPlist);
-        cc.spriteFrameCache.addSpriteFrames(res.StingrayPlist);
-        cc.spriteFrameCache.addSpriteFrames(res.LanternPlist);
-        cc.spriteFrameCache.addSpriteFrames(res.ButterflyPlist);
-        cc.spriteFrameCache.addSpriteFrames(res.GoldSharkPlist);
-        cc.spriteFrameCache.addSpriteFrames(res.SharkPlist);
-        cc.spriteFrameCache.addSpriteFrames(res.SmallFishPlist);
-
-        cc.spriteFrameCache.addSpriteFrames(res.AmphiprionPlist);
-        cc.spriteFrameCache.addSpriteFrames(res.AmphiprionBWPlist);
-        cc.spriteFrameCache.addSpriteFrames(res.GrouperFishPlist);
-        cc.spriteFrameCache.addSpriteFrames(res.MarlinsFishPlist);
-        cc.spriteFrameCache.addSpriteFrames(res.AngelFishPlist);
-        cc.spriteFrameCache.addSpriteFrames(res.ButterflyPlist);
-        cc.spriteFrameCache.addSpriteFrames(res.HorseshoeCrabPlist);
-        cc.spriteFrameCache.addSpriteFrames(res.PaddleFishPlist);
+        // cc.spriteFrameCache.addSpriteFrames(res.SquidPlist);
+        // cc.spriteFrameCache.addSpriteFrames(res.PufferfishPlist);
+        // cc.spriteFrameCache.addSpriteFrames(res.TurtlePlist);
+        // cc.spriteFrameCache.addSpriteFrames(res.PorgyPlist);
+        // cc.spriteFrameCache.addSpriteFrames(res.StingrayPlist);
+        // cc.spriteFrameCache.addSpriteFrames(res.LanternPlist);
+        // cc.spriteFrameCache.addSpriteFrames(res.ButterflyPlist);
+        // cc.spriteFrameCache.addSpriteFrames(res.GoldSharkPlist);
+        // cc.spriteFrameCache.addSpriteFrames(res.SharkPlist);
+        // cc.spriteFrameCache.addSpriteFrames(res.SmallFishPlist);
+        //
+        // cc.spriteFrameCache.addSpriteFrames(res.AmphiprionPlist);
+        // cc.spriteFrameCache.addSpriteFrames(res.AmphiprionBWPlist);
+        // cc.spriteFrameCache.addSpriteFrames(res.GrouperFishPlist);
+        // cc.spriteFrameCache.addSpriteFrames(res.MarlinsFishPlist);
+        // cc.spriteFrameCache.addSpriteFrames(res.AngelFishPlist);
+        // cc.spriteFrameCache.addSpriteFrames(res.ButterflyPlist);
+        // cc.spriteFrameCache.addSpriteFrames(res.HorseshoeCrabPlist);
+        // cc.spriteFrameCache.addSpriteFrames(res.PaddleFishPlist);
 
 
         //new game
@@ -58,6 +58,7 @@ const FishViewManager = (function(){
         this._fishes = {};
         this._fishGameArena = fishGameArena;
         this._gameConfig = gameConfig;
+        this._onAnimationEndEvent = animationEndEvent;
 
         // this.rotationFunction = rotationFunction;
 
@@ -75,15 +76,18 @@ const FishViewManager = (function(){
         return this._fishes[id];
     };
     
-    proto.caughtFish = function (id) {
+    proto.caughtFish = function (id, playerSlot) {
         // console.log("caughtFish : id", id);
-        return this._fishes[id].killFish(this, this.removeFish, id);
+        this._fishes[id].killFish(this, this.removeFish, id, playerSlot);
     };
 
-    proto.removeFish = function (reference, id) {
+    proto.removeFish = function (reference, data) {
         // console.log("removeFish: ", reference, "id", id);
-        this._fishes[id].destroyView(this._parent);
-        delete this._fishes[id];
+        this._fishes[data.id].destroyView(this._parent);
+        if(data.type && data.position && data.playerSlot) {
+            this._onAnimationEndEvent(data);
+        }
+        delete this._fishes[data.id];
     };
 
     proto.update = function () {
