@@ -32,6 +32,13 @@ const ReferenceName = {
     LobbySettingsButton : "#Lobby Setting.png",
     TopBg : "#Top Base.png",
 
+    //floating menu
+    FloatingMenuButtonBackground : "MenuButtonIdle.png",
+    FloatingMenuButtonBackgroundDown : "MenuButtonOnPress.png",
+    FloatingMenuButtonSettingsIcon :"#SettingIcon.png",
+    FloatingMenuButtonSettingsText : "#SettingChinese.png",
+
+
     //Profile
     ProfileBackground : "#Profile POut BG.png",
     ProfileFishBackground : "#Profile POut Fish Box.png",

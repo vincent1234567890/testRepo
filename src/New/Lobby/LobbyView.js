@@ -218,7 +218,7 @@ const LobbyView = (function () {
         listView.setContentSize(cc.size(width, height));
         // listView.setInnerContainerSize(200,200)
         listView.setAnchorPoint(cc.p(0.5, 0.5));
-        listView.setPosition(width / 2, height / 2 - 150);
+        listView.setPosition(width / 2, height / 2);
 
         const gameList = _theme.GameList;
         for (let i = 0; i < gameList.length; i++) {
