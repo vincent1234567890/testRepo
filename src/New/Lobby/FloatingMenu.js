@@ -12,14 +12,14 @@ const FloatingMenu = (function () {
         _theme = ThemeDataManager.getThemeDataList("FloatingMenu");
 
         const listView = new ccui.ListView();
-        // listView.setDirection(ccui.ScrollView.DIR_HORIZONTAL);
+        listView.setDirection(ccui.ScrollView.DIR_HORIZONTAL);
         // listView.setTouchEnabled(true);
         // listView.setBounceEnabled(true);
-        // // listView.setBackGroundImage(res.HelloWorld_png);
-        // listView.setContentSize(cc.size(width, height));
-        // // listView.setInnerContainerSize(200,200)
-        // listView.setAnchorPoint(cc.p(0.5, 0.5));
-        // listView.setPosition(width / 2, height / 2 - 150);
+        // listView.setBackGroundImage(res.HelloWorld_png);
+        listView.setContentSize(cc.size(500, 100));
+        // listView.setInnerContainerSize(200,200)
+        listView.setAnchorPoint(cc.p(0.5, 0.5));
+        listView.setPosition(_theme["SettingsButton"][0],_theme["SettingsButton"][1]);
 
         const settings = doButton(ReferenceName.FloatingMenuButtonSettingsIcon,
             ReferenceName.FloatingMenuButtonBackground,
@@ -28,9 +28,10 @@ const FloatingMenu = (function () {
             onSettingsSelected
         );
 
-        _parent.addChild(settings);
-        settings.setPosition(_theme["SettingsButton"][0],_theme["SettingsButton"][1]);
+        // _parent.addChild(settings);
+        // settings.setPosition(_theme["SettingsButton"][0],_theme["SettingsButton"][1]);
 
+        listView.pushBackCustomItem(settings);
 
 
 
