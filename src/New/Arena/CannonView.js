@@ -137,7 +137,7 @@ const CannonView = (function () {
 
     proto.updateCannonPowerLabel = function (cannonPower) {
         this._cannonPowerLabel.setString(String(cannonPower));
-        cc.audioEngine.playEffect(res.GunShotSound);
+        cc.audioEngine.playEffect(res.GunCockSound);
         this.setCannonSprite(cannonPower);
     };
 
@@ -200,11 +200,11 @@ const CannonView = (function () {
     proto.animateShootTo = function () { //Request to remove spark sprite.
         if (this._isAnimating) {
             this._cannonSprite.stopAction(this._sequence);
-            // cc.audioEngine.playEffect(res.GunShotSound);
+            // cc.audioEngine.stopEffect(res.GunShotSound);
             // this._sparkSprite.stopAction(this._sparkSequence);
         }
         // this._sparkSprite.setVisible(true);
-
+        cc.audioEngine.playEffect(res.GunShotSound);
         this._isAnimating = true;
         this._cannonSprite.runAction(this._sequence);
 
@@ -215,7 +215,7 @@ const CannonView = (function () {
     proto.onAnimateShootEnd = function () {
         this._isAnimating = false;
         // this._sparkSprite.setVisible(false);
-        cc.audioEngine.playEffect(res.GunShotSound);
+
     };
 
     proto.setupCannonChangeMenu = function (cannonManager, gameConfig, slot, callbackCannonDown, callbackCannonUp) {

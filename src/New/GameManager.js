@@ -188,7 +188,7 @@ const GameManager = function () {
             // _profileManger = new ProfileManager();
             _optionsManager = new OptionsManager(onSettingsButton, undefined, onLeaveArena);
             _lobbyWaterCausticsManager = new LobbyWaterCaustics();
-            _floatingMenuManager = new FloatingMenu();
+            // _floatingMenuManager = new FloatingMenu();
         }else {
             _lobbyManager.displayView(_playerData, onSettingsButton, onGameSelected,onRequestShowProfile);
         }

@@ -6,6 +6,8 @@ const OptionsView = (function () {
     "use strict";
     const ENDOFFSET = 0.05;
     let thisParent;
+    let _musicSlider;
+    let _soundSlider;
     const ZORDER = 10;
     let _background;
     // let _touchlayer;
@@ -18,18 +20,18 @@ const OptionsView = (function () {
         _background = new cc.Sprite(ReferenceName.OptionsBG);
         _background.setPosition(cc.view.getDesignResolutionSize().width/2, cc.view.getDesignResolutionSize().height / 2);
 
-        this._music = createSlider("Music", musicValueChangedEvent, PlayerPreferences.getMusicVolume());
-        this._sound = createSlider("Sound", soundValueChangedEvent, PlayerPreferences.getSoundVolume());
+        _musicSlider = createSlider("Music", musicValueChangedEvent, PlayerPreferences.getMusicVolume());
+        _soundSlider = createSlider("Sound", soundValueChangedEvent, PlayerPreferences.getSoundVolume());
 
-        this._music.setPosition(_background.getContentSize().width/2 + 47.5,_background.getContentSize().height/2 + 69.2);
-        this._sound.setPosition(_background.getContentSize().width/2 + 47.5,_background.getContentSize().height/2 + 4.1);
+        _musicSlider.setPosition(_background.getContentSize().width/2 + 47.5,_background.getContentSize().height/2 + 69.2);
+        _soundSlider.setPosition(_background.getContentSize().width/2 + 47.5,_background.getContentSize().height/2 + 4.1);
 
         // _touchlayer = new TouchLayerRefactored(dismissCallback);
         // _touchlayer.setSwallowTouches(true);
 
         // _background.addChild(_touchlayer,-1);
-        _background.addChild(this._music);
-        _background.addChild(this._sound);
+        _background.addChild(_musicSlider);
+        _background.addChild(_soundSlider);
 
         this._parent.addChild(_background);
 
@@ -77,7 +79,7 @@ const OptionsView = (function () {
 
     function soundValueChangedEvent(sender, controlEvent){
         PlayerPreferences.setSoundVolume(sender.getValue());
-        cc.audioEngine.setEffectsVolume(1 - (sender.getValue().toFixed(2)-ENDOFFSET)); // because it is flipped
+        cc.audioEngine.setEffectsVolume(1 - (sender.getValue().toFixed(2)-ENDOFFSET)); // because it is flipped\
     }
 
     function dismissCallback(touch){
@@ -89,6 +91,8 @@ const OptionsView = (function () {
         // _touchlayer.setEnable(false);
         thisParent.setLocalZOrder(-1000);
         _background.setVisible(false);
+        _musicSlider.setEnabled(false);
+        _soundSlider.setEnabled(false);
         BlockingManager.deregisterBlock(dismissCallback);
         // console.log("disable!", thisParent.getLocalZOrder());
     }
@@ -101,6 +105,8 @@ const OptionsView = (function () {
         // console.log("optionsview Show");
         BlockingManager.registerBlock(dismissCallback);
         thisParent.setLocalZOrder(ZORDER);
+        _musicSlider.setEnabled(true);
+        _soundSlider.setEnabled(true);
         _background.setVisible(true);
     };
 
