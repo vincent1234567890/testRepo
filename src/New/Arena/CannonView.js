@@ -23,7 +23,7 @@ const CannonView = (function () {
         }
         animationArray.push(new cc.SpriteFrame(" "));
         this._sparkSprite = new cc.Sprite();
-        this._sparkSequence = new cc.Sequence(new cc.Animate(new cc.Animation(animationArray, this._gameConfig.shootInterval / 1000 / animationArray.length)));
+        // this._sparkSequence = new cc.Sequence(new cc.Animate(new cc.Animation(animationArray, this._gameConfig.shootInterval / 1000 / animationArray.length)));
 
         this.createView(slot);
 
@@ -102,8 +102,6 @@ const CannonView = (function () {
         }
         this._cannonPowerBG.x = this.pos[0];
         this._cannonPowerBG.y = this.pos[1];
-
-
     };
 
     proto.getCannonAnimation = function (cannonPower) {
@@ -123,7 +121,6 @@ const CannonView = (function () {
         }
         animationArray.push(cc.spriteFrameCache.getSpriteFrame("Cannon" + cannonPower + "_00000.png"));
         return new cc.Animate(new cc.Animation(animationArray, this._gameConfig.shootInterval / 1000 / animationArray.length));
-
     };
 
     proto.setDirection = function (slot) {
@@ -140,7 +137,7 @@ const CannonView = (function () {
 
     proto.updateCannonPowerLabel = function (cannonPower) {
         this._cannonPowerLabel.setString(String(cannonPower));
-
+        cc.audioEngine.playEffect(res.GunCockSound);
         this.setCannonSprite(cannonPower);
     };
 
@@ -188,6 +185,7 @@ const CannonView = (function () {
 
     proto.clearCannonPowerLabel = function () {
         this._cannonPowerLabel.setString('');
+        this.setCannonSprite(1);
     };
 
     proto.shootTo = function (angle) {
@@ -202,22 +200,22 @@ const CannonView = (function () {
     proto.animateShootTo = function () { //Request to remove spark sprite.
         if (this._isAnimating) {
             this._cannonSprite.stopAction(this._sequence);
-            cc.audioEngine.playEffect(res.GunShotSound);
+            // cc.audioEngine.stopEffect(res.GunShotSound);
             // this._sparkSprite.stopAction(this._sparkSequence);
         }
         // this._sparkSprite.setVisible(true);
-
+        cc.audioEngine.playEffect(res.GunShotSound);
         this._isAnimating = true;
         this._cannonSprite.runAction(this._sequence);
 
-        cc.audioEngine.playEffect(res.GunCockSound);
+        // cc.audioEngine.playEffect(res.GunCockSound);
         // this._sparkSprite.runAction(this._sparkSequence);
     };
 
     proto.onAnimateShootEnd = function () {
         this._isAnimating = false;
         // this._sparkSprite.setVisible(false);
-        cc.audioEngine.playEffect(res.GunShotSound);
+
     };
 
     proto.setupCannonChangeMenu = function (cannonManager, gameConfig, slot, callbackCannonDown, callbackCannonUp) {

@@ -1,10 +1,10 @@
 /**
  * Created by eugeneseah on 26/10/16.
  */
-"use strict";
+
 
 const CannonManager = (function () {
-
+    "use strict";
     let _gameConfig;
 
     function CannonManager(gameConfig, index, isPlayer) {

@@ -58,7 +58,7 @@ const FishView = (function () {
         // }
     };
 
-    proto.killFish = function (target, callback, id) {
+    proto.killFish = function (target, callback, id, playerSlot) {
         //console.log("killFish:", this.type, FishAnimationData[this.type], FishAnimationData[this.type][FishAnimationEnum.death], FishAnimationData[this.type][FishAnimationEnum.death]&&FishAnimationData[this.type][FishAnimationEnum.death].length);
         if (FishAnimationData[this.type][FishAnimationEnum.death]
             && FishAnimationData[this.type][FishAnimationEnum.death].animation
@@ -79,9 +79,9 @@ const FishView = (function () {
             // this._sprite.setBlendFunc()
         }
 
-        const notify = new cc.Sequence(new cc.DelayTime(1), new cc.CallFunc(callback, target, id));
+        const notify = new cc.Sequence(new cc.DelayTime(1), new cc.CallFunc(callback, target, {position : this._parent.getPosition(), type : this.type, playerSlot: playerSlot, id : id}));
         this._sprite.runAction(notify);
-        return {position : this._parent.getPosition(), type : this.type};
+        // return {position : this._parent.getPosition(), type : this.type};
     };
 
     proto.destroyView = function (parent) {
@@ -93,11 +93,7 @@ const FishView = (function () {
         this._parent.setPosition(pos);
         this._parent.setRotation(rot);
 
-        if (rot%360 > 90 && rot%360 <=270){
-            this._sprite.flippedY = true;
-        }else{
-            this._sprite.flippedY = false;
-        }
+        this._sprite.flippedY = (rot%360 > 90 && rot%360 <=270);
 
         if (!debugReported && this._sprite.getContentSize().width == 0){
             debugReported = true;

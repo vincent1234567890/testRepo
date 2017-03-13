@@ -20,14 +20,20 @@ const PlayerViewStaticPrefab = (function () {
         const base = this._base = new cc.Sprite(ReferenceName.Base);
         this._parent.addChild(base);
 
-        const coinIcon = new cc.Sprite(ReferenceName.CoinIcon);
-        coinIcon.setPosition(themeData.CoinIcon[0],themeData.CoinIcon[1]);
-        base.addChild(coinIcon);
+        this._coinIcon = new cc.Sprite(ReferenceName.CoinIcon);
+        this._coinIcon.setPosition(themeData.CoinIcon[0],themeData.CoinIcon[1]);
+        this._coinIcon.setVisible(false);
+        base.addChild(this._coinIcon);
 
-        this.playerIcon = new cc.Sprite(ReferenceName.PlayerIcon);
-        this.playerIcon.setPosition(themeData.PlayerIcon[0],themeData.PlayerIcon[1]);
-        this.playerIcon.setVisible(false);
-        base.addChild(this.playerIcon);
+        this._playerIcon = new cc.Sprite(ReferenceName.PlayerIcon);
+        this._playerIcon.setPosition(themeData.PlayerIcon[0],themeData.PlayerIcon[1]);
+        this._playerIcon.setVisible(isPlayer);
+        base.addChild(this._playerIcon);
+
+        this._otherPlayerIcon = new cc.Sprite(ReferenceName.OtherPlayerIcon);
+        this._otherPlayerIcon.setPosition(themeData.PlayerIcon[0],themeData.PlayerIcon[1]);
+        this._otherPlayerIcon.setVisible(false);
+        base.addChild(this._otherPlayerIcon);
 
         const fontDef = new cc.FontDefinition();
         fontDef.fontName = "Arial";
@@ -74,9 +80,7 @@ const PlayerViewStaticPrefab = (function () {
         }
         this._coinStackManager = new CoinStackManager(this._parent);
 
-        if (isPlayer){
-            this.setPlayer();
-        }
+        // this.setPlayer(isPlayer);
     };
 
     const proto = PlayerViewStaticPrefab.prototype;
@@ -91,19 +95,27 @@ const PlayerViewStaticPrefab = (function () {
         if ( playerData.scoreChange && playerData.scoreChange > 0){
             this.AnimateCoinStack(playerData.scoreChange);
         }
-        let gold = Math.floor(playerData.score).toString();
-        if (gold.length > 9) {
-            gold = gold.substring(0,8) + "..";
+        let gold = Math.floor(playerData.score).toLocaleString('en-US', {maximumFractionDigits: 2});
+        if (gold.length > 10) {
+            gold = gold.substring(0,9) + "..";
         }
 
         this._gold.setString(gold);
         GUIFunctions.shrinkNumberString(playerData.score);
+        if(!this._isPlayer){
+            this._coinIcon.setVisible(true);
+            this.setPlayer(this._isPlayer);
+        }
         // this._gem.setString(0);
     };
 
     proto.clearPlayerData = function () {
         this._playerName.setString('');
         this._gold.setString('');
+        this._playerIcon.setVisible(false);
+        this._otherPlayerIcon.setVisible(false);
+        this._coinIcon.setVisible(false);
+        this._isPlayer = null;
         // this._gem.setString('');
     };
 
@@ -112,17 +124,13 @@ const PlayerViewStaticPrefab = (function () {
     };
 
     proto.AnimateCoinStack = function ( increase ) {
-        // const coinStack = [];
-        // const deckStacks = [];
-
-        // const coinStack = new CoinStackEffect(this._parent, 15, increase);
-
-
         this._coinStackManager.addStack(15,increase);
     };
 
-    proto.setPlayer = function () {
-        this.playerIcon.setVisible(true);
+    proto.setPlayer = function (isPlayer) {
+        this._isPlayer = isPlayer;
+        this._playerIcon.setVisible(isPlayer);
+        this._otherPlayerIcon.setVisible(!isPlayer);
     };
 
 

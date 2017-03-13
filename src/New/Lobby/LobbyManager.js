@@ -23,8 +23,19 @@ const LobbyManager = (function () {
 // =======
 
     let _profileManager;
+    let _lobbyTheme;
 
     const LobbyManager = function (playerData, settingsCallback, onGameSelectedCallback) {
+        _lobbyTheme = ThemeDataManager.getThemeDataList("LobbyData");
+        // const gameList = _lobbyTheme.GameList;
+        // for ( let i = 0; i < gameList.length; i++ )
+        // {
+        //     cc.spriteFrameCache.addSpriteFrames(res["GameType" + gameList[i] + "Plist"]);
+        // }
+        const plists = ResourceLoader.getPlists("Lobby");
+        for ( let list in plists){
+            cc.spriteFrameCache.addSpriteFrames(plists[list]);
+        }
         cc.spriteFrameCache.addSpriteFrames(res.LobbyUIPlist);
         this._parent = parent;
         _profileManager = new ProfileManager();
@@ -36,7 +47,7 @@ const LobbyManager = (function () {
             // this._parent.removeChild(this._view);
             this._view.destroyView();
         }
-        this._view = new LobbyView(playerData, settingsCallback,onGameSelectedCallback, onRequestShowProfile);
+        this._view = new LobbyView(playerData,_lobbyTheme, settingsCallback,onGameSelectedCallback, onRequestShowProfile);
     };
 
     function onRequestShowProfile(){
