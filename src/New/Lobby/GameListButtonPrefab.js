@@ -21,7 +21,9 @@ const GameListButtonPrefab = (function () {
         button.gameData = itemData;
         button.setPosition(button.getContentSize().width/2-120, button.getContentSize().height/2);
         button.addTouchEventListener(touchEvent);
-        button.setAnchorPoint(0.5,0.5);
+        button.setPressedActionEnabled(false); // set the resize animation to false
+
+        // button.setAnchorPoint(0.5,0.5);
         // button.setContentSize(cc.size(300,500));
 
         this._button = button;
@@ -29,7 +31,7 @@ const GameListButtonPrefab = (function () {
         let content = new ccui.Widget();
         content.setContentSize(widthOfButton,button.getContentSize().height);
         content.addChild(button);
-        content.setAnchorPoint(0.5,0.5);
+        // content.setAnchorPoint(0.5,0.5);
 
         this._content = content;
         this._selectedCallBack = selectedCallback;

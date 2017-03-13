@@ -37,6 +37,17 @@ const ReferenceName = {
     FloatingMenuButtonBackgroundDown : "MenuButtonOnPress.png",
     FloatingMenuButtonSettingsIcon :"#SettingIcon.png",
     FloatingMenuButtonSettingsText : "#SettingChinese.png",
+    FloatingMenuButtonAssetsIcon : "#AssetsIcon.png",
+    FloatingMenuButtonAssetsText : "#AssetsChinese.png",
+    FloatingMenuButtonInfoIcon : "#InfoIcon.png",
+    FloatingMenuButtonInfoText : "#InfoChinese.png",
+    FloatingMenuButtonLeaderboardIcon : "#RankingIcon.png",
+    FloatingMenuButtonLeaderboardText : "#RankingChinese.png",
+    FloatingMenuButtonFAQIcon : "#GameFAQIcon.png",
+    FloatingMenuButtonFAQText : "#GameFAQChinese.png",
+
+
+
 
 
     //Profile

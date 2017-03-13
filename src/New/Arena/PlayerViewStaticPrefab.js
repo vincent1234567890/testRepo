@@ -22,6 +22,7 @@ const PlayerViewStaticPrefab = (function () {
 
         this._coinIcon = new cc.Sprite(ReferenceName.CoinIcon);
         this._coinIcon.setPosition(themeData.CoinIcon[0],themeData.CoinIcon[1]);
+        this._coinIcon.setVisible(false);
         base.addChild(this._coinIcon);
 
         this._playerIcon = new cc.Sprite(ReferenceName.PlayerIcon);

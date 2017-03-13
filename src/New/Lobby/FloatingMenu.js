@@ -11,16 +11,16 @@ const FloatingMenu = (function () {
 
         _theme = ThemeDataManager.getThemeDataList("FloatingMenu");
 
-        const listView = new ccui.ListView();
-        listView.setDirection(ccui.ScrollView.DIR_HORIZONTAL);
-        // listView.setTouchEnabled(true);
-        // listView.setBounceEnabled(true);
-        // listView.setBackGroundImage(res.HelloWorld_png);
-        listView.setContentSize(cc.size(500, 100));
-        // listView.setInnerContainerSize(200,200)
-        listView.setAnchorPoint(cc.p(0.5, 0.5));
-        listView.setPosition(_theme["SettingsButton"][0],_theme["SettingsButton"][1]);
-
+        // const listView = new ccui.ListView();
+        // listView.setDirection(ccui.ScrollView.DIR_HORIZONTAL);
+        // // listView.setTouchEnabled(true);
+        // // listView.setBounceEnabled(true);
+        // // listView.setBackGroundImage(res.HelloWorld_png);
+        // listView.setContentSize(cc.size(500, 100));
+        // // listView.setInnerContainerSize(200,200)
+        // listView.setAnchorPoint(cc.p(0.5, 0.5));
+        // // listView.setPosition(_theme["SettingsButton"][0],_theme["SettingsButton"][1]);
+        // listView.setPosition(500,500);
         const settings = doButton(ReferenceName.FloatingMenuButtonSettingsIcon,
             ReferenceName.FloatingMenuButtonBackground,
             ReferenceName.FloatingMenuButtonBackgroundDown,
@@ -28,11 +28,52 @@ const FloatingMenu = (function () {
             onSettingsSelected
         );
 
-        // _parent.addChild(settings);
-        // settings.setPosition(_theme["SettingsButton"][0],_theme["SettingsButton"][1]);
+        _parent.addChild(settings);
+        settings.setPosition(_theme["SettingsButton"][0],_theme["SettingsButton"][1]);
 
-        listView.pushBackCustomItem(settings);
+        const assets = doButton(ReferenceName.FloatingMenuButtonAssetsIcon,
+            ReferenceName.FloatingMenuButtonBackground,
+            ReferenceName.FloatingMenuButtonBackgroundDown,
+            ReferenceName.FloatingMenuButtonAssetsText,
+            onAssetsSelected
+        );
 
+        _parent.addChild(assets);
+        assets.setPosition(_theme["AssetsButton"][0],_theme["AssetsButton"][1]);
+
+        const info = doButton(ReferenceName.FloatingMenuButtonInfoIcon,
+            ReferenceName.FloatingMenuButtonBackground,
+            ReferenceName.FloatingMenuButtonBackgroundDown,
+            ReferenceName.FloatingMenuButtonInfoText,
+            onInfoSelected
+        );
+
+        _parent.addChild(info);
+        info.setPosition(_theme["InfoButton"][0],_theme["InfoButton"][1]);
+
+        const leaderboard = doButton(ReferenceName.FloatingMenuButtonLeaderboardIcon,
+            ReferenceName.FloatingMenuButtonBackground,
+            ReferenceName.FloatingMenuButtonBackgroundDown,
+            ReferenceName.FloatingMenuButtonLeaderboardText,
+            onLeaderboardSelected
+        );
+
+        _parent.addChild(leaderboard);
+        leaderboard.setPosition(_theme["LeaderboardButton"][0],_theme["LeaderboardButton"][1]);
+
+        const FAQ = doButton(ReferenceName.FloatingMenuButtonFAQIcon,
+            ReferenceName.FloatingMenuButtonBackground,
+            ReferenceName.FloatingMenuButtonBackgroundDown,
+            ReferenceName.FloatingMenuButtonFAQText,
+            onFAQSelected
+        );
+
+        _parent.addChild(FAQ);
+        FAQ.setPosition(_theme["FAQButton"][0],_theme["FAQButton"][1]);
+        //
+        // listView.pushBackCustomItem(settings);
+        //
+        // _parent.addChild(listView);
 
 
     };
@@ -42,7 +83,7 @@ const FloatingMenu = (function () {
             switch (type) {
                 case ccui.Widget.TOUCH_ENDED:
                     // gameSelected(sender);
-                    console.log(sender.gameData);
+                    console.log(sender);
                     selectedCallBack(sender);
                     break;
             }
@@ -73,6 +114,22 @@ const FloatingMenu = (function () {
 
     function onSettingsSelected(){
 
+
+    }
+
+    function onAssetsSelected(){
+
+    }
+
+    function onInfoSelected() {
+
+    }
+
+    function onLeaderboardSelected(){
+
+    }
+
+    function onFAQSelected(){
 
     }
 
