@@ -5,7 +5,7 @@
 var TouchLayerRefactored = cc.Layer.extend({
     _enable: false,
     _callback: null,
-    _listener : null,
+    _listener: null,
     ctor: function (callback) {
         this._super();
         this.setEnable(true);
@@ -40,6 +40,7 @@ var TouchLayerRefactored = cc.Layer.extend({
         var touchPoint = touches.getLocation();
         if (this._callback) {
             this._callback(touchPoint, TouchType.Began);
+            console.log(touches);
         }
         return true;
     },
@@ -59,8 +60,8 @@ var TouchLayerRefactored = cc.Layer.extend({
         if (this._callback) {
             this._callback(touchPoint, TouchType.Ended);
         }
-
     },
+
     onTouchesCancelled: function (touches, event) {
         if (!this._enable) return;
         // var touchPoint = touches.getLocation();
@@ -69,15 +70,15 @@ var TouchLayerRefactored = cc.Layer.extend({
         }
     },
 
-    setSwallowTouches: function(isSwallow){
+    setSwallowTouches: function (isSwallow) {
         this._listener.setSwallowTouches(isSwallow);
     },
 });
 
 const TouchType = { // same as cc.EventTouch.EventCode
-    Began : 0,
-    Moved : 1,
-    Ended : 2,
+    Began: 0,
+    Moved: 1,
+    Ended: 2,
     Cancelled: 3
 };
 
