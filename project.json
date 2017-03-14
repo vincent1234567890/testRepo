@@ -33,6 +33,7 @@
         "src/New/BlockingManager.js",
         "src/New/BlockingView.js",
 
+        "src/New/Lobby/FloatingMenu.js",
         "src/New/Lobby/GameListButtonPrefab.js",
         "src/New/Lobby/LobbyWaterCausticInstance.js",
         "src/New/Lobby/LobbyWaterCaustics.js",

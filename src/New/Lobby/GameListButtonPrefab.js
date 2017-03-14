@@ -19,8 +19,10 @@ const GameListButtonPrefab = (function () {
         button.setTouchEnabled(true);
         button.loadTextures(itemData.gameName +"Base.png",undefined, undefined, ccui.Widget.PLIST_TEXTURE);
         button.gameData = itemData;
-        button.setPosition(button.getContentSize().width/2-120, button.getContentSize().height/2 + 120);
+        button.setPosition(button.getContentSize().width/2-120, button.getContentSize().height/2);
         button.addTouchEventListener(touchEvent);
+        button.setPressedActionEnabled(false); // set the resize animation to false
+
         // button.setAnchorPoint(0.5,0.5);
         // button.setContentSize(cc.size(300,500));
 
@@ -35,8 +37,6 @@ const GameListButtonPrefab = (function () {
         this._selectedCallBack = selectedCallback;
 
     };
-
-
 
     const proto = GameListButtonPrefab.prototype;
 

@@ -27,10 +27,14 @@ const LobbyManager = (function () {
 
     const LobbyManager = function (playerData, settingsCallback, onGameSelectedCallback) {
         _lobbyTheme = ThemeDataManager.getThemeDataList("LobbyData");
-        const gameList = _lobbyTheme.GameList;
-        for ( let i = 0; i < gameList.length; i++ )
-        {
-            cc.spriteFrameCache.addSpriteFrames(res["GameType" + gameList[i] + "Plist"]);
+        // const gameList = _lobbyTheme.GameList;
+        // for ( let i = 0; i < gameList.length; i++ )
+        // {
+        //     cc.spriteFrameCache.addSpriteFrames(res["GameType" + gameList[i] + "Plist"]);
+        // }
+        const plists = ResourceLoader.getPlists("Lobby");
+        for ( let list in plists){
+            cc.spriteFrameCache.addSpriteFrames(plists[list]);
         }
         cc.spriteFrameCache.addSpriteFrames(res.LobbyUIPlist);
         this._parent = parent;

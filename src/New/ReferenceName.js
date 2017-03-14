@@ -12,6 +12,7 @@ const ReferenceName = {
     CoinIcon : "#CoinIcon.png",
     CoinStackCoin : "#DeckCoins.png",
     PlayerIcon : "#PlayerIcon.png",
+    OtherPlayerIcon : "#PlayerIcon2.png",
 
     //Lobby
     LobbyBackground : "#Lobby BG 1.png",
@@ -30,6 +31,24 @@ const ReferenceName = {
     ProfileImage : "#Profile Image.png",
     LobbySettingsButton : "#Lobby Setting.png",
     TopBg : "#Top Base.png",
+
+    //floating menu
+    FloatingMenuButtonBackground : "MenuButtonIdle.png",
+    FloatingMenuButtonBackgroundDown : "MenuButtonOnPress.png",
+    FloatingMenuButtonSettingsIcon :"#SettingIcon.png",
+    FloatingMenuButtonSettingsText : "#SettingChinese.png",
+    FloatingMenuButtonAssetsIcon : "#AssetsIcon.png",
+    FloatingMenuButtonAssetsText : "#AssetsChinese.png",
+    FloatingMenuButtonInfoIcon : "#InfoIcon.png",
+    FloatingMenuButtonInfoText : "#InfoChinese.png",
+    FloatingMenuButtonLeaderboardIcon : "#RankingIcon.png",
+    FloatingMenuButtonLeaderboardText : "#RankingChinese.png",
+    FloatingMenuButtonFAQIcon : "#GameFAQIcon.png",
+    FloatingMenuButtonFAQText : "#GameFAQChinese.png",
+
+
+
+
 
     //Profile
     ProfileBackground : "#Profile POut BG.png",
