@@ -77,9 +77,7 @@ const BulletManager = (function(){
         const bullet = _bulletCache[bulletId];
 
         if (bullet){
-            bullet.reclaimView();
-            _bulletPool.free(bullet);
-            delete _bulletCache[bulletId];
+            this.removeBullet(bulletId);
             const bulletModel = _fishGameArena && _fishGameArena.getBullet(bulletId);
             if (bulletModel){
                 return { position:bulletModel.position, gunId : bulletModel.gunId}
@@ -89,6 +87,16 @@ const BulletManager = (function(){
         }
         return null;
     };
+
+    proto.removeBullet = function (bulletId) {
+        const bullet = _bulletCache[bulletId];
+
+        if (bullet) {
+            bullet.reclaimView();
+            _bulletPool.free(bullet);
+            delete _bulletCache[bulletId];
+        }
+    }
 
     proto.getView = function () {
         return _parent;

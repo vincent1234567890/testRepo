@@ -74,8 +74,11 @@ const GameManager = function () {
         if (bulletData) {
             _netManager.explodeAt(_gameConfig,bulletData);
         }
-
     };
+
+    const removeBullet = function(bulletId){
+        _bulletManager.removeBullet(bulletId);
+    }
 
     const setGameState = function (config, playerId, playerSlot) {
         // console.log(JSON.stringify(config));
@@ -284,6 +287,7 @@ const GameManager = function () {
         clearPlayerState: clearPlayerState,
         shootTo: shootTo,
         explodeBullet: explodeBullet,
+        removeBullet: removeBullet,
         createFish: createFish,
         removeFish: removeFish,
         caughtFish: caughtFish,
