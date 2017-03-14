@@ -51,7 +51,6 @@ const FishViewManager = (function(){
             cc.spriteFrameCache.addSpriteFrames(plists[list]);
         }
 
-        // FishAnimationData();
         FishAnimationData.initialise();
 
         this._parent = new cc.Node();
@@ -61,7 +60,6 @@ const FishViewManager = (function(){
         this._onAnimationEndEvent = animationEndEvent;
 
         // this.rotationFunction = rotationFunction;
-
         GameView.addView(this._parent);
     };
 

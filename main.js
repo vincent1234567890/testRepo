@@ -128,9 +128,6 @@ var cocos2dApp = cc.game.onStart = function() {
         }
     ).catch(console.error.bind(console));
 
-
-
-
     // },
    // var  applicationDidFinishLaunching = function () {
    //      // initialize director

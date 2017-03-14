@@ -29,11 +29,11 @@ const AppManager = (function () {
         _currentScene.addChild(_gameTicker);
         GameManager.initialiseGame(_currentScene, fishGameArena);
         _gameTicker.unpauseTicker();
-
     }
 
     function goBackToLobby(){
         console.log("goBackToLobby!");
+
         if (_gameTicker) {
             _gameTicker.pauseTicker();
             _currentScene.removeChild(_gameTicker, false);

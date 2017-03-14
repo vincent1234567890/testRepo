@@ -17,6 +17,7 @@ const BulletManager = (function(){
     const BulletManager = function (fishGameArena) {
         _parent = new cc.Node();
         _fishGameArena = fishGameArena;
+
         GameView.addView(_parent);
     };
 
@@ -75,7 +76,6 @@ const BulletManager = (function(){
 
     proto.explodeBullet = function (bulletId) {
         const bullet = _bulletCache[bulletId];
-
         if (bullet){
             bullet.reclaimView();
             _bulletPool.free(bullet);
@@ -107,8 +107,6 @@ const BulletManager = (function(){
         GameView.destroyView(_parent);
         _parent = null;
     };
-
-
 
     return BulletManager;
 

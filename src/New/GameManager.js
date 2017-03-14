@@ -234,6 +234,7 @@ const GameManager = function () {
         }
         if (_fishManager) {
             _fishManager.destroyView();
+            _fishManager = null;
         }
         if (_bulletManager) {
             _bulletManager.destroyView();
@@ -243,7 +244,6 @@ const GameManager = function () {
         }
         BlockingManager.destroyView();
         GameView.resetArena();
-
     }
 
     function onSettingsButton(){
@@ -293,6 +293,7 @@ const GameManager = function () {
         isCurrentPlayer: isCurrentPlayer,
 
         //current only used to reset
+        destroyArena : destroyArena,
 
         //debug
         debug: debug,
