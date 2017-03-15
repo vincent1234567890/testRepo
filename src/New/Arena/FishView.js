@@ -48,9 +48,6 @@ const FishView = (function () {
             if (this._currentAnimationAction) {
                 this._sprite.stopAction(this._currentAnimationAction);
             }
-            if(!FishAnimationData[this.type]){
-                console.log()
-            }
             const data = FishAnimationData[this.type][fishAnimationEnum];
             if (data.pivot) {
                 this._sprite.setAnchorPoint(data.pivot);
