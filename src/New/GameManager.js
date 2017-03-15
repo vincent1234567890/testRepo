@@ -240,7 +240,6 @@ const GameManager = function () {
         }
         if (_fishManager) {
             _fishManager.destroyView();
-            _fishManager = null;
         }
         if (_bulletManager) {
             _bulletManager.destroyView();

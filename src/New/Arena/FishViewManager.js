@@ -103,15 +103,17 @@ const FishViewManager = (function(){
     };
 
     proto.destroyView = function(){
-        for ( let fishId in this._fishes){
-            const fishModel = this._fishGameArena.getFish(fishId);
-            if (fishModel) {
-                this._parent.removeChild(fishModel);
-                delete fishModel;
+        if(this._parent) {
+            for (let fishId in this._fishes) {
+                const fishModel = this._fishGameArena.getFish(fishId);
+                if (fishModel) {
+                    this._parent.removeChild(fishModel);
+                    delete fishModel;
+                }
             }
+            GameView.destroyView(this._parent);
+            this._parent = null;
         }
-        GameView.destroyView(this._parent);
-        this._parent = null;
     };
 
     return FishViewManager;

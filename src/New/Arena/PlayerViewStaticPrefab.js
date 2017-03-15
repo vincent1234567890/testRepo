@@ -80,7 +80,9 @@ const PlayerViewStaticPrefab = (function () {
         }
         this._coinStackManager = new CoinStackManager(this._parent);
 
-        // this.setPlayer(isPlayer);
+        if(isPlayer) {
+            this.setPlayer(isPlayer);
+        }
     };
 
     const proto = PlayerViewStaticPrefab.prototype;
