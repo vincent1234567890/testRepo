@@ -28,6 +28,7 @@ const GameManager = function () {
     let _fishManager;
     let _lobbyManager;
     let _floatingMenuManager;
+    let _jackpotManager;
     let _scoreboardManager;
     let _optionsManager;
     let _bulletManager;
@@ -192,6 +193,7 @@ const GameManager = function () {
             _optionsManager = new OptionsManager(onSettingsButton, undefined, onLeaveArena);
             _lobbyWaterCausticsManager = new LobbyWaterCaustics();
             _floatingMenuManager = new FloatingMenu(onSettingsButton);
+            _jackpotManager = new JackpotManager();
         }else {
             _lobbyManager.displayView(_playerData, onSettingsButton, onGameSelected,onRequestShowProfile);
         }

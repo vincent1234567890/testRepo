@@ -46,9 +46,12 @@ const ReferenceName = {
     FloatingMenuButtonFAQIcon : "#GameFAQIcon.png",
     FloatingMenuButtonFAQText : "#GameFAQChinese.png",
 
-
-
-
+    JackpotBackground : "#JackpotIcon.png",
+    JackpotShadow : "#JackpotDropShadow.png",
+    JackpotBar : "#JackpotBar.png",
+    JackpotBarFrame : "#JackpotBarFrame.png",
+    JackpotLight : "#JackpotLigthray.png",
+    JackpotTitleChinese : "#JackpotChineseTitle.png",
 
     //Profile
     ProfileBackground : "#Profile POut BG.png",

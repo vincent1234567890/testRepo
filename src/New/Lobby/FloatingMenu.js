@@ -78,7 +78,6 @@ const FloatingMenu = (function () {
         //
         // _parent.addChild(listView);
 
-
     };
 
     function doButton(iconSprite, buttonImage, buttonSelected, labelImage, selectedCallBack) {
