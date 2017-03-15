@@ -102,7 +102,7 @@ const PlayerViewStaticPrefab = (function () {
 
         this._gold.setString(gold);
         GUIFunctions.shrinkNumberString(playerData.score);
-        if(!this._isPlayer){
+        if(this._isPlayer == null){
             this._coinIcon.setVisible(true);
             this.setPlayer(this._isPlayer);
         }

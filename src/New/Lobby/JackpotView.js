@@ -9,28 +9,36 @@ const JackpotView = (function () {
         const shadow = new cc.Sprite(ReferenceName.JackpotShadow);
         const bar = new cc.Sprite(ReferenceName.JackpotBar);
         const barFrame = new cc.Sprite(ReferenceName.JackpotBarFrame);
-        const text = new cc.Sprite(ReferenceName.JackpotTitleChinese);
+        const title = new cc.Sprite(ReferenceName.JackpotTitleChinese);
+        const light = new cc.Sprite(ReferenceName.JackpotLight);
 
         _parent = new cc.Node();
 
+        _parent.addChild(shadow);
+        shadow.setPosition(0,-5);
+
         _parent.addChild(bg);
-        bg.setAnchorPoint(0.5,0.5);
-        _parent.addChild(shadow,-1);
-        shadow.setAnchorPoint(0.5,0.5);
+
+        _parent.addChild(light);
+        light.runAction(new cc.repeatForever(new cc.rotateBy(25,360)));
+
         _parent.addChild(bar);
-        bar.setAnchorPoint(0.5,0.5);
-        _parent.addChild(barFrame);
         bar.setPosition(0,-22);
-        barFrame.setAnchorPoint(0.5,0.5);
-        _parent.addChild(text);
+
+        _parent.addChild(barFrame);
         barFrame.setPosition(0,-22);
-        text.setAnchorPoint(0.5,0.5);
+
+        _parent.addChild(title);
+        title.setPosition(0,22);
+
 
         GameView.addView(_parent);
 
-        _parent.setPosition(400,400)
+        _parent.setPosition(645,666)
+
 
 
     }
+
     return JackpotView;
 }());
