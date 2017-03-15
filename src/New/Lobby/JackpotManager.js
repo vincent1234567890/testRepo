@@ -5,14 +5,16 @@
 const JackpotManager = (function () {
     "use strict";
 
+    let _view;
     const JackpotManager = function (data) {
-        const view = new JackpotView();
+        _view = new JackpotView();
     };
 
     const proto = JackpotManager.prototype;
 
-
-
+    proto.updateJackpot = function (value) {
+        _view.updateJackpot(value);
+    };
 
     return JackpotManager;
 }());

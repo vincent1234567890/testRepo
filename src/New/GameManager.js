@@ -194,6 +194,7 @@ const GameManager = function () {
             _lobbyWaterCausticsManager = new LobbyWaterCaustics();
             _floatingMenuManager = new FloatingMenu(onSettingsButton);
             _jackpotManager = new JackpotManager();
+            _jackpotManager.updateJackpot(999999999);
         }else {
             _lobbyManager.displayView(_playerData, onSettingsButton, onGameSelected,onRequestShowProfile);
         }
