@@ -15,9 +15,11 @@ const LobbyView = (function () {
     let _onGameSelectedCallback;
     let _profileCallback;
 
-    let _gameButtonsForReset = [];
+    let _goldLabel;
 
-    let gamelist;
+    // let _gameButtonsForReset = [];
+
+    // let gamelist;
     let gameControlList;
 
     const LobbyView = function (playerData, theme, settingsCallback, onGameSelectedCallback, profileCallback) {
@@ -95,43 +97,44 @@ const LobbyView = (function () {
         let fontDef = new cc.FontDefinition();
         fontDef.fontName = "Arial";
         //fontDef.fontWeight = "bold";
-        fontDef.fontSize = "24";
+        fontDef.fontSize = 22;
         fontDef.textAlign = cc.TEXT_ALIGNMENT_CENTER;
         fontDef.fontWeight = "bold";
         fontDef.fillStyle = new cc.Color(255,255,255,255);
 
-        let label = new cc.LabelTTF("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW" , fontDef);
-        // let label = new cc.LabelTTF(playerData.playerState.name , fontDef);
+        // let label = new cc.LabelTTF("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW" , fontDef);
+        let label = new cc.LabelTTF(playerData.playerState.name , fontDef);
         label.enableStroke(new cc.Color(0, 0, 0, 255), 2);
         label.setAnchorPoint(0.5, 0.5);
 
         NameBG.addChild(label);
         label.setPosition(NameBG.getContentSize().width/2,NameBG.getContentSize().height/2);
-        label.setDimensions(cc.size(150,30));
+        label.setDimensions(cc.size(150,25));
 
         const LobbyCoinsBG = new cc.Sprite(ReferenceName.LobbyCoinsBG);
         // coinBG.setPosition(1136,cc.view.getDesignResolutionSize().height - 47);
         size = LobbyCoinsBG.getContentSize();
-        LobbyCoinsBG.setPosition(length - size.width/2,height - size.height/2);
+        LobbyCoinsBG.setPosition(320,600);
         bg.addChild(LobbyCoinsBG,2);
-        fontDef = new cc.FontDefinition();
-        fontDef.fontName = "Arial";
-        fontDef.fontWeight = "bold";
-        fontDef.fontSize = "40";
-        fontDef.fillStyle = new cc.Color(255,255,0,255);
-        fontDef.textAlign = cc.TEXT_ALIGNMENT_RIGHT;
+        // fontDef = new cc.FontDefinition();
+        // fontDef.fontName = "Arial";
+        // fontDef.fontWeight = "bold";
+        // fontDef.fontSize = 22;
+        // fontDef.fillStyle = new cc.Color(255,255,0,255);
+        // fontDef.textAlign = cc.TEXT_ALIGNMENT_CENTER;
 
-        label = new cc.LabelTTF(formatWithCommas(playerData.playerState.score), fontDef);
+        // label = new cc.LabelTTF(formatWithCommas(playerData.playerState.score), fontDef);
+        _goldLabel = new cc.LabelBMFont("", res.GoldenNumbersPlist);
         // label = new cc.LabelTTF("99999999999999999999999", fontDef);
-        LobbyCoinsBG.addChild(label);
-        label.setPosition(LobbyCoinsBG.getContentSize().width - 250,LobbyCoinsBG.getContentSize().height - 50);
+        LobbyCoinsBG.addChild(_goldLabel);
+        _goldLabel.setPosition(size /2,size /2);
         // label.setPosition(0,0);
-        label.setDimensions(cc.size(240,45));
+        // label.setDimensions(cc.size(240,45));
         //
         // // setupGameScroll(this._parent);
         //
         // const gameListMenu = setupGameList();
-        gamelist = setupGameList();
+        const gamelist = setupGameList();
         // size = gameListMenu.getContentSize();
         // gameListMenu.setPosition(- length/2 +size.height/2 - 200 , -height/2 + size.height/2 + 100);
         bg.addChild(gamelist, 2);
@@ -172,7 +175,7 @@ const LobbyView = (function () {
         // const waterCausticsLayer = new WaterCausticsLayer();
         // parent.addChild(waterCausticsLayer,999);
 
-
+        this.updatePlayerData(playerData);
     };
 
     // function onProfileclick(touch) {
@@ -379,6 +382,16 @@ const LobbyView = (function () {
         GameView.destroyView(this._parent);
     };
 
+    proto.updatePlayerData = function (playerData) {
+        let gold = Math.floor(playerData.playerState.score).toLocaleString('en-US', {maximumFractionDigits: 2});
+        if (gold.length > 10) {
+            gold = gold.substring(0,9) + "..";
+        }
+        if(gold != _goldLabel.getString()) {
+            _goldLabel.setString(gold);
+        }
+        console.log(_goldLabel.getString());
+    };
 
     return LobbyView;
 }());
