@@ -110,7 +110,7 @@ const GameListButtonPrefab = (function () {
 
         const text = new cc.Sprite("#" + itemData.gameName + "Chinese.png");
         text.setAnchorPoint(0.5,0.5);
-        text.setPosition(385, 110);
+        text.setPosition(385, 115);
         base.addChild(text);
 
         this._wrapper.setContentSize(widthOfButton,base.getContentSize().height);
