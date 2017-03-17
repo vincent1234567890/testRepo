@@ -70,12 +70,11 @@ const ClientServerConnect = function () {
                 console.log("Disconnect detected.  Will attempt reconnection soon...");
                 setTimeout(connectToMasterServer, 2000);
                 _hasConnected = false;
+                GameManager.destroyArena();
                 ClientServerConnect.postGameCleanup();
-                // GameManager.destroyArena();
                 AppManager.goBackToLobby();
             });
         });
-
     };
 
     function parseQueryParams (searchString) {
@@ -90,7 +89,7 @@ const ClientServerConnect = function () {
                 var val = decodeURIComponent(splitPair[1]);
                 queryParams[key] = val;
             }
-        )
+        );
         return queryParams;
     }
 

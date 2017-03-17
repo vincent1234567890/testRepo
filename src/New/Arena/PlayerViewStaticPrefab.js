@@ -80,7 +80,10 @@ const PlayerViewStaticPrefab = (function () {
         }
         this._coinStackManager = new CoinStackManager(this._parent);
 
-        // this.setPlayer(isPlayer);
+        if(isPlayer) {
+            this._coinIcon.setVisible(true);
+            this.setPlayer(isPlayer);
+        }
     };
 
     const proto = PlayerViewStaticPrefab.prototype;
@@ -102,7 +105,7 @@ const PlayerViewStaticPrefab = (function () {
 
         this._gold.setString(gold);
         GUIFunctions.shrinkNumberString(playerData.score);
-        if(!this._isPlayer){
+        if(this._isPlayer == null){
             this._coinIcon.setVisible(true);
             this.setPlayer(this._isPlayer);
         }

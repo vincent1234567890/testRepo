@@ -166,7 +166,6 @@ const GameView = function () {
             const direction = cc.pNormalize(cc.pSub(pos, new cc.p(_gameConfig.cannonPositions[slot][0], _gameConfig.cannonPositions[slot][1])));
             const rot = Math.atan2(direction.x, direction.y);
             // _playerViews[slot].shootTo(rot * 180 / Math.PI);
-
             let info = getRotatedView(undefined, rot);
 
             const bulletId = _playerId + ':' + getPlayerBulletId();
@@ -199,7 +198,9 @@ const GameView = function () {
     }
 
     function clearPlayerState(slot) {
-        _playerViews[slot].clearPlayerData();
+        if (_playerViews[slot]) {
+            _playerViews[slot].clearPlayerData();
+        }
     }
 
     function updateArena() {

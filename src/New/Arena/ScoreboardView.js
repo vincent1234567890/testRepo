@@ -178,7 +178,9 @@ const ScoreboardView = (function() {
     const proto = ScoreboardView.prototype;
 
     proto.destroyView = function () {
-        GameView.destroyView(this._parent);
+        if (this._parent) {
+            GameView.destroyView(this._parent);
+        }
     };
 
     return ScoreboardView;

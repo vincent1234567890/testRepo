@@ -15,18 +15,18 @@ const ReferenceName = {
     OtherPlayerIcon : "#PlayerIcon2.png",
 
     //Lobby
-    LobbyBackground : "#Lobby BG 1.png",
+    LobbyBackground : "#LobbyBG1.png",
     ScrollArrow : "#Arrow.png",//
     BonusPlaceHolder : "#Bonus.png",//
     BuyButton : "#Buy.png",
-    LobbyCoinsBG : "#Coins Base.png",
+    LobbyCoinsBG : "#CoinBase.png",
     LobbyCoinIcon : "#Coins.png",//
     // GameSelectBox : "#Game Frame.png",
     GameSelectBox : "Game Frame.png",
     Star : "#level Star.png",//
     LevelBG : "#Level Bar.png",
     MessageButton : "#Log.png",
-    NameBG : "#Name Bar.png",
+    NameBG : "#PlayerNameBase.png",
     ProfileFrame : "#Profile Frame.png",
     ProfileImage : "#Profile Image.png",
     LobbySettingsButton : "#Lobby Setting.png",
@@ -46,9 +46,12 @@ const ReferenceName = {
     FloatingMenuButtonFAQIcon : "#GameFAQIcon.png",
     FloatingMenuButtonFAQText : "#GameFAQChinese.png",
 
-
-
-
+    JackpotBackground : "#JackpotIcon.png",
+    JackpotShadow : "#JackpotDropShadow.png",
+    JackpotBar : "#JackpotBar.png",
+    JackpotBarFrame : "#JackpotBarFrame.png",
+    JackpotLight : "#JackpotLigthray.png",
+    JackpotTitleChinese : "#JackpotChineseTitle.png",
 
     //Profile
     ProfileBackground : "#Profile POut BG.png",

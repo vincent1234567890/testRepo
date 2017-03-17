@@ -36,7 +36,7 @@ const LobbyManager = (function () {
         for ( let list in plists){
             cc.spriteFrameCache.addSpriteFrames(plists[list]);
         }
-        cc.spriteFrameCache.addSpriteFrames(res.LobbyUIPlist);
+        // cc.spriteFrameCache.addSpriteFrames(res.LobbyUIPlist);
         this._parent = parent;
         _profileManager = new ProfileManager();
         this.displayView(playerData, settingsCallback,onGameSelectedCallback);
