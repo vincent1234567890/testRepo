@@ -39,6 +39,7 @@ const AppManager = (function () {
             _currentScene.removeChild(_gameTicker, false);
         }
         cc.director.popToSceneStackLevel(1);
+        GameManager.resetLobby();
     }
 
 

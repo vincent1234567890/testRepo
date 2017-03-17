@@ -81,6 +81,7 @@ const PlayerViewStaticPrefab = (function () {
         this._coinStackManager = new CoinStackManager(this._parent);
 
         if(isPlayer) {
+            this._coinIcon.setVisible(true);
             this.setPlayer(isPlayer);
         }
     };

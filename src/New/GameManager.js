@@ -49,7 +49,7 @@ const GameManager = function () {
     }
 
     const initialiseGame = function (parent, fishGameArena) {
-        _lobbyManager.resetView();
+        // _lobbyManager.resetView();
         GameView.initialise(parent, _gameConfig, fishGameArena);
 
         _fishManager = new FishViewManager(fishGameArena, _gameConfig, caughtFishAnimationEnd);
@@ -59,8 +59,6 @@ const GameManager = function () {
         _netManager = new NetManager();
         _effectsManager = new EffectsManager();
         BlockingManager.destroyView();
-
-
 
         GameView.goToGame(_currentScene);
     };
@@ -204,6 +202,7 @@ const GameManager = function () {
 
         destroyArena();
         _goToLobbyCallback();
+
         // createLobby();
 
     }
@@ -258,12 +257,12 @@ const GameManager = function () {
 
     function onGameSelected(chosenScene){
         _currentScene = chosenScene;
-            ClientServerConnect.joinGame(_currentScene).catch(
-                function (error) {
-                    _lobbyManager.resetView();
-                    console.log(error);
-                }
-            );
+        ClientServerConnect.joinGame(_currentScene).catch(
+            function (error) {
+                // _lobbyManager.resetView();
+                console.log(error);
+            }
+        );
 
     }
 
@@ -273,6 +272,10 @@ const GameManager = function () {
 
     function onRequestShowProfile(){
 
+    }
+
+    function resetLobby (){
+        _lobbyManager.resetView();
     }
 
     //dev for dev scene
@@ -297,6 +300,7 @@ const GameManager = function () {
         showPostGameStats: showPostGameStats,
         goToLobby: goToLobby,
         isCurrentPlayer: isCurrentPlayer,
+        resetLobby : resetLobby,
 
         //current only used to reset
         destroyArena : destroyArena,

@@ -4,7 +4,7 @@
 const LobbyView = (function () {
     "use strict";
     // let isGameSelected;
-    // let _touchLayer;
+    let _touchLayer;
 
     // const profileArea = new cc.Rect(0,0,450,120);
     const numberOfLobbyButtonsShown = 3;
@@ -17,6 +17,9 @@ const LobbyView = (function () {
 
     let _gameButtonsForReset = [];
 
+    let gamelist;
+    let gameControlList;
+
     const LobbyView = function (playerData, theme, settingsCallback, onGameSelectedCallback, profileCallback) {
         // this.gameSelected = false;
 
@@ -24,6 +27,8 @@ const LobbyView = (function () {
         GameView.addView(this._parent);
 
         _theme = theme;
+
+        let size;
 
         _settingsCallback = settingsCallback;
         _onGameSelectedCallback = onGameSelectedCallback;
@@ -81,51 +86,55 @@ const LobbyView = (function () {
         //   LevelBG.setPosition(length - size.width/2,height - size.height/2);
         //   bg.addChild(LevelBG,1);
         //
-        //   const NameBG = new cc.Sprite(ReferenceName.NameBG);
-        //   // NameBG.setPosition(279,cc.view.getDesignResolutionSize().height - 24);
-        //   size = NameBG.getContentSize();
-        //   NameBG.setPosition(length - size.width/2,height - size.height/2);
-        //   bg.addChild(NameBG,1);
-        //
-        //   let fontDef = new cc.FontDefinition();
-        //   fontDef.fontName = "Arial";
-        //   //fontDef.fontWeight = "bold";
-        //   fontDef.fontSize = "26";
-        //   fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
-        //   fontDef.fillStyle = new cc.Color(0,0,0,255);
-        //
-        //   let label = new cc.LabelTTF(playerData.playerState.name , fontDef);
-        //   label.setAnchorPoint(0, 0.5);
-        //
-        //   NameBG.addChild(label);
-        //   label.setPosition(130,NameBG.getContentSize().height- 25);
-        //   label.setDimensions(cc.size(300,35));
+        const NameBG = new cc.Sprite(ReferenceName.NameBG);
+        // NameBG.setPosition(279,cc.view.getDesignResolutionSize().height - 24);
+        // size = NameBG.getContentSize();
+        NameBG.setPosition(100,600);
+        bg.addChild(NameBG,99);
 
-        // const LobbyCoinsBG = new cc.Sprite(ReferenceName.LobbyCoinsBG);
-        // // coinBG.setPosition(1136,cc.view.getDesignResolutionSize().height - 47);
-        // const size = LobbyCoinsBG.getContentSize();
-        // LobbyCoinsBG.setPosition(length - size.width/2,height - size.height/2);
-        // bg.addChild(LobbyCoinsBG,2);
-        // let fontDef = new cc.FontDefinition();
-        // fontDef.fontName = "Arial";
-        // fontDef.fontWeight = "bold";
-        // fontDef.fontSize = "40";
-        // fontDef.fillStyle = new cc.Color(255,255,0,255);
-        // fontDef.textAlign = cc.TEXT_ALIGNMENT_RIGHT;
-        //
-        // let label = new cc.LabelTTF(formatWithCommas(playerData.playerState.score), fontDef);
-        // // label = new cc.LabelTTF("99999999999999999999999", fontDef);
-        // LobbyCoinsBG.addChild(label);
-        // label.setPosition(LobbyCoinsBG.getContentSize().width - 250,LobbyCoinsBG.getContentSize().height - 50);
-        // // label.setPosition(0,0);
-        // label.setDimensions(cc.size(240,45));
+        let fontDef = new cc.FontDefinition();
+        fontDef.fontName = "Arial";
+        //fontDef.fontWeight = "bold";
+        fontDef.fontSize = "24";
+        fontDef.textAlign = cc.TEXT_ALIGNMENT_CENTER;
+        fontDef.fontWeight = "bold";
+        fontDef.fillStyle = new cc.Color(255,255,255,255);
+
+        let label = new cc.LabelTTF("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW" , fontDef);
+        // let label = new cc.LabelTTF(playerData.playerState.name , fontDef);
+        label.enableStroke(new cc.Color(0, 0, 0, 255), 2);
+        label.setAnchorPoint(0.5, 0.5);
+
+        NameBG.addChild(label);
+        label.setPosition(NameBG.getContentSize().width/2,NameBG.getContentSize().height/2);
+        label.setDimensions(cc.size(150,30));
+
+        const LobbyCoinsBG = new cc.Sprite(ReferenceName.LobbyCoinsBG);
+        // coinBG.setPosition(1136,cc.view.getDesignResolutionSize().height - 47);
+        size = LobbyCoinsBG.getContentSize();
+        LobbyCoinsBG.setPosition(length - size.width/2,height - size.height/2);
+        bg.addChild(LobbyCoinsBG,2);
+        fontDef = new cc.FontDefinition();
+        fontDef.fontName = "Arial";
+        fontDef.fontWeight = "bold";
+        fontDef.fontSize = "40";
+        fontDef.fillStyle = new cc.Color(255,255,0,255);
+        fontDef.textAlign = cc.TEXT_ALIGNMENT_RIGHT;
+
+        label = new cc.LabelTTF(formatWithCommas(playerData.playerState.score), fontDef);
+        // label = new cc.LabelTTF("99999999999999999999999", fontDef);
+        LobbyCoinsBG.addChild(label);
+        label.setPosition(LobbyCoinsBG.getContentSize().width - 250,LobbyCoinsBG.getContentSize().height - 50);
+        // label.setPosition(0,0);
+        label.setDimensions(cc.size(240,45));
         //
         // // setupGameScroll(this._parent);
         //
-        const gameListMenu = setupGameList();
+        // const gameListMenu = setupGameList();
+        gamelist = setupGameList();
         // size = gameListMenu.getContentSize();
         // gameListMenu.setPosition(- length/2 +size.height/2 - 200 , -height/2 + size.height/2 + 100);
-        bg.addChild(gameListMenu, 2);
+        bg.addChild(gamelist, 2);
         //
         // const profileMenu = setupProfileMenu ();
         // const parent = new cc.Node();
@@ -136,9 +145,9 @@ const LobbyView = (function () {
         // bg.addChild(parent,2);
         // parent.setPosition(-length/2-300, height/2-80);
         // bg.addChild(parent,2);
-        // _touchLayer = new TouchLayerRefactored(onProfileclick);
+        // _touchLayer = new TouchLayerRefactored(onMouse);
         // _touchLayer.setSwallowTouches(false);
-        // parent.addChild(_touchLayer,1);
+        // this._parent.addChild(_touchLayer,1);
 
         // const testLayer = new cc.LayerColor(0,0,0,196);
 
@@ -163,7 +172,7 @@ const LobbyView = (function () {
         // const waterCausticsLayer = new WaterCausticsLayer();
         // parent.addChild(waterCausticsLayer,999);
 
-        // console.log("debug:", debugCircle, fishClass, fishType);
+
     };
 
     // function onProfileclick(touch) {
@@ -195,10 +204,17 @@ const LobbyView = (function () {
     //
     // };
 
-    function setupProfileClick() {
+    // function onMouse(touchAt){
+    //     const games = gamelist.getChildren();
+    //     for (let button in games){
+    //         console.log(games[button].getButtonSize());
+    //     }
+    //     // console.log ("onMouse",gamelist.getChildren());
+    //     // if(cc.rectContainsPoint(profileArea,touchAt)){
+    //     //
+    //     // }
+    // }
 
-
-    }
 
     function setupGameList() {
         // const game = new cc.Sprite(ReferenceName.GameSelectBox);
@@ -209,6 +225,8 @@ const LobbyView = (function () {
 
         const width = cc.view.getDesignResolutionSize().width;
         const height = cc.view.getDesignResolutionSize().height;
+        
+        gameControlList = [];
 
         const listView = new ccui.ListView();
         listView.setDirection(ccui.ScrollView.DIR_HORIZONTAL);
@@ -218,7 +236,8 @@ const LobbyView = (function () {
         listView.setContentSize(cc.size(width, height));
         // listView.setInnerContainerSize(200,200)
         listView.setAnchorPoint(cc.p(0.5, 0.5));
-        listView.setPosition(width / 2, height / 2);
+        // listView.setPosition(width / 2, height / 2);
+        listView.setPosition(width / 2 , height / 2 -120);
 
         const gameList = _theme.GameList;
         for (let i = 0; i < gameList.length; i++) {
@@ -239,68 +258,77 @@ const LobbyView = (function () {
                 gameName: gameList[i]
             }, width / numberOfLobbyButtonsShown, gameSelected);
             const content = gameListButtonPrefab.getContent();
+            
+            gameControlList.push(gameListButtonPrefab);
 
             listView.pushBackCustomItem(content);
         }
 
-        function touchEvent(sender, type) {
-            switch (type) {
-                case ccui.Widget.TOUCH_ENDED:
-                    gameSelected(sender);
-                    break;
-            }
-        }
+        // function touchEvent(sender, type) {
+        //     switch (type) {
+        //         case ccui.Widget.TOUCH_MOVED:
+        //             console.log(sender);
+        //             break;
+        //         case ccui.Widget.TOUCH_ENDED:
+        //             gameSelected(sender);
+        //             break;
+        //     }
+        // }
+
+
+
+        // listView.addEventListener(touchEvent);
 
         return listView;
     }
 
-    function setupProfileMenu() {
-        const Message = new cc.Sprite(ReferenceName.MessageButton);
-        const MessageDown = new cc.Sprite(ReferenceName.MessageButton);
-        const Settings = new cc.Sprite(ReferenceName.LobbySettingsButton);
-        const SettingsDown = new cc.Sprite(ReferenceName.LobbySettingsButton);
+    // function setupProfileMenu() {
+    //     const Message = new cc.Sprite(ReferenceName.MessageButton);
+    //     const MessageDown = new cc.Sprite(ReferenceName.MessageButton);
+    //     const Settings = new cc.Sprite(ReferenceName.LobbySettingsButton);
+    //     const SettingsDown = new cc.Sprite(ReferenceName.LobbySettingsButton);
+    //
+    //     const messageButton = new cc.MenuItemSprite(Message, MessageDown, undefined, messageButtonPressed);
+    //     const settingsButton = new cc.MenuItemSprite(Settings, SettingsDown, undefined, settingsButtonPressed);
+    //
+    //     const menu = new cc.Menu(messageButton, settingsButton);
+    //     messageButton.setPosition(cc.pAdd(cc.p(menu.getContentSize().width / 2, messageButton.getContentSize().height / 2), cc.p(-31, -20)));
+    //     settingsButton.setPosition(cc.pAdd(cc.p(menu.getContentSize().width / 2, settingsButton.getContentSize().height / 2), cc.p(32, -20)));
+    //     // menu.setPosition(-295,691);
+    //
+    //     return menu;
+    // }
 
-        const messageButton = new cc.MenuItemSprite(Message, MessageDown, undefined, messageButtonPressed);
-        const settingsButton = new cc.MenuItemSprite(Settings, SettingsDown, undefined, settingsButtonPressed);
-
-        const menu = new cc.Menu(messageButton, settingsButton);
-        messageButton.setPosition(cc.pAdd(cc.p(menu.getContentSize().width / 2, messageButton.getContentSize().height / 2), cc.p(-31, -20)));
-        settingsButton.setPosition(cc.pAdd(cc.p(menu.getContentSize().width / 2, settingsButton.getContentSize().height / 2), cc.p(32, -20)));
-        // menu.setPosition(-295,691);
-
-        return menu;
-    }
-
-    function setupLobbyButtons() {
-        const Buy = new cc.Sprite(ReferenceName.BuyButton);
-        const BuyDown = new cc.Sprite(ReferenceName.BuyButton);
-
-        const buyButton = new cc.MenuItemSprite(Buy, BuyDown, undefined, buyButtonPressed);
-        const menu = new cc.Menu(buyButton);
-        buyButton.setPosition(cc.pAdd(cc.p(menu.getContentSize().width / 2, buyButton.getContentSize().height / 2), cc.p(0, 0)));
-
-        let fontDef = new cc.FontDefinition();
-        fontDef.fontName = "Impact";
-        //fontDef.fontWeight = "bold";
-        fontDef.fontSize = "40";
-        fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
-        fontDef.fillStyle = new cc.Color(0, 0, 0, 255);
-
-        let label = new cc.LabelTTF(ReferenceName.LobbyBuyButton, fontDef);
-        label.setAnchorPoint(0.5, 0.5);
-        label.setPosition(buyButton.getContentSize().width / 2, buyButton.getContentSize().height / 2);
-
-        buyButton.addChild(label);
-        // menu.setPosition(0,300);
-        //buyButton.setPosition(cc.view.getDesignResolutionSize().width / 2,cc.view.getDesignResolutionSize().height / 2)
-        //buyButton.setPosition(0,0);
-
-        //  var buyTest = new cc.Sprite(ReferenceName.BuyButton);
-        //  parent.addChild(buyTest,9999999);
-        //  buyTest.setPosition(cc.view.getDesignResolutionSize().width / 2,cc.view.getDesignResolutionSize().height / 2);
-        //   parent.addChild(menu,5);
-        return menu;
-    }
+    // function setupLobbyButtons() {
+    //     const Buy = new cc.Sprite(ReferenceName.BuyButton);
+    //     const BuyDown = new cc.Sprite(ReferenceName.BuyButton);
+    //
+    //     const buyButton = new cc.MenuItemSprite(Buy, BuyDown, undefined, buyButtonPressed);
+    //     const menu = new cc.Menu(buyButton);
+    //     buyButton.setPosition(cc.pAdd(cc.p(menu.getContentSize().width / 2, buyButton.getContentSize().height / 2), cc.p(0, 0)));
+    //
+    //     let fontDef = new cc.FontDefinition();
+    //     fontDef.fontName = "Impact";
+    //     //fontDef.fontWeight = "bold";
+    //     fontDef.fontSize = "40";
+    //     fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
+    //     fontDef.fillStyle = new cc.Color(0, 0, 0, 255);
+    //
+    //     let label = new cc.LabelTTF(ReferenceName.LobbyBuyButton, fontDef);
+    //     label.setAnchorPoint(0.5, 0.5);
+    //     label.setPosition(buyButton.getContentSize().width / 2, buyButton.getContentSize().height / 2);
+    //
+    //     buyButton.addChild(label);
+    //     // menu.setPosition(0,300);
+    //     //buyButton.setPosition(cc.view.getDesignResolutionSize().width / 2,cc.view.getDesignResolutionSize().height / 2)
+    //     //buyButton.setPosition(0,0);
+    //
+    //     //  var buyTest = new cc.Sprite(ReferenceName.BuyButton);
+    //     //  parent.addChild(buyTest,9999999);
+    //     //  buyTest.setPosition(cc.view.getDesignResolutionSize().width / 2,cc.view.getDesignResolutionSize().height / 2);
+    //     //   parent.addChild(menu,5);
+    //     return menu;
+    // }
 
     let proto = LobbyView.prototype;
 
@@ -326,9 +354,12 @@ const LobbyView = (function () {
     }
 
     function gameSelected(sender) {
-        _onGameSelectedCallback(sender.gameData.gameId);
-        sender.setEnabled(false);
-        _gameButtonsForReset.push(sender);
+        _onGameSelectedCallback(sender.getGameData());
+        // sender.disableContent();
+        // _gameButtonsForReset.push(sender);
+        for (let button in gameControlList){
+            gameControlList[button].disableContent();
+        }
     }
 
     function formatWithCommas(x) {
@@ -336,13 +367,12 @@ const LobbyView = (function () {
         return x.toLocaleString('en-US', {maximumFractionDigits: 2});
     }
 
-
     proto.resetView = function () {
-        const length = _gameButtonsForReset.length;
-        for (let i = 0; i < length; i++) {
-            _gameButtonsForReset[i].setEnabled(true);
+        // const length = _gameButtonsForReset.length;
+        for (let button in gameControlList){
+            gameControlList[button].resetView();
         }
-        _gameButtonsForReset = [];
+        // _gameButtonsForReset = [];
     };
 
     proto.destroyView = function () {

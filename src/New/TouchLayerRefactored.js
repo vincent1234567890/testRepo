@@ -41,7 +41,7 @@ var TouchLayerRefactored = cc.Layer.extend({
         // debugger;
         if (this._callback) {
             this._callback(touchPoint, TouchType.Began);
-            console.log(touches);
+            // console.log(touches);
         }
         return true;
     },
