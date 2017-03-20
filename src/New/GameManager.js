@@ -109,7 +109,7 @@ const GameManager = function () {
     };
 
     const removeFish = function (fishId) {
-        _fishManager.removeFish(undefined,{id:fishId});
+        _fishManager.removeFish(undefined, {id: fishId});
     };
 
     const updateEverything = function () {

@@ -76,11 +76,17 @@ const FishViewManager = (function(){
     
     proto.caughtFish = function (id, playerSlot) {
         // console.log("caughtFish : id", id);
+        if (!this._fishes[id]) {
+            console.warn("Could not find fishActor for fish " + id + ".  Perhaps scene was not initialised.")
+        }
         this._fishes[id].killFish(this, this.removeFish, id, playerSlot);
     };
 
     proto.removeFish = function (reference, data) {
         // console.log("removeFish: ", reference, "id", id);
+        if (!this._fishes[data.id]) {
+            console.warn("Could not find fishActor for fish " + data.id + ".  Perhaps scene was not initialised.")
+        }
         this._fishes[data.id].destroyView(this._parent);
         if(data.type && data.position && data.playerSlot) {
             this._onAnimationEndEvent(data);
