@@ -5,9 +5,12 @@ const FloatingMenu = (function () {
     "use strict";
     let _parent;
     let _theme;
-    const FloatingMenu = function () {
+    let _settingsCallback
+    const FloatingMenu = function (settingsCallback) {
         _parent = new cc.Node();
         GameView.addView(_parent);
+
+        _settingsCallback = settingsCallback;
 
         _theme = ThemeDataManager.getThemeDataList("FloatingMenu");
 
@@ -29,7 +32,7 @@ const FloatingMenu = (function () {
         );
 
         _parent.addChild(settings);
-        settings.setPosition(_theme["SettingsButton"][0],_theme["SettingsButton"][1]);
+        settings.setPosition(_theme["SettingsButton"][0], _theme["SettingsButton"][1]);
 
         const assets = doButton(ReferenceName.FloatingMenuButtonAssetsIcon,
             ReferenceName.FloatingMenuButtonBackground,
@@ -39,7 +42,7 @@ const FloatingMenu = (function () {
         );
 
         _parent.addChild(assets);
-        assets.setPosition(_theme["AssetsButton"][0],_theme["AssetsButton"][1]);
+        assets.setPosition(_theme["AssetsButton"][0], _theme["AssetsButton"][1]);
 
         const info = doButton(ReferenceName.FloatingMenuButtonInfoIcon,
             ReferenceName.FloatingMenuButtonBackground,
@@ -49,7 +52,7 @@ const FloatingMenu = (function () {
         );
 
         _parent.addChild(info);
-        info.setPosition(_theme["InfoButton"][0],_theme["InfoButton"][1]);
+        info.setPosition(_theme["InfoButton"][0], _theme["InfoButton"][1]);
 
         const leaderboard = doButton(ReferenceName.FloatingMenuButtonLeaderboardIcon,
             ReferenceName.FloatingMenuButtonBackground,
@@ -59,7 +62,7 @@ const FloatingMenu = (function () {
         );
 
         _parent.addChild(leaderboard);
-        leaderboard.setPosition(_theme["LeaderboardButton"][0],_theme["LeaderboardButton"][1]);
+        leaderboard.setPosition(_theme["LeaderboardButton"][0], _theme["LeaderboardButton"][1]);
 
         const FAQ = doButton(ReferenceName.FloatingMenuButtonFAQIcon,
             ReferenceName.FloatingMenuButtonBackground,
@@ -69,12 +72,11 @@ const FloatingMenu = (function () {
         );
 
         _parent.addChild(FAQ);
-        FAQ.setPosition(_theme["FAQButton"][0],_theme["FAQButton"][1]);
+        FAQ.setPosition(_theme["FAQButton"][0], _theme["FAQButton"][1]);
         //
         // listView.pushBackCustomItem(settings);
         //
         // _parent.addChild(listView);
-
 
     };
 
@@ -92,32 +94,33 @@ const FloatingMenu = (function () {
         let button = new ccui.Button();
         button.setTouchEnabled(true);
         button.loadTextures(buttonImage, buttonSelected, undefined, ccui.Widget.PLIST_TEXTURE);
-        button.setPosition(button.getContentSize().width/2-120, button.getContentSize().height/2 + 120);
+        button.setPosition(button.getContentSize().width / 2 - 120, button.getContentSize().height / 2 + 120);
         button.addTouchEventListener(touchEvent);
 
         const size = button.getContentSize();
-        if (iconSprite){
+        if (iconSprite) {
             let icon = new cc.Sprite(iconSprite);
             button.addChild(icon);
-            icon.setPosition(size.width/2, size.height/2 - 10);
+            icon.setPosition(size.width / 2, size.height / 2 - 10);
         }
 
-        if(labelImage) {
+        if (labelImage) {
             let label = new cc.Sprite(labelImage);
             button.addChild(label);
             // label.setAnchorPoint(0.5,0.5);
-            label.setPosition(size.width/2, 0);
+            label.setPosition(size.width / 2, 0);
         }
 
         return button;
     }
 
-    function onSettingsSelected(){
-
-
+    function onSettingsSelected() {
+        if (_settingsCallback) {
+            _settingsCallback();
+        }
     }
 
-    function onAssetsSelected(){
+    function onAssetsSelected() {
 
     }
 
@@ -125,11 +128,11 @@ const FloatingMenu = (function () {
 
     }
 
-    function onLeaderboardSelected(){
+    function onLeaderboardSelected() {
 
     }
 
-    function onFAQSelected(){
+    function onFAQSelected() {
 
     }
 

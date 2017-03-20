@@ -51,7 +51,6 @@ const FishViewManager = (function(){
             cc.spriteFrameCache.addSpriteFrames(plists[list]);
         }
 
-        // FishAnimationData();
         FishAnimationData.initialise();
 
         this._parent = new cc.Node();
@@ -61,7 +60,6 @@ const FishViewManager = (function(){
         this._onAnimationEndEvent = animationEndEvent;
 
         // this.rotationFunction = rotationFunction;
-
         GameView.addView(this._parent);
     };
 
@@ -105,15 +103,17 @@ const FishViewManager = (function(){
     };
 
     proto.destroyView = function(){
-        for ( let fishId in this._fishes){
-            const fishModel = this._fishGameArena.getFish(fishId);
-            if (fishModel) {
-                this._parent.removeChild(fishModel);
-                delete fishModel;
+        if(this._parent) {
+            for (let fishId in this._fishes) {
+                const fishModel = this._fishGameArena.getFish(fishId);
+                if (fishModel) {
+                    this._parent.removeChild(fishModel);
+                    delete fishModel;
+                }
             }
+            GameView.destroyView(this._parent);
+            this._parent = null;
         }
-        GameView.destroyView(this._parent);
-        this._parent = null;
     };
 
     return FishViewManager;

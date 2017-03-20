@@ -17,6 +17,7 @@ const BulletManager = (function(){
     const BulletManager = function (fishGameArena) {
         _parent = new cc.Node();
         _fishGameArena = fishGameArena;
+
         GameView.addView(_parent);
     };
 
@@ -75,11 +76,8 @@ const BulletManager = (function(){
 
     proto.explodeBullet = function (bulletId) {
         const bullet = _bulletCache[bulletId];
-
         if (bullet){
-            bullet.reclaimView();
-            _bulletPool.free(bullet);
-            delete _bulletCache[bulletId];
+            this.removeBullet(bulletId);
             const bulletModel = _fishGameArena && _fishGameArena.getBullet(bulletId);
             if (bulletModel){
                 return { position:bulletModel.position, gunId : bulletModel.gunId}
@@ -89,6 +87,16 @@ const BulletManager = (function(){
         }
         return null;
     };
+
+    proto.removeBullet = function (bulletId) {
+        const bullet = _bulletCache[bulletId];
+
+        if (bullet) {
+            bullet.reclaimView();
+            _bulletPool.free(bullet);
+            delete _bulletCache[bulletId];
+        }
+    }
 
     proto.getView = function () {
         return _parent;
@@ -107,8 +115,6 @@ const BulletManager = (function(){
         GameView.destroyView(_parent);
         _parent = null;
     };
-
-
 
     return BulletManager;
 
