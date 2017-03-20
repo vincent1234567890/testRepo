@@ -13,6 +13,8 @@ const ReferenceName = {
     CoinStackCoin : "#DeckCoins.png",
     PlayerIcon : "#PlayerIcon.png",
     OtherPlayerIcon : "#PlayerIcon2.png",
+    ChangeSeatButton : "ChangeSitUP.png",
+    ChangeSeatButtonDown : "ChangeSitDW.png",
 
     //Lobby
     LobbyBackground : "#LobbyBG1.png",

@@ -50,6 +50,8 @@ const PlayerViewStaticPrefab = (function () {
         this._gold.setAnchorPoint(0,0.5);
         base.addChild(this._gold,1);
 
+        this._changeSlotbutton = new cc.MenuItemSprite(new cc.Sprite(ReferenceName.ChangeSeatButton), new cc.Sprite(ReferenceName.ChangeSeatButtonDown), changeSlot);
+
         let pos;
         let markerPos;
         if (gameConfig.isUsingOldCannonPositions) {
@@ -85,6 +87,10 @@ const PlayerViewStaticPrefab = (function () {
             this.setPlayer(isPlayer);
         }
     };
+
+    function changeSlot(){
+
+    }
 
     const proto = PlayerViewStaticPrefab.prototype;
 

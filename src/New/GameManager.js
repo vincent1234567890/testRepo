@@ -219,6 +219,7 @@ const GameManager = function () {
         if (!_scoreboardManager) {
             _scoreboardManager = new ScoreboardManager(stats.data.recentGames[0], exitToLobby, goToNewRoom);
         } else {
+            _scoreboardManager.destroyView();
             _scoreboardManager.displayView(stats.data.recentGames[0]);
         }
     }

@@ -34,8 +34,10 @@ var ScoreboardManager = (function () {
     };
 
     proto.destroyView = function(){
-        this._view.destroyView();
-        this._view = null;
+        if(this._view) {
+            this._view.destroyView();
+            this._view = null;
+        }
     };
 
     return ScoreboardManager;
