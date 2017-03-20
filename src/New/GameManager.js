@@ -225,7 +225,7 @@ const GameManager = function () {
 
     function goToNewRoom() {
         resetArena();
-        ClientServerConnect.joinGame(_currentScene).catch(console.error);
+        ClientServerConnect.joinGame(_currentScene.gameName).catch(console.error);
     }
 
     function destroyArena(){
@@ -257,7 +257,7 @@ const GameManager = function () {
 
     function onGameSelected(chosenScene){
         _currentScene = chosenScene;
-        ClientServerConnect.joinGame(_currentScene).catch(
+        ClientServerConnect.joinGame(_currentScene.gameName).catch(
             function (error) {
                 // _lobbyManager.resetView();
                 console.log(error);
