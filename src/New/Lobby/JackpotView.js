@@ -36,12 +36,12 @@ const JackpotView = (function () {
 
         GameView.addView(_parent);
 
-        _parent.setPosition(645,666);
+        _parent.setPosition(683,666);
 
         let fontDef = new cc.FontDefinition();
         fontDef.fontName = "Impact";
         fontDef.fontWeight = "bold";
-        fontDef.fontSize = 42;
+        fontDef.fontSize = 32;
         fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
         fontDef.fillStyle = new cc.Color(255, 255, 255, 255);
 
