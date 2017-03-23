@@ -34,13 +34,19 @@ const ReferenceName = {
     LobbySettingsButton : "#Lobby Setting.png",
     TopBg : "#Top Base.png",
 
+    //Dolphin
+    DolphinIcon : "#FishIcon.png",
+    DolphinBubble : "#Bubble.png",
+    DolphinTextName : "#FishText",
+    DolphinTextExtension : ".png",
+
     //floating menu
     FloatingMenuButtonBackground : "MenuButtonIdle.png",
     FloatingMenuButtonBackgroundDown : "MenuButtonOnPress.png",
     FloatingMenuButtonSettingsIcon :"#SettingIcon.png",
     FloatingMenuButtonSettingsText : "#SettingChinese.png",
-    FloatingMenuButtonAssetsIcon : "#AssetsIcon.png",
-    FloatingMenuButtonAssetsText : "#AssetsChinese.png",
+    FloatingMenuButtonGameLogIcon : "#GamelogIcon.png",
+    FloatingMenuButtonGameLogText : "#GamelogChinese.png",
     FloatingMenuButtonInfoIcon : "#InfoIcon.png",
     FloatingMenuButtonInfoText : "#InfoChinese.png",
     FloatingMenuButtonLeaderboardIcon : "#RankingIcon.png",

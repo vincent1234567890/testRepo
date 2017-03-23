@@ -1,15 +1,19 @@
 /**
  * Created by eugeneseah on 26/10/16.
  */
-"use strict";
-var PlayerView = (function () {
 
-    var PlayerView = function (gameConfig, slot, isPlayer) {
-        this._playerViewStaticPrefabInstance = new PlayerViewStaticPrefab(gameConfig, slot, isPlayer);
+var PlayerView = (function () {
+    "use strict";
+    var PlayerView = function (gameConfig, slot, isPlayer, changeSeatCallback) {
+        this._changeSeatCallback = changeSeatCallback;
+        const changeSeat = (slot) =>{
+            changeSeatCallback(slot);
+        };
+        this._playerViewStaticPrefabInstance = new PlayerViewStaticPrefab(gameConfig, slot, isPlayer, changeSeat);
     };
 
-    PlayerView.prototype.updateView = function(playerData){
-        this._playerViewStaticPrefabInstance.updatePlayerData(playerData);
+    PlayerView.prototype.updateView = function(playerData, isChangeSeat){
+        this._playerViewStaticPrefabInstance.updatePlayerData(playerData, isChangeSeat);
     };
 
     PlayerView.prototype.clearPlayerData = function () {

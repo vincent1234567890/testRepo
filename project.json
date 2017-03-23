@@ -33,6 +33,7 @@
         "src/New/BlockingManager.js",
         "src/New/BlockingView.js",
 
+        "src/New/Lobby/DolphinClippy.js",
         "src/New/Lobby/JackpotView.js",
         "src/New/Lobby/JackpotManager.js",
         "src/New/Lobby/FloatingMenu.js",
@@ -46,7 +47,6 @@
         "src/New/Lobby/ProfileManager.js",
         "src/New/Lobby/ProfileView.js",
 
-
         "src/New/Arena/OptionsView.js",
         "src/New/Arena/OptionsSideMenuView.js",
         "src/New/Arena/OptionsMenuViewBottom.js",
@@ -54,6 +54,7 @@
         "src/New/Data/FishAnimationEnum.js",
         "src/New/Data/FishAnimationData.js",
         "src/New/TouchLayerRefactored.js",
+        "src/New/MouseLayer.js",
         "src/New/ReferenceName.js",
         "src/New/Arena/BulletView.js",
         "src/New/Arena/BulletManager.js",

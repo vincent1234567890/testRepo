@@ -43,9 +43,16 @@ const LobbyView = (function () {
         const length = cc.view.getDesignResolutionSize().width;
         const height = cc.view.getDesignResolutionSize().height;
 
+        const clippy = new DolphinClippy();
+
+
         const bg = new cc.Sprite(ReferenceName.LobbyBackground);
         bg.setPosition(length / 2, height / 2 + 70);
-        this._parent.addChild(bg, -3);
+        this._parent.addChild(bg, -5);
+
+        // const test = new cc.Sprite(res.WaterCausticTest);
+        // test.setPosition(length / 2, height / 2 + 70);
+        // this._parent.addChild(test, -4);
         //
         //   const TopBg = new cc.Sprite(ReferenceName.TopBg);
         //   // TopBg.setPosition(683,cc.view.getDesignResolutionSize().height - 52);
@@ -211,25 +218,7 @@ const LobbyView = (function () {
     //
     // };
 
-    // function onMouse(touchAt){
-    //     const games = gamelist.getChildren();
-    //     for (let button in games){
-    //         console.log(games[button].getButtonSize());
-    //     }
-    //     // console.log ("onMouse",gamelist.getChildren());
-    //     // if(cc.rectContainsPoint(profileArea,touchAt)){
-    //     //
-    //     // }
-    // }
-
-
     function setupGameList() {
-        // const game = new cc.Sprite(ReferenceName.GameSelectBox);
-        // const gameButton = new cc.MenuItemSprite(game, undefined, undefined, gameSelected);
-        // const menu = new cc.Menu(gameButton);
-        // gameButton.setPosition(cc.pAdd(cc.p(menu.getContentSize().width / 2, gameButton.getContentSize().height / 2), cc.p(0, 0)));
-        // return menu;
-
         const width = cc.view.getDesignResolutionSize().width;
         const height = cc.view.getDesignResolutionSize().height;
         
@@ -244,22 +233,10 @@ const LobbyView = (function () {
         // listView.setInnerContainerSize(200,200)
         listView.setAnchorPoint(cc.p(0.5, 0.5));
         // listView.setPosition(width / 2, height / 2);
-        listView.setPosition(width / 2 , height / 2 - 50);
+        listView.setPosition(width / 2 , height / 2 - 70);
 
         const gameList = _theme.GameList;
         for (let i = 0; i < gameList.length; i++) {
-            // let button = new ccui.Button();
-            // button.setTouchEnabled(true);
-            // button.loadTextures(ReferenceName.GameSelectBox,undefined, undefined, ccui.Widget.PLIST_TEXTURE);
-            // button.gameData = i;
-            // button.setPosition(button.getContentSize().width/2 + 40, button.getContentSize().height/2 + 75);
-            // button.addTouchEventListener(touchEvent);
-            // // button.setContentSize(cc.size(300,500));
-            //
-            // let content = new ccui.Widget();
-            // content.setContentSize(width/4,button.getContentSize().height);
-            // content.addChild(button);
-
             const gameListButtonPrefab = new GameListButtonPrefab({
                 gameId: i,
                 gameName: gameList[i]
@@ -270,21 +247,6 @@ const LobbyView = (function () {
 
             listView.pushBackCustomItem(content);
         }
-
-        // function touchEvent(sender, type) {
-        //     switch (type) {
-        //         case ccui.Widget.TOUCH_MOVED:
-        //             console.log(sender);
-        //             break;
-        //         case ccui.Widget.TOUCH_ENDED:
-        //             gameSelected(sender);
-        //             break;
-        //     }
-        // }
-
-
-
-        // listView.addEventListener(touchEvent);
 
         return listView;
     }

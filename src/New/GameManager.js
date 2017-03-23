@@ -86,8 +86,8 @@ const GameManager = function () {
         GameView.setMyPlayerData(playerId,playerSlot)
     };
 
-    const updateMultiplayerState = function (playerData) {
-        GameView.updateMultiplayerState(playerData);
+    const updateMultiplayerState = function (playerData, oldSlot) {
+        GameView.updateMultiplayerState(playerData, oldSlot);
     };
 
     const clearPlayerState = function (slot) {
@@ -193,6 +193,7 @@ const GameManager = function () {
             _floatingMenuManager = new FloatingMenu(onSettingsButton);
             _jackpotManager = new JackpotManager();
             _jackpotManager.updateJackpot(999999999);
+            ClientServerConnect.getCurrentJackpotValues();
         }else {
             _lobbyManager.displayView(_playerData, onSettingsButton, onGameSelected,onRequestShowProfile);
         }
@@ -202,6 +203,7 @@ const GameManager = function () {
 
         destroyArena();
         _goToLobbyCallback();
+        ClientServerConnect.getCurrentJackpotValues();
 
         // createLobby();
 
@@ -260,11 +262,10 @@ const GameManager = function () {
         _currentScene = chosenScene;
         ClientServerConnect.joinGame(_currentScene.gameName).catch(
             function (error) {
-                // _lobbyManager.resetView();
+                _lobbyManager.resetView();
                 console.log(error);
             }
         );
-
     }
 
     function isCurrentPlayer (playerId) {
@@ -279,6 +280,10 @@ const GameManager = function () {
         _lobbyManager.resetView();
     }
 
+    function updateJackpotPool(value) {
+        _jackpotManager.updateJackpot(value)
+    }
+
     //dev for dev scene
     function development(parent) {
         _optionsManager = new OptionsManager(onSettingsButton);
@@ -288,6 +293,15 @@ const GameManager = function () {
     return {
         initialiseLogin: initialiseLogin,
         initialiseGame: initialiseGame,
+
+        //Lobby stuff
+        goToLobby: goToLobby,
+        resetLobby : resetLobby,
+
+        //Menu stuff
+        updateJackpotPool : updateJackpotPool,
+
+        //Game stuff
         setGameState: setGameState,
         updateMultiplayerState: updateMultiplayerState,
         clearPlayerState: clearPlayerState,
@@ -299,9 +313,9 @@ const GameManager = function () {
         caughtFish: caughtFish,
         updateEverything: updateEverything,
         showPostGameStats: showPostGameStats,
-        goToLobby: goToLobby,
+
+        //Misc
         isCurrentPlayer: isCurrentPlayer,
-        resetLobby : resetLobby,
 
         //current only used to reset
         destroyArena : destroyArena,

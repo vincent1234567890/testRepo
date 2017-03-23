@@ -295,6 +295,20 @@ const ClientServerConnect = function () {
         _clientReceiver.resetArena();
     }
 
+    function getCurrentJackpotValues(){
+        return _gameWSClient.callAPIOnce('game', 'getCurrentJackpotValues', {}).then(
+            jackpotValueResponse => {
+                console.log('jackpotValueResponse:', jackpotValueResponse);
+                const total = Object.values(jackpotValueResponse.data).map(level => level.value).reduce((a, b) => a + b, 0);
+                GameManager.updateJackpotPool(total);
+            }
+        );
+    }
+
+    const changeSeatRequest = function (slot) {
+        _informServer.changeSeat(slot);
+    };
+
     return {
         connectToMasterServer : connectToMasterServer,
         login : login,
@@ -308,5 +322,7 @@ const ClientServerConnect = function () {
         //getGameIOSocket: getGameIOSocket,
         postGameCleanup: postGameCleanup,
         listenForEvent: listenForEvent,
+        changeSeatRequest : changeSeatRequest,
+        getCurrentJackpotValues : getCurrentJackpotValues,
     };
 }();
