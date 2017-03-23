@@ -10,6 +10,8 @@ const BlockingView = (function() {
     let _touchlayer;
     const hideColour = cc.color(0,0,0,0);
     const showColour = cc.color(0,0,0,196);
+
+    let _mouseLayer;
     function BlockingView (touchCallback) {
         // console.log("new!");
         this._parent = new cc.Node();
@@ -20,6 +22,17 @@ const BlockingView = (function() {
         _touchlayer.setSwallowTouches(true);
         _touchlayer.setEnable(false);
         this._parent.addChild(_touchlayer,-1);
+
+        // _mouseLayer = new MouseLayer(onBackgroundClicked);
+        // _mouseLayer.setSwallowTouches(true);
+        // _mouseLayer.setEnable(false);
+        // this._parent.addChild(_mouseLayer,-1);
+        const _listener = cc.EventListener.create({
+            event: cc.EventListener.MOUSE,
+            swallowTouches: true,
+        });
+
+        cc.eventManager.addListener(_listener, _touchlayer);
 
         _colourBG = new cc.LayerColor(hideColour);
         this._parent.addChild(_colourBG,-1);
@@ -35,12 +48,14 @@ const BlockingView = (function() {
 
     proto.hideView = function(){
         _touchlayer.setEnable(false);
+        // _mouseLayer.setEnable(false);
         _colourBG.init(hideColour);
     };
     
     proto.showView = function() {
         // console.log("show!");
         _touchlayer.setEnable(true);
+        // _mouseLayer.setEnable(true);
         _colourBG.init(showColour);
     };
 

@@ -9,7 +9,8 @@ const PlayerViewStaticPrefab = (function () {
     //@param {Vector2} pos
     //@param {function} callback for cannon down
     //@param {function} callback for cannon up
-    const PlayerViewStaticPrefab = function(gameConfig, slot, isPlayer){
+    const PlayerViewStaticPrefab = function(gameConfig, slot, isPlayer, changeSeatCallback){
+        // this._slot = slot;
         this._parent = new cc.Node();
         GameView.addView(this._parent,1);
         this._parent.setPosition(300,300);
@@ -50,6 +51,40 @@ const PlayerViewStaticPrefab = (function () {
         this._gold.setAnchorPoint(0,0.5);
         base.addChild(this._gold,1);
 
+        const changeSlot = (sender, type) => {
+            switch (type) {
+                // case ccui.Widget.TOUCH_MOVED:
+                //     // console.log(sender);
+                //     break;
+                // case ccui.Widget.TOUCH_BEGAN:
+                //     if (selected) return;
+                //     selected = true;
+                //     break;
+                case ccui.Widget.TOUCH_ENDED:
+                    // gameSelected(sender);
+                    // console.log(sender);
+                    changeSeatCallback(slot);
+                // selectedCallBack(sender);
+                case ccui.Widget.TOUCH_CANCELED: // fallthrough intended
+                    // label.runAction(new cc.ScaleTo(0.01,originalSize));
+                    // label.setScale(originalSize);
+                    break;
+            }
+        };
+        // this._changeSlotbutton = new ccui.Button(ReferenceName.ChangeSeatButton, ReferenceName.ChangeSeatButtonDown, changeSlot);
+        this._changeSlotbutton = new ccui.Button();
+        this._changeSlotbutton.setTouchEnabled(true);
+        this._changeSlotbutton.loadTextures(ReferenceName.ChangeSeatButton, ReferenceName.ChangeSeatButtonDown, undefined, ccui.Widget.PLIST_TEXTURE);
+        this._changeSlotbutton.setPosition(255,55);
+        this._changeSlotbutton.addTouchEventListener(changeSlot);
+        base.addChild(this._changeSlotbutton,5);
+
+        this._slotLabel = new cc.LabelTTF('点击换座',fontDef);
+        this._slotLabel.setPosition(55,10);
+        this._changeSlotbutton.addChild(this._slotLabel);
+
+        //点击换座
+
         let pos;
         let markerPos;
         if (gameConfig.isUsingOldCannonPositions) {
@@ -81,14 +116,18 @@ const PlayerViewStaticPrefab = (function () {
         this._coinStackManager = new CoinStackManager(this._parent);
 
         if(isPlayer) {
+            this._playerSlot = slot;
             this._coinIcon.setVisible(true);
             this.setPlayer(isPlayer);
         }
+
     };
+
+
 
     const proto = PlayerViewStaticPrefab.prototype;
 
-    proto.updatePlayerData = function (playerData) {
+    proto.updatePlayerData = function (playerData, playerSlot) {
         let nameToShow = playerData.name;
         if (nameToShow.length > 12) {
             nameToShow = nameToShow.substring(0,10) + "..";
@@ -97,6 +136,7 @@ const PlayerViewStaticPrefab = (function () {
         // const goldAmount = parseFloat(this._gold.getString());
         if ( playerData.scoreChange && playerData.scoreChange > 0){
             this.AnimateCoinStack(playerData.scoreChange);
+            playerData.scoreChange = 0;
         }
         let gold = Math.floor(playerData.score).toLocaleString('en-US', {maximumFractionDigits: 2});
         if (gold.length > 10) {
@@ -105,14 +145,17 @@ const PlayerViewStaticPrefab = (function () {
 
         this._gold.setString(gold);
         GUIFunctions.shrinkNumberString(playerData.score);
-        if(this._isPlayer == null){
+        const activatePlayerIcons = this._isPlayer == null || playerData.slot == playerSlot;
+        if(activatePlayerIcons){
             this._coinIcon.setVisible(true);
-            this.setPlayer(this._isPlayer);
+            this.setPlayer(activatePlayerIcons);
         }
         // this._gem.setString(0);
     };
 
     proto.clearPlayerData = function () {
+        this._playerSlot = null;
+        this._changeSlotbutton.setVisible(true);
         this._playerName.setString('');
         this._gold.setString('');
         this._playerIcon.setVisible(false);
@@ -134,6 +177,8 @@ const PlayerViewStaticPrefab = (function () {
         this._isPlayer = isPlayer;
         this._playerIcon.setVisible(isPlayer);
         this._otherPlayerIcon.setVisible(!isPlayer);
+        this._changeSlotbutton.setVisible(false);
+        // this._cann
     };
 
 

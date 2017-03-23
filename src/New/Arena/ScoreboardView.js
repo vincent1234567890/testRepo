@@ -9,6 +9,8 @@ const ScoreboardView = (function() {
     let _goToNewRoom;
     function ScoreboardView(target, data, goToLobby, goToNewRoom) {
 
+        console.log(data);
+
         _goToLobby = goToLobby;
         _goToNewRoom = goToNewRoom;
 

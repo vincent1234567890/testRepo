@@ -5,7 +5,11 @@ const FloatingMenu = (function () {
     "use strict";
     let _parent;
     let _theme;
-    let _settingsCallback
+    let _settingsCallback;
+
+    const hoverSize = 1.2;
+    const originalSize = 1;
+
     const FloatingMenu = function (settingsCallback) {
         _parent = new cc.Node();
         GameView.addView(_parent);
@@ -34,10 +38,10 @@ const FloatingMenu = (function () {
         _parent.addChild(settings);
         settings.setPosition(_theme["SettingsButton"][0], _theme["SettingsButton"][1]);
 
-        const assets = doButton(ReferenceName.FloatingMenuButtonAssetsIcon,
+        const assets = doButton(ReferenceName.FloatingMenuButtonGameLogIcon,
             ReferenceName.FloatingMenuButtonBackground,
             ReferenceName.FloatingMenuButtonBackgroundDown,
-            ReferenceName.FloatingMenuButtonAssetsText,
+            ReferenceName.FloatingMenuButtonGameLogText,
             onAssetsSelected
         );
 
@@ -81,15 +85,63 @@ const FloatingMenu = (function () {
     };
 
     function doButton(iconSprite, buttonImage, buttonSelected, labelImage, selectedCallBack) {
+        let isMouseDown = false;
+        // let selected = false;
         const touchEvent = (sender, type) => {
             switch (type) {
+                // case ccui.Widget.TOUCH_MOVED:
+                //     // console.log(sender);
+                //     break;
+                // case ccui.Widget.TOUCH_BEGAN:
+                //     if (selected) return;
+                //     selected = true;
+                //     break;
                 case ccui.Widget.TOUCH_ENDED:
                     // gameSelected(sender);
                     console.log(sender);
                     selectedCallBack(sender);
+                case ccui.Widget.TOUCH_CANCELED: // fallthrough intended
+                    // label.runAction(new cc.ScaleTo(0.01,originalSize));
+                    label.setScale(originalSize);
                     break;
             }
         };
+
+        const onMouseMove = (mouseData)=>{
+            // console.log(mouseData);
+            const pos = button.convertToWorldSpace(cc.p());
+            var rect = cc.rect(pos.x, pos.y, button.getBoundingBox().width, button.getBoundingBox().height);
+            if (!isMouseDown){
+                if(cc.rectContainsPoint(rect,mouseData.getLocation())) {
+                    // label.runAction(new cc.ScaleTo(0.01, hoverSize));
+                    label.setScale(hoverSize);
+                    touchEvent(null, ccui.Widget.TOUCH_BEGAN);
+                }else{
+                    label.setScale(originalSize);
+                    // label.runAction(new cc.ScaleTo(0.01,originalSize));
+                }
+            }
+            // else if (selected){
+            //     // touchEvent(null, ccui.Widget.TOUCH_CANCELED);
+            // }
+        };
+
+        const onMouseDown = (mouseData) =>{
+            isMouseDown = true;
+        };
+
+        const onMouseUp = (mouseData) => {
+            isMouseDown = false;
+        };
+
+        const _listener = cc.EventListener.create({
+            event: cc.EventListener.MOUSE,
+
+            onMouseDown: onMouseDown,
+            onMouseUp: onMouseUp,
+            onMouseMove: onMouseMove,
+            // onMouseScroll: null,
+        });
 
         let button = new ccui.Button();
         button.setTouchEnabled(true);
@@ -98,18 +150,22 @@ const FloatingMenu = (function () {
         button.addTouchEventListener(touchEvent);
 
         const size = button.getContentSize();
+        let icon;
         if (iconSprite) {
-            let icon = new cc.Sprite(iconSprite);
+            icon = new cc.Sprite(iconSprite);
             button.addChild(icon);
             icon.setPosition(size.width / 2, size.height / 2 - 10);
         }
 
+        let label;
         if (labelImage) {
-            let label = new cc.Sprite(labelImage);
+            label = new cc.Sprite(labelImage);
             button.addChild(label);
             // label.setAnchorPoint(0.5,0.5);
             label.setPosition(size.width / 2, 0);
         }
+
+        cc.eventManager.addListener(_listener, button);
 
         return button;
     }

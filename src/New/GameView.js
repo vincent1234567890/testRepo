@@ -34,7 +34,7 @@ const GameView = function () {
             // console.log("initialised");
             for (let i = 0; i < _gameConfig.maxPlayers; i++) {
                 const index = getPlayerSlot(i);
-                _playerViews[index] = new PlayerViewManager(_gameConfig, index, i == _playerSlot);
+                _playerViews[index] = new PlayerViewManager(_gameConfig, index, i == _playerSlot, changeSeatRequest);
             }
         }
     }
@@ -192,9 +192,14 @@ const GameView = function () {
         _playerViews[modifiedSlot].shootTo(angle);
     }
 
-    function updateMultiplayerState(playerData) {
+    function updateMultiplayerState(playerData, oldSlot) {
         const slot = getPlayerSlot(playerData.slot);
-        _playerViews[slot].updatePlayerData(playerData);
+        if (oldSlot!=null){
+            if (oldSlot === _playerSlot){
+                _playerSlot = slot;
+            }
+        }
+        _playerViews[slot].updatePlayerData(playerData,oldSlot!=null ? _playerSlot : undefined);
     }
 
     function clearPlayerState(slot) {
@@ -211,6 +216,9 @@ const GameView = function () {
         _fishGameArena.updateEverything();
     }
 
+    function changeSeatRequest(slot){
+        ClientServerConnect.changeSeatRequest(slot);
+    }
 
     return {
         initialise: initialise,
