@@ -14,6 +14,7 @@ const FishAnimationData = function () {
     // y -> 1 => move fish right relative to hitbox
     // x -> 1 => move fish forward relative to hitbox
 
+    /*
     const FishRawData = {
         // Ray: {
         //     animationInterval: [5,5],
@@ -319,10 +320,11 @@ const FishAnimationData = function () {
         },
 
     };
+    */
 
-    //let FishAnimationData = new Array(FishRawData.length);
+    // let FishAnimationData = new Array(FishRawData.length);
 
-    //let FishRawData = {};
+    let FishRawData = {};
     let FishAnimationData = [];
 
     function resolveName(number, fishType) {
@@ -334,8 +336,8 @@ const FishAnimationData = function () {
     }
 
     FishAnimationData.setData = function(data){
-        //FishRawData = data;
-        console.log(data);
+        FishRawData = data;
+        // console.log(data);
         for (let entry in data){
           FishRawData[entry] = data[entry];
         }
