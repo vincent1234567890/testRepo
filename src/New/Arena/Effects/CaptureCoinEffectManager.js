@@ -47,14 +47,14 @@ const CaptureCoinEffectManager = (function () {
 
     const proto = CaptureCoinEffectManager.prototype;
 
-    proto.triggerCoins = function (pos, target, value) {
+    proto.triggerCoins = function (pos, target, fish) {
         // console.log(pos);
-        const label = _prizeLabelPool.alloc(this._parent, value);
+        const label = _prizeLabelPool.alloc(this._parent, fish.value);
         setupView(label, label.getTargetNode(), pos, Math.PI / 2, target, undefined, collectLabel, velocity, explodeLifetime * 10, collectLifetime * 10, gravity);
-        for (let i = 0; i < numberOfCoins; i++) {
+        for (let i = 0; i < fish.coinsShown; i++) {
             const coin = _coinViewPool.alloc(this._parent, this.animation.clone());
             // coin.startCoinAnimation(pos,(180/(numberOfCoins+2))*(i+1), target, collectCoins);
-            setupView(coin, coin.getTargetNode(), pos, 2 * Math.PI / (numberOfCoins) * (i + 1), target, this.animation.clone(), collectCoins, velocity * 10, explodeLifetime * 10, collectLifetime * 10, gravity);
+            setupView(coin, coin.getTargetNode(), pos, 2 * Math.PI / (fish.coinsShown) * (i + 1), target, this.animation.clone(), collectCoins, velocity * 10, explodeLifetime * 10, collectLifetime * 10, gravity);
         }
     };
 

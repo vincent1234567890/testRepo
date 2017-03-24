@@ -105,7 +105,7 @@ const GameManager = function () {
     };
 
     const caughtFishAnimationEnd = function (data) {
-        _effectsManager.doCapturePrizeEffect(data.position, _gameConfig.cannonPositions[data.playerSlot], _gameConfig.fishClasses[data.type].value);
+        _effectsManager.doCapturePrizeEffect(data.position, _gameConfig.cannonPositions[data.playerSlot], _gameConfig.fishClasses[data.type]);
     };
 
     const removeFish = function (fishId) {

@@ -88,7 +88,7 @@ const FishViewManager = (function(){
             console.warn("Could not find fishActor for fish " + data.id + ".  Perhaps scene was not initialised.")
         }
         this._fishes[data.id].destroyView(this._parent);
-        if(data.type && data.position && data.playerSlot) {
+        if(data.type && data.position && (data.playerSlot!=null)) {
             this._onAnimationEndEvent(data);
         }
         delete this._fishes[data.id];
