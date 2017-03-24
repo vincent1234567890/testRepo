@@ -9,28 +9,28 @@
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,-1}</string>
+                <string>{-1,-1}</string>
                 <key>spriteSize</key>
-                <string>{160,60}</string>
+                <string>{152,44}</string>
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{1,1},{160,60}}</string>
+                <string>{{465,1},{152,44}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GAnemoneFish_00001.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,-1}</string>
+                <string>{-1,-1}</string>
                 <key>spriteSize</key>
-                <string>{160,64}</string>
+                <string>{152,48}</string>
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{1,381},{160,64}}</string>
+                <string>{{311,57},{152,48}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -41,11 +41,11 @@
                 <key>spriteOffset</key>
                 <string>{0,-1}</string>
                 <key>spriteSize</key>
-                <string>{160,68}</string>
+                <string>{154,50}</string>
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{1,777},{160,68}}</string>
+                <string>{{309,107},{154,50}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -54,28 +54,28 @@
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,-1}</string>
+                <string>{-3,-1}</string>
                 <key>spriteSize</key>
-                <string>{160,70}</string>
+                <string>{148,52}</string>
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{163,801},{160,70}}</string>
+                <string>{{305,209},{148,52}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>GAnemoneFish_00004.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,-1}</string>
+                <string>{-2,-1}</string>
                 <key>spriteSize</key>
-                <string>{160,70}</string>
+                <string>{150,52}</string>
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{1,987},{160,70}}</string>
+                <string>{{153,165},{150,52}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -84,103 +84,103 @@
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,-1}</string>
+                <string>{-3,-1}</string>
                 <key>spriteSize</key>
-                <string>{160,68}</string>
+                <string>{150,50}</string>
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{1,847},{160,68}}</string>
+                <string>{{105,331},{150,50}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GAnemoneFish_00006.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,-1}</string>
+                <string>{-6,-1}</string>
                 <key>spriteSize</key>
-                <string>{160,64}</string>
+                <string>{144,48}</string>
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{1,447},{160,64}}</string>
+                <string>{{363,313},{144,48}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GAnemoneFish_00007.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,-1}</string>
+                <string>{-6,-1}</string>
                 <key>spriteSize</key>
-                <string>{160,62}</string>
+                <string>{142,44}</string>
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{1,125},{160,62}}</string>
+                <string>{{413,313},{142,44}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GAnemoneFish_00008.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,-1}</string>
+                <string>{-6,-1}</string>
                 <key>spriteSize</key>
-                <string>{160,62}</string>
+                <string>{142,44}</string>
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{1,189},{160,62}}</string>
+                <string>{{459,309},{142,44}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GAnemoneFish_00009.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,-1}</string>
+                <string>{-1,-1}</string>
                 <key>spriteSize</key>
-                <string>{160,64}</string>
+                <string>{154,48}</string>
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{1,513},{160,64}}</string>
+                <string>{{1,331},{154,48}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GAnemoneFish_00010.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,-1}</string>
+                <string>{-3,-1}</string>
                 <key>spriteSize</key>
-                <string>{160,68}</string>
+                <string>{148,50}</string>
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{1,917},{160,68}}</string>
+                <string>{{157,323},{148,50}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GAnemoneFish_00011.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,-1}</string>
+                <string>{-4,-1}</string>
                 <key>spriteSize</key>
-                <string>{160,70}</string>
+                <string>{146,52}</string>
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{163,963},{160,70}}</string>
+                <string>{{209,323},{146,52}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -189,28 +189,28 @@
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,-1}</string>
+                <string>{-3,-1}</string>
                 <key>spriteSize</key>
-                <string>{160,70}</string>
+                <string>{150,52}</string>
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{1,1059},{160,70}}</string>
+                <string>{{51,331},{150,52}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GAnemoneFish_00013.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,-1}</string>
+                <string>{-3,-1}</string>
                 <key>spriteSize</key>
-                <string>{160,64}</string>
+                <string>{150,48}</string>
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{1,579},{160,64}}</string>
+                <string>{{153,219},{150,48}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -219,13 +219,13 @@
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,-1}</string>
+                <string>{-6,-1}</string>
                 <key>spriteSize</key>
-                <string>{160,62}</string>
+                <string>{144,44}</string>
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{1,253},{160,62}}</string>
+                <string>{{363,459},{144,44}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -234,43 +234,43 @@
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,-1}</string>
+                <string>{-4,-1}</string>
                 <key>spriteSize</key>
-                <string>{160,60}</string>
+                <string>{148,44}</string>
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{1,63},{160,60}}</string>
+                <string>{{263,323},{148,44}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GAnemoneFish_00016.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,-1}</string>
+                <string>{-2,-1}</string>
                 <key>spriteSize</key>
-                <string>{160,62}</string>
+                <string>{152,44}</string>
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{1,317},{160,62}}</string>
+                <string>{{465,155},{152,44}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GAnemoneFish_00017.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,-1}</string>
+                <string>{-4,-1}</string>
                 <key>spriteSize</key>
-                <string>{160,64}</string>
+                <string>{146,48}</string>
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{1,645},{160,64}}</string>
+                <string>{{305,263},{146,48}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -279,43 +279,43 @@
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,-1}</string>
+                <string>{-5,-1}</string>
                 <key>spriteSize</key>
-                <string>{160,70}</string>
+                <string>{146,52}</string>
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{1,1131},{160,70}}</string>
+                <string>{{309,313},{146,52}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GAnemoneFish_00019.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,-1}</string>
+                <string>{-1,-1}</string>
                 <key>spriteSize</key>
-                <string>{160,72}</string>
+                <string>{152,54}</string>
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{163,1125},{160,72}}</string>
+                <string>{{311,1},{152,54}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>GAnemoneFish_00020.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,-1}</string>
+                <string>{-3,-1}</string>
                 <key>spriteSize</key>
-                <string>{160,70}</string>
+                <string>{148,52}</string>
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{1,1203},{160,70}}</string>
+                <string>{{147,269},{148,52}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -326,11 +326,11 @@
                 <key>spriteOffset</key>
                 <string>{0,-1}</string>
                 <key>spriteSize</key>
-                <string>{160,64}</string>
+                <string>{154,48}</string>
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{1,711},{160,64}}</string>
+                <string>{{309,159},{154,48}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -339,13 +339,13 @@
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,6}</string>
+                <string>{-6,5}</string>
                 <key>spriteSize</key>
-                <string>{160,92}</string>
+                <string>{144,82}</string>
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{1,1275},{160,92}}</string>
+                <string>{{1,247},{144,82}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -354,75 +354,75 @@
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{1,7}</string>
+                <string>{-2,6}</string>
                 <key>spriteSize</key>
-                <string>{158,90}</string>
+                <string>{150,80}</string>
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{163,1},{158,90}}</string>
+                <string>{{1,165},{150,80}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>GAnemoneFish_00024.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{1,9}</string>
+                <string>{1,7}</string>
                 <key>spriteSize</key>
-                <string>{158,88}</string>
+                <string>{154,80}</string>
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{163,161},{158,88}}</string>
+                <string>{{1,1},{154,80}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>GAnemoneFish_00025.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{1,9}</string>
+                <string>{-1,8}</string>
                 <key>spriteSize</key>
-                <string>{158,88}</string>
+                <string>{152,80}</string>
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{163,321},{158,88}}</string>
+                <string>{{157,1},{152,80}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>GAnemoneFish_00026.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{1,9}</string>
+                <string>{1,7}</string>
                 <key>spriteSize</key>
-                <string>{158,88}</string>
+                <string>{154,80}</string>
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{163,481},{158,88}}</string>
+                <string>{{1,83},{154,80}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>GAnemoneFish_00027.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{1,7}</string>
+                <string>{-2,6}</string>
                 <key>spriteSize</key>
-                <string>{158,90}</string>
+                <string>{150,80}</string>
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{163,641},{158,90}}</string>
+                <string>{{157,83},{150,80}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
         </dict>
         <key>metadata</key>
@@ -436,9 +436,9 @@
             <key>realTextureFileName</key>
             <string>GAnemoneFish.png</string>
             <key>size</key>
-            <string>{254,1368}</string>
+            <string>{510,504}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:6ff426a527cc3324c39b41b933eeaac7:cd7bb277141d7d65535aeee9b8834e7f:3a0b1c40ccc17169215ddaa88470f90e$</string>
+            <string>$TexturePacker:SmartUpdate:5afaae2a1d6c6230df90181241adbcaf:60b4e7d42ff7bc880e85c065bc1a0a7c:3a0b1c40ccc17169215ddaa88470f90e$</string>
             <key>textureFileName</key>
             <string>GAnemoneFish.png</string>
         </dict>
