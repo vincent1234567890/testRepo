@@ -148,7 +148,7 @@ const PlayerViewStaticPrefab = (function () {
         const activatePlayerIcons = this._isPlayer == null || playerData.slot == playerSlot;
         if(activatePlayerIcons){
             this._coinIcon.setVisible(true);
-            this.setPlayer(activatePlayerIcons);
+            this.setPlayer(playerData.slot == playerSlot);
         }
         // this._gem.setString(0);
     };
