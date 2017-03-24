@@ -32,9 +32,9 @@ const PlayerViewManager = (function () {
 
     proto.updatePlayerData = function (playerData, isChangeSeat) {
         this._playerView.updateView(playerData, isChangeSeat);
+        this._cannonManager.showGun();
         if (isChangeSeat != null){
             console.log(playerData);
-            this._cannonManager.showGun();
             this._cannonManager.setUpCannonChangeMenu(this._gameConfig, playerData.slot);
         }
         if (typeof playerData.gunId === 'number') {

@@ -39,6 +39,8 @@ const FishView = (function () {
             // console.log("debug:", debugCircle, fishClass, fishType);
         }
 
+        this._willFlip = fishClass.willFlip;
+
     };
 
     const proto = FishView.prototype;
@@ -93,7 +95,9 @@ const FishView = (function () {
         this._parent.setPosition(pos);
         this._parent.setRotation(rot);
 
-        this._sprite.flippedY = (rot%360 > 90 && rot%360 <=270);
+        if (this._willFlip) {
+            this._sprite.flippedY = (rot % 360 > 90 && rot % 360 <= 270);
+        }
 
         if (!debugReported && this._sprite.getContentSize().width == 0){
             debugReported = true;

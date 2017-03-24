@@ -40,7 +40,7 @@ const LobbyWaterCaustics = (function () {
         // alloc(0);
         count = 0;
 
-        console.log(WaterArea);
+        // console.log(WaterArea);
 
         WaterArea = new cc.Rect(0,0,cc.view.getDesignResolutionSize().width,120);
         

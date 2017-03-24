@@ -299,11 +299,14 @@ const ClientServerConnect = function () {
         return _gameWSClient.callAPIOnce('game', 'getCurrentJackpotValues', {}).then(
             jackpotValueResponse => {
                 console.log('jackpotValueResponse:', jackpotValueResponse);
-                const total = Object.values(jackpotValueResponse.data).map(level => level.value).reduce((a, b) => a + b, 0);
+                const total = Object_values(jackpotValueResponse.data).map(level => level.value).reduce((a, b) => a + b, 0);
+                console.log('jackpotValueResponse:total:', total);
                 GameManager.updateJackpotPool(total);
             }
         );
     }
+
+    const Object_values = (obj) => Object.keys(obj).map(key => obj[key]);
 
     const changeSeatRequest = function (slot) {
         _informServer.changeSeat(slot);
