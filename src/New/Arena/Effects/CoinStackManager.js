@@ -30,8 +30,5 @@ const CoinStackManager = (function () {
         this._coinStackList.enqueue(coin);
     };
 
-
-
-
     return CoinStackManager;
 }());

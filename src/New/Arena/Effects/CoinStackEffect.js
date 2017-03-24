@@ -39,8 +39,8 @@ const CoinStackEffect = (function () {
             this._coinValueLabel = new cc.LabelTTF("", fontDef);
 
             this._coinValueLabel.enableStroke(new cc.Color(96, 64, 0, 255),2);
-            this._parent.addChild(this._coinValueLabel);
-            this._coinValueLabel.setAnchorPoint(0.5, 0);
+            this._parent.addChild(this._coinValueLabel,1);
+            this._coinValueLabel.setAnchorPoint(0.5, -0.2);
             this._coinValueLabel.setOpacity(0);
         }
         const coinValueLabel = this._coinValueLabel;
@@ -90,7 +90,6 @@ const CoinStackEffect = (function () {
             this._animationEndedCallback(this, spriteSize);
             this._animationEndedCallback = null;
         };
-
 
         this._parent.setPosition(Offset[0] + theme.CoinStackWidth * arrayPosition , Offset[1]);
         // console.log(this._parent.getPosition(), Offset[0], theme.CoinStackWidth, arrayPosition, Offset[1]);
