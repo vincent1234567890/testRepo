@@ -15,10 +15,18 @@ const ClientServerConnect = function () {
     // let _debugSimulateLag = true;
     // let _debugGhosts = false;
 
+    let _wasKickedOutByRemoteLogIn = false;
 
     const connectToMasterServer = function () {
         return new Promise((resolve, reject) => {
+            // Do not connect if we are already connected!
             if (_hasConnected) return;
+
+            // If the player logs in from somewhere else, our connection will be closed.
+            // In that case, we should not reconnect.
+            // If we reconnect, the log in process will cause the active login to be kicked out!
+            // And that would create and endless cycle of clients fighting for the active login.
+            if (_wasKickedOutByRemoteLogIn) return;
 
             let gameAPIServerUrl = 'ws://' + document.location.hostname + ':8088';
             // let gameAPIServerUrl = 'ws://192.168.1.16:8088';
@@ -66,10 +74,22 @@ const ClientServerConnect = function () {
                 }
             });
 
+            ClientServerConnect.listenForEvent('kickedByRemoteLogIn', data => {
+                console.warn("You have been disconnected because you logged in from somewhere else.");
+                // We don't actually need to close the socket here.  The server is about to close it for us!
+
+                // We do need to stop trying to reconnect, at least until the player starts using this client again
+                _wasKickedOutByRemoteLogIn = true;
+
+                // @todo Show a nice message to the user
+
+                // @todo When the user wants to reconnect again, set _wasKickedOutByRemoteLogIn back to false, and then call connectToMasterServer()
+            });
+
             client.addEventListener('close', function () {
+                _hasConnected = false;
                 console.log("Disconnect detected.  Will attempt reconnection soon...");
                 setTimeout(connectToMasterServer, 2000);
-                _hasConnected = false;
                 GameManager.destroyArena();
                 ClientServerConnect.postGameCleanup();
                 AppManager.goBackToLobby();

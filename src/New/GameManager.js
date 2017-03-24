@@ -156,7 +156,7 @@ const GameManager = function () {
                 _playerData = stats.data;
                 createLobby();
             }
-        );
+        ).catch(console.error);
 
         // createLobby();
 
