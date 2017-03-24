@@ -32,7 +32,7 @@ const CoinStackEffect = (function () {
             let fontDef = new cc.FontDefinition();
             fontDef.fontName = "Arial";
             //fontDef.fontWeight = "bold";
-            fontDef.fontSize = 20;
+            fontDef.fontSize = 15;
             fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
             fontDef.fillStyle = new cc.Color(255, 192, 0, 255);
 

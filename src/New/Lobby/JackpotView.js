@@ -33,7 +33,6 @@ const JackpotView = (function () {
         _parent.addChild(title);
         title.setPosition(0,22);
 
-
         GameView.addView(_parent);
 
         _parent.setPosition(683,666);
@@ -46,7 +45,6 @@ const JackpotView = (function () {
         fontDef.fillStyle = new cc.Color(255, 255, 255, 255);
 
         _label = new cc.LabelTTF("", fontDef);
-        // this._label = new cc.LabelBMFont("", res.GoldenNumbersPlist);
         // this._label = new cc.LabelBMFont("",res.TestFont);
         _label.enableStroke(new cc.Color(0, 0, 0, 255), 2);
         _label.setContentSize(bar.getContentSize());
@@ -57,7 +55,7 @@ const JackpotView = (function () {
     const proto = JackpotView.prototype;
 
     proto.updateJackpot = function(value){
-        let prize = (value).toLocaleString('en-US');
+        let prize = (value).toLocaleString('en-US', {maximumFractionDigits: 2});
         if (prize.length > 11) {
             prize = prize.substring(0,10) + "..";
         }

@@ -5,16 +5,18 @@
 
 const PlayerViewStaticPrefab = (function () {
     "use strict";
-    //@param {node} parent
-    //@param {Vector2} pos
-    //@param {function} callback for cannon down
-    //@param {function} callback for cannon up
+
+    const stackValueTriggerPointLow = 1.1;
+    const stackValueTriggerPointMedium = 20;
+    const stackValueTriggerPointHigh = 300;
+    const stackHeightLow = 4;
+    const stackHeightMed = 8;
+    const stackHeightHigh = 16;
     const PlayerViewStaticPrefab = function(gameConfig, slot, isPlayer, changeSeatCallback){
         // this._slot = slot;
         this._parent = new cc.Node();
         GameView.addView(this._parent,1);
         this._parent.setPosition(300,300);
-
 
         const themeData = ThemeDataManager.getThemeDataList("CannonPlatformPositions");
 
@@ -83,8 +85,6 @@ const PlayerViewStaticPrefab = (function () {
         this._slotLabel.setPosition(55,10);
         this._changeSlotbutton.addChild(this._slotLabel);
 
-        //点击换座
-
         let pos;
         let markerPos;
         if (gameConfig.isUsingOldCannonPositions) {
@@ -120,10 +120,7 @@ const PlayerViewStaticPrefab = (function () {
             this._coinIcon.setVisible(true);
             this.setPlayer(isPlayer);
         }
-
     };
-
-
 
     const proto = PlayerViewStaticPrefab.prototype;
 
@@ -170,7 +167,15 @@ const PlayerViewStaticPrefab = (function () {
     };
 
     proto.AnimateCoinStack = function ( increase ) {
-        this._coinStackManager.addStack(15,increase);
+        if (increase >= stackValueTriggerPointHigh){
+            this._coinStackManager.addStack(stackHeightHigh,increase);
+        }else if (increase >= stackValueTriggerPointMedium ){
+            this._coinStackManager.addStack(stackHeightMed, increase);
+        }else{
+            this._coinStackManager.addStack(stackHeightLow, increase);
+        }
+
+
     };
 
     proto.setPlayer = function (isPlayer) {
@@ -180,8 +185,6 @@ const PlayerViewStaticPrefab = (function () {
         this._changeSlotbutton.setVisible(false);
         // this._cann
     };
-
-
 
     return PlayerViewStaticPrefab;
 }());
