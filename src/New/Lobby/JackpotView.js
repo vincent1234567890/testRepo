@@ -55,7 +55,8 @@ const JackpotView = (function () {
     const proto = JackpotView.prototype;
 
     proto.updateJackpot = function(value){
-        let prize = (value).toLocaleString('en-US', {maximumFractionDigits: 2});
+        // let prize = (value).toLocaleString('en-US', {maximumFractionDigits: 2});
+        let prize = (value).toFixed(2);
         if (prize.length > 11) {
             prize = prize.substring(0,10) + "..";
         }

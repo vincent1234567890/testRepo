@@ -172,11 +172,9 @@ const CaptureCoinEffectManager = (function () {
 
         viewTarget.update = function (dt) {
 
-            const elapsed = (Date.now() - startTime) / 100;
-            if (elapsed < delay){
+            const elapsed = (Date.now() - startTime ) / 100 - delay;
+            if (elapsed < 0){
                 return;
-            }else{
-                startTime = Date.now();
             }
             if (elapsed <= explodeLifetime) {
                 this.x = pos.x + velocity * elapsed * Math.cos(angle);

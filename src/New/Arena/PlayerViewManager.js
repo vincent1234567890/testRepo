@@ -34,7 +34,7 @@ const PlayerViewManager = (function () {
         this._playerView.updateView(playerData, isChangeSeat);
         this._cannonManager.showGun();
         if (isChangeSeat != null){
-            console.log(playerData);
+            // console.log(playerData);
             this._cannonManager.setUpCannonChangeMenu(this._gameConfig, playerData.slot);
         }
         if (typeof playerData.gunId === 'number') {
