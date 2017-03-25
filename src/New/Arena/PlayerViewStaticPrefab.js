@@ -174,8 +174,6 @@ const PlayerViewStaticPrefab = (function () {
         }else{
             this._coinStackManager.addStack(stackHeightLow, increase);
         }
-
-
     };
 
     proto.setPlayer = function (isPlayer) {

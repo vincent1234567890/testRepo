@@ -5,12 +5,13 @@ const CaptureCoinEffectManager = (function () {
     "use strict";
     const padding = 7;
     const animationPerFrameSpeed = 0.05;
-    const numberOfCoins = 8;
+    // const numberOfCoins = 8;
 
-    const explodeLifetime = 1; // seconds
+    const explodeLifetime = 0.5; // seconds
     const collectLifetime = 1;
     const velocity = 1;
     const gravity = 0.9;
+    const offsetPerCoin = 0.5;
 
     let animationFrames;
 
@@ -41,8 +42,6 @@ const CaptureCoinEffectManager = (function () {
         }
         // animationArray.push(cc.spriteFrameCache.getSpriteFrame("Coin" + frameCount + ".png"));
         this.animation = new cc.Animate(new cc.Animation(animationArray, animationPerFrameSpeed));
-
-
     };
 
     const proto = CaptureCoinEffectManager.prototype;
@@ -50,14 +49,15 @@ const CaptureCoinEffectManager = (function () {
     proto.triggerCoins = function (pos, target, fish) {
         // console.log(pos);
         const label = _prizeLabelPool.alloc(this._parent, fish.value);
-        setupView(label, label.getTargetNode(), pos, Math.PI / 2, target, undefined, collectLabel, velocity, explodeLifetime * 10, collectLifetime * 10, gravity);
+        setupView(label, label.getTargetNode(), pos, Math.PI / 2, target, undefined, collectLabel, velocity, explodeLifetime * 10, collectLifetime * 10, collectLifetime * 10 , gravity);
         for (let i = 0; i < fish.coinsShown; i++) {
             const coin = _coinViewPool.alloc(this._parent, this.animation.clone());
             // coin.startCoinAnimation(pos,(180/(numberOfCoins+2))*(i+1), target, collectCoins);
-            setupView(coin, coin.getTargetNode(), pos, 2 * Math.PI / (fish.coinsShown) * (i + 1), target, this.animation.clone(), collectCoins, velocity * 10, explodeLifetime * 10, collectLifetime * 10, gravity);
+            setupView(coin, coin.getTargetNode(),
+                pos, 2 * Math.PI / (fish.coinsShown) * (i + 1), target, this.animation.clone(), collectCoins,
+                velocity * 10, explodeLifetime * 10, collectLifetime * 10, collectLifetime * 10 * (i+1)/fish.coinsShown, gravity);
         }
     };
-
 
     function collectCoins(coin) {
         // this._label.setVisible(false);
@@ -159,8 +159,8 @@ const CaptureCoinEffectManager = (function () {
         return PrizeLabelObject;
     }());
 
-    function setupView(viewObject, viewTarget, pos, angle, target, animation, callback, velocity, explodeLifetime, collectLifetime, gravity) {
-        const startTime = Date.now();
+    function setupView(viewObject, viewTarget, pos, angle, target, animation, callback, velocity, explodeLifetime, collectLifetime, delay, gravity) {
+        let startTime = Date.now();
 
         viewTarget.setPosition(pos);
 
@@ -171,8 +171,13 @@ const CaptureCoinEffectManager = (function () {
         let yLength = undefined;
 
         viewTarget.update = function (dt) {
-            const elapsed = (Date.now() - startTime) / 100;
 
+            const elapsed = (Date.now() - startTime) / 100;
+            if (elapsed < delay){
+                return;
+            }else{
+                startTime = Date.now();
+            }
             if (elapsed <= explodeLifetime) {
                 this.x = pos.x + velocity * elapsed * Math.cos(angle);
                 this.y = pos.y + velocity * elapsed * Math.sin(angle) - gravity / 2 * Math.pow(elapsed, 2);
