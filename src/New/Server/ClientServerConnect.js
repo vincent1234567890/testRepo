@@ -88,7 +88,7 @@ const ClientServerConnect = function () {
 
             client.addEventListener('close', function () {
                 _hasConnected = false;
-                console.log("Disconnect detected.  Will attempt reconnection soon...");
+                console.log("Disconnect detected." + (_wasKickedOutByRemoteLogIn ? "" : "  Will attempt reconnection soon..."));
                 setTimeout(connectToMasterServer, 2000);
                 GameManager.destroyArena();
                 ClientServerConnect.postGameCleanup();
@@ -176,6 +176,11 @@ const ClientServerConnect = function () {
 
     const loginWithToken = function (token, playerId, email, onSuccess, onFailure) {
         const client = getGameWSClient();
+
+        // Consider: We could provide an extra param here to say whether this is the first connect, or a reconnect.
+        // In the case of an auto-reconnect, the server may decide to reject this login, if the player is currently
+        // playing on another client.  This would solve the concern of a socket being closed before
+        // the 'kickedByRemoteLogIn' event is received.
 
         client.callAPIOnce('game', 'login', {
             id: playerId,
