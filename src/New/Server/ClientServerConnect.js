@@ -88,7 +88,7 @@ const ClientServerConnect = function () {
 
             client.addEventListener('close', function () {
                 _hasConnected = false;
-                console.log("Disconnect detected.  Will attempt reconnection soon...");
+                console.log("Disconnect detected." + (_wasKickedOutByRemoteLogIn ? "" : "  Will attempt reconnection soon..."));
                 setTimeout(connectToMasterServer, 2000);
                 GameManager.destroyArena();
                 ClientServerConnect.postGameCleanup();
