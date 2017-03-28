@@ -5,7 +5,7 @@
 var PlayerView = (function () {
     "use strict";
     var PlayerView = function (gameConfig, slot, isPlayer, changeSeatCallback) {
-        this._changeSeatCallback = changeSeatCallback;
+        // this._changeSeatCallback = changeSeatCallback;
         const changeSeat = (slot) =>{
             changeSeatCallback(slot);
         };

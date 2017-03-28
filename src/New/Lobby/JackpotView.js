@@ -63,5 +63,10 @@ const JackpotView = (function () {
         _label.setString(prize);
     };
 
+    proto.reattach = function () {
+        _parent.getParent().removeChild(_parent,false);
+        GameView.addView(_parent);
+    };
+
     return JackpotView;
 }());

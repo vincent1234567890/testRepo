@@ -33,7 +33,6 @@ const GameManager = function () {
     let _optionsManager;
     let _bulletManager;
     let _netManager;
-    let _effectsManager;
     let _lobbyWaterCausticsManager;
 
     //?? only use is for clientReceiver to query if playerId == player
@@ -52,12 +51,14 @@ const GameManager = function () {
         // _lobbyManager.resetView();
         GameView.initialise(parent, _gameConfig, fishGameArena);
 
-        _fishManager = new FishViewManager(fishGameArena, _gameConfig, caughtFishAnimationEnd);
+        _fishManager = new FishViewManager(fishGameArena, _gameConfig, GameView.caughtFishAnimationEnd);
         _optionsManager = new OptionsManager(onSettingsButton, undefined, onLeaveArena);
         _optionsManager.displayView(_gameConfig);
         _bulletManager = new BulletManager(fishGameArena);
         _netManager = new NetManager();
-        _effectsManager = new EffectsManager();
+        _floatingMenuManager.reattach();
+        _jackpotManager.reattach();
+
         BlockingManager.destroyView();
 
         GameView.goToGame(_currentScene);
@@ -77,7 +78,7 @@ const GameManager = function () {
 
     const removeBullet = function(bulletId){
         _bulletManager.removeBullet(bulletId);
-    }
+    };
 
     const setGameState = function (config, playerId, playerSlot) {
         // console.log(JSON.stringify(config));
@@ -102,10 +103,6 @@ const GameManager = function () {
         // console.log("caught fish :" ,fishId);
         _fishManager.caughtFish(fishId, playerSlot);
 
-    };
-
-    const caughtFishAnimationEnd = function (data) {
-        _effectsManager.doCapturePrizeEffect(data.position, _gameConfig.cannonPositions[data.playerSlot], _gameConfig.fishClasses[data.type]);
     };
 
     const removeFish = function (fishId) {
@@ -142,7 +139,7 @@ const GameManager = function () {
 
     function goToLobby(goToLobbyCallback) {
         _goToLobbyCallback = goToLobbyCallback;
-        GameView.initialise();
+        // GameView.initialise();
         _loggedIn = true;
 
         // Login was successful, so save the user's details
@@ -254,7 +251,6 @@ const GameManager = function () {
     }
 
     function onSettingsButton(){
-        // GameView.initialise();
         _optionsManager.showSettings();
     }
 
@@ -277,6 +273,8 @@ const GameManager = function () {
     }
 
     function resetLobby (){
+        _jackpotManager.reattach();
+        _floatingMenuManager.reattach();
         _lobbyManager.resetView();
     }
 

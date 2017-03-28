@@ -98,7 +98,7 @@ const LobbyView = (function () {
         const NameBG = new cc.Sprite(ReferenceName.NameBG);
         // NameBG.setPosition(279,cc.view.getDesignResolutionSize().height - 24);
         // size = NameBG.getContentSize();
-        NameBG.setPosition(100,600);
+        NameBG.setPosition(100,550);
         bg.addChild(NameBG,1);
 
         let fontDef = new cc.FontDefinition();
@@ -121,7 +121,7 @@ const LobbyView = (function () {
         const LobbyCoinsBG = new cc.Sprite(ReferenceName.LobbyCoinsBG);
         // coinBG.setPosition(1136,cc.view.getDesignResolutionSize().height - 47);
         size = LobbyCoinsBG.getContentSize();
-        LobbyCoinsBG.setPosition(320,600);
+        LobbyCoinsBG.setPosition(320,550);
         bg.addChild(LobbyCoinsBG,2);
 
         fontDef = new cc.FontDefinition();

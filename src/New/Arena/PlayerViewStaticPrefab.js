@@ -85,6 +85,8 @@ const PlayerViewStaticPrefab = (function () {
         this._slotLabel.setPosition(55,10);
         this._changeSlotbutton.addChild(this._slotLabel);
 
+
+
         let pos;
         let markerPos;
         if (gameConfig.isUsingOldCannonPositions) {
@@ -102,24 +104,40 @@ const PlayerViewStaticPrefab = (function () {
         this._playerName.x = themeData["PlayerName"][0][0];
         this._playerName.y = themeData["PlayerName"][0][1];
 
+
+        let vector = new cc.p(0,150);
+
         if (pos[1] > markerPos[1]) {
             this._parent.y = pos[1]+ themeData["Base"][0];
+            // this._playerSeatIndicator.setPosition(0,200);
             if (pos[0] > markerPos[0]){
                 this._parent.x = pos[0]- themeData["Base"][1];
+                // vector = new cc.p(200,0);
                 this._parent.setRotation(-90);
+                // this._playerSeatIndicator.setRotation(90);
             }else {
                 this._parent.setRotation(90);
+                // vector = new cc.p(-200,0);
                 this._parent.x = pos[0]+ themeData["Base"][1];
-
+                // this._playerSeatIndicator.setRotation(-90);
             }
         }
+
         this._coinStackManager = new CoinStackManager(this._parent);
 
         if(isPlayer) {
             this._playerSlot = slot;
             this._coinIcon.setVisible(true);
             this.setPlayer(isPlayer);
+            this._playerSeatIndicator =  new cc.Sprite(ReferenceName.PlayerSeatIndicator);
+            this._parent.addChild(this._playerSeatIndicator,50);
+            this._playerSeatIndicator.setPosition(0,-50);
+            this._playerSeatIndicator.runAction(new cc.Sequence(new cc.MoveTo(0.5,vector), new cc.Blink(1,3), new cc.MoveTo(0.5,cc.pMult(vector,-1))));
+            this._playerSeatIndicator.runAction(new cc.Sequence(new cc.DelayTime(1.5), new cc.FadeOut(0.5)));
         }
+
+
+
     };
 
     const proto = PlayerViewStaticPrefab.prototype;

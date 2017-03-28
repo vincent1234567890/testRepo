@@ -49,7 +49,7 @@ const CoinStackEffect = (function () {
 
         parentNode.update = function (dt) {
             if (callbackTarget._moveAmount > 0){
-                parentNode.x -= MoveSpeed;
+                parentNode.x += MoveSpeed;
                 callbackTarget._moveAmount -= MoveSpeed;
             }
             const elapsed = (Date.now() - _startTime);
@@ -77,7 +77,7 @@ const CoinStackEffect = (function () {
         this.onStackAnimationEnded = ()=> {
             let spriteSize = theme.CoinStackWidth;
             if(this._coinStack.length > 0) {
-                spriteSize = this._coinStack[0].getSpriteSize();
+                // spriteSize = this._coinStack[0].getSpriteSize();
                 for (let coin in this._coinStack) {
                     this._coinStack[coin].reclaimView();
                     _coinPool.free(this._coinStack[coin]);
@@ -101,7 +101,7 @@ const CoinStackEffect = (function () {
 
     const proto = CoinStackEffect.prototype;
 
-    proto.Move = function (moveAmount) {
+    proto.move = function (moveAmount) {
         if (this._moveAmount <= 0) {
             // console.log("Move: moveAmount: ", moveAmount );
             this._moveAmount = moveAmount;
@@ -109,6 +109,11 @@ const CoinStackEffect = (function () {
             this._moveAmount += moveAmount;
         }
     };
+
+    proto.stop = function (){
+        this.onStackAnimationEnded();
+    };
+
 
     return CoinStackEffect;
 })();

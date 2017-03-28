@@ -12,16 +12,20 @@ const GameView = function () {
     let _gameConfig;
     let _playerId;
     let _playerSlot;
-    let _playerViews = [];
+
     let _fishGameArena;
     let _touchedPos;
     let _lastShotTime = -Infinity;
 
-    function initialise(parentNode, gameConfig, fishGameArena) {
+    //UIManagers
+    let _playerViews = [];
+    let _effectsManager;
 
-        initialiseParent(parentNode);
-        // console.log("initialise:gameconfig:",gameConfig);
-        if (gameConfig) {
+    let _lobbyNode;
+
+    function initialise(parentNode, gameConfig, fishGameArena) {
+        if (gameConfig) { // going into game
+            initialiseParent(parentNode);
             _fishGameArena = fishGameArena;
             _gameConfig = gameConfig;
 
@@ -36,6 +40,13 @@ const GameView = function () {
                 const index = getPlayerSlot(i);
                 _playerViews[index] = new PlayerViewManager(_gameConfig, index, i == _playerSlot, changeSeatRequest);
             }
+
+            _effectsManager = new EffectsManager();
+        }else if (!_lobbyNode){ // first time initialisation
+            initialiseParent(parentNode);
+            _lobbyNode = _parentNode;
+        }else{ // reuse lobby node
+            _parentNode = _lobbyNode;
         }
     }
 
@@ -48,15 +59,12 @@ const GameView = function () {
         if (parent === undefined && _parentNode && _parentNode.parent) {
             parent = _parentNode.parent;
         }
-        // if (_parentNode && _parentNode.parent) {
-        //     _parentNode.parent.removeChild(_parentNode);
-        // }
         _parentNode = new cc.Node();
-        parent.addChild(_parentNode, 99999);
+
+        parent.addChild(_parentNode);
     }
 
-    function goToGame(choice) {//temporary
-        console.log("goToGame");
+    function goToGame(choice) {
         if (_curretBKG) {
             _parentNode.removeChild(_curretBKG);
         }
@@ -83,14 +91,16 @@ const GameView = function () {
 
     function destroyView(view) {
         _parentNode.removeChild(view);
+        const plists = ResourceLoader.getPlists("Game");
+        for (let list in plists) {
+            cc.spriteFrameCache.removeSpriteFrameByName(plists[list]);
+        }
     }
 
     const initialiseTouch = function (touchAt) {
-        console.log("initialiseTouch");
         if (_touchLayer) {
             _parentNode.removeChild(_touchLayer);
         }
-        console.log("initialiseTouch");
         _touchLayer = new TouchLayerRefactored(touchAt);
         _parentNode.addChild(_touchLayer, -1);
     };
@@ -194,12 +204,12 @@ const GameView = function () {
 
     function updateMultiplayerState(playerData, oldSlot) {
         const slot = getPlayerSlot(playerData.slot);
-        if (oldSlot!=null){
-            if (oldSlot === _playerSlot){
+        if (oldSlot != null) {
+            if (oldSlot === _playerSlot) {
                 _playerSlot = slot;
             }
         }
-        _playerViews[slot].updatePlayerData(playerData,oldSlot!=null ? _playerSlot : undefined);
+        _playerViews[slot].updatePlayerData(playerData, oldSlot != null ? _playerSlot : undefined);
     }
 
     function clearPlayerState(slot) {
@@ -216,8 +226,14 @@ const GameView = function () {
         _fishGameArena.updateEverything();
     }
 
-    function changeSeatRequest(slot){
+    function changeSeatRequest(slot) {
         ClientServerConnect.changeSeatRequest(slot);
+    }
+
+    function caughtFishAnimationEnd(data) {
+        if (data.playerSlot === _playerSlot) {
+            _effectsManager.doCapturePrizeEffect(data.position, _gameConfig.cannonPositions[data.playerSlot], _gameConfig.fishClasses[data.type]);
+        }
     }
 
     return {
@@ -235,6 +251,7 @@ const GameView = function () {
         shootTo: shootTo,
         updateMultiplayerState: updateMultiplayerState,
         updateArena: updateArena,
+        caughtFishAnimationEnd: caughtFishAnimationEnd,
 
         //???
         getMyPlayerSlot: ()=> _playerSlot,

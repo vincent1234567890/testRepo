@@ -192,5 +192,15 @@ const FloatingMenu = (function () {
 
     }
 
+    const proto = FloatingMenu.prototype;
+
+
+    proto.reattach = function () {
+        _parent.getParent().removeChild(_parent,false);
+        GameView.addView(_parent);
+    };
+
+    // proto.Move
+
     return FloatingMenu;
 }());

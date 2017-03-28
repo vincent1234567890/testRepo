@@ -15,6 +15,7 @@ const ReferenceName = {
     OtherPlayerIcon : "#PlayerIcon2.png",
     ChangeSeatButton : "ChangeSitUP.png",
     ChangeSeatButtonDown : "ChangeSitDW.png",
+    PlayerSeatIndicator : "#YouAreHere.png",
 
     //Lobby
     LobbyBackground : "#LobbyBG1.png",

@@ -90,10 +90,15 @@ const ClientServerConnect = function () {
                 _hasConnected = false;
                 console.log("Disconnect detected.  Will attempt reconnection soon...");
                 setTimeout(connectToMasterServer, 2000);
+
+                setTimeout(cleanup, 0);
+            });
+
+            function cleanup(){
                 GameManager.destroyArena();
                 ClientServerConnect.postGameCleanup();
                 AppManager.goBackToLobby();
-            });
+            }
         });
     };
 

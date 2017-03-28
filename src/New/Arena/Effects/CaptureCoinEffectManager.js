@@ -7,11 +7,12 @@ const CaptureCoinEffectManager = (function () {
     const animationPerFrameSpeed = 0.05;
     // const numberOfCoins = 8;
 
-    const explodeLifetime = 0.5; // seconds
+    const explodeLifetime = 0.2; // seconds
+    const collectDelay = 0.1;
     const collectLifetime = 1;
-    const velocity = 1;
+    const velocity = 1.5;
     const gravity = 0.9;
-    const offsetPerCoin = 0.5;
+    const offsetPerCoin = 0.2;
 
     let animationFrames;
 
@@ -49,13 +50,13 @@ const CaptureCoinEffectManager = (function () {
     proto.triggerCoins = function (pos, target, fish) {
         // console.log(pos);
         const label = _prizeLabelPool.alloc(this._parent, fish.value);
-        setupView(label, label.getTargetNode(), pos, Math.PI / 2, target, undefined, collectLabel, velocity, explodeLifetime * 10, collectLifetime * 10, collectLifetime * 10 , gravity);
+        setupView(label, label.getTargetNode(), pos, Math.PI / 2, target, undefined, collectLabel, velocity, explodeLifetime * 10, collectDelay*10, collectLifetime * 10, collectLifetime * 10 , gravity);
         for (let i = 0; i < fish.coinsShown; i++) {
             const coin = _coinViewPool.alloc(this._parent, this.animation.clone());
             // coin.startCoinAnimation(pos,(180/(numberOfCoins+2))*(i+1), target, collectCoins);
             setupView(coin, coin.getTargetNode(),
                 pos, 2 * Math.PI / (fish.coinsShown) * (i + 1), target, this.animation.clone(), collectCoins,
-                velocity * 10, explodeLifetime * 10, collectLifetime * 10, collectLifetime * 10 * (i+1)/fish.coinsShown, gravity);
+                velocity * 10, explodeLifetime * 10, collectDelay *10 * (fish.coinsShown -i), collectLifetime * 10, collectLifetime * 10 * (i+1)/fish.coinsShown, gravity);
         }
     };
 
@@ -159,7 +160,7 @@ const CaptureCoinEffectManager = (function () {
         return PrizeLabelObject;
     }());
 
-    function setupView(viewObject, viewTarget, pos, angle, target, animation, callback, velocity, explodeLifetime, collectLifetime, delay, gravity) {
+    function setupView(viewObject, viewTarget, pos, angle, target, animation, callback, velocity, explodeLifetime, collectDelay, collectLifetime, delay, gravity) {
         let startTime = Date.now();
 
         viewTarget.setPosition(pos);
@@ -179,7 +180,9 @@ const CaptureCoinEffectManager = (function () {
             if (elapsed <= explodeLifetime) {
                 this.x = pos.x + velocity * elapsed * Math.cos(angle);
                 this.y = pos.y + velocity * elapsed * Math.sin(angle) - gravity / 2 * Math.pow(elapsed, 2);
-            } else { // animate move to player
+            } else if (elapsed <= explodeLifetime + collectDelay) {
+                return;
+            }else{// animate move to player
                 if (endingStartTime === undefined) {
                     endingStartTime = Date.now();
                     endingStartX = this.x;
@@ -196,8 +199,8 @@ const CaptureCoinEffectManager = (function () {
                 }
                 const endingPercentage = endingElapsed / collectLifetime;
                 // console.log(xLength, yLength, endingPercentage, endingElapsed);
-                this.x = endingStartX + endingPercentage * (xLength);
-                this.y = endingStartY + endingPercentage * (yLength);
+                this.x = endingStartX + endingPercentage * (xLength) * elapsed/5;
+                this.y = endingStartY + endingPercentage * (yLength) * elapsed/5;
                 // console.log(thisCoinSprite.x, thisCoinSprite.y, Date.now(), endingStartTime, endingElapsed,
                 //     endingPercentage, endingPercentage * (xLength), endingPercentage * (yLength));
             }
