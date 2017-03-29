@@ -201,6 +201,7 @@ const GameManager = function () {
         destroyArena();
         _goToLobbyCallback();
         ClientServerConnect.getCurrentJackpotValues();
+        ClientServerConnect.requestMyData();
 
         // createLobby();
 

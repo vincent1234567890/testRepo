@@ -20,7 +20,6 @@ const CoinStackEffect = (function () {
         }
         let moveAmount = this._moveAmount = 0;
         const coinStack = this._coinStack = [];
-        this.__parent = parent;
         let _startTime = Date.now();
 
         let currentCoinCount = 0;
@@ -84,8 +83,10 @@ const CoinStackEffect = (function () {
                 }
             }
             this._coinValueLabel.stopAllActions();
+            this._coinValueLabel.setOpacity(0);
             this._coinStack = [];
-            this.__parent.removeChild(this._parent,false);
+            this._parent.getParent().removeChild(this._parent,false);
+            this._parent.stopAllActions();
             this._parent.unscheduleUpdate();
             this._animationEndedCallback(this, spriteSize);
             this._animationEndedCallback = null;
@@ -111,6 +112,7 @@ const CoinStackEffect = (function () {
     };
 
     proto.stop = function (){
+        // this._parent.stopAllActions();
         this.onStackAnimationEnded();
     };
 
