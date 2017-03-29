@@ -22,7 +22,7 @@ const CannonView = (function () {
             count++;
         }
         animationArray.push(new cc.SpriteFrame(" "));
-        this._sparkSprite = new cc.Sprite();
+        // this._sparkSprite = new cc.Sprite();
         // this._sparkSequence = new cc.Sequence(new cc.Animate(new cc.Animation(animationArray, this._gameConfig.shootInterval / 1000 / animationArray.length)));
 
         this.createView(slot);
@@ -151,7 +151,7 @@ const CannonView = (function () {
         let angle;
         if (this._cannonSprite) {
             angle = this._cannonSprite.getRotation();
-            this._cannonSprite.removeChild(this._sparkSprite, false);
+            // this._cannonSprite.removeChild(this._sparkSprite, false);
             this._cannonSprite.removeChild(this._cannonPowerLabel, false);
             this._cannonNode.removeChild(this._cannonSprite);
         }
@@ -161,6 +161,7 @@ const CannonView = (function () {
         this._cannonSprite.setPosition({x: this.pos[0], y: this.pos[1]});
 
         this._sequence = new cc.Sequence(this.getCannonAnimation(cannonPower), new cc.CallFunc(this.onAnimateShootEnd, this));
+        this._sequence.setOriginalTarget(this._cannonSprite); // due to some unknown error, we need to set the original target, although this is discouraged by the docs
         this._cannonNode.addChild(this._cannonSprite, 20);
         this._cannonSprite.addChild(this._cannonPowerLabel, 29);
 
@@ -170,18 +171,18 @@ const CannonView = (function () {
         this._cannonPowerLabel.setAnchorPoint(0.5, 0.5);
         this._cannonPowerLabel.setPosition(cannonLabelPos);
 
-        this.setSparkSprite();
+        // this.setSparkSprite();
 
         if (angle) {
             this._cannonSprite.setRotation(angle);
         }
     };
 
-    proto.setSparkSprite = function () {
-        this._cannonSprite.addChild(this._sparkSprite, 99);
-        const size = this._cannonSprite.getContentSize();
-        this._sparkSprite.setPosition(size.width / 2, size.height);
-    };
+    // proto.setSparkSprite = function () {
+    //     this._cannonSprite.addChild(this._sparkSprite, 99);
+    //     const size = this._cannonSprite.getContentSize();
+    //     this._sparkSprite.setPosition(size.width / 2, size.height);
+    // };
 
     proto.clearCannonPowerLabel = function () {
         this._cannonPowerLabel.setString('');
