@@ -61,16 +61,16 @@ const ClientServerConnect = function () {
 
                 if (typeof document !== 'undefined') {
                     var queryParams = getCurrentOrCachedQueryParams();
-                    if (queryParams.token && (queryParams.playerId || queryParams.email)) {
-                        loginWithToken(queryParams.token, queryParams.playerId, queryParams.email, function (loginData) {
-                            // If successful, remove the query parameters from the URL
-                            window.history.pushState({where: 'start', search: document.location.search}, '', document.location.pathname);
-                            // Start the game!
-                            // AppManager.goToLobby();
-                            // console.log(client);
-                            resolve(loginData);
-                        });
-                    }
+                    // Players without credentials will now auto log in as trial players
+                    //if (queryParams.token && (queryParams.playerId || queryParams.email)) {
+                    loginWithToken(queryParams.token, queryParams.playerId, queryParams.email, function (loginData) {
+                        // If successful, remove the query parameters from the URL
+                        window.history.pushState({where: 'start', search: document.location.search}, '', document.location.pathname);
+                        // Start the game!
+                        // AppManager.goToLobby();
+                        // console.log(client);
+                        resolve(loginData);
+                    });
                 }
             });
 
