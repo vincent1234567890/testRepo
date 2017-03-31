@@ -10,6 +10,8 @@ const FloatingMenu = (function () {
     const hoverSize = 1.2;
     const originalSize = 1;
 
+    let _leaderboardView;
+
     const FloatingMenu = function (settingsCallback) {
         _parent = new cc.Node();
         GameView.addView(_parent);
@@ -185,7 +187,12 @@ const FloatingMenu = (function () {
     }
 
     function onLeaderboardSelected() {
-
+        console.log("onLeaderboardSelected");
+        if (!_leaderboardView){
+            _leaderboardView = new LeaderboardView();
+        }else{
+            _leaderboardView.show();
+        }
     }
 
     function onFAQSelected() {

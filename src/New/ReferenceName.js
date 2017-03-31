@@ -55,12 +55,23 @@ const ReferenceName = {
     FloatingMenuButtonFAQIcon : "#GameFAQIcon.png",
     FloatingMenuButtonFAQText : "#GameFAQChinese.png",
 
+    //Jackpot
     JackpotBackground : "#JackpotIcon.png",
     JackpotShadow : "#JackpotDropShadow.png",
     JackpotBar : "#JackpotBar.png",
     JackpotBarFrame : "#JackpotBarFrame.png",
     JackpotLight : "#JackpotLigthray.png",
     JackpotTitleChinese : "#JackpotChineseTitle.png",
+
+    //Floating menu shared
+    FloatingTitleBackground : "#TitleBase2.png",
+    FloatingBottomLeftDeco : "#Pattern1.png",
+    FloatingPopupBackground : "#PopupBase2.png",
+
+    //Leaderboard
+    LeaderboardTextBackground : "#TextBG2.png",
+    LeaderboardTitleChinese : "#RankingChineseTitle.png",
+
 
     //Profile
     ProfileBackground : "#Profile POut BG.png",

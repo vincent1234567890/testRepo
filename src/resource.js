@@ -195,6 +195,7 @@ var res = {
     // GameType100XPlist : "res/New/Lobby/100X.plist",
     // GameType100XPng : "res/New/Lobby/100X.png",
 
+    WaterCausticAnimation : "res/CompanyA/Lobby/Caustic.plist",
 
     WaterCaustic0 : "res/CompanyA/Lobby/Caustic1.png",
     WaterCaustic1 : "res/CompanyA/Lobby/Caustic2.png",

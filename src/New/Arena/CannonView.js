@@ -11,17 +11,17 @@ const CannonView = (function () {
         this._gameConfig = gameConfig;
         this._cannonNode = new cc.Node();
 
-        let animationArray = [];
-        let count = 0;
-        while (true) {
-            const frame = cc.spriteFrameCache.getSpriteFrame("Spark" + count + ".png");
-            if (!frame) {
-                break;
-            }
-            animationArray.push(frame);
-            count++;
-        }
-        animationArray.push(new cc.SpriteFrame(" "));
+        // let animationArray = [];
+        // let count = 0;
+        // while (true) {
+        //     const frame = cc.spriteFrameCache.getSpriteFrame("Spark" + count + ".png");
+        //     if (!frame) {
+        //         break;
+        //     }
+        //     animationArray.push(frame);
+        //     count++;
+        // }
+        // animationArray.push(new cc.SpriteFrame(" "));
         // this._sparkSprite = new cc.Sprite();
         // this._sparkSequence = new cc.Sequence(new cc.Animate(new cc.Animation(animationArray, this._gameConfig.shootInterval / 1000 / animationArray.length)));
 
