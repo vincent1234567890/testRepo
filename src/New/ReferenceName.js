@@ -3,6 +3,7 @@
  */
 const ReferenceName = {
 
+    //GameUI
     Base : "#Base.png",
     IncreaseCannon : "#plus.png",
     IncreaseCannon_Down : "#PlusDw.png",
@@ -16,6 +17,9 @@ const ReferenceName = {
     ChangeSeatButton : "ChangeSitUP.png",
     ChangeSeatButtonDown : "ChangeSitDW.png",
     PlayerSeatIndicator : "#YouAreHere.png",
+    LockOnButtonSide : "LockOnSide_",
+    LockOnButtonBottom : "LockOnBtm_",
+    LockOnTargetCrosshair :"#LockOnIcon_00000.png",
 
     //Lobby
     LobbyBackground : "#LobbyBG1.png",

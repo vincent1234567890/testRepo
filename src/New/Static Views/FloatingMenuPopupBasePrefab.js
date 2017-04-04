@@ -17,7 +17,7 @@ const FloatingMenuPopupBasePrefab = (function () {
         const titleBG = new cc.Sprite(ReferenceName.FloatingTitleBackground);
         const deco = new cc.Sprite(ReferenceName.FloatingBottomLeftDeco);
 
-        const closeButton = new
+        // const closeButton = new
 
         titleBG.setPosition(new cc.p(560,689));
         title.setPosition(new cc.p(315,60));

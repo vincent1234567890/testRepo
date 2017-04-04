@@ -342,6 +342,14 @@ const ClientServerConnect = function () {
         _informServer.changeSeat(slot);
     };
 
+    const setFishLockRequest = function(fishId){
+        _informServer.setTargetLockOnFish(fishId);
+    };
+
+    const unsetFishLockRequest = function () {
+        _informServer.unsetTargetLock();
+    };
+
     return {
         connectToMasterServer : connectToMasterServer,
         login : login,
@@ -357,5 +365,7 @@ const ClientServerConnect = function () {
         listenForEvent: listenForEvent,
         changeSeatRequest : changeSeatRequest,
         getCurrentJackpotValues : getCurrentJackpotValues,
+        setFishLockRequest : setFishLockRequest,
+        unsetFishLockRequest : unsetFishLockRequest,
     };
 }();

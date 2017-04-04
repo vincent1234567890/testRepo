@@ -13,8 +13,23 @@ const FishView = (function () {
     // const deathTint = new cc.TintTo (0.3, 196,196,196)
     let debugReported = false;
 
-    const FishView = function (parent, fishClass, fishType) {
+    const FishView = function (parent, fishClass, fishType, onFishClickedCallback) {
         this._parent = new cc.Node();
+
+        const touchEvent = (sender, type) => {
+            // console.log("touch",sender,type);
+            switch (type) {
+                case ccui.Widget.TOUCH_MOVED:
+                    break;
+                case ccui.Widget.TOUCH_BEGAN:
+                    break;
+                case ccui.Widget.TOUCH_ENDED:
+                    onFishClickedCallback(this);
+                    break;
+                case ccui.Widget.TOUCH_CANCELED:
+                    break;
+            }
+        };
 
         this._sprite = new cc.Sprite();
         this._parent.addChild(this._sprite, -1);
@@ -26,13 +41,21 @@ const FishView = (function () {
         // GameView.addView(this._parent);
         parent.addChild(this._parent, -1);
 
+        const _wrapper = new ccui.Widget();
+        _wrapper.setContentSize(fishClass.length * 2, fishClass.breadth * 2);
+        _wrapper.setTouchEnabled(true);
+        _wrapper.setSwallowTouches(false);
+        _wrapper.addTouchEventListener(touchEvent);
+
+        this._parent.addChild(_wrapper);
+
         // const testLayer = new cc.LayerColor();
         // testLayer.setBlendFunc()
         if (GameManager.debug) {
 
             const debugCircle = new cc.Sprite(res.DebugCircle);
 
-            debugCircle.setScaleX(fishClass.length * 2 / 100);
+            debugCircle.setScaleX(fishClass.length * 2 / 100); // radius
             debugCircle.setScaleY(fishClass.breadth * 2/ 100);
 
             this._parent.addChild(debugCircle, 1);
@@ -103,6 +126,10 @@ const FishView = (function () {
             debugReported = true;
             console.warn("Fish missing atlas :", this.type);
         }
+    };
+
+    proto.addTarget = function(target){
+        this._parent.addChild(target);
     };
 
     return FishView;

@@ -22,7 +22,9 @@
 
         "src/SharedClasses/LoadingScreen.js",
         "src/SharedClasses/ParticleSystemFactory.js",
-        "src/New/ObjectPool.js",
+        "src/New/Utilities/ObjectPool.js",
+        "src/New/Utilities/TouchLayerRefactored.js",
+        "src/New/Utilities/AnimatedButton.js",
 
         "src/New/Shaders/WaterCaustics/WaterCaustics.js",
         "src/New/Shaders/WaterCaustics/WaterCausticsLayer.js",
@@ -55,7 +57,6 @@
         "src/New/Arena/OptionsManager.js",
         "src/New/Data/FishAnimationEnum.js",
         "src/New/Data/FishAnimationData.js",
-        "src/New/TouchLayerRefactored.js",
         "src/New/MouseLayer.js",
         "src/New/ReferenceName.js",
         "src/New/Arena/BulletView.js",

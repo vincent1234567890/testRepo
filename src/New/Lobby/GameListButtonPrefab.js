@@ -82,7 +82,6 @@ const GameListButtonPrefab = (function () {
             // ball.resume();
             this._wrapper.setEnabled(true);
             // touchEvent(null, ccui.Widget.TOUCH_CANCELED);
-
         };
 
         this.disableContent = () => {

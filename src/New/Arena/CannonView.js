@@ -160,6 +160,7 @@ const CannonView = (function () {
         this._cannonSprite.setAnchorPoint(0.5, 0.5);
         this._cannonSprite.setPosition({x: this.pos[0], y: this.pos[1]});
 
+        // this._sequence = new cc.Sequence(this.getCannonAnimation(cannonPower), new cc.CallFunc(this.onAnimateShootEnd, this));
         this._sequence = new cc.Sequence(this.getCannonAnimation(cannonPower), new cc.CallFunc(this.onAnimateShootEnd, this));
         this._sequence.setOriginalTarget(this._cannonSprite); // due to some unknown error, we need to set the original target, although this is discouraged by the docs
         this._cannonNode.addChild(this._cannonSprite, 20);
