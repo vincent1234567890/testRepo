@@ -1,12 +1,9 @@
 /**
- * Created by eugeneseah on 9/3/17.
+ * Created by eugeneseah on 31/3/17.
  */
 
-//experimenting with arrow function format
-const GameListButtonPrefab = (function () {
-    "use strict";
-
-    const GameListButtonPrefab = function (itemData, widthOfButton, selectedCallback) {
+const RolloverEffectItem = (function () {
+    const RolloverEffectItem = function () {
         this._wrapper = new ccui.Widget();
 
         const touchEvent = (sender, type) => {
@@ -82,6 +79,7 @@ const GameListButtonPrefab = (function () {
             // ball.resume();
             this._wrapper.setEnabled(true);
             // touchEvent(null, ccui.Widget.TOUCH_CANCELED);
+
         };
 
         this.disableContent = () => {
@@ -130,35 +128,5 @@ const GameListButtonPrefab = (function () {
         let selected = false;
     };
 
-    function getAnimationArray(baseName) {
-        let animationArray = [];
-        let count = 0;
-        const padding = 5;
-        while (true) {
-            let frameCount = String(count);
-            while (frameCount.length < padding) {
-                frameCount = '0' + frameCount;
-            }
-            const frame = cc.spriteFrameCache.getSpriteFrame(baseName + "_" + frameCount + ".png");
-            if (!frame) {
-                break;
-            }
-            animationArray.push(frame);
-            count++;
-        }
-        return new cc.Animate(new cc.Animation(animationArray, 2 / animationArray.length));
-    }
-
-
-    const proto = GameListButtonPrefab.prototype;
-
-    proto.getContent = function () {
-        return this._wrapper;
-    };
-
-
-
-
-    return GameListButtonPrefab;
-
+    return RolloverEffectItem;
 }());

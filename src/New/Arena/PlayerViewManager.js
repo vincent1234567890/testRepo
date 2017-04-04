@@ -5,7 +5,7 @@ const PlayerViewManager = (function () {
     "use strict";
     let _bulletId;
 
-    const PlayerViewManager = function (gameConfig, index, isPlayer, changeSeatCallback) {
+    const PlayerViewManager = function (gameConfig, index, isPlayer, changeSeatCallback, lockOnCallback, fishLockStatus) {
         _bulletId = 0;
         this._cannonManager = new CannonManager(gameConfig, index, isPlayer);
 
@@ -15,12 +15,14 @@ const PlayerViewManager = (function () {
             changeSeatCallback(slot);
         };
 
-        this._playerView = new PlayerView(gameConfig, index, isPlayer, changeSeat);// not ideal : could have been parented to cannon and rotated accordingly
+        const onLockOnRequest = (state) =>{
+            lockOnCallback(state);
+        };
+
+        this._playerView = new PlayerView(gameConfig, index, isPlayer, changeSeat, onLockOnRequest, fishLockStatus);// not ideal : could have been parented to cannon and rotated accordingly
     };
 
     const proto = PlayerViewManager.prototype;
-
-
 
     proto.shootTo = function (pos) {
         return this._cannonManager.shootTo(pos);
@@ -34,7 +36,6 @@ const PlayerViewManager = (function () {
         this._playerView.updateView(playerData, isChangeSeat);
         this._cannonManager.showGun();
         if (isChangeSeat != null){
-            // console.log(playerData);
             this._cannonManager.setUpCannonChangeMenu(this._gameConfig, playerData.slot);
         }
         if (typeof playerData.gunId === 'number') {

@@ -22,7 +22,7 @@ const CaptureCoinEffectManager = (function () {
 
     const CaptureCoinEffectManager = function () {
         this._parent = new cc.Node();
-        GameView.addView(this._parent);
+        GameView.addView(this._parent,10);
         _coinViewPool = new ObjectPool(SpinningCoinView);
         _prizeLabelPool = new ObjectPool(PrizeLabelObject);
 

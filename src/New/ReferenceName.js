@@ -3,6 +3,7 @@
  */
 const ReferenceName = {
 
+    //GameUI
     Base : "#Base.png",
     IncreaseCannon : "#plus.png",
     IncreaseCannon_Down : "#PlusDw.png",
@@ -16,6 +17,9 @@ const ReferenceName = {
     ChangeSeatButton : "ChangeSitUP.png",
     ChangeSeatButtonDown : "ChangeSitDW.png",
     PlayerSeatIndicator : "#YouAreHere.png",
+    LockOnButtonSide : "LockOnSide_",
+    LockOnButtonBottom : "LockOnBtm_",
+    LockOnTargetCrosshair :"#LockOnIcon_00000.png",
 
     //Lobby
     LobbyBackground : "#LobbyBG1.png",
@@ -55,12 +59,23 @@ const ReferenceName = {
     FloatingMenuButtonFAQIcon : "#GameFAQIcon.png",
     FloatingMenuButtonFAQText : "#GameFAQChinese.png",
 
+    //Jackpot
     JackpotBackground : "#JackpotIcon.png",
     JackpotShadow : "#JackpotDropShadow.png",
     JackpotBar : "#JackpotBar.png",
     JackpotBarFrame : "#JackpotBarFrame.png",
     JackpotLight : "#JackpotLigthray.png",
     JackpotTitleChinese : "#JackpotChineseTitle.png",
+
+    //Floating menu shared
+    FloatingTitleBackground : "#TitleBase2.png",
+    FloatingBottomLeftDeco : "#Pattern1.png",
+    FloatingPopupBackground : "#PopupBase2.png",
+
+    //Leaderboard
+    LeaderboardTextBackground : "#TextBG2.png",
+    LeaderboardTitleChinese : "#RankingChineseTitle.png",
+
 
     //Profile
     ProfileBackground : "#Profile POut BG.png",

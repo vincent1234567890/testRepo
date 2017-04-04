@@ -4,12 +4,17 @@
 
 var PlayerView = (function () {
     "use strict";
-    var PlayerView = function (gameConfig, slot, isPlayer, changeSeatCallback) {
+    var PlayerView = function (gameConfig, slot, isPlayer, changeSeatCallback, lockOnCallback, fishLockStatus) {
         // this._changeSeatCallback = changeSeatCallback;
         const changeSeat = (slot) =>{
             changeSeatCallback(slot);
         };
-        this._playerViewStaticPrefabInstance = new PlayerViewStaticPrefab(gameConfig, slot, isPlayer, changeSeat);
+
+        const onLockOnRequest = (state) =>{
+            lockOnCallback(state);
+        };
+
+        this._playerViewStaticPrefabInstance = new PlayerViewStaticPrefab(gameConfig, slot, isPlayer, changeSeat, onLockOnRequest, fishLockStatus);
     };
 
     PlayerView.prototype.updateView = function(playerData, isChangeSeat){

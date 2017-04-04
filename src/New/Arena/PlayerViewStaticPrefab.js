@@ -12,11 +12,13 @@ const PlayerViewStaticPrefab = (function () {
     const stackHeightLow = 4;
     const stackHeightMed = 8;
     const stackHeightHigh = 16;
-    const PlayerViewStaticPrefab = function(gameConfig, slot, isPlayer, changeSeatCallback){
+    const PlayerViewStaticPrefab = function(gameConfig, slot, isPlayer, changeSeatCallback, lockOnCallback, fishLockStatus){
         // this._slot = slot;
         this._parent = new cc.Node();
         GameView.addView(this._parent,1);
         this._parent.setPosition(300,300);
+
+        this._fishLockStatus = fishLockStatus;
 
         const themeData = ThemeDataManager.getThemeDataList("CannonPlatformPositions");
 
@@ -85,8 +87,6 @@ const PlayerViewStaticPrefab = (function () {
         this._slotLabel.setPosition(55,10);
         this._changeSlotbutton.addChild(this._slotLabel);
 
-
-
         let pos;
         let markerPos;
         if (gameConfig.isUsingOldCannonPositions) {
@@ -104,24 +104,56 @@ const PlayerViewStaticPrefab = (function () {
         this._playerName.x = themeData["PlayerName"][0][0];
         this._playerName.y = themeData["PlayerName"][0][1];
 
+        // this._lockOnButton = new cc.Sprite();
+        // this._lockOnButtonAnimation = undefined;
+        // this._lockOnButtonAnimationReverse = undefined;
 
         let vector = new cc.p(0,150);
 
+        const LockOnCallback = (state) =>{
+            lockOnCallback({state :state, callback: setCallback});
+        };
+
+        const setCallback = (state) => {
+            if (state) {
+                this._lockOnButton.setState(state);
+            }else{
+                this._lockOnButton.setLook(state);
+            }
+        };
+
+        let name;
+        if (pos[1] > markerPos[1]) {
+            // this._lockOnButtonAnimation = GUIFunctions.getAnimation(ReferenceName.LockOnButtonSide,0.03);
+            name = ReferenceName.LockOnButtonSide;
+        }else{
+            name = ReferenceName.LockOnButtonBottom;
+            // this._lockOnButtonAnimation = GUIFunctions.getAnimation(ReferenceName.LockOnButtonBottom,0.03);
+        }
+
+        // if (isPlayer){
+            // const frame = this._lockOnButtonAnimation.getAnimation().getFrames()[0];
+            // const animate = new cc.Animate(new cc.Animation([frame.clone()], 0.1));
+            // this._lockOnButton.runAction(new cc.Sequence(animate));
+        this._lockOnButton = new AnimatedButton(name,0.03,true,LockOnCallback);
+        this._lockOnButton.getParent().setPosition(-170, 30);
+        this._parent.addChild(this._lockOnButton.getParent());
+        // }
+
         if (pos[1] > markerPos[1]) {
             this._parent.y = pos[1]+ themeData["Base"][0];
-            // this._playerSeatIndicator.setPosition(0,200);
             if (pos[0] > markerPos[0]){
                 this._parent.x = pos[0]- themeData["Base"][1];
-                // vector = new cc.p(200,0);
                 this._parent.setRotation(-90);
-                // this._playerSeatIndicator.setRotation(90);
             }else {
                 this._parent.setRotation(90);
-                // vector = new cc.p(-200,0);
                 this._parent.x = pos[0]+ themeData["Base"][1];
-                // this._playerSeatIndicator.setRotation(-90);
             }
         }
+
+        this._lockOnButton.getParent().setRotation(this._parent.getRotation() * -1);
+
+        this._lockOnButton.setVisible(isPlayer);
 
         this._coinStackManager = new CoinStackManager(this._parent);
 
@@ -135,9 +167,6 @@ const PlayerViewStaticPrefab = (function () {
             this._playerSeatIndicator.runAction(new cc.Sequence(new cc.MoveTo(0.5,vector), new cc.Blink(1,3), new cc.MoveTo(0.5,cc.pMult(vector,-1))));
             this._playerSeatIndicator.runAction(new cc.Sequence(new cc.DelayTime(1.5), new cc.FadeOut(0.5)));
         }
-
-
-
     };
 
     const proto = PlayerViewStaticPrefab.prototype;
@@ -159,7 +188,6 @@ const PlayerViewStaticPrefab = (function () {
         }
 
         this._gold.setString(gold);
-        GUIFunctions.shrinkNumberString(playerData.score);
         const activatePlayerIcons = this._isPlayer == null || playerData.slot == playerSlot;
         if(activatePlayerIcons){
             this._coinIcon.setVisible(true);
@@ -177,6 +205,8 @@ const PlayerViewStaticPrefab = (function () {
         this._otherPlayerIcon.setVisible(false);
         this._coinIcon.setVisible(false);
         this._isPlayer = null;
+        this._lockOnButton.setLook(false);
+        this._lockOnButton.setVisible(false);
         // this._gem.setString('');
     };
 
@@ -199,7 +229,13 @@ const PlayerViewStaticPrefab = (function () {
         this._playerIcon.setVisible(isPlayer);
         this._otherPlayerIcon.setVisible(!isPlayer);
         this._changeSlotbutton.setVisible(false);
-        // this._cann
+
+        if (this._lockOnButton){
+            this._lockOnButton.setVisible(isPlayer);
+            if(isPlayer){
+                this._lockOnButton.setState(this._fishLockStatus());
+            }
+        }
     };
 
     return PlayerViewStaticPrefab;

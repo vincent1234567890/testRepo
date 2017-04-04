@@ -27,13 +27,49 @@ const JackpotView = (function () {
         _parent.addChild(bar);
         bar.setPosition(0,-22);
 
-        _parent.addChild(barFrame);
-        barFrame.setPosition(0,-22);
-
         _parent.addChild(title);
         title.setPosition(0,22);
 
         GameView.addView(_parent);
+
+        //------------------- testing
+        // const color = new cc.LayerColor(new cc.Color(20,145,224,255));
+        const target = new cc.Sprite();
+        // const target = new cc.Sprite(ReferenceName.JackpotBackground);
+        // target.runAction(new cc.repeatForever(new cc.rotateBy(25,360)));
+        const mask = new cc.Sprite(ReferenceName.JackpotBar);
+
+        const maskedFill = new cc.ClippingNode(mask);
+        maskedFill.setAlphaThreshold(0.9);
+
+        // maskedFill.addChild(color,1);
+        maskedFill.addChild(target);
+        maskedFill.setPosition(0,-22);
+        _parent.addChild(maskedFill);
+
+        cc.spriteFrameCache.addSpriteFrames(res.WaterCausticAnimation);
+        let animationArray = [];
+        let count = 0;
+        while (true) {
+            let frameCount = String(count);
+            while (frameCount.length < 5) {
+                frameCount = '0' + frameCount;
+            }
+            const frame = cc.spriteFrameCache.getSpriteFrame("Caustic_" + frameCount + ".png");
+            if (!frame) {
+                break;
+            }
+            animationArray.push(frame);
+            count++;
+        }
+        const animation = new cc.Animate(new cc.Animation(animationArray,0.03));
+        target.runAction(new cc.repeatForever(animation));
+        // animationArray.push(new cc.SpriteFrame(" "));
+
+        //------------------------end test
+
+        _parent.addChild(barFrame);
+        barFrame.setPosition(0,-22);
 
         _parent.setPosition(683,666);
 

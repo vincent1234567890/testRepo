@@ -22,12 +22,14 @@ const GameView = function () {
     let _effectsManager;
 
     let _lobbyNode;
+    let _lockOnCallback;
 
-    function initialise(parentNode, gameConfig, fishGameArena) {
+    function initialise(parentNode, gameConfig, fishGameArena, lockOnCallback, fishLockStatus) {
         if (gameConfig) { // going into game
             initialiseParent(parentNode);
             _fishGameArena = fishGameArena;
             _gameConfig = gameConfig;
+            _lockOnCallback = lockOnCallback;
 
             if (_gameConfig.cannonPositions[_playerSlot][1] > cc.view.getDesignResolutionSize().height / 2) {
                 // console.log(_gameConfig.cannonPositions[_playerSlot]);
@@ -38,7 +40,7 @@ const GameView = function () {
             // console.log("initialised");
             for (let i = 0; i < _gameConfig.maxPlayers; i++) {
                 const index = getPlayerSlot(i);
-                _playerViews[index] = new PlayerViewManager(_gameConfig, index, i == _playerSlot, changeSeatRequest);
+                _playerViews[index] = new PlayerViewManager(_gameConfig, index, i == _playerSlot, changeSeatRequest, lockOnRequest, fishLockStatus);
             }
 
             _effectsManager = new EffectsManager();
@@ -228,6 +230,10 @@ const GameView = function () {
 
     function changeSeatRequest(slot) {
         ClientServerConnect.changeSeatRequest(slot);
+    }
+
+    function lockOnRequest(state){
+        _lockOnCallback(state);
     }
 
     function caughtFishAnimationEnd(data) {

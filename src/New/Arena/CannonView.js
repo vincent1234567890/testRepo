@@ -11,17 +11,17 @@ const CannonView = (function () {
         this._gameConfig = gameConfig;
         this._cannonNode = new cc.Node();
 
-        let animationArray = [];
-        let count = 0;
-        while (true) {
-            const frame = cc.spriteFrameCache.getSpriteFrame("Spark" + count + ".png");
-            if (!frame) {
-                break;
-            }
-            animationArray.push(frame);
-            count++;
-        }
-        animationArray.push(new cc.SpriteFrame(" "));
+        // let animationArray = [];
+        // let count = 0;
+        // while (true) {
+        //     const frame = cc.spriteFrameCache.getSpriteFrame("Spark" + count + ".png");
+        //     if (!frame) {
+        //         break;
+        //     }
+        //     animationArray.push(frame);
+        //     count++;
+        // }
+        // animationArray.push(new cc.SpriteFrame(" "));
         // this._sparkSprite = new cc.Sprite();
         // this._sparkSequence = new cc.Sequence(new cc.Animate(new cc.Animation(animationArray, this._gameConfig.shootInterval / 1000 / animationArray.length)));
 
@@ -160,6 +160,7 @@ const CannonView = (function () {
         this._cannonSprite.setAnchorPoint(0.5, 0.5);
         this._cannonSprite.setPosition({x: this.pos[0], y: this.pos[1]});
 
+        // this._sequence = new cc.Sequence(this.getCannonAnimation(cannonPower), new cc.CallFunc(this.onAnimateShootEnd, this));
         this._sequence = new cc.Sequence(this.getCannonAnimation(cannonPower), new cc.CallFunc(this.onAnimateShootEnd, this));
         this._sequence.setOriginalTarget(this._cannonSprite); // due to some unknown error, we need to set the original target, although this is discouraged by the docs
         this._cannonNode.addChild(this._cannonSprite, 20);
