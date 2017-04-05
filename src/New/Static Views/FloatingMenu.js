@@ -87,70 +87,92 @@ const FloatingMenu = (function () {
     };
 
     function doButton(iconSprite, buttonImage, buttonSelected, labelImage, selectedCallBack) {
-        let isMouseDown = false;
-        // let selected = false;
-        const touchEvent = (sender, type) => {
-            switch (type) {
-                // case ccui.Widget.TOUCH_MOVED:
-                //     // console.log(sender);
-                //     break;
-                // case ccui.Widget.TOUCH_BEGAN:
-                //     if (selected) return;
-                //     selected = true;
-                //     break;
-                case ccui.Widget.TOUCH_ENDED:
-                    // gameSelected(sender);
-                    console.log(sender);
-                    selectedCallBack(sender);
-                case ccui.Widget.TOUCH_CANCELED: // fallthrough intended
-                    // label.runAction(new cc.ScaleTo(0.01,originalSize));
-                    label.setScale(originalSize);
-                    break;
-            }
-        };
-
-        const onMouseMove = (mouseData)=>{
-            // console.log(mouseData);
-            const pos = button.convertToWorldSpace(cc.p());
-            var rect = cc.rect(pos.x, pos.y, button.getBoundingBox().width, button.getBoundingBox().height);
-            if (!isMouseDown){
-                if(cc.rectContainsPoint(rect,mouseData.getLocation())) {
-                    // label.runAction(new cc.ScaleTo(0.01, hoverSize));
-                    label.setScale(hoverSize);
-                    touchEvent(null, ccui.Widget.TOUCH_BEGAN);
-                }else{
-                    label.setScale(originalSize);
-                    // label.runAction(new cc.ScaleTo(0.01,originalSize));
-                }
-            }
-            // else if (selected){
-            //     // touchEvent(null, ccui.Widget.TOUCH_CANCELED);
-            // }
-        };
-
-        const onMouseDown = (mouseData) =>{
-            isMouseDown = true;
-        };
-
-        const onMouseUp = (mouseData) => {
-            isMouseDown = false;
-        };
-
-        const _listener = cc.EventListener.create({
-            event: cc.EventListener.MOUSE,
-
-            onMouseDown: onMouseDown,
-            onMouseUp: onMouseUp,
-            onMouseMove: onMouseMove,
-            // onMouseScroll: null,
-        });
+        // let isMouseDown = false;
+        // // let selected = false;
+        // const touchEvent = (sender, type) => {
+        //     switch (type) {
+        //         // case ccui.Widget.TOUCH_MOVED:
+        //         //     // console.log(sender);
+        //         //     break;
+        //         // case ccui.Widget.TOUCH_BEGAN:
+        //         //     if (selected) return;
+        //         //     selected = true;
+        //         //     break;
+        //         case ccui.Widget.TOUCH_ENDED:
+        //             // gameSelected(sender);
+        //             console.log(sender);
+        //             selectedCallBack(sender);
+        //         case ccui.Widget.TOUCH_CANCELED: // fallthrough intended
+        //             // label.runAction(new cc.ScaleTo(0.01,originalSize));
+        //             label.setScale(originalSize);
+        //             break;
+        //     }
+        // };
+        //
+        // const onMouseMove = (mouseData)=>{
+        //     // console.log(mouseData);
+        //     const pos = button.convertToWorldSpace(cc.p());
+        //     var rect = cc.rect(pos.x, pos.y, button.getBoundingBox().width, button.getBoundingBox().height);
+        //     if (!isMouseDown){
+        //         if(cc.rectContainsPoint(rect,mouseData.getLocation())) {
+        //             // label.runAction(new cc.ScaleTo(0.01, hoverSize));
+        //             label.setScale(hoverSize);
+        //             touchEvent(null, ccui.Widget.TOUCH_BEGAN);
+        //         }else{
+        //             label.setScale(originalSize);
+        //             // label.runAction(new cc.ScaleTo(0.01,originalSize));
+        //         }
+        //     }
+        //     // else if (selected){
+        //     //     // touchEvent(null, ccui.Widget.TOUCH_CANCELED);
+        //     // }
+        // };
+        //
+        // const onMouseDown = (mouseData) =>{
+        //     isMouseDown = true;
+        // };
+        //
+        // const onMouseUp = (mouseData) => {
+        //     isMouseDown = false;
+        // };
+        //
+        // const _listener = cc.EventListener.create({
+        //     event: cc.EventListener.MOUSE,
+        //
+        //     onMouseDown: onMouseDown,
+        //     onMouseUp: onMouseUp,
+        //     onMouseMove: onMouseMove,
+        //     // onMouseScroll: null,
+        // });
+        //
+        // let button = new ccui.Button();
+        // button.setTouchEnabled(true);
+        // button.loadTextures(buttonImage, buttonSelected, undefined, ccui.Widget.PLIST_TEXTURE);
+        // button.setPosition(button.getContentSize().width / 2 - 120, button.getContentSize().height / 2 + 120);
+        // button.addTouchEventListener(touchEvent);
+        //
+        // const size = button.getContentSize();
+        // let icon;
+        // if (iconSprite) {
+        //     icon = new cc.Sprite(iconSprite);
+        //     button.addChild(icon);
+        //     icon.setPosition(size.width / 2, size.height / 2 - 10);
+        // }
+        //
+        // let label;
+        // if (labelImage) {
+        //     label = new cc.Sprite(labelImage);
+        //     button.addChild(label);
+        //     // label.setAnchorPoint(0.5,0.5);
+        //     label.setPosition(size.width / 2, 0);
+        // }
+        //
+        // cc.eventManager.addListener(_listener, button);
 
         let button = new ccui.Button();
         button.setTouchEnabled(true);
         button.loadTextures(buttonImage, buttonSelected, undefined, ccui.Widget.PLIST_TEXTURE);
         button.setPosition(button.getContentSize().width / 2 - 120, button.getContentSize().height / 2 + 120);
-        button.addTouchEventListener(touchEvent);
-
         const size = button.getContentSize();
         let icon;
         if (iconSprite) {
@@ -167,7 +189,23 @@ const FloatingMenu = (function () {
             label.setPosition(size.width / 2, 0);
         }
 
-        cc.eventManager.addListener(_listener, button);
+        const item = new RolloverEffectItem(button, onSelected, onUnselected, onHover, onUnhover);
+
+        function onSelected() {
+            selectedCallBack();
+        }
+
+        function onUnselected() {
+            label.setScale(originalSize);
+        }
+
+        function onHover() {
+            label.setScale(hoverSize);
+        }
+
+        function onUnhover() {
+            label.setScale(originalSize);
+        }
 
         return button;
     }
@@ -188,9 +226,9 @@ const FloatingMenu = (function () {
 
     function onLeaderboardSelected() {
         console.log("onLeaderboardSelected");
-        if (!_leaderboardView){
+        if (!_leaderboardView) {
             _leaderboardView = new LeaderboardView();
-        }else{
+        } else {
             _leaderboardView.show();
         }
     }
@@ -203,7 +241,7 @@ const FloatingMenu = (function () {
 
 
     proto.reattach = function () {
-        _parent.getParent().removeChild(_parent,false);
+        _parent.getParent().removeChild(_parent, false);
         GameView.addView(_parent);
     };
 

@@ -302,6 +302,7 @@ const GameManager = function () {
     function unsetLockForFishId(fishId) {
         console.log(_currentFishLockOnId, fishId);
         if (fishId === _currentFishLockOnId){
+            _isFishLockOn = false;
             _fishLockOnCallback(false);
         }
     }

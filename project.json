@@ -25,6 +25,7 @@
         "src/New/Utilities/ObjectPool.js",
         "src/New/Utilities/TouchLayerRefactored.js",
         "src/New/Utilities/AnimatedButton.js",
+        "src/New/Utilities/RolloverEffectItem.js",
 
         "src/New/Shaders/WaterCaustics/WaterCaustics.js",
         "src/New/Shaders/WaterCaustics/WaterCausticsLayer.js",
@@ -36,6 +37,7 @@
         "src/New/BlockingView.js",
 
         "src/New/Static Views/FloatingMenu.js",
+        "src/New/Static Views/FloatingMenuPopupBasePrefab.js",
         "src/New/Static Views/JackpotView.js",
         "src/New/Static Views/JackpotManager.js",
         "src/New/Static Views/LeaderboardView.js",

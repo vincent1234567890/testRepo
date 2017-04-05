@@ -6,51 +6,39 @@ const LeaderboardView = (function () {
     const ZORDER = 10;
     let _parent;
     let _background;
+    let _popup;
 
     const LeaderboardView = function () {
         _parent = new cc.Node();
-        BlockingManager.registerBlock(dismissCallback);
+        _popup= new FloatingMenuPopupBasePrefab(dismissCallback);
 
-        _background = new cc.Sprite(ReferenceName.FloatingPopupBackground);
-        const titleBG = new cc.Sprite(ReferenceName.FloatingTitleBackground);
         const textBG = new cc.Sprite(ReferenceName.LeaderboardTextBackground);
         const title = new cc.Sprite(ReferenceName.LeaderboardTitleChinese);
-        const deco = new cc.Sprite(ReferenceName.FloatingBottomLeftDeco);
 
-        titleBG.setPosition(new cc.p(560,689));
         textBG.setPosition(new cc.p(567.5,345));
-        title.setPosition(new cc.p(315,60));
-        deco.setPosition(new cc.p(70,100));
+        title.setPosition(new cc.p(560,705));
 
-        _background.addChild(titleBG);
-        _background.addChild(textBG);
-        _background.addChild(deco);
+        _popup.getBackground().addChild(textBG,1);
+        _popup.getBackground().addChild(title,1);
 
-        titleBG.addChild(title);
+        _popup.getParent().setPosition(new cc.p(683,384));
 
-
-        _parent.addChild(_background);
-        _parent.setPosition(new cc.p(683,384));
+        _parent.addChild(_popup.getParent());
 
         GameView.addView(_parent,ZORDER);
     };
-    
-    function dismissCallback(touch) {
-        if (GUIFunctions.isSpriteTouched(_background,touch)) {
-            return;
-        }
-        _parent.setLocalZOrder(-1000);
-        _background.setVisible(false);
 
-        BlockingManager.deregisterBlock(dismissCallback);
+    function dismissCallback(touch) {
+        _parent.setLocalZOrder(-1000);
+        _parent.setVisible(false);
     }
 
     const proto = LeaderboardView.prototype;
 
     proto.show = function () {
-        BlockingManager.registerBlock(dismissCallback);
         _parent.setLocalZOrder(ZORDER);
-        _background.setVisible(true);
+        _parent.setVisible(true);
+        _popup.show();
     };
 
     return LeaderboardView;

@@ -59,6 +59,14 @@ const ReferenceName = {
     FloatingMenuButtonFAQIcon : "#GameFAQIcon.png",
     FloatingMenuButtonFAQText : "#GameFAQChinese.png",
 
+    //Floating menu shared
+    FloatingTitleBackground : "#TitleBase2.png",
+    FloatingBottomLeftDeco : "#Pattern1.png",
+    FloatingPopupBackground : "#PopupBase2.png",
+    FloatingCloseButton : "#CloseIcon.png",
+    FloatingCloseButtonBackground : "CloseIdle.png",
+    FloatingCloseButtonBackgroundOnPress : "CloseOnPress.png",
+
     //Jackpot
     JackpotBackground : "#JackpotIcon.png",
     JackpotShadow : "#JackpotDropShadow.png",
@@ -67,15 +75,9 @@ const ReferenceName = {
     JackpotLight : "#JackpotLigthray.png",
     JackpotTitleChinese : "#JackpotChineseTitle.png",
 
-    //Floating menu shared
-    FloatingTitleBackground : "#TitleBase2.png",
-    FloatingBottomLeftDeco : "#Pattern1.png",
-    FloatingPopupBackground : "#PopupBase2.png",
-
     //Leaderboard
     LeaderboardTextBackground : "#TextBG2.png",
     LeaderboardTitleChinese : "#RankingChineseTitle.png",
-
 
     //Profile
     ProfileBackground : "#Profile POut BG.png",
