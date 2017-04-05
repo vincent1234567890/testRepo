@@ -20,7 +20,6 @@ const CoinStackEffect = (function () {
         }
         let moveAmount = this._moveAmount = 0;
         const coinStack = this._coinStack = [];
-        this.__parent = parent;
         let _startTime = Date.now();
 
         let currentCoinCount = 0;
@@ -32,15 +31,15 @@ const CoinStackEffect = (function () {
             let fontDef = new cc.FontDefinition();
             fontDef.fontName = "Arial";
             //fontDef.fontWeight = "bold";
-            fontDef.fontSize = 20;
+            fontDef.fontSize = 15;
             fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
             fontDef.fillStyle = new cc.Color(255, 192, 0, 255);
 
             this._coinValueLabel = new cc.LabelTTF("", fontDef);
 
             this._coinValueLabel.enableStroke(new cc.Color(96, 64, 0, 255),2);
-            this._parent.addChild(this._coinValueLabel);
-            this._coinValueLabel.setAnchorPoint(0.5, 0);
+            this._parent.addChild(this._coinValueLabel,1);
+            this._coinValueLabel.setAnchorPoint(0.5, -0.2);
             this._coinValueLabel.setOpacity(0);
         }
         const coinValueLabel = this._coinValueLabel;
@@ -49,7 +48,7 @@ const CoinStackEffect = (function () {
 
         parentNode.update = function (dt) {
             if (callbackTarget._moveAmount > 0){
-                parentNode.x -= MoveSpeed;
+                parentNode.x += MoveSpeed;
                 callbackTarget._moveAmount -= MoveSpeed;
             }
             const elapsed = (Date.now() - _startTime);
@@ -77,20 +76,21 @@ const CoinStackEffect = (function () {
         this.onStackAnimationEnded = ()=> {
             let spriteSize = theme.CoinStackWidth;
             if(this._coinStack.length > 0) {
-                spriteSize = this._coinStack[0].getSpriteSize();
+                // spriteSize = this._coinStack[0].getSpriteSize();
                 for (let coin in this._coinStack) {
                     this._coinStack[coin].reclaimView();
                     _coinPool.free(this._coinStack[coin]);
                 }
             }
             this._coinValueLabel.stopAllActions();
+            this._coinValueLabel.setOpacity(0);
             this._coinStack = [];
-            this.__parent.removeChild(this._parent,false);
+            this._parent.getParent().removeChild(this._parent,false);
+            this._parent.stopAllActions();
             this._parent.unscheduleUpdate();
             this._animationEndedCallback(this, spriteSize);
             this._animationEndedCallback = null;
         };
-
 
         this._parent.setPosition(Offset[0] + theme.CoinStackWidth * arrayPosition , Offset[1]);
         // console.log(this._parent.getPosition(), Offset[0], theme.CoinStackWidth, arrayPosition, Offset[1]);
@@ -102,7 +102,7 @@ const CoinStackEffect = (function () {
 
     const proto = CoinStackEffect.prototype;
 
-    proto.Move = function (moveAmount) {
+    proto.move = function (moveAmount) {
         if (this._moveAmount <= 0) {
             // console.log("Move: moveAmount: ", moveAmount );
             this._moveAmount = moveAmount;
@@ -110,6 +110,12 @@ const CoinStackEffect = (function () {
             this._moveAmount += moveAmount;
         }
     };
+
+    proto.stop = function (){
+        // this._parent.stopAllActions();
+        this.onStackAnimationEnded();
+    };
+
 
     return CoinStackEffect;
 })();

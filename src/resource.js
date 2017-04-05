@@ -195,12 +195,14 @@ var res = {
     // GameType100XPlist : "res/New/Lobby/100X.plist",
     // GameType100XPng : "res/New/Lobby/100X.png",
 
+    WaterCausticAnimation : "res/CompanyA/Lobby/Caustic.plist",
 
     WaterCaustic0 : "res/CompanyA/Lobby/Caustic1.png",
     WaterCaustic1 : "res/CompanyA/Lobby/Caustic2.png",
     WaterCaustic2 : "res/CompanyA/Lobby/Caustic3.png",
     WaterCaustic3 : "res/CompanyA/Lobby/Caustic4.png",
     WaterCaustic4 : "res/CompanyA/Lobby/Caustic5.png",
+    WaterCaustic5 : "res/CompanyA/Lobby/Caustic masking 1_00000.png",
 
     //GameFrame
     GameFrame: "res/New/InGameFrame.png",

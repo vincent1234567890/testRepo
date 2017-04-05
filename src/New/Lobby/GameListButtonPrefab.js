@@ -1,6 +1,8 @@
 /**
  * Created by eugeneseah on 9/3/17.
  */
+
+//experimenting with arrow function format
 const GameListButtonPrefab = (function () {
     "use strict";
 
@@ -44,7 +46,9 @@ const GameListButtonPrefab = (function () {
 
         const onMouseMove = (mouseData)=>{
             // console.log(mouseData);
-            if (!isMouseDown && cc.rectContainsPoint(this._wrapper.getBoundingBox(),mouseData.getLocation())){
+            const pos = content.convertToWorldSpace(cc.p());
+            var rect = cc.rect(pos.x, pos.y, content.getBoundingBox().width, content.getBoundingBox().height);
+            if (!isMouseDown && cc.rectContainsPoint(rect,mouseData.getLocation())){
                 touchEvent(null, ccui.Widget.TOUCH_BEGAN);
             }else if (selected){
                 touchEvent(null, ccui.Widget.TOUCH_CANCELED);
@@ -78,14 +82,12 @@ const GameListButtonPrefab = (function () {
             // ball.resume();
             this._wrapper.setEnabled(true);
             // touchEvent(null, ccui.Widget.TOUCH_CANCELED);
-
         };
 
         this.disableContent = () => {
             this._wrapper.setEnabled(false);
             base.stopAllActions(); // due to some unknown cause, pausing immediately after running doesn't work.
             ball.stopAllActions();
-            console.log(cc.director.getScheduler(),cc.director.getScheduler().isTargetPaused(base));
         };
 
         cc.eventManager.addListener(_listener, this._wrapper);
@@ -94,26 +96,32 @@ const GameListButtonPrefab = (function () {
         base.setPosition(0,0);
 
         const content = new ccui.Widget();
-        const pos = new cc.p(base.getContentSize().width,base.getContentSize().height);
+        const ball = new cc.Sprite("#" + itemData.gameName + "Top_00000.png");
+        const text = new cc.Sprite("#" + itemData.gameName + "Chinese.png");
+
+        const pos = new cc.p(ball.getContentSize().width,ball.getContentSize().height);
         content.setContentSize(pos.x,pos.y);
         content.addChild(base);
         content.setTouchEnabled(true);
         content.addTouchEventListener(touchEvent);
         content.gameData = itemData;
         // base.setPosition(pos);
-        content.setPosition(375,300);
-        base.setPosition(210,300);
+        content.setPosition(35,10);
+        base.setPosition(165,140);
 
-        const ball = new cc.Sprite("#" + itemData.gameName + "Top_00000.png");
+        content.setAnchorPoint(0,0);
+        // base.setAnchorPoint(0,0);
+
+
         ball.setPosition(383, 330);
         base.addChild(ball);
 
-        const text = new cc.Sprite("#" + itemData.gameName + "Chinese.png");
+
         text.setAnchorPoint(0.5,0.5);
-        text.setPosition(385, 115);
+        text.setPosition(385, 117);
         base.addChild(text);
 
-        this._wrapper.setContentSize(widthOfButton,base.getContentSize().height);
+        this._wrapper.setContentSize(widthOfButton,ball.getContentSize().height);
         this._wrapper.addChild(content);
 
         base.pause();

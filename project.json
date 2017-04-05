@@ -22,7 +22,9 @@
 
         "src/SharedClasses/LoadingScreen.js",
         "src/SharedClasses/ParticleSystemFactory.js",
-        "src/New/ObjectPool.js",
+        "src/New/Utilities/ObjectPool.js",
+        "src/New/Utilities/TouchLayerRefactored.js",
+        "src/New/Utilities/AnimatedButton.js",
 
         "src/New/Shaders/WaterCaustics/WaterCaustics.js",
         "src/New/Shaders/WaterCaustics/WaterCausticsLayer.js",
@@ -33,9 +35,12 @@
         "src/New/BlockingManager.js",
         "src/New/BlockingView.js",
 
-        "src/New/Lobby/JackpotView.js",
-        "src/New/Lobby/JackpotManager.js",
-        "src/New/Lobby/FloatingMenu.js",
+        "src/New/Static Views/FloatingMenu.js",
+        "src/New/Static Views/JackpotView.js",
+        "src/New/Static Views/JackpotManager.js",
+        "src/New/Static Views/LeaderboardView.js",
+
+        "src/New/Lobby/DolphinClippy.js",
         "src/New/Lobby/GameListButtonPrefab.js",
         "src/New/Lobby/LobbyWaterCausticInstance.js",
         "src/New/Lobby/LobbyWaterCaustics.js",
@@ -46,14 +51,13 @@
         "src/New/Lobby/ProfileManager.js",
         "src/New/Lobby/ProfileView.js",
 
-
         "src/New/Arena/OptionsView.js",
         "src/New/Arena/OptionsSideMenuView.js",
         "src/New/Arena/OptionsMenuViewBottom.js",
         "src/New/Arena/OptionsManager.js",
         "src/New/Data/FishAnimationEnum.js",
         "src/New/Data/FishAnimationData.js",
-        "src/New/TouchLayerRefactored.js",
+        "src/New/MouseLayer.js",
         "src/New/ReferenceName.js",
         "src/New/Arena/BulletView.js",
         "src/New/Arena/BulletManager.js",

@@ -10,8 +10,8 @@ const EffectsManager = (function () {
 
     const proto = EffectsManager.prototype;
 
-    proto.doCapturePrizeEffect = function (pos, target, value) {
-        coinEffectsManager.triggerCoins(pos, target, value);
+    proto.doCapturePrizeEffect = function (pos, target, fish) {
+        coinEffectsManager.triggerCoins(pos, target, fish);
     };
 
     return EffectsManager;

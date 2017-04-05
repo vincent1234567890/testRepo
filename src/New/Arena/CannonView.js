@@ -11,18 +11,18 @@ const CannonView = (function () {
         this._gameConfig = gameConfig;
         this._cannonNode = new cc.Node();
 
-        let animationArray = [];
-        let count = 0;
-        while (true) {
-            const frame = cc.spriteFrameCache.getSpriteFrame("Spark" + count + ".png");
-            if (!frame) {
-                break;
-            }
-            animationArray.push(frame);
-            count++;
-        }
-        animationArray.push(new cc.SpriteFrame(" "));
-        this._sparkSprite = new cc.Sprite();
+        // let animationArray = [];
+        // let count = 0;
+        // while (true) {
+        //     const frame = cc.spriteFrameCache.getSpriteFrame("Spark" + count + ".png");
+        //     if (!frame) {
+        //         break;
+        //     }
+        //     animationArray.push(frame);
+        //     count++;
+        // }
+        // animationArray.push(new cc.SpriteFrame(" "));
+        // this._sparkSprite = new cc.Sprite();
         // this._sparkSequence = new cc.Sequence(new cc.Animate(new cc.Animation(animationArray, this._gameConfig.shootInterval / 1000 / animationArray.length)));
 
         this.createView(slot);
@@ -151,7 +151,7 @@ const CannonView = (function () {
         let angle;
         if (this._cannonSprite) {
             angle = this._cannonSprite.getRotation();
-            this._cannonSprite.removeChild(this._sparkSprite, false);
+            // this._cannonSprite.removeChild(this._sparkSprite, false);
             this._cannonSprite.removeChild(this._cannonPowerLabel, false);
             this._cannonNode.removeChild(this._cannonSprite);
         }
@@ -160,7 +160,9 @@ const CannonView = (function () {
         this._cannonSprite.setAnchorPoint(0.5, 0.5);
         this._cannonSprite.setPosition({x: this.pos[0], y: this.pos[1]});
 
+        // this._sequence = new cc.Sequence(this.getCannonAnimation(cannonPower), new cc.CallFunc(this.onAnimateShootEnd, this));
         this._sequence = new cc.Sequence(this.getCannonAnimation(cannonPower), new cc.CallFunc(this.onAnimateShootEnd, this));
+        this._sequence.setOriginalTarget(this._cannonSprite); // due to some unknown error, we need to set the original target, although this is discouraged by the docs
         this._cannonNode.addChild(this._cannonSprite, 20);
         this._cannonSprite.addChild(this._cannonPowerLabel, 29);
 
@@ -170,18 +172,18 @@ const CannonView = (function () {
         this._cannonPowerLabel.setAnchorPoint(0.5, 0.5);
         this._cannonPowerLabel.setPosition(cannonLabelPos);
 
-        this.setSparkSprite();
+        // this.setSparkSprite();
 
         if (angle) {
             this._cannonSprite.setRotation(angle);
         }
     };
 
-    proto.setSparkSprite = function () {
-        this._cannonSprite.addChild(this._sparkSprite, 99);
-        const size = this._cannonSprite.getContentSize();
-        this._sparkSprite.setPosition(size.width / 2, size.height);
-    };
+    // proto.setSparkSprite = function () {
+    //     this._cannonSprite.addChild(this._sparkSprite, 99);
+    //     const size = this._cannonSprite.getContentSize();
+    //     this._sparkSprite.setPosition(size.width / 2, size.height);
+    // };
 
     proto.clearCannonPowerLabel = function () {
         this._cannonPowerLabel.setString('');
@@ -222,20 +224,32 @@ const CannonView = (function () {
         let menuLeft = new cc.MenuItemSprite(new cc.Sprite(ReferenceName.DecreaseCannon), new cc.Sprite(ReferenceName.DecreaseCannon_Down), callbackCannonDown, cannonManager);
         let menuRight = new cc.MenuItemSprite(new cc.Sprite(ReferenceName.IncreaseCannon), new cc.Sprite(ReferenceName.IncreaseCannon_Down), callbackCannonUp, cannonManager);
 
-        let menu = new cc.Menu(menuLeft, menuRight);
+        this._menu = new cc.Menu(menuLeft, menuRight);
         const pMenuLeft = new cc.p(this._theme["MenuLeft"][0], this._theme["MenuLeft"][1]);
         const pMenuRight = new cc.p(this._theme["MenuRight"][0], this._theme["MenuRight"][1]);
         menuLeft.setPosition(pMenuLeft);
         menuRight.setPosition(pMenuRight);
-        this._cannonPowerBG.addChild(menu, 50);
+        this._cannonPowerBG.addChild(this._menu, 50);
 
 
-        menu.x = this._theme["MenuOffset"][0];
-        menu.y = this._theme["MenuOffset"][1];
+        this._menu.x = this._theme["MenuOffset"][0];
+        this._menu.y = this._theme["MenuOffset"][1];
     };
 
     proto.destroyView = function () {
         GameView.destroyView(this._cannonNode);
+    };
+
+    proto.hideView = function () {
+        this._cannonNode.setVisible(false);
+        if (this._menu){
+            this._cannonPowerBG.removeChild(this._menu);
+            this._menu = null;
+        }
+    };
+
+    proto.showView = function () {
+        this._cannonNode.setVisible(true);
     };
 
     return CannonView;

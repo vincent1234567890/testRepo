@@ -83,26 +83,19 @@ const OptionsView = (function () {
     }
 
     function dismissCallback(touch){
-        // console.log(touch);
         if (GUIFunctions.isSpriteTouched(_background,touch)) {
             return;
         }
-        // _touchlayer.setSwallowTouches(false);
-        // _touchlayer.setEnable(false);
         thisParent.setLocalZOrder(-1000);
         _background.setVisible(false);
         _musicSlider.setEnabled(false);
         _soundSlider.setEnabled(false);
         BlockingManager.deregisterBlock(dismissCallback);
-        // console.log("disable!", thisParent.getLocalZOrder());
     }
 
     let proto = OptionsView.prototype;
 
     proto.show = function(){
-        // _touchlayer.setSwallowTouches(true);
-        // _touchlayer.setEnable(true);
-        // console.log("optionsview Show");
         BlockingManager.registerBlock(dismissCallback);
         thisParent.setLocalZOrder(ZORDER);
         _musicSlider.setEnabled(true);

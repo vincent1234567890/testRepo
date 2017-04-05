@@ -3,6 +3,7 @@
  */
 const ReferenceName = {
 
+    //GameUI
     Base : "#Base.png",
     IncreaseCannon : "#plus.png",
     IncreaseCannon_Down : "#PlusDw.png",
@@ -15,6 +16,10 @@ const ReferenceName = {
     OtherPlayerIcon : "#PlayerIcon2.png",
     ChangeSeatButton : "ChangeSitUP.png",
     ChangeSeatButtonDown : "ChangeSitDW.png",
+    PlayerSeatIndicator : "#YouAreHere.png",
+    LockOnButtonSide : "LockOnSide_",
+    LockOnButtonBottom : "LockOnBtm_",
+    LockOnTargetCrosshair :"#LockOnIcon_00000.png",
 
     //Lobby
     LobbyBackground : "#LobbyBG1.png",
@@ -34,13 +39,19 @@ const ReferenceName = {
     LobbySettingsButton : "#Lobby Setting.png",
     TopBg : "#Top Base.png",
 
+    //Dolphin
+    DolphinIcon : "#FishIcon.png",
+    DolphinBubble : "#Bubble.png",
+    DolphinTextName : "#FishText",
+    DolphinTextExtension : ".png",
+
     //floating menu
     FloatingMenuButtonBackground : "MenuButtonIdle.png",
     FloatingMenuButtonBackgroundDown : "MenuButtonOnPress.png",
     FloatingMenuButtonSettingsIcon :"#SettingIcon.png",
     FloatingMenuButtonSettingsText : "#SettingChinese.png",
-    FloatingMenuButtonAssetsIcon : "#AssetsIcon.png",
-    FloatingMenuButtonAssetsText : "#AssetsChinese.png",
+    FloatingMenuButtonGameLogIcon : "#GamelogIcon.png",
+    FloatingMenuButtonGameLogText : "#GamelogChinese.png",
     FloatingMenuButtonInfoIcon : "#InfoIcon.png",
     FloatingMenuButtonInfoText : "#InfoChinese.png",
     FloatingMenuButtonLeaderboardIcon : "#RankingIcon.png",
@@ -48,12 +59,23 @@ const ReferenceName = {
     FloatingMenuButtonFAQIcon : "#GameFAQIcon.png",
     FloatingMenuButtonFAQText : "#GameFAQChinese.png",
 
+    //Jackpot
     JackpotBackground : "#JackpotIcon.png",
     JackpotShadow : "#JackpotDropShadow.png",
     JackpotBar : "#JackpotBar.png",
     JackpotBarFrame : "#JackpotBarFrame.png",
     JackpotLight : "#JackpotLigthray.png",
     JackpotTitleChinese : "#JackpotChineseTitle.png",
+
+    //Floating menu shared
+    FloatingTitleBackground : "#TitleBase2.png",
+    FloatingBottomLeftDeco : "#Pattern1.png",
+    FloatingPopupBackground : "#PopupBase2.png",
+
+    //Leaderboard
+    LeaderboardTextBackground : "#TextBG2.png",
+    LeaderboardTitleChinese : "#RankingChineseTitle.png",
+
 
     //Profile
     ProfileBackground : "#Profile POut BG.png",

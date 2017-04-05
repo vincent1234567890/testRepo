@@ -15,13 +15,21 @@ const ClientServerConnect = function () {
     // let _debugSimulateLag = true;
     // let _debugGhosts = false;
 
+    let _wasKickedOutByRemoteLogIn = false;
 
     const connectToMasterServer = function () {
         return new Promise((resolve, reject) => {
+            // Do not connect if we are already connected!
             if (_hasConnected) return;
 
-            //let gameAPIServerUrl = 'ws://' + document.location.hostname + ':8088';
-            let gameAPIServerUrl = 'ws://192.168.1.16:8088';
+            // If the player logs in from somewhere else, our connection will be closed.
+            // In that case, we should not reconnect.
+            // If we reconnect, the log in process will cause the active login to be kicked out!
+            // And that would create and endless cycle of clients fighting for the active login.
+            if (_wasKickedOutByRemoteLogIn) return;
+
+            let gameAPIServerUrl = 'ws://' + document.location.hostname + ':8088';
+            // let gameAPIServerUrl = 'ws://192.168.1.16:8088';
             // const useJoeysServerDuringDevelopment = false;
             // const localNames = ['localhost', '127.0.0.1', '127.0.1.1', '0.0.0.0'];
             // const doingDevelopment = (localNames.indexOf(window.location.hostname) >= 0);
@@ -53,27 +61,44 @@ const ClientServerConnect = function () {
 
                 if (typeof document !== 'undefined') {
                     var queryParams = getCurrentOrCachedQueryParams();
-                    if (queryParams.token && (queryParams.playerId || queryParams.email)) {
-                        loginWithToken(queryParams.token, queryParams.playerId, queryParams.email, function (loginData) {
-                            // If successful, remove the query parameters from the URL
-                            window.history.pushState({where: 'start', search: document.location.search}, '', document.location.pathname);
-                            // Start the game!
-                            // AppManager.goToLobby();
-                            // console.log(client);
-                            resolve(loginData);
-                        });
-                    }
+                    // Players without credentials will now auto log in as trial players
+                    //if (queryParams.token && (queryParams.playerId || queryParams.email)) {
+                    loginWithToken(queryParams.token, queryParams.playerId, queryParams.email, function (loginData) {
+                        // If successful, remove the query parameters from the URL
+                        window.history.pushState({where: 'start', search: document.location.search}, '', document.location.pathname);
+                        // Start the game!
+                        // AppManager.goToLobby();
+                        // console.log(client);
+                        resolve(loginData);
+                    });
                 }
             });
 
+            ClientServerConnect.listenForEvent('kickedByRemoteLogIn', data => {
+                console.warn("You have been disconnected because you logged in from somewhere else.");
+                // We don't actually need to close the socket here.  The server is about to close it for us!
+
+                // We do need to stop trying to reconnect, at least until the player starts using this client again
+                _wasKickedOutByRemoteLogIn = true;
+
+                // @todo Show a nice message to the user
+
+                // @todo When the user wants to reconnect again, set _wasKickedOutByRemoteLogIn back to false, and then call connectToMasterServer()
+            });
+
             client.addEventListener('close', function () {
-                console.log("Disconnect detected.  Will attempt reconnection soon...");
-                setTimeout(connectToMasterServer, 2000);
                 _hasConnected = false;
+                console.log("Disconnect detected." + (_wasKickedOutByRemoteLogIn ? "" : "  Will attempt reconnection soon..."));
+                setTimeout(connectToMasterServer, 2000);
+
+                setTimeout(cleanup, 0);
+            });
+
+            function cleanup(){
                 GameManager.destroyArena();
                 ClientServerConnect.postGameCleanup();
                 AppManager.goBackToLobby();
-            });
+            }
         });
     };
 
@@ -156,6 +181,11 @@ const ClientServerConnect = function () {
 
     const loginWithToken = function (token, playerId, email, onSuccess, onFailure) {
         const client = getGameWSClient();
+
+        // Consider: We could provide an extra param here to say whether this is the first connect, or a reconnect.
+        // In the case of an auto-reconnect, the server may decide to reject this login, if the player is currently
+        // playing on another client.  This would solve the concern of a socket being closed before
+        // the 'kickedByRemoteLogIn' event is received.
 
         client.callAPIOnce('game', 'login', {
             id: playerId,
@@ -295,6 +325,31 @@ const ClientServerConnect = function () {
         _clientReceiver.resetArena();
     }
 
+    function getCurrentJackpotValues(){
+        return _gameWSClient.callAPIOnce('game', 'getCurrentJackpotValues', {}).then(
+            jackpotValueResponse => {
+                console.log('jackpotValueResponse:', jackpotValueResponse);
+                const total = Object_values(jackpotValueResponse.data).map(level => level.value).reduce((a, b) => a + b, 0);
+                console.log('jackpotValueResponse:total:', total);
+                GameManager.updateJackpotPool(total);
+            }
+        );
+    }
+
+    const Object_values = (obj) => Object.keys(obj).map(key => obj[key]);
+
+    const changeSeatRequest = function (slot) {
+        _informServer.changeSeat(slot);
+    };
+
+    const setFishLockRequest = function(fishId){
+        _informServer.setTargetLockOnFish(fishId);
+    };
+
+    const unsetFishLockRequest = function () {
+        _informServer.unsetTargetLock();
+    };
+
     return {
         connectToMasterServer : connectToMasterServer,
         login : login,
@@ -308,5 +363,9 @@ const ClientServerConnect = function () {
         //getGameIOSocket: getGameIOSocket,
         postGameCleanup: postGameCleanup,
         listenForEvent: listenForEvent,
+        changeSeatRequest : changeSeatRequest,
+        getCurrentJackpotValues : getCurrentJackpotValues,
+        setFishLockRequest : setFishLockRequest,
+        unsetFishLockRequest : unsetFishLockRequest,
     };
 }();

@@ -32,13 +32,16 @@ const AppManager = (function () {
     }
 
     function goBackToLobby(){
-        console.log("goBackToLobby!");
-
         if (_gameTicker) {
             _gameTicker.pauseTicker();
             _currentScene.removeChild(_gameTicker, false);
         }
         cc.director.popToSceneStackLevel(1);
+        setTimeout(initialiseGameManager, 0);
+    }
+
+    function initialiseGameManager(){
+        GameManager.initialiseLogin(cc.director.getRunningScene());
         GameManager.resetLobby();
     }
 

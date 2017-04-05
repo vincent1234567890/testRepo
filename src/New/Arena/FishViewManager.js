@@ -4,8 +4,7 @@
 
 const FishViewManager = (function(){
 
-
-    const FishViewManager = function(fishGameArena, gameConfig, animationEndEvent){
+    const FishViewManager = function(fishGameArena, gameConfig, animationEndEvent, getFishLockStatus, onFishLockSelectedCallback){
         // console.log
 
         // cc.spriteFrameCache.addSpriteFrames(res.SquidPlist);
@@ -59,14 +58,34 @@ const FishViewManager = (function(){
         this._gameConfig = gameConfig;
         this._onAnimationEndEvent = animationEndEvent;
 
+        const targetLockUI = new cc.Sprite(ReferenceName.LockOnTargetCrosshair);
+
         // this.rotationFunction = rotationFunction;
         GameView.addView(this._parent);
+
+        proto._onFishClicked = (fishView) =>{
+            if (!getFishLockStatus()){
+                return;
+            }
+            let id = -1;
+            for( var fishId in this._fishes ) {
+                if( this._fishes[ fishId ] === fishView ) {
+                    id = fishId;
+                    break;
+                }
+            }
+            if (targetLockUI.getParent()!= null){
+                targetLockUI.getParent().removeChild(targetLockUI,false);
+            }
+            fishView.addTarget(targetLockUI);
+            onFishLockSelectedCallback(id);
+        }
     };
 
     const proto = FishViewManager.prototype;
 
     proto.addFish = function(fishId, fishType){
-        this._fishes[fishId] = new FishView(this._parent, this._gameConfig.fishClasses[fishType], fishType);
+        this._fishes[fishId] = new FishView(this._parent, this._gameConfig.fishClasses[fishType], fishType, this._onFishClicked);
         return this._fishes[fishId];
     };
 
@@ -76,13 +95,19 @@ const FishViewManager = (function(){
     
     proto.caughtFish = function (id, playerSlot) {
         // console.log("caughtFish : id", id);
+        if (!this._fishes[id]) {
+            console.warn("Could not find fishActor for fish " + id + ".  Perhaps scene was not initialised.")
+        }
         this._fishes[id].killFish(this, this.removeFish, id, playerSlot);
     };
 
     proto.removeFish = function (reference, data) {
         // console.log("removeFish: ", reference, "id", id);
+        if (!this._fishes[data.id]) {
+            console.warn("Could not find fishActor for fish " + data.id + ".  Perhaps scene was not initialised.")
+        }
         this._fishes[data.id].destroyView(this._parent);
-        if(data.type && data.position && data.playerSlot) {
+        if(data.type && data.position && (data.playerSlot!=null)) {
             this._onAnimationEndEvent(data);
         }
         delete this._fishes[data.id];

@@ -10,7 +10,6 @@
                 etc
  */
 
-
 const GameManager = function () {
     "use strict";
     let debug = false;
@@ -19,6 +18,9 @@ const GameManager = function () {
     let _gameConfig;
     let _playerData;
     let _currentScene;
+    let _isFishLockOn = false;
+    let _fishLockOnCallback;  //terribly messy should have a gameModel class eventually
+    let _currentFishLockOnId;
 
     //convenience
     let _loggedIn = false; //can remove
@@ -33,7 +35,6 @@ const GameManager = function () {
     let _optionsManager;
     let _bulletManager;
     let _netManager;
-    let _effectsManager;
     let _lobbyWaterCausticsManager;
 
     //?? only use is for clientReceiver to query if playerId == player
@@ -42,7 +43,6 @@ const GameManager = function () {
     //Callback to AppManager
     let _goToLobbyCallback;
 
-
     function initialiseLogin(parent) {
         GameView.initialise(parent);
         // _loginManager = new LoginManager();
@@ -50,14 +50,16 @@ const GameManager = function () {
 
     const initialiseGame = function (parent, fishGameArena) {
         // _lobbyManager.resetView();
-        GameView.initialise(parent, _gameConfig, fishGameArena);
+        GameView.initialise(parent, _gameConfig, fishGameArena, onFishLockButtonPress, getFishLockStatus);
 
-        _fishManager = new FishViewManager(fishGameArena, _gameConfig, caughtFishAnimationEnd);
+        _fishManager = new FishViewManager(fishGameArena, _gameConfig, GameView.caughtFishAnimationEnd , getFishLockStatus, onFishLockSelected);
         _optionsManager = new OptionsManager(onSettingsButton, undefined, onLeaveArena);
         _optionsManager.displayView(_gameConfig);
         _bulletManager = new BulletManager(fishGameArena);
         _netManager = new NetManager();
-        _effectsManager = new EffectsManager();
+        _floatingMenuManager.reattach();
+        _jackpotManager.reattach();
+
         BlockingManager.destroyView();
 
         GameView.goToGame(_currentScene);
@@ -77,7 +79,7 @@ const GameManager = function () {
 
     const removeBullet = function(bulletId){
         _bulletManager.removeBullet(bulletId);
-    }
+    };
 
     const setGameState = function (config, playerId, playerSlot) {
         // console.log(JSON.stringify(config));
@@ -86,8 +88,8 @@ const GameManager = function () {
         GameView.setMyPlayerData(playerId,playerSlot)
     };
 
-    const updateMultiplayerState = function (playerData) {
-        GameView.updateMultiplayerState(playerData);
+    const updateMultiplayerState = function (playerData, oldSlot) {
+        GameView.updateMultiplayerState(playerData, oldSlot);
     };
 
     const clearPlayerState = function (slot) {
@@ -104,12 +106,8 @@ const GameManager = function () {
 
     };
 
-    const caughtFishAnimationEnd = function (data) {
-        _effectsManager.doCapturePrizeEffect(data.position, _gameConfig.cannonPositions[data.playerSlot], _gameConfig.fishClasses[data.type].value);
-    };
-
     const removeFish = function (fishId) {
-        _fishManager.removeFish(undefined,{id:fishId});
+        _fishManager.removeFish(undefined, {id: fishId});
     };
 
     const updateEverything = function () {
@@ -142,7 +140,7 @@ const GameManager = function () {
 
     function goToLobby(goToLobbyCallback) {
         _goToLobbyCallback = goToLobbyCallback;
-        GameView.initialise();
+        // GameView.initialise();
         _loggedIn = true;
 
         // Login was successful, so save the user's details
@@ -156,7 +154,7 @@ const GameManager = function () {
                 _playerData = stats.data;
                 createLobby();
             }
-        );
+        ).catch(console.error);
 
         // createLobby();
 
@@ -193,18 +191,17 @@ const GameManager = function () {
             _floatingMenuManager = new FloatingMenu(onSettingsButton);
             _jackpotManager = new JackpotManager();
             _jackpotManager.updateJackpot(999999999);
+            ClientServerConnect.getCurrentJackpotValues();
         }else {
             _lobbyManager.displayView(_playerData, onSettingsButton, onGameSelected,onRequestShowProfile);
         }
     }
 
     function exitToLobby() {
-
         destroyArena();
         _goToLobbyCallback();
-
-        // createLobby();
-
+        ClientServerConnect.getCurrentJackpotValues();
+        ClientServerConnect.requestMyData();
     }
 
     function showPostGameStats () {
@@ -249,10 +246,11 @@ const GameManager = function () {
         }
         BlockingManager.destroyView();
         GameView.resetArena();
+        _isFishLockOn = false;
+        _fishLockOnCallback = undefined;
     }
 
     function onSettingsButton(){
-        // GameView.initialise();
         _optionsManager.showSettings();
     }
 
@@ -260,11 +258,10 @@ const GameManager = function () {
         _currentScene = chosenScene;
         ClientServerConnect.joinGame(_currentScene.gameName).catch(
             function (error) {
-                // _lobbyManager.resetView();
+                _lobbyManager.resetView();
                 console.log(error);
             }
         );
-
     }
 
     function isCurrentPlayer (playerId) {
@@ -272,11 +269,41 @@ const GameManager = function () {
     }
 
     function onRequestShowProfile(){
-
     }
 
     function resetLobby (){
+        _jackpotManager.reattach();
+        _floatingMenuManager.reattach();
         _lobbyManager.resetView();
+    }
+
+    function updateJackpotPool(value) {
+        _jackpotManager.updateJackpot(value)
+    }
+
+    function getFishLockStatus(){
+        return _isFishLockOn;
+    }
+
+    function onFishLockButtonPress(state){
+        _isFishLockOn = state.state;
+        console.log(_isFishLockOn);
+        _fishLockOnCallback = state.callback;
+        if (!_isFishLockOn){
+            ClientServerConnect.unsetFishLockRequest();
+        }
+    }
+
+    function onFishLockSelected (fishId){
+        _currentFishLockOnId = fishId;
+        ClientServerConnect.setFishLockRequest(fishId);
+    }
+
+    function unsetLockForFishId(fishId) {
+        console.log(_currentFishLockOnId, fishId);
+        if (fishId === _currentFishLockOnId){
+            _fishLockOnCallback(false);
+        }
     }
 
     //dev for dev scene
@@ -284,10 +311,18 @@ const GameManager = function () {
         _optionsManager = new OptionsManager(onSettingsButton);
     }
 
-
     return {
         initialiseLogin: initialiseLogin,
         initialiseGame: initialiseGame,
+
+        //Lobby stuff
+        goToLobby: goToLobby,
+        resetLobby : resetLobby,
+
+        //Menu stuff
+        updateJackpotPool : updateJackpotPool,
+
+        //Game stuff
         setGameState: setGameState,
         updateMultiplayerState: updateMultiplayerState,
         clearPlayerState: clearPlayerState,
@@ -299,9 +334,10 @@ const GameManager = function () {
         caughtFish: caughtFish,
         updateEverything: updateEverything,
         showPostGameStats: showPostGameStats,
-        goToLobby: goToLobby,
+        unsetLockForFishId : unsetLockForFishId,
+
+        //Misc
         isCurrentPlayer: isCurrentPlayer,
-        resetLobby : resetLobby,
 
         //current only used to reset
         destroyArena : destroyArena,

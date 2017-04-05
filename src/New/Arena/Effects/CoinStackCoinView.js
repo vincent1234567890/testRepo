@@ -10,7 +10,8 @@ const CoinStackCoinView = (function () {
             this._coinSprite.setAnchorPoint(0.5,0.5);
         }
 
-        this._coinSprite.setPosition(0, positionInArray * this._coinSprite.getContentSize().height);
+        // this._coinSprite.setPosition(0, positionInArray * this._coinSprite.getContentSize().height);
+        this._coinSprite.setPosition(0, positionInArray * 5);
         // console.log(this._coinSprite.getContentSize(), positionInArray, this._coinSprite.getContentSize(), positionInArray * this._coinSprite.getContentSize().height);
         this._parent = parent;
         this._coinSprite.stopAllActions();

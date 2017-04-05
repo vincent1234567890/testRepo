@@ -16,5 +16,9 @@ const JackpotManager = (function () {
         _view.updateJackpot(value);
     };
 
+    proto.reattach = function () {
+        _view.reattach();
+    };
+
     return JackpotManager;
 }());
