@@ -35,6 +35,8 @@ const JackpotView = (function () {
         //------------------- testing
         // const color = new cc.LayerColor(new cc.Color(20,145,224,255));
         const target = new cc.Sprite();
+        target.setScale(0.2);
+        target.setBlendFunc(cc.ONE, cc.ONE);
         // const target = new cc.Sprite(ReferenceName.JackpotBackground);
         // target.runAction(new cc.repeatForever(new cc.rotateBy(25,360)));
         const mask = new cc.Sprite(ReferenceName.JackpotBar);
@@ -62,7 +64,7 @@ const JackpotView = (function () {
             animationArray.push(frame);
             count++;
         }
-        const animation = new cc.Animate(new cc.Animation(animationArray,0.03));
+        const animation = new cc.Animate(new cc.Animation(animationArray,0.05));
         target.runAction(new cc.repeatForever(animation));
         // animationArray.push(new cc.SpriteFrame(" "));
 
