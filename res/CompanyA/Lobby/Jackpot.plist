@@ -4,6 +4,426 @@
     <dict>
         <key>frames</key>
         <dict>
+            <key>JPLobbylight_00038.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-22,-12}</string>
+                <key>spriteSize</key>
+                <string>{116,118}</string>
+                <key>spriteSourceSize</key>
+                <string>{1366,450}</string>
+                <key>textureRect</key>
+                <string>{{3131,1363},{116,118}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>JPLobbylight_00039.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-21,-12}</string>
+                <key>spriteSize</key>
+                <string>{226,202}</string>
+                <key>spriteSourceSize</key>
+                <string>{1366,450}</string>
+                <key>textureRect</key>
+                <string>{{2983,1619},{226,202}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>JPLobbylight_00040.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-20,-13}</string>
+                <key>spriteSize</key>
+                <string>{308,264}</string>
+                <key>spriteSourceSize</key>
+                <string>{1366,450}</string>
+                <key>textureRect</key>
+                <string>{{3149,905},{308,264}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>JPLobbylight_00041.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-20,-13}</string>
+                <key>spriteSize</key>
+                <string>{370,312}</string>
+                <key>spriteSourceSize</key>
+                <string>{1366,450}</string>
+                <key>textureRect</key>
+                <string>{{2611,1619},{370,312}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>JPLobbylight_00042.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-19,-13}</string>
+                <key>spriteSize</key>
+                <string>{404,340}</string>
+                <key>spriteSourceSize</key>
+                <string>{1366,450}</string>
+                <key>textureRect</key>
+                <string>{{2205,1385},{404,340}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>JPLobbylight_00043.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-19,-13}</string>
+                <key>spriteSize</key>
+                <string>{416,348}</string>
+                <key>spriteSourceSize</key>
+                <string>{1366,450}</string>
+                <key>textureRect</key>
+                <string>{{2713,1269},{416,348}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>JPLobbylight_00044.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-19,-13}</string>
+                <key>spriteSize</key>
+                <string>{434,362}</string>
+                <key>spriteSourceSize</key>
+                <string>{1366,450}</string>
+                <key>textureRect</key>
+                <string>{{2713,905},{434,362}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>JPLobbylight_00045.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-19,-14}</string>
+                <key>spriteSize</key>
+                <string>{452,374}</string>
+                <key>spriteSourceSize</key>
+                <string>{1366,450}</string>
+                <key>textureRect</key>
+                <string>{{723,1011},{452,374}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>JPLobbylight_00046.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-19,-14}</string>
+                <key>spriteSize</key>
+                <string>{472,388}</string>
+                <key>spriteSourceSize</key>
+                <string>{1366,450}</string>
+                <key>textureRect</key>
+                <string>{{1303,1457},{472,388}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>JPLobbylight_00047.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-18,-14}</string>
+                <key>spriteSize</key>
+                <string>{488,402}</string>
+                <key>spriteSourceSize</key>
+                <string>{1366,450}</string>
+                <key>textureRect</key>
+                <string>{{1693,1413},{488,402}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>JPLobbylight_00048.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-18,-14}</string>
+                <key>spriteSize</key>
+                <string>{506,416}</string>
+                <key>spriteSourceSize</key>
+                <string>{1366,450}</string>
+                <key>textureRect</key>
+                <string>{{2205,967},{506,416}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>JPLobbylight_00049.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-18,-12}</string>
+                <key>spriteSize</key>
+                <string>{524,426}</string>
+                <key>spriteSourceSize</key>
+                <string>{1366,450}</string>
+                <key>textureRect</key>
+                <string>{{1679,985},{524,426}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>JPLobbylight_00050.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-18,-9}</string>
+                <key>spriteSize</key>
+                <string>{542,432}</string>
+                <key>spriteSourceSize</key>
+                <string>{1366,450}</string>
+                <key>textureRect</key>
+                <string>{{2159,533},{542,432}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>JPLobbylight_00051.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-18,-6}</string>
+                <key>spriteSize</key>
+                <string>{560,438}</string>
+                <key>spriteSourceSize</key>
+                <string>{1366,450}</string>
+                <key>textureRect</key>
+                <string>{{981,569},{560,438}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>JPLobbylight_00052.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-18,-2}</string>
+                <key>spriteSize</key>
+                <string>{578,446}</string>
+                <key>spriteSourceSize</key>
+                <string>{1366,450}</string>
+                <key>textureRect</key>
+                <string>{{1099,1009},{578,446}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>JPLobbylight_00053.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-18,0}</string>
+                <key>spriteSize</key>
+                <string>{596,450}</string>
+                <key>spriteSourceSize</key>
+                <string>{1366,450}</string>
+                <key>textureRect</key>
+                <string>{{705,1465},{596,450}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>JPLobbylight_00054.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-18,0}</string>
+                <key>spriteSize</key>
+                <string>{614,450}</string>
+                <key>spriteSourceSize</key>
+                <string>{1366,450}</string>
+                <key>textureRect</key>
+                <string>{{1543,533},{614,450}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>JPLobbylight_00055.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-17,0}</string>
+                <key>spriteSize</key>
+                <string>{630,450}</string>
+                <key>spriteSourceSize</key>
+                <string>{1366,450}</string>
+                <key>textureRect</key>
+                <string>{{2727,453},{630,450}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>JPLobbylight_00056.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-17,0}</string>
+                <key>spriteSize</key>
+                <string>{648,450}</string>
+                <key>spriteSourceSize</key>
+                <string>{1366,450}</string>
+                <key>textureRect</key>
+                <string>{{2723,1},{648,450}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>JPLobbylight_00057.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-17,0}</string>
+                <key>spriteSize</key>
+                <string>{666,450}</string>
+                <key>spriteSourceSize</key>
+                <string>{1366,450}</string>
+                <key>textureRect</key>
+                <string>{{2055,1},{666,450}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>JPLobbylight_00058.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-17,0}</string>
+                <key>spriteSize</key>
+                <string>{684,450}</string>
+                <key>spriteSourceSize</key>
+                <string>{1366,450}</string>
+                <key>textureRect</key>
+                <string>{{1369,1},{684,450}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>JPLobbylight_00059.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-17,0}</string>
+                <key>spriteSize</key>
+                <string>{702,450}</string>
+                <key>spriteSourceSize</key>
+                <string>{1366,450}</string>
+                <key>textureRect</key>
+                <string>{{1,1463},{702,450}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>JPLobbylight_00060.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-17,0}</string>
+                <key>spriteSize</key>
+                <string>{720,450}</string>
+                <key>spriteSourceSize</key>
+                <string>{1366,450}</string>
+                <key>textureRect</key>
+                <string>{{1,1011},{720,450}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>JPLobbylight_00061.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-17,-5}</string>
+                <key>spriteSize</key>
+                <string>{978,440}</string>
+                <key>spriteSourceSize</key>
+                <string>{1366,450}</string>
+                <key>textureRect</key>
+                <string>{{1,569},{978,440}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>JPLobbylight_00062.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-16,-15}</string>
+                <key>spriteSize</key>
+                <string>{1234,342}</string>
+                <key>spriteSourceSize</key>
+                <string>{1366,450}</string>
+                <key>textureRect</key>
+                <string>{{1,225},{1234,342}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>JPLobbylight_00063.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,-15}</string>
+                <key>spriteSize</key>
+                <string>{1366,222}</string>
+                <key>spriteSourceSize</key>
+                <string>{1366,450}</string>
+                <key>textureRect</key>
+                <string>{{1,1},{1366,222}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>JPLobbylight_00064.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-16,-15}</string>
+                <key>spriteSize</key>
+                <string>{658,78}</string>
+                <key>spriteSourceSize</key>
+                <string>{1366,450}</string>
+                <key>textureRect</key>
+                <string>{{2067,453},{658,78}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>JPLobbylight_00065.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-16,-15}</string>
+                <key>spriteSize</key>
+                <string>{828,78}</string>
+                <key>spriteSourceSize</key>
+                <string>{1366,450}</string>
+                <key>textureRect</key>
+                <string>{{1237,453},{828,78}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
             <key>JackpotBar.png</key>
             <dict>
                 <key>aliases</key>
@@ -15,7 +435,7 @@
                 <key>spriteSourceSize</key>
                 <string>{190,38}</string>
                 <key>textureRect</key>
-                <string>{{217,155},{190,38}}</string>
+                <string>{{3373,1},{190,38}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -30,9 +450,9 @@
                 <key>spriteSourceSize</key>
                 <string>{204,42}</string>
                 <key>textureRect</key>
-                <string>{{1,303},{204,42}}</string>
+                <string>{{1237,225},{204,42}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>JackpotChineseTitle.png</key>
             <dict>
@@ -45,7 +465,7 @@
                 <key>spriteSourceSize</key>
                 <string>{133,36}</string>
                 <key>textureRect</key>
-                <string>{{169,347},{133,36}}</string>
+                <string>{{2611,1385},{133,36}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -60,7 +480,7 @@
                 <key>spriteSourceSize</key>
                 <string>{222,152}</string>
                 <key>textureRect</key>
-                <string>{{1,1},{222,152}}</string>
+                <string>{{2183,1727},{222,152}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -75,7 +495,7 @@
                 <key>spriteSourceSize</key>
                 <string>{214,146}</string>
                 <key>textureRect</key>
-                <string>{{1,155},{214,146}}</string>
+                <string>{{3149,1215},{214,146}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -90,7 +510,7 @@
                 <key>spriteSourceSize</key>
                 <string>{166,139}</string>
                 <key>textureRect</key>
-                <string>{{1,347},{166,139}}</string>
+                <string>{{2407,1727},{166,139}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -106,9 +526,9 @@
             <key>realTextureFileName</key>
             <string>Jackpot.png</string>
             <key>size</key>
-            <string>{256,487}</string>
+            <string>{3414,1932}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:a351e7f6eb11fa6ebf016bdfd74b57a5:d002a206d11cbb562ab0f509ecd77964:8cec78be4de0ab7598c4003c942b161d$</string>
+            <string>$TexturePacker:SmartUpdate:fa5b902a9734cf3b73b5d5c512313c8a:20a15c774038331e167424f16b058804:8cec78be4de0ab7598c4003c942b161d$</string>
             <key>textureFileName</key>
             <string>Jackpot.png</string>
         </dict>
