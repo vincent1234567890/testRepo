@@ -22,7 +22,7 @@ const LobbyView = (function () {
     // let gamelist;
     let gameControlList;
 
-    const LobbyView = function (playerData, theme, settingsCallback, onGameSelectedCallback, profileCallback) {
+    const LobbyView = function (playerData, theme, onGameSelectedCallback, profileCallback) {
         // this.gameSelected = false;
 
         this._parent = new cc.Node();
@@ -32,7 +32,7 @@ const LobbyView = (function () {
 
         let size;
 
-        _settingsCallback = settingsCallback;
+        // _settingsCallback = settingsCallback;
         _onGameSelectedCallback = onGameSelectedCallback;
         _profileCallback = profileCallback;
 
@@ -318,7 +318,7 @@ const LobbyView = (function () {
     }
 
     function settingsButtonPressed() {
-        _settingsCallback();
+        // _settingsCallback();
         console.log("settingsButtonPressed");
     }
 

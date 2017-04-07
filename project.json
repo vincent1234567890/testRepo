@@ -37,10 +37,12 @@
         "src/New/BlockingView.js",
 
         "src/New/Static Views/FloatingMenu.js",
+        "src/New/Static Views/CloseButtonPrefab.js",
         "src/New/Static Views/FloatingMenuPopupBasePrefab.js",
         "src/New/Static Views/JackpotView.js",
         "src/New/Static Views/JackpotManager.js",
         "src/New/Static Views/LeaderboardView.js",
+        "src/New/Static Views/SettingsView.js",
 
         "src/New/Lobby/DolphinClippy.js",
         "src/New/Lobby/GameListButtonPrefab.js",

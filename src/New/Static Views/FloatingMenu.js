@@ -5,18 +5,19 @@ const FloatingMenu = (function () {
     "use strict";
     let _parent;
     let _theme;
-    let _settingsCallback;
+
 
     const hoverSize = 1.2;
     const originalSize = 1;
 
     let _leaderboardView;
+    let _setttingsView;
 
-    const FloatingMenu = function (settingsCallback) {
+    const FloatingMenu = function () {
         _parent = new cc.Node();
         GameView.addView(_parent);
 
-        _settingsCallback = settingsCallback;
+        // _settingsCallback = settingsCallback;
 
         _theme = ThemeDataManager.getThemeDataList("FloatingMenu");
 
@@ -211,8 +212,11 @@ const FloatingMenu = (function () {
     }
 
     function onSettingsSelected() {
-        if (_settingsCallback) {
-            _settingsCallback();
+        console.log("onSettingsSelected");
+        if (_setttingsView){
+            _setttingsView.show();
+        }else{
+            _setttingsView = new SettingsView();
         }
     }
 

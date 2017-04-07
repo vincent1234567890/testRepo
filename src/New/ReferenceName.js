@@ -59,6 +59,9 @@ const ReferenceName = {
     FloatingMenuButtonFAQIcon : "#GameFAQIcon.png",
     FloatingMenuButtonFAQText : "#GameFAQChinese.png",
 
+    CrownIcon : "#Crown.png",
+
+
     //Floating menu shared
     FloatingTitleBackground : "#TitleBase2.png",
     FloatingBottomLeftDeco : "#Pattern1.png",
@@ -78,6 +81,25 @@ const ReferenceName = {
     //Leaderboard
     LeaderboardTextBackground : "#TextBG2.png",
     LeaderboardTitleChinese : "#RankingChineseTitle.png",
+
+    //FAQ
+    FAQTextBackground : "#TextBG3.png",
+    FAQTitleChinese : "#GameFAQChineseTitle.png",
+    FAQUserAgreementTitleChinese : "#UserAgreementChinese.png",
+    FAQTabTitleChinese : "#GameFAQChinese (2).png",
+    FAQTabBackground : "#Button2Idle.png",
+    FAQTabBackground2 : "#Button2OnPress.png",
+    FAQButtonBackground : "#Button3Idle.png",
+    FAQButtonBackgroundOnPress : "#Button3OnPress.png",
+
+    //Settings
+    SettingsBackground : "#PopupBase1.png",
+    SettingsButtonBackground : "#Button1Idle.png",
+    SettingsButtonBackgroundOnPress : "#Button1OnPress.png",
+    SettingsSliderBackground : "#BarBase1.png",
+    SettingsSliderFiller : "#BarMid1.png",
+    SettingsSliderIndicator : "#Puller.png",
+
 
     //Profile
     ProfileBackground : "#Profile POut BG.png",

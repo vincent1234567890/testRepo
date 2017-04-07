@@ -19,7 +19,7 @@ const GameManager = function () {
     let _playerData;
     let _currentScene;
     let _isFishLockOn = false;
-    let _fishLockOnCallback;  //terribly messy should have a gameModel class eventually
+    let _fishLockOnCallback;  //terribly messy should have a gameViewModel class eventually
     let _currentFishLockOnId;
 
     //convenience
@@ -184,16 +184,16 @@ const GameManager = function () {
 
     function createLobby() {
         if (!_lobbyManager) {
-            _lobbyManager = new LobbyManager(_playerData, onSettingsButton, onGameSelected, onRequestShowProfile);
+            _lobbyManager = new LobbyManager(_playerData, onGameSelected, onRequestShowProfile);
             // _profileManger = new ProfileManager();
-            _optionsManager = new OptionsManager(onSettingsButton, undefined, onLeaveArena);
+            // _optionsManager = new OptionsManager(onSettingsButton, undefined, onLeaveArena);
             _lobbyWaterCausticsManager = new LobbyWaterCaustics();
-            _floatingMenuManager = new FloatingMenu(onSettingsButton);
+            _floatingMenuManager = new FloatingMenu();
             _jackpotManager = new JackpotManager();
             _jackpotManager.updateJackpot(999999999);
             ClientServerConnect.getCurrentJackpotValues();
         }else {
-            _lobbyManager.displayView(_playerData, onSettingsButton, onGameSelected,onRequestShowProfile);
+            _lobbyManager.displayView(_playerData, onGameSelected,onRequestShowProfile);
         }
     }
 
@@ -287,7 +287,6 @@ const GameManager = function () {
 
     function onFishLockButtonPress(state){
         _isFishLockOn = state.state;
-        console.log(_isFishLockOn);
         _fishLockOnCallback = state.callback;
         if (!_isFishLockOn){
             ClientServerConnect.unsetFishLockRequest();
