@@ -514,7 +514,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>GAangelfish.png</key>
+            <key>GLAangelfish.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -1399,6 +1399,36 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
+            <key>LineLong.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{1051,1}</string>
+                <key>spriteSourceSize</key>
+                <string>{1051,1}</string>
+                <key>textureRect</key>
+                <string>{{1,1714},{1051,1}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>LineShort.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{560,1}</string>
+                <key>spriteSourceSize</key>
+                <string>{560,1}</string>
+                <key>textureRect</key>
+                <string>{{1,1758},{560,1}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
             <key>MenuButtonIdle.png</key>
             <dict>
                 <key>aliases</key>
@@ -1728,6 +1758,21 @@
                 <string>{{714,1753},{10,86}}</string>
                 <key>textureRotated</key>
                 <true/>
+            </dict>
+            <key>Selection.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{12,12}</string>
+                <key>spriteSourceSize</key>
+                <string>{12,12}</string>
+                <key>textureRect</key>
+                <string>{{1040,867},{12,12}}</string>
+                <key>textureRotated</key>
+                <false/>
             </dict>
             <key>SelectionBase.png</key>
             <dict>
@@ -2149,51 +2194,6 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>line long.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{1051,1}</string>
-                <key>spriteSourceSize</key>
-                <string>{1051,1}</string>
-                <key>textureRect</key>
-                <string>{{1,1714},{1051,1}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>line short.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{560,1}</string>
-                <key>spriteSourceSize</key>
-                <string>{560,1}</string>
-                <key>textureRect</key>
-                <string>{{1,1758},{560,1}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>selected.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{12,12}</string>
-                <key>spriteSourceSize</key>
-                <string>{12,12}</string>
-                <key>textureRect</key>
-                <string>{{1040,867},{12,12}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
         </dict>
         <key>metadata</key>
         <dict>
@@ -2208,7 +2208,7 @@
             <key>size</key>
             <string>{2046,1764}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:75ab2e3865155013e64fdfa1920f467c:cbcb9e515ee6dcafbaef3a9d88a5afc5:474a9a58f742d06d2866a4a6eac25590$</string>
+            <string>$TexturePacker:SmartUpdate:680b17f0066599b1ee556bd1b70e22a3:0dce087e58ae42884192ff678d17b8a5:474a9a58f742d06d2866a4a6eac25590$</string>
             <key>textureFileName</key>
             <string>Menu.png</string>
         </dict>
