@@ -115,8 +115,21 @@ const ReferenceName = {
     SettingsConfirmButtonTextChinese : "#ConfirmChinese.png",
     SettingsCancelButtonTextChinese : "#CancelChinese.png",
 
-
     //Profile
+    ProfileTitleChinese : "InfoChineseTitle.png",
+    ProfileUserTextBackground : "TextBG6.png",
+    ProfileNicknameTitleChinese : "NicknameChinese.png",
+    ProfileInputBackground : "InputBox.png",
+    ProfileEditButton : "EditButton.png",
+    ProfileUsernameTitleChinese : "UsernameChinese.png",
+    ProfileIconBackground : "SymbolBG.png",
+    ProfileIconTextBackground : "TextBG5.png",
+    ProfileTimeIcon : "TimeSymbol.png",
+    ProfileCoinIcon : "CoinsSymbol.png",
+    ProfileRankingIcon : "RankingSymbol.png",
+    ProfileCoinStackIcon : "Coin2WeekSymbol.png",
+
+    //Profile OLD
     ProfileBackground : "#Profile POut BG.png",
     ProfileFishBackground : "#Profile POut Fish Box.png",
     ProfileFishStatsBackground : "#Profile POut Fish Detail.png",

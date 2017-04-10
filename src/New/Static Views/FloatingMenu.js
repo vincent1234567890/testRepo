@@ -57,11 +57,11 @@ const FloatingMenu = (function () {
             ReferenceName.FloatingMenuButtonBackground,
             ReferenceName.FloatingMenuButtonBackgroundDown,
             ReferenceName.FloatingMenuButtonInfoText,
-            onInfoSelected
+            onProfileSelected
         );
 
         _parent.addChild(info);
-        info.setPosition(_theme["InfoButton"][0], _theme["InfoButton"][1]);
+        info.setPosition(_theme["ProfileButton"][0], _theme["ProfileButton"][1]);
 
         const leaderboard = doButton(ReferenceName.FloatingMenuButtonLeaderboardIcon,
             ReferenceName.FloatingMenuButtonBackground,
@@ -226,7 +226,7 @@ const FloatingMenu = (function () {
 
     }
 
-    function onInfoSelected() {
+    function onProfileSelected() {
 
     }
 

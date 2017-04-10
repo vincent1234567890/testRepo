@@ -52,9 +52,9 @@ const FAQView = (function () {
         const cannonInfoButtonText = new cc.Sprite(ReferenceName.FAQCannonInfoButtonText);
         const jackpotInfoButtonText = new cc.Sprite(ReferenceName.FAQJackpotInfoButtonText);
 
-        const pos = cc.pMult(gameRules.getContentSize(), 0.5);
+        const pos = new cc.p(gameRules.getContentSize().width/2, gameRules.getContentSize().height/2);
 
-        console.log(pos);
+        console.log(gameRules,gameRules.getContentSize(),pos);
 
         gameRulesButtonText.setPosition(pos);
         uiFAQButtonText.setPosition(pos);
@@ -67,7 +67,6 @@ const FAQView = (function () {
         fishInfo.addChild(fishInfoButtonText);
         cannonInfo.addChild(cannonInfoButtonText);
         jackpotInfo.addChild(jackpotInfoButtonText);
-
 
         textBG.setPosition(new cc.p(420,310));
         title.setPosition(new cc.p(560,705));
