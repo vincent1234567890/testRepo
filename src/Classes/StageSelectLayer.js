@@ -193,16 +193,6 @@ var StageSelectLayer = cc.Layer.extend({
         var _currentPage = this._currentPage + 1;
         this.unLockStageOK(_currentPage);
     },
-    showPurchaseUI:function (stage) {
-        if (this._showBuyLayer)
-            return;
-
-        this._showBuyLayer = true;
-        var lockLayer = new UnLockStageLayer();
-        lockLayer.initWithDelegate(this, stage);
-        this.setUnLockLayer(lockLayer);
-        this.addChild(this.getUnLockLayer(), 10, StageUITag.kStageUnLockTag);
-    },
 
     otherLeft:function (sender) {
         if (this._currentPage != 0 && !this._showBuyLayer) {
