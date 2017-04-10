@@ -1384,7 +1384,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>JackpotIfoChinese.png</key>
+            <key>JackpotInfoChinese.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -2208,7 +2208,7 @@
             <key>size</key>
             <string>{2046,1764}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:680b17f0066599b1ee556bd1b70e22a3:0dce087e58ae42884192ff678d17b8a5:474a9a58f742d06d2866a4a6eac25590$</string>
+            <string>$TexturePacker:SmartUpdate:0777151475ea0015594bf8a08283d381:0dce087e58ae42884192ff678d17b8a5:474a9a58f742d06d2866a4a6eac25590$</string>
             <key>textureFileName</key>
             <string>Menu.png</string>
         </dict>
