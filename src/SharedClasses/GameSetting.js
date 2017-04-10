@@ -633,12 +633,6 @@ var GameSetting = cc.Class.extend({
         this.experienceMoney = 200;
         this.consumeMoney = 200;
     },
-    fishJoySettingHost:function () {
-        if (DEBUG)
-            return "http://test.KingFisher.punchbox.org";
-        else
-            return "http://KingFisher.punchbox.org";
-    },
     spaRedeemDisplayedAtCurrentLanguage:function () {
         return true;
     },

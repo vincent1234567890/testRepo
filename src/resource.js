@@ -6,7 +6,6 @@ var res = {
     // LoadingAdBg : "res/LoadingAdBg.jpg",
     // LoadingCompanyLogoScreen : "res/MainBg.jpg",
     //
-    // AchievementPlist :"res/Achievement.plist",
     // ChestFishPlist: "res/ChestFish.plist",
     //
     // music_1 : "res/music/music_1.ogg",
