@@ -47,10 +47,10 @@ const ProfileView = (function () {
         // _musicSlider.setPosition(475, musicSliderHeight);
         // _soundSlider.setPosition(475, soundSliderHeight);
 
-        const time = new cc.Sprite(ReferenceName.FAQGameRulesButtonText);
-        const uiFAQButtonText = new cc.Sprite(ReferenceName.FAQUIFaqButtonText);
-        const fishInfoButtonText = new cc.Sprite(ReferenceName.FAQFishInfoButtonText);
-        const cannonInfoButtonText = new cc.Sprite(ReferenceName.FAQCannonInfoButtonText);
+        const timeIcon = new cc.Sprite(ReferenceName.ProfileTimeIcon);
+        const coinIcon = new cc.Sprite(ReferenceName.CoinIcon);
+        const rankingIcon = new cc.Sprite(ReferenceName.FAQFishInfoButtonText);
+        const coinStack = new cc.Sprite(ReferenceName.FAQCannonInfoButtonText);
         const jackpotInfoButtonText = new cc.Sprite(ReferenceName.FAQJackpotInfoButtonText);
 
         const pos = new cc.p(gameRules.getContentSize().width/2, gameRules.getContentSize().height/2);
@@ -140,7 +140,7 @@ const ProfileView = (function () {
         _background.addChild(musicTitle);
         _background.addChild(soundTitle);
         _background.addChild(gameLanguageSelectionTitle);
-        _background.addChild(gameLanguageSelectionBar);
+        _background.addChild(gameLanguageSelectionBar);Ø
         _background.addChild(label);
         _background.addChild(acceptButton);
         _background.addChild(cancelButton);
@@ -196,11 +196,19 @@ const ProfileView = (function () {
             BlockingManager.deregisterBlock(dismissCallback);
         }
 
-        function createDisplay(spriteIcon){
-            const title = new cc.Sprite(ReferenceName.SettingsTitleChinese);
-            const titleBackground = new cc.Sprite(ReferenceName.SettingsTitleBackground);
-            const musicTitle = new cc.Sprite(ReferenceName.SettingsMusicTitleChinese);
-            const soundTitle = new cc.Sprite(ReferenceName.SettingsSoundTitleChinese);
+        function createDisplay(spriteIcon, titleText, infoText){
+            const iconBackground = new cc.Sprite(ReferenceName.ProfileIconBackground);
+            const background = new cc.Sprite(ReferenceName.ProfileBackground);
+            const icon = new cc.Sprite(spriteIcon);
+            // const soundTitle = new cc.Sprite(ReferenceName.SettingsSoundTitleChinese);
+            let fontDef = new cc.FontDefinition();
+            fontDef.fontName = "Microsoft YaHei";
+            // fontDef.fontName = "Arial Unicode MS";
+            fontDef.fontSize = "20";
+            fontDef.fontStyle = "bold";
+            fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
+            fontDef.fillStyle = new cc.Color(255, 255, 255, 255);
+            let label = new cc.LabelTTF(titleText, fontDef);
         }
 
     };

@@ -33,8 +33,8 @@ const SettingsView = (function () {
 
         parent.setPosition(683, 384);
 
-        const _musicSlider = createSlider(musicValueChangedEvent, PlayerPreferences.getMusicVolume());
-        const _soundSlider = createSlider(soundValueChangedEvent, PlayerPreferences.getSoundVolume());
+        const _musicSlider = createSlider(parent, musicValueChangedEvent, PlayerPreferences.getMusicVolume());
+        const _soundSlider = createSlider(parent, soundValueChangedEvent, PlayerPreferences.getSoundVolume());
 
         _background.addChild(_musicSlider);
         _background.addChild(_soundSlider);
@@ -86,6 +86,8 @@ const SettingsView = (function () {
 
         acceptText.setPosition(acceptButton.getPosition());
         cancelText.setPosition(cancelButton.getPosition());
+
+
 
         // const touchEvent = (sender, type) => {
         //     switch (type) {
@@ -161,10 +163,9 @@ const SettingsView = (function () {
             previousSound = -1;
             BlockingManager.deregisterBlock(dismissCallback);
         }
-
     };
 
-    function createSlider(callback, value) {
+    function createSlider(parent, callback, value) {
         let slider = new cc.ControlSlider(ReferenceName.SettingsSliderBackground, ReferenceName.SettingsSliderFiller, ReferenceName.SettingsSliderIndicator);
         slider.setMinimumAllowedValue(STARTOFFSET);
 
@@ -175,17 +176,54 @@ const SettingsView = (function () {
         slider.getProgressSprite().setPosition(cc.pAdd(slider.getProgressSprite().getPosition(), new cc.p(5, 0)));
         slider.addTargetWithActionForControlEvents(SettingsView, callback, cc.CONTROL_EVENT_VALUECHANGED);
 
+        //animation effects
+        // const target = new cc.Sprite();
+        // target.setBlendFunc(cc.ONE, cc.ONE);
+        //
+        // // const sliderFiller = new cc.Sprite('#' + ReferenceName.SettingsSliderFiller);
+        // // const mask = new cc.Sprite('#' + ReferenceName.SettingsSliderFiller);
+        // const mask = slider.getProgressSprite();
+        //
+        // const maskedFill = new cc.ClippingNode(mask);
+        // maskedFill.setAlphaThreshold(0.9);
+        //
+        // // slider.getProgressSprite().addChild(sliderFiller,1);
+        //
+        // maskedFill.addChild(target);
+        // // maskedFill.setPosition(0,0);
+        // slider.addChild(maskedFill,1);
+        //
+        // cc.spriteFrameCache.addSpriteFrames(res.WaterCausticAnimation);
+        // let animationArray = [];
+        // let count = 0;
+        // while (true) {
+        //     let frameCount = String(count);
+        //     while (frameCount.length < 5) {
+        //         frameCount = '0' + frameCount;
+        //     }
+        //     const frame = cc.spriteFrameCache.getSpriteFrame("Caustic_" + frameCount + ".png");
+        //     if (!frame) {
+        //         break;
+        //     }
+        //     animationArray.push(frame);
+        //     count++;
+        // }
+        // const animation = new cc.Animate(new cc.Animation(animationArray,0.05));
+        // target.runAction(new cc.repeatForever(animation));
+
+        //end animation effects
+
         return slider;
     }
 
     function musicValueChangedEvent(sender, controlEvent) {
-        console.log(sender.getValue());
+        // console.log(sender.getValue());
         PlayerPreferences.setMusicVolume(sender.getValue());
         cc.audioEngine.setMusicVolume(sender.getValue().toFixed(2) - STARTOFFSET);
     }
 
     function soundValueChangedEvent(sender, controlEvent) {
-        console.log(sender.getValue());
+        // console.log(sender.getValue());
         PlayerPreferences.setSoundVolume(sender.getValue());
         cc.audioEngine.setEffectsVolume(sender.getValue().toFixed(2) - STARTOFFSET);
     }

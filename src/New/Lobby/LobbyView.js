@@ -46,6 +46,7 @@ const LobbyView = (function () {
         const clippy = new DolphinClippy();
 
 
+
         const bg = new cc.Sprite(ReferenceName.LobbyBackground);
         bg.setPosition(length / 2, height / 2 + 70);
         this._parent.addChild(bg, -5);
@@ -187,6 +188,20 @@ const LobbyView = (function () {
         // parent.addChild(waterCausticsLayer,999);
 
         this.updatePlayerData(playerData);
+
+
+        /* testing
+         */
+        // cc.spriteFrameCache.addSpriteFrames(res.CoinExplosion);
+        // const animation = GUIFunctions.getAnimation("CoinExplosion1_",0.3);
+        // const animationSequence = new cc.RepeatForever(animation,new cc.callFunc(onAnimationEnd));
+        // const test = new cc.Sprite();
+        // this._parent.addChild(test,100);
+        // test.runAction(animationSequence);
+        //
+        // function onAnimationEnd() {
+        //
+        // }
     };
 
     // function onProfileclick(touch) {

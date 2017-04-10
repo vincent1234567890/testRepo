@@ -252,7 +252,7 @@ var res = {
     // HorseshoeCrabPng: "res/New/Fish/HorseshoeCrab.png",
     // PaddleFishPlist: "res/New/Fish/PaddleFish.plist",
     // PaddleFishPng: "res/New/Fish/PaddleFish.png",
-
+    CoinExplosion : "res/CompanyA/Game/CoinExplosion1.plist",
     //
 
     GoldenNumbersPlist : "res/New/Fonts/GoldNumber.plist",
