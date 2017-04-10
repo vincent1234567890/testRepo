@@ -7,7 +7,7 @@ const LobbyManager = (function () {
     let _profileManager;
     let _lobbyTheme;
 
-    const LobbyManager = function (playerData, settingsCallback, onGameSelectedCallback) {
+    const LobbyManager = function (playerData, onGameSelectedCallback) {
         _lobbyTheme = ThemeDataManager.getThemeDataList("LobbyData");
 
         const plists = ResourceLoader.getPlists("Lobby");
@@ -16,15 +16,15 @@ const LobbyManager = (function () {
         }
         this._parent = parent;
         _profileManager = new ProfileManager();
-        this.displayView(playerData, settingsCallback,onGameSelectedCallback);
+        this.displayView(playerData,onGameSelectedCallback);
     };
 
-    LobbyManager.prototype.displayView = function(playerData, settingsCallback, onGameSelectedCallback){
+    LobbyManager.prototype.displayView = function(playerData, onGameSelectedCallback){
         if (this._view){
             // this._parent.removeChild(this._view);
             this._view.destroyView();
         }
-        this._view = new LobbyView(playerData,_lobbyTheme, settingsCallback,onGameSelectedCallback, onRequestShowProfile);
+        this._view = new LobbyView(playerData,_lobbyTheme, onGameSelectedCallback, onRequestShowProfile);
     };
 
     function onRequestShowProfile(){

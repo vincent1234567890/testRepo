@@ -5,7 +5,6 @@
 const LeaderboardView = (function () {
     const ZORDER = 10;
     let _parent;
-    let _background;
     let _popup;
 
     const LeaderboardView = function () {

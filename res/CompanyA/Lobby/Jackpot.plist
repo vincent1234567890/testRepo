@@ -15,9 +15,9 @@
                 <key>spriteSourceSize</key>
                 <string>{1366,450}</string>
                 <key>textureRect</key>
-                <string>{{3131,1363},{116,118}}</string>
+                <string>{{1693,1817},{116,118}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>JPLobbylight_00039.png</key>
             <dict>
@@ -30,7 +30,7 @@
                 <key>spriteSourceSize</key>
                 <string>{1366,450}</string>
                 <key>textureRect</key>
-                <string>{{2983,1619},{226,202}}</string>
+                <string>{{3149,1059},{226,202}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -45,7 +45,7 @@
                 <key>spriteSourceSize</key>
                 <string>{1366,450}</string>
                 <key>textureRect</key>
-                <string>{{3149,905},{308,264}}</string>
+                <string>{{2983,1619},{308,264}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -435,7 +435,7 @@
                 <key>spriteSourceSize</key>
                 <string>{190,38}</string>
                 <key>textureRect</key>
-                <string>{{3373,1},{190,38}}</string>
+                <string>{{3333,1287},{190,38}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -450,7 +450,7 @@
                 <key>spriteSourceSize</key>
                 <string>{204,42}</string>
                 <key>textureRect</key>
-                <string>{{1237,225},{204,42}}</string>
+                <string>{{2567,1727},{204,42}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -465,7 +465,7 @@
                 <key>spriteSourceSize</key>
                 <string>{133,36}</string>
                 <key>textureRect</key>
-                <string>{{2611,1385},{133,36}}</string>
+                <string>{{1237,225},{133,36}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -480,7 +480,7 @@
                 <key>spriteSourceSize</key>
                 <string>{222,152}</string>
                 <key>textureRect</key>
-                <string>{{2183,1727},{222,152}}</string>
+                <string>{{3149,905},{222,152}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -495,7 +495,7 @@
                 <key>spriteSourceSize</key>
                 <string>{214,146}</string>
                 <key>textureRect</key>
-                <string>{{3149,1215},{214,146}}</string>
+                <string>{{2183,1727},{214,146}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -510,7 +510,52 @@
                 <key>spriteSourceSize</key>
                 <string>{166,139}</string>
                 <key>textureRect</key>
-                <string>{{2407,1727},{166,139}}</string>
+                <string>{{2399,1727},{166,139}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>Lensfare1.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{20,0}</string>
+                <key>spriteSize</key>
+                <string>{288,200}</string>
+                <key>spriteSourceSize</key>
+                <string>{400,200}</string>
+                <key>textureRect</key>
+                <string>{{3131,1287},{288,200}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>Lensfare2.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{77,77}</string>
+                <key>spriteSourceSize</key>
+                <string>{77,77}</string>
+                <key>textureRect</key>
+                <string>{{2611,1385},{77,77}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>Lensfare3.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{2,1}</string>
+                <key>spriteSize</key>
+                <string>{61,53}</string>
+                <key>spriteSourceSize</key>
+                <string>{65,75}</string>
+                <key>textureRect</key>
+                <string>{{1813,1817},{61,53}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -526,9 +571,9 @@
             <key>realTextureFileName</key>
             <string>Jackpot.png</string>
             <key>size</key>
-            <string>{3414,1932}</string>
+            <string>{3372,1934}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:fa5b902a9734cf3b73b5d5c512313c8a:20a15c774038331e167424f16b058804:8cec78be4de0ab7598c4003c942b161d$</string>
+            <string>$TexturePacker:SmartUpdate:956286ad47706ef835b7abb5b7cfabc0:6bfc705d9063077ff90c3959d7a4935d:8cec78be4de0ab7598c4003c942b161d$</string>
             <key>textureFileName</key>
             <string>Jackpot.png</string>
         </dict>

@@ -347,6 +347,7 @@ const ClientServerConnect = function () {
     };
 
     const unsetFishLockRequest = function () {
+        console.log("unsetTargetLock");
         _informServer.unsetTargetLock();
     };
 

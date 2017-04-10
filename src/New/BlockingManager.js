@@ -28,12 +28,10 @@ const BlockingManager = (function(){
 
     function deregisterBlock (callback) {
         const index = _callbackStack.indexOf(callback);
-        console.log(index);
         if(index !== -1) {
             _callbackStack.splice(index, 1);
         }
-        console.log(_callbackStack);
-        if(_callbackStack.length == 0){
+        if(_callbackStack.length == 0 && _view){ // check for view in case its part of cleanup
             _view.hideView();
         }
     }
@@ -49,6 +47,7 @@ const BlockingManager = (function(){
             _view = null;
         }
     }
+
     return {
         registerBlock : registerBlock,
         deregisterBlock : deregisterBlock,

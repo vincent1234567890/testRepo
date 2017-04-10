@@ -21,7 +21,7 @@ const JackpotView = (function () {
         _parent.addChild(bg);
 
         _parent.addChild(light);
-        light.setBlendFunc(cc.ONE, cc.ONE);
+        // light.setBlendFunc(cc.ONE, cc.ONE);
         light.runAction(new cc.repeatForever(new cc.rotateBy(25,360)));
 
         _parent.addChild(bar);

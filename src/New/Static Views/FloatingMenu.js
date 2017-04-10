@@ -5,18 +5,21 @@ const FloatingMenu = (function () {
     "use strict";
     let _parent;
     let _theme;
-    let _settingsCallback;
+
 
     const hoverSize = 1.2;
     const originalSize = 1;
 
     let _leaderboardView;
+    let _setttingsView;
 
-    const FloatingMenu = function (settingsCallback) {
+    let _faqView;
+
+    const FloatingMenu = function () {
         _parent = new cc.Node();
         GameView.addView(_parent);
 
-        _settingsCallback = settingsCallback;
+        // _settingsCallback = settingsCallback;
 
         _theme = ThemeDataManager.getThemeDataList("FloatingMenu");
 
@@ -54,11 +57,11 @@ const FloatingMenu = (function () {
             ReferenceName.FloatingMenuButtonBackground,
             ReferenceName.FloatingMenuButtonBackgroundDown,
             ReferenceName.FloatingMenuButtonInfoText,
-            onInfoSelected
+            onProfileSelected
         );
 
         _parent.addChild(info);
-        info.setPosition(_theme["InfoButton"][0], _theme["InfoButton"][1]);
+        info.setPosition(_theme["ProfileButton"][0], _theme["ProfileButton"][1]);
 
         const leaderboard = doButton(ReferenceName.FloatingMenuButtonLeaderboardIcon,
             ReferenceName.FloatingMenuButtonBackground,
@@ -211,8 +214,11 @@ const FloatingMenu = (function () {
     }
 
     function onSettingsSelected() {
-        if (_settingsCallback) {
-            _settingsCallback();
+        console.log("onSettingsSelected");
+        if (_setttingsView){
+            _setttingsView.show();
+        }else{
+            _setttingsView = new SettingsView();
         }
     }
 
@@ -220,7 +226,7 @@ const FloatingMenu = (function () {
 
     }
 
-    function onInfoSelected() {
+    function onProfileSelected() {
 
     }
 
@@ -234,7 +240,12 @@ const FloatingMenu = (function () {
     }
 
     function onFAQSelected() {
-
+        console.log("onFAQSelected");
+        if (!_faqView) {
+            _faqView = new FAQView();
+        } else {
+            _faqView.show();
+        }
     }
 
     const proto = FloatingMenu.prototype;
@@ -245,6 +256,17 @@ const FloatingMenu = (function () {
         GameView.addView(_parent);
     };
 
+    proto.hideAll = function () {
+        if (_setttingsView){
+            _setttingsView.hide();
+        }
+        if (_leaderboardView){
+            _leaderboardView.hide();
+        }
+        if (_faqView){
+            _faqView.hide();
+        }
+    };
     // proto.Move
 
     return FloatingMenu;
