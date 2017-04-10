@@ -4,822 +4,807 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>Mermaid_00000.png</key>
+            <key>GMermaid_00000.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-1,-1}</string>
+                <string>{-1,3}</string>
                 <key>spriteSize</key>
-                <string>{396,152}</string>
+                <string>{402,154}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{803,923},{396,152}}</string>
+                <string>{{407,903},{402,154}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Mermaid_00001.png</key>
+            <key>GMermaid_00001.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{1,-1}</string>
+                <string>{1,3}</string>
                 <key>spriteSize</key>
-                <string>{398,152}</string>
+                <string>{406,154}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{403,779},{398,152}}</string>
+                <string>{{825,689},{406,154}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Mermaid_00002.png</key>
+            <key>GMermaid_00002.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{3,-1}</string>
+                <string>{3,3}</string>
                 <key>spriteSize</key>
-                <string>{400,154}</string>
+                <string>{410,154}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{1,653},{400,154}}</string>
+                <string>{{833,533},{410,154}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Mermaid_00003.png</key>
+            <key>GMermaid_00003.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{3,1}</string>
+                <string>{5,5}</string>
                 <key>spriteSize</key>
-                <string>{402,156}</string>
+                <string>{410,158}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{415,493},{402,156}}</string>
+                <string>{{1245,505},{410,158}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Mermaid_00004.png</key>
+            <key>GMermaid_00004.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{2,6}</string>
+                <string>{4,9}</string>
                 <key>spriteSize</key>
-                <string>{398,166}</string>
+                <string>{408,166}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{809,755},{398,166}}</string>
+                <string>{{1245,665},{408,166}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Mermaid_00005.png</key>
+            <key>GMermaid_00005.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-4,7}</string>
+                <string>{-1,11}</string>
                 <key>spriteSize</key>
-                <string>{388,170}</string>
+                <string>{398,172}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{1191,1181},{388,170}}</string>
+                <string>{{1,1115},{398,172}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Mermaid_00006.png</key>
+            <key>GMermaid_00006.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-5,3}</string>
+                <string>{-3,8}</string>
                 <key>spriteSize</key>
-                <string>{386,166}</string>
+                <string>{396,168}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{1,1309},{386,166}}</string>
+                <string>{{807,1141},{396,168}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Mermaid_00007.png</key>
+            <key>GMermaid_00007.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-5,0}</string>
+                <string>{-3,6}</string>
                 <key>spriteSize</key>
-                <string>{386,162}</string>
+                <string>{396,164}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{389,1411},{386,162}}</string>
+                <string>{{401,1215},{396,164}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Mermaid_00008.png</key>
+            <key>GMermaid_00008.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-4,-1}</string>
+                <string>{-2,4}</string>
                 <key>spriteSize</key>
-                <string>{390,158}</string>
+                <string>{398,160}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{1607,933},{390,158}}</string>
+                <string>{{1213,989},{398,160}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Mermaid_00009.png</key>
+            <key>GMermaid_00009.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-1,-1}</string>
+                <string>{-1,3}</string>
                 <key>spriteSize</key>
-                <string>{396,158}</string>
+                <string>{404,158}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{1209,847},{396,158}}</string>
+                <string>{{1,803},{404,158}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Mermaid_00010.png</key>
+            <key>GMermaid_00010.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,-1}</string>
+                <string>{-1,3}</string>
                 <key>spriteSize</key>
-                <string>{402,152}</string>
+                <string>{404,154}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{1,499},{402,152}}</string>
+                <string>{{1233,833},{404,154}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Mermaid_00011.png</key>
+            <key>GMermaid_00011.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-5,-1}</string>
+                <string>{-7,2}</string>
                 <key>spriteSize</key>
                 <string>{394,152}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{1597,1093},{394,152}}</string>
+                <string>{{1205,1151},{394,152}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Mermaid_00012.png</key>
+            <key>GMermaid_00012.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-12,-2}</string>
+                <string>{-15,3}</string>
                 <key>spriteSize</key>
-                <string>{380,152}</string>
+                <string>{378,152}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{777,1427},{380,152}}</string>
+                <string>{{1,1589},{378,152}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Mermaid_00013.png</key>
+            <key>GMermaid_00013.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-18,-1}</string>
+                <string>{-22,3}</string>
                 <key>spriteSize</key>
-                <string>{368,152}</string>
+                <string>{368,154}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{1,1783},{368,152}}</string>
+                <string>{{759,1755},{368,154}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Mermaid_00014.png</key>
+            <key>GMermaid_00014.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-19,-2}</string>
+                <string>{-23,2}</string>
                 <key>spriteSize</key>
                 <string>{366,152}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{1143,1641},{366,152}}</string>
+                <string>{{503,1911},{366,152}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
-            <key>Mermaid_00015.png</key>
+            <key>GMermaid_00015.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-9,-1}</string>
+                <string>{-12,3}</string>
                 <key>spriteSize</key>
-                <string>{384,152}</string>
+                <string>{386,154}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{1,1477},{384,152}}</string>
+                <string>{{799,1311},{386,154}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Mermaid_00016.png</key>
+            <key>GMermaid_00016.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-5,-2}</string>
+                <string>{-6,3}</string>
                 <key>spriteSize</key>
-                <string>{390,152}</string>
+                <string>{394,154}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{399,1087},{390,152}}</string>
+                <string>{{1613,1101},{394,154}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Mermaid_00017.png</key>
+            <key>GMermaid_00017.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-2,-1}</string>
+                <string>{-3,0}</string>
                 <key>spriteSize</key>
-                <string>{396,152}</string>
+                <string>{400,154}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{399,933},{396,152}}</string>
+                <string>{{405,1059},{400,154}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Mermaid_00018.png</key>
+            <key>GMermaid_00018.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-2,-1}</string>
-                <key>spriteSize</key>
-                <string>{396,152}</string>
-                <key>spriteSourceSize</key>
-                <string>{616,420}</string>
-                <key>textureRect</key>
-                <string>{{1,979},{396,152}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>Mermaid_00019.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{1,0}</string>
-                <key>spriteSize</key>
-                <string>{400,152}</string>
-                <key>spriteSourceSize</key>
-                <string>{616,420}</string>
-                <key>textureRect</key>
-                <string>{{1223,693},{400,152}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>Mermaid_00020.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{8,4}</string>
+                <string>{1,1}</string>
                 <key>spriteSize</key>
                 <string>{402,150}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{819,603},{402,150}}</string>
+                <string>{{1,963},{402,150}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Mermaid_00021.png</key>
+            <key>GMermaid_00019.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{6,5}</string>
+                <key>spriteSize</key>
+                <string>{406,152}</string>
+                <key>spriteSourceSize</key>
+                <string>{616,420}</string>
+                <key>textureRect</key>
+                <string>{{409,749},{406,152}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>GMermaid_00020.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{11,9}</string>
                 <key>spriteSize</key>
-                <string>{402,160}</string>
+                <string>{406,160}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{1241,531},{402,160}}</string>
+                <string>{{1,641},{406,160}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Mermaid_00022.png</key>
+            <key>GMermaid_00021.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{16,15}</string>
+                <string>{16,16}</string>
                 <key>spriteSize</key>
-                <string>{396,168}</string>
+                <string>{400,168}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{1,809},{396,168}}</string>
+                <string>{{811,971},{400,168}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Mermaid_00023.png</key>
+            <key>GMermaid_00022.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{17,20}</string>
+                <string>{18,21}</string>
                 <key>spriteSize</key>
-                <string>{394,172}</string>
+                <string>{394,170}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{1201,1007},{394,172}}</string>
+                <string>{{1,1289},{394,170}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Mermaid_00024.png</key>
+            <key>GMermaid_00023.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{17,27}</string>
+                <string>{19,27}</string>
                 <key>spriteSize</key>
-                <string>{388,174}</string>
+                <string>{388,172}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{1,1133},{388,174}}</string>
+                <string>{{1205,1305},{388,172}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Mermaid_00025.png</key>
+            <key>GMermaid_00024.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{18,29}</string>
+                <string>{19,30}</string>
                 <key>spriteSize</key>
-                <string>{386,168}</string>
+                <string>{384,168}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{391,1241},{386,168}}</string>
+                <string>{{397,1381},{384,168}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Mermaid_00026.png</key>
+            <key>GMermaid_00025.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{20,32}</string>
+                <string>{21,32}</string>
                 <key>spriteSize</key>
-                <string>{378,160}</string>
+                <string>{380,160}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{387,1575},{378,160}}</string>
+                <string>{{385,1551},{380,160}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Mermaid_00027.png</key>
+            <key>GMermaid_00026.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{21,31}</string>
+                <string>{22,32}</string>
                 <key>spriteSize</key>
                 <string>{376,150}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{1,1631},{376,150}}</string>
+                <string>{{381,1713},{376,150}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Mermaid_00028.png</key>
+            <key>GMermaid_00027.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{24,31}</string>
+                <string>{26,32}</string>
                 <key>spriteSize</key>
-                <string>{370,140}</string>
+                <string>{370,138}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{1625,791},{370,140}}</string>
+                <string>{{1595,1385},{370,138}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Mermaid_00029.png</key>
+            <key>GMermaid_00028.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{27,34}</string>
+                <string>{29,35}</string>
                 <key>spriteSize</key>
                 <string>{364,140}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{1019,1871},{364,140}}</string>
+                <string>{{657,1911},{364,140}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>Mermaid_00030.png</key>
+            <key>GMermaid_00029.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{31,36}</string>
+                <string>{32,36}</string>
                 <key>spriteSize</key>
                 <string>{358,144}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{1161,1931},{358,144}}</string>
+                <string>{{931,1911},{358,144}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>Mermaid_00031.png</key>
+            <key>GMermaid_00030.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{33,36}</string>
+                <string>{34,37}</string>
                 <key>spriteSize</key>
-                <string>{352,144}</string>
+                <string>{352,146}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{299,1985},{352,144}}</string>
+                <string>{{1535,1525},{352,146}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>Mermaid_00032.png</key>
+            <key>GMermaid_00031.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{33,38}</string>
+                <string>{34,38}</string>
                 <key>spriteSize</key>
                 <string>{338,148}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{1307,1931},{338,148}}</string>
+                <string>{{1683,1525},{338,148}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
-            <key>Mermaid_00033.png</key>
+            <key>GMermaid_00032.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{31,39}</string>
                 <key>spriteSize</key>
-                <string>{326,150}</string>
+                <string>{328,150}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{1457,1931},{326,150}}</string>
+                <string>{{1683,1675},{328,150}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
-            <key>Mermaid_00034.png</key>
+            <key>GMermaid_00033.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{25,34}</string>
+                <string>{27,34}</string>
                 <key>spriteSize</key>
                 <string>{308,164}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{1683,1},{308,164}}</string>
+                <string>{{163,1991},{308,164}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
-            <key>Mermaid_00035.png</key>
+            <key>GMermaid_00034.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{22,29}</string>
+                <string>{23,30}</string>
                 <key>spriteSize</key>
                 <string>{298,176}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{1609,1799},{298,176}}</string>
+                <string>{{1683,1827},{298,176}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Mermaid_00036.png</key>
+            <key>GMermaid_00035.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{17,24}</string>
+                <string>{19,25}</string>
+                <key>spriteSize</key>
+                <string>{288,184}</string>
+                <key>spriteSourceSize</key>
+                <string>{616,420}</string>
+                <key>textureRect</key>
+                <string>{{1837,2005},{288,184}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>GMermaid_00036.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{19,25}</string>
                 <key>spriteSize</key>
                 <string>{290,184}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{1609,1977},{290,184}}</string>
+                <string>{{1651,2005},{290,184}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>Mermaid_00037.png</key>
+            <key>GMermaid_00037.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{17,24}</string>
-                <key>spriteSize</key>
-                <string>{290,184}</string>
-                <key>spriteSourceSize</key>
-                <string>{616,420}</string>
-                <key>textureRect</key>
-                <string>{{1795,1977},{290,184}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>Mermaid_00038.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{22,29}</string>
+                <string>{24,29}</string>
                 <key>spriteSize</key>
                 <string>{304,172}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{1683,167},{304,172}}</string>
+                <string>{{329,1991},{304,172}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
-            <key>Mermaid_00039.png</key>
+            <key>GMermaid_00038.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{28,34}</string>
+                <string>{29,35}</string>
                 <key>spriteSize</key>
                 <string>{318,160}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{1679,341},{318,160}}</string>
+                <string>{{1,1991},{318,160}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
-            <key>Mermaid_00040.png</key>
+            <key>GMermaid_00039.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{37,44}</string>
+                <string>{38,45}</string>
                 <key>spriteSize</key>
                 <string>{344,134}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{1161,1795},{344,134}}</string>
+                <string>{{1129,1771},{344,134}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Mermaid_00041.png</key>
+            <key>GMermaid_00040.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{43,45}</string>
+                <string>{45,47}</string>
                 <key>spriteSize</key>
-                <string>{360,128}</string>
+                <string>{360,130}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{1511,1669},{360,128}}</string>
+                <string>{{799,1911},{360,130}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
-            <key>Mermaid_00042.png</key>
+            <key>GMermaid_00041.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{52,44}</string>
+                <string>{53,45}</string>
                 <key>spriteSize</key>
                 <string>{382,126}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{1581,1247},{382,126}}</string>
+                <string>{{1,1461},{382,126}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Mermaid_00043.png</key>
+            <key>GMermaid_00042.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{56,42}</string>
+                <string>{57,43}</string>
                 <key>spriteSize</key>
-                <string>{392,124}</string>
+                <string>{392,126}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{797,1077},{392,124}}</string>
+                <string>{{1601,1257},{392,126}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Mermaid_00044.png</key>
+            <key>GMermaid_00043.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{60,40}</string>
+                <string>{61,40}</string>
                 <key>spriteSize</key>
-                <string>{402,126}</string>
+                <string>{404,124}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{405,651},{402,126}}</string>
+                <string>{{817,845},{404,124}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Mermaid_00045.png</key>
+            <key>GMermaid_00044.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{62,39}</string>
+                <string>{63,40}</string>
                 <key>spriteSize</key>
-                <string>{406,128}</string>
+                <string>{408,128}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{833,473},{406,128}}</string>
+                <string>{{415,619},{408,128}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Mermaid_00046.png</key>
+            <key>GMermaid_00045.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{64,44}</string>
+                <string>{65,44}</string>
                 <key>spriteSize</key>
                 <string>{412,146}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{833,325},{412,146}}</string>
+                <string>{{1,493},{412,146}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Mermaid_00047.png</key>
+            <key>GMermaid_00046.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{65,45}</string>
+                <string>{66,46}</string>
                 <key>spriteSize</key>
                 <string>{412,156}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{1,341},{412,156}}</string>
+                <string>{{1,335},{412,156}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Mermaid_00048.png</key>
+            <key>GMermaid_00047.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{64,45}</string>
+                <string>{65,46}</string>
                 <key>spriteSize</key>
                 <string>{414,168}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{417,323},{414,168}}</string>
+                <string>{{1259,335},{414,168}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Mermaid_00049.png</key>
+            <key>GMermaid_00048.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{63,43}</string>
+                <string>{65,43}</string>
                 <key>spriteSize</key>
                 <string>{414,172}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{1,167},{414,172}}</string>
+                <string>{{1265,161},{414,172}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Mermaid_00050.png</key>
+            <key>GMermaid_00049.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{61,36}</string>
+                <string>{63,36}</string>
                 <key>spriteSize</key>
-                <string>{416,170}</string>
+                <string>{414,170}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{1265,1},{416,170}}</string>
+                <string>{{843,175},{414,170}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Mermaid_00051.png</key>
+            <key>GMermaid_00050.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{61,30}</string>
+                <string>{62,30}</string>
                 <key>spriteSize</key>
                 <string>{416,166}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{845,157},{416,166}}</string>
+                <string>{{1,167},{416,166}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Mermaid_00052.png</key>
+            <key>GMermaid_00051.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{62,18}</string>
+                <string>{64,19}</string>
                 <key>spriteSize</key>
                 <string>{416,158}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{423,163},{416,158}}</string>
+                <string>{{1265,1},{416,158}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Mermaid_00053.png</key>
+            <key>GMermaid_00052.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{63,11}</string>
+                <string>{65,12}</string>
                 <key>spriteSize</key>
                 <string>{418,154}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{845,1},{418,154}}</string>
+                <string>{{423,163},{418,154}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Mermaid_00054.png</key>
+            <key>GMermaid_00053.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{67,8}</string>
+                <string>{68,8}</string>
                 <key>spriteSize</key>
                 <string>{420,160}</string>
                 <key>spriteSourceSize</key>
@@ -829,12 +814,12 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Mermaid_00055.png</key>
+            <key>GMermaid_00054.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{69,6}</string>
+                <string>{70,6}</string>
                 <key>spriteSize</key>
                 <string>{420,164}</string>
                 <key>spriteSourceSize</key>
@@ -844,168 +829,183 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Mermaid_00056.png</key>
+            <key>GMermaid_00055.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{70,2}</string>
+                <string>{69,3}</string>
                 <key>spriteSize</key>
-                <string>{414,170}</string>
+                <string>{418,172}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{1263,173},{414,170}}</string>
+                <string>{{845,1},{418,172}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Mermaid_00057.png</key>
+            <key>GMermaid_00056.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{67,-4}</string>
+                <string>{66,-3}</string>
                 <key>spriteSize</key>
-                <string>{406,184}</string>
+                <string>{410,184}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{1247,345},{406,184}}</string>
+                <string>{{833,347},{410,184}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Mermaid_00058.png</key>
+            <key>GMermaid_00057.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{58,-21}</string>
+                <string>{57,-20}</string>
                 <key>spriteSize</key>
-                <string>{386,222}</string>
+                <string>{392,224}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{791,1203},{386,222}}</string>
+                <string>{{1639,875},{392,224}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Mermaid_00059.png</key>
+            <key>GMermaid_00058.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{52,-31}</string>
+                <string>{50,-30}</string>
                 <key>spriteSize</key>
-                <string>{368,246}</string>
+                <string>{374,246}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{379,1737},{368,246}}</string>
+                <string>{{1,1743},{374,246}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Mermaid_00060.png</key>
+            <key>GMermaid_00059.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{43,-38}</string>
+                <string>{42,-38}</string>
                 <key>spriteSize</key>
-                <string>{346,276}</string>
+                <string>{352,274}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{445,1985},{346,276}}</string>
+                <string>{{1375,1907},{352,274}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>Mermaid_00061.png</key>
+            <key>GMermaid_00060.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{41,-39}</string>
+                <string>{40,-38}</string>
                 <key>spriteSize</key>
-                <string>{340,286}</string>
+                <string>{344,286}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{1655,503},{340,286}}</string>
+                <string>{{1681,297},{344,286}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Mermaid_00062.png</key>
+            <key>GMermaid_00061.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{45,-33}</string>
+                <string>{45,-31}</string>
                 <key>spriteSize</key>
-                <string>{344,294}</string>
+                <string>{346,294}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{723,1985},{344,294}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>Mermaid_00063.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{52,-25}</string>
-                <key>spriteSize</key>
-                <string>{352,296}</string>
-                <key>spriteSourceSize</key>
-                <string>{616,420}</string>
-                <key>textureRect</key>
-                <string>{{1,1985},{352,296}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>Mermaid_00064.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{63,-11}</string>
-                <key>spriteSize</key>
-                <string>{366,292}</string>
-                <key>spriteSourceSize</key>
-                <string>{616,420}</string>
-                <key>textureRect</key>
-                <string>{{1561,1375},{366,292}}</string>
+                <string>{{1683,1},{346,294}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Mermaid_00065.png</key>
+            <key>GMermaid_00062.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{69,0}</string>
+                <string>{52,-24}</string>
+                <key>spriteSize</key>
+                <string>{356,296}</string>
+                <key>spriteSourceSize</key>
+                <string>{616,420}</string>
+                <key>textureRect</key>
+                <string>{{1077,1911},{356,296}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>GMermaid_00063.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{64,-10}</string>
+                <key>spriteSize</key>
+                <string>{368,290}</string>
+                <key>spriteSourceSize</key>
+                <string>{616,420}</string>
+                <key>textureRect</key>
+                <string>{{1165,1479},{368,290}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>GMermaid_00064.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{70,0}</string>
                 <key>spriteSize</key>
                 <string>{374,288}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{767,1581},{374,288}}</string>
+                <string>{{1657,585},{374,288}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Mermaid_00066.png</key>
+            <key>GMermaid_00065.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{76,13}</string>
+                <string>{77,15}</string>
                 <key>spriteSize</key>
                 <string>{380,286}</string>
                 <key>spriteSourceSize</key>
                 <string>{616,420}</string>
                 <key>textureRect</key>
-                <string>{{1179,1353},{380,286}}</string>
+                <string>{{783,1467},{380,286}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>GMermaid_00066.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{97,23}</string>
+                <key>spriteSize</key>
+                <string>{412,298}</string>
+                <key>spriteSourceSize</key>
+                <string>{616,420}</string>
+                <key>textureRect</key>
+                <string>{{419,319},{412,298}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -1019,13 +1019,13 @@
             <key>premultiplyAlpha</key>
             <false/>
             <key>realTextureFileName</key>
-            <string>Mermaid.png</string>
+            <string>GMermaid.png</string>
             <key>size</key>
-            <string>{1998,2338}</string>
+            <string>{2032,2310}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:ebb08012ac45ac4e65209235f0810c20:f6b54ace63a8fef6bafb62d5045bbc13:c920391b653cdddbe6bea173a2b8e194$</string>
+            <string>$TexturePacker:SmartUpdate:abfb67554d7674bae67950194c87c07d:76f6ba6e3c4d05802440c4355e533132:b5d90658f021859663a97862f0dcf834$</string>
             <key>textureFileName</key>
-            <string>Mermaid.png</string>
+            <string>GMermaid.png</string>
         </dict>
     </dict>
 </plist>
