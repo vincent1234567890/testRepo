@@ -91,6 +91,11 @@ const ReferenceName = {
     FAQTabBackgroundOnPress : "Button2OnPress.png",
     FAQButtonBackground : "Button3Idle.png",
     FAQButtonBackgroundOnPress : "Button3OnPress.png",
+    FAQGameRulesButtonText : "#GamerulesChinese.png",
+    FAQUIFaqButtonText : "#UIControlChinese.png",
+    FAQFishInfoButtonText : "#FishInfoChinese.png",
+    FAQCannonInfoButtonText :"#CannonInfoChinese.png",
+    FAQJackpotInfoButtonText : "#JackpotInfoChinese.png",
 
     //Settings
     SettingsBackground : "#PopupBase1.png",

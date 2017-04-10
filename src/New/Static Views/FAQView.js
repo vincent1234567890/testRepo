@@ -31,11 +31,43 @@ const FAQView = (function () {
         const userAgreementTab = GUIFunctions.createButton(ReferenceName.FAQTabBackground,ReferenceName.FAQTabBackgroundOnPress,onUserAgreementTabClicked);
         const faqTab = GUIFunctions.createButton(ReferenceName.FAQTabBackground,ReferenceName.FAQTabBackgroundOnPress,onFAQTabClicked);
 
+        const userAgreementTabTitleText = new cc.Sprite(ReferenceName.FAQUserAgreementTitleChinese);
+        const faqTabTitleText = new cc.Sprite(ReferenceName.FAQTabTitleChinese);
+
+        userAgreementTabTitleText.setAnchorPoint(0,0);
+        faqTabTitleText.setAnchorPoint(0,0);
+
+        userAgreementTab.addChild(userAgreementTabTitleText);
+        faqTab.addChild(faqTabTitleText);
+
         const gameRules = GUIFunctions.createButton(ReferenceName.FAQButtonBackground,ReferenceName.FAQButtonBackgroundOnPress,onGameRulesClicked);
         const uiFAQ = GUIFunctions.createButton(ReferenceName.FAQButtonBackground,ReferenceName.FAQButtonBackgroundOnPress,onGameRulesClicked);
         const fishInfo = GUIFunctions.createButton(ReferenceName.FAQButtonBackground,ReferenceName.FAQButtonBackgroundOnPress,onFishInfoClicked);
         const cannonInfo = GUIFunctions.createButton(ReferenceName.FAQButtonBackground,ReferenceName.FAQButtonBackgroundOnPress,onCannonInfoClicked);
         const jackpotInfo = GUIFunctions.createButton(ReferenceName.FAQButtonBackground,ReferenceName.FAQButtonBackgroundOnPress,onJackpotInfoClicked);
+
+        const gameRulesButtonText = new cc.Sprite(ReferenceName.FAQGameRulesButtonText);
+        const uiFAQButtonText = new cc.Sprite(ReferenceName.FAQUIFaqButtonText);
+        const fishInfoButtonText = new cc.Sprite(ReferenceName.FAQFishInfoButtonText);
+        const cannonInfoButtonText = new cc.Sprite(ReferenceName.FAQCannonInfoButtonText);
+        const jackpotInfoButtonText = new cc.Sprite(ReferenceName.FAQJackpotInfoButtonText);
+
+        const pos = cc.pMult(gameRules.getContentSize(), 0.5);
+
+        console.log(pos);
+
+        gameRulesButtonText.setPosition(pos);
+        uiFAQButtonText.setPosition(pos);
+        fishInfoButtonText.setPosition(pos);
+        cannonInfoButtonText.setPosition(pos);
+        jackpotInfoButtonText.setPosition(pos);
+
+        gameRules.addChild(gameRulesButtonText);
+        uiFAQ.addChild(uiFAQButtonText);
+        fishInfo.addChild(fishInfoButtonText);
+        cannonInfo.addChild(cannonInfoButtonText);
+        jackpotInfo.addChild(jackpotInfoButtonText);
+
 
         textBG.setPosition(new cc.p(420,310));
         title.setPosition(new cc.p(560,705));
@@ -54,6 +86,7 @@ const FAQView = (function () {
 
         userAgreementTab.setPosition(200,tabHeight);
         faqTab.setPosition(390,tabHeight);
+
 
 
         gameRules.setPosition(sideButtonX, sideStart);
