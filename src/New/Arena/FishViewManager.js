@@ -4,29 +4,28 @@
 
 const FishViewManager = (function(){
 
-
-    const FishViewManager = function(fishGameArena, gameConfig){
+    const FishViewManager = function(fishGameArena, gameConfig, animationEndEvent, getFishLockStatus, onFishLockSelectedCallback){
         // console.log
 
-        cc.spriteFrameCache.addSpriteFrames(res.SquidPlist);
-        cc.spriteFrameCache.addSpriteFrames(res.PufferfishPlist);
-        cc.spriteFrameCache.addSpriteFrames(res.TurtlePlist);
-        cc.spriteFrameCache.addSpriteFrames(res.PorgyPlist);
-        cc.spriteFrameCache.addSpriteFrames(res.StingrayPlist);
-        cc.spriteFrameCache.addSpriteFrames(res.LanternPlist);
-        cc.spriteFrameCache.addSpriteFrames(res.ButterflyPlist);
-        cc.spriteFrameCache.addSpriteFrames(res.GoldSharkPlist);
-        cc.spriteFrameCache.addSpriteFrames(res.SharkPlist);
-        cc.spriteFrameCache.addSpriteFrames(res.SmallFishPlist);
-
-        cc.spriteFrameCache.addSpriteFrames(res.AmphiprionPlist);
-        cc.spriteFrameCache.addSpriteFrames(res.AmphiprionBWPlist);
-        cc.spriteFrameCache.addSpriteFrames(res.GrouperFishPlist);
-        cc.spriteFrameCache.addSpriteFrames(res.MarlinsFishPlist);
-        cc.spriteFrameCache.addSpriteFrames(res.AngelFishPlist);
-        cc.spriteFrameCache.addSpriteFrames(res.ButterflyPlist);
-        cc.spriteFrameCache.addSpriteFrames(res.HorseshoeCrabPlist);
-        cc.spriteFrameCache.addSpriteFrames(res.PaddleFishPlist);
+        // cc.spriteFrameCache.addSpriteFrames(res.SquidPlist);
+        // cc.spriteFrameCache.addSpriteFrames(res.PufferfishPlist);
+        // cc.spriteFrameCache.addSpriteFrames(res.TurtlePlist);
+        // cc.spriteFrameCache.addSpriteFrames(res.PorgyPlist);
+        // cc.spriteFrameCache.addSpriteFrames(res.StingrayPlist);
+        // cc.spriteFrameCache.addSpriteFrames(res.LanternPlist);
+        // cc.spriteFrameCache.addSpriteFrames(res.ButterflyPlist);
+        // cc.spriteFrameCache.addSpriteFrames(res.GoldSharkPlist);
+        // cc.spriteFrameCache.addSpriteFrames(res.SharkPlist);
+        // cc.spriteFrameCache.addSpriteFrames(res.SmallFishPlist);
+        //
+        // cc.spriteFrameCache.addSpriteFrames(res.AmphiprionPlist);
+        // cc.spriteFrameCache.addSpriteFrames(res.AmphiprionBWPlist);
+        // cc.spriteFrameCache.addSpriteFrames(res.GrouperFishPlist);
+        // cc.spriteFrameCache.addSpriteFrames(res.MarlinsFishPlist);
+        // cc.spriteFrameCache.addSpriteFrames(res.AngelFishPlist);
+        // cc.spriteFrameCache.addSpriteFrames(res.ButterflyPlist);
+        // cc.spriteFrameCache.addSpriteFrames(res.HorseshoeCrabPlist);
+        // cc.spriteFrameCache.addSpriteFrames(res.PaddleFishPlist);
 
 
         //new game
@@ -51,49 +50,67 @@ const FishViewManager = (function(){
             cc.spriteFrameCache.addSpriteFrames(plists[list]);
         }
 
-
-
-        // FishAnimationData();
         FishAnimationData.initialise();
 
         this._parent = new cc.Node();
         this._fishes = {};
         this._fishGameArena = fishGameArena;
         this._gameConfig = gameConfig;
+        this._onAnimationEndEvent = animationEndEvent;
+
+        const targetLockUI = new cc.Sprite(ReferenceName.LockOnTargetCrosshair);
 
         // this.rotationFunction = rotationFunction;
-
         GameView.addView(this._parent);
+
+        proto._onFishClicked = (fishView) =>{
+            if (!getFishLockStatus()){
+                return;
+            }
+            let id = -1;
+            for( var fishId in this._fishes ) {
+                if( this._fishes[ fishId ] === fishView ) {
+                    id = fishId;
+                    break;
+                }
+            }
+            if (targetLockUI.getParent()!= null){
+                targetLockUI.getParent().removeChild(targetLockUI,false);
+            }
+            fishView.addTarget(targetLockUI);
+            onFishLockSelectedCallback(id);
+        }
     };
 
     const proto = FishViewManager.prototype;
 
     proto.addFish = function(fishId, fishType){
-        this._fishes[fishId] = new FishView(this._parent, this._gameConfig.fishClasses[fishType], fishType);
+        this._fishes[fishId] = new FishView(this._parent, this._gameConfig.fishClasses[fishType], fishType, this._onFishClicked);
         return this._fishes[fishId];
-
-        //debug version:
-        // const parent = new cc.Node();
-        // this._parent.addChild(parent);
-        // new FishView(parent, fishType);
-        // this._fishes[fishId] = parent;
-        // return this._fishes[fishId];
-
     };
 
     proto.getFish = function(id){
         return this._fishes[id];
     };
     
-    proto.caughtFish = function (id) {
+    proto.caughtFish = function (id, playerSlot) {
         // console.log("caughtFish : id", id);
-        return this._fishes[id].killFish(this, this.removeFish, id);
+        if (!this._fishes[id]) {
+            console.warn("Could not find fishActor for fish " + id + ".  Perhaps scene was not initialised.")
+        }
+        this._fishes[id].killFish(this, this.removeFish, id, playerSlot);
     };
 
-    proto.removeFish = function (reference, id) {
+    proto.removeFish = function (reference, data) {
         // console.log("removeFish: ", reference, "id", id);
-        this._fishes[id].destroyView(this._parent);
-        delete this._fishes[id];
+        if (!this._fishes[data.id]) {
+            console.warn("Could not find fishActor for fish " + data.id + ".  Perhaps scene was not initialised.")
+        }
+        this._fishes[data.id].destroyView(this._parent);
+        if(data.type && data.position && (data.playerSlot!=null)) {
+            this._onAnimationEndEvent(data);
+        }
+        delete this._fishes[data.id];
     };
 
     proto.update = function () {
@@ -111,15 +128,17 @@ const FishViewManager = (function(){
     };
 
     proto.destroyView = function(){
-        for ( let fishId in this._fishes){
-            const fishModel = this._fishGameArena.getFish(fishId);
-            if (fishModel) {
-                this._parent.removeChild(fishModel);
-                delete fishModel;
+        if(this._parent) {
+            for (let fishId in this._fishes) {
+                const fishModel = this._fishGameArena.getFish(fishId);
+                if (fishModel) {
+                    this._parent.removeChild(fishModel);
+                    delete fishModel;
+                }
             }
+            GameView.destroyView(this._parent);
+            this._parent = null;
         }
-        GameView.destroyView(this._parent);
-        this._parent = null;
     };
 
     return FishViewManager;

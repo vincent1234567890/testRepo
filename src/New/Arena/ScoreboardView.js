@@ -9,6 +9,8 @@ const ScoreboardView = (function() {
     let _goToNewRoom;
     function ScoreboardView(target, data, goToLobby, goToNewRoom) {
 
+        console.log(data);
+
         _goToLobby = goToLobby;
         _goToNewRoom = goToNewRoom;
 
@@ -63,7 +65,10 @@ const ScoreboardView = (function() {
         skillsUsed.setPosition(660 , cc.view.getDesignResolutionSize().height - 363);
         bg.addChild(skillsUsed,1);
 
-        const returnRate = createGridObject(ReferenceName.ReturnRate, ReferenceName.HitRateIcon, Math.round(data.fishCaught / data.fishHit * 100));
+        // const returnRate = createGridObject(ReferenceName.ReturnRate, ReferenceName.HitRateIcon, Math.round(data.fishCaught / data.fishHit * 100));
+        // returnRate.setPosition(1050 , cc.view.getDesignResolutionSize().height - 363);
+        // bg.addChild(returnRate,1);
+        const returnRate = createGridObject(ReferenceName.ReturnRate, ReferenceName.HitRateIcon, Math.round(data.fishWinnings / data.bulletsCost * 100));
         returnRate.setPosition(1050 , cc.view.getDesignResolutionSize().height - 363);
         bg.addChild(returnRate,1);
 
@@ -175,7 +180,9 @@ const ScoreboardView = (function() {
     const proto = ScoreboardView.prototype;
 
     proto.destroyView = function () {
-        GameView.destroyView(this._parent);
+        if (this._parent) {
+            GameView.destroyView(this._parent);
+        }
     };
 
     return ScoreboardView;

@@ -1,10 +1,10 @@
 /**
  * Created by eugeneseah on 26/10/16.
  */
-"use strict";
+
 
 const CannonManager = (function () {
-
+    "use strict";
     let _gameConfig;
 
     function CannonManager(gameConfig, index, isPlayer) {
@@ -16,8 +16,11 @@ const CannonManager = (function () {
         }
         this._cannon = new CannonView(gameConfig, index);
         if (isPlayer) {
-            this._cannon.setupCannonChangeMenu(this, gameConfig, index, this.decreaseCannon, this.increaseCannon);
+            this.setUpCannonChangeMenu(gameConfig, index);
+            // this._cannon.setupCannonChangeMenu(this, gameConfig, index, this.decreaseCannon, this.increaseCannon);
             this.forceSetGun(0);
+        }else{
+            this.forceClearGun();
         }
 
     }
@@ -32,6 +35,10 @@ const CannonManager = (function () {
     // CannonManager.prototype.turnTo = function (pos) {
     //     return this._cannon.turnTo(pos);
     // };
+    proto.setUpCannonChangeMenu = function (gameConfig, index) {
+        this._cannon.setupCannonChangeMenu(this, gameConfig, index, this.decreaseCannon, this.increaseCannon);
+        // this.forceSetGun(0);
+    };
 
     proto.increaseCannon = function () {
         this.selectGun(this._currentGunId + 1);
@@ -74,7 +81,12 @@ const CannonManager = (function () {
     };
 
     proto.forceClearGun = function () {
-        this._cannon.clearCannonPowerLabel();
+        // this._cannon.clearCannonPowerLabel();
+        this._cannon.hideView();
+    };
+
+    proto.showGun = function () {
+        this._cannon.showView();
     };
 
     proto.getCurrentGunClass = function () {

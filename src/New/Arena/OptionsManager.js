@@ -51,8 +51,10 @@ const OptionsManager = (function (){
     proto.destroyView = function () {
         if (this._view)
             this._view.destroy();
+            this._view = null;
         if(this._settingsView){
             this._settingsView.destroyView();
+            this._settingsView = null;
         }
     };
 

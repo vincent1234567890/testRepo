@@ -13,8 +13,23 @@ const FishView = (function () {
     // const deathTint = new cc.TintTo (0.3, 196,196,196)
     let debugReported = false;
 
-    const FishView = function (parent, fishClass, fishType) {
+    const FishView = function (parent, fishClass, fishType, onFishClickedCallback) {
         this._parent = new cc.Node();
+
+        const touchEvent = (sender, type) => {
+            // console.log("touch",sender,type);
+            switch (type) {
+                case ccui.Widget.TOUCH_MOVED:
+                    break;
+                case ccui.Widget.TOUCH_BEGAN:
+                    break;
+                case ccui.Widget.TOUCH_ENDED:
+                    onFishClickedCallback(this);
+                    break;
+                case ccui.Widget.TOUCH_CANCELED:
+                    break;
+            }
+        };
 
         this._sprite = new cc.Sprite();
         this._parent.addChild(this._sprite, -1);
@@ -26,18 +41,28 @@ const FishView = (function () {
         // GameView.addView(this._parent);
         parent.addChild(this._parent, -1);
 
+        const _wrapper = new ccui.Widget();
+        _wrapper.setContentSize(fishClass.length * 2, fishClass.breadth * 2);
+        _wrapper.setTouchEnabled(true);
+        _wrapper.setSwallowTouches(false);
+        _wrapper.addTouchEventListener(touchEvent);
+
+        this._parent.addChild(_wrapper);
+
         // const testLayer = new cc.LayerColor();
         // testLayer.setBlendFunc()
         if (GameManager.debug) {
 
             const debugCircle = new cc.Sprite(res.DebugCircle);
 
-            debugCircle.setScaleX(fishClass.length * 2 / 100);
+            debugCircle.setScaleX(fishClass.length * 2 / 100); // radius
             debugCircle.setScaleY(fishClass.breadth * 2/ 100);
 
             this._parent.addChild(debugCircle, 1);
             // console.log("debug:", debugCircle, fishClass, fishType);
         }
+
+        this._willFlip = fishClass.willFlip;
 
     };
 
@@ -58,7 +83,7 @@ const FishView = (function () {
         // }
     };
 
-    proto.killFish = function (target, callback, id) {
+    proto.killFish = function (target, callback, id, playerSlot) {
         //console.log("killFish:", this.type, FishAnimationData[this.type], FishAnimationData[this.type][FishAnimationEnum.death], FishAnimationData[this.type][FishAnimationEnum.death]&&FishAnimationData[this.type][FishAnimationEnum.death].length);
         if (FishAnimationData[this.type][FishAnimationEnum.death]
             && FishAnimationData[this.type][FishAnimationEnum.death].animation
@@ -79,9 +104,9 @@ const FishView = (function () {
             // this._sprite.setBlendFunc()
         }
 
-        const notify = new cc.Sequence(new cc.DelayTime(3), new cc.CallFunc(callback, target, id));
+        const notify = new cc.Sequence(new cc.DelayTime(1), new cc.CallFunc(callback, target, {position : this._parent.getPosition(), type : this.type, playerSlot: playerSlot, id : id}));
         this._sprite.runAction(notify);
-        return {position : this._parent.getPosition(), type : this.type};
+        // return {position : this._parent.getPosition(), type : this.type};
     };
 
     proto.destroyView = function (parent) {
@@ -90,14 +115,11 @@ const FishView = (function () {
 
     proto.updateView = function(pos,rot){
 
-
         this._parent.setPosition(pos);
         this._parent.setRotation(rot);
 
-        if (rot%360 > 90 && rot%360 <=270){
-            this._sprite.flippedY = true;
-        }else{
-            this._sprite.flippedY = false;
+        if (this._willFlip) {
+            this._sprite.flippedY = (rot % 360 > 90 && rot % 360 <= 270);
         }
 
         if (!debugReported && this._sprite.getContentSize().width == 0){
@@ -106,57 +128,9 @@ const FishView = (function () {
         }
     };
 
+    proto.addTarget = function(target){
+        this._parent.addChild(target);
+    };
+
     return FishView;
-
-
-
-    // return cc.Sprite.extend({
-    //     _className: "FishView",
-    //     _currentAnimationAction: null,
-    //     // type : -1,
-    //
-    //     ctor: function (parent, fishType) {
-    //         this.type = fishType;
-    //
-    //
-    //         // seems only useful to set and initialise rect/sprite box for sprite (otherwise it would be 0)
-    //         // can be removed for production
-    //         let number = '0';
-    //         while (number.length < 5){
-    //             number = '0' + number;
-    //         }
-    //         const frameName = '#' + fishType + '_' + number + '.png';
-    //         this._super(frameName);
-    //
-    //         this.doAnimation(FishAnimationEnum.default);
-    //
-    //
-    //         this.setScale(0.5);
-    //         parent.addChild(this, -1);
-    //
-    //     },
-    //
-    //     doAnimation : function(fishAnimationEnum) {
-    //         if (this._currentAnimationAction) {
-    //             this.stopAction(this._currentAnimationAction);
-    //         }
-    //         const data = FishAnimationData[this.type][fishAnimationEnum];
-    //         if (data.pivot){
-    //             this.setAnchorPoint(data.pivot);
-    //         }
-    //
-    //         const sequence = new cc.Sequence(data.animation.clone(), new cc.DelayTime(data.animationInterval));
-    //         this._currentAnimationAction = new cc.RepeatForever(sequence);
-    //         this.runAction(this._currentAnimationAction);
-    //
-    //     },
-    //
-    //     killFish : function (id, callback) {
-    //
-    //
-    //         this.setColor(new cc.Color(0,0,255,196));
-    //         const sequence = new cc.Sequence(new cc.DelayTime(5), new cc.CallFunc(undefined, callback, id));
-    //         this.runAction(sequence);
-    //     }
-    // });
 })();

@@ -167,6 +167,8 @@ var res = {
     // MainUITitle : "res/main_ui_title.png",
 
     //New
+
+    //Lobby
     // GameUIPng: "res/New/Game/GameUI.png",
     // GameUIPlist: "res/New/Game/GameUI.plist",
     LobbyUIPlist: "res/New/Lobby/LobbyUI.plist",
@@ -184,53 +186,84 @@ var res = {
     // LoginUIPlist : "res/New/Lobby/Login.plist",
     // LoginUIPng : "res/New/Lobby/Login.png",
 
+    //new lobby
+    // GameType1XPlist : "res/New/Lobby/1X.plist",
+    // GameType1XPng : "res/New/Lobby/1X.png",
+    // GameType10XPlist : "res/New/Lobby/10X.plist",
+    // GameType10XPng : "res/New/Lobby/10X.png",
+    // GameType100XPlist : "res/New/Lobby/100X.plist",
+    // GameType100XPng : "res/New/Lobby/100X.png",
+
+    WaterCausticAnimation : "res/CompanyA/Lobby/Caustic.plist",
+
+    WaterCaustic0 : "res/CompanyA/Lobby/Caustic1.png",
+    WaterCaustic1 : "res/CompanyA/Lobby/Caustic2.png",
+    WaterCaustic2 : "res/CompanyA/Lobby/Caustic3.png",
+    WaterCaustic3 : "res/CompanyA/Lobby/Caustic4.png",
+    WaterCaustic4 : "res/CompanyA/Lobby/Caustic5.png",
+    WaterCaustic5 : "res/CompanyA/Lobby/Caustic masking 1_00000.png",
+
     //GameFrame
     GameFrame: "res/New/InGameFrame.png",
+    GameFrame2: "res/New/InGameFrame2.png",
 
     //GameBackgrounds
     GameBackground0: "res/New/Game BG/Game BG 1.png",
-    GameBackground1: "res/New/Game BG/Game BG 2.jpg",
-    GameBackground2: "res/New/Game BG/Game BG 3.jpg",
-    GameBackground3: "res/New/Game BG/Game BG 4.jpg",
+    GameBackground1: "res/New/Game BG/Game BG 2.png",
+    GameBackground2: "res/New/Game BG/Game BG 3.png",
+    GameBackground3: "res/New/Game BG/Game BG 4.png",
 
     //Fish
-    StingrayPNG: "res/New/Fish/Ray.png",
-    StingrayPlist: "res/New/Fish/Ray.plist",
-    PorgyPlist: "res/New/Fish/Porgy.plist",
-    PorgyPNG: "res/New/Fish/Porgy.png",
-    PufferfishPlist: "res/New/Fish/Puffer.plist",
-    PufferfishPNG: "res/New/Fish/Puffer.png",
-    LanternPlist: "res/New/Fish/Lantern.plist",
-    LanternPng: "res/New/Fish/Lantern.png",
-    SquidPNG: "res/New/Fish/Squid.png",
-    SquidPlist: "res/New/Fish/Squid.plist",
-    TurtlePlist: "res/New/Fish/Chelonian.plist",
-    TurtlePNG: "res/New/Fish/Chelonian.png",
-    SharkPlist: "res/New/Fish/Shark.plist",
-    SharkPng: "res/New/Fish/Shark.png",
-    ButterflyPlist: "res/New/Fish/ButterFly.plist",
-    ButterflyPng: "res/New/Fish/ButterFly.png",
-    GoldSharkPng: "res/New/Fish/GoldShark.png",
-    GoldSharkPlist: "res/New/Fish/GoldShark.plist",
-    SmallFishPlist: "res/New/Fish/SmallFish.plist",
-    SmallFishPng: "res/New/Fish/SmallFish.png",
-    AmphiprionPlist: "res/New/Fish/Amphiprion.plist",
-    AmphiprionPng: "res/New/Fish/Amphiprion.png",
-    AmphiprionBWPlist: "res/New/Fish/AmphiprionBW.plist",
-    AmphiprionBWPng: "res/New/Fish/AmphiprionBW.png",
-    AngelFishPlist: "res/New/Fish/Angelfish.plist",
-    AngelFishPng: "res/New/Fish/Angelfish.png",
-    ButterFlyPlist: "res/New/Fish/ButterFly.plist",
-    ButterFlyPng: "res/New/Fish/ButterFly.png",
-    GrouperFishPlist: "res/New/Fish/GrouperFish.plist",
-    GrouperFishPng: "res/New/Fish/GrouperFish.png",
-    MarlinsFishPlist: "res/New/Fish/MarlinsFish.plist",
-    MarlinsFishPng: "res/New/Fish/MarlinsFish.png",
+    // StingrayPNG: "res/New/Fish/Ray.png",
+    // StingrayPlist: "res/New/Fish/Ray.plist",
+    // PorgyPlist: "res/New/Fish/Porgy.plist",
+    // PorgyPNG: "res/New/Fish/Porgy.png",
+    // PufferfishPlist: "res/New/Fish/Puffer.plist",
+    // PufferfishPNG: "res/New/Fish/Puffer.png",
+    // LanternPlist: "res/New/Fish/Lantern.plist",
+    // LanternPng: "res/New/Fish/Lantern.png",
+    // SquidPNG: "res/New/Fish/Squid.png",
+    // SquidPlist: "res/New/Fish/Squid.plist",
+    // TurtlePlist: "res/New/Fish/Chelonian.plist",
+    // TurtlePNG: "res/New/Fish/Chelonian.png",
+    // SharkPlist: "res/New/Fish/Shark.plist",
+    // SharkPng: "res/New/Fish/Shark.png",
+    // ButterflyPlist: "res/New/Fish/ButterFly.plist",
+    // ButterflyPng: "res/New/Fish/ButterFly.png",
+    // GoldSharkPng: "res/New/Fish/GoldShark.png",
+    // GoldSharkPlist: "res/New/Fish/GoldShark.plist",
+    // SmallFishPlist: "res/New/Fish/SmallFish.plist",
+    // SmallFishPng: "res/New/Fish/SmallFish.png",
+    // AmphiprionPlist: "res/New/Fish/Amphiprion.plist",
+    // AmphiprionPng: "res/New/Fish/Amphiprion.png",
+    // AmphiprionBWPlist: "res/New/Fish/AmphiprionBW.plist",
+    // AmphiprionBWPng: "res/New/Fish/AmphiprionBW.png",
+    // AngelFishPlist: "res/New/Fish/Angelfish.plist",
+    // AngelFishPng: "res/New/Fish/Angelfish.png",
+    // ButterFlyPlist: "res/New/Fish/ButterFly.plist",
+    // ButterFlyPng: "res/New/Fish/ButterFly.png",
+    // GrouperFishPlist: "res/New/Fish/GrouperFish.plist",
+    // GrouperFishPng: "res/New/Fish/GrouperFish.png",
+    // MarlinsFishPlist: "res/New/Fish/MarlinsFish.plist",
+    // MarlinsFishPng: "res/New/Fish/MarlinsFish.png",
+    //
+    // HorseshoeCrabPlist: "res/New/Fish/HorseshoeCrab.plist",
+    // HorseshoeCrabPng: "res/New/Fish/HorseshoeCrab.png",
+    // PaddleFishPlist: "res/New/Fish/PaddleFish.plist",
+    // PaddleFishPng: "res/New/Fish/PaddleFish.png",
 
-    HorseshoeCrabPlist: "res/New/Fish/HorseshoeCrab.plist",
-    HorseshoeCrabPng: "res/New/Fish/HorseshoeCrab.png",
-    PaddleFishPlist: "res/New/Fish/PaddleFish.plist",
-    PaddleFishPng: "res/New/Fish/PaddleFish.png",
+    //
+
+    GoldenNumbersPlist : "res/New/Fonts/GoldNumber.plist",
+    GoldNumberPng : "res/New/Fonts/GoldNumber.png",
+
+    TestFont : "res/New/Fonts/test-export.fnt",
+    TestFontPNG : "res/New/Fonts/test-export.png",
+
+    GunCockSound : "res/New/Sound/gun-cocking-01.mp3",
+    GunShotSound : "res/New/Sound/gun-gunshot-01.mp3",
+
+    // Custom_font : {type:"font", name:"GoldenNumbersPlist", srcs:["res/CustomName.ttf"]}
 
 
     // DemoFishPlist: "res/CompanyA/Fish/DemoFish.plist",
@@ -278,6 +311,8 @@ var res = {
 
     //debug
     DebugCircle: "res/New/testing/circle.png",
+
+
 };
 
 const ResourceLoader = (function () {
@@ -325,7 +360,3 @@ const ResourceLoader = (function () {
         finaliseResources: finaliseResources,
     };
 })(); 
-
-
-
-

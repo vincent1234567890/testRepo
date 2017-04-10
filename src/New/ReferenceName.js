@@ -3,40 +3,86 @@
  */
 const ReferenceName = {
 
+    //GameUI
     Base : "#Base.png",
     IncreaseCannon : "#plus.png",
     IncreaseCannon_Down : "#PlusDw.png",
     DecreaseCannon : "#Minus.png",
     DecreaseCannon_Down : "#MinusDw.png",
     CannonPower : "#CoinDeck.png",
-    CoinIcon : "#Coin icon.png",
-
-    // Login9Slice : "9 slice square.png",
-
+    CoinIcon : "#CoinIcon.png",
+    CoinStackCoin : "#DeckCoins.png",
+    PlayerIcon : "#PlayerIcon.png",
+    OtherPlayerIcon : "#PlayerIcon2.png",
+    ChangeSeatButton : "ChangeSitUP.png",
+    ChangeSeatButtonDown : "ChangeSitDW.png",
+    PlayerSeatIndicator : "#YouAreHere.png",
+    LockOnButtonSide : "LockOnSide_",
+    LockOnButtonBottom : "LockOnBtm_",
+    LockOnTargetCrosshair :"#LockOnIcon_00000.png",
 
     //Lobby
-    LobbyBackground : "#Lobby BG 1.png",
+    LobbyBackground : "#LobbyBG1.png",
     ScrollArrow : "#Arrow.png",//
     BonusPlaceHolder : "#Bonus.png",//
     BuyButton : "#Buy.png",
-    LobbyCoinsBG : "#Coins Base.png",
+    LobbyCoinsBG : "#CoinBase.png",
     LobbyCoinIcon : "#Coins.png",//
     // GameSelectBox : "#Game Frame.png",
     GameSelectBox : "Game Frame.png",
     Star : "#level Star.png",//
     LevelBG : "#Level Bar.png",
     MessageButton : "#Log.png",
-    NameBG : "#Name Bar.png",
+    NameBG : "#PlayerNameBase.png",
     ProfileFrame : "#Profile Frame.png",
     ProfileImage : "#Profile Image.png",
     LobbySettingsButton : "#Lobby Setting.png",
     TopBg : "#Top Base.png",
 
+    //Dolphin
+    DolphinIcon : "#FishIcon.png",
+    DolphinBubble : "#Bubble.png",
+    DolphinTextName : "#FishText",
+    DolphinTextExtension : ".png",
+
+    //floating menu
+    FloatingMenuButtonBackground : "MenuButtonIdle.png",
+    FloatingMenuButtonBackgroundDown : "MenuButtonOnPress.png",
+    FloatingMenuButtonSettingsIcon :"#SettingIcon.png",
+    FloatingMenuButtonSettingsText : "#SettingChinese.png",
+    FloatingMenuButtonGameLogIcon : "#GamelogIcon.png",
+    FloatingMenuButtonGameLogText : "#GamelogChinese.png",
+    FloatingMenuButtonInfoIcon : "#InfoIcon.png",
+    FloatingMenuButtonInfoText : "#InfoChinese.png",
+    FloatingMenuButtonLeaderboardIcon : "#RankingIcon.png",
+    FloatingMenuButtonLeaderboardText : "#RankingChinese.png",
+    FloatingMenuButtonFAQIcon : "#GameFAQIcon.png",
+    FloatingMenuButtonFAQText : "#GameFAQChinese.png",
+
+    //Floating menu shared
+    FloatingTitleBackground : "#TitleBase2.png",
+    FloatingBottomLeftDeco : "#Pattern1.png",
+    FloatingPopupBackground : "#PopupBase2.png",
+    FloatingCloseButton : "#CloseIcon.png",
+    FloatingCloseButtonBackground : "CloseIdle.png",
+    FloatingCloseButtonBackgroundOnPress : "CloseOnPress.png",
+
+    //Jackpot
+    JackpotBackground : "#JackpotIcon.png",
+    JackpotShadow : "#JackpotDropShadow.png",
+    JackpotBar : "#JackpotBar.png",
+    JackpotBarFrame : "#JackpotBarFrame.png",
+    JackpotLight : "#JackpotLigthray.png",
+    JackpotTitleChinese : "#JackpotChineseTitle.png",
+
+    //Leaderboard
+    LeaderboardTextBackground : "#TextBG2.png",
+    LeaderboardTitleChinese : "#RankingChineseTitle.png",
+
     //Profile
     ProfileBackground : "#Profile POut BG.png",
     ProfileFishBackground : "#Profile POut Fish Box.png",
     ProfileFishStatsBackground : "#Profile POut Fish Detail.png",
-
 
     //Scoreboard
     ScoreboardBG : "#SummaryBase.png",
@@ -83,8 +129,9 @@ const ReferenceName = {
 
     // Cannon1Animated : "#Cannon1",
 
-
-    //localisable
+    //------------
+    //Localisable
+    //------------
     //@TODO: move to seperate file
 
     //Login
