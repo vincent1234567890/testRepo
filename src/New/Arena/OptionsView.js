@@ -79,11 +79,7 @@ const OptionsView = (function () {
         if (GUIFunctions.isSpriteTouched(_background,touch)) {
             return;
         }
-        thisParent.setLocalZOrder(-1000);
-        _background.setVisible(false);
-        _musicSlider.setEnabled(false);
-        _soundSlider.setEnabled(false);
-        BlockingManager.deregisterBlock(dismissCallback);
+        this.hide();
     }
 
     let proto = OptionsView.prototype;
@@ -94,6 +90,14 @@ const OptionsView = (function () {
         _musicSlider.setEnabled(true);
         _soundSlider.setEnabled(true);
         _background.setVisible(true);
+    };
+
+    proto.hide = function () {
+        thisParent.setLocalZOrder(-1000);
+        _background.setVisible(false);
+        _musicSlider.setEnabled(false);
+        _soundSlider.setEnabled(false);
+        BlockingManager.deregisterBlock(dismissCallback);
     };
 
     proto.destroyView = function () {

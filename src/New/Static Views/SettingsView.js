@@ -2,13 +2,36 @@
  * Created by eugeneseah on 6/4/17.
  */
 const SettingsView = (function () {
+    "use strict";
+    const STARTOFFSET = 0.03;
     const ENDOFFSET = 0.05;
     const ZORDER = 10;
+    const STARTING_ALIGNMENT = 175;
     const SettingsView = function () {
+        /*
+         SettingsBackground : "#PopupBase1.png",
+         SettingsTitleChinese : "#SettingChineseTitle.png",
+         SettingsTitleBackground : "#TitleBase1.png",
+         SettingsButtonBackground : "#Button1Idle.png",
+         SettingsButtonBackgroundOnPress : "#Button1OnPress.png",
+         SettingsSliderBackground : "#BarBase1.png",
+         SettingsSliderFiller : "#BarMid1.png",
+         SettingsSliderIndicator : "#Puller.png",
+         SettingsMusicTitleChinese : "#BGMChinese.png",
+         SettingsSoundTitleChinese : "#MusicFXChinese.png",
+         SettingsGameLanguageSelectionTitleChinese : "#GameLangChinese.png",
+         SettingsGameLanguageSelectionBar : "#BarBase2.png",
+         SettingsDropDownButton : "DropDWIdle.png",
+         SettingsDropDownButtonOnPress : "DropDWOnPress.png",
+         */
         const parent = new cc.Node();
         const _background = new cc.Sprite(ReferenceName.SettingsBackground);
+        const _closeButton = new CloseButtonPrefab(dismiss);
 
-        parent.setPosition(683,384);
+        parent.addChild(_closeButton.getButton(),10);
+        _closeButton.getButton().setPosition(new cc.p(350, 220));
+
+        parent.setPosition(683, 384);
 
         const _musicSlider = createSlider(musicValueChangedEvent, PlayerPreferences.getMusicVolume());
         const _soundSlider = createSlider(soundValueChangedEvent, PlayerPreferences.getSoundVolume());
@@ -16,63 +39,156 @@ const SettingsView = (function () {
         _background.addChild(_musicSlider);
         _background.addChild(_soundSlider);
 
+        const musicSliderHeight = 350;
+        const soundSliderHeight = 270;
+        const gameLanguageSelectionHeight = 190;
+
+        _musicSlider.setPosition(475, musicSliderHeight);
+        _soundSlider.setPosition(475, soundSliderHeight);
+
+        const title = new cc.Sprite(ReferenceName.SettingsTitleChinese);
+        const titleBackground = new cc.Sprite(ReferenceName.SettingsTitleBackground);
+        const musicTitle = new cc.Sprite(ReferenceName.SettingsMusicTitleChinese);
+        const soundTitle = new cc.Sprite(ReferenceName.SettingsSoundTitleChinese);
+        const gameLanguageSelectionTitle = new cc.Sprite(ReferenceName.SettingsGameLanguageSelectionTitleChinese);
+        const gameLanguageSelectionBar = new cc.Sprite(ReferenceName.SettingsGameLanguageSelectionBar);
+
+        const titlePosition = new cc.p(400, 450);
+        title.setPosition(titlePosition);
+        titleBackground.setPosition(titlePosition);
+
+        musicTitle.setPosition(STARTING_ALIGNMENT, musicSliderHeight);
+        soundTitle.setPosition(STARTING_ALIGNMENT, soundSliderHeight);
+
+        gameLanguageSelectionTitle.setPosition(STARTING_ALIGNMENT, gameLanguageSelectionHeight);
+        gameLanguageSelectionBar.setPosition(400, gameLanguageSelectionHeight);
+
+        let fontDef = new cc.FontDefinition();
+        fontDef.fontName = "Microsoft YaHei";
+        // fontDef.fontName = "Arial Unicode MS";
+        fontDef.fontSize = "20";
+        fontDef.fontStyle = "bold";
+        fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
+        fontDef.fillStyle = new cc.Color(255, 255, 255, 255);
+        let label = new cc.LabelTTF("中文", fontDef);
+        label.setPosition(300, gameLanguageSelectionHeight);
+
+        const acceptButton = GUIFunctions.createButton(ReferenceName.SettingsButtonBackground, ReferenceName.SettingsButtonBackgroundOnPress, dismiss);
+        const cancelButton = GUIFunctions.createButton(ReferenceName.SettingsButtonBackground, ReferenceName.SettingsButtonBackgroundOnPress, cancel);
+
+        const buttonLevel = 80;
+
+        acceptButton.setPosition(250, buttonLevel);
+        cancelButton.setPosition(550, buttonLevel);
+
+        const acceptText = new cc.Sprite(ReferenceName.SettingsConfirmButtonTextChinese);
+        const cancelText = new cc.Sprite(ReferenceName.SettingsCancelButtonTextChinese);
+
+        acceptText.setPosition(acceptButton.getPosition());
+        cancelText.setPosition(cancelButton.getPosition());
+
+        // const touchEvent = (sender, type) => {
+        //     switch (type) {
+        //         case ccui.Widget.TOUCH_ENDED:
+        //             break;
+        //     }
+        // };
+        //
+        // const dropDownButton = new ccui.Button(ReferenceName.SettingsDropDownButton, ReferenceName.SettingsDropDownButtonOnPress, undefined, ccui.Widget.PLIST_TEXTURE);
+        // dropDownButton.setTouchEnabled(true);
+        // dropDownButton.setPosition(gameLanguageSelectionBar.getContentSize().width, gameLanguageSelectionBar.getContentSize().height / 2);
+        // dropDownButton.addTouchEventListener(touchEvent);
+        //
+        // gameLanguageSelectionBar.addChild(dropDownButton);
+
+        _background.addChild(titleBackground);
+        _background.addChild(title);
+        _background.addChild(musicTitle);
+        _background.addChild(soundTitle);
+        _background.addChild(gameLanguageSelectionTitle);
+        _background.addChild(gameLanguageSelectionBar);
+        _background.addChild(label);
+        _background.addChild(acceptButton);
+        _background.addChild(cancelButton);
+        _background.addChild(acceptText);
+        _background.addChild(cancelText);
+
         parent.addChild(_background);
 
-        GameView.addView(parent,10);
+        GameView.addView(parent, 10);
         BlockingManager.registerBlock(dismissCallback);
 
-        function dismissCallback(touch){
-            if (GUIFunctions.isSpriteTouched(_background,touch)) {
+        let previousMusic = _musicSlider.getValue();
+        let previousSound = _soundSlider.getValue();
+
+        function dismissCallback(touch) {
+            if (GUIFunctions.isSpriteTouched(_background, touch)) {
                 return;
             }
-            parent.setLocalZOrder(-1000);
-            _background.setVisible(false);
-            _musicSlider.setEnabled(false);
-            _soundSlider.setEnabled(false);
-            BlockingManager.deregisterBlock(dismissCallback);
+            dismiss();
         }
 
         this.show = function () {
-            console.log("show");
+            previousMusic = _musicSlider.getValue();
+            previousSound = _soundSlider.getValue();
             parent.setLocalZOrder(ZORDER);
             _background.setVisible(true);
             _musicSlider.setEnabled(true);
             _soundSlider.setEnabled(true);
+            _closeButton.setVisible(true);
+
             BlockingManager.registerBlock(dismissCallback);
         };
+
+        this.hide = function(){
+            dismiss();
+        };
+
+        function cancel() {
+            _musicSlider.setValue(previousMusic);
+            _soundSlider.setValue(previousSound);
+            dismissCallback();
+        }
+
+        function dismiss() {
+            parent.setLocalZOrder(-1000);
+            _background.setVisible(false);
+            _musicSlider.setEnabled(false);
+            _soundSlider.setEnabled(false);
+            _closeButton.setVisible(false);
+
+            previousMusic = -1;
+            previousSound = -1;
+            BlockingManager.deregisterBlock(dismissCallback);
+        }
+
     };
 
-    function createSlider(callback, value){
+    function createSlider(callback, value) {
         let slider = new cc.ControlSlider(ReferenceName.SettingsSliderBackground, ReferenceName.SettingsSliderFiller, ReferenceName.SettingsSliderIndicator);
-        slider._thumbSprite.setFlippedX(true);
-        slider._thumbSprite.setFlippedY(true);
-        slider._progressSprite.setFlippedX(true);
-        slider._progressSprite.setFlippedY(true);
-        slider._backgroundSprite.setFlippedX(true);
-        slider._backgroundSprite.setFlippedY(true);
-        slider.setMinimumValue(0.0); // Sets the min value of range
-        slider.setMinimumAllowedValue(ENDOFFSET);
-        slider.setValue(value || ENDOFFSET);
-        slider.setMaximumValue(1+ENDOFFSET); // Sets the max value of range
-        slider.setRotation(180);
+        slider.setMinimumAllowedValue(STARTOFFSET);
 
+        slider.setMaximumValue(1 + STARTOFFSET + ENDOFFSET);
+        slider.setMaximumAllowedValue(1 + STARTOFFSET);
+
+        slider.setValue(value);
+        slider.getProgressSprite().setPosition(cc.pAdd(slider.getProgressSprite().getPosition(), new cc.p(5, 0)));
         slider.addTargetWithActionForControlEvents(SettingsView, callback, cc.CONTROL_EVENT_VALUECHANGED);
-
-        slider.setScaleX(1.01);
 
         return slider;
     }
 
-    function musicValueChangedEvent(sender, controlEvent){
-        PlayerPreferences.setMusicVolume(sender.getValue()); // because it saves convert on load
-        cc.audioEngine.setMusicVolume(sender.getValue().toFixed(2)-ENDOFFSET);// because it is flipped
+    function musicValueChangedEvent(sender, controlEvent) {
+        console.log(sender.getValue());
+        PlayerPreferences.setMusicVolume(sender.getValue());
+        cc.audioEngine.setMusicVolume(sender.getValue().toFixed(2) - STARTOFFSET);
     }
 
-    function soundValueChangedEvent(sender, controlEvent){
+    function soundValueChangedEvent(sender, controlEvent) {
+        console.log(sender.getValue());
         PlayerPreferences.setSoundVolume(sender.getValue());
-        cc.audioEngine.setEffectsVolume(1 - (sender.getValue().toFixed(2)-ENDOFFSET)); // because it is flipped\
+        cc.audioEngine.setEffectsVolume(sender.getValue().toFixed(2) - STARTOFFSET);
     }
-
 
     return SettingsView;
 }());

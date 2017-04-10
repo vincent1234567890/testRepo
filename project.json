@@ -43,6 +43,7 @@
         "src/New/Static Views/JackpotManager.js",
         "src/New/Static Views/LeaderboardView.js",
         "src/New/Static Views/SettingsView.js",
+        "src/New/Static Views/FAQView.js",
 
         "src/New/Lobby/DolphinClippy.js",
         "src/New/Lobby/GameListButtonPrefab.js",

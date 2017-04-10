@@ -6,7 +6,6 @@ const FloatingMenuPopupBasePrefab = (function () {
     "use strict";
     const ZORDER = 10;
 
-
     const FloatingMenuPopupBasePrefab = function (parentDismissCallback) {
         this._parent = new cc.Node();
         BlockingManager.registerBlock(dismissCallback);
@@ -27,7 +26,7 @@ const FloatingMenuPopupBasePrefab = (function () {
         this._background.addChild(deco, 10);
 
         this._parent.addChild(this._background);
-        this._parent.setPosition(new cc.p(683, 384));
+        this._parent.setPosition(new cc.p(683, 390));
 
         const parent = this._parent;
         const background = this._background;
@@ -52,6 +51,10 @@ const FloatingMenuPopupBasePrefab = (function () {
             this._parent.setLocalZOrder(ZORDER);
             this._background.setVisible(true);
             closeButton.setVisible(true);
+        };
+
+        this.hide = function () {
+            dismiss();
         };
     };
 

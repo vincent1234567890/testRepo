@@ -13,6 +13,8 @@ const FloatingMenu = (function () {
     let _leaderboardView;
     let _setttingsView;
 
+    let _faqView;
+
     const FloatingMenu = function () {
         _parent = new cc.Node();
         GameView.addView(_parent);
@@ -238,7 +240,12 @@ const FloatingMenu = (function () {
     }
 
     function onFAQSelected() {
-
+        console.log("onFAQSelected");
+        if (!_faqView) {
+            _faqView = new FAQView();
+        } else {
+            _faqView.show();
+        }
     }
 
     const proto = FloatingMenu.prototype;
@@ -249,6 +256,17 @@ const FloatingMenu = (function () {
         GameView.addView(_parent);
     };
 
+    proto.hideAll = function () {
+        if (_setttingsView){
+            _setttingsView.hide();
+        }
+        if (_leaderboardView){
+            _leaderboardView.hide();
+        }
+        if (_faqView){
+            _faqView.hide();
+        }
+    };
     // proto.Move
 
     return FloatingMenu;

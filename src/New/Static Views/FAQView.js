@@ -7,8 +7,10 @@ const FAQView = (function () {
     const ZORDER = 10;
     let _parent;
     let _popup;
-    let tabHeight = 550;
-    let sideButtonX = 1200;
+    let tabHeight = 600;
+    let sideButtonX = 910;
+    let sideSpacing = 100;
+    let sideStart = 550;
 
     const FAQView = function () {
         _parent = new cc.Node();
@@ -26,22 +28,68 @@ const FAQView = (function () {
         const textBG = new cc.Sprite(ReferenceName.FAQTextBackground);
         const title = new cc.Sprite(ReferenceName.FAQTitleChinese);
 
+        const userAgreementTab = GUIFunctions.createButton(ReferenceName.FAQTabBackground,ReferenceName.FAQTabBackgroundOnPress,onUserAgreementTabClicked);
+        const faqTab = GUIFunctions.createButton(ReferenceName.FAQTabBackground,ReferenceName.FAQTabBackgroundOnPress,onFAQTabClicked);
 
+        const gameRules = GUIFunctions.createButton(ReferenceName.FAQButtonBackground,ReferenceName.FAQButtonBackgroundOnPress,onGameRulesClicked);
+        const uiFAQ = GUIFunctions.createButton(ReferenceName.FAQButtonBackground,ReferenceName.FAQButtonBackgroundOnPress,onGameRulesClicked);
+        const fishInfo = GUIFunctions.createButton(ReferenceName.FAQButtonBackground,ReferenceName.FAQButtonBackgroundOnPress,onFishInfoClicked);
+        const cannonInfo = GUIFunctions.createButton(ReferenceName.FAQButtonBackground,ReferenceName.FAQButtonBackgroundOnPress,onCannonInfoClicked);
+        const jackpotInfo = GUIFunctions.createButton(ReferenceName.FAQButtonBackground,ReferenceName.FAQButtonBackgroundOnPress,onJackpotInfoClicked);
 
-
-        textBG.setPosition(new cc.p(567.5,345));
+        textBG.setPosition(new cc.p(420,310));
         title.setPosition(new cc.p(560,705));
 
-        _popup.getBackground().addChild(textBG,1);
-        _popup.getBackground().addChild(title,1);
+        _popup.getBackground().addChild(textBG);
+        _popup.getBackground().addChild(title);
 
-        _popup.getParent().setPosition(new cc.p(683,384));
+        _popup.getBackground().addChild(userAgreementTab);
+        _popup.getBackground().addChild(faqTab);
+
+        _popup.getBackground().addChild(gameRules);
+        _popup.getBackground().addChild(uiFAQ);
+        _popup.getBackground().addChild(fishInfo);
+        _popup.getBackground().addChild(cannonInfo);
+        _popup.getBackground().addChild(jackpotInfo);
+
+        userAgreementTab.setPosition(200,tabHeight);
+        faqTab.setPosition(390,tabHeight);
+
+
+        gameRules.setPosition(sideButtonX, sideStart);
+        uiFAQ.setPosition(sideButtonX, sideStart - sideSpacing);
+        fishInfo.setPosition(sideButtonX, sideStart - sideSpacing * 2);
+        cannonInfo.setPosition(sideButtonX, sideStart - sideSpacing * 3);
+        jackpotInfo.setPosition(sideButtonX, sideStart - sideSpacing * 4);
 
         _parent.addChild(_popup.getParent());
 
         GameView.addView(_parent,ZORDER);
-
     };
+
+    function onUserAgreementTabClicked (){
+
+    }
+
+    function onFAQTabClicked(){
+
+    }
+
+    function onGameRulesClicked() {
+
+    }
+
+    function onFishInfoClicked() {
+
+    }
+
+    function onCannonInfoClicked() {
+
+    }
+
+    function onJackpotInfoClicked(){
+
+    }
 
     function dismissCallback(touch) {
         _parent.setLocalZOrder(-1000);
@@ -56,20 +104,10 @@ const FAQView = (function () {
         _popup.show();
     };
 
-    const doButtons = function(buttonImage,buttonSelected,selectedCallBack){
-        const touchEvent = (sender, type) => {
-            switch (type) {
-                case ccui.Widget.TOUCH_ENDED:
-                    selectedCallBack(sender);
-                    break;
-            }
-        };
+    proto.hide = function () {
+        dismissCallback();
+        _popup.hide();
+    };
 
-        const button = new ccui.Button(buttonImage, buttonSelected, undefined, ccui.Widget.PLIST_TEXTURE);
-        button.setTouchEnabled(true);
-        button.setPosition(button.getContentSize().width / 2 - 120, button.getContentSize().height / 2 + 120);
-        button.addTouchEventListener(touchEvent);
-
-        return button;
-    }
+    return FAQView;
 }());

@@ -244,6 +244,9 @@ const GameManager = function () {
         if (_scoreboardManager) {
             _scoreboardManager.destroyView();
         }
+        if(_floatingMenuManager){
+            _floatingMenuManager.hideAll();
+        }
         BlockingManager.destroyView();
         GameView.resetArena();
         _isFishLockOn = false;
@@ -310,6 +313,7 @@ const GameManager = function () {
     function development(parent) {
         _optionsManager = new OptionsManager(onSettingsButton);
     }
+
 
     return {
         initialiseLogin: initialiseLogin,
