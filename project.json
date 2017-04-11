@@ -37,10 +37,14 @@
         "src/New/BlockingView.js",
 
         "src/New/Static Views/FloatingMenu.js",
+        "src/New/Static Views/CloseButtonPrefab.js",
         "src/New/Static Views/FloatingMenuPopupBasePrefab.js",
         "src/New/Static Views/JackpotView.js",
         "src/New/Static Views/JackpotManager.js",
         "src/New/Static Views/LeaderboardView.js",
+        "src/New/Static Views/ProfileView.js",
+        "src/New/Static Views/SettingsView.js",
+        "src/New/Static Views/FAQView.js",
 
         "src/New/Lobby/DolphinClippy.js",
         "src/New/Lobby/GameListButtonPrefab.js",
@@ -50,8 +54,6 @@
         "src/New/LoginManager.js",
         "src/New/Lobby/LobbyManager.js",
         "src/New/Lobby/LobbyView.js",
-        "src/New/Lobby/ProfileManager.js",
-        "src/New/Lobby/ProfileView.js",
 
         "src/New/Arena/OptionsView.js",
         "src/New/Arena/OptionsSideMenuView.js",

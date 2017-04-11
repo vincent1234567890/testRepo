@@ -84,6 +84,22 @@ const GUIFunctions = function () {
         padding = value;
     }
 
+    function createButton(buttonImage,buttonSelected,selectedCallBack){
+        const touchEvent = (sender, type) => {
+            switch (type) {
+                case ccui.Widget.TOUCH_ENDED:
+                    selectedCallBack(sender);
+                    break;
+            }
+        };
+
+        const button = new ccui.Button(buttonImage, buttonSelected, undefined, ccui.Widget.PLIST_TEXTURE);
+        button.setTouchEnabled(true);
+        button.addTouchEventListener(touchEvent);
+
+        return button;
+    }
+
 
     return {
         getHitBox: getHitBox,
@@ -91,5 +107,6 @@ const GUIFunctions = function () {
         getAnimation: getAnimation,
         // getReverseAnimation: getReverseAnimation,
         setPadding : setPadding,
+        createButton : createButton,
     }
 }();

@@ -59,6 +59,9 @@ const ReferenceName = {
     FloatingMenuButtonFAQIcon : "#GameFAQIcon.png",
     FloatingMenuButtonFAQText : "#GameFAQChinese.png",
 
+    CrownIcon : "#Crown.png",
+
+
     //Floating menu shared
     FloatingTitleBackground : "#TitleBase2.png",
     FloatingBottomLeftDeco : "#Pattern1.png",
@@ -79,7 +82,54 @@ const ReferenceName = {
     LeaderboardTextBackground : "#TextBG2.png",
     LeaderboardTitleChinese : "#RankingChineseTitle.png",
 
+    //FAQ
+    FAQTextBackground : "#TextBG3.png",
+    FAQTitleChinese : "#GameFAQChineseTitle.png",
+    FAQUserAgreementTitleChinese : "#UserAgreementChinese.png",
+    FAQTabTitleChinese : "#GameFAQChinese (2).png",
+    FAQTabBackground : "Button2Idle.png",
+    FAQTabBackgroundOnPress : "Button2OnPress.png",
+    FAQButtonBackground : "Button3Idle.png",
+    FAQButtonBackgroundOnPress : "Button3OnPress.png",
+    FAQGameRulesButtonText : "#GamerulesChinese.png",
+    FAQUIFaqButtonText : "#UIControlChinese.png",
+    FAQFishInfoButtonText : "#FishInfoChinese.png",
+    FAQCannonInfoButtonText :"#CannonInfoChinese.png",
+    FAQJackpotInfoButtonText : "#JackpotInfoChinese.png",
+
+    //Settings
+    SettingsBackground : "#PopupBase1.png",
+    SettingsTitleChinese : "#SettingChineseTitle.png",
+    SettingsTitleBackground : "#TitleBase1.png",
+    SettingsButtonBackground : "Button1Idle.png",
+    SettingsButtonBackgroundOnPress : "Button1OnPress.png",
+    SettingsSliderBackground : "#BarBase1.png",
+    SettingsSliderFiller : "#BarMid1.png",
+    SettingsSliderIndicator : "#Puller.png",
+    SettingsMusicTitleChinese : "#BGMChinese.png",
+    SettingsSoundTitleChinese : "#MusicFxChinese.png",
+    SettingsGameLanguageSelectionTitleChinese : "#GameLangChinese.png",
+    SettingsGameLanguageSelectionBar : "#BarBase2.png",
+    SettingsDropDownButton : "DropDWIdle.png",
+    SettingsDropDownButtonOnPress : "DropDWOnPress.png",
+    SettingsConfirmButtonTextChinese : "#ConfirmChinese.png",
+    SettingsCancelButtonTextChinese : "#CancelChinese.png",
+
     //Profile
+    ProfileTitleChinese : "#InfoChineseTitle.png",
+    ProfileUserTextBackground : "#TextBG6.png",
+    ProfileNicknameTitleChinese : "#NicknameChinese.png",
+    ProfileInputBackground : "#InputBox.png",
+    ProfileEditButton : "#EditButton.png",
+    ProfileUsernameTitleChinese : "#UsernameChinese.png",
+    ProfileIconBackground : "#SymbolBG.png",
+    ProfileIconTextBackground : "#TextBG5.png",
+    ProfileTimeIcon : "#TimeSymbol.png",
+    ProfileCoinIcon : "#CoinsSymbol.png",
+    ProfileRankingIcon : "#RankingSymbol.png",
+    ProfileCoinStackIcon : "#Coin2WeekSymbol.png",
+
+    //Profile OLD
     ProfileBackground : "#Profile POut BG.png",
     ProfileFishBackground : "#Profile POut Fish Box.png",
     ProfileFishStatsBackground : "#Profile POut Fish Detail.png",

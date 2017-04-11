@@ -10,11 +10,8 @@ const OptionsView = (function () {
     let _soundSlider;
     const ZORDER = 10;
     let _background;
-    // let _touchlayer;
-
 
     function OptionsView (){
-        // this._parent = parent;
         thisParent = this._parent = new cc.Node();
 
         _background = new cc.Sprite(ReferenceName.OptionsBG);
@@ -26,10 +23,6 @@ const OptionsView = (function () {
         _musicSlider.setPosition(_background.getContentSize().width/2 + 47.5,_background.getContentSize().height/2 + 69.2);
         _soundSlider.setPosition(_background.getContentSize().width/2 + 47.5,_background.getContentSize().height/2 + 4.1);
 
-        // _touchlayer = new TouchLayerRefactored(dismissCallback);
-        // _touchlayer.setSwallowTouches(true);
-
-        // _background.addChild(_touchlayer,-1);
         _background.addChild(_musicSlider);
         _background.addChild(_soundSlider);
 
@@ -86,11 +79,7 @@ const OptionsView = (function () {
         if (GUIFunctions.isSpriteTouched(_background,touch)) {
             return;
         }
-        thisParent.setLocalZOrder(-1000);
-        _background.setVisible(false);
-        _musicSlider.setEnabled(false);
-        _soundSlider.setEnabled(false);
-        BlockingManager.deregisterBlock(dismissCallback);
+        this.hide();
     }
 
     let proto = OptionsView.prototype;
@@ -101,6 +90,14 @@ const OptionsView = (function () {
         _musicSlider.setEnabled(true);
         _soundSlider.setEnabled(true);
         _background.setVisible(true);
+    };
+
+    proto.hide = function () {
+        thisParent.setLocalZOrder(-1000);
+        _background.setVisible(false);
+        _musicSlider.setEnabled(false);
+        _soundSlider.setEnabled(false);
+        BlockingManager.deregisterBlock(dismissCallback);
     };
 
     proto.destroyView = function () {

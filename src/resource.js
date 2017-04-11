@@ -6,7 +6,6 @@ var res = {
     // LoadingAdBg : "res/LoadingAdBg.jpg",
     // LoadingCompanyLogoScreen : "res/MainBg.jpg",
     //
-    // AchievementPlist :"res/Achievement.plist",
     // ChestFishPlist: "res/ChestFish.plist",
     //
     // music_1 : "res/music/music_1.ogg",
@@ -252,7 +251,7 @@ var res = {
     // HorseshoeCrabPng: "res/New/Fish/HorseshoeCrab.png",
     // PaddleFishPlist: "res/New/Fish/PaddleFish.plist",
     // PaddleFishPng: "res/New/Fish/PaddleFish.png",
-
+    CoinExplosion : "res/CompanyA/Game/CoinExplosion1.plist",
     //
 
     GoldenNumbersPlist : "res/New/Fonts/GoldNumber.plist",

@@ -11,9 +11,9 @@ const LobbyView = (function () {
 
     let _theme;
 
-    let _settingsCallback;
+    // let _settingsCallback;
     let _onGameSelectedCallback;
-    let _profileCallback;
+    // let _profileCallback;
 
     let _goldLabel;
 
@@ -22,7 +22,7 @@ const LobbyView = (function () {
     // let gamelist;
     let gameControlList;
 
-    const LobbyView = function (playerData, theme, settingsCallback, onGameSelectedCallback, profileCallback) {
+    const LobbyView = function (playerData, theme, onGameSelectedCallback) {
         // this.gameSelected = false;
 
         this._parent = new cc.Node();
@@ -32,9 +32,9 @@ const LobbyView = (function () {
 
         let size;
 
-        _settingsCallback = settingsCallback;
+        // _settingsCallback = settingsCallback;
         _onGameSelectedCallback = onGameSelectedCallback;
-        _profileCallback = profileCallback;
+        // _profileCallback = profileCallback;
 
         //var width = cc.view.getDesignResolutionSize().width;
 
@@ -44,7 +44,6 @@ const LobbyView = (function () {
         const height = cc.view.getDesignResolutionSize().height;
 
         const clippy = new DolphinClippy();
-
 
         const bg = new cc.Sprite(ReferenceName.LobbyBackground);
         bg.setPosition(length / 2, height / 2 + 70);
@@ -187,6 +186,20 @@ const LobbyView = (function () {
         // parent.addChild(waterCausticsLayer,999);
 
         this.updatePlayerData(playerData);
+
+
+        /* testing
+         */
+        // cc.spriteFrameCache.addSpriteFrames(res.CoinExplosion);
+        // const animation = GUIFunctions.getAnimation("CoinExplosion1_",0.3);
+        // const animationSequence = new cc.RepeatForever(animation,new cc.callFunc(onAnimationEnd));
+        // const test = new cc.Sprite();
+        // this._parent.addChild(test,100);
+        // test.runAction(animationSequence);
+        //
+        // function onAnimationEnd() {
+        //
+        // }
     };
 
     // function onProfileclick(touch) {
@@ -318,7 +331,7 @@ const LobbyView = (function () {
     }
 
     function settingsButtonPressed() {
-        _settingsCallback();
+        // _settingsCallback();
         console.log("settingsButtonPressed");
     }
 

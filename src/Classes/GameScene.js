@@ -1058,26 +1058,7 @@ var GameScene = cc.Scene.extend({
     },
     GoRandomOval:function (GoImage, movePos) {
     },
-    playGetAchievement:function (index) {
-        cc.assert(index < AchievementIndex.kAchieveMentCount, "Achievement index out of range");
-        playEffect(ACH_EFFECT);
 
-        var achieveLayer = new AchievementShareLayer();
-        achieveLayer.initWithIndex(index, true);
-        achieveLayer.setScale(0.4);
-        this.addChild(achieveLayer, 200, kAchieveLayerTag);
-
-        achieveLayer.setPosition(cc.p(VisibleRect.center().x, VisibleRect.center().y + 50));
-
-        var spawn = cc.spawn(cc.scaleTo(0.2, 1), cc.fadeIn(0.2));
-        var spawn1 = cc.spawn(cc.scaleTo(0.3, 0.1), cc.fadeOut(0.6), cc.moveTo(0.6, cc.p(VisibleRect.center().x, VisibleRect.top().y - 28)));
-
-        var sequ = cc.sequence(spawn, cc.callFunc(this.addParticleAchieve, this), cc.delayTime(5.0), spawn1,
-            cc.callFunc(this.removeParticelAchieve, this),
-            cc.callFunc(this.removeSpriteChangeWeapon, this));
-        achieveLayer.runAction(sequ);
-        this._achievementShowNum++;
-    },
     removeSpriteChangeWeapon:function (sender) {
         this._achievementShowNum--;
         sender.removeFromParentAndCleanup(true);
@@ -1999,55 +1980,10 @@ var GameScene = cc.Scene.extend({
         }
         ActorFactory.cleanRes();
     },
-    saveImageWithDelay:function (delay) {
-        this.runAction(new cc.Sequence
-            (new cc.DelayTime(delay)
-                , new cc.CallFunc(this.saveImage, this,  this)
-            ));
-    },
     _stopTutorialHint:function (sender) {
 
     },
-    saveImage:function (sender) {
-        var hl = (cc.sys.language == cc.sys.LANGUAGE_CHINESE) ? "zh-CN" : "en-US";
-        var gplusHref = "https://plus.google.com/share?url=http://chrome.KingFisher.com/recommend.html&hl=" + hl;
-        var heightValue = window.screen.height / 2 - 300;
-        var widthValue = window.screen.width / 2 - 300;
 
-        var positionStr = "screenX=" + widthValue + ",left=" + widthValue + " ,screenY=" + heightValue + ",top=" + heightValue;
-        window.open(gplusHref, 'Share FishJoy to Friends', 'menubar=no,toolbar=no,resizable=no,scrollbars=yes,height=600,width=600,' + positionStr);
-
-        wrapper.logEvent("GameScene","Tap","Google+",1);
-
-        //return;
-
-        /*if (this._isPause) {
-         return;
-         }
-
-         if (this.getChildByTag(kShareToWeiBoTag)) {
-         return;
-         }
-
-         if (this._savingImage) {
-         return;
-         }
-         this._savingImage = true;
-
-         var winSize = cc.director.getWinSize();
-         var sprite = cc.Sprite.create(ImageName("mark.png"));
-         sprite.setScaleX(winSize.width / sprite.getContentSize().width);
-         sprite.setScaleY(winSize.height / sprite.getContentSize().height);
-         sprite.setPosition(VisibleRect.center());
-         this.addChild(sprite, 9999, kMarkTag);
-
-         var fadeOut = cc.FadeOut.create(0.5);
-
-         var callback = cc.CallFunc.create(this, this.showShareImageLayer);
-         var sequ = cc.Sequence.create(fadeOut, callback);
-         sprite.runAction(sequ);
-         playEffect(CAMERA_EFFECT);*/
-    },
     showShareImageLayer:function () {
         this._savingImage = false;
 
