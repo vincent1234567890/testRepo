@@ -15,9 +15,9 @@
                 <key>spriteSourceSize</key>
                 <string>{160,184}</string>
                 <key>textureRect</key>
-                <string>{{1,119},{136,180}}</string>
+                <string>{{141,1},{136,180}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>GTurtle2_00001.png</key>
             <dict>
@@ -30,9 +30,9 @@
                 <key>spriteSourceSize</key>
                 <string>{160,184}</string>
                 <key>textureRect</key>
-                <string>{{183,125},{136,176}}</string>
+                <string>{{141,183},{136,176}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>GTurtle2_00002.png</key>
             <dict>
@@ -45,9 +45,9 @@
                 <key>spriteSourceSize</key>
                 <string>{160,184}</string>
                 <key>textureRect</key>
-                <string>{{361,125},{136,174}}</string>
+                <string>{{1,553},{136,174}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>GTurtle2_00003.png</key>
             <dict>
@@ -60,9 +60,9 @@
                 <key>spriteSourceSize</key>
                 <string>{160,184}</string>
                 <key>textureRect</key>
-                <string>{{537,131},{136,172}}</string>
+                <string>{{417,1},{136,172}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>GTurtle2_00004.png</key>
             <dict>
@@ -75,9 +75,9 @@
                 <key>spriteSourceSize</key>
                 <string>{160,184}</string>
                 <key>textureRect</key>
-                <string>{{1,257},{136,174}}</string>
+                <string>{{279,179},{136,174}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>GTurtle2_00005.png</key>
             <dict>
@@ -90,9 +90,9 @@
                 <key>spriteSourceSize</key>
                 <string>{160,184}</string>
                 <key>textureRect</key>
-                <string>{{177,263},{136,176}}</string>
+                <string>{{279,1},{136,176}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>GTurtle2_00006.png</key>
             <dict>
@@ -105,9 +105,9 @@
                 <key>spriteSourceSize</key>
                 <string>{160,184}</string>
                 <key>textureRect</key>
-                <string>{{355,263},{136,172}}</string>
+                <string>{{417,175},{136,172}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>GTurtle2_00007.png</key>
             <dict>
@@ -120,9 +120,9 @@
                 <key>spriteSourceSize</key>
                 <string>{160,184}</string>
                 <key>textureRect</key>
-                <string>{{1,395},{138,162}}</string>
+                <string>{{555,171},{138,162}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>GTurtle2_00008.png</key>
             <dict>
@@ -135,9 +135,9 @@
                 <key>spriteSourceSize</key>
                 <string>{160,184}</string>
                 <key>textureRect</key>
-                <string>{{859,139},{138,148}}</string>
+                <string>{{555,335},{138,148}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>GTurtle2_00009.png</key>
             <dict>
@@ -150,9 +150,9 @@
                 <key>spriteSourceSize</key>
                 <string>{160,184}</string>
                 <key>textureRect</key>
-                <string>{{863,1},{140,136}}</string>
+                <string>{{417,349},{140,136}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GTurtle2_00010.png</key>
             <dict>
@@ -165,9 +165,9 @@
                 <key>spriteSourceSize</key>
                 <string>{160,184}</string>
                 <key>textureRect</key>
-                <string>{{577,1},{140,128}}</string>
+                <string>{{565,647},{140,128}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GTurtle2_00011.png</key>
             <dict>
@@ -180,7 +180,7 @@
                 <key>spriteSourceSize</key>
                 <string>{160,184}</string>
                 <key>textureRect</key>
-                <string>{{289,1},{142,122}}</string>
+                <string>{{701,433},{142,122}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -195,7 +195,7 @@
                 <key>spriteSourceSize</key>
                 <string>{160,184}</string>
                 <key>textureRect</key>
-                <string>{{1,1},{142,116}}</string>
+                <string>{{1,729},{142,116}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -210,7 +210,7 @@
                 <key>spriteSourceSize</key>
                 <string>{160,184}</string>
                 <key>textureRect</key>
-                <string>{{145,1},{142,116}}</string>
+                <string>{{701,557},{142,116}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -225,7 +225,7 @@
                 <key>spriteSourceSize</key>
                 <string>{160,184}</string>
                 <key>textureRect</key>
-                <string>{{433,1},{142,122}}</string>
+                <string>{{695,675},{142,122}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -240,9 +240,9 @@
                 <key>spriteSourceSize</key>
                 <string>{160,184}</string>
                 <key>textureRect</key>
-                <string>{{719,1},{142,134}}</string>
+                <string>{{429,653},{142,134}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GTurtle2_00016.png</key>
             <dict>
@@ -255,7 +255,7 @@
                 <key>spriteSourceSize</key>
                 <string>{160,184}</string>
                 <key>textureRect</key>
-                <string>{{497,547},{142,152}}</string>
+                <string>{{697,1},{142,152}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -270,9 +270,9 @@
                 <key>spriteSourceSize</key>
                 <string>{160,184}</string>
                 <key>textureRect</key>
-                <string>{{165,541},{140,168}}</string>
+                <string>{{555,1},{140,168}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>GTurtle2_00018.png</key>
             <dict>
@@ -285,9 +285,9 @@
                 <key>spriteSourceSize</key>
                 <string>{160,184}</string>
                 <key>textureRect</key>
-                <string>{{165,401},{138,182}}</string>
+                <string>{{1,187},{138,182}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>GTurtle2_00019.png</key>
             <dict>
@@ -300,9 +300,9 @@
                 <key>spriteSourceSize</key>
                 <string>{160,184}</string>
                 <key>textureRect</key>
-                <string>{{513,407},{138,184}}</string>
+                <string>{{1,1},{138,184}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>GTurtle2_00020.png</key>
             <dict>
@@ -315,9 +315,9 @@
                 <key>spriteSourceSize</key>
                 <string>{160,184}</string>
                 <key>textureRect</key>
-                <string>{{529,269},{136,180}}</string>
+                <string>{{1,371},{136,180}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>GTurtle2_00021.png</key>
             <dict>
@@ -330,9 +330,9 @@
                 <key>spriteSourceSize</key>
                 <string>{160,184}</string>
                 <key>textureRect</key>
-                <string>{{335,541},{140,160}}</string>
+                <string>{{279,503},{140,160}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>GTurtle2_00022.png</key>
             <dict>
@@ -345,9 +345,9 @@
                 <key>spriteSourceSize</key>
                 <string>{160,184}</string>
                 <key>textureRect</key>
-                <string>{{349,401},{138,162}}</string>
+                <string>{{139,371},{138,162}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>GTurtle2_00023.png</key>
             <dict>
@@ -360,9 +360,9 @@
                 <key>spriteSourceSize</key>
                 <string>{160,184}</string>
                 <key>textureRect</key>
-                <string>{{859,279},{138,160}}</string>
+                <string>{{421,491},{138,160}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>GTurtle2_00024.png</key>
             <dict>
@@ -375,7 +375,7 @@
                 <key>spriteSourceSize</key>
                 <string>{160,184}</string>
                 <key>textureRect</key>
-                <string>{{651,559},{142,150}}</string>
+                <string>{{697,145},{142,150}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -390,9 +390,9 @@
                 <key>spriteSourceSize</key>
                 <string>{160,184}</string>
                 <key>textureRect</key>
-                <string>{{711,275},{146,140}}</string>
+                <string>{{145,699},{146,140}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GTurtle2_00026.png</key>
             <dict>
@@ -405,9 +405,9 @@
                 <key>spriteSourceSize</key>
                 <string>{160,184}</string>
                 <key>textureRect</key>
-                <string>{{711,137},{146,136}}</string>
+                <string>{{279,355},{146,136}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GTurtle2_00027.png</key>
             <dict>
@@ -420,9 +420,9 @@
                 <key>spriteSourceSize</key>
                 <string>{160,184}</string>
                 <key>textureRect</key>
-                <string>{{699,417},{146,140}}</string>
+                <string>{{287,665},{146,140}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GTurtle2_00028.png</key>
             <dict>
@@ -435,7 +435,7 @@
                 <key>spriteSourceSize</key>
                 <string>{160,184}</string>
                 <key>textureRect</key>
-                <string>{{803,559},{142,150}}</string>
+                <string>{{695,289},{142,150}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -450,9 +450,9 @@
                 <key>spriteSourceSize</key>
                 <string>{160,184}</string>
                 <key>textureRect</key>
-                <string>{{847,419},{138,160}}</string>
+                <string>{{561,485},{138,160}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>GTurtle2_00030.png</key>
             <dict>
@@ -465,9 +465,9 @@
                 <key>spriteSourceSize</key>
                 <string>{160,184}</string>
                 <key>textureRect</key>
-                <string>{{1,535},{138,162}}</string>
+                <string>{{139,535},{138,162}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
         </dict>
         <key>metadata</key>
@@ -481,9 +481,9 @@
             <key>realTextureFileName</key>
             <string>GTurtle2.png</string>
             <key>size</key>
-            <string>{1020,702}</string>
+            <string>{850,850}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:008b857cb27d1dbbb4db98bd854c7da4:f24940f35af6673e4a1b7fb1b1959ae3:6367bb1c3461bc4c0ecf208aaae52fbb$</string>
+            <string>$TexturePacker:SmartUpdate:fedf3e4030f5f6f09970a65ede70a602:f24940f35af6673e4a1b7fb1b1959ae3:6367bb1c3461bc4c0ecf208aaae52fbb$</string>
             <key>textureFileName</key>
             <string>GTurtle2.png</string>
         </dict>

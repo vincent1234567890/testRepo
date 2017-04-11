@@ -15,7 +15,7 @@
                 <key>spriteSourceSize</key>
                 <string>{389,200}</string>
                 <key>textureRect</key>
-                <string>{{1,167},{343,44}}</string>
+                <string>{{1,1},{343,44}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -30,7 +30,7 @@
                 <key>spriteSourceSize</key>
                 <string>{389,200}</string>
                 <key>textureRect</key>
-                <string>{{1,63},{343,50}}</string>
+                <string>{{344,49},{343,50}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -45,7 +45,7 @@
                 <key>spriteSourceSize</key>
                 <string>{389,200}</string>
                 <key>textureRect</key>
-                <string>{{1,1},{343,60}}</string>
+                <string>{{1,205},{343,60}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -60,7 +60,7 @@
                 <key>spriteSourceSize</key>
                 <string>{389,200}</string>
                 <key>textureRect</key>
-                <string>{{1,287},{341,68}}</string>
+                <string>{{342,401},{341,68}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -75,7 +75,7 @@
                 <key>spriteSourceSize</key>
                 <string>{389,200}</string>
                 <key>textureRect</key>
-                <string>{{1,357},{341,68}}</string>
+                <string>{{342,471},{341,68}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -90,7 +90,7 @@
                 <key>spriteSourceSize</key>
                 <string>{389,200}</string>
                 <key>textureRect</key>
-                <string>{{1,567},{341,62}}</string>
+                <string>{{342,337},{341,62}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -105,7 +105,7 @@
                 <key>spriteSourceSize</key>
                 <string>{389,200}</string>
                 <key>textureRect</key>
-                <string>{{1,693},{341,50}}</string>
+                <string>{{1,97},{341,50}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -120,7 +120,7 @@
                 <key>spriteSourceSize</key>
                 <string>{389,200}</string>
                 <key>textureRect</key>
-                <string>{{1,797},{341,46}}</string>
+                <string>{{346,1},{341,46}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -135,9 +135,9 @@
                 <key>spriteSourceSize</key>
                 <string>{389,200}</string>
                 <key>textureRect</key>
-                <string>{{462,673},{341,48}}</string>
+                <string>{{1,47},{341,48}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>GPaddleFish2_00009.png</key>
             <dict>
@@ -150,7 +150,7 @@
                 <key>spriteSourceSize</key>
                 <string>{389,200}</string>
                 <key>textureRect</key>
-                <string>{{1,745},{341,50}}</string>
+                <string>{{344,101},{341,50}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -165,7 +165,7 @@
                 <key>spriteSourceSize</key>
                 <string>{389,200}</string>
                 <key>textureRect</key>
-                <string>{{1,631},{341,60}}</string>
+                <string>{{346,213},{341,60}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -180,7 +180,7 @@
                 <key>spriteSourceSize</key>
                 <string>{389,200}</string>
                 <key>textureRect</key>
-                <string>{{1,427},{341,68}}</string>
+                <string>{{342,541},{341,68}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -195,7 +195,7 @@
                 <key>spriteSourceSize</key>
                 <string>{389,200}</string>
                 <key>textureRect</key>
-                <string>{{1,845},{339,68}}</string>
+                <string>{{1,465},{339,68}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -210,7 +210,7 @@
                 <key>spriteSourceSize</key>
                 <string>{389,200}</string>
                 <key>textureRect</key>
-                <string>{{1,1113},{337,60}}</string>
+                <string>{{1,267},{337,60}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -225,9 +225,9 @@
                 <key>spriteSourceSize</key>
                 <string>{389,200}</string>
                 <key>textureRect</key>
-                <string>{{452,1016},{337,58}}</string>
+                <string>{{346,153},{337,58}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>GPaddleFish2_00015.png</key>
             <dict>
@@ -240,7 +240,7 @@
                 <key>spriteSourceSize</key>
                 <string>{389,200}</string>
                 <key>textureRect</key>
-                <string>{{1,1175},{337,60}}</string>
+                <string>{{340,275},{337,60}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -255,7 +255,7 @@
                 <key>spriteSourceSize</key>
                 <string>{389,200}</string>
                 <key>textureRect</key>
-                <string>{{1,1051},{339,60}}</string>
+                <string>{{1,337},{339,60}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -270,7 +270,7 @@
                 <key>spriteSourceSize</key>
                 <string>{389,200}</string>
                 <key>textureRect</key>
-                <string>{{1,985},{339,64}}</string>
+                <string>{{1,399},{339,64}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -285,7 +285,7 @@
                 <key>spriteSourceSize</key>
                 <string>{389,200}</string>
                 <key>textureRect</key>
-                <string>{{1,915},{339,68}}</string>
+                <string>{{1,535},{339,68}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -300,9 +300,9 @@
                 <key>spriteSourceSize</key>
                 <string>{389,200}</string>
                 <key>textureRect</key>
-                <string>{{1,213},{341,72}}</string>
+                <string>{{795,290},{341,72}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GPaddleFish2_00020.png</key>
             <dict>
@@ -315,7 +315,7 @@
                 <key>spriteSourceSize</key>
                 <string>{389,200}</string>
                 <key>textureRect</key>
-                <string>{{1,497},{341,68}}</string>
+                <string>{{1,611},{341,68}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -330,7 +330,7 @@
                 <key>spriteSourceSize</key>
                 <string>{389,200}</string>
                 <key>textureRect</key>
-                <string>{{1,115},{343,50}}</string>
+                <string>{{1,153},{343,50}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -345,9 +345,9 @@
                 <key>spriteSourceSize</key>
                 <string>{389,200}</string>
                 <key>textureRect</key>
-                <string>{{346,1},{337,154}}</string>
+                <string>{{334,729},{337,154}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>GPaddleFish2_00023.png</key>
             <dict>
@@ -360,9 +360,9 @@
                 <key>spriteSourceSize</key>
                 <string>{389,200}</string>
                 <key>textureRect</key>
-                <string>{{344,340},{331,148}}</string>
+                <string>{{1,681},{331,148}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>GPaddleFish2_00024.png</key>
             <dict>
@@ -375,9 +375,9 @@
                 <key>spriteSourceSize</key>
                 <string>{389,200}</string>
                 <key>textureRect</key>
-                <string>{{344,673},{317,116}}</string>
+                <string>{{344,611},{317,116}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>GPaddleFish2_00025.png</key>
             <dict>
@@ -390,9 +390,9 @@
                 <key>spriteSourceSize</key>
                 <string>{389,200}</string>
                 <key>textureRect</key>
-                <string>{{1,1237},{287,94}}</string>
+                <string>{{789,1},{287,94}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GPaddleFish2_00026.png</key>
             <dict>
@@ -405,9 +405,9 @@
                 <key>spriteSourceSize</key>
                 <string>{389,200}</string>
                 <key>textureRect</key>
-                <string>{{1,1333},{275,98}}</string>
+                <string>{{689,1},{275,98}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GPaddleFish2_00027.png</key>
             <dict>
@@ -420,7 +420,7 @@
                 <key>spriteSourceSize</key>
                 <string>{389,200}</string>
                 <key>textureRect</key>
-                <string>{{342,992},{289,108}}</string>
+                <string>{{685,290},{289,108}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -436,9 +436,9 @@
             <key>realTextureFileName</key>
             <string>GPaddleFish2.png</string>
             <key>size</key>
-            <string>{511,1432}</string>
+            <string>{884,884}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:a78b874ec6f29a6bf34a0d56dd5763cd:5657817bc15be14ea99e3434e786ffc3:d5ada60fa6cf344ab873c4539b86b00d$</string>
+            <string>$TexturePacker:SmartUpdate:1cda0c5057daf536496c15a941f0e5b4:5657817bc15be14ea99e3434e786ffc3:d5ada60fa6cf344ab873c4539b86b00d$</string>
             <key>textureFileName</key>
             <string>GPaddleFish2.png</string>
         </dict>

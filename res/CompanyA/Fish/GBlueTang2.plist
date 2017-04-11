@@ -30,7 +30,7 @@
                 <key>spriteSourceSize</key>
                 <string>{120,72}</string>
                 <key>textureRect</key>
-                <string>{{1,41},{110,36}}</string>
+                <string>{{113,1},{110,36}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -45,7 +45,7 @@
                 <key>spriteSourceSize</key>
                 <string>{120,72}</string>
                 <key>textureRect</key>
-                <string>{{1,269},{110,34}}</string>
+                <string>{{1,79},{110,34}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -60,7 +60,7 @@
                 <key>spriteSourceSize</key>
                 <string>{120,72}</string>
                 <key>textureRect</key>
-                <string>{{1,305},{110,34}}</string>
+                <string>{{225,77},{110,34}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -75,7 +75,7 @@
                 <key>spriteSourceSize</key>
                 <string>{120,72}</string>
                 <key>textureRect</key>
-                <string>{{1,341},{110,34}}</string>
+                <string>{{225,113},{110,34}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -90,9 +90,9 @@
                 <key>spriteSourceSize</key>
                 <string>{120,72}</string>
                 <key>textureRect</key>
-                <string>{{1,377},{110,34}}</string>
+                <string>{{1,149},{110,34}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GBlueTang2_00006.png</key>
             <dict>
@@ -105,9 +105,9 @@
                 <key>spriteSourceSize</key>
                 <string>{120,72}</string>
                 <key>textureRect</key>
-                <string>{{1,413},{110,34}}</string>
+                <string>{{37,149},{110,34}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GBlueTang2_00007.png</key>
             <dict>
@@ -120,7 +120,7 @@
                 <key>spriteSourceSize</key>
                 <string>{120,72}</string>
                 <key>textureRect</key>
-                <string>{{1,79},{110,36}}</string>
+                <string>{{225,1},{110,36}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -135,7 +135,7 @@
                 <key>spriteSourceSize</key>
                 <string>{120,72}</string>
                 <key>textureRect</key>
-                <string>{{1,117},{110,36}}</string>
+                <string>{{113,39},{110,36}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -150,7 +150,7 @@
                 <key>spriteSourceSize</key>
                 <string>{120,72}</string>
                 <key>textureRect</key>
-                <string>{{1,449},{110,34}}</string>
+                <string>{{113,115},{110,34}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -165,7 +165,7 @@
                 <key>spriteSourceSize</key>
                 <string>{120,72}</string>
                 <key>textureRect</key>
-                <string>{{1,485},{110,34}}</string>
+                <string>{{259,149},{110,34}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -180,7 +180,7 @@
                 <key>spriteSourceSize</key>
                 <string>{120,72}</string>
                 <key>textureRect</key>
-                <string>{{1,521},{110,34}}</string>
+                <string>{{259,185},{110,34}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -195,7 +195,7 @@
                 <key>spriteSourceSize</key>
                 <string>{120,72}</string>
                 <key>textureRect</key>
-                <string>{{1,557},{110,34}}</string>
+                <string>{{259,221},{110,34}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -210,9 +210,9 @@
                 <key>spriteSourceSize</key>
                 <string>{120,72}</string>
                 <key>textureRect</key>
-                <string>{{1,593},{110,34}}</string>
+                <string>{{203,257},{110,34}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GBlueTang2_00014.png</key>
             <dict>
@@ -225,7 +225,7 @@
                 <key>spriteSourceSize</key>
                 <string>{120,72}</string>
                 <key>textureRect</key>
-                <string>{{1,155},{110,36}}</string>
+                <string>{{1,41},{110,36}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -240,7 +240,7 @@
                 <key>spriteSourceSize</key>
                 <string>{120,72}</string>
                 <key>textureRect</key>
-                <string>{{1,193},{110,36}}</string>
+                <string>{{225,39},{110,36}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -255,9 +255,9 @@
                 <key>spriteSourceSize</key>
                 <string>{120,72}</string>
                 <key>textureRect</key>
-                <string>{{1,921},{108,36}}</string>
+                <string>{{127,151},{108,36}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GBlueTang2_00017.png</key>
             <dict>
@@ -270,9 +270,9 @@
                 <key>spriteSourceSize</key>
                 <string>{120,72}</string>
                 <key>textureRect</key>
-                <string>{{1,959},{108,34}}</string>
+                <string>{{165,151},{108,34}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GBlueTang2_00018.png</key>
             <dict>
@@ -285,9 +285,9 @@
                 <key>spriteSourceSize</key>
                 <string>{120,72}</string>
                 <key>textureRect</key>
-                <string>{{1,995},{108,34}}</string>
+                <string>{{167,261},{108,34}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GBlueTang2_00019.png</key>
             <dict>
@@ -300,9 +300,9 @@
                 <key>spriteSourceSize</key>
                 <string>{120,72}</string>
                 <key>textureRect</key>
-                <string>{{1,629},{110,34}}</string>
+                <string>{{239,257},{110,34}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GBlueTang2_00020.png</key>
             <dict>
@@ -315,9 +315,9 @@
                 <key>spriteSourceSize</key>
                 <string>{120,72}</string>
                 <key>textureRect</key>
-                <string>{{1,665},{110,34}}</string>
+                <string>{{275,257},{110,34}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GBlueTang2_00021.png</key>
             <dict>
@@ -330,7 +330,7 @@
                 <key>spriteSourceSize</key>
                 <string>{120,72}</string>
                 <key>textureRect</key>
-                <string>{{1,231},{110,36}}</string>
+                <string>{{113,77},{110,36}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -345,7 +345,7 @@
                 <key>spriteSourceSize</key>
                 <string>{120,72}</string>
                 <key>textureRect</key>
-                <string>{{1,1031},{104,56}}</string>
+                <string>{{201,151},{104,56}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -360,9 +360,9 @@
                 <key>spriteSourceSize</key>
                 <string>{120,72}</string>
                 <key>textureRect</key>
-                <string>{{1,701},{108,54}}</string>
+                <string>{{1,261},{108,54}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GBlueTang2_00024.png</key>
             <dict>
@@ -375,9 +375,9 @@
                 <key>spriteSourceSize</key>
                 <string>{120,72}</string>
                 <key>textureRect</key>
-                <string>{{1,813},{108,52}}</string>
+                <string>{{73,151},{108,52}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GBlueTang2_00025.png</key>
             <dict>
@@ -390,7 +390,7 @@
                 <key>spriteSourceSize</key>
                 <string>{120,72}</string>
                 <key>textureRect</key>
-                <string>{{59,1031},{104,52}}</string>
+                <string>{{311,257},{104,52}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -405,9 +405,9 @@
                 <key>spriteSourceSize</key>
                 <string>{120,72}</string>
                 <key>textureRect</key>
-                <string>{{1,867},{108,52}}</string>
+                <string>{{113,261},{108,52}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GBlueTang2_00027.png</key>
             <dict>
@@ -420,9 +420,9 @@
                 <key>spriteSourceSize</key>
                 <string>{120,72}</string>
                 <key>textureRect</key>
-                <string>{{1,757},{108,54}}</string>
+                <string>{{57,261},{108,54}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
         </dict>
         <key>metadata</key>
@@ -436,9 +436,9 @@
             <key>realTextureFileName</key>
             <string>GBlueTang2.png</string>
             <key>size</key>
-            <string>{112,1136}</string>
+            <string>{370,370}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:cc80ff138f8e05f2811e6e78dd64c4bf:136b25b90ca92423a34376dda5193a01:eb11295bbf4340a81c90a33aa426d08b$</string>
+            <string>$TexturePacker:SmartUpdate:3ff9a0c7151603ed0dbe03e3342aa46c:136b25b90ca92423a34376dda5193a01:eb11295bbf4340a81c90a33aa426d08b$</string>
             <key>textureFileName</key>
             <string>GBlueTang2.png</string>
         </dict>
