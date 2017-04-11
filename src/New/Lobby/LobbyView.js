@@ -11,9 +11,9 @@ const LobbyView = (function () {
 
     let _theme;
 
-    let _settingsCallback;
+    // let _settingsCallback;
     let _onGameSelectedCallback;
-    let _profileCallback;
+    // let _profileCallback;
 
     let _goldLabel;
 
@@ -22,7 +22,7 @@ const LobbyView = (function () {
     // let gamelist;
     let gameControlList;
 
-    const LobbyView = function (playerData, theme, onGameSelectedCallback, profileCallback) {
+    const LobbyView = function (playerData, theme, onGameSelectedCallback) {
         // this.gameSelected = false;
 
         this._parent = new cc.Node();
@@ -34,7 +34,7 @@ const LobbyView = (function () {
 
         // _settingsCallback = settingsCallback;
         _onGameSelectedCallback = onGameSelectedCallback;
-        _profileCallback = profileCallback;
+        // _profileCallback = profileCallback;
 
         //var width = cc.view.getDesignResolutionSize().width;
 
@@ -44,8 +44,6 @@ const LobbyView = (function () {
         const height = cc.view.getDesignResolutionSize().height;
 
         const clippy = new DolphinClippy();
-
-
 
         const bg = new cc.Sprite(ReferenceName.LobbyBackground);
         bg.setPosition(length / 2, height / 2 + 70);

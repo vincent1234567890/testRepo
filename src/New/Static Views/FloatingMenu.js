@@ -12,7 +12,7 @@ const FloatingMenu = (function () {
 
     let _leaderboardView;
     let _setttingsView;
-
+    let _profileView;
     let _faqView;
 
     const FloatingMenu = function () {
@@ -227,7 +227,12 @@ const FloatingMenu = (function () {
     }
 
     function onProfileSelected() {
-
+        console.log("onProfileSelected");
+        if (!_profileView) {
+            _profileView = new ProfileView();
+        } else {
+            _profileView.show();
+        }
     }
 
     function onLeaderboardSelected() {
@@ -249,7 +254,6 @@ const FloatingMenu = (function () {
     }
 
     const proto = FloatingMenu.prototype;
-
 
     proto.reattach = function () {
         _parent.getParent().removeChild(_parent, false);

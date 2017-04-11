@@ -8,22 +8,6 @@ const SettingsView = (function () {
     const ZORDER = 10;
     const STARTING_ALIGNMENT = 175;
     const SettingsView = function () {
-        /*
-         SettingsBackground : "#PopupBase1.png",
-         SettingsTitleChinese : "#SettingChineseTitle.png",
-         SettingsTitleBackground : "#TitleBase1.png",
-         SettingsButtonBackground : "#Button1Idle.png",
-         SettingsButtonBackgroundOnPress : "#Button1OnPress.png",
-         SettingsSliderBackground : "#BarBase1.png",
-         SettingsSliderFiller : "#BarMid1.png",
-         SettingsSliderIndicator : "#Puller.png",
-         SettingsMusicTitleChinese : "#BGMChinese.png",
-         SettingsSoundTitleChinese : "#MusicFXChinese.png",
-         SettingsGameLanguageSelectionTitleChinese : "#GameLangChinese.png",
-         SettingsGameLanguageSelectionBar : "#BarBase2.png",
-         SettingsDropDownButton : "DropDWIdle.png",
-         SettingsDropDownButtonOnPress : "DropDWOnPress.png",
-         */
         const parent = new cc.Node();
         const _background = new cc.Sprite(ReferenceName.SettingsBackground);
         const _closeButton = new CloseButtonPrefab(dismiss);
@@ -86,8 +70,6 @@ const SettingsView = (function () {
 
         acceptText.setPosition(acceptButton.getPosition());
         cancelText.setPosition(cancelButton.getPosition());
-
-
 
         // const touchEvent = (sender, type) => {
         //     switch (type) {

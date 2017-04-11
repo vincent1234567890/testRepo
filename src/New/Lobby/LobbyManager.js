@@ -15,7 +15,7 @@ const LobbyManager = (function () {
             cc.spriteFrameCache.addSpriteFrames(plists[list]);
         }
         this._parent = parent;
-        _profileManager = new ProfileManager();
+        // _profileManager = new ProfileManager();
         this.displayView(playerData,onGameSelectedCallback);
     };
 
@@ -24,12 +24,12 @@ const LobbyManager = (function () {
             // this._parent.removeChild(this._view);
             this._view.destroyView();
         }
-        this._view = new LobbyView(playerData,_lobbyTheme, onGameSelectedCallback, onRequestShowProfile);
+        this._view = new LobbyView(playerData,_lobbyTheme, onGameSelectedCallback);
     };
 
-    function onRequestShowProfile(){
-        _profileManager.displayView();
-    }
+    // function onRequestShowProfile(){
+    //     _profileManager.displayView();
+    // }
 
     LobbyManager.prototype.resetView = function(){
         this._view.resetView();
