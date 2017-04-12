@@ -40,5 +40,11 @@ const LeaderboardView = (function () {
         _popup.show();
     };
 
+    proto.hide = function () {
+        _parent.setLocalZOrder(-1000);
+
+        BlockingManager.deregisterBlock(dismissCallback);
+    };
+
     return LeaderboardView;
 }());

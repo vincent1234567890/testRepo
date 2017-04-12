@@ -198,6 +198,8 @@ const GameManager = function () {
     }
 
     function exitToLobby() {
+        _floatingMenuManager.unattach();
+        _jackpotManager.unattach();
         destroyArena();
         _goToLobbyCallback();
         ClientServerConnect.getCurrentJackpotValues();

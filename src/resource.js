@@ -201,7 +201,7 @@ var res = {
     WaterCaustic2 : "res/CompanyA/Lobby/Caustic3.png",
     WaterCaustic3 : "res/CompanyA/Lobby/Caustic4.png",
     WaterCaustic4 : "res/CompanyA/Lobby/Caustic5.png",
-    WaterCaustic5 : "res/CompanyA/Lobby/Caustic masking 1_00000.png",
+    // WaterCaustic5 : "res/CompanyA/Lobby/Caustic masking 1_00000.png",
 
     //GameFrame
     GameFrame: "res/New/InGameFrame.png",

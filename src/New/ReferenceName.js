@@ -119,7 +119,7 @@ const ReferenceName = {
     ProfileTitleChinese : "#InfoChineseTitle.png",
     ProfileUserTextBackground : "#TextBG6.png",
     ProfileNicknameTitleChinese : "#NicknameChinese.png",
-    ProfileInputBackground : "#InputBox.png",
+    ProfileInputBackground : "InputBox.png",
     ProfileEditButton : "#EditButton.png",
     ProfileUsernameTitleChinese : "#UsernameChinese.png",
     ProfileIconBackground : "#SymbolBG.png",
@@ -127,7 +127,21 @@ const ReferenceName = {
     ProfileTimeIcon : "#TimeSymbol.png",
     ProfileCoinIcon : "#CoinsSymbol.png",
     ProfileRankingIcon : "#RankingSymbol.png",
-    ProfileCoinStackIcon : "#Coin2WeekSymbol.png",
+    ProfileCoinStackIcon : "#Coin2weekSymbol.png",
+
+    //GameLog
+    GameLogTitleChinese : "#GamelogChineseTitle.png",
+    GameLogRecordTabChinese : "#GameRecordChinese.png",
+    GameLogConsumptionTabChinese : "#ConsumptionRecordChinese.png",
+    GameLogRadioButton : "#SelectionBase.png",
+    GameLogRadioButtonSelected : "#Selection.png",
+    GameLogLogTitleBackground : "#TextHeaderBase.png",
+    GameLogDateChinese : "#DateChinese.png",
+    GameLogTypeChinese : "#TypeChinese.png",
+    GameLogConsumptionIdChinese : "#SerialNumberChinese.png",
+    GameLogConsumptionAmountChinese : "#ConsumptionChinese.png",
+    GameLogScore : "#PointChinese.png",
+
 
     //Profile OLD
     ProfileBackground : "#Profile POut BG.png",

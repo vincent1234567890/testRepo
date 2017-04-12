@@ -255,8 +255,16 @@ const FloatingMenu = (function () {
 
     const proto = FloatingMenu.prototype;
 
+    proto.unattach = function () {
+        if (_parent.getParent()) {
+            _parent.getParent().removeChild(_parent, false);
+        }
+    };
+
     proto.reattach = function () {
-        _parent.getParent().removeChild(_parent, false);
+        if (_parent.getParent()) {
+            _parent.getParent().removeChild(_parent, false);
+        }
         GameView.addView(_parent);
     };
 

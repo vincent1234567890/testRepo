@@ -5,12 +5,26 @@
 const ProfileView = (function () {
     "use strict";
     const ZORDER = 10;
-    const startHeight = 300;
-    const LeftColumn = 250;
-    const RightColumn = 550;
+    const startHeight = 325;
+    const LeftColumn = 275;
+    const RightColumn = 625;
     const Spacing = 100;
     const ProfileView = function () {
 
+        /*
+         ProfileTitleChinese : "#InfoChineseTitle.png",
+         ProfileUserTextBackground : "TextBG6.png",
+         ProfileNicknameTitleChinese : "#NicknameChinese.png",
+         ProfileInputBackground : "#InputBox.png",
+         ProfileEditButton : "#EditButton.png",
+         ProfileUsernameTitleChinese : "#UsernameChinese.png",
+         ProfileIconBackground : "#SymbolBG.png",
+         ProfileIconTextBackground : "#TextBG5.png",
+         ProfileTimeIcon : "#TimeSymbol.png",
+         ProfileCoinIcon : "#CoinsSymbol.png",
+         ProfileRankingIcon : "#RankingSymbol.png",
+         ProfileCoinStackIcon : "#Coin2WeekSymbol.png",
+         */
         const parent = new cc.Node();
         const _background = new cc.Sprite(ReferenceName.SettingsBackground);
         const _closeButton = new CloseButtonPrefab(dismiss);
@@ -36,25 +50,47 @@ const ProfileView = (function () {
         coinStackDisplay.setPosition(RightColumn,startHeight - Spacing*2);
 
         //------
-        var textName = new cc.EditBox(cc.size(300,70), ReferenceName.ProfileUserTextBackground);
-        textName.setPlaceHolder(ReferenceName.LoginNamePlaceHolder);
-        textName.setPosition(midX, midY + 100);
-        textName.setFontSize(40);
-        textName.setPlaceholderFontSize(40);
-        //textName.setAnchorPoint(cc.p());
-        textName.needsLayout();
-        this._parent.addChild(textName);
-        this.textName = textName;
+
+        const bg = new cc.Sprite (ReferenceName.ProfileUserTextBackground);
+        const bgPos = new cc.p(bg.getContentSize().width/2,bg.getContentSize().height/2);
+        const nickTitle = new cc.Sprite (ReferenceName.ProfileNicknameTitleChinese);
+        const profilebg = new cc.Scale9Sprite(ReferenceName.ProfileInputBackground);
+        profilebg.setAnchorPoint(0.0,0.0);
+
+        const nickTextBox = new cc.EditBox(cc.size(170,30), profilebg);
+        nickTextBox.setPlaceHolder("Nickname");
+        nickTextBox.setFontName("Microsoft YaHei");
+        bg.addChild(nickTitle);
+        bg.addChild(nickTextBox);
+        // nickName.setFontSize(40);
+        // nickName.setPlaceholderFontSize(40);
+        nickTextBox.setPosition( 180, bgPos.y);
+        nickTitle.setPosition(50, bgPos.y);
+        bg.setPosition(LeftColumn - 35, startHeight);
+        _background.addChild(bg);
+
+        let fontDef = new cc.FontDefinition();
+        fontDef.fontName = "Microsoft YaHei";
+        // fontDef.fontName = "Arial Unicode MS";
+        fontDef.fontSize = "20";
+        fontDef.fontStyle = "bold";
+        fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
+        fontDef.fillStyle = new cc.Color(0, 0, 0, 255);
+        let userNameLabel = new cc.LabelTTF("username", fontDef);
+
+        const userbg = new cc.Sprite(ReferenceName.ProfileUserTextBackground);
+        const userTitle = new cc.Sprite(ReferenceName.ProfileUsernameTitleChinese);
+        userbg.addChild(userTitle);
+        userbg.addChild(userNameLabel);
+        userTitle.setPosition(75, bgPos.y);
+        userNameLabel.setPosition(userTitle.x + userTitle.getContentSize().width, bgPos.y);
+        userbg.setPosition(RightColumn - 35, startHeight);
+        _background.addChild(userbg);
 //-------
-
-
-
-
-
         const title = new cc.Sprite(ReferenceName.ProfileTitleChinese);
         const titleBackground = new cc.Sprite(ReferenceName.SettingsTitleBackground);
 
-        const titlePosition = new cc.p(400, 450);
+        const titlePosition = new cc.p(400, 425);
         title.setPosition(titlePosition);
         titleBackground.setPosition(titlePosition);
         //
@@ -88,8 +124,10 @@ const ProfileView = (function () {
         // acceptText.setPosition(acceptButton.getPosition());
         // cancelText.setPosition(cancelButton.getPosition());
         //
-        // _background.addChild(titleBackground);
-        // _background.addChild(title);
+
+        _background.addChild(titleBackground);
+        _background.addChild(title);
+
         // _background.addChild(musicTitle);
         // _background.addChild(soundTitle);
         // _background.addChild(gameLanguageSelectionTitle);
@@ -143,7 +181,7 @@ const ProfileView = (function () {
 
             const iconPos = new cc.p(iconBackground.getContentSize().width/2, iconBackground.getContentSize().height/2);
             const bgPos = new cc.p(background.getContentSize().width/2, background.getContentSize().height/2);
-            iconBackground.setPosition(iconPos.x,bgPos.y);
+            iconBackground.setPosition(-iconPos.x,bgPos.y);
             icon.setPosition(iconPos);
 
             // const soundTitle = new cc.Sprite(ReferenceName.SettingsSoundTitleChinese);
@@ -156,12 +194,12 @@ const ProfileView = (function () {
             fontDef.fillStyle = new cc.Color(0, 0, 0, 255);
             let titleLabel = new cc.LabelTTF(titleText, fontDef);
 
-            titleLabel.setPosition(bgPos.x, bgPos.y + 20);
+            titleLabel.setPosition(15, bgPos.y + 20);
             titleLabel.setAnchorPoint(0,0.5);
 
             fontDef.fillStyle = new cc.Color(255, 255, 255, 255);
             let infoLabel = new cc.LabelTTF(titleText, fontDef);
-            infoLabel.setPosition(bgPos.x, bgPos.y - 20);
+            infoLabel.setPosition(15, bgPos.y - 20);
             infoLabel.setAnchorPoint(0,0.5);
 
             background.addChild(iconBackground);
