@@ -15,7 +15,7 @@
                 <key>spriteSourceSize</key>
                 <string>{180,180}</string>
                 <key>textureRect</key>
-                <string>{{155,1339},{100,84}}</string>
+                <string>{{1093,97},{100,84}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -30,7 +30,7 @@
                 <key>spriteSourceSize</key>
                 <string>{180,180}</string>
                 <key>textureRect</key>
-                <string>{{1,1339},{152,128}}</string>
+                <string>{{847,519},{152,128}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -45,9 +45,9 @@
                 <key>spriteSourceSize</key>
                 <string>{180,180}</string>
                 <key>textureRect</key>
-                <string>{{729,1329},{178,156}}</string>
+                <string>{{1029,669},{178,156}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>Rewardmedal_00018.png</key>
             <dict>
@@ -60,9 +60,9 @@
                 <key>spriteSourceSize</key>
                 <string>{180,180}</string>
                 <key>textureRect</key>
-                <string>{{547,169},{180,164}}</string>
+                <string>{{1,351},{180,164}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>Rewardmedal_00019.png</key>
             <dict>
@@ -90,7 +90,7 @@
                 <key>spriteSourceSize</key>
                 <string>{180,180}</string>
                 <key>textureRect</key>
-                <string>{{1,169},{180,166}}</string>
+                <string>{{183,1},{180,166}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -105,9 +105,9 @@
                 <key>spriteSourceSize</key>
                 <string>{180,180}</string>
                 <key>textureRect</key>
-                <string>{{729,1},{180,164}}</string>
+                <string>{{167,519},{180,164}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>Rewardmedal_00022.png</key>
             <dict>
@@ -120,9 +120,9 @@
                 <key>spriteSourceSize</key>
                 <string>{180,180}</string>
                 <key>textureRect</key>
-                <string>{{1,841},{180,164}}</string>
+                <string>{{1,533},{180,164}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>Rewardmedal_00023.png</key>
             <dict>
@@ -135,9 +135,9 @@
                 <key>spriteSourceSize</key>
                 <string>{180,180}</string>
                 <key>textureRect</key>
-                <string>{{183,673},{180,164}}</string>
+                <string>{{167,701},{180,164}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>Rewardmedal_00024.png</key>
             <dict>
@@ -150,9 +150,9 @@
                 <key>spriteSourceSize</key>
                 <string>{180,180}</string>
                 <key>textureRect</key>
-                <string>{{365,505},{180,164}}</string>
+                <string>{{1,715},{180,164}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>Rewardmedal_00025.png</key>
             <dict>
@@ -165,9 +165,9 @@
                 <key>spriteSourceSize</key>
                 <string>{180,180}</string>
                 <key>textureRect</key>
-                <string>{{547,335},{180,164}}</string>
+                <string>{{167,883},{180,164}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>Rewardmedal_00026.png</key>
             <dict>
@@ -180,9 +180,9 @@
                 <key>spriteSourceSize</key>
                 <string>{180,180}</string>
                 <key>textureRect</key>
-                <string>{{729,167},{180,164}}</string>
+                <string>{{1,897},{180,164}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>Rewardmedal_00027.png</key>
             <dict>
@@ -195,9 +195,9 @@
                 <key>spriteSourceSize</key>
                 <string>{180,180}</string>
                 <key>textureRect</key>
-                <string>{{1,1007},{180,164}}</string>
+                <string>{{333,519},{180,164}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>Rewardmedal_00028.png</key>
             <dict>
@@ -210,9 +210,9 @@
                 <key>spriteSourceSize</key>
                 <string>{180,180}</string>
                 <key>textureRect</key>
-                <string>{{183,839},{180,164}}</string>
+                <string>{{337,337},{180,164}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>Rewardmedal_00029.png</key>
             <dict>
@@ -225,9 +225,9 @@
                 <key>spriteSourceSize</key>
                 <string>{180,180}</string>
                 <key>textureRect</key>
-                <string>{{365,671},{180,164}}</string>
+                <string>{{333,701},{180,164}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>Rewardmedal_00030.png</key>
             <dict>
@@ -240,9 +240,9 @@
                 <key>spriteSourceSize</key>
                 <string>{180,180}</string>
                 <key>textureRect</key>
-                <string>{{547,501},{180,164}}</string>
+                <string>{{333,883},{180,164}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>Rewardmedal_00031.png</key>
             <dict>
@@ -255,9 +255,9 @@
                 <key>spriteSourceSize</key>
                 <string>{180,180}</string>
                 <key>textureRect</key>
-                <string>{{729,333},{180,164}}</string>
+                <string>{{499,519},{180,164}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>Rewardmedal_00032.png</key>
             <dict>
@@ -270,56 +270,11 @@
                 <key>spriteSourceSize</key>
                 <string>{180,180}</string>
                 <key>textureRect</key>
-                <string>{{1,1173},{180,164}}</string>
+                <string>{{503,337},{180,164}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>Rewardmedal_00033.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,-4}</string>
-                <key>spriteSize</key>
-                <string>{180,166}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,180}</string>
-                <key>textureRect</key>
-                <string>{{183,1},{180,166}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>Rewardmedal_00034.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,-4}</string>
-                <key>spriteSize</key>
-                <string>{180,166}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,180}</string>
-                <key>textureRect</key>
-                <string>{{1,337},{180,166}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>Rewardmedal_00035.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,-4}</string>
-                <key>spriteSize</key>
-                <string>{180,166}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,180}</string>
-                <key>textureRect</key>
-                <string>{{183,169},{180,166}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>Rewardmedal_00036.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -334,262 +289,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Rewardmedal_00037.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,-4}</string>
-                <key>spriteSize</key>
-                <string>{180,166}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,180}</string>
-                <key>textureRect</key>
-                <string>{{1,505},{180,166}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>Rewardmedal_00038.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,-4}</string>
-                <key>spriteSize</key>
-                <string>{180,166}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,180}</string>
-                <key>textureRect</key>
-                <string>{{183,337},{180,166}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>Rewardmedal_00039.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,-5}</string>
-                <key>spriteSize</key>
-                <string>{180,164}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,180}</string>
-                <key>textureRect</key>
-                <string>{{183,1005},{180,164}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>Rewardmedal_00040.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,-5}</string>
-                <key>spriteSize</key>
-                <string>{180,164}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,180}</string>
-                <key>textureRect</key>
-                <string>{{365,837},{180,164}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>Rewardmedal_00041.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,-5}</string>
-                <key>spriteSize</key>
-                <string>{180,164}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,180}</string>
-                <key>textureRect</key>
-                <string>{{547,667},{180,164}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>Rewardmedal_00042.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,-5}</string>
-                <key>spriteSize</key>
-                <string>{180,164}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,180}</string>
-                <key>textureRect</key>
-                <string>{{729,499},{180,164}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>Rewardmedal_00043.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,-5}</string>
-                <key>spriteSize</key>
-                <string>{180,164}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,180}</string>
-                <key>textureRect</key>
-                <string>{{183,1171},{180,164}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>Rewardmedal_00044.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,-5}</string>
-                <key>spriteSize</key>
-                <string>{180,164}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,180}</string>
-                <key>textureRect</key>
-                <string>{{365,1003},{180,164}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>Rewardmedal_00045.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,-5}</string>
-                <key>spriteSize</key>
-                <string>{180,164}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,180}</string>
-                <key>textureRect</key>
-                <string>{{547,833},{180,164}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>Rewardmedal_00046.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,-5}</string>
-                <key>spriteSize</key>
-                <string>{180,164}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,180}</string>
-                <key>textureRect</key>
-                <string>{{729,665},{180,164}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>Rewardmedal_00047.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,-5}</string>
-                <key>spriteSize</key>
-                <string>{180,164}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,180}</string>
-                <key>textureRect</key>
-                <string>{{365,1169},{180,164}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>Rewardmedal_00048.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,-5}</string>
-                <key>spriteSize</key>
-                <string>{180,164}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,180}</string>
-                <key>textureRect</key>
-                <string>{{547,999},{180,164}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>Rewardmedal_00049.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,-5}</string>
-                <key>spriteSize</key>
-                <string>{180,164}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,180}</string>
-                <key>textureRect</key>
-                <string>{{729,831},{180,164}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>Rewardmedal_00050.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,-5}</string>
-                <key>spriteSize</key>
-                <string>{180,164}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,180}</string>
-                <key>textureRect</key>
-                <string>{{547,1165},{180,164}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>Rewardmedal_00051.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,-4}</string>
-                <key>spriteSize</key>
-                <string>{180,166}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,180}</string>
-                <key>textureRect</key>
-                <string>{{365,169},{180,166}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>Rewardmedal_00052.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,-5}</string>
-                <key>spriteSize</key>
-                <string>{180,164}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,180}</string>
-                <key>textureRect</key>
-                <string>{{729,997},{180,164}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>Rewardmedal_00053.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,-5}</string>
-                <key>spriteSize</key>
-                <string>{180,164}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,180}</string>
-                <key>textureRect</key>
-                <string>{{729,1163},{180,164}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>Rewardmedal_00054.png</key>
+            <key>Rewardmedal_00034.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -604,6 +304,306 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
+            <key>Rewardmedal_00035.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,-4}</string>
+                <key>spriteSize</key>
+                <string>{180,166}</string>
+                <key>spriteSourceSize</key>
+                <string>{180,180}</string>
+                <key>textureRect</key>
+                <string>{{729,1},{180,166}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>Rewardmedal_00036.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,-4}</string>
+                <key>spriteSize</key>
+                <string>{180,166}</string>
+                <key>spriteSourceSize</key>
+                <string>{180,180}</string>
+                <key>textureRect</key>
+                <string>{{911,1},{180,166}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>Rewardmedal_00037.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,-4}</string>
+                <key>spriteSize</key>
+                <string>{180,166}</string>
+                <key>spriteSourceSize</key>
+                <string>{180,180}</string>
+                <key>textureRect</key>
+                <string>{{1,169},{180,166}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>Rewardmedal_00038.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,-4}</string>
+                <key>spriteSize</key>
+                <string>{180,166}</string>
+                <key>spriteSourceSize</key>
+                <string>{180,180}</string>
+                <key>textureRect</key>
+                <string>{{169,169},{180,166}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>Rewardmedal_00039.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,-5}</string>
+                <key>spriteSize</key>
+                <string>{180,164}</string>
+                <key>spriteSourceSize</key>
+                <string>{180,180}</string>
+                <key>textureRect</key>
+                <string>{{499,701},{180,164}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>Rewardmedal_00040.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,-5}</string>
+                <key>spriteSize</key>
+                <string>{180,164}</string>
+                <key>spriteSourceSize</key>
+                <string>{180,180}</string>
+                <key>textureRect</key>
+                <string>{{499,883},{180,164}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>Rewardmedal_00041.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,-5}</string>
+                <key>spriteSize</key>
+                <string>{180,164}</string>
+                <key>spriteSourceSize</key>
+                <string>{180,180}</string>
+                <key>textureRect</key>
+                <string>{{665,519},{180,164}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>Rewardmedal_00042.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,-5}</string>
+                <key>spriteSize</key>
+                <string>{180,164}</string>
+                <key>spriteSourceSize</key>
+                <string>{180,180}</string>
+                <key>textureRect</key>
+                <string>{{669,337},{180,164}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>Rewardmedal_00043.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,-5}</string>
+                <key>spriteSize</key>
+                <string>{180,164}</string>
+                <key>spriteSourceSize</key>
+                <string>{180,180}</string>
+                <key>textureRect</key>
+                <string>{{835,337},{180,164}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>Rewardmedal_00044.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,-5}</string>
+                <key>spriteSize</key>
+                <string>{180,164}</string>
+                <key>spriteSourceSize</key>
+                <string>{180,180}</string>
+                <key>textureRect</key>
+                <string>{{1001,337},{180,164}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>Rewardmedal_00045.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,-5}</string>
+                <key>spriteSize</key>
+                <string>{180,164}</string>
+                <key>spriteSourceSize</key>
+                <string>{180,180}</string>
+                <key>textureRect</key>
+                <string>{{1001,503},{180,164}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>Rewardmedal_00046.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,-5}</string>
+                <key>spriteSize</key>
+                <string>{180,164}</string>
+                <key>spriteSourceSize</key>
+                <string>{180,180}</string>
+                <key>textureRect</key>
+                <string>{{847,669},{180,164}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>Rewardmedal_00047.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,-5}</string>
+                <key>spriteSize</key>
+                <string>{180,164}</string>
+                <key>spriteSourceSize</key>
+                <string>{180,180}</string>
+                <key>textureRect</key>
+                <string>{{665,685},{180,164}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>Rewardmedal_00048.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,-5}</string>
+                <key>spriteSize</key>
+                <string>{180,164}</string>
+                <key>spriteSourceSize</key>
+                <string>{180,180}</string>
+                <key>textureRect</key>
+                <string>{{847,835},{180,164}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>Rewardmedal_00049.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,-5}</string>
+                <key>spriteSize</key>
+                <string>{180,164}</string>
+                <key>spriteSourceSize</key>
+                <string>{180,180}</string>
+                <key>textureRect</key>
+                <string>{{665,851},{180,164}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>Rewardmedal_00050.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,-5}</string>
+                <key>spriteSize</key>
+                <string>{180,164}</string>
+                <key>spriteSourceSize</key>
+                <string>{180,180}</string>
+                <key>textureRect</key>
+                <string>{{847,1001},{180,164}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>Rewardmedal_00051.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,-4}</string>
+                <key>spriteSize</key>
+                <string>{180,166}</string>
+                <key>spriteSourceSize</key>
+                <string>{180,180}</string>
+                <key>textureRect</key>
+                <string>{{351,169},{180,166}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>Rewardmedal_00052.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,-5}</string>
+                <key>spriteSize</key>
+                <string>{180,164}</string>
+                <key>spriteSourceSize</key>
+                <string>{180,180}</string>
+                <key>textureRect</key>
+                <string>{{665,1017},{180,164}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>Rewardmedal_00053.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,-5}</string>
+                <key>spriteSize</key>
+                <string>{180,164}</string>
+                <key>spriteSourceSize</key>
+                <string>{180,180}</string>
+                <key>textureRect</key>
+                <string>{{1013,1001},{180,164}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>Rewardmedal_00054.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,-4}</string>
+                <key>spriteSize</key>
+                <string>{180,166}</string>
+                <key>spriteSourceSize</key>
+                <string>{180,180}</string>
+                <key>textureRect</key>
+                <string>{{533,169},{180,166}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
             <key>Rewardmedal_00055.png</key>
             <dict>
                 <key>aliases</key>
@@ -615,7 +615,7 @@
                 <key>spriteSourceSize</key>
                 <string>{180,180}</string>
                 <key>textureRect</key>
-                <string>{{1,673},{180,166}}</string>
+                <string>{{715,169},{180,166}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -630,7 +630,7 @@
                 <key>spriteSourceSize</key>
                 <string>{180,180}</string>
                 <key>textureRect</key>
-                <string>{{183,505},{180,166}}</string>
+                <string>{{897,169},{180,166}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -645,9 +645,9 @@
                 <key>spriteSourceSize</key>
                 <string>{180,180}</string>
                 <key>textureRect</key>
-                <string>{{365,337},{180,166}}</string>
+                <string>{{169,337},{180,166}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>Rewardmedal_00058.png</key>
             <dict>
@@ -660,9 +660,9 @@
                 <key>spriteSourceSize</key>
                 <string>{180,180}</string>
                 <key>textureRect</key>
-                <string>{{1,505},{180,166}}</string>
+                <string>{{1,169},{180,166}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>Rewardmedal_00059.png</key>
             <dict>
@@ -675,7 +675,7 @@
                 <key>spriteSourceSize</key>
                 <string>{180,180}</string>
                 <key>textureRect</key>
-                <string>{{547,1331},{180,126}}</string>
+                <string>{{167,1065},{180,126}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -690,9 +690,9 @@
                 <key>spriteSourceSize</key>
                 <string>{180,180}</string>
                 <key>textureRect</key>
-                <string>{{241,1337},{94,96}}</string>
+                <string>{{1093,1},{94,96}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>Rewardmedal_00061.png</key>
             <dict>
@@ -705,9 +705,9 @@
                 <key>spriteSourceSize</key>
                 <string>{180,180}</string>
                 <key>textureRect</key>
-                <string>{{337,1337},{76,78}}</string>
+                <string>{{1079,199},{76,78}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
         </dict>
         <key>metadata</key>
@@ -721,9 +721,9 @@
             <key>realTextureFileName</key>
             <string>Rewardmedal.png</string>
             <key>size</key>
-            <string>{910,1486}</string>
+            <string>{1192,1192}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:cf8b9823f165a3a53299a89399955a56:fbf1e04bb49467189d539d5dc7e412ba:d78ffb308dcc167eeb3381fa1a88437d$</string>
+            <string>$TexturePacker:SmartUpdate:e1fd5bcff2eac9d0e0253ad23f8da264:fbf1e04bb49467189d539d5dc7e412ba:d78ffb308dcc167eeb3381fa1a88437d$</string>
             <key>textureFileName</key>
             <string>Rewardmedal.png</string>
         </dict>

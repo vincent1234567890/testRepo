@@ -30,7 +30,7 @@
                 <key>spriteSourceSize</key>
                 <string>{352,90}</string>
                 <key>textureRect</key>
-                <string>{{1,87},{350,84}}</string>
+                <string>{{353,1},{350,84}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -45,9 +45,9 @@
                 <key>spriteSourceSize</key>
                 <string>{352,90}</string>
                 <key>textureRect</key>
-                <string>{{353,1},{350,84}}</string>
+                <string>{{705,1},{350,84}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>FreeRoundChinese_00003.png</key>
             <dict>
@@ -60,9 +60,9 @@
                 <key>spriteSourceSize</key>
                 <string>{352,90}</string>
                 <key>textureRect</key>
-                <string>{{1,173},{350,84}}</string>
+                <string>{{791,1},{350,84}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>FreeRoundChinese_00004.png</key>
             <dict>
@@ -75,9 +75,9 @@
                 <key>spriteSourceSize</key>
                 <string>{352,90}</string>
                 <key>textureRect</key>
-                <string>{{353,87},{350,84}}</string>
+                <string>{{1,353},{350,84}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>FreeRoundChinese_00005.png</key>
             <dict>
@@ -90,7 +90,7 @@
                 <key>spriteSourceSize</key>
                 <string>{352,90}</string>
                 <key>textureRect</key>
-                <string>{{705,1},{350,84}}</string>
+                <string>{{1,705},{350,84}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -105,9 +105,9 @@
                 <key>spriteSourceSize</key>
                 <string>{352,90}</string>
                 <key>textureRect</key>
-                <string>{{1,259},{350,84}}</string>
+                <string>{{87,353},{350,84}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>FreeRoundChinese_00007.png</key>
             <dict>
@@ -120,9 +120,9 @@
                 <key>spriteSourceSize</key>
                 <string>{352,90}</string>
                 <key>textureRect</key>
-                <string>{{353,173},{350,84}}</string>
+                <string>{{173,353},{350,84}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>FreeRoundChinese_00008.png</key>
             <dict>
@@ -135,9 +135,9 @@
                 <key>spriteSourceSize</key>
                 <string>{352,90}</string>
                 <key>textureRect</key>
-                <string>{{705,87},{350,84}}</string>
+                <string>{{259,353},{350,84}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>FreeRoundChinese_00009.png</key>
             <dict>
@@ -150,9 +150,9 @@
                 <key>spriteSourceSize</key>
                 <string>{352,90}</string>
                 <key>textureRect</key>
-                <string>{{1057,1},{350,84}}</string>
+                <string>{{345,353},{350,84}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>FreeRoundChinese_00010.png</key>
             <dict>
@@ -165,7 +165,7 @@
                 <key>spriteSourceSize</key>
                 <string>{352,90}</string>
                 <key>textureRect</key>
-                <string>{{1,345},{350,84}}</string>
+                <string>{{1,791},{350,84}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -180,7 +180,7 @@
                 <key>spriteSourceSize</key>
                 <string>{352,90}</string>
                 <key>textureRect</key>
-                <string>{{353,259},{350,84}}</string>
+                <string>{{353,705},{350,84}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -195,9 +195,9 @@
                 <key>spriteSourceSize</key>
                 <string>{352,90}</string>
                 <key>textureRect</key>
-                <string>{{705,173},{350,84}}</string>
+                <string>{{431,353},{350,84}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>FreeRoundChinese_00013.png</key>
             <dict>
@@ -210,9 +210,9 @@
                 <key>spriteSourceSize</key>
                 <string>{352,90}</string>
                 <key>textureRect</key>
-                <string>{{1057,87},{350,84}}</string>
+                <string>{{517,353},{350,84}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>FreeRoundChinese_00014.png</key>
             <dict>
@@ -225,9 +225,9 @@
                 <key>spriteSourceSize</key>
                 <string>{352,90}</string>
                 <key>textureRect</key>
-                <string>{{1409,1},{350,84}}</string>
+                <string>{{603,353},{350,84}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>FreeRoundChinese_00015.png</key>
             <dict>
@@ -240,9 +240,9 @@
                 <key>spriteSourceSize</key>
                 <string>{352,90}</string>
                 <key>textureRect</key>
-                <string>{{353,345},{350,84}}</string>
+                <string>{{689,353},{350,84}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>FreeRoundChinese_00016.png</key>
             <dict>
@@ -255,7 +255,7 @@
                 <key>spriteSourceSize</key>
                 <string>{352,90}</string>
                 <key>textureRect</key>
-                <string>{{705,259},{350,84}}</string>
+                <string>{{353,791},{350,84}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -270,9 +270,9 @@
                 <key>spriteSourceSize</key>
                 <string>{352,90}</string>
                 <key>textureRect</key>
-                <string>{{1057,173},{350,84}}</string>
+                <string>{{775,353},{350,84}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>FreeRoundChinese_00018.png</key>
             <dict>
@@ -285,9 +285,9 @@
                 <key>spriteSourceSize</key>
                 <string>{352,90}</string>
                 <key>textureRect</key>
-                <string>{{1409,87},{350,84}}</string>
+                <string>{{861,353},{350,84}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>FreeRoundChinese_00019.png</key>
             <dict>
@@ -300,7 +300,7 @@
                 <key>spriteSourceSize</key>
                 <string>{352,90}</string>
                 <key>textureRect</key>
-                <string>{{705,345},{350,84}}</string>
+                <string>{{1,87},{350,84}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -315,7 +315,7 @@
                 <key>spriteSourceSize</key>
                 <string>{352,90}</string>
                 <key>textureRect</key>
-                <string>{{1057,259},{350,84}}</string>
+                <string>{{353,87},{350,84}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -330,7 +330,7 @@
                 <key>spriteSourceSize</key>
                 <string>{352,90}</string>
                 <key>textureRect</key>
-                <string>{{1409,173},{350,84}}</string>
+                <string>{{1,173},{350,84}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -345,7 +345,7 @@
                 <key>spriteSourceSize</key>
                 <string>{352,90}</string>
                 <key>textureRect</key>
-                <string>{{1057,345},{350,84}}</string>
+                <string>{{353,173},{350,84}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -360,7 +360,7 @@
                 <key>spriteSourceSize</key>
                 <string>{352,90}</string>
                 <key>textureRect</key>
-                <string>{{1409,259},{350,84}}</string>
+                <string>{{1,259},{350,84}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -375,7 +375,7 @@
                 <key>spriteSourceSize</key>
                 <string>{352,90}</string>
                 <key>textureRect</key>
-                <string>{{1409,345},{350,84}}</string>
+                <string>{{353,259},{350,84}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -406,9 +406,9 @@
             <key>realTextureFileName</key>
             <string>FreeRoundChinese.png</string>
             <key>size</key>
-            <string>{1760,430}</string>
+            <string>{946,946}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:635fb2991cff92557d0140e53a9e353c:9f33a8a8a62f8bfd3dd5b3503c8ed3da:29426129f707cfbfb11e37e3595e050a$</string>
+            <string>$TexturePacker:SmartUpdate:bbf7c94d071c078538f0167860595ce9:9f33a8a8a62f8bfd3dd5b3503c8ed3da:29426129f707cfbfb11e37e3595e050a$</string>
             <key>textureFileName</key>
             <string>FreeRoundChinese.png</string>
         </dict>

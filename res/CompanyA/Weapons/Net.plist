@@ -9,28 +9,13 @@
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{242,242}</string>
-                <key>spriteSourceSize</key>
-                <string>{242,242}</string>
-                <key>textureRect</key>
-                <string>{{1,1},{242,242}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>Net2.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
                 <string>{1,-1}</string>
                 <key>spriteSize</key>
                 <string>{232,232}</string>
                 <key>spriteSourceSize</key>
                 <string>{242,242}</string>
                 <key>textureRect</key>
-                <string>{{245,1},{232,232}}</string>
+                <string>{{1,1},{232,232}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -46,9 +31,9 @@
             <key>realTextureFileName</key>
             <string>Net.png</string>
             <key>size</key>
-            <string>{478,244}</string>
+            <string>{234,234}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:1bd5b236acabf0ba0f5a1a06442bdcf8:c2e9714d61d59e8363b6c7281ecb9bdd:50d1ca6341bfd358eb06069d3f6796f0$</string>
+            <string>$TexturePacker:SmartUpdate:2fe3a0a06fa6643db59a9fe7a20628a5:a446346300887569c876b36d1fbdee39:50d1ca6341bfd358eb06069d3f6796f0$</string>
             <key>textureFileName</key>
             <string>Net.png</string>
         </dict>

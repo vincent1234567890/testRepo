@@ -15,9 +15,9 @@
                 <key>spriteSourceSize</key>
                 <string>{22,66}</string>
                 <key>textureRect</key>
-                <string>{{1,479},{22,66}}</string>
+                <string>{{197,1},{22,66}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>Cannon4_00000.png</key>
             <dict>
@@ -45,9 +45,9 @@
                 <key>spriteSourceSize</key>
                 <string>{98,149}</string>
                 <key>textureRect</key>
-                <string>{{1,247},{98,117}}</string>
+                <string>{{1,124},{98,117}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>Cannon4_00002.png</key>
             <dict>
@@ -60,9 +60,9 @@
                 <key>spriteSourceSize</key>
                 <string>{98,149}</string>
                 <key>textureRect</key>
-                <string>{{1,366},{98,111}}</string>
+                <string>{{120,124},{98,111}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>Cannon4_00003.png</key>
             <dict>
@@ -75,7 +75,7 @@
                 <key>spriteSourceSize</key>
                 <string>{98,149}</string>
                 <key>textureRect</key>
-                <string>{{1,124},{96,121}}</string>
+                <string>{{99,1},{96,121}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -91,9 +91,9 @@
             <key>realTextureFileName</key>
             <string>Cannon4.png</string>
             <key>size</key>
-            <string>{100,502}</string>
+            <string>{232,232}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:306961b5de50c811a221bacbe8a431c9:5d39e475e0fba16f53f6a94db37759cd:75eb83df4dcedde27a0a97751584bbfe$</string>
+            <string>$TexturePacker:SmartUpdate:7fe8511f20c22ea96ca8b42d14efdfc9:5d39e475e0fba16f53f6a94db37759cd:75eb83df4dcedde27a0a97751584bbfe$</string>
             <key>textureFileName</key>
             <string>Cannon4.png</string>
         </dict>
