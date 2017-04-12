@@ -15,9 +15,9 @@
                 <key>spriteSourceSize</key>
                 <string>{124,126}</string>
                 <key>textureRect</key>
-                <string>{{1,659},{124,52}}</string>
+                <string>{{183,207},{124,52}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GBlackYellowButterflyFish_00001.png</key>
             <dict>
@@ -30,7 +30,7 @@
                 <key>spriteSourceSize</key>
                 <string>{124,126}</string>
                 <key>textureRect</key>
-                <string>{{1,875},{124,50}}</string>
+                <string>{{237,315},{124,50}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -45,9 +45,9 @@
                 <key>spriteSourceSize</key>
                 <string>{124,126}</string>
                 <key>textureRect</key>
-                <string>{{1,927},{124,50}}</string>
+                <string>{{127,333},{124,50}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GBlackYellowButterflyFish_00003.png</key>
             <dict>
@@ -60,9 +60,9 @@
                 <key>spriteSourceSize</key>
                 <string>{124,126}</string>
                 <key>textureRect</key>
-                <string>{{1,1083},{124,48}}</string>
+                <string>{{323,79},{124,48}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GBlackYellowButterflyFish_00004.png</key>
             <dict>
@@ -75,7 +75,7 @@
                 <key>spriteSourceSize</key>
                 <string>{124,126}</string>
                 <key>textureRect</key>
-                <string>{{1,1133},{124,48}}</string>
+                <string>{{1,411},{124,48}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -90,9 +90,9 @@
                 <key>spriteSourceSize</key>
                 <string>{124,126}</string>
                 <key>textureRect</key>
-                <string>{{1,979},{124,50}}</string>
+                <string>{{179,333},{124,50}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GBlackYellowButterflyFish_00006.png</key>
             <dict>
@@ -105,7 +105,7 @@
                 <key>spriteSourceSize</key>
                 <string>{124,126}</string>
                 <key>textureRect</key>
-                <string>{{1,323},{124,54}}</string>
+                <string>{{243,205},{124,54}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -120,9 +120,9 @@
                 <key>spriteSourceSize</key>
                 <string>{124,126}</string>
                 <key>textureRect</key>
-                <string>{{1,379},{124,54}}</string>
+                <string>{{369,241},{124,54}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GBlackYellowButterflyFish_00008.png</key>
             <dict>
@@ -135,7 +135,7 @@
                 <key>spriteSourceSize</key>
                 <string>{124,126}</string>
                 <key>textureRect</key>
-                <string>{{1,149},{124,56}}</string>
+                <string>{{1,81},{124,56}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -150,9 +150,9 @@
                 <key>spriteSourceSize</key>
                 <string>{124,126}</string>
                 <key>textureRect</key>
-                <string>{{1,435},{124,54}}</string>
+                <string>{{425,241},{124,54}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GBlackYellowButterflyFish_00010.png</key>
             <dict>
@@ -165,7 +165,7 @@
                 <key>spriteSourceSize</key>
                 <string>{124,126}</string>
                 <key>textureRect</key>
-                <string>{{1,713},{124,52}}</string>
+                <string>{{1,251},{124,52}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -180,7 +180,7 @@
                 <key>spriteSourceSize</key>
                 <string>{124,126}</string>
                 <key>textureRect</key>
-                <string>{{1,767},{124,52}}</string>
+                <string>{{1,305},{124,52}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -195,7 +195,7 @@
                 <key>spriteSourceSize</key>
                 <string>{124,126}</string>
                 <key>textureRect</key>
-                <string>{{1,821},{124,52}}</string>
+                <string>{{237,261},{124,52}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -210,7 +210,7 @@
                 <key>spriteSourceSize</key>
                 <string>{124,126}</string>
                 <key>textureRect</key>
-                <string>{{1,491},{124,54}}</string>
+                <string>{{1,139},{124,54}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -225,9 +225,9 @@
                 <key>spriteSourceSize</key>
                 <string>{124,126}</string>
                 <key>textureRect</key>
-                <string>{{1,207},{124,56}}</string>
+                <string>{{127,81},{124,56}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GBlackYellowButterflyFish_00015.png</key>
             <dict>
@@ -240,9 +240,9 @@
                 <key>spriteSourceSize</key>
                 <string>{124,126}</string>
                 <key>textureRect</key>
-                <string>{{1,265},{124,56}}</string>
+                <string>{{185,81},{124,56}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GBlackYellowButterflyFish_00016.png</key>
             <dict>
@@ -255,7 +255,7 @@
                 <key>spriteSourceSize</key>
                 <string>{124,126}</string>
                 <key>textureRect</key>
-                <string>{{1,547},{124,54}}</string>
+                <string>{{1,195},{124,54}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -270,9 +270,9 @@
                 <key>spriteSourceSize</key>
                 <string>{124,126}</string>
                 <key>textureRect</key>
-                <string>{{1,603},{124,54}}</string>
+                <string>{{127,207},{124,54}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GBlackYellowButterflyFish_00018.png</key>
             <dict>
@@ -285,7 +285,7 @@
                 <key>spriteSourceSize</key>
                 <string>{124,126}</string>
                 <key>textureRect</key>
-                <string>{{1,1183},{124,48}}</string>
+                <string>{{231,367},{124,48}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -300,7 +300,7 @@
                 <key>spriteSourceSize</key>
                 <string>{124,126}</string>
                 <key>textureRect</key>
-                <string>{{1,1233},{124,48}}</string>
+                <string>{{357,367},{124,48}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -315,7 +315,7 @@
                 <key>spriteSourceSize</key>
                 <string>{124,126}</string>
                 <key>textureRect</key>
-                <string>{{1,1283},{124,48}}</string>
+                <string>{{231,417},{124,48}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -330,7 +330,7 @@
                 <key>spriteSourceSize</key>
                 <string>{124,126}</string>
                 <key>textureRect</key>
-                <string>{{1,1031},{124,50}}</string>
+                <string>{{1,359},{124,50}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -345,7 +345,7 @@
                 <key>spriteSourceSize</key>
                 <string>{124,126}</string>
                 <key>textureRect</key>
-                <string>{{1,1493},{122,76}}</string>
+                <string>{{249,1},{122,76}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -360,9 +360,9 @@
                 <key>spriteSourceSize</key>
                 <string>{124,126}</string>
                 <key>textureRect</key>
-                <string>{{1,1},{124,72}}</string>
+                <string>{{249,79},{124,72}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GBlackYellowButterflyFish_00024.png</key>
             <dict>
@@ -375,7 +375,7 @@
                 <key>spriteSourceSize</key>
                 <string>{124,126}</string>
                 <key>textureRect</key>
-                <string>{{1,1333},{122,78}}</string>
+                <string>{{1,1},{122,78}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -390,9 +390,9 @@
                 <key>spriteSourceSize</key>
                 <string>{124,126}</string>
                 <key>textureRect</key>
-                <string>{{1,1571},{112,82}}</string>
+                <string>{{373,1},{112,82}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GBlackYellowButterflyFish_00026.png</key>
             <dict>
@@ -405,7 +405,7 @@
                 <key>spriteSourceSize</key>
                 <string>{124,126}</string>
                 <key>textureRect</key>
-                <string>{{1,1413},{122,78}}</string>
+                <string>{{125,1},{122,78}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -420,9 +420,9 @@
                 <key>spriteSourceSize</key>
                 <string>{124,126}</string>
                 <key>textureRect</key>
-                <string>{{1,75},{124,72}}</string>
+                <string>{{373,115},{124,72}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
         </dict>
         <key>metadata</key>
@@ -436,9 +436,9 @@
             <key>realTextureFileName</key>
             <string>GBlackYellowButterflyFish.png</string>
             <key>size</key>
-            <string>{126,1654}</string>
+            <string>{482,482}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:e42f68544b923ba34c668e40f028203e:071fd30838bbf7bd3f7f4b155e5fee78:62d687dbf4992997f54fafdff83a50f6$</string>
+            <string>$TexturePacker:SmartUpdate:f3907f7da6b1d12617087ad080317f66:071fd30838bbf7bd3f7f4b155e5fee78:62d687dbf4992997f54fafdff83a50f6$</string>
             <key>textureFileName</key>
             <string>GBlackYellowButterflyFish.png</string>
         </dict>

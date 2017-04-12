@@ -15,7 +15,7 @@
                 <key>spriteSourceSize</key>
                 <string>{300,250}</string>
                 <key>textureRect</key>
-                <string>{{757,1},{132,234}}</string>
+                <string>{{545,477},{132,234}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -30,7 +30,7 @@
                 <key>spriteSourceSize</key>
                 <string>{300,250}</string>
                 <key>textureRect</key>
-                <string>{{789,237},{106,222}}</string>
+                <string>{{763,247},{106,222}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -45,7 +45,7 @@
                 <key>spriteSourceSize</key>
                 <string>{300,250}</string>
                 <key>textureRect</key>
-                <string>{{139,769},{112,170}}</string>
+                <string>{{921,383},{112,170}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -60,9 +60,9 @@
                 <key>spriteSourceSize</key>
                 <string>{300,250}</string>
                 <key>textureRect</key>
-                <string>{{369,969},{120,156}}</string>
+                <string>{{445,793},{120,156}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>GOctopus_00004.png</key>
             <dict>
@@ -75,9 +75,9 @@
                 <key>spriteSourceSize</key>
                 <string>{300,250}</string>
                 <key>textureRect</key>
-                <string>{{1,769},{136,178}}</string>
+                <string>{{567,783},{136,178}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GOctopus_00005.png</key>
             <dict>
@@ -90,7 +90,7 @@
                 <key>spriteSourceSize</key>
                 <string>{300,250}</string>
                 <key>textureRect</key>
-                <string>{{1,949},{174,158}}</string>
+                <string>{{269,793},{174,158}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -105,7 +105,7 @@
                 <key>spriteSourceSize</key>
                 <string>{300,250}</string>
                 <key>textureRect</key>
-                <string>{{177,961},{190,72}}</string>
+                <string>{{269,953},{190,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -120,7 +120,7 @@
                 <key>spriteSourceSize</key>
                 <string>{300,250}</string>
                 <key>textureRect</key>
-                <string>{{699,1049},{188,64}}</string>
+                <string>{{567,921},{188,64}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -135,9 +135,9 @@
                 <key>spriteSourceSize</key>
                 <string>{300,250}</string>
                 <key>textureRect</key>
-                <string>{{177,1035},{188,66}}</string>
+                <string>{{761,713},{188,66}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GOctopus_00009.png</key>
             <dict>
@@ -150,9 +150,9 @@
                 <key>spriteSourceSize</key>
                 <string>{300,250}</string>
                 <key>textureRect</key>
-                <string>{{699,979},{192,68}}</string>
+                <string>{{897,727},{192,68}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GOctopus_00010.png</key>
             <dict>
@@ -165,7 +165,7 @@
                 <key>spriteSourceSize</key>
                 <string>{300,250}</string>
                 <key>textureRect</key>
-                <string>{{883,755},{194,68}}</string>
+                <string>{{967,727},{194,68}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -180,7 +180,7 @@
                 <key>spriteSourceSize</key>
                 <string>{300,250}</string>
                 <key>textureRect</key>
-                <string>{{455,767},{200,66}}</string>
+                <string>{{829,695},{200,66}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -195,9 +195,9 @@
                 <key>spriteSourceSize</key>
                 <string>{300,250}</string>
                 <key>textureRect</key>
-                <string>{{879,461},{204,60}}</string>
+                <string>{{757,979},{204,60}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>GOctopus_00013.png</key>
             <dict>
@@ -210,9 +210,9 @@
                 <key>spriteSourceSize</key>
                 <string>{300,250}</string>
                 <key>textureRect</key>
-                <string>{{897,215},{208,56}}</string>
+                <string>{{757,921},{208,56}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>GOctopus_00014.png</key>
             <dict>
@@ -225,9 +225,9 @@
                 <key>spriteSourceSize</key>
                 <string>{300,250}</string>
                 <key>textureRect</key>
-                <string>{{891,1},{212,58}}</string>
+                <string>{{273,733},{212,58}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>GOctopus_00015.png</key>
             <dict>
@@ -240,7 +240,7 @@
                 <key>spriteSourceSize</key>
                 <string>{300,250}</string>
                 <key>textureRect</key>
-                <string>{{679,685},{214,68}}</string>
+                <string>{{545,713},{214,68}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -255,9 +255,9 @@
                 <key>spriteSourceSize</key>
                 <string>{300,250}</string>
                 <key>textureRect</key>
-                <string>{{273,767},{192,180}}</string>
+                <string>{{817,1},{192,180}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>GOctopus_00017.png</key>
             <dict>
@@ -270,7 +270,7 @@
                 <key>spriteSourceSize</key>
                 <string>{300,250}</string>
                 <key>textureRect</key>
-                <string>{{545,521},{132,234}}</string>
+                <string>{{679,477},{132,234}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -285,7 +285,7 @@
                 <key>spriteSourceSize</key>
                 <string>{300,250}</string>
                 <key>textureRect</key>
-                <string>{{775,755},{106,222}}</string>
+                <string>{{813,471},{106,222}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -300,9 +300,9 @@
                 <key>spriteSourceSize</key>
                 <string>{300,250}</string>
                 <key>textureRect</key>
-                <string>{{527,975},{112,170}}</string>
+                <string>{{921,555},{112,170}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>GOctopus_00020.png</key>
             <dict>
@@ -315,9 +315,9 @@
                 <key>spriteSourceSize</key>
                 <string>{300,250}</string>
                 <key>textureRect</key>
-                <string>{{679,521},{198,162}}</string>
+                <string>{{871,183},{198,162}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GOctopus_00021.png</key>
             <dict>
@@ -330,9 +330,9 @@
                 <key>spriteSourceSize</key>
                 <string>{300,250}</string>
                 <key>textureRect</key>
-                <string>{{545,757},{216,228}}</string>
+                <string>{{545,247},{216,228}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>GOctopus_00022.png</key>
             <dict>
@@ -345,7 +345,7 @@
                 <key>spriteSourceSize</key>
                 <string>{300,250}</string>
                 <key>textureRect</key>
-                <string>{{521,273},{266,246}}</string>
+                <string>{{1,745},{266,246}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -362,7 +362,7 @@
                 <key>textureRect</key>
                 <string>{{1,1},{270,246}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>GOctopus_00024.png</key>
             <dict>
@@ -375,7 +375,7 @@
                 <key>spriteSourceSize</key>
                 <string>{300,250}</string>
                 <key>textureRect</key>
-                <string>{{1,273},{270,246}}</string>
+                <string>{{1,249},{270,246}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -390,7 +390,7 @@
                 <key>spriteSourceSize</key>
                 <string>{300,250}</string>
                 <key>textureRect</key>
-                <string>{{249,1},{270,246}}</string>
+                <string>{{273,1},{270,246}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -405,9 +405,9 @@
                 <key>spriteSourceSize</key>
                 <string>{300,250}</string>
                 <key>textureRect</key>
-                <string>{{273,249},{270,246}}</string>
+                <string>{{1,497},{270,246}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>GOctopus_00027.png</key>
             <dict>
@@ -420,7 +420,7 @@
                 <key>spriteSourceSize</key>
                 <string>{300,250}</string>
                 <key>textureRect</key>
-                <string>{{1,521},{270,246}}</string>
+                <string>{{273,249},{270,246}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -435,7 +435,7 @@
                 <key>spriteSourceSize</key>
                 <string>{300,250}</string>
                 <key>textureRect</key>
-                <string>{{273,521},{270,244}}</string>
+                <string>{{545,1},{270,244}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -450,9 +450,9 @@
                 <key>spriteSourceSize</key>
                 <string>{300,250}</string>
                 <key>textureRect</key>
-                <string>{{521,1},{270,234}}</string>
+                <string>{{273,497},{270,234}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
         </dict>
         <key>metadata</key>
@@ -466,9 +466,9 @@
             <key>realTextureFileName</key>
             <string>GOctopus.png</string>
             <key>size</key>
-            <string>{954,1114}</string>
+            <string>{1040,1040}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:d531b7e38f94f78531724e6792a59ae4:4d141aaaeb0360770595f0e888b7f9c2:75eeaaf4a2624debf69a013aa1ea966b$</string>
+            <string>$TexturePacker:SmartUpdate:51440000c40a3fc08ec9df18ee7ad327:4d141aaaeb0360770595f0e888b7f9c2:75eeaaf4a2624debf69a013aa1ea966b$</string>
             <key>textureFileName</key>
             <string>GOctopus.png</string>
         </dict>

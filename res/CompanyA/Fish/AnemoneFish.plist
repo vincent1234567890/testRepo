@@ -15,9 +15,9 @@
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{1,321},{154,46}}</string>
+                <string>{{113,253},{154,46}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>AnemoneFish_00001.png</key>
             <dict>
@@ -30,9 +30,9 @@
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{157,167},{154,48}}</string>
+                <string>{{271,225},{154,48}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>AnemoneFish_00002.png</key>
             <dict>
@@ -45,7 +45,7 @@
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{1,113},{154,52}}</string>
+                <string>{{1,409},{154,52}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -60,9 +60,9 @@
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{1,1},{154,54}}</string>
+                <string>{{1,253},{154,54}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>AnemoneFish_00004.png</key>
             <dict>
@@ -75,9 +75,9 @@
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{157,1},{154,54}}</string>
+                <string>{{57,253},{154,54}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>AnemoneFish_00005.png</key>
             <dict>
@@ -90,7 +90,7 @@
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{157,113},{154,52}}</string>
+                <string>{{1,463},{154,52}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -105,9 +105,9 @@
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{157,217},{154,48}}</string>
+                <string>{{433,197},{154,48}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>AnemoneFish_00007.png</key>
             <dict>
@@ -120,7 +120,7 @@
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{1,221},{154,48}}</string>
+                <string>{{161,381},{154,48}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -135,9 +135,9 @@
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{157,267},{154,48}}</string>
+                <string>{{483,155},{154,48}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>AnemoneFish_00009.png</key>
             <dict>
@@ -150,9 +150,9 @@
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{1,271},{154,48}}</string>
+                <string>{{483,311},{154,48}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>AnemoneFish_00010.png</key>
             <dict>
@@ -165,9 +165,9 @@
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{1,167},{154,52}}</string>
+                <string>{{161,225},{154,52}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>AnemoneFish_00011.png</key>
             <dict>
@@ -180,7 +180,7 @@
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{1,57},{154,54}}</string>
+                <string>{{151,169},{154,54}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -195,7 +195,7 @@
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{157,57},{154,54}}</string>
+                <string>{{305,85},{154,54}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -210,9 +210,9 @@
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{303,477},{152,50}}</string>
+                <string>{{377,351},{152,50}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>AnemoneFish_00014.png</key>
             <dict>
@@ -225,7 +225,7 @@
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{155,423},{152,52}}</string>
+                <string>{{157,431},{152,52}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -240,9 +240,9 @@
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{1,425},{152,52}}</string>
+                <string>{{461,1},{152,52}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>AnemoneFish_00016.png</key>
             <dict>
@@ -255,7 +255,7 @@
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{397,85},{152,54}}</string>
+                <string>{{215,225},{152,54}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -270,9 +270,9 @@
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{303,529},{150,54}}</string>
+                <string>{{321,351},{150,54}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>AnemoneFish_00018.png</key>
             <dict>
@@ -285,7 +285,7 @@
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{157,367},{152,54}}</string>
+                <string>{{307,141},{152,54}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -300,7 +300,7 @@
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{397,239},{152,54}}</string>
+                <string>{{321,197},{152,54}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -315,9 +315,9 @@
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{1,369},{152,54}}</string>
+                <string>{{377,197},{152,54}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>AnemoneFish_00021.png</key>
             <dict>
@@ -330,9 +330,9 @@
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{157,317},{154,48}}</string>
+                <string>{{429,353},{154,48}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>AnemoneFish_00022.png</key>
             <dict>
@@ -345,7 +345,7 @@
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{313,1},{142,82}}</string>
+                <string>{{307,1},{142,82}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -360,7 +360,7 @@
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{311,393},{148,82}}</string>
+                <string>{{1,169},{148,82}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -375,9 +375,9 @@
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{313,85},{152,82}}</string>
+                <string>{{1,1},{152,82}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>AnemoneFish_00025.png</key>
             <dict>
@@ -390,7 +390,7 @@
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{1,479},{150,82}}</string>
+                <string>{{155,1},{150,82}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -405,9 +405,9 @@
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{313,239},{152,82}}</string>
+                <string>{{1,85},{152,82}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>AnemoneFish_00027.png</key>
             <dict>
@@ -420,7 +420,7 @@
                 <key>spriteSourceSize</key>
                 <string>{160,130}</string>
                 <key>textureRect</key>
-                <string>{{153,479},{148,82}}</string>
+                <string>{{155,85},{148,82}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -436,9 +436,9 @@
             <key>realTextureFileName</key>
             <string>AnemoneFish.png</string>
             <key>size</key>
-            <string>{460,584}</string>
+            <string>{532,532}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:b6c794dd0f3f72a7119bf0e9ee77dd53:589d186311a57d33d692c4e0de4a7ce9:e4202ad0d6fb29e6b1bc9c0c5b3c541c$</string>
+            <string>$TexturePacker:SmartUpdate:7ccde4b81b221fa9a2819e0924931054:589d186311a57d33d692c4e0de4a7ce9:e4202ad0d6fb29e6b1bc9c0c5b3c541c$</string>
             <key>textureFileName</key>
             <string>AnemoneFish.png</string>
         </dict>

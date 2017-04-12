@@ -15,9 +15,9 @@
                 <key>spriteSourceSize</key>
                 <string>{1500,1000}</string>
                 <key>textureRect</key>
-                <string>{{1,3529},{72,70}}</string>
+                <string>{{3791,921},{72,70}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>CoinExplosion1_00001.png</key>
             <dict>
@@ -30,7 +30,7 @@
                 <key>spriteSourceSize</key>
                 <string>{1500,1000}</string>
                 <key>textureRect</key>
-                <string>{{525,3415},{208,150}}</string>
+                <string>{{691,3495},{208,150}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -45,7 +45,7 @@
                 <key>spriteSourceSize</key>
                 <string>{1500,1000}</string>
                 <key>textureRect</key>
-                <string>{{929,3005},{320,278}}</string>
+                <string>{{411,3495},{320,278}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -60,9 +60,9 @@
                 <key>spriteSourceSize</key>
                 <string>{1500,1000}</string>
                 <key>textureRect</key>
-                <string>{{525,3005},{408,402}}</string>
+                <string>{{1,3495},{408,402}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>CoinExplosion1_00004.png</key>
             <dict>
@@ -75,7 +75,7 @@
                 <key>spriteSourceSize</key>
                 <string>{1500,1000}</string>
                 <key>textureRect</key>
-                <string>{{1,3005},{522,522}}</string>
+                <string>{{2475,1003},{522,522}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -90,9 +90,9 @@
                 <key>spriteSourceSize</key>
                 <string>{1500,1000}</string>
                 <key>textureRect</key>
-                <string>{{1209,2987},{652,636}}</string>
+                <string>{{1423,3143},{652,636}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>CoinExplosion1_00006.png</key>
             <dict>
@@ -105,7 +105,7 @@
                 <key>spriteSourceSize</key>
                 <string>{1500,1000}</string>
                 <key>textureRect</key>
-                <string>{{2959,2859},{784,746}}</string>
+                <string>{{3005,921},{784,746}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -120,9 +120,9 @@
                 <key>spriteSourceSize</key>
                 <string>{1500,1000}</string>
                 <key>textureRect</key>
-                <string>{{2959,2005},{918,852}}</string>
+                <string>{{3005,1},{918,852}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>CoinExplosion1_00008.png</key>
             <dict>
@@ -135,7 +135,7 @@
                 <key>spriteSourceSize</key>
                 <string>{1500,1000}</string>
                 <key>textureRect</key>
-                <string>{{1003,1931},{1054,952}}</string>
+                <string>{{2425,2671},{1054,952}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -150,9 +150,9 @@
                 <key>spriteSourceSize</key>
                 <string>{1500,1000}</string>
                 <key>textureRect</key>
-                <string>{{2701,1},{1190,1000}}</string>
+                <string>{{1423,1951},{1190,1000}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>CoinExplosion1_00010.png</key>
             <dict>
@@ -165,7 +165,7 @@
                 <key>spriteSourceSize</key>
                 <string>{1500,1000}</string>
                 <key>textureRect</key>
-                <string>{{2699,1003},{1294,1000}}</string>
+                <string>{{2475,1669},{1294,1000}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -180,9 +180,9 @@
                 <key>spriteSourceSize</key>
                 <string>{1500,1000}</string>
                 <key>textureRect</key>
-                <string>{{1957,2005},{1420,1000}}</string>
+                <string>{{1,2493},{1420,1000}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>CoinExplosion1_00012.png</key>
             <dict>
@@ -197,7 +197,7 @@
                 <key>textureRect</key>
                 <string>{{1,1},{1500,1000}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>CoinExplosion1_00013.png</key>
             <dict>
@@ -210,9 +210,9 @@
                 <key>spriteSourceSize</key>
                 <string>{1500,1000}</string>
                 <key>textureRect</key>
-                <string>{{1,1503},{1500,1000}}</string>
+                <string>{{1503,1},{1500,1000}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>CoinExplosion1_00014.png</key>
             <dict>
@@ -225,7 +225,7 @@
                 <key>spriteSourceSize</key>
                 <string>{1500,1000}</string>
                 <key>textureRect</key>
-                <string>{{1209,1},{1490,946}}</string>
+                <string>{{983,1003},{1490,946}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -240,9 +240,9 @@
                 <key>spriteSourceSize</key>
                 <string>{1500,1000}</string>
                 <key>textureRect</key>
-                <string>{{1209,949},{1488,980}}</string>
+                <string>{{1,1003},{1488,980}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
         </dict>
         <key>metadata</key>
@@ -256,9 +256,9 @@
             <key>realTextureFileName</key>
             <string>CoinExplosion1.png</string>
             <key>size</key>
-            <string>{3994,3624}</string>
+            <string>{3898,3898}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:6f2f552721969aa5e92136e9c8c314f5:461c1e1b8eca3a58b7415af361ee0765:afe42a6f91ec3b9581f6b306e0ef9c1b$</string>
+            <string>$TexturePacker:SmartUpdate:02c64a179a3204f90e6184c9d1839e75:461c1e1b8eca3a58b7415af361ee0765:afe42a6f91ec3b9581f6b306e0ef9c1b$</string>
             <key>textureFileName</key>
             <string>CoinExplosion1.png</string>
         </dict>

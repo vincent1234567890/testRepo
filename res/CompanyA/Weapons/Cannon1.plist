@@ -15,9 +15,9 @@
                 <key>spriteSourceSize</key>
                 <string>{15,28}</string>
                 <key>textureRect</key>
-                <string>{{1,415},{15,28}}</string>
+                <string>{{61,61},{15,28}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>Cannon1_00000.png</key>
             <dict>
@@ -30,7 +30,7 @@
                 <key>spriteSourceSize</key>
                 <string>{58,128}</string>
                 <key>textureRect</key>
-                <string>{{1,317},{58,96}}</string>
+                <string>{{105,61},{58,96}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -47,7 +47,7 @@
                 <key>textureRect</key>
                 <string>{{1,109},{58,102}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>Cannon1_00002.png</key>
             <dict>
@@ -75,9 +75,9 @@
                 <key>spriteSourceSize</key>
                 <string>{58,128}</string>
                 <key>textureRect</key>
-                <string>{{1,213},{58,102}}</string>
+                <string>{{61,1},{58,102}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
         </dict>
         <key>metadata</key>
@@ -91,9 +91,9 @@
             <key>realTextureFileName</key>
             <string>Cannon1.png</string>
             <key>size</key>
-            <string>{60,431}</string>
+            <string>{168,168}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:4d0b4a050cc0cad4943ba98bbb91095b:844b8e5d21cf18ed793dd9cb368e061a:3b36d7b2d3207e6d67174f9962d7e8b6$</string>
+            <string>$TexturePacker:SmartUpdate:8babfe3f0be091f6245b51fb57db9963:844b8e5d21cf18ed793dd9cb368e061a:3b36d7b2d3207e6d67174f9962d7e8b6$</string>
             <key>textureFileName</key>
             <string>Cannon1.png</string>
         </dict>

@@ -15,9 +15,9 @@
                 <key>spriteSourceSize</key>
                 <string>{280,250}</string>
                 <key>textureRect</key>
-                <string>{{441,371},{202,106}}</string>
+                <string>{{845,1},{202,106}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GJellyFish_00001.png</key>
             <dict>
@@ -30,7 +30,7 @@
                 <key>spriteSourceSize</key>
                 <string>{280,250}</string>
                 <key>textureRect</key>
-                <string>{{659,257},{200,116}}</string>
+                <string>{{641,153},{200,116}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -45,7 +45,7 @@
                 <key>spriteSourceSize</key>
                 <string>{280,250}</string>
                 <key>textureRect</key>
-                <string>{{315,279},{198,124}}</string>
+                <string>{{155,571},{198,124}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -60,9 +60,9 @@
                 <key>spriteSourceSize</key>
                 <string>{280,250}</string>
                 <key>textureRect</key>
-                <string>{{861,261},{196,134}}</string>
+                <string>{{429,265},{196,134}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GJellyFish_00004.png</key>
             <dict>
@@ -75,7 +75,7 @@
                 <key>spriteSourceSize</key>
                 <string>{280,250}</string>
                 <key>textureRect</key>
-                <string>{{1385,305},{192,140}}</string>
+                <string>{{541,777},{192,140}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -90,7 +90,7 @@
                 <key>spriteSourceSize</key>
                 <string>{280,250}</string>
                 <key>textureRect</key>
-                <string>{{1455,155},{192,148}}</string>
+                <string>{{541,627},{192,148}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -105,7 +105,7 @@
                 <key>spriteSourceSize</key>
                 <string>{280,250}</string>
                 <key>textureRect</key>
-                <string>{{1457,1},{192,152}}</string>
+                <string>{{281,571},{192,152}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -120,9 +120,9 @@
                 <key>spriteSourceSize</key>
                 <string>{280,250}</string>
                 <key>textureRect</key>
-                <string>{{1261,1},{194,152}}</string>
+                <string>{{1,565},{194,152}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GJellyFish_00008.png</key>
             <dict>
@@ -135,7 +135,7 @@
                 <key>spriteSourceSize</key>
                 <string>{280,250}</string>
                 <key>textureRect</key>
-                <string>{{865,1},{196,150}}</string>
+                <string>{{647,1},{196,150}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -150,9 +150,9 @@
                 <key>spriteSourceSize</key>
                 <string>{280,250}</string>
                 <key>textureRect</key>
-                <string>{{1063,1},{196,150}}</string>
+                <string>{{277,265},{196,150}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GJellyFish_00010.png</key>
             <dict>
@@ -165,7 +165,7 @@
                 <key>spriteSourceSize</key>
                 <string>{280,250}</string>
                 <key>textureRect</key>
-                <string>{{1259,155},{194,148}}</string>
+                <string>{{565,271},{194,148}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -180,9 +180,9 @@
                 <key>spriteSourceSize</key>
                 <string>{280,250}</string>
                 <key>textureRect</key>
-                <string>{{1193,305},{190,148}}</string>
+                <string>{{1,761},{190,148}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GJellyFish_00012.png</key>
             <dict>
@@ -195,7 +195,7 @@
                 <key>spriteSourceSize</key>
                 <string>{280,250}</string>
                 <key>textureRect</key>
-                <string>{{1071,153},{186,146}}</string>
+                <string>{{761,271},{186,146}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -210,7 +210,7 @@
                 <key>spriteSourceSize</key>
                 <string>{280,250}</string>
                 <key>textureRect</key>
-                <string>{{1649,155},{182,144}}</string>
+                <string>{{735,697},{182,144}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -225,9 +225,9 @@
                 <key>spriteSourceSize</key>
                 <string>{280,250}</string>
                 <key>textureRect</key>
-                <string>{{1651,1},{178,144}}</string>
+                <string>{{151,771},{178,144}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GJellyFish_00015.png</key>
             <dict>
@@ -240,7 +240,7 @@
                 <key>spriteSourceSize</key>
                 <string>{280,250}</string>
                 <key>textureRect</key>
-                <string>{{1579,305},{178,142}}</string>
+                <string>{{771,419},{178,142}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -255,9 +255,9 @@
                 <key>spriteSourceSize</key>
                 <string>{280,250}</string>
                 <key>textureRect</key>
-                <string>{{1059,301},{184,132}}</string>
+                <string>{{749,563},{184,132}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>GJellyFish_00017.png</key>
             <dict>
@@ -270,7 +270,7 @@
                 <key>spriteSourceSize</key>
                 <string>{280,250}</string>
                 <key>textureRect</key>
-                <string>{{645,375},{196,110}}</string>
+                <string>{{443,153},{196,110}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -285,7 +285,7 @@
                 <key>spriteSourceSize</key>
                 <string>{280,250}</string>
                 <key>textureRect</key>
-                <string>{{661,153},{204,102}}</string>
+                <string>{{565,421},{204,102}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -300,9 +300,9 @@
                 <key>spriteSourceSize</key>
                 <string>{280,250}</string>
                 <key>textureRect</key>
-                <string>{{213,279},{206,100}}</string>
+                <string>{{541,525},{206,100}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>GJellyFish_00020.png</key>
             <dict>
@@ -315,7 +315,7 @@
                 <key>spriteSourceSize</key>
                 <string>{280,250}</string>
                 <key>textureRect</key>
-                <string>{{867,153},{202,106}}</string>
+                <string>{{277,463},{202,106}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -330,7 +330,7 @@
                 <key>spriteSourceSize</key>
                 <string>{280,250}</string>
                 <key>textureRect</key>
-                <string>{{443,155},{214,106}}</string>
+                <string>{{219,157},{214,106}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -345,9 +345,9 @@
                 <key>spriteSourceSize</key>
                 <string>{280,250}</string>
                 <key>textureRect</key>
-                <string>{{1,347},{210,134}}</string>
+                <string>{{297,725},{210,134}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GJellyFish_00023.png</key>
             <dict>
@@ -360,7 +360,7 @@
                 <key>spriteSourceSize</key>
                 <string>{280,250}</string>
                 <key>textureRect</key>
-                <string>{{661,1},{202,150}}</string>
+                <string>{{443,1},{202,150}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -375,9 +375,9 @@
                 <key>spriteSourceSize</key>
                 <string>{280,250}</string>
                 <key>textureRect</key>
-                <string>{{443,1},{216,152}}</string>
+                <string>{{1,347},{216,152}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GJellyFish_00025.png</key>
             <dict>
@@ -435,9 +435,9 @@
                 <key>spriteSourceSize</key>
                 <string>{280,250}</string>
                 <key>textureRect</key>
-                <string>{{219,157},{222,120}}</string>
+                <string>{{155,347},{222,120}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>GJellyFish_00029.png</key>
             <dict>
@@ -450,9 +450,9 @@
                 <key>spriteSourceSize</key>
                 <string>{280,250}</string>
                 <key>textureRect</key>
-                <string>{{443,263},{214,106}}</string>
+                <string>{{433,725},{214,106}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
         </dict>
         <key>metadata</key>
@@ -466,9 +466,9 @@
             <key>realTextureFileName</key>
             <string>GJellyFish.png</string>
             <key>size</key>
-            <string>{1832,486}</string>
+            <string>{952,952}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:f6f7f5b3ba2b81f8d0d7d99a9073af55:4f341128ab0ec360d5c0815b687cf1f4:df21f69096534a1f593352ff9d0d3f63$</string>
+            <string>$TexturePacker:SmartUpdate:3b65d1f617cc13e5ffb1483a89b2032b:4f341128ab0ec360d5c0815b687cf1f4:df21f69096534a1f593352ff9d0d3f63$</string>
             <key>textureFileName</key>
             <string>GJellyFish.png</string>
         </dict>
