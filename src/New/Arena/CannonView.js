@@ -11,6 +11,7 @@ const CannonView = (function () {
         this._gameConfig = gameConfig;
         this._cannonNode = new cc.Node();
 
+        //the animation of cannon
         // let animationArray = [];
         // let count = 0;
         // while (true) {
@@ -27,7 +28,7 @@ const CannonView = (function () {
 
         this.createView(slot);
 
-        // this.setSparkSprite();
+        // this.setSparkSprite();   //show the spark when cannon is firing.
         this.setDirection(slot);
         GameView.addView(this._cannonNode, 2);
     };
@@ -71,27 +72,10 @@ const CannonView = (function () {
         this._cannonPowerBG = new cc.Sprite(ReferenceName.SideMenuBG);
         this._cannonNode.addChild(this._cannonPowerBG, 27);
 
-
         // this._spriteDown.setAnchorPoint(this._sprite.getAnchorPoint());
         // this._spriteDown.setPosition(this._sprite.getPosition());
 
-
         // this._cannonNode.setPosition(cc.view.getDesignResolutionSize().width/2,cc.view.getDesignResolutionSize().height/2)
-
-
-        // if (pos[1] > markerPos[1]){
-        //     let multiplier = 1;
-        //     let diff = theme["CannonPowerBGRotationOffset"];
-        //     if (pos[0] > markerPos[0]){
-        //         multiplier = -1;
-        //     }
-        //     this._cannonPowerBG.x = pos[0] + (diff * multiplier);
-        //     this._cannonPowerBG.y = pos[1];
-        //     this._cannonPowerBG.setRotation( multiplier * 90);
-        // }else{
-        //     this._cannonPowerBG.x = pos[0];
-        //     this._cannonPowerBG.y = pos[1];
-        // }
 
         if (this.pos[1] > markerPos[1]) {
             let multiplier = 1;
@@ -127,12 +111,10 @@ const CannonView = (function () {
         const direction = cc.pNormalize(cc.pSub({
             x: cc.winSize.width / 2,
             y: cc.winSize.height / 2
-        }, new cc.p(this._gameConfig.cannonPositions[slot][0], this._gameConfig.cannonPositions[slot][1])));
+        }, cc.p(this._gameConfig.cannonPositions[slot][0], this._gameConfig.cannonPositions[slot][1])));
         const rot = Math.atan2(direction.x, -direction.y);
         let angle = (GameView.getRotatedView(undefined, rot)).rotation;
         this._cannonSprite.setRotation(angle);
-        // this._spriteDown.setRotation(angle);
-        // this._spriteDown.setVisible(false);
     };
 
     proto.updateCannonPowerLabel = function (cannonPower) {
@@ -202,7 +184,6 @@ const CannonView = (function () {
     proto.animateShootTo = function () { //Request to remove spark sprite.
         if (this._isAnimating) {
             this._cannonSprite.stopAction(this._sequence);
-            // cc.audioEngine.stopEffect(res.GunShotSound);
             // this._sparkSprite.stopAction(this._sparkSequence);
         }
         // this._sparkSprite.setVisible(true);
