@@ -1,16 +1,8 @@
 /**
  * Created by eugeneseah on 21/2/17.
  */
-// const ObjectPool = (function () {
-//     const _objectPool = {};
-//     const ObjectPool = function () {
-//
-//     }
-// }());
 
 const ObjectPool = (function (){
-
-
     /**
      * Create a new object pool of a certain class
      *
@@ -33,7 +25,6 @@ const ObjectPool = (function (){
      * @return the object
      */
     ObjectPool.prototype.alloc = function alloc() {
-
         var obj;
 
         if (this._objpool.length == 0) {

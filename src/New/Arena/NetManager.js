@@ -2,6 +2,7 @@
  * Created by eugeneseah on 13/12/16.
  */
 
+//
 const NetManager = (function (){
         "use strict";
 

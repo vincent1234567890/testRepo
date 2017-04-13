@@ -2,11 +2,11 @@
  * Created by eugeneseah on 3/11/16.
  */
 
+//use for manage fishes.
 const FishViewManager = (function(){
 
     const FishViewManager = function(fishGameArena, gameConfig, animationEndEvent, getFishLockStatus, onFishLockSelectedCallback){
         // console.log
-
         // cc.spriteFrameCache.addSpriteFrames(res.SquidPlist);
         // cc.spriteFrameCache.addSpriteFrames(res.PufferfishPlist);
         // cc.spriteFrameCache.addSpriteFrames(res.TurtlePlist);
@@ -29,7 +29,6 @@ const FishViewManager = (function(){
 
 
         //new game
-
         // cc.spriteFrameCache.addSpriteFrames(res.AnemoneFishPlist);
         // cc.spriteFrameCache.addSpriteFrames(res.AngelFish2Plist);
         // cc.spriteFrameCache.addSpriteFrames(res.BlackWhiteYellowFishPlist);
@@ -68,13 +67,13 @@ const FishViewManager = (function(){
                 return;
             }
             let id = -1;
-            for( var fishId in this._fishes ) {
+            for( let fishId in this._fishes ) {
                 if( this._fishes[ fishId ] === fishView ) {
                     id = fishId;
                     break;
                 }
             }
-            if (targetLockUI.getParent()!= null){
+            if (targetLockUI.getParent() != null){
                 targetLockUI.getParent().removeChild(targetLockUI,false);
             }
             fishView.addTarget(targetLockUI);
@@ -133,7 +132,8 @@ const FishViewManager = (function(){
                 const fishModel = this._fishGameArena.getFish(fishId);
                 if (fishModel) {
                     this._parent.removeChild(fishModel);
-                    delete fishModel;
+                    //delete fishModel;   //it is wrong.
+                    this._fishGameArena.removeFish(fishId);
                 }
             }
             GameView.destroyView(this._parent);

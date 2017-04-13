@@ -2,12 +2,12 @@
  * Created by eugeneseah on 30/11/16.
  */
 
-const BulletView = (function () {
+const BulletView = (function () {  //the bullet class define.
     "use strict";
 
     const BulletView = function (parent, gunId) {
         this._parent = parent;
-        if (this.gunId != gunId) {
+        if (this.gunId !== gunId) {
             this.gunId = gunId;
 
             if (this._particle){
@@ -34,7 +34,6 @@ const BulletView = (function () {
         this._view.setVisible(true);
 
         if (GameManager.debug && !this.debugCircle) {
-
             this.debugCircle = new cc.Sprite(res.DebugCircle);
 
             const bulletSetting = GameManager.getGameConfig().gunClasses[gunId].collisionRadius;
