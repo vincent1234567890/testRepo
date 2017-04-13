@@ -131,7 +131,7 @@ const SettingsView = (function () {
         function cancel() {
             _musicSlider.setValue(previousMusic);
             _soundSlider.setValue(previousSound);
-            dismissCallback();
+            dismiss();
         }
 
         function dismiss() {
@@ -145,6 +145,17 @@ const SettingsView = (function () {
             previousSound = -1;
             BlockingManager.deregisterBlock(dismissCallback);
         }
+
+        this.unattach = function () {
+            if (parent.getParent()) {
+                parent.getParent().removeChild(parent, false);
+            }
+        };
+
+        this.reattach = function () {
+            this.unattach();
+            GameView.addView(parent);
+        };
     };
 
     function createSlider(parent, callback, value) {
@@ -210,20 +221,6 @@ const SettingsView = (function () {
         cc.audioEngine.setEffectsVolume(sender.getValue().toFixed(2) - STARTOFFSET);
     }
 
-    const proto = SettingsView.prototype;
-
-    proto.unattach = function () {
-        if (_parent.getParent()) {
-            _parent.getParent().removeChild(_parent, false);
-        }
-    };
-
-    proto.reattach = function () {
-        if (_parent.getParent()) {
-            _parent.getParent().removeChild(_parent, false);
-        }
-        GameView.addView(_parent);
-    };
 
     return SettingsView;
 }());

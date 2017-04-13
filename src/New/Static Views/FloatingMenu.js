@@ -9,14 +9,18 @@ const FloatingMenu = (function () {
     const hoverSize = 1.2;
     const originalSize = 1;
 
+    let _playerData;
+
     let _leaderboardView;
     let _setttingsView;
     let _profileView;
     let _faqView;
 
-    const FloatingMenu = function () {
+    const FloatingMenu = function (playerData) {
         _parent = new cc.Node();
         GameView.addView(_parent);
+
+        _playerData = playerData;
 
         _theme = ThemeDataManager.getThemeDataList("FloatingMenu");
 
@@ -130,7 +134,7 @@ const FloatingMenu = (function () {
     function onProfileSelected() {
         console.log("onProfileSelected");
         if (!_profileView) {
-            _profileView = new ProfileView();
+            _profileView = new ProfileView(_playerData);
         } else {
             _profileView.show();
         }

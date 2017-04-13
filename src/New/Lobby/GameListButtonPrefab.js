@@ -17,16 +17,16 @@ const GameListButtonPrefab = (function () {
                     break;
                 case ccui.Widget.TOUCH_BEGAN:
                     if (selected) return;
-                    if(base.getNumberOfRunningActions() == 0){
+                    if(ball.getNumberOfRunningActions() == 0){
                         // console.log("run");
-                        const _baseSequence = new cc.repeatForever(new cc.Sequence(getAnimationArray("GameSelectionBase")));
+                        // const _baseSequence = new cc.repeatForever(new cc.Sequence(getAnimationArray("GameSelectionBase")));
                         const _ballSequence = new cc.repeatForever(new cc.Sequence(getAnimationArray(itemData.gameName+"Top")));
 
-                        base.runAction(_baseSequence);
+                        // base.runAction(_baseSequence);
                         ball.runAction(_ballSequence);
                     }
                     selected = true;
-                    base.resume();
+                    // base.resume();
                     ball.resume();
                     break;
                 case ccui.Widget.TOUCH_ENDED:
@@ -34,7 +34,7 @@ const GameListButtonPrefab = (function () {
                     selectedCallback(this);
                 case ccui.Widget.TOUCH_CANCELED:
                     // gameSelected(sender);
-                    base.pause();
+                    // base.pause();
                     ball.pause();
                     selected = false;
                     // this._selectedCallBack(sender);
@@ -86,14 +86,18 @@ const GameListButtonPrefab = (function () {
 
         this.disableContent = () => {
             this._wrapper.setEnabled(false);
-            base.stopAllActions(); // due to some unknown cause, pausing immediately after running doesn't work.
+            // base.stopAllActions(); // due to some unknown cause, pausing immediately after running doesn't work.
             ball.stopAllActions();
         };
 
         cc.eventManager.addListener(_listener, this._wrapper);
 
+        const _baseSequence = new cc.repeatForever(new cc.Sequence(getAnimationArray("GameSelectionBase")));
+
         const base = new cc.Sprite("#GameSelectionBase_00000.png");
         base.setPosition(0,0);
+
+        base.runAction(_baseSequence);
 
         const content = new ccui.Widget();
         const ball = new cc.Sprite("#" + itemData.gameName + "Top_00000.png");
@@ -105,13 +109,10 @@ const GameListButtonPrefab = (function () {
         content.setTouchEnabled(true);
         content.addTouchEventListener(touchEvent);
         content.gameData = itemData;
-        // base.setPosition(pos);
         content.setPosition(35,10);
         base.setPosition(165,140);
 
         content.setAnchorPoint(0,0);
-        // base.setAnchorPoint(0,0);
-
 
         ball.setPosition(383, 330);
         base.addChild(ball);
@@ -149,15 +150,11 @@ const GameListButtonPrefab = (function () {
         return new cc.Animate(new cc.Animation(animationArray, 2 / animationArray.length));
     }
 
-
     const proto = GameListButtonPrefab.prototype;
 
     proto.getContent = function () {
         return this._wrapper;
     };
-
-
-
 
     return GameListButtonPrefab;
 

@@ -21,6 +21,10 @@ const ReferenceName = {
     LockOnButtonBottom : "LockOnBtm_",
     LockOnTargetCrosshair :"#LockOnIcon_00000.png",
 
+    BackButton : "Back.png",
+    BackButtonOnPress : "BackDW.png",
+    BackButtonText : "#BackChinese.png",
+
     //Lobby
     LobbyBackground : "#LobbyBG1.png",
     ScrollArrow : "#Arrow.png",//
@@ -120,7 +124,7 @@ const ReferenceName = {
     ProfileUserTextBackground : "#TextBG6.png",
     ProfileNicknameTitleChinese : "#NicknameChinese.png",
     ProfileInputBackground : "InputBox.png",
-    ProfileEditButton : "#EditButton.png",
+    ProfileEditButton : "EditButton.png",
     ProfileUsernameTitleChinese : "#UsernameChinese.png",
     ProfileIconBackground : "#SymbolBG.png",
     ProfileIconTextBackground : "#TextBG5.png",
@@ -146,7 +150,6 @@ const ReferenceName = {
     GameLogRadioTextPeriodLongChinese :"#2WeeksChinese.png",
     GameLogListSeparator : "#LineLong.png",
     GameLogListSeparatorShort : "#LineShort.png",
-
 
     //Profile OLD
     ProfileBackground : "#Profile POut BG.png",

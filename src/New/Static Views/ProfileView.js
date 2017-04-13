@@ -10,7 +10,9 @@ const ProfileView = (function () {
     const RightColumn = 625;
     const Spacing = 100;
     const _parent = new cc.Node();
-    const ProfileView = function () {
+
+    let _playerData;
+    const ProfileView = function (playerData) {
 
         /*
          ProfileTitleChinese : "#InfoChineseTitle.png",
@@ -27,6 +29,8 @@ const ProfileView = (function () {
          ProfileCoinStackIcon : "#Coin2WeekSymbol.png",
          */
 
+        _playerData = playerData;
+
         const _background = new cc.Sprite(ReferenceName.SettingsBackground);
         const _closeButton = new CloseButtonPrefab(dismiss);
 
@@ -35,10 +39,10 @@ const ProfileView = (function () {
 
         _parent.setPosition(683, 384);
 
-        const timeDisplay = createDisplay(ReferenceName.ProfileTimeIcon,"timeTitle", "timeText");
-        const coinDisplay = createDisplay(ReferenceName.ProfileCoinIcon,"coinTitle", "coinText");
-        const rankingDisplay = createDisplay(ReferenceName.ProfileRankingIcon,"rankingTitle", "rankingText");
-        const coinStackDisplay = createDisplay(ReferenceName.ProfileCoinStackIcon,"coinStackTitle", "coinStackText");
+        const timeDisplay = createDisplay(ReferenceName.ProfileTimeIcon,"今日在线时长", "timeText");
+        const coinDisplay = createDisplay(ReferenceName.ProfileCoinIcon,"今日获得得分数", "coinText");
+        const rankingDisplay = createDisplay(ReferenceName.ProfileRankingIcon,"排行榜最高名次", "rankingText");
+        const coinStackDisplay = createDisplay(ReferenceName.ProfileCoinStackIcon,"近两周获得得分数", "coinStackText");
 
         _background.addChild(coinDisplay);
         _background.addChild(timeDisplay);
@@ -50,22 +54,33 @@ const ProfileView = (function () {
         rankingDisplay.setPosition(RightColumn,startHeight - Spacing);
         coinStackDisplay.setPosition(RightColumn,startHeight - Spacing*2);
 
-        //------
+        //------ user name text boxes
 
         const bg = new cc.Sprite (ReferenceName.ProfileUserTextBackground);
         const bgPos = new cc.p(bg.getContentSize().width/2,bg.getContentSize().height/2);
         const nickTitle = new cc.Sprite (ReferenceName.ProfileNicknameTitleChinese);
         const profilebg = new cc.Scale9Sprite(ReferenceName.ProfileInputBackground);
+        profilebg.setContentSize(190,30);
+        const profilebgdummy = new cc.Scale9Sprite();
+        const editButton = GUIFunctions.createButton(ReferenceName.ProfileEditButton,undefined,onEditNicknameCallback);
+
         profilebg.setAnchorPoint(0.0,0.0);
 
-        const nickTextBox = new cc.EditBox(cc.size(170,30), profilebg);
+        const nickTextBox = new cc.EditBox(cc.size(165,30), profilebgdummy);
         nickTextBox.setPlaceHolder("Nickname");
         nickTextBox.setFontName("Microsoft YaHei");
+        nickTextBox.setFontColor(new cc.Color(72, 21, 0, 255));
         bg.addChild(nickTitle);
         bg.addChild(nickTextBox);
+        bg.addChild(profilebg);
+        bg.addChild(editButton,10);
         // nickName.setFontSize(40);
         // nickName.setPlaceholderFontSize(40);
-        nickTextBox.setPosition( 180, bgPos.y);
+
+        nickTextBox.setPosition( 95, bgPos.y);
+        // editButton.setPosition( 250, bgPos.y);
+        profilebg.setPosition(90,bgPos.y/2);
+        editButton.setPosition( 270 , bgPos.y);
         nickTitle.setPosition(50, bgPos.y);
         bg.setPosition(LeftColumn - 35, startHeight);
         _background.addChild(bg);
@@ -76,55 +91,26 @@ const ProfileView = (function () {
         fontDef.fontSize = "20";
         fontDef.fontStyle = "bold";
         fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
-        fontDef.fillStyle = new cc.Color(0, 0, 0, 255);
-        let userNameLabel = new cc.LabelTTF("username", fontDef);
+        fontDef.fillStyle = new cc.Color(72, 21, 0, 255);
+        let userNameLabel = new cc.LabelTTF(_playerData.playerState.name, fontDef);
 
         const userbg = new cc.Sprite(ReferenceName.ProfileUserTextBackground);
         const userTitle = new cc.Sprite(ReferenceName.ProfileUsernameTitleChinese);
         userbg.addChild(userTitle);
         userbg.addChild(userNameLabel);
         userTitle.setPosition(75, bgPos.y);
-        userNameLabel.setPosition(userTitle.x + userTitle.getContentSize().width, bgPos.y);
+        userNameLabel.setPosition(userTitle.x + userTitle.getContentSize().width + 10, bgPos.y);
         userbg.setPosition(RightColumn - 35, startHeight);
         _background.addChild(userbg);
-//-------
+        //-------
         const title = new cc.Sprite(ReferenceName.ProfileTitleChinese);
         const titleBackground = new cc.Sprite(ReferenceName.SettingsTitleBackground);
+        titleBackground.setScale(2,2);
 
         const titlePosition = new cc.p(400, 425);
         title.setPosition(titlePosition);
         titleBackground.setPosition(titlePosition);
-        //
-        // musicTitle.setPosition(STARTING_ALIGNMENT, musicSliderHeight);
-        // soundTitle.setPosition(STARTING_ALIGNMENT, soundSliderHeight);
-        //
-        // gameLanguageSelectionTitle.setPosition(STARTING_ALIGNMENT, gameLanguageSelectionHeight);
-        // gameLanguageSelectionBar.setPosition(400, gameLanguageSelectionHeight);
-        //
-        // let fontDef = new cc.FontDefinition();
-        // fontDef.fontName = "Microsoft YaHei";
-        // // fontDef.fontName = "Arial Unicode MS";
-        // fontDef.fontSize = "20";
-        // fontDef.fontStyle = "bold";
-        // fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
-        // fontDef.fillStyle = new cc.Color(255, 255, 255, 255);
-        // let label = new cc.LabelTTF("中文", fontDef);
-        // label.setPosition(300, gameLanguageSelectionHeight);
-        //
-        // const acceptButton = GUIFunctions.createButton(ReferenceName.SettingsButtonBackground, ReferenceName.SettingsButtonBackgroundOnPress, dismiss);
-        // const cancelButton = GUIFunctions.createButton(ReferenceName.SettingsButtonBackground, ReferenceName.SettingsButtonBackgroundOnPress, cancel);
-        //
-        // const buttonLevel = 80;
-        //
-        // acceptButton.setPosition(250, buttonLevel);
-        // cancelButton.setPosition(550, buttonLevel);
-        //
-        // const acceptText = new cc.Sprite(ReferenceName.SettingsConfirmButtonTextChinese);
-        // const cancelText = new cc.Sprite(ReferenceName.SettingsCancelButtonTextChinese);
-        //
-        // acceptText.setPosition(acceptButton.getPosition());
-        // cancelText.setPosition(cancelButton.getPosition());
-        //
+
 
         _background.addChild(titleBackground);
         _background.addChild(title);
@@ -175,6 +161,10 @@ const ProfileView = (function () {
             BlockingManager.deregisterBlock(dismissCallback);
         }
 
+        function onEditNicknameCallback(){
+
+        }
+
     };
 
     function createDisplay(spriteIcon, titleText, infoText){
@@ -212,6 +202,8 @@ const ProfileView = (function () {
 
         return background;
     }
+
+
 
     const proto = ProfileView.prototype;
 

@@ -55,14 +55,12 @@
         "src/New/Lobby/LobbyManager.js",
         "src/New/Lobby/LobbyView.js",
 
-        "src/New/Arena/OptionsView.js",
-        "src/New/Arena/OptionsSideMenuView.js",
-        "src/New/Arena/OptionsMenuViewBottom.js",
-        "src/New/Arena/OptionsManager.js",
+
         "src/New/Data/FishAnimationEnum.js",
         "src/New/Data/FishAnimationData.js",
         "src/New/MouseLayer.js",
         "src/New/ReferenceName.js",
+        "src/New/Arena/BackToLobbyButton.js",
         "src/New/Arena/BulletView.js",
         "src/New/Arena/BulletManager.js",
         "src/New/Arena/NetManager.js",
