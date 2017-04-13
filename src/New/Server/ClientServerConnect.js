@@ -75,11 +75,14 @@ const ClientServerConnect = function () {
                     // This is example code to demonstrate how to collect stats from
                     // It can be removed, commented,  or used elsewhere.
                     Promise.resolve().then(
-                        () => client.callAPIOnce('player', 'authPlayer', {playerId: queryParams.playerId, token: queryParams.token}).then(
-                            authResponse => {
-                                console.log("authResponse:", authResponse);
-                            }
-                        )
+                        //() => client.callAPIOnce('player', 'authPlayer', {playerId: queryParams.playerId, token: queryParams.token}).then(
+                        //    authResponse => {
+                        //        console.log("authResponse:", authResponse);
+                        //    }
+                        //)
+
+                        // But we don't need to use that auth mechanism if the login above completes
+                        () => new Promise(resolve => setTimeout(resolve, 8000))
                     ).then(
                         () => client.callAPIOnce('player', 'getConsumptionLog', {}).then(
                             consumptions => {
