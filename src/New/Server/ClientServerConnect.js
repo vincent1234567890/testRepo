@@ -75,7 +75,7 @@ const ClientServerConnect = function () {
                     // This is example code to demonstrate how to collect stats from
                     // It can be removed, commented,  or used elsewhere.
                     Promise.resolve().then(
-                        () => client.callAPIOnce('player', 'authForStats', {playerId: queryParams.playerId, token: queryParams.token}).then(
+                        () => client.callAPIOnce('player', 'authPlayer', {playerId: queryParams.playerId, token: queryParams.token}).then(
                             authResponse => {
                                 console.log("authResponse:", authResponse);
                             }
