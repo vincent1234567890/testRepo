@@ -18,8 +18,8 @@ var TestScene = cc.Scene.extend({
         // GameManager.initialise(this);
         // GameManager.development(this);
 
-        const waterCausticsLayer = new WaterCausticsLayer();
-        this.addChild(waterCausticsLayer,999);
+        //const waterCausticsLayer = new WaterCausticsLayer();
+        //this.addChild(waterCausticsLayer,999);
 
 
     }
