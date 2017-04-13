@@ -1,3 +1,0 @@
-AlertTip = cc.Class.extend({
-
-});
