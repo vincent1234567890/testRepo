@@ -98,48 +98,6 @@ var res = {
     // Track2_25 : "res/Track2_25.plist",
     //
     // FishPng : "res/fish.png",
-    // CroakerSprite : "res/croaker.sprite",
-    // ChelonianSprite : "res/chelonian.sprite",
-    // LanternSprite : "res/lantern.sprite",
-    // AngelfishSprite : "res/angelfish.sprite",
-    //
-    // ProgySprite : "res/progy.sprite",
-    // AmphiprionSprite : "res/amphiprion.sprite",
-    // PufferSprite : "res/puffer.sprite",
-    // RaySprite : "res/ray.sprite",
-    // BreamSprite : "res/bream.sprite",
-    // SmallFishActorSprite : "res/smallfishactor.sprite",
-    //
-    // OldSharkPng: "res/shayu.png",
-    // SharkSprite : "res/shark.sprite",
-    //
-    // MarlinPng : "res/marlins.png",
-    // MarlinSprite : "res/marlins.sprite",
-    //
-    // GrouperPng : "res/grouper.png",
-    // GrouperSprite : "res/grouper.sprite",
-    //
-    // GSharkPng : "res/gshayu.png",
-    // GSharkSprite : "res/gshayu.sprite",
-    //
-    // GMarlinPng : "res/gmarlins.png",
-    // GMarlinSprite : "res/gmarlins.sprite",
-    //
-    // OldButterflyPng : "res/butterfly.png",
-    // ButterflySprite : "res/butterfly.sprite",
-    // PomfretSprite : "res/pomfret.sprite",
-    //
-    // GoldenTroutPng : "res/goldentrout.png",
-    // GoldenTroutSprite: "res/goldentrout.sprite",
-    //
-    // StarfishPNG : "res/ghaixing.png",
-    // StarfishSprite : "res/ghaixing.sprite",
-    //
-    // CannonPlist : "res/cannon.plist",
-    // CannonPng : "res/cannon.png",
-    //
-    // BulletSprite : "res/bullet.sprite",
-    // SmallItemPng : "res/SmallItem.png",
     //
     // JindunPlist : "res/jindun.plist",
     // JindunPng : "res/jindun.png",
@@ -319,9 +277,6 @@ const ResourceLoader = (function () {
     "use strict";
     var plists = {};
     var g_resources = [];
-
-    //register sprite file loader. 
-    cc.loader.register(["sprite"], cc._binaryLoader);
 
     function getResourceList() {
         return g_resources;
