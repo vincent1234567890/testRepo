@@ -30,95 +30,92 @@ var ScoreBarLayer = cc.Layer.extend({
     _moneyTip:0,
     _powerProgressTo:0,
     _powerProgressTimer:0,
-    init:function () {
-        if (this._super()) {
-            //this.setKeyboardEnabled(true);
-            // @warning 此 plist 在进游戏时预加载了。如有问题可在此重新加载
-            var frameCache = cc.SpriteFrameCache.getInstance();
-            frameCache.addSpriteFrames(ImageName("SuperWeaponButton.plist"));
-            frameCache.addSpriteFrames(ImageName("help_ui.plist"));
+    ctor:function () {
+        this._super();
+        //this.setKeyboardEnabled(true);
+        // @warning 此 plist 在进游戏时预加载了。如有问题可在此重新加载
+        var frameCache = cc.spriteFrameCache;
+        frameCache.addSpriteFrames(res.SuperWeaponButtonPList);
+        frameCache.addSpriteFrames(res.HelpUIPlist);
 
-            this.setTag(kTagLayerStatusBar);
+        this.setTag(kTagLayerStatusBar);
 
-            // Get Coin button
-            var menuItemGetCoin = cc.MenuItemSprite.create(
-                cc.Sprite.createWithSpriteFrameName(("ui_button_05.png")),
-                cc.Sprite.createWithSpriteFrameName(("ui_button_06.png")),
-                this, this.getMoreMoney);
+        // Get Coin button
+        var menuItemGetCoin = new cc.MenuItemSprite(
+            new cc.Sprite("#ui_button_05.png"), new cc.Sprite("#ui_button_06.png"), this.getMoreMoney, this);
 
-            menuItemGetCoin.setPosition(cc.p(/*-VisibleRect.bottomRight().x + */85, 42));
-            menuItemGetCoin.setTag(kTagMenuItemGetMoney);
-            this._ptItemTapjoy = menuItemGetCoin.getPosition();
+        menuItemGetCoin.setPosition(cc.p(/*-VisibleRect.bottomRight().x + */85, 42));
+        menuItemGetCoin.setTag(kTagMenuItemGetMoney);
+        this._ptItemTapjoy = menuItemGetCoin.getPosition();
 
-            //Redeem
-            /*var menuItemRedeem = cc.MenuItemSprite.create(
-             cc.Sprite.create(ImageNameLang("ui_btn_redeem_normal.png")),
-             cc.Sprite.create(ImageNameLang("ui_btn_redeem_select.png")),
-             this, this.showRedeemView);
-             menuItemRedeem.setScale(kUiItemScale);
-             menuItemRedeem.setPosition(cc.p(*/
-            /*-VisibleRect.bottomRight().x + */
-            /*29, 91));*/
+        //Redeem
+        /*var menuItemRedeem = cc.MenuItemSprite.create(
+         cc.Sprite.create(ImageNameLang("ui_btn_redeem_normal.png")),
+         cc.Sprite.create(ImageNameLang("ui_btn_redeem_select.png")),
+         this, this.showRedeemView);
+         menuItemRedeem.setScale(kUiItemScale);
+         menuItemRedeem.setPosition(cc.p(*/
+        /*-VisibleRect.bottomRight().x + */
+        /*29, 91));*/
 
-            this._moneyTip = cc.Sprite.createWithSpriteFrameName(("tishiguang01.png"));
-            var tipOffset = cc.pAdd(cc.p(0, this._moneyTip.getContentSize().height / 2), cc.p(-266, -18));
-            this._moneyTip.setPosition(tipOffset);
+        this._moneyTip = new cc.Sprite("#tishiguang01.png");
+        var tipOffset = cc.pAdd(cc.p(0, this._moneyTip.getContentSize().height / 2), cc.p(-266, -18));
+        this._moneyTip.setPosition(tipOffset);
 
-            this.addChild(this._moneyTip, 60);
+        this.addChild(this._moneyTip, 60);
 
 
-            //rudder
-            this._weaponBaseRudder = cc.Sprite.createWithSpriteFrameName(("ui_box_02_rudder.png"));
-            this.addChild(this._weaponBaseRudder, 61);
-            this._weaponBaseRudder.setAnchorPoint(AnchorPointBottomLeft);
-            this._weaponBaseRudder.setPosition(cc.p(-VisibleRect.right().x / 2, 0));
+        //rudder
+        this._weaponBaseRudder = new cc.Sprite("#ui_box_02_rudder.png");
+        this.addChild(this._weaponBaseRudder, 61);
+        this._weaponBaseRudder.setAnchorPoint(AnchorPointBottomLeft);
+        this._weaponBaseRudder.setPosition(cc.p(-VisibleRect.right().x / 2, 0));
 
-            // pause Menu
-            var rudderMenu = cc.Menu.create(menuItemGetCoin/*,menuItemRedeem*/);
-            rudderMenu.setPosition(cc.p(-VisibleRect.right().x / 2, 0));
-            this.addChild(rudderMenu, 91, kTagScoreBar);
+        // pause Menu
+        var rudderMenu = cc.Menu.create(menuItemGetCoin/*,menuItemRedeem*/);
+        rudderMenu.setPosition(cc.p(-VisibleRect.right().x / 2, 0));
+        this.addChild(rudderMenu, 91, kTagScoreBar);
 
-            //weapon base
-            var weaponBase = cc.Sprite.createWithSpriteFrameName(("ui_box_02.png"));
-            this.addChild(weaponBase, 20);
-            weaponBase.setPosition(cc.p(0, weaponBase.getContentSize().height / 2));
+        //weapon base
+        var weaponBase = new cc.Sprite("#ui_box_02.png");
+        this.addChild(weaponBase, 20);
+        weaponBase.setPosition(cc.p(0, weaponBase.getContentSize().height / 2));
 
-            //help
-            this.setFinger(cc.Sprite.createWithSpriteFrameName("finger_0001.png"));
-            this._finger.setVisible(false);
-            this.addChild(this._finger, 201);
-            this._finger.setFlipX(true);
+        //help
+        this.setFinger(new cc.Sprite("#finger_0001.png"));
+        this._finger.setVisible(false);
+        this.addChild(this._finger, 201);
+        this._finger.flippedX = true;
 
-            this.setFocus(cc.Sprite.createWithSpriteFrameName("circle_0001.png"));
-            this._focus.setVisible(false);
-            this.addChild(this._focus, 200);
+        this.setFocus(new cc.Sprite("#circle_0001.png"));
+        this._focus.setVisible(false);
+        this.addChild(this._focus, 200);
 
-            this._initLightBlood();
-            this.superWeaponChanged();
+        this._initLightBlood();
+        this.superWeaponChanged();
 
-            // 生成按钮菜单
-            this.setBulletsLabel(NumberScrollLabel.create());
-            this._bulletsLabel.setComponentSize(cc.SizeMake(25, 28));
-            this._bulletsLabel.setComponentNumber(6);
-            this.addChild(this._bulletsLabel, 60);
-            this._bulletsLabel.setPosition(cc.p(-342, 10));
-            this.setBullet(PlayerActor.sharedActor().getPlayerMoney());
-            this.setDownTimeLabel(cc.LabelAtlas.create("60", ImageName("ui_number_time.png"), 18, 26, '0'));
-            this.addChild(this._downTimeLabel, 21);
-            this._downTimeLabel.setPosition(cc.p(-168, 13));
+        // 生成按钮菜单
+        this.setBulletsLabel(NumberScrollLabel.create());
+        this._bulletsLabel.setComponentSize(new cc.Size(25, 28));
+        this._bulletsLabel.setComponentNumber(6);
+        this.addChild(this._bulletsLabel, 60);
+        this._bulletsLabel.setPosition(cc.p(-342, 10));
+        this.setBullet(PlayerActor.sharedActor().getPlayerMoney());
+        this.setDownTimeLabel(new cc.LabelAtlas("60", ImageName("ui_number_time.png"), 18, 26, '0'));
+        this.addChild(this._downTimeLabel, 21);
+        this._downTimeLabel.setPosition(cc.p(-168, 13));
 
-            this.initTools();
-            this.ccbLoadCompleted = true;
+        this.initTools();
+        this.ccbLoadCompleted = true;
 
-            return true;
-        }
-        return false;
+
+
     },
     onExit:function(){
         this._super();
-        var frameCache = cc.SpriteFrameCache.getInstance();
-        frameCache.removeSpriteFrameByName(ImageName("SuperWeaponButton.plist"));
-        frameCache.removeSpriteFrameByName(ImageName("help_ui.plist"));
+        var frameCache = cc.spriteFrameCache;
+        frameCache.removeSpriteFrameByName(res.SuperWeaponButtonPList);
+        frameCache.removeSpriteFrameByName(res.HelpUIPlist);
     },
     getHiScore:function () {
         return this._hiScore;
@@ -261,17 +258,17 @@ var ScoreBarLayer = cc.Layer.extend({
         }
         this._isPlayTip = true;
         var dua = 0.2;
-        var fadein = cc.FadeIn.create(dua);
+        var fadein = cc.fadeIn(dua);
         var fadeRev = fadein.reverse();
-        var sequ1 = cc.Sequence.create(fadein, fadeRev);
+        var sequ1 = cc.sequence(fadein, fadeRev);
 
-        var scaleby = cc.ScaleBy.create(dua, 1.2);
+        var scaleby = cc.scaleBy(dua, 1.2);
         var scaleRev = scaleby.reverse();
-        var sequ2 = cc.Sequence.create(scaleby, scaleRev);
+        var sequ2 = cc.sequence(scaleby, scaleRev);
 
-        var spawn = cc.Spawn.create(sequ1, sequ2);
+        var spawn = cc.spawn(sequ1, sequ2);
 
-        var repeat = cc.RepeatForever.create(spawn);
+        var repeat = cc.repeatForever(spawn);
 
         moneyItem.setScale(1.0);
         moneyItem.runAction(repeat);
@@ -285,23 +282,23 @@ var ScoreBarLayer = cc.Layer.extend({
         this._isPlayNeedMoney = true;
         this._moneyTip.setVisible(true);
 
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
         // @warning 此 plist 在进游戏时预加载了。如有问题可在此重新加载
-        cache.addSpriteFrames(ImageName("jindun.plist"));
+        cache.addSpriteFrames(res.JindunPlist);
 
         var frames = [];
         var frameName;
 
         for (var i = 1; i < 3; ++i) {
-            frameName = "tishiguang0" + i + ".png";
+            frameName = "#tishiguang0" + i + ".png";
             var frame = cache.getSpriteFrame(frameName);
             frames.push(frame);
         }
 
-        var animation2 = cc.Animation.create(frames, 0.2);
-        var ac2 = cc.Animate.create(animation2, false);
+        var animation2 = new cc.Animation(frames, 0.2);
+        var ac2 = cc.animate(animation2, false);
 
-        var repeat = cc.RepeatForever.create(ac2);
+        var repeat = cc.repeatForever(ac2);
         this._moneyTip.runAction(repeat);
     },
     showNotEnouth:function () {
@@ -370,7 +367,7 @@ var ScoreBarLayer = cc.Layer.extend({
     convertPointFromSubNode:function (pNode, point) {
         var selfContainNode = false;
         var temp = pNode;
-        var result = cc.PointZero();
+        var result = new cc.Point(0, 0);
         while (temp.getParent() != null) {
             if (temp.getParent() == this) {
                 selfContainNode = true;
@@ -383,16 +380,14 @@ var ScoreBarLayer = cc.Layer.extend({
         if (selfContainNode) {
             return result;
         } else {
-            return cc.PointZero();
+            return new cc.Point(0, 0);
         }
     },
     initTools:function () {
-        var laserItem = cc.MenuItemSprite.create(
-            cc.Sprite.createWithSpriteFrameName(("button_prop_001_1.png")),
-            cc.Sprite.createWithSpriteFrameName(("button_prop_001_2.png")),
-            this, this.useLaser);
+        var laserItem = new cc.MenuItemSprite(
+            new cc.Sprite("#button_prop_001_1.png"), new cc.Sprite("#button_prop_001_2.png"), this.useLaser, this);
 
-        var menuTool = cc.Menu.create(laserItem);
+        var menuTool = new cc.Menu(laserItem);
         this.addChild(menuTool, 60);
         menuTool.setPosition(cc.p(250, 30));
 
@@ -409,22 +404,22 @@ var ScoreBarLayer = cc.Layer.extend({
 
         var curSuperWeapon = wrapper.getIntegerForKey(CURRENT_SPECIAL_WEAPON_KEY);
         if (FishWeaponType.eWeaponLevel9 == curSuperWeapon) {
-            menuItemSuperWeapon = cc.MenuItemSprite.create(
-                cc.Sprite.createWithSpriteFrameName("button_lightning_1.png"),
-                cc.Sprite.createWithSpriteFrameName("button_lightning_2.png"),
-                this, this.chooseSuperWeapon);
+            menuItemSuperWeapon = new cc.MenuItemSprite(
+                new cc.Sprite("#button_lightning_1.png"),
+                new cc.Sprite("#button_lightning_2.png"),
+                this.chooseSuperWeapon, this);
         }
         else {
             if (FishWeaponType.eWeaponLevel8 != curSuperWeapon) {
                 wrapper.setIntegerForKey(CURRENT_SPECIAL_WEAPON_KEY, FishWeaponType.eWeaponLevel8);
             }
-            menuItemSuperWeapon = cc.MenuItemSprite.create(
-                cc.Sprite.createWithSpriteFrameName("button_jiguang_1.png"),
-                cc.Sprite.createWithSpriteFrameName("button_jiguang_2.png"),
-                this, this.chooseSuperWeapon);
+            menuItemSuperWeapon = new cc.MenuItemSprite(
+                new cc.Sprite("#button_jiguang_1.png"),
+                new cc.Sprite("#button_jiguang_2.png"),
+                this.chooseSuperWeapon, this);
         }
 
-        menuChooseSuperWeapon = cc.Menu.create(menuItemSuperWeapon);
+        menuChooseSuperWeapon = new cc.Menu(menuItemSuperWeapon);
         this.addChild(menuChooseSuperWeapon, 100);
 
         menuChooseSuperWeapon.setPosition(cc.p(160, 30));
@@ -449,7 +444,7 @@ var ScoreBarLayer = cc.Layer.extend({
         if (this._delegate.getIsPause()) {
             return;
         }
-        cc.Assert(0, "havn't implement yet.");
+        cc.assert(0, "havn't implement yet.");
     },
     showGamecenter:function (sender) {
         if (GameCenterManager.isGameCenterAvailable()) {
@@ -589,19 +584,17 @@ var ScoreBarLayer = cc.Layer.extend({
             tipPos = cc.p(430, 40)
         }
 
-        var tipLaserZero = cc.LabelTTF.create("not enough laser", tipSize, cc.TEXT_ALIGNMENT_CENTER, "Arial", fontSize);
+        var tipLaserZero = new cc.LabelTTF("not enough laser", tipSize, cc.TEXT_ALIGNMENT_CENTER, "Arial", fontSize);
 
         if (this.getChildByTag(kTagTipLaserZero)) {
-            tipLaserZero.setColor(cc.c3(255, 0, 0));
+            tipLaserZero.setColor(new cc.Color(255, 0, 0));
             this.removeChildByTag(kTagTipLaserZero, true);
         } else {
-            tipLaserZero.setColor(cc.c3(255, 100, 100));
+            tipLaserZero.setColor(new cc.Color(255, 100, 100));
         }
 
         tipLaserZero.setPosition(tipPos);
-        var FadeOut = cc.FadeOut.create(2.0);
-        var CallFun = cc.CallFunc.create(this, this._removeSelf);
-        tipLaserZero.runAction(cc.Sequence.create(FadeOut, CallFun));
+        tipLaserZero.runAction(cc.sequence(cc.fadeOut(2.0), cc.callFunc(this._removeSelf, this)));
         this.addChild(tipLaserZero, 300, kTagTipLaserZero);
     },
     _removeSelf:function (node) {
@@ -635,7 +628,7 @@ var ScoreBarLayer = cc.Layer.extend({
                 LaserNum--;
         }
 
-        var skip3 = cc.LabelAtlas.create(LaserNum, ImageName("fonts_laser_num.png"), 30, 40, '0');
+        var skip3 = new cc.LabelAtlas(LaserNum, res.LaserFonts, 30, 40, '0');
         skip3.setScale(0.8);
         var num = 1;
         while (true) {
@@ -654,19 +647,19 @@ var ScoreBarLayer = cc.Layer.extend({
             locOffset = cc.p(48, 84);
         }
 
-        var reminder = cc.MenuItemSprite.create(cc.Sprite.createWithSpriteFrameName("ui_laserwarning_bg.png"), cc.Sprite.createWithSpriteFrameName("ui_laserwarning_bg.png"),
-            this, this._removeLazerReminder);
-        var info = cc.Sprite.create(ImageNameLang("ui_laserwarning.png"));
+        var reminder = new cc.MenuItemSprite(new cc.Sprite("#ui_laserwarning_bg.png"), new cc.Sprite("#ui_laserwarning_bg.png"),
+            this._removeLazerReminder, this);
+        var info = new cc.Sprite(ImageNameLang("ui_laserwarning.png"));
         info.setPosition(cc.p(reminder.getContentSize().width / 2, reminder.getContentSize().height / 2));
         reminder.addChild(info);
-        var fadeIn = cc.FadeIn.create(0.4);
-        var blank = cc.MoveBy.create(3, cc.PointZero());
+        var fadeIn = new cc.FadeIn(0.4);
+        var blank = new cc.MoveBy(3, new cc.Point(0, 0));
         var reverse = fadeIn.reverse();
 
-        var removeReminder = cc.CallFunc.create(this, this._removeLazerReminder);
-        var actionSequence = cc.Sequence.create(fadeIn, blank, reverse, removeReminder);
+        var removeReminder = new cc.CallFunc(this._removeLazerReminder, this);
+        var actionSequence = new cc.Sequence(fadeIn, blank, reverse, removeReminder);
         reminder.runAction(actionSequence);
-        var OKMenu = cc.Menu.create(reminder);
+        var OKMenu = new cc.Menu(reminder);
 
         OKMenu.setPosition(cc.pAdd(position, locOffset));
         this.addChild(OKMenu, 1000, LUIREMINDERTAG);
@@ -676,11 +669,11 @@ var ScoreBarLayer = cc.Layer.extend({
             lbScale = 0.8;
         }
 
-        var lightGroove = cc.Sprite.createWithSpriteFrameName(("ui_2p_004.png"));
+        var lightGroove = new cc.Sprite("#ui_2p_004.png");
         this.addChild(lightGroove, 11);
         lightGroove.setPosition(cc.p(-1, 0));
         this._lightValue = -90;
-        this.setLightBlood(cc.Sprite.createWithSpriteFrameName(("ui_2p_005.png")));
+        this.setLightBlood(new cc.Sprite("#ui_2p_005.png"));
         this._lightBlood.setRotation(this._lightValue);
         this._lightBlood.setPosition(cc.p(-1, 0));
         this.addChild(this._lightBlood, 12);
@@ -697,7 +690,7 @@ var ScoreBarLayer = cc.Layer.extend({
         var ac1 = cc.Show.action();
 
         var frames = [];
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
         var frameName;
         for (var i = 1; i < 6; ++i) {
             frameName = "circle_000" + i + ".png";
@@ -706,20 +699,20 @@ var ScoreBarLayer = cc.Layer.extend({
         }
 
 
-        var animation2 = cc.Animation.create(frames, 0.2);
-        var ac2 = cc.Animate.create(animation2, false);
+        var animation2 = new cc.Animation(frames, 0.2);
+        var ac2 = new cc.Animate(animation2, false);
 
         var ac3 = cc.Hide.action();
-        var ac4 = cc.DelayTime.create(0.5);
+        var ac4 = new cc.DelayTime(0.5);
 
-        var se = cc.Sequence.create(ac0, ac1, ac2, ac3, ac4);
-        return cc.RepeatForever.create(se);
+        var se = new cc.Sequence(ac0, ac1, ac2, ac3, ac4);
+        return new cc.RepeatForever(se);
     },
     _fingerAction:function () {
         var ac0 = cc.Show.action();
 
         var frames = [];
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
         var frameName;
 
         for (var i = 1; i < 3; ++i) {
@@ -755,25 +748,23 @@ var ScoreBarLayer = cc.Layer.extend({
 
         this._moneyTip.setVisible(true);
 
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
         // @warning 此 plist 在进游戏时预加载了。如有问题可在此重新加载
-        cache.addSpriteFrames(ImageName("jindun.plist"));
+        cache.addSpriteFrames(res.JindunPlist);
 
         var frames = [];
         var frameName;
 
         for (var i = 1; i < 3; ++i) {
-            frameName = "tishiguang0" + i + ".png";
+            frameName = "#tishiguang0" + i + ".png";
             var frame = cache.getSpriteFrame(frameName);
             frames.push(frame);
         }
 
-        var animation2 = cc.Animation.create(frames, 0.4);
-        var ac2 = cc.Animate.create(animation2, false);
-
-        var callback = cc.CallFunc.create(this, this._setVis);
-        var repeat = cc.Repeat.create(ac2, 2);
-        this._moneyTip.runAction(cc.Sequence.create(repeat, callback));
+        var animation2 = new cc.Animation(frames, 0.4);
+        var ac2 = cc.animate(animation2);
+        ac2.repeat(2);
+        this._moneyTip.runAction(cc.sequence(ac2, cc.callFunc(this._setVis, this)));
     },
     _updatePowerProgressBar:function (percentage) {
         this._powerProgressTimer.setPercentage(percentage);

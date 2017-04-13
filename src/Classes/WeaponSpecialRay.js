@@ -13,21 +13,19 @@ var WeaponSpecialRay = WeaponSpecial.extend({
      The energy param determine init energy count
      The shootCost determine energy cost per shoot
      */
-    initWeapon:function (pos, energy, shootCost) {
-        if (this._super("actor_cannon_jiguang_02.png", "actor_cannon_jiguang_01.png", pos, 0.5, energy, shootCost)) {
-            this.setCannonLevel(FishWeaponType.eWeaponLevel8);
-            this.setAnchorPoint(cc.p(0.5, 0.5));
-            this._weaponSprite.setAnchorPoint(cc.p(0.5, 75.0 / 180.0));
-            return true;
-        }
-        return false;
+    ctor:function (pos, energy, shootCost) {
+        this._super("actor_cannon_jiguang_02.png", "actor_cannon_jiguang_01.png", pos, 0.5, energy, shootCost);
+        this.setCannonLevel(FishWeaponType.eWeaponLevel8);
+        this.setAnchorPoint(cc.p(0.5, 0.5));
+        this._weaponSprite.setAnchorPoint(cc.p(0.5, 75.0 / 180.0));
+
     },
     /**
      Add rainbow effect for ray weapon at special position
      The rbPos param determine rainbow postion
      */
     addRainbow:function () {
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
         // @warning 此 plist 在进游戏时预加载了。如有问题可在此重新加载
         cache.addSpriteFrames(ImageName("caihong.plist"));
 
@@ -40,7 +38,7 @@ var WeaponSpecialRay = WeaponSpecial.extend({
 
         var firstFrame = "caihong_1.png";
         var animation = cc.Animation.create(frames, 0.1);
-        var rainbow = cc.Sprite.createWithSpriteFrameName(firstFrame);
+        var rainbow = new cc.Sprite("#" + firstFrame);
         var rainbowAnimate = cc.Animate.create(animation);
         rainbow.runAction(cc.RepeatForever.create(rainbowAnimate));
         rainbow.setAnchorPoint(cc.p(0.5, 0.5));
@@ -108,12 +106,9 @@ var WeaponSpecialRay = WeaponSpecial.extend({
         }
 
         GameCtrl.sharedGame().getCurScene().addActor(bullet);
-
-        var delay1 = cc.DelayTime.create(0.8);
-        var callback1 = cc.CallFunc.create(this, this.startCameraAnimation);
-        var delay = cc.DelayTime.create(2.2);
-        var callback = cc.CallFunc.create(this, this.doSpecialShootFinish);
-        this.runAction(cc.Sequence.create(delay1, callback1, delay, callback));
+        this.runAction(cc.sequence(
+            cc.delayTime(0.8), cc.callFunc(this.startCameraAnimation, this),
+            cc.delayTime(2.2), cc.callFunc(this.doSpecialShootFinish, this)));
         this.getWeaponSprite().getChildByTag(999).removeFromParentAndCleanup(true);
 
         var currentScene = GameCtrl.sharedGame().getCurScene();

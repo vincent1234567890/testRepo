@@ -15,32 +15,32 @@ var StartMenuLayer = cc.Layer.extend({
     _bg:null,
     _particle2:null,
     _particle3:null,
-    init:function () {
+
+    ctor: function(){
+        // cc.Layer.prototype.ctor.call(this);
+
         this._super();
         PlayerActor.sharedActor().playerLogin();
-        return true;
-    },
-    onEnter:function () {
-        this._super();
-        this.setKeyboardEnabled(true);
-        var cache = cc.SpriteFrameCache.getInstance();
-        cache.addSpriteFrames(ImageName("StartMenuLayer.plist"));
-        cache.addSpriteFrames(ImageName("logoscene.plist"));
-        cache.addSpriteFrames(ImageName("buttons.plist"));
-        cache.addSpriteFrames(ImageName("icons.plist"));
-        cache.addSpriteFrames(ImageName("chestreward.plist"));
-        cache.addSpriteFrames(ImageName("main.plist"));
-        cache.addSpriteFrames(ImageName("tutorial.plist"));
 
-        this._bg = cc.Sprite.create(ImageName("ui_background_normal.jpg"));
+        //todo it should be load once enough.
+        var cache = cc.spriteFrameCache;
+        cache.addSpriteFrames(res.StartMenuPlist);
+        cache.addSpriteFrames(res.LogoScenePlist);
+        cache.addSpriteFrames(res.ButtonsPlist);
+        cache.addSpriteFrames(res.IconsPlist);
+        cache.addSpriteFrames(res.ChestRewardsPlist);
+        cache.addSpriteFrames(res.MainPlist);
+        cache.addSpriteFrames(res.TutorialPlist);
+
+        this._bg = new cc.Sprite(ImageName("ui_background_normal.jpg"));
         this.addChild(this._bg, 0);
         this._bg.setPosition(VisibleRect.center());
-        this._bg.setScale(Multiple);
+        // this._bg.setScale(Multiple);
 
         //title
         this._title = LogoWaveLayer.create();
         this.addChild(this._title, 1);
-        this._title.setPosition(cc.p(VisibleRect.rect().size.width / 2, VisibleRect.top().y - 140));
+        this._title.setPosition(cc.p(VisibleRect.rect().width / 2, VisibleRect.top().y - 140));
 
         this._initLight1(0);
 
@@ -49,7 +49,7 @@ var StartMenuLayer = cc.Layer.extend({
         this.initStartLayer();
 
         for (var i = 0; i < 8; i++) {
-            var spriteLight = cc.Sprite.createWithSpriteFrameName("main_ui_other_01.png");
+            var spriteLight = new cc.Sprite("#main_ui_other_01.png");
             this.addChild(spriteLight, 10, kLightTagInit + i);
         }
 
@@ -58,65 +58,50 @@ var StartMenuLayer = cc.Layer.extend({
         this.schedule(this._initWaterLight, 5.5);
 
         this._showVersionBuild();
-
-        // 判断等级是否大于10级，是否进入过地图3（加勒比海）
-        /*var askEnter = wrapper.getBooleanForKey("AskEnterLevel3");
-         var askByTurnHere = wrapper.getBooleanForKey("AskByTurnHere");
-         if ((!askEnter && PlayerActor.sharedActor().getPlayerLevel() > 9) && !askByTurnHere) {
-         var stageArray = PlayerActor.sharedActor().getStageArray();
-
-         var bValue = (parseInt(stageArray[2]) == 1) ? true : false;
-         if (!bValue) {
-         this._enterNewLayer = new TutorialConfirmLayer();
-         this._enterNewLayer.initWithTitle(null, cc.LocalizedString.localizedString("newscene"),
-         ImageName("ui_teach_002.png"), ImageName("btn_teach_001.png"), ImageName("btn_teach_002.png"),
-         cc.LocalizedString.localizedString("newscene enter"),
-         cc.LocalizedString.localizedString("Tutorial Text Cancel"), this,
-         this.EnterSceneSelect,
-         this.cancelEnterSceneSelect);
-         this.addChild(this._enterNewLayer, 120);
-         this._enterNewLayer.show();
-         wrapper.setBooleanForKey("AskEnterLevel3", true);
-         }
-         }
-         wrapper.setBooleanForKey("AskByTurnHere", false);*/
     },
-    onExit:function () {
-        this._super();
-        var cache = cc.SpriteFrameCache.getInstance();
-        cache.removeSpriteFrameByName(ImageName("StartMenuLayer.plist"));
-        cache.removeSpriteFrameByName(ImageName("logoscene.plist"));
-        cache.removeSpriteFrameByName(ImageName("buttons.plist"));
-        cache.removeSpriteFrameByName(ImageName("icons.plist"));
-        cache.removeSpriteFrameByName(ImageName("chestreward.plist"));
-        cache.removeSpriteFrameByName(ImageName("main.plist"));
-        cache.removeSpriteFrameByName(ImageName("tutorial.plist"));
 
+    _resizeHandler: function(){
+        this.resetAllSpritePos();
     },
+    _refResizeHandler: null,
+
+    onEnter: function(){
+        cc.Layer.prototype.onEnter.call(this);
+
+        //add event listener
+        this._refResizeHandler = this._resizeHandler.bind(this);
+        window.addEventListener("resize", this._refResizeHandler);
+    },
+
+    onExit: function(){
+        cc.Layer.prototype.onExit.call(this);
+        window.removeEventListener("resize", this._refResizeHandler);
+    },
+
     initStartLayer:function () {
-        // item1 = Start button
-        this._newGameItem = cc.MenuItemSprite.create(
+        this._newGameItem = new cc.MenuItemSprite(
             CSpriteLayer.getButtonBoxOffsetY("btn_start_1.png", ImageNameLang("txt_start.png"), PlistAndPlist, 1),
             CSpriteLayer.getButtonBoxOffsetY("btn_start_2.png", ImageNameLang("txt_start.png"), PlistAndPlist, 1),
-            this, this._menuNewGame);
+            // this._menuNewGame, this);
+            this._menuGoToLobby, this);
 
         // item2 = Scenes select button
-        this._sceneItem = cc.MenuItemSprite.create(
+        this._sceneItem = new cc.MenuItemSprite(
             CSpriteLayer.getButtonBoxOffsetY("btn_scenes_1.png", ImageNameLang("button_other_014.png"), PlistAndPlist, 0),
             CSpriteLayer.getButtonBoxOffsetY("btn_scenes_2.png", ImageNameLang("button_other_014.png"), PlistAndPlist, 0),
-            this, this._menuSelectStage);
+            this._menuSelectStage, this );
 
         // item3 = Option button
-        this._settingItem = cc.MenuItemSprite.create(
+        this._settingItem = new cc.MenuItemSprite(
             CSpriteLayer.getButtonBoxOffsetY("btn_bg_1.png", "main_ui_button_05.png", PlistAndPlist, 3),
             CSpriteLayer.getButtonBoxOffsetY("btn_bg_2.png", "main_ui_button_05.png", PlistAndPlist, 3),
-            this, this._menuOption);
+            this._menuOption, this);
 
         // leftItem4 = Help button
-        this._helpItem = cc.MenuItemSprite.create(
+        this._helpItem = new cc.MenuItemSprite(
             CSpriteLayer.getButtonBoxOffsetY("btn_bg_1.png", "main_ui_button_03.png", PlistAndPlist, 3),
             CSpriteLayer.getButtonBoxOffsetY("btn_bg_2.png", "main_ui_button_03.png", PlistAndPlist, 3),
-            this, this._menuShowHowToPlay);
+            this._menuShowHowToPlay, this );
 
         this.resetAllSpritePos();
 
@@ -125,13 +110,15 @@ var StartMenuLayer = cc.Layer.extend({
             that.resetAllSpritePos();
         });
 
-        var menu = cc.Menu.create(this._newGameItem, this._sceneItem, this._settingItem, this._helpItem);
-        menu.setPosition(cc.PointZero());
+        var menu = new cc.Menu(this._newGameItem, this._sceneItem, this._settingItem, this._helpItem);
+        menu.setPosition(0, 0);
         this.addChild(menu, eZOrder_MainMenu_StartMenu_menu, eTag_MainMenu_StartMenu_menu);
     },
+
     EnterSceneSelect:function () {
         GameCtrl.sharedGame().homeWithStage();
-        StageSelectLayer.getInstance().SetDefaultPage(3);
+        var stageSelect = new StageSelectLayer();
+        stageSelect.setDefaultPage(3);
     },
     cancelEnterSceneSelect:function () {
         if (this._enterNewLayer) {
@@ -141,25 +128,24 @@ var StartMenuLayer = cc.Layer.extend({
     _initWaterAnimation:function () {
         var rightPos = cc.p(VisibleRect.bottomRight().x - 260, VisibleRect.bottomRight().y + 100);
         var leftPos = cc.p(VisibleRect.bottomLeft().x + 157, VisibleRect.bottomLeft().y + 105);
-        this._particle2 = cc.ParticleSystemQuad.create(ImageName("qipao3.plist"));
-        this._particle2._dontTint = true;
+        this._particle2 = new cc.ParticleSystem(ImageName("qipao3.plist"));
+        this._particle2.ignoreColor(true);
         this._particle2.setTotalParticles(100);
-        this._particle2.setDrawMode(cc.PARTICLE_TEXTURE_MODE);
+        this._particle2.setDrawMode(cc.ParticleSystem.TEXTURE_MODE);
         this.addChild(this._particle2);
         this._particle2.setPosition(rightPos);
 
-        this._particle3 = cc.ParticleSystemQuad.create(ImageName("qipao4.plist"));
+        this._particle3 = new cc.ParticleSystem(ImageName("qipao4.plist"));
         this.addChild(this._particle3);
         this._particle3.setTotalParticles(30);
-        this._particle3._dontTint = true;
-        this._particle3.setDrawMode(cc.PARTICLE_TEXTURE_MODE);
+        this._particle3.ignoreColor(true);
+        this._particle3.setDrawMode(cc.ParticleSystem.TEXTURE_MODE);
         this._particle3.setPosition(leftPos);
     },
     _moveAction:function () {
-        var moveto = cc.MoveBy.create(5, cc.p(625, 0));
-        var fadeOut = cc.FadeOut.create(5);
-        var spawn = cc.Spawn.create(moveto, fadeOut);
-        return spawn;
+        var moveto = new cc.MoveBy(5, cc.p(625, 0));
+        var fadeOut = new cc.FadeOut(5);
+        return new cc.Spawn(moveto, fadeOut);
     },
     _initWaterLight:function (dt) {
         for (var i = 0; i < 8; i++) {
@@ -174,10 +160,33 @@ var StartMenuLayer = cc.Layer.extend({
         if (sender) {
             sender.removeFromParentAndCleanup(true);
         }
-        this._spriteLight1 = cc.Sprite.createWithSpriteFrameName(("main_ui_other_02.png"));
+
+        this._spriteLight1 = new cc.Sprite("#main_ui_other_02.png");
+
         this.addChild(this._spriteLight1, 10);
         this._spriteLight1.setPosition(cc.p(125 + Math.random() * 63, VisibleRect.top().y - this._spriteLight1.getContentSize().height / 2));
     },
+
+    _menuGoToLobby : function () {
+        //legacy boilerplate
+        playEffect(BUTTON_EFFECT);
+        var startMenu = this.getChildByTag(eTag_MainMenu_StartMenu_menu);
+        startMenu.setEnabled(false);
+
+        GameManager.login(
+            function onSuccess () {
+                GameManager.goToLobby();
+            },
+            function onFailure (error) {
+                console.log("Login failed:", error);
+                // @todo Display message to the user
+
+                // Let the user try again
+                startMenu.setEnabled(true);
+            }
+        );
+    },
+
     _menuNewGame:function (sender) {
         AutoAdapterScreen.getInstance().enterFullScreen();
         var mainMenu = GameCtrl.sharedGame().getCurScene();
@@ -186,7 +195,8 @@ var StartMenuLayer = cc.Layer.extend({
         }
 
         var startMenu = this.getChildByTag(eTag_MainMenu_StartMenu_menu);
-        startMenu.setTouchEnabled(false);
+        // startMenu.setTouchEnabled(false);
+        startMenu.setEnabled(false);
 
         playEffect(BUTTON_EFFECT);
 
@@ -244,16 +254,16 @@ var StartMenuLayer = cc.Layer.extend({
     _showVersionBuild:function () {
         var layer = new cc.Node();
         var versionInfo = g_Version;
-        var versionTTFSize = new cc.Size(VisibleRect.rect().size.width, 24);
-        var versionTTF = cc.LabelTTF.create(versionInfo, "Arial Bold", 20, versionTTFSize, cc.TEXT_ALIGNMENT_RIGHT);
+        var versionTTFSize = new cc.Size(VisibleRect.rect().width, 24);
+        var versionTTF = new cc.LabelTTF(versionInfo, "Arial Bold", 20, versionTTFSize, cc.TEXT_ALIGNMENT_RIGHT);
         versionTTF.setAnchorPoint(AnchorPointBottomRight);
         versionTTF.setPosition(cc.p(0, 30));
         layer.addChild(versionTTF, 0);
 
         //versionTTF.setPosition(cc.pAdd(VisibleRect.bottomRight(),cc.p(0, 30)));
         var buildInfo = "Powered by Cocos2d-html5";
-        var buildTTFSize = new cc.Size(VisibleRect.rect().size.width, 24);
-        var buildTTF = cc.LabelTTF.create(buildInfo, "Arial Bold", 20, buildTTFSize, cc.TEXT_ALIGNMENT_RIGHT);
+        var buildTTFSize = new cc.Size(VisibleRect.rect().width, 24);
+        var buildTTF = new cc.LabelTTF(buildInfo, "Arial Bold", 20, buildTTFSize, cc.TEXT_ALIGNMENT_RIGHT);
         buildTTF.setAnchorPoint(AnchorPointBottomRight);
         buildTTF.setPosition(cc.p(0, 5));
         layer.addChild(buildTTF, 0);
@@ -268,14 +278,14 @@ var StartMenuLayer = cc.Layer.extend({
             versionInfo.setPosition(VisibleRect.bottomRight());
         }
 
-        this._title.setPosition(cc.p(VisibleRect.rect().size.width / 2, VisibleRect.top().y - 140));
+        this._title.setPosition(cc.p(VisibleRect.rect().width / 2, VisibleRect.top().y - 140));
         this._bg.setPosition(VisibleRect.center());
-        Multiple = AutoAdapterScreen.getInstance().getScaleMultiple()
-        this._bg.setScale(Multiple);
+        // Multiple = AutoAdapterScreen.getInstance().getScaleMultiple();
+        // this._bg.setScale(Multiple);
 
         this._spriteLight1.setPosition(cc.p(125 + Math.random() * 63, VisibleRect.top().y - this._spriteLight1.getContentSize().height / 2));
 
-        var winSize = VisibleRect.rect().size;
+        var winSize = VisibleRect.rect();
         var center = VisibleRect.center();
         var goldenSectionY = VisibleRect.bottom().y + winSize.height * (1 - 0.618);
         var selectItemY = Math.min(goldenSectionY / 2, goldenSectionY - (this._newGameItem.getContentSize().height + this._sceneItem.getContentSize().height) / 2);
@@ -299,11 +309,3 @@ var StartMenuLayer = cc.Layer.extend({
         this._particle3.setPosition(leftPos);
     }
 });
-
-StartMenuLayer.create = function () {
-    var ret = new StartMenuLayer();
-    if (ret && ret.init()) {
-        return ret;
-    }
-    return null;
-};

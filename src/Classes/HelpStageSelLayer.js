@@ -8,11 +8,11 @@ var HelpStageSelLayer = cc.Sprite.extend({
         if (this.initWithSpriteFrameName(bgName)) {
             var titlePos = cc.p(105, 385);
             var descPos = cc.pAdd(cc.p(this.getContentSize().width / 2, 0), cc.p(20, 150));
-            var titleSprite = cc.Sprite.createWithSpriteFrameName(title);
+            var titleSprite = new cc.Sprite("#" + title);
             titleSprite.setPosition(titlePos);
             this.addChild(titleSprite, 0, kTitleTag);
 
-            var topDesSprite = cc.Sprite.createWithSpriteFrameName(topdes);
+            var topDesSprite = new cc.Sprite("#" + topdes);
             topDesSprite.setAnchorPoint(cc.p(0.5, 0.5));
             topDesSprite.setPosition(descPos);
             this.addChild(topDesSprite, 0, kTopDesTag);

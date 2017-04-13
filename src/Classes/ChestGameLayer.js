@@ -57,25 +57,23 @@ var ChestGameLayer = cc.Layer.extend({
             this.getDelegate().addActor(big);
             big.ChestMove();
         }
-        var parAchieve = cc.ParticleSystemQuad.create(ImageName("kaibaoxiang01.plist"));
+        var parAchieve = new cc.ParticleSystem(ImageName("kaibaoxiang01.plist"));
         this.addChild(parAchieve, 200);
         parAchieve.setPosition(VisibleRect.center());
     },
     DelChestScoreNumber:function(){
-        var flashSprite = cc.Sprite.createWithSpriteFrameName(("ui_box_go_bg.png"));
-        var flashGo = cc.Sprite.createWithSpriteFrameName(("ui_box_go_1.png"));
-        var fadeIn = cc.FadeIn.create(1.0);
+        var flashSprite = new cc.Sprite("#ui_box_go_bg.png");
+        var flashGo = new cc.Sprite("#ui_box_go_1.png");
+        var fadeIn = cc.fadeIn(1.0);
         var reverse = fadeIn.reverse();
-        var sequ = cc.Sequence.create(fadeIn, reverse);
-        flashGo.runAction(cc.RepeatForever.create(sequ));
+        flashGo.runAction(cc.sequence(fadeIn, reverse).repeatForever());
         flashGo.setPosition(cc.p(flashSprite.getContentSize().width/2, flashSprite.getContentSize().height/2));
         flashSprite.addChild(flashGo);
 
-        var selectedSprite = cc.Sprite.createWithSpriteFrameName(("ui_box_go_2.png"));
-        var goButton = cc.MenuItemSprite.create(flashSprite,
+        var selectedSprite = new cc.Sprite("#ui_box_go_2.png");
+        var goButton = new cc.MenuItemSprite(flashSprite,
             selectedSprite,
-            this,
-            this.GoRandomOval);
+            this.GoRandomOval, this);
 
         var OKMenu = cc.Menu.create(goButton);
         var posOffset = cc.p(0, -100);
@@ -106,7 +104,7 @@ var ChestGameLayer = cc.Layer.extend({
         this.schedule(this.RandomOvalinit, 1.0);
     },
     RandomOvalinit:function(dt){
-        this.getScheduler().unscheduleSelector(this.RandomOvalinit, this);
+        this.getScheduler().unschedule(this.RandomOvalinit, this);
         while (this.getChildByTag(LUIChestMoveTag)) {
             this.removeChildByTag(LUIChestMoveTag, true);
         }
@@ -121,7 +119,7 @@ var ChestGameLayer = cc.Layer.extend({
         this.iChestMoveNum = 0;
     },
     RandomOval:function(dt){
-        this.getScheduler().unscheduleSelector(this.RandomOval, this);
+        this.getScheduler().unschedule(this.RandomOval, this);
         if (this.iChestMoveNum++<15)
         {
             var iRandom = 0|(Math.random()*4+1);

@@ -10,45 +10,46 @@ var UserInfoLayer = cc.Layer.extend({
     _curLevel:null,
     _loadFromCCBCompleted:false,
     _menuAchieve:null,
-    init:function () {
-        if (this._super()) {
-            var frameCache = cc.SpriteFrameCache.getInstance();
-            frameCache.addSpriteFrames(ImageNameLang("ui_textbox_30.plist"));
+    ctor:function () {
+        this._super();
+        var frameCache = cc.spriteFrameCache;
+        frameCache.addSpriteFrames(ImageNameLang("ui_textbox_30.plist"));
 
-            this._curTitle = ImageNameLang(PlayerActor.sharedActor().title(), true);
-            this._bgSprite = cc.Sprite.createWithSpriteFrameName(("ui_box_01.png"));
-            this._bgSprite.setAnchorPoint(AnchorPointTop);
-            this._bgSprite.setPosition(VisibleRect.top());
-            this.addChild(this._bgSprite);
+        this._curTitle = ImageNameLang(PlayerActor.sharedActor().title(), true);
+        this._bgSprite = new cc.Sprite("#ui_box_01.png");
+        this._bgSprite.setAnchorPoint(AnchorPointTop);
+        this._bgSprite.setPosition(VisibleRect.top());
+        this.addChild(this._bgSprite);
 
-            var menuAchieve = cc.MenuItemSprite.create(cc.Sprite.createWithSpriteFrameName(("ui_box_01-0.png")),
-                cc.Sprite.createWithSpriteFrameName(("ui_box_01-1.png")), this, this.showAchievements);
-            this._menuAchieve = cc.Menu.create(menuAchieve);
-            this._menuAchieve.setPosition(cc.pAdd(VisibleRect.top(), cc.p(0, -28)));
-            this.addChild(this._menuAchieve);
+        var menuAchieve = new cc.MenuItemSprite(new cc.Sprite("#ui_box_01-0.png"),
+            new cc.Sprite("#ui_box_01-1.png"), this.showAchievements, this);
+        this._menuAchieve = new cc.Menu(menuAchieve);
+        this._menuAchieve.setPosition(cc.pAdd(VisibleRect.top(), cc.p(0, -28)));
+        this.addChild(this._menuAchieve);
 
-            this.setUserTitleLabel(cc.Sprite.createWithSpriteFrameName(this._curTitle));
-            this._userTitleLabel.setPosition(cc.p(VisibleRect.top().x - 130, VisibleRect.top().y - 26));
+        this.setUserTitleLabel(new cc.Sprite("#" + this._curTitle));
+        this._userTitleLabel.setPosition(cc.p(VisibleRect.top().x - 130, VisibleRect.top().y - 26));
 
-            this._curLevel = 1;
+        this._curLevel = 1;
 
-            this._levellabel = cc.LabelAtlas.create("1", ImageName("ui_text_03.png"), 14, 20, '0');
-            this.addChild(this._levellabel, 200);
-            this._levellabel.setAnchorPoint(cc.p(0.5, 0.5));
-            this._levellabel.setPosition(cc.pAdd(VisibleRect.top(), cc.p(0, -28)));
+        this._levellabel = new cc.LabelAtlas("1", ImageName("ui_text_03.png"), 14, 20, '0');
+        this.addChild(this._levellabel, 200);
+        this._levellabel.setAnchorPoint(cc.p(0.5, 0.5));
+        this._levellabel.setPosition(cc.pAdd(VisibleRect.top(), cc.p(0, -28)));
 
 
-            var processDef = ProcessDef.defaultDef();
-            processDef.setOffset(cc.Size(0.5, 0.5));
-            var tempPS = new ProcessSprite();
-            this.setProcesssprite(tempPS);
-            this._processsprite.initWithDef(processDef);
-            this._processsprite.setPosition(cc.p(VisibleRect.top().x + 156, VisibleRect.top().y - 24));
-            this.addChild(this._processsprite);
+        // var processDef = ProcessDef.defaultDef();
+        // processDef.setOffset(cc.Size(0.5, 0.5));
+        // var tempPS = new ProcessSprite();
+        // this.setProcesssprite(tempPS);
+        // this._processsprite.initWithDef(processDef);
+        var tempPS = new ProcessSprite(ProcessDef.defaultDef());
+        this.setProcesssprite(tempPS);
+        this._processsprite.setPosition(cc.p(VisibleRect.top().x + 156, VisibleRect.top().y - 24));
+        this.addChild(this._processsprite);
 
-            this._loadFromCCBCompleted = true;
-        }
-        return true;
+        this._loadFromCCBCompleted = true;
+
     },
     showAchievements:function (sender) {
 
@@ -61,7 +62,7 @@ var UserInfoLayer = cc.Layer.extend({
         this.newTitle();
 
         if (this._curTitle != title) {
-            var tempSprite = cc.Sprite.createWithSpriteFrameName(ImageNameLang(title, true));
+            var tempSprite = new cc.Sprite("#" + ImageNameLang(title, true));
             tempSprite.setPosition(cc.pSub(VisibleRect.top(), cc.p(130, 26)));
             this.setUserTitleLabel(tempSprite);
             this._curTitle = title;

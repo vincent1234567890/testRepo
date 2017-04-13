@@ -39,15 +39,12 @@ var WeaponSpecial = Weapon.extend({
      The energy param determine init energy count
      The shootCost determine energy cost per shoot
      */
-    initWeapon:function (spriteName, spriteShoot, pos, animationDelay, energy, shootCost) {
-        if (this._super(spriteName, spriteShoot, pos, animationDelay)) {
-            this._currentEnergy = energy;
-            this._energyPerShoot = shootCost;
-            this._isShooting = false;
-            return true;
-        }
+    ctor:function (spriteName, spriteShoot, pos, animationDelay, energy, shootCost) {
+        this._super(spriteName, spriteShoot, pos, animationDelay)
+        this._currentEnergy = energy;
+        this._energyPerShoot = shootCost;
+        this._isShooting = false;
 
-        return false;
     },
     /**
      After every shooting, update energy to determine weather can shoot more
@@ -65,7 +62,7 @@ var WeaponSpecial = Weapon.extend({
         }
     },
     specialShootingFinished:function (dt) {
-        cc.Director.getInstance().getScheduler().unscheduleSelector(this.specialShootingFinished, this);
+        cc.director.getScheduler().unschedule(this.specialShootingFinished, this);
         this._isShooting = false;
         if (this._currentEnergy < this._energyPerShoot) {
             this._delegate.weaponSwitchBackNormal(this);

@@ -20,9 +20,9 @@ var FishSeasonPath = FishGroup.extend({
     _pastTime:0,
     _createdCount:0,
     _fishActorName:"",
-    _initPostion:cc.PointZero(),
+    _initPostion:new cc.Point(0, 0),
     _pathDict:null,
-    _offset:cc.PointZero(),
+    _offset:new cc.Point(0, 0),
     _fishSeasonPathDelegate:null,
     init:function (delegate) {
         this._super();
@@ -55,7 +55,7 @@ var FishSeasonPath = FishGroup.extend({
         this._initPostion = cc.PointFromString(dict[kInitPosition]);
         this._pathDict = [];
 
-        this._offset = cc.PointZero();
+        this._offset = new cc.Point(0, 0);
         var value = dict[kPathOffset];
         if (value) {
             this._offset = cc.PointFromString(value);
@@ -136,8 +136,8 @@ var FishSeasonSessionController = GameSessionController.extend({
             startPos = cc.p(x, VisibleRect.center().y);
         }
         this._time = 0;
-        FishGroup.shareFishGroup().setInitPoint(startPos);
-        FishGroup.shareFishGroup().createPrizeFishGroup(bLeft);
+        sino.fishGroup.setInitPoint(startPos);
+        sino.fishGroup.createPrizeFishGroup(bLeft);
     },
     loadFishSeasonPaths:function (index) {
 
@@ -152,7 +152,7 @@ var FishSeasonSessionController = GameSessionController.extend({
                     X = PlayerActor.sharedActor().getCurReturn() / nConsume;
                 }
                 if (X < 0.6) {
-                    this._addPrizeFishGroupFinish = FishGroup.shareFishGroup().createCirclePrize();
+                    this._addPrizeFishGroupFinish = sino.fishGroup.createCirclePrize();
                     this._addPrizeFlag = 3;
                 }
                 else {

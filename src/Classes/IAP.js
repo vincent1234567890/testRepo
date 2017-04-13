@@ -5,10 +5,14 @@ var paypalSrc = "Resource/shop/paypal.png";
 var IAP_GUIDSTRINGS = "IapGuidStrings";
 
 var paypalButton = cc.$("#submitBtn");
-var paypalForm = cc.$("#paypal_form").remove();
+var paypalForm = cc.$("#paypal_form");
+if (paypalForm) {
+    paypalForm.remove();
+}
 
-var server = "http://chrome.KingFisher.com/level3/";
+//var server = "http://chrome.KingFisher.com/level3/";
 //var server = "http://localhost:7839/";
+var server = "http://fishingjoy.sinonet.sg/level3/";
 
 var PaymentPopUp = cc.Class.extend({
     ctor:function (pos, cb1, cb2, cb3) {
@@ -104,7 +108,7 @@ var PaymentPopUp = cc.Class.extend({
         this.animate();
 
         var that = this;
-        if (!paypalButton.customClickAdded) {
+        if (paypalButton && !paypalButton.customClickAdded) {
             paypalButton.addEventListener("click", function () {
                 //with an interval, check if dg is closed
                 that.paypalChecker = setInterval(PaymentPopUp.checkPaypal.bind(that), 1000 / 2);
@@ -217,31 +221,31 @@ PaymentPopUp.checkPaypal = function () {
 
 var ShopLayer = cc.Layer.extend({
     ctor:function () {
-        this.init();
-        var board = cc.Sprite.create(ImageName("shop/ui_prop_002.png"));
+        this._super();
+        var board = new cc.Sprite(ImageName("shop/ui_prop_002.png"));
         board.setPosition(VisibleRect.center());
         this.addChild(board);
 
-        cc.SpriteFrameCache.getInstance().addSpriteFrames(ImageName("shop/ui_shop.plist"));
-        var lang = cc.Application.getCurrentLanguage() === cc.LANGUAGE_CHINESE ? "cn" : "en";
-        var awardNotice = cc.Sprite.createWithSpriteFrameName(("shop_awarding_notice_" + lang + ".png"));
+        cc.spriteFrameCache.addSpriteFrames(ImageName("shop/ui_shop.plist"));
+        var lang = cc.sys.language === cc.sys.LANGUAGE_CHINESE ? "cn" : "en";
+        var awardNotice = new cc.Sprite(("#shop_awarding_notice_" + lang + ".png"));
         this.addChild(awardNotice);
         awardNotice.setPosition(cc.p(VisibleRect.center().x, VisibleRect.center().y + 126));
 
-        var shopTitle = cc.Sprite.createWithSpriteFrameName("shop_title_" + lang + ".png");
+        var shopTitle = new cc.Sprite("#shop_title_" + lang + ".png");
         this.addChild(shopTitle);
         shopTitle.setPosition(cc.p(VisibleRect.center().x, VisibleRect.center().y + 240));
 
-        var totalAwarding = cc.Sprite.createWithSpriteFrameName("total_awarding_" + lang + ".png");
+        var totalAwarding = new cc.Sprite("#total_awarding_" + lang + ".png");
         this.addChild(totalAwarding);
         totalAwarding.setPosition(cc.p(VisibleRect.center().x - 86, VisibleRect.center().y + 160));
 
-        var coinIcon = cc.Sprite.create(ImageName("shop/ui_pur_buton_01xiao.png"));
+        var coinIcon = new cc.Sprite(ImageName("shop/ui_pur_buton_01xiao.png"));
         this.addChild(coinIcon);
         coinIcon.setPosition(cc.p(VisibleRect.center().x + 132, VisibleRect.center().y + 162));
 
-        var back = cc.MenuItemSprite.create(cc.Sprite.createWithSpriteFrameName("ui_button_17.png"), cc.Sprite.createWithSpriteFrameName("ui_button_18.png"), this, this.goBackAnimation);
-        this.menu = cc.Menu.create(back);
+        var back = new cc.MenuItemSprite(new cc.Sprite("#ui_button_17.png"), cc.Sprite("#ui_button_18.png"), this.goBackAnimation, this);
+        this.menu = new cc.Menu(back);
         back.ignoreAnchorPointForPosition(true);
         back.setPosition(cc.p(VisibleRect.topLeft().x, VisibleRect.topLeft().y - 76));
         this.addChild(this.menu);
@@ -263,12 +267,12 @@ var ShopLayer = cc.Layer.extend({
             this._itemWidth = iWidth;
             this._itemHeight = iHeight;
             this._charMapFile = mapFile;
-            this._scissorRect = cc.RectZero();
+            this._scissorRect = cc.rect();
             this._components = [];
             this.initAllComponents();
             this.schedule(this.update);
         };
-        number.initWithSize(ImageName("shop/ui_shop_num_02.png"), cc.SizeMake(20, 20), 14, 20);
+        number.initWithSize(ImageName("shop/ui_shop_num_02.png"), cc.size(20, 20), 14, 20);
         number.setNumber((0 | (PlayerActor.sharedActor().getTotalGain() * 0.0141583)));
         this.addChild(number);
     },
@@ -276,19 +280,19 @@ var ShopLayer = cc.Layer.extend({
         var scene = PlayerActor.sharedActor().getScene();
         scene.resumeGame();
         scene.showAllMenu();
-        this.removeFromParentAndCleanup(true);
-        cc.SpriteFrameCache.getInstance().removeSpriteFrameByName(ImageName("shop/ui_shop.plist"));
+        this.removeFromParent(true);
+        cc.spriteFrameCache.getInstance().removeSpriteFrameByName(ImageName("shop/ui_shop.plist"));
     },
     addLabel:function (gold, usd, p) {
-        var coin = cc.Sprite.create(ImageName("shop/ui_pur_buton_01xiao.png"));
+        var coin = new cc.Sprite(ImageName("shop/ui_pur_buton_01xiao.png"));
         this.addChild(coin);
         coin.setPosition(cc.pAdd(VisibleRect.center(), p));
 
-        var goldcount = cc.LabelAtlas.create(gold, ImageName("shop/ui_shop_num_01.png"), 14, 20, "0");
+        var goldcount = new cc.LabelAtlas(gold, ImageName("shop/ui_shop_num_01.png"), 14, 20, "0");
         goldcount.setPosition(cc.pAdd(coin.getPosition(), cc.p(20, -15)));
         this.addChild(goldcount);
 
-        var usdcount = cc.LabelTTF.create("$" + usd, 'Impact', 16);
+        var usdcount = new cc.LabelTTF("$" + usd, 'Impact', 16);
         usdcount.setPosition(cc.pAdd(coin.getPosition(), cc.p(20, -17)));
         usdcount.setAnchorPoint(cc.p(0, 1));
         this.addChild(usdcount);
@@ -372,8 +376,9 @@ var ShopLayer = cc.Layer.extend({
     },
     server:"http://chrome.KingFisher.com/level2/",
     dropdown:function () {
-        this.setPositionY(cc.canvas.height);
-        this.runAction(cc.EaseElasticOut.create(cc.MoveTo.create(1, cc.p(0, 0)), 1));
+        this.setPositionY(cc._canvas.height);
+        // this.runAction(cc.EaseElasticOut.create(cc.MoveTo.create(1, cc.p(0, 0)), 1));
+        this.runAction(new cc.MoveTo(1,cc.p(0,0)).easing(cc.easeElasticOut(1)));
     },
     googError:false
 });
@@ -396,48 +401,48 @@ var ShopGoldItem = cc.MenuItemSprite.extend({
     ctor:function (value) {
         switch (value) {
             case 200:
-                var sp1 = cc.Sprite.create(ImageName("shop/ui_pur_buton_01-1.png"));
-                var sp2 = cc.Sprite.create(ImageName("shop/ui_pur_buton_01-2.png"));
+                var sp1 = new cc.Sprite(ImageName("shop/ui_pur_buton_01-1.png"));
+                var sp2 = new cc.Sprite(ImageName("shop/ui_pur_buton_01-2.png"));
                 this.id = 1;
                 break;
             case 500:
-                var sp1 = cc.Sprite.create(ImageName("shop/ui_pur_buton_02-1.png"));
-                var sp2 = cc.Sprite.create(ImageName("shop/ui_pur_buton_02-2.png"));
+                var sp1 = new cc.Sprite(ImageName("shop/ui_pur_buton_02-1.png"));
+                var sp2 = new cc.Sprite(ImageName("shop/ui_pur_buton_02-2.png"));
                 this.id = 2;
                 break;
             case 800:
-                var sp1 = cc.Sprite.create(ImageName("shop/ui_pur_buton_03-1.png"));
-                var sp2 = cc.Sprite.create(ImageName("shop/ui_pur_buton_03-2.png"));
+                var sp1 = new cc.Sprite(ImageName("shop/ui_pur_buton_03-1.png"));
+                var sp2 = new cc.Sprite(ImageName("shop/ui_pur_buton_03-2.png"));
                 this.id = 3;
                 break;
             case 2000:
-                var sp1 = cc.Sprite.create(ImageName("shop/ui_pur_buton_04-1.png"));
-                var sp2 = cc.Sprite.create(ImageName("shop/ui_pur_buton_04-2.png"));
+                var sp1 = new cc.Sprite(ImageName("shop/ui_pur_buton_04-1.png"));
+                var sp2 = new cc.Sprite(ImageName("shop/ui_pur_buton_04-2.png"));
                 this.id = 4;
                 break;
             case 5000:
-                var sp1 = cc.Sprite.create(ImageName("shop/ui_pur_buton_05-1.png"));
-                var sp2 = cc.Sprite.create(ImageName("shop/ui_pur_buton_05-2.png"));
+                var sp1 = new cc.Sprite(ImageName("shop/ui_pur_buton_05-1.png"));
+                var sp2 = new cc.Sprite(ImageName("shop/ui_pur_buton_05-2.png"));
                 this.id = 5;
                 break;
             case 10000:
-                var sp1 = cc.Sprite.create(ImageName("shop/ui_pur_buton_06-1.png"));
-                var sp2 = cc.Sprite.create(ImageName("shop/ui_pur_buton_06-2.png"));
+                var sp1 = new cc.Sprite(ImageName("shop/ui_pur_buton_06-1.png"));
+                var sp2 = new cc.Sprite(ImageName("shop/ui_pur_buton_06-2.png"));
                 this.id = 6;
                 break;
             case 20000:
-                var sp1 = cc.Sprite.create(ImageName("shop/ui_pur_buton_07-1.png"));
-                var sp2 = cc.Sprite.create(ImageName("shop/ui_pur_buton_07-2.png"));
+                var sp1 = new cc.Sprite(ImageName("shop/ui_pur_buton_07-1.png"));
+                var sp2 = new cc.Sprite(ImageName("shop/ui_pur_buton_07-2.png"));
                 this.id = 7;
                 break;
             case 30000:
-                var sp1 = cc.Sprite.create(ImageName("shop/ui_pur_buton_08-1.png"));
-                var sp2 = cc.Sprite.create(ImageName("shop/ui_pur_buton_08-2.png"));
+                var sp1 = new cc.Sprite(ImageName("shop/ui_pur_buton_08-1.png"));
+                var sp2 = new cc.Sprite(ImageName("shop/ui_pur_buton_08-2.png"));
                 this.id = 8;
                 break;
         }
         if (this.id) {
-            this.initWithNormalSprite(sp1, sp2, null, this, this.initBuy);
+            this._super(sp1, sp2, null, this, this.initBuy);
             var s = this.getContentSize();
 
             if (this.id < 6) {
@@ -492,7 +497,7 @@ var ShopGoldItem = cc.MenuItemSprite.extend({
         div.appendTo(document.body);
         this.getParent().screen = div;
         //get lang
-        var lang = cc.Application.getCurrentLanguage() === cc.LANGUAGE_CHINESE ? "cn" : "en";
+        var lang = cc.sys.language === cc.sys.LANGUAGE_CHINESE ? "cn" : "en";
         var offset = (lang === "cn") ? 8 : 0;
         //get jwt from server
         var http = new XMLHttpRequest();

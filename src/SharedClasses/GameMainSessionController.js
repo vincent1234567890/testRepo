@@ -41,8 +41,13 @@ var GameMainSessionController = GameSessionController.extend({
         }
     },
     addFishGroup:function (startPos, delay) {
+        if (GameCtrl.isOnlineGame()) {
+            // New fish will be triggered by the server
+            return;
+        }
+
         if (!startPos || !delay) {
-            var fishStartPosition = (cc.p(VisibleRect.right().x + 5.0, Math.random() * 10 + VisibleRect.bottom().y + VisibleRect.rect().size.height / 2 + INIT_POS_Y_STEP));
+            var fishStartPosition = (cc.p(VisibleRect.right().x + 5.0, Math.random() * 10 + VisibleRect.bottom().y + VisibleRect.rect().height / 2 + INIT_POS_Y_STEP));
             this.addFishGroup(fishStartPosition, 0.5);
             return true;
         }
@@ -50,44 +55,44 @@ var GameMainSessionController = GameSessionController.extend({
         //ActorFactory.loadStatus();
         this.addFishAtPosition(startPos);
 
-        var scheduler = cc.Director.getInstance().getScheduler();
-        scheduler.scheduleSelector(this.addSec, this, 0.2, false);
-        scheduler.scheduleSelector(this.addThird, this, 0.3, false);
-        scheduler.scheduleSelector(this.addFourth, this, 0.4, false);
-        scheduler.scheduleSelector(this.addFifth, this, 0.5, false);
-        scheduler.scheduleSelector(this.addSixth, this, delay, false);
+        var scheduler = cc.director.getScheduler();
+        scheduler.schedule(this.addSec, this, 0.2, false);
+        scheduler.schedule(this.addThird, this, 0.3, false);
+        scheduler.schedule(this.addFourth, this, 0.4, false);
+        scheduler.schedule(this.addFifth, this, 0.5, false);
+        scheduler.schedule(this.addSixth, this, delay, false);
     },
     addFishAtPosition:function (startPos) {
         var tempGameScene = this._currentScene;
-        FishGroup.shareFishGroup().setInitPoint(startPos);
-        FishGroup.shareFishGroup().createFishGroup(tempGameScene.getCurStage());
+        sino.fishGroup.setInitPoint(startPos);
+        sino.fishGroup.createFishGroup(tempGameScene.getCurStage());
     },
     nextWave:function () {
         alert('next wave');
     },
     addSec:function (time) {
-        cc.Director.getInstance().getScheduler().unscheduleSelector(this.addSec, this);
-        var position = (cc.p(VisibleRect.right().x + 5.0, Math.random() * 10 + VisibleRect.bottom().y + VisibleRect.rect().size.height / 2 - INIT_POS_Y_STEP));
+        cc.director.getScheduler().unschedule(this.addSec, this);
+        var position = (cc.p(VisibleRect.right().x + 5.0, Math.random() * 10 + VisibleRect.bottom().y + VisibleRect.rect().height / 2 - INIT_POS_Y_STEP));
         this.addFishAtPosition(position);
     },
     addThird:function (time) {
-        cc.Director.getInstance().getScheduler().unscheduleSelector(this.addThird, this);
-        var position = (cc.p(VisibleRect.left().x - 5.0, Math.random() * 10 + VisibleRect.bottom().y + VisibleRect.rect().size.height / 2 + INIT_POS_Y_STEP));
+        cc.director.getScheduler().unschedule(this.addThird, this);
+        var position = (cc.p(VisibleRect.left().x - 5.0, Math.random() * 10 + VisibleRect.bottom().y + VisibleRect.rect().height / 2 + INIT_POS_Y_STEP));
         this.addFishAtPosition(position);
     },
     addFourth:function (time) {
-        cc.Director.getInstance().getScheduler().unscheduleSelector(this.addFourth, this);
-        var position = (cc.p(VisibleRect.left().x - 5.0, Math.random() * 10 + VisibleRect.bottom().y + VisibleRect.rect().size.height / 2 - INIT_POS_Y_STEP));
+        cc.director.getScheduler().unschedule(this.addFourth, this);
+        var position = (cc.p(VisibleRect.left().x - 5.0, Math.random() * 10 + VisibleRect.bottom().y + VisibleRect.rect().height / 2 - INIT_POS_Y_STEP));
         this.addFishAtPosition(position);
     },
     addFifth:function (time) {
-        cc.Director.getInstance().getScheduler().unscheduleSelector(this.addFifth, this);
-        var position = (cc.p(VisibleRect.right().x + 5.0, Math.random() * 10 + VisibleRect.bottom().y + VisibleRect.rect().size.height / 2));
+        cc.director.getScheduler().unschedule(this.addFifth, this);
+        var position = (cc.p(VisibleRect.right().x + 5.0, Math.random() * 10 + VisibleRect.bottom().y + VisibleRect.rect().height / 2));
         this.addFishAtPosition(position);
     },
     addSixth:function (time) {
-        cc.Director.getInstance().getScheduler().unscheduleSelector(this.addSixth, this);
-        var position = (cc.p(VisibleRect.left().x - 5.0, Math.random() * 10 + VisibleRect.bottom().y + VisibleRect.rect().size.height / 2));
+        cc.director.getScheduler().unschedule(this.addSixth, this);
+        var position = (cc.p(VisibleRect.left().x - 5.0, Math.random() * 10 + VisibleRect.bottom().y + VisibleRect.rect().height / 2));
         this.addFishAtPosition(position);
     },
     getSessionType:function () {
@@ -115,6 +120,22 @@ var GameMainSessionController = GameSessionController.extend({
         return true;
     },
     update:function (dt) {
+        if (GameCtrl.isOnlineGame()) {
+            // if (GameCtrl.sharedGame().getArena()) {
+            //     GameCtrl.sharedGame().getArena().updateEverything();
+            // }
+            GameManager.updateEverything();
+
+            var gameScene = GameCtrl.sharedGame().getCurScene();
+            this.updateBullets(dt, gameScene.getActors(GroupHeroBullet), []);
+            this.updateBullets(dt, gameScene.getActors(GroupEnemyBullet), []);
+
+            // This fires pending bullets by shifting them from the _shootPosList
+            this.updateBullets(dt);
+
+            return;
+        }
+
         if (this._sessionRunning) {
             this.updateAllActors(dt);
             this.updateStarFish(dt);

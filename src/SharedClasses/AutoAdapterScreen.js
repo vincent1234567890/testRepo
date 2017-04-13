@@ -28,27 +28,33 @@ var AutoAdapterScreen = cc.Class.extend({
     getWinSize:function () {
         var width = document.documentElement.clientWidth;
         var height = document.documentElement.clientHeight;
+        // console.log(document.documentElement.clientWidth);
+        // console.log( document.documentElement.clientHeight);
 
-        if (width > this._maxWidth) {
-            this._width = this._maxWidth;
-        }
-        else if (width < this._minWidth) {
-            this._width = this._minWidth;
-        }
-        else {
-            this._width = width;
-        }
+        // if (width > this._maxWidth) {
+        //     this._width = this._maxWidth;
+        // }
+        // else if (width < this._minWidth) {
+        //     this._width = this._minWidth;
+        // }
+        // else {
+        //     this._width = width;
+        // }
+        //
+        // if (height > this._maxHeight) {
+        //     this._height = this._maxHeight;
+        // }
+        // else if (height < this._minHeight) {
+        //     this._height = this._minHeight;
+        // }
+        // else {
+        //     this._height = height;
+        // }
 
-        if (height > this._maxHeight) {
-            this._height = this._maxHeight;
-        }
-        else if (height < this._minHeight) {
-            this._height = this._minHeight;
-        }
-        else {
-            this._height = height;
-        }
+        this._width = width;
+        this._height = height;
 
+        // console.trace();
         return new cc.Size(this._width, this._height);
     },
     adjustSize:function () {
@@ -69,8 +75,16 @@ var AutoAdapterScreen = cc.Class.extend({
             KingFisher.style.height = this._height + "px";
         }
 
-        cc._renderContext.translate(0, cc.canvas.height);
+        // cc._renderContext.translate(0, cc._canvas.height);
+        // if (cc._renderType == cc.game.RENDER_TYPE_WEBGL) {
+        //     if (cc._renderType == cc.game.RENDER_TYPE_CANVAS) {
+        //         cc._renderContext.translate(0, cc._canvas.height);
+        //     }else if (cc._renderType == cc.game.RENDER_TYPE_WEBGL){
+                //cc._renderContext.viewport(0, 0, cc._canvas.width, cc._canvas.height);
+            // }
+        // }
     },
+
     setWinSize:function (tag) {
         this._tag = tag;
         // console.log(tag);

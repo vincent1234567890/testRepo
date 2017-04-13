@@ -24,22 +24,19 @@ var TutorialHintLayer = cc.Layer.extend({
         return false;
     },
     onEnter:function () {
-        this._super();
-        this.runAction(cc.Sequence.create(cc.DelayTime.create(3),
-            cc.CallFunc.create(this, this.permitClose)));
+        cc.Layer.prototype.onEnter.call(this);
+        this.runAction(cc.sequence(cc.delayTime(3), cc.callFunc(this.permitClose, this)));
     },
     setVisible:function (v) {
         this._super();
         this.canClose = false;
-        this.runAction(cc.Sequence.create(cc.DelayTime.create(3),
-            cc.CallFunc.create(this, this.permitClose)));
+        this.runAction(cc.sequence(cc.delayTime(3), cc.callFunc(this.permitClose, this)));
     },
     permitClose:function () {
         this.canClose = true;
     },
     initViews:function () {
-        var winSize = cc.Director.getInstance().getWinSize();
-        var bg = cc.Sprite.createWithSpriteFrameName(("ui_other_021.png"));
+        var bg = new cc.Sprite("#ui_other_021.png");
         var bgSizeHalf = bg.getContentSize();
         bgSizeHalf.width /= 2;
         bgSizeHalf.height /= 2;
@@ -47,23 +44,19 @@ var TutorialHintLayer = cc.Layer.extend({
         this.addChild(bg);
         bg.setPosition(VisibleRect.center());
 
-        this.hint = cc.LabelTTF.create(this.hintFile, "Arial", 32, cc.SizeMake(320, 150), cc.TEXT_ALIGNMENT_CENTER, cc.VERTICAL_TEXT_ALIGNMENT_CENTER); //todo(cjh) need to modify position
+        this.hint = new cc.LabelTTF(this.hintFile, "Arial", 32, new cc.Size(320, 150), cc.TEXT_ALIGNMENT_CENTER, cc.VERTICAL_TEXT_ALIGNMENT_CENTER); //todo(cjh) need to modify position
 
         bg.addChild(this.hint);
         this.hint.setPosition(cc.p(bgSizeHalf.width, bgSizeHalf.height));
 
-        var close = cc.MenuItemSprite.create(cc.Sprite.createWithSpriteFrameName("button_other_012.png"),
-            cc.Sprite.createWithSpriteFrameName("button_other_013.png"),
-            this,
-            this.clickClose);
+        var close = new cc.MenuItemSprite(new cc.Sprite("#button_other_012.png"),
+            new cc.Sprite("#button_other_013.png"), this.clickClose, this);
 
-        var fish = cc.MenuItemSprite.create(cc.Sprite.createWithSpriteFrameName("button_help_02.png"),
-            cc.Sprite.createWithSpriteFrameName("button_help_02.png"),
-            this,
-            this.clickFish);
+        var fish = new cc.MenuItemSprite(new cc.Sprite("button_help_02.png"),
+            new cc.Sprite("#button_help_02.png"), this.clickFish, this);
 
-        var menu = cc.Menu.create(close, fish);
-        menu.setPosition(cc.PointZero());
+        var menu = new cc.Menu(close, fish);
+        menu.setPosition(0, 0);
         close.setPosition(cc.p(bgSizeHalf.width * 2, bgSizeHalf.height * 2));
         var fishSize = fish.getContentSize();
         fish.setPosition(cc.p(bgSizeHalf.width * 2 - fishSize.width, fishSize.height / 2));
@@ -75,7 +68,7 @@ var TutorialHintLayer = cc.Layer.extend({
         }
 
         this.removeAllChildrenWithCleanup(true);
-        this.removeFromParentAndCleanup(true);
+        this.removeFromParent(true);
     },
     clickFish:function (sender) {
     }

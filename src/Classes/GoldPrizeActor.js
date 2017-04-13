@@ -40,15 +40,15 @@ var GoldPrizeActor = BaseActor.extend({
         }
     },
 
-    initWithDef:function (def) {
+    ctor:function (def) {
         this._def = def;
 
         this.setBDeleteBigChest(false);
-        var ret = this.initWithSpriteName("coin", "GoldItem.png");
+        var ret = this._super("coin", "GoldItem.png");
         if (ret) {
             this.playAction(0);
             this._speed = 100;
-            this._dir = cc.PointZero();
+            this._dir = new cc.Point(0, 0);
             this._isAlive = true;
             this._group = GroupGoldPrizeActor;
         }
@@ -83,7 +83,7 @@ var GoldPrizeActor = BaseActor.extend({
         }
 
         if (this.getIsAlive()) {
-            if (!cc.Rect.CCRectContainsPoint(EScreenRect, this.getPosition())) {
+            if (!cc.rectContainsPoint(EScreenRect, this.getPosition())) {
                 if (this._deleteBigChest) {
                     //by now, there should only be 1 max chest
                     var chest = this.getScene().getActors(GroupMaxChestActor)[0];
@@ -121,8 +121,7 @@ var GoldPrizeActor = BaseActor.extend({
 
 GoldPrizeActor.sharedActor = function () {
     if (!this._sharedActor) {
-        this._sharedActor = new GoldPrizeActor();
-        this._sharedActor.initWithDef("");
+        this._sharedActor = new GoldPrizeActor("");
     }
 
     return this._sharedActor;
@@ -131,8 +130,8 @@ GoldPrizeActor.sharedActor = function () {
 GoldPrizeActor._sharedActor = null;
 
 var BigPrizeActor = BaseActor.extend({
-    initWithDef:function (def_) {
-        var ret = this.initWithSpriteName("nihongdeng", "SmallItem.png");
+    ctor:function (def_) {
+        var ret = this._super("nihongdeng", "SmallItem.png");
         if (ret) {
             this.playAction(0);
             this._group = GroupBigGoldPrizeActor;
@@ -150,9 +149,9 @@ var BigPrizeActor = BaseActor.extend({
 });
 
 var ChestActor = BaseActor.extend({
-    initWithDef:function(def_){
+    ctor:function(def_){
         this._def = def_;
-        var bRet = this.initWithSpriteName("chest", "chest.png");
+        var bRet = this._super("chest", "chest.png");
         if (bRet)
         {
             this.playAction(0);
@@ -164,7 +163,7 @@ var ChestActor = BaseActor.extend({
     },
     getBaseActorType:function(){return ActorType.eChestActor},
     removeSelfFromScene:function(){
-        this.getScheduler().unscheduleAllSelectorsForTarget(this);
+        this.getScheduler().unscheduleAllForTarget(this);
         this._super();
     },
     resetState:function(){
@@ -172,7 +171,7 @@ var ChestActor = BaseActor.extend({
         this._super();
     },
     addParticleSystem:function(){
-        var tempParticle = cc.ParticleSystemQuad.create(ImageName("kaibaoxiang02.plist"));
+        var tempParticle = new cc.ParticleSystem(ImageName("kaibaoxiang02.plist"));
         tempParticle.setPosition(this.getPosition());
         //self.pParticle = tempParticle;
         this.getScene().addChild(tempParticle, 10);
@@ -192,14 +191,11 @@ var ChestActor = BaseActor.extend({
     getChestRect:function(){
         var chestWidth =  136.0;
         var chestHeight = 116.0;
-        var ChestRect = cc.RectMake(this.getPosition().x - chestWidth / 2, this.getPosition().y - chestHeight / 2, chestWidth, chestHeight);
-        return ChestRect;
+        return new cc.Rect(this.getPosition().x - chestWidth / 2, this.getPosition().y - chestHeight / 2, chestWidth, chestHeight);
     },
     deleteBigChest:function(SceneSprite){},
     ChestMove:function(){
-        var moveSprite = cc.MoveTo.create(1.00, VisibleRect.center());
-        var call = cc.CallFunc.create(this, this.deleteChest);
-        this.runAction(cc.Sequence.create(moveSprite, call));
+        this.runAction(cc.sequence(cc.moveTo(1.00, VisibleRect.center()), cc.callFunc(this.deleteChest, this)));
     },
     DrawOval:function(){},
     prizeNumber:0,
@@ -265,12 +261,10 @@ var ChestActor = BaseActor.extend({
 ChestActor.OvalCiShu = -1;
 
 var MaxChestActor = ChestActor.extend({
-    ctor:function(){
+    ctor:function(def_){
         this.prizeType = "";
-    },
-    initWithDef:function(def_){
         this._def = def_;
-        var bRet = this.initWithSpriteName("chest", "chest.png");
+        var bRet = this._super("chest", "chest.png");
 
         if (bRet)
         {
@@ -318,12 +312,12 @@ var MaxChestActor = ChestActor.extend({
         {
             this.getScene().getChestGameLayer().DelChestScoreNumber();
         }
-        cc.SpriteFrameCache.getInstance().addSpriteFrames(ImageName("chestreward.plist"));
+        cc.spriteFrameCache.addSpriteFrames(ImageName("chestreward.plist"));
         if (this.getPrizeType() === "Gold")
         {
             var temp =  this.getPrizeNumber();
             var labelNum = cc.LabelAtlas.create(temp, ImageName("prizenum.png"), PrizeNum_TextWidth, PrizeNum_TextHeight, '0');
-            var prizeSprite = cc.Sprite.createWithSpriteFrameName(("prizesign1.png"));
+            var prizeSprite = new cc.Sprite("#prizesign1.png");
             labelNum.setScale(0.5);
             prizeSprite.setScale(0.5);
             var prizeOffset = cc.p(-35,90);
@@ -339,7 +333,7 @@ var MaxChestActor = ChestActor.extend({
         }
         else if (this.getPrizeType() == "Exp")
         {
-            var EXPSprite = cc.Sprite.createWithSpriteFrameName(("EXP.png"));
+            var EXPSprite = new cc.Sprite("#EXP.png");
             EXPSprite.setScale(0.5);
             var expYoffset =110;
             EXPSprite.setPosition(cc.pAdd(this.getPosition(), cc.p(0,expYoffset)));
@@ -356,7 +350,7 @@ var MaxChestActor = ChestActor.extend({
         }
         else if (this.getPrizeType() == "Laser")
         {
-            var RewardSprite = cc.Sprite.createWithSpriteFrameName(("button_prop_Laser.png"));
+            var RewardSprite = new cc.Sprite("#button_prop_Laser.png");
 
             RewardSprite.setScale(0.5);
             var yOffset = 120;
@@ -374,7 +368,7 @@ var MaxChestActor = ChestActor.extend({
             var perPoint = parseInt(strPrePoint);
             var p = cc.PointFromString(dict["position"]);
             var distpos = cc.PointFromString(dict["distpos"]);
-            var pPParticle = cc.ParticleSystemQuad.create(ImageName("goldlizi.plist"));
+            var pPParticle = new cc.ParticleSystem(ImageName("goldlizi.plist"));
             var goldcoin = ActorFactory.create("GoldPrizeActor");
             goldcoin.setPoint(perPoint);
             var oddsNumber = this.getScene().getOddsNumber();
@@ -390,18 +384,18 @@ var MaxChestActor = ChestActor.extend({
             this.deleteBigChest();
         }
         else{
-            this.getScheduler().unscheduleSelector(this.addGoldAt, this);
+            this.getScheduler().unschedule(this.addGoldAt, this);
             this.addGoldAt(this.m_pCallParamDict);
         }
     },
     addGoldPrizeDel:function(dictORdt){
         if((typeof dictORdt) === "object")
         {
-            var dict = dictORdt
+            var dict = dictORdt;
             playEffect(COIN_EFFECT1);
             var strPrePoint = dict["perPoint"];
             var perPoint = parseInt(strPrePoint);
-            var pParticle = cc.ParticleSystemQuad.create(ImageName("goldlizi.plist"));
+            var pParticle = new cc.ParticleSystem(ImageName("goldlizi.plist"));
             var goldcoin  = ActorFactory.create("GoldPrizeActor");
             goldcoin.setPoint(perPoint);
 
@@ -416,51 +410,45 @@ var MaxChestActor = ChestActor.extend({
             this.getScene().addActor(goldcoin);
         }
         else{
-            this.getScheduler().unscheduleSelector(this.addGoldPrizeDel, this);
+            this.getScheduler().unschedule(this.addGoldPrizeDel, this);
             this.addGoldPrizeDel(this.m_pCallParamDict);
         }
     },
     ChestMove:function(){
         this.setPosition(VisibleRect.center());
-        var moveSprite = cc.MoveTo.create(1.00, cc.p((this.iDirection + 1) * screenWidth / 6, VisibleRect.center().y));
-        var call = cc.CallFunc.create(this, this.initScoreNumber);
-        this.runAction(cc.Sequence.create(moveSprite, call, null));
+        this.runAction(cc.sequence(
+            cc.moveTo(1.00, cc.p((this.iDirection + 1) * screenWidth / 6, VisibleRect.center().y)),
+            cc.callFunc(this.initScoreNumber, this)));
     },
     ChestMoveCenter:function(){
-        var moveSprite1 = cc.MoveTo.create(1.00, VisibleRect.center());
-        var moveSprite2 = cc.MoveTo.create(0.50, cc.p((this.iDirection + 1) * screenWidth / 6, VisibleRect.center().y));
-        if (this.iDirection == 0)
-        {
-            var call = cc.CallFunc.create(this.getScene().getChestGameLayer(), ChestGameLayer.prototype.RandomOvalForCall);
-            this.runAction(cc.Sequence.create(moveSprite1, moveSprite2, call));
-        }
-        else
-        {
-            this.runAction(cc.Sequence.create(moveSprite1, moveSprite2));
+        var moveSprite1 = cc.moveTo(1.00, VisibleRect.center());
+        var moveSprite2 = cc.moveTo(0.50, cc.p((this.iDirection + 1) * screenWidth / 6, VisibleRect.center().y));
+        if (this.iDirection == 0){
+            this.runAction(cc.sequence(moveSprite1, moveSprite2,
+                cc.callFunc(this.getScene().getChestGameLayer(), ChestGameLayer.prototype.RandomOvalForCall)));
+        } else {
+            this.runAction(cc.sequence(moveSprite1, moveSprite2));
         }
     },
     ChestMoveToPos:function(pos, timef){
-        var moveSprite = cc.MoveTo.create(timef, pos);
-        var call = cc.CallFunc.create(this, this.ChestMoveInit);
-
-        this.runAction(cc.Sequence.create(moveSprite,call, 0));
+        this.runAction(cc.sequence(cc.moveTo(timef, pos), cc.callFunc(this.ChestMoveInit, this)));
     },
     ChestMoveInit:function(pNode){
         this.setPosition(cc.p((this.iDirection+1)*screenWidth/6,VisibleRect.center().y));
     },
     addGameReward:function(){
-        var tempParticle = cc.ParticleSystemQuad.create(ImageName("kaibaoxiang02.plist"));
+        var tempParticle = new cc.ParticleSystem(ImageName("kaibaoxiang02.plist"));
         tempParticle.setPosition(this.getPosition());
         this.setParticle(tempParticle);
         this.addChild(tempParticle, 10);
         if (this.getPrizeType() === "Exp")
         {
-            this.UPSprite = cc.Sprite.createWithSpriteFrameName(("EXP.png"));
+            this.UPSprite = new cc.Sprite("#EXP.png");
             var expPosOffset = cc.p(5,200);
             this.UPSprite.setPosition(cc.pAdd(this.getPosition(), expPosOffset));
             //this.getScene().getChestGameLayer().addChild(this.UPSprite);
             this.getScene().getChestGameLayer().addChild(this.UPSprite);
-            var FlyingframeCache = cc.SpriteFrameCache.getInstance();
+            var FlyingframeCache = cc.spriteFrameCache;
 
             // @warning 此 plist 在进游戏时预加载了。如有问题可在此重新加载
             FlyingframeCache.addSpriteFrames(ImageName("FlyingBook.plist"));
@@ -487,17 +475,12 @@ var MaxChestActor = ChestActor.extend({
             var angle = cc.pAngleSigned(cc.pAdd(this.getPosition(), pos1), pos2);
             var FlyingAnimation;
             if (angle>=0)
-            {
-                FlyingAnimation = cc.Animation.create(FlyingSpriteNode1, 0.1);
-            }
+                FlyingAnimation = new cc.Animation(FlyingSpriteNode1, 0.1);
             else
-            {
-                FlyingAnimation = cc.Animation.create(FlyingSpriteNode, 0.1);
-            }
+                FlyingAnimation = new cc.Animation(FlyingSpriteNode, 0.1);
 
-            var BookAnimate = cc.Animate.create(FlyingAnimation, false);
-            var RewardSprite = cc.Sprite.createWithSpriteFrame(FlyingframeCache.getSpriteFrame("fb0000.png"));
-            var BookRepeat = cc.RepeatForever.create(BookAnimate);
+            var BookAnimate = new cc.Animate(FlyingAnimation).repeatForever();
+            var RewardSprite = new cc.Sprite(FlyingframeCache.getSpriteFrame("fb0000.png"));
             var yOffset = 190;
 
             var targetPos= cc.p(156, -24);
@@ -505,11 +488,9 @@ var MaxChestActor = ChestActor.extend({
             RewardSprite.setScale(1.0);
 
             RewardSprite.setRotation(angle/Math.PI*180);
-            var moveTo = cc.MoveTo.create(1.0, cc.pAdd(VisibleRect.top(), targetPos));//actionWithDuration: Distance/(kIsPad?200:100) position:cc.p(kIsPad?650:325-RewardSprite.position.x, kIsPad?720:310-RewardSprite.position.y)];
-
-            var call1 = cc.CallFunc.create(this, this.deleteBigChest);
-            RewardSprite.runAction(BookRepeat);
-            RewardSprite.runAction(cc.Sequence.create(moveTo,call1));
+            RewardSprite.runAction(BookAnimate);
+            RewardSprite.runAction(cc.sequence(
+                cc.moveTo(1.0, cc.pAdd(VisibleRect.top(), targetPos)), cc.callFunc(this.deleteBigChest, this)));
 
             this.getScene().getChestGameLayer().addChild(RewardSprite, 100);
 
@@ -532,24 +513,23 @@ var MaxChestActor = ChestActor.extend({
         {
             playEffect(ACH_EFFECT);
             //应该调用收集到激光的函数
-            this.UPSprite = cc.Sprite.createWithSpriteFrameName(("button_prop_Laser.png"));
+            this.UPSprite = new cc.Sprite("#button_prop_Laser.png");
             this.UPSprite.setScale(0.5);
             var posOffset = cc.p(5,200);
             this.UPSprite.setPosition(cc.pAdd(this.getPosition(), posOffset));
             //this.getScene().getChestGameLayer().addChild(this.UPSprite);
             this.getScene().getChestGameLayer().addChild(this.UPSprite);
-            var RewardSprite = cc.Sprite.createWithSpriteFrameName(("button_prop_Laser.png"));
+            var RewardSprite = new cc.Sprite("#button_prop_Laser.png");
             RewardSprite.setScale(0.5);
             RewardSprite.setPosition(this.getPosition());
 
             var targetPosX = 700.0;
-            var moveTo = cc.MoveTo.create(1.0, cc.p(targetPosX, VisibleRect.bottom().y));
-            var call1 = cc.CallFunc.create(this, this.deleteBigChest);
-            RewardSprite.runAction(cc.Sequence.create(moveTo, call1));
+            RewardSprite.runAction(cc.sequence(
+                cc.moveTo(1.0, cc.p(targetPosX, VisibleRect.bottom().y)), cc.callFunc(this.deleteBigChest, this)));
             this.getScene().getChestGameLayer().addChild(RewardSprite, 100);
         }
 
-        var frameCache = cc.SpriteFrameCache.getInstance();
+        var frameCache = cc.spriteFrameCache;
         // @warning 此 plist 在进游戏时预加载了。如有问题可在此重新加载
         frameCache.addSpriteFrames(ImageName("BaoXiangLight.plist"));
 
@@ -560,14 +540,13 @@ var MaxChestActor = ChestActor.extend({
             frameCache.getSpriteFrame("boxlinght_04.png"),
             frameCache.getSpriteFrame("boxlinght_05.png")];
 
-        var ChestAnimation = cc.Animation.create(ChestSpriteNode, 0.2);
-        var Chest01 = cc.Animate.create(ChestAnimation, false);
-        this.ChestGoldSprite = cc.Sprite.createWithSpriteFrame(frameCache.getSpriteFrame("boxlinght_01.png"));
-        var repeat = cc.RepeatForever.create(Chest01);
+        var chestAnimation = new cc.Animation(ChestSpriteNode, 0.2);
+        var chest01Ani = cc.animate(chestAnimation).repeatForever();
+        this.ChestGoldSprite = new cc.Sprite(frameCache.getSpriteFrame("boxlinght_01.png"));
         var yOffset= 190.0;
         this.ChestGoldSprite.setPosition(cc.pAdd(this.getPosition(), cc.p(5, yOffset)));
         this.ChestGoldSprite.setScale(2.0);
-        this.ChestGoldSprite.runAction(repeat);
+        this.ChestGoldSprite.runAction(chest01Ani);
         this.name = "hello";
         this.getScene().getChestGameLayer().addChild(this.ChestGoldSprite);
         //this.addChild(this.ChestGoldSprite,9999)
@@ -578,7 +557,7 @@ var MaxChestActor = ChestActor.extend({
             playEffect(COIN_EFFECT1);
             var strPrePoint = (dict["perPoint"]);
             var perPoint =  parseInt(strPrePoint);
-            var pParticle = cc.ParticleSystemQuad.create(ImageName("goldlizi.plist"));
+            var pParticle = new cc.ParticleSystem(ImageName("goldlizi.plist"));
             var goldcoin = ActorFactory.create("GoldPrizeActor");
             goldcoin.setPoint(perPoint);
 
@@ -627,7 +606,7 @@ var MaxChestActor = ChestActor.extend({
                 }
                 else
                 {
-                    this.getScheduler().scheduleSelector(this.addGoldAt, this, 0.5, false);
+                    this.getScheduler().schedule(this.addGoldAt, this, 0.5, false);
                 }
             }
         }

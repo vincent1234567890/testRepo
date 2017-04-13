@@ -14,7 +14,7 @@ var WeaponCannon = Weapon.extend({
      The weaponLevel param is normal cannon weapon level
      The pos param determine base point of sprite
      */
-    initWeapon:function (weaponLevel, pos) {
+    ctor:function (weaponLevel, pos) {
         if (arguments.length < 2) {
             return true;
         }
@@ -27,21 +27,21 @@ var WeaponCannon = Weapon.extend({
 
         var spriteName = "actor_cannon1_" + weaponLevel + "1.png";
         var shootName = "actor_cannon1_" + weaponLevel + "2.png";
-        if (!this._super(spriteName, shootName, pos, 0.1)) return;
+        this._super(spriteName, shootName, pos, 0.1);
         this._cannonLevel = weaponLevel;
         this.setAnchorPoint(cc.p(0.5, 0.5));
-        var menuLeft = cc.MenuItemSprite.create(cc.Sprite.createWithSpriteFrameName("ui_button_63.png"), cc.Sprite.createWithSpriteFrameName("ui_button_64.png"), this, this.changeWeapon);
+        var menuLeft = new cc.MenuItemSprite(new cc.Sprite("#ui_button_63.png"), new cc.Sprite("#ui_button_64.png"), this.changeWeapon, this);
         menuLeft.setTag(CannonPowDow);
         menuLeft.setScale(0.7);
 
-        var menuRight = cc.MenuItemSprite.create(cc.Sprite.createWithSpriteFrameName("ui_button_65.png"), cc.Sprite.createWithSpriteFrameName("ui_button_66.png"), this, this.changeWeapon);
+        var menuRight = new cc.MenuItemSprite(new cc.Sprite("#ui_button_65.png"), new cc.Sprite("#ui_button_66.png"), this.changeWeapon, this);
         menuRight.setTag(CannonPowUp);
         menuRight.setScale(0.7);
 
         menuLeft.setPosition(cc.pAdd(cc.p(this.getContentSize().width / 2, menuLeft.getContentSize().height / 2), cc.p(-70, -20)));
         menuRight.setPosition(cc.pAdd(cc.p(this.getContentSize().width / 2, menuRight.getContentSize().height / 2), cc.p(70, -20)));
 
-        var menu = cc.Menu.create(menuLeft, menuRight);
+        var menu = new cc.Menu(menuLeft, menuRight);
         this.addChild(menu, 10, CannonMenu);
         menu.setPosition(cc.p(0, 0));
 
@@ -75,7 +75,7 @@ var WeaponCannon = Weapon.extend({
 
         /*
          currentScene.removeChildByTag(kParticleTag, true);
-         var partic = cc.ParticleSystemQuad.create(ImageName("huanpao02.plist"));
+         var partic = new cc.ParticleSystem(ImageName("huanpao02.plist"));
          partic.setPosition(cc.pAdd(this.getPosition(), cc.p(0, 0)));
          currentScene.addChild(partic, 111, kParticleTag);*/
     },
@@ -102,16 +102,16 @@ var WeaponCannon = Weapon.extend({
         if (!this._isShootable)
             return;
 
-        var distance = cc.pDistance(cc.PointZero(), cc.p(30, 23));
+        var distance = cc.pDistance(new cc.Point(0, 0), cc.p(30, 23));
 
         this.getWeaponSprite().stopAction(this.getShootAnimation());
         this.getWeaponSprite().setScale(1.0);
 
-        //var pParticle = cc.ParticleSystemQuad.create(ImageName("_particle.plist"));
+        //var pParticle = new cc.ParticleSystem(ImageName("_particle.plist"));
         //TODO foundn't this file
-        var pParticle = ParticleSystemFactory.getInstance().createParticle(ImageName("particle.plist"));
-        pParticle.setDrawMode(cc.PARTICLE_SHAPE_MODE);
-        pParticle.setShapeType(cc.PARTICLE_STAR_SHAPE);
+        var pParticle = particleSystemFactory.createParticle(res.ParticlePlist);
+        pParticle.setDrawMode(cc.ParticleSystem.SHAPE_MODE);
+        pParticle.setShapeType(cc.ParticleSystem.STAR_SHAPE);
         var sourcePos = cc.pAdd(this.getPosition(), cc.p(-25, 0));
         var direction = cc.pNormalize(cc.pSub(targetPos, sourcePos));
 
@@ -188,7 +188,7 @@ var WeaponCannonExt = WeaponCannon.extend({
             this.setWeaponDirection(newDirection);
         }
     },
-    initWeapon:function (weaponLevel, pos, actorType) {
+    ctor:function (weaponLevel, pos, actorType) {
         var bRet = this._super(weaponLevel, pos);
         if (bRet) {
             this.setCurrentActorType(actorType);
@@ -196,13 +196,24 @@ var WeaponCannonExt = WeaponCannon.extend({
 
         return bRet;
     },
-    shootTo:function (targetPosition, type) {
-        this.setDirection(targetPosition);
-        var distance = cc.pDistance(cc.PointZero(), cc.p(50, 33));
-        this.getWeaponSprite().stopAction(this.getShootAnimation());
-        this.getWeaponSprite().setScale(1.0);
+    shootTo:function (targetPosition, type, showCannonAnimation) {
+        return;
+        // Defaults:
+        if (showCannonAnimation === undefined) {
+            showCannonAnimation = true;
+        }
 
-        this.getWeaponSprite().runAction(this.getShootAnimation());
+        //var particleDistance = cc.pDistance(new cc.Point(0, 0), cc.p(50, 33));
+        var particleDistance = 60;
+
+        if (showCannonAnimation) {
+            this.setDirection(targetPosition);
+
+            this.getWeaponSprite().stopAction(this.getShootAnimation());
+            this.getWeaponSprite().setScale(1.0);
+
+            this.getWeaponSprite().runAction(this.getShootAnimation());
+        }
 
         var bullet;
         if (this.getCannonLevel() == 10) {
@@ -212,7 +223,7 @@ var WeaponCannonExt = WeaponCannon.extend({
             bullet = ActorFactory.create("BulletActor");
         }
 
-        var particle = ParticleSystemFactory.getInstance().createParticle(ImageName("particle.plist"));
+        var particle = particleSystemFactory.createParticle(res.ParticlePlist);
         particle.setDrawMode(cc.PARTICLE_SHAPE_MODE);
         particle.setShapeType(cc.PARTICLE_STAR_SHAPE);
 
@@ -227,7 +238,7 @@ var WeaponCannonExt = WeaponCannon.extend({
         var direction = cc.pNormalize(cc.pSub(targetPosition, bulletPos));
         bullet.setMoveDirection(direction);
         bullet.setPosition(bulletPos);
-        particle.setPosition(cc.pAdd(this.getPosition(), cc.pMult(direction, distance)));
+        particle.setPosition(cc.pAdd(this.getPosition(), cc.pMult(direction, particleDistance)));
 
         bullet.setTargetPosition(targetPosition);
         var speedSetArray = GameSetting.getInstance().getBulletSpeedArray();
@@ -269,54 +280,57 @@ var WeaponCannonExt = WeaponCannon.extend({
         }
 
         playEffect(FIRE_EFFECT);
+
+        // So we can set bulletId
+        return bullet;
     }
 });
 
 
 var WeaponCannon1 = WeaponCannonExt.extend({
-    initWeapon:function (pos, actorType) {
+    ctor:function (pos, actorType) {
         return this._super(FishWeaponType.eWeaponLevel1, pos, actorType);
     }
 });
 
 var WeaponCannon2 = WeaponCannonExt.extend({
-    initWeapon:function (pos, actorType) {
+    ctor:function (pos, actorType) {
         return this._super(FishWeaponType.eWeaponLevel2, pos, actorType);
     }
 });
 
 var WeaponCannon3 = WeaponCannonExt.extend({
-    initWeapon:function (pos, actorType) {
+    ctor:function (pos, actorType) {
         return this._super(FishWeaponType.eWeaponLevel3, pos, actorType);
     }
 });
 
 var WeaponCannon4 = WeaponCannonExt.extend({
-    initWeapon:function (pos, actorType) {
+    ctor:function (pos, actorType) {
         return this._super(FishWeaponType.eWeaponLevel4, pos, actorType);
     }
 });
 
 var WeaponCannon5 = WeaponCannonExt.extend({
-    initWeapon:function (pos, actorType) {
+    ctor:function (pos, actorType) {
         return this._super(FishWeaponType.eWeaponLevel5, pos, actorType);
     }
 });
 
 var WeaponCannon6 = WeaponCannonExt.extend({
-    initWeapon:function (pos, actorType) {
+    ctor:function (pos, actorType) {
         return this._super(FishWeaponType.eWeaponLevel6, pos, actorType);
     }
 });
 
 var WeaponCannon7 = WeaponCannonExt.extend({
-    initWeapon:function (pos, actorType) {
+    ctor:function (pos, actorType) {
         return this._super(FishWeaponType.eWeaponLevel7, pos, actorType);
     }
 });
 
 var WeaponCannon10 = WeaponCannonExt.extend({
-    initWeapon:function (pos, actorType) {
+    ctor:function (pos, actorType) {
         return this._super(FishWeaponType.eWeaponLevel10, pos, actorType);
     }
 });

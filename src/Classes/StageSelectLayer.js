@@ -6,14 +6,14 @@ var StageUITag = {
 };
 
 var StageSelectLayer = cc.Layer.extend({
-    _helpImages:0,
+    _helpImages:null,
     _touchBegan:null,
     _helpLayer:0,
     _dragSpeed:0,
     _curIndex:null,
     _otherLeftButton:0,
     _otherRightButton:0,
-    _curPageIndicator:[],
+    _curPageIndicator:null,
     _parentDeleaget:0,
     _showBuyLayer:false,
     _purchaseConfirmation:false,
@@ -23,20 +23,69 @@ var StageSelectLayer = cc.Layer.extend({
     _returnButton:null,
     _currentPage:0,
     _actorCoinLabel:0,
-    init:function(){
-        this._super();
+    _touchListener: null,
+
+    ctor: function(){
+        cc.Layer.prototype.ctor.call(this);
+
         this._helpImages = [];
         this._curIndex = 1;
+        this._curPageIndicator = [];
 
-        cc.Director.getInstance().getTouchDispatcher().addTargetedDelegate(this, 0, false);
+        this._touchListener = cc.EventListener.create({
+            event: cc.EventListener.TOUCH_ONE_BY_ONE,
+            swallowTouches: true,
+            onTouchBegan:function (touch, event) {
+                var target = event.getCurrentTarget();
+                if (target._showBuyLayer) {
+                    return false;
+                }
 
-        return true;
+                target._touchBegan = touch.getLocation();
+                return true;
+            },
+            onTouchMoved:function (touch, event) {
+                var target = event.getCurrentTarget();
+                if (target._showBuyLayer) {
+                    return;
+                }
+                var touchPoint = touch.getLocation();
+                var touchEnd = touch.getPreviousLocation();
+                var offsetX = touchPoint.x - touchEnd.x;
+                var layerX = target._helpLayer.getPosition().x + offsetX;
+
+                target._helpLayer.setPosition(cc.p(layerX, target._helpLayer.getPosition().y));
+            },
+            onTouchEnded:function (touch, event) {
+                var target = event.getCurrentTarget();
+                if (target._showBuyLayer || target._exiting) {
+                    return;
+                }
+                var touchPoint = touch.getLocation();
+                var distance = target._touchBegan.x - touchPoint.x;
+
+                if (Math.abs(distance) > 60 && target._helpLayer.getPosition().x <= 0 && target._helpLayer.getPosition().x >= -(VisibleRect.rect().width) * (STAGE_PAGE_NUM - 1)) {
+                    if (distance < 0)
+                        target.otherLeft(null);
+                    else
+                        target.otherRight(null);
+                } else {
+                    var x = -(target._currentPage * VisibleRect.rect().width);
+                    this._helpLayer.runAction(cc.sequence(
+                        cc.moveTo(0.2, x, target._helpLayer.getPosition().y),
+                        cc.callFunc(target.updateCurrentPage, target)));
+                }
+            }
+        });
     },
-    onEnter:function () {
-        this._super();
-        this.setKeyboardEnabled(true);
 
-        var cache = cc.SpriteFrameCache.getInstance();
+    onEnter:function () {
+        cc.Layer.prototype.onEnter.call(this);
+
+        //todo use event manager
+        //this.setKeyboardEnabled(true);
+
+        var cache = cc.spriteFrameCache;
         cache.addSpriteFrames(ImageNameLang("StageSelectLayer.plist"));
         cache.addSpriteFrames(ImageNameLang("StageSelectLayer3.plist"));
 
@@ -45,6 +94,9 @@ var StageSelectLayer = cc.Layer.extend({
         this.drawReturnButton();
         this.drawPageControl();
 
+        if (this._touchListener && !this._touchListener._isRegistered())
+            cc.eventManager.addListener(this._touchListener, this);
+
         var that = this;
         window.addEventListener("resize", function (event) {
             that.resetAllSpritePos();
@@ -52,12 +104,12 @@ var StageSelectLayer = cc.Layer.extend({
     },
     onExit:function(){
         this._super();
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
         cache.removeSpriteFrameByName(ImageNameLang("StageSelectLayer.plist"));
         cache.removeSpriteFrameByName(ImageNameLang("StageSelectLayer3.plist"));
 
-        this._helpImages = [];
-        this._curPageIndicator = [];
+        this._helpImages.length = 0;
+        this._curPageIndicator.length = 0;
     },
     keyBackClicked:function () {
         if (this._showBuyLayer) {
@@ -141,32 +193,22 @@ var StageSelectLayer = cc.Layer.extend({
         var _currentPage = this._currentPage + 1;
         this.unLockStageOK(_currentPage);
     },
-    showPurchaseUI:function (stage) {
-        if (this._showBuyLayer)
-            return;
-
-        this._showBuyLayer = true;
-        var lockLayer = new UnLockStageLayer();
-        lockLayer.initWithDelegate(this, stage);
-        this.setUnLockLayer(lockLayer);
-        this.addChild(this.getUnLockLayer(), 10, StageUITag.kStageUnLockTag);
-    },
 
     otherLeft:function (sender) {
         if (this._currentPage != 0 && !this._showBuyLayer) {
             this._currentPage--;
-            var Move = cc.MoveTo.create(0.2, cc.p(-screenWidth * this._currentPage, this._helpLayer.getPosition().y));
-            var call = cc.CallFunc.create(this, this.updateCurrentPage);
-            this._helpLayer.runAction(cc.Sequence.create(Move, call, 0));
+            this._helpLayer.runAction(cc.sequence(
+                cc.moveTo(0.2, cc.p(-screenWidth * this._currentPage, this._helpLayer.getPosition().y)),
+                cc.callFunc(this.updateCurrentPage, this)));
         }
     },
 
     otherRight:function (sender) {
         if (this._currentPage != STAGE_PAGE_NUM - 1 && !this._showBuyLayer) {
             this._currentPage++;
-            var Move = cc.MoveTo.create(0.2, cc.p(-screenWidth * this._currentPage, this._helpLayer.getPosition().y));
-            var call = cc.CallFunc.create(this, this.updateCurrentPage);
-            this._helpLayer.runAction(cc.Sequence.create(Move, call, 0));
+            this._helpLayer.runAction(cc.sequence(
+                cc.moveTo(0.2, cc.p(-screenWidth * this._currentPage, this._helpLayer.getPosition().y)),
+                cc.callFunc(this.updateCurrentPage, this)));
         }
     },
     back:function (sender) {
@@ -179,15 +221,14 @@ var StageSelectLayer = cc.Layer.extend({
         }
         else {
             var scene = GameCtrl.sharedGame().getCurScene();
-            if (scene) {
+            if (scene)
                 scene.setIsSubLayer(false);
-            }
         }
 
-        cc.Director.getInstance().getTouchDispatcher().removeDelegate(this);
         this.removeAllChildrenWithCleanup(true);
-        this.removeFromParentAndCleanup(true);
+        this.removeFromParent(true);
     },
+
     showAchievements:function (sender) {
     },
     showHiScore:function (sender) {
@@ -195,52 +236,10 @@ var StageSelectLayer = cc.Layer.extend({
     updateUI:function (dt) {
     },
 
-    SetDefaultPage:function (pageNum) {
+    setDefaultPage:function (pageNum) {
         this._currentPage = pageNum - 1;
         this._helpLayer.setPosition(cc.p(-screenWidth * this._currentPage, this._helpLayer.getPosition().y));
         this.updateCurrentPage();
-    },
-
-    onTouchBegan:function (touch, event) {
-        if (this._showBuyLayer) {
-            return false;
-        }
-
-        this._touchBegan = touch.getLocation();
-        return true;
-    },
-    onTouchMoved:function (touch, event) {
-        if (this._showBuyLayer) {
-            return;
-        }
-        var touchPoint = touch.getLocation();
-        var touchEnd = touch.getPreviousLocation();
-        var offsetX = touchPoint.x - touchEnd.x;
-        var layerX = this._helpLayer.getPosition().x + offsetX;
-
-        this._helpLayer.setPosition(cc.p(layerX, this._helpLayer.getPosition().y));
-    },
-    onTouchEnded:function (touch, event) {
-        if (this._showBuyLayer || this._exiting) {
-            return;
-        }
-        var touchPoint = touch.getLocation();
-        var distance = this._touchBegan.x - touchPoint.x;
-
-        if (Math.abs(distance) > 60 && this._helpLayer.getPosition().x <= 0 && this._helpLayer.getPosition().x >= -(VisibleRect.rect().size.width) * (STAGE_PAGE_NUM - 1)) {
-            if (distance < 0) {
-                this.otherLeft(null);
-            }
-            else {
-                this.otherRight(null);
-            }
-        }
-        else {
-            var x = -(this._currentPage * VisibleRect.rect().size.width);
-            var Move = cc.MoveTo.create(0.2, cc.p(x, this._helpLayer.getPosition().y));
-            var call = cc.CallFunc.create(this, this.updateCurrentPage);
-            this._helpLayer.runAction(cc.Sequence.create(Move, call, 0));
-        }
     },
 
     delegateAsObject:function () {
@@ -312,9 +311,9 @@ var StageSelectLayer = cc.Layer.extend({
     },
     setCurrentPage:function (curIndex) {
         this._currentPage = curIndex;
-        var Move = cc.MoveTo.create(0.2, cc.p(-screenWidth * this._currentPage, this._helpLayer.getPosition().y));
-        var call = cc.CallFunc.create(this, this.updateCurrentPage);
-        this._helpLayer.runAction(cc.Sequence.create(Move, call, 0));
+        this._helpLayer.runAction(cc.sequence(
+            cc.moveTo(0.2, cc.p(-screenWidth * this._currentPage, this._helpLayer.getPosition().y)),
+            cc.callFunc(this.updateCurrentPage, this), 0));
     },
     drawBackGround:function () {
         this._bg = cc.Sprite.create(ImageName("ui_background_normal.jpg"));
@@ -323,8 +322,8 @@ var StageSelectLayer = cc.Layer.extend({
         this._bg.setPosition(VisibleRect.center());
     },
     drawHelpImages:function () {
-        cc.SpriteFrameCache.getInstance().addSpriteFrames(ImageName("buttons.plist"));
-        cc.SpriteFrameCache.getInstance().addSpriteFrames(ImageName("stage.plist"));
+        cc.spriteFrameCache.addSpriteFrames(ImageName("buttons.plist"));
+        cc.spriteFrameCache.addSpriteFrames(ImageName("stage.plist"));
         this._helpLayer = cc.Layer.create();
         this.addChild(this._helpLayer, 8, 30);
 
@@ -343,12 +342,10 @@ var StageSelectLayer = cc.Layer.extend({
             page.setPosition(cc.p(VisibleRect.center().x + (i - 1) * screenWidth - 2.0, VisibleRect.center().y - 30));
             this._helpLayer.addChild(page, 8, i + 2);
 
-            var btnPageIndicator = cc.MenuItemToggle.create(
-                cc.MenuItemSprite.create(
-                    cc.Sprite.createWithSpriteFrameName("UI_select_slider_2.png"),
-                    cc.Sprite.createWithSpriteFrameName("UI_select_slider_1.png")),
-                    this, this.indicatorClick
-            );
+            var btnPageIndicator = new cc.MenuItemToggle(
+                new cc.MenuItemSprite(
+                    new cc.Sprite("#UI_select_slider_2.png"), new cc.Sprite("#UI_select_slider_1.png")),
+                    this.indicatorClick, this);
             this.addChild(btnPageIndicator, 8, i * 30 + i);
             this._curPageIndicator[i - 1] = btnPageIndicator;
             if (1 == i) {
@@ -372,26 +369,26 @@ var StageSelectLayer = cc.Layer.extend({
 
             var PlayerItem, markBackground, markLock;
             if (!value) {
-                PlayerItem = cc.MenuItemSprite.create(
+                PlayerItem = new cc.MenuItemSprite(
                     CSpriteLayer.getButtonBoxOffsetY(("ui_button_box04_01.png"), ImageNameLang("UI_select_button_3.png"), PlistAndPlist, itemOffset),
                     CSpriteLayer.getButtonBoxOffsetY(("ui_button_box04_02.png"), ImageNameLang("UI_select_button_4.png"), PlistAndPlist, itemOffset),
-                    this, this.buyLayer);
+                    this.buyLayer, this);
 
-                markBackground = cc.Sprite.createWithSpriteFrameName(("map_btn_1.png"));
-                markLock = cc.Sprite.createWithSpriteFrameName(("map_mark_2.png"));
+                markBackground = new cc.Sprite("#map_btn_1.png");
+                markLock = new cc.Sprite("#map_mark_2.png");
             }
             else {
                 PlayerItem = cc.MenuItemSprite.create(
                     CSpriteLayer.getButtonBoxOffsetY(("ui_button_box03_01.png"), ImageNameLang("UI_select_button_1.png"), PlistAndPlist, itemOffset),
                     CSpriteLayer.getButtonBoxOffsetY(("ui_button_box03_02.png"), ImageNameLang("UI_select_button_2.png"), PlistAndPlist, itemOffset),
-                    this, this.playGame);
+                    this.playGame, this);
 
-                markBackground = cc.Sprite.createWithSpriteFrameName(("map_btn_1.png"));
-                markLock = cc.Sprite.createWithSpriteFrameName(("map_mark_1.png"));
+                markBackground = new cc.Sprite("#map_btn_1.png");
+                markLock = new cc.Sprite("#map_mark_1.png");
             }
 
 
-            var menu = cc.Menu.create(PlayerItem);
+            var menu = new cc.Menu(PlayerItem);
             menu.setContentSize(page.getContentSize());
             menu.setPosition(cc.p(page.getContentSize().width/2,page.getContentSize().height/2));
             page.addChild(menu, 9, i * 20 + 2);
@@ -427,20 +424,17 @@ var StageSelectLayer = cc.Layer.extend({
         }
     },
     drawReturnButton:function () {
-        cc.SpriteFrameCache.getInstance().addSpriteFrames(ImageName("stage.plist"));
-        this._returnButton = cc.MenuItemSprite.create(cc.Sprite.createWithSpriteFrameName("ui_button_17.png"),
-            cc.Sprite.createWithSpriteFrameName("ui_button_18.png"),
-            this, this.back);
+        cc.spriteFrameCache.addSpriteFrames(ImageName("stage.plist"));
+        this._returnButton = new cc.MenuItemSprite(new cc.Sprite("#ui_button_17.png"),
+            new cc.Sprite("#ui_button_18.png"), this.back, this);
 
-        this._otherLeftButton = cc.MenuItemSprite.create(cc.Sprite.createWithSpriteFrameName("button_other_033.png"),
-            cc.Sprite.createWithSpriteFrameName("button_other_032.png"),
-            this, this.otherLeft);
+        this._otherLeftButton = new cc.MenuItemSprite(new cc.Sprite("#button_other_033.png"),
+            new cc.Sprite("#button_other_032.png"), this.otherLeft, this);
 
-        this._otherRightButton = cc.MenuItemSprite.create(cc.Sprite.createWithSpriteFrameName("button_other_033.png"),
-            cc.Sprite.createWithSpriteFrameName("button_other_032.png"),
-            this, this.otherRight);
+        this._otherRightButton = new cc.MenuItemSprite(new cc.Sprite("#button_other_033.png"),
+            new cc.Sprite("#button_other_032.png"), this.otherRight, this);
 
-        var mBack = cc.Menu.create(this._returnButton, this._otherLeftButton, this._otherRightButton);
+        var mBack = new cc.Menu(this._returnButton, this._otherLeftButton, this._otherRightButton);
         this.addChild(mBack, 30);
         mBack.setPosition(cc.p(0, 0));
         this._returnButton.setPosition(cc.pAdd(VisibleRect.topLeft(), cc.p(73, -38)));
@@ -457,9 +451,9 @@ var StageSelectLayer = cc.Layer.extend({
         var fontW = 14;
         var fontH = 22;
 
-        this._actorCoinLabel = cc.LabelAtlas.create(ActorStr, ImageName("ui_select_txt_01.png"), fontW, fontH, '0');
+        this._actorCoinLabel = new cc.LabelAtlas(ActorStr, ImageName("ui_select_txt_01.png"), fontW, fontH, '0');
 
-        this._textBox = cc.Sprite.createWithSpriteFrameName(("btn_gold_1.png"));
+        this._textBox = new cc.Sprite("#btn_gold_1.png");
         this._textBox.setAnchorPoint(cc.p(0.5, 0.5));
         this._textBox.setPosition(cc.p(VisibleRect.right().x - this._textBox.getContentSize().width / 2, VisibleRect.top().y - this._textBox.getContentSize().height / 2 - 5));
         this.addChild(this._textBox, 19);
@@ -488,9 +482,8 @@ var StageSelectLayer = cc.Layer.extend({
     playGame:function (sender) {
         playEffect(BUTTON_EFFECT);
         GameCtrl.sharedGame().newGame(this._currentPage + 1);
-        cc.Director.getInstance().getTouchDispatcher().removeDelegate(this);
         this.removeAllChildrenWithCleanup(true);
-        this.removeFromParentAndCleanup(true);
+        this.removeFromParent(true);
     },
     buyLayer:function (sender) {
         //this.showPurchaseUI(2);
@@ -501,18 +494,18 @@ var StageSelectLayer = cc.Layer.extend({
         var page = this._helpLayer.getChildByTag(i + 2);
         page.removeChildByTag(i * 20 + 2, true);
 
-        var PlayerItem = cc.MenuItemSprite.create(
+        var PlayerItem = new cc.MenuItemSprite(
             CSpriteLayer.getButtonBoxOffsetY(("ui_button_box03_02.png"), ImageNameLang("UI_select_button_2.png"), PlistAndPlist, 2),
             CSpriteLayer.getButtonBoxOffsetY(("ui_button_box03_01.png"), ImageNameLang("UI_select_button_1.png"), PlistAndPlist, 2),
-            this, this.playGame);
+            this.playGame, this);
 
         page.removeChildByTag(230 + i, true);
-        var markLock = cc.Sprite.createWithSpriteFrameName(("map_mark_1.png"));
+        var markLock = new cc.Sprite("#map_mark_1.png");
 
         var strMoney = PlayerActor.sharedActor().getPlayerMoney();
         this.getChildByTag(99).setString(strMoney + "");
 
-        var menu = cc.Menu.create(PlayerItem);
+        var menu = new cc.Menu(PlayerItem);
         menu.setContentSize(page.getContentSize());
         menu.setPosition(cc.p(page.getContentSize().width/2,page.getContentSize().height/2));
         page.addChild(menu, 9, i * 20 + 2);
@@ -573,14 +566,6 @@ var StageSelectLayer = cc.Layer.extend({
         }
     }
 });
-
-StageSelectLayer.getInstance = function () {
-    var ret = new StageSelectLayer();
-    if (ret.init()) {
-        return ret;
-    }
-    return null;
-};
 
 var EnterStage = StageSelectLayer.extend({
     clickedButtonAtIndex:function (buttonIndex) {

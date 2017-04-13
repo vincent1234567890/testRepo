@@ -1,3 +1,10 @@
+cc.timeval = cc.Class.extend(/** @lends cc.timeval# */{
+
+    tv_sec:0,
+
+    tv_usec:0//
+});
+
 var Starfish = BaseActor.extend({
     _isMoveToFirst:false,
     speed:0,
@@ -8,18 +15,15 @@ var Starfish = BaseActor.extend({
     centerPt:null,
     moveAgle:0,
     multiple:1,
-    initWithDef:function (def) {
+    ctor:function (def) {
         this._def = def;
-        var ret = this.initWithSpriteName("ghaixing", "ghaixing.png");
-        if (ret) {
-            this.playAction(0);
-            this.setGroup(GroupStarfishActor);
-            this._isMoveToFirst = false;
-            this.delta = cc.pNormalize(cc.p(-512, -384));
-            this.speed = 400;
-            this.delIng = false;
-        }
-        return ret;
+        this._super(res.StarfishSprite, res.StarfishPNG);
+        this.playAction(0);
+        this.setGroup(GroupStarfishActor);
+        this._isMoveToFirst = false;
+        this.delta = cc.pNormalize(cc.p(-512, -384));
+        this.speed = 400;
+        this.delIng = false;
     },
     getDelIng:function () {
         return this.delIng;
@@ -59,34 +63,21 @@ var Starfish = BaseActor.extend({
     },
     addScoreNumber:function () {
         var labelNum = cc.LabelAtlas.create(10 * this.multiple, ImageName("prizenum.png"), PrizeNum_TextWidth, PrizeNum_TextHeight, '0');
-        var prizeSprite = cc.Sprite.createWithSpriteFrameName(("prizesign1.png"));
+        var prizeSprite = new cc.Sprite("#prizesign1.png");
 
         var movePoition = cc.p(0, 48);
         var move = cc.p(prizeSprite.getContentSize().width / 2, -prizeSprite.getContentSize().height / 2);
 
-        var moveBy = cc.MoveBy.create(1.05, movePoition);
-        var fadeIn = cc.FadeIn.create(0.35);
-        var fadeOut = cc.FadeOut.create(0.35);
-        var delayTime = cc.DelayTime.create(0.35);
-
-        var sequ = cc.Sequence.create(fadeIn, delayTime, fadeOut);
-        var spawn = cc.Spawn.create(sequ, moveBy);
-
-        var call = cc.CallFunc.create(this.getScene(), this.getScene().removeSprite);
-        prizeSprite.runAction(cc.Sequence.create(spawn, call));
+        var sequ = cc.sequence(cc.fadeIn(0.35), cc.delayTime.create(0.35), cc.fadeOut(0.35));
+        var spawn = cc.spawn(sequ, cc.moveBy(1.05, movePoition));
+        prizeSprite.runAction(cc.sequence(spawn, cc.callFunc(this.getScene().removeSprite, this.getScene())));
         prizeSprite.setPosition(this.getPosition());
         prizeSprite.setScale(1);
 
-        var moveBy1 = cc.MoveBy.create(1.05, movePoition);
-        var fadeIn1 = cc.FadeIn.create(0.35);
-        var fadeOut1 = cc.FadeOut.create(0.35);
-        var delayTime1 = cc.DelayTime.create(0.35);
-        var sequ1 = cc.Sequence.create(fadeIn1, delayTime1, fadeOut1);
-        var spawn1 = cc.Spawn.create(sequ1, moveBy1);
+        var sequ1 = cc.sequence(cc.fadeIn(0.35), cc.delayTime(0.35), cc.fadeOut(0.35));
+        var spawn1 = cc.spawn(sequ1, cc.moveBy(1.05, movePoition));
 
-        var call1 = cc.CallFunc.create(this.getScene(), this.getScene().removeSprite);
-
-        labelNum.runAction(cc.Sequence.create(spawn1, call1));
+        labelNum.runAction(cc.sequence(spawn1, cc.callFunc(this.getScene().removeSprite, this.getScene())));
         labelNum.setPosition(cc.pAdd(this.getPosition(), move));
         this.getScene().addChild(labelNum, 100);
         this.getScene().addChild(prizeSprite, 100);
@@ -97,12 +88,12 @@ var Starfish = BaseActor.extend({
         }
         this.delIng = true;
         this.playAction(1);
-        cc.Director.getInstance().getScheduler().scheduleSelector(this.addGold, this, 0.5, false);
+        cc.director.getScheduler().schedule(this.addGold, this, 0.5, false);
     },
     addGold:function (dt) {
-        cc.Director.getInstance().getScheduler().unscheduleSelector(this.addGold, this);
+        cc.director.getScheduler().unschedule(this.addGold, this);
         playEffect(COIN_EFFECT1);
-        var particle = cc.ParticleSystemQuad.create(ImageName("goldlizi.plist"));
+        var particle = new cc.ParticleSystem(ImageName("goldlizi.plist"));
         var goldcoin = ActorFactory.create("GoldPrizeActor");
         goldcoin.setPoint(10 * this.multiple);
         goldcoin.setPosition(this.getPosition());
@@ -132,7 +123,13 @@ var Starfish = BaseActor.extend({
         }
 
         this._super();
-        var _time = cc.Time.gettimeofdayCocos2d();
+        // var _time = cc.Timer.gettimeofdayCocos2d();
+
+        var _time = new cc.timeval();
+        var tmp = Date.now();
+        _time.tv_usec = (tmp % 1000) * 1000;
+        _time.tv_sec = Math.floor(tmp / 1000);
+
 
         if (!this._firstUpdate) {
             this._firstUpdate = true;
@@ -167,7 +164,7 @@ var Starfish = BaseActor.extend({
         return this.handleCollide(plane);
     },
     removeSelfFromScene:function () {
-        cc.Director.getInstance().getScheduler().unscheduleAllSelectorsForTarget(this);
+        cc.director.getScheduler().unscheduleAllForTarget(this);
         this._super();
     },
     moveByLine:function (dt) {

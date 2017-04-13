@@ -28,17 +28,16 @@ var CompactUserInfo = cc.Layer.extend({
         this._experienceProcess = v;
     },
     loadUI:function () {
-        var spriteTemp = cc.Sprite.createWithSpriteFrameName(("ui_usertitle_bg.png"));
+        var spriteTemp = new cc.Sprite("#ui_usertitle_bg.png");
         this.addChild(spriteTemp, 1);
         this.setUserTitleBG(spriteTemp);
 
-        spriteTemp = cc.Sprite.createWithSpriteFrameName(("ui_expbar_bg.png"));
+        spriteTemp = new cc.Sprite("#ui_expbar_bg.png");
         this.addChild(spriteTemp, 1);
         spriteTemp.setPosition(cc.pAdd(spriteTemp.getPosition(), cc.p(spriteTemp.getContentSize().width + 6, 0)));
 
         var processDef = ProcessDef.defaultDef();
-        var proSprite = new ProcessSprite();
-        proSprite.initWithDef(processDef);
+        var proSprite = new ProcessSprite(processDef);
         this.setExperienceProcess(proSprite);
         this._experienceProcess.setPosition(cc.pAdd(spriteTemp.getPosition(), cc.p(-1, 3)));
         this.setScale(0.85);
@@ -50,7 +49,7 @@ var CompactUserInfo = cc.Layer.extend({
         var title = sharedActor.title();
         if (title != this.getCurrentShowingUserTitle()) {
             this.setCurrentShowingUserTitle(title);
-            var tempSprite = cc.Sprite.createWithSpriteFrameName(ImageNameLang(title, true));
+            var tempSprite = new cc.Sprite("#" + ImageNameLang(title, true));
             //this.setUserTitle(tempSprite);
             this.addChild(tempSprite, 10);
 

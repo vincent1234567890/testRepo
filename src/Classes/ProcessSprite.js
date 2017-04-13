@@ -64,7 +64,7 @@ ProcessDef.defaultDef = function () {
     temp.currentValue = 50;
     temp.backgroundImage = "ui_slot_01.png";
     temp.bloodImage = "ui_slot_02.png";
-    temp.offset = cc.SizeMake(0, 0);
+    temp.offset = new cc.Size(0, 0);
     return temp;
 };
 
@@ -84,29 +84,30 @@ var ProcessSprite = cc.Sprite.extend({
     setNeedFade:function (v) {
         this.needFade = v;
     },
-    initWithDef:function (def) {
+    ctor:function (def) {
+        this._super();
         if (def == 0) {
             return false;
         }
         this.needFade = false;
-        if (this.initWithFile(ImageName(def.getBackgroundImage()))) {
+        // if (this.initWithFile(ImageName(def.getBackgroundImage()))) { // Eugene : not supposed to call directly
             this.processDef = def;
-            this.fullSprite = cc.Sprite.create(ImageName(def.getBloodImage()));
-            this.halfSprite = cc.Sprite.create(ImageName(def.getBloodImage()));
-            this.lessSprite = cc.Sprite.create(ImageName(def.getBloodImage()));
-            var sprite = cc.Sprite.create(ImageName(def.getBloodImage()));
+            this.fullSprite = new cc.Sprite(ImageName(def.getBloodImage()));
+            this.halfSprite = new cc.Sprite(ImageName(def.getBloodImage()));
+            this.lessSprite = new cc.Sprite(ImageName(def.getBloodImage()));
+            var sprite = new cc.Sprite(ImageName(def.getBloodImage()));
 
             this.originalBloodSize = sprite.getContentSize();
             this.addChild(sprite, 1, kTagBlood);
             this.originalPosition = cc.p(0/* + def.getOffset().width*/, sprite.getContentSize().height / 2/* + def.getOffset().height*/);
             sprite.setPosition(this.originalPosition);
 
-            var spriteBg = cc.Sprite.create(ImageName(def.getBackgroundImage()));
+            var spriteBg = new cc.Sprite(ImageName(def.getBackgroundImage())); //Eugene : took out if (), was commented out in original and also already initialised here
             this.addChild(spriteBg, 2);
             spriteBg.setPosition(cc.p(spriteBg.getContentSize().width / 2, spriteBg.getContentSize().height / 2));
 
             this.updatePosition();
-        }
+        // }
         return true;
     },
     setBloodValue:function (value) {
@@ -120,23 +121,23 @@ var ProcessSprite = cc.Sprite.extend({
                 this.needFade = true;
                 this.isPlayineFade = false;
             }
-            processSprite.setDisplayFrame(this.lessSprite.displayFrame());
+            processSprite.setDisplayFrame(this.lessSprite.getSpriteFrame());
         }
         else if (value <= this.processDef.getTotalValue() / 2) {
-            processSprite.setDisplayFrame(this.halfSprite.displayFrame());
+            processSprite.setDisplayFrame(this.halfSprite.getSpriteFrame());
             this.needFade = false;
             this.isPlayineFade = false;
         }
         else {
-            processSprite.setDisplayFrame(this.fullSprite.displayFrame());
+            processSprite.setDisplayFrame(this.fullSprite.getSpriteFrame());
             this.needFade = false;
             this.isPlayineFade = false;
         }
 
-        var fadeOut = cc.FadeOut.create(0.2);
-        var fadeIn = cc.FadeIn.create(0.2);
-        var sequ = cc.Sequence.actions(fadeOut, fadeIn, 0);
-        var forever = cc.RepeatForever.create(sequ);
+        var fadeOut = new cc.FadeOut(0.2);
+        var fadeIn = new cc.FadeIn(0.2);
+        var sequ = new cc.Sequence.actions(fadeOut, fadeIn, 0);
+        var forever = new cc.RepeatForever(sequ);
         if (this.needFade) {
             if (!this.isPlayineFade) {
                 this.isPlayineFade = true;
@@ -157,7 +158,7 @@ var ProcessSprite = cc.Sprite.extend({
             ratio = 1.0;
         }
 
-        processSprite.setTextureRect(cc.RectMake(0, 0, this.originalBloodSize.width * ratio, this.originalBloodSize.height));
+        processSprite.setTextureRect(new cc.Rect(0, 0, this.originalBloodSize.width * ratio, this.originalBloodSize.height));
 
         var pos = cc.pAdd(this.originalPosition, cc.p(processSprite.getContentSize().width / 2, 0));
         processSprite.setPosition(pos);

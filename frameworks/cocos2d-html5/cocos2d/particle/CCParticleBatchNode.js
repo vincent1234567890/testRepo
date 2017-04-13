@@ -67,7 +67,7 @@ cc.PARTICLE_DEFAULT_CAPACITY = 500;
  *
  * 2.
  * //Create a cc.ParticleBatchNode with a texture and capacity
- * var texture = cc.TextureCache.getInstance().addImage("res/grossini_dance.png");
+ * var texture = cc.textureCache.addImage("res/grossini_dance.png");
  * var particleBatchNode = new cc.ParticleBatchNode(texture, 30);
  */
 cc.ParticleBatchNode = cc.Node.extend(/** @lends cc.ParticleBatchNode# */{
@@ -88,7 +88,7 @@ cc.ParticleBatchNode = cc.Node.extend(/** @lends cc.ParticleBatchNode# */{
      *
      * 2.
      * //Create a cc.ParticleBatchNode with a texture and capacity
-     * var texture = cc.TextureCache.getInstance().addImage("res/grossini_dance.png");
+     * var texture = cc.textureCache.addImage("res/grossini_dance.png");
      * var particleBatchNode = new cc.ParticleBatchNode(texture, 30);
      */
     ctor:function (fileImage, capacity) {

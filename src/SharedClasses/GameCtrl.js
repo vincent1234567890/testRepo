@@ -15,48 +15,61 @@ var GameCtrl = cc.Class.extend({
     m_nMultiLevel:null,
     m_bIsLoadingFight:null,
     myPlanType:null,
-    init:function () {
+    ctor:function () {
         this.setIsNewGame(true);
         this.setIsPassStage(false);
         return true;
     },
+
     runGame:function () {
-        cc.Director.getInstance().replaceScene(this.getCurScene());
+        cc.director.runScene(this.getCurScene());
     },
     newGame:function (level) {
-        if (level !== null) {
-            this._selectLevel = level;
-            //this.m_bIsLoadingFight = false;
-            this.startNewGame();
+        if (!level) {
+            level = 1;
         }
-        else {
-            this.gameState = GAMEPLAY;
-            var newScene = new GameScene();
-            newScene.initWithDef("Scene_Main", 1);
-            this.setCurScene(newScene);
-            wrapper.setIntegerForKey(UserDefaultsKeyPreviousPlayedStage, 1);
+        //this.m_bIsLoadingFight = false;
+        this._selectLevel = level;
+
+        if (GameCtrl.isOnlineGame()) {
+            // this.joinOnlineGame();
+            // GameManager.login();
+        } else {
+            this.startGameScene();
         }
     },
-    startNewGame:function () {
+
+    startGameScene: function (fishGameArena) {
+        // Sometimes for testing, I want to create lag on the game packets but not on the initial packets.
+        // So I only start simulating the network latency here, not earlier.
+        //var ioSocket = ClientServerConnect.getGameIOSocket();
+        //socketUtils.simulateNetworkLatency(ioSocket, 500);
+
+        this.setArena(fishGameArena);
         this.gameState = GAMEPLAY;
-        var gameScene = new GameScene();
-        gameScene.initWithDef("Scene_Main", this._selectLevel);
+        var gameScene = new GameScene("Scene_Main", this._selectLevel);
         this.setCurScene(gameScene);
 
-        cc.Director.getInstance().replaceScene(this.getCurScene());
+        cc.director.runScene(this.getCurScene());
+        GameManager.initialiseGame(gameScene, fishGameArena);
+        sino.fishGroup.loadResource(this.getCurScene());
+        sino.fishGroup.init();
+
         wrapper.setIntegerForKey(UserDefaultsKeyPreviousPlayedStage, this._selectLevel);
     },
     home:function () {
         this.gameState = GAMEHOME;
         var mainMenuScene = MainMenuScene.create();
-        mainMenuScene.initWithDef("");
+        // mainMenuScene.initWithDef("");
         this.setCurScene(mainMenuScene);
+        GameManager.initialiseLogin(mainMenuScene);
+        GameManager.goToLogin();
         this.runGame();
     },
     option:function () {
         this.gameState = GAMEHOME;
         var mainMenuScene = MainMenuScene.create();
-        mainMenuScene.initWithDef("");
+        // mainMenuScene.initWithDef("");
         this.setCurScene(mainMenuScene);
         this.getCurScene().showSelectStage();
         this.runGame();
@@ -65,7 +78,7 @@ var GameCtrl = cc.Class.extend({
         this.gameState = GAMEHOME;
 
         var mainMenuScene = new MainMenuScene();
-        mainMenuScene.initWithDef("");
+        // mainMenuScene.initWithDef("");
         this.setCurScene(mainMenuScene);
         this.getCurScene().showSelectStage();
 
@@ -80,9 +93,21 @@ var GameCtrl = cc.Class.extend({
 
         }
     },
+    setArena:function (arena) {
+        this.arena = arena;
+    },
+    getArena:function () {
+        return this.arena;
+    },
+    setMyPlayerId:function (myPlayerId) {
+        this.myPlayerId = myPlayerId;
+    },
+    getMyPlayerId:function () {
+        return this.myPlayerId;
+    },
 
     run:function () {
-        cc.Director.getInstance().runWithScene(LogoScene.scene());
+        cc.director.runScene(LogoScene.scene());
     },
     setCurScene:function (s) {
         if (this._curScene != s) {
@@ -91,7 +116,7 @@ var GameCtrl = cc.Class.extend({
             }
             this._curScene = s;
             if (this._curScene) {
-                cc.Director.getInstance().replaceScene(s);
+                cc.director.runScene(s);
             }
         }
     },
@@ -110,7 +135,7 @@ var GameCtrl = cc.Class.extend({
         }
         var def = "Scene_Main";
         this._curScene.initWithDef(def, 1);
-        cc.Director.getInstance().replaceScene(this.getCurScene().getScene());
+        cc.director.runScene(this.getCurScene().getScene());
     },
     getPlanType:function () {
         return this.myPlanType;
@@ -144,7 +169,13 @@ var GameCtrl = cc.Class.extend({
     },
     setSharedGame:function (game) {
         GameCtrl._sharedGame = game;
-    }
+    },
+    setGameConfig:function (gameConfig) {
+        this.gameConfig = gameConfig;
+    },
+    getGameConfig:function () {
+        return this.gameConfig;
+    },
 });
 
 GameCtrl.sharedGame = function () {
@@ -152,13 +183,20 @@ GameCtrl.sharedGame = function () {
     //cc.Assert(this._sharedGame, "Havn't call setSharedGame");
     if (!this._sharedGame) {
         this._sharedGame = new GameCtrl();
-        if (this._sharedGame.init()) {
-            return this._sharedGame;
-        }
-    } else {
-        return this._sharedGame;
     }
-    return null;
+    return this._sharedGame;
+};
+GameCtrl.isOnlineGame = function () {
+    // This allows us to switch the game back into offline play mode.
+    //
+    // But its other purpose is simply to explain parts of the code:
+    //
+    //     if (GameCtrl.isOnlineGame()) {
+    //         // online code
+    //     } else {
+    //         // offline code
+    //     }
+    return true;
 };
 
 GameCtrl._sharedGame = null;

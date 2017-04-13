@@ -2,11 +2,11 @@ var g_Path = "Resource/";
 var g_Version = "V1.0.5";
 
 var ImageName = function (fileName) {
-    return cc.Resource.getInstance().getName(fileName)
+    return sino.resource.getName(fileName);
 };
 
 var ImageNameLang = function (fileName, isFrame) {
-    return cc.Resource.getInstance().getNameWithLang(fileName, isFrame);
+    return sino.resource.getNameWithLang(fileName, isFrame);
 };
 //把传人图片_1，返回图片_2
 
@@ -64,32 +64,33 @@ var TURNPLATE_RUN = "turnRun";
 var TURNPLATE_WIN = "turnSucceed";
 var TURNPLATE_LOSE = "turnFailed";
 
-var LASER_EFFECT = "bgm_laser";
-var CHANGECANNON_EFFECT = "bgm_change_cannon";
-var CAMERA_EFFECT = "bgm_camera";
-var BOX_EFFECT = "bgm_box";
+var LASER_EFFECT = res.LASER_EFFECT;
+var CHANGECANNON_EFFECT = res.CHANGECANNON_EFFECT;
+var CAMERA_EFFECT = res.CAMERA_EFFECT;
+var BOX_EFFECT = res.BOX_EFFECT;
 
-var LEVINSTORM_EFFECT = "LevinStorm_explode_sound";
-var ACH_EFFECT = "bgm_ach";
-var COUNTDOWN_EFFECT = "3secondscountdown";
-var GO_EFFECT = "bgm_go";
-var SO_EFFECT = "bgm_so";
-var UI_EFFECT_03 = "effect_ui_03";
-var SURF_EFFECT = "bgm_surf";
+var LEVINSTORM_EFFECT = res.LEVINSTORM_EFFECT;
+var ACH_EFFECT = res.ACH_EFFECT;
+var COUNTDOWN_EFFECT = res.COUNTDOWN_EFFECT;
+var GO_EFFECT = res.GO_EFFECT;
+var SO_EFFECT = res.SO_EFFECT;
+var UI_EFFECT_03 = res.UI_EFFECT_03;
+var SURF_EFFECT = res.SURF_EFFECT;
 
-var kBGM_RUNOUTBULLET = "bgm_rayover";
-var COIN_EFFECT1 = "bgm_coin_01";
-var COIN_EFFECT2 = "bgm_coin_02";
-var COIN_EFFECT3 = "bgm_coin_03";
-var FIRE_EFFECT = "bgm_fire";
-var NET_EFFECT = "bgm_net";
-var BUTTON_EFFECT = "bgm_button";
+var kBGM_RUNOUTBULLET = res.kBGM_RUNOUTBULLET;
+var COIN_EFFECT1 = res.COIN_EFFECT1;
+var COIN_EFFECT2 = res.COIN_EFFECT2;
+var COIN_EFFECT3 = res.COIN_EFFECT3;
+var FIRE_EFFECT = res.FIRE_EFFECT;
+var NET_EFFECT = res.NET_EFFECT;
+var BUTTON_EFFECT = res.BUTTON_EFFECT;
 
-var BACK_MUSIC1 = "music_1";
-var BACK_MUSIC2 = "music_6";
-var BACK_MUSIC3 = "music_3";
-var BACK_MUSIC4 = "music_4";
-var BACK_MUSIC5 = "music_1";
+//ussdfasdfasdfa
+var BACK_MUSIC1 = res.music_1;
+var BACK_MUSIC2 = res.music_6;
+var BACK_MUSIC3 = res.music_3;
+var BACK_MUSIC4 = res.music_4;
+var BACK_MUSIC5 = res.music_1;// originally music 1 too
 
 ////// #pragma mark GameUI
 var ui_box_MenuBox = ImageNameLang("ui_box_05.png");

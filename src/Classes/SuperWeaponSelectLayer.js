@@ -4,11 +4,9 @@ var SuperWeaponSelectLayer = cc.Layer.extend({
     _itemWidth:0,
     _weaponButtonBackground:null,
     createMenuToggle:function () {
-        var button_push = cc.MenuItemToggle.create(
-            cc.MenuItemSprite.create(cc.Sprite.createWithSpriteFrameName("button_weapon_1.png"),
-            cc.Sprite.createWithSpriteFrameName("button_weapon_1.png")),
-            this, this.weaponButtonClicked
-        );
+        var button_push = new cc.MenuItemToggle(
+            new cc.MenuItemSprite(new cc.Sprite("#button_weapon_1.png"),
+            new cc.Sprite("#button_weapon_1.png")), this.weaponButtonClicked, this);
 
         return button_push;
     },
@@ -23,7 +21,7 @@ var SuperWeaponSelectLayer = cc.Layer.extend({
             }
         }
 
-        var bgMenu = cc.Menu.create(this._weaponButtonBackground[0], this._weaponButtonBackground[1])
+        var bgMenu = new cc.Menu(this._weaponButtonBackground[0], this._weaponButtonBackground[1])
 
         this.addChild(bgMenu, 10);
         bgMenu.setPosition(cc.p(0, 0));
@@ -33,16 +31,16 @@ var SuperWeaponSelectLayer = cc.Layer.extend({
     createWeaponSprites:function (buttonWidth) {
         var xBegin = -121;
 
-        var weaponSprite = cc.Sprite.createWithSpriteFrameName("tubiao-jiguang.png");
+        var weaponSprite = new cc.Sprite("#tubiao-jiguang.png");
         this.addChild(weaponSprite, 15);
         weaponSprite.setPosition(cc.p(xBegin, 0));
 
-        weaponSprite = cc.Sprite.createWithSpriteFrameName("ui_lightning_1.png");
+        weaponSprite = new cc.Sprite("#ui_lightning_1.png");
         this.addChild(weaponSprite, 15);
         weaponSprite.setPosition(cc.p(xBegin - 1 + buttonWidth, 0));
     },
     loadSelectedIndicator:function () {
-        var frameCache = cc.SpriteFrameCache.getInstance();
+        var frameCache = cc.spriteFrameCache;
         var frames = [];
 
         for (var i = 1; i <= 6; i++) {
@@ -51,9 +49,9 @@ var SuperWeaponSelectLayer = cc.Layer.extend({
             frames.push(frame);
         }
 
-        var animation = cc.Animation.create(frames, 0.1);
-        var selectMark = cc.Sprite.createWithSpriteFrameName("ui_weapon_choice1.png");
-        selectMark.runAction(cc.RepeatForever.create(cc.Animate.create(animation)));
+        var animation = new cc.Animation(frames, 0.1);
+        var selectMark = new cc.Sprite("#ui_weapon_choice1.png");
+        selectMark.runAction(new cc.RepeatForever(new cc.Animate(animation)));
         this.addChild(selectMark, 20);
         this.setSpriteMark(selectMark);
         frames = [];
@@ -63,10 +61,10 @@ var SuperWeaponSelectLayer = cc.Layer.extend({
         this.setWeaponButtonBackground(tempArray);
 
         // @warning 此 plist 在进游戏时预加载了。如有问题可在此重新加载
-        var frameCache = cc.SpriteFrameCache.getInstance();
+        var frameCache = cc.spriteFrameCache;
         frameCache.addSpriteFrames(ImageName("SuperWeaponSelect.plist"));
         frameCache.addSpriteFrames(ImageName("SuperWeaponSelectedMark.plist"));
-        var bg = cc.Sprite.createWithSpriteFrameName("ui_weapon_bg.png");
+        var bg = new cc.Sprite("#ui_weapon_bg.png");
         this.addChild(bg, 1);
         this._itemWidth = this.createBackgroundButtons();
 
@@ -108,7 +106,7 @@ var SuperWeaponSelectLayer = cc.Layer.extend({
     },
     onExit:function(){
         this._super();
-        var frameCache = cc.SpriteFrameCache.getInstance();
+        var frameCache = cc.spriteFrameCache;
         frameCache.removeSpriteFrameByName(ImageName("SuperWeaponSelect.plist"));
         frameCache.removeSpriteFrameByName(ImageName("SuperWeaponSelectedMark.plist"));
     },

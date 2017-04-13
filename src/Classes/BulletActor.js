@@ -23,16 +23,14 @@ var BulletActor = BaseActor.extend({
     _moveDirection:null,
     _gunShootDistance:null,
     _maxShootDistance:null,
-    initWithDef:function (def) {
-        var ret = this.initWithSpriteName("bullet", "SmallItem.png");
+    ctor:function (def) {
+        this._super(res.BulletSprite, res.SmallItemPng);
+        console.log(this._sd);
 
-        if (ret) {
-            this._group = GroupHeroBullet;
-            this._curWeaponLevel = FishWeaponType.eWeaponLevel1;
-            this.playAction(this._curWeaponLevel + 8);
-        }
+        this._group = GroupHeroBullet;
+        this._curWeaponLevel = FishWeaponType.eWeaponLevel1;
+        this.playAction(this._curWeaponLevel + 8);
 
-        return ret;
     },
     resetState:function () {
         this._super();
@@ -56,15 +54,61 @@ var BulletActor = BaseActor.extend({
         if (!this.getIsAlive()) {
             return;
         }
-        this._gunShootDistance += this._speed * dt;
-        if (this._gunShootDistance > this._maxShootDistance) {
-            this.addFishNet();
+
+        if (GameCtrl.isOnlineGame()) {
+            const arena = GameCtrl.sharedGame().getArena();
+            if (!arena) {
+                console.warn("Arena does not exist yet!");
+                // Sadly the arena does not exist for a few moments after the scene has started, because we are waiting for the server to send initial data.
+                // In the final version, there should be no bullets at that time, but it may be a problem elsewhere in the code, if the user takes actions before the arena has been created.
+                // Ideally we will not switch scene until the arena has been created.
+            }
+
+            const bulletModel = arena && arena.getBullet(this.bulletId);
+            if (!bulletModel) {
+                // Only happens if we fire bullets without going through the server/arena
+                console.warn("No bullet found in arena with id:", this.bulletId);
+                console.trace();
+            }
+
+            if (bulletModel && !bulletModel.position) {
+                console.warn("bulletModel does not have a position!", bulletModel);
+            }
+
+            //console.log("bulletModel:", bulletModel);
+            if (bulletModel && bulletModel.position) {
+                //console.log("bulletModel.position:", bulletModel.position);
+                //this.setPosition(new cc.Point(bulletModel.position[0], bulletModel.position[1]));
+                this.setPosition(bulletModel.position[0], bulletModel.position[1]);
+                this.setRotation(bulletModel.angle / Math.PI * 180);
+            }
+
+            var nextStep = cc.pAdd(this.getPosition(), cc.p(this._speed * dt * this._moveDirection.x, this._speed * dt * this._moveDirection.y));
+            var Dir = cc.pSub(nextStep, this.getPosition());
+            var ang = Math.atan2(Dir.x, Dir.y);
+            if (this._particle) {
+                this._particle.setPosition(this.getPosition());
+                if (ang < 0) {
+                    this._particle.setAngle(270 - ang / Math.PI * 180);
+                }
+                else {
+                    this._particle.setAngle(270 - ang / Math.PI * 180);
+                }
+            }
+            return;
         }
 
-        if (this._gunShootDistance > this._maxShootDistance || !cc.Rect.CCRectContainsPoint(EScreenRect, this.getPosition())) {
-            this._isAlive = false;
-            this.removeSelfFromScene();
-            return;
+        if (!GameCtrl.isOnlineGame()) {
+            this._gunShootDistance += this._speed * dt;
+            if (this._gunShootDistance > this._maxShootDistance) {
+                this.addFishNet();
+            }
+
+            if (this._gunShootDistance > this._maxShootDistance || !cc.rectContainsPoint(EScreenRect, this.getPosition())) {
+                this._isAlive = false;
+                this.removeSelfFromScene();
+                return;
+            }
         }
 
         var nextStep = cc.pAdd(this.getPosition(), cc.p(this._speed * dt * this._moveDirection.x, this._speed * dt * this._moveDirection.y));
@@ -100,7 +144,9 @@ var BulletActor = BaseActor.extend({
     },
     finalEvent:function () {
     },
-    addFishNet:function () {
+    addFishNet:function (explodePosition) {
+        explodePosition = explodePosition || this.getPosition();
+
         playEffect(NET_EFFECT);
 
         var cNetName = "FishNetActor" + this._curWeaponLevel;
@@ -108,27 +154,27 @@ var BulletActor = BaseActor.extend({
 
         var tempPar;
         if (this._curWeaponLevel == FishWeaponType.eWeaponLevel5) {
-            tempPar = ParticleSystemFactory.getInstance().createParticle(ImageName("lizibianhua1.plist"));
-            tempPar.setDrawMode(cc.PARTICLE_SHAPE_MODE);
-            tempPar.setShapeType(cc.PARTICLE_STAR_SHAPE);
+            tempPar = particleSystemFactory.createParticle(res.lizibianhua1Plist);
+            tempPar.setDrawMode(cc.ParticleSystem.SHAPE_MODE);
+            tempPar.setShapeType(cc.ParticleSystem.STAR_SHAPE);
         } else if (this._curWeaponLevel == FishWeaponType.eWeaponLevel6) {
-            tempPar = ParticleSystemFactory.getInstance().createParticle(ImageName("lizibianhua2.plist"));
-            tempPar.setDrawMode(cc.PARTICLE_SHAPE_MODE);
-            tempPar.setShapeType(cc.PARTICLE_STAR_SHAPE);
+            tempPar = particleSystemFactory.createParticle(res.lizibianhua2Plist);
+            tempPar.setDrawMode(cc.ParticleSystem.SHAPE_MODE);
+            tempPar.setShapeType(cc.ParticleSystem.STAR_SHAPE);
         } else if (this._curWeaponLevel == FishWeaponType.eWeaponLevel7) {
-            tempPar = ParticleSystemFactory.getInstance().createParticle(ImageName("lizibianhua3.plist"));
-            tempPar.setDrawMode(cc.PARTICLE_SHAPE_MODE);
-            tempPar.setShapeType(cc.PARTICLE_STAR_SHAPE);
+            tempPar = particleSystemFactory.createParticle(res.lizibianhua3Plist);
+            tempPar.setDrawMode(cc.ParticleSystem.SHAPE_MODE);
+            tempPar.setShapeType(cc.ParticleSystem.STAR_SHAPE);
         } else if (this._curWeaponLevel == FishWeaponType.eWeaponLevel10) {
-            tempPar = ParticleSystemFactory.getInstance().createParticle(ImageName("lizibianhua3.plist"));
-            tempPar.setDrawMode(cc.PARTICLE_SHAPE_MODE);
-            tempPar.setShapeType(cc.PARTICLE_STAR_SHAPE);
+            tempPar = particleSystemFactory.createParticle(res.lizibianhua3Plist);
+            tempPar.setDrawMode(cc.ParticleSystem.SHAPE_MODE);
+            tempPar.setShapeType(cc.ParticleSystem.STAR_SHAPE);
         } else {
-            tempPar = ParticleSystemFactory.getInstance().createParticle(ImageName("yuwanglizi.plist"));
+            tempPar = particleSystemFactory.createParticle(res.yuwangliziPlist);
         }
 
         net.setParticle(tempPar);
-        tempPar.setPosition(this.getPosition());
+        tempPar.setPosition(explodePosition);
 
         //tempPar._dontTint = true;
         GameCtrl.sharedGame().getCurScene().addChild(tempPar, BulletActorZValue + 1);
@@ -136,7 +182,7 @@ var BulletActor = BaseActor.extend({
         net.setGroup(GroupFishNetActor);
         net.resetState();
         net.updateInfo();
-        net.setPosition(this.getPosition());
+        net.setPosition(explodePosition);
         net.setZOrder(BulletActorZValue);
         net.playCatchAction();
         net.setActorType(this._actorType);
@@ -310,7 +356,7 @@ var LevinStormBulletActor = BulletActor.extend({
 
         this.getScene().addChild(this.getExplodeActor(), this.getZOrder() + 1, this.getZOrder() + 1);
 
-        cc.Director.getInstance().getScheduler().scheduleSelector(this.removeSelfFromScene2, this, 2, false);
+        cc.director.getScheduler().schedule(this.removeSelfFromScene2, this, 2, false);
     },
     refreshBulletState:function () {
         var Dir = this.getMoveDirection();
@@ -333,7 +379,7 @@ var LevinStormBulletActor = BulletActor.extend({
             return;
         }
 
-        if (!cc.Rect.CCRectContainsPoint(LEVINBULLETALIVERECT, this.getPosition())) {
+        if (!cc.rectContainsPoint(LEVINBULLETALIVERECT, this.getPosition())) {
             if (!this.bExplode)
                 this.explodeEffect(this._targetPosition);
             return;
@@ -353,7 +399,7 @@ var LevinStormBulletActor = BulletActor.extend({
         }
     },
     removeSelfFromScene:function () {
-        cc.Director.getInstance().getScheduler().unscheduleAllSelectorsForTarget(this);
+        cc.director.getScheduler().unscheduleAllSelectorsForTarget(this);
 
         if (this.bExplode) {
             this.getExplodeActor().stopAllActions();
@@ -364,7 +410,7 @@ var LevinStormBulletActor = BulletActor.extend({
         this.setVisible(true);
     },
     removeSelfFromScene2:function (dt) {
-        cc.Director.getInstance().getScheduler().unscheduleSelector(this.removeSelfFromScene2, this);
+        cc.director.getScheduler().unschedule(this.removeSelfFromScene2, this);
         this.removeSelfFromScene();
     },
     collisionEvent:function () {
@@ -429,7 +475,7 @@ var SwirlBulletActor = BulletActor.extend({
         this.fLiveTime = 0;
     },
     removeSelfFromScene:function () {
-        cc.Scheduler.getInstance().unscheduleAllSelectorsForTarget(this);
+        cc.director.getScheduler().unscheduleAllForTarget(this);
 
         if (this.bExplode) {
             this.getExplodeNode().stopAllActions();
@@ -534,26 +580,23 @@ var RayBulletActor = BulletActor.extend({
         return ret;
     },
     update:function () {
-        var _time = cc.Time.gettimeofdayCocos2d();
+        var _time = Date.now();
 
         if (!this._firstUpdate) {
             this._firstUpdate = true;
             this._lastTime = _time;
         }
 
-
         var dms = this._sd.actionData[this._actionIndex].frames[this._sequenceIndex].delay / 1000;
-        var subTime = (_time.tv_sec - this._lastTime.tv_sec) + (_time.tv_usec - this._lastTime.tv_usec) / 1000000.0;
-
+        var subTime = (_time - this._lastTime) / 1000.0;
         if (((subTime >= dms) || (subTime < 0)) && !this._stopByNotLoop) {
             this._sequenceIndex = (this._sequenceIndex + 1) % this._sd.actionData[this._actionIndex].frameCount;
             this._lastTime = _time;
 
             if (!this._sd.actionData[this._actionIndex].loop && ((this._sequenceIndex + 1) == this._sd.actionData[this._actionIndex].frameCount)) {
                 this._stopByNotLoop = true;
-                if (this._delegate && this._didStopSelector) {
+                if (this._delegate && this._didStopSelector)
                     this._didStopSelector.call(this._delegate);
-                }
             }
         }
     },
@@ -596,7 +639,7 @@ var HarpoonBulletActor = BulletActor.extend({
         if (this._gunShootDistance > this._maxShootDistance) {
            this.addFishNet();
         }
-        if (this._gunShootDistance > this._maxShootDistance || !cc.Rect.CCRectContainsPoint(EScreenRect, this.getPosition())) {
+        if (this._gunShootDistance > this._maxShootDistance || !cc.rectContainsPoint(EScreenRect, this.getPosition())) {
             this._isAlive = false;
             this.removeSelfFromScene();
             return;

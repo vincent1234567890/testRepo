@@ -24,6 +24,18 @@ var BaseActor = BaseSprite.extend({
     _sd:null,
     _scene:null,
     _group:null,
+
+    ctor:function (defName, imgName, pos) {
+        if (!pos)
+            pos = cc.p(240, 160);
+
+        BaseSprite.prototype.ctor.call(this, defName, imgName);
+
+        this.setIsAlive(true);
+        this.setIsPause(false);
+        //this.setPosition(pos);
+    },
+
     getScene:function () {
         return this._scene
     },
@@ -45,33 +57,7 @@ var BaseActor = BaseSprite.extend({
     getBaseActorType:function () {
         return BaseActorType.eBaseActor
     },
-    initWithSpriteName:function (defName, imgName, pos) {
-        if (!pos) {
-            pos = cc.p(240, 160);
-        }
 
-        var currentGameScene = this.getCurrentGameScene();
-        //this.initWithTexture(currentGameScene.getBatchNodeForKey(imgName, true, 1));
-        this.initWithFile(ImageName(defName), ImageName(imgName));
-
-        //this.initWithFile(ImageName(imgName));
-        //this._curAction = 0;
-
-        /*this._actionIndex = 0;
-         this._sequenceIndex = 0;
-         this._disableUpdate = true;
-         this._stopByNotLoop = false;
-         this._spriteBN = ImageName(imgName);
-         this._sd = cc.FileUtils.getInstance().dictionaryWithContentsOfFileThreadSafe(ImageName(defName + ".plist"));*/
-        //this.setAction(this._curAction);
-        //this.schedule(this.update);
-
-        this.setIsAlive(true);
-        this.setIsPause(false);
-        //this.setPosition(pos);
-
-        return true;
-    },
     playAction:function (actionIndex) {
         if (this._curAction != actionIndex) {
             this._curAction = actionIndex;
@@ -85,45 +71,27 @@ var BaseActor = BaseSprite.extend({
         return this._actionIndex;
     },
     getCurrentGameScene:function () {
-        var gameController = GameCtrl.sharedGame();
-        var currentScene = gameController.getCurScene();
-        return currentScene;
+        return GameCtrl.sharedGame().getCurScene();
     },
+
     handleCollide:function (plane) {
         return true;
     },
-    //this function do nothing
-    /*update:function (dt) {
-        this._super();
 
-        if (!this._isAlive) {
-            return;
-        }
-
-        *//*        if (this._isAlive) {
-         var rcEScreenRect = VisibleRect.rect();
-         var fishSize = this.getContentSize();
-         rcEScreenRect.origin.x -= fishSize.width / 2;
-         rcEScreenRect.origin.y -= fishSize.height / 2;
-         rcEScreenRect.size.width += fishSize.width;
-         rcEScreenRect.size.height += fishSize.height;
-         if (!cc.Rect.CCRectContainsPoint(rcEScreenRect, this.getPosition())) {
-         this.removeSelfFromScene();
-         return;
-         }
-         }*//*
-    },*/
     resetState:function () {
         this._isPause = false;
         this._isAlive = true;
         this._isShouldShooting = true;
         this.setUpdatebySelf(true);
     },
+
     updateInfo:function () {
     },
+
     beginMove:function () {
         this._isAlive = true;
     },
+
     removeSelfFromScene:function () {
         this._isAlive = false;
         this._isShouldShooting = false;
@@ -134,10 +102,10 @@ var BaseActor = BaseSprite.extend({
         this.getScene().removeActor(this);
         //this.removeFromParentAndCleanup();
     },
+
     setInfoDict:function (v) {
-        if (v != this._infoDict) {
+        if (v != this._infoDict)
             this._infoDict = v;
-        }
     },
     getInfoDict:function () {
         return this._infoDict;

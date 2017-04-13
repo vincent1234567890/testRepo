@@ -6,7 +6,7 @@
     <target name="compile">
         <jscomp compilationLevel="simple" warning="quiet"
                 debug="false" output="./../lib/cocos2d-js-v3.13-min.js"
-                languageIn="ECMASCRIPT5"
+                language_in="ECMASCRIPT6"
                 sourceMapOutputFile="./../lib/cocos2d-js-v3.13-sourcemap" sourceMapFormat="V3">
             <sources dir="./../">
                 <file name="Base64Images.js"/>
@@ -307,7 +307,7 @@
     <target name="compile_core">
         <jscomp compilationLevel="simple" warning="quiet"
                 debug="false" output="./../lib/cocos2d-js-v3.13-core-min.js"
-                languageIn="ECMASCRIPT5"
+                language_in="ECMASCRIPT6"
                 sourceMapOutputFile="./../lib/cocos2d-js-v3.13-core-sourcemap" sourceMapFormat="V3">
             <sources dir="./../">
                 <file name="cocos2d/core/utils/CCSimplePool.js"/>

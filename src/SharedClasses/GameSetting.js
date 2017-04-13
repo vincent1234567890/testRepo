@@ -327,10 +327,8 @@ var GameSetting = cc.Class.extend({
         this.normalCoinCount = 1500;
         this.bulletShootCount = 0;
 
-        // this.achieveArray = cc.fileUtils.getInstance().getValueMapFromFile((res.AchievementPlist));
-
-        this.achieveArray = jsb.fileUtils.getValueMapFromFile(res.AchievementPlist);
-        this.chestFishArray = cc.fileUtils.getInstance().dictionaryWithContentsOfFile(ImageName("ChestFish.plist"));
+        this.achieveArray = cc.loader.getRes(res.AchievementPlist);
+        this.chestFishArray = cc.loader.getRes(res.ChestFishPlist);
 
         return true;
 
@@ -339,7 +337,8 @@ var GameSetting = cc.Class.extend({
     loadAttackArray:function () {
         //attackTable
         this.attackIdArray = [];
-        var attackTablePath = cc.FileUtils.getInstance().fullPathFromRelativePath(SceneSettingDataModel.sharedSceneSettingDataModel().getAttackTableFileName());
+        var attackTablePath = SceneSettingDataModel.sharedSceneSettingDataModel().getAttackTableFileName();
+
         //KingFisher cc.log("csv path:" + attackTablePath);
         var csvFile = new CSVFile();
         csvFile.Open(attackTablePath);
@@ -515,7 +514,7 @@ var GameSetting = cc.Class.extend({
     loadFishIdArray:function () {
         //fishTable
         this.fishIdArray = [];
-        var fishTablePath = cc.FileUtils.getInstance().fullPathFromRelativePath(SceneSettingDataModel.sharedSceneSettingDataModel().getFishTableFileName());
+        var fishTablePath = SceneSettingDataModel.sharedSceneSettingDataModel().getFishTableFileName();
         //KingFisher cc.log("csv path:" + fishTablePath);
         var csvFile = new CSVFile();
         csvFile.Open(fishTablePath);
@@ -607,7 +606,7 @@ var GameSetting = cc.Class.extend({
     loadStimulateIdArray:function () {
         //stimulateTable
         this.stimulateIdArray = [];
-        var incentiveTablePath = cc.FileUtils.getInstance().fullPathFromRelativePath(SceneSettingDataModel.sharedSceneSettingDataModel().getIncentiveTableFileName());
+        var incentiveTablePath = SceneSettingDataModel.sharedSceneSettingDataModel().getIncentiveTableFileName();
         //KingFisher cc.log("csv path" + incentiveTablePath);
         var csvFile = new CSVFile();
         csvFile.Open(incentiveTablePath);
@@ -633,12 +632,6 @@ var GameSetting = cc.Class.extend({
 
         this.experienceMoney = 200;
         this.consumeMoney = 200;
-    },
-    fishJoySettingHost:function () {
-        if (DEBUG)
-            return "http://test.KingFisher.punchbox.org";
-        else
-            return "http://KingFisher.punchbox.org";
     },
     spaRedeemDisplayedAtCurrentLanguage:function () {
         return true;

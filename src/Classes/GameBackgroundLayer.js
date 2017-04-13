@@ -6,57 +6,57 @@ var PARAM_Y = screenHeight / 752.0;
 var GameBackgroundLayer = cc.Layer.extend({
     _bgIdx:0,
     _bg:null,
-    _spsprite:false,
+    _spSprite:false,
     beChanged:null,
-    initWith:function (level) {
-        if (this.init()) {
-            this._bgIdx = level;
-            this.initBackground(this._bgIdx);
-            // cc.SpriteFrameCache.getInstance().addSpriteFrames("npc.plist");
-            this.playMusic(level);
-        }
+
+    ctor:function (level) {
+        cc.Layer.prototype.ctor.call(this);
+        this._bgIdx = level;
+        this.initBackground(this._bgIdx);
+        // cc.spriteFrameCache.addSpriteFrames("npc.plist");
+        this.playMusic(level);
         return true;
     },
 
     transition:function () {
         this.beChanged = false;
-        cc.SpriteFrameCache.getInstance().addSpriteFrames(ImageName("sea.plist"));
-        this.schedule(this.updateBg);
+        cc.spriteFrameCache.addSpriteFrames(ImageName("sea.plist"));
+        // this.schedule(this.updateBg);
         this.playsea();
     },
     updateBg:function (dt) {
-        var s = this.getChildByTag(100);
-        var x = s.getPosition().x - dt * 200;
-        for (var i = 0; i < 12; i++) {
-            var sp = this.getChildByTag(100 + i);
-            sp.setPosition(cc.pAdd(sp.getPosition(), cc.p(-dt * speedValue, 0)));
-        }
-
-        var w = screenWidth - x;
-        if (w <= 0) w = 0;
-        if (w >= screenWidth) w = screenWidth;
-
-        if (this.beChanged) {
-            var bg = this.getChildByTag(991);
-            bg.setTextureRect(cc.RectMake(0, 0, bg.getTextureRect().size.width - dt * speedValue, screenHeight));
-            if (bg.getTextureRect().size.width < 0) {
-                this.beChanged = false;
-                bg.setTextureRect(cc.RectZero());
-                var sp = this.getChildByTag(990);
-                this.reorderChild(sp, -2);
-                bg.removeFromParentAndCleanup(true);
-            }
-        }
-
-        if (x <= -s.getContentSize().width / 2) {
-            for (var i = 0; i < 12; i++) {
-                this.getChildByTag(100 + i).stopAllActions();
-                this.removeChildByTag(100 + i, true);
-            }
-            cc.SpriteFrameCache.getInstance().removeSpriteFramesFromFile(ImageName("sea.plist"));
-
-            this.unschedule(this.updateBg);
-        }
+        // var s = this.getChildByTag(100);
+        // var x = s.getPosition().x - dt * 200;
+        // for (var i = 0; i < 12; i++) {
+        //     var sp = this.getChildByTag(100 + i);
+        //     sp.setPosition(cc.pAdd(sp.getPosition(), cc.p(-dt * speedValue, 0)));
+        // }
+        //
+        // var w = screenWidth - x;
+        // if (w <= 0) w = 0;
+        // if (w >= screenWidth) w = screenWidth;
+        //
+        // if (this.beChanged) {
+        //     var bg = this.getChildByTag(991);
+        //     bg.setTextureRect(new cc.Rect(0, 0, bg.getTextureRect().width - dt * speedValue, screenHeight));
+        //     if (bg.getTextureRect().width < 0) {
+        //         this.beChanged = false;
+        //         bg.setTextureRect(new cc.Rect(0,0,0,0));
+        //         var sp = this.getChildByTag(990);
+        //         this.reorderChild(sp, -2);
+        //         bg.removeFromParentAndCleanup(true);
+        //     }
+        // }
+        //
+        // if (x <= -s.getContentSize().width / 2) {
+        //     for (var i = 0; i < 12; i++) {
+        //         this.getChildByTag(100 + i).stopAllActions();
+        //         this.removeChildByTag(100 + i, true);
+        //     }
+        //     cc.spriteFrameCache.removeSpriteFramesFromFile(ImageName("sea.plist"));
+        //
+        //     this.unschedule(this.updateBg);
+        // }
     },
     shakeScreen:function () {
     },
@@ -76,7 +76,7 @@ var GameBackgroundLayer = cc.Layer.extend({
         }
     },
     removeFromParentAndCleanup:function (cleanup) {
-        cc.SpriteFrameCache.getInstance().removeSpriteFramesFromFile(ImageName("sea.plist"));
+        cc.spriteFrameCache.removeSpriteFramesFromFile(ImageName("sea.plist"));
         this._super(cleanup);
     },
     getBgIdx:function () {
@@ -86,10 +86,10 @@ var GameBackgroundLayer = cc.Layer.extend({
         this._bgIdx = v;
     },
     getSpsprite:function () {
-        return this._spsprite;
+        return this._spSprite;
     },
     setSpsprite:function (v) {
-        this._spsprite = v;
+        this._spSprite = v;
     },
     addSpriteX:function (file, imageFile, p, r, sc) {
         var sprite = new SPSprite();
@@ -114,39 +114,39 @@ var GameBackgroundLayer = cc.Layer.extend({
                 this.removeChild(tmp, true);
             }
         }
-        var haibei1 = cc.Sprite.createWithSpriteFrameName("haibei_001.png");
+        var haibei1 = new cc.Sprite("#haibei_001.png");
         var haibeiAni = this.haibeiAni();
         haibei1.runAction(haibeiAni);
         this.addChild(haibei1, 0, 999);
         haibei1.setPosition(cc.p(375 * PARAM_X, 593 * PARAM_Y));
 
-        var pangxie = cc.Sprite.createWithSpriteFrameName("pangxie_001.png");
+        var pangxie = new cc.Sprite("#pangxie_001.png");
         var pangxieAni1 = this.pangxieAni();
         pangxie.runAction(pangxieAni1);
         this.addChild(pangxie, 0, 997);
         pangxie.setPosition(cc.p(671 * PARAM_X, 588 * PARAM_Y));
 
-        var haixing = cc.Sprite.createWithSpriteFrameName("haixing_001.png");
+        var haixing = new cc.Sprite("#haixing_001.png");
         var haixingAni1 = this.haixingAni();
         haixing.runAction(haixingAni1);
         this.addChild(haixing, 0, 996);
         haixing.setPosition(cc.p(656 * PARAM_X, 423 * PARAM_Y));
 
-        var longxia1 = cc.Sprite.createWithSpriteFrameName("longxia_001.png");
+        var longxia1 = new cc.Sprite("#longxia_001.png");
         var longxiaAni1 = this.longxiaAni();
         longxia1.runAction(longxiaAni1);
         this.addChild(longxia1, 0, 995);
         longxia1.setRotation(100);
         longxia1.setPosition(cc.p(1004 * PARAM_X, 494 * PARAM_Y));
 
-        var longxia2 = cc.Sprite.createWithSpriteFrameName("longxia_001.png");
+        var longxia2 = new cc.Sprite("#longxia_001.png");
         var longxiaAni2 = this.longxiaAni();
         longxia2.runAction(longxiaAni2);
         this.addChild(longxia2, 0, 994);
         longxia2.setRotation(30);
         longxia2.setPosition(cc.p(373 * PARAM_X, 69 * PARAM_Y));
 
-        var longxia3 = cc.Sprite.createWithSpriteFrameName("longxia_001.png");
+        var longxia3 = new cc.Sprite("#longxia_001.png");
         var longxiaAni3 = this.longxiaAni();
         longxia3.runAction(longxiaAni3);
         longxia3.setRotation(290);
@@ -161,44 +161,44 @@ var GameBackgroundLayer = cc.Layer.extend({
             }
         }
 
-        var pangxie = cc.Sprite.createWithSpriteFrameName("pangxie_001.png");
+        var pangxie = new cc.Sprite("#pangxie_001.png");
         var pangxieAni1 = this.pangxieAni();
         pangxie.runAction(pangxieAni1);
         this.addChild(pangxie, 0, 999);
         pangxie.setPosition(cc.p(181 * PARAM_X, 196 * PARAM_Y));
 
-        var pangxie2 = cc.Sprite.createWithSpriteFrameName("pangxie_001.png");
+        var pangxie2 = new cc.Sprite("#pangxie_001.png");
         var pangxieAni2 = this.pangxieAni();
         pangxie2.runAction(pangxieAni2);
         this.addChild(pangxie2, 0, 998);
         pangxie2.setPosition(cc.p(1088 * PARAM_X, 632 * PARAM_Y));
 
-        var pangxie3 = cc.Sprite.createWithSpriteFrameName("pangxie_001.png");
+        var pangxie3 = new cc.Sprite("#pangxie_001.png");
         var pangxieAni3 = this.pangxieAni();
         pangxie3.runAction(pangxieAni3);
         this.addChild(pangxie3, 0, 997);
         pangxie3.setPosition(cc.p(181 * PARAM_X, 196 * PARAM_Y));
 
 
-        var jijuxie1 = cc.Sprite.createWithSpriteFrameName("jijuxie_001.png");
+        var jijuxie1 = new cc.Sprite("#jijuxie_001.png");
         var pjijuxieAni1 = this.jijuxieAni();
         jijuxie1.runAction(pjijuxieAni1);
         this.addChild(jijuxie1, 0, 996);
         jijuxie1.setPosition(cc.p(516 * PARAM_X, 118 * PARAM_Y));
 
-        var haima1 = cc.Sprite.createWithSpriteFrameName("haima_001.png");
+        var haima1 = new cc.Sprite("#haima_001.png");
         var haimaAni1 = this.haimaAni();
         haima1.runAction(haimaAni1);
         this.addChild(haima1, 0, 995);
         haima1.setPosition(cc.p(191 * PARAM_X, 313 * PARAM_Y));
 
-        var haima2 = cc.Sprite.createWithSpriteFrameName("haima_001.png");
+        var haima2 = new cc.Sprite("#haima_001.png");
         var haimaAni2 = this.haimaAni();
         haima2.runAction(haimaAni1);
         this.addChild(haima2, 0, 994);
         haima2.setPosition(cc.p(903 * PARAM_X, 487 * PARAM_Y));
 
-        var longxia1 = cc.Sprite.createWithSpriteFrameName("longxia_001.png");
+        var longxia1 = new cc.Sprite("#longxia_001.png");
         var longxiaAni1 = this.longxiaAni();
         longxia1.runAction(longxiaAni1);
         this.addChild(longxia1, 0, 993);
@@ -213,31 +213,31 @@ var GameBackgroundLayer = cc.Layer.extend({
             }
         }
 
-        var pangxie = cc.Sprite.createWithSpriteFrameName("pangxie_001.png");
+        var pangxie = new cc.Sprite("#pangxie_001.png");
         var pangxieAni1 = this.pangxieAni();
         pangxie.runAction(pangxieAni1);
         this.addChild(pangxie, 0, 999);
         pangxie.setPosition(cc.p(246 * PARAM_X, 222 * PARAM_Y));
 
-        var haixing = cc.Sprite.createWithSpriteFrameName("haixing_001.png");
+        var haixing = new cc.Sprite("#haixing_001.png");
         var haixingAni1 = this.haixingAni();
         haixing.runAction(haixingAni1);
         this.addChild(haixing, 0, 998);
         haixing.setPosition(cc.p(884 * PARAM_X, 349 * PARAM_Y));
 
-        var jijuxie1 = cc.Sprite.createWithSpriteFrameName("jijuxie_001.png");
+        var jijuxie1 = new cc.Sprite("#jijuxie_001.png");
         var pjijuxieAni1 = this.jijuxieAni();
         jijuxie1.runAction(pjijuxieAni1);
         this.addChild(jijuxie1, 0, 997);
         jijuxie1.setPosition(cc.p(191 * PARAM_X, 304 * PARAM_Y));
 
-        var jijuxie2 = cc.Sprite.createWithSpriteFrameName("jijuxie_001.png");
+        var jijuxie2 = new cc.Sprite("#jijuxie_001.png");
         var pjijuxieAni2 = this.jijuxieAni();
         jijuxie2.runAction(pjijuxieAni2);
         this.addChild(jijuxie2, 0, 996);
         jijuxie2.setPosition(cc.p(1063 * PARAM_X, 173 * PARAM_Y));
 
-        var longxia1 = cc.Sprite.createWithSpriteFrameName("longxia_001.png");
+        var longxia1 = new cc.Sprite("#longxia_001.png");
         var longxiaAni1 = this.longxiaAni();
         longxia1.runAction(longxiaAni1);
         this.addChild(longxia1, 0, 995);
@@ -252,25 +252,25 @@ var GameBackgroundLayer = cc.Layer.extend({
             }
         }
 
-        var haibei1 = cc.Sprite.createWithSpriteFrameName("haibei_001.png");
+        var haibei1 = new cc.Sprite("#haibei_001.png");
         var haibeiAni = this.haibeiAni();
         haibei1.runAction(haibeiAni);
         this.addChild(haibei1, 0, 999);
         haibei1.setPosition(cc.p(940 * PARAM_X, 113 * PARAM_Y));
 
-        var haixing = cc.Sprite.createWithSpriteFrameName("haixing_001.png");
+        var haixing = new cc.Sprite("#haixing_001.png");
         var haixingAni1 = this.haixingAni();
         haixing.runAction(haixingAni1);
         this.addChild(haixing, 0, 998);
         haixing.setPosition(cc.p(998 * PARAM_X, 349 * PARAM_Y));
 
-        var jijuxie1 = cc.Sprite.createWithSpriteFrameName("jijuxie_001.png");
+        var jijuxie1 = new cc.Sprite("#jijuxie_001.png");
         var pjijuxieAni1 = this.jijuxieAni();
         jijuxie1.runAction(pjijuxieAni1);
         this.addChild(jijuxie1, 0, 997);
         jijuxie1.setPosition(cc.p(931 * PARAM_X, 401 * PARAM_Y));
 
-        var haima1 = cc.Sprite.createWithSpriteFrameName("haima_001.png");
+        var haima1 = new cc.Sprite("#haima_001.png");
         var haimaAni1 = this.haimaAni();
         haima1.runAction(haimaAni1);
         this.addChild(haima1, 0, 996);
@@ -287,13 +287,13 @@ var GameBackgroundLayer = cc.Layer.extend({
 
         this._bg.setPosition(VisibleRect.center());
         this.addChild(this._bg, -2, 990);
-        Multiple = AutoAdapterScreen.getInstance().getScaleMultiple();
-        this._bg.setScale(Multiple);
+        // Multiple = AutoAdapterScreen.getInstance().getScaleMultiple();
+        // this._bg.setScale(Multiple);
 
     },
     haibeiAni:function () {
         var frames = [];
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
 
         for (var i = 0; i < 25; i++) {
             var frame = cache.getSpriteFrame("haibei_001.png");
@@ -320,7 +320,7 @@ var GameBackgroundLayer = cc.Layer.extend({
     },
     pangxieAni:function () {
         var frames = [];
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
 
         for (var i = 1; i < 6; i++) {
             var frame = cache.getSpriteFrame("pangxie_00" + i + ".png");
@@ -346,7 +346,7 @@ var GameBackgroundLayer = cc.Layer.extend({
     },
     haixingAni:function () {
         var frames = [];
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
 
         for (var i = 1; i < 6; i++) {
             var frame = cache.getSpriteFrame("haixing_00" + i + ".png");
@@ -364,7 +364,7 @@ var GameBackgroundLayer = cc.Layer.extend({
     },
     longxiaAni:function () {
         var frames = [];
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
 
         for (var i = 1; i < 6; i++) {
             var frame = cache.getSpriteFrame("longxia_00" + i + ".png");
@@ -377,7 +377,7 @@ var GameBackgroundLayer = cc.Layer.extend({
     },
     jijuxieAni:function () {
         var frames = [];
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
 
         for (var i = 0; i < 15; i++) {
             var frame = cache.getSpriteFrame("jijuxie_005.png");
@@ -405,7 +405,7 @@ var GameBackgroundLayer = cc.Layer.extend({
     },
     haimaAni:function () {
         var frames = [];
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
 
 
         for (var i = 1; i < 5; i++) {
@@ -424,17 +424,17 @@ var GameBackgroundLayer = cc.Layer.extend({
         if (fabScale == null) fabScale = 6;
         if (yScale == null) yScale = 60;
 
-        var firstFrame = "water_001.png";
+        var firstFrame = "#water_001.png";
         var temp = 1;
         for (var i = 0; i < 12; i++) {
             temp++;
             if (temp > 10) {
                 temp = 1;
             }
-            var sprite = cc.Sprite.createWithSpriteFrameName(firstFrame);
+            var sprite = new cc.Sprite(firstFrame);
             var p = temp;
             var frames = [];
-            var cache = cc.SpriteFrameCache.getInstance();
+            var cache = cc.spriteFrameCache;
 
             for (var j = 1; j <= 10; j++) {
                 if (p > 10) {
@@ -455,16 +455,16 @@ var GameBackgroundLayer = cc.Layer.extend({
         }
     },
     removeSprite:function (sender) {
-        cc.SpriteFrameCache.getInstance().removeSpriteFramesFromFile(ImageName("sea.plist"));
+        cc.spriteFrameCache.removeSpriteFramesFromFile(ImageName("sea.plist"));
         sender.removeFromParentAndCleanup(true);
     }
 });
 
 
 GameBackgroundLayer.create = function (level) {
-    var ret = new GameBackgroundLayer();
-    if (ret.initWith(level)) {
-        return ret;
-    }
-    return null;
+    // var ret = new GameBackgroundLayer();
+    // if (ret.initWith(level)) {
+    //     return ret;
+    // }
+    return new GameBackgroundLayer();
 };

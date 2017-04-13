@@ -344,7 +344,7 @@ PlayerEntity_Wrapper.getInstance = function () {
 PlayerEntity_Wrapper.loadFromLocalStorage = function () {
     var playerEntity;
     var strEntityInfo = wrapper.getStringForKey(KEY_PLAYER_ENTITY);
-    if (0 != strEntityInfo.length) {
+    if (strEntityInfo) {
         playerEntity = this.loadFromString(strEntityInfo);
     }
 
@@ -353,7 +353,7 @@ PlayerEntity_Wrapper.loadFromLocalStorage = function () {
         playerEntity = this.initData();
     }
 
-    cc.Assert(playerEntity != null, "PlayerEntity_Wrapper must not be null!");
+    // cc.Assert(playerEntity != null, "PlayerEntity_Wrapper must not be null!");
     return playerEntity;
 };
 

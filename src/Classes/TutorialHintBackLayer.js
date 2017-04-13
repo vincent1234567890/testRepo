@@ -19,10 +19,11 @@ var TutorialHintBackLayer = cc.Sprite.extend({
     },
     init:function (hint) {
         this._super();
-        cc.SpriteFrameCache.getInstance().addSpriteFrames(ImageName("tutorial.plist"));
-        var bg = cc.Sprite.createWithSpriteFrameName(("ui_teach_001.png"));
+        cc.spriteFrameCache.addSpriteFrames(ImageName("tutorial.plist"));
+        var bg = new cc.Sprite("#ui_teach_001.png");
         this.setHintBg(bg);
-        this.setLabel(cc.LabelTTF.create(hint, "Microsoft YaHei", 18, cc.SizeMake(bg.getContentSize().width * 0.8, bg.getContentSize().height), cc.TEXT_ALIGNMENT_CENTER, cc.VERTICAL_TEXT_ALIGNMENT_CENTER));
+        this.setLabel(cc.LabelTTF.create(hint, "Microsoft YaHei", 18, new cc.Size(bg.getContentSize().width * 0.8,
+            bg.getContentSize().height), cc.TEXT_ALIGNMENT_CENTER, cc.VERTICAL_TEXT_ALIGNMENT_CENTER));
         this.addChild(this.getHintBg());
         this.addChild(this.getLabel());
 
@@ -30,7 +31,7 @@ var TutorialHintBackLayer = cc.Sprite.extend({
     },
     onExit:function(){
         this._super();
-        cc.SpriteFrameCache.getInstance().removeSpriteFrameByName(ImageName("tutorial.plist"));
+        cc.spriteFrameCache.removeSpriteFrameByName(ImageName("tutorial.plist"));
     },
     setHint:function (hint) {
         this.getLabel().setString(hint);

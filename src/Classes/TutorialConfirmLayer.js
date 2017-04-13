@@ -28,12 +28,12 @@ var TutorialConfirmLayer = cc.LayerColor.extend({
         this._selector = selector;
         this._cancelSelector = cancelSelector;
 
-        this.setBackgroundSprite(cc.Sprite.createWithSpriteFrameName(imageName));
+        this.setBackgroundSprite(new cc.Sprite("#" + imageName));
         this.addChild(this.getBackgroundSprite());
         var backSize = this.getBackgroundSprite().getContentSize();
 
         var textPos = cc.pAdd(cc.p(backSize.width / 2, backSize.height / 2), cc.p(-20, -40));
-        this.setTextLabel(cc.LabelTTF.create(text, "Microsoft YaHei", 20, cc.SizeMake(backSize.width / 2, backSize.height / 2), cc.TEXT_ALIGNMENT_CENTER, cc.VERTICAL_TEXT_ALIGNMENT_CENTER));
+        this.setTextLabel(cc.LabelTTF.create(text, "Microsoft YaHei", 20, new cc.Size(backSize.width / 2, backSize.height / 2), cc.TEXT_ALIGNMENT_CENTER, cc.VERTICAL_TEXT_ALIGNMENT_CENTER));
         this.getTextLabel().setPosition(textPos);
         this.getBackgroundSprite().addChild(this.getTextLabel());
 
@@ -45,41 +45,41 @@ var TutorialConfirmLayer = cc.LayerColor.extend({
         var confirmPosOffset = cc.p(164, 22);
         var cancelPosOffset = cc.p(88, -22);
 
-        var confirm = cc.Sprite.createWithSpriteFrameName(confirmImage);
+        var confirm = new cc.Sprite("#" + confirmImage);
         var confirmLabel = cc.LabelTTF.create(confirmAction, "Microsoft YaHei", btnFontSize);
         confirmLabel.setAnchorPoint(cc.p(0.5, 0.5));
         confirmLabel.setPosition(cc.p(confirm.getContentSize().width / 2, confirm.getContentSize().height / 2));
         confirm.addChild(confirmLabel);
 
-        var selectedSprite = cc.Sprite.createWithSpriteFrameName(selectedImage);
+        var selectedSprite = new cc.Sprite("#" + selectedImage);
         var selectedLabel = cc.LabelTTF.create(confirmAction, "Microsoft YaHei", btnFontSize);
         selectedLabel.setPosition(cc.p(selectedSprite.getContentSize().width / 2, selectedSprite.getContentSize().height / 2));
         selectedSprite.addChild(selectedLabel);
 
-        var menuItem = cc.MenuItemSprite.create(confirm, selectedSprite, this, this.dismiss);
+        var menuItem = new cc.MenuItemSprite(confirm, selectedSprite, this.dismiss, this);
         var confirmPos = cc.pSub(cc.p(backSize.width / 2, confirm.getContentSize().height), confirmPosOffset);
         menuItem.setPosition(confirmPos);
 
-        var cancel = cc.Sprite.createWithSpriteFrameName(confirmImage);
+        var cancel = new cc.Sprite("#" + confirmImage);
         var cancelLabel = cc.LabelTTF.create(cancelAction, "Microsoft YaHei", btnFontSize);
         cancelLabel.setAnchorPoint(cc.p(0.5, 0.5));
         cancelLabel.setPosition(cc.p(confirm.getContentSize().width / 2, confirm.getContentSize().height / 2));
         cancel.addChild(cancelLabel);
 
-        var selectedSprite0 = cc.Sprite.createWithSpriteFrameName(selectedImage);
+        var selectedSprite0 = new cc.Sprite("#" + selectedImage);
         var selectedLabel0 = cc.LabelTTF.create(cancelAction, "Microsoft YaHei", btnFontSize);
         selectedLabel0.setPosition(cc.p(selectedSprite0.getContentSize().width / 2, selectedSprite0.getContentSize().height / 2));
         selectedSprite0.addChild(selectedLabel0);
 
-        var cancelItem = cc.MenuItemSprite.create(cancel, selectedSprite0, this, this.cancel);
+        var cancelItem = new cc.MenuItemSprite(cancel, selectedSprite0, this.cancel, this);
         var cancelPos = cc.pAdd(cc.p(backSize.width / 2, confirm.getContentSize().height), cancelPosOffset);
         cancelItem.setPosition(cancelPos);
-        var menu = cc.Menu.create(menuItem, cancelItem);
-        menu.setPosition(cc.PointZero());
+        var menu = new cc.Menu(menuItem, cancelItem);
+        menu.setPosition(0, 0);
         this.getBackgroundSprite().addChild(menu);
 
         this.setVisible(false);
-        this.setPosition(cc.PointZero());
+        this.setPosition(0, 0);
         this.setAnchorPoint(cc.p(0.5, 0.5));
 
         return true;
@@ -98,10 +98,9 @@ var TutorialConfirmLayer = cc.LayerColor.extend({
      },*/
     hide:function () {
         this._active = false;
-        var moveAction = cc.MoveTo.create(0.3, cc.p(this.getContentSize().width / 2, this.getContentSize().height + this.getBackgroundSprite().getContentSize().height));
-        var easeIn = cc.EaseExponentialIn.create(moveAction);
-        var call = cc.CallFunc.create(this, this.removeSelf);
-        var sequnce = cc.Sequence.create(easeIn, call);
+        var moveAction = cc.moveTo(0.3, cc.p(this.getContentSize().width / 2, this.getContentSize().height + this.getBackgroundSprite().getContentSize().height));
+        moveAction.easing(cc.easeExponentialIn());
+        var sequnce = cc.sequence(moveAction, cc.callFunc(this.removeSelf, this));
 
         this.getBackgroundSprite().runAction(sequnce);
     },
@@ -125,11 +124,9 @@ var TutorialConfirmLayer = cc.LayerColor.extend({
     },
     show:function () {
         this.setVisible(true);
-        var moveAction = cc.MoveTo.create(0.3, VisibleRect.center());
-        var easeOut = cc.EaseExponentialOut.create(moveAction);
-        var call = cc.CallFunc.create(this, this.activate);
-
-        this.getBackgroundSprite().runAction(cc.Sequence.create(easeOut, call));
+        this.getBackgroundSprite().runAction(cc.sequence(
+            cc.moveTo(0.3, VisibleRect.center()).easing(cc.easeExponentialOut()),
+            cc.callFunc(this.activate, this)));
     },
     removeSelf:function () {
         this.removeFromParentAndCleanup(true);

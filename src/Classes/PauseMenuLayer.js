@@ -32,17 +32,19 @@ var PauseMenuLayer = cc.Layer.extend({
     _musicOffItem:null,
     _isSubLayer:null,
     _delegate:null,
-    ctor:function () {
-        this._delegate = null;
+    ctor:function (delegate) {
+        this._super();
         this._isSubLayer = false;
+        this._delegate = delegate;
+        this.ShowMenu();
     },
-    init:function () {
-        if (this._super()) {
-            this.setKeyboardEnabled(true);
-        }
-
-        return true;
-    },
+    // init:function () {
+    //     if (this._super()) {
+    //         this.setKeyboardEnabled(true);
+    //     }
+    //
+    //     return true;
+    // },
     didLoadFromCCB:function () {
         this.init();
         this.addPunchBox();
@@ -60,7 +62,7 @@ var PauseMenuLayer = cc.Layer.extend({
         playEffect(BUTTON_EFFECT);
         this._delegate.resumeGame();
 
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
         cache.removeSpriteFrameByName(ImageNameLang("options_other.plist"));
         cache.removeSpriteFrameByName(ImageName("Button_push.plist"));
         cache.removeSpriteFrameByName(ImageName("PauseMenuLayer.plist"));
@@ -161,13 +163,13 @@ var PauseMenuLayer = cc.Layer.extend({
         var pItem = sender;
         GamePreference.getInstance().setPlayEffect(pItem.getSelectedIndex() == 1);
         GamePreference.getInstance().updateSoftPref();
-        cc.AudioEngine.getInstance().setEffectsVolume(pItem.getSelectedIndex());
+        cc.audioEngine.setEffectsVolume(pItem.getSelectedIndex());
     },
     mMusic:function (sender) {
         var pItem = sender;
         GamePreference.getInstance().setPlayMusic(pItem.getSelectedIndex() == 1);
         GamePreference.getInstance().updateSoftPref();
-        cc.AudioEngine.getInstance().setBackgroundMusicVolume(pItem.getSelectedIndex());
+        cc.audioEngine.setBackgroundMusicVolume(pItem.getSelectedIndex());
     },
     alertView:function (alertView, buttonIndex) {
 
@@ -235,7 +237,7 @@ var PauseMenuLayer = cc.Layer.extend({
         this._super();
     },
     didReceiveAd:function () {
-        return cc.RectMake(VisibleRect.rect().size.width / 2 - 160, 0, 320, 50);
+        return new cc.Rect(VisibleRect.rect().width / 2 - 160, 0, 320, 50);
     },
     didFailWithMessage:function () {
         //KingFisher cc.log("No Tapjoy Display Ads available");
@@ -250,38 +252,30 @@ var PauseMenuLayer = cc.Layer.extend({
 
     },
     initWithDelegate:function (delegate) {
-        if (this.init()) {
-            this.setKeyboardEnabled(true);
 
-            this._delegate = delegate;
-            this.ShowMenu();
-        }
-
-        this._isSubLayer = false;
-        return this;
     },
     ShowMenu:function (sender) {
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
         cache.addSpriteFrames(ImageNameLang("options_other.plist"));
         cache.addSpriteFrames(ImageName("Button_push.plist"));
         cache.addSpriteFrames(ImageName("PauseMenuLayer.plist"));
 
         var pauseMenuBackground;
-        var button_continue = cc.MenuItemSprite.create(
-            cc.Sprite.createWithSpriteFrameName(ImageNameLang("ui_button_13.png",true)),
-            cc.Sprite.createWithSpriteFrameName(ImageNameLang("ui_button_14.png",true)),
-            this, this.resumeGame);
-        var button_Other = cc.MenuItemSprite.create(
-            cc.Sprite.createWithSpriteFrameName(ImageNameLang("button_other_026.png",true)),
-            cc.Sprite.createWithSpriteFrameName(ImageNameLang("button_other_027.png",true)),
-            this, this.SelectOther);
-        var button_giveup = cc.MenuItemSprite.create(
-            cc.Sprite.createWithSpriteFrameName(ImageNameLang("ui_button_15.png",true)),
-            cc.Sprite.createWithSpriteFrameName(ImageNameLang("ui_button_16.png",true)),
-            this, this.giveup);
+        var button_continue = new cc.MenuItemSprite(
+            new cc.Sprite("#" +ImageNameLang("ui_button_13.png",true)),
+            new cc.Sprite("#" +ImageNameLang("ui_button_14.png",true)),
+            this.resumeGame, this);
+        var button_Other = new cc.MenuItemSprite(
+            new cc.Sprite("#" +ImageNameLang("button_other_026.png",true)),
+            new cc.Sprite("#" +ImageNameLang("button_other_027.png",true)),
+            this.SelectOther, this);
+        var button_giveup = new cc.MenuItemSprite(
+            new cc.Sprite("#" +ImageNameLang("ui_button_15.png",true)),
+            new cc.Sprite("#" +ImageNameLang("ui_button_16.png",true)),
+            this.giveup, this);
 
         var menu;
-        pauseMenuBackground = cc.Sprite.createWithSpriteFrameName("btn_pause_1.png");
+        pauseMenuBackground = new cc.Sprite("#btn_pause_1.png");
         pauseMenuBackground.setAnchorPoint(cc.p(0.5, 0.5));
         pauseMenuBackground.setPosition(cc.p(0, VisibleRect.top().y / 2));
         this.addChild(pauseMenuBackground, 10, 123);
@@ -289,20 +283,20 @@ var PauseMenuLayer = cc.Layer.extend({
         button_giveup.setPosition(cc.p(0, -10));
         button_Other.setPosition(cc.p(0, -97));
 
-        var button_Option = cc.MenuItemSprite.create(
-            cc.Sprite.createWithSpriteFrameName(ImageNameLang("button_other_037.png", true)),
-            cc.Sprite.createWithSpriteFrameName(ImageNameLang("button_other_038.png", true)),
-            this, this.OptionFunction);
+        var button_Option = new cc.MenuItemSprite(
+            new cc.Sprite("#" +ImageNameLang("button_other_037.png", true)),
+            new cc.Sprite("#" +ImageNameLang("button_other_038.png", true)),
+            this.OptionFunction, this);
         button_Option.setPosition(cc.p(0, -187));
-        menu = cc.Menu.create(button_Option, button_continue, button_giveup, button_Other);
+        menu = new cc.Menu(button_Option, button_continue, button_giveup, button_Other);
 
         menu.setPosition(cc.p(0, VisibleRect.top().y / 2));
-        menu.setAnchorPoint(cc.PointZero());
+        menu.setAnchorPoint(cc.p());
         this.addChild(menu, 10, kTagMenuPause);
         menu.setTag(kTagMenuPause);
 
         this.setTag(kTagLayerResume);
-        menu.runAction(cc.FadeIn.create(0.3));
+        menu.runAction(new cc.FadeIn(0.3));
     },
     restartGame:function (sender) {
         this.removeAdView();
@@ -318,7 +312,6 @@ var PauseMenuLayer = cc.Layer.extend({
 });
 
 PauseMenuLayer.create = function (delegate) {
-    var layer = new PauseMenuLayer();
-    layer.initWithDelegate(delegate);
+    var layer = new PauseMenuLayer(delegate);
     return layer;
 };

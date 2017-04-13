@@ -1,37 +1,38 @@
 var wrapper = {
     // UserDefaults
     getBooleanForKey:function (key, defaultValue) {
-        return cc.UserDefault.getInstance().getBoolForKey(key, defaultValue);
+        return cc.sys.localStorage.getItem(key, defaultValue);
     },
     setBooleanForKey:function (key, value) {
-        cc.UserDefault.getInstance().setBoolForKey(key, value);
+        cc.sys.localStorage.getItem(key, value);
     },
 
     getFloatForKey:function (key, defaultValue) {
-        return cc.UserDefault.getInstance().getFloatForKey(key, defaultValue);
+        return cc.sys.localStorage.getItem(key, defaultValue);
     },
     setFloatForKey:function (key, value) {
-        cc.UserDefault.getInstance().setFloatForKey(key, value);
+        cc.sys.localStorage.getItem(key, value);
     },
 
     getIntegerForKey:function (key, defaultValue) {
-        return cc.UserDefault.getInstance().getIntegerForKey(key, defaultValue);
+        return cc.sys.localStorage.getItem(key, defaultValue);
     },
     setIntegerForKey:function (key, value) {
-        cc.UserDefault.getInstance().setIntegerForKey(key, value);
+        cc.sys.localStorage.getItem(key, value);
     },
     getStringForKey:function (key, defaultValue) {
-        return cc.UserDefault.getInstance().getStringForKey(key, defaultValue);
+        return cc.sys.localStorage.getItem(key, defaultValue);
     },
     setStringForKey:function (key, value) {
-        cc.UserDefault.getInstance().setStringForKey(key, value);
+        cc.sys.localStorage.setItem(key, value);
     },
     setStringForKeyAsync:function (key, value) {
         this.setStringForKey(key, value);
     },
     logEvent:function (category, action, label, value) {
         try {
-            _gaq.push(['_trackEvent', category, action, label, value]);
+            //TODO:Setup own google analytics
+            // _gaq.push(['_trackEvent', category, action, label, value]);
         }
         catch (e) {
             cc.log(e.message)
@@ -114,10 +115,14 @@ var AdsController = {
     // 显示游戏中广告时，界面动画播放完成了
     actionEnd:function (type) {
         if (type == 1) {
-            cc.$("#ad").style.display = "block";
+            var ad = cc.$("#ad");
+            if (ad)
+                ad.style.display = "block";
         }
         else {
-            cc.$("#ad").style.display = "none";
+            var ad = cc.$("#ad");
+            if (ad)
+                ad.style.display = "none";
         }
     },
 
@@ -127,7 +132,9 @@ var AdsController = {
             return;
         }
 
-        cc.$("#ad").style.display = "none";
+        var ad = cc.$("#ad");
+        if (ad)
+            ad.style.display = "none";
     }
 };
 

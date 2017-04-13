@@ -93,16 +93,17 @@ var Weapon = cc.Node.extend({
      The shootAnimationDelay param determine delay time between shooting animation
      images
      */
-    initWeapon:function (spriteName, spriteShoot, pos, shootAnimationDelay) {
+    ctor:function (spriteName, spriteShoot, pos, shootAnimationDelay) {
         if (arguments.length < 4) {
             return true;
         }
+        this._super();
         this._isShootable = false;
         this._isSwitching = false;
         this._weaponPosition = pos;
         this.setVisible(false);
-        this.setContentSize(cc.SizeMake(200, 100));
-        var cannon = cc.Sprite.createWithSpriteFrameName(spriteName);
+        this.setContentSize(200, 100);
+        var cannon = new cc.Sprite("#" + spriteName);
 
         this.setWeaponSprite(cannon);
 
@@ -111,15 +112,18 @@ var Weapon = cc.Node.extend({
 
         this.getWeaponSprite().setPosition(cc.p(this.getContentSize().width / 2, cannon.getContentSize().height / 2 - 58));
 
-        var frameCache = cc.SpriteFrameCache.getInstance();
+        var frameCache = cc.spriteFrameCache;
         var normalSprite = frameCache.getSpriteFrame(spriteName);
         var shootSprite = frameCache.getSpriteFrame(spriteShoot);
         var frames = [];
         frames.push(normalSprite, shootSprite);
 
-        var animation = cc.Animation.create(frames, shootAnimationDelay);
-        this.setShootAnimation(cc.Animate.create(animation));
-        this.getShootAnimation().setTag(SHOOT_ANIMATIONTAG);
+        var animation = new cc.Animation(frames, shootAnimationDelay);
+
+        var animate= new cc.Animate( animation );
+        animate.setOriginalTarget(this);
+        this.setShootAnimation(animate);
+        this.getShootAnimation().setTag(SHOOT_ANIMATIONTAG); // Eugene: currently unused tag
 
         return true;
     },
@@ -133,10 +137,7 @@ var Weapon = cc.Node.extend({
         this._isShootable = false;
 
         this.getWeaponSprite().setScale(0.2);
-        var moveby = cc.ScaleTo.create(0.2, 1.0);
-        var callback = cc.CallFunc.create(this, this.switchFinished, WEAPON_SWITCHIN_FINISHED);
-
-        var sequence = cc.Sequence.create(moveby, callback);
+        var sequence = cc.sequence(cc.scaleTo(0.2, 1.0), cc.callFunc(this.switchFinished, this, WEAPON_SWITCHIN_FINISHED));
         sequence.setTag(SWITCHIN_ANIMATIONTAG);
         this.getWeaponSprite().runAction(sequence);
     },
@@ -153,10 +154,8 @@ var Weapon = cc.Node.extend({
         if (this.getWeaponSprite().getPosition().y > 0) {
             this.getWeaponSprite().setPosition(cc.pSub(this.getWeaponSprite().getPosition(), cc.p(0, 100)));
         }
-        var moveby = cc.MoveBy.create(animationDelay, cc.p(0, 100));
-        var callBack = cc.CallFunc.create(this, this.switchFinished, WEAPON_SWITCHIN_FINISHED);
 
-        var sequence = cc.Sequence.create(moveby, callBack);
+        var sequence = cc.sequence(cc.moveBy(animationDelay, cc.p(0, 100)), cc.callFunc(this.switchFinished, this, WEAPON_SWITCHIN_FINISHED));
         sequence.setTag(SWITCHIN2_ANIMATIONTAG);
         this.getWeaponSprite().runAction(sequence);
     },
@@ -169,10 +168,7 @@ var Weapon = cc.Node.extend({
         this._isSwitching = true;
         this._isShootable = false;
 
-        var moveby = cc.ScaleTo.create(0.2, 0.1);
-        var callback = cc.CallFunc.create(this, this.switchFinished, WEAPON_SWITCHOUT_FINISHED);
-
-        var sequence = cc.Sequence.create(moveby, callback);
+        var sequence = cc.sequence(cc.scaleTo(0.2, 0.1), cc.callFunc(this.switchFinished, this, WEAPON_SWITCHOUT_FINISHED));
         sequence.setTag(SWITCHOUT_ANIMATIONTAG);
         this.getWeaponSprite().runAction(sequence);
     },
@@ -185,11 +181,8 @@ var Weapon = cc.Node.extend({
     switchOut2:function (animationDelay) {
         this._isSwitching = true;
         this._isShootable = false;
-
-        var moveby = cc.MoveBy.create(animationDelay, cc.p(0, -100));
-        var callBack = cc.CallFunc.create(this, this.switchFinished, WEAPON_SWITCHOUT2_FINISHED);
-
-        var sequence = cc.Sequence.create(moveby, callBack);
+        var sequence = cc.sequence(cc.moveBy(animationDelay, cc.p(0, -100)),
+            cc.callFunc(this.switchFinished, this, WEAPON_SWITCHOUT2_FINISHED));
         sequence.setTag(SWITCHOUT2_ANIMATIONTAG);
         this.getWeaponSprite().runAction(sequence);
     },

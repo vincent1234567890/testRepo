@@ -103,7 +103,7 @@ var GameScene = cc.Scene.extend({
     _shootCount:0,
     _dictionaryFish:null,
     //bg
-    _backgroundLayer:null,
+    // _backgroundLayer:null,
     _gamepassTime:0,
     _items:null,
     _time:0,
@@ -130,7 +130,6 @@ var GameScene = cc.Scene.extend({
     _processsprite:null,
     _addPrizeFishGroupFinish:false,
     _addCoinTime:0,
-    _punchBoxAd:null,
 
     _bigPrizeExist:false,
     _layer:null,
@@ -178,10 +177,81 @@ var GameScene = cc.Scene.extend({
     _tutorialSessionController:null,
     _shakeTime:0,
     _swingRadio:5,
-    ctor:function () {
-        this._super();
+
+    ctor:function (def, le) {
+        cc.Scene.prototype.ctor.call(this);
+
+        this._layer = new cc.Layer();
+        this._layer.setTag(2233);
+        this.addChild(this._layer);
+
+        //FishNetCollideHandler.shareFishNetCollideHandler().checkLocallyData(le);
+
+        // 重置是否可以显示 redeem 窗口的参数，防止兑换金币时异常退出导致无法打开redeem 窗口
+        wrapper.setBooleanForKey(kCanShowRedeem, true);
+
+        this._prizeSprite = new cc.Node();
+        this._prizeSprite.setAnchorPoint(cc.p(0.5, 0.5));
+        this._prizeSprite.setPosition(VisibleRect.center());
+
+        this._gameover = false;
+        this._isPause = false;
+        this._isPLayGameMainSessionController = false;
+
+        this._musicIdx = this._curStage = le;
+
+        // this.initBgLayer();
+
+        cc.director.getScheduler().schedule(this.update, this, 0, false);
+        /*        var pSceneSettingDataModel = SceneSettingDataModel.sharedSceneSettingDataModel();
+         if (pSceneSettingDataModel.getCanUseNewPath()) {
+         FishFactoryManager.shareFishFactoryManager().setScene(this);
+         }
+         else {*/
+        sino.fishGroup.setScene(this);
+        //sino.fishGroup.initAllTrack(le);
+        //}
+
+        GameSetting.getInstance().loadData(this._curStage);
+
+        //this._oddsNumber = SceneSettingDataModel.sharedSceneSettingDataModel().getOddNumber();
+
+        // 双倍区 设置倍数  五倍区设置
+        if (le == 2) {
+            this.setOddsNumber(2);
+        }
+        else if (le == 3) {
+            this.setOddsNumber(5);
+        }
+        else {
+            this.setOddsNumber(1);
+        }
+
+        var stage;
+        switch (this._curStage){
+            case 1:
+                stage = "Maldives";
+                break;
+            case 2:
+                stage = "Hawaii";
+                break;
+            default:
+                stage = "Err";
+        }
+
+        wrapper.logEvent("Stage", "Select", stage, this._curStage);
+
+        this._adMobBannerProcessType = kNoAdBanner;
+        this._retainedResArray = [];
+
+        // 加勒比海场景 武器初始化为10级
+        if (le == 3) {
+            PlayerActor.sharedActor().setCurWeaponLevel(FishWeaponType.eWeaponLevel10);
+        }
+
+
         wrapper.getBooleanForKey("AskEnterLecel3", false);
-        this._movePoint = cc.PointZero();
+        this._movePoint = new cc.Point(0, 0);
         this._sessionsNeedLoad = [];
         this._sessionControllers = [];
         this._sessionsEnded = [];
@@ -189,7 +259,11 @@ var GameScene = cc.Scene.extend({
         this._aliveActor = [];
         this._retainedResArray = [];
         this._shootPosList = []
+
+        // GameManager.initialise(this);
+
     },
+
     getLayer:function () {
         return this._layer;
     },
@@ -315,32 +389,32 @@ var GameScene = cc.Scene.extend({
         ActorFactory.returnActor(actor);
     },
     startAction:function () {
-        var frameCache = cc.SpriteFrameCache.getInstance();
+        var frameCache = cc.spriteFrameCache;
         frameCache.addSpriteFrames(ImageName("jinbi.plist"));
-        var rotateBy1 = cc.RotateBy.create(1.4 * 25, 360);
-        var repeat1 = cc.Repeat.create(rotateBy1, 20);
+        var rotateBy1 = new cc.RotateBy(1.4 * 25, 360);
+        var repeat1 = new cc.Repeat(rotateBy1, 20);
         this._prizeSprite.getChildByTag(kTagPrizeLight1).runAction(cc.Sequence.create(repeat1));
 
-        var rotateBy2 = cc.RotateBy.create(12.5, 360);
-        var repeat2 = cc.Repeat.create(rotateBy2, 20);
+        var rotateBy2 = new cc.RotateBy(12.5, 360);
+        var repeat2 = new cc.Repeat(rotateBy2, 20);
         this._prizeSprite.getChildByTag(kTagPrizeLight2).runAction(cc.Sequence.create(repeat2));
 
         for (var j = 0; j < 2; ++j) {
             for (var i = 0; i < 5; ++i) {
-                var guang3 = cc.Sprite.createWithSpriteFrameName("shark_prize_guang_11.png");
+                var guang3 = new cc.Sprite("#shark_prize_guang_11.png");
                 guang3.setOpacity(0);
-                var size = VisibleRect.rect().size;
+                var size = VisibleRect.rect();
                 guang3.setPosition(cc.p(size.width / 2 - 39 + i * 19, size.height / 2 + 27 - j * 48));
                 this._prizeSprite.addChild(guang3, kTagPrizeLight3, kTagPrizeLight3 + (j + 1) * (i + 1));
-                var rotateBy3 = cc.RotateBy.create(3, 360);
-                var repeat3 = cc.Repeat.create(rotateBy3, 60);
-                var fadeIn = cc.FadeIn.create(0.7);
-                var fadeOut = cc.FadeOut.create(0.5);
-                var delayTime = cc.DelayTime.create(0.5);
-                var twinkle = cc.Sequence.create(fadeIn, delayTime, fadeOut);
-                var twinkle1 = cc.Repeat.create(twinkle, 20);
-                var spawn = cc.Spawn.create(repeat3, twinkle1);
-                guang3.runAction(cc.Sequence.create(spawn));
+                var rotateBy3 = new cc.RotateBy(3, 360);
+                var repeat3 = new cc.Repeat(rotateBy3, 60);
+                var fadeIn = new cc.FadeIn(0.7);
+                var fadeOut = new cc.FadeOut(0.5);
+                var delayTime = new cc.DelayTime(0.5);
+                var twinkle = new cc.Sequence(fadeIn, delayTime, fadeOut);
+                var twinkle1 = new cc.Repeat(twinkle, 20);
+                var spawn = new cc.Spawn(repeat3, twinkle1);
+                guang3.runAction(new cc.Sequence(spawn));
 
             } // for
         } // for
@@ -354,35 +428,33 @@ var GameScene = cc.Scene.extend({
         ];
 
         for (var i = 0; i < 5; ++i) {
-            var guang4 = cc.Sprite.createWithSpriteFrameName("shark_prize_guang_12.png");
+            var guang4 = new cc.Sprite("#shark_prize_guang_12.png");
             guang4.setAnchorPoint(cc.p(0.5, 0.5));
             guang4.setOpacity(0);
             guang4.setPosition(pos[i]);
             this._prizeSprite.addChild(guang4, kTagPrizeLight4, kTagPrizeLight4 + i);
 
             var time = (Math.random() % 20 + 2) * 0.1;
-            var delayTime1 = cc.DelayTime.create(time);
-            var fadeTo = cc.FadeTo.create(0.5, 255);
-            var fadeOut = cc.FadeOut.create(0.3);
-            var delayTime2 = cc.DelayTime.create(0.5);
-            var twinkle = cc.Sequence.create(delayTime1, fadeTo, delayTime2, fadeOut);
-            var twinkle1 = cc.Repeat.create(twinkle, 20);
-            guang4.runAction(cc.Sequence.create(twinkle1));
+            var delayTime1 = new cc.DelayTime(time);
+            var fadeTo = new cc.FadeTo(0.5, 255);
+            var fadeOut = new cc.FadeOut(0.3);
+            var delayTime2 = new cc.DelayTime(0.5);
+            var twinkle = new cc.Sequence(delayTime1, fadeTo, delayTime2, fadeOut);
+            var twinkle1 = new cc.Repeat(twinkle, 20);
+            guang4.runAction(new cc.Sequence(twinkle1));
         } // for
 
 
         var framesArray = [];
-        var frame = frameCache.getSpriteFrame("shark_prize_bg_1.png");
+        var frame = frameCache.getSpriteFrame("#shark_prize_bg_1.png");
         framesArray.push(frame);
-        frame = frameCache.getSpriteFrame("shark_prize_bg_2.png");
+        frame = frameCache.getSpriteFrame("#shark_prize_bg_2.png");
         framesArray.push(frame);
-        frame = frameCache.getSpriteFrame("shark_prize_bg_3.png");
+        frame = frameCache.getSpriteFrame("#shark_prize_bg_3.png");
         framesArray.push(frame);
-        var animation2 = cc.Animation.create(framesArray, 0.15);
-        var ac2 = cc.Animate.create(animation2, false);
-        var repeat = cc.Repeat.create(ac2, 11);
-        var final2 = cc.CallFunc.create(this, this.removeNihongDeng);
-        this._prizeSprite.getChildByTag(kTagPrizeBG).runAction(cc.Sequence.create(repeat, final2));
+        var animation2 = new cc.Animation(framesArray, 0.15);
+        var ac2 = cc.animate(animation2).repeat(11);
+        this._prizeSprite.getChildByTag(kTagPrizeBG).runAction(cc.sequence(ac2, new cc.CallFunc(this.removeNihongDeng, this)));
     },
     removeNihongDeng:function (sender) {
         this._bigPrizeExist = false;
@@ -396,9 +468,9 @@ var GameScene = cc.Scene.extend({
     addChangeWeaponMenu:function (menuPos, bltPos) {
         this.addChangeWeaponMenu(cc.p(301, 10), cc.p(17, 17));
 
-        var menuItem = cc.MenuItem.create(this, this.changeWeapon);
-        menuItem.setContentSize(cc.SizeMake(80, 50));
-        var menu = cc.Menu.create(menuItem, null);
+        var menuItem = new cc.MenuItem(this, this.changeWeapon);
+        menuItem.setContentSize(new cc.Size(80, 50));
+        var menu = new cc.Menu(menuItem, null);
         menu.setPosition(cc.p(0, 0));
         this.addChild(menu, 109);
         menuItem.setPosition(menuPos);
@@ -410,29 +482,29 @@ var GameScene = cc.Scene.extend({
         if (this._bigPrizeExist) {
             return;
         }
-        var frameCache = cc.SpriteFrameCache.getInstance();
+        var frameCache = cc.spriteFrameCache;
         frameCache.addSpriteFrames(ImageName("jinbi.plist"));
         playEffect(COIN_EFFECT3);
 
         this._bigPrizeExist = true;
 
-        var guang1 = cc.Sprite.createWithSpriteFrameName(("shark_prize_guang_21.png"));
+        var guang1 = new cc.Sprite("#shark_prize_guang_21.png");
         this._prizeSprite.addChild(guang1, kTagPrizeLight1, kTagPrizeLight1);
         guang1.setPosition(cc.p(0, 0));
 
-        var guang2 = cc.Sprite.createWithSpriteFrameName(("shark_prize_guang_22.png"));
+        var guang2 = new cc.Sprite("#shark_prize_guang_22.png");
         this._prizeSprite.addChild(guang2, kTagPrizeLight2, kTagPrizeLight2);
         guang2.setPosition(cc.p(0, 0));
 
-        var sharkePrize = cc.Sprite.createWithSpriteFrameName("shark_prize_bg_1.png");
+        var sharkePrize = new cc.Sprite("#shark_prize_bg_1.png");
         this._prizeSprite.addChild(sharkePrize, kTagPrizeBG, kTagPrizeBG);
         sharkePrize.setPosition(cc.p(0, 0));
 
-        var notice = cc.Sprite.createWithSpriteFrameName(ImageNameLang("shark_prize_notice.png", true));
+        var notice = new cc.Sprite("#" + ImageNameLang("shark_prize_notice.png", true));
         notice.setPosition(cc.p(0, (sharkePrize.getContentSize().height + notice.getContentSize().height) / 2));
         this._prizeSprite.addChild(notice, kTagPrizeNOTICE, kTagPrizeNOTICE);
 
-        var labelNum = cc.LabelAtlas.create(100, ImageName("shark_prize_num.png"), 56, 84, '0');
+        var labelNum = new cc.LabelAtlas(100, ImageName("shark_prize_num.png"), 56, 84, '0');
         labelNum.setAnchorPoint(cc.p(0.5, 0.5));
         labelNum.setPosition(cc.p(0, 0));
         this._prizeSprite.addChild(labelNum, kTagPrizeLABEL, kTagPrizeLABEL);
@@ -440,14 +512,11 @@ var GameScene = cc.Scene.extend({
         this.addChild(this._prizeSprite, kTagPrizeSprite, kTagPrizeSprite);
         this._prizeSprite.setScale(0);
 
-        var scaleTo1 = cc.ScaleTo.create(0.2, 1.1, 1.1);
-        var scaleTo2 = cc.ScaleTo.create(0.1, 1, 1);
-        var call = cc.CallFunc.create(this, this.startAction);
-        this._prizeSprite.runAction(cc.Sequence.create(scaleTo1, scaleTo2, call));
+        this._prizeSprite.runAction(new cc.Sequence(new cc.ScaleTo(0.2, 1.1, 1.1), new cc.ScaleTo(0.1, 1, 1),
+            new cc.CallFunc(this.startAction, this)));
     },
     loadFishGroup:function () {
-        var path = cc.FileUtils.getInstance().fullPathFromRelativePath(ImageName("TrackPlist/Track.plist"));
-        this._dictionaryFish = cc.FileUtils.dictionaryWithContentsOfFile(path);
+        this._dictionaryFish = cc.loader.getRes(ImageName("TrackPlist/Track.plist"));
     },
     addFishGroupForPlayTutorial:function (fishIdx, startPos) {
 
@@ -458,7 +527,7 @@ var GameScene = cc.Scene.extend({
             //KingFisher cc.log("-------removeActoraCaller, param = " + this._removeActoraParam);
             this.removeActora(this._removeActoraParam);
         }
-        cc.Director.getInstance().getScheduler().unscheduleSelector(this.removeActoraCaller, this);
+        cc.director.getScheduler().unschedule(this.removeActoraCaller, this);
     },
     BigPrize:function () {
         if (this._bigPrizeExist) {
@@ -466,7 +535,7 @@ var GameScene = cc.Scene.extend({
         }
 
         var big = ActorFactory.create("BigPrizeActor");
-        big.setZOrder(BulletActorZValue + 10);
+        big.setLocalZOrder(BulletActorZValue + 10);
         big.setPosition(VisibleRect.center());
         big.replayAction();
         this.addActor(big);
@@ -474,101 +543,31 @@ var GameScene = cc.Scene.extend({
         this._removeActoraParam = big;
         //KingFisher cc.log("BigPrize, param = "+ this._removeActoraParam);
         this._bigPrizeExist = true;
-        cc.Director.getInstance().getScheduler().scheduleSelector(this.removeActoraCaller, this, 5.0, false);
+        cc.director.getScheduler().schedule(this.removeActoraCaller, this, 5.0, false);
     },
     initMusicPlay:function () {
         // this._itemMusicPlayer = cc.MenuItemSprite.create(
-        //     cc.Sprite.createWithSpriteFrameName(("ui_button_music_1.png")),
-        //     cc.Sprite.createWithSpriteFrameName(("ui_button_music_2.png")),
+        //     new cc.Sprite(("#ui_button_music_1.png")),
+        //     new cc.Sprite(("#ui_button_music_2.png")),
         //     this, this.changeMusic);
 
         //Pause button
-        this._itemPause = cc.MenuItemSprite.create(
-            cc.Sprite.createWithSpriteFrameName(("ui_button_01.png")),
-            cc.Sprite.createWithSpriteFrameName(("ui_button_02.png")),
-            this, this.pauseGame);
+        this._itemPause = new cc.MenuItemSprite(
+            new cc.Sprite("#ui_button_01.png"),
+            new cc.Sprite("#ui_button_02.png"),
+            this.pauseGame, this );
 
         // this._itemMusicPlayer.setPosition(cc.p(VisibleRect.topLeft().x + 125, VisibleRect.topLeft().y - this._itemPause.getContentSize().height / 2));
         this._itemPause.setPosition(cc.p(VisibleRect.topLeft().x + 45, VisibleRect.topLeft().y - this._itemPause.getContentSize().height / 2));
 
 
-        this._userBtn = cc.Menu.create(this._itemPause/*, this._itemMusicPlayer*/);
+        this._userBtn = new cc.Menu(this._itemPause/*, this._itemMusicPlayer*/);
         this.addChild(this._userBtn, 101);
 
         var pos = cc.p(VisibleRect.topLeft().x + 135, VisibleRect.topLeft().y - this._itemPause.getContentSize().height / 2);
-        this._userBtn.setPosition(cc.PointZero());
+        this._userBtn.setPosition(0, 0);
     },
-    initWithDef:function (def, le) {
-        this._layer = cc.Layer.create();
-        this._layer.setTag(2233);
-        this.addChild(this._layer);
 
-        //FishNetCollideHandler.shareFishNetCollideHandler().checkLocallyData(le);
-
-        // 重置是否可以显示 redeem 窗口的参数，防止兑换金币时异常退出导致无法打开redeem 窗口
-        wrapper.setBooleanForKey(kCanShowRedeem, true);
-
-        this._prizeSprite = new cc.Node();
-        this._prizeSprite.setAnchorPoint(cc.p(0.5, 0.5));
-        this._prizeSprite.setPosition(VisibleRect.center());
-
-        this._gameover = false;
-        this._isPause = false;
-        this._isPLayGameMainSessionController = false;
-
-        this._musicIdx = this._curStage = le;
-
-        this.initBgLayer();
-
-        cc.Director.getInstance().getScheduler().scheduleSelector(this.update, this, 0, false);
-        /*        var pSceneSettingDataModel = SceneSettingDataModel.sharedSceneSettingDataModel();
-         if (pSceneSettingDataModel.getCanUseNewPath()) {
-         FishFactoryManager.shareFishFactoryManager().setScene(this);
-         }
-         else {*/
-        FishGroup.shareFishGroup().setScene(this);
-        //FishGroup.shareFishGroup().initAllTrack(le);
-        //}
-
-        GameSetting.getInstance().loadData(this._curStage);
-
-        //this._oddsNumber = SceneSettingDataModel.sharedSceneSettingDataModel().getOddNumber();
-
-        // 双倍区 设置倍数  五倍区设置
-        if (le == 2) {
-            this.setOddsNumber(2);
-        }
-        else if (le == 3) {
-            this.setOddsNumber(5);
-        }
-        else {
-            this.setOddsNumber(1);
-        }
-
-        var stage;
-        switch (this._curStage){
-            case 1:
-                stage = "Maldives";
-                break;
-            case 2:
-                stage = "Hawaii";
-                break;
-            default:
-                stage = "Err";
-        }
-
-        wrapper.logEvent("Stage", "Select", stage, this._curStage);
-
-        this._adMobBannerProcessType = kNoAdBanner;
-        this._retainedResArray = [];
-
-        // 加勒比海场景 武器初始化为10级
-        if (le == 3) {
-            PlayerActor.sharedActor().setCurWeaponLevel(FishWeaponType.eWeaponLevel10);
-        }
-
-        return true;
-    },
     planMoveIn:function () {
 
     },
@@ -591,22 +590,22 @@ var GameScene = cc.Scene.extend({
     },
     clearGameResource:function () {
         // 停掉所有的定时器
-        cc.Director.getInstance().getScheduler().unscheduleAllSelectorsForTarget(this);
+        cc.director.getScheduler().unscheduleAllForTarget(this);
         this.stopAllActions();
         if (this._cannonActor) {
-            cc.Director.getInstance().getScheduler().unscheduleAllSelectorsForTarget(this._cannonActor);
+            cc.director.getScheduler().unscheduleAllForTarget(this._cannonActor);
         }
 
         // 隐藏广告条
         AdsController.forceHideBannerAd();
 
-        cc.SpriteFrameCache.getInstance().removeSpriteFramesFromFile(ImageName("jindun.plist"));
+        cc.spriteFrameCache.removeSpriteFramesFromFile(res.JindunPlist);
         this._gameover = true;
 
-        if (this._backgroundLayer != null) {
-            this._backgroundLayer.removeAllChildrenWithCleanup(true);
-            this._backgroundLayer.removeFromParentAndCleanup(true);
-        }
+        // if (this._backgroundLayer != null) {
+        //     this._backgroundLayer.removeAllChildrenWithCleanup(true);
+        //     this._backgroundLayer.removeFromParentAndCleanup(true);
+        // }
 
         if (this._blurBackgroundLayer != null) {
             this._blurBackgroundLayer.removeAllChildrenWithCleanup(true);
@@ -663,7 +662,7 @@ var GameScene = cc.Scene.extend({
         this.removeChildByTag(kTagMenuPause, true);
 
         if (this._cannonActor) {
-            cc.Director.getInstance().getScheduler().resumeTarget(this._cannonActor.getCurrentWeapon());
+            cc.director.getScheduler().resumeTarget(this._cannonActor.getCurrentWeapon());
         }
     },
     removeBlurBG:function () {
@@ -673,10 +672,7 @@ var GameScene = cc.Scene.extend({
             this._cannonActor.setWeaponButtonEnable(true);
         }
 
-        var fadeout = cc.FadeOut.create(0.8);
-        var callBack = cc.CallFunc.create(this, this.removeSprite);
-
-        this._blurBackgroundLayer.runAction(cc.Sequence.create(fadeout, callBack));
+        this._blurBackgroundLayer.runAction(cc.sequence(cc.fadeOut(0.8), cc.callFunc(this.removeSprite, this)));
         this._blurBackgroundLayer = null;
     },
     pauseGameBG:function (bgPos) {
@@ -690,12 +686,12 @@ var GameScene = cc.Scene.extend({
             this._cannonActor.setWeaponButtonEnable(false);
         }
         playEffect(BUTTON_EFFECT);
-        var blurImageName = "bgblur0" + this._backgroundLayer.getBgIdx() + "_01.jpg";
-        this._blurBackgroundLayer = cc.Sprite.create(ImageName(blurImageName));
-        this._blurBackgroundLayer.runAction(cc.FadeIn.create(0.6));
-        this._blurBackgroundLayer.setPosition(bgPos);
-        this._blurBackgroundLayer.setScale(Multiple);
-        this.getLayer().addChild(this._blurBackgroundLayer, 150);
+        // var blurImageName = "bgblur0" + this._backgroundLayer.getBgIdx() + "_01.jpg";
+        // this._blurBackgroundLayer = new cc.Sprite(ImageName(blurImageName));
+        // this._blurBackgroundLayer.runAction(new cc.FadeIn(0.6));
+        // this._blurBackgroundLayer.setPosition(bgPos);
+        // this._blurBackgroundLayer.setScale(Multiple);
+        // this.getLayer().addChild(this._blurBackgroundLayer, 150);
     },
     pauseGameForShop:function () {
         if (this._isPause || this._gameover || this._playTutorial) {
@@ -709,16 +705,16 @@ var GameScene = cc.Scene.extend({
             this._cannonActor.setWeaponButtonEnable(false);
         }
         playEffect(BUTTON_EFFECT);
-        var blurImageName = "bgblur0" + this._backgroundLayer.getBgIdx() + "_01.jpg";
-        this._blurBackgroundLayer = cc.Sprite.create(ImageName(blurImageName));
-        Multiple = AutoAdapterScreen.getInstance().getScaleMultiple();
-        this._blurBackgroundLayer.runAction(cc.FadeIn.create(0.6));
-        this._blurBackgroundLayer.setPosition(VisibleRect.center());
-        this._blurBackgroundLayer.setScale(Multiple);
-        this.getLayer().addChild(this._blurBackgroundLayer);
+        // var blurImageName = "bgblur0" + this._backgroundLayer.getBgIdx() + "_01.jpg";
+        // this._blurBackgroundLayer = new cc.Sprite(ImageName(blurImageName));
+        // Multiple = AutoAdapterScreen.getInstance().getScaleMultiple();
+        // this._blurBackgroundLayer.runAction(new cc.FadeIn(0.6));
+        // this._blurBackgroundLayer.setPosition(VisibleRect.center());
+        // this._blurBackgroundLayer.setScale(Multiple);
+        // this.getLayer().addChild(this._blurBackgroundLayer);
 
         if (this._cannonActor) {
-            cc.Director.getInstance().getScheduler().pauseTarget(this._cannonActor.getCurrentWeapon());
+            cc.director.getScheduler().pauseTarget(this._cannonActor.getCurrentWeapon());
         }
     },
     getActors:function (groupTag) {
@@ -754,10 +750,11 @@ var GameScene = cc.Scene.extend({
         if (PlayerActor.sharedActor().canSendWeapon()) {
             if (!this._isPause) {
                 if (this._cannonActor) {
-                    this._cannonActor.shootTo(pos);
+                    // this._cannonActor.shootTo(pos);
                 }
+
                 this._shootCount++;
-                this._scoreBar.setBullet(PlayerActor.sharedActor().getPlayerMoney());
+                // this._scoreBar.setBullet(PlayerActor.sharedActor().getPlayerMoney());
 
                 if (0 == PlayerActor.sharedActor().getPlayerMoney() &&
                     this.getCannonActor().getCurrentWeapon().getCannonLevel() < 8) {
@@ -793,10 +790,8 @@ var GameScene = cc.Scene.extend({
 
     },
     removeTitle:function () {
-        var scaleto = cc.MoveBy.create(1, cc.p(0, 1000));
-        var callBack = cc.CallFunc.create(this, this.removeLogoWave);
-        this.getChildByTag(kLogeWaveTag).runAction(cc.Sequence.create(scaleto, callBack));
-
+        this.getChildByTag(kLogeWaveTag).runAction(
+            cc.sequence(cc.moveBy(1, cc.p(0, 1000)), cc.callFunc(this.removeLogoWave, this)));
     },
     removeLogoWave:function (node) {
         this.removeChildByTag(kLogeWaveTag, true);
@@ -811,17 +806,12 @@ var GameScene = cc.Scene.extend({
         leveupSprite.setPosition(cc.p(VisibleRect.center().x, VisibleRect.center().y - 50));
         this.addChild(leveupSprite, 100);
 
-        var moveBy = cc.MoveBy.create(1.8, cc.p(0, 180));
-        var fadeIn = cc.FadeIn.create(0.6);
-        var delay = cc.DelayTime.create(0.6);
+        var spawn = cc.spawn(
+            cc.sequence(cc.fadeIn(0.6), cc.delayTime(0.6), cc.fadeOut(0.6)),
+            cc.moveBy(1.8, cc.p(0, 180)));
 
-        var fadeOut = cc.FadeOut.create(0.6);
-        var callb = cc.CallFunc.create(this, this.addPrizeNets);
-        var final1 = cc.CallFunc.create(this, this.removeSprite);
-        var sequ = cc.Sequence.create(fadeIn, delay, fadeOut);
-        var spawn = cc.Spawn.create(sequ, moveBy);
-
-        leveupSprite.runAction(cc.Sequence.create(spawn, callb, final1));
+        leveupSprite.runAction(cc.sequence(spawn,
+            cc.callFunc(this.addPrizeNets, this), cc.callFunc(this.removeSprite, this)));
     },
     addActor:function (actor) {
         this.addActorIntoAllObjects(actor);
@@ -837,7 +827,7 @@ var GameScene = cc.Scene.extend({
         }
 
         //this._aliveActor = cc.ArrayRemoveObject(this._aliveActor, actor);
-        cc.ArrayRemoveObject(this._aliveActor, actor);
+        cc.arrayRemoveObject(this._aliveActor, actor);
 
         this.removeActorFromAllObjects(actor);
     },
@@ -868,7 +858,7 @@ var GameScene = cc.Scene.extend({
                 return;
             }
         }
-        cc.Assert(0, "can not find actor array!");
+        cc.assert(0, "can not find actor array!");
     },
     removeAllActor:function () {
         var i;
@@ -929,7 +919,7 @@ var GameScene = cc.Scene.extend({
             star.removeSelfFromScene();
         }
         // 将移除霓虹灯的定时器停止掉
-        cc.Director.getInstance().getScheduler().unscheduleSelector(this.removeActoraCaller, this);
+        cc.director.getScheduler().unschedule(this.removeActoraCaller, this);
     },
     hideAllMenu:function () {
         if (this._cannonActor.getCurrentWeaponLevel() < FishWeaponType.eWeaponLevel8) {
@@ -963,8 +953,11 @@ var GameScene = cc.Scene.extend({
 
     },
     loadCannon:function () {
-        this._cannonActor = new WeaponManager();
-        this._cannonActor.initWithDefaults(cc.pAdd(VisibleRect.bottom(), cc.p(0, 50)), 0.0, this);
+        // this._testCannonManager = CannonManager;
+        // GameManager.initialise(this);
+        // this._testCannon = new CannonView(this,{x:300, y:300} );
+        // this.addChild(CannonManager);
+        // this._cannonActor = new WeaponManager(cc.pAdd(VisibleRect.bottom(), cc.p(0, 50)), 0.0, this);
     },
     updateTutorial:function (dt) {
         var showBuyItem = GameSetting.getInstance().getShowBuyItem() && this.getChildByTag(999);
@@ -1065,38 +1058,7 @@ var GameScene = cc.Scene.extend({
     },
     GoRandomOval:function (GoImage, movePos) {
     },
-    playGetAchievement:function (index) {
-        cc.Assert(index < AchievementIndex.kAchieveMentCount, "Achievement index out of range");
-        playEffect(ACH_EFFECT);
 
-        var achieveLayer = new AchievementShareLayer();
-        achieveLayer.initWithIndex(index, true);
-        achieveLayer.setScale(0.4);
-        this.addChild(achieveLayer, 200, kAchieveLayerTag);
-
-        achieveLayer.setPosition(cc.p(VisibleRect.center().x, VisibleRect.center().y + 50));
-
-        var scaleTo = cc.ScaleTo.create(0.2, 1);
-        var fadeOut = cc.FadeIn.create(0.2);
-        var spawn = cc.Spawn.create(scaleTo, fadeOut);
-
-        var addParticle = cc.CallFunc.create(this, this.addParticleAchieve);
-
-        var scaleTo1 = cc.ScaleTo.create(0.3, 0.1);
-        var fadeIn = cc.FadeOut.create(0.6);
-
-        var moveto = cc.MoveTo.create(0.6, cc.p(VisibleRect.center().x, VisibleRect.top().y - 28));
-
-        var spawn1 = cc.Spawn.create(scaleTo1, fadeIn, moveto);
-        var delay = cc.DelayTime.create(5.0);
-
-        var callBack = cc.CallFunc.create(this, this.removeSpriteChangeWeapon);
-        var removeParicle = cc.CallFunc.create(this, this.removeParticelAchieve);
-
-        var sequ = cc.Sequence.create(spawn, addParticle, delay, spawn1, removeParicle, callBack);
-        achieveLayer.runAction(sequ);
-        this._achievementShowNum++;
-    },
     removeSpriteChangeWeapon:function (sender) {
         this._achievementShowNum--;
         sender.removeFromParentAndCleanup(true);
@@ -1116,20 +1078,20 @@ var GameScene = cc.Scene.extend({
             this._cannonActor.setWeaponButtonEnable(false);
         }
         playEffect(BUTTON_EFFECT);
-        var blurImageName = "bgblur0" + this._backgroundLayer.getBgIdx() + "_01.jpg";
-        this._blurBackgroundLayer = cc.Sprite.create(ImageName(blurImageName));
-        Multiple = AutoAdapterScreen.getInstance().getScaleMultiple();
-        this._blurBackgroundLayer.runAction(cc.FadeIn.create(0.6));
-        this._blurBackgroundLayer.setPosition(VisibleRect.center());
-        this._blurBackgroundLayer.setScale(Multiple);
-        this.addChild(this._blurBackgroundLayer);
+        // var blurImageName = "bgblur0" + this._backgroundLayer.getBgIdx() + "_01.jpg";
+        // this._blurBackgroundLayer = new cc.Sprite(ImageName(blurImageName));
+        // Multiple = AutoAdapterScreen.getInstance().getScaleMultiple();
+        // this._blurBackgroundLayer.runAction(new cc.FadeIn(0.6));
+        // this._blurBackgroundLayer.setPosition(VisibleRect.center());
+        // this._blurBackgroundLayer.setScale(Multiple);
+        // this.addChild(this._blurBackgroundLayer);
 
         this._pauseMenuLayer = PauseMenuLayer.create(this);
         this._pauseMenuLayer.setPosition(VisibleRect.bottom());
         this.addChild(this._pauseMenuLayer, 120, kTagMenuPause);
 
         if (this._cannonActor) {
-            cc.Director.getInstance().getScheduler().pauseTarget(this._cannonActor.getCurrentWeapon());
+            cc.director.getScheduler().pauseTarget(this._cannonActor.getCurrentWeapon());
         }
     },
     showGetMoneyLayer:function (spbPos) {
@@ -1143,8 +1105,8 @@ var GameScene = cc.Scene.extend({
             return;
         }
 
-        var sprite = cc.Sprite.create("guanghuan");
-        var s = cc.SpriteBatchNode.create(ImageName("guanghuan.png"));
+        var sprite = new cc.Sprite("guanghuan");
+        var s = new cc.SpriteBatchNode(ImageName("guanghuan.png"));
         s.setPosition(spbPos);
         sprite.setAction(0);
         sprite.setUpdatebySelf(true);
@@ -1159,7 +1121,6 @@ var GameScene = cc.Scene.extend({
         PlayerActor.sharedActor().setPlayerMoney(PlayerActor.sharedActor().getPlayerMoney() + point);
     },
     addPrizeNet:function (dt) {
-        //dt = dt | cc.Director.getInstance()._deltatime;
         this._prizeNetCount += dt;
         if (this._prizeNetCount > 5) {
             this.unschedule(this.addPrizeNet);
@@ -1175,23 +1136,23 @@ var GameScene = cc.Scene.extend({
 
             var tempPar = null;
             if (weapl == FishWeaponType.eWeaponLevel5) {
-                tempPar = ParticleSystemFactory.getInstance().createParticle(ImageName("lizibianhua1.plist"));
+                tempPar = particleSystemFactory.createParticle(res.lizibianhua1Plist);
                 tempPar.setDrawMode(cc.PARTICLE_SHAPE_MODE);
                 tempPar.setShapeType(cc.PARTICLE_STAR_SHAPE);
             } else if (weapl == FishWeaponType.eWeaponLevel6) {
-                tempPar = ParticleSystemFactory.getInstance().createParticle(ImageName("lizibianhua2.plist"));
+                tempPar = particleSystemFactory.createParticle(res.lizibianhua2Plist);
                 tempPar.setDrawMode(cc.PARTICLE_SHAPE_MODE);
                 tempPar.setShapeType(cc.PARTICLE_STAR_SHAPE);
             } else if (weapl == FishWeaponType.eWeaponLevel7) {
-                tempPar = ParticleSystemFactory.getInstance().createParticle(ImageName("lizibianhua3.plist"));
+                tempPar = particleSystemFactory.createParticle(res.lizibianhua3Plist);
                 tempPar.setDrawMode(cc.PARTICLE_SHAPE_MODE);
                 tempPar.setShapeType(cc.PARTICLE_STAR_SHAPE);
             } else if (weapl == FishWeaponType.eWeaponLevel10) {
-                tempPar = ParticleSystemFactory.getInstance().createParticle(ImageName("lizibianhua3.plist"));
+                tempPar = particleSystemFactory.createParticle(res.lizibianhua3Plist);
                 tempPar.setDrawMode(cc.PARTICLE_SHAPE_MODE);
                 tempPar.setShapeType(cc.PARTICLE_STAR_SHAPE);
             } else {
-                tempPar = ParticleSystemFactory.getInstance().createParticle(ImageName("yuwanglizi.plist"));
+                tempPar = particleSystemFactory.createParticle(res.yuwangliziPlist);
             }
 
             net.setParticle(tempPar);
@@ -1222,19 +1183,14 @@ var GameScene = cc.Scene.extend({
         duration = 1.2;
         delayDuration = 1.2;
         this.addPrizeNets(null);
-        var levelupSprite = cc.Sprite.create(ImageNameLang("ui_main_LV.png"));
+        var levelupSprite = new cc.Sprite(ImageNameLang("ui_main_LV.png"));
         levelupSprite.setPosition(spritePos);
         this.addChild(levelupSprite, 100);
 
-        var moveBy = cc.MoveBy.create(duration, cc.p(0, 50));
-        var fadeIn = cc.FadeIn.create(0.6);
-        var delay = cc.DelayTime.create(delayDuration);
-        var fadeOut = cc.FadeOut.create(0.6);
-        var final1 = cc.CallFunc.create(this, this.removeSprite);
-        var sequ = cc.Sequence.create(fadeIn, delay, fadeOut, null);
-        var spawn = cc.Spawn.create(sequ, moveBy);
+        var sequ = new cc.Sequence(new cc.FadeIn(0.6), new cc.DelayTime(delayDuration), new cc.FadeOut(0.6));
+        var spawn = new cc.Spawn(sequ, new cc.MoveBy(duration, cc.p(0, 50)));
 
-        levelupSprite.runAction(cc.Sequence.create(spawn, final1));
+        levelupSprite.runAction(cc.sequence(spawn, new cc.CallFunc(this.removeSprite, this)));
 
         // 升级为10级的时候 提示进入新地图
         /*if (10 == PlayerActor.sharedActor().getPlayerLevel()) {
@@ -1291,11 +1247,6 @@ var GameScene = cc.Scene.extend({
         if (!this._playTutorial && ((this._firstInGame && this._timeAdMob >= 30) || (this._timeAdMob >= AD_INTERVEL))) {
             this._firstInGame = false;
             this._timeAdMob = 0;
-
-            // 显示 AdMob 广告条
-            // this._punchBoxAd.request(function () {
-            //    // AdsController.showBannerAd(BannerAdTyp.BannerAdGame);
-            // });
         }
 
         if ((this._curStage == 1 && PlayerActor.sharedActor().getPlayerMoney() == 0) ||
@@ -1307,81 +1258,76 @@ var GameScene = cc.Scene.extend({
             }
         }
 
-        this._scoreBar.backToNormal();
+        // this._scoreBar.backToNormal();
 
-        if (PlayerActor.sharedActor().getPlayerMoney() <= 50 * this.getOddsNumber()) {
-            this._scoreBar.moneyNotEnough();
-        }
-        else if (PlayerActor.sharedActor().getPlayerMoney() <= 100 * this.getOddsNumber()) {
-            this._scoreBar.moneyIsEnough();
-            this._scoreBar.setIsLessThan150(false);
-            this._scoreBar.showNotEnough();
-            this._scoreBar.setIsLessThan100(true);
-        }
-        else if (PlayerActor.sharedActor().getPlayerMoney() <= 150 * this.getOddsNumber()) {
-            this._scoreBar.showNotEnough();
-            this._scoreBar.setIsLessThan150(true);
-            this._scoreBar.setIsLessThan100(false);
-        }
-        else {
-            this._scoreBar.moneyIsEnough();
-            this._scoreBar.setIsLessThan150(false);
-            this._scoreBar.setIsLessThan100(false);
-        }
+        // if (PlayerActor.sharedActor().getPlayerMoney() <= 50 * this.getOddsNumber()) {
+        //     this._scoreBar.moneyNotEnough();
+        // }
+        // else if (PlayerActor.sharedActor().getPlayerMoney() <= 100 * this.getOddsNumber()) {
+        //     this._scoreBar.moneyIsEnough();
+        //     this._scoreBar.setIsLessThan150(false);
+        //     this._scoreBar.showNotEnough();
+        //     this._scoreBar.setIsLessThan100(true);
+        // }
+        // else if (PlayerActor.sharedActor().getPlayerMoney() <= 150 * this.getOddsNumber()) {
+        //     this._scoreBar.showNotEnough();
+        //     this._scoreBar.setIsLessThan150(true);
+        //     this._scoreBar.setIsLessThan100(false);
+        // }
+        // else {
+        //     // this._scoreBar.moneyIsEnough();
+        //     // this._scoreBar.setIsLessThan150(false);
+        //     // this._scoreBar.setIsLessThan100(false);
+        // }
 
         PlayerActor.sharedActor().update(dt);
-        if (/*this._playTutorial || */PlayerActor.sharedActor().getPlayerMoney() >= GameSetting.getInstance().getPlayerMoney()) {
-            this._scoreBar.setDownTime(PlayerActor.sharedActor().getAddCoinNeedTime());
-            PlayerActor.sharedActor().setAddCoinTime(0);
-        }
-        else {
-            var time = parseInt(PlayerActor.sharedActor().getAddCoinNeedTime() - PlayerActor.sharedActor().getAddCoinTime());
-            this._scoreBar.setDownTime(time);
-        }
+        // if (/*this._playTutorial || */PlayerActor.sharedActor().getPlayerMoney() >= GameSetting.getInstance().getPlayerMoney()) {
+        //     this._scoreBar.setDownTime(PlayerActor.sharedActor().getAddCoinNeedTime());
+        //     PlayerActor.sharedActor().setAddCoinTime(0);
+        // }
+        // else {
+        //     var time = parseInt(PlayerActor.sharedActor().getAddCoinNeedTime() - PlayerActor.sharedActor().getAddCoinTime());
+        //     this._scoreBar.setDownTime(time);
+        // }
 
         if (PlayerActor.sharedActor().getNeedAddCoin()) {
             this.removeChildByTag(kAddCoidParticleTag, true);
-            var par = ParticleSystemFactory.getInstance().createParticle(ImageName("addCoin.plist"));
+            var par = particleSystemFactory.createParticle(ImageName("addCoin.plist"));
             this.addChild(par, 111, kAddCoidParticleTag);
             par.setPosition(parPos);
 
-            var add = cc.Sprite.createWithSpriteFrameName("add5.png");
+            var add = new cc.Sprite("#add5.png");
             add.setPosition(addPos);
-            var moveBy = cc.MoveBy.create(1.05, cc.p(0, 48));
-            var fadeIn = cc.FadeIn.create(0.35);
-            var fadeOut = cc.FadeOut.create(0.35);
-            var delayTime = cc.DelayTime.create(0.35);
 
-            var sequ = cc.Sequence.create(fadeIn, delayTime, fadeOut, null);
-            var spawn = cc.Spawn.create(sequ, moveBy);
+            var sequ = cc.sequence(cc.fadeIn(0.35), cc.delayTime(0.35), cc.fadeOut(0.35));
+            var spawn = cc.spawn(sequ, cc.moveBy(1.05, cc.p(0, 48)));
 
-            var call = cc.CallFunc.create(this, this.removeSprite);
-            add.runAction(cc.Sequence.create(spawn, call, null));
+            add.runAction(cc.sequence(spawn, cc.callFunc(this.removeSprite, this)));
             this.addChild(add, 111);
             PlayerActor.sharedActor().setNeedAddCoin(false);
         }
 
-        this._userInfoLayer.updateUserInfo();
+        // this._userInfoLayer.updateUserInfo();
         this._compactUserInfo.updateUserInfo();
-        this._scoreBar.setLightValue(-60.0 + 115.0 * PlayerActor.sharedActor().getNormalGain() / (GameSetting.getInstance().getNormalCoinCount() * this.getOddsNumber()));
-        if (this._scoreBar.getLightValue() >= 55)
-            this._scoreBar.setLightValue(-60);
-        this._scoreBar.getLightBlood().setRotation(this._scoreBar.getLightValue());
-
-        this._scoreBar.setBullet(PlayerActor.sharedActor().getPlayerMoney());
+        // this._scoreBar.setLightValue(-60.0 + 115.0 * PlayerActor.sharedActor().getNormalGain() / (GameSetting.getInstance().getNormalCoinCount() * this.getOddsNumber()));
+        // if (this._scoreBar.getLightValue() >= 55)
+        //     this._scoreBar.setLightValue(-60);
+        // this._scoreBar.getLightBlood().setRotation(this._scoreBar.getLightValue());
+        //
+        // this._scoreBar.setBullet(PlayerActor.sharedActor().getPlayerMoney());
 
         var useLaser = wrapper.getIntegerForKey(kUseLaser);
-        var isUseSpecialWeapon = this.getCannonActor().getIsChangeToSpecialWeapon();
+        // var isUseSpecialWeapon = this.getCannonActor().getIsChangeToSpecialWeapon();
 
-        if ((useLaser == 1 || PlayerActor.sharedActor().getNormalGain() >= GameSetting.getInstance().getNormalCoinCount() * this.getOddsNumber()) && !isUseSpecialWeapon) {
-            var curSpecialWeapon = wrapper.getIntegerForKey(CURRENT_SPECIAL_WEAPON_KEY);
-            this._scoreBar.superWeaponChanged();
-            this.getCannonActor().changeToSpecialWeapon(curSpecialWeapon);
-
-            if (useLaser == 1) {
-                wrapper.setIntegerForKey(kUseLaser, 2);
-            }
-        }
+        // if ((useLaser == 1 || PlayerActor.sharedActor().getNormalGain() >= GameSetting.getInstance().getNormalCoinCount() * this.getOddsNumber()) && !isUseSpecialWeapon) {
+        //     var curSpecialWeapon = wrapper.getIntegerForKey(CURRENT_SPECIAL_WEAPON_KEY);
+        //     this._scoreBar.superWeaponChanged();
+        //     this.getCannonActor().changeToSpecialWeapon(curSpecialWeapon);
+        //
+        //     if (useLaser == 1) {
+        //         wrapper.setIntegerForKey(kUseLaser, 2);
+        //     }
+        // }
 
 
     },
@@ -1390,8 +1336,8 @@ var GameScene = cc.Scene.extend({
     },
     addPrizeFishGroup:function (bLeft) {
         this._time = 0;
-        FishGroup.shareFishGroup().setInitPoint(startPos);
-        FishGroup.shareFishGroup().createPrizeFishGroup(bLeft);
+        sino.fishGroup.setInitPoint(startPos);
+        sino.fishGroup.createPrizeFishGroup(bLeft);
     },
     addFishGroup:function (startPos, delay) {
     },
@@ -1413,38 +1359,36 @@ var GameScene = cc.Scene.extend({
         this._time = this._maxTime;
         this._curWaveTime = 0;
 
-        this._backgroundLayer.transition();
+        // this._backgroundLayer.transition();
         this._addPrizeGroup = true;
     },
-    initBgLayer:function () {
-        this._backgroundLayer = new GameBackgroundLayer();
-        this._backgroundLayer.initWith(this._curStage);
-        this.addChild(this._backgroundLayer, -1, kBackGoundLayerTag);
-    },
+    // initBgLayer:function () {
+    //     this._backgroundLayer = new GameBackgroundLayer(this._curStage);
+    //     this.addChild(this._backgroundLayer, -1, kBackGoundLayerTag);
+    // },
     loadScoreLayer:function () {
         this._shootCount = 0;
         this._controlChesh = false;
         this._achievementShowNum = 0;
 
-        this._scoreBar = new ScoreBarLayer();
-        this._scoreBar.init();
+        // this._scoreBar = new ScoreBarLayer();
 
-        this._scoreBar.setDelegate(this);
-        this.addChild(this._scoreBar, 109);
+        // this._scoreBar.setDelegate(this);
+        // this.addChild(this._scoreBar, 109);
         var useLaser = wrapper.getIntegerForKey(kUseLaser);
         if (useLaser == 2 || useLaser == 3) {
             wrapper.setIntegerForKey(kUseLaser, 0);
         }
 
-        this._scoreBar.setBullet(PlayerActor.sharedActor().getPlayerMoney());
-        this._scoreBar.setAnchorPoint(AnchorPointBottom);
-        this._scoreBar.setPosition(VisibleRect.bottom());
+        // this._scoreBar.setBullet(PlayerActor.sharedActor().getPlayerMoney());
+        // this._scoreBar.setAnchorPoint(AnchorPointBottom);
+        // this._scoreBar.setPosition(VisibleRect.bottom());
     },
     loadUserInfoLayer:function () {
-        this._userInfoLayer = UserInfoLayer.create(this);
-        this._userInfoLayer.setDelegate(this);
-        this.addChild(this._userInfoLayer, 10);
-        this._userInfoLayer.setPosition(cc.PointZero());
+        // this._userInfoLayer = UserInfoLayer.create(this);
+        // this._userInfoLayer.setDelegate(this);
+        // this.addChild(this._userInfoLayer, 10);
+        // this._userInfoLayer.setPosition(0, 0);
     },
     initChestGameLayer:function () {
         this._chestGameLayer = ChestGameLayer.create();
@@ -1468,7 +1412,9 @@ var GameScene = cc.Scene.extend({
 
     },
     initUI:function (dsPos) {
-        AutoAdapterScreen.getInstance().adjustSize();
+        // AutoAdapterScreen.getInstance().adjustSize();
+        // AutoAdapterScreen.getInstance().setVisibleRect();
+        EScreenRect = cc.rect(1.0, 1.0, document.documentElement.clientWidth + 10, document.documentElement.clientHeight + 10);
         this._timeScale = 1;
         this._playTutorial = !wrapper.getBooleanForKey(kTutorialPlayed);
 
@@ -1498,7 +1444,7 @@ var GameScene = cc.Scene.extend({
 
         PlayerActor.sharedActor().reset();
         // 使玩家武器等级与武器管理中设置的当前武器等级相同
-        PlayerActor.sharedActor().setCurWeaponLevel(this.getCannonActor().getCurrentWeaponLevel());
+        // PlayerActor.sharedActor().setCurWeaponLevel(this.getCannonActor().getCurrentWeaponLevel());
         PlayerActor.sharedActor().loadStates();
         PlayerActor.sharedActor().setScene(this);
         PlayerActor.sharedActor().setPreMoney(PlayerActor.sharedActor().getPlayerMoney());
@@ -1508,17 +1454,17 @@ var GameScene = cc.Scene.extend({
         }
 
         this._isShowAllMenu = true;
-        this._scoreBar.setBullet(PlayerActor.sharedActor().getPlayerMoney());
+        // this._scoreBar.setBullet(PlayerActor.sharedActor().getPlayerMoney());
 
         if (this.getOddsNumber() == 2) {
-            var DoubleSprite = cc.Sprite.create(ImageNameLang("fonts_other_40.png"));
-            var addCall = cc.CallFunc.create(this, this.delDouble);
-            var ac = cc.ScaleBy.create(0.5, 1.2);
-            var cc1 = cc.ScaleBy.create(0.5, 0.8);
-            var ccc = cc.ScaleBy.create(0.5, 1);
+            var DoubleSprite = new cc.Sprite(ImageNameLang("fonts_other_40.png"));
+            var addCall = new cc.CallFunc(this.delDouble, this);
+            var ac = new cc.ScaleBy(0.5, 1.2);
+            var cc1 = new cc.ScaleBy(0.5, 0.8);
+            var ccc = new cc.ScaleBy(0.5, 1);
 
-            var fadeOut = cc.FadeOut.create(1);
-            DoubleSprite.runAction(cc.Sequence.create(ac, cc1, ac, cc1, ccc, fadeOut, addCall));
+            var fadeOut = new cc.FadeOut(1);
+            DoubleSprite.runAction(new cc.Sequence(ac, cc1, ac, cc1, ccc, fadeOut, addCall));
             DoubleSprite.setPosition(VisibleRect.center());
             this.addChild(DoubleSprite, 120, DoubleSpriteNum);
         }
@@ -1555,25 +1501,25 @@ var GameScene = cc.Scene.extend({
             ];
 
         /*        for (var i = 0; i < texList.length; i++) {
-         this._retainedResArray.push(cc.TextureCache.getInstance().addImage(ImageName(texList[i])));
+         this._retainedResArray.push(cc.textureCache.addImage(ImageName(texList[i])));
          }*/
 
         switch (this.getOddsNumber()) {
             case 1:
-                this._retainedResArray.push(cc.TextureCache.getInstance().addImage(ImageName("shayu.png")));
-                this._retainedResArray.push(cc.TextureCache.getInstance().addImage(ImageName("gshayu.png")));
-                this._retainedResArray.push(cc.TextureCache.getInstance().addImage(ImageName("butterfly.png")));
+                this._retainedResArray.push(cc.textureCache.addImage(res.OldSharkPng));
+                this._retainedResArray.push(cc.textureCache.addImage(res.GSharkPng));
+                this._retainedResArray.push(cc.textureCache.addImage(res.OldButterflyPng));
                 break;
             case 2:
-                this._retainedResArray.push(cc.TextureCache.getInstance().addImage(ImageName("grouper.png")));
-                this._retainedResArray.push(cc.TextureCache.getInstance().addImage(ImageName("gmarlins.png")));
-                this._retainedResArray.push(cc.TextureCache.getInstance().addImage(ImageName("marlins.png")));
-                this._retainedResArray.push(cc.TextureCache.getInstance().addImage(ImageName("butterfly.png")));
+                this._retainedResArray.push(cc.textureCache.addImage(res.GrouperPng));
+                this._retainedResArray.push(cc.textureCache.addImage(res.GMarlinPng));
+                this._retainedResArray.push(cc.textureCache.addImage(res.MarlinPng));
+                this._retainedResArray.push(cc.textureCache.addImage(res.OldButterflyPng));//Eugene : was originally also butterfly
                 break;
             case 3:
-                this._retainedResArray.push(cc.TextureCache.getInstance().addImage(ImageName("shayu.png")));
-                this._retainedResArray.push(cc.TextureCache.getInstance().addImage(ImageName("goldentrout.png")));
-                this._retainedResArray.push(cc.TextureCache.getInstance().addImage(ImageName("gshayu.png")));
+                this._retainedResArray.push(cc.textureCache.addImage(res.OldSharkPng));//was orignally also shark
+                this._retainedResArray.push(cc.textureCache.addImage(res.GoldenTroutPng));
+                this._retainedResArray.push(cc.textureCache.addImage(res.GSharkPng));//was orignally also gshark
                 break;
         }
 
@@ -1581,21 +1527,23 @@ var GameScene = cc.Scene.extend({
         window.addEventListener("resize", function (event) {
             that.resetAllSpritePos();
         });
+
+
     },
     loadCameraButton:function () {
         this._savingImage = false;
-        var spriteHide = cc.Sprite.createWithSpriteFrameName(("ui_button_25.png"));
-        var spriteHided = cc.Sprite.createWithSpriteFrameName(("ui_button_26.png"));
-        this._itemHide = cc.MenuItemSprite.create(spriteHide, spriteHided, this, this.hideAllUI);
+        var spriteHide = new cc.Sprite("#ui_button_25.png");
+        var spriteHided = new cc.Sprite("#ui_button_26.png");
+        this._itemHide = new cc.MenuItemSprite(spriteHide, spriteHided, this.hideAllUI, this);
         this._itemHide.setPosition(cc.p(VisibleRect.topRight().x - 45, VisibleRect.topRight().y - this._itemHide.getContentSize().height / 2));
 
-        // var spriteCamra = cc.Sprite.createWithSpriteFrameName("button_other_001.png");
-        // var spriteCamrad = cc.Sprite.createWithSpriteFrameName(("button_other_002.png"));
+        // var spriteCamra = new cc.Sprite("#button_other_001.png");
+        // var spriteCamrad = new cc.Sprite("#button_other_002.png");
         // this._itemCamera = cc.MenuItemSprite.create(spriteCamra, spriteCamrad, this, this.saveImage);
         // this._itemCamera.setPosition(cc.p(VisibleRect.topRight().x - 125, VisibleRect.topRight().y - this._itemCamera.getContentSize().height / 2));
 
-        this._camera = cc.Menu.create(this._itemHide/*, this._itemCamera*/);
-        this._camera.setPosition(cc.PointZero());
+        this._camera = new cc.Menu(this._itemHide/*, this._itemCamera*/);
+        this._camera.setPosition(0, 0);
         this.addChild(this._camera, 101);
     },
     addPrizeNets:function (sender) {
@@ -1618,9 +1566,9 @@ var GameScene = cc.Scene.extend({
         if (debug) {
             if (this._curStage < 3) {
                 // 新场景没有金鲨
-                FishGroup.shareFishGroup().setGSharkActor();
+                sino.fishGroup.setGSharkActor();
                 this._chestGameLayer.addMinChest(this._oddsNumber - 1, cc.pAdd(VisibleRect.left(),
-                    cc.p(Math.random() % parseInt(VisibleRect.rect().size.width), Math.random() % parseInt(VisibleRect.rect().size.height))));//添加宝箱
+                    cc.p(Math.random() % parseInt(VisibleRect.rect().width), Math.random() % parseInt(VisibleRect.rect().height))));//添加宝箱
             }
 
             var playerActor = PlayerActor.sharedActor();
@@ -1641,19 +1589,19 @@ var GameScene = cc.Scene.extend({
         for (var i = 1; i < 6; i++) {
             var StarfishNode = ActorFactory.create("Starfish");
             StarfishNode.setMultiple(this.getOddsNumber());
-            StarfishNode.setZOrder(BulletActorZValue);
+            StarfishNode.setLocalZOrder(BulletActorZValue);
 
             StarfishNode.initFirstPt(cc.pAdd(cc.p(VisibleRect.bottom().x, VisibleRect.bottom().y + yOffset), cc.p(Math.sin((30 * i - 90) * Math.PI / 180) * roundR, Math.cos((30 * i - 90) * Math.PI / 180) * roundR)));
             StarfishNode.resetState();
             this.addActor(StarfishNode);
             StarfishNode.setPosition(VisibleRect.topRight());
         }
-        cc.Director.getInstance().getScheduler().scheduleSelector(this.delStarfish, this, 15, false);
+        cc.director.getScheduler().schedule(this.delStarfish, this, 15, false);
     },
     addParticleAchieve:function () {
         var pos = cc.p(VisibleRect.center().x, VisibleRect.center().y + 100);
 
-        var parAchieve = ParticleSystemFactory.getInstance().createParticle(ImageName("kaibaoxiang01.plist"));
+        var parAchieve = particleSystemFactory.createParticle(res.ChestOpeningParticlePlist);
         this.addChild(parAchieve, 201, kAchieveParticleTag);
         parAchieve.setPosition(pos);
     },
@@ -1664,7 +1612,7 @@ var GameScene = cc.Scene.extend({
 
     },
     delStarfish:function () {
-        cc.Director.getInstance().getScheduler().unscheduleSelector(this.delStarfish, this);
+        cc.director.getScheduler().unschedule(this.delStarfish, this);
 
         var groupStarfishActor = this.getActors(GroupStarfishActor);
         for (var i = groupStarfishActor.length - 1; i >= 0; i--) {
@@ -1719,8 +1667,8 @@ var GameScene = cc.Scene.extend({
     loadCannonAtPosition:function (cannonPos) {
 
     },
-    changeMusic:function () {
-        cc.AudioEngine.getInstance().stopBackgroundMusic(false);
+    changeMusic:function () { //not using the res.music correctly (currently unused)
+        cc.audioEngine.stopMusic(false);
         this._musicIdx = (++this._musicIdx) > 6 ? 1 : this._musicIdx;
         var szMusicFile = "music_" + this._musicIdx;
         playMusic(szMusicFile, true);
@@ -1758,23 +1706,29 @@ var GameScene = cc.Scene.extend({
         //init touch event
         this.initTouchEvent();
 
-
-        // 新场景 加勒比海 不进行游戏教学
-        if (this._playTutorial == true && this.getCurStage() == 3) {
-            wrapper.setBooleanForKey(kTutorialPlayed, false);
-            this._playTutorial = false;
-        }
-
-        this.initTutorial();
-        if (!this._playTutorial) {
+        var DISABLE_TUTORIAL = true;
+        if (DISABLE_TUTORIAL) {
+            console.warn('Not loading tutorial because it breaks!  Please remove this warning when it is fixed.');
             this.loadGameMainSessionController();
+        } else {
+            // 新场景 加勒比海 不进行游戏教学
+            if (this._playTutorial == true && this.getCurStage() == 3) {
+                wrapper.setBooleanForKey(kTutorialPlayed, false);
+                this._playTutorial = false;
+            }
+
+            this.initTutorial();
+            if (!this._playTutorial) {
+                this.loadGameMainSessionController();
+            }
+
         }
         //PaymentPopUp.checkPaypal();
     },
     onExit:function () {
         this._super();
-        var cache = cc.SpriteFrameCache.getInstance();
-        cache.removeSpriteFrameByName(ImageName("cannon.plist"));
+        var cache = cc.spriteFrameCache;
+        cache.removeSpriteFrameByName(ImageName(res.CannonPlist));
         cache.removeSpriteFrameByName(ImageName("cannon10.plist"));
         cache.removeSpriteFrameByName(ImageName("weaponLevinStorm.plist"));
         cache.removeSpriteFrameByName(ImageName("LevinStorm_xuli1.plist"));
@@ -1858,6 +1812,7 @@ var GameScene = cc.Scene.extend({
         var mainSessionController = new GameMainSessionController();
         mainSessionController.initWithDelegate(this, this);
         this.loadSessionController(mainSessionController);
+        this._mainSessionController = mainSessionController;
     },
     loadFishSeasonSessionController:function () {
         var fishSeasonSessionController = new FishSeasonSessionController();
@@ -1865,7 +1820,7 @@ var GameScene = cc.Scene.extend({
         this.loadSessionController(fishSeasonSessionController);
     },
     initTutorial:function () {
-        cc.SpriteFrameCache.getInstance().addSpriteFrames(ImageName("tutorial.plist"));
+        cc.spriteFrameCache.addSpriteFrames(ImageName("tutorial.plist"));
         if (this._playTutorial) {
             this._tutorialConfirmLayer = new TutorialConfirmLayer();
             this._tutorialConfirmLayer.init();
@@ -1874,9 +1829,9 @@ var GameScene = cc.Scene.extend({
                 cc.LocalizedString.localizedString("Tutorial Text Start"), cc.LocalizedString.localizedString("Tutorial Text Skip"),
                 this, this.startTutorial, this.skipTutorial);
             this.addChild(this._tutorialConfirmLayer, 120);
-            var delay = cc.DelayTime.create(0.5);
-            var call = cc.CallFunc.create(this._tutorialConfirmLayer, this._tutorialConfirmLayer.show);
-            this._tutorialConfirmLayer.runAction(cc.Sequence.create(delay, call));
+            var delay = new cc.DelayTime(0.5);
+            var call = new cc.CallFunc(this._tutorialConfirmLayer.show, this._tutorialConfirmLayer);
+            this._tutorialConfirmLayer.runAction(new cc.Sequence(delay, call));
         }
         else {
             PlayerActor.sharedActor().setIsGetSpringFestival(true);
@@ -1899,58 +1854,58 @@ var GameScene = cc.Scene.extend({
     },
     actionForAdShow:function () {
         if (this._userInfoLayer) {
-            var userInfoMove = cc.MoveTo.create(1, cc.p(this._userInfoLayer.getPosition().x, VisibleRect.top().y + 50));
+            var userInfoMove = new cc.MoveTo(1, cc.p(this._userInfoLayer.getPosition().x, VisibleRect.top().y + 50));
             this._userInfoLayer.runAction(userInfoMove);
         }
 
         if (this._camera) {
-            var delay1 = cc.DelayTime.create(1);
-            var targetPosX = VisibleRect.rect().size.width - 340; // btnWidth 为四个按钮的宽度
-            var camraMove = cc.MoveTo.create(1, cc.p(-targetPosX, this._camera.getPosition().y));
-            this._camera.runAction(cc.Sequence.create(delay1, camraMove));
+            var delay1 = new cc.DelayTime(1);
+            var targetPosX = VisibleRect.rect().width - 340; // btnWidth 为四个按钮的宽度
+            var camraMove = new cc.MoveTo(1, cc.p(-targetPosX, this._camera.getPosition().y));
+            this._camera.runAction(new cc.Sequence(delay1, camraMove));
         }
 
         if (this._compactUserInfo) {
-            var delay2 = cc.DelayTime.create(1);
-            var compactMove = cc.MoveBy.create(1, cc.p(360, 0));
-            var call = cc.CallFunc.create(this, this.showAdActionEnd);
-            this._compactUserInfo.runAction(cc.Sequence.create(delay2, compactMove, call));
+            var delay2 = new cc.DelayTime(1);
+            var compactMove = new cc.MoveBy(1, cc.p(360, 0));
+            var call = new cc.CallFunc(this.showAdActionEnd, this);
+            this._compactUserInfo.runAction(new cc.Sequence(delay2, compactMove, call));
         }
     },
     actionAfterAdHide:function () {
         if (this._camera) {
-            var camraMove = cc.MoveTo.create(1, cc.PointZero());
+            var camraMove = new cc.MoveTo(1, cc.p());
             this._camera.runAction(camraMove);
         }
 
         if (this._compactUserInfo) {
-            var compactMove = cc.MoveBy.create(1, cc.p(-360, 0));
+            var compactMove = new cc.MoveBy(1, cc.p(-360, 0));
             this._compactUserInfo.runAction(compactMove);
         }
 
         if (this._userInfoLayer) {
-            var delay = cc.DelayTime.create(1);
-            var userInfoMove = cc.MoveTo.create(1, cc.PointZero());
-            var call = cc.CallFunc.create(this, this.hideAdActionStart);
-            this._userInfoLayer.runAction(cc.Sequence.create(call, delay, userInfoMove));
+            var delay = new cc.DelayTime(1);
+            var userInfoMove = new cc.MoveTo(1, cc.p(0,0));
+            var call = new cc.CallFunc(this.hideAdActionStart, this);
+            this._userInfoLayer.runAction(new cc.Sequence(call, delay, userInfoMove));
         }
     },
     showAdActionEnd:function () {
         AdsController.actionEnd(1);
 
         // 设置定时器，隐藏广告条
-        cc.Director.getInstance().getScheduler().scheduleSelector(this.hideAdView, this, AD_SHOWN_TIME, false);
+        cc.director.getScheduler().schedule(this.hideAdView, this, AD_SHOWN_TIME, false);
     },
     hideAdActionStart:function () {
         AdsController.actionEnd(0);
     },
     hideAdView:function (dt) {
-        cc.Director.getInstance().getScheduler().unscheduleSelector(this.hideAdView, this);
+        cc.director.getScheduler().unschedule(this.hideAdView, this);
         AdsController.hideBannerAd(BannerAdTyp.BannerAdGame);
     },
     terminateAdMobShown:function () {
         // 停止隐藏广告的定时器
-        cc.Director.getInstance().getScheduler().unscheduleSelector(this.hideAdView, this);
+        cc.director.getScheduler().unschedule(this.hideAdView, this);
 
         // 停止广告相关 UI 的动画
         if (this._camera) {
@@ -1971,15 +1926,9 @@ var GameScene = cc.Scene.extend({
         // 强制隐藏游戏界面的广告条
         AdsController.forceHideBannerAd(BannerAdTyp.BannerAdGame);
     },
-    initPunchBoxAd:function () {
-        //this._punchBoxAd = new webKingFisherAd();
-        //this._punchBoxAd.init("ad");
-    },
-    punchBoxAdUpdate:function (fun) {
-        //this._punchBoxAd.request(fun);
-    },
+
     startCameraAnimation:function () {
-        cc.Director.getInstance().getScheduler().scheduleSelector(this.shakeScreen, this, 0.02, false);
+        cc.director.getScheduler().schedule(this.shakeScreen, this, 0.02, false);
     },
     shakeScreen:function (dt) {
         var body = cc.$("canvas");
@@ -1997,7 +1946,7 @@ var GameScene = cc.Scene.extend({
                 body.translates(0, 0);
             }
             this._shakeTime = 0;
-            cc.Director.getInstance().getScheduler().unscheduleSelector(this.shakeScreen, this);
+            cc.director.getScheduler().unschedule(this.shakeScreen, this);
         }
     },
     EnterSceneSelect:function () {
@@ -2005,7 +1954,8 @@ var GameScene = cc.Scene.extend({
         wrapper.getBooleanForKey("AskByTurnHere", true);
         this.clearGameResource();
         GameCtrl.sharedGame().homeWithStage();
-        StageSelectLayer.getInstance().SetDefaultPage(3);
+        var stageSelectLayer = new StageSelectLayer();
+        stageSelectLayer.setDefaultPage(3);
     },
     cancelEnterSceneSelect:function () {
         if (this._enterNewLayer) {
@@ -2030,55 +1980,10 @@ var GameScene = cc.Scene.extend({
         }
         ActorFactory.cleanRes();
     },
-    saveImageWithDelay:function (delay) {
-        this.runAction(cc.Sequence.create
-            (cc.DelayTime.create(delay)
-                , cc.CallFunc.create(this, this.saveImage, this)
-            ));
-    },
     _stopTutorialHint:function (sender) {
 
     },
-    saveImage:function (sender) {
-        var hl = (cc.Application.getCurrentLanguage() == cc.LANGUAGE_CHINESE) ? "zh-CN" : "en-US";
-        var gplusHref = "https://plus.google.com/share?url=http://chrome.KingFisher.com/recommend.html&hl=" + hl;
-        var heightValue = window.screen.height / 2 - 300;
-        var widthValue = window.screen.width / 2 - 300;
 
-        var positionStr = "screenX=" + widthValue + ",left=" + widthValue + " ,screenY=" + heightValue + ",top=" + heightValue;
-        window.open(gplusHref, 'Share FishJoy to Friends', 'menubar=no,toolbar=no,resizable=no,scrollbars=yes,height=600,width=600,' + positionStr);
-
-        wrapper.logEvent("GameScene","Tap","Google+",1);
-
-        //return;
-
-        /*if (this._isPause) {
-         return;
-         }
-
-         if (this.getChildByTag(kShareToWeiBoTag)) {
-         return;
-         }
-
-         if (this._savingImage) {
-         return;
-         }
-         this._savingImage = true;
-
-         var winSize = cc.Director.getInstance().getWinSize();
-         var sprite = cc.Sprite.create(ImageName("mark.png"));
-         sprite.setScaleX(winSize.width / sprite.getContentSize().width);
-         sprite.setScaleY(winSize.height / sprite.getContentSize().height);
-         sprite.setPosition(VisibleRect.center());
-         this.addChild(sprite, 9999, kMarkTag);
-
-         var fadeOut = cc.FadeOut.create(0.5);
-
-         var callback = cc.CallFunc.create(this, this.showShareImageLayer);
-         var sequ = cc.Sequence.create(fadeOut, callback);
-         sprite.runAction(sequ);
-         playEffect(CAMERA_EFFECT);*/
-    },
     showShareImageLayer:function () {
         this._savingImage = false;
 
@@ -2133,54 +2038,54 @@ var GameScene = cc.Scene.extend({
     },
     resetAllSpritePos:function () {
 
-        Multiple = AutoAdapterScreen.getInstance().getScaleMultiple();
-        this._backgroundLayer._bg.setScale(Multiple);
-        this._backgroundLayer._bg.setPosition(VisibleRect.center());
-        if (this._blurBackgroundLayer) {
-            this._blurBackgroundLayer.setScale(Multiple);
-            this._blurBackgroundLayer.setPosition(VisibleRect.center());
-        }
+        // Multiple = AutoAdapterScreen.getInstance().getScaleMultiple();
+        // this._backgroundLayer._bg.setScale(Multiple);
+        // this._backgroundLayer._bg.setPosition(VisibleRect.center());
+        // if (this._blurBackgroundLayer) {
+        //     // this._blurBackgroundLayer.setScale(Multiple);
+        //     this._blurBackgroundLayer.setPosition(VisibleRect.center());
+        // }
 
         //pause menu
-        if (this._pauseMenuLayer) {
-            this._pauseMenuLayer.setPosition(VisibleRect.bottom());
-        }
+        // if (this._pauseMenuLayer) {
+        //     this._pauseMenuLayer.setPosition(VisibleRect.bottom());
+        // }
         //compact user info
-        var act = this._compactUserInfo.numberOfRunningActions();
-        if (!(act > 0)) {
-            this._compactUserInfo.setPosition(cc.pAdd(VisibleRect.topLeft(), cc.p(this._compactUserInfo.getPosition().x, -150)));
-        }
+        // var act = this._compactUserInfo.getNumberOfRunningActions();
+        // if (!(act > 0)) {
+        //     this._compactUserInfo.setPosition(cc.pAdd(VisibleRect.topLeft(), cc.p(this._compactUserInfo.getPosition().x, -150)));
+        // }
         //weapon
-        this._cannonActor.getCurrentWeapon().setPosition(cc.pAdd(VisibleRect.bottom(), cc.p(0, 50)));
-        this._cannonActor._defaultWeaponPosition = cc.pAdd(VisibleRect.bottom(), cc.p(0, 50));
+        // this._cannonActor.getCurrentWeapon().setPosition(cc.pAdd(VisibleRect.bottom(), cc.p(0, 50)));
+        // this._cannonActor._defaultWeaponPosition = cc.pAdd(VisibleRect.bottom(), cc.p(0, 50));
 
         //scoreBar
-        this._scoreBar.setPosition(VisibleRect.bottom());
+        // this._scoreBar.setPosition(VisibleRect.bottom());
+        //
+        // this._scoreBar._weaponBaseRudder.setPosition(cc.p(-VisibleRect.right().x / 2, 0));
+        // if (this._scoreBar.getChildByTag(kTagScoreBar)) {
+        //     this._scoreBar.getChildByTag(kTagScoreBar).setPosition(cc.p(-VisibleRect.right().x / 2, 0));
+        // }
 
-        this._scoreBar._weaponBaseRudder.setPosition(cc.p(-VisibleRect.right().x / 2, 0));
-        if (this._scoreBar.getChildByTag(kTagScoreBar)) {
-            this._scoreBar.getChildByTag(kTagScoreBar).setPosition(cc.p(-VisibleRect.right().x / 2, 0));
-        }
-
-        var rainbow = this.getChildByTag(461);
-        if (rainbow) {
-            rainbow.setPosition(cc.pAdd(VisibleRect.bottom(), cc.p(0, -7)));
-        }
+        // var rainbow = this.getChildByTag(461);
+        // if (rainbow) {
+        //     rainbow.setPosition(cc.pAdd(VisibleRect.bottom(), cc.p(0, -7)));
+        // }
 
         //btn
-        this._itemMusicPlayer.setPosition(cc.p(VisibleRect.topLeft().x + 125, VisibleRect.topLeft().y - this._itemPause.getContentSize().height / 2));
-        this._itemPause.setPosition(cc.p(VisibleRect.topLeft().x + 45, VisibleRect.topLeft().y - this._itemPause.getContentSize().height / 2));
-        this._itemHide.setPosition(cc.p(VisibleRect.topRight().x - 45, VisibleRect.topRight().y - this._itemHide.getContentSize().height / 2));
-        this._itemCamera.setPosition(cc.p(VisibleRect.topRight().x - 125, VisibleRect.topRight().y - this._itemCamera.getContentSize().height / 2));
+        // this._itemMusicPlayer.setPosition(cc.p(VisibleRect.topLeft().x + 125, VisibleRect.topLeft().y - this._itemPause.getContentSize().height / 2));
+        // this._itemPause.setPosition(cc.p(VisibleRect.topLeft().x + 45, VisibleRect.topLeft().y - this._itemPause.getContentSize().height / 2));
+        // this._itemHide.setPosition(cc.p(VisibleRect.topRight().x - 45, VisibleRect.topRight().y - this._itemHide.getContentSize().height / 2));
+        // this._itemCamera.setPosition(cc.p(VisibleRect.topRight().x - 125, VisibleRect.topRight().y - this._itemCamera.getContentSize().height / 2));
 
         //userinfo layer
-        this._userInfoLayer._bgSprite.setPosition(VisibleRect.top());
-        this._userInfoLayer._menuAchieve.setPosition(cc.pAdd(VisibleRect.top(), cc.p(0, -28)));
-        this._userInfoLayer._userTitleLabel.setPosition(cc.p(VisibleRect.top().x - 130, VisibleRect.top().y - 26));
-        this._userInfoLayer._levellabel.setPosition(cc.pAdd(VisibleRect.top(), cc.p(0, -28)));
-        this._userInfoLayer._processsprite.setPosition(cc.p(VisibleRect.top().x + 156, VisibleRect.top().y - 24));
+        // this._userInfoLayer._bgSprite.setPosition(VisibleRect.top());
+        // this._userInfoLayer._menuAchieve.setPosition(cc.pAdd(VisibleRect.top(), cc.p(0, -28)));
+        // this._userInfoLayer._userTitleLabel.setPosition(cc.p(VisibleRect.top().x - 130, VisibleRect.top().y - 26));
+        // this._userInfoLayer._levellabel.setPosition(cc.pAdd(VisibleRect.top(), cc.p(0, -28)));
+        // this._userInfoLayer._processsprite.setPosition(cc.p(VisibleRect.top().x + 156, VisibleRect.top().y - 24));
 
         //prize sprite
-        this._prizeSprite.setPosition(VisibleRect.center());
+        // this._prizeSprite.setPosition(VisibleRect.center());
     }
 });

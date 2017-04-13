@@ -1,3 +1,4 @@
+//鱼的种类
 var FISH = {
     Base:0,
     Shark:1,
@@ -19,1304 +20,22 @@ var FISH = {
     Pomfret:17,
     GoldenTrout:18
 };
+
 var valueOfDropShell = [80, 50, 30, 20, 10];
+
 var valueOfSecKilling = [
     [500, 1000, 1200, 1500, 2000],
     [500, 1000, 1200, 1500, 2000]
 ];
 var kOneAngleMore = 361.0;
+
 var SCARE_MODE = {
     runAway:0,
     pop:1,
     runWithGroup:2
 };
 
-var ccBezierConfig5 = cc.Class.extend({
-    endPoint:null,
-    control1:null,
-    control2:null,
-    control3:null,
-    control4:null,
-    ctor:function () {
-        this.endPoint = {x:0, y:0};
-        this.control1 = {x:0, y:0};
-        this.control2 = {x:0, y:0};
-        this.control3 = {x:0, y:0};
-        this.control4 = {x:0, y:0};
-    }
-});
-
 var BaseFishActor = BaseActor.extend({
-    ctor:function () {
-        this.offset = {x:0, y:0};
-        this.createPosition = {x:0, y:0};
-        this.straightDirVec = {x:0, y:0};
-        this.position = {x:0, y:0};
-        this.straightStartPosition = {x:0, y:0};
-        this.straightEndPosition = {x:0, y:0};
-        this.controlPoint = {x:0, y:0};
-    },
-    initWithDef:function (def) {
-        this.fishSortLevel = ["10", "9", "8", "7", "6", "5", "4", "12", "3", "2", "1", "0", "11"];
-
-        return true;
-    },
-    _group:null,
-    getGroup:function () {
-        return this._group
-    },
-    setGroup:function (group) {
-        this._group = group
-    },
-    initWithSpriteName:function (defname, imgname) {
-        this._super(defname, imgname);
-        this._group = GroupFishActor;
-        this._fishType = FISH.smallFish;
-        this.speed = 100;
-        this.curCollideIndex = -1;
-        this.curAttackState = AttackState.eAttackStateNone;
-        this.HP = 0;
-        this.fishAttackedType = FishAttackedType.eFishAttackedNormal;
-        this.curAction = 0;
-        this.setAction(this.curAction);
-        //this.setUpdatebySelf(true);
-        return true;
-    },
-    resetState:function () {
-        this._super();
-        this.curAttackState = AttackState.eAttackStateNone;
-        this.stateChangeTime = 0.0;
-        this.speedScale = 0.6;
-        this.actorType = ActorType.eActorTypeNormal;
-
-        var AchieveArray = GameSetting.getInstance().getChestFishArray();
-        var pOneDict = AchieveArray[this.ChestFishID];
-        this.HP = pOneDict["Maximum"];
-        this.fPullAngle = 0.0;
-        this.fPullDis = 0.0;
-        this.bPulled = false;
-    },
-
-    update:function (dt) {
-        this._super(dt);
-        if (!this.getIsAlive()) {
-            return;
-        }
-
-        if (this.bPulled) {
-            this.passivityMoveToRoundPositon(dt);
-        }
-        else {
-            if (this.curAttackState == AttackState.eAttackStateHited) {
-                this.stateChangeTime += dt;
-                if (this._fishType == FishType.bigFish) {
-                    this.speedScale = 0.6;
-                } else if (this._fishType == FishType.mediumFish) {
-                    this.speedScale = 0.8;
-                } else if (this._fishType == FishType.smallFish) {
-                    this.speedScale = 1.2;
-                } else {
-                    this.speedScale = 0.6;
-                }
-            }
-
-            if (this.stateChangeTime >= 3.0) {
-                this.curAttackState = AttackState.eAttackStateNone;
-                this.stateChangeTime = 0.0;
-                this.speedScale = 0.6;
-
-                if (this.getFishActorType() == FISH.Puffer) {
-                    this.playAction(4);
-                    this.setActionDidStopSelector(this.backToNormalState, this);
-                }
-            }
-
-            switch (this.eMoveType) {
-                case MoveType.eMoveByBeeline://0
-                    this.fishMoveByBeeline(dt, this.beRightDir);
-                    break;
-                case MoveType.eMoveByEllipse://1
-                    if (this.beRightDir) {
-                        this.fishMovebyEllipse(dt, true);
-                        if (this.getPosition().x > (VisibleRect.right().x + this.getSize().width)) {
-                            this.removeSelfFromScene();
-                        }
-                    }
-                    else if (!this.beRightDir) {
-                        this.fishMovebyEllipse(dt, false);
-                        //[self fishWheelMove:dt dir:false] ;
-                        if (this.getPosition().x < (VisibleRect.left().x - this.getSize().width)) {
-                            this.removeSelfFromScene();
-                        }
-                    }
-                    break;
-                case MoveType.eMoveByWheel://2
-                    this.fishWheelMove(dt, this.beRightDir);
-                    break;
-                case MoveType.eMoveByCircles://3
-                    this.turningInCircles(dt, false);
-                    break;
-                case MoveType.eMoveByCircleWithCount://4
-                    this.turningInCircles(dt, false, 1);
-                    break;
-                default:
-                    break;
-            }
-        }
-        //this is new update, dont run
-        /*if (!this.getIsAlive()) {
-         if (this.moveData) {
-         if (this.moveData.actorName == 7) {
-         if (this.getAction() != 1) {
-         this.playAction(1);
-         }
-         if (!this.getUpdatebySelfValue()) {
-         this.setUpdatebySelf(true);
-         }
-         }
-         }
-         return;
-         }
-
-         //    if (bPulled)
-         //    {
-         //        this.passivityMoveToRoundPositon(dt);
-         //    }
-         //    else
-         //    {
-         //        if (curAttackState == eAttackStateHited)
-         //        {
-         //            stateChangeTime += dt;
-         //            if (this.getFishType() == bigFish)
-         //            {
-         //                speedScale = 0.6f;
-         //            }
-         //            else  if(this.getFishType() == mediumFish)
-         //            {
-         //                speedScale = 0.8f;
-         //            }
-         //            else if(this.getFishType() == smallFish)
-         //            {
-         //                speedScale = 1.2f;
-         //            }
-         //            else
-         //            {
-         //                speedScale = 0.6f;
-         //            }
-         //        }
-         //
-         //        if (stateChangeTime >= 3.0f)
-         //        {
-         //            curAttackState = eAttackStateNone;
-         //            stateChangeTime = 0.0f;
-         //            speedScale = curSpeedScale;
-         //
-         //            if(this.getFishActorType() == eFishPuffer)
-         //            {
-         //                this.playAction(4);
-         //                this.getKSprite().setActionDidStopSelector((ActorCallBackFunc)(&BaseFishActorBase.backToNormalState), this);
-         //            }
-         //        }
-
-         if (this.runningAway) {
-         this.handleRunAway(dt);
-         }
-         else if (this.afterRunAway) {
-         this.handleAfterRunAway(dt);
-         }
-         else {
-         switch (this.curMoveType) {
-         case SW_MOVETYPE.MOVETYPE_STRAIGHT:
-         this.runStraightNormalLogic(dt);
-         break;
-         case SW_MOVETYPE.MOVETYPE_ELLIPSE:
-         this.runEllipseNormalLogic(dt);
-         break;
-         case SW_MOVETYPE.MOVETYPE_UTYPE:
-         this.runUTypeNormalLogic(dt);
-         break;
-         case SW_MOVETYPE.MOVETYPE_CUTTLESTYLE:
-         this.runCuttleStyleLogic(dt);
-         break;
-         case SW_MOVETYPE.MOVETYPE_COMPAGES:
-         this.runCompagesLogic(dt);
-         break;
-         case SW_MOVETYPE.MOVETYPE_BEZIERAT:
-         this.runBezierLogic(dt);
-         break;
-         case SW_MOVETYPE.MOVETYPE_RETURN:
-         //nil
-         break;
-         }
-         }
-         this.checkMoveEnd();*/
-    },
-    updateInfo:function () {
-        /*        if (SceneSettingDataModel.sharedSceneSettingDataModel().getCanUseNewPath())
-         {
-         updateNewInfo();
-         }
-         else
-         {
-         updateOldInfo();
-         } // */
-        this.updateOldInfo();
-    },
-    updateNewInfo:function () {
-    },
-    updateOldInfo:function () {
-        /*var tempScore = 0;
-         for (var i = 0; i < 11; i++) {
-         tempScore += (GameSetting.getInstance().getPrizeScoreArray())[i];
-         }
-         var temp = 53479978;
-         var sScore = tempScore + "";
-         if (temp == PlayerActor.sign(sScore)) {
-         this.prizeScore = GameSetting.getInstance().getPrizeScoreArray()[this._fishLevel];
-         this.expectation = GameSetting.getInstance().getExpectationArray()[this._fishLevel];
-         }
-         else {
-         // @to do
-         // 		UIAlertView*alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", nil)
-         // 														   message:NSLocalizedString(@"Warning Content", nil)
-         // 														  delegate:self
-         // 												 cancelButtonTitle:NSLocalizedString(@"cancel", nil)
-         // 												 otherButtonTitles:nil] ;
-         // 		[alertView show] ;
-         // 		[alertView release] ;
-         return;
-
-         }   */
-
-        this.prizeScore = GameSetting.getInstance().getPrizeScoreArray()[this._fishLevel];
-        this.expectation = GameSetting.getInstance().getExpectationArray()[this._fishLevel];
-
-        this.topRotationAngle = 0.0;
-        this.bottomRotationAngle = 360.0;
-        this.wheelAngle = 180.0;
-        this.turningCount = 0;
-        var radius = 300.0;
-        var length = Math.PI * radius;
-        this.time1 = length / this.speed;
-        this.speedScale = 0.6;
-
-        this.controlIndex = 0;
-        var controlradius = this.getControlRadius(this.controlIndex);
-        if (!this.beRightDir) {
-            this.controlPoint = cc.p(this.getPosition().x - controlradius.x, this.getPosition().y);
-        }
-        else {
-            this.controlPoint = cc.p(this.getPosition().x + controlradius.x, this.getPosition().y);
-        }
-        this._passTime = 0;
-        var Dir = cc.pSub(this.getPosition(), cc.pAdd(this.getCreatePosition(), cc.p(0.1, 0.1)));
-        Dir = cc.pNormalize(Dir);
-        var ang = Math.atan2(Dir.x, Dir.y);
-        this.circlesAngle = ang / Math.PI * 180.0;
-        this.moveOut = false;
-    },
-    removeSelfFromScene:function () {
-        this.getScheduler().unscheduleAllSelectorsForTarget(this);
-        this._super();
-    },
-    getBaseActorType:function () {
-        return BaseActorType.eFishActor;
-    },
-    getFishActorType:function () {
-        return FISH.Base;
-    },
-    setTurningCount:function (c) {
-        this.turningCount = c;
-    },
-    addScoreNumber:function () {
-        this.ScoreNum(this.getPosition());
-    },
-    ScoreNum:function (Pos) {
-        if (this.prizeScore <= 0) {
-            return;
-        }
-        var str = "" + (this.prizeScore * this.getScene().getOddsNumber());
-        var labelNum = cc.LabelAtlas.create(str, ImageName("prizenum.png"), PrizeNum_TextWidth, PrizeNum_TextHeight, '0');
-        var prizeSprite = cc.Sprite.createWithSpriteFrameName(("prizesign1.png"));
-        var movePoition = cc.p(0, 48);
-        var move = cc.p(prizeSprite.getContentSize().width / 2, -prizeSprite.getContentSize().height / 2);
-        switch (this.actorType) {
-            case ActorType.eActorTypeBL:
-                prizeSprite.setRotation(90);
-                break;
-            case ActorType.eActorTypeBR:
-                prizeSprite.setRotation(90);
-                break;
-            case ActorType.eActorTypeTL:
-                movePoition = cc.p(48, 0);
-                prizeSprite.setRotation(90);
-                labelNum.setRotation(90);
-                move = cc.p(-prizeSprite.getContentSize().width / 2, -prizeSprite.getContentSize().height / 2);
-                break;
-            case ActorType.eActorTypeTR:
-            {
-                movePoition = cc.p(-48, 0);
-                prizeSprite.setRotation(270);
-                labelNum.setRotation(270);
-                move = cc.p(prizeSprite.getContentSize().height / 2, prizeSprite.getContentSize().width / 2);
-            }
-                break;
-            case ActorType.eActorTypeNormal:
-                //[prizeSprite setRotation:90];
-                break;
-            default:
-                break;
-        }
-
-        var moveBy = cc.MoveBy.create(1.05, movePoition);
-        var fadeIn = cc.FadeIn.create(0.35);
-        var fadeOut = cc.FadeOut.create(0.35);
-        var delayTime = cc.DelayTime.create(0.35);
-
-        //CCScaleBy *scaleby = [CCScaleBy actionWithDuration:0.2f scale:1.2 ];
-        //id scaleRev = [scaleby reverse];
-        var sequ = cc.Sequence.create(fadeIn, delayTime, fadeOut);
-        var spawn = cc.Spawn.create(sequ, moveBy);
-
-        var call = cc.CallFunc.create(prizeSprite, this.getScene().removeSprite);
-        prizeSprite.runAction(cc.Sequence.create(spawn, call));
-        prizeSprite.setPosition(Pos);
-        prizeSprite.setScale(1.0);
-        this.getScene().addChild(prizeSprite, 120);
-
-        var moveBy1 = cc.MoveBy.create(1.05, movePoition);
-        var fadeIn1 = cc.FadeIn.create(0.35);
-        var fadeOut1 = cc.FadeOut.create(0.35);
-        var delayTime1 = cc.DelayTime.create(0.35);
-        var sequ1 = cc.Sequence.create(fadeIn1, delayTime1, fadeOut1);
-        var spawn1 = cc.Spawn.create(sequ1, moveBy1);
-
-        var call1 = cc.CallFunc.create(labelNum, this.getScene().removeSprite);
-        labelNum.runAction(cc.Sequence.create(spawn1, call1));
-        labelNum.setPosition(cc.pAdd(Pos, move));
-        this.getScene().addChild(labelNum, 130);
-    },
-    playPrizeAnimation:function () {
-        if (this.getPrizeScore() >= 80) {
-            var pScene = GameCtrl.sharedGame().getCurScene();
-            var pScene1 = pScene;
-            if (pScene1) {
-                pScene1.coinsAnimation(this.getPosition());
-            }
-        }
-        else if (this.getPrizeScore() >= 60) {
-            playEffect(COIN_EFFECT2);
-
-            this.addJinDunAnimation(this.getPosition(), 60, this.getActorType());
-        }
-        else if (this.getPrizeScore() >= 50) {
-            playEffect(COIN_EFFECT2);
-
-            this.addJinDunAnimation(this.getPosition(), 50, this.getActorType());
-        }
-        else if (this.getPrizeScore() >= 40) {
-            playEffect(COIN_EFFECT2);
-
-            this.addJinDunAnimation(this.getPosition(), 40, this.getActorType());
-        }
-        else if (this.getPrizeScore() >= 20) {
-            playEffect(COIN_EFFECT2);
-        }
-        else {
-            playEffect(COIN_EFFECT1);
-        }
-    },
-    addGoldPrizeWithPlayAnimation:function (playAnimation) {
-        var count = this.referencePointCount();
-
-        var offset = cc.p(256, 30);
-        var distpos = cc.pSub(VisibleRect.bottom(), offset);
-
-        if (this.getPrizeScore()) {
-            var perPoint = (count == 0) ? this.prizeScore : this.prizeScore / count;
-
-            for (var idx = 0; idx < count; idx++) {
-                var p = this.referencePoint(idx);
-                var distance = cc.pDistance(p, cc.PointZero());
-                p = cc.p(distance * Math.cos(this.getCurRotation()), distance * Math.sin(this.getCurRotation()));
-
-                var pParticle = ParticleSystemFactory.getInstance().createParticle(ImageName("goldlizi.plist"));
-                pParticle._dontTint = true;
-
-                var goldcoin = ActorFactory.create("GoldPrizeActor");
-                goldcoin.setPoint(perPoint);
-                goldcoin.setPosition(cc.pAdd(this.getPosition(), p));
-                goldcoin.setParticle(pParticle);
-                goldcoin.resetState();
-                goldcoin.dropGoldPrizeWithFishPoint(goldcoin.getPosition(), distpos);
-                pParticle.setPosition(cc.pAdd(this.getPosition(), p));
-                this.getScene().addChild(pParticle, 10);
-                this.getScene().addActor(goldcoin);
-            }
-        }
-        this.getScene().addPlayerMoney(this.prizeScore);
-
-        if (playAnimation) {
-            this.playPrizeAnimation();
-        }
-    },
-    getControlRadius:function (index) {
-        if (index >= this.controlValus.length - 1)
-            index = this.controlValus.length - 1;
-
-        if (this.controlValus[index])
-            return this.controlValus[index];
-
-        return {x:0, y:0};
-    },
-    deleteLabelScoreNumber:function (sender) {
-        this.ScoreNum(this.GoldPos);
-        this.getScene().removeSprite(sender);
-        this.removeParticle();
-    },
-    updatePath:function (dict) {
-        var strKey = "Radius";
-        this.controlValus = (dict[strKey]);
-
-        var speedKey = "speed";
-        var pSpeedStr = (dict[speedKey]);
-        this.speed = 0;
-        if (pSpeedStr != null) {
-            this.speed = parseFloat(pSpeedStr);
-        }
-
-        //CCLOG(@"speed  is %.f", speed);
-        var pMoveTypeStr = dict["MoveDict"];
-        this.eMoveType = MoveType.eMoveByBeeline;
-        if (pMoveTypeStr != null) {
-            this.eMoveType = parseInt(pMoveTypeStr);
-        }
-
-        var pOnTheRrcStr = dict["onTheRrc"];
-        this.onTheRrc = false;
-        if (pOnTheRrcStr != null) {
-            this.onTheRrc = (pOnTheRrcStr != "0");
-        }
-        var pAngle = dict["Angle"];
-        if (pAngle != null) {
-            this._moveAngle = parseFloat(pAngle);
-        }
-        else {
-            this._moveAngle = 361;
-        }
-    },
-    addFishNetAt:function (pt, weaponType, actType, flag) {
-        var NetName = "FishNetActor" + weaponType;
-        var net = ActorFactory.create(NetName);
-        if (flag) {
-            this.setShootFlag(flag);
-            net.setShootFlag(flag);
-        }
-        var tempPar;
-        if (weaponType === FishWeaponType.eWeaponLevel5) {
-            tempPar = ParticleSystemFactory.getInstance().createParticle(ImageName("lizibianhua1.plist"));
-            tempPar.setDrawMode(cc.PARTICLE_SHAPE_MODE);
-            tempPar.setShapeType(cc.PARTICLE_STAR_SHAPE);
-        } else if (weaponType == FishWeaponType.eWeaponLevel7) {
-            tempPar = ParticleSystemFactory.getInstance().createParticle(ImageName("lizibianhua2.plist"));
-            tempPar.setDrawMode(cc.PARTICLE_SHAPE_MODE);
-            tempPar.setShapeType(cc.PARTICLE_STAR_SHAPE);
-        } else if (weaponType == FishWeaponType.eWeaponLevel10) {
-            tempPar = ParticleSystemFactory.getInstance().createParticle(ImageName("lizibianhua3.plist"));
-            tempPar.setDrawMode(cc.PARTICLE_SHAPE_MODE);
-            tempPar.setShapeType(cc.PARTICLE_STAR_SHAPE);
-        } else {
-            tempPar = ParticleSystemFactory.getInstance().createParticle(ImageName("yuwanglizi.plist"));
-        }
-        if (net != null) {
-            net.setParticle(tempPar);
-        }
-        tempPar._dontTint = true;
-        tempPar.setPosition(pt);
-
-        this.getScene().addChild(tempPar, BulletActorZValue + 1);
-        if (net != null) {
-            net.setGroup(GroupFishNetActor);
-            net.resetState();
-            net.updateInfo();
-            net.setPosition(pt);
-            net.setZOrder(BulletActorZValue);
-            net.playCatchAction();
-            this.getScene().addActor(net);
-            if (actType) {
-                net.setActorType(actType);
-            }
-        }
-    },
-    handleCollide:function (plane) {
-        if (this._super(plane)) {
-            if (BaseActorType.eBulletActor == plane.getBaseActortype() && this.handleCollideWithBullet(plane)) {
-                return true;
-            }
-
-            if (BaseActorType.eFishNetActor == plane.getBaseActortype() && this.handleCollideWithNet(plane)) {
-                return true;
-            }
-
-        }
-        return false;
-    },
-    handleCollideForTutorial:function (shouldCatch, pTarget) {
-        var target = pTarget instanceof  BulletActor ? pTarget : false;
-        if (target) {
-            var pLevin = target instanceof  LevinStormBulletActor;
-            if (pLevin) {
-                if (target.finalEvent()) {
-
-                }
-                else {
-                    if (this._fishLevel != FishLevel.eFishLevel13 && this._fishLevel != FishLevel.eFishLevel12 && this._fishLevel > FishLevel.eFishLevel7) {
-                        return false;
-                    }
-                    target.collisionEvent();
-                }
-
-            }
-            this.addFishNetAt(target.getPosition(), target.getCurWeaponLevel());
-            if (!(target instanceof  RayBulletActor) && !(target instanceof  LevinStormBulletActor)) {
-                target.removeSelfFromScene();
-
-                if (!this.getScene().getAddPrizeGroup()) {
-                    if (this instanceof PufferActor) {
-                        this.playAction(2);
-                        this.setActionDidStopSelector(this.backToNormalState, this);
-                        this.curAttackState = AttackState.eAttackStateHited;
-                    }
-                }
-            }
-            else {
-                this.playAction(1);
-                this.setActionDidStopSelector(this.actionAfterArrested, this);
-                this._isAlive = false;
-
-                return true;
-            }
-            return true;
-        }
-        else if (pTarget instanceof FishNetActor) {
-            if (shouldCatch) {
-                if (this instanceof PufferActor) {
-                    if (this.curAttackState == AttackState.eAttackStateHited) {
-                        return false;
-                    }
-                }
-
-                this.playAction(1);
-                PlayerActor.sharedActor().updateTutorialCatchMoney(this.prizeScore);
-                PlayerActor.sharedActor().catchFish(this.getDef());
-
-                this.setActionDidStopSelector(this.actionAfterArrested, this);
-                this._isAlive = false;
-                return true;
-            } else {
-                return false;
-            }
-        }
-
-        return false;
-    },
-
-    /**
-     * creates fish net, or if its special bullet, kills fishes
-     * @param bullet
-     * @return {Boolean}
-     */
-    handleCollideWithBullet:function (bullet) {
-        if (BulletType.eRayBullet == bullet.getBulletType() ||
-            BulletType.eLevinStormBullet == bullet.getBulletType()) {
-            if (BulletType.eLevinStormBullet == bullet.getBulletType()) {
-                if (bullet.finalEvent()) {
-                }
-                else {
-                    if (this.getFishLevel() != FishLevel.eFishLevel13 && this.getFishLevel() != FishLevel.eFishLevel12 && this.getFishLevel() > FishLevel.eFishLevel7) {
-                        return false;
-                    }
-                    bullet.collisionEvent();
-                }
-            }
-            this.playAction(1);
-            this.setActorType(bullet.getActorType());
-            switch (bullet.getActorType()) {
-                case ActorType.eActorTypeTL:
-                {
-                    PlayerActor.sharedActorTL().updateCatchMoney(this.getPrizeScore(), true, false, false);
-
-                    //
-                    if (1)//FightWithEachOther
-                    {
-                        PlayerActor.sharedActorTL().catchFish(this.getDef());
-                        // @todo
-// 					if (getScene().GetGameCenterGCHelper())
-// 					{
-// 						getScene().massageFish(true, FishID);
-// 					}
-                    }
-                    else {
-                    }
-                }
-                    break;
-                case ActorType.eActorTypeTR:
-                {
-                    PlayerActor.sharedActorTR().updateCatchMoney(this.getPrizeScore(), true, false, false);
-                    if (1)//FightWithEachOther
-                    {
-                        PlayerActor.sharedActorTR().catchFish(this.getDef());
-                        // @todo
-// 					if (getScene().GetGameCenterGCHelper())
-// 					{
-// 						getScene().massageFish(true, FishID);
-// 					}
-                    }
-                    else {
-                    }
-                }
-                    break;
-
-                case ActorType.eActorTypeBL:
-                    break;
-
-                case ActorType.eActorTypeBR:
-                    break;
-
-                case ActorType.eActorTypeNormal:
-                {
-                    if (this.getIsChangeColor()) {
-                        var baoixangParticle = ParticleSystemFactory.getInstance().createParticle(ImageName("bianbaoxiangl03.plist"));
-                        baoixangParticle._dontTint = true;
-                        baoixangParticle.setPosition(this.getPosition());
-                        this.getScene().addChild(baoixangParticle);
-                        this.getScene().getChestGameLayer().addMinChest(this.getChestFishID(), this.getPosition());//TODO chest game layer
-                    }
-
-                    PlayerActor.sharedActor().updateCatchMoney(this.getPrizeScore(), false, false, true);
-                    if (PlayerActor.sharedActor().canLevelUp()) {
-                        PlayerActor.sharedActor().setPlayerLevel(PlayerActor.sharedActor().getPlayerLevel() + 1);
-                        this.getScene().levelUp();
-                    }
-
-                    if (FISH.Shark == this.getFishActorType()) {
-                        if (PlayerActor.sharedActor().getAutoSave()) {
-                            PlayerActor.sharedActor().setCatchSharkWithRay(true);
-                            PlayerActor.sharedActor().submitAchievement(0);
-                        }
-                    }
-                    PlayerActor.sharedActor().catchFish(this.getDef(), this.getShootFlag());
-                }
-                    break;
-                default:
-                    break;
-            }
-
-            //CCLOG(@"the catchedFishes is %@", [[[PlayerActor sharedActor] catchedFishes] description]);
-            this.setActionDidStopSelector(this.actionAfterArrested, this);
-            this._isAlive = false;
-            return true;
-        }
-        else if (BulletType.eHarpoonBullet == bullet.getBulletType()) {
-            this.playAction(1);
-            this.setActorType(bullet.getActorType());
-            switch (bullet.getActorType()) {
-                //Multiplayer
-                /*                case ActorType.eActorTypeTL:
-                 {
-                 PlayerActor.sharedActorTL().updateCatchMoney(prizeScore, true, true, false);
-                 //
-                 if(FightWithEachOther)
-                 {
-                 PlayerActor.sharedActorTL().catchFish(getDef().c_str());
-                 // @todo
-                 // 					if (getScene().GetGameCenterGCHelper())
-                 // 					{
-                 // 						getScene().massageFish(true, FishID);
-                 // 					}
-                 }
-                 else
-                 {
-                 }
-                 }
-
-                 break;
-                 case eActorTypeTR:
-                 {
-                 PlayerActor.sharedActorTR().updateCatchMoney(prizeScore, true, true, false);
-                 if (FightWithEachOther)
-                 {
-                 PlayerActor.sharedActorTR().catchFish(getDef().c_str());
-                 // @todo
-                 // 					if (getScene().GetGameCenterGCHelper())
-                 // 					{
-                 // 						getScene().massageFish(true, FishID);
-                 // 					}
-                 }
-                 else
-                 {
-                 }
-                 }
-                 break;
-
-                 case eActorTypeBL:
-                 break;
-
-                 case eActorTypeBR:
-                 break;*/
-
-                case ActorType.eActorTypeNormal:
-                {
-                    PlayerActor.sharedActor().updateCatchMoney(this.prizeScore, false, true, true);
-                    if (FISH.Shark == this.getFishActorType()) {
-                        if (PlayerActor.sharedActor().getAutoSave()) {
-                            PlayerActor.sharedActor().setCatchSharkWithRay(true);
-                            PlayerActor.sharedActor().submitAchievement(0.0);
-                        }
-                    }
-                    PlayerActor.sharedActor().catchFish(this.getDef(), this.getShootFlag());
-                }
-                    break;
-
-                default:
-                    break;
-            }
-
-            //CCLOG(@"the catchedFishes is %@", [[[PlayerActor sharedActor] catchedFishes] description]);
-            this.setActionDidStopSelector(this.actionAfterArrested, this);
-            this._isAlive = false;
-            return true;
-        }
-        else if (BulletType.eSwirlBullet == bullet.getBulletType()) {
-            this.bPassivityToRound(bullet.getPosition());
-            // @todo if (bullet.finalEvent())
-            {
-                PlayerActor.sharedActor().updateCatchMoney(this.prizeScore, false, true, true);
-                if (FISH.Shark == this.getFishActorType()) {
-                    if (PlayerActor.sharedActor().getAutoSave()) {
-                        PlayerActor.sharedActor().setCatchSharkWithRay(true);
-                        PlayerActor.sharedActor().submitAchievement(0.0);
-                    }
-                }
-                PlayerActor.sharedActor().catchFish(this.getDef());
-
-                this.playAction(1);
-                this.setActionDidStopSelector(this.actionAfterArrested, this);
-                this.setIsAlive(false);
-            }
-            return true;
-        }
-
-        if (!this.getScene().getAddPrizeGroup()) {
-            if (FISH.Puffer == this.getFishActorType()) {
-                this.playAction(2);
-                this.setActionDidStopSelector(this.backToNormalState, this);
-            }
-            if (this.curAttackState == AttackState.eAttackStateNone) {
-                this.curAttackState = AttackState.eAttackStateHited;
-            }
-        }
-
-        this.addFishNetAt(bullet.getPosition(), bullet.getCurWeaponLevel(), bullet.getActorType(), bullet.getShootFlag());
-        bullet.collisionEvent();
-        return false;
-    },
-    handleCollideWithNet:function (netActor) {
-        //var random = Math.random() * 10000;
-
-        //var finalRandom = this.getFinalRandom(netActor);
-        this.getFinalRandom(netActor);
-
-        if (FISH.Puffer == this.getFishActorType()) {
-            if (this.curAttackState == AttackState.eAttackStateHited) {
-                return false;
-            }
-        }
-
-        /* var iFinalRadom = Math.ceil(finalRandom);
-         //cc.log(iFinalRadom);
-         //cc.log(finalRandom + " : "+random);
-         if (random < iFinalRadom || this.HP < 0) {
-         cc.log("true");
-         // It uses Nacl to process the result.
-         //this.grapedByFishNet(netActor);
-         //return true;
-         } */
-
-        return false;
-    },
-    SpikeFish:function (isPlayer1) {
-        this.playAction(1);
-        if (isPlayer1) {
-            PlayerActor.sharedActorTL().updateCatchMoney(this.prizeScore, true, true, false);
-            PlayerActor.sharedActorTL().catchFish(this.getDef());
-        }
-        else {
-            PlayerActor.sharedActorTR().updateCatchMoney(this.prizeScore, true, true, false);
-            PlayerActor.sharedActorTR().catchFish(this.getDef());
-        }
-        this.setActionDidStopSelector(this.actionAfterArrested, this);
-        this._isAlive = false;
-    },
-    canSecKilling:function () {
-        var prizeScoreAvailable = this.prizeScore >= 30;
-        var attackTaupeAvailable = this.fishAttackedType != FishAttackedType.eFishAttackedNone;
-        var ret = prizeScoreAvailable && attackTaupeAvailable;
-        return ret;
-    },
-    handleSecKillingWith:function (fishnet) {
-        var secKillingValue = Math.random() * 10000;
-        switch (this.fishAttackedType) {
-            case FishAttackedType.eFishAttackedNormal:
-            {
-                this.fishAttackedType = FishAttackedType.eFishAttackedFirst;
-                if (secKillingValue <= valueOfSecKilling[0][this._fishLevel]) {
-                    return true;
-                }
-                else {
-                    return false;
-                }
-
-            }
-
-                break;
-            case FishAttackedType.eFishAttackedFirst:
-            {
-                this.fishAttackedType = FishAttackedType.eFishAttackedSecond;
-                if (secKillingValue <= valueOfSecKilling[1][this._fishLevel]) {
-                    return true;
-                }
-                else {
-                    return false;
-                }
-            }
-
-                break;
-            case FishAttackedType.eFishAttackedSecond:
-            {
-                this.fishAttackedType = FishAttackedType.eFishAttackedNone;
-
-            }
-
-                break;
-            case FishAttackedType.eFishAttackedNone:
-
-                break;
-            default:
-                break;
-        }
-
-        return false;
-    },
-    canDropShell:function () {
-        return false;
-    },
-    dropShellActor:function () {
-        if (!this.canDropShell()) {
-            return;
-        }
-
-        var dropShellValue = Math.random() * 100;
-        if (dropShellValue <= valueOfDropShell[this._fishLevel]) {
-            cc.assert(0);//ShellActor.shareShellActor().dropAtPosition(this.getPosition());
-        }
-    },
-
-    fishMoveByBeeline:function (dt, right) {
-        var nextStep = cc.p(0, 0);
-        if (this._moveAngle >= kOneAngleMore) {
-            if (right) {
-                this._moveAngle = 360;
-            }
-            else {
-                this._moveAngle = 180;
-            }
-        }
-
-
-        var moveDistance = this.speed * this.speedScale * dt * 0.4;
-        var fAngle = Math.PI * this._moveAngle / 180;
-        var delta = cc.p(moveDistance * Math.cos(fAngle), moveDistance * Math.sin(fAngle));
-        var pos = this.getPosition();
-        nextStep = cc.pAdd(pos, delta);
-
-        var Dir = cc.pSub(nextStep, pos);
-        Dir = cc.pNormalize(Dir);
-        var ang = Math.atan2(Dir.x, Dir.y) + Math.PI / 2;
-
-        this.setRotation(ang / Math.PI * 180.0);
-        this.setPosition(nextStep);
-        pos = this.getPosition();
-        var fishSize = this.getSize();//TODO get size of spSprite
-        if (this._moveAngle == 180) {
-            if (pos.x < VisibleRect.left().x - fishSize.width)
-                this.removeSelfFromScene();
-
-        }
-
-        else if (this._moveAngle == 360) {
-            if (pos.x > VisibleRect.right().x + fishSize.width)
-                this.removeSelfFromScene();
-        }
-
-        else if (this._moveAngle < 180) {
-            if (pos.y > VisibleRect.right().x + fishSize.width) {
-                this.removeSelfFromScene();
-            }
-        }
-
-        else if (this._moveAngle > 180) {
-            if (pos.y < VisibleRect.bottom().y - fishSize.height) {
-                this.removeSelfFromScene();
-            }
-        }
-    },
-    turningInCircles:function (dt, right, count) {
-        if (count != null) {
-            var controlradius = this.getControlRadius(this.controlIndex);
-            this.controlPoint = this.createPosition;
-            if (this.turningCount > count) {
-
-                this.removeSelfFromScene();
-
-            }
-            else {
-                var l = this.getEllipsePerimeter(this.controlPoint.x, this.controlPoint.y);
-
-                this.circlesAngle -= (this.speed * 180.0) * dt / l;
-                //circlesAngle -= 10 ;
-
-                if (this.circlesAngle >= 360) {
-                    this.circlesAngle -= 360;
-                    this.turningCount++;
-                }
-                else if (this.circlesAngle < 0) {
-                    this.circlesAngle += 360;
-                    this.turningCount++;
-                }
-                var angle = this.circlesAngle / 180.0 * Math.PI;
-
-                var nextStep = cc.p(this.controlPoint.x + (controlradius.x + this.radiusOffset) * Math.cos(angle), this.controlPoint.y + (controlradius.y + this.radiusOffset) * Math.sin(angle));
-
-                var Dir = cc.pSub(nextStep, this.getPosition());
-                Dir = cc.pNormalize(Dir);
-                var ang = Math.atan2(Dir.x, Dir.y) + Math.PI / 2;
-
-                this.setRotation(ang / Math.PI * 180.0);
-                this.setPosition(nextStep);
-            }
-        }
-        else {
-            var controlradius = this.getControlRadius(this.controlIndex);
-            this.controlPoint = VisibleRect.center();
-
-            count = 3;
-            if (this.getScene().getPlayTutorial()) {
-                count = 1000;
-            }
-
-            if (this.turningCount > count && this.circlesAngle < 220.0 && this.circlesAngle > 190.0) {
-                var pt , dir;
-                var ang;
-
-                pt = cc.p(100, screenHeight + 200);
-                this.moveOut = true;
-                dir = cc.pSub(pt, this.getPosition());
-                dir = cc.pNormalize(dir);
-                ang = Math.atan2(dir.x, dir.y) + Math.PI / 2;
-
-                this.setRotation(ang / Math.PI * 180.0);
-
-                this.setPosition(cc.pAdd(this.getPosition(), cc.pMult(dir, dt * 200)));
-                if (this.getPosition().y > screenHeight + 100) {
-                    this.removeSelfFromScene();
-                }
-
-            }
-            else {
-                var l = this.getEllipsePerimeter(controlradius.x, controlradius.y);
-
-                this.circlesAngle -= (this.speed * 180.0) * dt / l;
-                //circlesAngle -= 10 ;
-
-                if (this.circlesAngle >= 360) {
-                    this.circlesAngle -= 360;
-                    this.turningCount++;
-                }
-                else if (this.circlesAngle < 0) {
-                    this.circlesAngle += 360;
-                    this.turningCount++;
-                }
-                //NSLog(@"....angle = %f", circlesAngle) ;
-                //220-190
-                var angle = this.circlesAngle / 180.0 * Math.PI;
-
-                var nextStep = cc.p(this.controlPoint.x + (controlradius.x + this.radiusOffset) * Math.cos(angle), this.controlPoint.y + (controlradius.y + this.radiusOffset) * Math.sin(angle));
-                var curPos = this.getPosition();
-                var Dir = cc.pSub(nextStep, curPos);
-                Dir = cc.pNormalize(Dir);
-                var ang = Math.atan2(Dir.x, Dir.y) + Math.PI / 2;
-
-                this.setRotation(ang / Math.PI * 180.0);
-                this.setPosition(nextStep);
-            }
-        }
-    },
-    fishWheelMove:function (dt, right) {
-        var controlradius = this.getControlRadius(this.controlIndex);
-        var l = this.getEllipsePerimeter(controlradius.x, controlradius.y);
-        this.wheelAngle -= (this.speed * this.speedScale * 180.0) * dt / l;
-
-        var angle = this.wheelAngle / 180.0 * Math.PI;
-
-        var nextStep = this.getPosition();
-
-        if (right) {
-            nextStep = cc.p(this.controlPoint.x + (controlradius.x + this.offset.x) * Math.cos(angle), this.controlPoint.y + (controlradius.y + this.offset.x) * Math.sin(angle));
-        }
-        else {
-            nextStep = cc.p(this.controlPoint.x - (controlradius.x + this.offset.x) * Math.cos(angle), this.controlPoint.y + (controlradius.y + this.offset.x) * Math.sin(angle));
-        }
-
-        var Dir = cc.pSub(nextStep, this.getPosition());
-        Dir = cc.pNormalize(Dir);
-        var ang = Math.atan2(Dir.x, Dir.y) + Math.PI / 2;
-
-        this.setRotation(ang / Math.PI * 180.0);
-
-        this.setPosition(nextStep);
-        if (this.wheelAngle < -180) {
-            this.removeSelfFromScene();
-            return;
-        }
-    },
-
-    fishMovebyEllipse:function (dt, right) {
-        var controlradius = this.getControlRadius(this.controlIndex), tmppoint; // ;
-
-        if (this.topRotationAngle >= 180) {
-            this.topRotationAngle = 0;
-            this.onTheRrc = false;
-            tmppoint = this.getControlRadius(this.controlIndex);
-            this.controlIndex++;
-            controlradius = this.getControlRadius(this.controlIndex);
-            (right) ?
-                (this.controlPoint.x += (controlradius.x + tmppoint.x) )
-                : (this.controlPoint.x -= (controlradius.x + tmppoint.x));
-        }
-
-        if (this.bottomRotationAngle <= 180) {
-            this.bottomRotationAngle = 360;
-            this.onTheRrc = true;
-            tmppoint = this.getControlRadius(this.controlIndex);
-            this.controlIndex++;
-            controlradius = this.getControlRadius(this.controlIndex);
-            (right) ?
-                (this.controlPoint.x += (controlradius.x + tmppoint.x) )
-                : (this.controlPoint.x -= (controlradius.x + tmppoint.x) );
-        }
-        var l = this.getEllipsePerimeter(controlradius.x, controlradius.y);
-        if (this.onTheRrc) {
-            this.topRotationAngle += (this.speed * this.speedScale * 180) * dt / l;
-        } else {
-            this.bottomRotationAngle -= (this.speed * this.speedScale * 180) * dt / l;
-        }
-
-        if (this.topRotationAngle >= 180)
-            this.topRotationAngle = 180;
-
-        if (this.bottomRotationAngle <= 180)
-            this.bottomRotationAngle = 180;
-
-        var angle = (this.onTheRrc) ? this.topRotationAngle / 180.0 * Math.PI : this.bottomRotationAngle / 180.0 * Math.PI;
-        var nextStep = right ? ( cc.p(this.controlPoint.x - controlradius.x * Math.cos(angle), this.controlPoint.y + controlradius.y * Math.sin(angle)) )
-            : ( cc.p(this.controlPoint.x + controlradius.x * Math.cos(angle), this.controlPoint.y + controlradius.y * Math.sin(angle)) );
-        var Dir = cc.pSub(nextStep, this.getPosition());
-        Dir = cc.pNormalize(Dir);
-
-        var ang = Math.atan2(Dir.x, Dir.y) + Math.PI / 2;
-        this.setRotation(ang / Math.PI * 180.0);
-        this.setPosition(nextStep);
-    },
-
-    handleCollideForRequired:function (target, gainGold) {
-    },
-    passivityMoveToRoundPositon:function (dt) {
-        this.roundPos = Pos;
-        if (!this.bPulled) {
-            this.bPulled = true;
-            var pos = this.getPosition();
-            this.fPullDis = Math.sqrt(Math.pow((this.roundPos.x - pos.x), 2.0) + Math.pow((this.roundPos.y - pos.y), 2.0));
-            if (pos.x != this.roundPos.x) {
-                this.fPullAngle = Math.atan((pos.y - this.roundPos.y) / (pos.x - this.roundPos.x));
-
-                if (pos.x < this.roundPos.x) {
-                    this.fPullAngle += Math.PI;
-                }
-                else {
-                    this.fPullAngle += Math.PI * 2;
-                }
-            }
-            else if (pos.y < this.roundPos.y) {
-                this.fPullAngle = Math.PI * 3 / 2;
-            }
-            else {
-                this.fPullAngle = Math.PI / 2;
-            }
-        }
-    },
-    bPassivityToRound:function (pos) {
-    },
-
-    simpleUpdate:function (dt) {
-        this.setPosition(cc.p(this.getPosition().x - 10, this.getPosition().y));
-    },
-    addSprite:function (node) {
-        node.setOpacity(255);
-    },
-    backToNormalState:function () {
-        this.playAction(0);
-    },
-
-    getEllipsePerimeter:function (a, b) {
-        var _a = a > b ? a : b;
-        var _b = a < b ? a : b;
-        var l = 2 * Math.PI * _b + 4 * (_a - _b);
-        return l;
-    },
-    addOddNumber:function () {
-        if (this.prizeScore <= 0) {
-            return;
-        }
-        var labelNum = cc.LabelAtlas.create("2", ImageName("prizenum.png"), PrizeNum_TextWidth, PrizeNum_TextHeight, '0');
-        var prizeScore = "" + this.prizeScore;
-        var labelNum1 = cc.LabelAtlas.create(prizeScore, ImageName("prizenum.png"), PrizeNum_TextWidth, PrizeNum_TextHeight, '0');
-        var prizeSprite = cc.Sprite.createWithSpriteFrameName(("prizesign1.png"));
-        var prizeSprite1 = cc.Sprite.createWithSpriteFrameName(("prizesign1.png"));
-
-        var move = cc.p(-prizeSprite.getContentSize().width * 4, prizeSprite.getContentSize().height * 0.7);
-        var fadeOut = cc.FadeOut.create(0.5);
-        var scaleTo = cc.ScaleTo.create(0.5, 0.5);
-        var spawnL = cc.Spawn.create(fadeOut, scaleTo);
-        var delay = cc.DelayTime.create(0.5);
-        var call = cc.CallFunc.create(this.getScene(), GameScene.removeSprite);
-        var delayTime = cc.DelayTime.create(0.1);
-        var sequ = cc.Sequence.create(spawnL, delayTime);
-
-        var addCall = cc.CallFunc.create(this, this.addSprite);
-        prizeSprite.setOpacity(0);
-        labelNum.setOpacity(0);
-
-        prizeSprite.runAction(cc.Sequence.create(delay, addCall, sequ, call));
-        prizeSprite.setPosition(cc.pAdd(this.getPosition(), move));
-        prizeSprite.setScale(1.6);
-
-        var fadeOut1 = cc.FadeOut.create(0.5);
-        var scaleTo1 = cc.ScaleTo.create(0.5, 0.5);
-        var delayTime1 = cc.DelayTime.create(0.05);
-        var spawnL1 = cc.Spawn.create(fadeOut1, scaleTo1);
-        var sequ1 = cc.Sequence.create(spawnL1, delayTime1);
-        var spawn1 = cc.Spawn.create(sequ1, sequ1);
-        var call1 = cc.CallFunc.create(this.getScene(), GameScene.removeSprite);
-
-        labelNum.runAction(cc.Sequence.create(delay, addCall, sequ1, call1));
-        labelNum.setPosition(this.getPosition());
-        labelNum.setScale(1.6);
-        var call2 = cc.CallFunc.create(this, this.DeletelabelScoreNumber);
-        var move1 = cc.p(-prizeSprite.getContentSize().width * 0.4, prizeSprite.getContentSize().height * 0.5);
-        var delay1 = cc.DelayTime.create(0.5);
-        labelNum1.runAction(cc.Sequence.create(delay1, call1));
-        labelNum1.setPosition(this.getPosition());
-        labelNum1.setScale(1.0);
-        prizeSprite1.runAction(cc.Sequence.create(delay1, call2));
-        prizeSprite1.setPosition(cc.pAdd(this.getPosition(), move1));
-        prizeSprite1.setScale(1.0);
-
-        this.getScene().getScene().addChild(labelNum1, 100);
-        this.getScene().getScene().addChild(prizeSprite1, 100);
-        //[self.scene.scene addChild:labelOddNumber z:120];
-        this.setGoldPos(this.getPosition());
-    },
-    removeParticle:function () {
-        this.getScene().getScene().removeChildByTag(kParticleDoubleTag, true);
-    },
-    actionAfterArrested:function () {
-        this.addGoldPrizeWithPlayAnimation(true);
-        this.addScoreNumber();
-        this.removeSelfFromScene();
-    },
-
-    getFishExpect:function () {
-        var temp;
-        var fishIdArray = (GameSetting.getInstance().getFishIdArray());
-        var dict = fishIdArray[this._fishLevel];
-        temp = dict["weapon5Expect"];
-        return temp;
-    },
-    handleStimulate:function (weaponLevel) {
-        var temp;
-        var attackIdArray = (GameSetting.getInstance().getAttackIdArray());
-        var dict = attackIdArray[weaponLevel - 1];
-        switch (this._fishLevel) {
-            case FishLevel.eFishLevel1:
-                temp = dict["StimulateUnit1"];
-                break;
-            case FishLevel.eFishLevel2:
-                temp = dict["StimulateUnit2"];
-                break;
-            case FishLevel.eFishLevel3:
-                temp = dict["StimulateUnit3"];
-                break;
-            case FishLevel.eFishLevel4:
-                temp = dict["StimulateUnit4"];
-                break;
-            case FishLevel.eFishLevel5:
-                temp = dict["StimulateUnit5"];
-                break;
-            case FishLevel.eFishLevel6:
-                temp = dict["StimulateUnit6"];
-                break;
-            case FishLevel.eFishLevel7:
-                temp = dict["StimulateUnit7"];
-                break;
-            case FishLevel.eFishLevel8:
-                temp = dict["StimulateUnit8"];
-                break;
-            case FishLevel.eFishLevel9:
-                temp = dict["StimulateUnit9"];
-                break;
-            case FishLevel.eFishLevel10:
-                temp = dict["StimulateUnit10"];
-                break;
-            case FishLevel.eFishLevel11:
-                temp = dict["StimulateUnit11"];
-                break;
-            case FishLevel.eFishLevel12:
-                temp = dict["StimulateUnit12"];
-                break;
-            case FishLevel.eFishLevel13:
-                temp = dict["StimulateUnit13"];
-                break;
-            case FishLevel.eFishLevel14:
-                temp = dict["StimulateUnit14"];
-                break;
-            case FishLevel.eFishLevel15:
-                temp = dict["StimulateUnit15"];
-                break;
-        }
-        var stimulateIdArray = (GameSetting.getInstance().getStimulateIdArray());
-        for (var i = 0; i < stimulateIdArray.length; i++) {
-            dict = stimulateIdArray[i];
-            var sId = dict["StimulateID"];
-            if (sId == temp) {
-                this.stimulateId = sId;
-                var nFBP = dict["NoFeedbackPro"];
-                this.noFeedBackPro = nFBP;
-                break;
-            }
-        }
-    },
-
     prizeScore:0,
     getPrizeScore:function () {
         return this.prizeScore
@@ -1324,22 +43,26 @@ var BaseFishActor = BaseActor.extend({
     setPrizeScore:function (prizeScore) {
         this.prizeScore = prizeScore
     },
+
     offset:null, //point
     getOffset:function () {
-        return {x:this.offset.x, y:this.offset.y}
+        return new cc.Point(this.offset.x, this.offset.y);
     },
     setOffset:function (offset) {
         this.offset.x = offset.x;
         this.offset.y = offset.y;
     },
+
     GoldPos:null,
     getGoldPos:function () {
         return {x:this.GoldPos.x, y:this.GoldPos.y}
     },
     setGoldPos:function (GoldPos) {
         this.GoldPos.x = GoldPos.x;
-        this.GoldPos.y = Goldpos.y;
+        this.GoldPos.y = GoldPos.y;
     },
+
+    //当前碰撞索引
     curCollideIndex:0,
     getCurCollideIndex:function () {
         return this.curCollideIndex
@@ -1356,6 +79,7 @@ var BaseFishActor = BaseActor.extend({
         this.beRightDir = beRightDir
     },
 
+    //鱼类型
     _fishType:FISH.smallFish,
     getFishType:function () {
         return this._fishType
@@ -1474,6 +198,1050 @@ var BaseFishActor = BaseActor.extend({
         this.expectation = expectation
     },
 
+    ctor:function (defname, imgname) {
+        this.fishSortLevel = ["10", "9", "8", "7", "6", "5", "4", "12", "3", "2", "1", "0", "11"];
+        BaseActor.prototype.ctor.call(this, defname, imgname);
+
+        this.offset = {x:0, y:0};
+        this.createPosition = {x:0, y:0};
+        this.straightDirVec = {x:0, y:0};
+        this.position = {x:0, y:0};
+        this.straightStartPosition = {x:0, y:0};
+        this.straightEndPosition = {x:0, y:0};
+        this.controlPoint = {x:0, y:0};
+
+
+        this._group = GroupFishActor;
+        this._fishType = FISH.smallFish;
+        this.speed = 100;
+        this.curCollideIndex = -1;
+        this.curAttackState = AttackState.eAttackStateNone;
+        this.HP = 0;
+        this.fishAttackedType = FishAttackedType.eFishAttackedNormal;
+        this.curAction = 0;
+        this.setAction(this.curAction);
+    },
+
+    _group:null,
+    getGroup:function () {
+        return this._group
+    },
+    setGroup:function (group) {
+        this._group = group
+    },
+
+    resetState:function () {
+        BaseActor.prototype.resetState.call(this);
+        this.curAttackState = AttackState.eAttackStateNone;
+        this.stateChangeTime = 0.0;
+        this.speedScale = 0.6;
+        this.actorType = ActorType.eActorTypeNormal;
+
+        var AchieveArray = GameSetting.getInstance().getChestFishArray();
+        var pOneDict = AchieveArray[this.ChestFishID];
+        this.HP = pOneDict["Maximum"];
+        this.fPullAngle = 0.0;
+        this.fPullDis = 0.0;
+        this.bPulled = false;
+    },
+
+    update:function (dt) {
+        this._super(dt);
+        if (!this.getIsAlive()) {
+            return;
+        }
+
+        if (this.controlledByServer) {
+            this.copyPositionFromModel();
+            return;
+        }
+
+        if (this.bPulled) {
+            this.passivityMoveToRoundPositon(dt);
+        }
+        else {
+            if (this.curAttackState == AttackState.eAttackStateHited) {
+                this.stateChangeTime += dt;
+                if (this._fishType == FishType.bigFish) {
+                    this.speedScale = 0.6;
+                } else if (this._fishType == FishType.mediumFish) {
+                    this.speedScale = 0.8;
+                } else if (this._fishType == FishType.smallFish) {
+                    this.speedScale = 1.2;
+                } else {
+                    this.speedScale = 0.6;
+                }
+            }
+
+            if (this.stateChangeTime >= 3.0) {
+                this.curAttackState = AttackState.eAttackStateNone;
+                this.stateChangeTime = 0.0;
+                this.speedScale = 0.6;
+
+                if (this.getFishActorType() == FISH.Puffer) {
+                    this.playAction(4);
+                    this.setActionDidStopSelector(this.backToNormalState, this);
+                }
+            }
+
+            switch (this.eMoveType) {
+                case MoveType.eMoveByBeeline://0
+                    this.fishMoveByBeeline(dt, this.beRightDir);
+                    break;
+                case MoveType.eMoveByEllipse://1
+                    if (this.beRightDir) {
+                        this.fishMovebyEllipse(dt, true);
+                        if (this.getPosition().x > (VisibleRect.right().x + this.getSize().width)) {
+                            this.removeSelfFromScene();
+                        }
+                    }
+                    else if (!this.beRightDir) {
+                        this.fishMovebyEllipse(dt, false);
+                        //[self fishWheelMove:dt dir:false] ;
+                        if (this.getPosition().x < (VisibleRect.left().x - this.getSize().width)) {
+                            this.removeSelfFromScene();
+                        }
+                    }
+                    break;
+                case MoveType.eMoveByWheel://2
+                    this.fishWheelMove(dt, this.beRightDir);
+                    break;
+                case MoveType.eMoveByCircles://3
+                    this.turningInCircles(dt, false);
+                    break;
+                case MoveType.eMoveByCircleWithCount://4
+                    this.turningInCircles(dt, false, 1);
+                    break;
+                default:
+                    break;
+            }
+        }
+    },
+    updateInfo:function () {
+        this.updateOldInfo();
+    },
+
+    updateNewInfo:function () {
+    },
+
+    updateOldInfo:function () {
+        this.prizeScore = GameSetting.getInstance().getPrizeScoreArray()[this._fishLevel];
+        this.expectation = GameSetting.getInstance().getExpectationArray()[this._fishLevel];
+
+        this.topRotationAngle = 0.0;
+        this.bottomRotationAngle = 360.0;
+        this.wheelAngle = 180.0;
+        this.turningCount = 0;
+        var radius = 300.0;
+        var length = Math.PI * radius;
+        this.time1 = length / this.speed;
+        this.speedScale = 0.6;
+
+        // When we create server-spawned fish without a path descriptor, the following code will not work.
+        // It is not enough to check `this.controlledByServer` because it has not yet been set (because this function is called from the constructor).
+        if (this.controlledByServer || !this.controlValues) {
+            return;
+        }
+        this.controlIndex = 0;
+        var controlradius = this.getControlRadius(this.controlIndex);
+        if (!this.beRightDir) {
+            this.controlPoint = cc.p(this.getPosition().x - controlradius.x, this.getPosition().y);
+        }
+        else {
+            this.controlPoint = cc.p(this.getPosition().x + controlradius.x, this.getPosition().y);
+        }
+        this._passTime = 0;
+        var Dir = cc.pSub(this.getPosition(), cc.pAdd(this.getCreatePosition(), cc.p(0.1, 0.1)));
+        Dir = cc.pNormalize(Dir);
+        var ang = Math.atan2(Dir.x, Dir.y);
+        this.circlesAngle = ang / Math.PI * 180.0;
+        this.moveOut = false;
+    },
+
+    copyPositionFromModel:function () {
+        var arena = GameCtrl.sharedGame().getArena();
+        var fishModel = arena.getFish(this.FishID);
+        if (fishModel) {
+            //console.log(`Moving fish ${this.FishID} to ${fishModel.position}`);
+            this.setPositionX(fishModel.position[0]);
+            this.setPositionY(fishModel.position[1]);
+            this.setRotation(180 - fishModel.angle * 180 / Math.PI);
+        }
+    },
+
+    removeSelfFromScene:function () {
+        this.getScheduler().unscheduleAllForTarget(this);
+        this._super();
+    },
+    getBaseActorType:function () {
+        return BaseActorType.eFishActor;
+    },
+    getFishActorType:function () {
+        return FISH.Base;
+    },
+    setTurningCount:function (c) {
+        this.turningCount = c;
+    },
+    addScoreNumber:function () {
+        this.ScoreNum(this.getPosition());
+    },
+    ScoreNum:function (Pos) {
+        if (this.prizeScore <= 0) {
+            return;
+        }
+        var str = "" + (this.prizeScore * this.getScene().getOddsNumber());
+        var labelNum = cc.LabelAtlas.create(str, ImageName("prizenum.png"), PrizeNum_TextWidth, PrizeNum_TextHeight, '0');
+        var prizeSprite = new cc.Sprite("#prizesign1.png");
+        var movePoition = cc.p(0, 48);
+        var move = cc.p(prizeSprite.getContentSize().width / 2, -prizeSprite.getContentSize().height / 2);
+        switch (this.actorType) {
+            case ActorType.eActorTypeBL:
+                prizeSprite.setRotation(90);
+                break;
+            case ActorType.eActorTypeBR:
+                prizeSprite.setRotation(90);
+                break;
+            case ActorType.eActorTypeTL:
+                movePoition = cc.p(48, 0);
+                prizeSprite.setRotation(90);
+                labelNum.setRotation(90);
+                move = cc.p(-prizeSprite.getContentSize().width / 2, -prizeSprite.getContentSize().height / 2);
+                break;
+            case ActorType.eActorTypeTR:
+            {
+                movePoition = cc.p(-48, 0);
+                prizeSprite.setRotation(270);
+                labelNum.setRotation(270);
+                move = cc.p(prizeSprite.getContentSize().height / 2, prizeSprite.getContentSize().width / 2);
+            }
+                break;
+            case ActorType.eActorTypeNormal:
+                //[prizeSprite setRotation:90];
+                break;
+            default:
+                break;
+        }
+
+        var moveBy = cc.MoveBy.create(1.05, movePoition);
+        var fadeIn = cc.FadeIn.create(0.35);
+        var fadeOut = cc.FadeOut.create(0.35);
+        var delayTime = cc.DelayTime.create(0.35);
+
+        //CCScaleBy *scaleby = [CCScaleBy actionWithDuration:0.2f scale:1.2 ];
+        //id scaleRev = [scaleby reverse];
+        var sequ = cc.Sequence.create(fadeIn, delayTime, fadeOut);
+        var spawn = cc.Spawn.create(sequ, moveBy);
+
+        var call = cc.callFunc(this.getScene().removeSprite, prizeSprite);
+        prizeSprite.runAction(cc.Sequence.create(spawn, call));
+        prizeSprite.setPosition(Pos);
+        prizeSprite.setScale(1.0);
+        this.getScene().addChild(prizeSprite, 120);
+
+        var moveBy1 = cc.MoveBy.create(1.05, movePoition);
+        var fadeIn1 = cc.FadeIn.create(0.35);
+        var fadeOut1 = cc.FadeOut.create(0.35);
+        var delayTime1 = cc.DelayTime.create(0.35);
+        var sequ1 = cc.Sequence.create(fadeIn1, delayTime1, fadeOut1);
+        var spawn1 = cc.Spawn.create(sequ1, moveBy1);
+
+        var call1 = cc.callFunc(this.getScene().removeSprite, labelNum );
+        labelNum.runAction(cc.sequence(spawn1, call1));
+        labelNum.setPosition(cc.pAdd(Pos, move));
+        this.getScene().addChild(labelNum, 130);
+    },
+    playPrizeAnimation:function () {
+        if (this.getPrizeScore() >= 80) {
+            var pScene = GameCtrl.sharedGame().getCurScene();
+            var pScene1 = pScene;
+            if (pScene1) {
+                pScene1.coinsAnimation(this.getPosition());
+            }
+        }
+        else if (this.getPrizeScore() >= 60) {
+            playEffect(COIN_EFFECT2);
+
+            this.addJinDunAnimation(this.getPosition(), 60, this.getActorType());
+        }
+        else if (this.getPrizeScore() >= 50) {
+            playEffect(COIN_EFFECT2);
+
+            this.addJinDunAnimation(this.getPosition(), 50, this.getActorType());
+        }
+        else if (this.getPrizeScore() >= 40) {
+            playEffect(COIN_EFFECT2);
+
+            this.addJinDunAnimation(this.getPosition(), 40, this.getActorType());
+        }
+        else if (this.getPrizeScore() >= 20) {
+            playEffect(COIN_EFFECT2);
+        }
+        else {
+            playEffect(COIN_EFFECT1);
+        }
+    },
+    addGoldPrizeWithPlayAnimation:function (playAnimation) {
+        var count = this.referencePointCount();
+
+        var offset = cc.p(256, 30);
+        var distpos = cc.pSub(VisibleRect.bottom(), offset);
+
+        if (this.getPrizeScore()) {
+            var perPoint = (count == 0) ? this.prizeScore : this.prizeScore / count;
+
+            for (var idx = 0; idx < count; idx++) {
+                var p = this.referencePoint(idx);
+                var distance = cc.pDistance(p, cc.p());
+                p = cc.p(distance * Math.cos(this.getCurRotation()), distance * Math.sin(this.getCurRotation()));
+
+                var pParticle = particleSystemFactory.createParticle(ImageName("goldlizi.plist"));
+                pParticle._dontTint = true;
+
+                // @todo REMOVE THIS
+                console.warn("Creation of GoldPrizeActor temporarily disabled (because it throws an error)")
+                continue;
+
+                var goldcoin = ActorFactory.create("GoldPrizeActor");
+                goldcoin.setPoint(perPoint);
+                goldcoin.setPosition(cc.pAdd(this.getPosition(), p));
+                goldcoin.setParticle(pParticle);
+                goldcoin.resetState();
+                goldcoin.dropGoldPrizeWithFishPoint(goldcoin.getPosition(), distpos);
+                pParticle.setPosition(cc.pAdd(this.getPosition(), p));
+                this.getScene().addChild(pParticle, 10);
+                this.getScene().addActor(goldcoin);
+            }
+        }
+        this.getScene().addPlayerMoney(this.prizeScore);
+
+        if (playAnimation) {
+            this.playPrizeAnimation();
+        }
+    },
+    getControlRadius:function (index) {
+        if (index >= this.controlValus.length - 1)
+            index = this.controlValus.length - 1;
+
+        if (this.controlValus[index])
+            return this.controlValus[index];
+
+        return {x:0, y:0};
+    },
+    deleteLabelScoreNumber:function (sender) {
+        this.ScoreNum(this.GoldPos);
+        this.getScene().removeSprite(sender);
+        this.removeParticle();
+    },
+    updatePath:function (dict) {
+        var strKey = "Radius";
+        this.controlValus = (dict[strKey]);
+
+        var speedKey = "speed";
+        var pSpeedStr = (dict[speedKey]);
+        this.speed = 0;
+        if (pSpeedStr != null) {
+            this.speed = parseFloat(pSpeedStr);
+        }
+
+        //CCLOG(@"speed  is %.f", speed);
+        var pMoveTypeStr = dict["MoveDict"];
+        this.eMoveType = MoveType.eMoveByBeeline;
+        if (pMoveTypeStr != null) {
+            this.eMoveType = parseInt(pMoveTypeStr);
+        }
+
+        var pOnTheRrcStr = dict["onTheRrc"];
+        this.onTheRrc = false;
+        if (pOnTheRrcStr != null) {
+            this.onTheRrc = (pOnTheRrcStr != "0");
+        }
+        var pAngle = dict["Angle"];
+        if (pAngle != null) {
+            this._moveAngle = parseFloat(pAngle);
+        }
+        else {
+            this._moveAngle = 361;
+        }
+    },
+    addFishNetAt:function (pt, weaponType, actType, flag) {
+        var NetName = "FishNetActor" + weaponType;
+        var net = ActorFactory.create(NetName);
+        if (flag) {
+            this.setShootFlag(flag);
+            net.setShootFlag(flag);
+        }
+        var tempPar;
+        if (weaponType === FishWeaponType.eWeaponLevel5) {
+            tempPar = particleSystemFactory.createParticle(res.lizibianhua1Plist);
+            tempPar.setDrawMode(cc.PARTICLE_SHAPE_MODE);
+            tempPar.setShapeType(cc.PARTICLE_STAR_SHAPE);
+        } else if (weaponType == FishWeaponType.eWeaponLevel7) {
+            tempPar = particleSystemFactory.createParticle(res.lizibianhua2Plist);
+            tempPar.setDrawMode(cc.PARTICLE_SHAPE_MODE);
+            tempPar.setShapeType(cc.PARTICLE_STAR_SHAPE);
+        } else if (weaponType == FishWeaponType.eWeaponLevel10) {
+            tempPar = particleSystemFactory.createParticle(res.lizibianhua3Plist);
+            tempPar.setDrawMode(cc.PARTICLE_SHAPE_MODE);
+            tempPar.setShapeType(cc.PARTICLE_STAR_SHAPE);
+        } else {
+            tempPar = particleSystemFactory.createParticle(res.yuwangliziPlist);
+        }
+        if (net != null) {
+            net.setParticle(tempPar);
+        }
+        tempPar._dontTint = true;
+        tempPar.setPosition(pt);
+
+        this.getScene().addChild(tempPar, BulletActorZValue + 1);
+        if (net != null) {
+            net.setGroup(GroupFishNetActor);
+            net.resetState();
+            net.updateInfo();
+            net.setPosition(pt);
+            net.setZOrder(BulletActorZValue);
+            net.playCatchAction();
+            this.getScene().addActor(net);
+            if (actType) {
+                net.setActorType(actType);
+            }
+        }
+    },
+    handleCollide:function (plane) {
+        if (this._super(plane)) {
+            if (BaseActorType.eBulletActor == plane.getBaseActortype() && this.handleCollideWithBullet(plane)) {
+                return true;
+            }
+
+            if (BaseActorType.eFishNetActor == plane.getBaseActortype() && this.handleCollideWithNet(plane)) {
+                return true;
+            }
+
+        }
+        return false;
+    },
+    handleCollideForTutorial:function (shouldCatch, pTarget) {
+        var target = pTarget instanceof  BulletActor ? pTarget : false;
+        if (target) {
+            var pLevin = target instanceof  LevinStormBulletActor;
+            if (pLevin) {
+                if (target.finalEvent()) {
+
+                }
+                else {
+                    if (this._fishLevel != FishLevel.eFishLevel13 && this._fishLevel != FishLevel.eFishLevel12 && this._fishLevel > FishLevel.eFishLevel7) {
+                        return false;
+                    }
+                    target.collisionEvent();
+                }
+
+            }
+            this.addFishNetAt(target.getPosition(), target.getCurWeaponLevel());
+            if (!(target instanceof  RayBulletActor) && !(target instanceof  LevinStormBulletActor)) {
+                target.removeSelfFromScene();
+
+                if (!this.getScene().getAddPrizeGroup()) {
+                    if (this instanceof PufferActor) {
+                        this.playAction(2);
+                        this.setActionDidStopSelector(this.backToNormalState, this);
+                        this.curAttackState = AttackState.eAttackStateHited;
+                    }
+                }
+            }
+            else {
+                this.playAction(1);
+                this.setActionDidStopSelector(this.actionAfterArrested, this);
+                this._isAlive = false;
+
+                return true;
+            }
+            return true;
+        }
+        else if (pTarget instanceof FishNetActor) {
+            if (shouldCatch) {
+                if (this instanceof PufferActor) {
+                    if (this.curAttackState == AttackState.eAttackStateHited) {
+                        return false;
+                    }
+                }
+
+                this.playAction(1);
+                PlayerActor.sharedActor().updateTutorialCatchMoney(this.prizeScore);
+                PlayerActor.sharedActor().catchFish(this.getDef());
+
+                this.setActionDidStopSelector(this.actionAfterArrested, this);
+                this._isAlive = false;
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        return false;
+    },
+
+    /**
+     * creates fish net, or if its special bullet, kills fishes
+     * @param bullet
+     * @return {Boolean}
+     */
+    handleCollideWithBullet:function (bullet) {
+        if (this.controlledByServer) {
+            return;
+        }
+
+        if (BulletType.eRayBullet == bullet.getBulletType() ||
+            BulletType.eLevinStormBullet == bullet.getBulletType()) {
+            if (BulletType.eLevinStormBullet == bullet.getBulletType()) {
+                if (!bullet.finalEvent()) {
+                    if (this.getFishLevel() != FishLevel.eFishLevel13 && this.getFishLevel() != FishLevel.eFishLevel12 && this.getFishLevel() > FishLevel.eFishLevel7) {
+                        return false;
+                    }
+                    bullet.collisionEvent();
+                }
+            }
+            this.playAction(1);
+            this.setActorType(bullet.getActorType());
+            switch (bullet.getActorType()) {
+                case ActorType.eActorTypeTL:
+                    PlayerActor.sharedActorTL().updateCatchMoney(this.getPrizeScore(), true, false, false);
+                    PlayerActor.sharedActorTL().catchFish(this.getDef());
+
+                    break;
+                case ActorType.eActorTypeTR:
+                    PlayerActor.sharedActorTR().updateCatchMoney(this.getPrizeScore(), true, false, false);
+                    PlayerActor.sharedActorTR().catchFish(this.getDef());
+                    break;
+                case ActorType.eActorTypeBL:
+                    break;
+
+                case ActorType.eActorTypeBR:
+                    break;
+
+                case ActorType.eActorTypeNormal:
+                    if (this.getIsChangeColor()) {
+                        var baoixangParticle = particleSystemFactory.createParticle(ImageName("bianbaoxiangl03.plist"));
+                        baoixangParticle._dontTint = true;
+                        baoixangParticle.setPosition(this.getPosition());
+                        this.getScene().addChild(baoixangParticle);
+                        this.getScene().getChestGameLayer().addMinChest(this.getChestFishID(), this.getPosition());    //TODO chest game layer
+                    }
+
+                    PlayerActor.sharedActor().updateCatchMoney(this.getPrizeScore(), false, false, true);
+                    if (PlayerActor.sharedActor().canLevelUp()) {
+                        PlayerActor.sharedActor().setPlayerLevel(PlayerActor.sharedActor().getPlayerLevel() + 1);
+                        this.getScene().levelUp();
+                    }
+
+                    if (FISH.Shark == this.getFishActorType()) {
+                        if (PlayerActor.sharedActor().getAutoSave()) {
+                            PlayerActor.sharedActor().setCatchSharkWithRay(true);
+                            PlayerActor.sharedActor().submitAchievement(0);
+                        }
+                    }
+                    PlayerActor.sharedActor().catchFish(this.getDef(), this.getShootFlag());
+                    break;
+                default:
+                    break;
+            }
+
+            this.setActionDidStopSelector(this.actionAfterArrested, this);
+            this._isAlive = false;
+            return true;
+        } else if (BulletType.eHarpoonBullet == bullet.getBulletType()) {
+            this.playAction(1);
+            this.setActorType(bullet.getActorType());
+            switch (bullet.getActorType()) {
+                case ActorType.eActorTypeNormal:
+                    PlayerActor.sharedActor().updateCatchMoney(this.prizeScore, false, true, true);
+                    if (FISH.Shark == this.getFishActorType()) {
+                        if (PlayerActor.sharedActor().getAutoSave()) {
+                            PlayerActor.sharedActor().setCatchSharkWithRay(true);
+                            PlayerActor.sharedActor().submitAchievement(0.0);
+                        }
+                    }
+                    PlayerActor.sharedActor().catchFish(this.getDef(), this.getShootFlag());
+                    break;
+
+                default:
+                    break;
+            }
+
+            this.setActionDidStopSelector(this.actionAfterArrested, this);
+            this._isAlive = false;
+            return true;
+        } else if (BulletType.eSwirlBullet == bullet.getBulletType()) {
+            this.bPassivityToRound(bullet.getPosition());
+
+            PlayerActor.sharedActor().updateCatchMoney(this.prizeScore, false, true, true);
+            if (FISH.Shark == this.getFishActorType()) {
+                if (PlayerActor.sharedActor().getAutoSave()) {
+                    PlayerActor.sharedActor().setCatchSharkWithRay(true);
+                    PlayerActor.sharedActor().submitAchievement(0.0);
+                }
+            }
+            PlayerActor.sharedActor().catchFish(this.getDef());
+
+            this.playAction(1);
+            this.setActionDidStopSelector(this.actionAfterArrested, this);
+            this.setIsAlive(false);
+            return true;
+        }
+
+        if (!this.getScene().getAddPrizeGroup()) {
+            if (FISH.Puffer == this.getFishActorType()) {
+                this.playAction(2);
+                this.setActionDidStopSelector(this.backToNormalState, this);
+            }
+            if (this.curAttackState == AttackState.eAttackStateNone)
+                this.curAttackState = AttackState.eAttackStateHited;
+        }
+
+        this.addFishNetAt(bullet.getPosition(), bullet.getCurWeaponLevel(), bullet.getActorType(), bullet.getShootFlag());
+        bullet.collisionEvent();
+        return false;
+    },
+
+    handleCollideWithNet:function (netActor) {
+        this.getFinalRandom(netActor);
+
+        if (FISH.Puffer == this.getFishActorType()) {
+            if (this.curAttackState == AttackState.eAttackStateHited)
+                return false;
+        }
+
+        return false;
+    },
+    SpikeFish:function (isPlayer1) {
+        this.playAction(1);
+        if (isPlayer1) {
+            PlayerActor.sharedActorTL().updateCatchMoney(this.prizeScore, true, true, false);
+            PlayerActor.sharedActorTL().catchFish(this.getDef());
+        }
+        else {
+            PlayerActor.sharedActorTR().updateCatchMoney(this.prizeScore, true, true, false);
+            PlayerActor.sharedActorTR().catchFish(this.getDef());
+        }
+        this.setActionDidStopSelector(this.actionAfterArrested, this);
+        this._isAlive = false;
+    },
+    canSecKilling:function () {
+        var prizeScoreAvailable = this.prizeScore >= 30;
+        var attackTaupeAvailable = this.fishAttackedType != FishAttackedType.eFishAttackedNone;
+        return prizeScoreAvailable && attackTaupeAvailable;
+    },
+
+    handleSecKillingWith:function (fishnet) {
+        var secKillingValue = Math.random() * 10000;
+        switch (this.fishAttackedType) {
+            case FishAttackedType.eFishAttackedNormal:
+                this.fishAttackedType = FishAttackedType.eFishAttackedFirst;
+                return secKillingValue <= valueOfSecKilling[0][this._fishLevel];
+                break;
+            case FishAttackedType.eFishAttackedFirst:
+                this.fishAttackedType = FishAttackedType.eFishAttackedSecond;
+                return (secKillingValue <= valueOfSecKilling[1][this._fishLevel]);
+                break;
+            case FishAttackedType.eFishAttackedSecond:
+                this.fishAttackedType = FishAttackedType.eFishAttackedNone;
+                break;
+            case FishAttackedType.eFishAttackedNone:
+                break;
+            default:
+                break;
+        }
+        return false;
+    },
+
+    canDropShell:function () {
+        return false;
+    },
+
+    dropShellActor:function () {
+        if (!this.canDropShell()) {
+            return;
+        }
+
+        var dropShellValue = Math.random() * 100;
+        if (dropShellValue <= valueOfDropShell[this._fishLevel]) {
+            cc.assert(0);//ShellActor.shareShellActor().dropAtPosition(this.getPosition());
+        }
+    },
+
+    fishMoveByBeeline:function (dt, right) {
+        var nextStep = cc.p(0, 0);
+        if (this._moveAngle >= kOneAngleMore) {
+            this._moveAngle = right?360: 180;
+        }
+
+
+        var moveDistance = this.speed * this.speedScale * dt * 0.4;
+        var fAngle = Math.PI * this._moveAngle / 180;
+        var delta = cc.p(moveDistance * Math.cos(fAngle), moveDistance * Math.sin(fAngle));
+        var pos = this.getPosition();
+        nextStep = cc.pAdd(pos, delta);
+
+        var Dir = cc.pSub(nextStep, pos);
+        Dir = cc.pNormalize(Dir);
+        var ang = Math.atan2(Dir.x, Dir.y) + Math.PI / 2;
+
+        this.setRotation(ang / Math.PI * 180.0);
+        this.setPosition(nextStep);
+        pos = this.getPosition();
+        var fishSize = this.getSize();//TODO get size of spSprite
+        if (this._moveAngle == 180) {
+            if (pos.x < VisibleRect.left().x - fishSize.width)
+                this.removeSelfFromScene();
+
+        } else if (this._moveAngle == 360) {
+            if (pos.x > VisibleRect.right().x + fishSize.width)
+                this.removeSelfFromScene();
+        } else if (this._moveAngle < 180) {
+            if (pos.y > VisibleRect.right().x + fishSize.width)
+                this.removeSelfFromScene();
+        } else if (this._moveAngle > 180) {
+            if (pos.y < VisibleRect.bottom().y - fishSize.height)
+                this.removeSelfFromScene();
+        }
+    },
+
+    turningInCircles:function (dt, right, count) {
+        if (count != null) {
+            var controlradius = this.getControlRadius(this.controlIndex);
+            this.controlPoint = this.createPosition;
+            if (this.turningCount > count) {
+                this.removeSelfFromScene();
+            } else {
+                var l = this.getEllipsePerimeter(this.controlPoint.x, this.controlPoint.y);
+
+                this.circlesAngle -= (this.speed * 180.0) * dt / l;
+                //circlesAngle -= 10 ;
+
+                if (this.circlesAngle >= 360) {
+                    this.circlesAngle -= 360;
+                    this.turningCount++;
+                }
+                else if (this.circlesAngle < 0) {
+                    this.circlesAngle += 360;
+                    this.turningCount++;
+                }
+                var angle = this.circlesAngle / 180.0 * Math.PI;
+
+                var nextStep = cc.p(this.controlPoint.x + (controlradius.x + this.radiusOffset) * Math.cos(angle), this.controlPoint.y + (controlradius.y + this.radiusOffset) * Math.sin(angle));
+
+                var Dir = cc.pSub(nextStep, this.getPosition());
+                Dir = cc.pNormalize(Dir);
+                var ang = Math.atan2(Dir.x, Dir.y) + Math.PI / 2;
+
+                this.setRotation(ang / Math.PI * 180.0);
+                this.setPosition(nextStep);
+            }
+        } else {
+            var controlradius = this.getControlRadius(this.controlIndex);
+            this.controlPoint = VisibleRect.center();
+
+            count = 3;
+            if (this.getScene().getPlayTutorial()) {
+                count = 1000;
+            }
+
+            if (this.turningCount > count && this.circlesAngle < 220.0 && this.circlesAngle > 190.0) {
+                var pt , dir;
+                var ang;
+
+                pt = cc.p(100, screenHeight + 200);
+                this.moveOut = true;
+                dir = cc.pSub(pt, this.getPosition());
+                dir = cc.pNormalize(dir);
+                ang = Math.atan2(dir.x, dir.y) + Math.PI / 2;
+
+                this.setRotation(ang / Math.PI * 180.0);
+
+                this.setPosition(cc.pAdd(this.getPosition(), cc.pMult(dir, dt * 200)));
+                if (this.getPosition().y > screenHeight + 100) {
+                    this.removeSelfFromScene();
+                }
+
+            } else {
+                var l = this.getEllipsePerimeter(controlradius.x, controlradius.y);
+
+                this.circlesAngle -= (this.speed * 180.0) * dt / l;
+                //circlesAngle -= 10 ;
+
+                if (this.circlesAngle >= 360) {
+                    this.circlesAngle -= 360;
+                    this.turningCount++;
+                }
+                else if (this.circlesAngle < 0) {
+                    this.circlesAngle += 360;
+                    this.turningCount++;
+                }
+                //NSLog(@"....angle = %f", circlesAngle) ;
+                //220-190
+                var angle = this.circlesAngle / 180.0 * Math.PI;
+
+                var nextStep = cc.p(this.controlPoint.x + (controlradius.x + this.radiusOffset) * Math.cos(angle),
+                    this.controlPoint.y + (controlradius.y + this.radiusOffset) * Math.sin(angle));
+                var curPos = this.getPosition();
+                var Dir = cc.pSub(nextStep, curPos);
+                Dir = cc.pNormalize(Dir);
+                var ang = Math.atan2(Dir.x, Dir.y) + Math.PI / 2;
+
+                this.setRotation(ang / Math.PI * 180.0);
+                this.setPosition(nextStep);
+            }
+        }
+    },
+
+    fishWheelMove:function (dt, right) {
+        var controlradius = this.getControlRadius(this.controlIndex);
+        var l = this.getEllipsePerimeter(controlradius.x, controlradius.y);
+        this.wheelAngle -= (this.speed * this.speedScale * 180.0) * dt / l;
+
+        var angle = this.wheelAngle / 180.0 * Math.PI;
+
+        var nextStep = this.getPosition();
+
+        if (right) {
+            nextStep = cc.p(this.controlPoint.x + (controlradius.x + this.offset.x) * Math.cos(angle), this.controlPoint.y + (controlradius.y + this.offset.x) * Math.sin(angle));
+        }
+        else {
+            nextStep = cc.p(this.controlPoint.x - (controlradius.x + this.offset.x) * Math.cos(angle), this.controlPoint.y + (controlradius.y + this.offset.x) * Math.sin(angle));
+        }
+
+        var Dir = cc.pSub(nextStep, this.getPosition());
+        Dir = cc.pNormalize(Dir);
+        var ang = Math.atan2(Dir.x, Dir.y) + Math.PI / 2;
+
+        this.setRotation(ang / Math.PI * 180.0);
+
+        this.setPosition(nextStep);
+        if (this.wheelAngle < -180) {
+            this.removeSelfFromScene();
+        }
+    },
+
+    fishMovebyEllipse:function (dt, right) {
+        var controlradius = this.getControlRadius(this.controlIndex), tmppoint; // ;
+
+        if (this.topRotationAngle >= 180) {
+            this.topRotationAngle = 0;
+            this.onTheRrc = false;
+            tmppoint = this.getControlRadius(this.controlIndex);
+            this.controlIndex++;
+            controlradius = this.getControlRadius(this.controlIndex);
+            (right) ?
+                (this.controlPoint.x += (controlradius.x + tmppoint.x) )
+                : (this.controlPoint.x -= (controlradius.x + tmppoint.x));
+        }
+
+        if (this.bottomRotationAngle <= 180) {
+            this.bottomRotationAngle = 360;
+            this.onTheRrc = true;
+            tmppoint = this.getControlRadius(this.controlIndex);
+            this.controlIndex++;
+            controlradius = this.getControlRadius(this.controlIndex);
+            (right) ?
+                (this.controlPoint.x += (controlradius.x + tmppoint.x) )
+                : (this.controlPoint.x -= (controlradius.x + tmppoint.x) );
+        }
+        var l = this.getEllipsePerimeter(controlradius.x, controlradius.y);
+        if (this.onTheRrc) {
+            this.topRotationAngle += (this.speed * this.speedScale * 180) * dt / l;
+        } else {
+            this.bottomRotationAngle -= (this.speed * this.speedScale * 180) * dt / l;
+        }
+
+        if (this.topRotationAngle >= 180)
+            this.topRotationAngle = 180;
+
+        if (this.bottomRotationAngle <= 180)
+            this.bottomRotationAngle = 180;
+
+        var angle = (this.onTheRrc) ? this.topRotationAngle / 180.0 * Math.PI : this.bottomRotationAngle / 180.0 * Math.PI;
+        var nextStep = right ? ( cc.p(this.controlPoint.x - controlradius.x * Math.cos(angle), this.controlPoint.y + controlradius.y * Math.sin(angle)) )
+            : ( cc.p(this.controlPoint.x + controlradius.x * Math.cos(angle), this.controlPoint.y + controlradius.y * Math.sin(angle)) );
+        var Dir = cc.pSub(nextStep, this.getPosition());
+        Dir = cc.pNormalize(Dir);
+
+        var ang = Math.atan2(Dir.x, Dir.y) + Math.PI / 2;
+        this.setRotation(ang / Math.PI * 180.0);
+        this.setPosition(nextStep);
+    },
+
+    handleCollideForRequired:function (target, gainGold) {
+    },
+
+    passivityMoveToRoundPositon:function (dt) {
+        this.roundPos = Pos;
+        if (!this.bPulled) {
+            this.bPulled = true;
+            var pos = this.getPosition();
+            this.fPullDis = Math.sqrt(Math.pow((this.roundPos.x - pos.x), 2.0) + Math.pow((this.roundPos.y - pos.y), 2.0));
+            if (pos.x != this.roundPos.x) {
+                this.fPullAngle = Math.atan((pos.y - this.roundPos.y) / (pos.x - this.roundPos.x));
+
+                if (pos.x < this.roundPos.x) {
+                    this.fPullAngle += Math.PI;
+                }
+                else {
+                    this.fPullAngle += Math.PI * 2;
+                }
+            }
+            else if (pos.y < this.roundPos.y) {
+                this.fPullAngle = Math.PI * 3 / 2;
+            }
+            else {
+                this.fPullAngle = Math.PI / 2;
+            }
+        }
+    },
+    bPassivityToRound:function (pos) {
+    },
+
+    simpleUpdate:function (dt) {
+        this.setPosition(cc.p(this.getPosition().x - 10, this.getPosition().y));
+    },
+    addSprite:function (node) {
+        node.setOpacity(255);
+    },
+    backToNormalState:function () {
+        this.playAction(0);
+    },
+
+    getEllipsePerimeter:function (a, b) {
+        var _a = a > b ? a : b;
+        var _b = a < b ? a : b;
+        var l = 2 * Math.PI * _b + 4 * (_a - _b);
+        return l;
+    },
+    addOddNumber:function () {
+        if (this.prizeScore <= 0) {
+            return;
+        }
+        var labelNum = cc.LabelAtlas.create("2", ImageName("prizenum.png"), PrizeNum_TextWidth, PrizeNum_TextHeight, '0');
+        var prizeScore = "" + this.prizeScore;
+        var labelNum1 = cc.LabelAtlas.create(prizeScore, ImageName("prizenum.png"), PrizeNum_TextWidth, PrizeNum_TextHeight, '0');
+        var prizeSprite = new cc.Sprite("#prizesign1.png");
+        var prizeSprite1 = new cc.Sprite("#prizesign1.png");
+
+        var move = cc.p(-prizeSprite.getContentSize().width * 4, prizeSprite.getContentSize().height * 0.7);
+        var spawnL = cc.spawn(cc.fadeOut(0.5), cc.scaleTo(0.5, 0.5));
+        var call = cc.callFunc(GameScene.removeSprite, this.getScene());
+        var sequ = cc.sequence(spawnL, cc.delayTime(0.1));
+
+        var addCall = cc.callFunc(this.addSprite, this);
+        prizeSprite.setOpacity(0);
+        labelNum.setOpacity(0);
+
+        prizeSprite.runAction(cc.sequence(cc.delayTime(0.5), addCall, sequ, call));
+        prizeSprite.setPosition(cc.pAdd(this.getPosition(), move));
+        prizeSprite.setScale(1.6);
+
+        var fadeOut1 = new cc.FadeOut(0.5);
+        var scaleTo1 = new cc.ScaleTo(0.5, 0.5);
+        var delayTime1 = new cc.DelayTime(0.05);
+        var spawnL1 = new cc.Spawn(fadeOut1, scaleTo1);
+        var sequ1 = cc.sequence(spawnL1, delayTime1);
+        var spawn1 = new cc.Spawn(sequ1, sequ1);
+        var call1 = cc.callFunc(GameScene.removeSprite, this.getScene());
+
+        labelNum.runAction(cc.sequence(delay, addCall, sequ1, call1));
+        labelNum.setPosition(this.getPosition());
+        labelNum.setScale(1.6);
+        var call2 = cc.callFunc(this.DeletelabelScoreNumber, this);
+        var move1 = cc.p(-prizeSprite.getContentSize().width * 0.4, prizeSprite.getContentSize().height * 0.5);
+        var delay1 = cc.delayTime(0.5);
+        labelNum1.runAction(cc.sequence(delay1, call1));
+        labelNum1.setPosition(this.getPosition());
+        labelNum1.setScale(1.0);
+        prizeSprite1.runAction(cc.sequence(delay1, call2));
+        prizeSprite1.setPosition(cc.pAdd(this.getPosition(), move1));
+        prizeSprite1.setScale(1.0);
+
+        this.getScene().getScene().addChild(labelNum1, 100);
+        this.getScene().getScene().addChild(prizeSprite1, 100);
+        this.setGoldPos(this.getPosition());
+    },
+    removeParticle:function () {
+        this.getScene().getScene().removeChildByTag(kParticleDoubleTag, true);
+    },
+    actionAfterArrested:function () {
+        this.addGoldPrizeWithPlayAnimation(true);
+        this.addScoreNumber();
+        this.removeSelfFromScene();
+    },
+
+    getFishExpect:function () {
+        var temp;
+        var fishIdArray = (GameSetting.getInstance().getFishIdArray());
+        var dict = fishIdArray[this._fishLevel];
+        temp = dict["weapon5Expect"];
+        return temp;
+    },
+    handleStimulate:function (weaponLevel) {
+        var temp;
+        var attackIdArray = (GameSetting.getInstance().getAttackIdArray());
+        var dict = attackIdArray[weaponLevel - 1];
+        switch (this._fishLevel) {
+            case FishLevel.eFishLevel1:
+                temp = dict["StimulateUnit1"];
+                break;
+            case FishLevel.eFishLevel2:
+                temp = dict["StimulateUnit2"];
+                break;
+            case FishLevel.eFishLevel3:
+                temp = dict["StimulateUnit3"];
+                break;
+            case FishLevel.eFishLevel4:
+                temp = dict["StimulateUnit4"];
+                break;
+            case FishLevel.eFishLevel5:
+                temp = dict["StimulateUnit5"];
+                break;
+            case FishLevel.eFishLevel6:
+                temp = dict["StimulateUnit6"];
+                break;
+            case FishLevel.eFishLevel7:
+                temp = dict["StimulateUnit7"];
+                break;
+            case FishLevel.eFishLevel8:
+                temp = dict["StimulateUnit8"];
+                break;
+            case FishLevel.eFishLevel9:
+                temp = dict["StimulateUnit9"];
+                break;
+            case FishLevel.eFishLevel10:
+                temp = dict["StimulateUnit10"];
+                break;
+            case FishLevel.eFishLevel11:
+                temp = dict["StimulateUnit11"];
+                break;
+            case FishLevel.eFishLevel12:
+                temp = dict["StimulateUnit12"];
+                break;
+            case FishLevel.eFishLevel13:
+                temp = dict["StimulateUnit13"];
+                break;
+            case FishLevel.eFishLevel14:
+                temp = dict["StimulateUnit14"];
+                break;
+            case FishLevel.eFishLevel15:
+                temp = dict["StimulateUnit15"];
+                break;
+        }
+        var stimulateIdArray = (GameSetting.getInstance().getStimulateIdArray());
+        for (var i = 0; i < stimulateIdArray.length; i++) {
+            dict = stimulateIdArray[i];
+            var sId = dict["StimulateID"];
+            if (sId == temp) {
+                this.stimulateId = sId;
+                var nFBP = dict["NoFeedbackPro"];
+                this.noFeedBackPro = nFBP;
+                break;
+            }
+        }
+    },
+
     setMoveData:function (data) {
         this.moveData = data;
         //nut
@@ -1482,6 +1250,7 @@ var BaseFishActor = BaseActor.extend({
         this.bezieratTime_total = 0;
         this.comagesId = 0;
     },
+
     unwindMoveData:function () {
         if (!this.isCompages) {
             this.curMoveType = this.moveData.dataType;
@@ -1638,6 +1407,7 @@ var BaseFishActor = BaseActor.extend({
                 break;
         }
     },
+
     runStraightNormalLogic:function (dt) {
         this.runStraight(dt, this.straightDirVec);
     },
@@ -1713,8 +1483,6 @@ var BaseFishActor = BaseActor.extend({
             : (nextStep = cc.p(this.controlPoint.x + controlradius.x * Math.cos(angle), this.controlPoint.y + controlradius.y * Math.sin(angle)) );
         var Dir = cc.pSub(nextStep, this.position);
         Dir = cc.pNormalize(Dir);
-        //	var ang = atan2f(Dir.x, Dir.y) + M_PI/2;
-        //    this.handleActorRotation(ang/M_PI*180.0f);
         this.handleActorRotation(Dir);
         this.setPosition(nextStep);
     },
@@ -1749,9 +1517,6 @@ var BaseFishActor = BaseActor.extend({
                 var Dir = cc.pSub(nextStep, this.position);
                 Dir = cc.pNormalize(Dir);
                 this.handleActorRotation(Dir);
-                //            var ang = atan2f(Dir.x, Dir.y) + Math.PI/2;
-                //
-                //            this.handleActorRotation(ang/Math.PI*180.0f);
                 this.setPosition(nextStep);
                 if (this.wheelAngle < this.endAngle) {
 
@@ -1923,20 +1688,8 @@ var BaseFishActor = BaseActor.extend({
                 }
                 var endpo = this.position;
                 var ep = this.runAwayData.endPosition;
-                if (!this.runWithGroup) {
-                    //                MoveDataBezier* groupDest = FishGroupInfoDataManager.shareFishGroupInfoDataManager().getHasGroupInScreen(this.groupInfo.groupType);
-                    //                if (groupDest == null)
-                    {
-                        this.createMoveDataAfterRunAway();
-                    }
-                    //                else
-                    {
-                        //                    this.cloneSimilarMoveData(groupDest);
-                    }
-                }
-                else {
-
-                }
+                if (!this.runWithGroup)
+                    this.createMoveDataAfterRunAway();
             }
             return;
         }
@@ -2091,7 +1844,7 @@ var BaseFishActor = BaseActor.extend({
                         break;
                 }
                 break;
-            case 1://TODO
+            case 1:
                 switch (this.getForwardDir()) {
                     case 0:
                     case 2:
@@ -2208,12 +1961,10 @@ var BaseFishActor = BaseActor.extend({
         var halfSize = this.getSize();
         halfSize.width /= 2;
         halfSize.height /= 2;
-        if (this.position.x > VisibleRect.right().x + halfSize.width || this.position.x < VisibleRect.left().x - halfSize.width ||
-            this.position.y > VisibleRect.top().y + halfSize.height || this.position.y < VisibleRect.bottom().y - halfSize.height) {
-            return true;
-        }
-        return false;
+        return (this.position.x > VisibleRect.right().x + halfSize.width || this.position.x < VisibleRect.left().x - halfSize.width ||
+        this.position.y > VisibleRect.top().y + halfSize.height || this.position.y < VisibleRect.bottom().y - halfSize.height);
     },
+
     createMoveDataAfterRunAway:function () {
         this.afterRunAwayData = new MoveDataBezier();
         switch (this.getForwardDir()) {
@@ -2318,9 +2069,7 @@ var BaseFishActor = BaseActor.extend({
                 if (this.getIsChangeColor()) {
                     /*CCParticleSystem *baoixangParticle=[CCParticleSystemQuad particleWithFile:@"bianbaoxiangl03.plist"];*/
                 }
-//            [PlayerActor sharedActorTL].curReturn += self.prizeScore;
-//            [PlayerActor sharedActorTL].totalGain += self.prizeScore;
-//            [PlayerActor sharedActorTL].normalGain += self.prizeScore;
+
                 PlayerActor.sharedActorTL().updateCatchMoney(this.prizeScore, true, true, false);
                 //
                 PlayerActor.sharedActorTL().catchFish(this.getDef());
@@ -2329,11 +2078,9 @@ var BaseFishActor = BaseActor.extend({
             case ActorType.eActorTypeTR:
             {
                 if (this.getIsChangeColor()) {
-                    var baoixangParticle = ParticleSystemFactory.getInstance().createParticle(ImageName("bianbaoxiangl03.plist"));
+                    var baoixangParticle = particleSystemFactory.createParticle(ImageName("bianbaoxiangl03.plist"));
                 }
-//            [PlayerActor sharedActorTR].curReturn += self.prizeScore;
-//            [PlayerActor sharedActorTR].totalGain += self.prizeScore;
-//            [PlayerActor sharedActorTR].normalGain += self.prizeScore;
+
                 PlayerActor.sharedActorTR().updateCatchMoney(this.prizeScore, true, true, false);
                 PlayerActor.sharedActorTR().catchFish(this.getDef());
                 var curScene = this.getScene();
@@ -2353,7 +2100,7 @@ var BaseFishActor = BaseActor.extend({
                 var playerActor = PlayerActor.sharedActor();
                 if (playerActor.getAutoSave()) {
                     if (this.getIsChangeColor()) {
-                        var baoixangParticle = ParticleSystemFactory.getInstance().createParticle(ImageName("bianbaoxiangl03.plist"));
+                        var baoixangParticle = particleSystemFactory.createParticle(ImageName("bianbaoxiangl03.plist"));
                         baoixangParticle.setPosition(this.getPosition());
                         this.getScene().addChild(baoixangParticle);
 
@@ -2425,10 +2172,10 @@ var BaseFishActor = BaseActor.extend({
         }
     },
     addJinDunAnimation:function (val, number, type) {
-        var frameCache = cc.SpriteFrameCache.getInstance();
-        frameCache.addSpriteFrames(ImageName("jindun.plist"));
-        var str = "jindun_" + number + "_01.png";
-        var coin = cc.Sprite.createWithSpriteFrameName(str);
+        var frameCache = cc.spriteFrameCache;
+        frameCache.addSpriteFrames(res.JindunPlist);
+        var str = "#jindun_" + number + "_01.png";
+        var coin = new cc.Sprite(str);
         this.getScene().addChild(coin);
         coin.setPosition(val);
         var frames = [];
@@ -2436,11 +2183,11 @@ var BaseFishActor = BaseActor.extend({
             str = "jindun_" + number + "_0" + i + ".png";
             frames.push(frameCache.getSpriteFrame(str));
         }
-        var animation = cc.Animation.create(frames, 0.1);
-        var ac = cc.Animate.create(animation);
-        ac = cc.Repeat.create(ac, 3);
-        var last = cc.CallFunc.create(coin, this.getScene().removeSprite);
-        coin.runAction(cc.Sequence.create(ac, last, 0));
+        var animation = cc.animation(frames, 0.1);
+        var ac = cc.animate(animation);
+        ac = cc.repeat(ac, 3);
+        var last = cc.callFunc(this.getScene().removeSprite, coin );
+        coin.runAction(cc.sequence(ac, last, 0));
 
         switch (type) {
             case ActorType.eActorTypeBL:
@@ -2481,7 +2228,7 @@ var BaseFishActor = BaseActor.extend({
             this.fish = that;
             this.netActor = netActor;
             this.index = naclFishIndex;
-        }
+        };
         var tempUnit = new naclUnit(this);
         naclFishPool.push(tempUnit);
         (naclFishIndex > 100) ? (naclFishIndex = 0) : naclFishIndex++;
@@ -2489,53 +2236,9 @@ var BaseFishActor = BaseActor.extend({
             netActor.getCurRatio(), this.getScene().getOddsNumber(), PlayerActor.sharedActor().getPlayerMoney(),
             gameSetting.getExperienceRatio(), gameSetting.getPreReturnRatio());
 
-        /*var bulletRandom = gameSetting.getBulletRandomArray()[netActorCurWeaponLecel - 1];
-         var fishNetRandom = gameSetting.getNetRandomArray()[netActorCurWeaponLecel - 1];
-         var cannonRandom = gameSetting.getCannonRandomArray()[netActorCurWeaponLecel - 1];
-         var bulletFishRandom = gameSetting.getBulletFishRandomArray()[netActorCurWeaponLecel - 1][this._fishLevel];
-
-         var independRadom = gameSetting.getIndependRandomArray()[this._fishLevel];
-         var departRandom = gameSetting.getFishDepartRandomArray()[this._fishLevel][this.getCurCollideIndex()];
-
-
-         fishNetRandom = fishNetRandom * netActor.getCurRatio() / 100.0;
-
-         var finalRandom = fishRandom * fishNetRandom / 100.0;
-         finalRandom = finalRandom * bulletRandom / 100.0;
-         finalRandom = finalRandom * cannonRandom / 100.0;
-         finalRandom = finalRandom * independRadom / (100.0);
-         finalRandom = finalRandom * departRandom / 100;
-         if (this.getScene().getOddsNumber() == 2) {
-         finalRandom = finalRandom * bulletFishRandom / 100.0;
-         if (PlayerActor.sharedActor().getPlayerMoney() > 100000) {
-         finalRandom *= 0.7;
-         }
-         else {
-         var parmb = 1.1 - Math.pow(PlayerActor.sharedActor().getPlayerMoney(), 1.0 / 5.0) / 15;
-         finalRandom *= parmb;
-         }
-         }
-         var expRatio = gameSetting.getExperienceRatio() * 10000 / 10000;
-         finalRandom = finalRandom * expRatio;
-
-         if (PlayerActor.sharedActor().getPlayerMoney() < 30) {
-         finalRandom = finalRandom * (1.2 * 10000) / 10000;
-         }
-         else {
-         finalRandom = finalRandom * (gameSetting.getPreReturnRatio() * 10000) / 10000;
-         }
-
-         cc.log("finalRandom:"+finalRandom); */
-
         gameSetting.setBulletShootCount(gameSetting.getBulletShootCount() + 1);
-        /*        var bulletShootCount = gameSetting.getBulletShootCount();
-         if (bulletShootCount < 12) {
-         if (bulletShootCount < 3 || bulletShootCount % 2) {
-         finalRandom = 10000;
-         }
-         }*/
-        //return  finalRandom;
     },
+
     curAttackState:AttackState.eAttackStateNone, //EAttackState
     stateChangeTime:0,
     speedScale:0,
@@ -2628,10 +2331,10 @@ var BaseFishActor = BaseActor.extend({
 
 
 var LanternActor = BaseFishActor.extend({
-    initWithDef:function (def_) {
+    ctor:function (def_) {
         this._def = def_;
         var bRet = false;
-        bRet = this.initWithSpriteName("lantern", "fish.png");
+        bRet = this._super(res.LanternSprite, res.FishPng);
         if (bRet) {
             this._fishLevel = FishLevel.eFishLevel3;
             this._fishType = FishType.mediumFish;
@@ -2646,10 +2349,10 @@ var LanternActor = BaseFishActor.extend({
 });
 
 var SharkActor = BaseFishActor.extend({
-    initWithDef:function (def_) {
+    ctor:function (def_) {
         this._def = def_;
         var bRet = false;
-        bRet = this.initWithSpriteName("shark", "shayu.png");
+        bRet = this._super(res.SharkSprite, res.OldSharkPng);
         if (bRet) {
             this._fishLevel = FishLevel.eFishLevel1;
             this._fishType = FishType.bigFish;
@@ -2664,10 +2367,10 @@ var SharkActor = BaseFishActor.extend({
 });
 
 var PorgyActor = BaseFishActor.extend({
-    initWithDef:function (def_) {
+    ctor:function (def_) {
         this._def = def_;
         var bRet = false;
-        bRet = this.initWithSpriteName("progy", "fish.png");
+        bRet = this._super(res.ProgySprite, res.FishPng);
         if (bRet) {
             this._fishLevel = FishLevel.eFishLevel5;
             this._fishType = FishType.mediumFish;
@@ -2682,10 +2385,10 @@ var PorgyActor = BaseFishActor.extend({
 });
 
 var AmphiprionActor = BaseFishActor.extend({
-    initWithDef:function (def_) {
+    ctor:function (def_) {
         this._def = def_;
         var bRet = false;
-        bRet = this.initWithSpriteName("amphiprion", "fish.png");
+        bRet = this._super(res.AmphiprionSprite, res.FishPng);
         if (bRet) {
             this._fishLevel = FishLevel.eFishLevel7;
             this._fishType = FishType.smallFish;
@@ -2700,10 +2403,10 @@ var AmphiprionActor = BaseFishActor.extend({
 });
 
 var PufferActor = BaseFishActor.extend({
-    initWithDef:function (def_) {
+    ctor:function (def_) {
         this._def = def_;
         var bRet = false;
-        bRet = this.initWithSpriteName("puffer", "fish.png");
+        bRet = this._super(res.PufferSprite, res.FishPng);
         if (bRet) {
             this._fishLevel = FishLevel.eFishLevel8;
             this._fishType = FishType.balloonfish;
@@ -2718,10 +2421,10 @@ var PufferActor = BaseFishActor.extend({
 });
 
 var CroakerActor = BaseFishActor.extend({
-    initWithDef:function (def_) {
+    ctor:function (def_) {
         this._def = def_;
         var bRet = false;
-        bRet = this.initWithSpriteName("croaker", "fish.png");
+        bRet = this._super(res.CroakerSprite, res.FishPng);
         if (bRet) {
             this._fishLevel = FishLevel.eFishLevel10;
             this._fishType = FishType.smallFish;
@@ -2735,12 +2438,11 @@ var CroakerActor = BaseFishActor.extend({
     }
 });
 
-
 var RayActor = BaseFishActor.extend({
-    initWithDef:function (def_) {
+    ctor:function (def_) {
         this._def = def_;
         var bRet = false;
-        bRet = this.initWithSpriteName("ray", "fish.png");
+        bRet = this._super(res.RaySprite, res.FishPng);
         if (bRet) {
             this._fishLevel = FishLevel.eFishLevel2;
             this._fishType = FishType.mediumFish;
@@ -2755,10 +2457,10 @@ var RayActor = BaseFishActor.extend({
 });
 
 var ChelonianActor = BaseFishActor.extend({
-    initWithDef:function (def_) {
+    ctor:function (def_) {
         this._def = def_;
         var bRet = false;
-        bRet = this.initWithSpriteName("chelonian", "fish.png");
+        bRet = this._super(res.ChelonianSprite, res.FishPng);
         if (bRet) {
             this._fishLevel = FishLevel.eFishLevel4;
             this._fishType = FishType.mediumFish;
@@ -2773,10 +2475,10 @@ var ChelonianActor = BaseFishActor.extend({
 });
 
 var BreamActor = BaseFishActor.extend({
-    initWithDef:function (def_) {
+    ctor:function (def_) {
         this._def = def_;
         var bRet = false;
-        bRet = this.initWithSpriteName("bream", "fish.png");
+        bRet = this._super(res.BreamSprite, res.FishPng);
         if (bRet) {
             this._fishLevel = FishLevel.eFishLevel6;
             this._fishType = FishType.mediumFish;
@@ -2791,10 +2493,10 @@ var BreamActor = BaseFishActor.extend({
 });
 
 var AngleFishActor = BaseFishActor.extend({
-    initWithDef:function (def_) {
+    ctor:function (def_) {
         this._def = def_;
         var bRet = false;
-        bRet = this.initWithSpriteName("angelfish", "fish.png");
+        bRet = this._super(res.AngelfishSprite, res.FishPng);
         if (bRet) {
             this._fishLevel = FishLevel.eFishLevel9;
             this._fishType = FishType.smallFish;
@@ -2809,10 +2511,10 @@ var AngleFishActor = BaseFishActor.extend({
 });
 
 var SmallFishActor = BaseFishActor.extend({
-    initWithDef:function (def_) {
+    ctor:function (def_) {
         this._def = def_;
         var bRet = false;
-        bRet = this.initWithSpriteName("smallfishactor", "fish.png");
+        bRet = this._super(res.SmallFishActorSprite, res.FishPng);
         if (bRet) {
             this._fishLevel = FishLevel.eFishLevel11;
             this._fishType = FishType.smallFish;
@@ -2827,10 +2529,10 @@ var SmallFishActor = BaseFishActor.extend({
 });
 
 var MarlinsFishActor = BaseFishActor.extend({
-    initWithDef:function (def_) {
+    ctor:function (def_) {
         this._def = def_;
         var bRet = false;
-        bRet = this.initWithSpriteName("marlins", "marlins.png");
+        bRet = this._super(res.MarlinSprite, res.MarlinPng);
         if (bRet) {
             this._fishLevel = FishLevel.eFishLevel12;
             this._fishType = FishType.bigFish;
@@ -2845,10 +2547,10 @@ var MarlinsFishActor = BaseFishActor.extend({
 });
 
 var GrouperFishActor = BaseFishActor.extend({
-    initWithDef:function (def_) {
+    ctor:function (def_) {
         this._def = def_;
         var bRet = false;
-        bRet = this.initWithSpriteName("grouper", "grouper.png");
+        bRet = this._super(res.GrouperSprite, res.GrouperPng);
         if (bRet) {
             this._fishLevel = FishLevel.eFishLevel13;
             this._fishType = FishType.mediumFish;
@@ -2863,10 +2565,10 @@ var GrouperFishActor = BaseFishActor.extend({
 });
 
 var GSharkActor = BaseFishActor.extend({
-    initWithDef:function (def_) {
+    ctor:function (def_) {
         this._def = def_;
         var bRet = false;
-        bRet = this.initWithSpriteName("gshayu", "gshayu.png");
+        bRet = this._super(res.GSharkSprite, res.GSharkPng);
         if (bRet) {
             this._fishLevel = FishLevel.eFishLevel1;
             this._fishType = FishType.bigFish;
@@ -2881,10 +2583,10 @@ var GSharkActor = BaseFishActor.extend({
 });
 
 var GMarlinsFishActor = BaseFishActor.extend({
-    initWithDef:function (def_) {
+    ctor:function (def_) {
         this._def = def_;
         var bRet = false;
-        bRet = this.initWithSpriteName("gmarlins", "gmarlins.png");
+        bRet = this._super(res.GMarlinSprite, res.GMarlinPng);
         if (bRet) {
             this._fishLevel = FishLevel.eFishLevel12;
             this._fishType = FishType.bigFish;
@@ -2899,10 +2601,10 @@ var GMarlinsFishActor = BaseFishActor.extend({
 });
 
 var ButterflyActor = BaseFishActor.extend({
-    initWithDef:function (def_) {
+    ctor:function (def_) {
         this._def = def_;
         var bRet = false;
-        bRet = this.initWithSpriteName("butterfly", "butterfly.png");
+        bRet = this._super(res.ButterflySprite, res.OldButterflyPng);
         if (bRet) {
             this._fishLevel = FishLevel.eFishLevel7;
             this._fishType = FishType.mediumFish;
@@ -2917,10 +2619,10 @@ var ButterflyActor = BaseFishActor.extend({
 });
 
 var PomfretActor = BaseFishActor.extend({
-    initWithDef:function (def_) {
+    ctor:function (def_) {
         this._def = def_;
         var bRet = false;
-        bRet = this.initWithSpriteName("pomfret", "butterfly.png");
+        bRet = this._super(res.PomfretSprite, res.OldButterflyPng);
         if (bRet) {
             this._fishLevel = FishLevel.eFishLevel9;
             this._fishType = FishType.smallFish;
@@ -2935,10 +2637,10 @@ var PomfretActor = BaseFishActor.extend({
 });
 
 var GoldenTroutActor = BaseFishActor.extend({
-    initWithDef:function (def_) {
+    ctor:function (def_) {
         this._def = def_;
         var bRet = false;
-        bRet = this.initWithSpriteName("goldentrout", "goldentrout.png");
+        bRet = this._super(res.GoldenTroutSprite, res.GoldenTroutPng);
         if (bRet) {
             this._fishLevel = FishLevel.eFishLevel5;
             this._fishType = FishType.mediumFish;

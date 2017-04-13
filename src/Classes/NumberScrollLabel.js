@@ -18,11 +18,11 @@ var NumberScrollLabel = cc.Layer.extend({
             this._setPreNumber(PlayerActor.sharedActor().getPlayerMoney());
             this._componentNumber = 1;
             this._updateTime = 0.0;
-            this._componentSize = cc.SizeMake(20, 30);
+            this._componentSize = new cc.Size(20, 30);
             this._charMapFile = ImageName("ui_text_01.png");
             this._itemWidth = TextWidth2;
             this._itemHeight = TextHeight2;
-            this._scissorRect = cc.RectZero();
+            this._scissorRect = new cc.Rect(0, 0, 0, 0);
             this._components = [];
             this._durations = [];
             this.initAllComponents();
@@ -36,12 +36,12 @@ var NumberScrollLabel = cc.Layer.extend({
             this._setPreNumber(PlayerActor.sharedActor().getPlayerMoney());
             this._componentNumber = 1;
             this._updateTime = 0.0;
-            //this.componentSize = cc.SizeMake(TextWidth2+5, TextHeight2);
+            //this.componentSize = new cc.Size(TextWidth2+5, TextHeight2);
             this._componentSize = size;
             this._itemWidth = iWidth;
             this._itemHeight = iHeight;
             this._charMapFile = mapFile;
-            this._scissorRect = cc.RectZero();
+            this._scissorRect = cc.Rect(0, 0, 0, 0);
             this._components = [];
             this.initAllComponents();
             this.schedule(this.update);
@@ -49,7 +49,7 @@ var NumberScrollLabel = cc.Layer.extend({
         return true;
     },
     reloadAllComponents:function () {
-        this.setContentSize(cc.SizeMake(this._componentSize.width * this._componentNumber, this._componentSize.height));
+        this.setContentSize(new cc.Size(this._componentSize.width * this._componentNumber, this._componentSize.height));
 
         for (var idx = 0; idx < this._componentNumber; idx++) {
             var temp = this._getPreNumber() / Math.pow(10.0, idx);
@@ -59,7 +59,7 @@ var NumberScrollLabel = cc.Layer.extend({
         }
     },
     initAllComponents:function () {
-        this.setContentSize(cc.SizeMake(this._componentSize.width * this._componentNumber, this._componentSize.height));
+        this.setContentSize(new cc.Size(this._componentSize.width * this._componentNumber, this._componentSize.height));
 
         this._durations = [];
         //this.durations.assign(this.componentNumber, 1.0);
@@ -85,16 +85,18 @@ var NumberScrollLabel = cc.Layer.extend({
             return;
         }
 
-        if (this._scissorRect.size.width <= 0 && this._scissorRect.size.height <= 0) {
+        if (this._scissorRect.width <= 0 && this._scissorRect.height <= 0) {
             var pos = this.getPosition();
             var cs = this.getContentSize();
-            this._scissorRect = cc.RectMake(pos.x, pos.y, cs.width, cs.height);
+            this._scissorRect = new cc.Rect(pos.x, pos.y, cs.width, cs.height);
         }
     },
+
+    //todo
     draw:function (ctx) {
         if (cc.renderContextType == cc.CANVAS) {
             var context = ctx || cc.renderContext;
-            var size = this._scissorRect.size;
+            var size = this._scissorRect;
             context.beginPath();
             context.moveTo(-size.width / 2, -size.height / 2);
             context.lineTo(size.width / 2, -size.height / 2);
@@ -187,17 +189,15 @@ var NumberScrollLabel = cc.Layer.extend({
 
                 if (this._dtNum > 0) {
                     newLabel.setPosition(cc.p(this._componentSize.width * (0.5 + (this._componentNumber - 1 - idx)), this._componentSize.height * 1.5));
-                    var oldAction = cc.Sequence.create(cc.MoveTo.create(this._dtTime, cc.p(old.getPosition().x, -this._componentSize.height / 2 * kUiItemScale))
-                        , cc.CallFunc.create(this, this.removeComponent));
-                    old.runAction(oldAction);
-                    newLabel.runAction(cc.MoveTo.create(this._dtTime, cc.p(newLabel.getPosition().x, this._componentSize.height / 2 * kUiItemScale)));
-                }
-                else {
+                    old.runAction(
+                        cc.sequence(cc.moveTo(this._dtTime, cc.p(old.getPosition().x, -this._componentSize.height / 2 * kUiItemScale))
+                        , cc.callFunc(this.removeComponent, this)));
+                    newLabel.runAction(cc.moveTo(this._dtTime, cc.p(newLabel.getPosition().x, this._componentSize.height / 2 * kUiItemScale)));
+                } else {
                     newLabel.setPosition(cc.p(this._componentSize.width * (0.5 + (this._componentNumber - 1 - idx)), this._componentSize.height * (-0.5)));
-                    var oldAction = cc.Sequence.create(cc.MoveTo.create(this._dtTime, cc.p(old.getPosition().x, this._componentSize.height * 1.5))
-                        , cc.CallFunc.create(this, this.removeComponent));
-                    old.runAction(oldAction);
-                    newLabel.runAction(cc.MoveTo.create(this._dtTime, cc.p(newLabel.getPosition().x, this._componentSize.height / 2)));
+                    old.runAction(cc.sequence(cc.moveTo(this._dtTime, cc.p(old.getPosition().x, this._componentSize.height * 1.5))
+                        , cc.callFunc(this.removeComponent, this)));
+                    newLabel.runAction(cc.moveTo(this._dtTime, cc.p(newLabel.getPosition().x, this._componentSize.height / 2)));
                 }
 
             }

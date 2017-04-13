@@ -9,23 +9,20 @@ var WeaponSpecialLevinStorm = WeaponSpecial.extend({
     _targetPoint:null,
     _isPowerUp:false,
     _levinStormBulletSoundEffect:0,
-    initWeapon:function (pos, energy, shootCost) {
+    ctor:function (pos, energy, shootCost) {
         var strweaponSprite = "weaponLevinStorm.png";
         var strweaponShoot = "weaponLevinStorm.png";
-        cc.SpriteFrameCache.getInstance().addSpriteFrames(ImageName("LevinStorm_xuli1.plist"));
-        cc.SpriteFrameCache.getInstance().addSpriteFrames(ImageName("LevinStorm_xuli2.plist"));
-        if (this._super(strweaponSprite, strweaponShoot, pos, 0.5, energy, shootCost)) {
-            this.setCannonLevel(FishWeaponType.eWeaponLevel9);
-            this._isPowerUp = false;
-            this.setAnchorPoint(cc.p(0.5, 0.5));
-            this.loadWeaponEffect();
-            this._weaponSprite.setAnchorPoint(cc.p(0.5, 0.34));
-            return true;
-        }
-        return false;
+        cc.spriteFrameCache.addSpriteFrames(ImageName("LevinStorm_xuli1.plist"));
+        cc.spriteFrameCache.addSpriteFrames(ImageName("LevinStorm_xuli2.plist"));
+        this._super(strweaponSprite, strweaponShoot, pos, 0.5, energy, shootCost)
+        this.setCannonLevel(FishWeaponType.eWeaponLevel9);
+        this._isPowerUp = false;
+        this.setAnchorPoint(cc.p(0.5, 0.5));
+        this.loadWeaponEffect();
+        this._weaponSprite.setAnchorPoint(cc.p(0.5, 0.34));
     },
     loadWeaponEffect:function () {
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
         var frames = [];
         for (var i = 1; i <= 5; i++) {
             var frameName = "xl0" + i + ".png";
@@ -35,7 +32,7 @@ var WeaponSpecialLevinStorm = WeaponSpecial.extend({
 
         var firstFrame = "xl01.png";
         var animation = cc.Animation.create(frames, 0.1);
-        var xuli01 = cc.Sprite.createWithSpriteFrameName(firstFrame);
+        var xuli01 = new cc.Sprite("#" + firstFrame);
         var xuli01Animate = cc.Animate.create(animation);
         xuli01.runAction(cc.RepeatForever.create(xuli01Animate));
         xuli01.setAnchorPoint(cc.p(0.5, 0.5));
@@ -45,7 +42,7 @@ var WeaponSpecialLevinStorm = WeaponSpecial.extend({
         frames = [];
     },
     stopLevinStormBulletSoundEffect:function () {
-        cc.AudioEngine.getInstance().stopEffect(this._levinStormBulletSoundEffect);
+        cc.audioEngine.stopEffect(this._levinStormBulletSoundEffect);
     },
     createLevinStormBullet:function (pos) {
         if (GameCtrl.sharedGame().getGameState() != GAMEPLAY)
@@ -70,18 +67,18 @@ var WeaponSpecialLevinStorm = WeaponSpecial.extend({
 
         var currentScene = GameCtrl.sharedGame().getCurScene();
         currentScene.cancelChange();
-        cc.Director.getInstance().getScheduler().scheduleSelector(this.specialShootingFinished, this, 2.0, false);
+        cc.director.getScheduler().schedule(this.specialShootingFinished, this, 2.0, false);
         this._isPowerUp = false;
     },
     addLevinStormBullet:function (dt) {
-        cc.Director.getInstance().getScheduler().unscheduleSelector(this.addLevinStormBullet, this);
+        cc.director.getScheduler().unschedule(this.addLevinStormBullet, this);
         //KingFisher cc.log("Playing add bullet sound.");
         this._levinStormBulletSoundEffect = playEffect(LEVINSTORM_EFFECT);
         this.createLevinStormBullet(this._targetPoint);
         this.getWeaponSprite().getChildByTag(LevinStormXuliTag).removeFromParentAndCleanup(true);
     },
     powerUp:function () {
-        var cache = cc.SpriteFrameCache.getInstance();
+        var cache = cc.spriteFrameCache;
         var frames = [];
         for (var i = 1; i <= 5; i++) {
             var frameName = "x0" + i + ".png";
@@ -91,7 +88,7 @@ var WeaponSpecialLevinStorm = WeaponSpecial.extend({
 
         var firstFrame = "x01.png";
         var animation = cc.Animation.create(frames, 0.1);
-        var xuli02 = cc.Sprite.createWithSpriteFrameName(firstFrame);
+        var xuli02 = new cc.Sprite("#" + firstFrame);
         var xuli02Animate = cc.Animate.create(animation);
         xuli02.runAction(cc.RepeatForever.create(xuli02Animate));
         xuli02.setAnchorPoint(cc.p(0.5, 0.5));
@@ -124,7 +121,7 @@ var WeaponSpecialLevinStorm = WeaponSpecial.extend({
         this.checkAndCleanOldNormalGain();
         this.updateEnergy();
         this.powerUp();
-        cc.Director.getInstance().getScheduler().scheduleSelector(this.addLevinStormBullet, this, 2, false);
+        cc.director.getScheduler().schedule(this.addLevinStormBullet, this, 2, false);
 
         this._weaponSprite.runAction(this._shootAnimation);
     }

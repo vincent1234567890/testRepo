@@ -7,14 +7,24 @@ var ShipRefitTag = 5;
 var MainMenuScene = cc.Scene.extend({
     _isSubLayer:false,
     _startLayer:0,
-    init:function () {
-        if (this._super()) {
-            var startLayer = StartMenuLayer.create();
-            this.addChild(startLayer, 10, StartLayerTag);
-            this._isSubLayer = false;
-        }
-        return true;
+
+    ctor : function () {
+        this._super();
+        this._startLayer = new StartMenuLayer();
+        this.addChild( this._startLayer, 10, StartLayerTag);
+        this._isSubLayer = false;
+
+        this.playBackMusic();
     },
+
+    // init:function () {
+    //     if (this._super()) {
+    //         this._startLayer = new StartMenuLayer();
+    //         this.addChild( this._startLayer, 10, StartLayerTag);
+    //         this._isSubLayer = false;
+    //     }
+    //     return true;
+    // },
     showMoreGame:function () {
     },
     showOption:function () {
@@ -66,14 +76,18 @@ var MainMenuScene = cc.Scene.extend({
         playMusic(BACK_MUSIC1, true);
     },
 
-    initWithDef:function (def) {
-        this._startLayer = StartMenuLayer.create();
-        this.addChild(this._startLayer, 10, StartLayerTag);
-        this._isSubLayer = false;
-        this.playBackMusic();
+    // initWithDef:function (def) {
+    //     if (!this._startLayer) {
+    //         this._startLayer = new StartMenuLayer();
+    //         this.addChild(this._startLayer, 10, StartLayerTag);
+    //         this._isSubLayer = false;
+    //     }
+    //
+    //     this.playBackMusic();
+    //
+    //     return true;
+    // },
 
-        return true;
-    },
     update:function (dt) {
         this._super(dt);
     },
@@ -88,7 +102,9 @@ var MainMenuScene = cc.Scene.extend({
             if (this._startLayer) {
                 var mainMenu = this._startLayer.getChildByTag(eTag_MainMenu_StartMenu_menu);
                 if (mainMenu) {
-                    mainMenu.isTouchEnabled(!this._isSubLayer);
+                    //TODO:FIX
+                    // mainMenu.isTouchEnabled(!this._isSubLayer);
+                    // mainMenu.setTouchEnabled(!this._isSubLayer);
                 }
             }
         }
@@ -108,8 +124,8 @@ var MainMenuScene = cc.Scene.extend({
 
 MainMenuScene.create = function () {
     var ret = new MainMenuScene();
-    if (ret && ret.init()) {
-        return ret;
-    }
-    return null;
+    // if (ret && ret.init()) {
+    //     return ret;
+    // }
+    return ret;
 };

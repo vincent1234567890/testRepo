@@ -51,7 +51,8 @@ cc.spriteFrameCache = /** @lends cc.spriteFrameCache# */{
 
     _pointFromString : function (content) {
         var result = this._CCNS_REG1.exec(content);
-        if(!result) return cc.p(0,0);
+        if(!result)
+            return new cc.Point(0,0);
         return cc.p(parseFloat(result[1]), parseFloat(result[2]));
     },
 

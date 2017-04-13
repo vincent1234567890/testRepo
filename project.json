@@ -1,7 +1,7 @@
 {
     "project_type": "javascript",
 
-    "debugMode" : 2,
+    "debugMode" : 3,
     "showFPS" : true,
     "frameRate" : 60,
     "noCache" : false,
@@ -9,19 +9,97 @@
     "renderMode" : 0,
     "engineDir":"frameworks/cocos2d-html5",
 
-    "modules" : ["cocos2d"],
+    "modules" : [
+        "cocos2d",
+        "extensions"
+    ],
 
     "jsList" : [
+        "src/New/ThemeDataManager.js",
         "src/resource.js",
-        "src/app.js",
-        "src/SharedClasses/ConstantEnum.js",
-        "src/SharedClasses/GameCtrl.js",
+
+        "src/New/Utilities/Queue.js",
+
         "src/SharedClasses/LoadingScreen.js",
-        "src/SharedClasses/GameSetting.js",
-        "src/Classes/LogoScene.js",
-        "src/Classes/MainMenuScene.js",
-        "src/Classes/PlayerActor.js",
-        "src/Classes/StartMenuLayer.js"
+        "src/SharedClasses/ParticleSystemFactory.js",
+        "src/New/Utilities/ObjectPool.js",
+        "src/New/Utilities/TouchLayerRefactored.js",
+        "src/New/Utilities/AnimatedButton.js",
+        "src/New/Utilities/RolloverEffectItem.js",
+
+        "src/New/Shaders/WaterCaustics/WaterCaustics.js",
+        "src/New/Shaders/WaterCaustics/WaterCausticsLayer.js",
+
+        "src/New/PlayerPreferences.js",
+        "src/New/Server/ClientServerConnect.js",
+        "src/New/GUIFunctions.js",
+        "src/New/BlockingManager.js",
+        "src/New/BlockingView.js",
+
+        "src/New/Static Views/FloatingMenu.js",
+        "src/New/Static Views/CloseButtonPrefab.js",
+        "src/New/Static Views/FloatingMenuPopupBasePrefab.js",
+        "src/New/Static Views/JackpotView.js",
+        "src/New/Static Views/JackpotManager.js",
+        "src/New/Static Views/LeaderboardView.js",
+        "src/New/Static Views/ProfileView.js",
+        "src/New/Static Views/SettingsView.js",
+        "src/New/Static Views/FAQView.js",
+
+        "src/New/Lobby/DolphinClippy.js",
+        "src/New/Lobby/GameListButtonPrefab.js",
+        "src/New/Lobby/LobbyWaterCausticInstance.js",
+        "src/New/Lobby/LobbyWaterCaustics.js",
+        "src/New/LoginView.js",
+        "src/New/LoginManager.js",
+        "src/New/Lobby/LobbyManager.js",
+        "src/New/Lobby/LobbyView.js",
+
+        "src/New/Arena/OptionsView.js",
+        "src/New/Arena/OptionsSideMenuView.js",
+        "src/New/Arena/OptionsMenuViewBottom.js",
+        "src/New/Arena/OptionsManager.js",
+        "src/New/Data/FishAnimationEnum.js",
+        "src/New/Data/FishAnimationData.js",
+        "src/New/MouseLayer.js",
+        "src/New/ReferenceName.js",
+        "src/New/Arena/BulletView.js",
+        "src/New/Arena/BulletManager.js",
+        "src/New/Arena/NetManager.js",
+        "src/New/Arena/NetPrefab.js",
+        "src/New/Arena/CannonView.js",
+        "src/New/Arena/CannonManager.js",
+        "src/New/Arena/PlayerViewStaticPrefab.js",
+        "src/New/Arena/PlayerView.js",
+        "src/New/Arena/PlayerViewManager.js",
+        "src/New/Arena/FishView.js",
+        "src/New/Arena/FishViewManager.js",
+        "src/New/Arena/ScoreboardView.js",
+        "src/New/Arena/ScoreboardManager.js",
+        "src/New/Arena/Effects/EffectsManager.js",
+        "src/New/Arena/Effects/CaptureCoinEffectManager.js",
+        "src/New/Arena/Effects/SpinningCoinView.js",
+        "src/New/Arena/Effects/CoinStackCoinView.js",
+        "src/New/Arena/Effects/CoinStackEffect.js",
+        "src/New/Arena/Effects/CoinStackManager.js",
+        "src/New/GameManager.js",
+        "src/New/GameView.js",
+        "src/New/GameTicker.js",
+
+        "src/New/AppManager.js",
+
+        "lib/common/WebSocketClient.js",
+        "lib/common/WebSocketService.js",
+        "lib/services/game/GameServices.js",
+        "lib/services/player/PlayerServices.js",
+        "lib/modules/simpleEmitter.js",
+        "lib/modules/socketUtils.js",
+        "lib/fishgamelogic/serverInformer.js",
+        "lib/fishgamelogic/clientReceiver.js",
+        "lib/fishgamelogic/FishGameArena.js",
+
+
+        "src/TestScene.js"
 
     ]
 }
