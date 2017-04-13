@@ -97,6 +97,12 @@ const FAQView = (function () {
         _parent.addChild(_popup.getParent());
 
         GameView.addView(_parent,ZORDER);
+
+        const wiggle = new cc.Sequence(cc.rotateBy(0.1, 30), cc.rotateBy(0.1, -30));
+
+        function onHover(widget){
+            widget.runAction(cc.RepeatForever(wiggle.clone()));
+        }
     };
 
     function onUserAgreementTabClicked (){
@@ -123,6 +129,8 @@ const FAQView = (function () {
 
     }
 
+
+
     function dismissCallback(touch) {
         _parent.setLocalZOrder(-1000);
         _parent.setVisible(false);
@@ -130,9 +138,24 @@ const FAQView = (function () {
 
     const proto = FAQView.prototype;
 
+    proto.unattach = function () {
+        if (_parent.getParent()) {
+            _parent.getParent().removeChild(_parent, false);
+        }
+    };
+
+    proto.reattach = function () {
+        if (_parent.getParent()) {
+            _parent.getParent().removeChild(_parent, false);
+        }
+        GameView.addView(_parent);
+    };
+
     proto.show = function () {
-        _parent.setLocalZOrder(ZORDER);
+        console.log("show");
         _parent.setVisible(true);
+        _parent.setLocalZOrder(ZORDER);
+
         _popup.show();
     };
 

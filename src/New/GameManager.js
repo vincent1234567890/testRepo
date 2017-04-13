@@ -44,6 +44,7 @@ const GameManager = function () {
     let _goToLobbyCallback;
 
     function initialiseLogin(parent) {
+        console.log("initialise");
         GameView.initialise(parent);
         // _loginManager = new LoginManager();
     }

@@ -210,5 +210,20 @@ const SettingsView = (function () {
         cc.audioEngine.setEffectsVolume(sender.getValue().toFixed(2) - STARTOFFSET);
     }
 
+    const proto = SettingsView.prototype;
+
+    proto.unattach = function () {
+        if (_parent.getParent()) {
+            _parent.getParent().removeChild(_parent, false);
+        }
+    };
+
+    proto.reattach = function () {
+        if (_parent.getParent()) {
+            _parent.getParent().removeChild(_parent, false);
+        }
+        GameView.addView(_parent);
+    };
+
     return SettingsView;
 }());

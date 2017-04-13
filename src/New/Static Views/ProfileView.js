@@ -9,6 +9,7 @@ const ProfileView = (function () {
     const LeftColumn = 275;
     const RightColumn = 625;
     const Spacing = 100;
+    const _parent = new cc.Node();
     const ProfileView = function () {
 
         /*
@@ -25,14 +26,14 @@ const ProfileView = (function () {
          ProfileRankingIcon : "#RankingSymbol.png",
          ProfileCoinStackIcon : "#Coin2WeekSymbol.png",
          */
-        const parent = new cc.Node();
+
         const _background = new cc.Sprite(ReferenceName.SettingsBackground);
         const _closeButton = new CloseButtonPrefab(dismiss);
 
-        parent.addChild(_closeButton.getButton(),10);
+        _parent.addChild(_closeButton.getButton(),10);
         _closeButton.getButton().setPosition(new cc.p(350, 220));
 
-        parent.setPosition(683, 384);
+        _parent.setPosition(683, 384);
 
         const timeDisplay = createDisplay(ReferenceName.ProfileTimeIcon,"timeTitle", "timeText");
         const coinDisplay = createDisplay(ReferenceName.ProfileCoinIcon,"coinTitle", "coinText");
@@ -138,9 +139,9 @@ const ProfileView = (function () {
         // _background.addChild(acceptText);
         // _background.addChild(cancelText);
 
-        parent.addChild(_background);
+        _parent.addChild(_background);
 
-        GameView.addView(parent, 10);
+        GameView.addView(_parent, 10);
         BlockingManager.registerBlock(dismissCallback);
 
 
@@ -152,7 +153,7 @@ const ProfileView = (function () {
         }
 
         this.show = function () {
-            parent.setLocalZOrder(ZORDER);
+            _parent.setLocalZOrder(ZORDER);
             _background.setVisible(true);
             _closeButton.setVisible(true);
 
@@ -168,48 +169,63 @@ const ProfileView = (function () {
         }
 
         function dismiss() {
-            parent.setLocalZOrder(-1000);
+            _parent.setLocalZOrder(-1000);
             _background.setVisible(false);
             _closeButton.setVisible(false);
             BlockingManager.deregisterBlock(dismissCallback);
         }
 
-        function createDisplay(spriteIcon, titleText, infoText){
-            const iconBackground = new cc.Sprite(ReferenceName.ProfileIconBackground);
-            const background = new cc.Sprite(ReferenceName.ProfileIconTextBackground);
-            const icon = new cc.Sprite(spriteIcon);
+    };
 
-            const iconPos = new cc.p(iconBackground.getContentSize().width/2, iconBackground.getContentSize().height/2);
-            const bgPos = new cc.p(background.getContentSize().width/2, background.getContentSize().height/2);
-            iconBackground.setPosition(-iconPos.x,bgPos.y);
-            icon.setPosition(iconPos);
+    function createDisplay(spriteIcon, titleText, infoText){
+        const iconBackground = new cc.Sprite(ReferenceName.ProfileIconBackground);
+        const background = new cc.Sprite(ReferenceName.ProfileIconTextBackground);
+        const icon = new cc.Sprite(spriteIcon);
 
-            // const soundTitle = new cc.Sprite(ReferenceName.SettingsSoundTitleChinese);
-            let fontDef = new cc.FontDefinition();
-            fontDef.fontName = "Microsoft YaHei";
-            // fontDef.fontName = "Arial Unicode MS";
-            fontDef.fontSize = "20";
-            fontDef.fontStyle = "bold";
-            fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
-            fontDef.fillStyle = new cc.Color(0, 0, 0, 255);
-            let titleLabel = new cc.LabelTTF(titleText, fontDef);
+        const iconPos = new cc.p(iconBackground.getContentSize().width/2, iconBackground.getContentSize().height/2);
+        const bgPos = new cc.p(background.getContentSize().width/2, background.getContentSize().height/2);
+        iconBackground.setPosition(-iconPos.x,bgPos.y);
+        icon.setPosition(iconPos);
 
-            titleLabel.setPosition(15, bgPos.y + 20);
-            titleLabel.setAnchorPoint(0,0.5);
+        // const soundTitle = new cc.Sprite(ReferenceName.SettingsSoundTitleChinese);
+        let fontDef = new cc.FontDefinition();
+        fontDef.fontName = "Microsoft YaHei";
+        // fontDef.fontName = "Arial Unicode MS";
+        fontDef.fontSize = "20";
+        fontDef.fontStyle = "bold";
+        fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
+        fontDef.fillStyle = new cc.Color(0, 0, 0, 255);
+        let titleLabel = new cc.LabelTTF(titleText, fontDef);
 
-            fontDef.fillStyle = new cc.Color(255, 255, 255, 255);
-            let infoLabel = new cc.LabelTTF(titleText, fontDef);
-            infoLabel.setPosition(15, bgPos.y - 20);
-            infoLabel.setAnchorPoint(0,0.5);
+        titleLabel.setPosition(15, bgPos.y + 20);
+        titleLabel.setAnchorPoint(0,0.5);
 
-            background.addChild(iconBackground);
-            iconBackground.addChild(icon);
-            background.addChild(titleLabel);
-            background.addChild(infoLabel);
+        fontDef.fillStyle = new cc.Color(255, 255, 255, 255);
+        let infoLabel = new cc.LabelTTF(infoText, fontDef);
+        infoLabel.setPosition(15, bgPos.y - 20);
+        infoLabel.setAnchorPoint(0,0.5);
 
-            return background;
+        background.addChild(iconBackground);
+        iconBackground.addChild(icon);
+        background.addChild(titleLabel);
+        background.addChild(infoLabel);
+
+        return background;
+    }
+
+    const proto = ProfileView.prototype;
+
+    proto.unattach = function () {
+        if (_parent.getParent()) {
+            _parent.getParent().removeChild(_parent, false);
         }
+    };
 
+    proto.reattach = function () {
+        if (_parent.getParent()) {
+            _parent.getParent().removeChild(_parent, false);
+        }
+        GameView.addView(_parent);
     };
 
     return ProfileView;

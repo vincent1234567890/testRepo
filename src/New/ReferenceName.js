@@ -141,6 +141,11 @@ const ReferenceName = {
     GameLogConsumptionIdChinese : "#SerialNumberChinese.png",
     GameLogConsumptionAmountChinese : "#ConsumptionChinese.png",
     GameLogScore : "#PointChinese.png",
+    GameLogRadioTextPeriodShortChinese : "#TodayChinese.png",
+    GameLogRadioTextPeriodMediumChinese :"#3DaysChinese.png",
+    GameLogRadioTextPeriodLongChinese :"#2WeeksChinese.png",
+    GameLogListSeparator : "#LineLong.png",
+    GameLogListSeparatorShort : "#LineShort.png",
 
 
     //Profile OLD
