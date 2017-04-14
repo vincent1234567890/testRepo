@@ -2,8 +2,6 @@
  * Created by eugeneseah on 15/11/16.
  */
 
-
-
 const ClientServerConnect = function () {
     "use strict";
     let _hasConnected = false;

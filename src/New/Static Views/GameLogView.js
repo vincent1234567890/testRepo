@@ -14,6 +14,7 @@ const GameLogView = (function () {
     const GameLogView = function () {
         _parent = new cc.Node();
         _popup= new FloatingMenuPopupBasePrefab(dismissCallback);
+        _popup.turnOffDeco();
         /*
          GameLogTitleChinese : "#GamelogChineseTitle.png",
          GameLogRecordTabChinese : "#GameRecordChinese.png",
@@ -58,6 +59,8 @@ const GameLogView = (function () {
 
         scrollTitleBackground.setPosition(565,520);
         scrollBackground.setPosition(565,265);
+
+
 
         // const gameRules = GUIFunctions.createButton(ReferenceName.FAQButtonBackground,ReferenceName.FAQButtonBackgroundOnPress,onGameRulesClicked);
         // const uiFAQ = GUIFunctions.createButton(ReferenceName.FAQButtonBackground,ReferenceName.FAQButtonBackgroundOnPress,onGameRulesClicked);
@@ -163,13 +166,13 @@ const GameLogView = (function () {
         _popup.hide();
     };
 
-    function setupGameList() {
+    function setupConsumptionLog() {
         const width = cc.view.getDesignResolutionSize().width;
         const height = cc.view.getDesignResolutionSize().height;
 
 
         const listView = new ccui.ListView();
-        listView.setDirection(ccui.ScrollView.DIR_HORIZONTAL);
+        listView.setDirection(ccui.ScrollView.DIR_VERTICAL);
         listView.setTouchEnabled(true);
         listView.setBounceEnabled(true);
         // listView.setBackGroundImage(res.HelloWorld_png);
@@ -187,10 +190,10 @@ const GameLogView = (function () {
             }, width / numberOfLobbyButtonsShown, gameSelected);
             const content = gameListButtonPrefab.getContent();
 
-            gameControlList.push(gameListButtonPrefab);
-
             listView.pushBackCustomItem(content);
         }
+
+
 
         return listView;
     }

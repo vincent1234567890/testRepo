@@ -209,11 +209,11 @@ var res = {
     // GameFrame: "res/New/InGameFrame.png",
     // GameFrame2: "res/New/InGameFrame2.png",
 
-    GameBackgrounds
-    GameBackground0: "res\CompanyA\Game BG/Game BG 1.png",
-    GameBackground1: "res\CompanyA\Game BG/Game BG 2.png",
-    GameBackground2: "res\CompanyA\Game BG/Game BG 3.png",
-    GameBackground3: "res\CompanyA\Game BG/Game BG 4.png",
+    //GameBackgrounds
+    GameBackground0: "res/CompanyA/Game BG/Game BG 1.png",
+    GameBackground1: "res/CompanyA/Game BG/Game BG 2.png",
+    GameBackground2: "res/CompanyA/Game BG/Game BG 3.png",
+    GameBackground3: "res/CompanyA/Game BG/Game BG 4.png",
 
     //Fish
     // StingrayPNG: "res/New/Fish/Ray.png",
@@ -260,8 +260,8 @@ var res = {
     // TestFont : "res/New/Fonts/test-export.fnt",
     // TestFontPNG : "res/New/Fonts/test-export.png",
 
-    GunCockSound : "res\CompanyA\Sound/gun-cocking-01.mp3",
-    GunShotSound : "res\CompanyA\Sound/gun-gunshot-01.mp3",
+    GunCockSound : "res/CompanyA/Sound/gun-cocking-01.mp3",
+    GunShotSound : "res/CompanyA/Sound/gun-gunshot-01.mp3",
 
     // Custom_font : {type:"font", name:"GoldenNumbersPlist", srcs:["res/CustomName.ttf"]}
 
@@ -310,7 +310,7 @@ var res = {
     // NetPng : "res/New/testing/Net.png",
 
     //debug
-    DebugCircle: "res\CompanyA\Testingcircle.png",
+    DebugCircle: "res/CompanyA/Testing/circle.png",
 
 
 };
