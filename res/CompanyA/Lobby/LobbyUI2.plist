@@ -19,6 +19,21 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
+            <key>NotificationBackground.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{618,49}</string>
+                <key>spriteSourceSize</key>
+                <string>{618,49}</string>
+                <key>textureRect</key>
+                <string>{{108,1213},{618,49}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
             <key>SSArrow.png</key>
             <dict>
                 <key>aliases</key>
@@ -90,9 +105,9 @@
                 <key>spriteSourceSize</key>
                 <string>{613,474}</string>
                 <key>textureRect</key>
-                <string>{{141,376},{607,412}}</string>
+                <string>{{728,376},{607,412}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>SSnotificationBar.png</key>
             <dict>
@@ -109,6 +124,21 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
+            <key>TimerBackground.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{385,48}</string>
+                <key>spriteSourceSize</key>
+                <string>{385,48}</string>
+                <key>textureRect</key>
+                <string>{{110,1137},{385,48}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
         </dict>
         <key>metadata</key>
         <dict>
@@ -123,7 +153,7 @@
             <key>size</key>
             <string>{1368,1368}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:4e657c4b979f322046b3045fdc97a2bc:cbff71792cfd49ec4d6250674321900e:94163f642743ebc20a54c1c8cbe99d40$</string>
+            <string>$TexturePacker:SmartUpdate:ae1ff2c6fa6ca51881d8c3375c7c9f75:a0e7a5b5a85c88c5ea7ab54b43752ca8:94163f642743ebc20a54c1c8cbe99d40$</string>
             <key>textureFileName</key>
             <string>LobbyUI2.png</string>
         </dict>
