@@ -1,8 +1,7 @@
 /**
- * Created by eugeneseah on 5/4/17.
+ * Created by eugeneseah on 11/4/17.
  */
-
-const FAQView = (function () {
+const GameLogView = (function () {
     "use strict";
     const ZORDER = 10;
     let _parent;
@@ -12,7 +11,7 @@ const FAQView = (function () {
     let sideSpacing = 100;
     let sideStart = 550;
 
-    const FAQView = function () {
+    const GameLogView = function () {
         _parent = new cc.Node();
         _popup= new FloatingMenuPopupBasePrefab(dismissCallback);
         /*FAQTextBackground : "#TextBG3.png",
@@ -26,7 +25,7 @@ const FAQView = (function () {
          */
 
         const textBG = new cc.Sprite(ReferenceName.FAQTextBackground);
-        const title = new cc.Sprite(ReferenceName.FAQTitleChinese);
+        const title = new cc.Sprite(ReferenceName.GameLog);
 
         const userAgreementTab = GUIFunctions.createButton(ReferenceName.FAQTabBackground,ReferenceName.FAQTabBackgroundOnPress,onUserAgreementTabClicked);
         const faqTab = GUIFunctions.createButton(ReferenceName.FAQTabBackground,ReferenceName.FAQTabBackgroundOnPress,onFAQTabClicked);
@@ -39,12 +38,6 @@ const FAQView = (function () {
 
         userAgreementTab.addChild(userAgreementTabTitleText);
         faqTab.addChild(faqTabTitleText);
-
-        userAgreementTab.setAnchorPoint(0.2,0.5);
-        faqTab.setAnchorPoint(0.2,0.5);
-
-        const userAgreementRollover = new RolloverEffectItem(userAgreementTab,undefined,undefined,onTabHover,onTabUnhover);
-        const faqRollover = new RolloverEffectItem(faqTab,undefined,undefined,onTabHover,onTabUnhover);
 
         const gameRules = GUIFunctions.createButton(ReferenceName.FAQButtonBackground,ReferenceName.FAQButtonBackgroundOnPress,onGameRulesClicked);
         const uiFAQ = GUIFunctions.createButton(ReferenceName.FAQButtonBackground,ReferenceName.FAQButtonBackgroundOnPress,onGameRulesClicked);
@@ -89,8 +82,8 @@ const FAQView = (function () {
         _popup.getBackground().addChild(cannonInfo);
         _popup.getBackground().addChild(jackpotInfo);
 
-        userAgreementTab.setPosition(130,tabHeight);
-        faqTab.setPosition(310,tabHeight);
+        userAgreementTab.setPosition(200,tabHeight);
+        faqTab.setPosition(390,tabHeight);
 
 
 
@@ -103,19 +96,6 @@ const FAQView = (function () {
         _parent.addChild(_popup.getParent());
 
         GameView.addView(_parent,ZORDER);
-
-        const wiggle = new cc.Sequence(cc.rotateBy(0.08, 3), cc.rotateBy(0.08, -3));
-
-        function onTabHover(widget){
-            if (widget.getNumberOfRunningActions()==0) {
-                widget.runAction(new cc.RepeatForever(wiggle.clone()));
-            }
-        }
-
-        function onTabUnhover(widget) {
-            widget.stopAllActions();
-            widget.setRotation(0);
-        }
     };
 
     function onUserAgreementTabClicked (){
@@ -142,8 +122,6 @@ const FAQView = (function () {
 
     }
 
-
-
     function dismissCallback(touch) {
         _parent.setLocalZOrder(-1000);
         _parent.setVisible(false);
@@ -151,24 +129,9 @@ const FAQView = (function () {
 
     const proto = FAQView.prototype;
 
-    proto.unattach = function () {
-        if (_parent.getParent()) {
-            _parent.getParent().removeChild(_parent, false);
-        }
-    };
-
-    proto.reattach = function () {
-        if (_parent.getParent()) {
-            _parent.getParent().removeChild(_parent, false);
-        }
-        GameView.addView(_parent);
-    };
-
     proto.show = function () {
-        console.log("show");
-        _parent.setVisible(true);
         _parent.setLocalZOrder(ZORDER);
-
+        _parent.setVisible(true);
         _popup.show();
     };
 
@@ -177,5 +140,5 @@ const FAQView = (function () {
         _popup.hide();
     };
 
-    return FAQView;
+    return GameLogView;
 }());

@@ -40,5 +40,24 @@ const LeaderboardView = (function () {
         _popup.show();
     };
 
+    proto.hide = function () {
+        _parent.setLocalZOrder(-1000);
+
+        BlockingManager.deregisterBlock(dismissCallback);
+    };
+
+    proto.unattach = function () {
+        if (_parent.getParent()) {
+            _parent.getParent().removeChild(_parent, false);
+        }
+    };
+
+    proto.reattach = function () {
+        if (_parent.getParent()) {
+            _parent.getParent().removeChild(_parent, false);
+        }
+        GameView.addView(_parent);
+    };
+
     return LeaderboardView;
 }());

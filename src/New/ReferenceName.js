@@ -21,6 +21,10 @@ const ReferenceName = {
     LockOnButtonBottom : "LockOnBtm_",
     LockOnTargetCrosshair :"#LockOnIcon_00000.png",
 
+    BackButton : "Back.png",
+    BackButtonOnPress : "BackDW.png",
+    BackButtonText : "#BackChinese.png",
+
     //Lobby
     LobbyBackground : "#LobbyBG1.png",
     ScrollArrow : "#Arrow.png",//
@@ -119,15 +123,33 @@ const ReferenceName = {
     ProfileTitleChinese : "#InfoChineseTitle.png",
     ProfileUserTextBackground : "#TextBG6.png",
     ProfileNicknameTitleChinese : "#NicknameChinese.png",
-    ProfileInputBackground : "#InputBox.png",
-    ProfileEditButton : "#EditButton.png",
+    ProfileInputBackground : "InputBox.png",
+    ProfileEditButton : "EditButton.png",
     ProfileUsernameTitleChinese : "#UsernameChinese.png",
     ProfileIconBackground : "#SymbolBG.png",
     ProfileIconTextBackground : "#TextBG5.png",
     ProfileTimeIcon : "#TimeSymbol.png",
     ProfileCoinIcon : "#CoinsSymbol.png",
     ProfileRankingIcon : "#RankingSymbol.png",
-    ProfileCoinStackIcon : "#Coin2WeekSymbol.png",
+    ProfileCoinStackIcon : "#Coin2weekSymbol.png",
+
+    //GameLog
+    GameLogTitleChinese : "#GamelogChineseTitle.png",
+    GameLogRecordTabChinese : "#GameRecordChinese.png",
+    GameLogConsumptionTabChinese : "#ConsumptionRecordChinese.png",
+    GameLogRadioButton : "#SelectionBase.png",
+    GameLogRadioButtonSelected : "#Selection.png",
+    GameLogLogTitleBackground : "#TextHeaderBase.png",
+    GameLogDateChinese : "#DateChinese.png",
+    GameLogTypeChinese : "#TypeChinese.png",
+    GameLogConsumptionIdChinese : "#SerialNumberChinese.png",
+    GameLogConsumptionAmountChinese : "#ConsumptionChinese.png",
+    GameLogScore : "#PointChinese.png",
+    GameLogRadioTextPeriodShortChinese : "#TodayChinese.png",
+    GameLogRadioTextPeriodMediumChinese :"#3DaysChinese.png",
+    GameLogRadioTextPeriodLongChinese :"#2WeeksChinese.png",
+    GameLogListSeparator : "#LineLong.png",
+    GameLogListSeparatorShort : "#LineShort.png",
 
     //Profile OLD
     ProfileBackground : "#Profile POut BG.png",

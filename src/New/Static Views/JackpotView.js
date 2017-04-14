@@ -92,6 +92,12 @@ const JackpotView = (function () {
 
     const proto = JackpotView.prototype;
 
+    proto.unattach = function () {
+        if (_parent.getParent()) {
+            _parent.getParent().removeChild(_parent, false);
+        }
+    };
+
     proto.updateJackpot = function(value){
         // let prize = (value).toLocaleString('en-US', {maximumFractionDigits: 2});
         let prize = (value).toFixed(2);
@@ -102,7 +108,9 @@ const JackpotView = (function () {
     };
 
     proto.reattach = function () {
-        _parent.getParent().removeChild(_parent,false);
+        if (_parent.getParent()) {
+            _parent.getParent().removeChild(_parent, false);
+        }
         GameView.addView(_parent);
     };
 

@@ -37,7 +37,6 @@ const FishView = (function () {
         this.type = fishType;
 
         this.doAnimation(FishAnimationEnum.default);
-        // this._sprite.setScale(0.5);
         // GameView.addView(this._parent);
         parent.addChild(this._parent, -1);
 
@@ -63,7 +62,6 @@ const FishView = (function () {
         }
 
         this._willFlip = fishClass.willFlip;
-
     };
 
     const proto = FishView.prototype;
@@ -84,14 +82,13 @@ const FishView = (function () {
     };
 
     proto.killFish = function (target, callback, id, playerSlot) {
-        //console.log("killFish:", this.type, FishAnimationData[this.type], FishAnimationData[this.type][FishAnimationEnum.death], FishAnimationData[this.type][FishAnimationEnum.death]&&FishAnimationData[this.type][FishAnimationEnum.death].length);
-        if (FishAnimationData[this.type][FishAnimationEnum.death]
-            && FishAnimationData[this.type][FishAnimationEnum.death].animation
-            && FishAnimationData[this.type][FishAnimationEnum.death].animation._animation
-            && FishAnimationData[this.type][FishAnimationEnum.death].animation._animation._frames
-            && FishAnimationData[this.type][FishAnimationEnum.death].animation._animation._frames.length > 0){//lulwut? maybe need to find a better way
+        //console.log("killFish:", this.type, FishAnimationData[this.type], FishAnimationData[this.type][FishAnimationEnum.death],
+        // FishAnimationData[this.type][FishAnimationEnum.death]&&FishAnimationData[this.type][FishAnimationEnum.death].length);
+        let deathAnimation = FishAnimationData[this.type][FishAnimationEnum.death];
+        if (deathAnimation && deathAnimation.animation && deathAnimation.animation._animation
+            && deathAnimation.animation._animation._frames && deathAnimation.animation._animation._frames.length > 0) {//lulwut? maybe need to find a better way
             this.doAnimation(FishAnimationEnum.death);
-        }else {
+        } else {
             // console.log("killFish", id)
             this._sprite.setColor(new cc.Color(32, 32, 128, 128));
             // this._sprite.runAction(deathTint);
@@ -104,7 +101,12 @@ const FishView = (function () {
             // this._sprite.setBlendFunc()
         }
 
-        const notify = new cc.Sequence(new cc.DelayTime(1), new cc.CallFunc(callback, target, {position : this._parent.getPosition(), type : this.type, playerSlot: playerSlot, id : id}));
+        const notify = new cc.Sequence(new cc.DelayTime(1), new cc.CallFunc(callback, target, {
+            position: this._parent.getPosition(),
+            type: this.type,
+            playerSlot: playerSlot,
+            id: id
+        }));
         this._sprite.runAction(notify);
         // return {position : this._parent.getPosition(), type : this.type};
     };
@@ -122,7 +124,7 @@ const FishView = (function () {
             this._sprite.flippedY = (rot % 360 > 90 && rot % 360 <= 270);
         }
 
-        if (!debugReported && this._sprite.getContentSize().width == 0){
+        if (!debugReported && this._sprite.getContentSize().width === 0){
             debugReported = true;
             console.warn("Fish missing atlas :", this.type);
         }
