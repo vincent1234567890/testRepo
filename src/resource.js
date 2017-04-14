@@ -1,8 +1,8 @@
 var res = {
     LoadingLogo: "res/loadingLogo.jpg",
 
-    waterCausticsFSH: "src/New/Shaders/WaterCaustics/WaterCaustics.fsh",
-    waterCausticsVSH: "src/New/Shaders/WaterCaustics/WaterCaustics.vsh",
+    // waterCausticsFSH: "src/New/Shaders/WaterCaustics/WaterCaustics.fsh",
+    // waterCausticsVSH: "src/New/Shaders/WaterCaustics/WaterCaustics.vsh",
     // LoadingAdBg : "res/LoadingAdBg.jpg",
     // LoadingCompanyLogoScreen : "res/MainBg.jpg",
     //
@@ -171,18 +171,20 @@ var res = {
     //Lobby
     // GameUIPng: "res/New/Game/GameUI.png",
     // GameUIPlist: "res/New/Game/GameUI.plist",
-    LobbyUIPlist: "res/New/Lobby/LobbyUI.plist",
-    LobbyUIPng: "res/New/Lobby/LobbyUI.png",
-    ProfileUIPlist: "res/New/Lobby/ProfileUI.plist",
-    ProfileUIPng: "res/New/Lobby/ProfileUI.png",
-    SettingUIPlist: "res/New/Options/SettingUI.plist",
-    SettingUIPng: "res/New/Options/SettingUI.png",
-    ScoreboardPlist: "res/New/Scoreboard/Scoreboard.plist",
-    ScoreboardPng: "res/New/Scoreboard/Scoreboard.png",
+
+
+    // LobbyUIPlist: "res/New/Lobby/LobbyUI.plist",
+    // LobbyUIPng: "res/New/Lobby/LobbyUI.png",
+    // ProfileUIPlist: "res/New/Lobby/ProfileUI.plist",
+    // ProfileUIPng: "res/New/Lobby/ProfileUI.png",
+    // SettingUIPlist: "res/New/Options/SettingUI.plist",
+    // SettingUIPng: "res/New/Options/SettingUI.png",
+    // ScoreboardPlist: "res/New/Scoreboard/Scoreboard.plist",
+    // ScoreboardPng: "res/New/Scoreboard/Scoreboard.png",
     // SideMenuPlist : "res/New/Options/Options Menu.plist",
     // SideMenuPng : "res/New/Options/Options Menu.png",
-    BottomMenuPlist: "res/New/Options/BottomMenu.plist",
-    BottomMenuPng: "res/New/Options/BottomMenu.png",
+    // BottomMenuPlist: "res/New/Options/BottomMenu.plist",
+    // BottomMenuPng: "res/New/Options/BottomMenu.png",
     // LoginUIPlist : "res/New/Lobby/Login.plist",
     // LoginUIPng : "res/New/Lobby/Login.png",
 
@@ -196,22 +198,22 @@ var res = {
 
     WaterCausticAnimation : "res/CompanyA/Lobby/Caustic.plist",
 
-    WaterCaustic0 : "res/CompanyA/Lobby/Caustic1.png",
-    WaterCaustic1 : "res/CompanyA/Lobby/Caustic2.png",
-    WaterCaustic2 : "res/CompanyA/Lobby/Caustic3.png",
-    WaterCaustic3 : "res/CompanyA/Lobby/Caustic4.png",
-    WaterCaustic4 : "res/CompanyA/Lobby/Caustic5.png",
+    // WaterCaustic0 : "res/CompanyA/Lobby/Caustic1.png",
+    // WaterCaustic1 : "res/CompanyA/Lobby/Caustic2.png",
+    // WaterCaustic2 : "res/CompanyA/Lobby/Caustic3.png",
+    // WaterCaustic3 : "res/CompanyA/Lobby/Caustic4.png",
+    // WaterCaustic4 : "res/CompanyA/Lobby/Caustic5.png",
     // WaterCaustic5 : "res/CompanyA/Lobby/Caustic masking 1_00000.png",
 
     //GameFrame
-    GameFrame: "res/New/InGameFrame.png",
-    GameFrame2: "res/New/InGameFrame2.png",
+    // GameFrame: "res/New/InGameFrame.png",
+    // GameFrame2: "res/New/InGameFrame2.png",
 
-    //GameBackgrounds
-    GameBackground0: "res/New/Game BG/Game BG 1.png",
-    GameBackground1: "res/New/Game BG/Game BG 2.png",
-    GameBackground2: "res/New/Game BG/Game BG 3.png",
-    GameBackground3: "res/New/Game BG/Game BG 4.png",
+    GameBackgrounds
+    GameBackground0: "res\CompanyA\Game BG/Game BG 1.png",
+    GameBackground1: "res\CompanyA\Game BG/Game BG 2.png",
+    GameBackground2: "res\CompanyA\Game BG/Game BG 3.png",
+    GameBackground3: "res\CompanyA\Game BG/Game BG 4.png",
 
     //Fish
     // StingrayPNG: "res/New/Fish/Ray.png",
@@ -250,18 +252,16 @@ var res = {
     // HorseshoeCrabPlist: "res/New/Fish/HorseshoeCrab.plist",
     // HorseshoeCrabPng: "res/New/Fish/HorseshoeCrab.png",
     // PaddleFishPlist: "res/New/Fish/PaddleFish.plist",
-    // PaddleFishPng: "res/New/Fish/PaddleFish.png",
-    CoinExplosion : "res/CompanyA/Game/CoinExplosion1.plist",
     //
 
-    GoldenNumbersPlist : "res/New/Fonts/GoldNumber.plist",
-    GoldNumberPng : "res/New/Fonts/GoldNumber.png",
+    // GoldenNumbersPlist : "res/New/Fonts/GoldNumber.plist",
+    // GoldNumberPng : "res/New/Fonts/GoldNumber.png",
+    //
+    // TestFont : "res/New/Fonts/test-export.fnt",
+    // TestFontPNG : "res/New/Fonts/test-export.png",
 
-    TestFont : "res/New/Fonts/test-export.fnt",
-    TestFontPNG : "res/New/Fonts/test-export.png",
-
-    GunCockSound : "res/New/Sound/gun-cocking-01.mp3",
-    GunShotSound : "res/New/Sound/gun-gunshot-01.mp3",
+    GunCockSound : "res\CompanyA\Sound/gun-cocking-01.mp3",
+    GunShotSound : "res\CompanyA\Sound/gun-gunshot-01.mp3",
 
     // Custom_font : {type:"font", name:"GoldenNumbersPlist", srcs:["res/CustomName.ttf"]}
 
@@ -310,7 +310,7 @@ var res = {
     // NetPng : "res/New/testing/Net.png",
 
     //debug
-    DebugCircle: "res/New/testing/circle.png",
+    DebugCircle: "res\CompanyA\Testingcircle.png",
 
 
 };
