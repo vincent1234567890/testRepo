@@ -66,7 +66,7 @@ const ProfileView = (function () {
 
         profilebg.setAnchorPoint(0.0,0.0);
 
-        const nickTextBox = new cc.EditBox(cc.size(165,30), profilebgdummy);
+        const nickTextBox = new cc.EditBox(cc.size(160,30), profilebgdummy);
         nickTextBox.setPlaceHolder("Nickname");
         nickTextBox.setFontName("Microsoft YaHei");
         nickTextBox.setFontColor(new cc.Color(72, 21, 0, 255));
@@ -80,7 +80,7 @@ const ProfileView = (function () {
         nickTextBox.setPosition( 95, bgPos.y);
         // editButton.setPosition( 250, bgPos.y);
         profilebg.setPosition(90,bgPos.y/2);
-        editButton.setPosition( 270 , bgPos.y);
+        editButton.setPosition( 265 , bgPos.y);
         nickTitle.setPosition(50, bgPos.y);
         bg.setPosition(LeftColumn - 35, startHeight);
         _background.addChild(bg);

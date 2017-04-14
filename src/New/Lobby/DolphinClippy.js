@@ -22,9 +22,9 @@ const DolphinClippy = (function () {
         parent.addChild(dolphinText);
         dolphinText.setPosition(200, 600);
 
-        let dolphinCrown = new cc.Sprite(ReferenceName.CrownIcon);
-        parent.addChild(dolphinCrown);
-        dolphinText.setPosition(200, 600);
+        // let dolphinCrown = new cc.Sprite(ReferenceName.CrownIcon);
+        // parent.addChild(dolphinCrown);
+        // dolphinText.setPosition(200, 600);
 
     };
 

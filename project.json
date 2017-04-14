@@ -41,9 +41,10 @@
         "src/New/Static Views/FloatingMenuPopupBasePrefab.js",
         "src/New/Static Views/JackpotView.js",
         "src/New/Static Views/JackpotManager.js",
-        "src/New/Static Views/LeaderboardView.js",
-        "src/New/Static Views/ProfileView.js",
         "src/New/Static Views/SettingsView.js",
+        "src/New/Static Views/GameLogView.js",
+        "src/New/Static Views/ProfileView.js",
+        "src/New/Static Views/LeaderboardView.js",
         "src/New/Static Views/FAQView.js",
 
         "src/New/Lobby/DolphinClippy.js",

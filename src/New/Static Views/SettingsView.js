@@ -40,6 +40,7 @@ const SettingsView = (function () {
         const titlePosition = new cc.p(400, 450);
         title.setPosition(titlePosition);
         titleBackground.setPosition(titlePosition);
+        titleBackground.setScale(2);
 
         musicTitle.setPosition(STARTING_ALIGNMENT, musicSliderHeight);
         soundTitle.setPosition(STARTING_ALIGNMENT, soundSliderHeight);

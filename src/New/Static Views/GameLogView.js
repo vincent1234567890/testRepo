@@ -14,84 +14,107 @@ const GameLogView = (function () {
     const GameLogView = function () {
         _parent = new cc.Node();
         _popup= new FloatingMenuPopupBasePrefab(dismissCallback);
-        /*FAQTextBackground : "#TextBG3.png",
-         FAQTitleChinese : "#GameFAQChineseTitle.png",
-         FAQUserAgreementTitleChinese : "#UserAgreementChinese.png",
-         FAQTabTitleChinese : "#GameFAQChinese (2).png",
-         FAQTabBackground : "#Button2Idle.png",
-         FAQTabBackground2 : "#Button2OnPress.png",
-         FAQButtonBackground : "#Button3Idle.png",
-         FAQButtonBackgroundOnPress : "#Button3OnPress.png",
+        /*
+         GameLogTitleChinese : "#GamelogChineseTitle.png",
+         GameLogRecordTabChinese : "#GameRecordChinese.png",
+         GameLogConsumptionTabChinese : "#ConsumptionRecordChinese.png",
+         GameLogRadioButton : "#SelectionBase.png",
+         GameLogRadioButtonSelected : "#Selection.png",
+         GameLogLogTitleBackground : "#TextHeaderBase.png",
+         GameLogDateChinese : "#DateChinese.png",
+         GameLogTypeChinese : "#TypeChinese.png",
+         GameLogConsumptionIdChinese : "#SerialNumberChinese.png",
+         GameLogConsumptionAmountChinese : "#ConsumptionChinese.png",
+         GameLogScore : "#PointChinese.png",
+         GameLogRadioTextPeriodShortChinese : "#TodayChinese.png",
+         GameLogRadioTextPeriodMediumChinese :"#3DaysChinese.png",
+         GameLogRadioTextPeriodLongChinese :"#2WeeksChinese.png",
+         GameLogListSeparator : "#LineLong.png",
+         GameLogListSeparatorShort : "#LineShort.png",
          */
 
-        const textBG = new cc.Sprite(ReferenceName.FAQTextBackground);
-        const title = new cc.Sprite(ReferenceName.GameLog);
+        const title = new cc.Sprite(ReferenceName.GameLogTitleChinese);
 
-        const userAgreementTab = GUIFunctions.createButton(ReferenceName.FAQTabBackground,ReferenceName.FAQTabBackgroundOnPress,onUserAgreementTabClicked);
-        const faqTab = GUIFunctions.createButton(ReferenceName.FAQTabBackground,ReferenceName.FAQTabBackgroundOnPress,onFAQTabClicked);
+        const gameLogTab = GUIFunctions.createButton(ReferenceName.FAQTabBackground,ReferenceName.FAQTabBackgroundOnPress,onUserAgreementTabClicked);
+        const consumptionLogTab = GUIFunctions.createButton(ReferenceName.FAQTabBackground,ReferenceName.FAQTabBackgroundOnPress,onFAQTabClicked);
 
-        const userAgreementTabTitleText = new cc.Sprite(ReferenceName.FAQUserAgreementTitleChinese);
-        const faqTabTitleText = new cc.Sprite(ReferenceName.FAQTabTitleChinese);
+        const gameLogTabTitleText = new cc.Sprite(ReferenceName.GameLogRecordTabChinese);
+        const consumptionLogTabTitleText = new cc.Sprite(ReferenceName.GameLogConsumptionTabChinese);
 
-        userAgreementTabTitleText.setAnchorPoint(0,0);
-        faqTabTitleText.setAnchorPoint(0,0);
+        gameLogTabTitleText.setAnchorPoint(0,0);
+        consumptionLogTabTitleText.setAnchorPoint(0,0);
 
-        userAgreementTab.addChild(userAgreementTabTitleText);
-        faqTab.addChild(faqTabTitleText);
+        gameLogTab.addChild(gameLogTabTitleText);
+        consumptionLogTab.addChild(consumptionLogTabTitleText);
 
-        const gameRules = GUIFunctions.createButton(ReferenceName.FAQButtonBackground,ReferenceName.FAQButtonBackgroundOnPress,onGameRulesClicked);
-        const uiFAQ = GUIFunctions.createButton(ReferenceName.FAQButtonBackground,ReferenceName.FAQButtonBackgroundOnPress,onGameRulesClicked);
-        const fishInfo = GUIFunctions.createButton(ReferenceName.FAQButtonBackground,ReferenceName.FAQButtonBackgroundOnPress,onFishInfoClicked);
-        const cannonInfo = GUIFunctions.createButton(ReferenceName.FAQButtonBackground,ReferenceName.FAQButtonBackgroundOnPress,onCannonInfoClicked);
-        const jackpotInfo = GUIFunctions.createButton(ReferenceName.FAQButtonBackground,ReferenceName.FAQButtonBackgroundOnPress,onJackpotInfoClicked);
+        const scrollTitleBackground = new cc.Sprite(ReferenceName.GameLogLogTitleBackground);
+        const scrollBackground = new cc.Sprite(ReferenceName.GameLogLogBackground);
 
-        const gameRulesButtonText = new cc.Sprite(ReferenceName.FAQGameRulesButtonText);
-        const uiFAQButtonText = new cc.Sprite(ReferenceName.FAQUIFaqButtonText);
-        const fishInfoButtonText = new cc.Sprite(ReferenceName.FAQFishInfoButtonText);
-        const cannonInfoButtonText = new cc.Sprite(ReferenceName.FAQCannonInfoButtonText);
-        const jackpotInfoButtonText = new cc.Sprite(ReferenceName.FAQJackpotInfoButtonText);
+        gameLogTabTitleText.setRotation(-10);
+        consumptionLogTabTitleText.setRotation(-10);
 
-        const pos = new cc.p(gameRules.getContentSize().width/2, gameRules.getContentSize().height/2);
+        gameLogTabTitleText.setPosition(23,10);
+        consumptionLogTabTitleText.setPosition(17,5);
 
-        console.log(gameRules,gameRules.getContentSize(),pos);
+        scrollTitleBackground.setPosition(565,520);
+        scrollBackground.setPosition(565,265);
 
-        gameRulesButtonText.setPosition(pos);
-        uiFAQButtonText.setPosition(pos);
-        fishInfoButtonText.setPosition(pos);
-        cannonInfoButtonText.setPosition(pos);
-        jackpotInfoButtonText.setPosition(pos);
+        // const gameRules = GUIFunctions.createButton(ReferenceName.FAQButtonBackground,ReferenceName.FAQButtonBackgroundOnPress,onGameRulesClicked);
+        // const uiFAQ = GUIFunctions.createButton(ReferenceName.FAQButtonBackground,ReferenceName.FAQButtonBackgroundOnPress,onGameRulesClicked);
+        // const fishInfo = GUIFunctions.createButton(ReferenceName.FAQButtonBackground,ReferenceName.FAQButtonBackgroundOnPress,onFishInfoClicked);
+        // const cannonInfo = GUIFunctions.createButton(ReferenceName.FAQButtonBackground,ReferenceName.FAQButtonBackgroundOnPress,onCannonInfoClicked);
+        // const jackpotInfo = GUIFunctions.createButton(ReferenceName.FAQButtonBackground,ReferenceName.FAQButtonBackgroundOnPress,onJackpotInfoClicked);
+        //
+        // const gameRulesButtonText = new cc.Sprite(ReferenceName.FAQGameRulesButtonText);
+        // const uiFAQButtonText = new cc.Sprite(ReferenceName.FAQUIFaqButtonText);
+        // const fishInfoButtonText = new cc.Sprite(ReferenceName.FAQFishInfoButtonText);
+        // const cannonInfoButtonText = new cc.Sprite(ReferenceName.FAQCannonInfoButtonText);
+        // const jackpotInfoButtonText = new cc.Sprite(ReferenceName.FAQJackpotInfoButtonText);
 
-        gameRules.addChild(gameRulesButtonText);
-        uiFAQ.addChild(uiFAQButtonText);
-        fishInfo.addChild(fishInfoButtonText);
-        cannonInfo.addChild(cannonInfoButtonText);
-        jackpotInfo.addChild(jackpotInfoButtonText);
+        // const pos = new cc.p(gameRules.getContentSize().width/2, gameRules.getContentSize().height/2);
+        //
+        // console.log(gameRules,gameRules.getContentSize(),pos);
+        //
+        // gameRulesButtonText.setPosition(pos);
+        // uiFAQButtonText.setPosition(pos);
+        // fishInfoButtonText.setPosition(pos);
+        // cannonInfoButtonText.setPosition(pos);
+        // jackpotInfoButtonText.setPosition(pos);
+        //
+        // gameRules.addChild(gameRulesButtonText);
+        // uiFAQ.addChild(uiFAQButtonText);
+        // fishInfo.addChild(fishInfoButtonText);
+        // cannonInfo.addChild(cannonInfoButtonText);
+        // jackpotInfo.addChild(jackpotInfoButtonText);
 
-        textBG.setPosition(new cc.p(420,310));
         title.setPosition(new cc.p(560,705));
 
-        _popup.getBackground().addChild(textBG);
         _popup.getBackground().addChild(title);
 
-        _popup.getBackground().addChild(userAgreementTab);
-        _popup.getBackground().addChild(faqTab);
+        _popup.getBackground().addChild(gameLogTab);
+        _popup.getBackground().addChild(consumptionLogTab);
 
-        _popup.getBackground().addChild(gameRules);
-        _popup.getBackground().addChild(uiFAQ);
-        _popup.getBackground().addChild(fishInfo);
-        _popup.getBackground().addChild(cannonInfo);
-        _popup.getBackground().addChild(jackpotInfo);
-
-        userAgreementTab.setPosition(200,tabHeight);
-        faqTab.setPosition(390,tabHeight);
+        _popup.getBackground().addChild(scrollTitleBackground);
+        _popup.getBackground().addChild(scrollBackground);
 
 
 
-        gameRules.setPosition(sideButtonX, sideStart);
-        uiFAQ.setPosition(sideButtonX, sideStart - sideSpacing);
-        fishInfo.setPosition(sideButtonX, sideStart - sideSpacing * 2);
-        cannonInfo.setPosition(sideButtonX, sideStart - sideSpacing * 3);
-        jackpotInfo.setPosition(sideButtonX, sideStart - sideSpacing * 4);
+        // _popup.getBackground().addChild(gameRules);
+        // _popup.getBackground().addChild(uiFAQ);
+        // _popup.getBackground().addChild(fishInfo);
+        // _popup.getBackground().addChild(cannonInfo);
+        // _popup.getBackground().addChild(jackpotInfo);
+
+        gameLogTab.setPosition(200,tabHeight);
+        consumptionLogTab.setPosition(390,tabHeight);
+
+
+
+        // gameRules.setPosition(sideButtonX, sideStart);
+        // uiFAQ.setPosition(sideButtonX, sideStart - sideSpacing);
+        // fishInfo.setPosition(sideButtonX, sideStart - sideSpacing * 2);
+        // cannonInfo.setPosition(sideButtonX, sideStart - sideSpacing * 3);
+        // jackpotInfo.setPosition(sideButtonX, sideStart - sideSpacing * 4);
 
         _parent.addChild(_popup.getParent());
 
@@ -127,7 +150,7 @@ const GameLogView = (function () {
         _parent.setVisible(false);
     }
 
-    const proto = FAQView.prototype;
+    const proto = GameLogView.prototype;
 
     proto.show = function () {
         _parent.setLocalZOrder(ZORDER);
@@ -139,6 +162,38 @@ const GameLogView = (function () {
         dismissCallback();
         _popup.hide();
     };
+
+    function setupGameList() {
+        const width = cc.view.getDesignResolutionSize().width;
+        const height = cc.view.getDesignResolutionSize().height;
+
+
+        const listView = new ccui.ListView();
+        listView.setDirection(ccui.ScrollView.DIR_HORIZONTAL);
+        listView.setTouchEnabled(true);
+        listView.setBounceEnabled(true);
+        // listView.setBackGroundImage(res.HelloWorld_png);
+        listView.setContentSize(cc.size(width, height));
+        // listView.setInnerContainerSize(200,200)
+        listView.setAnchorPoint(cc.p(0.5, 0.5));
+        // listView.setPosition(width / 2, height / 2);
+        listView.setPosition(width / 2 , height / 2 - 70);
+
+        const gameList = _theme.GameList;
+        for (let i = 0; i < gameList.length; i++) {
+            const gameListButtonPrefab = new GameListButtonPrefab({
+                gameId: i,
+                gameName: gameList[i]
+            }, width / numberOfLobbyButtonsShown, gameSelected);
+            const content = gameListButtonPrefab.getContent();
+
+            gameControlList.push(gameListButtonPrefab);
+
+            listView.pushBackCustomItem(content);
+        }
+
+        return listView;
+    }
 
     return GameLogView;
 }());

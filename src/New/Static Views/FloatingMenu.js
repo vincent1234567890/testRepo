@@ -11,9 +11,11 @@ const FloatingMenu = (function () {
 
     let _playerData;
 
-    let _leaderboardView;
+
     let _setttingsView;
+    let _gameLogView;
     let _profileView;
+    let _leaderboardView;
     let _faqView;
 
     const FloatingMenu = function (playerData) {
@@ -38,7 +40,7 @@ const FloatingMenu = (function () {
             ReferenceName.FloatingMenuButtonBackground,
             ReferenceName.FloatingMenuButtonBackgroundDown,
             ReferenceName.FloatingMenuButtonGameLogText,
-            onAssetsSelected
+            onGameLogSelected
         );
 
         _parent.addChild(assets);
@@ -127,8 +129,13 @@ const FloatingMenu = (function () {
         }
     }
 
-    function onAssetsSelected() {
-
+    function onGameLogSelected() {
+        console.log("onGameLogSelected");
+        if (_gameLogView){
+            _gameLogView.show();
+        }else{
+            _gameLogView = new GameLogView();
+        }
     }
 
     function onProfileSelected() {
