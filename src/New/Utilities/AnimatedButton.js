@@ -10,7 +10,7 @@ const AnimatedButton = (function () {
 
         const animation = GUIFunctions.getAnimation(animationName, animationSpeed);
 
-        const _animationSequence = new cc.Sequence(animation, new cc.callFunc(onAnimationEnd));
+        const _animationSequence = new cc.Sequence(animation, cc.callFunc(onAnimationEnd));
         const _spriteTarget = new cc.Sprite();
 
         const frame = animation.getAnimation().getFrames()[0];
@@ -20,7 +20,6 @@ const AnimatedButton = (function () {
         var isOn = false;
 
         const touchEvent = (sender, type) => {
-
             // console.log("touch",sender,type);
             switch (type) {
                 case ccui.Widget.TOUCH_MOVED:
@@ -83,8 +82,6 @@ const AnimatedButton = (function () {
     proto.getParent = function () {
         return this._parent;
     };
-
-
 
     return AnimatedButton;
 }());

@@ -162,6 +162,27 @@ const ReferenceName = {
     BottomMenuFishListButton : "#Fish V2.png",
     BottomMenuExitButton : "#Exit V2.png",
 
+    //jackpot
+    JackpotBase: "#JPBase.png",
+    JackpotTimerBg: "#TimerBackground.png",
+    JackpotTimerIcon: "#TimerIcon.png",
+    JackpotTitle: "#JPTitle.png",
+    JackpotPrizeListFrame: "#PrizeListFrame.png",
+    JackpotMermaidIcon: "#MermaidIcon.png",
+    JackpotSharkIcon:"#SharkIcon.png",
+    JackpotTurtleIcon: "#TurtleIcon.png",
+    JackpotButterflyFishIcon: "#ButterflyfishIcon.png",
+    JackpotNotificationBackground: "#NotificationBackground.png",
+    JackpotTreasureBoxOpen_00000: "#TreasureBoxOpen_00000.png",
+    JackpotTreasureBoxOpenAnm: "TreasureBoxOpen_",
+    JackpotButterflyFishMedal_00000: "#JPButterflyFishMedal_00000.png",
+    JackpotButterflyFishMedalAnm: "JPButterflyFishMedal_",
+    JackpotMermaidMedal_00000: "#JPMermaidMedal_00000.png",
+    JackpotMermaidMedalAnm: "JPMermaidMedal_",
+    JackpotSharkMedal_00000: "#JPSharkMedal_00000.png",
+    JackpotSharkMedalAnm: "JPSharkMedal_",
+    JackpotTurtleMedal_00000: "#JPTurtleMedal_00000.png",
+    JackpotTurtleMedalAnm: "JPTurtleMedal_",
 
     //OptionsMenu
     OptionsBG : "#Setting BG.png",
