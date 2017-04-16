@@ -1,10 +1,13 @@
 
 var JackpotPanel = cc.Layer.extend({ //gradient
+    _selectedBoxes: 0,
+    _prizeList: null,
+    _iconPatterns: null,
 
-    ctor: function(){
+    ctor: function(iconPattern, prizeList, winAward){
         cc.Layer.prototype.ctor.call(this);
 
-        cc.spriteFrameCache.addSpriteFrames(res.JackpotMiniGamePlist, res.JackpotMiniGamePng);
+        cc.spriteFrameCache.addSpriteFrames(res.JackpotMiniGamePlist);
 
         //buzz effect
         //
@@ -105,30 +108,106 @@ var JackpotPanel = cc.Layer.extend({ //gradient
         lbPrize4Value.setScale(0.3);
 
         //Treasure Box
-        let boxStartPoint = cc.p(215, 100), boxPadding = new cc.Size(180, 120), spTreasureBox;
+        let boxStartPoint = cc.p(215, 100), boxPadding = new cc.Size(180, 120), spTreasureBox, selfPoint = this;
         for(let col = 0; col < 4; col++) {
             for (let row = 0; row < 3; row++) {
                 spTreasureBox = new cc.Sprite(ReferenceName.JackpotTreasureBoxOpen_00000);
                 spTreasureBox.setPosition(boxStartPoint.x + boxPadding.width * col, boxStartPoint.y + boxPadding.height * row);
                 spBackground.addChild(spTreasureBox);
-                let boxSize = spTreasureBox.getContentSize();
 
-                //add touch event.
-                let boxAnimation = GUIFunctions.getAnimation(ReferenceName.JackpotTreasureBoxOpenAnm, 0.05);
-                spTreasureBox.runAction(boxAnimation);
+                //add touch listener
+                let touchEventListener = cc.EventListener.create({
+                    event: cc.EventListener.TOUCH_ONE_BY_ONE,
+                    swallowTouches: true,
+                    onTouchBegan: function(touch, event){
+                        let target = event.getCurrentTarget();
+                        if(cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
+                            target.convertToNodeSpace(touch.getLocation()))){
+                            //show the effect
+                            let spEffect = target.getChildByTag(1);
+                            if(!spEffect)
+                                spEffect = new cc.Sprite(ReferenceName.JackpotChestGlow_00014);
+                            spEffect.setPosition(85, 44);
+                            target.addChild(spEffect, 1, 1);
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    },
 
-                let spMedal = new cc.Sprite(ReferenceName.JackpotMermaidIcon);
-                spTreasureBox.addChild(spMedal);
-                spMedal.setPosition(boxSize.width * 0.5, boxSize.height * 0.5);
-                spMedal.setScale(0.05);
-                spMedal.runAction(cc.scaleTo(1, 1));
+                    onTouchMoved: function(touch, event) {
+                        let target = event.getCurrentTarget();
+                        let spEffect = target.getChildByTag(1);
+                        if (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
+                                target.convertToNodeSpace(touch.getLocation()))) {
+                            if (!spEffect.isVisible())
+                                spEffect.setVisible(true);
+                        } else {
+                            if (spEffect.isVisible())
+                                spEffect.setVisible(false);
+                        }
+                    },
+
+                    onTouchEnded: function(touch, event){
+                        let target = event.getCurrentTarget();
+                        if (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
+                                target.convertToNodeSpace(touch.getLocation()))) {
+                            //
+                            let boxAnimation = GUIFunctions.getAnimation(ReferenceName.JackpotTreasureBoxOpenAnm, 0.05);
+                            target.runAction(cc.sequence(boxAnimation, cc.callFunc(function(){
+                                this.removeFromParent(true);
+                            }, target)));
+
+                            let spMedal = selfPoint._createIconSprite();
+                            spBackground.addChild(spMedal);
+                            spMedal.setPosition(target.getPosition());
+                            spMedal.setScale(0.05);
+                            spMedal.runAction(cc.sequence(cc.scaleTo(0.8, 1), cc.callFunc(function(){
+                                //
+                            }, spMedal)));
+                            //remove the event listener
+                            cc.eventManager.removeListeners(target);
+                        }
+                        let spEffect = target.getChildByTag(1);
+                        if(spEffect)
+                            spEffect.setVisible(false);
+                    }
+                });
+                cc.eventManager.addListener(touchEventListener, spTreasureBox);
             }
         }
-
     },
 
     cleanup: function () {
         cc.spriteFrameCache.removeSpriteFramesFromFile(res.JackpotMiniGamePlist);
         cc.Layer.prototype.cleanup.call(this);
+    },
+
+    _createIconSprite: function(){
+        let type = this._selectedBoxes % 4, spIcon;
+        if(type === 0){
+            spIcon = new cc.Sprite(ReferenceName.JackpotMermaidIcon);
+        } else if(type === 1){
+            spIcon = new cc.Sprite(ReferenceName.JackpotSharkIcon);
+        } else if(type === 2){
+            spIcon = new cc.Sprite(ReferenceName.JackpotTurtleIcon);
+        } else {
+            spIcon = new cc.Sprite(ReferenceName.JackpotButterflyFishIcon);
+        }
+        this._selectedBoxes++;
+        return spIcon;
+    },
+
+    showRemainBoxes: function(){
+        //show the remain boxes.
+
+    }
+});
+
+var JackpotAwardPanel = cc.LayerColor.extend({
+    ctor: function(){
+        cc.LayerColor.prototype.ctor.call(this, new cc.Color(10, 10, 10, 192), 1163, 631);
+
+
     }
 });

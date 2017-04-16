@@ -183,6 +183,7 @@ const ReferenceName = {
     JackpotSharkMedalAnm: "JPSharkMedal_",
     JackpotTurtleMedal_00000: "#JPTurtleMedal_00000.png",
     JackpotTurtleMedalAnm: "JPTurtleMedal_",
+    JackpotChestGlow_00014: "#ChestGlow_00014.png",
 
     //OptionsMenu
     OptionsBG : "#Setting BG.png",
