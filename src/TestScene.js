@@ -5,8 +5,8 @@ var TestScene = cc.Scene.extend({
 
         var winSize = cc.director.getWinSize();
 
-        var layerColor = new cc.LayerColor(new cc.Color(77, 50, 30));
-        this.addChild(layerColor);
+        //var layerColor = new cc.LayerColor(new cc.Color(77, 50, 30));
+        //this.addChild(layerColor);
 
         //add Fishes
         // var shark = new SharkActor();
@@ -18,9 +18,10 @@ var TestScene = cc.Scene.extend({
         // GameManager.initialise(this);
         // GameManager.development(this);
 
-        const waterCausticsLayer = new WaterCausticsLayer();
-        this.addChild(waterCausticsLayer,999);
+        //const waterCausticsLayer = new WaterCausticsLayer();
+        //this.addChild(waterCausticsLayer,999);
 
-
+        var jackpotPanel = new JackpotPanel();
+        this.addChild(jackpotPanel);
     }
 });
