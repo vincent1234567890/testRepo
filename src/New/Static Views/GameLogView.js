@@ -44,8 +44,8 @@ const GameLogView = (function () {
 
         const title = new cc.Sprite(ReferenceName.GameLogTitleChinese);
 
-        const gameLogTab = GUIFunctions.createButton(ReferenceName.FAQTabBackground,ReferenceName.FAQTabBackgroundOnPress,onUserAgreementTabClicked);
-        const consumptionLogTab = GUIFunctions.createButton(ReferenceName.FAQTabBackground,ReferenceName.FAQTabBackgroundOnPress,onFAQTabClicked);
+        const gameLogTab = GUIFunctions.createButton(ReferenceName.FAQTabBackground,ReferenceName.FAQTabBackgroundOnPress,onGameLogTabPressed);
+        const consumptionLogTab = GUIFunctions.createButton(ReferenceName.FAQTabBackground,ReferenceName.FAQTabBackgroundOnPress,onConsumptionTabPressed);
 
         const gameLogTabTitleText = new cc.Sprite(ReferenceName.GameLogRecordTabChinese);
         const consumptionLogTabTitleText = new cc.Sprite(ReferenceName.GameLogConsumptionTabChinese);
@@ -67,6 +67,14 @@ const GameLogView = (function () {
 
         scrollTitleBackground.setPosition(565,520);
         scrollBackground.setPosition(565,265);
+
+        gameLogTab.setAnchorPoint(0.2,0.5);
+        consumptionLogTab.setAnchorPoint(0.2,0.5);
+
+        const userAgreementRollover = new RolloverEffectItem(gameLogTab,onGameLogTabPressed,undefined,onTabHover,onTabUnhover);
+        const faqRollover = new RolloverEffectItem(consumptionLogTab,onConsumptionTabPressed,undefined,onTabHover,onTabUnhover);
+        gameLogTab.setPosition(130,tabHeight);
+        consumptionLogTab.setPosition(310,tabHeight);
 
         const scrollTitle = setupConsumptionLogTitle();
         scrollTitle.setPosition(0,scrollTitleBackground.getContentSize().height/2);
@@ -90,47 +98,45 @@ const GameLogView = (function () {
         // _popup.getBackground().addChild(cannonInfo);
         // _popup.getBackground().addChild(jackpotInfo);
 
-        gameLogTab.setPosition(200,tabHeight);
-        consumptionLogTab.setPosition(390,tabHeight);
+        // gameLogTab.setPosition(200,tabHeight);
+        // consumptionLogTab.setPosition(390,tabHeight);
 
-
-
-        // gameRules.setPosition(sideButtonX, sideStart);
-        // uiFAQ.setPosition(sideButtonX, sideStart - sideSpacing);
-        // fishInfo.setPosition(sideButtonX, sideStart - sideSpacing * 2);
-        // cannonInfo.setPosition(sideButtonX, sideStart - sideSpacing * 3);
-        // jackpotInfo.setPosition(sideButtonX, sideStart - sideSpacing * 4);
 
         _parent.addChild(_popup.getParent());
 
-        this.show(consumptionData);
+        let list;
+
+        function onGameLogTabPressed(){
+            // const list = setupConsumptionLogList(consumptionData);
+            // scrollBackground.addChild(list);
+        }
+
+        function onConsumptionTabPressed(){
+            if(list){
+                scrollBackground.removeChild(list);
+            }
+            list = setupConsumptionLogList(scrollBackground,consumptionData);
+            scrollBackground.addChild(list);
+
+        }
+
+        const wiggle = new cc.Sequence(cc.rotateBy(0.08, 3), cc.rotateBy(0.08, -3));
+
+        function onTabHover(widget){
+            if (widget.getNumberOfRunningActions()==0) {
+                widget.runAction(new cc.RepeatForever(wiggle.clone()));
+            }
+        }
+
+        function onTabUnhover(widget) {
+            widget.stopAllActions();
+            widget.setRotation(0);
+        }
+
+        // this.show(consumptionData);
 
         GameView.addView(_parent,ZORDER);
     };
-
-    function onUserAgreementTabClicked (){
-
-    }
-
-    function onFAQTabClicked(){
-
-    }
-
-    function onGameRulesClicked() {
-
-    }
-
-    function onFishInfoClicked() {
-
-    }
-
-    function onCannonInfoClicked() {
-
-    }
-
-    function onJackpotInfoClicked(){
-
-    }
 
     function dismissCallback(touch) {
         _parent.setLocalZOrder(-1000);
@@ -139,12 +145,9 @@ const GameLogView = (function () {
 
     const proto = GameLogView.prototype;
 
-    proto.show = function (consumptionData) {
+    proto.show = function () {
         _parent.setLocalZOrder(ZORDER);
         _parent.setVisible(true);
-
-        setupConsumptionLogList(consumptionData);
-
         _popup.show();
     };
 
@@ -155,7 +158,6 @@ const GameLogView = (function () {
 
     function setupGameLog(){
         const parent = new cc.Node();
-
     }
 
     function setupConsumptionLogTitle(){
@@ -188,9 +190,10 @@ const GameLogView = (function () {
         return parent;
     }
 
-    function setupConsumptionLogList(consumptionData) {
-        const width = cc.view.getDesignResolutionSize().width;
-        const height = cc.view.getDesignResolutionSize().height;
+    function setupConsumptionLogList(scrollBackground,consumptionData) {
+        console.log("setupConsumptionLogList",consumptionData);
+
+        const size = scrollBackground.getContentSize();
 
 
         const listView = new ccui.ListView();
@@ -198,38 +201,118 @@ const GameLogView = (function () {
         listView.setTouchEnabled(true);
         listView.setBounceEnabled(true);
         // listView.setBackGroundImage(res.HelloWorld_png);
-        listView.setContentSize(cc.size(width, height));
+        // listView.setContentSize(cc.size(width, height));
         // listView.setInnerContainerSize(200,200)
-        listView.setAnchorPoint(cc.p(0.5, 0.5));
+        // listView.setAnchorPoint(cc.p(0.5, 0.5));
         // listView.setPosition(width / 2, height / 2);
-        listView.setPosition(width / 2 , height / 2 - 70);
-
+        // listView.setPosition(width / 2 , height / 2 - 70);
+        listView.setContentSize(size);
+        // listView.setPosition(size.width/2, size.height/2);
         // const gameList = _theme.GameList;
-        const consumption = consumptionData.data;
-        for (let i = 0; i < consumption.length; i++) {
-            const listItemPrefab = new listItemPrefab({
-                gameId: i,
-                gameName: consumption[i]
+        // const consumption = consumptionData.data;
+        // for (let i = 0; i < consumption.length; i++) {
+        const ListItemPrefab = (function () {
+            // const
+            function ListItemPrefab(itemData, onSelectedCallback){
+                // const base = GUIFunctions.createButton(undefined, ReferenceName.GameLogHighLight, onSelectedCallback);
+                const wrapper = new ccui.Widget();
+                const highlight = new cc.Sprite(ReferenceName.GameLogHighLight);
+                const separator = new cc.Sprite(ReferenceName.GameLogListSeparator);
+
+                // highlight.setContentSize(scrollBackground.getContentSize().width,highlight.getContentSize().height);
+
+                wrapper.addChild(highlight);
+                wrapper.addChild(separator);
+                wrapper.itemData = itemData;
+
+                wrapper.setContentSize(highlight.getContentSize());
+                wrapper.setTouchEnabled(true);
+
+                highlight.setVisible(false);
+
+                highlight.setPosition(size.width/2,highlight.getContentSize().height/2);
+                separator.setPosition(size.width/2,0);
+
+                console.log("ListItemPrefab",wrapper,highlight.getContentSize());
+
+                let fontDef = new cc.FontDefinition();
+                fontDef.fontName = "Microsoft YaHei";
+                // fontDef.fontName = "Arial Unicode MS";
+                fontDef.fontSize = "20";
+                fontDef.fontStyle = "bold";
+                fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
+                fontDef.fillStyle = new cc.Color(0, 0, 0, 255);
+
+                let roundId = new cc.LabelTTF("T6-123456789", fontDef);
+                let totalSpend = new cc.LabelTTF("987654321", fontDef);
+                let totalRevenue = new cc.LabelTTF("123456789", fontDef);
+                let totalProfit = new cc.LabelTTF("864197532", fontDef);
+                let startTime = new cc.LabelTTF(new Date(Date.now()).toLocaleDateString("zh-Hans-CN"), fontDef);
+                let endTime = new cc.LabelTTF(Date.now().toString(), fontDef);
+
+                roundId.setAnchorPoint(0, 0.5);
+                totalSpend.setAnchorPoint(0, 0.5);
+                totalRevenue.setAnchorPoint(0, 0.5);
+                totalProfit.setAnchorPoint(0, 0.5);
+                startTime.setAnchorPoint(0, 0.5);
+                endTime.setAnchorPoint(0, 0.5);
+
+                roundId.setPosition(0, 0);
+                totalSpend.setPosition(150, 0);
+                totalRevenue.setPosition(300, 0);
+                totalProfit.setPosition(450, 0);
+                startTime.setPosition(600, 0);
+                endTime.setPosition(750, 0);
+
+                wrapper.addChild(roundId);
+                wrapper.addChild(totalSpend);
+                wrapper.addChild(totalRevenue);
+                wrapper.addChild(totalProfit);
+                wrapper.addChild(startTime);
+                wrapper.addChild(endTime);
+
+                const item = new RolloverEffectItem(wrapper, onSelected, onUnselected, onHover, onUnhover);
+
+                function onSelected(item) {
+                    onSelectedCallback(item);
+                }
+
+                function onUnselected() {
+                    // label.setScale(originalSize);
+                }
+
+                function onHover() {
+                    highlight.setVisible(true);
+                    // label.setScale(hoverSize);
+                }
+
+                function onUnhover() {
+                    highlight.setVisible(false);
+                    // label.setScale(originalSize);
+                }
+
+                this.getContent = function () {
+                    return wrapper;
+                };
+            }
+
+            return ListItemPrefab;
+        }());
+
+        const onItemSelected = function (sender) {
+            console.log(sender);
+        };
+
+        const data = consumptionData.data;
+        for (let i = 0; i < data.length; i++) {
+            const listItemPrefab = new ListItemPrefab({
+                consumptionID: i,
             }, onItemSelected);
-            const content = gameListButtonPrefab.getContent();
+            const content = listItemPrefab.getContent();
+            console.log(content);
 
             listView.pushBackCustomItem(content);
         }
-
-        const listItemPrefab = (function () {
-            // const
-            function listItemPrefab(itemData, onSelectedCallback){
-                const base = GUIFunctions.createButton(undefined, ReferenceName.GameLogHighLight, onSelectedCallback);
-                const separator = new cc.Sprite(ReferenceName.GameLogListSeparator);
-
-                base.addChild(separator);
-                base.itemData = itemData;
-            }
-
-            return listItemPrefab;
-        }());
-
-
 
         return listView;
     }

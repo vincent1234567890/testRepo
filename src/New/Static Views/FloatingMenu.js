@@ -223,6 +223,7 @@ const FloatingMenu = (function () {
 
     proto.setConsumptionLogData = function (consumptionData) {
         _consumptionData = consumptionData;
+        console.log(_consumptionData);
     };
 
     return FloatingMenu;

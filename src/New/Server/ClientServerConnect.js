@@ -70,25 +70,25 @@ const ClientServerConnect = function () {
                         resolve(loginData);
                     });
 
-                    // This is example code to demonstrate how to collect stats from
-                    // It can be removed, commented,  or used elsewhere.
-                    Promise.resolve().then(
-                        //() => client.callAPIOnce('player', 'authPlayer', {playerId: queryParams.playerId, token: queryParams.token}).then(
-                        //    authResponse => {
-                        //        console.log("authResponse:", authResponse);
-                        //    }
-                        //)
-
-                        // But we don't need to use that auth mechanism if the login above completes
-                        () => new Promise(resolve => setTimeout(resolve, 8000))
-                    ).then(
-                        () => client.callAPIOnce('player', 'getConsumptionLog', {}).then(
-                            consumptions => {
-                                console.log("consumptions:", consumptions);
-                                GameManager.setConsumptionLogData(consumptions);
-                            }
-                        )
-                    ).catch(console.error.bind(console));
+                    // // This is example code to demonstrate how to collect stats from
+                    // // It can be removed, commented,  or used elsewhere.
+                    // Promise.resolve().then(
+                    //     //() => client.callAPIOnce('player', 'authPlayer', {playerId: queryParams.playerId, token: queryParams.token}).then(
+                    //     //    authResponse => {
+                    //     //        console.log("authResponse:", authResponse);
+                    //     //    }
+                    //     //)
+                    //
+                    //     // But we don't need to use that auth mechanism if the login above completes
+                    //     () => new Promise(resolve => setTimeout(resolve, 8000))
+                    // ).then(
+                    //     () => client.callAPIOnce('player', 'getConsumptionLog', {}).then(
+                    //         consumptions => {
+                    //             console.log("consumptions:", consumptions);
+                    //             GameManager.setConsumptionLogData(consumptions);
+                    //         }
+                    //     )
+                    // ).catch(console.error.bind(console));
                 }
             });
 
@@ -369,6 +369,10 @@ const ClientServerConnect = function () {
         _informServer.unsetTargetLock();
     };
 
+    function getConsumptionLog() {
+        return _gameWSClient.callAPIOnce('player', 'getConsumptionLog', {});
+    }
+
     return {
         connectToMasterServer : connectToMasterServer,
         login : login,
@@ -386,5 +390,6 @@ const ClientServerConnect = function () {
         getCurrentJackpotValues : getCurrentJackpotValues,
         setFishLockRequest : setFishLockRequest,
         unsetFishLockRequest : unsetFishLockRequest,
+        getConsumptionLog : getConsumptionLog,
     };
 }();

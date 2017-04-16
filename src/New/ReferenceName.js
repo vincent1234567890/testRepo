@@ -141,7 +141,7 @@ const ReferenceName = {
     GameLogRadioButtonSelected : "#Selection.png",
     GameLogLogTitleBackground : "#TextHeaderBase.png",
     GameLogLogBackground : "#TextBG4.png",
-    GameLogHighLight : "#TextBG4HL",
+    GameLogHighLight : "#TextBG4HL.png",
     GameLogDateChinese : "#DateChinese.png",
     GameLogTypeChinese : "#TypeChinese.png",
     GameLogConsumptionIdChinese : "#SerialNumberChinese.png",
