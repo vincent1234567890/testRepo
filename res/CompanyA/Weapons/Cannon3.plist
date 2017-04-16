@@ -15,7 +15,7 @@
                 <key>spriteSourceSize</key>
                 <string>{29,44}</string>
                 <key>textureRect</key>
-                <string>{{1,455},{29,44}}</string>
+                <string>{{114,197},{29,44}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -32,7 +32,7 @@
                 <key>textureRect</key>
                 <string>{{1,116},{96,111}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>Cannon3_00001.png</key>
             <dict>
@@ -45,9 +45,9 @@
                 <key>spriteSourceSize</key>
                 <string>{96,147}</string>
                 <key>textureRect</key>
-                <string>{{1,229},{96,111}}</string>
+                <string>{{114,1},{96,111}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>Cannon3_00002.png</key>
             <dict>
@@ -75,9 +75,9 @@
                 <key>spriteSourceSize</key>
                 <string>{96,147}</string>
                 <key>textureRect</key>
-                <string>{{1,342},{96,111}}</string>
+                <string>{{114,99},{96,111}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
         </dict>
         <key>metadata</key>
@@ -91,9 +91,9 @@
             <key>realTextureFileName</key>
             <string>Cannon3.png</string>
             <key>size</key>
-            <string>{98,485}</string>
+            <string>{227,227}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:7133268af3ab3cb7d91feee55e0c3fb6:c745ba741712f81dda67d378de863cd8:4650f8d430234cf44c6f91cc857a4f6a$</string>
+            <string>$TexturePacker:SmartUpdate:5547474a78d7523e88899eb6514a21db:c745ba741712f81dda67d378de863cd8:4650f8d430234cf44c6f91cc857a4f6a$</string>
             <key>textureFileName</key>
             <string>Cannon3.png</string>
         </dict>

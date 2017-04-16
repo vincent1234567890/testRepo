@@ -2,8 +2,6 @@
  * Created by eugeneseah on 15/11/16.
  */
 
-
-
 const ClientServerConnect = function () {
     "use strict";
     let _hasConnected = false;
@@ -43,8 +41,8 @@ const ClientServerConnect = function () {
             // var clientServerConnect = this;
 
             const client = new WebSocketClient(gameAPIServerUrl);
-            const gameService = new GameServices.GameService();
-            client.addService(gameService);
+            client.addService(new GameServices.GameService());
+            client.addService(new PlayerServices.PlayerService());
 
             setGameWSClient(client);
 
@@ -71,6 +69,26 @@ const ClientServerConnect = function () {
                         // console.log(client);
                         resolve(loginData);
                     });
+
+                    // This is example code to demonstrate how to collect stats from
+                    // It can be removed, commented,  or used elsewhere.
+                    Promise.resolve().then(
+                        //() => client.callAPIOnce('player', 'authPlayer', {playerId: queryParams.playerId, token: queryParams.token}).then(
+                        //    authResponse => {
+                        //        console.log("authResponse:", authResponse);
+                        //    }
+                        //)
+
+                        // But we don't need to use that auth mechanism if the login above completes
+                        () => new Promise(resolve => setTimeout(resolve, 8000))
+                    ).then(
+                        () => client.callAPIOnce('player', 'getConsumptionLog', {}).then(
+                            consumptions => {
+                                console.log("consumptions:", consumptions);
+                                GameManager.setConsumptionLogData(consumptions);
+                            }
+                        )
+                    ).catch(console.error.bind(console));
                 }
             });
 

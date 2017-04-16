@@ -56,6 +56,10 @@ const FloatingMenuPopupBasePrefab = (function () {
         this.hide = function () {
             dismiss();
         };
+
+        this.turnOffDeco = function () {
+            deco.setVisible(false);
+        };
     };
 
     const proto = FloatingMenuPopupBasePrefab.prototype;
@@ -67,6 +71,8 @@ const FloatingMenuPopupBasePrefab = (function () {
     proto.getBackground = function () {
         return this._background;
     };
+
+
 
     return FloatingMenuPopupBasePrefab;
 }());

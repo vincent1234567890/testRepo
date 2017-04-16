@@ -40,6 +40,12 @@ const FAQView = (function () {
         userAgreementTab.addChild(userAgreementTabTitleText);
         faqTab.addChild(faqTabTitleText);
 
+        userAgreementTab.setAnchorPoint(0.2,0.5);
+        faqTab.setAnchorPoint(0.2,0.5);
+
+        const userAgreementRollover = new RolloverEffectItem(userAgreementTab,undefined,undefined,onTabHover,onTabUnhover);
+        const faqRollover = new RolloverEffectItem(faqTab,undefined,undefined,onTabHover,onTabUnhover);
+
         const gameRules = GUIFunctions.createButton(ReferenceName.FAQButtonBackground,ReferenceName.FAQButtonBackgroundOnPress,onGameRulesClicked);
         const uiFAQ = GUIFunctions.createButton(ReferenceName.FAQButtonBackground,ReferenceName.FAQButtonBackgroundOnPress,onGameRulesClicked);
         const fishInfo = GUIFunctions.createButton(ReferenceName.FAQButtonBackground,ReferenceName.FAQButtonBackgroundOnPress,onFishInfoClicked);
@@ -83,8 +89,8 @@ const FAQView = (function () {
         _popup.getBackground().addChild(cannonInfo);
         _popup.getBackground().addChild(jackpotInfo);
 
-        userAgreementTab.setPosition(200,tabHeight);
-        faqTab.setPosition(390,tabHeight);
+        userAgreementTab.setPosition(130,tabHeight);
+        faqTab.setPosition(310,tabHeight);
 
 
 
@@ -97,6 +103,19 @@ const FAQView = (function () {
         _parent.addChild(_popup.getParent());
 
         GameView.addView(_parent,ZORDER);
+
+        const wiggle = new cc.Sequence(cc.rotateBy(0.08, 3), cc.rotateBy(0.08, -3));
+
+        function onTabHover(widget){
+            if (widget.getNumberOfRunningActions()==0) {
+                widget.runAction(new cc.RepeatForever(wiggle.clone()));
+            }
+        }
+
+        function onTabUnhover(widget) {
+            widget.stopAllActions();
+            widget.setRotation(0);
+        }
     };
 
     function onUserAgreementTabClicked (){
@@ -123,6 +142,8 @@ const FAQView = (function () {
 
     }
 
+
+
     function dismissCallback(touch) {
         _parent.setLocalZOrder(-1000);
         _parent.setVisible(false);
@@ -130,9 +151,24 @@ const FAQView = (function () {
 
     const proto = FAQView.prototype;
 
+    proto.unattach = function () {
+        if (_parent.getParent()) {
+            _parent.getParent().removeChild(_parent, false);
+        }
+    };
+
+    proto.reattach = function () {
+        if (_parent.getParent()) {
+            _parent.getParent().removeChild(_parent, false);
+        }
+        GameView.addView(_parent);
+    };
+
     proto.show = function () {
-        _parent.setLocalZOrder(ZORDER);
+        console.log("show");
         _parent.setVisible(true);
+        _parent.setLocalZOrder(ZORDER);
+
         _popup.show();
     };
 

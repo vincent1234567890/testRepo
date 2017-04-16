@@ -9,16 +9,20 @@ const FloatingMenu = (function () {
     const hoverSize = 1.2;
     const originalSize = 1;
 
-    let _leaderboardView;
+    let _playerData;
+    let _consumptionData;
+
     let _setttingsView;
+    let _gameLogView;
     let _profileView;
+    let _leaderboardView;
     let _faqView;
 
-    const FloatingMenu = function () {
+    const FloatingMenu = function (playerData) {
         _parent = new cc.Node();
         GameView.addView(_parent);
 
-        // _settingsCallback = settingsCallback;
+        _playerData = playerData;
 
         _theme = ThemeDataManager.getThemeDataList("FloatingMenu");
 
@@ -36,7 +40,7 @@ const FloatingMenu = (function () {
             ReferenceName.FloatingMenuButtonBackground,
             ReferenceName.FloatingMenuButtonBackgroundDown,
             ReferenceName.FloatingMenuButtonGameLogText,
-            onAssetsSelected
+            onGameLogSelected
         );
 
         _parent.addChild(assets);
@@ -71,10 +75,6 @@ const FloatingMenu = (function () {
 
         _parent.addChild(FAQ);
         FAQ.setPosition(_theme["FAQButton"][0], _theme["FAQButton"][1]);
-        //
-        // listView.pushBackCustomItem(settings);
-        //
-        // _parent.addChild(listView);
 
     };
 
@@ -129,47 +129,88 @@ const FloatingMenu = (function () {
         }
     }
 
-    function onAssetsSelected() {
-
+    function onGameLogSelected() {
+        console.log("onGameLogSelected");
+        if (_gameLogView){
+            _gameLogView.show(_consumptionData);
+        }else{
+            _gameLogView = new GameLogView(_consumptionData);
+        }
     }
 
     function onProfileSelected() {
         console.log("onProfileSelected");
-        if (!_profileView) {
-            _profileView = new ProfileView();
-        } else {
+        if (_profileView) {
             _profileView.show();
+        } else {
+            _profileView = new ProfileView(_playerData);
         }
     }
 
     function onLeaderboardSelected() {
         console.log("onLeaderboardSelected");
-        if (!_leaderboardView) {
-            _leaderboardView = new LeaderboardView();
-        } else {
+        if (_leaderboardView) {
             _leaderboardView.show();
+        } else {
+            _leaderboardView = new LeaderboardView();
         }
     }
 
     function onFAQSelected() {
         console.log("onFAQSelected");
-        if (!_faqView) {
-            _faqView = new FAQView();
-        } else {
+        if (_faqView) {
             _faqView.show();
+        } else {
+            _faqView = new FAQView();
         }
     }
 
     const proto = FloatingMenu.prototype;
 
+    proto.unattach = function () {
+        if (_parent.getParent()) {
+            _parent.getParent().removeChild(_parent, false);
+        }
+        if (_setttingsView){
+            _setttingsView.unattach();
+        }
+        if (_profileView){
+            _profileView.unattach();
+        }
+        if (_leaderboardView){
+            _leaderboardView.unattach();
+        }
+        if (_faqView){
+            _faqView.unattach();
+        }
+
+    };
+
     proto.reattach = function () {
-        _parent.getParent().removeChild(_parent, false);
+        if (_parent.getParent()) {
+            _parent.getParent().removeChild(_parent, false);
+        }
+        if (_setttingsView){
+            _setttingsView.reattach();
+        }
+        if (_profileView){
+            _profileView.reattach();
+        }
+        if (_leaderboardView){
+            _leaderboardView.reattach();
+        }
+        if (_faqView){
+            _faqView.reattach();
+        }
         GameView.addView(_parent);
     };
 
     proto.hideAll = function () {
         if (_setttingsView){
             _setttingsView.hide();
+        }
+        if (_profileView){
+            _profileView.hide();
         }
         if (_leaderboardView){
             _leaderboardView.hide();
@@ -179,6 +220,10 @@ const FloatingMenu = (function () {
         }
     };
     // proto.Move
+
+    proto.setConsumptionLogData = function (consumptionData) {
+        _consumptionData = consumptionData;
+    };
 
     return FloatingMenu;
 }());

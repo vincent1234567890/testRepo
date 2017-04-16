@@ -466,9 +466,9 @@
             <key>realTextureFileName</key>
             <string>100_2.png</string>
             <key>size</key>
-            <string>{120,110}</string>
+            <string>{120,120}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:05c2fa7331ee0ebeb761d6274985c6b9:634a60aea82384928ac9018849785908:e86dd5c81ab8317d20fc38b5bc2e50f2$</string>
+            <string>$TexturePacker:SmartUpdate:b32143027dd17e13bd0f1fde3c85a831:634a60aea82384928ac9018849785908:e86dd5c81ab8317d20fc38b5bc2e50f2$</string>
             <key>textureFileName</key>
             <string>100_2.png</string>
         </dict>

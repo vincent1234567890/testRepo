@@ -32,7 +32,7 @@ const GameManager = function () {
     let _floatingMenuManager;
     let _jackpotManager;
     let _scoreboardManager;
-    let _optionsManager;
+    // let _optionsManager;
     let _bulletManager;
     let _netManager;
     let _lobbyWaterCausticsManager;
@@ -44,6 +44,7 @@ const GameManager = function () {
     let _goToLobbyCallback;
 
     function initialiseLogin(parent) {
+        console.log("initialise");
         GameView.initialise(parent);
         // _loginManager = new LoginManager();
     }
@@ -53,8 +54,9 @@ const GameManager = function () {
         GameView.initialise(parent, _gameConfig, fishGameArena, onFishLockButtonPress, getFishLockStatus);
 
         _fishManager = new FishViewManager(fishGameArena, _gameConfig, GameView.caughtFishAnimationEnd , getFishLockStatus, onFishLockSelected);
-        _optionsManager = new OptionsManager(onSettingsButton, undefined, onLeaveArena);
-        _optionsManager.displayView(_gameConfig);
+        // _optionsManager = new OptionsManager(onSettingsButton, undefined, onLeaveArena);
+        // _optionsManager.displayView(_gameConfig);
+        new BackToLobbyButton(onLeaveArena);
         _bulletManager = new BulletManager(fishGameArena);
         _netManager = new NetManager();
         _floatingMenuManager.reattach();
@@ -79,6 +81,10 @@ const GameManager = function () {
 
     const removeBullet = function(bulletId){
         _bulletManager.removeBullet(bulletId);
+    };
+
+    const setConsumptionLogData = function (consumptionLogData) {
+        _floatingMenuManager.setConsumptionLogData(consumptionLogData);
     };
 
     const setGameState = function (config, playerId, playerSlot) {
@@ -175,41 +181,54 @@ const GameManager = function () {
 
 
     function onLeaveArena() {
-        Promise.resolve().then(
-            () => ClientServerConnect.leaveGame()
-        ).then(
-            () => showPostGameStats()
-        ).catch(console.error);
+        // Promise.resolve().then(
+        //     () => ClientServerConnect.leaveGame()
+        // ).then(
+        //     () => showPostGameStats()
+        // ).catch(console.error);
+        ClientServerConnect.leaveGame();
+        exitToLobby();
     }
 
     function createLobby() {
         if (!_lobbyManager) {
-            _lobbyManager = new LobbyManager(_playerData, onGameSelected, onRequestShowProfile);
+            _lobbyManager = new LobbyManager(_playerData, onGameSelected);
             // _profileManger = new ProfileManager();
             // _optionsManager = new OptionsManager(onSettingsButton, undefined, onLeaveArena);
             _lobbyWaterCausticsManager = new LobbyWaterCaustics();
-            _floatingMenuManager = new FloatingMenu();
+            _floatingMenuManager = new FloatingMenu(_playerData);
             _jackpotManager = new JackpotManager();
             _jackpotManager.updateJackpot(999999999);
             ClientServerConnect.getCurrentJackpotValues();
         }else {
-            _lobbyManager.displayView(_playerData, onGameSelected,onRequestShowProfile);
+            _lobbyManager.displayView(_playerData, onGameSelected);
         }
     }
 
     function exitToLobby() {
+        ClientServerConnect.requestMyData().then(
+            stats => {
+                console.log(stats);
+                _playerData = stats.data;
+                _lobbyManager.updateView(_playerData);
+            }
+        ).catch(console.error);
+        _floatingMenuManager.unattach();
+        _jackpotManager.unattach();
         destroyArena();
         _goToLobbyCallback();
         ClientServerConnect.getCurrentJackpotValues();
-        ClientServerConnect.requestMyData();
+
+        // _lobbyManager.displayView(_playerData, onGameSelected);
     }
 
-    function showPostGameStats () {
-        ClientServerConnect.requestStats().then(
-            stats => {
-                goToScoreboard(stats);
-            }
-        ).catch(console.error);
+    function showPostGameStats () { // used to be for post game stats but feature has been removed
+        // ClientServerConnect.requestStats().then(
+        //     stats => {
+        //         goToScoreboard(stats);
+        //     }
+        // ).catch(console.error);
+        exitToLobby();
     }
 
     function goToScoreboard(stats) {
@@ -232,9 +251,9 @@ const GameManager = function () {
     }
 
     function resetArena(){
-        if (_optionsManager) {
-            _optionsManager.destroyView();
-        }
+        // if (_optionsManager) {
+        //     _optionsManager.destroyView();
+        // }
         if (_fishManager) {
             _fishManager.destroyView();
         }
@@ -253,9 +272,9 @@ const GameManager = function () {
         _fishLockOnCallback = undefined;
     }
 
-    function onSettingsButton(){
-        _optionsManager.showSettings();
-    }
+    // function onSettingsButton(){
+    //     _optionsManager.showSettings();
+    // }
 
     function onGameSelected(chosenScene){
         _currentScene = chosenScene;
@@ -311,7 +330,8 @@ const GameManager = function () {
 
     //dev for dev scene
     function development(parent) {
-        _optionsManager = new OptionsManager(onSettingsButton);
+        // _optionsManager = new OptionsManager(onSettingsButton);
+
     }
 
 
@@ -325,6 +345,7 @@ const GameManager = function () {
 
         //Menu stuff
         updateJackpotPool : updateJackpotPool,
+        setConsumptionLogData : setConsumptionLogData,
 
         //Game stuff
         setGameState: setGameState,

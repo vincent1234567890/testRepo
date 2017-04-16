@@ -10,9 +10,13 @@ const RolloverEffectItem = (function () {
             switch (type) {
                 case ccui.Widget.TOUCH_ENDED:
                     console.log(sender);
-                    onSelectedCallback();
+                    if (onSelectedCallback) {
+                        onSelectedCallback(widget);
+                    }
                 case ccui.Widget.TOUCH_CANCELED: // fallthrough intended
-                    onUnselectedCallback();
+                    if (onUnselectedCallback) {
+                        onUnselectedCallback(widget);
+                    }
                     break;
             }
         };
@@ -23,12 +27,16 @@ const RolloverEffectItem = (function () {
             var rect = cc.rect(pos.x, pos.y, widget.getBoundingBox().width, widget.getBoundingBox().height);
             if (!isMouseDown){
                 if(cc.rectContainsPoint(rect,mouseData.getLocation())) {
-                    onHoverCallback();
+                    if (onHoverCallback) {
+                        onHoverCallback(widget);
+                    }
                 }else{
-                    onUnhoverCallback();
+                    if (onUnhoverCallback) {
+                        onUnhoverCallback(widget);
+                    }
                 }
             }else{
-                onUnhoverCallback();
+                onUnhoverCallback(widget);
             }
         };
 

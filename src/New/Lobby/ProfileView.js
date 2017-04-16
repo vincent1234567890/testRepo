@@ -6,9 +6,11 @@ const ProfileView = (function () {
 
     const listSize = new cc.size(900,650);
     const _parent = new cc.Node();
+    let _playerData;
     function ProfileView() {
         cc.spriteFrameCache.addSpriteFrames(res.ProfileUIPlist);
         GameView.addView(_parent,10);
+
         this._bkg = new cc.Sprite(ReferenceName.ProfileBackground);
         _parent.addChild(this._bkg);
         this._bkg.setPosition(this._bkg.getContentSize().width/2 + 35,this._bkg.getContentSize().height/2);
@@ -22,8 +24,6 @@ const ProfileView = (function () {
 
         BlockingManager.registerBlock(hideView);
     }
-
-
 
     function loadProfilePicture(){
 

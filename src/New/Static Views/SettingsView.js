@@ -40,6 +40,7 @@ const SettingsView = (function () {
         const titlePosition = new cc.p(400, 450);
         title.setPosition(titlePosition);
         titleBackground.setPosition(titlePosition);
+        titleBackground.setScale(2);
 
         musicTitle.setPosition(STARTING_ALIGNMENT, musicSliderHeight);
         soundTitle.setPosition(STARTING_ALIGNMENT, soundSliderHeight);
@@ -131,7 +132,7 @@ const SettingsView = (function () {
         function cancel() {
             _musicSlider.setValue(previousMusic);
             _soundSlider.setValue(previousSound);
-            dismissCallback();
+            dismiss();
         }
 
         function dismiss() {
@@ -145,6 +146,17 @@ const SettingsView = (function () {
             previousSound = -1;
             BlockingManager.deregisterBlock(dismissCallback);
         }
+
+        this.unattach = function () {
+            if (parent.getParent()) {
+                parent.getParent().removeChild(parent, false);
+            }
+        };
+
+        this.reattach = function () {
+            this.unattach();
+            GameView.addView(parent);
+        };
     };
 
     function createSlider(parent, callback, value) {
@@ -209,6 +221,7 @@ const SettingsView = (function () {
         PlayerPreferences.setSoundVolume(sender.getValue());
         cc.audioEngine.setEffectsVolume(sender.getValue().toFixed(2) - STARTOFFSET);
     }
+
 
     return SettingsView;
 }());

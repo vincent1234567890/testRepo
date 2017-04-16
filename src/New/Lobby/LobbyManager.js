@@ -19,7 +19,9 @@ const LobbyManager = (function () {
         this.displayView(playerData,onGameSelectedCallback);
     };
 
-    LobbyManager.prototype.displayView = function(playerData, onGameSelectedCallback){
+    const proto = LobbyManager.prototype;
+
+    proto.displayView = function(playerData, onGameSelectedCallback){
         if (this._view){
             // this._parent.removeChild(this._view);
             this._view.destroyView();
@@ -31,9 +33,14 @@ const LobbyManager = (function () {
     //     _profileManager.displayView();
     // }
 
-    LobbyManager.prototype.resetView = function(){
+    proto.resetView = function(){
         this._view.resetView();
     };
+
+    proto.updateView = function(playerData){
+        this._view.updatePlayerData(playerData);
+    };
+
 
     return LobbyManager;
 }());
