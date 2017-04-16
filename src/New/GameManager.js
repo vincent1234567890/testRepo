@@ -46,6 +46,8 @@ const GameManager = function () {
     function initialiseLogin(parent) {
         console.log("initialise");
         GameView.initialise(parent);
+
+
         // _loginManager = new LoginManager();
     }
 
@@ -158,7 +160,12 @@ const GameManager = function () {
             stats => {
                 console.log(stats);
                 _playerData = stats.data;
-                createLobby();
+                ClientServerConnect.getConsumptionLog().then(
+                    consumptionLog => {
+                        createLobby();
+                        GameManager.setConsumptionLogData(consumptionLog);
+                    }
+                ).catch(console.error);
             }
         ).catch(console.error);
 
@@ -172,9 +179,9 @@ const GameManager = function () {
             // Now we want to update the view
             // We need to update this label in the LobbyView: new cc.LabelTTF(formatWithCommas(playerData.playerState.score), fontDef);
             // This would probably be a nice solution:
-            //LobbyManager._view.updatePlayerData(_playerData);
+            LobbyManager.updatePlayerData(_playerData);
             // But for now:
-            createLobby();
+            // createLobby();
             // We could also notify the player, either with an alert box, or just some flashing / bouncing / animation on the score label
         });
     }

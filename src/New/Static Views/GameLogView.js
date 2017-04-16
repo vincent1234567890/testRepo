@@ -44,8 +44,8 @@ const GameLogView = (function () {
 
         const title = new cc.Sprite(ReferenceName.GameLogTitleChinese);
 
-        const gameLogTab = GUIFunctions.createButton(ReferenceName.FAQTabBackground,ReferenceName.FAQTabBackgroundOnPress,onUserAgreementTabClicked);
-        const consumptionLogTab = GUIFunctions.createButton(ReferenceName.FAQTabBackground,ReferenceName.FAQTabBackgroundOnPress,onFAQTabClicked);
+        const gameLogTab = GUIFunctions.createButton(ReferenceName.FAQTabBackground,ReferenceName.FAQTabBackgroundOnPress,onGameLogTabPressed);
+        const consumptionLogTab = GUIFunctions.createButton(ReferenceName.FAQTabBackground,ReferenceName.FAQTabBackgroundOnPress,onConsumptionTabPressed);
 
         const gameLogTabTitleText = new cc.Sprite(ReferenceName.GameLogRecordTabChinese);
         const consumptionLogTabTitleText = new cc.Sprite(ReferenceName.GameLogConsumptionTabChinese);
@@ -94,43 +94,23 @@ const GameLogView = (function () {
         consumptionLogTab.setPosition(390,tabHeight);
 
 
-
-        // gameRules.setPosition(sideButtonX, sideStart);
-        // uiFAQ.setPosition(sideButtonX, sideStart - sideSpacing);
-        // fishInfo.setPosition(sideButtonX, sideStart - sideSpacing * 2);
-        // cannonInfo.setPosition(sideButtonX, sideStart - sideSpacing * 3);
-        // jackpotInfo.setPosition(sideButtonX, sideStart - sideSpacing * 4);
-
         _parent.addChild(_popup.getParent());
 
-        this.show(consumptionData);
+        function onGameLogTabPressed(){
+            // const list = setupConsumptionLogList(consumptionData);
+            // scrollBackground.addChild(list);
+        }
+
+        function onConsumptionTabPressed(){
+            const list = setupConsumptionLogList(scrollBackground,consumptionData);
+            scrollBackground.addChild(list);
+
+        }
+
+        // this.show(consumptionData);
 
         GameView.addView(_parent,ZORDER);
     };
-
-    function onUserAgreementTabClicked (){
-
-    }
-
-    function onFAQTabClicked(){
-
-    }
-
-    function onGameRulesClicked() {
-
-    }
-
-    function onFishInfoClicked() {
-
-    }
-
-    function onCannonInfoClicked() {
-
-    }
-
-    function onJackpotInfoClicked(){
-
-    }
 
     function dismissCallback(touch) {
         _parent.setLocalZOrder(-1000);
@@ -139,12 +119,9 @@ const GameLogView = (function () {
 
     const proto = GameLogView.prototype;
 
-    proto.show = function (consumptionData) {
+    proto.show = function () {
         _parent.setLocalZOrder(ZORDER);
         _parent.setVisible(true);
-
-        setupConsumptionLogList(consumptionData);
-
         _popup.show();
     };
 
@@ -155,7 +132,6 @@ const GameLogView = (function () {
 
     function setupGameLog(){
         const parent = new cc.Node();
-
     }
 
     function setupConsumptionLogTitle(){
@@ -188,9 +164,10 @@ const GameLogView = (function () {
         return parent;
     }
 
-    function setupConsumptionLogList(consumptionData) {
-        const width = cc.view.getDesignResolutionSize().width;
-        const height = cc.view.getDesignResolutionSize().height;
+    function setupConsumptionLogList(scrollBackground,consumptionData) {
+        console.log("setupConsumptionLogList",consumptionData);
+
+        const size = scrollBackground.getContentSize();
 
 
         const listView = new ccui.ListView();
@@ -198,38 +175,82 @@ const GameLogView = (function () {
         listView.setTouchEnabled(true);
         listView.setBounceEnabled(true);
         // listView.setBackGroundImage(res.HelloWorld_png);
-        listView.setContentSize(cc.size(width, height));
+        // listView.setContentSize(cc.size(width, height));
         // listView.setInnerContainerSize(200,200)
-        listView.setAnchorPoint(cc.p(0.5, 0.5));
+        // listView.setAnchorPoint(cc.p(0.5, 0.5));
         // listView.setPosition(width / 2, height / 2);
-        listView.setPosition(width / 2 , height / 2 - 70);
-
+        // listView.setPosition(width / 2 , height / 2 - 70);
+        listView.setContentSize(size);
+        // listView.setPosition(size.width/2, size.height/2);
         // const gameList = _theme.GameList;
-        const consumption = consumptionData.data;
-        for (let i = 0; i < consumption.length; i++) {
-            const listItemPrefab = new listItemPrefab({
-                gameId: i,
-                gameName: consumption[i]
+        // const consumption = consumptionData.data;
+        // for (let i = 0; i < consumption.length; i++) {
+        const ListItemPrefab = (function () {
+            // const
+            function ListItemPrefab(itemData, onSelectedCallback){
+                // const base = GUIFunctions.createButton(undefined, ReferenceName.GameLogHighLight, onSelectedCallback);
+                const wrapper = new ccui.Widget();
+                const highlight = new cc.Sprite(ReferenceName.GameLogHighLight);
+                const separator = new cc.Sprite(ReferenceName.GameLogListSeparator);
+
+                // highlight.setContentSize(scrollBackground.getContentSize().width,highlight.getContentSize().height);
+
+                wrapper.addChild(highlight);
+                wrapper.addChild(separator);
+                wrapper.itemData = itemData;
+
+                wrapper.setContentSize(highlight.getContentSize());
+                wrapper.setTouchEnabled(true);
+
+                highlight.setVisible(false);
+
+                highlight.setPosition(size.width/2,highlight.getContentSize().height/2);
+                separator.setPosition(size.width/2,0);
+
+                console.log("ListItemPrefab",wrapper,highlight.getContentSize());
+
+                const item = new RolloverEffectItem(wrapper, onSelected, onUnselected, onHover, onUnhover);
+
+                function onSelected(item) {
+                    onSelectedCallback(item);
+                }
+
+                function onUnselected() {
+                    // label.setScale(originalSize);
+                }
+
+                function onHover() {
+                    highlight.setVisible(true);
+                    // label.setScale(hoverSize);
+                }
+
+                function onUnhover() {
+                    highlight.setVisible(false);
+                    // label.setScale(originalSize);
+                }
+
+                this.getContent = function () {
+                    return wrapper;
+                };
+            }
+
+            return ListItemPrefab;
+        }());
+
+        const onItemSelected = function (sender) {
+            console.log(sender);
+        };
+
+        const data = consumptionData.data;
+        for (let i = 0; i < data.length; i++) {
+            const listItemPrefab = new ListItemPrefab({
+                consumptionID: i,
             }, onItemSelected);
-            const content = gameListButtonPrefab.getContent();
+            const content = listItemPrefab.getContent();
+            console.log(content);
 
             listView.pushBackCustomItem(content);
         }
-
-        const listItemPrefab = (function () {
-            // const
-            function listItemPrefab(itemData, onSelectedCallback){
-                const base = GUIFunctions.createButton(undefined, ReferenceName.GameLogHighLight, onSelectedCallback);
-                const separator = new cc.Sprite(ReferenceName.GameLogListSeparator);
-
-                base.addChild(separator);
-                base.itemData = itemData;
-            }
-
-            return listItemPrefab;
-        }());
-
-
 
         return listView;
     }
