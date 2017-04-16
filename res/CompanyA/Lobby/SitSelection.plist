@@ -15,7 +15,7 @@
                 <key>spriteSourceSize</key>
                 <string>{149,44}</string>
                 <key>textureRect</key>
-                <string>{{470,155},{145,42}}</string>
+                <string>{{357,185},{145,42}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -30,9 +30,9 @@
                 <key>spriteSourceSize</key>
                 <string>{127,44}</string>
                 <key>textureRect</key>
-                <string>{{477,381},{123,42}}</string>
+                <string>{{1,313},{123,42}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>SS1X.png</key>
             <dict>
@@ -45,234 +45,39 @@
                 <key>spriteSourceSize</key>
                 <string>{105,44}</string>
                 <key>textureRect</key>
-                <string>{{326,428},{101,42}}</string>
+                <string>{{1,357},{101,42}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
+            </dict>
+            <key>SSChairGlow.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-3,-3}</string>
+                <key>spriteSize</key>
+                <string>{113,112}</string>
+                <key>spriteSourceSize</key>
+                <string>{145,150}</string>
+                <key>textureRect</key>
+                <string>{{126,313},{113,112}}</string>
+                <key>textureRotated</key>
+                <false/>
             </dict>
             <key>SSChair_00000.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,-2}</string>
+                <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{105,89}</string>
+                <string>{104,87}</string>
                 <key>spriteSourceSize</key>
-                <string>{115,115}</string>
+                <string>{130,109}</string>
                 <key>textureRect</key>
-                <string>{{219,428},{105,89}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>SSChair_00001.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,-2}</string>
-                <key>spriteSize</key>
-                <string>{105,93}</string>
-                <key>spriteSourceSize</key>
-                <string>{115,115}</string>
-                <key>textureRect</key>
-                <string>{{112,428},{105,93}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>SSChair_00002.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,-2}</string>
-                <key>spriteSize</key>
-                <string>{105,97}</string>
-                <key>spriteSourceSize</key>
-                <string>{115,115}</string>
-                <key>textureRect</key>
-                <string>{{427,1},{105,97}}</string>
+                <string>{{241,313},{104,87}}</string>
                 <key>textureRotated</key>
                 <true/>
-            </dict>
-            <key>SSChair_00003.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-1,-2}</string>
-                <key>spriteSize</key>
-                <string>{109,101}</string>
-                <key>spriteSourceSize</key>
-                <string>{115,115}</string>
-                <key>textureRect</key>
-                <string>{{1,428},{109,101}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>SSChair_00004.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,-2}</string>
-                <key>spriteSize</key>
-                <string>{109,105}</string>
-                <key>spriteSourceSize</key>
-                <string>{115,115}</string>
-                <key>textureRect</key>
-                <string>{{370,411},{109,105}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>SSChair_00005.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,-1}</string>
-                <key>spriteSize</key>
-                <string>{111,109}</string>
-                <key>spriteSourceSize</key>
-                <string>{115,115}</string>
-                <key>textureRect</key>
-                <string>{{357,300},{111,109}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>SSChair_00006.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-1,-1}</string>
-                <key>spriteSize</key>
-                <string>{113,111}</string>
-                <key>spriteSourceSize</key>
-                <string>{115,115}</string>
-                <key>textureRect</key>
-                <string>{{357,185},{113,111}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>SSChair_00007.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-1,-1}</string>
-                <key>spriteSize</key>
-                <string>{113,113}</string>
-                <key>spriteSourceSize</key>
-                <string>{115,115}</string>
-                <key>textureRect</key>
-                <string>{{1,313},{113,113}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>SSChair_00008.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-1,-1}</string>
-                <key>spriteSize</key>
-                <string>{113,113}</string>
-                <key>spriteSourceSize</key>
-                <string>{115,115}</string>
-                <key>textureRect</key>
-                <string>{{116,313},{113,113}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>SSChair_00009.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,-1}</string>
-                <key>spriteSize</key>
-                <string>{113,113}</string>
-                <key>spriteSourceSize</key>
-                <string>{115,115}</string>
-                <key>textureRect</key>
-                <string>{{231,313},{113,113}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>SSChair_00010.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,-1}</string>
-                <key>spriteSize</key>
-                <string>{113,113}</string>
-                <key>spriteSourceSize</key>
-                <string>{115,115}</string>
-                <key>textureRect</key>
-                <string>{{231,313},{113,113}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>SSChair_00011.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,-1}</string>
-                <key>spriteSize</key>
-                <string>{113,113}</string>
-                <key>spriteSourceSize</key>
-                <string>{115,115}</string>
-                <key>textureRect</key>
-                <string>{{231,313},{113,113}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>SSChair_00012.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,-1}</string>
-                <key>spriteSize</key>
-                <string>{113,113}</string>
-                <key>spriteSourceSize</key>
-                <string>{115,115}</string>
-                <key>textureRect</key>
-                <string>{{231,313},{113,113}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>SSChair_00013.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,-1}</string>
-                <key>spriteSize</key>
-                <string>{113,113}</string>
-                <key>spriteSourceSize</key>
-                <string>{115,115}</string>
-                <key>textureRect</key>
-                <string>{{231,313},{113,113}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>SSChair_00014.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,-1}</string>
-                <key>spriteSize</key>
-                <string>{113,113}</string>
-                <key>spriteSourceSize</key>
-                <string>{115,115}</string>
-                <key>textureRect</key>
-                <string>{{231,313},{113,113}}</string>
-                <key>textureRotated</key>
-                <false/>
             </dict>
             <key>SSMultiplayerChinese.png</key>
             <dict>
@@ -285,9 +90,9 @@
                 <key>spriteSourceSize</key>
                 <string>{79,45}</string>
                 <key>textureRect</key>
-                <string>{{470,302},{77,45}}</string>
+                <string>{{330,379},{77,45}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>SSMutiplayerPic.png</key>
             <dict>
@@ -315,7 +120,7 @@
                 <key>spriteSourceSize</key>
                 <string>{80,45}</string>
                 <key>textureRect</key>
-                <string>{{427,108},{78,45}}</string>
+                <string>{{330,332},{78,45}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -361,9 +166,9 @@
             <key>realTextureFileName</key>
             <string>SitSelection.png</string>
             <key>size</key>
-            <string>{530,530}</string>
+            <string>{426,426}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:65235a4435549fdaf5f42fdf716ff9a2:80604aeebece52b148f3207d2a7d748a:63fd188402233a0cbc32703c2cf2c91c$</string>
+            <string>$TexturePacker:SmartUpdate:3676e4691250aaedfcac11cf966f38c2:63e6cd851a213fa124d1637eeeef4921:63fd188402233a0cbc32703c2cf2c91c$</string>
             <key>textureFileName</key>
             <string>SitSelection.png</string>
         </dict>
