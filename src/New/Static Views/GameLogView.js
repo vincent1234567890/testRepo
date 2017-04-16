@@ -68,6 +68,14 @@ const GameLogView = (function () {
         scrollTitleBackground.setPosition(565,520);
         scrollBackground.setPosition(565,265);
 
+        gameLogTab.setAnchorPoint(0.2,0.5);
+        consumptionLogTab.setAnchorPoint(0.2,0.5);
+
+        const userAgreementRollover = new RolloverEffectItem(gameLogTab,onGameLogTabPressed,undefined,onTabHover,onTabUnhover);
+        const faqRollover = new RolloverEffectItem(consumptionLogTab,onConsumptionTabPressed,undefined,onTabHover,onTabUnhover);
+        gameLogTab.setPosition(130,tabHeight);
+        consumptionLogTab.setPosition(310,tabHeight);
+
         const scrollTitle = setupConsumptionLogTitle();
         scrollTitle.setPosition(0,scrollTitleBackground.getContentSize().height/2);
         scrollTitleBackground.addChild(scrollTitle);
@@ -90,11 +98,13 @@ const GameLogView = (function () {
         // _popup.getBackground().addChild(cannonInfo);
         // _popup.getBackground().addChild(jackpotInfo);
 
-        gameLogTab.setPosition(200,tabHeight);
-        consumptionLogTab.setPosition(390,tabHeight);
+        // gameLogTab.setPosition(200,tabHeight);
+        // consumptionLogTab.setPosition(390,tabHeight);
 
 
         _parent.addChild(_popup.getParent());
+
+        let list;
 
         function onGameLogTabPressed(){
             // const list = setupConsumptionLogList(consumptionData);
@@ -102,9 +112,25 @@ const GameLogView = (function () {
         }
 
         function onConsumptionTabPressed(){
-            const list = setupConsumptionLogList(scrollBackground,consumptionData);
+            if(list){
+                scrollBackground.removeChild(list);
+            }
+            list = setupConsumptionLogList(scrollBackground,consumptionData);
             scrollBackground.addChild(list);
 
+        }
+
+        const wiggle = new cc.Sequence(cc.rotateBy(0.08, 3), cc.rotateBy(0.08, -3));
+
+        function onTabHover(widget){
+            if (widget.getNumberOfRunningActions()==0) {
+                widget.runAction(new cc.RepeatForever(wiggle.clone()));
+            }
+        }
+
+        function onTabUnhover(widget) {
+            widget.stopAllActions();
+            widget.setRotation(0);
         }
 
         // this.show(consumptionData);
@@ -208,6 +234,42 @@ const GameLogView = (function () {
                 separator.setPosition(size.width/2,0);
 
                 console.log("ListItemPrefab",wrapper,highlight.getContentSize());
+
+                let fontDef = new cc.FontDefinition();
+                fontDef.fontName = "Microsoft YaHei";
+                // fontDef.fontName = "Arial Unicode MS";
+                fontDef.fontSize = "20";
+                fontDef.fontStyle = "bold";
+                fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
+                fontDef.fillStyle = new cc.Color(0, 0, 0, 255);
+
+                let roundId = new cc.LabelTTF("T6-123456789", fontDef);
+                let totalSpend = new cc.LabelTTF("987654321", fontDef);
+                let totalRevenue = new cc.LabelTTF("123456789", fontDef);
+                let totalProfit = new cc.LabelTTF("864197532", fontDef);
+                let startTime = new cc.LabelTTF(new Date(Date.now()).toLocaleDateString("zh-Hans-CN"), fontDef);
+                let endTime = new cc.LabelTTF(Date.now().toString(), fontDef);
+
+                roundId.setAnchorPoint(0, 0.5);
+                totalSpend.setAnchorPoint(0, 0.5);
+                totalRevenue.setAnchorPoint(0, 0.5);
+                totalProfit.setAnchorPoint(0, 0.5);
+                startTime.setAnchorPoint(0, 0.5);
+                endTime.setAnchorPoint(0, 0.5);
+
+                roundId.setPosition(0, 0);
+                totalSpend.setPosition(150, 0);
+                totalRevenue.setPosition(300, 0);
+                totalProfit.setPosition(450, 0);
+                startTime.setPosition(600, 0);
+                endTime.setPosition(750, 0);
+
+                wrapper.addChild(roundId);
+                wrapper.addChild(totalSpend);
+                wrapper.addChild(totalRevenue);
+                wrapper.addChild(totalProfit);
+                wrapper.addChild(startTime);
+                wrapper.addChild(endTime);
 
                 const item = new RolloverEffectItem(wrapper, onSelected, onUnselected, onHover, onUnhover);
 
