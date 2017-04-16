@@ -15,7 +15,7 @@
                 <key>spriteSourceSize</key>
                 <string>{99,75}</string>
                 <key>textureRect</key>
-                <string>{{1817,1008},{69,67}}</string>
+                <string>{{740,1460},{69,67}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -30,234 +30,24 @@
                 <key>spriteSourceSize</key>
                 <string>{138,113}</string>
                 <key>textureRect</key>
-                <string>{{791,1499},{90,87}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>ChestGlow_00000.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-58.5,53.5}</string>
-                <key>spriteSize</key>
-                <string>{3,3}</string>
-                <key>spriteSourceSize</key>
-                <string>{120,110}</string>
-                <key>textureRect</key>
-                <string>{{1026,1250},{3,3}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>ChestGlow_00001.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{108,98}</string>
-                <key>spriteSourceSize</key>
-                <string>{120,110}</string>
-                <key>textureRect</key>
-                <string>{{574,1163},{108,98}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>ChestGlow_00002.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{110,98}</string>
-                <key>spriteSourceSize</key>
-                <string>{120,110}</string>
-                <key>textureRect</key>
-                <string>{{914,1155},{110,98}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>ChestGlow_00003.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{110,100}</string>
-                <key>spriteSourceSize</key>
-                <string>{120,110}</string>
-                <key>textureRect</key>
-                <string>{{1723,1676},{110,100}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>ChestGlow_00004.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{112,102}</string>
-                <key>spriteSourceSize</key>
-                <string>{120,110}</string>
-                <key>textureRect</key>
-                <string>{{1658,302},{112,102}}</string>
+                <string>{{1459,995},{90,87}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>ChestGlow_00005.png</key>
+            <key>ChestGlow.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{114,102}</string>
+                <string>{118,108}</string>
                 <key>spriteSourceSize</key>
                 <string>{120,110}</string>
                 <key>textureRect</key>
-                <string>{{1102,779},{114,102}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>ChestGlow_00006.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{114,104}</string>
-                <key>spriteSourceSize</key>
-                <string>{120,110}</string>
-                <key>textureRect</key>
-                <string>{{572,1263},{114,104}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>ChestGlow_00007.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{116,104}</string>
-                <key>spriteSourceSize</key>
-                <string>{120,110}</string>
-                <key>textureRect</key>
-                <string>{{688,1263},{116,104}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>ChestGlow_00008.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{116,106}</string>
-                <key>spriteSourceSize</key>
-                <string>{120,110}</string>
-                <key>textureRect</key>
-                <string>{{914,1037},{116,106}}</string>
+                <string>{{867,914},{118,108}}</string>
                 <key>textureRotated</key>
                 <true/>
-            </dict>
-            <key>ChestGlow_00009.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{116,106}</string>
-                <key>spriteSourceSize</key>
-                <string>{120,110}</string>
-                <key>textureRect</key>
-                <string>{{1767,1368},{116,106}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>ChestGlow_00010.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{118,108}</string>
-                <key>spriteSourceSize</key>
-                <string>{120,110}</string>
-                <key>textureRect</key>
-                <string>{{684,1153},{118,108}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>ChestGlow_00011.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{118,108}</string>
-                <key>spriteSourceSize</key>
-                <string>{120,110}</string>
-                <key>textureRect</key>
-                <string>{{804,1136},{118,108}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>ChestGlow_00012.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{118,108}</string>
-                <key>spriteSourceSize</key>
-                <string>{120,110}</string>
-                <key>textureRect</key>
-                <string>{{1526,1255},{118,108}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>ChestGlow_00013.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{118,108}</string>
-                <key>spriteSourceSize</key>
-                <string>{120,110}</string>
-                <key>textureRect</key>
-                <string>{{1159,1332},{118,108}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>ChestGlow_00014.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{118,108}</string>
-                <key>spriteSourceSize</key>
-                <string>{120,110}</string>
-                <key>textureRect</key>
-                <string>{{1646,1258},{118,108}}</string>
-                <key>textureRotated</key>
-                <false/>
             </dict>
             <key>JPBase.png</key>
             <dict>
@@ -274,290 +64,35 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
+            <key>JPButterflyFishMedalGlow.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{6,-2}</string>
+                <key>spriteSize</key>
+                <string>{112,110}</string>
+                <key>spriteSourceSize</key>
+                <string>{200,150}</string>
+                <key>textureRect</key>
+                <string>{{1223,984},{112,110}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
             <key>JPButterflyFishMedal_00000.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{6,-2}</string>
+                <string>{12,-10}</string>
                 <key>spriteSize</key>
                 <string>{90,87}</string>
                 <key>spriteSourceSize</key>
-                <string>{180,135}</string>
+                <string>{138,113}</string>
                 <key>textureRect</key>
-                <string>{{871,1803},{90,87}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>JPButterflyFishMedal_00001.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{5,-2}</string>
-                <key>spriteSize</key>
-                <string>{94,91}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{1804,1165},{94,91}}</string>
+                <string>{{1459,1087},{90,87}}</string>
                 <key>textureRotated</key>
                 <true/>
-            </dict>
-            <key>JPButterflyFishMedal_00002.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{5,-2}</string>
-                <key>spriteSize</key>
-                <string>{98,95}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{1593,1776},{98,95}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>JPButterflyFishMedal_00003.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{5,-2}</string>
-                <key>spriteSize</key>
-                <string>{100,97}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{679,1051},{100,97}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>JPButterflyFishMedal_00004.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{5,-2}</string>
-                <key>spriteSize</key>
-                <string>{104,101}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{576,1057},{104,101}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>JPButterflyFishMedal_00005.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{5,-2}</string>
-                <key>spriteSize</key>
-                <string>{106,103}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{1360,673},{106,103}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>JPButterflyFishMedal_00006.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{5,-2}</string>
-                <key>spriteSize</key>
-                <string>{108,105}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{1613,1668},{108,105}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>JPButterflyFishMedal_00007.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{5,-2}</string>
-                <key>spriteSize</key>
-                <string>{110,107}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{1389,1659},{110,107}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>JPButterflyFishMedal_00008.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{6,-2}</string>
-                <key>spriteSize</key>
-                <string>{110,109}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{1501,1665},{110,109}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>JPButterflyFishMedal_00009.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{5,-2}</string>
-                <key>spriteSize</key>
-                <string>{112,109}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{920,1255},{112,109}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>JPButterflyFishMedal_00010.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{6,-2}</string>
-                <key>spriteSize</key>
-                <string>{112,111}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{897,786},{112,111}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>JPButterflyFishMedal_00011.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{6,-2}</string>
-                <key>spriteSize</key>
-                <string>{112,111}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{806,1256},{112,111}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>JPButterflyFishMedal_00012.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{6,-2}</string>
-                <key>spriteSize</key>
-                <string>{112,111}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{924,1495},{112,111}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>JPButterflyFishMedal_00013.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{6,-2}</string>
-                <key>spriteSize</key>
-                <string>{106,105}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{1273,1762},{106,105}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>JPButterflyFishMedal_00014.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{5,-2}</string>
-                <key>spriteSize</key>
-                <string>{100,97}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{1797,1778},{100,97}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>JPButterflyFishMedal_00015.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{5,-2}</string>
-                <key>spriteSize</key>
-                <string>{96,93}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{966,1704},{96,93}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>JPButterflyFishMedal_00016.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{6,-2}</string>
-                <key>spriteSize</key>
-                <string>{92,89}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{1011,776},{92,89}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>JPButterflyFishMedal_00017.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{6,-2}</string>
-                <key>spriteSize</key>
-                <string>{90,87}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{1061,1685},{90,87}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>JPButterflyFishMedal_00018.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{6,-2}</string>
-                <key>spriteSize</key>
-                <string>{90,87}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{871,1803},{90,87}}</string>
-                <key>textureRotated</key>
-                <false/>
             </dict>
             <key>JPCoinLight.png</key>
             <dict>
@@ -574,243 +109,48 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
+            <key>JPMermaidMedalGlow.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{5,2}</string>
+                <key>spriteSize</key>
+                <string>{132,126}</string>
+                <key>spriteSourceSize</key>
+                <string>{200,150}</string>
+                <key>textureRect</key>
+                <string>{{461,918},{132,126}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
             <key>JPMermaidMedal_00000.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{7,4}</string>
+                <string>{13,-2}</string>
                 <key>spriteSize</key>
-                <string>{114,105}</string>
+                <string>{112,105}</string>
                 <key>spriteSourceSize</key>
-                <string>{180,135}</string>
+                <string>{138,113}</string>
                 <key>textureRect</key>
-                <string>{{1766,1261},{114,105}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>JPMermaidMedal_00001.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{6,3}</string>
-                <key>spriteSize</key>
-                <string>{116,109}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{1159,1442},{116,109}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>JPMermaidMedal_00002.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{6,3}</string>
-                <key>spriteSize</key>
-                <string>{116,113}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{1103,661},{116,113}}</string>
+                <string>{{1225,1096},{112,105}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>JPMermaidMedal_00003.png</key>
+            <key>JPSharkMedalGlow.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{5,3}</string>
+                <string>{-13,-6}</string>
                 <key>spriteSize</key>
-                <string>{120,115}</string>
+                <string>{150,112}</string>
                 <key>spriteSourceSize</key>
-                <string>{180,135}</string>
+                <string>{200,150}</string>
                 <key>textureRect</key>
-                <string>{{553,1637},{120,115}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>JPMermaidMedal_00004.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{6,3}</string>
-                <key>spriteSize</key>
-                <string>{122,119}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{1292,900},{122,119}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>JPMermaidMedal_00005.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{6,3}</string>
-                <key>spriteSize</key>
-                <string>{126,123}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{1413,900},{126,123}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>JPMermaidMedal_00006.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{5,3}</string>
-                <key>spriteSize</key>
-                <string>{128,125}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{1762,287},{128,125}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>JPMermaidMedal_00007.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{5,2}</string>
-                <key>spriteSize</key>
-                <string>{130,125}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{1022,1012},{130,125}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>JPMermaidMedal_00008.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{5,3}</string>
-                <key>spriteSize</key>
-                <string>{130,127}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{1022,883},{130,127}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>JPMermaidMedal_00009.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{5,2}</string>
-                <key>spriteSize</key>
-                <string>{132,127}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{147,1619},{132,127}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>JPMermaidMedal_00010.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{5,2}</string>
-                <key>spriteSize</key>
-                <string>{132,127}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{281,1618},{132,127}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>JPMermaidMedal_00011.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{5,2}</string>
-                <key>spriteSize</key>
-                <string>{126,121}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{1760,555},{126,121}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>JPMermaidMedal_00012.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{5,3}</string>
-                <key>spriteSize</key>
-                <string>{120,115}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{562,1515},{120,115}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>JPMermaidMedal_00013.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{6,3}</string>
-                <key>spriteSize</key>
-                <string>{116,111}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{1031,1250},{116,111}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>JPMermaidMedal_00014.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{7,3}</string>
-                <key>spriteSize</key>
-                <string>{114,107}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{1159,1553},{114,107}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>JPMermaidMedal_00015.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{7,4}</string>
-                <key>spriteSize</key>
-                <string>{114,105}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{1766,1261},{114,105}}</string>
+                <string>{{951,661},{150,112}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -819,285 +159,15 @@
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-14,-6}</string>
+                <string>{-6,-10}</string>
                 <key>spriteSize</key>
-                <string>{128,87}</string>
+                <string>{126,87}</string>
                 <key>spriteSourceSize</key>
-                <string>{180,135}</string>
+                <string>{138,113}</string>
                 <key>textureRect</key>
-                <string>{{1412,1161},{128,87}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>JPSharkMedal_00001.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-13,-6}</string>
-                <key>spriteSize</key>
-                <string>{130,93}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{1542,1160},{130,93}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>JPSharkMedal_00002.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-13,-6}</string>
-                <key>spriteSize</key>
-                <string>{134,97}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{778,1037},{134,97}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>JPSharkMedal_00003.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-13,-6}</string>
-                <key>spriteSize</key>
-                <string>{136,99}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{576,919},{136,99}}</string>
+                <string>{{883,786},{126,87}}</string>
                 <key>textureRotated</key>
                 <true/>
-            </dict>
-            <key>JPSharkMedal_00004.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-13,-6}</string>
-                <key>spriteSize</key>
-                <string>{140,103}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{1218,673},{140,103}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>JPSharkMedal_00005.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-13,-6}</string>
-                <key>spriteSize</key>
-                <string>{142,105}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{280,1511},{142,105}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>JPSharkMedal_00006.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-13,-6}</string>
-                <key>spriteSize</key>
-                <string>{144,107}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{461,1369},{144,107}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>JPSharkMedal_00007.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-13,-6}</string>
-                <key>spriteSize</key>
-                <string>{146,109}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{461,1221},{146,109}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>JPSharkMedal_00008.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-13,-6}</string>
-                <key>spriteSize</key>
-                <string>{148,111}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{461,1071},{148,111}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>JPSharkMedal_00009.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-13,-6}</string>
-                <key>spriteSize</key>
-                <string>{148,111}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{747,786},{148,111}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>JPSharkMedal_00010.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-13,-7}</string>
-                <key>spriteSize</key>
-                <string>{150,111}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{1506,302},{150,111}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>JPSharkMedal_00011.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-13,-6}</string>
-                <key>spriteSize</key>
-                <string>{150,113}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{951,661},{150,113}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>JPSharkMedal_00012.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-13,-6}</string>
-                <key>spriteSize</key>
-                <string>{150,113}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{461,919},{150,113}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>JPSharkMedal_00013.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-13,-6}</string>
-                <key>spriteSize</key>
-                <string>{142,105}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{1218,566},{142,105}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>JPSharkMedal_00014.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-13,-6}</string>
-                <key>spriteSize</key>
-                <string>{136,99}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{677,913},{136,99}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>JPSharkMedal_00015.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-13,-6}</string>
-                <key>spriteSize</key>
-                <string>{132,95}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{1150,1144},{132,95}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>JPSharkMedal_00016.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-13,-6}</string>
-                <key>spriteSize</key>
-                <string>{128,91}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{1674,1165},{128,91}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>JPSharkMedal_00017.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-14,-6}</string>
-                <key>spriteSize</key>
-                <string>{128,89}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{1150,1241},{128,89}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>JPSharkMedal_00018.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-14,-6}</string>
-                <key>spriteSize</key>
-                <string>{128,87}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{1412,1161},{128,87}}</string>
-                <key>textureRotated</key>
-                <false/>
             </dict>
             <key>JPTitle.png</key>
             <dict>
@@ -1114,288 +184,33 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
+            <key>JPTurtleMedalGlow.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-9,3}</string>
+                <key>spriteSize</key>
+                <string>{144,130}</string>
+                <key>spriteSourceSize</key>
+                <string>{200,150}</string>
+                <key>textureRect</key>
+                <string>{{461,786},{144,130}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
             <key>JPTurtleMedal_00000.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-9,4}</string>
+                <string>{-3,0}</string>
                 <key>spriteSize</key>
-                <string>{122,107}</string>
+                <string>{120,107}</string>
                 <key>spriteSourceSize</key>
-                <string>{180,135}</string>
+                <string>{138,113}</string>
                 <key>textureRect</key>
-                <string>{{1280,1247},{122,107}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>JPTurtleMedal_00001.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-9,4}</string>
-                <key>spriteSize</key>
-                <string>{126,113}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{809,1369},{126,113}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>JPTurtleMedal_00002.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-9,4}</string>
-                <key>spriteSize</key>
-                <string>{128,117}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{1480,781},{128,117}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>JPTurtleMedal_00003.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-9,4}</string>
-                <key>spriteSize</key>
-                <string>{132,119}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{1292,1024},{132,119}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>JPTurtleMedal_00004.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-9,4}</string>
-                <key>spriteSize</key>
-                <string>{134,123}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{1413,1025},{134,123}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>JPTurtleMedal_00005.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-9,4}</string>
-                <key>spriteSize</key>
-                <string>{136,125}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{1,1750},{136,125}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>JPTurtleMedal_00006.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-9,4}</string>
-                <key>spriteSize</key>
-                <string>{138,127}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{1760,147},{138,127}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>JPTurtleMedal_00007.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-9,3}</string>
-                <key>spriteSize</key>
-                <string>{140,129}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{1364,302},{140,129}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>JPTurtleMedal_00008.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-9,3}</string>
-                <key>spriteSize</key>
-                <string>{142,129}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{1218,435},{142,129}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>JPTurtleMedal_00009.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-9,3}</string>
-                <key>spriteSize</key>
-                <string>{144,129}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{1,1619},{144,129}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>JPTurtleMedal_00010.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-9,2}</string>
-                <key>spriteSize</key>
-                <string>{144,131}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{1218,302},{144,131}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>JPTurtleMedal_00011.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-9,2}</string>
-                <key>spriteSize</key>
-                <string>{144,131}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{1760,1},{144,131}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>JPTurtleMedal_00012.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-9,2}</string>
-                <key>spriteSize</key>
-                <string>{144,131}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{461,786},{144,131}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>JPTurtleMedal_00013.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-9,4}</string>
-                <key>spriteSize</key>
-                <string>{138,125}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{607,786},{138,125}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>JPTurtleMedal_00014.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-9,4}</string>
-                <key>spriteSize</key>
-                <string>{132,119}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{1760,678},{132,119}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>JPTurtleMedal_00015.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-9,4}</string>
-                <key>spriteSize</key>
-                <string>{128,115}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{692,1369},{128,115}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>JPTurtleMedal_00016.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-9,4}</string>
-                <key>spriteSize</key>
-                <string>{124,111}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{924,1369},{124,111}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>JPTurtleMedal_00017.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-9,4}</string>
-                <key>spriteSize</key>
-                <string>{122,109}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{1026,1139},{122,109}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>JPTurtleMedal_00018.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-9,4}</string>
-                <key>spriteSize</key>
-                <string>{122,107}</string>
-                <key>spriteSourceSize</key>
-                <string>{180,135}</string>
-                <key>textureRect</key>
-                <string>{{1280,1247},{122,107}}</string>
+                <string>{{965,1295},{120,107}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -1410,7 +225,7 @@
                 <key>spriteSourceSize</key>
                 <string>{97,97}</string>
                 <key>textureRect</key>
-                <string>{{692,1499},{81,97}}</string>
+                <string>{{461,1460},{81,97}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -1425,9 +240,9 @@
                 <key>spriteSourceSize</key>
                 <string>{97,97}</string>
                 <key>textureRect</key>
-                <string>{{792,1588},{93,97}}</string>
+                <string>{{1435,1344},{93,97}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>JPWin3.png</key>
             <dict>
@@ -1440,9 +255,9 @@
                 <key>spriteSourceSize</key>
                 <string>{97,97}</string>
                 <key>textureRect</key>
-                <string>{{887,1609},{93,97}}</string>
+                <string>{{1309,1420},{93,97}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>JPWin4.png</key>
             <dict>
@@ -1455,9 +270,9 @@
                 <key>spriteSourceSize</key>
                 <string>{97,97}</string>
                 <key>textureRect</key>
-                <string>{{871,1704},{93,97}}</string>
+                <string>{{1404,1439},{93,97}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>JPWinBase.png</key>
             <dict>
@@ -1472,7 +287,7 @@
                 <key>textureRect</key>
                 <string>{{1218,1},{540,299}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>MermaidIcon.png</key>
             <dict>
@@ -1485,7 +300,7 @@
                 <key>spriteSourceSize</key>
                 <string>{99,88}</string>
                 <key>textureRect</key>
-                <string>{{1061,1774},{91,84}}</string>
+                <string>{{560,1460},{91,84}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -1500,9 +315,9 @@
                 <key>spriteSourceSize</key>
                 <string>{138,113}</string>
                 <key>textureRect</key>
-                <string>{{1159,1662},{112,105}}</string>
+                <string>{{1225,1210},{112,105}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>PL1.png</key>
             <dict>
@@ -1515,7 +330,7 @@
                 <key>spriteSourceSize</key>
                 <string>{6,19}</string>
                 <key>textureRect</key>
-                <string>{{1723,1668},{6,15}}</string>
+                <string>{{1337,984},{6,15}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -1530,9 +345,9 @@
                 <key>spriteSourceSize</key>
                 <string>{9,18}</string>
                 <key>textureRect</key>
-                <string>{{1886,799},{9,16}}</string>
+                <string>{{951,775},{9,16}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>PL3.png</key>
             <dict>
@@ -1545,9 +360,9 @@
                 <key>spriteSourceSize</key>
                 <string>{9,18}</string>
                 <key>textureRect</key>
-                <string>{{1886,817},{9,16}}</string>
+                <string>{{1205,1409},{9,16}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>PL4.png</key>
             <dict>
@@ -1560,9 +375,9 @@
                 <key>spriteSourceSize</key>
                 <string>{11,19}</string>
                 <key>textureRect</key>
-                <string>{{1622,537},{11,17}}</string>
+                <string>{{740,1529},{11,17}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>PrizeListFrame.png</key>
             <dict>
@@ -1575,7 +390,7 @@
                 <key>spriteSourceSize</key>
                 <string>{277,106}</string>
                 <key>textureRect</key>
-                <string>{{1,1511},{277,106}}</string>
+                <string>{{1218,543},{277,106}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -1590,9 +405,9 @@
                 <key>spriteSourceSize</key>
                 <string>{99,77}</string>
                 <key>textureRect</key>
-                <string>{{1835,1676},{87,59}}</string>
+                <string>{{1459,1179},{87,59}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>SharkIconGray.png</key>
             <dict>
@@ -1605,7 +420,7 @@
                 <key>spriteSourceSize</key>
                 <string>{138,113}</string>
                 <key>textureRect</key>
-                <string>{{1284,1158},{126,87}}</string>
+                <string>{{1226,895},{126,87}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -1620,7 +435,7 @@
                 <key>spriteSourceSize</key>
                 <string>{30,34}</string>
                 <key>textureRect</key>
-                <string>{{1474,433},{30,34}}</string>
+                <string>{{1,1511},{30,34}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -1635,7 +450,7 @@
                 <key>spriteSourceSize</key>
                 <string>{150,120}</string>
                 <key>textureRect</key>
-                <string>{{1485,1776},{106,94}}</string>
+                <string>{{1225,1324},{106,94}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -1650,7 +465,7 @@
                 <key>spriteSourceSize</key>
                 <string>{150,120}</string>
                 <key>textureRect</key>
-                <string>{{1364,433},{108,102}}</string>
+                <string>{{1438,1240},{108,102}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -1665,9 +480,9 @@
                 <key>spriteSourceSize</key>
                 <string>{150,120}</string>
                 <key>textureRect</key>
-                <string>{{1381,1768},{100,102}}</string>
+                <string>{{1333,1309},{100,102}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>TreasureBoxOpen_00003.png</key>
             <dict>
@@ -1680,7 +495,7 @@
                 <key>spriteSourceSize</key>
                 <string>{150,120}</string>
                 <key>textureRect</key>
-                <string>{{1693,1778},{100,102}}</string>
+                <string>{{1205,1420},{100,102}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -1695,9 +510,9 @@
                 <key>spriteSourceSize</key>
                 <string>{150,120}</string>
                 <key>textureRect</key>
-                <string>{{1275,1656},{104,112}}</string>
+                <string>{{1332,1195},{104,112}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>TreasureBoxOpen_00005.png</key>
             <dict>
@@ -1710,7 +525,7 @@
                 <key>spriteSourceSize</key>
                 <string>{150,120}</string>
                 <key>textureRect</key>
-                <string>{{670,1637},{120,120}}</string>
+                <string>{{1103,661},{120,120}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -1725,7 +540,7 @@
                 <key>spriteSourceSize</key>
                 <string>{150,120}</string>
                 <key>textureRect</key>
-                <string>{{1356,778},{122,120}}</string>
+                <string>{{977,913},{122,120}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -1740,9 +555,9 @@
                 <key>spriteSourceSize</key>
                 <string>{150,120}</string>
                 <key>textureRect</key>
-                <string>{{570,1369},{130,120}}</string>
+                <string>{{1094,783},{130,120}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>TreasureBoxOpen_00008.png</key>
             <dict>
@@ -1755,9 +570,9 @@
                 <key>spriteSourceSize</key>
                 <string>{150,120}</string>
                 <key>textureRect</key>
-                <string>{{1362,537},{134,120}}</string>
+                <string>{{1363,651},{134,120}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>TreasureBoxOpen_00009.png</key>
             <dict>
@@ -1770,7 +585,7 @@
                 <key>spriteSourceSize</key>
                 <string>{150,120}</string>
                 <key>textureRect</key>
-                <string>{{424,1515},{136,120}}</string>
+                <string>{{607,786},{136,120}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -1785,9 +600,9 @@
                 <key>spriteSourceSize</key>
                 <string>{150,120}</string>
                 <key>textureRect</key>
-                <string>{{415,1637},{136,120}}</string>
+                <string>{{461,1046},{136,120}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>TreasureBoxOpen_00011.png</key>
             <dict>
@@ -1800,9 +615,9 @@
                 <key>spriteSourceSize</key>
                 <string>{150,120}</string>
                 <key>textureRect</key>
-                <string>{{139,1759},{136,120}}</string>
+                <string>{{745,786},{136,120}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>TreasureBoxOpen_00012.png</key>
             <dict>
@@ -1815,7 +630,7 @@
                 <key>spriteSourceSize</key>
                 <string>{150,120}</string>
                 <key>textureRect</key>
-                <string>{{1037,1363},{120,120}}</string>
+                <string>{{1101,1043},{120,120}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -1830,7 +645,7 @@
                 <key>spriteSourceSize</key>
                 <string>{150,120}</string>
                 <key>textureRect</key>
-                <string>{{261,1759},{136,120}}</string>
+                <string>{{461,1184},{136,120}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -1845,7 +660,7 @@
                 <key>spriteSourceSize</key>
                 <string>{150,120}</string>
                 <key>textureRect</key>
-                <string>{{383,1759},{136,120}}</string>
+                <string>{{461,1322},{136,120}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -1860,9 +675,9 @@
                 <key>spriteSourceSize</key>
                 <string>{150,120}</string>
                 <key>textureRect</key>
-                <string>{{505,1759},{136,120}}</string>
+                <string>{{1225,651},{136,120}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>TreasureBoxOpen_00016.png</key>
             <dict>
@@ -1875,7 +690,7 @@
                 <key>spriteSourceSize</key>
                 <string>{150,120}</string>
                 <key>textureRect</key>
-                <string>{{627,1759},{136,120}}</string>
+                <string>{{972,775},{136,120}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -1890,9 +705,9 @@
                 <key>spriteSourceSize</key>
                 <string>{150,120}</string>
                 <key>textureRect</key>
-                <string>{{749,1759},{136,120}}</string>
+                <string>{{1226,773},{136,120}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>TreasureBoxOpen_00018.png</key>
             <dict>
@@ -1905,9 +720,9 @@
                 <key>spriteSourceSize</key>
                 <string>{150,120}</string>
                 <key>textureRect</key>
-                <string>{{778,899},{136,120}}</string>
+                <string>{{1364,773},{136,120}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>TreasureBoxOpen_00019.png</key>
             <dict>
@@ -1920,7 +735,7 @@
                 <key>spriteSourceSize</key>
                 <string>{150,120}</string>
                 <key>textureRect</key>
-                <string>{{900,899},{136,120}}</string>
+                <string>{{583,1046},{136,120}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -1935,9 +750,9 @@
                 <key>spriteSourceSize</key>
                 <string>{150,120}</string>
                 <key>textureRect</key>
-                <string>{{1218,778},{136,120}}</string>
+                <string>{{583,1184},{136,120}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>TreasureBoxOpen_00021.png</key>
             <dict>
@@ -1950,9 +765,9 @@
                 <key>spriteSourceSize</key>
                 <string>{150,120}</string>
                 <key>textureRect</key>
-                <string>{{1154,900},{136,120}}</string>
+                <string>{{583,1322},{136,120}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>TreasureBoxOpen_00022.png</key>
             <dict>
@@ -1965,9 +780,9 @@
                 <key>spriteSourceSize</key>
                 <string>{150,120}</string>
                 <key>textureRect</key>
-                <string>{{1154,1022},{136,120}}</string>
+                <string>{{607,908},{136,120}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>TreasureBoxOpen_00023.png</key>
             <dict>
@@ -1980,7 +795,7 @@
                 <key>spriteSourceSize</key>
                 <string>{150,120}</string>
                 <key>textureRect</key>
-                <string>{{1506,415},{136,120}}</string>
+                <string>{{729,908},{136,120}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -1995,9 +810,9 @@
                 <key>spriteSourceSize</key>
                 <string>{150,120}</string>
                 <key>textureRect</key>
-                <string>{{1484,537},{136,120}}</string>
+                <string>{{1101,905},{136,120}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>TreasureBoxOpen_00025.png</key>
             <dict>
@@ -2010,7 +825,7 @@
                 <key>spriteSourceSize</key>
                 <string>{150,120}</string>
                 <key>textureRect</key>
-                <string>{{1762,417},{136,120}}</string>
+                <string>{{705,1046},{136,120}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -2025,9 +840,9 @@
                 <key>spriteSourceSize</key>
                 <string>{150,120}</string>
                 <key>textureRect</key>
-                <string>{{1622,550},{136,120}}</string>
+                <string>{{705,1184},{136,120}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>TreasureBoxOpen_00027.png</key>
             <dict>
@@ -2040,9 +855,9 @@
                 <key>spriteSourceSize</key>
                 <string>{150,120}</string>
                 <key>textureRect</key>
-                <string>{{1484,659},{136,120}}</string>
+                <string>{{705,1322},{136,120}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>TreasureBoxOpen_00028.png</key>
             <dict>
@@ -2055,7 +870,7 @@
                 <key>spriteSourceSize</key>
                 <string>{150,120}</string>
                 <key>textureRect</key>
-                <string>{{1622,672},{136,120}}</string>
+                <string>{{827,1034},{136,120}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -2070,7 +885,7 @@
                 <key>spriteSourceSize</key>
                 <string>{150,120}</string>
                 <key>textureRect</key>
-                <string>{{1610,794},{136,120}}</string>
+                <string>{{827,1156},{136,120}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -2085,7 +900,7 @@
                 <key>spriteSourceSize</key>
                 <string>{150,120}</string>
                 <key>textureRect</key>
-                <string>{{1748,799},{136,120}}</string>
+                <string>{{827,1278},{136,120}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -2100,9 +915,9 @@
                 <key>spriteSourceSize</key>
                 <string>{150,120}</string>
                 <key>textureRect</key>
-                <string>{{1541,916},{136,120}}</string>
+                <string>{{965,1157},{136,120}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>TreasureBoxOpen_00032.png</key>
             <dict>
@@ -2115,7 +930,7 @@
                 <key>spriteSourceSize</key>
                 <string>{150,120}</string>
                 <key>textureRect</key>
-                <string>{{1538,1038},{136,120}}</string>
+                <string>{{1087,1165},{136,120}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -2130,7 +945,7 @@
                 <key>spriteSourceSize</key>
                 <string>{150,120}</string>
                 <key>textureRect</key>
-                <string>{{1679,921},{136,120}}</string>
+                <string>{{1087,1287},{136,120}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -2145,7 +960,7 @@
                 <key>spriteSourceSize</key>
                 <string>{150,120}</string>
                 <key>textureRect</key>
-                <string>{{1676,1043},{134,120}}</string>
+                <string>{{965,1035},{134,120}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -2160,9 +975,9 @@
                 <key>spriteSourceSize</key>
                 <string>{150,120}</string>
                 <key>textureRect</key>
-                <string>{{1644,416},{132,116}}</string>
+                <string>{{827,1400},{132,116}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>TreasureBoxOpen_00036.png</key>
             <dict>
@@ -2175,7 +990,7 @@
                 <key>spriteSourceSize</key>
                 <string>{150,120}</string>
                 <key>textureRect</key>
-                <string>{{1279,1356},{120,98}}</string>
+                <string>{{1083,1409},{120,98}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -2190,7 +1005,7 @@
                 <key>spriteSourceSize</key>
                 <string>{150,120}</string>
                 <key>textureRect</key>
-                <string>{{1401,1359},{120,98}}</string>
+                <string>{{1354,895},{120,98}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -2205,7 +1020,7 @@
                 <key>spriteSourceSize</key>
                 <string>{150,120}</string>
                 <key>textureRect</key>
-                <string>{{1523,1365},{120,98}}</string>
+                <string>{{1337,995},{120,98}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -2220,307 +1035,7 @@
                 <key>spriteSourceSize</key>
                 <string>{150,120}</string>
                 <key>textureRect</key>
-                <string>{{1645,1368},{120,98}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>TreasureBoxOpen_00040.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-7,-11}</string>
-                <key>spriteSize</key>
-                <string>{120,98}</string>
-                <key>spriteSourceSize</key>
-                <string>{150,120}</string>
-                <key>textureRect</key>
-                <string>{{1277,1456},{120,98}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>TreasureBoxOpen_00041.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-7,-11}</string>
-                <key>spriteSize</key>
-                <string>{120,98}</string>
-                <key>spriteSourceSize</key>
-                <string>{150,120}</string>
-                <key>textureRect</key>
-                <string>{{1399,1459},{120,98}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>TreasureBoxOpen_00042.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-7,-11}</string>
-                <key>spriteSize</key>
-                <string>{120,98}</string>
-                <key>spriteSourceSize</key>
-                <string>{150,120}</string>
-                <key>textureRect</key>
-                <string>{{1521,1465},{120,98}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>TreasureBoxOpen_00043.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-7,-11}</string>
-                <key>spriteSize</key>
-                <string>{120,98}</string>
-                <key>spriteSourceSize</key>
-                <string>{150,120}</string>
-                <key>textureRect</key>
-                <string>{{1643,1468},{120,98}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>TreasureBoxOpen_00044.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-7,-11}</string>
-                <key>spriteSize</key>
-                <string>{120,98}</string>
-                <key>spriteSourceSize</key>
-                <string>{150,120}</string>
-                <key>textureRect</key>
-                <string>{{1765,1476},{120,98}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>TreasureBoxOpen_00045.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-7,-11}</string>
-                <key>spriteSize</key>
-                <string>{120,98}</string>
-                <key>spriteSourceSize</key>
-                <string>{150,120}</string>
-                <key>textureRect</key>
-                <string>{{1037,1485},{120,98}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>TreasureBoxOpen_00046.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-7,-11}</string>
-                <key>spriteSize</key>
-                <string>{120,98}</string>
-                <key>spriteSourceSize</key>
-                <string>{150,120}</string>
-                <key>textureRect</key>
-                <string>{{1037,1485},{120,98}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>TreasureBoxOpen_00047.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-7,-11}</string>
-                <key>spriteSize</key>
-                <string>{120,98}</string>
-                <key>spriteSourceSize</key>
-                <string>{150,120}</string>
-                <key>textureRect</key>
-                <string>{{1037,1585},{120,98}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>TreasureBoxOpen_00048.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-7,-11}</string>
-                <key>spriteSize</key>
-                <string>{120,98}</string>
-                <key>spriteSourceSize</key>
-                <string>{150,120}</string>
-                <key>textureRect</key>
-                <string>{{1037,1585},{120,98}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>TreasureBoxOpen_00049.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-7,-11}</string>
-                <key>spriteSize</key>
-                <string>{120,98}</string>
-                <key>spriteSourceSize</key>
-                <string>{150,120}</string>
-                <key>textureRect</key>
-                <string>{{1037,1585},{120,98}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>TreasureBoxOpen_00050.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-7,-11}</string>
-                <key>spriteSize</key>
-                <string>{120,98}</string>
-                <key>spriteSourceSize</key>
-                <string>{150,120}</string>
-                <key>textureRect</key>
-                <string>{{1037,1585},{120,98}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>TreasureBoxOpen_00051.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-7,-11}</string>
-                <key>spriteSize</key>
-                <string>{120,98}</string>
-                <key>spriteSourceSize</key>
-                <string>{150,120}</string>
-                <key>textureRect</key>
-                <string>{{1037,1585},{120,98}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>TreasureBoxOpen_00052.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-7,-11}</string>
-                <key>spriteSize</key>
-                <string>{120,98}</string>
-                <key>spriteSourceSize</key>
-                <string>{150,120}</string>
-                <key>textureRect</key>
-                <string>{{1037,1585},{120,98}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>TreasureBoxOpen_00053.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-7,-11}</string>
-                <key>spriteSize</key>
-                <string>{120,98}</string>
-                <key>spriteSourceSize</key>
-                <string>{150,120}</string>
-                <key>textureRect</key>
-                <string>{{1037,1585},{120,98}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>TreasureBoxOpen_00054.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-7,-11}</string>
-                <key>spriteSize</key>
-                <string>{120,98}</string>
-                <key>spriteSourceSize</key>
-                <string>{150,120}</string>
-                <key>textureRect</key>
-                <string>{{1275,1556},{120,98}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>TreasureBoxOpen_00055.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-7,-11}</string>
-                <key>spriteSize</key>
-                <string>{120,98}</string>
-                <key>spriteSourceSize</key>
-                <string>{150,120}</string>
-                <key>textureRect</key>
-                <string>{{1397,1559},{120,98}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>TreasureBoxOpen_00056.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-7,-11}</string>
-                <key>spriteSize</key>
-                <string>{120,98}</string>
-                <key>spriteSourceSize</key>
-                <string>{150,120}</string>
-                <key>textureRect</key>
-                <string>{{1519,1565},{120,98}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>TreasureBoxOpen_00057.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-7,-11}</string>
-                <key>spriteSize</key>
-                <string>{120,98}</string>
-                <key>spriteSourceSize</key>
-                <string>{150,120}</string>
-                <key>textureRect</key>
-                <string>{{1641,1568},{120,98}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>TreasureBoxOpen_00058.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-7,-11}</string>
-                <key>spriteSize</key>
-                <string>{120,98}</string>
-                <key>spriteSourceSize</key>
-                <string>{150,120}</string>
-                <key>textureRect</key>
-                <string>{{1763,1576},{120,98}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>TreasureBoxOpen_00059.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-73.5,58.5}</string>
-                <key>spriteSize</key>
-                <string>{3,3}</string>
-                <key>spriteSourceSize</key>
-                <string>{150,120}</string>
-                <key>textureRect</key>
-                <string>{{1026,1250},{3,3}}</string>
+                <string>{{1337,1095},{120,98}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -2535,9 +1050,9 @@
                 <key>spriteSourceSize</key>
                 <string>{99,84}</string>
                 <key>textureRect</key>
-                <string>{{1817,921},{85,76}}</string>
+                <string>{{653,1460},{85,76}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>TurtleIconGray.png</key>
             <dict>
@@ -2550,7 +1065,7 @@
                 <key>spriteSourceSize</key>
                 <string>{138,113}</string>
                 <key>textureRect</key>
-                <string>{{1404,1250},{120,107}}</string>
+                <string>{{961,1404},{120,107}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -2566,9 +1081,9 @@
             <key>realTextureFileName</key>
             <string>JPminigame.png</string>
             <key>size</key>
-            <string>{1896,1896}</string>
+            <string>{1547,1547}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:a9ddb0eec308541edf1a72aa28da7fdf:365cd44593a7570cddb7195ba0170de7:b68bb779ffd4fbcd4f3deadbe4d1c881$</string>
+            <string>$TexturePacker:SmartUpdate:25b88200002b9c26bea3eab6a42145c8:e71823c3238d9ed5d5ff8aa1cd8c8495:0a85bd5f4af13766f78642409eed76d8$</string>
             <key>textureFileName</key>
             <string>JPminigame.png</string>
         </dict>
