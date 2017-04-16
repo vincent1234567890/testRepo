@@ -11,7 +11,7 @@ const GameLogView = (function () {
     let sideSpacing = 100;
     let sideStart = 550;
 
-    const GameLogView = function () {
+    const GameLogView = function (consumptionData) {
         _parent = new cc.Node();
         _popup= new FloatingMenuPopupBasePrefab(dismissCallback);
         _popup.turnOffDeco();
@@ -22,6 +22,8 @@ const GameLogView = (function () {
          GameLogRadioButton : "#SelectionBase.png",
          GameLogRadioButtonSelected : "#Selection.png",
          GameLogLogTitleBackground : "#TextHeaderBase.png",
+         GameLogLogBackground : "#TextBG4.png",
+         GameLogHighLight : "#TextBG4HL",
          GameLogDateChinese : "#DateChinese.png",
          GameLogTypeChinese : "#TypeChinese.png",
          GameLogConsumptionIdChinese : "#SerialNumberChinese.png",
@@ -32,6 +34,12 @@ const GameLogView = (function () {
          GameLogRadioTextPeriodLongChinese :"#2WeeksChinese.png",
          GameLogListSeparator : "#LineLong.png",
          GameLogListSeparatorShort : "#LineShort.png",
+         GameLogRoundIdTitleChinese : "#RoundChinese.png",
+         GameLogTotalSpendTitleChinese : "#CannonTotalPointChinese.png",
+         GameLogTotalRevenueTitleChinese : "#FishPointChinese.png",
+         GameLogTotalProfitTitleChinese : "#ProfitPointChinese.png",
+         GameLogStartTimeTitleChinese : "#StartTimeChinese.png",
+         GameLogEndTimeTitleChinese : "#EndTimeChinese.png",
          */
 
         const title = new cc.Sprite(ReferenceName.GameLogTitleChinese);
@@ -60,35 +68,10 @@ const GameLogView = (function () {
         scrollTitleBackground.setPosition(565,520);
         scrollBackground.setPosition(565,265);
 
+        const scrollTitle = setupConsumptionLogTitle();
+        scrollTitle.setPosition(0,scrollTitleBackground.getContentSize().height/2);
+        scrollTitleBackground.addChild(scrollTitle);
 
-
-        // const gameRules = GUIFunctions.createButton(ReferenceName.FAQButtonBackground,ReferenceName.FAQButtonBackgroundOnPress,onGameRulesClicked);
-        // const uiFAQ = GUIFunctions.createButton(ReferenceName.FAQButtonBackground,ReferenceName.FAQButtonBackgroundOnPress,onGameRulesClicked);
-        // const fishInfo = GUIFunctions.createButton(ReferenceName.FAQButtonBackground,ReferenceName.FAQButtonBackgroundOnPress,onFishInfoClicked);
-        // const cannonInfo = GUIFunctions.createButton(ReferenceName.FAQButtonBackground,ReferenceName.FAQButtonBackgroundOnPress,onCannonInfoClicked);
-        // const jackpotInfo = GUIFunctions.createButton(ReferenceName.FAQButtonBackground,ReferenceName.FAQButtonBackgroundOnPress,onJackpotInfoClicked);
-        //
-        // const gameRulesButtonText = new cc.Sprite(ReferenceName.FAQGameRulesButtonText);
-        // const uiFAQButtonText = new cc.Sprite(ReferenceName.FAQUIFaqButtonText);
-        // const fishInfoButtonText = new cc.Sprite(ReferenceName.FAQFishInfoButtonText);
-        // const cannonInfoButtonText = new cc.Sprite(ReferenceName.FAQCannonInfoButtonText);
-        // const jackpotInfoButtonText = new cc.Sprite(ReferenceName.FAQJackpotInfoButtonText);
-
-        // const pos = new cc.p(gameRules.getContentSize().width/2, gameRules.getContentSize().height/2);
-        //
-        // console.log(gameRules,gameRules.getContentSize(),pos);
-        //
-        // gameRulesButtonText.setPosition(pos);
-        // uiFAQButtonText.setPosition(pos);
-        // fishInfoButtonText.setPosition(pos);
-        // cannonInfoButtonText.setPosition(pos);
-        // jackpotInfoButtonText.setPosition(pos);
-        //
-        // gameRules.addChild(gameRulesButtonText);
-        // uiFAQ.addChild(uiFAQButtonText);
-        // fishInfo.addChild(fishInfoButtonText);
-        // cannonInfo.addChild(cannonInfoButtonText);
-        // jackpotInfo.addChild(jackpotInfoButtonText);
 
         title.setPosition(new cc.p(560,705));
 
@@ -99,7 +82,6 @@ const GameLogView = (function () {
 
         _popup.getBackground().addChild(scrollTitleBackground);
         _popup.getBackground().addChild(scrollBackground);
-
 
 
         // _popup.getBackground().addChild(gameRules);
@@ -120,6 +102,8 @@ const GameLogView = (function () {
         // jackpotInfo.setPosition(sideButtonX, sideStart - sideSpacing * 4);
 
         _parent.addChild(_popup.getParent());
+
+        this.show(consumptionData);
 
         GameView.addView(_parent,ZORDER);
     };
@@ -155,9 +139,12 @@ const GameLogView = (function () {
 
     const proto = GameLogView.prototype;
 
-    proto.show = function () {
+    proto.show = function (consumptionData) {
         _parent.setLocalZOrder(ZORDER);
         _parent.setVisible(true);
+
+        setupConsumptionLogList(consumptionData);
+
         _popup.show();
     };
 
@@ -166,7 +153,42 @@ const GameLogView = (function () {
         _popup.hide();
     };
 
-    function setupConsumptionLog() {
+    function setupGameLog(){
+        const parent = new cc.Node();
+
+    }
+
+    function setupConsumptionLogTitle(){
+        const parent = new cc.Node();
+        const roundIdTitleText = new cc.Sprite(ReferenceName.GameLogRoundIdTitleChinese);
+        const totalSpendTitleText = new cc.Sprite(ReferenceName.GameLogTotalSpendTitleChinese);
+        const totalRevenueTitleText = new cc.Sprite(ReferenceName.GameLogTotalRevenueTitleChinese);
+        const totalProfitTitleText = new cc.Sprite(ReferenceName.GameLogTotalProfitTitleChinese);
+        const startTimeTitleText = new cc.Sprite(ReferenceName.GameLogStartTimeTitleChinese);
+        const endTimeTitleText = new cc.Sprite(ReferenceName.GameLogEndTimeTitleChinese);
+
+        // const pos = new cc.p(gameRules.getContentSize().width/2, gameRules.getContentSize().height/2);
+        //
+        // console.log(gameRules,gameRules.getContentSize(),pos);
+        //
+        roundIdTitleText.setPosition(100,0);
+        totalSpendTitleText.setPosition(300,0);
+        totalRevenueTitleText.setPosition(450,0);
+        totalProfitTitleText.setPosition(600,0);
+        startTimeTitleText.setPosition(750,0);
+        endTimeTitleText.setPosition(950,0);
+
+        parent.addChild(roundIdTitleText);
+        parent.addChild(totalSpendTitleText);
+        parent.addChild(totalRevenueTitleText);
+        parent.addChild(totalProfitTitleText);
+        parent.addChild(startTimeTitleText);
+        parent.addChild(endTimeTitleText);
+
+        return parent;
+    }
+
+    function setupConsumptionLogList(consumptionData) {
         const width = cc.view.getDesignResolutionSize().width;
         const height = cc.view.getDesignResolutionSize().height;
 
@@ -182,16 +204,30 @@ const GameLogView = (function () {
         // listView.setPosition(width / 2, height / 2);
         listView.setPosition(width / 2 , height / 2 - 70);
 
-        const gameList = _theme.GameList;
-        for (let i = 0; i < gameList.length; i++) {
-            const gameListButtonPrefab = new GameListButtonPrefab({
+        // const gameList = _theme.GameList;
+        const consumption = consumptionData.data;
+        for (let i = 0; i < consumption.length; i++) {
+            const listItemPrefab = new listItemPrefab({
                 gameId: i,
-                gameName: gameList[i]
-            }, width / numberOfLobbyButtonsShown, gameSelected);
+                gameName: consumption[i]
+            }, onItemSelected);
             const content = gameListButtonPrefab.getContent();
 
             listView.pushBackCustomItem(content);
         }
+
+        const listItemPrefab = (function () {
+            // const
+            function listItemPrefab(itemData, onSelectedCallback){
+                const base = GUIFunctions.createButton(undefined, ReferenceName.GameLogHighLight, onSelectedCallback);
+                const separator = new cc.Sprite(ReferenceName.GameLogListSeparator);
+
+                base.addChild(separator);
+                base.itemData = itemData;
+            }
+
+            return listItemPrefab;
+        }());
 
 
 

@@ -83,6 +83,10 @@ const GameManager = function () {
         _bulletManager.removeBullet(bulletId);
     };
 
+    const setConsumptionLogData = function (consumptionLogData) {
+        _floatingMenuManager.setConsumptionLogData(consumptionLogData);
+    };
+
     const setGameState = function (config, playerId, playerSlot) {
         // console.log(JSON.stringify(config));
         _gameConfig = config;
@@ -341,6 +345,7 @@ const GameManager = function () {
 
         //Menu stuff
         updateJackpotPool : updateJackpotPool,
+        setConsumptionLogData : setConsumptionLogData,
 
         //Game stuff
         setGameState: setGameState,

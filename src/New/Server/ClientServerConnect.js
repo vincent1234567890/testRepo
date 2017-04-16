@@ -85,6 +85,7 @@ const ClientServerConnect = function () {
                         () => client.callAPIOnce('player', 'getConsumptionLog', {}).then(
                             consumptions => {
                                 console.log("consumptions:", consumptions);
+                                GameManager.setConsumptionLogData(consumptions);
                             }
                         )
                     ).catch(console.error.bind(console));

@@ -10,7 +10,7 @@ const FloatingMenu = (function () {
     const originalSize = 1;
 
     let _playerData;
-
+    let _consumptionData;
 
     let _setttingsView;
     let _gameLogView;
@@ -132,36 +132,36 @@ const FloatingMenu = (function () {
     function onGameLogSelected() {
         console.log("onGameLogSelected");
         if (_gameLogView){
-            _gameLogView.show();
+            _gameLogView.show(_consumptionData);
         }else{
-            _gameLogView = new GameLogView();
+            _gameLogView = new GameLogView(_consumptionData);
         }
     }
 
     function onProfileSelected() {
         console.log("onProfileSelected");
-        if (!_profileView) {
-            _profileView = new ProfileView(_playerData);
-        } else {
+        if (_profileView) {
             _profileView.show();
+        } else {
+            _profileView = new ProfileView(_playerData);
         }
     }
 
     function onLeaderboardSelected() {
         console.log("onLeaderboardSelected");
-        if (!_leaderboardView) {
-            _leaderboardView = new LeaderboardView();
-        } else {
+        if (_leaderboardView) {
             _leaderboardView.show();
+        } else {
+            _leaderboardView = new LeaderboardView();
         }
     }
 
     function onFAQSelected() {
         console.log("onFAQSelected");
-        if (!_faqView) {
-            _faqView = new FAQView();
-        } else {
+        if (_faqView) {
             _faqView.show();
+        } else {
+            _faqView = new FAQView();
         }
     }
 
@@ -220,6 +220,10 @@ const FloatingMenu = (function () {
         }
     };
     // proto.Move
+
+    proto.setConsumptionLogData = function (consumptionData) {
+        _consumptionData = consumptionData;
+    };
 
     return FloatingMenu;
 }());

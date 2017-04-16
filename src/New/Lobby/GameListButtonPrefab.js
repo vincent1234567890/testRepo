@@ -5,7 +5,6 @@
 //experimenting with arrow function format
 const GameListButtonPrefab = (function () {
     "use strict";
-
     const GameListButtonPrefab = function (itemData, widthOfButton, selectedCallback) {
         this._wrapper = new ccui.Widget();
 
@@ -17,11 +16,9 @@ const GameListButtonPrefab = (function () {
                     break;
                 case ccui.Widget.TOUCH_BEGAN:
                     if (selected) return;
-                    if(ball.getNumberOfRunningActions() == 0){
-                        // console.log("run");
+                    if(ball.getNumberOfRunningActions() == 0){ //base is requested to play all the time. Comments in case of re-reversion
                         // const _baseSequence = new cc.repeatForever(new cc.Sequence(getAnimationArray("GameSelectionBase")));
                         const _ballSequence = new cc.repeatForever(new cc.Sequence(getAnimationArray(itemData.gameName+"Top")));
-
                         // base.runAction(_baseSequence);
                         ball.runAction(_ballSequence);
                     }
@@ -30,14 +27,11 @@ const GameListButtonPrefab = (function () {
                     ball.resume();
                     break;
                 case ccui.Widget.TOUCH_ENDED:
-                    // console.log(sender.gameData);
                     selectedCallback(this);
-                case ccui.Widget.TOUCH_CANCELED:
-                    // gameSelected(sender);
+                case ccui.Widget.TOUCH_CANCELED: // fallthrough intended
                     // base.pause();
                     ball.pause();
                     selected = false;
-                    // this._selectedCallBack(sender);
                     break;
             }
         };
@@ -117,7 +111,6 @@ const GameListButtonPrefab = (function () {
         ball.setPosition(383, 330);
         base.addChild(ball);
 
-
         text.setAnchorPoint(0.5,0.5);
         text.setPosition(385, 117);
         base.addChild(text);
@@ -125,7 +118,7 @@ const GameListButtonPrefab = (function () {
         this._wrapper.setContentSize(widthOfButton,ball.getContentSize().height);
         this._wrapper.addChild(content);
 
-        base.pause();
+        // base.pause();
         ball.pause();
 
         let selected = false;

@@ -141,6 +141,7 @@ const ReferenceName = {
     GameLogRadioButtonSelected : "#Selection.png",
     GameLogLogTitleBackground : "#TextHeaderBase.png",
     GameLogLogBackground : "#TextBG4.png",
+    GameLogHighLight : "#TextBG4HL",
     GameLogDateChinese : "#DateChinese.png",
     GameLogTypeChinese : "#TypeChinese.png",
     GameLogConsumptionIdChinese : "#SerialNumberChinese.png",
@@ -151,6 +152,12 @@ const ReferenceName = {
     GameLogRadioTextPeriodLongChinese :"#2WeeksChinese.png",
     GameLogListSeparator : "#LineLong.png",
     GameLogListSeparatorShort : "#LineShort.png",
+    GameLogRoundIdTitleChinese : "#RoundChinese.png",
+    GameLogTotalSpendTitleChinese : "#CannonTotalPointChinese.png",
+    GameLogTotalRevenueTitleChinese : "#FishPointChinese.png",
+    GameLogTotalProfitTitleChinese : "#ProfitPointChinese.png",
+    GameLogStartTimeTitleChinese : "#StartTimeChinese.png",
+    GameLogEndTimeTitleChinese : "#EndTimeChinese.png",
 
     //Profile OLD
     ProfileBackground : "#Profile POut BG.png",
