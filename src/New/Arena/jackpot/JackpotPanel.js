@@ -3,12 +3,13 @@ var JackpotPanel = cc.Layer.extend({ //gradient
     _selectedBoxes: 0,
     _prizeList: null,
     _iconPatterns: null,
-
+    _boxes: null,
+    _pnAward: null,
     ctor: function(iconPattern, prizeList, winAward){
         cc.Layer.prototype.ctor.call(this);
 
         cc.spriteFrameCache.addSpriteFrames(res.JackpotMiniGamePlist);
-
+        cc.spriteFrameCache.addSpriteFrames(res.LobbyUI2Plist);
         //buzz effect
         //
 
@@ -110,7 +111,7 @@ var JackpotPanel = cc.Layer.extend({ //gradient
         //Treasure Box
         let boxStartPoint = cc.p(215, 100), boxPadding = new cc.Size(180, 120), spTreasureBox, selfPoint = this;
         for(let col = 0; col < 4; col++) {
-            for (let row = 0; row < 3; row++) {
+            for (let row = 2; row >= 0; row--) {
                 spTreasureBox = new cc.Sprite(ReferenceName.JackpotTreasureBoxOpen_00000);
                 spTreasureBox.setPosition(boxStartPoint.x + boxPadding.width * col, boxStartPoint.y + boxPadding.height * row);
                 spBackground.addChild(spTreasureBox);
@@ -122,13 +123,17 @@ var JackpotPanel = cc.Layer.extend({ //gradient
                     onTouchBegan: function(touch, event){
                         let target = event.getCurrentTarget();
                         if(cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
-                            target.convertToNodeSpace(touch.getLocation()))){
+                            target.convertToNodeSpace(touch.getLocation()))) {
                             //show the effect
                             let spEffect = target.getChildByTag(1);
-                            if(!spEffect)
+                            if (!spEffect) {
                                 spEffect = new cc.Sprite(ReferenceName.JackpotChestGlow_00014);
-                            spEffect.setPosition(85, 44);
-                            target.addChild(spEffect, 1, 1);
+                                spEffect.setPosition(85, 44);
+                                target.addChild(spEffect, 1, 1);
+                            } else {
+                                spEffect.setVisible(true);
+                            }
+
                             return true;
                         } else {
                             return false;
@@ -176,10 +181,17 @@ var JackpotPanel = cc.Layer.extend({ //gradient
                 cc.eventManager.addListener(touchEventListener, spTreasureBox);
             }
         }
+
+        //add award panel
+        let pnAward = new JackpotAwardPanel();
+        //pnAward.ignoreAnchor = false;
+        pnAward.setPosition(101, 74);
+        this.addChild(pnAward);
     },
 
     cleanup: function () {
         cc.spriteFrameCache.removeSpriteFramesFromFile(res.JackpotMiniGamePlist);
+        cc.spriteFrameCache.removeSpriteFramesFromFIle(res.LobbyUI2Plist);
         cc.Layer.prototype.cleanup.call(this);
     },
 
@@ -205,9 +217,62 @@ var JackpotPanel = cc.Layer.extend({ //gradient
 });
 
 var JackpotAwardPanel = cc.LayerColor.extend({
-    ctor: function(){
-        cc.LayerColor.prototype.ctor.call(this, new cc.Color(10, 10, 10, 192), 1163, 631);
+    ctor: function(awardLv, awardMoney){
+        let panelSize = new cc.Size(1162, 628);
+        cc.LayerColor.prototype.ctor.call(this, new cc.Color(10, 10, 10, 168), panelSize.width, panelSize.height);
 
+        cc.spriteFrameCache.addSpriteFrames(res.JackpotCoinAnimationPlist);
+
+        //panel
+        let spAwardPanel = new cc.Sprite(ReferenceName.JackpotWinBase);
+        this.addChild(spAwardPanel);
+        spAwardPanel.setPosition(panelSize.width * 0.5, panelSize.height * 0.5);
+        spAwardPanel.setScale(0.3);
+        let spAwardLevel = new cc.Sprite(ReferenceName.JackpotWin1);
+        spAwardPanel.addChild(spAwardLevel);
+        spAwardLevel.setPosition(200, 200);
+        let lbAwardMoney = new cc.LabelBMFont("16,013,245", res.JackpotGoldTextFont);
+        lbAwardMoney.setPosition(270, 90);
+        spAwardPanel.addChild(lbAwardMoney);
+
+        let pnDist1 = new cc.Point(panelSize.width * 0.5, panelSize.height * 0.88),
+            pnDist2 = new cc.Point(panelSize.width * 0.5, panelSize.height * 0.71);
+        //spAwardPanel.runAction(cc.spawn(cc.moveTo(0.4, pnDist1), cc.scaleTo(0.4, 0.42)));
+        spAwardPanel.runAction(cc.sequence(cc.spawn(cc.moveTo(0.4, pnDist1), cc.scaleTo(0.4, 0.42)),
+            cc.spawn(cc.moveTo(0.3, pnDist2), cc.scaleTo(0.3, 1))));
+
+        //light
+        let spLight = new cc.Sprite(ReferenceName.JackpotCoinLight);
+        this.addChild(spLight);
+        spLight.setPosition(panelSize.width * 0.5, 225);
+        spLight.setScaleY(0.8);
+        spLight.setOpacity(0);
+        spLight.runAction(cc.sequence(cc.delayTime(2), cc.fadeIn(0.6)));
+
+        //coins animation
+        let spCoins1 = new cc.Sprite(ReferenceName.JackpotCoinAnimation_00001);
+        spCoins1.setPosition(panelSize.width * 0.5, 225);
+        spCoins1.setScaleX(1.15);
+        this.addChild(spCoins1);
+        //spCoins1.setVisible(false);
+        let coinsAnimation = GUIFunctions.getAnimation(ReferenceName.JackpotCoinAnimation, 0.03);
+        spCoins1.runAction(cc.sequence(cc.show(), coinsAnimation, cc.hide(), cc.delayTime(0.5)).repeatForever());
+
+        let spCoins2 = new cc.Sprite(ReferenceName.JackpotCoinAnimation_00001);
+        spCoins2.setPosition(panelSize.width * 0.5, 225);
+        spCoins2.setScaleX(1.15);
+        this.addChild(spCoins2);
+        spCoins2.setVisible(false);
+        let coinsAnimation2 = GUIFunctions.getAnimation(ReferenceName.JackpotCoinAnimation, 0.03);
+        spCoins2.runAction(cc.sequence(cc.delayTime(0.5), cc.show(), coinsAnimation2, cc.hide()).repeatForever());
+
+
+    },
+    cleanup: function(){
+        cc.spriteFrameCache.removeSpriteFramesFromFile(res.JackpotCoinAnimationPlist);
+    },
+
+    _createAwardLevel: function(awardLv){
 
     }
 });

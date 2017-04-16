@@ -90,6 +90,8 @@ var res = {
     JackpotGoldTextFont: "res/CompanyA/Jackpot/GoldCoinText-export.fnt",
 
     //Lobby
+    LobbyUI2Png: "res/CompanyA/Lobby/LobbyUI2.png",
+    LobbyUI2Plist: "res/CompanyA/Lobby/LobbyUI2.plist",
     // GameUIPng: "res/New/Game/GameUI.png",
     // GameUIPlist: "res/New/Game/GameUI.plist",
 

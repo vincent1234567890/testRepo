@@ -214,6 +214,14 @@ const ReferenceName = {
     JackpotTurtleMedal_00000: "#JPTurtleMedal_00000.png",
     JackpotTurtleMedalAnm: "JPTurtleMedal_",
     JackpotChestGlow_00014: "#ChestGlow_00014.png",
+    JackpotCoinAnimation_00001: "#JPCoinAnimation_00001.png",
+    JackpotCoinAnimation: "JPCoinAnimation_",
+    JackpotCoinLight: "#JPCoinLight.png",
+    JackpotWinBase: "#JPWinBase.png",
+    JackpotWin1: "#JPWin1.png",
+    JackpotWin2: "#JPWin2.png",
+    JackpotWin3: "#JPWin3.png",
+    JackpotWin4: "#JPWin4.png",
 
     //OptionsMenu
     OptionsBG : "#Setting BG.png",
