@@ -213,7 +213,7 @@ const ReferenceName = {
     JackpotSharkMedalAnm: "JPSharkMedal_",
     JackpotTurtleMedal_00000: "#JPTurtleMedal_00000.png",
     JackpotTurtleMedalAnm: "JPTurtleMedal_",
-    JackpotChestGlow_00014: "#ChestGlow_00014.png",
+    JackpotChestGlow: "#ChestGlow.png",
     JackpotCoinAnimation_00001: "#JPCoinAnimation_00001.png",
     JackpotCoinAnimation: "JPCoinAnimation_",
     JackpotCoinLight: "#JPCoinLight.png",
@@ -222,6 +222,15 @@ const ReferenceName = {
     JackpotWin2: "#JPWin2.png",
     JackpotWin3: "#JPWin3.png",
     JackpotWin4: "#JPWin4.png",
+    JackpotMermaidIconGray: "#MermaidIconGray.png",
+    JackpotSharkIconGray: "#SharkIconGray.png",
+    JackpotTurtleIconGray: "#TurtleIconGray.png",
+    JackpotButterflyFishIconGray: "#ButterflyFishIconGray.png",
+    JackpotMermaidMedalGlow: "#JPMermaidMedalGlow.png",
+    JackpotSharkMedalGlow: "#JPSharkMedalGlow.png",
+    JackpotTurtleMedalGlow: "#JPTurtleMedalGlow.png",
+    JackpotButterflyFishMedalGlow: "#JPButterflyFishMedalGlow.png",
+
 
     //OptionsMenu
     OptionsBG : "#Setting BG.png",
