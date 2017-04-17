@@ -225,7 +225,7 @@ const ReferenceName = {
     JackpotMermaidIconGray: "#MermaidIconGray.png",
     JackpotSharkIconGray: "#SharkIconGray.png",
     JackpotTurtleIconGray: "#TurtleIconGray.png",
-    JackpotButterflyFishIconGray: "#ButterflyFishIconGray.png",
+    JackpotButterflyFishIconGray: "#ButterflyfishIconGray.png",
     JackpotMermaidMedalGlow: "#JPMermaidMedalGlow.png",
     JackpotSharkMedalGlow: "#JPSharkMedalGlow.png",
     JackpotTurtleMedalGlow: "#JPTurtleMedalGlow.png",

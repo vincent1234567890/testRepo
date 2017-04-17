@@ -6,7 +6,7 @@ var JackpotPanel = cc.Layer.extend({ //gradient
     _unselectedBoxes: null,
     _selectedMedals: null,
     _pnAward: null,
-
+    _spBackground: null,
 
     ctor: function(iconPattern, prizeList){
         cc.Layer.prototype.ctor.call(this);
@@ -27,6 +27,7 @@ var JackpotPanel = cc.Layer.extend({ //gradient
         spBackground.setPosition(cc.winSize.width * 0.5, cc.winSize.height * 0.5);
         this.addChild(spBackground);
         const panelSize = spBackground.getContentSize();
+        this._spBackground = spBackground;
 
         let spTimerBackground = new cc.Sprite(ReferenceName.JackpotTimerBg);
         spBackground.addChild(spTimerBackground);
@@ -173,8 +174,8 @@ var JackpotPanel = cc.Layer.extend({ //gradient
                             let boxAnimation = GUIFunctions.getAnimation(ReferenceName.JackpotTreasureBoxOpenAnm, 0.04);
                             target.runAction(cc.sequence(boxAnimation, cc.callFunc(function(){
                                 this.removeFromParent(true);
-                                selfPoint._removeBoxFromArray(this);
                             }, target)));
+                            selfPoint._removeBoxFromArray(target);
 
                             let spMedalGlow = selfPoint._createMedalGlowSprite(); //glow first.
                             let spMedal = selfPoint._createMedalSprite();
@@ -189,6 +190,11 @@ var JackpotPanel = cc.Layer.extend({ //gradient
 
                             spMedalGlow.setPosition(spMedal.width * 0.55, spMedal.height * 0.45);
                             let medalCount = selfPoint._glowSameMedals(spMedal);
+
+                            if(medalCount >= 3){
+                                //show all the
+                                selfPoint.showRemainBoxes();
+                            }
 
                             //remove the event listener
                             cc.eventManager.removeListeners(target);
@@ -219,13 +225,15 @@ var JackpotPanel = cc.Layer.extend({ //gradient
         for (let i = 0; i < boxes.length; i++) {
             if (boxes[i] === treasureBox) {
                 boxes.splice(i, 1);
+                console.log(boxes.length);
                 return;
             }
         }
+        console.log("can't find box", treasureBox);
     },
 
     _glowSameMedals: function(medal){
-        let medals = this._selectedMedals, arr = [medal];
+        let medals = this._selectedMedals, arr = [];
         medals.push(medal);
 
         for(let i = 0; i < medals.length; i++){
@@ -236,7 +244,7 @@ var JackpotPanel = cc.Layer.extend({ //gradient
             for(let i = 0; i < arr.length; i++){
                 let selGlow = arr[i].getChildByTag(1);
                 selGlow.setVisible(true);
-                selGlow.runAction(cc.sequence(cc.delayTime(1.5), cc.fadeIn(0.1), cc.delayTime(0.4), cc.fadeOut(0.3), cc.hide()));
+                selGlow.runAction(cc.sequence(cc.delayTime(1.6), cc.fadeIn(0.1), cc.delayTime(0.4), cc.fadeOut(0.3), cc.hide()));
             }
         }
         return arr.length;
@@ -270,9 +278,38 @@ var JackpotPanel = cc.Layer.extend({ //gradient
         return spIcon;
     },
 
+    _createGrayMedalSprite: function(){
+        let type = this._selectedIndex % 4, spIcon;
+        if(type === 0)
+            spIcon = new cc.Sprite(ReferenceName.JackpotMermaidIconGray);
+        else if(type === 1)
+            spIcon = new cc.Sprite(ReferenceName.JackpotSharkIconGray);
+        else if(type === 2)
+            spIcon = new cc.Sprite(ReferenceName.JackpotTurtleIconGray);
+        else
+            spIcon = new cc.Sprite(ReferenceName.JackpotButterflyFishIconGray);
+        spIcon.setUserData(type);
+        this._selectedIndex++;
+        return spIcon;
+    },
+
     showRemainBoxes: function(){
         //show the remain boxes.
+        let boxes = this._unselectedBoxes, delay = 2.4, ins = 0.8, selfPoint = this;
+        for(let i = 0; i < boxes.length; i++){
+            let selBox = boxes[i];
+            let spGrayMedal = this._createGrayMedalSprite();
+            this._spBackground.addChild(spGrayMedal);
+            spGrayMedal.setPosition(selBox.getPosition());
+            spGrayMedal.setScale(0.05);
+            spGrayMedal.runAction(cc.sequence(cc.delayTime(delay + ins * i), cc.scaleTo(0.4, 1)));
 
+            let boxAnimation = GUIFunctions.getAnimation(ReferenceName.JackpotTreasureBoxOpenAnm, 0.02);
+            selBox.runAction(cc.sequence(cc.delayTime(delay + ins * i), boxAnimation, cc.callFunc(function(){
+                this.removeFromParent(true);
+                selfPoint._removeBoxFromArray(this);
+            }, selBox)));
+        }
     }
 });
 
