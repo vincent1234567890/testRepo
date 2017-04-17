@@ -81,6 +81,7 @@
         "src/New/Arena/Effects/CoinStackCoinView.js",
         "src/New/Arena/Effects/CoinStackEffect.js",
         "src/New/Arena/Effects/CoinStackManager.js",
+        "src/New/Arena/jackpot/JackpotPanel.js",
         "src/New/GameManager.js",
         "src/New/GameView.js",
         "src/New/GameTicker.js",

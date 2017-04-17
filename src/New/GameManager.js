@@ -160,12 +160,16 @@ const GameManager = function () {
             stats => {
                 console.log(stats);
                 _playerData = stats.data;
-                ClientServerConnect.getConsumptionLog().then(
+                return ClientServerConnect.getGameSummaries(3);
+            }
+        ).then(
+            gameSummaries => {
+                return ClientServerConnect.getConsumptionLog().then(
                     consumptionLog => {
                         createLobby();
                         GameManager.setConsumptionLogData(consumptionLog);
                     }
-                ).catch(console.error);
+                );
             }
         ).catch(console.error);
 
