@@ -339,6 +339,10 @@ const GameManager = function () {
         }
     }
 
+    function getPlayerData(){
+        return _playerData;
+    }
+
     //dev for dev scene
     function development(parent) {
         // _optionsManager = new OptionsManager(onSettingsButton);
@@ -371,6 +375,7 @@ const GameManager = function () {
         updateEverything: updateEverything,
         showPostGameStats: showPostGameStats,
         unsetLockForFishId : unsetLockForFishId,
+        getPlayerData: getPlayerData,
 
         //Misc
         isCurrentPlayer: isCurrentPlayer,
