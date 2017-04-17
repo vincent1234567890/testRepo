@@ -76,7 +76,7 @@ const GameLogView = (function () {
         gameLogTab.setPosition(130,tabHeight);
         consumptionLogTab.setPosition(310,tabHeight);
 
-        const scrollTitle = setupConsumptionLogTitle();
+        const scrollTitle = setupGameLogTitle();
         scrollTitle.setPosition(0,scrollTitleBackground.getContentSize().height/2);
         scrollTitleBackground.addChild(scrollTitle);
 
@@ -107,16 +107,17 @@ const GameLogView = (function () {
         let list;
 
         function onGameLogTabPressed(){
-            // const list = setupConsumptionLogList(consumptionData);
+            // const list = setupGameLogList(consumptionData);
             // scrollBackground.addChild(list);
-        }
-
-        function onConsumptionTabPressed(){
             if(list){
                 scrollBackground.removeChild(list);
             }
-            list = setupConsumptionLogList(scrollBackground,consumptionData);
+            list = setupGameLogList(scrollBackground,consumptionData);
             scrollBackground.addChild(list);
+        }
+
+        function onConsumptionTabPressed(){
+
 
         }
 
@@ -160,7 +161,7 @@ const GameLogView = (function () {
         const parent = new cc.Node();
     }
 
-    function setupConsumptionLogTitle(){
+    function setupGameLogTitle(){
         const parent = new cc.Node();
         const roundIdTitleText = new cc.Sprite(ReferenceName.GameLogRoundIdTitleChinese);
         const totalSpendTitleText = new cc.Sprite(ReferenceName.GameLogTotalSpendTitleChinese);
@@ -190,36 +191,41 @@ const GameLogView = (function () {
         return parent;
     }
 
-    function setupConsumptionLogList(scrollBackground,consumptionData) {
-        console.log("setupConsumptionLogList",consumptionData);
+    function setupGameLogList(scrollBackground,consumptionData) {
+        console.log("setupGameLogList",consumptionData);
 
-        const size = scrollBackground.getContentSize();
+        const listSize = scrollBackground.getContentSize();
 
 
         const listView = new ccui.ListView();
         listView.setDirection(ccui.ScrollView.DIR_VERTICAL);
         listView.setTouchEnabled(true);
         listView.setBounceEnabled(true);
-        // listView.setBackGroundImage(res.HelloWorld_png);
-        // listView.setContentSize(cc.size(width, height));
-        // listView.setInnerContainerSize(200,200)
-        // listView.setAnchorPoint(cc.p(0.5, 0.5));
-        // listView.setPosition(width / 2, height / 2);
-        // listView.setPosition(width / 2 , height / 2 - 70);
-        listView.setContentSize(size);
-        // listView.setPosition(size.width/2, size.height/2);
-        // const gameList = _theme.GameList;
-        // const consumption = consumptionData.data;
-        // for (let i = 0; i < consumption.length; i++) {
+        listView.setContentSize(listSize);
+
+        const _listener = cc.EventListener.create({
+            event: cc.EventListener.MOUSE,
+            onMouseScroll: onMouseScroll,
+        });
+
+        function onMouseScroll(mouseData) {
+            console.log(mouseData);
+            const touch = new cc.Touch(0,mouseData.getScrollY()/100);
+            touch._setPrevPoint(0,0);
+            console.log(touch);
+            listView.onTouchMoved(touch);
+            const end = new cc.Touch(0,0);
+            end._setPrevPoint(0,0);
+            listView.onTouchEnded(end);
+        }
+
+        cc.eventManager.addListener(_listener, listView);
+
         const ListItemPrefab = (function () {
-            // const
             function ListItemPrefab(itemData, onSelectedCallback){
-                // const base = GUIFunctions.createButton(undefined, ReferenceName.GameLogHighLight, onSelectedCallback);
                 const wrapper = new ccui.Widget();
                 const highlight = new cc.Sprite(ReferenceName.GameLogHighLight);
                 const separator = new cc.Sprite(ReferenceName.GameLogListSeparator);
-
-                // highlight.setContentSize(scrollBackground.getContentSize().width,highlight.getContentSize().height);
 
                 wrapper.addChild(highlight);
                 wrapper.addChild(separator);
@@ -230,10 +236,12 @@ const GameLogView = (function () {
 
                 highlight.setVisible(false);
 
-                highlight.setPosition(size.width/2,highlight.getContentSize().height/2);
-                separator.setPosition(size.width/2,0);
+                const listEntryPos = new cc.p(highlight.getContentSize().width/2,highlight.getContentSize().height/2);
 
-                console.log("ListItemPrefab",wrapper,highlight.getContentSize());
+                highlight.setPosition(listSize.width/2,listEntryPos.y);
+                separator.setPosition(listSize.width/2,0);
+
+                // console.log("ListItemPrefab",wrapper,highlight.getContentSize());
 
                 let fontDef = new cc.FontDefinition();
                 fontDef.fontName = "Microsoft YaHei";
@@ -244,25 +252,24 @@ const GameLogView = (function () {
                 fontDef.fillStyle = new cc.Color(0, 0, 0, 255);
 
                 let roundId = new cc.LabelTTF("T6-123456789", fontDef);
+
+                fontDef.textAlign = cc.TEXT_ALIGNMENT_CENTER;
                 let totalSpend = new cc.LabelTTF("987654321", fontDef);
                 let totalRevenue = new cc.LabelTTF("123456789", fontDef);
                 let totalProfit = new cc.LabelTTF("864197532", fontDef);
-                let startTime = new cc.LabelTTF(new Date(Date.now()).toLocaleDateString("zh-Hans-CN"), fontDef);
+
+                fontDef.fontSize = "16";
+                let startTime = new cc.LabelTTF(new Date(Date.now()).toLocaleDateString("en-GB") + "\n" + new Date(Date.now()).toLocaleTimeString("en-GB"), fontDef);
                 let endTime = new cc.LabelTTF(Date.now().toString(), fontDef);
 
                 roundId.setAnchorPoint(0, 0.5);
-                totalSpend.setAnchorPoint(0, 0.5);
-                totalRevenue.setAnchorPoint(0, 0.5);
-                totalProfit.setAnchorPoint(0, 0.5);
-                startTime.setAnchorPoint(0, 0.5);
-                endTime.setAnchorPoint(0, 0.5);
 
-                roundId.setPosition(0, 0);
-                totalSpend.setPosition(150, 0);
-                totalRevenue.setPosition(300, 0);
-                totalProfit.setPosition(450, 0);
-                startTime.setPosition(600, 0);
-                endTime.setPosition(750, 0);
+                roundId.setPosition(50, listEntryPos.y);
+                totalSpend.setPosition(300, listEntryPos.y);
+                totalRevenue.setPosition(450, listEntryPos.y);
+                totalProfit.setPosition(600, listEntryPos.y);
+                startTime.setPosition(750, listEntryPos.y);
+                endTime.setPosition(950, listEntryPos.y);
 
                 wrapper.addChild(roundId);
                 wrapper.addChild(totalSpend);
@@ -278,17 +285,14 @@ const GameLogView = (function () {
                 }
 
                 function onUnselected() {
-                    // label.setScale(originalSize);
                 }
 
                 function onHover() {
                     highlight.setVisible(true);
-                    // label.setScale(hoverSize);
                 }
 
                 function onUnhover() {
                     highlight.setVisible(false);
-                    // label.setScale(originalSize);
                 }
 
                 this.getContent = function () {
@@ -309,7 +313,7 @@ const GameLogView = (function () {
                 consumptionID: i,
             }, onItemSelected);
             const content = listItemPrefab.getContent();
-            console.log(content);
+            // console.log(content);
 
             listView.pushBackCustomItem(content);
         }
