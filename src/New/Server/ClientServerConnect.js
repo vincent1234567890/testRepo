@@ -369,8 +369,12 @@ const ClientServerConnect = function () {
         _informServer.unsetTargetLock();
     };
 
-    function getConsumptionLog() {
-        return _gameWSClient.callAPIOnce('player', 'getConsumptionLog', {});
+    function getGameSummaries (numDays) {
+        return _gameWSClient.callAPIOnce('player', 'getGameSummaries', {hours: numDays * 24});
+    }
+
+    function getConsumptionLog (playerGameNumber, roundNumber) {
+        return _gameWSClient.callAPIOnce('player', 'getConsumptionLog', {playerGameNumber: playerGameNumber, roundNumber: roundNumber});
     }
 
     return {
@@ -390,6 +394,7 @@ const ClientServerConnect = function () {
         getCurrentJackpotValues : getCurrentJackpotValues,
         setFishLockRequest : setFishLockRequest,
         unsetFishLockRequest : unsetFishLockRequest,
+        getGameSummaries: getGameSummaries,
         getConsumptionLog : getConsumptionLog,
     };
 }();
