@@ -208,11 +208,6 @@ var JackpotPanel = cc.Layer.extend({ //gradient
                 cc.eventManager.addListener(touchEventListener, spTreasureBox);
             }
         }
-
-        //add award panel
-        //let pnAward = new JackpotAwardPanel();
-        //pnAward.setPosition(101, 74);
-        //this.addChild(pnAward);
     },
 
     cleanup: function () {
