@@ -13,6 +13,10 @@ const GameLogView = (function () {
 
     let _scrollTitleBackground;
 
+    let _displayList;
+    let _displayTitle;
+
+
     let _gameSummaryData;
     let _consumptionData;
 
@@ -87,9 +91,6 @@ const GameLogView = (function () {
         gameLogTab.setPosition(130,tabHeight);
         consumptionLogTab.setPosition(310,tabHeight);
 
-
-
-
         title.setPosition(new cc.p(560,705));
 
         _popup.getBackground().addChild(title);
@@ -102,17 +103,18 @@ const GameLogView = (function () {
 
         _parent.addChild(_popup.getParent());
 
-        let list;
 
         function onGameLogTabPressed(){
             // const list = setupGameLogList(consumptionData);
             // scrollBackground.addChild(list);
-            if(list){
-                scrollBackground.removeChild(list);
+            if(_displayList){
+                scrollBackground.removeChild(_displayList);
             }
             const items = setupGameLogList(scrollBackground,gameSummaryData);
-            _scrollTitleBackground.addChild(items.scrollTitle);
-            scrollBackground.addChild(items.listView);
+            _displayList = items.listView;
+            _displayTitle = items.scrollTitle;
+            _scrollTitleBackground.addChild(_displayTitle);
+            scrollBackground.addChild(_displayList);
         }
 
         function onConsumptionTabPressed(){
