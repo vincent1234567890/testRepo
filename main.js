@@ -77,11 +77,11 @@ var cocos2dApp = cc.game.onStart = function() {
 
             cc.LoadingScreen.preload(ResourceLoader.getResourceList(), function () {
                 // cc.director.runScene(new LogoScene());
-                //cc.director.runScene(new TestScene());
+                cc.director.runScene(new TestScene());
                 // cc.director.runScene(new StartMenuLayer());
 
-                AppManager.goToLobby();
-                FishAnimationData.setData(themeConfig.FishRawData);
+                //AppManager.goToLobby();
+                //FishAnimationData.setData(themeConfig.FishRawData);
                 // GameCtrl.sharedGame().home();
                 // AppManager.goToLobby();
             }, this);

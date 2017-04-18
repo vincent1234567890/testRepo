@@ -19,6 +19,7 @@ var JackpotPanel = cc.Layer.extend({ //gradient
         this._iconPatterns = iconPattern;
 
         cc.spriteFrameCache.addSpriteFrames(res.JackpotMiniGamePlist);
+        cc.spriteFrameCache.addSpriteFrames(res.JackpotMiniGame2Plist);
         cc.spriteFrameCache.addSpriteFrames(res.LobbyUI2Plist);
         //buzz effect
         //
@@ -216,6 +217,7 @@ var JackpotPanel = cc.Layer.extend({ //gradient
 
     cleanup: function () {
         cc.spriteFrameCache.removeSpriteFramesFromFile(res.JackpotMiniGamePlist);
+        cc.spriteFrameCache.removeSpriteFramesFromFile(res.JackpotMiniGame2Plist);
         cc.spriteFrameCache.removeSpriteFramesFromFIle(res.LobbyUI2Plist);
         cc.Layer.prototype.cleanup.call(this);
     },
@@ -225,11 +227,9 @@ var JackpotPanel = cc.Layer.extend({ //gradient
         for (let i = 0; i < boxes.length; i++) {
             if (boxes[i] === treasureBox) {
                 boxes.splice(i, 1);
-                console.log(boxes.length);
                 return;
             }
         }
-        console.log("can't find box", treasureBox);
     },
 
     _glowSameMedals: function(medal){
@@ -297,19 +297,29 @@ var JackpotPanel = cc.Layer.extend({ //gradient
         //show the remain boxes.
         let boxes = this._unselectedBoxes, delay = 2.4, ins = 0.8, selfPoint = this;
         for(let i = 0; i < boxes.length; i++){
+            delay+= ins;
             let selBox = boxes[i];
+            cc.eventManager.removeListeners(selBox);
             let spGrayMedal = this._createGrayMedalSprite();
             this._spBackground.addChild(spGrayMedal);
             spGrayMedal.setPosition(selBox.getPosition());
             spGrayMedal.setScale(0.05);
-            spGrayMedal.runAction(cc.sequence(cc.delayTime(delay + ins * i), cc.scaleTo(0.4, 1)));
+            spGrayMedal.runAction(cc.sequence(cc.delayTime(delay), cc.scaleTo(0.4, 1)));
 
             let boxAnimation = GUIFunctions.getAnimation(ReferenceName.JackpotTreasureBoxOpenAnm, 0.02);
-            selBox.runAction(cc.sequence(cc.delayTime(delay + ins * i), boxAnimation, cc.callFunc(function(){
+            selBox.runAction(cc.sequence(cc.delayTime(delay), boxAnimation, cc.callFunc(function(){
                 this.removeFromParent(true);
                 selfPoint._removeBoxFromArray(this);
             }, selBox)));
         }
+
+        delay += ins;
+        //show the award panel.
+        let pnAward = new JackpotAwardPanel();
+        pnAward.setPosition(101, 74);
+        this.addChild(pnAward);
+        pnAward.setVisible(false);
+        pnAward.runAction(cc.sequence(cc.delayTime(delay), cc.show()));
     }
 });
 
