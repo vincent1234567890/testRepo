@@ -110,8 +110,9 @@ const GameLogView = (function () {
             if(list){
                 scrollBackground.removeChild(list);
             }
-            list = setupGameLogList(scrollBackground,gameSummaryData);
-            scrollBackground.addChild(list);
+            const items = setupGameLogList(scrollBackground,gameSummaryData);
+            _scrollTitleBackground.addChild(items.scrollTitle);
+            scrollBackground.addChild(items.listView);
         }
 
         function onConsumptionTabPressed(){
@@ -235,7 +236,6 @@ const GameLogView = (function () {
 
         let scrollTitle = setupGameLogTitle();
         scrollTitle.setPosition(0,_scrollTitleBackground.getContentSize().height/2);
-        _scrollTitleBackground.addChild(scrollTitle);
 
         console.log("setupGameLogList",gameSummaryData);
 
@@ -254,10 +254,8 @@ const GameLogView = (function () {
         });
 
         function onMouseScroll(mouseData) {
-            console.log(mouseData);
             const touch = new cc.Touch(0,mouseData.getScrollY()/100);
             touch._setPrevPoint(0,0);
-            console.log(touch);
             listView.onTouchMoved(touch);
             const end = new cc.Touch(0,0);
             end._setPrevPoint(0,0);
@@ -269,7 +267,7 @@ const GameLogView = (function () {
         const ListItemPrefab = (function () {
             function ListItemPrefab(itemData, onSelectedCallback){
                 const wrapper = new ccui.Widget();
-                const highlight = new cc.Sprite(ReferenceName.GameLogHighLight);
+                const highlight = new cc.Sprite(ReferenceName.GameLogItemHighLight);
                 const separator = new cc.Sprite(ReferenceName.GameLogListSeparator);
 
                 wrapper.addChild(highlight);
@@ -347,7 +345,11 @@ const GameLogView = (function () {
                 this.getContent = function () {
                     return wrapper;
                 };
+
+                console.log(wrapper,itemData);
             }
+
+
 
             return ListItemPrefab;
         }());
@@ -361,14 +363,15 @@ const GameLogView = (function () {
 
         const data = gameSummaryData.data;
         for (let i = 0; i < data.length; i++) {
+            console.log(data[i]);
             const listItemPrefab = new ListItemPrefab({
                 id : data[i]._id.sceneName,
                 totalRevenue : data[i].totalBonus,
                 totalSpent : data[i].totalConsumption,
                 startTime : data[i].startTime,
                 endTime : data[i].endTime,
-                playerGameNumber : data[i].playerGameNumber,
-                roundNumber : data[i].roundNumber,
+                playerGameNumber : data[i]._id.playerGameNumber,
+                roundNumber : data[i]._id.roundNumber,
             }, onItemSelected);
             const content = listItemPrefab.getContent();
             // console.log(content);
@@ -376,7 +379,7 @@ const GameLogView = (function () {
             listView.pushBackCustomItem(content);
         }
 
-        return listView;
+        return {scrollTitle : scrollTitle, listView:listView}
     }
 
     const proto = GameLogView.prototype;

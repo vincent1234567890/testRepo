@@ -129,10 +129,10 @@ const FloatingMenu = (function () {
 
     function onSettingsSelected() {
         console.log("onSettingsSelected");
-        if (_setttingsView){
-            _setttingsView.show();
+        if (_settingsView){
+            _settingsView.show();
         }else{
-            _setttingsView = new SettingsView();
+            _settingsView = new SettingsView();
         }
     }
 
