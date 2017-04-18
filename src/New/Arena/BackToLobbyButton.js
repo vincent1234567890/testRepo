@@ -7,7 +7,7 @@ const BackToLobbyButton = (function () {
     const BackToLobbyButton = function (onLeaveArenaCallback) {
         const backButton = GUIFunctions.createButton(ReferenceName.BackButton,ReferenceName.BackButtonOnPress, onLeaveArenaCallback);
 
-        backButton.setPosition(60,700);
+        backButton.setPosition(60,670);
 
         const backButtonTitle = new cc.Sprite(ReferenceName.BackButtonText);
 
@@ -15,7 +15,7 @@ const BackToLobbyButton = (function () {
 
         backButtonTitle.setPosition(backButton.getContentSize().width/2,backButton.getContentSize().height/2);
 
-        GameView.addView(backButton,10);
+        GameView.addView(backButton,5);
     };
     return BackToLobbyButton;
 }());

@@ -9,20 +9,27 @@ const FloatingMenu = (function () {
     const hoverSize = 1.2;
     const originalSize = 1;
 
+    //playerData
     let _playerData;
     let _consumptionData;
+    let _gameSummaryData;
 
-    let _setttingsView;
+    //views
+    let _settingsView;
     let _gameLogView;
     let _profileView;
     let _leaderboardView;
     let _faqView;
 
-    const FloatingMenu = function (playerData) {
+    //callbacks
+    let _requestConsumptionLogCallback;
+
+    const FloatingMenu = function (playerData, requestConsumptionLogCallback) {
         _parent = new cc.Node();
         GameView.addView(_parent);
 
         _playerData = playerData;
+        _requestConsumptionLogCallback = requestConsumptionLogCallback;
 
         _theme = ThemeDataManager.getThemeDataList("FloatingMenu");
 
@@ -122,19 +129,19 @@ const FloatingMenu = (function () {
 
     function onSettingsSelected() {
         console.log("onSettingsSelected");
-        if (_setttingsView){
-            _setttingsView.show();
+        if (_settingsView){
+            _settingsView.show();
         }else{
-            _setttingsView = new SettingsView();
+            _settingsView = new SettingsView();
         }
     }
 
     function onGameLogSelected() {
         console.log("onGameLogSelected");
         if (_gameLogView){
-            _gameLogView.show(_consumptionData);
+            _gameLogView.showGameSummary(_gameSummaryData);
         }else{
-            _gameLogView = new GameLogView(_consumptionData);
+            _gameLogView = new GameLogView(_gameSummaryData, _requestConsumptionLogCallback);
         }
     }
 
@@ -171,8 +178,11 @@ const FloatingMenu = (function () {
         if (_parent.getParent()) {
             _parent.getParent().removeChild(_parent, false);
         }
-        if (_setttingsView){
-            _setttingsView.unattach();
+        if (_settingsView){
+            _settingsView.unattach();
+        }
+        if (_gameLogView){
+            _gameLogView.unattach();
         }
         if (_profileView){
             _profileView.unattach();
@@ -184,14 +194,18 @@ const FloatingMenu = (function () {
             _faqView.unattach();
         }
 
+
     };
 
     proto.reattach = function () {
         if (_parent.getParent()) {
             _parent.getParent().removeChild(_parent, false);
         }
-        if (_setttingsView){
-            _setttingsView.reattach();
+        if (_settingsView){
+            _settingsView.reattach();
+        }
+        if (_gameLogView){
+            _gameLogView.reattach();
         }
         if (_profileView){
             _profileView.reattach();
@@ -206,8 +220,11 @@ const FloatingMenu = (function () {
     };
 
     proto.hideAll = function () {
-        if (_setttingsView){
-            _setttingsView.hide();
+        if (_settingsView){
+            _settingsView.hide();
+        }
+        if (_gameLogView){
+            _gameLogView.hide();
         }
         if (_profileView){
             _profileView.hide();
@@ -221,9 +238,15 @@ const FloatingMenu = (function () {
     };
     // proto.Move
 
+    proto.setGameSummaryData = function (gameSummaryData) {
+        _gameSummaryData = gameSummaryData;
+        console.log(_gameSummaryData);
+    };
+
     proto.setConsumptionLogData = function (consumptionData) {
         _consumptionData = consumptionData;
         console.log(_consumptionData);
+        _gameLogView.showConsumptionLog(consumptionData);
     };
 
     return FloatingMenu;
