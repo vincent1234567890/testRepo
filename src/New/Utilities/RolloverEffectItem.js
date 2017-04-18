@@ -9,7 +9,6 @@ const RolloverEffectItem = (function () {
         const touchEvent = (sender, type) => {
             switch (type) {
                 case ccui.Widget.TOUCH_ENDED:
-                    console.log(sender);
                     if (onSelectedCallback) {
                         onSelectedCallback(widget);
                     }

@@ -85,6 +85,10 @@ const GameManager = function () {
         _bulletManager.removeBullet(bulletId);
     };
 
+    const setGameLogData = function (gameSummaryData) {
+        _floatingMenuManager.setGameSummaryData(gameSummaryData);
+    };
+
     const setConsumptionLogData = function (consumptionLogData) {
         _floatingMenuManager.setConsumptionLogData(consumptionLogData);
     };
@@ -160,16 +164,15 @@ const GameManager = function () {
             stats => {
                 console.log(stats);
                 _playerData = stats.data;
-                return ClientServerConnect.getGameSummaries(3);
+                return ClientServerConnect.getGameSummaries(7);
             }
         ).then(
             gameSummaries => {
-                return ClientServerConnect.getConsumptionLog().then(
-                    consumptionLog => {
-                        createLobby();
-                        GameManager.setConsumptionLogData(consumptionLog);
-                    }
-                );
+                createLobby();
+                setGameLogData(gameSummaries);
+                // return ClientServerConnect.getConsumptionLog().then(
+                //
+                // );
             }
         ).catch(console.error);
 
@@ -207,7 +210,7 @@ const GameManager = function () {
             // _profileManger = new ProfileManager();
             // _optionsManager = new OptionsManager(onSettingsButton, undefined, onLeaveArena);
             _lobbyWaterCausticsManager = new LobbyWaterCaustics();
-            _floatingMenuManager = new FloatingMenu(_playerData);
+            _floatingMenuManager = new FloatingMenu(_playerData, requestConsumptionLogHandle);
             _jackpotManager = new JackpotManager();
             _jackpotManager.updateJackpot(999999999);
             ClientServerConnect.getCurrentJackpotValues();
@@ -227,8 +230,14 @@ const GameManager = function () {
         _floatingMenuManager.unattach();
         _jackpotManager.unattach();
         destroyArena();
-        _goToLobbyCallback();
         ClientServerConnect.getCurrentJackpotValues();
+        ClientServerConnect.getGameSummaries(7).then(
+            gameSummaries => {
+                setGameLogData(gameSummaries);
+            }
+        );
+        _goToLobbyCallback();
+
 
         // _lobbyManager.displayView(_playerData, onGameSelected);
     }
@@ -339,6 +348,17 @@ const GameManager = function () {
         }
     }
 
+    function requestConsumptionLogHandle(playerGameNumber, roundNumber){
+        console.log(playerGameNumber, roundNumber);
+        ClientServerConnect.getConsumptionLog(playerGameNumber, roundNumber).then(
+            consumptionData => {
+                console.log(consumptionData);
+                _floatingMenuManager.setConsumptionLogData(consumptionData);
+            }
+        )
+
+    }
+
     //dev for dev scene
     function development(parent) {
         // _optionsManager = new OptionsManager(onSettingsButton);
@@ -356,7 +376,8 @@ const GameManager = function () {
 
         //Menu stuff
         updateJackpotPool : updateJackpotPool,
-        setConsumptionLogData : setConsumptionLogData,
+        // setGameLogData : setGameLogData,
+        // setConsumptionLogData : setConsumptionLogData,
 
         //Game stuff
         setGameState: setGameState,

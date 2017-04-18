@@ -11,7 +11,18 @@ const GameLogView = (function () {
     let sideSpacing = 100;
     let sideStart = 550;
 
-    const GameLogView = function (consumptionData) {
+    let _scrollTitleBackground;
+
+    let _gameSummaryData;
+    let _consumptionData;
+
+    //callback
+    let _requestConsumptionLogCallback;
+
+    const GameLogView = function (gameSummaryData , requestConsumptionLogCallback) {
+        _requestConsumptionLogCallback = requestConsumptionLogCallback;
+        _gameSummaryData = gameSummaryData;
+
         _parent = new cc.Node();
         _popup= new FloatingMenuPopupBasePrefab(dismissCallback);
         _popup.turnOffDeco();
@@ -56,7 +67,7 @@ const GameLogView = (function () {
         gameLogTab.addChild(gameLogTabTitleText);
         consumptionLogTab.addChild(consumptionLogTabTitleText);
 
-        const scrollTitleBackground = new cc.Sprite(ReferenceName.GameLogLogTitleBackground);
+        _scrollTitleBackground= new cc.Sprite(ReferenceName.GameLogLogTitleBackground);
         const scrollBackground = new cc.Sprite(ReferenceName.GameLogLogBackground);
 
         gameLogTabTitleText.setRotation(-10);
@@ -65,7 +76,7 @@ const GameLogView = (function () {
         gameLogTabTitleText.setPosition(23,10);
         consumptionLogTabTitleText.setPosition(17,5);
 
-        scrollTitleBackground.setPosition(565,520);
+        _scrollTitleBackground.setPosition(565,520);
         scrollBackground.setPosition(565,265);
 
         gameLogTab.setAnchorPoint(0.2,0.5);
@@ -76,9 +87,7 @@ const GameLogView = (function () {
         gameLogTab.setPosition(130,tabHeight);
         consumptionLogTab.setPosition(310,tabHeight);
 
-        const scrollTitle = setupGameLogTitle();
-        scrollTitle.setPosition(0,scrollTitleBackground.getContentSize().height/2);
-        scrollTitleBackground.addChild(scrollTitle);
+
 
 
         title.setPosition(new cc.p(560,705));
@@ -88,19 +97,8 @@ const GameLogView = (function () {
         _popup.getBackground().addChild(gameLogTab);
         _popup.getBackground().addChild(consumptionLogTab);
 
-        _popup.getBackground().addChild(scrollTitleBackground);
+        _popup.getBackground().addChild(_scrollTitleBackground);
         _popup.getBackground().addChild(scrollBackground);
-
-
-        // _popup.getBackground().addChild(gameRules);
-        // _popup.getBackground().addChild(uiFAQ);
-        // _popup.getBackground().addChild(fishInfo);
-        // _popup.getBackground().addChild(cannonInfo);
-        // _popup.getBackground().addChild(jackpotInfo);
-
-        // gameLogTab.setPosition(200,tabHeight);
-        // consumptionLogTab.setPosition(390,tabHeight);
-
 
         _parent.addChild(_popup.getParent());
 
@@ -112,7 +110,7 @@ const GameLogView = (function () {
             if(list){
                 scrollBackground.removeChild(list);
             }
-            list = setupGameLogList(scrollBackground,consumptionData);
+            list = setupGameLogList(scrollBackground,gameSummaryData);
             scrollBackground.addChild(list);
         }
 
@@ -136,6 +134,23 @@ const GameLogView = (function () {
 
         // this.show(consumptionData);
 
+        this.showGameSummary = function (gameSummaryData) {
+            _gameSummaryData = gameSummaryData;
+            onGameLogTabPressed();
+            _parent.setLocalZOrder(ZORDER);
+            _parent.setVisible(true);
+            _popup.show();
+        };
+
+        this.showConsumptionLog = function (consumptionData){
+            _consumptionData = consumptionData;
+            if(list){
+                scrollBackground.removeChild(list);
+            }
+            list = setupConsumptionLogList(scrollBackground,consumptionData);
+            _popup.show();
+        };
+
         GameView.addView(_parent,ZORDER);
     };
 
@@ -144,21 +159,46 @@ const GameLogView = (function () {
         _parent.setVisible(false);
     }
 
-    const proto = GameLogView.prototype;
+    function setupConsumptionLogList(scrollBackground, consumptionData) {
+        console.log("setupConsumptionLogList", consumptionData);
 
-    proto.show = function () {
-        _parent.setLocalZOrder(ZORDER);
-        _parent.setVisible(true);
-        _popup.show();
-    };
+        const listSize = scrollBackground.getContentSize();
 
-    proto.hide = function () {
-        dismissCallback();
-        _popup.hide();
-    };
+        const listView = new ccui.ListView();
+        listView.setDirection(ccui.ScrollView.DIR_VERTICAL);
+        listView.setTouchEnabled(true);
+        listView.setBounceEnabled(true);
+        listView.setContentSize(listSize);
+    }
 
-    function setupGameLog(){
+    function setupConsumptionTitle(){
         const parent = new cc.Node();
+        const roundIdTitleText = new cc.Sprite(ReferenceName.GameLogRoundIdTitleChinese);
+        const totalSpendTitleText = new cc.Sprite(ReferenceName.GameLogTotalSpendTitleChinese);
+        const totalRevenueTitleText = new cc.Sprite(ReferenceName.GameLogTotalRevenueTitleChinese);
+        const totalProfitTitleText = new cc.Sprite(ReferenceName.GameLogTotalProfitTitleChinese);
+        const startTimeTitleText = new cc.Sprite(ReferenceName.GameLogStartTimeTitleChinese);
+        const endTimeTitleText = new cc.Sprite(ReferenceName.GameLogEndTimeTitleChinese);
+
+        // const pos = new cc.p(gameRules.getContentSize().width/2, gameRules.getContentSize().height/2);
+        //
+        // console.log(gameRules,gameRules.getContentSize(),pos);
+        //
+        roundIdTitleText.setPosition(100,0);
+        totalSpendTitleText.setPosition(300,0);
+        totalRevenueTitleText.setPosition(450,0);
+        totalProfitTitleText.setPosition(600,0);
+        startTimeTitleText.setPosition(750,0);
+        endTimeTitleText.setPosition(950,0);
+
+        parent.addChild(roundIdTitleText);
+        parent.addChild(totalSpendTitleText);
+        parent.addChild(totalRevenueTitleText);
+        parent.addChild(totalProfitTitleText);
+        parent.addChild(startTimeTitleText);
+        parent.addChild(endTimeTitleText);
+
+        return parent;
     }
 
     function setupGameLogTitle(){
@@ -191,8 +231,13 @@ const GameLogView = (function () {
         return parent;
     }
 
-    function setupGameLogList(scrollBackground,consumptionData) {
-        console.log("setupGameLogList",consumptionData);
+    function setupGameLogList(scrollBackground, gameSummaryData) {
+
+        let scrollTitle = setupGameLogTitle();
+        scrollTitle.setPosition(0,_scrollTitleBackground.getContentSize().height/2);
+        _scrollTitleBackground.addChild(scrollTitle);
+
+        console.log("setupGameLogList",gameSummaryData);
 
         const listSize = scrollBackground.getContentSize();
 
@@ -251,16 +296,20 @@ const GameLogView = (function () {
                 fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
                 fontDef.fillStyle = new cc.Color(0, 0, 0, 255);
 
-                let roundId = new cc.LabelTTF("T6-123456789", fontDef);
+                const date = new Date(itemData.startTime);
+                const roundIdText = itemData.id + "-" + date.getYear() + date.getMonth() + date.getDay();
+
+                let roundId = new cc.LabelTTF(roundIdText, fontDef);
 
                 fontDef.textAlign = cc.TEXT_ALIGNMENT_CENTER;
-                let totalSpend = new cc.LabelTTF("987654321", fontDef);
-                let totalRevenue = new cc.LabelTTF("123456789", fontDef);
-                let totalProfit = new cc.LabelTTF("864197532", fontDef);
+                let totalSpend = new cc.LabelTTF(itemData.totalSpent, fontDef);
+                let totalRevenue = new cc.LabelTTF(itemData.totalRevenue, fontDef);
+                let totalProfit = new cc.LabelTTF(parseFloat(itemData.totalRevenue) - parseFloat(itemData.totalSpent), fontDef);
 
+                const endDate = new Date(itemData.endTime);
                 fontDef.fontSize = "16";
-                let startTime = new cc.LabelTTF(new Date(Date.now()).toLocaleDateString("en-GB") + "\n" + new Date(Date.now()).toLocaleTimeString("en-GB"), fontDef);
-                let endTime = new cc.LabelTTF(Date.now().toString(), fontDef);
+                let startTime = new cc.LabelTTF(date.toLocaleDateString("en-GB") + "\n" + date.toLocaleTimeString("en-GB"), fontDef);
+                let endTime = new cc.LabelTTF(endDate.toLocaleDateString("en-GB") + "\n" + endDate.toLocaleTimeString("en-GB"), fontDef);
 
                 roundId.setAnchorPoint(0, 0.5);
 
@@ -281,7 +330,7 @@ const GameLogView = (function () {
                 const item = new RolloverEffectItem(wrapper, onSelected, onUnselected, onHover, onUnhover);
 
                 function onSelected(item) {
-                    onSelectedCallback(item);
+                    onSelectedCallback(itemData);
                 }
 
                 function onUnselected() {
@@ -303,14 +352,23 @@ const GameLogView = (function () {
             return ListItemPrefab;
         }());
 
-        const onItemSelected = function (sender) {
-            console.log(sender);
+        const onItemSelected = function (data) {
+            if (_requestConsumptionLogCallback){
+                _requestConsumptionLogCallback(data.playerGameNumber,data.roundNumber)
+            }
+            // ClientServerConnect.getConsumptionLog(data.playerGameNumber,data.roundNumber);
         };
 
-        const data = consumptionData.data;
+        const data = gameSummaryData.data;
         for (let i = 0; i < data.length; i++) {
             const listItemPrefab = new ListItemPrefab({
-                consumptionID: i,
+                id : data[i]._id.sceneName,
+                totalRevenue : data[i].totalBonus,
+                totalSpent : data[i].totalConsumption,
+                startTime : data[i].startTime,
+                endTime : data[i].endTime,
+                playerGameNumber : data[i].playerGameNumber,
+                roundNumber : data[i].roundNumber,
             }, onItemSelected);
             const content = listItemPrefab.getContent();
             // console.log(content);
@@ -320,6 +378,26 @@ const GameLogView = (function () {
 
         return listView;
     }
+
+    const proto = GameLogView.prototype;
+
+    proto.hide = function () {
+        dismissCallback();
+        _popup.hide();
+    };
+
+    proto.unattach = function () {
+        if (_parent.getParent()) {
+            _parent.getParent().removeChild(_parent, false);
+        }
+    };
+
+    proto.reattach = function () {
+        if (_parent.getParent()) {
+            _parent.getParent().removeChild(_parent, false);
+        }
+        GameView.addView(_parent);
+    };
 
     return GameLogView;
 }());
