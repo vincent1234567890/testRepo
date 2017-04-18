@@ -360,6 +360,14 @@ const ClientServerConnect = function () {
         _informServer.changeSeat(slot);
     };
 
+    function listUncollectedJackpots () {
+        return _gameWSClient.callAPIOnce('game', 'listUncollectedJackpots', {});
+    }
+
+    function collectJackpot (rewardLogObjId) {
+        return _gameWSClient.callAPIOnce('game', 'collectJackpot', {rewardLogObjId: rewardLogObjId});
+    }
+
     const setFishLockRequest = function(fishId){
         _informServer.setTargetLockOnFish(fishId);
     };
@@ -395,6 +403,8 @@ const ClientServerConnect = function () {
         postGameCleanup: postGameCleanup,
         listenForEvent: listenForEvent,
         changeSeatRequest : changeSeatRequest,
+        listUncollectedJackpots: listUncollectedJackpots,
+        collectJackpot: collectJackpot,
         getCurrentJackpotValues : getCurrentJackpotValues,
         setFishLockRequest : setFishLockRequest,
         unsetFishLockRequest : unsetFishLockRequest,
