@@ -172,7 +172,7 @@ var JackpotPanel = cc.Layer.extend({ //gradient
                         if (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
                                 target.convertToNodeSpace(touch.getLocation()))) {
                             //
-                            let boxAnimation = GUIFunctions.getAnimation(ReferenceName.JackpotTreasureBoxOpenAnm, 0.04);
+                            let boxAnimation = GUIFunctions.getAnimation(ReferenceName.JackpotTreasureBoxOpenAnm, 0.03);
                             target.runAction(cc.sequence(boxAnimation, cc.callFunc(function(){
                                 this.removeFromParent(true);
                             }, target)));
@@ -187,7 +187,7 @@ var JackpotPanel = cc.Layer.extend({ //gradient
                             spMedal.setPosition(target.getPosition());
                             spMedal.setScale(0.05);
                             spMedal.addChild(spMedalGlow, -1, 1);  //tag = 1
-                            spMedal.runAction(cc.sequence(cc.scaleTo(0.4, 1)));
+                            spMedal.runAction(cc.sequence(cc.delayTime(0.4), cc.scaleTo(0.5, 1).easing(cc.easeBounceOut())));
 
                             spMedalGlow.setPosition(spMedal.width * 0.55, spMedal.height * 0.45);
                             let medalCount = selfPoint._glowSameMedals(spMedal);
@@ -235,11 +235,11 @@ var JackpotPanel = cc.Layer.extend({ //gradient
             if(medal.getUserData()  === medals[i].getUserData())
                 arr.push(medals[i]);
         }
-        if(arr.length > 2){
+        if(arr.length >= 2){
             for(let i = 0; i < arr.length; i++){
                 let selGlow = arr[i].getChildByTag(1);
                 selGlow.setVisible(true);
-                selGlow.runAction(cc.sequence(cc.delayTime(1.6), cc.fadeIn(0.1), cc.delayTime(0.4), cc.fadeOut(0.3), cc.hide()));
+                selGlow.runAction(cc.sequence(cc.delayTime(0.9), cc.fadeIn(0.1), cc.delayTime(0.2), cc.fadeOut(0.5), cc.hide()));
             }
         }
         return arr.length;
@@ -290,7 +290,7 @@ var JackpotPanel = cc.Layer.extend({ //gradient
 
     showRemainBoxes: function(){
         //show the remain boxes.
-        let boxes = this._unselectedBoxes, delay = 2.4, ins = 0.8, selfPoint = this;
+        let boxes = this._unselectedBoxes, delay = 1.5, ins = 0.8, selfPoint = this;
         for(let i = 0; i < boxes.length; i++){
             delay+= ins;
             let selBox = boxes[i];
@@ -310,11 +310,11 @@ var JackpotPanel = cc.Layer.extend({ //gradient
 
         delay += ins;
         //show the award panel.
-        let pnAward = new JackpotAwardPanel();
-        pnAward.setPosition(101, 74);
-        this.addChild(pnAward);
-        pnAward.setVisible(false);
-        pnAward.runAction(cc.sequence(cc.delayTime(delay), cc.show()));
+        this.runAction(cc.sequence(cc.delayTime(delay), cc.callFunc(function(){
+            let pnAward = new JackpotAwardPanel();
+            pnAward.setPosition(101, 74);
+            this.addChild(pnAward);
+        }, this)));
     }
 });
 
@@ -341,7 +341,7 @@ var JackpotAwardPanel = cc.LayerColor.extend({
             pnDist2 = new cc.Point(panelSize.width * 0.5, panelSize.height * 0.71);
         //spAwardPanel.runAction(cc.spawn(cc.moveTo(0.4, pnDist1), cc.scaleTo(0.4, 0.42)));
         spAwardPanel.runAction(cc.sequence(cc.spawn(cc.moveTo(0.4, pnDist1), cc.scaleTo(0.4, 0.42)),
-            cc.spawn(cc.moveTo(0.3, pnDist2), cc.scaleTo(0.3, 1))));
+            cc.spawn(cc.moveTo(0.4, pnDist2), cc.scaleTo(0.4, 1).easing(cc.easeBackOut()))));
 
         //light
         let spLight = new cc.Sprite(ReferenceName.JackpotCoinLight);
