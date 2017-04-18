@@ -385,6 +385,10 @@ const ClientServerConnect = function () {
         return _gameWSClient.callAPIOnce('player', 'getConsumptionLog', {playerGameNumber: playerGameNumber, roundNumber: roundNumber});
     }
 
+    function getRechargeLog (numDays) {
+        return _gameWSClient.callAPIOnce('player', 'getRechargeLog', {hours: numDays * 24});
+    }
+
     return {
         connectToMasterServer : connectToMasterServer,
         login : login,
@@ -406,5 +410,6 @@ const ClientServerConnect = function () {
         unsetFishLockRequest : unsetFishLockRequest,
         getGameSummaries: getGameSummaries,
         getConsumptionLog : getConsumptionLog,
+        getRechargeLog : getRechargeLog,
     };
 }();
