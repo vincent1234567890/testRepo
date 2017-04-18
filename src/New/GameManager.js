@@ -348,15 +348,18 @@ const GameManager = function () {
         }
     }
 
-    function requestConsumptionLogHandle(playerGameNumber, roundNumber){
+    function requestConsumptionLogHandle(playerGameNumber, roundNumber) {
         console.log(playerGameNumber, roundNumber);
         ClientServerConnect.getConsumptionLog(playerGameNumber, roundNumber).then(
             consumptionData => {
                 console.log(consumptionData);
                 _floatingMenuManager.setConsumptionLogData(consumptionData);
             }
-        )
+        );
+    }
 
+    function getPlayerData(){
+        return _playerData;
     }
 
     //dev for dev scene
@@ -392,6 +395,7 @@ const GameManager = function () {
         updateEverything: updateEverything,
         showPostGameStats: showPostGameStats,
         unsetLockForFishId : unsetLockForFishId,
+        getPlayerData: getPlayerData,
 
         //Misc
         isCurrentPlayer: isCurrentPlayer,
