@@ -30,7 +30,7 @@
                 <key>spriteSourceSize</key>
                 <string>{45,24}</string>
                 <key>textureRect</key>
-                <string>{{579,336},{43,24}}</string>
+                <string>{{624,421},{43,24}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -121,6 +121,186 @@
                 <string>{25,13}</string>
                 <key>textureRect</key>
                 <string>{{756,163},{25,13}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>LOBase.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{127,38}</string>
+                <key>spriteSourceSize</key>
+                <string>{127,38}</string>
+                <key>textureRect</key>
+                <string>{{579,336},{127,38}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>LOCircle.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{44,43}</string>
+                <key>spriteSourceSize</key>
+                <string>{44,43}</string>
+                <key>textureRect</key>
+                <string>{{628,376},{44,43}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>LOIconGreen.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{37,35}</string>
+                <key>spriteSourceSize</key>
+                <string>{37,35}</string>
+                <key>textureRect</key>
+                <string>{{579,430},{37,35}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>LOIconWhite.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{37,35}</string>
+                <key>spriteSourceSize</key>
+                <string>{37,35}</string>
+                <key>textureRect</key>
+                <string>{{618,447},{37,35}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>LOLockGreenH.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{43,25}</string>
+                <key>spriteSourceSize</key>
+                <string>{43,25}</string>
+                <key>textureRect</key>
+                <string>{{579,403},{43,25}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>LOLockGreenV.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{25,47}</string>
+                <key>spriteSourceSize</key>
+                <string>{25,47}</string>
+                <key>textureRect</key>
+                <string>{{708,340},{25,47}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>LOLockWhiteH.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{43,25}</string>
+                <key>spriteSourceSize</key>
+                <string>{43,25}</string>
+                <key>textureRect</key>
+                <string>{{522,410},{43,25}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>LOLockWhiteV.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{25,47}</string>
+                <key>spriteSourceSize</key>
+                <string>{25,47}</string>
+                <key>textureRect</key>
+                <string>{{708,367},{25,47}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>LOReleaseGreenH.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{43,25}</string>
+                <key>spriteSourceSize</key>
+                <string>{43,25}</string>
+                <key>textureRect</key>
+                <string>{{702,394},{43,25}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>LOReleaseGreenV.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{25,47}</string>
+                <key>spriteSourceSize</key>
+                <string>{25,47}</string>
+                <key>textureRect</key>
+                <string>{{579,376},{25,47}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>LOReleaseWhiteH.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{43,25}</string>
+                <key>spriteSourceSize</key>
+                <string>{43,25}</string>
+                <key>textureRect</key>
+                <string>{{674,411},{43,25}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>LOReleaseWhiteV.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{25,47}</string>
+                <key>spriteSourceSize</key>
+                <string>{25,47}</string>
+                <key>textureRect</key>
+                <string>{{522,383},{25,47}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -645,9 +825,9 @@
                 <key>spriteSourceSize</key>
                 <string>{33,26}</string>
                 <key>textureRect</key>
-                <string>{{624,336},{33,26}}</string>
+                <string>{{674,376},{33,26}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>PlusDw.png</key>
             <dict>
@@ -723,7 +903,7 @@
             <key>size</key>
             <string>{770,770}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:814e5c70e3bb3e25a688e96f419c491d:033e27274c2ec3a6e7bf6dcd7bfa3287:2531ce2a050ca5e2ac51e04161e77adb$</string>
+            <string>$TexturePacker:SmartUpdate:e3c5aa76d676db9a89dd289eabcef4ec:e435d34e61a2ed1573e1c5ca3b4416ac:2531ce2a050ca5e2ac51e04161e77adb$</string>
             <key>textureFileName</key>
             <string>GameUI.png</string>
         </dict>

@@ -15,7 +15,7 @@
                 <key>spriteSourceSize</key>
                 <string>{1366,450}</string>
                 <key>textureRect</key>
-                <string>{{1237,225},{116,118}}</string>
+                <string>{{1,2447},{116,118}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -424,6 +424,96 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
+            <key>JPPOPBase.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{148,133}</string>
+                <key>spriteSourceSize</key>
+                <string>{148,133}</string>
+                <key>textureRect</key>
+                <string>{{2445,2343},{148,133}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>JPPOPBlue.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{138,36}</string>
+                <key>spriteSourceSize</key>
+                <string>{138,36}</string>
+                <key>textureRect</key>
+                <string>{{1795,2365},{138,36}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>JPPOPFrame.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{126,66}</string>
+                <key>spriteSourceSize</key>
+                <string>{126,66}</string>
+                <key>textureRect</key>
+                <string>{{829,2373},{126,66}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>JPPOPGold.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{208,47}</string>
+                <key>spriteSourceSize</key>
+                <string>{208,47}</string>
+                <key>textureRect</key>
+                <string>{{2199,1},{208,47}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>JPPOPGreen.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{138,36}</string>
+                <key>spriteSourceSize</key>
+                <string>{138,36}</string>
+                <key>textureRect</key>
+                <string>{{2409,1},{138,36}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>JPPOPSilver.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{182,44}</string>
+                <key>spriteSourceSize</key>
+                <string>{182,44}</string>
+                <key>textureRect</key>
+                <string>{{1281,225},{182,44}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
             <key>JackpotBar.png</key>
             <dict>
                 <key>aliases</key>
@@ -435,9 +525,9 @@
                 <key>spriteSourceSize</key>
                 <string>{190,38}</string>
                 <key>textureRect</key>
-                <string>{{2445,2343},{190,38}}</string>
+                <string>{{1571,2519},{190,38}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>JackpotBarFrame.png</key>
             <dict>
@@ -450,9 +540,9 @@
                 <key>spriteSourceSize</key>
                 <string>{204,42}</string>
                 <key>textureRect</key>
-                <string>{{2199,1},{204,42}}</string>
+                <string>{{1237,225},{204,42}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>JackpotChineseTitle.png</key>
             <dict>
@@ -465,7 +555,7 @@
                 <key>spriteSourceSize</key>
                 <string>{133,36}</string>
                 <key>textureRect</key>
-                <string>{{1571,2519},{133,36}}</string>
+                <string>{{2445,2493},{133,36}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -540,7 +630,7 @@
                 <key>spriteSourceSize</key>
                 <string>{77,77}</string>
                 <key>textureRect</key>
-                <string>{{1237,345},{77,77}}</string>
+                <string>{{119,2447},{77,77}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -555,7 +645,7 @@
                 <key>spriteSourceSize</key>
                 <string>{65,75}</string>
                 <key>textureRect</key>
-                <string>{{2485,2343},{61,53}}</string>
+                <string>{{119,2526},{61,53}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -573,7 +663,7 @@
             <key>size</key>
             <string>{2580,2580}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:889c58a67c30553c485db6c7f6636a51:6bfc705d9063077ff90c3959d7a4935d:8cec78be4de0ab7598c4003c942b161d$</string>
+            <string>$TexturePacker:SmartUpdate:99c6cb41ab57c8e11c228399baabaec5:f20f082e8db9c542069cba4a5170246a:8cec78be4de0ab7598c4003c942b161d$</string>
             <key>textureFileName</key>
             <string>Jackpot.png</string>
         </dict>
