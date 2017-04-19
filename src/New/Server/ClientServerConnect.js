@@ -349,7 +349,8 @@ const ClientServerConnect = function () {
                 console.log('jackpotValueResponse:', jackpotValueResponse);
                 const total = Object_values(jackpotValueResponse.data).map(level => level.value).reduce((a, b) => a + b, 0);
                 console.log('jackpotValueResponse:total:', total);
-                GameManager.updateJackpotPool(total);
+                //GameManager.updateJackpotPool(total);
+                return jackpotValueResponse;
             }
         );
     }

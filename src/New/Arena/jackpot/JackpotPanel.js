@@ -1,28 +1,32 @@
 
 var JackpotPanel = cc.Layer.extend({ //gradient
     _selectedIndex: 0,
-    _prizeList: null,
-    _iconPatterns: null,
+    _jackpotResult: null,
     _unselectedBoxes: null,
     _selectedMedals: null,
     _pnAward: null,
     _spBackground: null,
+    _spTimer: null,
+    _lbTimeCounter: null,
 
-    ctor: function(iconPattern, prizeList){
+    _lbPlayer: null,
+
+    _lbPrize1Value: null,
+    _lbPrize2Value: null,
+    _lbPrize3Value: null,
+    _lbPrize4Value: null,
+
+    ctor: function() {
         cc.Layer.prototype.ctor.call(this);
 
         this._unselectedBoxes = [];
         this._selectedMedals = [];
         let boxes = this._unselectedBoxes;
 
-        this._prizeList = prizeList;
-        this._iconPatterns = iconPattern;
-
         cc.spriteFrameCache.addSpriteFrames(res.JackpotMiniGamePlist);
         cc.spriteFrameCache.addSpriteFrames(res.JackpotMiniGame2Plist);
         cc.spriteFrameCache.addSpriteFrames(res.LobbyUI2Plist);
         //buzz effect
-        //
 
         let spBackground = new cc.Sprite(ReferenceName.JackpotBase);
         spBackground.setPosition(cc.winSize.width * 0.5, cc.winSize.height * 0.5);
@@ -35,19 +39,33 @@ var JackpotPanel = cc.Layer.extend({ //gradient
         spTimerBackground.setAnchorPoint(0, 0.5);
         spTimerBackground.setPosition(25, panelSize.height * 0.90);
 
-        let playerData = GameManager.getPlayerData();
-        let playerName = playerData?playerData.name: "张飞捕鱼";
-        let lbPlayer = new cc.LabelTTF("中奖玩家: " + playerName , "Arial", 20);
+        let lbPlayer = this._lbPlayer = new cc.LabelTTF("中奖玩家: ", "Arial", 20);
         lbPlayer.setAnchorPoint(0, 0.5);
         lbPlayer.setPosition(18, 24);
         spTimerBackground.addChild(lbPlayer);
-        let spTimerIcon = new cc.Sprite(ReferenceName.JackpotTimerIcon);
+        let spTimerIcon = this._spTimer = new cc.Sprite(ReferenceName.JackpotTimerIcon);
         spTimerBackground.addChild(spTimerIcon);
         spTimerIcon.setPosition(240, 24);
-        let lbTimeCounter = new cc.LabelTTF("30", "Arial", 24);
+        spTimerIcon.setAnchorPoint(0.5, 0.4);
+        spTimerIcon.setRotation(-20);
+        spTimerIcon.runAction(cc.sequence(cc.rotateBy(0.07, 40), cc.rotateBy(0.07, -40)).repeatForever());
+        let lbTimeCounter = this._lbTimeCounter = new cc.LabelTTF("30", "Arial", 24);
         lbTimeCounter.setColor(new cc.Color(200, 200, 10, 255));
         spTimerBackground.addChild(lbTimeCounter);
         lbTimeCounter.setPosition(278, 24);
+        lbTimeCounter.setUserData(30);
+
+        lbTimeCounter.schedule(function () {
+            let remainTime = this.getUserData();
+            remainTime--;
+            this.setString(remainTime);
+            this.setUserData(remainTime);
+            if(remainTime === 10)
+                this.setColor(new cc.Color(255, 0, 0, 255));
+            if (remainTime <= 0) {
+                this.unscheduleAllCallbacks();
+            }
+        }, 1, cc.REPEAT_FOREVER);
 
         //title
         let spTitle = new cc.Sprite(ReferenceName.JackpotTitle);
@@ -74,7 +92,7 @@ var JackpotPanel = cc.Layer.extend({ //gradient
         let spMermaidIcon = new cc.Sprite(ReferenceName.JackpotMermaidIcon);
         spPrizeListFrame1.addChild(spMermaidIcon);
         spMermaidIcon.setPosition(55, 50);
-        let lbPrize1Value = new cc.LabelBMFont("16,013,245", res.JackpotGoldTextFont);
+        let lbPrize1Value = this._lbPrize1Value = new cc.LabelBMFont("16,013,245", res.JackpotGoldTextFont);
         spPrizeListFrame1.addChild(lbPrize1Value);
         lbPrize1Value.setPosition(185, 40);
         lbPrize1Value.setScale(0.3);
@@ -89,7 +107,7 @@ var JackpotPanel = cc.Layer.extend({ //gradient
         let spSharkIcon = new cc.Sprite(ReferenceName.JackpotSharkIcon);
         spPrizeListFrame2.addChild(spSharkIcon);
         spSharkIcon.setPosition(55, 50);
-        let lbPrize2Value = new cc.LabelBMFont("513,221", res.JackpotGoldTextFont);
+        let lbPrize2Value = this._lbPrize2Value = new cc.LabelBMFont("513,221", res.JackpotGoldTextFont);
         spPrizeListFrame2.addChild(lbPrize2Value);
         lbPrize2Value.setPosition(185, 40);
         lbPrize2Value.setScale(0.3);
@@ -103,7 +121,7 @@ var JackpotPanel = cc.Layer.extend({ //gradient
         let spTurtleIcon = new cc.Sprite(ReferenceName.JackpotTurtleIcon);
         spPrizeListFrame3.addChild(spTurtleIcon);
         spTurtleIcon.setPosition(55, 50);
-        let lbPrize3Value = new cc.LabelBMFont("13,228", res.JackpotGoldTextFont);
+        let lbPrize3Value = this._lbPrize3Value = new cc.LabelBMFont("13,228", res.JackpotGoldTextFont);
         spPrizeListFrame3.addChild(lbPrize3Value);
         lbPrize3Value.setPosition(185, 40);
         lbPrize3Value.setScale(0.3);
@@ -117,15 +135,30 @@ var JackpotPanel = cc.Layer.extend({ //gradient
         let spButterflyFishIcon = new cc.Sprite(ReferenceName.JackpotButterflyFishIcon);
         spPrizeListFrame4.addChild(spButterflyFishIcon);
         spButterflyFishIcon.setPosition(55, 50);
-        let lbPrize4Value = new cc.LabelBMFont("628", res.JackpotGoldTextFont);
+        let lbPrize4Value = this._lbPrize4Value = new cc.LabelBMFont("628", res.JackpotGoldTextFont);
         spPrizeListFrame4.addChild(lbPrize4Value);
         lbPrize4Value.setPosition(185, 40);
         lbPrize4Value.setScale(0.3);
 
+        ClientServerConnect.requestMyData().then(stats => {
+            console.log(stats.data);
+            return ClientServerConnect.getCurrentJackpotValues()
+        }).then(jackpotValues => {
+            //show the jackpot list
+            if(jackpotValues["status"] === 200)
+                selfPoint._showJackpotPrizeValues(jackpotValues["data"]);
+            return ClientServerConnect.listUncollectedJackpots();
+        }).then(jackpotObject => {
+            console.log(jackpotObject);
+            if(jackpotObject["status"] === 200)
+                selfPoint._jackpotResult = jackpotObject["data"][0];
+        }).catch(console.error);
+
         //Treasure Box
         let boxStartPoint = cc.p(215, 100), boxPadding = new cc.Size(180, 120), spTreasureBox, selfPoint = this;
-        for(let col = 0; col < 4; col++) {
-            for (let row = 2; row >= 0; row--) {
+        for (let row = 2; row >= 0; row--) {
+            for (let col = 0; col < 4; col++) {
+
                 spTreasureBox = new cc.Sprite(ReferenceName.JackpotTreasureBoxOpen_00000);
                 spTreasureBox.setPosition(boxStartPoint.x + boxPadding.width * col, boxStartPoint.y + boxPadding.height * row);
                 spBackground.addChild(spTreasureBox);
@@ -135,10 +168,10 @@ var JackpotPanel = cc.Layer.extend({ //gradient
                 let touchEventListener = cc.EventListener.create({
                     event: cc.EventListener.TOUCH_ONE_BY_ONE,
                     swallowTouches: true,
-                    onTouchBegan: function(touch, event){
+                    onTouchBegan: function (touch, event) {
                         let target = event.getCurrentTarget();
-                        if(cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
-                            target.convertToNodeSpace(touch.getLocation()))) {
+                        if (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
+                                target.convertToNodeSpace(touch.getLocation()))) {
                             //show the effect
                             let spEffect = target.getChildByTag(1);
                             if (!spEffect) {
@@ -154,7 +187,7 @@ var JackpotPanel = cc.Layer.extend({ //gradient
                         }
                     },
 
-                    onTouchMoved: function(touch, event) {
+                    onTouchMoved: function (touch, event) {
                         let target = event.getCurrentTarget();
                         let spEffect = target.getChildByTag(1);
                         if (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
@@ -167,13 +200,13 @@ var JackpotPanel = cc.Layer.extend({ //gradient
                         }
                     },
 
-                    onTouchEnded: function(touch, event){
+                    onTouchEnded: function (touch, event) {
                         let target = event.getCurrentTarget();
                         if (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
                                 target.convertToNodeSpace(touch.getLocation()))) {
                             //
                             let boxAnimation = GUIFunctions.getAnimation(ReferenceName.JackpotTreasureBoxOpenAnm, 0.03);
-                            target.runAction(cc.sequence(boxAnimation, cc.callFunc(function(){
+                            target.runAction(cc.sequence(boxAnimation, cc.callFunc(function () {
                                 this.removeFromParent(true);
                             }, target)));
                             selfPoint._removeBoxFromArray(target);
@@ -192,7 +225,7 @@ var JackpotPanel = cc.Layer.extend({ //gradient
                             spMedalGlow.setPosition(spMedal.width * 0.55, spMedal.height * 0.45);
                             let medalCount = selfPoint._glowSameMedals(spMedal);
 
-                            if(medalCount >= 3){
+                            if (medalCount >= 3) {
                                 //show all the
                                 selfPoint.showRemainBoxes();
                             }
@@ -201,7 +234,7 @@ var JackpotPanel = cc.Layer.extend({ //gradient
                             cc.eventManager.removeListeners(target);
                         }
                         let spEffect = target.getChildByTag(1);
-                        if(spEffect)
+                        if (spEffect)
                             spEffect.setVisible(false);
                     }
                 });
@@ -210,11 +243,29 @@ var JackpotPanel = cc.Layer.extend({ //gradient
         }
     },
 
+
     cleanup: function () {
         cc.spriteFrameCache.removeSpriteFramesFromFile(res.JackpotMiniGamePlist);
         cc.spriteFrameCache.removeSpriteFramesFromFile(res.JackpotMiniGame2Plist);
         cc.spriteFrameCache.removeSpriteFramesFromFIle(res.LobbyUI2Plist);
         cc.Layer.prototype.cleanup.call(this);
+    },
+
+    _showJackpotPrizeValues: function(prizeValues){
+        if(!prizeValues)
+            return;
+        let prizeValue = prizeValues["Level_1"];
+        if(prizeValue)
+            this._lbPrize1Value.setString(Math.round(prizeValue["value"]));
+        prizeValue = prizeValues["Level_2"];
+        if(prizeValue)
+            this._lbPrize2Value.setString(Math.round(prizeValue["value"]));
+        prizeValue = prizeValues["Level_3"];
+        if(prizeValue)
+            this._lbPrize3Value.setString(Math.round(prizeValue["value"]));
+        prizeValue = prizeValues["Level_4"];
+        if(prizeValue)
+            this._lbPrize4Value.setString(Math.round(prizeValue["value"]));
     },
 
     _removeBoxFromArray: function(treasureBox) {
@@ -246,12 +297,12 @@ var JackpotPanel = cc.Layer.extend({ //gradient
     },
 
     _createMedalSprite: function(){
-        let type = this._selectedIndex % 4, spIcon;
-        if(type === 0)
+        let type = this._getTypeFromPattern(), spIcon;
+        if(type === 1)
             spIcon = new cc.Sprite(ReferenceName.JackpotMermaidMedal_00000);
-        else if(type === 1)
-            spIcon = new cc.Sprite(ReferenceName.JackpotSharkMedal_00000);
         else if(type === 2)
+            spIcon = new cc.Sprite(ReferenceName.JackpotSharkMedal_00000);
+        else if(type === 3)
             spIcon = new cc.Sprite(ReferenceName.JackpotTurtleMedal_00000);
         else
             spIcon = new cc.Sprite(ReferenceName.JackpotButterflyFishMedal_00000);
@@ -261,12 +312,12 @@ var JackpotPanel = cc.Layer.extend({ //gradient
     },
 
     _createMedalGlowSprite: function(){
-        let type = this._selectedIndex % 4, spIcon;
-        if(type === 0)
+        let type = this._getTypeFromPattern(), spIcon;
+        if(type === 1)
             spIcon = new cc.Sprite(ReferenceName.JackpotMermaidMedalGlow);
-         else if(type === 1)
+         else if(type === 2)
             spIcon = new cc.Sprite(ReferenceName.JackpotSharkMedalGlow);
-        else if(type === 2)
+        else if(type === 3)
             spIcon = new cc.Sprite(ReferenceName.JackpotTurtleMedalGlow);
         else
             spIcon = new cc.Sprite(ReferenceName.JackpotButterflyFishMedalGlow);
@@ -274,12 +325,12 @@ var JackpotPanel = cc.Layer.extend({ //gradient
     },
 
     _createGrayMedalSprite: function(){
-        let type = this._selectedIndex % 4, spIcon;
-        if(type === 0)
+        let type = this._getTypeFromPattern(), spIcon;
+        if(type === 1)
             spIcon = new cc.Sprite(ReferenceName.JackpotMermaidIconGray);
-        else if(type === 1)
-            spIcon = new cc.Sprite(ReferenceName.JackpotSharkIconGray);
         else if(type === 2)
+            spIcon = new cc.Sprite(ReferenceName.JackpotSharkIconGray);
+        else if(type === 3)
             spIcon = new cc.Sprite(ReferenceName.JackpotTurtleIconGray);
         else
             spIcon = new cc.Sprite(ReferenceName.JackpotButterflyFishIconGray);
@@ -288,11 +339,16 @@ var JackpotPanel = cc.Layer.extend({ //gradient
         return spIcon;
     },
 
-    showRemainBoxes: function(){
+    _getTypeFromPattern: function(){
+        let pattern = this._jackpotResult["lotteryPattern"];
+        return pattern[this._selectedIndex];
+    },
+
+    showRemainBoxes: function() {
         //show the remain boxes.
         let boxes = this._unselectedBoxes, delay = 1.5, ins = 0.8, selfPoint = this;
-        for(let i = 0; i < boxes.length; i++){
-            delay+= ins;
+        for (let i = 0; i < boxes.length; i++) {
+            delay += ins;
             let selBox = boxes[i];
             cc.eventManager.removeListeners(selBox);
             let spGrayMedal = this._createGrayMedalSprite();
@@ -302,7 +358,7 @@ var JackpotPanel = cc.Layer.extend({ //gradient
             spGrayMedal.runAction(cc.sequence(cc.delayTime(delay), cc.scaleTo(0.4, 1)));
 
             let boxAnimation = GUIFunctions.getAnimation(ReferenceName.JackpotTreasureBoxOpenAnm, 0.02);
-            selBox.runAction(cc.sequence(cc.delayTime(delay), boxAnimation, cc.callFunc(function(){
+            selBox.runAction(cc.sequence(cc.delayTime(delay), boxAnimation, cc.callFunc(function () {
                 this.removeFromParent(true);
                 selfPoint._removeBoxFromArray(this);
             }, selBox)));
@@ -310,11 +366,20 @@ var JackpotPanel = cc.Layer.extend({ //gradient
 
         delay += ins;
         //show the award panel.
-        this.runAction(cc.sequence(cc.delayTime(delay), cc.callFunc(function(){
-            let pnAward = new JackpotAwardPanel();
+        this.runAction(cc.sequence(cc.delayTime(delay), cc.callFunc(function () {
+            let result = this._jackpotResult;
+            let pnAward = new JackpotAwardPanel(result["level"], result["rewardValue"]);
             pnAward.setPosition(101, 74);
             this.addChild(pnAward);
+            this._stopTimer();
         }, this)));
+    },
+
+    _stopTimer: function(){
+        this._spTimer.stopAllActions();
+        this._lbTimeCounter.unscheduleAllCallbacks();
+        this._lbTimeCounter.setString("0");
+        this._lbTimeCounter.setColor(new cc.Color(255, 255, 255, 255));
     }
 });
 
@@ -330,16 +395,15 @@ var JackpotAwardPanel = cc.LayerColor.extend({
         this.addChild(spAwardPanel);
         spAwardPanel.setPosition(panelSize.width * 0.5, panelSize.height * 0.5);
         spAwardPanel.setScale(0.3);
-        let spAwardLevel = new cc.Sprite(ReferenceName.JackpotWin1);
+        let spAwardLevel = this._createAwardLevelSprite(awardLv);
         spAwardPanel.addChild(spAwardLevel);
         spAwardLevel.setPosition(200, 200);
-        let lbAwardMoney = new cc.LabelBMFont("16,013,245", res.JackpotGoldTextFont);
+        let lbAwardMoney = new cc.LabelBMFont(Math.round(awardMoney), res.JackpotGoldTextFont);
         lbAwardMoney.setPosition(270, 90);
         spAwardPanel.addChild(lbAwardMoney);
 
         let pnDist1 = new cc.Point(panelSize.width * 0.5, panelSize.height * 0.88),
             pnDist2 = new cc.Point(panelSize.width * 0.5, panelSize.height * 0.71);
-        //spAwardPanel.runAction(cc.spawn(cc.moveTo(0.4, pnDist1), cc.scaleTo(0.4, 0.42)));
         spAwardPanel.runAction(cc.sequence(cc.spawn(cc.moveTo(0.4, pnDist1), cc.scaleTo(0.4, 0.42)),
             cc.spawn(cc.moveTo(0.4, pnDist2), cc.scaleTo(0.4, 1).easing(cc.easeBackOut()))));
 
@@ -374,7 +438,20 @@ var JackpotAwardPanel = cc.LayerColor.extend({
         cc.spriteFrameCache.removeSpriteFramesFromFile(res.JackpotCoinAnimationPlist);
     },
 
-    _createAwardLevel: function(awardLv){
+    _createAwardLevelSprite: function(level) {
+        if (!level)
+            throw "invalid level.";
 
+        let spAward;
+        if (level === "Level_1") {
+            spAward = new cc.Sprite(ReferenceName.JackpotWin1);
+        } else if (level === "Level_2") {
+            spAward = new cc.Sprite(ReferenceName.JackpotWin2);
+        } else if (level === "Level_3") {
+            spAward = new cc.Sprite(ReferenceName.JackpotWin3);
+        } else {
+            spAward = new cc.Sprite(ReferenceName.JackpotWin4);
+        }
+        return spAward;
     }
 });

@@ -1,7 +1,7 @@
 /**
- * Created by eugeneseah on 3/11/16.
+ * the Layer for receive the touch.
+ * @type {TouchLayerRefactored}
  */
-// var MOUSE_DOWN = false;
 var TouchLayerRefactored = cc.Layer.extend({
     _enable: false,
     _callback: null,
@@ -30,14 +30,14 @@ var TouchLayerRefactored = cc.Layer.extend({
         return this._enable;
     },
     setEnable: function (enabled) {
-        if (this._enable != enabled) {
+        if (this._enable !== enabled) {
             this._enable = enabled;
         }
     },
 
     onTouchesBegan: function (touches, event) {
         if (!this._enable) return;
-        var touchPoint = touches.getLocation();
+        let touchPoint = touches.getLocation();
         // debugger;
         if (this._callback) {
             this._callback(touchPoint, TouchType.Began);
@@ -48,7 +48,7 @@ var TouchLayerRefactored = cc.Layer.extend({
 
     onTouchesMoved: function (touches, event) {
         if (!this._enable) return;
-        var touchPoint = touches.getLocation();
+        let touchPoint = touches.getLocation();
 
         if (this._callback) {
             this._callback(touchPoint, TouchType.Moved);
@@ -57,7 +57,7 @@ var TouchLayerRefactored = cc.Layer.extend({
 
     onTouchesEnded: function (touches, event) {
         if (!this._enable) return;
-        var touchPoint = touches.getLocation();
+        let touchPoint = touches.getLocation();
         if (this._callback) {
             this._callback(touchPoint, TouchType.Ended);
         }
