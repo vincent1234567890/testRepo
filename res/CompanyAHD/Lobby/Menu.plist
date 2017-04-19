@@ -514,22 +514,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>GLAangelfish.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{52,26}</string>
-                <key>spriteSourceSize</key>
-                <string>{52,26}</string>
-                <key>textureRect</key>
-                <string>{{881,978},{52,26}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>GLAnemonefish.png</key>
+            <key>GLAnemoneFish.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -544,7 +529,22 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>GLBlackWhiteNemo.png</key>
+            <key>GLAngelFish2.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{52,26}</string>
+                <key>spriteSourceSize</key>
+                <string>{52,26}</string>
+                <key>textureRect</key>
+                <string>{{881,978},{52,26}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>GLBWNemo.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -559,7 +559,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>GLBlackWhiteYellowfish.png</key>
+            <key>GLBlackWhiteYellowFish.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -574,7 +574,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>GLBlackYellowButterflyfish.png</key>
+            <key>GLBlackYellowButterflyFish.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -589,7 +589,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>GLBlueTang.png</key>
+            <key>GLBlueTang2.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -604,7 +604,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>GLButterflyfish.png</key>
+            <key>GLButterflyFish2.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -619,7 +619,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>GLGAnemonefish.png</key>
+            <key>GLGAnemoneFish.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -634,7 +634,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>GLGAngelfish.png</key>
+            <key>GLGAngelFish2.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -649,7 +649,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>GLGBlackWhiteNemo.png</key>
+            <key>GLGBWNemo.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -664,7 +664,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>GLGBlackWhiteYellowfish.png</key>
+            <key>GLGBlackWhiteYellowFish.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -679,7 +679,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>GLGBlackYellowButterflyfish.png</key>
+            <key>GLGBlackYellowButterflyFish.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -694,7 +694,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>GLGBlueTang.png</key>
+            <key>GLGBlueTang2.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -709,7 +709,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>GLGButterflyfish.png</key>
+            <key>GLGButterflyFish2.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -724,7 +724,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>GLGJellyfish.png</key>
+            <key>GLGJellyFish.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -739,7 +739,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>GLGKissingfish.png</key>
+            <key>GLGKissingFish.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -754,7 +754,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>GLGLanternfish.png</key>
+            <key>GLGLantern2.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -769,7 +769,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>GLGLionfish.png</key>
+            <key>GLGLionFish2.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -784,7 +784,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>GLGMarlinfish.png</key>
+            <key>GLGMarlins2.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -844,7 +844,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>GLGPaddlefish.png</key>
+            <key>GLGPaddleFish2.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -859,7 +859,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>GLGRay.png</key>
+            <key>GLGRay2.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -889,7 +889,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>GLGShark.png</key>
+            <key>GLGShark2.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -904,7 +904,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>GLGTurtle.png</key>
+            <key>GLGTurtle2.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -919,7 +919,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>GLGYellowfish.png</key>
+            <key>GLGYellowFish.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -934,7 +934,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>GLJellyfish.png</key>
+            <key>GLJellyFish.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -949,7 +949,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>GLKissingfish.png</key>
+            <key>GLKissingFish.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -964,7 +964,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>GLLanternfish.png</key>
+            <key>GLLantern2.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -979,7 +979,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>GLLionfish.png</key>
+            <key>GLLionFish2.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -994,7 +994,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>GLMarlinfish.png</key>
+            <key>GLMarlins2.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -1054,7 +1054,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>GLPaddle fish.png</key>
+            <key>GLPaddleFish2.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -1069,7 +1069,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>GLRay.png</key>
+            <key>GLRay2.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -1099,7 +1099,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>GLShark.png</key>
+            <key>GLShark2.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -1114,7 +1114,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>GLTurtle.png</key>
+            <key>GLTurtle2.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -1126,6 +1126,21 @@
                 <string>{44,58}</string>
                 <key>textureRect</key>
                 <string>{{1075,1281},{44,58}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>GLYellowFish.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{57,22}</string>
+                <key>spriteSourceSize</key>
+                <string>{57,22}</string>
+                <key>textureRect</key>
+                <string>{{98,1039},{57,22}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -1308,21 +1323,6 @@
                 <string>{{493,857},{151,38}}</string>
                 <key>textureRotated</key>
                 <true/>
-            </dict>
-            <key>GlYellowfish.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{57,22}</string>
-                <key>spriteSourceSize</key>
-                <string>{57,22}</string>
-                <key>textureRect</key>
-                <string>{{98,1039},{57,22}}</string>
-                <key>textureRotated</key>
-                <false/>
             </dict>
             <key>GoldAmountChinese.png</key>
             <dict>
@@ -2208,7 +2208,7 @@
             <key>size</key>
             <string>{1705,1705}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:4339b596a7cca3a0b18c24e5e02dc7c5:6a8b1f1d53b06045e75195769e1caf16:474a9a58f742d06d2866a4a6eac25590$</string>
+            <string>$TexturePacker:SmartUpdate:a945bb3ff6b74e94e3f47d3e0beee78a:d4b4f7cb8ceb8131c60e6ad3f4dc1e1a:474a9a58f742d06d2866a4a6eac25590$</string>
             <key>textureFileName</key>
             <string>Menu.png</string>
         </dict>
