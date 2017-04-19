@@ -1,7 +1,3 @@
-/**
- * Created by eugeneseah on 27/10/16.
- */
-
 /*
  Current structure :
  GameManager    -> GameView
@@ -56,8 +52,6 @@ const GameManager = function () {
         GameView.initialise(parent, _gameConfig, fishGameArena, onFishLockButtonPress, getFishLockStatus);
 
         _fishManager = new FishViewManager(fishGameArena, _gameConfig, GameView.caughtFishAnimationEnd , getFishLockStatus, onFishLockSelected);
-        // _optionsManager = new OptionsManager(onSettingsButton, undefined, onLeaveArena);
-        // _optionsManager.displayView(_gameConfig);
         new BackToLobbyButton(onLeaveArena);
         _bulletManager = new BulletManager(fishGameArena);
         _netManager = new NetManager();
@@ -132,24 +126,6 @@ const GameManager = function () {
         return _gameConfig;
     };
 
-    // const goToLogin = function () {
-    //     if (!_loggedIn) {
-    //         _loginManager.goToLogin();
-    //     }
-    // };
-
-    // const login = function (onSuccess, onFailure) {
-    //     let loginInfo = _loginManager.getLoginInfo();
-    //     ClientServerConnect.login(loginInfo.name, loginInfo.pass, function (data) {
-    //         if (data) {
-    //             _playerData = data;
-    //             onSuccess();
-    //         } else {
-    //             onFailure();
-    //         }
-    //     });
-    // };
-
     function goToLobby(goToLobbyCallback) {
         _goToLobbyCallback = goToLobbyCallback;
         // GameView.initialise();
@@ -193,7 +169,6 @@ const GameManager = function () {
         });
     }
 
-
     function onLeaveArena() {
         // Promise.resolve().then(
         //     () => ClientServerConnect.leaveGame()
@@ -207,8 +182,6 @@ const GameManager = function () {
     function createLobby() {
         if (!_lobbyManager) {
             _lobbyManager = new LobbyManager(_playerData, onGameSelected);
-            // _profileManger = new ProfileManager();
-            // _optionsManager = new OptionsManager(onSettingsButton, undefined, onLeaveArena);
             _lobbyWaterCausticsManager = new LobbyWaterCaustics();
             _floatingMenuManager = new FloatingMenu(_playerData, requestConsumptionLogHandle);
             _jackpotManager = new JackpotManager();

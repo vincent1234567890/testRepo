@@ -8,6 +8,11 @@ var JackpotPanel = cc.Layer.extend({ //gradient
     _pnAward: null,
     _spBackground: null,
 
+    _lbPrize1Value: null,
+    _lbPrize2Value: null,
+    _lbPrize3Value: null,
+    _lbPrize4Value: null,
+
     ctor: function(iconPattern, prizeList){
         cc.Layer.prototype.ctor.call(this);
 
@@ -44,10 +49,24 @@ var JackpotPanel = cc.Layer.extend({ //gradient
         let spTimerIcon = new cc.Sprite(ReferenceName.JackpotTimerIcon);
         spTimerBackground.addChild(spTimerIcon);
         spTimerIcon.setPosition(240, 24);
+        spTimerIcon.setAnchorPoint(0.5, 0.4);
+        spTimerIcon.setRotation(-20);
+        spTimerIcon.runAction(cc.sequence(cc.rotateBy(0.07, 40), cc.rotateBy(0.07, -40)).repeatForever());
         let lbTimeCounter = new cc.LabelTTF("30", "Arial", 24);
         lbTimeCounter.setColor(new cc.Color(200, 200, 10, 255));
         spTimerBackground.addChild(lbTimeCounter);
         lbTimeCounter.setPosition(278, 24);
+        lbTimeCounter.setUserData(30);
+
+        lbTimeCounter.schedule(function(){
+            let remainTime = this.getUserData();
+            remainTime--;
+            this.setString(remainTime);
+            this.setUserData(remainTime);
+            if(remainTime <= 0){
+                this.unscheduleAllCallbacks();
+            }
+        }, 1, cc.REPEAT_FOREVER);
 
         //title
         let spTitle = new cc.Sprite(ReferenceName.JackpotTitle);
@@ -74,7 +93,7 @@ var JackpotPanel = cc.Layer.extend({ //gradient
         let spMermaidIcon = new cc.Sprite(ReferenceName.JackpotMermaidIcon);
         spPrizeListFrame1.addChild(spMermaidIcon);
         spMermaidIcon.setPosition(55, 50);
-        let lbPrize1Value = new cc.LabelBMFont("16,013,245", res.JackpotGoldTextFont);
+        let lbPrize1Value = this._lbPrize1Value = new cc.LabelBMFont("16,013,245", res.JackpotGoldTextFont);
         spPrizeListFrame1.addChild(lbPrize1Value);
         lbPrize1Value.setPosition(185, 40);
         lbPrize1Value.setScale(0.3);
@@ -89,7 +108,7 @@ var JackpotPanel = cc.Layer.extend({ //gradient
         let spSharkIcon = new cc.Sprite(ReferenceName.JackpotSharkIcon);
         spPrizeListFrame2.addChild(spSharkIcon);
         spSharkIcon.setPosition(55, 50);
-        let lbPrize2Value = new cc.LabelBMFont("513,221", res.JackpotGoldTextFont);
+        let lbPrize2Value = this._lbPrize2Value = new cc.LabelBMFont("513,221", res.JackpotGoldTextFont);
         spPrizeListFrame2.addChild(lbPrize2Value);
         lbPrize2Value.setPosition(185, 40);
         lbPrize2Value.setScale(0.3);
@@ -103,7 +122,7 @@ var JackpotPanel = cc.Layer.extend({ //gradient
         let spTurtleIcon = new cc.Sprite(ReferenceName.JackpotTurtleIcon);
         spPrizeListFrame3.addChild(spTurtleIcon);
         spTurtleIcon.setPosition(55, 50);
-        let lbPrize3Value = new cc.LabelBMFont("13,228", res.JackpotGoldTextFont);
+        let lbPrize3Value = this._lbPrize3Value = new cc.LabelBMFont("13,228", res.JackpotGoldTextFont);
         spPrizeListFrame3.addChild(lbPrize3Value);
         lbPrize3Value.setPosition(185, 40);
         lbPrize3Value.setScale(0.3);
@@ -117,15 +136,20 @@ var JackpotPanel = cc.Layer.extend({ //gradient
         let spButterflyFishIcon = new cc.Sprite(ReferenceName.JackpotButterflyFishIcon);
         spPrizeListFrame4.addChild(spButterflyFishIcon);
         spButterflyFishIcon.setPosition(55, 50);
-        let lbPrize4Value = new cc.LabelBMFont("628", res.JackpotGoldTextFont);
+        let lbPrize4Value = this._lbPrize4Value = new cc.LabelBMFont("628", res.JackpotGoldTextFont);
         spPrizeListFrame4.addChild(lbPrize4Value);
         lbPrize4Value.setPosition(185, 40);
         lbPrize4Value.setScale(0.3);
 
+        ClientServerConnect.listUncollectedJackpots().then(jackpotList=>{
+            console.log(jackpotList);
+        });
+
         //Treasure Box
         let boxStartPoint = cc.p(215, 100), boxPadding = new cc.Size(180, 120), spTreasureBox, selfPoint = this;
-        for(let col = 0; col < 4; col++) {
-            for (let row = 2; row >= 0; row--) {
+        for (let row = 2; row >= 0; row--) {
+            for(let col = 0; col < 4; col++) {
+
                 spTreasureBox = new cc.Sprite(ReferenceName.JackpotTreasureBoxOpen_00000);
                 spTreasureBox.setPosition(boxStartPoint.x + boxPadding.width * col, boxStartPoint.y + boxPadding.height * row);
                 spBackground.addChild(spTreasureBox);
@@ -209,6 +233,7 @@ var JackpotPanel = cc.Layer.extend({ //gradient
             }
         }
     },
+
 
     cleanup: function () {
         cc.spriteFrameCache.removeSpriteFramesFromFile(res.JackpotMiniGamePlist);

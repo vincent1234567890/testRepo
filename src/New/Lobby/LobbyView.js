@@ -32,14 +32,8 @@ const LobbyView = (function () {
 
         let size;
 
-        // _settingsCallback = settingsCallback;
         _onGameSelectedCallback = onGameSelectedCallback;
-        // _profileCallback = profileCallback;
 
-        //var width = cc.view.getDesignResolutionSize().width;
-
-        // var midX = cc.view.getDesignResolutionSize().width / 2;
-        // var midY = cc.view.getDesignResolutionSize().height / 2;
         const length = cc.view.getDesignResolutionSize().width;
         const height = cc.view.getDesignResolutionSize().height;
 
@@ -49,51 +43,6 @@ const LobbyView = (function () {
         bg.setPosition(length / 2, height / 2 + 70);
         this._parent.addChild(bg, -5);
 
-        // const test = new cc.Sprite(res.WaterCausticTest);
-        // test.setPosition(length / 2, height / 2 + 70);
-        // this._parent.addChild(test, -4);
-        //
-        //   const TopBg = new cc.Sprite(ReferenceName.TopBg);
-        //   // TopBg.setPosition(683,cc.view.getDesignResolutionSize().height - 52);
-        //   let size = TopBg.getContentSize();
-        //   TopBg.setPosition(length - size.width/2,height - size.height/2);
-        //   bg.addChild(TopBg);
-        //
-        //   const ProfileFrame = new cc.Sprite(ReferenceName.ProfileFrame);
-        //   // ProfileFrame.setPosition(59,cc.view.getDesignResolutionSize().height - 46);
-        //   size = ProfileFrame.getContentSize();
-        //   ProfileFrame.setPosition(size.width/2 + 15,height - size.height/2);
-        //   // TopBg.addChild(ProfileFrame,1);
-        //   bg.addChild(ProfileFrame,1);
-        //
-        //   const ProfileImage = new cc.Sprite(ReferenceName.ProfileImage);
-        //   // ProfileImage.setPosition(59,cc.view.getDesignResolutionSize().height - 47);
-        //   size = ProfileImage.getContentSize();
-        //   // ProfileImage.setPosition(size.width/2 - 15,95-size.height/2);
-        //   ProfileImage.setPosition(size.width/2 ,height - size.height/2);
-        //   bg.addChild(ProfileImage,0);
-        //
-        // //   const star = new cc.Sprite(ReferenceName.Star);
-        // // //  star.setPosition(midX,midY);
-        // //   star.setPosition(166 , cc.view.getDesignResolutionSize().height - 66);
-        // //   bg.addChild(star,2);
-        //
-        //   // var coin = new cc.Sprite(ReferenceName.LobbyCoinIcon);
-        //   // coin.setPosition(971,cc.view.getDesignResolutionSize().height - 46);
-        //   // bg.addChild(coin,2);
-        //
-        //   // const BonusPlaceHolder = new cc.Sprite(ReferenceName.BonusPlaceHolder);
-        //   // // BonusPlaceHolder.setPosition(685,cc.view.getDesignResolutionSize().height - 49);
-        //   // size = BonusPlaceHolder.getContentSize();
-        //   // BonusPlaceHolder.setPosition(length/2 - size.width/2,height - size.height/2);
-        //   // bg.addChild(BonusPlaceHolder,2);
-        //
-        //   const LevelBG = new cc.Sprite(ReferenceName.LevelBG);
-        //   // LevelBG.setPosition(233,cc.view.getDesignResolutionSize().height - 79);
-        //   size = LevelBG.getContentSize();
-        //   LevelBG.setPosition(length - size.width/2,height - size.height/2);
-        //   bg.addChild(LevelBG,1);
-        //
         const NameBG = new cc.Sprite(ReferenceName.NameBG);
         // NameBG.setPosition(279,cc.view.getDesignResolutionSize().height - 24);
         // size = NameBG.getContentSize();
@@ -108,7 +57,6 @@ const LobbyView = (function () {
         fontDef.fontWeight = "bold";
         fontDef.fillStyle = new cc.Color(255,255,255,255);
 
-        // let label = new cc.LabelTTF("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW" , fontDef);
         let label = new cc.LabelTTF(playerData.playerState.name , fontDef);
         label.enableStroke(new cc.Color(0, 0, 0, 255), 2);
         label.setAnchorPoint(0.5, 0.5);
@@ -148,59 +96,11 @@ const LobbyView = (function () {
         // size = gameListMenu.getContentSize();
         // gameListMenu.setPosition(- length/2 +size.height/2 - 200 , -height/2 + size.height/2 + 100);
         this._parent.addChild(gamelist, 2);
-        //
-        // const profileMenu = setupProfileMenu ();
-        // const parent = new cc.Node();
-        // parent.addChild(profileMenu);
-        // // size = profileMenu.getContentSize();
-        // // profileMenu.setPosition(length - size.width/2,height - size.height/2);
-        // // parent.setPosition(- 300, height - 80);
-        // bg.addChild(parent,2);
-        // parent.setPosition(-length/2-300, height/2-80);
-        // bg.addChild(parent,2);
-        // _touchLayer = new TouchLayerRefactored(onMouse);
-        // _touchLayer.setSwallowTouches(false);
-        // this._parent.addChild(_touchLayer,1);
-
-        // const testLayer = new cc.LayerColor(0,0,0,196);
-
-        // profileArea.x = parent.getPositionX() ;
-        // profileArea.y = parent.getPositionY() ;
-        // profileArea.x = 0 ;
-        // profileArea.y = height - profileArea.height ;
-        // profileArea.height = size.height;
-        // profileArea.width = size.width;
-        //
-        // testLayer.setContentSize(profileArea);
-        // // testLayer.setContentSize(new cc.rect(500,-500,1000,1000));
-        // parent.addChild((testLayer),99);
-        // testLayer.setPosition(1000,-1000);
-
-        // const lobbyMenu = setupLobbyButtons ();
-        // size = lobbyMenu.getContentSize();
-        // lobbyMenu.setPosition(size.width/2 - 70,height - 80);
-        // LobbyCoinsBG.addChild(lobbyMenu,2);
-
-        //testing
-        // const waterCausticsLayer = new WaterCausticsLayer();
-        // parent.addChild(waterCausticsLayer,999);
 
         this.updatePlayerData(playerData);
-
-
-        /* testing
-         */
-        // cc.spriteFrameCache.addSpriteFrames(res.CoinExplosion);
-        // const animation = GUIFunctions.getAnimation("CoinExplosion1_",0.3);
-        // const animationSequence = new cc.RepeatForever(animation,new cc.callFunc(onAnimationEnd));
-        // const test = new cc.Sprite();
-        // this._parent.addChild(test,100);
-        // test.runAction(animationSequence);
-        //
-        // function onAnimationEnd() {
-        //
-        // }
     };
+
+
 
     // function onProfileclick(touch) {
     //     // console.log(touch,profileArea);
