@@ -6,5 +6,4 @@ var FishAnimationEnum = {
     startled : 1,
     unstartled : 2,
     death : 3,
-
 };
