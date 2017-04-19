@@ -389,6 +389,10 @@ const ClientServerConnect = function () {
         return _gameWSClient.callAPIOnce('player', 'getRechargeLog', {hours: numDays * 24});
     }
 
+    function changePlayerDisplayName (newDisplayName) {
+        return _gameWSClient.callAPIOnce('player', 'changePlayerDisplayName', {newDisplayName: newDisplayName});
+    }
+
     return {
         connectToMasterServer : connectToMasterServer,
         login : login,
@@ -411,5 +415,6 @@ const ClientServerConnect = function () {
         getGameSummaries: getGameSummaries,
         getConsumptionLog : getConsumptionLog,
         getRechargeLog : getRechargeLog,
+        changePlayerDisplayName : changePlayerDisplayName,
     };
 }();
