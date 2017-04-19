@@ -200,7 +200,13 @@ const GameManager = function () {
         // ).then(
         //     () => showPostGameStats()
         // ).catch(console.error);
-        ClientServerConnect.leaveGame();
+        ClientServerConnect.leaveGame().then(
+            ClientServerConnect.getGameSummaries(7).then(
+                gameSummaries => {
+                    setGameLogData(gameSummaries);
+                }
+            )
+        );
         exitToLobby();
     }
 
@@ -231,11 +237,7 @@ const GameManager = function () {
         _jackpotManager.unattach();
         destroyArena();
         ClientServerConnect.getCurrentJackpotValues();
-        ClientServerConnect.getGameSummaries(7).then(
-            gameSummaries => {
-                setGameLogData(gameSummaries);
-            }
-        );
+
         _goToLobbyCallback();
 
 

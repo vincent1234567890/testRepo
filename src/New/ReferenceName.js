@@ -147,7 +147,7 @@ const ReferenceName = {
     GameLogRechargeTitleIdChinese : "#NumberChinese.png",
     GameLogRechargeTitleAmountChinese : "#ConsumptionChinese.png",
     GameLogRechargeTitleTotalScoreChinese : "#PointChinese.png",
-    GameLogConsumptionTitleIdChinese : "#SerialNumberChinese.png",
+    GameLogConsumptionTitleIdChinese : "#NumberChinese.png",
     GameLogConsumptionTitleCannonAmountChinese : "#CannonPointChinese.png",
     GameLogConsumptionTitleProfitChinese : "#PointChinese.png",
     GameLogConsumptionTitleSceneNameChinese : "#StageChinese.png",
