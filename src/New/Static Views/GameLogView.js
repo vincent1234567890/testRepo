@@ -23,12 +23,12 @@ const GameLogView = (function () {
     //callback
     let _requestConsumptionLogCallback;
 
-    const GameLogView = function (gameSummaryData , requestConsumptionLogCallback) {
+    const GameLogView = function (gameSummaryData, requestConsumptionLogCallback) {
         _requestConsumptionLogCallback = requestConsumptionLogCallback;
         _gameSummaryData = gameSummaryData;
 
         _parent = new cc.Node();
-        _popup= new FloatingMenuPopupBasePrefab(dismissCallback);
+        _popup = new FloatingMenuPopupBasePrefab(dismissCallback);
         _popup.turnOffDeco();
         /*
          GameLogTitleChinese : "#GamelogChineseTitle.png",
@@ -59,39 +59,39 @@ const GameLogView = (function () {
 
         const title = new cc.Sprite(ReferenceName.GameLogTitleChinese);
 
-        const gameLogTab = GUIFunctions.createButton(ReferenceName.FAQTabBackground,ReferenceName.FAQTabBackgroundOnPress,onGameLogTabPressed);
-        const consumptionLogTab = GUIFunctions.createButton(ReferenceName.FAQTabBackground,ReferenceName.FAQTabBackgroundOnPress,onConsumptionTabPressed);
+        const gameLogTab = GUIFunctions.createButton(ReferenceName.FAQTabBackground, ReferenceName.FAQTabBackgroundOnPress, onGameLogTabPressed);
+        const consumptionLogTab = GUIFunctions.createButton(ReferenceName.FAQTabBackground, ReferenceName.FAQTabBackgroundOnPress, onConsumptionTabPressed);
 
         const gameLogTabTitleText = new cc.Sprite(ReferenceName.GameLogRecordTabChinese);
         const consumptionLogTabTitleText = new cc.Sprite(ReferenceName.GameLogConsumptionTabChinese);
 
-        gameLogTabTitleText.setAnchorPoint(0,0);
-        consumptionLogTabTitleText.setAnchorPoint(0,0);
+        gameLogTabTitleText.setAnchorPoint(0, 0);
+        consumptionLogTabTitleText.setAnchorPoint(0, 0);
 
         gameLogTab.addChild(gameLogTabTitleText);
         consumptionLogTab.addChild(consumptionLogTabTitleText);
 
-        _scrollTitleBackground= new cc.Sprite(ReferenceName.GameLogLogTitleBackground);
+        _scrollTitleBackground = new cc.Sprite(ReferenceName.GameLogLogTitleBackground);
         const scrollBackground = new cc.Sprite(ReferenceName.GameLogLogBackground);
 
         gameLogTabTitleText.setRotation(-10);
         consumptionLogTabTitleText.setRotation(-10);
 
-        gameLogTabTitleText.setPosition(23,10);
-        consumptionLogTabTitleText.setPosition(17,5);
+        gameLogTabTitleText.setPosition(23, 10);
+        consumptionLogTabTitleText.setPosition(17, 5);
 
-        _scrollTitleBackground.setPosition(565,520);
-        scrollBackground.setPosition(565,265);
+        _scrollTitleBackground.setPosition(565, 520);
+        scrollBackground.setPosition(565, 265);
 
-        gameLogTab.setAnchorPoint(0.2,0.5);
-        consumptionLogTab.setAnchorPoint(0.2,0.5);
+        gameLogTab.setAnchorPoint(0.2, 0.5);
+        consumptionLogTab.setAnchorPoint(0.2, 0.5);
 
-        const userAgreementRollover = new RolloverEffectItem(gameLogTab,onGameLogTabPressed,undefined,onTabHover,onTabUnhover);
-        const faqRollover = new RolloverEffectItem(consumptionLogTab,onConsumptionTabPressed,undefined,onTabHover,onTabUnhover);
-        gameLogTab.setPosition(130,tabHeight);
-        consumptionLogTab.setPosition(310,tabHeight);
+        const userAgreementRollover = new RolloverEffectItem(gameLogTab, onGameLogTabPressed, undefined, onTabHover, onTabUnhover);
+        const faqRollover = new RolloverEffectItem(consumptionLogTab, onConsumptionTabPressed, undefined, onTabHover, onTabUnhover);
+        gameLogTab.setPosition(130, tabHeight);
+        consumptionLogTab.setPosition(310, tabHeight);
 
-        title.setPosition(new cc.p(560,705));
+        title.setPosition(new cc.p(560, 705));
 
         _popup.getBackground().addChild(title);
 
@@ -104,28 +104,29 @@ const GameLogView = (function () {
         _parent.addChild(_popup.getParent());
 
 
-        function onGameLogTabPressed(){
+        function onGameLogTabPressed() {
             // const list = setupGameLogList(consumptionData);
             // scrollBackground.addChild(list);
-            if(_displayList){
+            if (_displayList) {
                 scrollBackground.removeChild(_displayList);
+                _scrollTitleBackground.removeChild(_displayTitle);
             }
-            const items = setupGameLogList(scrollBackground,gameSummaryData);
+            const items = setupGameLogList(scrollBackground, gameSummaryData);
             _displayList = items.listView;
             _displayTitle = items.scrollTitle;
             _scrollTitleBackground.addChild(_displayTitle);
             scrollBackground.addChild(_displayList);
         }
 
-        function onConsumptionTabPressed(){
+        function onConsumptionTabPressed() {
 
 
         }
 
         const wiggle = new cc.Sequence(cc.rotateBy(0.08, 3), cc.rotateBy(0.08, -3));
 
-        function onTabHover(widget){
-            if (widget.getNumberOfRunningActions()==0) {
+        function onTabHover(widget) {
+            if (widget.getNumberOfRunningActions() == 0) {
                 widget.runAction(new cc.RepeatForever(wiggle.clone()));
             }
         }
@@ -145,16 +146,21 @@ const GameLogView = (function () {
             _popup.show();
         };
 
-        this.showConsumptionLog = function (consumptionData){
+        this.showConsumptionLog = function (consumptionData) {
             _consumptionData = consumptionData;
-            if(list){
-                scrollBackground.removeChild(list);
+            if (_displayList) {
+                scrollBackground.removeChild(_displayList);
+                _scrollTitleBackground.removeChild(_displayTitle);
             }
-            list = setupConsumptionLogList(scrollBackground,consumptionData);
-            _popup.show();
+            const items = setupConsumptionLogList(scrollBackground, consumptionData);
+            _displayList = items.listView;
+            _displayTitle = items.scrollTitle;
+            _scrollTitleBackground.addChild(_displayTitle);
+            scrollBackground.addChild(_displayList);
+            // _popup.show();
         };
 
-        GameView.addView(_parent,ZORDER);
+        GameView.addView(_parent, ZORDER);
     };
 
     function dismissCallback(touch) {
@@ -162,49 +168,33 @@ const GameLogView = (function () {
         _parent.setVisible(false);
     }
 
-    function setupConsumptionLogList(scrollBackground, consumptionData) {
-        console.log("setupConsumptionLogList", consumptionData);
-
-        const listSize = scrollBackground.getContentSize();
-
-        const listView = new ccui.ListView();
-        listView.setDirection(ccui.ScrollView.DIR_VERTICAL);
-        listView.setTouchEnabled(true);
-        listView.setBounceEnabled(true);
-        listView.setContentSize(listSize);
-    }
-
-    function setupConsumptionTitle(){
+    function setupConsumptionTitle() {
         const parent = new cc.Node();
-        const roundIdTitleText = new cc.Sprite(ReferenceName.GameLogRoundIdTitleChinese);
-        const totalSpendTitleText = new cc.Sprite(ReferenceName.GameLogTotalSpendTitleChinese);
-        const totalRevenueTitleText = new cc.Sprite(ReferenceName.GameLogTotalRevenueTitleChinese);
-        const totalProfitTitleText = new cc.Sprite(ReferenceName.GameLogTotalProfitTitleChinese);
-        const startTimeTitleText = new cc.Sprite(ReferenceName.GameLogStartTimeTitleChinese);
-        const endTimeTitleText = new cc.Sprite(ReferenceName.GameLogEndTimeTitleChinese);
+        const bulletIdTitleText = new cc.Sprite(ReferenceName.GameLogConsumptionTitleIdChinese);
+        const cannonAmountTitleText = new cc.Sprite(ReferenceName.GameLogConsumptionTitleCannonAmountChinese);
+        const totalProfitTitleText = new cc.Sprite(ReferenceName.GameLogConsumptionTitleProfitChinese);
+        const stageTitleText = new cc.Sprite(ReferenceName.GameLogConsumptionTitleSceneNameChinese);
+        const fishTitleText = new cc.Sprite(ReferenceName.GameLogConsumptionTitleFishAffectedChinese);
+        const indicatorTitleText = new cc.Sprite(ReferenceName.GameLogConsumptionTitleFishCatchIndicatorChinese);
 
-        // const pos = new cc.p(gameRules.getContentSize().width/2, gameRules.getContentSize().height/2);
-        //
-        // console.log(gameRules,gameRules.getContentSize(),pos);
-        //
-        roundIdTitleText.setPosition(100,0);
-        totalSpendTitleText.setPosition(300,0);
-        totalRevenueTitleText.setPosition(450,0);
-        totalProfitTitleText.setPosition(600,0);
-        startTimeTitleText.setPosition(750,0);
-        endTimeTitleText.setPosition(950,0);
+        bulletIdTitleText.setPosition(50, 0);
+        cannonAmountTitleText.setPosition(175, 0);
+        totalProfitTitleText.setPosition(300, 0);
+        stageTitleText.setPosition(425, 0);
+        fishTitleText.setPosition(700, 0);
+        indicatorTitleText.setPosition(960, 0);
 
-        parent.addChild(roundIdTitleText);
-        parent.addChild(totalSpendTitleText);
-        parent.addChild(totalRevenueTitleText);
+        parent.addChild(bulletIdTitleText);
+        parent.addChild(cannonAmountTitleText);
         parent.addChild(totalProfitTitleText);
-        parent.addChild(startTimeTitleText);
-        parent.addChild(endTimeTitleText);
+        parent.addChild(stageTitleText);
+        parent.addChild(fishTitleText);
+        parent.addChild(indicatorTitleText);
 
         return parent;
     }
 
-    function setupGameLogTitle(){
+    function setupGameLogTitle() {
         const parent = new cc.Node();
         const roundIdTitleText = new cc.Sprite(ReferenceName.GameLogRoundIdTitleChinese);
         const totalSpendTitleText = new cc.Sprite(ReferenceName.GameLogTotalSpendTitleChinese);
@@ -217,12 +207,12 @@ const GameLogView = (function () {
         //
         // console.log(gameRules,gameRules.getContentSize(),pos);
         //
-        roundIdTitleText.setPosition(100,0);
-        totalSpendTitleText.setPosition(300,0);
-        totalRevenueTitleText.setPosition(450,0);
-        totalProfitTitleText.setPosition(600,0);
-        startTimeTitleText.setPosition(750,0);
-        endTimeTitleText.setPosition(950,0);
+        roundIdTitleText.setPosition(100, 0);
+        totalSpendTitleText.setPosition(300, 0);
+        totalRevenueTitleText.setPosition(450, 0);
+        totalProfitTitleText.setPosition(600, 0);
+        startTimeTitleText.setPosition(750, 0);
+        endTimeTitleText.setPosition(950, 0);
 
         parent.addChild(roundIdTitleText);
         parent.addChild(totalSpendTitleText);
@@ -237,9 +227,9 @@ const GameLogView = (function () {
     function setupGameLogList(scrollBackground, gameSummaryData) {
 
         let scrollTitle = setupGameLogTitle();
-        scrollTitle.setPosition(0,_scrollTitleBackground.getContentSize().height/2);
+        scrollTitle.setPosition(0, _scrollTitleBackground.getContentSize().height / 2);
 
-        console.log("setupGameLogList",gameSummaryData);
+        console.log("setupGameLogList", gameSummaryData);
 
         const listSize = scrollBackground.getContentSize();
 
@@ -256,18 +246,18 @@ const GameLogView = (function () {
         });
 
         function onMouseScroll(mouseData) {
-            const touch = new cc.Touch(0,mouseData.getScrollY()/100);
-            touch._setPrevPoint(0,0);
+            const touch = new cc.Touch(0, mouseData.getScrollY() / 100);
+            touch._setPrevPoint(0, 0);
             listView.onTouchMoved(touch);
-            const end = new cc.Touch(0,0);
-            end._setPrevPoint(0,0);
+            const end = new cc.Touch(0, 0);
+            end._setPrevPoint(0, 0);
             listView.onTouchEnded(end);
         }
 
         cc.eventManager.addListener(_listener, listView);
 
-        const ListItemPrefab = (function () {
-            function ListItemPrefab(itemData, onSelectedCallback){
+        const GameLogListItemPrefab = (function () {
+            function GameLogListItemPrefab(itemData, onSelectedCallback) {
                 const wrapper = new ccui.Widget();
                 const highlight = new cc.Sprite(ReferenceName.GameLogItemHighLight);
                 const separator = new cc.Sprite(ReferenceName.GameLogListSeparator);
@@ -281,10 +271,10 @@ const GameLogView = (function () {
 
                 highlight.setVisible(false);
 
-                const listEntryPos = new cc.p(highlight.getContentSize().width/2,highlight.getContentSize().height/2);
+                const listEntryPos = new cc.p(highlight.getContentSize().width / 2, highlight.getContentSize().height / 2);
 
-                highlight.setPosition(listSize.width/2,listEntryPos.y);
-                separator.setPosition(listSize.width/2,0);
+                highlight.setPosition(listSize.width / 2, listEntryPos.y);
+                separator.setPosition(listSize.width / 2, 0);
 
                 // console.log("ListItemPrefab",wrapper,highlight.getContentSize());
 
@@ -348,17 +338,16 @@ const GameLogView = (function () {
                     return wrapper;
                 };
 
-                console.log(wrapper,itemData);
+                console.log(wrapper, itemData);
             }
 
 
-
-            return ListItemPrefab;
+            return GameLogListItemPrefab;
         }());
 
         const onItemSelected = function (data) {
-            if (_requestConsumptionLogCallback){
-                _requestConsumptionLogCallback(data.playerGameNumber,data.roundNumber)
+            if (_requestConsumptionLogCallback) {
+                _requestConsumptionLogCallback(data.playerGameNumber, data.roundNumber)
             }
             // ClientServerConnect.getConsumptionLog(data.playerGameNumber,data.roundNumber);
         };
@@ -366,14 +355,14 @@ const GameLogView = (function () {
         const data = gameSummaryData.data;
         for (let i = 0; i < data.length; i++) {
             console.log(data[i]);
-            const listItemPrefab = new ListItemPrefab({
-                id : data[i]._id.sceneName,
+            const listItemPrefab = new GameLogListItemPrefab({
+                id: data[i]._id.sceneName,
+                totalSpent: data[i].totalConsumption,
                 totalRevenue : data[i].totalBonus,
-                totalSpent : data[i].totalConsumption,
-                startTime : data[i].startTime,
-                endTime : data[i].endTime,
-                playerGameNumber : data[i]._id.playerGameNumber,
-                roundNumber : data[i]._id.roundNumber,
+                startTime: data[i].startTime,
+                endTime: data[i].endTime,
+                playerGameNumber: data[i]._id.playerGameNumber,
+                roundNumber: data[i]._id.roundNumber,
             }, onItemSelected);
             const content = listItemPrefab.getContent();
             // console.log(content);
@@ -381,7 +370,196 @@ const GameLogView = (function () {
             listView.pushBackCustomItem(content);
         }
 
-        return {scrollTitle : scrollTitle, listView:listView}
+        return {scrollTitle: scrollTitle, listView: listView}
+    }
+
+    function setupConsumptionLogList(scrollBackground, consumptionLogData) {
+
+        let scrollTitle = setupConsumptionTitle();
+        scrollTitle.setPosition(0, _scrollTitleBackground.getContentSize().height / 2);
+
+        console.log("setupConsumptionLogList", consumptionLogData);
+
+        const listSize = scrollBackground.getContentSize();
+
+        const listView = new ccui.ListView();
+        listView.setDirection(ccui.ScrollView.DIR_VERTICAL);
+        listView.setTouchEnabled(true);
+        listView.setBounceEnabled(true);
+        listView.setContentSize(listSize);
+
+        const _listener = cc.EventListener.create({
+            event: cc.EventListener.MOUSE,
+            onMouseScroll: onMouseScroll,
+        });
+
+        function onMouseScroll(mouseData) {
+            const touch = new cc.Touch(0, mouseData.getScrollY() / 100);
+            touch._setPrevPoint(0, 0);
+            listView.onTouchMoved(touch);
+            const end = new cc.Touch(0, 0);
+            end._setPrevPoint(0, 0);
+            listView.onTouchEnded(end);
+        }
+
+        cc.eventManager.addListener(_listener, listView);
+
+        function createFishList (fishArray) {
+            const fishList = new ccui.ListView();
+            fishList.setDirection(ccui.ScrollView.DIR_HORIZONTAL);
+            fishList.setTouchEnabled(true);
+            fishList.setBounceEnabled(true);
+            // fishList.setContentSize(fishArray.);
+
+            // var names = ['Mike', 'Matt', 'Nancy', 'Adam', 'Jenny', 'Nancy', 'Carl']
+
+            var uniq = fishArray
+                .map((fish) => {
+                    console.log(fish);
+                    return {type: fish.type, count: 1}
+                })
+                .reduce((a, b) => {
+                    console.log(a,b);
+                    a[b.type] = (a[b.type] || 0) + b.count;
+                    return a
+                }, {});
+
+            console.log(uniq);
+
+            for (let i = 0; i < fishArray.length; i++) {
+                console.log(data[i]);
+                const wrapper = new ccui.Widget();
+                const fishSprite = new cc.Sprite("#GL" + fishArray[i].type + ".png");
+
+                let fontDef = new cc.FontDefinition();
+                fontDef.fontName = "Microsoft YaHei";
+                // fontDef.fontName = "Arial Unicode MS";
+                fontDef.fontSize = "20";
+                fontDef.fontStyle = "bold";
+                fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
+                fontDef.fillStyle = new cc.Color(0, 0, 0, 255);
+
+                const fishAmount = new cc.LabelTTF(uniq[fishArray[i].type], fontDef);
+
+                wrapper.addChild(fishSprite);
+                wrapper.addChild(fishAmount);
+                // console.log(content);
+
+                wrapper.setContentSize(fishSprite.getContentSize());
+                console.log(fishSprite,wrapper);
+
+                fishList.pushBackCustomItem(wrapper);
+            }
+
+            fishList.setContentSize(200,50);
+
+            return fishList;
+        }
+
+
+        const consumptionLogListItemPrefab = (function () {
+            function consumptionLogListItemPrefab(itemData) {
+                const wrapper = new ccui.Widget();
+                const highlight = new cc.Sprite(ReferenceName.GameLogItemHighLight);
+                const separator = new cc.Sprite(ReferenceName.GameLogListSeparator);
+
+                wrapper.addChild(highlight);
+                wrapper.addChild(separator);
+                wrapper.itemData = itemData;
+
+                wrapper.setContentSize(highlight.getContentSize());
+                wrapper.setTouchEnabled(true);
+
+                highlight.setVisible(false);
+
+                const listEntryPos = new cc.p(highlight.getContentSize().width / 2, highlight.getContentSize().height / 2);
+
+                highlight.setPosition(listSize.width / 2, listEntryPos.y);
+                separator.setPosition(listSize.width / 2, 0);
+
+                // console.log("ListItemPrefab",wrapper,highlight.getContentSize());
+
+                let fontDef = new cc.FontDefinition();
+                fontDef.fontName = "Microsoft YaHei";
+                // fontDef.fontName = "Arial Unicode MS";
+                fontDef.fontSize = "20";
+                fontDef.fontStyle = "bold";
+                fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
+                fontDef.fillStyle = new cc.Color(0, 0, 0, 255);
+
+                let bulletId = new cc.LabelTTF(itemData.id, fontDef);
+
+                fontDef.textAlign = cc.TEXT_ALIGNMENT_CENTER;
+                let totalSpend = new cc.LabelTTF(itemData.totalSpend, fontDef);
+                // let totalRevenue = new cc.LabelTTF(itemData.totalRevenue, fontDef);
+                let totalProfit = new cc.LabelTTF(parseFloat(itemData.totalRevenue) - parseFloat(itemData.totalSpend), fontDef);
+                let sceneName = new cc.LabelTTF(itemData.sceneName, fontDef);
+
+
+                const captured = createFishList(itemData.fishCaught);
+
+                // bulletId.setAnchorPoint(0, 0.5);
+
+                bulletId.setPosition(50, listEntryPos.y);
+                totalSpend.setPosition(175, listEntryPos.y);
+                // totalRevenue.setPosition(450, listEntryPos.y);
+                totalProfit.setPosition(300, listEntryPos.y);
+                sceneName.setPosition(425, listEntryPos.y);
+                captured.setPosition(500, listEntryPos.y);
+
+                wrapper.addChild(bulletId);
+                wrapper.addChild(totalSpend);
+                // wrapper.addChild(totalRevenue);
+                wrapper.addChild(totalProfit);
+                wrapper.addChild(sceneName);
+                wrapper.addChild(captured);
+
+                const item = new RolloverEffectItem(wrapper, onSelected, onUnselected, onHover, onUnhover);
+
+                function onSelected() {
+                }
+
+                function onUnselected() {
+                }
+
+                function onHover() {
+                    highlight.setVisible(true);
+                }
+
+                function onUnhover() {
+                    highlight.setVisible(false);
+                }
+
+                this.getContent = function () {
+                    return wrapper;
+                };
+
+                // console.log(wrapper, itemData);
+            }
+
+            return consumptionLogListItemPrefab;
+        }());
+
+
+
+        const data = consumptionLogData.data;
+        for (let i = 0; i < data.length; i++) {
+            console.log(data[i]);
+            const listItemPrefab = new consumptionLogListItemPrefab({
+                id: i,
+                totalSpend: data[i].consumptionCredit,
+                totalRevenue: data[i].bonusCredit,
+                sceneName : data[i].sceneName,
+                fishCaught: data[i].caughtFishes,
+                fishUncaught : data[i].uncaughtFishes,
+            });
+            const content = listItemPrefab.getContent();
+            // console.log(content);
+
+            listView.pushBackCustomItem(content);
+        }
+
+        return {scrollTitle: scrollTitle, listView: listView}
     }
 
     const proto = GameLogView.prototype;
