@@ -6,10 +6,12 @@ const GameLogView = (function () {
     const ZORDER = 10;
     let _parent;
     let _popup;
-    let tabHeight = 600;
-    let sideButtonX = 910;
-    let sideSpacing = 100;
-    let sideStart = 550;
+    const tabHeight = 600;
+    const fishPosition = 500;
+
+    const timePeriodShort = 1;
+    const timePeriodMedium = 3;
+    const timePeriodLong = 14;
 
     let _scrollTitleBackground;
 
@@ -87,9 +89,53 @@ const GameLogView = (function () {
         consumptionLogTab.setAnchorPoint(0.2, 0.5);
 
         const userAgreementRollover = new RolloverEffectItem(gameLogTab, onGameLogTabPressed, undefined, onTabHover, onTabUnhover);
-        const faqRollover = new RolloverEffectItem(consumptionLogTab, onConsumptionTabPressed, undefined, onTabHover, onTabUnhover);
+        const faqRollover = new RolloverEffectItem(consumptionLogTab, onRechargeLogTabPressed, undefined, onTabHover, onTabUnhover);
         gameLogTab.setPosition(130, tabHeight);
         consumptionLogTab.setPosition(310, tabHeight);
+
+        const checkBoxShort = new ccui.CheckBox(ReferenceName.GameLogRadioButton, undefined, ReferenceName.GameLogRadioButtonSelected, undefined, undefined, ccui.Widget.PLIST_TEXTURE);
+        const checkBoxShortText = new cc.Sprite(ReferenceName.GameLogRadioTextPeriodShortChinese);
+        checkBoxShort.addChild(checkBoxShortText);
+        checkBoxShortText.setAnchorPoint(0, 0.5);
+        checkBoxShortText.setPosition(20, 10);
+        checkBoxShort.setPosition(700, tabHeight);
+        checkBoxShort.itemData = timePeriodShort;
+
+        checkBoxShort.setSelected(true);
+
+        const checkBoxMedium = new ccui.CheckBox(ReferenceName.GameLogRadioButton, undefined, ReferenceName.GameLogRadioButtonSelected, undefined, undefined, ccui.Widget.PLIST_TEXTURE);
+        const checkBoxMediumText = new cc.Sprite(ReferenceName.GameLogRadioTextPeriodMediumChinese);
+        checkBoxMedium.addChild(checkBoxMediumText);
+        checkBoxMediumText.setAnchorPoint(0, 0.5);
+        checkBoxMediumText.setPosition(20, 10);
+        checkBoxMedium.setPosition(825, tabHeight);
+        checkBoxMedium.itemData = timePeriodMedium;
+
+        const checkBoxLong = new ccui.CheckBox(ReferenceName.GameLogRadioButton, undefined, ReferenceName.GameLogRadioButtonSelected, undefined, undefined, ccui.Widget.PLIST_TEXTURE);
+        const checkBoxLongText = new cc.Sprite(ReferenceName.GameLogRadioTextPeriodLongChinese);
+        checkBoxLong.addChild(checkBoxLongText);
+        checkBoxLongText.setAnchorPoint(0, 0.5);
+        checkBoxLongText.setPosition(20, 10);
+        checkBoxLong.setPosition(950, tabHeight);
+        checkBoxLong.itemData = timePeriodLong;
+
+        const radioButtonPressEvent = (sender, type) => {
+            switch (type) {
+                case ccui.CheckBox.EVENT_SELECTED:
+                case ccui.CheckBox.EVENT_UNSELECTED: // fallthrough intended
+                    for (let radio in radioArray) {
+                        radioArray[radio].setSelected(false);
+                    }
+                    sender.setSelected(true);
+                    break;
+            }
+        };
+
+        const radioArray = [checkBoxShort, checkBoxMedium, checkBoxLong];
+        for (let radio in radioArray) {
+            radioArray[radio].addEventListener(radioButtonPressEvent);
+        }
+
 
         title.setPosition(new cc.p(560, 705));
 
@@ -97,6 +143,10 @@ const GameLogView = (function () {
 
         _popup.getBackground().addChild(gameLogTab);
         _popup.getBackground().addChild(consumptionLogTab);
+
+        _popup.getBackground().addChild(checkBoxShort);
+        _popup.getBackground().addChild(checkBoxMedium);
+        _popup.getBackground().addChild(checkBoxLong);
 
         _popup.getBackground().addChild(_scrollTitleBackground);
         _popup.getBackground().addChild(scrollBackground);
@@ -107,19 +157,80 @@ const GameLogView = (function () {
         function onGameLogTabPressed() {
             // const list = setupGameLogList(consumptionData);
             // scrollBackground.addChild(list);
+            for (let radio in radioArray) {
+                radioArray[radio].setEnabled(true);
+                radioArray[radio].setVisible(true);
+            }
+
             if (_displayList) {
                 scrollBackground.removeChild(_displayList);
                 _scrollTitleBackground.removeChild(_displayTitle);
             }
-            const items = setupGameLogList(scrollBackground, gameSummaryData);
-            _displayList = items.listView;
-            _displayTitle = items.scrollTitle;
-            _scrollTitleBackground.addChild(_displayTitle);
-            scrollBackground.addChild(_displayList);
+
+            // let filtered = gameSummaryData.;
+            // if (checkBoxShort.isSelected()){
+            //
+            // }
+
+            let length;
+            for (let radio in radioArray) {
+                if (radioArray[radio].isSelected()) {
+                    length = radioArray[radio].itemData;
+                    break;
+                }
+            }
+
+            ClientServerConnect.getGameSummaries(length).then(
+                gameSummaries => {
+                    console.log(length, gameSummaries);
+                    // setGameLogData(gameSummaries);
+                    gameSummaryData = gameSummaries;
+                    const items = setupGameLogList(scrollBackground, gameSummaryData);
+                    _displayList = items.listView;
+                    _displayTitle = items.scrollTitle;
+                    _scrollTitleBackground.addChild(_displayTitle);
+                    scrollBackground.addChild(_displayList);
+                }
+            );
+
+
         }
 
-        function onConsumptionTabPressed() {
+        function onRechargeLogTabPressed() {
+            for (let radio in radioArray) {
+                radioArray[radio].setEnabled(true);
+                radioArray[radio].setVisible(true);
+            }
 
+            if (_displayList) {
+                scrollBackground.removeChild(_displayList);
+                _scrollTitleBackground.removeChild(_displayTitle);
+            }
+
+            // let filtered = gameSummaryData.;
+            // if (checkBoxShort.isSelected()){
+            //
+            // }
+
+            let length;
+            for (let radio in radioArray) {
+                if (radioArray[radio].isSelected()) {
+                    length = radioArray[radio].itemData;
+                    break;
+                }
+            }
+
+            ClientServerConnect.getConsumptionLog(length).then(
+                consumptionLog => {
+                    console.log(length, consumptionLog);
+                    // setGameLogData(gameSummaries);
+                    const items = setupRechargeLogList(scrollBackground, consumptionLog);
+                    _displayList = items.listView;
+                    _displayTitle = items.scrollTitle;
+                    _scrollTitleBackground.addChild(_displayTitle);
+                    scrollBackground.addChild(_displayList);
+                }
+            );
 
         }
 
@@ -147,6 +258,10 @@ const GameLogView = (function () {
         };
 
         this.showConsumptionLog = function (consumptionData) {
+            for (let radio in radioArray) {
+                radioArray[radio].setEnabled(false);
+                radioArray[radio].setVisible(false);
+            }
             _consumptionData = consumptionData;
             if (_displayList) {
                 scrollBackground.removeChild(_displayList);
@@ -155,8 +270,8 @@ const GameLogView = (function () {
             const items = setupConsumptionLogList(scrollBackground, consumptionData);
             _displayList = items.listView;
             _displayTitle = items.scrollTitle;
-            _scrollTitleBackground.addChild(_displayTitle);
-            scrollBackground.addChild(_displayList);
+            // _scrollTitleBackground.addChild(_displayTitle);
+            // scrollBackground.addChild(_displayList);
             // _popup.show();
         };
 
@@ -289,7 +404,7 @@ const GameLogView = (function () {
                 fontDef.fillStyle = new cc.Color(0, 0, 0, 255);
 
                 const date = new Date(itemData.startTime);
-                const roundIdText = itemData.id + "-" + date.getYear() + date.getMonth() + date.getDay();
+                const roundIdText = itemData.id + "-" + (1900 + date.getYear()) + date.getMonth() + date.getDate();
 
                 let roundId = new cc.LabelTTF(roundIdText, fontDef);
 
@@ -360,7 +475,7 @@ const GameLogView = (function () {
             const listItemPrefab = new GameLogListItemPrefab({
                 id: data[i]._id.sceneName,
                 totalSpent: data[i].totalConsumption,
-                totalRevenue : data[i].totalBonus,
+                totalRevenue: data[i].totalBonus,
                 startTime: data[i].startTime,
                 endTime: data[i].endTime,
                 playerGameNumber: data[i]._id.playerGameNumber,
@@ -406,14 +521,14 @@ const GameLogView = (function () {
 
         cc.eventManager.addListener(_listener, listView);
 
-        function createFishList (fishArray) {
+        function createFishList(fishArray) {
             const fishView = new ccui.ListView();
             fishView.setDirection(ccui.ScrollView.DIR_HORIZONTAL);
 
             const fishList = new ccui.ListView();
             fishList.setDirection(ccui.ScrollView.DIR_HORIZONTAL);
 
-            if (!fishArray || fishArray&&fishArray.length < 1){
+            if (!fishArray || fishArray && fishArray.length < 1) {
                 return fishList;
             }
 
@@ -424,19 +539,19 @@ const GameLogView = (function () {
             // var names = ['Mike', 'Matt', 'Nancy', 'Adam', 'Jenny', 'Nancy', 'Carl']
 
             const count = fishArray
-            .map((fish) => {
-                return {type: fish.type, count: 1}
-            })
-            .reduce((a, b) => {
-                a[b.type] = (a[b.type] || 0) + b.count;
-                return a;
-            }, {});
+                .map((fish) => {
+                    return {type: fish.type, count: 1}
+                })
+                .reduce((a, b) => {
+                    a[b.type] = (a[b.type] || 0) + b.count;
+                    return a;
+                }, {});
 
             let contentSize = new cc.p();
             const fishPadding = 10;
 
             // for (let i = 0; i < count.length; i++) {
-            for (let fish in count){
+            for (let fish in count) {
                 const wrapper = new ccui.Widget();
                 const fishSprite = new cc.Sprite("#GL" + fish + ".png");
 
@@ -455,14 +570,14 @@ const GameLogView = (function () {
                 wrapper.addChild(fishSprite);
                 wrapper.addChild(fishAmount);
                 // console.log(content);
-                fishSprite.setPosition(size.width/2, size.height/2);
-                fishAmount.setPosition(size.width/2, size.height/2);
+                fishSprite.setPosition(size.width / 2, size.height / 2);
+                fishAmount.setPosition(size.width / 2, size.height / 2);
                 // fishSprite.setPosition(size.width/2, 0);
                 // fishAmount.setPosition(size.width/2, 0);
 
                 wrapper.setContentSize(size);
 
-                if(contentSize.y < size.height){
+                if (contentSize.y < size.height) {
                     contentSize.y = size.height;
                 }
 
@@ -470,19 +585,19 @@ const GameLogView = (function () {
 
                 fishList.pushBackCustomItem(wrapper);
             }
-            const pos = new cc.p(400,50);
+            const pos = new cc.p(400, 50);
 
             const fishViewCanvas = new ccui.Widget();
             fishViewCanvas.addChild(fishList);
-            fishList.setPosition(pos.x/2 - contentSize.x/2,0);
+            fishList.setPosition(pos.x / 2 - contentSize.x / 2, 0);
             // fishViewCanvas.setPosition(pos.x,contentSize.y/2);
 
             // fishList.jumpToPercentHorizontal(50);
             // fishList.setInnerContainerPosition(contentSize.x,0);
             fishList.setContentSize(contentSize.x, contentSize.y);
             fishView.pushBackCustomItem(fishViewCanvas);
-            fishView.setContentSize(pos.x,pos.y);
-            fishViewCanvas.setContentSize(pos.x,0);
+            fishView.setContentSize(pos.x, contentSize.y);
+            fishViewCanvas.setContentSize(pos.x, contentSize.y);
 
             return fishView;
         }
@@ -496,7 +611,7 @@ const GameLogView = (function () {
 
                 const highlightSize = highlight.getContentSize();
                 wrapper.addChild(highlight);
-                wrapper.addChild(separator);
+
                 wrapper.itemData = itemData;
 
                 wrapper.setContentSize(highlightSize);
@@ -506,8 +621,6 @@ const GameLogView = (function () {
 
                 const listEntryPos = new cc.p(highlightSize.width / 2, highlightSize.height / 2);
 
-
-                separator.setPosition(listSize.width / 2, 0);
 
                 // console.log("ListItemPrefab",wrapper,highlight.getContentSize());
 
@@ -528,64 +641,63 @@ const GameLogView = (function () {
                 let sceneName = new cc.LabelTTF(itemData.sceneName, fontDef);
 
 
-
-
                 // bulletId.setAnchorPoint(0, 0.5);
 
-                bulletId.setPosition(50, listEntryPos.y);
-                totalSpend.setPosition(175, listEntryPos.y);
-                // totalRevenue.setPosition(450, listEntryPos.y);
-                totalProfit.setPosition(300, listEntryPos.y);
-                sceneName.setPosition(425, listEntryPos.y);
-
-                console.log(itemData.fishCaught,itemData.fishUncaught);
+                console.log(itemData.id, itemData.fishCaught, itemData.fishUncaught);
 
                 let uncaught;
-                if (itemData.fishUncaught.length >0){
+                let uncaughtIndicator;
+                if (itemData.fishUncaught.length > 0) {
                     uncaught = createFishList(itemData.fishUncaught);
                     // uncaught.setPosition(500, listEntryPos.y/2);
                     wrapper.addChild(uncaught);
-                    const indicator = new cc.Sprite(ReferenceName.GameLogConsumptionTitleFishUncaughtIndicator);
-                    wrapper.addChild(indicator);
+                    uncaughtIndicator = new cc.Sprite(ReferenceName.GameLogConsumptionTitleFishUncaughtIndicator);
+                    wrapper.addChild(uncaughtIndicator);
 
-                    if(uncaught.getContentSize().height > wrapper.getContentSize().height){
-                        // console.log("uncaught",uncaught.getContentSize(),"wrapper",wrapper.getContentSize(), uncaught.getContentSize().height + itemData.fishCaught.length > 0 ? wrapper.getContentSize().height:0);
-                        wrapper.setContentSize(wrapper.getContentSize().width, uncaught.getContentSize().height);
-                        // console.log("uncaught",uncaught.getContentSize(),"wrapper",wrapper.getContentSize());
-                    }
-                    // if (itemData.fishCaught.length > 0){
-                    //     captured.setPosition(500, uncaught.getContentSize().height + captured.getContentSize().height/2);
-                    // }
-                    uncaught.setPosition(500, uncaught.getContentSize().height/2);
-                    indicator.setPosition(925, uncaught.getContentSize().height/2);
+                    uncaught.setPosition(fishPosition, 0);
+                    uncaughtIndicator.setPosition(925, uncaught.getContentSize().height / 2);
                 }
 
                 let captured;
-                if (itemData.fishCaught.length >0){
+                if (itemData.fishCaught.length > 0) {
                     captured = createFishList(itemData.fishCaught);
 
                     wrapper.addChild(captured);
                     const indicator = new cc.Sprite(ReferenceName.GameLogConsumptionTitleFishCaughtIndicator);
                     wrapper.addChild(indicator);
 
-
-                    if(captured.getContentSize().height > wrapper.getContentSize().height){
-                        console.log("fishCaught",captured.getContentSize(),"wrapper",wrapper.getContentSize());
-                        wrapper.setContentSize(wrapper.getContentSize().width, captured.getContentSize().height);
-                        console.log("fishCaught",captured.getContentSize(),"wrapper",wrapper.getContentSize());
-
-                    }
-                    // captured.setPosition(500, listEntryPos.y/2);
-                    captured.setPosition(500, captured.getContentSize().height/2);
-                    indicator.setPosition(925, captured.getContentSize().height/2);
+                    captured.setPosition(fishPosition, 0);
+                    indicator.setPosition(925, captured.getContentSize().height / 2);
                 }
 
+                if (itemData.fishUncaught.length > 0 || itemData.fishCaught.length > 0) { // ugly could improve
+                    const height = wrapper.getContentSize().height;
 
+                    let first = itemData.fishUncaught.length > 0 ? height : 0;
+                    if (uncaught && uncaught.getContentSize().height > height) {
+                        first = uncaught.getContentSize().height;
+                    }
 
-                // if (itemData.fishCaught.length >0 && itemData.fishUncaught.length >0){
-                //     wrapper.setContentSize(wrapper.getContentSize().width, wrapper.getContentSize().height* 2);
-                //
-                // }
+                    let second = itemData.fishCaught.length > 0 ? height : 0;
+                    if (captured && captured.getContentSize().height > height) {
+                        second = captured.getContentSize().height;
+                    }
+
+                    if (uncaught && captured) {
+                        uncaught.setPosition(uncaught.getPosition().x, second);
+                        uncaughtIndicator.setPosition(uncaughtIndicator.getPosition().x, second + first / 2);
+                        const separator = new cc.Sprite(ReferenceName.GameLogListSeparatorShort);
+                        separator.setPosition(fishPosition, second);
+                        separator.setAnchorPoint(0.1,0.5);
+                        wrapper.addChild(separator);
+                    }
+
+                    wrapper.setContentSize(wrapper.getContentSize().width, first + second);
+
+                }
+
+                console.log("wrapper", wrapper.getContentSize());
+
 
                 wrapper.addChild(bulletId);
                 wrapper.addChild(totalSpend);
@@ -593,8 +705,20 @@ const GameLogView = (function () {
                 wrapper.addChild(totalProfit);
                 wrapper.addChild(sceneName);
 
-                highlight.setScaleY ( wrapper.getContentSize().height / highlightSize.height );
-                highlight.setPosition(listSize.width / 2, highlightSize.height/2 );
+                wrapper.addChild(separator);
+                separator.setPosition(listSize.width / 2, 0);
+
+                const mid = wrapper.getContentSize().height / 2;
+
+                highlight.setScaleY(wrapper.getContentSize().height / highlightSize.height);
+                highlight.setPosition(listSize.width / 2, mid);
+
+
+                bulletId.setPosition(50, mid);
+                totalSpend.setPosition(175, mid);
+                // totalRevenue.setPosition(450, listEntryPos.y);
+                totalProfit.setPosition(300, mid);
+                sceneName.setPosition(425, mid);
 
                 const item = new RolloverEffectItem(wrapper, onSelected, onUnselected, onHover, onUnhover);
 
@@ -623,7 +747,6 @@ const GameLogView = (function () {
         }());
 
 
-
         const data = consumptionLogData.data;
         for (let i = 0; i < data.length; i++) {
             // console.log(data[i]);
@@ -631,9 +754,9 @@ const GameLogView = (function () {
                 id: i,
                 totalSpend: data[i].consumptionCredit,
                 totalRevenue: data[i].bonusCredit,
-                sceneName : data[i].sceneName,
+                sceneName: data[i].sceneName,
                 fishCaught: data[i].caughtFishes,
-                fishUncaught : data[i].uncaughtFishes,
+                fishUncaught: data[i].uncaughtFishes,
             });
             const content = listItemPrefab.getContent();
             // console.log(content);
@@ -643,6 +766,8 @@ const GameLogView = (function () {
 
         return {scrollTitle: scrollTitle, listView: listView}
     }
+
+    function setupRechargeLogList(scrollBackground)
 
     const proto = GameLogView.prototype;
 

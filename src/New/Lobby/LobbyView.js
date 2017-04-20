@@ -44,14 +44,11 @@ const LobbyView = (function () {
         this._parent.addChild(bg, -5);
 
         const NameBG = new cc.Sprite(ReferenceName.NameBG);
-        // NameBG.setPosition(279,cc.view.getDesignResolutionSize().height - 24);
-        // size = NameBG.getContentSize();
         NameBG.setPosition(100,550);
         bg.addChild(NameBG,1);
 
         let fontDef = new cc.FontDefinition();
         fontDef.fontName = "Arial";
-        //fontDef.fontWeight = "bold";
         fontDef.fontSize = 22;
         fontDef.textAlign = cc.TEXT_ALIGNMENT_CENTER;
         fontDef.fontWeight = "bold";
@@ -66,7 +63,6 @@ const LobbyView = (function () {
         label.setDimensions(cc.size(150,25));
 
         const LobbyCoinsBG = new cc.Sprite(ReferenceName.LobbyCoinsBG);
-        // coinBG.setPosition(1136,cc.view.getDesignResolutionSize().height - 47);
         size = LobbyCoinsBG.getContentSize();
         LobbyCoinsBG.setPosition(320,550);
         bg.addChild(LobbyCoinsBG,2);
@@ -79,23 +75,30 @@ const LobbyView = (function () {
         fontDef.textAlign = cc.TEXT_ALIGNMENT_CENTER;
 
 
-        // label = new cc.LabelTTF(formatWithCommas(playerData.playerState.score), fontDef);
-        // _goldLabel = new cc.LabelBMFont("", res.GoldenNumbersPlist);
         _goldLabel = new cc.LabelTTF("", fontDef);
         LobbyCoinsBG.addChild(_goldLabel);
         _goldLabel.enableStroke(new cc.Color(90, 24, 8, 255), 3);
         _goldLabel.setPosition(120,27);
-        // _goldLabel.setPosition(size /2,size /2);
-        // label.setPosition(0,0);
-        // label.setDimensions(cc.size(240,45));
-        //
-        // // setupGameScroll(this._parent);
-        //
-        // const gameListMenu = setupGameList();
+
         const gamelist = setupGameList();
         // size = gameListMenu.getContentSize();
         // gameListMenu.setPosition(- length/2 +size.height/2 - 200 , -height/2 + size.height/2 + 100);
         this._parent.addChild(gamelist, 2);
+
+        /* testing
+         */
+        cc.spriteFrameCache.addSpriteFrames(res.testingEffect);
+        const animation = GUIFunctions.getAnimation("FREffect_",0.01);
+        const animationSequence = new cc.RepeatForever(animation,new cc.callFunc(onAnimationEnd));
+        const test = new cc.Sprite();
+        test.setPosition(400,400);
+        this._parent.addChild(test,100);
+        test.runAction(animationSequence);
+
+        function onAnimationEnd() {
+
+        }
+
 
         this.updatePlayerData(playerData);
     };

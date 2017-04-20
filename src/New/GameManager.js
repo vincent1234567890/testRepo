@@ -175,13 +175,7 @@ const GameManager = function () {
         // ).then(
         //     () => showPostGameStats()
         // ).catch(console.error);
-        ClientServerConnect.leaveGame().then(
-            ClientServerConnect.getGameSummaries(7).then(
-                gameSummaries => {
-                    setGameLogData(gameSummaries);
-                }
-            )
-        );
+        ClientServerConnect.leaveGame();
         exitToLobby();
     }
 
