@@ -196,6 +196,9 @@ const ClientServerConnect = function () {
             token: token,
         }).then(
             loginResponse => {
+                if (loginResponse.data && loginResponse.data.version) {
+                    console.log("Server version: " + loginResponse.data.version);
+                }
                 console.log("loginResponse:", loginResponse);
                 onSuccess(loginResponse.data);
             }
