@@ -12,23 +12,7 @@ const ProfileView = (function () {
     const _parent = new cc.Node();
 
     let _playerData;
-    const ProfileView = function (playerData) {
-
-        /*
-         ProfileTitleChinese : "#InfoChineseTitle.png",
-         ProfileUserTextBackground : "TextBG6.png",
-         ProfileNicknameTitleChinese : "#NicknameChinese.png",
-         ProfileInputBackground : "#InputBox.png",
-         ProfileEditButton : "#EditButton.png",
-         ProfileUsernameTitleChinese : "#UsernameChinese.png",
-         ProfileIconBackground : "#SymbolBG.png",
-         ProfileIconTextBackground : "#TextBG5.png",
-         ProfileTimeIcon : "#TimeSymbol.png",
-         ProfileCoinIcon : "#CoinsSymbol.png",
-         ProfileRankingIcon : "#RankingSymbol.png",
-         ProfileCoinStackIcon : "#Coin2WeekSymbol.png",
-         */
-
+    const ProfileView = function (playerData, loginData) {
         _playerData = playerData;
 
         const _background = new cc.Sprite(ReferenceName.SettingsBackground);
@@ -67,7 +51,9 @@ const ProfileView = (function () {
         profilebg.setAnchorPoint(0.0,0.0);
 
         const nickTextBox = new cc.EditBox(cc.size(160,30), profilebgdummy);
-        nickTextBox.setPlaceHolder("Nickname");
+        // nickTextBox.setPlaceHolder("Nickname");
+        console.log(loginData.displayName);
+        nickTextBox.setString(playerData.displayName);
         nickTextBox.setFontName("Microsoft YaHei");
         nickTextBox.setFontColor(new cc.Color(72, 21, 0, 255));
         bg.addChild(nickTitle);
@@ -111,19 +97,8 @@ const ProfileView = (function () {
         title.setPosition(titlePosition);
         titleBackground.setPosition(titlePosition);
 
-
         _background.addChild(titleBackground);
         _background.addChild(title);
-
-        // _background.addChild(musicTitle);
-        // _background.addChild(soundTitle);
-        // _background.addChild(gameLanguageSelectionTitle);
-        // _background.addChild(gameLanguageSelectionBar);
-        // _background.addChild(label);
-        // _background.addChild(acceptButton);
-        // _background.addChild(cancelButton);
-        // _background.addChild(acceptText);
-        // _background.addChild(cancelText);
 
         _parent.addChild(_background);
 
@@ -162,7 +137,7 @@ const ProfileView = (function () {
         }
 
         function onEditNicknameCallback(){
-
+            ClientServerConnect.changePlayerDisplayName(nickTextBox.getString());
         }
 
     };
