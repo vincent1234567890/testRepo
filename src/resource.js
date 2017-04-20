@@ -1,20 +1,7 @@
 var res = {
     LoadingLogo: "res/loadingLogo.jpg",
 
-
     ParticlePlist: "res/particle.plist",
-    //
-    // lizibianhua1Plist : "res/lizibianhua1.plist",
-    // lizibianhua1Png : "res/lizibianhua1.png",
-    // lizibianhua2Plist : "res/lizibianhua2.plist",
-    // lizibianhua3Plist : "res/lizibianhua3.plist",
-    // lizibianhua3Png : "res/lizibianhua3.png",
-    //
-    // yuwangliziPlist : "res/yuwanglizi.plist",
-    // ChestOpeningParticlePlist : "res/kaibaoxiang01.plist",
-
-
-    // MainUITitle : "res/main_ui_title.png",
 
     //jackpot
     JackpotMiniGamePng: "res/CompanyA/Jackpot/JPminigame.png",
@@ -61,19 +48,6 @@ var res = {
 
     GunCockSound : "res/CompanyA/Sound/gun-cocking-01.mp3",
     GunShotSound : "res/CompanyA/Sound/gun-gunshot-01.mp3",
-
-
-    //Weapons
-    // Weapon1Plist: "res/New/Weapons/Weapon 1.plist",
-    // Weapon1Png: "res/New/Weapons/Weapon 1.png",
-
-    //
-    // Cannon1Plist: "res/CompanyA/Weapons/Cannon1.plist",
-    // Cannon1Png: "res/CompanyA/Weapons/Cannon1.png",
-
-    //testing
-    // BulletPNG: "res/New/testing/bullet.png",
-    // NetPng : "res/New/testing/Net.png",
 
     //debug
     DebugCircle: "res/CompanyA/Testing/circle.png",

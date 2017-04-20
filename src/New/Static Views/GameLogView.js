@@ -154,6 +154,7 @@ const GameLogView = (function () {
                 scrollBackground.removeChild(_displayList);
                 _scrollTitleBackground.removeChild(_displayTitle);
             }
+
             const items = setupGameLogList(scrollBackground, gameSummaryData);
             _displayList = items.listView;
             _displayTitle = items.scrollTitle;
