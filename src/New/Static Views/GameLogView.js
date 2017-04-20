@@ -62,7 +62,7 @@ const GameLogView = (function () {
         const title = new cc.Sprite(ReferenceName.GameLogTitleChinese);
 
         const gameLogTab = GUIFunctions.createButton(ReferenceName.FAQTabBackground, ReferenceName.FAQTabBackgroundOnPress, onGameLogTabPressed);
-        const consumptionLogTab = GUIFunctions.createButton(ReferenceName.FAQTabBackground, ReferenceName.FAQTabBackgroundOnPress, onConsumptionTabPressed);
+        const consumptionLogTab = GUIFunctions.createButton(ReferenceName.FAQTabBackground, ReferenceName.FAQTabBackgroundOnPress, onRechargeLogTabPressed);
 
         const gameLogTabTitleText = new cc.Sprite(ReferenceName.GameLogRecordTabChinese);
         const consumptionLogTabTitleText = new cc.Sprite(ReferenceName.GameLogConsumptionTabChinese);
@@ -167,11 +167,6 @@ const GameLogView = (function () {
                 _scrollTitleBackground.removeChild(_displayTitle);
             }
 
-            // let filtered = gameSummaryData.;
-            // if (checkBoxShort.isSelected()){
-            //
-            // }
-
             let length;
             for (let radio in radioArray) {
                 if (radioArray[radio].isSelected()) {
@@ -206,11 +201,6 @@ const GameLogView = (function () {
                 scrollBackground.removeChild(_displayList);
                 _scrollTitleBackground.removeChild(_displayTitle);
             }
-
-            // let filtered = gameSummaryData.;
-            // if (checkBoxShort.isSelected()){
-            //
-            // }
 
             let length;
             for (let radio in radioArray) {
@@ -373,8 +363,8 @@ const GameLogView = (function () {
 
         cc.eventManager.addListener(_listener, listView);
 
-        const GameLogListItemPrefab = (function () {
-            function GameLogListItemPrefab(itemData, onSelectedCallback) {
+        const gameLogListItemPrefab = (function () {
+            function gameLogListItemPrefab(itemData, onSelectedCallback) {
                 const wrapper = new ccui.Widget();
                 const highlight = new cc.Sprite(ReferenceName.GameLogItemHighLight);
                 const separator = new cc.Sprite(ReferenceName.GameLogListSeparator);
@@ -454,25 +444,22 @@ const GameLogView = (function () {
                 this.getContent = function () {
                     return wrapper;
                 };
-
-                console.log(wrapper, itemData);
             }
 
 
-            return GameLogListItemPrefab;
+            return gameLogListItemPrefab;
         }());
 
         const onItemSelected = function (data) {
             if (_requestConsumptionLogCallback) {
                 _requestConsumptionLogCallback(data.playerGameNumber, data.roundNumber)
             }
-            // ClientServerConnect.getConsumptionLog(data.playerGameNumber,data.roundNumber);
         };
 
         const data = gameSummaryData.data;
         for (let i = 0; i < data.length; i++) {
             console.log(data[i]);
-            const listItemPrefab = new GameLogListItemPrefab({
+            const listItemPrefab = new gameLogListItemPrefab({
                 id: data[i]._id.sceneName,
                 totalSpent: data[i].totalConsumption,
                 totalRevenue: data[i].totalBonus,
@@ -601,7 +588,6 @@ const GameLogView = (function () {
 
             return fishView;
         }
-
 
         const consumptionLogListItemPrefab = (function () {
             function consumptionLogListItemPrefab(itemData) {
@@ -746,7 +732,6 @@ const GameLogView = (function () {
             return consumptionLogListItemPrefab;
         }());
 
-
         const data = consumptionLogData.data;
         for (let i = 0; i < data.length; i++) {
             // console.log(data[i]);
@@ -767,7 +752,160 @@ const GameLogView = (function () {
         return {scrollTitle: scrollTitle, listView: listView}
     }
 
-    function setupRechargeLogList(scrollBackground)
+    function setupRechargeLogTitle(){
+        const parent = new cc.Node();
+        const dateTitleText = new cc.Sprite(ReferenceName.GameLogRechargeTitleDateChinese);
+        const typeTitleText = new cc.Sprite(ReferenceName.GameLogRechargeTitleTypeChinese);
+        const idTitleText = new cc.Sprite(ReferenceName.GameLogRechargeTitleIdChinese);
+        const amountTitleText = new cc.Sprite(ReferenceName.GameLogRechargeTitleAmountChinese);
+        const totalScoreTitleText = new cc.Sprite(ReferenceName.GameLogRechargeTitleTotalScoreChinese);
+
+        dateTitleText.setPosition(50, 0);
+        typeTitleText.setPosition(175, 0);
+        idTitleText.setPosition(300, 0);
+        amountTitleText.setPosition(425, 0);
+        totalScoreTitleText.setPosition(700, 0);
+
+        parent.addChild(dateTitleText);
+        parent.addChild(typeTitleText);
+        parent.addChild(idTitleText);
+        parent.addChild(amountTitleText);
+        parent.addChild(totalScoreTitleText);
+
+        return parent;
+    }
+
+    function setupRechargeLogList(scrollBackground, rechargeData){
+
+        let scrollTitle = setupRechargeLogTitle();
+        scrollTitle.setPosition(0, _scrollTitleBackground.getContentSize().height / 2);
+
+        console.log("setupRechargeLogList", rechargeData);
+
+        const listSize = scrollBackground.getContentSize();
+
+        const listView = new ccui.ListView();
+        listView.setDirection(ccui.ScrollView.DIR_VERTICAL);
+        listView.setTouchEnabled(true);
+        listView.setBounceEnabled(true);
+        listView.setContentSize(listSize);
+
+        const _listener = cc.EventListener.create({
+            event: cc.EventListener.MOUSE,
+            onMouseScroll: onMouseScroll,
+        });
+
+        function onMouseScroll(mouseData) {
+            const touch = new cc.Touch(0, mouseData.getScrollY() / 100);
+            touch._setPrevPoint(0, 0);
+            listView.onTouchMoved(touch);
+            const end = new cc.Touch(0, 0);
+            end._setPrevPoint(0, 0);
+            listView.onTouchEnded(end);
+        }
+
+        cc.eventManager.addListener(_listener, listView);
+
+        const RechargeLogListItemPrefab = (function () {
+            function RechargeLogListItemPrefab(itemData) {
+                const wrapper = new ccui.Widget();
+                const highlight = new cc.Sprite(ReferenceName.GameLogItemHighLight);
+                const separator = new cc.Sprite(ReferenceName.GameLogListSeparator);
+
+                wrapper.addChild(highlight);
+                wrapper.addChild(separator);
+                wrapper.itemData = itemData;
+
+                wrapper.setContentSize(highlight.getContentSize());
+                wrapper.setTouchEnabled(true);
+
+                highlight.setVisible(false);
+
+                const listEntryPos = new cc.p(highlight.getContentSize().width / 2, highlight.getContentSize().height / 2);
+
+                highlight.setPosition(listSize.width / 2, listEntryPos.y);
+                separator.setPosition(listSize.width / 2, 0);
+
+                // console.log("ListItemPrefab",wrapper,highlight.getContentSize());
+
+                let fontDef = new cc.FontDefinition();
+                fontDef.fontName = "Microsoft YaHei";
+                // fontDef.fontName = "Arial Unicode MS";
+                fontDef.fontSize = "20";
+                fontDef.fontStyle = "bold";
+                fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
+                fontDef.fillStyle = new cc.Color(0, 0, 0, 255);
+
+                const date = new Date(itemData.startTime);
+                const roundIdText = itemData.id + "-" + (1900 + date.getYear()) + date.getMonth() + date.getDate();
+
+                let roundId = new cc.LabelTTF(roundIdText, fontDef);
+
+                fontDef.textAlign = cc.TEXT_ALIGNMENT_CENTER;
+                let totalSpend = new cc.LabelTTF(itemData.totalSpent, fontDef);
+                let totalRevenue = new cc.LabelTTF(itemData.totalRevenue, fontDef);
+                let totalProfit = new cc.LabelTTF(parseFloat(itemData.totalRevenue) - parseFloat(itemData.totalSpent), fontDef);
+
+                const endDate = new Date(itemData.endTime);
+                fontDef.fontSize = "16";
+                let startTime = new cc.LabelTTF(date.toLocaleDateString("en-GB") + "\n" + date.toLocaleTimeString("en-GB"), fontDef);
+                let endTime = new cc.LabelTTF(endDate.toLocaleDateString("en-GB") + "\n" + endDate.toLocaleTimeString("en-GB"), fontDef);
+
+                roundId.setAnchorPoint(0, 0.5);
+
+                roundId.setPosition(50, listEntryPos.y);
+                totalSpend.setPosition(300, listEntryPos.y);
+                totalRevenue.setPosition(450, listEntryPos.y);
+                totalProfit.setPosition(600, listEntryPos.y);
+                startTime.setPosition(750, listEntryPos.y);
+                endTime.setPosition(950, listEntryPos.y);
+
+                wrapper.addChild(roundId);
+                wrapper.addChild(totalSpend);
+                wrapper.addChild(totalRevenue);
+                wrapper.addChild(totalProfit);
+                wrapper.addChild(startTime);
+                wrapper.addChild(endTime);
+
+                const item = new RolloverEffectItem(wrapper, undefined, undefined, onHover, onUnhover);
+
+                function onHover() {
+                    highlight.setVisible(true);
+                }
+
+                function onUnhover() {
+                    highlight.setVisible(false);
+                }
+
+                this.getContent = function () {
+                    return wrapper;
+                };
+
+            }
+
+            return RechargeLogListItemPrefab;
+        }());
+
+        const data = rechargeData.data;
+        for (let i = 0; i < data.length; i++) {
+            console.log(data[i]);
+            const listItemPrefab = new RechargeLogListItemPrefab({
+                id: data[i]._id.sceneName,
+                totalSpent: data[i].totalConsumption,
+                totalRevenue: data[i].totalBonus,
+                startTime: data[i].startTime,
+                endTime: data[i].endTime,
+                playerGameNumber: data[i]._id.playerGameNumber,
+                roundNumber: data[i]._id.roundNumber,
+            });
+            const content = listItemPrefab.getContent();
+            // console.log(content);
+
+            listView.pushBackCustomItem(content);
+        }
+
+        return {scrollTitle: scrollTitle, listView: listView}
+    }
 
     const proto = GameLogView.prototype;
 
