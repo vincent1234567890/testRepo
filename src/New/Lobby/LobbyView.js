@@ -3,26 +3,18 @@
  */
 const LobbyView = (function () {
     "use strict";
-    // let isGameSelected;
-    let _touchLayer;
 
-    // const profileArea = new cc.Rect(0,0,450,120);
     const numberOfLobbyButtonsShown = 3;
 
     let _theme;
 
-    // let _settingsCallback;
     let _onGameSelectedCallback;
-    // let _profileCallback;
 
     let _goldLabel;
 
-    // let _gameButtonsForReset = [];
-
-    // let gamelist;
     let gameControlList;
 
-    const LobbyView = function (playerData, theme, onGameSelectedCallback) {
+    const LobbyView = function (playerData, loginData, theme, onGameSelectedCallback) {
         // this.gameSelected = false;
 
         this._parent = new cc.Node();
@@ -54,7 +46,7 @@ const LobbyView = (function () {
         fontDef.fontWeight = "bold";
         fontDef.fillStyle = new cc.Color(255,255,255,255);
 
-        let label = new cc.LabelTTF(playerData.playerState.name , fontDef);
+        let label = new cc.LabelTTF(loginData.displayName , fontDef);
         label.enableStroke(new cc.Color(0, 0, 0, 255), 2);
         label.setAnchorPoint(0.5, 0.5);
 
@@ -80,10 +72,8 @@ const LobbyView = (function () {
         _goldLabel.enableStroke(new cc.Color(90, 24, 8, 255), 3);
         _goldLabel.setPosition(120,27);
 
-        const gamelist = setupGameList();
-        // size = gameListMenu.getContentSize();
-        // gameListMenu.setPosition(- length/2 +size.height/2 - 200 , -height/2 + size.height/2 + 100);
-        this._parent.addChild(gamelist, 2);
+        const gameList = setupGameList();
+        this._parent.addChild(gameList, 2);
 
         /* testing
          */
@@ -102,37 +92,6 @@ const LobbyView = (function () {
 
         this.updatePlayerData(playerData);
     };
-
-
-
-    // function onProfileclick(touch) {
-    //     // console.log(touch,profileArea);
-    //     if(cc.rectContainsPoint(profileArea,touch)){
-    //         //profileview
-    //         // console.log("profile");
-    //         _profileCallback();
-    //     }
-    // }
-
-    // function setupGameScroll(parent) {
-    //     const arrow = new cc.Sprite(ReferenceName.ScrollArrow);
-    //     const arrowDown = new cc.Sprite(ReferenceName.ScrollArrow);
-    //     const rightArrow = new cc.Sprite(ReferenceName.ScrollArrow);
-    //     rightArrow.flippedX = true;
-    //     const rightArrowDown = new cc.Sprite(ReferenceName.ScrollArrow);
-    //     rightArrowDown.flippedX = true;
-    //
-    //     const menuLeft = new cc.MenuItemSprite(arrow, arrowDown, undefined, scrollLeft);
-    //     const menuRight = new cc.MenuItemSprite(rightArrow,rightArrowDown, undefined, scrollRight);
-    //
-    //
-    //     const menu = new cc.Menu(menuLeft, menuRight);
-    //     menuLeft.setPosition(cc.pAdd(cc.p(menu.getContentSize().width / 2, menuLeft.getContentSize().height / 2), cc.p(-630, 0)));
-    //     menuRight.setPosition(cc.pAdd(cc.p(menu.getContentSize().width / 2, menuRight.getContentSize().height / 2), cc.p(630, 0)));
-    //     parent.addChild(menu,2);
-    //     menu.setPosition(0,300);
-    //
-    // };
 
     function setupGameList() {
         const width = cc.view.getDesignResolutionSize().width;
@@ -167,76 +126,8 @@ const LobbyView = (function () {
         return listView;
     }
 
-    // function setupProfileMenu() {
-    //     const Message = new cc.Sprite(ReferenceName.MessageButton);
-    //     const MessageDown = new cc.Sprite(ReferenceName.MessageButton);
-    //     const Settings = new cc.Sprite(ReferenceName.LobbySettingsButton);
-    //     const SettingsDown = new cc.Sprite(ReferenceName.LobbySettingsButton);
-    //
-    //     const messageButton = new cc.MenuItemSprite(Message, MessageDown, undefined, messageButtonPressed);
-    //     const settingsButton = new cc.MenuItemSprite(Settings, SettingsDown, undefined, settingsButtonPressed);
-    //
-    //     const menu = new cc.Menu(messageButton, settingsButton);
-    //     messageButton.setPosition(cc.pAdd(cc.p(menu.getContentSize().width / 2, messageButton.getContentSize().height / 2), cc.p(-31, -20)));
-    //     settingsButton.setPosition(cc.pAdd(cc.p(menu.getContentSize().width / 2, settingsButton.getContentSize().height / 2), cc.p(32, -20)));
-    //     // menu.setPosition(-295,691);
-    //
-    //     return menu;
-    // }
-
-    // function setupLobbyButtons() {
-    //     const Buy = new cc.Sprite(ReferenceName.BuyButton);
-    //     const BuyDown = new cc.Sprite(ReferenceName.BuyButton);
-    //
-    //     const buyButton = new cc.MenuItemSprite(Buy, BuyDown, undefined, buyButtonPressed);
-    //     const menu = new cc.Menu(buyButton);
-    //     buyButton.setPosition(cc.pAdd(cc.p(menu.getContentSize().width / 2, buyButton.getContentSize().height / 2), cc.p(0, 0)));
-    //
-    //     let fontDef = new cc.FontDefinition();
-    //     fontDef.fontName = "Impact";
-    //     //fontDef.fontWeight = "bold";
-    //     fontDef.fontSize = "40";
-    //     fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
-    //     fontDef.fillStyle = new cc.Color(0, 0, 0, 255);
-    //
-    //     let label = new cc.LabelTTF(ReferenceName.LobbyBuyButton, fontDef);
-    //     label.setAnchorPoint(0.5, 0.5);
-    //     label.setPosition(buyButton.getContentSize().width / 2, buyButton.getContentSize().height / 2);
-    //
-    //     buyButton.addChild(label);
-    //     // menu.setPosition(0,300);
-    //     //buyButton.setPosition(cc.view.getDesignResolutionSize().width / 2,cc.view.getDesignResolutionSize().height / 2)
-    //     //buyButton.setPosition(0,0);
-    //
-    //     //  var buyTest = new cc.Sprite(ReferenceName.BuyButton);
-    //     //  parent.addChild(buyTest,9999999);
-    //     //  buyTest.setPosition(cc.view.getDesignResolutionSize().width / 2,cc.view.getDesignResolutionSize().height / 2);
-    //     //   parent.addChild(menu,5);
-    //     return menu;
-    // }
-
     let proto = LobbyView.prototype;
 
-    function scrollLeft() {
-        console.log("scroll left");
-    }
-
-    function scrollRight() {
-        console.log("scrollRight");
-    }
-
-    function buyButtonPressed() {
-        console.log("buyButtonPressed");
-    }
-
-    function messageButtonPressed() {
-        console.log("messageButtonPressed");
-    }
-
-    function settingsButtonPressed() {
-        // _settingsCallback();
-        console.log("settingsButtonPressed");
-    }
 
     function gameSelected(sender) {
         _onGameSelectedCallback(sender.getGameData());
@@ -247,17 +138,10 @@ const LobbyView = (function () {
         }
     }
 
-    // function formatWithCommas(x) {
-    //     // return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-    //     return x.toLocaleString('en-US', {maximumFractionDigits: 2});
-    // }
-
     proto.resetView = function () {
-        // const length = _gameButtonsForReset.length;
         for (let button in gameControlList){
             gameControlList[button].resetView();
         }
-        // _gameButtonsForReset = [];
     };
 
     proto.destroyView = function () {

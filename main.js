@@ -25,6 +25,7 @@ var cocos2dApp = cc.game.onStart = function() {
     // var scene = LogoScene.scene();
     ClientServerConnect.connectToMasterServer().then(
         data => {
+            console.log(data);
             const themeConfig = data.themeConfig;
             console.log(themeConfig);
             for (let i = 0; i < themeConfig.resourceList.length; i++) {
@@ -49,7 +50,7 @@ var cocos2dApp = cc.game.onStart = function() {
                 //cc.director.runScene(new TestScene());
                 // cc.director.runScene(new StartMenuLayer());
 
-                AppManager.goToLobby();
+                AppManager.goToLobby(data.player);
                 FishAnimationData.setData(themeConfig.FishRawData);
             }, this);
         }
