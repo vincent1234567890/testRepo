@@ -6,10 +6,8 @@ const GameLogView = (function () {
     const ZORDER = 10;
     let _parent;
     let _popup;
-    let tabHeight = 600;
-    let sideButtonX = 910;
-    let sideSpacing = 100;
-    let sideStart = 550;
+    const tabHeight = 600;
+    const fishPosition = 500;
 
     let _scrollTitleBackground;
 
@@ -91,12 +89,57 @@ const GameLogView = (function () {
         gameLogTab.setPosition(130, tabHeight);
         consumptionLogTab.setPosition(310, tabHeight);
 
+        const checkBoxShort = new ccui.CheckBox(ReferenceName.GameLogRadioButton, undefined, ReferenceName.GameLogRadioButtonSelected, undefined, undefined, ccui.Widget.PLIST_TEXTURE);
+        const checkBoxShortText = new cc.Sprite(ReferenceName.GameLogRadioTextPeriodShortChinese);
+        checkBoxShort.addChild(checkBoxShortText);
+        checkBoxShortText.setAnchorPoint(0,0.5);
+        checkBoxShortText.setPosition(20,10);
+        checkBoxShort.setPosition(700, tabHeight);
+
+        checkBoxShort.setSelected(true);
+
+        const checkBoxMedium = new ccui.CheckBox(ReferenceName.GameLogRadioButton, undefined, ReferenceName.GameLogRadioButtonSelected, undefined, undefined, ccui.Widget.PLIST_TEXTURE);
+        const checkBoxMediumText = new cc.Sprite(ReferenceName.GameLogRadioTextPeriodMediumChinese);
+        checkBoxMedium.addChild(checkBoxMediumText);
+        checkBoxMediumText.setAnchorPoint(0,0.5);
+        checkBoxMediumText.setPosition(20,10);
+        checkBoxMedium.setPosition(825, tabHeight);
+
+        const checkBoxLong = new ccui.CheckBox(ReferenceName.GameLogRadioButton, undefined, ReferenceName.GameLogRadioButtonSelected, undefined, undefined, ccui.Widget.PLIST_TEXTURE);
+        const checkBoxLongText = new cc.Sprite(ReferenceName.GameLogRadioTextPeriodLongChinese);
+        checkBoxLong.addChild(checkBoxLongText);
+        checkBoxLongText.setAnchorPoint(0,0.5);
+        checkBoxLongText.setPosition(20,10);
+        checkBoxLong.setPosition(950, tabHeight);
+
+        const radioButtonPressEvent = (sender, type) => {
+            switch (type) {
+                case ccui.CheckBox.EVENT_SELECTED:
+                case ccui.CheckBox.EVENT_UNSELECTED: // fallthrough intended
+                    for (let radio in radioArray){
+                        radioArray[radio].setSelected(false);
+                    }
+                    sender.setSelected(true);
+                    break;
+            }
+        };
+
+        const radioArray = [checkBoxShort,checkBoxMedium, checkBoxLong];
+        for (let radio in radioArray){
+            radioArray[radio].addEventListener(radioButtonPressEvent);
+        }
+
+
         title.setPosition(new cc.p(560, 705));
 
         _popup.getBackground().addChild(title);
 
         _popup.getBackground().addChild(gameLogTab);
         _popup.getBackground().addChild(consumptionLogTab);
+
+        _popup.getBackground().addChild(checkBoxShort);
+        _popup.getBackground().addChild(checkBoxMedium);
+        _popup.getBackground().addChild(checkBoxLong);
 
         _popup.getBackground().addChild(_scrollTitleBackground);
         _popup.getBackground().addChild(scrollBackground);
@@ -481,8 +524,8 @@ const GameLogView = (function () {
             // fishList.setInnerContainerPosition(contentSize.x,0);
             fishList.setContentSize(contentSize.x, contentSize.y);
             fishView.pushBackCustomItem(fishViewCanvas);
-            fishView.setContentSize(pos.x,pos.y);
-            fishViewCanvas.setContentSize(pos.x,0);
+            fishView.setContentSize(pos.x,contentSize.y);
+            fishViewCanvas.setContentSize(pos.x,contentSize.y);
 
             return fishView;
         }
@@ -496,7 +539,7 @@ const GameLogView = (function () {
 
                 const highlightSize = highlight.getContentSize();
                 wrapper.addChild(highlight);
-                wrapper.addChild(separator);
+
                 wrapper.itemData = itemData;
 
                 wrapper.setContentSize(highlightSize);
@@ -507,7 +550,6 @@ const GameLogView = (function () {
                 const listEntryPos = new cc.p(highlightSize.width / 2, highlightSize.height / 2);
 
 
-                separator.setPosition(listSize.width / 2, 0);
 
                 // console.log("ListItemPrefab",wrapper,highlight.getContentSize());
 
@@ -528,36 +570,21 @@ const GameLogView = (function () {
                 let sceneName = new cc.LabelTTF(itemData.sceneName, fontDef);
 
 
-
-
                 // bulletId.setAnchorPoint(0, 0.5);
 
-                bulletId.setPosition(50, listEntryPos.y);
-                totalSpend.setPosition(175, listEntryPos.y);
-                // totalRevenue.setPosition(450, listEntryPos.y);
-                totalProfit.setPosition(300, listEntryPos.y);
-                sceneName.setPosition(425, listEntryPos.y);
-
-                console.log(itemData.fishCaught,itemData.fishUncaught);
+                console.log(itemData.id,itemData.fishCaught,itemData.fishUncaught);
 
                 let uncaught;
+                let uncaughtIndicator;
                 if (itemData.fishUncaught.length >0){
                     uncaught = createFishList(itemData.fishUncaught);
                     // uncaught.setPosition(500, listEntryPos.y/2);
                     wrapper.addChild(uncaught);
-                    const indicator = new cc.Sprite(ReferenceName.GameLogConsumptionTitleFishUncaughtIndicator);
-                    wrapper.addChild(indicator);
+                    uncaughtIndicator = new cc.Sprite(ReferenceName.GameLogConsumptionTitleFishUncaughtIndicator);
+                    wrapper.addChild(uncaughtIndicator);
 
-                    if(uncaught.getContentSize().height > wrapper.getContentSize().height){
-                        // console.log("uncaught",uncaught.getContentSize(),"wrapper",wrapper.getContentSize(), uncaught.getContentSize().height + itemData.fishCaught.length > 0 ? wrapper.getContentSize().height:0);
-                        wrapper.setContentSize(wrapper.getContentSize().width, uncaught.getContentSize().height);
-                        // console.log("uncaught",uncaught.getContentSize(),"wrapper",wrapper.getContentSize());
-                    }
-                    // if (itemData.fishCaught.length > 0){
-                    //     captured.setPosition(500, uncaught.getContentSize().height + captured.getContentSize().height/2);
-                    // }
-                    uncaught.setPosition(500, uncaught.getContentSize().height/2);
-                    indicator.setPosition(925, uncaught.getContentSize().height/2);
+                    uncaught.setPosition(fishPosition, 0);
+                    uncaughtIndicator.setPosition(925, uncaught.getContentSize().height/2);
                 }
 
                 let captured;
@@ -568,24 +595,34 @@ const GameLogView = (function () {
                     const indicator = new cc.Sprite(ReferenceName.GameLogConsumptionTitleFishCaughtIndicator);
                     wrapper.addChild(indicator);
 
-
-                    if(captured.getContentSize().height > wrapper.getContentSize().height){
-                        console.log("fishCaught",captured.getContentSize(),"wrapper",wrapper.getContentSize());
-                        wrapper.setContentSize(wrapper.getContentSize().width, captured.getContentSize().height);
-                        console.log("fishCaught",captured.getContentSize(),"wrapper",wrapper.getContentSize());
-
-                    }
-                    // captured.setPosition(500, listEntryPos.y/2);
-                    captured.setPosition(500, captured.getContentSize().height/2);
+                    captured.setPosition(fishPosition, 0);
                     indicator.setPosition(925, captured.getContentSize().height/2);
                 }
 
+                if (itemData.fishUncaught.length >0 || itemData.fishCaught.length >0){ // ugly could improve
+                    const height = wrapper.getContentSize().height;
 
+                    let first =  itemData.fishUncaught.length > 0 ? height : 0;
+                    if(uncaught  && uncaught.getContentSize().height > height){
+                            first = uncaught.getContentSize().height;
+                    }
 
-                // if (itemData.fishCaught.length >0 && itemData.fishUncaught.length >0){
-                //     wrapper.setContentSize(wrapper.getContentSize().width, wrapper.getContentSize().height* 2);
-                //
-                // }
+                    let second =  itemData.fishCaught.length > 0 ? height : 0;
+                    if(captured && captured.getContentSize().height > height){
+                        second = captured.getContentSize().height;
+                    }
+
+                    if (uncaught && captured){
+                        uncaught.setPosition(uncaught.getPosition().x, second );
+                        uncaughtIndicator.setPosition(uncaughtIndicator.getPosition().x, second + first/2);
+                    }
+
+                    wrapper.setContentSize(wrapper.getContentSize().width, first + second);
+
+                }
+
+                console.log("wrapper",wrapper.getContentSize());
+
 
                 wrapper.addChild(bulletId);
                 wrapper.addChild(totalSpend);
@@ -593,8 +630,20 @@ const GameLogView = (function () {
                 wrapper.addChild(totalProfit);
                 wrapper.addChild(sceneName);
 
+                wrapper.addChild(separator);
+                separator.setPosition(listSize.width / 2, 0);
+
+                const mid = wrapper.getContentSize().height/2;
+
                 highlight.setScaleY ( wrapper.getContentSize().height / highlightSize.height );
-                highlight.setPosition(listSize.width / 2, highlightSize.height/2 );
+                highlight.setPosition(listSize.width / 2, mid );
+
+
+                bulletId.setPosition(50, mid);
+                totalSpend.setPosition(175, mid);
+                // totalRevenue.setPosition(450, listEntryPos.y);
+                totalProfit.setPosition(300, mid);
+                sceneName.setPosition(425, mid);
 
                 const item = new RolloverEffectItem(wrapper, onSelected, onUnselected, onHover, onUnhover);
 
