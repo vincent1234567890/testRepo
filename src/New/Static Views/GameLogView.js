@@ -89,7 +89,7 @@ const GameLogView = (function () {
         consumptionLogTab.setAnchorPoint(0.2, 0.5);
 
         const userAgreementRollover = new RolloverEffectItem(gameLogTab, onGameLogTabPressed, undefined, onTabHover, onTabUnhover);
-        const faqRollover = new RolloverEffectItem(consumptionLogTab, onConsumptionTabPressed, undefined, onTabHover, onTabUnhover);
+        const faqRollover = new RolloverEffectItem(consumptionLogTab, onRechargeLogTabPressed, undefined, onTabHover, onTabUnhover);
         gameLogTab.setPosition(130, tabHeight);
         consumptionLogTab.setPosition(310, tabHeight);
 
@@ -157,6 +157,11 @@ const GameLogView = (function () {
         function onGameLogTabPressed() {
             // const list = setupGameLogList(consumptionData);
             // scrollBackground.addChild(list);
+            for (let radio in radioArray) {
+                radioArray[radio].setEnabled(true);
+                radioArray[radio].setVisible(true);
+            }
+
             if (_displayList) {
                 scrollBackground.removeChild(_displayList);
                 _scrollTitleBackground.removeChild(_displayTitle);
@@ -191,8 +196,41 @@ const GameLogView = (function () {
 
         }
 
-        function onConsumptionTabPressed() {
+        function onRechargeLogTabPressed() {
+            for (let radio in radioArray) {
+                radioArray[radio].setEnabled(true);
+                radioArray[radio].setVisible(true);
+            }
 
+            if (_displayList) {
+                scrollBackground.removeChild(_displayList);
+                _scrollTitleBackground.removeChild(_displayTitle);
+            }
+
+            // let filtered = gameSummaryData.;
+            // if (checkBoxShort.isSelected()){
+            //
+            // }
+
+            let length;
+            for (let radio in radioArray) {
+                if (radioArray[radio].isSelected()) {
+                    length = radioArray[radio].itemData;
+                    break;
+                }
+            }
+
+            ClientServerConnect.getConsumptionLog(length).then(
+                consumptionLog => {
+                    console.log(length, consumptionLog);
+                    // setGameLogData(gameSummaries);
+                    const items = setupRechargeLogList(scrollBackground, consumptionLog);
+                    _displayList = items.listView;
+                    _displayTitle = items.scrollTitle;
+                    _scrollTitleBackground.addChild(_displayTitle);
+                    scrollBackground.addChild(_displayList);
+                }
+            );
 
         }
 
@@ -220,6 +258,10 @@ const GameLogView = (function () {
         };
 
         this.showConsumptionLog = function (consumptionData) {
+            for (let radio in radioArray) {
+                radioArray[radio].setEnabled(false);
+                radioArray[radio].setVisible(false);
+            }
             _consumptionData = consumptionData;
             if (_displayList) {
                 scrollBackground.removeChild(_displayList);
@@ -228,8 +270,8 @@ const GameLogView = (function () {
             const items = setupConsumptionLogList(scrollBackground, consumptionData);
             _displayList = items.listView;
             _displayTitle = items.scrollTitle;
-            _scrollTitleBackground.addChild(_displayTitle);
-            scrollBackground.addChild(_displayList);
+            // _scrollTitleBackground.addChild(_displayTitle);
+            // scrollBackground.addChild(_displayList);
             // _popup.show();
         };
 
@@ -644,6 +686,10 @@ const GameLogView = (function () {
                     if (uncaught && captured) {
                         uncaught.setPosition(uncaught.getPosition().x, second);
                         uncaughtIndicator.setPosition(uncaughtIndicator.getPosition().x, second + first / 2);
+                        const separator = new cc.Sprite(ReferenceName.GameLogListSeparatorShort);
+                        separator.setPosition(fishPosition, second);
+                        separator.setAnchorPoint(0.1,0.5);
+                        wrapper.addChild(separator);
                     }
 
                     wrapper.setContentSize(wrapper.getContentSize().width, first + second);
@@ -720,6 +766,8 @@ const GameLogView = (function () {
 
         return {scrollTitle: scrollTitle, listView: listView}
     }
+
+    function setupRechargeLogList(scrollBackground)
 
     const proto = GameLogView.prototype;
 
