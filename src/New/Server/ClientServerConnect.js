@@ -152,6 +152,7 @@ const ClientServerConnect = function () {
         return parseQueryParams(searchString);
     }
 
+    /*
     const login = function (name, pass, onSuccess, onFailure) {
         const client = getGameWSClient();
 
@@ -168,23 +169,6 @@ const ClientServerConnect = function () {
                 onSuccess(loginResponse.data.player);
                 // return client.callAPIOnce('game', 'joinGame', {})
             }
-        //).then(
-        //     joinResponse => {
-        //         console.log("joinResponse:", joinResponse);
-        //
-        //         var ioSocket = getGameIOSocket();
-        //
-        //         socketUtils.simulateNetworkLatency(ioSocket, 100);
-        //
-        //         var receiver = clientReceiver(ioSocket, GameCtrl.sharedGame());
-        //
-        //         informServer = serverInformer(ioSocket);
-        //
-        //         // GameManager.setServerInformer(informServer);
-        //
-        //         // clientServerConnect.startGameScene() will be run by clientReceiver when everything is ready.
-        //     }
-        // )
         ).catch(
             error => {
                 console.log(error);
@@ -196,6 +180,7 @@ const ClientServerConnect = function () {
             }
         );
     };
+    */
 
     const loginWithToken = function (token, playerId, email, onSuccess, onFailure) {
         const client = getGameWSClient();
@@ -396,7 +381,7 @@ const ClientServerConnect = function () {
 
     return {
         connectToMasterServer : connectToMasterServer,
-        login : login,
+        //login : login,
         joinGame : joinGame,
         getServerInformer : getServerInformer,
         resetArena : resetArena,
