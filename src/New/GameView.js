@@ -40,7 +40,7 @@ const GameView = function () {
             // console.log("initialised");
             for (let i = 0; i < _gameConfig.maxPlayers; i++) {
                 const index = getPlayerSlot(i);
-                _playerViews[index] = new PlayerViewManager(_gameConfig, index, i == _playerSlot, changeSeatRequest, lockOnRequest, fishLockStatus);
+                _playerViews[index] = new PlayerViewManager(_gameConfig, index, i === _playerSlot, changeSeatRequest, lockOnRequest, fishLockStatus);
             }
 
             _effectsManager = new EffectsManager();
@@ -119,7 +119,6 @@ const GameView = function () {
             }
             if (rotation != null) {
                 rot = -(rotation * 180 / Math.PI);
-
             }
         } else {
             if (position) {

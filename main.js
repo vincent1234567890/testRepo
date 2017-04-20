@@ -22,9 +22,7 @@ var cocos2dApp = cc.game.onStart = function() {
     cc.view.resizeWithBrowserSize(true);
 
     //load resources
-
     // var scene = LogoScene.scene();
-
     ClientServerConnect.connectToMasterServer().then(
         data => {
             const themeConfig = data.themeConfig;

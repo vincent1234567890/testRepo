@@ -1,11 +1,10 @@
-/**
- * Created by eugeneseah on 22/3/17.
- */
+
 
 const DolphinClippy = (function () {
     "use strict";
     
     const DolphinClippy = function () {
+        //why?
         const parent = new cc.Node();
         GameView.addView(parent);
 
@@ -21,11 +20,6 @@ const DolphinClippy = (function () {
         let dolphinText = new cc.Sprite(ReferenceName.DolphinTextName + "1" + ReferenceName.DolphinTextExtension);
         parent.addChild(dolphinText);
         dolphinText.setPosition(200, 600);
-
-        // let dolphinCrown = new cc.Sprite(ReferenceName.CrownIcon);
-        // parent.addChild(dolphinCrown);
-        // dolphinText.setPosition(200, 600);
-
     };
 
     return DolphinClippy;

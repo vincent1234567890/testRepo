@@ -51,5 +51,4 @@ const AppManager = (function () {
         goToGame : goToGame,
         goBackToLobby : goBackToLobby,
     }
-
 }());

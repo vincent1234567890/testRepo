@@ -11,21 +11,6 @@ const CannonView = (function () {
         this._gameConfig = gameConfig;
         this._cannonNode = new cc.Node();
 
-        //the animation of cannon
-        // let animationArray = [];
-        // let count = 0;
-        // while (true) {
-        //     const frame = cc.spriteFrameCache.getSpriteFrame("Spark" + count + ".png");
-        //     if (!frame) {
-        //         break;
-        //     }
-        //     animationArray.push(frame);
-        //     count++;
-        // }
-        // animationArray.push(new cc.SpriteFrame(" "));
-        // this._sparkSprite = new cc.Sprite();
-        // this._sparkSequence = new cc.Sequence(new cc.Animate(new cc.Animation(animationArray, this._gameConfig.shootInterval / 1000 / animationArray.length)));
-
         this.createView(slot);
 
         // this.setSparkSprite();   //show the spark when cannon is firing.
@@ -57,25 +42,11 @@ const CannonView = (function () {
         cannonLabelFontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
 
         this._cannonPowerLabel = new cc.LabelTTF('', cannonLabelFontDef);
-
-        // console.log(this._cannonPowerLabel,cannonLabelPos);
-
         this.setCannonSprite(1);
-
         this._isAnimating = false;
-        // this._sprite = new cc.Sprite(ReferenceName.Cannon1);
-        // this._spriteDown = new cc.Sprite(ReferenceName.CannonDown1);
-        // this._spriteDown.setVisible(false);
-
-        // this._cannonNode.addChild(this._spriteDown, 20);
 
         this._cannonPowerBG = new cc.Sprite(ReferenceName.SideMenuBG);
         this._cannonNode.addChild(this._cannonPowerBG, 27);
-
-        // this._spriteDown.setAnchorPoint(this._sprite.getAnchorPoint());
-        // this._spriteDown.setPosition(this._sprite.getPosition());
-
-        // this._cannonNode.setPosition(cc.view.getDesignResolutionSize().width/2,cc.view.getDesignResolutionSize().height/2)
 
         if (this.pos[1] > markerPos[1]) {
             let multiplier = 1;

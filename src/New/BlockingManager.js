@@ -19,7 +19,7 @@ const BlockingManager = (function(){
 
     function registerBlock (callback) {
         // console.log("registerBlock:",_callbackStack);
-        if (_callbackStack.length == 0){
+        if (_callbackStack.length === 0){
             // console.log("0 show");
             showView();
         }
@@ -31,7 +31,7 @@ const BlockingManager = (function(){
         if(index !== -1) {
             _callbackStack.splice(index, 1);
         }
-        if(_callbackStack.length == 0 && _view){ // check for view in case its part of cleanup
+        if(_callbackStack.length === 0 && _view){ // check for view in case its part of cleanup
             _view.hideView();
         }
     }
