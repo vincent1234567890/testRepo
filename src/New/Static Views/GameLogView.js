@@ -62,7 +62,7 @@ const GameLogView = (function () {
         const title = new cc.Sprite(ReferenceName.GameLogTitleChinese);
 
         const gameLogTab = GUIFunctions.createButton(ReferenceName.FAQTabBackground, ReferenceName.FAQTabBackgroundOnPress, onGameLogTabPressed);
-        const consumptionLogTab = GUIFunctions.createButton(ReferenceName.FAQTabBackground, ReferenceName.FAQTabBackgroundOnPress, onConsumptionTabPressed);
+        const consumptionLogTab = GUIFunctions.createButton(ReferenceName.FAQTabBackground, ReferenceName.FAQTabBackgroundOnPress, onRechargeLogTabPressed);
 
         const gameLogTabTitleText = new cc.Sprite(ReferenceName.GameLogRecordTabChinese);
         const consumptionLogTabTitleText = new cc.Sprite(ReferenceName.GameLogConsumptionTabChinese);
@@ -882,7 +882,7 @@ const GameLogView = (function () {
                 };
 
             }
-            
+
             return RechargeLogListItemPrefab;
         }());
 
