@@ -360,6 +360,14 @@ const ClientServerConnect = function () {
         _informServer.changeSeat(slot);
     };
 
+    function listUncollectedJackpots () {
+        return _gameWSClient.callAPIOnce('game', 'listUncollectedJackpots', {});
+    }
+
+    function collectJackpot (rewardLogObjId) {
+        return _gameWSClient.callAPIOnce('game', 'collectJackpot', {rewardLogObjId: rewardLogObjId});
+    }
+
     const setFishLockRequest = function(fishId){
         _informServer.setTargetLockOnFish(fishId);
     };
@@ -377,6 +385,14 @@ const ClientServerConnect = function () {
         return _gameWSClient.callAPIOnce('player', 'getConsumptionLog', {playerGameNumber: playerGameNumber, roundNumber: roundNumber});
     }
 
+    function getRechargeLog (numDays) {
+        return _gameWSClient.callAPIOnce('player', 'getRechargeLog', {hours: numDays * 24});
+    }
+
+    function changePlayerDisplayName (newDisplayName) {
+        return _gameWSClient.callAPIOnce('player', 'changePlayerDisplayName', {newDisplayName: newDisplayName});
+    }
+
     return {
         connectToMasterServer : connectToMasterServer,
         login : login,
@@ -391,10 +407,14 @@ const ClientServerConnect = function () {
         postGameCleanup: postGameCleanup,
         listenForEvent: listenForEvent,
         changeSeatRequest : changeSeatRequest,
+        listUncollectedJackpots: listUncollectedJackpots,
+        collectJackpot: collectJackpot,
         getCurrentJackpotValues : getCurrentJackpotValues,
         setFishLockRequest : setFishLockRequest,
         unsetFishLockRequest : unsetFishLockRequest,
         getGameSummaries: getGameSummaries,
         getConsumptionLog : getConsumptionLog,
+        getRechargeLog : getRechargeLog,
+        changePlayerDisplayName : changePlayerDisplayName,
     };
 }();

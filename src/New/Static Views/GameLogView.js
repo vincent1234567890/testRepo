@@ -160,6 +160,8 @@ const GameLogView = (function () {
             // _popup.show();
         };
 
+        onGameLogTabPressed();
+
         GameView.addView(_parent, ZORDER);
     };
 
@@ -405,31 +407,38 @@ const GameLogView = (function () {
         cc.eventManager.addListener(_listener, listView);
 
         function createFishList (fishArray) {
+            const fishView = new ccui.ListView();
+            fishView.setDirection(ccui.ScrollView.DIR_HORIZONTAL);
+
             const fishList = new ccui.ListView();
             fishList.setDirection(ccui.ScrollView.DIR_HORIZONTAL);
-            fishList.setTouchEnabled(true);
-            fishList.setBounceEnabled(true);
+
+            if (!fishArray || fishArray&&fishArray.length < 1){
+                return fishList;
+            }
+
+            fishView.setTouchEnabled(true);
+            fishView.setBounceEnabled(true);
             // fishList.setContentSize(fishArray.);
 
             // var names = ['Mike', 'Matt', 'Nancy', 'Adam', 'Jenny', 'Nancy', 'Carl']
 
-            var uniq = fishArray
-                .map((fish) => {
-                    console.log(fish);
-                    return {type: fish.type, count: 1}
-                })
-                .reduce((a, b) => {
-                    console.log(a,b);
-                    a[b.type] = (a[b.type] || 0) + b.count;
-                    return a
-                }, {});
+            const count = fishArray
+            .map((fish) => {
+                return {type: fish.type, count: 1}
+            })
+            .reduce((a, b) => {
+                a[b.type] = (a[b.type] || 0) + b.count;
+                return a;
+            }, {});
 
-            console.log(uniq);
+            let contentSize = new cc.p();
+            const fishPadding = 10;
 
-            for (let i = 0; i < fishArray.length; i++) {
-                console.log(data[i]);
+            // for (let i = 0; i < count.length; i++) {
+            for (let fish in count){
                 const wrapper = new ccui.Widget();
-                const fishSprite = new cc.Sprite("#GL" + fishArray[i].type + ".png");
+                const fishSprite = new cc.Sprite("#GL" + fish + ".png");
 
                 let fontDef = new cc.FontDefinition();
                 fontDef.fontName = "Microsoft YaHei";
@@ -439,21 +448,43 @@ const GameLogView = (function () {
                 fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
                 fontDef.fillStyle = new cc.Color(0, 0, 0, 255);
 
-                const fishAmount = new cc.LabelTTF(uniq[fishArray[i].type], fontDef);
+                const fishAmount = new cc.LabelTTF(count[fish], fontDef);
+
+                const size = fishSprite.getContentSize();
 
                 wrapper.addChild(fishSprite);
                 wrapper.addChild(fishAmount);
                 // console.log(content);
+                fishSprite.setPosition(size.width/2, size.height/2);
+                fishAmount.setPosition(size.width/2, size.height/2);
+                // fishSprite.setPosition(size.width/2, 0);
+                // fishAmount.setPosition(size.width/2, 0);
 
-                wrapper.setContentSize(fishSprite.getContentSize());
-                console.log(fishSprite,wrapper);
+                wrapper.setContentSize(size);
+
+                if(contentSize.y < size.height){
+                    contentSize.y = size.height;
+                }
+
+                contentSize.x += size.width;
 
                 fishList.pushBackCustomItem(wrapper);
             }
+            const pos = new cc.p(400,50);
 
-            fishList.setContentSize(200,50);
+            const fishViewCanvas = new ccui.Widget();
+            fishViewCanvas.addChild(fishList);
+            fishList.setPosition(pos.x/2 - contentSize.x/2,0);
+            // fishViewCanvas.setPosition(pos.x,contentSize.y/2);
 
-            return fishList;
+            // fishList.jumpToPercentHorizontal(50);
+            // fishList.setInnerContainerPosition(contentSize.x,0);
+            fishList.setContentSize(contentSize.x, contentSize.y);
+            fishView.pushBackCustomItem(fishViewCanvas);
+            fishView.setContentSize(pos.x,pos.y);
+            fishViewCanvas.setContentSize(pos.x,0);
+
+            return fishView;
         }
 
 
@@ -463,18 +494,19 @@ const GameLogView = (function () {
                 const highlight = new cc.Sprite(ReferenceName.GameLogItemHighLight);
                 const separator = new cc.Sprite(ReferenceName.GameLogListSeparator);
 
+                const highlightSize = highlight.getContentSize();
                 wrapper.addChild(highlight);
                 wrapper.addChild(separator);
                 wrapper.itemData = itemData;
 
-                wrapper.setContentSize(highlight.getContentSize());
+                wrapper.setContentSize(highlightSize);
                 wrapper.setTouchEnabled(true);
 
                 highlight.setVisible(false);
 
-                const listEntryPos = new cc.p(highlight.getContentSize().width / 2, highlight.getContentSize().height / 2);
+                const listEntryPos = new cc.p(highlightSize.width / 2, highlightSize.height / 2);
 
-                highlight.setPosition(listSize.width / 2, listEntryPos.y);
+
                 separator.setPosition(listSize.width / 2, 0);
 
                 // console.log("ListItemPrefab",wrapper,highlight.getContentSize());
@@ -496,7 +528,7 @@ const GameLogView = (function () {
                 let sceneName = new cc.LabelTTF(itemData.sceneName, fontDef);
 
 
-                const captured = createFishList(itemData.fishCaught);
+
 
                 // bulletId.setAnchorPoint(0, 0.5);
 
@@ -505,14 +537,64 @@ const GameLogView = (function () {
                 // totalRevenue.setPosition(450, listEntryPos.y);
                 totalProfit.setPosition(300, listEntryPos.y);
                 sceneName.setPosition(425, listEntryPos.y);
-                captured.setPosition(500, listEntryPos.y);
+
+                console.log(itemData.fishCaught,itemData.fishUncaught);
+
+                let uncaught;
+                if (itemData.fishUncaught.length >0){
+                    uncaught = createFishList(itemData.fishUncaught);
+                    // uncaught.setPosition(500, listEntryPos.y/2);
+                    wrapper.addChild(uncaught);
+                    const indicator = new cc.Sprite(ReferenceName.GameLogConsumptionTitleFishUncaughtIndicator);
+                    wrapper.addChild(indicator);
+
+                    if(uncaught.getContentSize().height > wrapper.getContentSize().height){
+                        // console.log("uncaught",uncaught.getContentSize(),"wrapper",wrapper.getContentSize(), uncaught.getContentSize().height + itemData.fishCaught.length > 0 ? wrapper.getContentSize().height:0);
+                        wrapper.setContentSize(wrapper.getContentSize().width, uncaught.getContentSize().height);
+                        // console.log("uncaught",uncaught.getContentSize(),"wrapper",wrapper.getContentSize());
+                    }
+                    // if (itemData.fishCaught.length > 0){
+                    //     captured.setPosition(500, uncaught.getContentSize().height + captured.getContentSize().height/2);
+                    // }
+                    uncaught.setPosition(500, uncaught.getContentSize().height/2);
+                    indicator.setPosition(925, uncaught.getContentSize().height/2);
+                }
+
+                let captured;
+                if (itemData.fishCaught.length >0){
+                    captured = createFishList(itemData.fishCaught);
+
+                    wrapper.addChild(captured);
+                    const indicator = new cc.Sprite(ReferenceName.GameLogConsumptionTitleFishCaughtIndicator);
+                    wrapper.addChild(indicator);
+
+
+                    if(captured.getContentSize().height > wrapper.getContentSize().height){
+                        console.log("fishCaught",captured.getContentSize(),"wrapper",wrapper.getContentSize());
+                        wrapper.setContentSize(wrapper.getContentSize().width, captured.getContentSize().height);
+                        console.log("fishCaught",captured.getContentSize(),"wrapper",wrapper.getContentSize());
+
+                    }
+                    // captured.setPosition(500, listEntryPos.y/2);
+                    captured.setPosition(500, captured.getContentSize().height/2);
+                    indicator.setPosition(925, captured.getContentSize().height/2);
+                }
+
+
+
+                // if (itemData.fishCaught.length >0 && itemData.fishUncaught.length >0){
+                //     wrapper.setContentSize(wrapper.getContentSize().width, wrapper.getContentSize().height* 2);
+                //
+                // }
 
                 wrapper.addChild(bulletId);
                 wrapper.addChild(totalSpend);
                 // wrapper.addChild(totalRevenue);
                 wrapper.addChild(totalProfit);
                 wrapper.addChild(sceneName);
-                wrapper.addChild(captured);
+
+                highlight.setScaleY ( wrapper.getContentSize().height / highlightSize.height );
+                highlight.setPosition(listSize.width / 2, highlightSize.height/2 );
 
                 const item = new RolloverEffectItem(wrapper, onSelected, onUnselected, onHover, onUnhover);
 
@@ -544,7 +626,7 @@ const GameLogView = (function () {
 
         const data = consumptionLogData.data;
         for (let i = 0; i < data.length; i++) {
-            console.log(data[i]);
+            // console.log(data[i]);
             const listItemPrefab = new consumptionLogListItemPrefab({
                 id: i,
                 totalSpend: data[i].consumptionCredit,

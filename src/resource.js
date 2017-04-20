@@ -84,6 +84,8 @@ var res = {
     //jackpot
     JackpotMiniGamePng: "res/CompanyA/Jackpot/JPminigame.png",
     JackpotMiniGamePlist: "res/CompanyA/Jackpot/JPminigame.plist",
+    JackpotMiniGame2Png: "res/CompanyA/Jackpot/JPminigame2.png",
+    JackpotMiniGame2Plist: "res/CompanyA/Jackpot/JPminigame2.plist",
     JackpotCoinAnimationPng: "res/CompanyA/Jackpot/JPCoinAnimation.png",
     JackpotCoinAnimationPlist: "res/CompanyA/Jackpot/JPCoinAnimation.plist",
     JackpotGoldTextPng: "res/CompanyA/Jackpot/GoldCoinText-export.png",

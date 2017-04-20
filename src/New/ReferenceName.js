@@ -153,6 +153,8 @@ const ReferenceName = {
     GameLogConsumptionTitleSceneNameChinese : "#StageChinese.png",
     GameLogConsumptionTitleFishAffectedChinese : "#FishChinese.png",
     GameLogConsumptionTitleFishCatchIndicatorChinese : "#CaptureChinese.png",
+    GameLogConsumptionTitleFishCaughtIndicator : "#YesIcon.png",
+    GameLogConsumptionTitleFishUncaughtIndicator : "#NoIcon.png",
     GameLogRadioTextPeriodShortChinese : "#TodayChinese.png",
     GameLogRadioTextPeriodMediumChinese :"#3DaysChinese.png",
     GameLogRadioTextPeriodLongChinese :"#2WeeksChinese.png",
