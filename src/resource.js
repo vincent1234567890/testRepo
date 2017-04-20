@@ -68,6 +68,9 @@ var res = {
     // LaserFonts : "res/fonts_laser_num.png",
     //
     ParticlePlist: "res/particle.plist",
+
+    LobbyJackpotPng: "res/CompanyA/Lobby/Jackpot.png",
+    LobbyJackpotPlist: "res/CompanyA/Lobby/Jackpot.plist",
     //
     // lizibianhua1Plist : "res/lizibianhua1.plist",
     // lizibianhua1Png : "res/lizibianhua1.png",

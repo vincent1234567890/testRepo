@@ -43,6 +43,13 @@ const ReferenceName = {
     LobbySettingsButton : "#Lobby Setting.png",
     TopBg : "#Top Base.png",
 
+    JackpotPopBase: "#JPPOPBase.png",
+    JackpotPopFrame: "#JPPOPFrame.png",
+    JackpotPopGold: "#JPPOPGold.png",
+    JackpotPopSilver: "#JPPOPSilver.png",
+    JackpotPopGreen: "#JPPOPGreen.png",
+    JackpotPopBlue: "#JPPOPBlue.png",
+
     //Dolphin
     DolphinIcon : "#FishIcon.png",
     DolphinBubble : "#Bubble.png",
