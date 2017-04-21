@@ -85,16 +85,6 @@ const LobbyView = (function () {
         // gameListMenu.setPosition(- length/2 +size.height/2 - 200 , -height/2 + size.height/2 + 100);
         this._parent.addChild(gamelist, 2);
 
-        /* testing
-         */
-        cc.spriteFrameCache.addSpriteFrames(res.testingEffect);
-        const animation = GUIFunctions.getAnimation("FREffect_",0.01);
-        const animationSequence = new cc.RepeatForever(animation,new cc.callFunc(onAnimationEnd));
-        const test = new cc.Sprite();
-        test.setPosition(400,400);
-        this._parent.addChild(test,100);
-        test.runAction(animationSequence);
-
         function onAnimationEnd() {
 
         }
@@ -135,8 +125,8 @@ const LobbyView = (function () {
     // };
 
     function setupGameList() {
-        const width = cc.view.getDesignResolutionSize().width;
-        const height = cc.view.getDesignResolutionSize().height;
+        const width = cc.winSize.width;  //cc.view.getDesignResolutionSize().width;
+        const height = cc.winSize.height; //cc.view.getDesignResolutionSize().height;
         
         gameControlList = [];
 

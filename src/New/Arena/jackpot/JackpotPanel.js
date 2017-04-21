@@ -63,7 +63,6 @@ var JackpotPanel = cc.Layer.extend({ //gradient
             if (remainTime === 5)
                 this.setColor(new cc.Color(255, 0, 0, 255));
             if (remainTime <= 0) {
-                //this.unscheduleAllCallbacks();
                 //auto open a box
                 selfPoint._autoOpenBox();
             }

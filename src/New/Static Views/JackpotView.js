@@ -73,12 +73,58 @@ const JackpotView = (function () {
         _parent.addChild(barFrame);
         barFrame.setPosition(0,-22);
 
+        //add event listener
+        let barFrameTouchListener = cc.EventListener.create({
+            event: cc.EventListener.TOUCH_ONE_BY_ONE,
+            swallowTouches: true,
+            onTouchBegan: function(touch, event){
+                let target = event.getCurrentTarget();
+                if (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
+                        target.convertToNodeSpace(touch.getLocation()))) {
+                    target.runAction(cc.scaleTo(0.2, 1.05));
+                    target.setUserData(true);   //scale;
+                    return true;
+                }
+                return false;
+            },
+            onTouchMoved: function(touch, event) {
+                let target = event.getCurrentTarget();
+                if (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
+                        target.convertToNodeSpace(touch.getLocation()))) {
+                    if(target.getUserData() !== true){
+                        target.setUserData(true);
+                        target.runAction(cc.scaleTo(0.2, 1.06));
+                    }
+                } else {
+                    if(target.getUserData() === true){
+                        target.setUserData(false);
+                        target.runAction(cc.scaleTo(0.2, 1));
+                    }
+                }
+            },
+            onTouchEnded: function(touch, event){
+                let target = event.getCurrentTarget();
+                target.setUserData(false);
+                target.runAction(cc.scaleTo(0.2, 1));
+
+                if (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
+                        target.convertToNodeSpace(touch.getLocation()))) {
+                    //show the jackpot float panel
+                    let jackpotPanel = new JackpotFloatPanel();
+                    GameView.addView(jackpotPanel, 199);
+                    jackpotPanel.setPositionY(cc.winSize.height + 2);
+                    jackpotPanel.runAction(cc.moveTo(0.2, 0, 0).easing(cc.easeBounceIn()));
+                }
+            }
+        });
+        cc.eventManager.addListener(barFrameTouchListener, barFrame);
+
         _parent.setPosition(683,666);
 
         let fontDef = new cc.FontDefinition();
         fontDef.fontName = "Impact";
         fontDef.fontWeight = "bold";
-        fontDef.fontSize = 32;
+        fontDef.fontSize = 30;
         fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
         fontDef.fillStyle = new cc.Color(255, 255, 255, 255);
 
@@ -100,8 +146,8 @@ const JackpotView = (function () {
 
     proto.updateJackpot = function(value){
         // let prize = (value).toLocaleString('en-US', {maximumFractionDigits: 2});
-        let prize = (value).toFixed(2);
-        if (prize.length > 11) {
+        let prize = Math.round(value).toLocaleString('en-US', {maximumFractionDigits: 2});
+        if (prize.length > 13) {
             prize = prize.substring(0,10) + "..";
         }
         _label.setString(prize);
