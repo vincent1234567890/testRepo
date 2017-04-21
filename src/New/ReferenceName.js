@@ -72,7 +72,6 @@ const ReferenceName = {
 
     CrownIcon : "#Crown.png",
 
-
     //Floating menu shared
     FloatingTitleBackground : "#TitleBase2.png",
     FloatingBottomLeftDeco : "#Pattern1.png",
@@ -92,6 +91,11 @@ const ReferenceName = {
     //Leaderboard
     LeaderboardTextBackground : "#TextBG2.png",
     LeaderboardTitleChinese : "#RankingChineseTitle.png",
+    LeaderboardTitlePlayerNameChinese : "#PlayernameChinese.png",
+    LeaderboardTitleOnlineTimeChinese : "#OnlineTimeChinese.png",
+    LeaderboardTitleScoreChinese : "#TodayScoreChinese.png",
+    LeaderboardItemBackground : "#TextBG7.png",
+    LeaderboardItemRankBackground : "#RankBase.png",
 
     //FAQ
     FAQTextBackground : "#TextBG3.png",
@@ -130,7 +134,7 @@ const ReferenceName = {
     ProfileTitleChinese : "#InfoChineseTitle.png",
     ProfileUserTextBackground : "#TextBG6.png",
     ProfileNicknameTitleChinese : "#NicknameChinese.png",
-    ProfileInputBackground : "InputBox.png",
+    ProfileInputBackground : "#InputBox.png",
     ProfileEditButton : "EditButton.png",
     ProfileUsernameTitleChinese : "#UsernameChinese.png",
     ProfileIconBackground : "#SymbolBG.png",
@@ -173,11 +177,6 @@ const ReferenceName = {
     GameLogTotalProfitTitleChinese : "#ProfitPointChinese.png",
     GameLogStartTimeTitleChinese : "#StartTimeChinese.png",
     GameLogEndTimeTitleChinese : "#EndTimeChinese.png",
-
-    //Profile OLD
-    ProfileBackground : "#Profile POut BG.png",
-    ProfileFishBackground : "#Profile POut Fish Box.png",
-    ProfileFishStatsBackground : "#Profile POut Fish Detail.png",
 
     //Scoreboard
     ScoreboardBG : "#SummaryBase.png",
