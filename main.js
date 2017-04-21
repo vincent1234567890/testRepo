@@ -19,7 +19,7 @@ var cocos2dApp = cc.game.onStart = function() {
 
     //load resources
     // var scene = LogoScene.scene();
-    ClientServerConnect.connectToMasterServer().then(
+    ClientServerConnect.doInitialConnect().then(
         data => {
             const themeConfig = data.themeConfig;
             console.log(themeConfig);

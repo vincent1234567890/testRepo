@@ -13,7 +13,7 @@ const ClientServerConnect = function () {
 
     let _loginParams = null;
 
-    const connectToMasterServer = function () {
+    function doInitialConnect () {
         return new Promise((resolve, reject) => {
             // Do not connect if we are already connected!
             if (_hasConnected) return;
@@ -89,13 +89,13 @@ const ClientServerConnect = function () {
 
                 // @todo Show a nice message to the user
 
-                // @todo When the user wants to reconnect again, set _wasKickedOutByRemoteLogIn back to false, and then call connectToMasterServer()
+                // @todo When the user wants to reconnect again, set _wasKickedOutByRemoteLogIn back to false, and then call doInitialConnect()
             });
 
             client.addEventListener('close', function () {
                 _hasConnected = false;
                 console.log("Disconnect detected." + (_wasKickedOutByRemoteLogIn ? "" : "  Will attempt reconnection soon..."));
-                setTimeout(connectToMasterServer, 2000);
+                setTimeout(doInitialConnect, 2000);
 
                 setTimeout(cleanup, 0);
             });
@@ -106,7 +106,7 @@ const ClientServerConnect = function () {
                 AppManager.goBackToLobby();
             }
         });
-    };
+    }
 
     function parseQueryParams (searchString) {
         if (searchString === undefined) {
@@ -377,7 +377,7 @@ const ClientServerConnect = function () {
     }
 
     return {
-        connectToMasterServer: connectToMasterServer,
+        doInitialConnect: doInitialConnect,
         joinGame: joinGame,
         getServerInformer: getServerInformer,
         leaveGame: leaveGame,
