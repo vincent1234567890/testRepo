@@ -16,7 +16,7 @@ var JackpotPanel = cc.Layer.extend({ //gradient
     _lbPrize3Value: null,
     _lbPrize4Value: null,
 
-    ctor: function() {
+    ctor: function (isPlaying, jackpotRewardObject) {
         cc.Layer.prototype.ctor.call(this);
 
         this._unselectedBoxes = [];
@@ -29,6 +29,7 @@ var JackpotPanel = cc.Layer.extend({ //gradient
         //buzz effect
 
         let spBackground = new cc.Sprite(ReferenceName.JackpotBase);
+        this._spBackground = spBackground;
         spBackground.setPosition(cc.winSize.width * 0.5, cc.winSize.height * 0.5);
         this.addChild(spBackground);
         const panelSize = spBackground.getContentSize();
@@ -55,18 +56,20 @@ var JackpotPanel = cc.Layer.extend({ //gradient
         lbTimeCounter.setPosition(278, 24);
         lbTimeCounter.setUserData(10);
 
-        lbTimeCounter.schedule(function () {
-            let remainTime = this.getUserData();
-            remainTime--;
-            this.setString(remainTime);
-            this.setUserData(remainTime);
-            if (remainTime === 5)
-                this.setColor(new cc.Color(255, 0, 0, 255));
-            if (remainTime <= 0) {
-                //auto open a box
-                selfPoint._autoOpenBox();
-            }
-        }, 1, cc.REPEAT_FOREVER);
+        if (isPlaying) {
+            lbTimeCounter.schedule(function () {
+                let remainTime = this.getUserData();
+                remainTime--;
+                this.setString(remainTime);
+                this.setUserData(remainTime);
+                if (remainTime === 5)
+                    this.setColor(new cc.Color(255, 0, 0, 255));
+                if (remainTime <= 0) {
+                    //auto open a box
+                    selfPoint._autoOpenBox();
+                }
+            }, 1, cc.REPEAT_FOREVER);
+        }
 
         //title
         let spTitle = new cc.Sprite(ReferenceName.JackpotTitle);
@@ -85,28 +88,38 @@ var JackpotPanel = cc.Layer.extend({ //gradient
 
         this._createPrizeListFrame();
 
-        ClientServerConnect.requestMyData().then(stats => {
-            console.log(stats.data);
-            return ClientServerConnect.getCurrentJackpotValues()
-        }).then(jackpotValues => {
-            //show the jackpot list
-            if (jackpotValues["status"] === 200)
-                selfPoint._showJackpotPrizeValues(jackpotValues["data"]);
-            return ClientServerConnect.listUncollectedJackpots();
-        }).then(jackpotObject => {
-            console.log(jackpotObject);
-            if (jackpotObject["status"] === 200)
-                selfPoint._jackpotResult = jackpotObject["data"][0];
-        }).catch(console.error);
+        let selfPoint = this;
+
+        //if (isPlaying) {
+        //    ClientServerConnect.requestMyData().then(stats => {
+        //        console.log(stats.data);
+        //        return ClientServerConnect.getCurrentJackpotValues()
+        //    }).then(jackpotValues => {
+        //        //show the jackpot list
+        //        if (jackpotValues["status"] === 200)
+        //            selfPoint._showJackpotPrizeValues(jackpotValues["data"]);
+        //        return ClientServerConnect.listUncollectedJackpots();
+        //    }).then(jackpotObject => {
+        //        console.log(jackpotObject);
+        //        if (jackpotObject["status"] === 200)
+        //            selfPoint._jackpotResult = jackpotObject["data"][0];
+        //    }).catch(console.error);
+        //}
+
+        selfPoint._jackpotResult = jackpotRewardObject;
 
         //Treasure Box
-        let boxStartPoint = cc.p(215, 100), boxPadding = new cc.Size(180, 120), spTreasureBox, selfPoint = this;
+        let boxStartPoint = cc.p(215, 100), boxPadding = new cc.Size(180, 120), spTreasureBox;
         for (let row = 2; row >= 0; row--) {
             for (let col = 0; col < 4; col++) {
                 spTreasureBox = new cc.Sprite(ReferenceName.JackpotTreasureBoxOpen_00000);
                 spTreasureBox.setPosition(boxStartPoint.x + boxPadding.width * col, boxStartPoint.y + boxPadding.height * row);
                 spBackground.addChild(spTreasureBox);
                 boxes.push(spTreasureBox);
+
+                if (!isPlaying) {
+                    continue;
+                }
 
                 //add touch listener
                 let touchEventListener = cc.EventListener.create({
@@ -148,31 +161,14 @@ var JackpotPanel = cc.Layer.extend({ //gradient
                         let target = event.getCurrentTarget();
                         if (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
                                 target.convertToNodeSpace(touch.getLocation()))) {
-                            //
-                            let boxAnimation = GUIFunctions.getAnimation(ReferenceName.JackpotTreasureBoxOpenAnm, 0.03);
-                            target.runAction(cc.sequence(boxAnimation, cc.callFunc(function () {
-                                this.removeFromParent(true);
-                            }, target)));
+                            const boxNumber = selfPoint._getBoxNumber(target);
+                            ClientServerConnect.getServerInformer().shareJackpotBoxOpened(boxNumber);
+
                             selfPoint._removeBoxFromArray(target);
 
-                            let spMedalGlow = selfPoint._createMedalGlowSprite(); //glow first.
-                            let spMedal = selfPoint._createMedalSprite();
+                            const medalCount = selfPoint._animateClickedBox(target);
 
-                            spMedalGlow.setOpacity(0);
-                            spMedalGlow.setVisible(false);
-                            spBackground.addChild(spMedal);
-                            spMedal.setPosition(target.getPosition());
-                            spMedal.setScale(0.05);
-                            spMedal.addChild(spMedalGlow, -1, 1);  //tag = 1
-                            spMedal.runAction(cc.sequence(cc.delayTime(0.4), cc.scaleTo(0.5, 1).easing(cc.easeBounceOut())));
-
-                            spMedalGlow.setPosition(spMedal.width * 0.55, spMedal.height * 0.45);
-                            let medalCount = selfPoint._glowSameMedals(spMedal);
-
-                            if (medalCount >= 3) {
-                                //show all the
-                                selfPoint.showRemainBoxes();
-                            } else {
+                            if (medalCount < 3) {
                                 selfPoint._resetTimeCounter();
                             }
 
@@ -187,6 +183,46 @@ var JackpotPanel = cc.Layer.extend({ //gradient
                 cc.eventManager.addListener(touchEventListener, spTreasureBox);
             }
         }
+    },
+
+    _animateClickedBox: function (target) {
+        const selfPoint = this;
+        const spBackground = this._spBackground;
+
+        const boxAnimation = GUIFunctions.getAnimation(ReferenceName.JackpotTreasureBoxOpenAnm, 0.03);
+        target.runAction(cc.sequence(boxAnimation, cc.callFunc(function () {
+            this.removeFromParent(true);
+        }, target)));
+
+        let spMedalGlow = selfPoint._createMedalGlowSprite(); //glow first.
+        let spMedal = selfPoint._createMedalSprite();
+
+        spMedalGlow.setOpacity(0);
+        spMedalGlow.setVisible(false);
+        spBackground.addChild(spMedal);
+        spMedal.setPosition(target.getPosition());
+        spMedal.setScale(0.05);
+        spMedal.addChild(spMedalGlow, -1, 1);  //tag = 1
+        spMedal.runAction(cc.sequence(cc.delayTime(0.4), cc.scaleTo(0.5, 1).easing(cc.easeBounceOut())));
+
+        spMedalGlow.setPosition(spMedal.width * 0.55, spMedal.height * 0.45);
+
+        let medalCount = selfPoint._glowSameMedals(spMedal);
+
+        if (medalCount >= 3) {
+            //show all the
+            selfPoint.showRemainBoxes();
+        }
+
+        return medalCount;
+    },
+
+    showBoxOpening: function (boxNumber) {
+        const boxes = this._unselectedBoxes;
+        const boxToOpen = boxes[boxNumber];
+        this._removeBoxFromArray(boxToOpen);
+
+        this._animateClickedBox(boxToOpen);
     },
 
     _resetTimeCounter: function(){
@@ -311,6 +347,16 @@ var JackpotPanel = cc.Layer.extend({ //gradient
         prizeValue = prizeValues["Level_4"];
         if(prizeValue)
             this._lbPrize4Value.setString(Math.round(prizeValue["value"]));
+    },
+
+    _getBoxNumber: function(treasureBox) {
+        const boxes = this._unselectedBoxes;
+        for (let i = 0; i < boxes.length; i++) {
+            if (boxes[i] === treasureBox) {
+                return i;
+            }
+        }
+        return -1;
     },
 
     _removeBoxFromArray: function(treasureBox) {
@@ -446,7 +492,7 @@ var JackpotPanel = cc.Layer.extend({ //gradient
         this.runAction(cc.sequence(cc.scaleTo(1, 0).easing(cc.easeOut(3)), cc.callFunc(function(){
             this.removeFromParent();
         }, this)));
-    }
+    },
 });
 
 const JackpotAwardPanel = cc.LayerColor.extend({
