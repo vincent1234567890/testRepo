@@ -1,34 +1,71 @@
 cc.LoadingScreen = cc.LoaderScene.extend({
-    init : function(){
-        var self = this;
+    _spShark: null,
 
-        var logoWidth = 460;
-        var logoHeight = 170;
+    init : function(){
+        let self = this;
 
         // bg
-        var bgLayer = self._bgLayer = new cc.LayerColor(cc.color(32, 32, 32, 255));
+        let bgLayer = self._bgLayer = new cc.LayerColor(cc.color(7, 10, 64, 255));
         self.addChild(bgLayer, 0);
 
-        //image move to CCSceneFile.js
-        var fontSize = 24, lblHeight =  -logoHeight / 2 + 100;
-        if(res.LoadingLogo){
-            //loading logo
-            cc.loader.loadImg(res.LoadingLogo, {isCrossOrigin : false }, function(err, img){
-                logoWidth = img.width;
-                logoHeight = img.height;
-                self._initStage(img, cc.visibleRect.center);
+        //background
+        if(res.LoadingBackgroundPng){
+            cc.loader.loadImg(res.LoadingIconPng, {isCrossOrigin : false }, function(err, img){
+                let spBackground = new cc.Sprite(res.LoadingBackgroundPng);
+                bgLayer.addChild(spBackground);
+                spBackground.setPosition(cc.winSize.width * 0.5, cc.winSize.height * 0.5);
             });
-            fontSize = 14;
-            lblHeight = -logoHeight / 2 - 10;
+        }
+
+        //add a logo
+        if(res.LoadingLogo){
+            cc.loader.loadImg(res.LoadingLogo, {isCrossOrigin : false }, function(err, img){
+                let spLogo = new cc.Sprite(res.LoadingLogo);
+                spLogo.setPosition(cc.visibleRect.center.x, cc.visibleRect.top.y - 200);
+                bgLayer.addChild(spLogo, 10);
+            });
+        }
+
+        if(res.LoadingIconPng){
+            //loading logo
+            cc.loader.loadImg(res.LoadingIconPng, {isCrossOrigin : false }, function(err, img){
+                cc.loader.load(res.LoadingIconPlist, function(err, img){
+                    cc.spriteFrameCache.addSpriteFrames(res.LoadingIconPlist);
+                    //logoWidth = img.width;
+                    //logoHeight = img.height;
+                    //self._initStage(img, cc.visibleRect.center);
+                    let spShark = self._spShark = new cc.Sprite(ReferenceName.LoadingIcon_00000);
+                    spShark.setPosition(0, 195);
+                    bgLayer.addChild(spShark, 10);
+
+                    let boxAnimation = GUIFunctions.getAnimation(ReferenceName.LoadingIconAnim, 0.03);
+                    spShark.runAction(boxAnimation.repeatForever());
+                });
+            });
         }
         //loading percent
-        var label = self._label = new cc.LabelTTF("Loading... 0%", "Arial", fontSize);
-        label.setPosition(cc.pAdd(cc.visibleRect.center, cc.p(0, lblHeight)));
+        let label = self._label = new cc.LabelTTF("加载资源中... 0%", "Arial", 24);
+        label.setPosition(cc.visibleRect.center.x, 120);
         label.setColor(cc.color(180, 180, 180));
         bgLayer.addChild(this._label, 10);
         return true;
     },
-})
+
+    loadingCallback: function(result, count, loadedCount){
+        //cc.LoaderScene.prototype.loadingCallback.call(this, result, count, loadedCount);
+        let percent = (loadedCount / count * 100) | 0;
+        percent = Math.min(percent, 100);
+        this._label.setString("资源加载中... " + percent + "% (已加载" + loadedCount + "/" + count + ")");
+        if(this._spShark){
+            this._spShark.setPositionX((cc.winSize.width - 190) * (loadedCount / count));
+        }
+    },
+
+    cleanup: function(){
+        cc.spriteFrameCache.removeSpriteFramesFromFile(res.LoadingIconPlist);
+        cc.Scene.prototype.cleanup.call(this);
+    }
+});
 
 cc.LoadingScreen._instance = null;
 

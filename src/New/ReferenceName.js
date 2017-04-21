@@ -25,6 +25,9 @@ const ReferenceName = {
     BackButtonOnPress : "BackDW.png",
     BackButtonText : "#BackChinese.png",
 
+    LoadingIconAnim: "LoadingIcon_",
+    LoadingIcon_00000: "#LoadingIcon_00000.png",
+
     //Lobby
     LobbyBackground : "#LobbyBG1.png",
     ScrollArrow : "#Arrow.png",//
