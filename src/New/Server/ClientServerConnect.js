@@ -4,6 +4,12 @@
 
 const ClientServerConnect = function () {
     "use strict";
+
+    const masterServerUrl = 'ws://' + document.location.hostname + ':8089';
+    const defaultGameAPIServerUrl = 'ws://' + document.location.hostname + ':8088';
+
+    let _masterServerSocket = null;
+
     let _hasConnected = false;
     let _informServer ;
     let _gameWSClient;
@@ -13,7 +19,45 @@ const ClientServerConnect = function () {
 
     let _loginParams = null;
 
-    const connectToMasterServer = function () {
+    function getMasterServerSocket () {
+        if (!_masterServerSocket) {
+            const socket = io.connect(masterServerUrl + '/player');
+            //socket.on('connect', function(){});
+            //socket.on('event', function(data){});
+            //socket.on('disconnect', function(){});
+            _masterServerSocket = socket;
+        }
+        return _masterServerSocket;
+    }
+
+    function doInitialConnect () {
+        // Without any join prefs, this will just give us the least busy game server to join initially
+        return socketEmitPromise(getMasterServerSocket(), 'getRecommendedServers', {}).then(recommendedServers => {
+            //console.log("recommendedServers:", recommendedServers);
+            const urlToUse = 'ws://' + recommendedServers[0];
+            return connectToGameServer(urlToUse);
+        }, error => {
+            console.warn(`Problem getting recommended server from the master server:`, error);
+            console.warn(`So falling back to default: ${defaultGameAPIServerUrl}`);
+            return connectToGameServer(defaultGameAPIServerUrl);
+        });
+    }
+
+    function socketEmitPromise (socket /* ...args... */) {
+        const args = Array.prototype.slice.call(arguments, 1);
+        return new Promise((resolve, reject) => {
+            args.push(function (err, response) {
+                if (err) return reject(err);
+                resolve(response);
+            });
+            socket.emit.apply(socket, args);
+            setTimeout(() => {
+                reject(Error(`Socket call (${JSON.stringify(args.slice(0, args.length - 1))}) timed out`));
+            }, 40000);
+        });
+    }
+
+    function connectToGameServer (gameAPIServerUrl) {
         return new Promise((resolve, reject) => {
             // Do not connect if we are already connected!
             if (_hasConnected) return;
@@ -23,8 +67,6 @@ const ClientServerConnect = function () {
             // If we reconnect, the log in process will cause the active login to be kicked out!
             // And that would create and endless cycle of clients fighting for the active login.
             if (_wasKickedOutByRemoteLogIn) return;
-
-            let gameAPIServerUrl = 'ws://' + document.location.hostname + ':8088';
 
             const client = new WebSocketClient(gameAPIServerUrl);
             client.addService(new GameServices.GameService());
@@ -89,13 +131,13 @@ const ClientServerConnect = function () {
 
                 // @todo Show a nice message to the user
 
-                // @todo When the user wants to reconnect again, set _wasKickedOutByRemoteLogIn back to false, and then call connectToMasterServer()
+                // @todo When the user wants to reconnect again, set _wasKickedOutByRemoteLogIn back to false, and then call doInitialConnect()
             });
 
             client.addEventListener('close', function () {
                 _hasConnected = false;
                 console.log("Disconnect detected." + (_wasKickedOutByRemoteLogIn ? "" : "  Will attempt reconnection soon..."));
-                setTimeout(connectToMasterServer, 2000);
+                setTimeout(doInitialConnect, 2000);
 
                 setTimeout(cleanup, 0);
             });
@@ -106,7 +148,7 @@ const ClientServerConnect = function () {
                 AppManager.goBackToLobby();
             }
         });
-    };
+    }
 
     function parseQueryParams (searchString) {
         if (searchString === undefined) {
@@ -377,7 +419,7 @@ const ClientServerConnect = function () {
     }
 
     return {
-        connectToMasterServer: connectToMasterServer,
+        doInitialConnect: doInitialConnect,
         joinGame: joinGame,
         getServerInformer: getServerInformer,
         leaveGame: leaveGame,
