@@ -6,14 +6,12 @@ const ClientServerConnect = function () {
     "use strict";
     let _hasConnected = false;
     let _informServer ;
-    //let _clientReceiver;
     let _gameWSClient;
     let _gameIOSocket;
 
-    // let _debugSimulateLag = true;
-    // let _debugGhosts = false;
-
     let _wasKickedOutByRemoteLogIn = false;
+
+    let _loginParams = null;
 
     const connectToMasterServer = function () {
         return new Promise((resolve, reject) => {
@@ -27,18 +25,6 @@ const ClientServerConnect = function () {
             if (_wasKickedOutByRemoteLogIn) return;
 
             let gameAPIServerUrl = 'ws://' + document.location.hostname + ':8088';
-            // let gameAPIServerUrl = 'ws://192.168.1.16:8088';
-            // const useJoeysServerDuringDevelopment = false;
-            // const localNames = ['localhost', '127.0.0.1', '127.0.1.1', '0.0.0.0'];
-            // const doingDevelopment = (localNames.indexOf(window.location.hostname) >= 0);
-            // if (doingDevelopment) {
-            //     gameAPIServerUrl = 'ws://127.0.0.1:8088';
-            //     if (useJoeysServerDuringDevelopment) {
-            //         gameAPIServerUrl = 'ws://192.168.1.16:8088';
-            //     }
-            // }
-
-            // var clientServerConnect = this;
 
             const client = new WebSocketClient(gameAPIServerUrl);
             client.addService(new GameServices.GameService());
@@ -58,10 +44,12 @@ const ClientServerConnect = function () {
                 ).catch(console.error.bind(console));
 
                 if (typeof document !== 'undefined') {
-                    var queryParams = getCurrentOrCachedQueryParams();
+                    if (!_loginParams) {
+                        _loginParams = getCurrentOrCachedQueryParams();
+                    }
                     // Players without credentials will now auto log in as trial players
                     //if (queryParams.token && (queryParams.playerId || queryParams.email)) {
-                    loginWithToken(queryParams.token, queryParams.playerId, queryParams.email, function (loginData) {
+                    loginWithToken(_loginParams.token, _loginParams.playerId, _loginParams.email, function (loginData) {
                         // If successful, remove the query parameters from the URL
                         window.history.pushState({where: 'start', search: document.location.search}, '', document.location.pathname);
                         // Start the game!
@@ -152,6 +140,25 @@ const ClientServerConnect = function () {
         return parseQueryParams(searchString);
     }
 
+    // Requirement: In production environments, if a player closes their tab, and then shortly afterwards a malicious
+    // user has access to that machine, that user should not be able to log in to the player's account.
+    //
+    // It would be easy to just forget the token, but:
+    //
+    //   1. The player may change to a different server later.  They will need their token to auth with that server.
+    //
+    //   2. Even if we clear the token from localStorage, the malicious user can still get it back from the browser's
+    //      history (or from reopening the closed tab, and navigating back one page).
+    //
+    // @todo The solution is: to give them a new token on their first log in (or every log in).
+    //       That token can be stored in the tab's temporary memory, but won't be stored in the browser's history.
+    //
+    function forgetCachedQueryParams () {
+        if (window.localStorage) {
+            localStorage['FishGame_Cached_Query_Params'] = '';
+        }
+    }
+
     /*
     const login = function (name, pass, onSuccess, onFailure) {
         const client = getGameWSClient();
@@ -199,6 +206,9 @@ const ClientServerConnect = function () {
                 if (loginResponse.data && loginResponse.data.version) {
                     console.log("Server version: " + loginResponse.data.version);
                 }
+                if (loginResponse.data && loginResponse.data.forgetYourToken) {
+                    forgetCachedQueryParams();
+                }
                 console.log("loginResponse:", loginResponse);
                 onSuccess(loginResponse.data);
             }
@@ -237,9 +247,9 @@ const ClientServerConnect = function () {
                 console.log("joinResponse:", joinResponse);
 
                 // Wrapper which listens for game events
-                const ioSocket = socketUtils.getIOSocketFromClient(client);
                 // This object has on() and off() functions for receiving messages, and send() for sending them.
-                //setGameIOSocket(ioSocket);
+                const ioSocket = socketUtils.getIOSocketFromClient(client);
+
                 AppManager.debugSimulateLag = true;
                 AppManager.debugGhosts = false;
 
@@ -253,14 +263,7 @@ const ClientServerConnect = function () {
                     receiver.setupGhostingForSocket(ioSocket, 2000);
                 }
 
-                //setClientReceiver(receiver);
-
                 setServerInformer(serverInformer(ioSocket));
-                // _informServer = serverInformer(ioSocket);
-
-                // GameManager.setServerInformer(informServer);
-
-                // clientServerConnect.startGameScene() will be run by clientReceiver when everything is ready.
             }
         );
     };
@@ -279,7 +282,6 @@ const ClientServerConnect = function () {
         socketUtils.disengageIOSocketFromClient(_gameIOSocket, _gameWSClient);
 
         _informServer = undefined;
-        //_clientReceiver = undefined;
     }
 
     function requestStats() {
@@ -305,10 +307,6 @@ const ClientServerConnect = function () {
     //    return _gameIOSocket;
     //};
 
-    //var setClientReceiver = function (receiver) {
-    //    _clientReceiver = receiver;
-    //};
-
     function setServerInformer (informer) {
         _informServer = informer;
     }
@@ -325,10 +323,6 @@ const ClientServerConnect = function () {
             throw Error("The wsFunc '" + wsFuncName + "' that was passed to listenForEvent() does not exist!");
         }
         wsFunc.addListener(callback);
-    }
-
-    function resetArena() {
-        _clientReceiver.resetArena();
     }
 
     function getCurrentJackpotValues(){
@@ -383,27 +377,24 @@ const ClientServerConnect = function () {
     }
 
     return {
-        connectToMasterServer : connectToMasterServer,
-        //login : login,
-        joinGame : joinGame,
-        getServerInformer : getServerInformer,
-        resetArena : resetArena,
-        leaveGame : leaveGame,
-        requestStats : requestStats,
-        requestMyData : requestMyData,
+        connectToMasterServer: connectToMasterServer,
+        joinGame: joinGame,
+        getServerInformer: getServerInformer,
+        leaveGame: leaveGame,
+        requestStats: requestStats,
+        requestMyData: requestMyData,
         getGameWSClient: getGameWSClient,
-        //getGameIOSocket: getGameIOSocket,
         postGameCleanup: postGameCleanup,
         listenForEvent: listenForEvent,
-        changeSeatRequest : changeSeatRequest,
+        changeSeatRequest: changeSeatRequest,
         listUncollectedJackpots: listUncollectedJackpots,
         collectJackpot: collectJackpot,
-        getCurrentJackpotValues : getCurrentJackpotValues,
-        setFishLockRequest : setFishLockRequest,
-        unsetFishLockRequest : unsetFishLockRequest,
+        getCurrentJackpotValues: getCurrentJackpotValues,
+        setFishLockRequest: setFishLockRequest,
+        unsetFishLockRequest: unsetFishLockRequest,
         getGameSummaries: getGameSummaries,
-        getConsumptionLog : getConsumptionLog,
-        getRechargeLog : getRechargeLog,
-        changePlayerDisplayName : changePlayerDisplayName,
+        getConsumptionLog: getConsumptionLog,
+        getRechargeLog: getRechargeLog,
+        changePlayerDisplayName: changePlayerDisplayName,
     };
 }();
