@@ -85,7 +85,7 @@ const ClientServerConnect = function () {
             socket.emit.apply(socket, args);
             setTimeout(() => {
                 reject(Error(`Socket call (${JSON.stringify(args.slice(0, args.length - 1))}) timed out`));
-            }, 40000);
+            }, 15000);
         });
     }
 
