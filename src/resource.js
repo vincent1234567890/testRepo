@@ -1,6 +1,5 @@
 var res = {
     LoadingLogo: "res/loadingLogo.jpg",
-    LoadingBackgroundPng: "res/CompanyA/Loading/LoadingBG.png",
     LoadingIconPng: "res/CompanyA/Loading/LoadingIcon.png",
     LoadingIconPlist: "res/CompanyA/Loading/LoadingIcon.plist",
 

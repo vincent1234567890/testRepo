@@ -1,7 +1,7 @@
 cc.LoadingScreen = cc.LoaderScene.extend({
     _spShark: null,
 
-    init : function(){
+    init : function() {
         let self = this;
 
         // bg
@@ -9,27 +9,34 @@ cc.LoadingScreen = cc.LoaderScene.extend({
         self.addChild(bgLayer, 0);
 
         //background
-        if(res.LoadingBackgroundPng){
-            cc.loader.loadImg(res.LoadingIconPng, {isCrossOrigin : false }, function(err, img){
-                let spBackground = new cc.Sprite(res.LoadingBackgroundPng);
-                bgLayer.addChild(spBackground);
-                spBackground.setPosition(cc.winSize.width * 0.5, cc.winSize.height * 0.5);
-            });
+        let imgLoadingBg = document.getElementById("imgLoadingBG");
+        if (!imgLoadingBg) {
+            if (res.LoadingBackgroundPng) {
+                cc.loader.loadImg(res.LoadingIconPng, {isCrossOrigin: false}, function (err, img) {
+                    let spBackground = new cc.Sprite(res.LoadingBackgroundPng);
+                    bgLayer.addChild(spBackground);
+                    spBackground.setPosition(cc.winSize.width * 0.5, cc.winSize.height * 0.5);
+                });
+            }
+        } else {
+            let spBackground = new cc.Sprite(imgLoadingBg);
+            bgLayer.addChild(spBackground);
+            spBackground.setPosition(cc.winSize.width * 0.5, cc.winSize.height * 0.5);
         }
 
         //add a logo
-        if(res.LoadingLogo){
-            cc.loader.loadImg(res.LoadingLogo, {isCrossOrigin : false }, function(err, img){
+        if (res.LoadingLogo) {
+            cc.loader.loadImg(res.LoadingLogo, {isCrossOrigin: false}, function (err, img) {
                 let spLogo = new cc.Sprite(res.LoadingLogo);
                 spLogo.setPosition(cc.visibleRect.center.x, cc.visibleRect.top.y - 200);
                 bgLayer.addChild(spLogo, 10);
             });
         }
 
-        if(res.LoadingIconPng){
+        if (res.LoadingIconPng) {
             //loading logo
-            cc.loader.loadImg(res.LoadingIconPng, {isCrossOrigin : false }, function(err, img){
-                cc.loader.load(res.LoadingIconPlist, function(err, img){
+            cc.loader.loadImg(res.LoadingIconPng, {isCrossOrigin: false}, function (err, img) {
+                cc.loader.load(res.LoadingIconPlist, function (err, img) {
                     cc.spriteFrameCache.addSpriteFrames(res.LoadingIconPlist);
                     //logoWidth = img.width;
                     //logoHeight = img.height;

@@ -45,8 +45,8 @@ var cocos2dApp = cc.game.onStart = function() {
                 //cc.director.runScene(new TestScene());
                 // cc.director.runScene(new StartMenuLayer());
 
-                //AppManager.goToLobby(data.player);
-                //FishAnimationData.setData(themeConfig.FishRawData);
+                AppManager.goToLobby(data.player);
+                FishAnimationData.setData(themeConfig.FishRawData);
             }, this);
         }
     ).catch(console.error.bind(console));
