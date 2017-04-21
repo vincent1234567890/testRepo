@@ -1,7 +1,3 @@
-//////////////////////////////////////////////////////////////////////////
-// implement VisableRect
-//////////////////////////////////////////////////////////////////////////
-
 var cocos2dApp = cc.game.onStart = function() {
     // if (!cc.sys.isNative && document.getElementById("cocosLoading")) //If referenced loading.js, please remove it
     //     document.body.removeChild(document.getElementById("cocosLoading"));
@@ -49,7 +45,7 @@ var cocos2dApp = cc.game.onStart = function() {
                 //cc.director.runScene(new TestScene());
                 // cc.director.runScene(new StartMenuLayer());
 
-                AppManager.goToLobby();
+                AppManager.goToLobby(data.player);
                 FishAnimationData.setData(themeConfig.FishRawData);
             }, this);
         }

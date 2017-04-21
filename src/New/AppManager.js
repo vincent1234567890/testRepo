@@ -8,11 +8,11 @@ const AppManager = (function () {
     let _currentScene;
     let _gameTicker;
 
-    function goToLobby() {
+    function goToLobby(loginData) {
         // cc.director.popScene();
         _currentScene = new cc.Scene();
         cc.director.runScene(_currentScene);
-        GameManager.initialiseLogin(_currentScene);
+        GameManager.initialiseLogin(_currentScene, loginData);
         GameManager.goToLobby(goBackToLobby);
     }
 
