@@ -15,15 +15,6 @@ const FAQView = (function () {
     const FAQView = function () {
         _parent = new cc.Node();
         _popup= new FloatingMenuPopupBasePrefab(dismissCallback);
-        /*FAQTextBackground : "#TextBG3.png",
-         FAQTitleChinese : "#GameFAQChineseTitle.png",
-         FAQUserAgreementTitleChinese : "#UserAgreementChinese.png",
-         FAQTabTitleChinese : "#GameFAQChinese (2).png",
-         FAQTabBackground : "#Button2Idle.png",
-         FAQTabBackground2 : "#Button2OnPress.png",
-         FAQButtonBackground : "#Button3Idle.png",
-         FAQButtonBackgroundOnPress : "#Button3OnPress.png",
-         */
 
         const textBG = new cc.Sprite(ReferenceName.FAQTextBackground);
         const title = new cc.Sprite(ReferenceName.FAQTitleChinese);
@@ -80,8 +71,8 @@ const FAQView = (function () {
         _popup.getBackground().addChild(textBG);
         _popup.getBackground().addChild(title);
 
-        _popup.getBackground().addChild(userAgreementTab);
-        _popup.getBackground().addChild(faqTab);
+        // _popup.getBackground().addChild(userAgreementTab);
+        // _popup.getBackground().addChild(faqTab);
 
         _popup.getBackground().addChild(gameRules);
         _popup.getBackground().addChild(uiFAQ);
@@ -91,8 +82,6 @@ const FAQView = (function () {
 
         userAgreementTab.setPosition(130,tabHeight);
         faqTab.setPosition(310,tabHeight);
-
-
 
         gameRules.setPosition(sideButtonX, sideStart);
         uiFAQ.setPosition(sideButtonX, sideStart - sideSpacing);

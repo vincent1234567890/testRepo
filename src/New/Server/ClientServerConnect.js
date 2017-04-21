@@ -506,6 +506,10 @@ const ClientServerConnect = function () {
         return _gameWSClient.callAPIOnce('player', 'changePlayerDisplayName', {newDisplayName: newDisplayName});
     }
 
+    function getLeaderboard(){
+        return _gameWSClient.callAPIOnce('player', 'getTopRankedPlayers');
+    }
+
     return {
         doInitialConnect: doInitialConnect,
         joinGame: joinGame,
@@ -526,5 +530,6 @@ const ClientServerConnect = function () {
         getConsumptionLog: getConsumptionLog,
         getRechargeLog: getRechargeLog,
         changePlayerDisplayName: changePlayerDisplayName,
+        getLeaderboard: getLeaderboard,
     };
 }();
