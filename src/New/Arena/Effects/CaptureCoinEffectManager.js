@@ -191,7 +191,7 @@ const CaptureCoinEffectManager = (function () {
                     yLength = target[1] - this.y;
                 }
 
-                const endingElapsed = (Date.now() - endingStartTime) / 100;
+                const endingElapsed = (Date.now() - endingStartTime) / 100 - delay;
                 if (endingElapsed > collectLifetime) {
                     //handle callback
                     callback(viewObject);
