@@ -226,14 +226,18 @@ ccui.Scale9Sprite = cc.Scale9Sprite = cc.Node.extend(/** @lends ccui.Scale9Sprit
             if (file instanceof cc.SpriteFrame)
                 this.initWithSpriteFrame(file, rectOrCapInsets);
             else {
-                var frame = cc.spriteFrameCache.getSpriteFrame(file);
-                if (frame)
-                    this.initWithSpriteFrame(frame, rectOrCapInsets);
-                else
+                if (file[0] === "#") {
+                    // Init with a sprite frame name
+                    var frameName = file.substr(1, file.length - 1);
+                    var frame = cc.spriteFrameCache.getSpriteFrame(frameName);
+                    if (frame)
+                        this.initWithSpriteFrame(frame, rectOrCapInsets);
+                    else
+                        cc.log("%s does not exist", file);
+                } else
                     this.initWithFile(file, rectOrCapInsets, capInsets);
             }
-        }
-        else {
+        } else {
             this.init();
             this.setCascadeColorEnabled(true);
             this.setCascadeOpacityEnabled(true);

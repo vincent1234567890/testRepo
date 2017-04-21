@@ -75,27 +75,48 @@ const LobbyView = (function () {
         const gameList = setupGameList();
         this._parent.addChild(gameList, 2);
 
-        /* testing
-         */
-        // cc.spriteFrameCache.addSpriteFrames(res.testingEffect);
-        // const animation = GUIFunctions.getAnimation("FREffect_",0.01);
-        // const animationSequence = new cc.RepeatForever(animation,new cc.callFunc(onAnimationEnd));
-        // const test = new cc.Sprite();
-        // test.setPosition(400,400);
-        // this._parent.addChild(test,100);
-        // test.runAction(animationSequence);
-        //
-        // function onAnimationEnd() {
-        //
-        // }
+        function onAnimationEnd() {
+
+        }
 
 
         this.updatePlayerData(playerData);
     };
 
+
+
+    // function onProfileclick(touch) {
+    //     // console.log(touch,profileArea);
+    //     if(cc.rectContainsPoint(profileArea,touch)){
+    //         //profileview
+    //         // console.log("profile");
+    //         _profileCallback();
+    //     }
+    // }
+
+    // function setupGameScroll(parent) {
+    //     const arrow = new cc.Sprite(ReferenceName.ScrollArrow);
+    //     const arrowDown = new cc.Sprite(ReferenceName.ScrollArrow);
+    //     const rightArrow = new cc.Sprite(ReferenceName.ScrollArrow);
+    //     rightArrow.flippedX = true;
+    //     const rightArrowDown = new cc.Sprite(ReferenceName.ScrollArrow);
+    //     rightArrowDown.flippedX = true;
+    //
+    //     const menuLeft = new cc.MenuItemSprite(arrow, arrowDown, undefined, scrollLeft);
+    //     const menuRight = new cc.MenuItemSprite(rightArrow,rightArrowDown, undefined, scrollRight);
+    //
+    //
+    //     const menu = new cc.Menu(menuLeft, menuRight);
+    //     menuLeft.setPosition(cc.pAdd(cc.p(menu.getContentSize().width / 2, menuLeft.getContentSize().height / 2), cc.p(-630, 0)));
+    //     menuRight.setPosition(cc.pAdd(cc.p(menu.getContentSize().width / 2, menuRight.getContentSize().height / 2), cc.p(630, 0)));
+    //     parent.addChild(menu,2);
+    //     menu.setPosition(0,300);
+    //
+    // };
+
     function setupGameList() {
-        const width = cc.view.getDesignResolutionSize().width;
-        const height = cc.view.getDesignResolutionSize().height;
+        const width = cc.winSize.width;  //cc.view.getDesignResolutionSize().width;
+        const height = cc.winSize.height; //cc.view.getDesignResolutionSize().height;
         
         gameControlList = [];
 

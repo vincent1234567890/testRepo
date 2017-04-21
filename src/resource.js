@@ -1,7 +1,12 @@
 var res = {
     LoadingLogo: "res/loadingLogo.jpg",
 
+
+
     ParticlePlist: "res/particle.plist",
+
+    LobbyJackpotPng: "res/CompanyA/Lobby/Jackpot.png",
+    LobbyJackpotPlist: "res/CompanyA/Lobby/Jackpot.plist",
 
     //jackpot
     JackpotMiniGamePng: "res/CompanyA/Jackpot/JPminigame.png",
