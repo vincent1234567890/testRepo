@@ -15,6 +15,7 @@ const ClientServerConnect = function () {
     let _gameWSClient;
     let _gameIOSocket;
 
+    let _nextDisconnectIsExpected = false;
     let _wasKickedOutByRemoteLogIn = false;
 
     let _loginParams = null;
@@ -34,6 +35,8 @@ const ClientServerConnect = function () {
         if (_wasKickedOutByRemoteLogIn) {
             return Promise.reject(Error("We were kicked.  Clear _wasKickedOutByRemoteLogIn if you want to reconnect."));
         }
+
+        console.log(`Requesting initial game server from master server...`);
 
         // Without any join prefs, this will just give us the least busy game server to join initially
         return socketEmitPromise(getMasterServerSocket(), 'getRecommendedServers', {}).then(recommendedServers => {
@@ -65,7 +68,7 @@ const ClientServerConnect = function () {
         return new Promise((resolve, reject) => {
             // Do not connect if we are already connected to that server
             if (_currentGameServerUrl === gameAPIServerUrl) {
-                return;
+                return;   // @todo We should return the earlier loginResponseData here, or alternatively skip the following connect code and do the login again
             }
 
             // If the player logs in from somewhere else, our connection will be closed.
@@ -74,6 +77,22 @@ const ClientServerConnect = function () {
             // And that would create and endless cycle of clients fighting for the active login.
             if (_wasKickedOutByRemoteLogIn) {
                 return Promise.reject(Error("We were kicked.  Clear _wasKickedOutByRemoteLogIn if you want to reconnect."));
+            }
+
+            const oldClient = getGameWSClient();
+            if (oldClient) {
+                console.log(`Disconnecting from old gameServer`);
+                try {
+                    _currentGameServerUrl = null;
+                    oldClient.disconnect();
+                    // When that disconnect event is fired, do not take too much notice of it
+                    _nextDisconnectIsExpected = true;
+                } catch (error) {
+                    // This might happen if the old client is already disconnected
+                    // In those cases, there is no reason even to log the error
+                    console.warn("Error while trying to disconnect from old client:", error);
+                }
+                setGameWSClient(null);
             }
 
             const client = new WebSocketClient(gameAPIServerUrl);
@@ -86,12 +105,12 @@ const ClientServerConnect = function () {
             client.addEventListener('open', function () {
                 _currentGameServerUrl = gameAPIServerUrl;
 
-                client.callAPIOnce('game', 'requestServer', {}).then(
-                    (serverList) => {
-                        console.log("serverList:", serverList);
-                        // Future: Maybe ping the servers here, then connect to the closest one
-                    }
-                ).catch(console.error.bind(console));
+                //client.callAPIOnce('game', 'requestServer', {}).then(
+                //    (serverList) => {
+                //        console.log("serverList:", serverList);
+                //        // Future: Maybe ping the servers here, then connect to the closest one
+                //    }
+                //).catch(console.error.bind(console));
 
                 if (typeof document !== 'undefined') {
                     if (!_loginParams) {
@@ -143,6 +162,13 @@ const ClientServerConnect = function () {
             });
 
             client.addEventListener('close', function () {
+                // This is an expected disconnect, e.g. because we are switching to a different game server
+                if (_nextDisconnectIsExpected) {
+                    _nextDisconnectIsExpected = false;
+                    return;
+                }
+
+                // This was an unexpected disconnect, e.g. because the net went down, or the server crashed
                 _currentGameServerUrl = null;
                 setTimeout(cleanup, 0);
                 if (_wasKickedOutByRemoteLogIn) {
@@ -277,9 +303,25 @@ const ClientServerConnect = function () {
     };
 
     const joinGame = function (chosenScene) {
-        const client = getGameWSClient();
+        const joinPrefs = {scene: chosenScene};
 
-        return Promise.resolve().then(
+        let client;
+
+        console.log(`Requesting suitable game server from master server...`);
+
+        return socketEmitPromise(getMasterServerSocket(), 'getRecommendedServers', joinPrefs).then(
+            recommendedServers => {
+                console.log("recommendedServers:", recommendedServers);
+                // @todo If we fail to connect to the first recommended server, we could try the later ones.
+                const urlToUse = 'ws://' + recommendedServers[0];
+                return connectToGameServer(urlToUse);
+            }
+        ).then(
+            loginResponseData => {
+                console.log("loginResponseData:", loginResponseData);
+                client = getGameWSClient();
+            }
+        ).then(
             () => {
                 if (getServerInformer()) {
                     //registered events triggering multiple times are source of error.
@@ -291,10 +333,9 @@ const ClientServerConnect = function () {
                 if (!client.isOpen()) {
                     throw Error("Socket is closed");
                 }
-                return client.callAPIOnce('game', 'joinGame', {scene: chosenScene});
+                return client.callAPIOnce('game', 'joinGame', joinPrefs);
 
             }
-
         ).then(
             joinResponse => {
                 console.log("joinResponse:", joinResponse);
