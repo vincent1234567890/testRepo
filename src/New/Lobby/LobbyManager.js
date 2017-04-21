@@ -15,17 +15,17 @@ const LobbyManager = (function () {
         }
         this._parent = parent;
         // _profileManager = new ProfileManager();
-        this.displayView(playerData,onGameSelectedCallback);
+        this.displayView(playerData, loginData, onGameSelectedCallback);
     };
 
     const proto = LobbyManager.prototype;
 
-    proto.displayView = function(playerData, onGameSelectedCallback){
+    proto.displayView = function(playerData, loginData, onGameSelectedCallback){
         if (this._view){
             // this._parent.removeChild(this._view);
             this._view.destroyView();
         }
-        this._view = new LobbyView(playerData, loginData,_lobbyTheme, onGameSelectedCallback);
+        this._view = new LobbyView(playerData, loginData, _lobbyTheme, onGameSelectedCallback);
     };
 
     // function onRequestShowProfile(){

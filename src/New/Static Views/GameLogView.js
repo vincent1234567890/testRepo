@@ -521,6 +521,7 @@ const GameLogView = (function () {
                 fontDef.fillStyle = new cc.Color(0, 0, 0, 255);
 
                 const fishAmount = new cc.LabelTTF(count[fish], fontDef);
+                fishAmount.enableStroke(new cc.Color(255, 255, 255, 255), 2);
 
                 const size = fishSprite.getContentSize();
 
@@ -575,6 +576,7 @@ const GameLogView = (function () {
                 fontDef.fontStyle = "bold";
                 fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
                 fontDef.fillStyle = new cc.Color(0, 0, 0, 255);
+
 
                 let bulletId = new cc.LabelTTF(itemData.id, fontDef);
 
@@ -662,7 +664,6 @@ const GameLogView = (function () {
                 this.getContent = function () {
                     return wrapper;
                 };
-
             }
 
             return consumptionLogListItemPrefab;
@@ -672,7 +673,7 @@ const GameLogView = (function () {
         for (let i = 0; i < data.length; i++) {
             // console.log(data[i]);
             const listItemPrefab = new consumptionLogListItemPrefab({
-                id: i,
+                id: i+1,
                 totalSpend: data[i].consumptionCredit,
                 totalRevenue: data[i].bonusCredit,
                 sceneName: data[i].sceneName,
@@ -792,8 +793,8 @@ const GameLogView = (function () {
 
                 const transferType = new cc.LabelTTF(typeText, fontDef);
                 const transferId = new cc.LabelTTF(itemData.id, fontDef);
-                const transferAmount = new cc.LabelTTF(itemData.amount, fontDef);
-                const totalAmount = new cc.LabelTTF(itemData.total, fontDef);
+                const transferAmount = new cc.LabelTTF((itemData.amount).toLocaleString('en-US', {maximumFractionDigits: 2}), fontDef);
+                const totalAmount = new cc.LabelTTF((itemData.total).toLocaleString('en-US', {maximumFractionDigits: 2}), fontDef);
 
                 dateText.setPosition(125, listEntryPos.y);
                 transferType.setPosition(325, listEntryPos.y);
