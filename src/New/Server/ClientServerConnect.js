@@ -10,7 +10,7 @@ const ClientServerConnect = function () {
 
     let _masterServerSocket = null;
 
-    let _hasConnected = false;
+    let _currentGameServerUrl = null;
     let _informServer ;
     let _gameWSClient;
     let _gameIOSocket;
@@ -31,6 +31,10 @@ const ClientServerConnect = function () {
     }
 
     function doInitialConnect () {
+        if (_wasKickedOutByRemoteLogIn) {
+            return Promise.reject(Error("We were kicked.  Clear _wasKickedOutByRemoteLogIn if you want to reconnect."));
+        }
+
         // Without any join prefs, this will just give us the least busy game server to join initially
         return socketEmitPromise(getMasterServerSocket(), 'getRecommendedServers', {}).then(recommendedServers => {
             //console.log("recommendedServers:", recommendedServers);
@@ -59,14 +63,18 @@ const ClientServerConnect = function () {
 
     function connectToGameServer (gameAPIServerUrl) {
         return new Promise((resolve, reject) => {
-            // Do not connect if we are already connected!
-            if (_hasConnected) return;
+            // Do not connect if we are already connected to that server
+            if (_currentGameServerUrl === gameAPIServerUrl) {
+                return;
+            }
 
             // If the player logs in from somewhere else, our connection will be closed.
             // In that case, we should not reconnect.
             // If we reconnect, the log in process will cause the active login to be kicked out!
             // And that would create and endless cycle of clients fighting for the active login.
-            if (_wasKickedOutByRemoteLogIn) return;
+            if (_wasKickedOutByRemoteLogIn) {
+                return Promise.reject(Error("We were kicked.  Clear _wasKickedOutByRemoteLogIn if you want to reconnect."));
+            }
 
             const client = new WebSocketClient(gameAPIServerUrl);
             client.addService(new GameServices.GameService());
@@ -76,7 +84,7 @@ const ClientServerConnect = function () {
 
             client.connect();
             client.addEventListener('open', function () {
-                _hasConnected = true;
+                _currentGameServerUrl = gameAPIServerUrl;
 
                 client.callAPIOnce('game', 'requestServer', {}).then(
                     (serverList) => {
@@ -123,7 +131,7 @@ const ClientServerConnect = function () {
             });
 
             ClientServerConnect.listenForEvent('kickedByRemoteLogIn', data => {
-                console.warn("You have been disconnected because you logged in from somewhere else.");
+                console.log("You have been disconnected because you logged in from somewhere else.");
                 // We don't actually need to close the socket here.  The server is about to close it for us!
 
                 // We do need to stop trying to reconnect, at least until the player starts using this client again
@@ -135,11 +143,14 @@ const ClientServerConnect = function () {
             });
 
             client.addEventListener('close', function () {
-                _hasConnected = false;
-                console.log("Disconnect detected." + (_wasKickedOutByRemoteLogIn ? "" : "  Will attempt reconnection soon..."));
-                setTimeout(doInitialConnect, 2000);
-
+                _currentGameServerUrl = null;
                 setTimeout(cleanup, 0);
+                if (_wasKickedOutByRemoteLogIn) {
+                    console.log("Disconnect detected.  We were kicked, so will not auto-reconnect.  Will wait for player activity.");
+                } else {
+                    console.log("Disconnect detected.  Will reconnect and return to lobby soon...");
+                    setTimeout(() => doInitialConnect().catch(console.error), 2000);
+                }
             });
 
             function cleanup(){
