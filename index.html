@@ -48,8 +48,6 @@ body, canvas, div {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     /*background-image: url("/res/New/HTML/tileable Fish icon.png");*/
 
-
-
     /*background-image: url("/res/New/HTML/tileable Fish icon.png"), -webkit-linear-gradient(to right, #a1d3b0, #f6f1d3);*/
     /*background-image: url("/res/New/HTML/tileable Fish icon.png"), -moz-linear-gradient(to right, #a1d3b0, #f6f1d3);*/
     /*background-image: url("/res/New/HTML/HTML_BG.png"), linear-gradient(to right, #d34a55, #a23439);*/
@@ -93,15 +91,11 @@ body {
   -webkit-box-orient: horizontal;
   -webkit-box-align: center;
   -webkit-box-pack: center;
-
-
-
 }
 
 canvas {
   background-color: rgba(0, 0, 0, 0);
 }
-
 
 #bkg{
     /*position : fixed;*/
@@ -132,10 +126,9 @@ canvas {
 
 </head>
 <body>
-<img id="bkg" src="/res/New/HTML/HTML_BG.png" style="display: none"/>
+<img id="imgLoadingBG" src="res/CompanyA/Loading/LoadingBG.png" style="display: none"/>
 <script src="res/loading.js"></script>
 <canvas id="gameCanvas" width="480" height="720"></canvas>
-
 
 <script>
     (function () {
@@ -162,86 +155,6 @@ canvas {
 <script src="frameworks/cocos2d-html5/CCBoot.js"></script>
 <!--<script src="src/New/fastjslogger.user.js"></script>-->
 <script cocos src="main.js"></script>
-<script>
-    "use strict";
-
-    window.addEventListener("load", () => setTimeout(resizeBackground, 5000));
-
-    window.addEventListener("resize", resizeBackground);
-
-    function resizeBackground() {
-        const cocos = document.getElementById("Cocos2dGameContainer");
-        if (!cocos) return;
-
-        const gameCanvas = document.getElementById("gameCanvas");
-        const bkgStyle = document.getElementById("bkg").style;
-//        var bgInnerWidth = 1740;
-//        var bgInnerHeight = 1137;
-//        var bgOuterWidth = 2016;
-//        var bgOuterHeight = 1400;
-
-        const bgViewportLeft = 822;
-        const bgViewportTop = 1104;
-        const bgViewportRight = 2295;
-        const bgViewportBottom = 1995;
-        const bgWidth = 3080;
-        const bgHeight = 3080;
-
-        const bgViewportWidth = bgViewportRight - bgViewportLeft;
-        const bgViewportHeight = bgViewportBottom - bgViewportTop;
-
-        const canvasLeft = parseFloat(cocos.style.paddingLeft);
-        const canvasTop = parseFloat(cocos.style.paddingTop);
-        const canvasWidth = parseFloat(gameCanvas.width);
-        const canvasHeight = parseFloat(gameCanvas.height);
-
-        const canvasCenterX = canvasLeft + canvasWidth / 2;
-        const canvasCenterY = canvasTop + canvasHeight / 2;
-
-        const bgLeftInPageSpace = canvasCenterX - bgWidth / 2 * canvasWidth / bgViewportWidth;
-        const bgTopInPageSpace = canvasCenterY - bgHeight / 2 * canvasHeight / bgViewportHeight;
-        const bgRightInPageSpace = canvasCenterX + bgWidth / 2 * canvasWidth / bgViewportWidth;
-        const bgBottomInPageSpace = canvasCenterY + bgHeight / 2 * canvasHeight / bgViewportHeight;
-
-        const bgWidthInPageSpace = bgRightInPageSpace - bgLeftInPageSpace;
-        const bgHeightInPageSpace = bgBottomInPageSpace - bgTopInPageSpace;
-
-        bkgStyle.position = 'fixed';
-        bkgStyle.left = bgLeftInPageSpace + 'px';
-        bkgStyle.top = bgTopInPageSpace + 'px';
-        bkgStyle.width = bgWidthInPageSpace + 'px';
-        bkgStyle.height = bgHeightInPageSpace + 'px';
-
-        // Make it visible
-        bkgStyle.display = 'block';
-
-        /*
-        bkgStyle.width = parseFloat(gameCanvas.width) + 250 +"px";
-//        document.getElementById("bkg").width = document.getElementById("Cocos2dGameContainer").width + 50;
-//        console.log(document.getElementById("bkg").style.width);
-//        console.log(document.getElementById("gameCanvas").width);
-//        console.log(document.getElementById("gameCanvas").style.width);
-        bkgStyle.height = parseFloat(gameCanvas.height + 250) +"px";
-//        document.getElementById("bkg").height = document.getElementById("gameCanvas").height + 50;
-//        console.log(document.getElementById("bkg").style.height);
-//        console.log(document.getElementById("gameCanvas").height);
-//        console.log(document.getElementById("gameCanvas").style.height);
-        if(cocos) {
-            bkgStyle.padding = document.getElementById("Cocos2dGameContainer").style.padding;
-//            bkgStyle.padding.top
-//        document.getElementById("bkg").style.left = document.getElementById("gameCanvas").style.left - 50;
-//        console.log(document.getElementById("bkg").style.left);
-            console.log("bkgStyle.paddingTop:",bkgStyle.paddingTop);
-
-            console.log("bkgStyle.paddingTop:",bkgStyle.paddingTop = parseFloat(bkgStyle.paddingTop)-50);
-            console.log(bkgStyle.paddingLeft);
-//        document.getElementById("bkg").style.top = document.getElementById("gameCanvas").style.top - 50;
-//        console.log(document.getElementById("bkg").style.top);
-            console.log(document.getElementById("gameCanvas").style.top);
-        }
-        */
-    }
-</script>
 <!--</div>-->
 </body>
 </html>

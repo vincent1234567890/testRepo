@@ -1,7 +1,7 @@
 var res = {
     LoadingLogo: "res/loadingLogo.jpg",
-
-
+    LoadingIconPng: "res/CompanyA/Loading/LoadingIcon.png",
+    LoadingIconPlist: "res/CompanyA/Loading/LoadingIcon.plist",
 
     ParticlePlist: "res/particle.plist",
 
