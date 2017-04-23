@@ -21,6 +21,11 @@ var res = {
     //Lobby
     LobbyUI2Png: "res/CompanyA/Lobby/LobbyUI2.png",
     LobbyUI2Plist: "res/CompanyA/Lobby/LobbyUI2.plist",
+    LobbyUIPng: "res/CompanyA/Lobby/LobbyUI.png",
+    LobbyUIPlist: "res/CompanyA/Lobby/LobbyUI.plist",
+
+    SeatSelectionPng: "res/CompanyA/Lobby/SitSelection.png",
+    SeatSelectionPlist: "res/CompanyA/Lobby/SitSelection.plist",
 
     //testing
     testingEffect: "res/CompanyA/Game/FREffect.plist",
