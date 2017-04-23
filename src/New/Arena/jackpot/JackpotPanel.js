@@ -1,5 +1,5 @@
 
-var JackpotPanel = cc.Layer.extend({ //gradient
+var JackpotPanel = cc.LayerColor.extend({ //gradient
     _selectedIndex: 0,
     _jackpotResult: null,
     _unselectedBoxes: null,
@@ -15,9 +15,10 @@ var JackpotPanel = cc.Layer.extend({ //gradient
     _lbPrize2Value: null,
     _lbPrize3Value: null,
     _lbPrize4Value: null,
+    _eventListener: null,
 
     ctor: function (isPlaying, jackpotRewardObject) {
-        cc.Layer.prototype.ctor.call(this);
+        cc.LayerColor.prototype.ctor.call(this, new cc.Color(10,10,10,196));
 
         this._unselectedBoxes = [];
         this._selectedMedals = [];
@@ -183,6 +184,23 @@ var JackpotPanel = cc.Layer.extend({ //gradient
                 cc.eventManager.addListener(touchEventListener, spTreasureBox);
             }
         }
+
+        this._eventListener = cc.EventListener.create({
+            event: cc.EventListener.TOUCH_ONE_BY_ONE,
+            swallowTouches: true,
+            onTouchBegan: function (touch, event) {
+                let target = event.getCurrentTarget();
+                return (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
+                        target.convertToNodeSpace(touch.getLocation())));
+            },
+            onTouchEnded: function (touch, event) {
+                let target = event.getCurrentTarget();
+                if (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
+                        target.convertToNodeSpace(touch.getLocation()))) {
+                    //do nothing.
+                }
+            }
+        });
     },
 
     _animateClickedBox: function (target) {
@@ -479,6 +497,12 @@ var JackpotPanel = cc.Layer.extend({ //gradient
         this._lbTimeCounter.unscheduleAllCallbacks();
         this._lbTimeCounter.setString("0");
         this._lbTimeCounter.setColor(new cc.Color(255, 255, 255, 255));
+    },
+
+    onEnter: function(){
+        cc.LayerColor.prototype.onEnter.call(this);
+        if (this._eventListener && !this._eventListener._isRegistered())
+            cc.eventManager.addListener(this._eventListener, this);
     },
 
     cleanup: function () {
