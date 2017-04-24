@@ -110,10 +110,9 @@ const JackpotView = (function () {
                 if (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
                         target.convertToNodeSpace(touch.getLocation()))) {
                     //show the jackpot float panel
-                    let jackpotPanel = new JackpotFloatPanel();
+                    let jackpotPanel = new JackpotDetailPanel();
                     GameView.addView(jackpotPanel, 199);
-                    jackpotPanel.setPositionY(cc.winSize.height + 2);
-                    jackpotPanel.runAction(cc.moveTo(0.2, 0, 0).easing(cc.easeBounceIn()));
+                    jackpotPanel.showDetail();
                 }
             }
         });

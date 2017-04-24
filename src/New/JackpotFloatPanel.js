@@ -1,4 +1,16 @@
-var JackpotFloatPanel = cc.LayerColor.extend({
+var JackpotFloatPanel = cc.Layer.extend({
+
+    ctor: function(){
+        cc.Layer.prototype.ctor.call(this);
+        this._className = "JackpotFloatPanel";
+
+        //show
+
+    }
+});
+
+var JackpotDetailPanel = cc.LayerColor.extend({
+    _spJackpotPopBase: null,
     _lbPrize1Value: null,
     _lbPrize2Value: null,
     _lbPrize3Value: null,
@@ -29,7 +41,8 @@ var JackpotFloatPanel = cc.LayerColor.extend({
             }
         });
 
-        let spJackpotPopBase = new ccui.Scale9Sprite(ReferenceName.JackpotPopBase, new cc.Rect(20, 20, 108, 93));
+        let spJackpotPopBase = this._spJackpotPopBase =
+            new ccui.Scale9Sprite(ReferenceName.JackpotPopBase, new cc.Rect(20, 20, 108, 93));
         spJackpotPopBase.setPreferredSize(new cc.Size(517, 452));
         this.addChild(spJackpotPopBase);
         spJackpotPopBase.setPosition(cc.winSize.width * 0.5, cc.winSize.height * 0.5);
@@ -104,6 +117,11 @@ var JackpotFloatPanel = cc.LayerColor.extend({
             if (jackpotValues["status"] === 200)
                 selfPoint._showJackpotPrizeValues(jackpotValues["data"]);
         }).catch(console.error)
+    },
+
+    showDetail: function(){
+        let spJackpotPopBase = this._spJackpotPopBase;
+        _spJackpotPopBase.runAction(cc.moveTo(0.2, 0, 0).easing(cc.easeBounceIn()));
     },
 
     _showJackpotPrizeValues: function(prizeValues){

@@ -1,3 +1,12 @@
 -----v1.1.0--------
 
 
+---------------v1.3.424b 修改日志---------------------
+1. implements Jackpot feature on client
+2. adds Loading Scene
+3. adds leader board panel.
+4. adds Seat selection scene.
+5. update the asset for improve loading speed.
+
+
+----------------v1.3.428b 开发计划--------------------
