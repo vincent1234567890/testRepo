@@ -49,6 +49,8 @@ var res = {
     GameBackground2: "res/CompanyA/Game BG/Game BG 3.png",
     GameBackground3: "res/CompanyA/Game BG/Game BG 4.png",
 
+    //FreeRound
+    FreeRoundTitle : "res/CompanyA/Game/FreeRoundTitle.png",
 
     // GoldenNumbersPlist : "res/New/Fonts/GoldNumber.plist",
     // GoldNumberPng : "res/New/Fonts/GoldNumber.png",
