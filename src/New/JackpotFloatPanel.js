@@ -1,11 +1,128 @@
-var JackpotFloatPanel = cc.Layer.extend({
+var JackpotFloatPanel = cc.Node.extend({
+    _lbJackpotValue: null,
+    _barFrameEventListener: null,
+    _spBarFrame: null,
 
     ctor: function(){
-        cc.Layer.prototype.ctor.call(this);
+        cc.Node.prototype.ctor.call(this);
         this._className = "JackpotFloatPanel";
 
-        //show
+        cc.spriteFrameCache.addSpriteFrames(res.LobbyJackpotPlist);
+        cc.spriteFrameCache.addSpriteFrames(res.WaterCausticAnimation);
 
+        //shadow
+        let spShadow = new cc.Sprite(ReferenceName.JackpotShadow);
+        this.addChild(spShadow);
+        spShadow.setPosition(0, -5);
+
+        //background
+        let spBackground = new cc.Sprite(ReferenceName.JackpotBackground);
+        this.addChild(spBackground);
+        spBackground.setPosition(0, 0);
+
+        //light
+        let spLight = new cc.Sprite(ReferenceName.JackpotLight);
+        this.addChild(spLight);
+        spLight.setPosition(0, 0);
+        spLight.runAction(cc.rotateBy(25,360).repeatForever());
+
+        //bar
+        let spBar = new cc.Sprite(ReferenceName.JackpotBar);
+        this.addChild(spBar);
+        spBar.setPosition(0, -22);
+
+        //title
+        let spTitle = new cc.Sprite(ReferenceName.JackpotTitleChinese);
+        this.addChild(spTitle);
+        spTitle.setPosition(0, 22);
+
+        //spWaterCaustic
+        let spWaterCaustic = new cc.Sprite(ReferenceName.JackpotWaterCaustic00000);
+        spWaterCaustic.setScale(0.2);
+        spWaterCaustic.setBlendFunc(cc.ONE, cc.ONE);
+        spWaterCaustic.setPosition(0, 0);
+        let animWater = GUIFunctions.getAnimation(ReferenceName.JackpotWaterCausticAnim, 0.05);
+        spWaterCaustic.runAction(animWater.repeatForever());
+
+        let spMask = new cc.Sprite(ReferenceName.JackpotBar);
+        let maskedFill = new cc.ClippingNode(spMask);
+        maskedFill.setAlphaThreshold(0.9);
+        // maskedFill.addChild(color,1);
+        maskedFill.addChild(spWaterCaustic);
+        maskedFill.setPosition(0,-22);
+        this.addChild(maskedFill);
+
+        //barFrame
+        let spBarFrame = this._spBarFrame = new cc.Sprite(ReferenceName.JackpotBarFrame);
+        spBarFrame.setPosition(0, -22);
+        this.addChild(spBarFrame);
+
+
+        //jackpot value label
+        let barSize = spBarFrame.getContentSize();
+        let lbJackpotValue = this._lbJackpotValue = new cc.LabelTTF("9,888,999.88", "Impact", 30);
+        spBarFrame.addChild(lbJackpotValue, -1);
+        lbJackpotValue.setPosition(barSize.width * 0.5, barSize.height * 0.5);
+        lbJackpotValue.fontWeight = "bold";
+        lbJackpotValue.setFontFillColor(new cc.Color(255,255,255,255));
+        lbJackpotValue.enableStroke(new cc.Color(0, 0, 0, 255), 2);
+        //lbJackpotValue.setDimensions(barSize);
+
+        //add the event listener
+        this._barFrameEventListener = cc.EventListener.create({
+            event: cc.EventListener.TOUCH_ONE_BY_ONE,
+            swallowTouches: true,
+            onTouchBegan: function(touch, event){
+                let target = event.getCurrentTarget();
+                if (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
+                        target.convertToNodeSpace(touch.getLocation()))) {
+                    target.runAction(cc.scaleTo(0.2, 1.05));
+                    target.setUserData(true);   //scale;
+                    return true;
+                }
+                return false;
+            },
+            onTouchMoved: function(touch, event) {
+                let target = event.getCurrentTarget();
+                if (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
+                        target.convertToNodeSpace(touch.getLocation()))) {
+                    if(target.getUserData() !== true){
+                        target.setUserData(true);
+                        target.runAction(cc.scaleTo(0.2, 1.06));
+                    }
+                } else {
+                    if(target.getUserData() === true){
+                        target.setUserData(false);
+                        target.runAction(cc.scaleTo(0.2, 1));
+                    }
+                }
+            },
+            onTouchEnded: function(touch, event){
+                let target = event.getCurrentTarget();
+                target.setUserData(false);
+                target.runAction(cc.scaleTo(0.2, 1));
+
+                if (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
+                        target.convertToNodeSpace(touch.getLocation()))) {
+                    //show the jackpot float panel
+                    let jackpotPanel = new JackpotDetailPanel(), scene = cc.director.getRunningScene();
+                    scene.addChild(jackpotPanel, 999);
+                    jackpotPanel.showDetail();
+                }
+            }
+        });
+    },
+
+    onEnter: function(){
+       cc.Node.prototype.onEnter.call(this);
+        if (this._barFrameEventListener && !this._barFrameEventListener._isRegistered())
+            cc.eventManager.addListener(this._barFrameEventListener, this._spBarFrame);
+    },
+
+    cleanup: function(){
+        cc.spriteFrameCache.removeSpriteFramesFromFile(res.LobbyJackpotPlist);
+        cc.spriteFrameCache.removeSpriteFramesFromFile(res.WaterCausticAnimation);
+        cc.Node.prototype.cleanup.call(this);
     }
 });
 
@@ -33,7 +150,7 @@ var JackpotDetailPanel = cc.LayerColor.extend({
                 let target = event.getCurrentTarget();
                 if (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
                         target.convertToNodeSpace(touch.getLocation()))) {
-                    target.runAction(cc.sequence(cc.scaleTo(0.6, 0).easing(cc.easeExponentialOut()),
+                    target._spJackpotPopBase.runAction(cc.sequence(cc.scaleTo(0.6, 0).easing(cc.easeExponentialOut()),
                         cc.callFunc(function(){
                             this.removeFromParent(true);
                         }, target)));
@@ -120,8 +237,9 @@ var JackpotDetailPanel = cc.LayerColor.extend({
     },
 
     showDetail: function(){
-        let spJackpotPopBase = this._spJackpotPopBase;
-        _spJackpotPopBase.runAction(cc.moveTo(0.2, 0, 0).easing(cc.easeBounceIn()));
+        let spJackpotPopBase = this._spJackpotPopBase, size = this._contentSize;
+        spJackpotPopBase.setPositionY(size.height * 2);
+        spJackpotPopBase.runAction(cc.moveTo(0.3, size.width * 0.5, size.height * 0.5).easing(cc.easeBounceIn()));
     },
 
     _showJackpotPrizeValues: function(prizeValues){
