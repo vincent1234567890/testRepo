@@ -1,8 +1,10 @@
 
 var JackpotPanel = cc.LayerColor.extend({ //gradient
-    _selectedIndex: 0,
+    _isPlaying: null,
     _jackpotResult: null,
+
     _unselectedBoxes: null,
+    _selectedIndex: 0,
     _selectedMedals: null,
     _pnAward: null,
     _spBackground: null,
@@ -18,6 +20,9 @@ var JackpotPanel = cc.LayerColor.extend({ //gradient
     _eventListener: null,
 
     ctor: function (isPlaying, jackpotRewardObject) {
+        this._isPlaying = isPlaying;
+        this._jackpotResult = jackpotRewardObject;
+
         cc.LayerColor.prototype.ctor.call(this, new cc.Color(10,10,10,196));
 
         this._unselectedBoxes = [];
@@ -106,8 +111,6 @@ var JackpotPanel = cc.LayerColor.extend({ //gradient
         //            selfPoint._jackpotResult = jackpotObject["data"][0];
         //    }).catch(console.error);
         //}
-
-        selfPoint._jackpotResult = jackpotRewardObject;
 
         //Treasure Box
         let boxStartPoint = cc.p(215, 100), boxPadding = new cc.Size(180, 120), spTreasureBox;
@@ -484,6 +487,9 @@ var JackpotPanel = cc.LayerColor.extend({ //gradient
         //show the award panel.
         this.runAction(cc.sequence(cc.delayTime(delay), cc.callFunc(function () {
             let result = this._jackpotResult;
+            if (this._isPlaying) {
+                ClientServerConnect.collectJackpot(result._id);
+            }
             let pnAward = new JackpotAwardPanel(result["level"], result["rewardValue"]);
             pnAward.setPosition(101, 74);
             this.addChild(pnAward);
