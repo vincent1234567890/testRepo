@@ -42,7 +42,7 @@ var cocos2dApp = cc.game.onStart = function() {
 
             cc.LoadingScreen.preload(ResourceLoader.getResourceList(), function () {
                 // cc.director.runScene(new LogoScene());
-                //cc.director.runScene(new TestScene());
+                // cc.director.runScene(new TestScene());
                 //cc.director.runScene(new SeatSelectionScene());
 
                 AppManager.goToLobby(data.player);
