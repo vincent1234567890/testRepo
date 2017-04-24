@@ -30,9 +30,14 @@ var SeatSelectionScene = cc.Scene.extend({
 
         //info panel
 
+
         //context menu
 
+
         //jackpot panel
+        let pnJackpot = new JackpotFloatPanel();
+        this.addChild(pnJackpot);
+        pnJackpot.setPosition(683, 666);
 
         //title
         let spNotificationBar = new cc.Sprite(ReferenceName.SeatNotificationBar);

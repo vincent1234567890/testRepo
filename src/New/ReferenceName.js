@@ -64,13 +64,6 @@ const ReferenceName = {
     SeatChairGlow: "#SSChairGlow.png",
     SeatArrow: "#SSArrow.png",
 
-    JackpotPopBase: "#JPPOPBase.png",
-    JackpotPopFrame: "#JPPOPFrame.png",
-    JackpotPopGold: "#JPPOPGold.png",
-    JackpotPopSilver: "#JPPOPSilver.png",
-    JackpotPopGreen: "#JPPOPGreen.png",
-    JackpotPopBlue: "#JPPOPBlue.png",
-
     //Dolphin
     DolphinIcon : "#FishIcon.png",
     DolphinBubble : "#Bubble.png",
@@ -108,6 +101,16 @@ const ReferenceName = {
     JackpotBarFrame : "#JackpotBarFrame.png",
     JackpotLight : "#JackpotLigthray.png",
     JackpotTitleChinese : "#JackpotChineseTitle.png",
+
+    JackpotPopBase: "#JPPOPBase.png",
+    JackpotPopFrame: "#JPPOPFrame.png",
+    JackpotPopGold: "#JPPOPGold.png",
+    JackpotPopSilver: "#JPPOPSilver.png",
+    JackpotPopGreen: "#JPPOPGreen.png",
+    JackpotPopBlue: "#JPPOPBlue.png",
+
+    JackpotWaterCaustic00000: "#Caustic_00000.png",
+    JackpotWaterCausticAnim: "Caustic_",
 
     //Leaderboard
     LeaderboardTextBackground : "#TextBG2.png",

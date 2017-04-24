@@ -64,6 +64,15 @@ const GameManager = function () {
         GameView.goToGame(_currentScene);
     };
 
+    const gotoSeatingSelection = function(parent){
+        GameView.initialise(parent);
+
+        _floatingMenuManager.reattach();
+        _jackpotManager.reattach();
+
+        BlockingManager.destroyView();
+    }
+
     const shootTo = function (playerId, gunId, angle, bulletId) {
         GameView.shootTo(playerId, angle);
         return _bulletManager.createBullet(gunId, bulletId);
@@ -366,6 +375,7 @@ const GameManager = function () {
         showPostGameStats: showPostGameStats,
         unsetLockForFishId : unsetLockForFishId,
         getPlayerData: getPlayerData,
+        gotoSeatingSelection:gotoSeatingSelection,
 
         //Misc
         isCurrentPlayer: isCurrentPlayer,

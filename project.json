@@ -19,6 +19,7 @@
         "src/resource.js",
 
         "src/New/Utilities/Queue.js",
+        "src/New/CommonWidget.js",
 
         "src/SharedClasses/LoadingScreen.js",
         "src/SharedClasses/ParticleSystemFactory.js",
