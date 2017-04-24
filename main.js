@@ -42,16 +42,16 @@ var cocos2dApp = cc.game.onStart = function() {
 
             cc.LoadingScreen.preload(ResourceLoader.getResourceList(), function () {
                 // cc.director.runScene(new LogoScene());
-                // cc.director.runScene(new TestScene());
-                //cc.director.runScene(new SeatSelectionScene());
+                //cc.director.runScene(new TestScene());
+                cc.director.runScene(new SeatSelectionScene());
 
-                AppManager.goToLobby(data.player);
-                FishAnimationData.setData(themeConfig.FishRawData);
+                //AppManager.goToLobby(data.player);
+                //FishAnimationData.setData(themeConfig.FishRawData);
             }, this);
         }
     ).catch(console.error.bind(console));
 };
 
 cc.game.run();
-console.log("version: 1.3.417b");
+console.log("version: 1.3.424b");
 

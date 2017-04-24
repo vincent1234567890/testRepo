@@ -21,12 +21,7 @@ var TestScene = cc.Scene.extend({
         //const waterCausticsLayer = new WaterCausticsLayer();
         //this.addChild(waterCausticsLayer,999);
 
-        // let jackpotPanel = new JackpotFloatPanel();
-        // this.addChild(jackpotPanel);
-
-        GameView.initialise(this);
-        const effects = new EffectsManager();
-        effects.showFreeRoundEffect();
-
+        let jackpotPanel = new JackpotDetailPanel();
+        this.addChild(jackpotPanel);
     }
 });

@@ -23,6 +23,7 @@ var SeatSelectionScene = cc.Scene.extend({
         let btnBack = GUIFunctions.createButton(ReferenceName.SeatBackBtn, ReferenceName.SeatBackBtnSelected, function(){
             //back to Lobby
             console.log("click button");
+            //GameManager.goToLobby();
         });
         this.addChild(btnBack);
         btnBack.setPosition(50, cc.visibleRect.top.y - 60);
@@ -43,12 +44,12 @@ var SeatSelectionScene = cc.Scene.extend({
         spLobbyType.setPosition(notificationSize.width * 0.5, notificationSize.height * 0.5);
 
         //multiple
-        let pnMultipleTable = new TableSeatPanel(TableType.MULTIPLE);
+        let pnMultipleTable = new TableSeatPanel(this._lobbyType, TableType.MULTIPLE);
         pnMultipleTable.setPosition(0, 0);
         this.addChild(pnMultipleTable);
 
         //solo
-        let pnSoleTable = new TableSeatPanel(TableType.SINGLE);
+        let pnSoleTable = new TableSeatPanel(this._lobbyType, TableType.SINGLE);
         pnSoleTable.setPosition(cc.visibleRect.center.x, 0);
         this.addChild(pnSoleTable);
     },
@@ -72,16 +73,18 @@ var SeatSelectionScene = cc.Scene.extend({
 });
 
 const TableSeatPanel = cc.Layer.extend({
+    _lobbyType: null,
     _tableType: null,
     _spSeatLeft: null,
     _spSeatBtmLeft: null,
     _spSeatBtmRight: null,
     _spSeatRight: null,
 
-    ctor: function(tableType){
+    ctor: function(lobbyType, tableType){
         cc.Layer.prototype.ctor.call(this);
-        this._tableType = tableType || TableType.MULTIPLE;
         this._className = "TableSeatPanel";
+        this._lobbyType = lobbyType;
+        this._tableType = tableType || TableType.MULTIPLE;
 
         //type title
         let spWood = new cc.Sprite(ReferenceName.SeatWoodBackground);
@@ -93,14 +96,14 @@ const TableSeatPanel = cc.Layer.extend({
         spTitle.setPosition(woodSize.width * 0.5, woodSize.height * 0.5);
 
         //seat Left
-        let spSeatLeft = this._spSeatLeft = new SeatSprite(ReferenceName.SeatChair);
+        let spSeatLeft = this._spSeatLeft = new SeatSprite();
         spSeatLeft.setSeatPosition(SeatPosition.LEFT);
         spSeatLeft.setPosition(72, 195);
         spSeatLeft.setTableType(this._tableType);
         this.addChild(spSeatLeft);
 
         //seat right
-        let spSeatRight = this._spSeatRight = new SeatSprite(ReferenceName.SeatChair);
+        let spSeatRight = this._spSeatRight = new SeatSprite();
         spSeatRight.setSeatPosition(SeatPosition.RIGHT);
         spSeatRight.setPosition(596, 195);
         spSeatRight.setTableType(this._tableType);
@@ -115,14 +118,14 @@ const TableSeatPanel = cc.Layer.extend({
         spTablePicture.setPosition(292, 348);
 
         //seat Bottom Left
-        let spSeatBtmLeft = this._spSeatBtmLeft = new SeatSprite(ReferenceName.SeatChair);
+        let spSeatBtmLeft = this._spSeatBtmLeft = new SeatSprite();
         spSeatBtmLeft.setSeatPosition(SeatPosition.BOTTOM_LEFT);
         spSeatBtmLeft.setPosition(230, 60);
         spSeatBtmLeft.setTableType(this._tableType);
         this.addChild(spSeatBtmLeft);
 
         //seat Bottom Right
-        let spSeatBtmRight = this._spSeatBtmRight = new SeatSprite(ReferenceName.SeatChair);
+        let spSeatBtmRight = this._spSeatBtmRight = new SeatSprite();
         spSeatBtmRight.setSeatPosition(SeatPosition.BOTTOM_RIGHT);
         spSeatBtmRight.setPosition(450, 60);
         spSeatBtmRight.setTableType(this._tableType);
@@ -149,6 +152,8 @@ const TableSeatPanel = cc.Layer.extend({
 
 var SeatSprite = cc.Sprite.extend({
     _seatPosition: null,
+    _tableType: null,
+    _LobbyType: null,
     _spGlow: null,
     _spArrow: null,
     _eventListener: null,
@@ -171,12 +176,12 @@ var SeatSprite = cc.Sprite.extend({
         this._eventListener = cc.EventListener.create({
             event: cc.EventListener.TOUCH_ONE_BY_ONE,
             swallowTouches: true,
-
             onTouchBegan: function(touch, event){
                 let target = event.getCurrentTarget();
                 if (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
                         target.convertToNodeSpace(touch.getLocation()))) {
                     target._showSelectedStatus();
+                    window.selSeat = target;
                     return true;
                 }
                 return false;
@@ -186,40 +191,47 @@ var SeatSprite = cc.Sprite.extend({
                 let target = event.getCurrentTarget();
                 if (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
                         target.convertToNodeSpace(touch.getLocation()))) {
-
+                    if(!target._spGlow.isVisible())
+                        target._showSelectedStatus()
                 } else {
-
+                    if(target._spGlow.isVisible())
+                        target._hideSelectedStatus();
                 }
             },
 
             onTouchEnded: function (touch, event) {
                 let target = event.getCurrentTarget();
-                target._hideSelectedStatus();
+
                 if (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
                         target.convertToNodeSpace(touch.getLocation()))) {
 
-                } else {
-
                 }
+                target._hideSelectedStatus();
             }
         });
     },
 
     _showSelectedStatus: function(){
         let spArrow = this._spArrow;
+        spArrow.stopAllActions();
         spArrow.setVisible(true);
+        spArrow.setOpacity(255);
         spArrow.setPosition(63, 125);
         spArrow.runAction(cc.sequence(
             cc.moveTo(0.3, 63, 140).easing(cc.easeBounceIn()), cc.delayTime(0.2),
             cc.moveTo(0.3, 63, 125).easing(cc.easeBounceOut()), cc.delayTime(0.1)).repeatForever());
+
+        this._spGlow.stopAllActions();
         this._spGlow.setVisible(true);
+        this._spGlow.setOpacity(255);
     },
 
     _hideSelectedStatus: function(){
         let spArrow = this._spArrow;
         spArrow.stopAllActions();
-        spArrow.setVisible(false);
-        this._spGlow.setVisible(false);
+        spArrow.runAction(cc.sequence(cc.fadeOut(0.2), cc.hide()));
+        this._spGlow.stopAllActions();
+        this._spGlow.runAction(cc.sequence(cc.fadeOut(0.2), cc.hide()));
     },
 
     onEnter: function(){
@@ -242,13 +254,21 @@ var SeatSprite = cc.Sprite.extend({
 
     getTableType: function(){
         return this._tableType;
+    },
+
+    setLobbyType: function(lobbyType){
+        this._LobbyType = lobbyType;
+    },
+
+    getLobbyType: function(){
+        return this._LobbyType;
     }
 });
 
 const SeatPosition = {
-    LEFT: 0,
-    BOTTOM_LEFT: 1,
-    BOTTOM_RIGHT: 2,
+    LEFT: 2,
+    BOTTOM_LEFT: 0,
+    BOTTOM_RIGHT: 1,
     RIGHT: 3
 };
 

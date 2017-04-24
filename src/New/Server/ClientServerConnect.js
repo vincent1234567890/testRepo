@@ -6,7 +6,7 @@ const ClientServerConnect = function () {
     "use strict";
 
     const masterServerUrl = 'ws://' + document.location.hostname + ':8089';
-    const defaultGameAPIServerUrl = 'ws://' + document.location.hostname + ':8088';
+    const defaultGameAPIServerAddress = document.location.hostname + ':8088';
 
     let _masterServerSocket = null;
 
@@ -48,7 +48,7 @@ const ClientServerConnect = function () {
             //console.log("recommendedServers:", recommendedServers);
 
             // In case none of the recommended servers work, add the default server as a fallback
-            recommendedServers.push(defaultGameAPIServerUrl);
+            recommendedServers.push(defaultGameAPIServerAddress);
 
             const tryNextGameServer = () => {
                 if (recommendedServers.length === 0) {
@@ -70,8 +70,8 @@ const ClientServerConnect = function () {
         }, error => {
             // We arrive here if the master server did not respond, or was not awake.
             console.warn(`Problem getting recommended server from the master server:`, error);
-            console.warn(`So falling back to default: ${defaultGameAPIServerUrl}`);
-            return connectToGameServer(defaultGameAPIServerUrl);
+            console.warn(`So falling back to default: ${defaultGameAPIServerAddress}`);
+            return connectToGameServer('ws://' + defaultGameAPIServerAddress);
         });
     }
 
@@ -346,7 +346,7 @@ const ClientServerConnect = function () {
     }
 
     function joinGame (chosenScene) {
-        const joinPrefs = {scene: chosenScene};
+        const joinPrefs = {scene: chosenScene, preferredSeat: 0};
 
         console.log(`Requesting suitable game server from master server...`);
 
