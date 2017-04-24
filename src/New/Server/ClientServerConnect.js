@@ -346,7 +346,7 @@ const ClientServerConnect = function () {
     }
 
     function joinGame (chosenScene) {
-        const joinPrefs = {scene: chosenScene};
+        const joinPrefs = {scene: chosenScene, preferredSeat: 0};
 
         console.log(`Requesting suitable game server from master server...`);
 

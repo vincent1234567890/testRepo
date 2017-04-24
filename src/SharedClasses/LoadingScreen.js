@@ -45,7 +45,7 @@ cc.LoadingScreen = cc.LoaderScene.extend({
                     spShark.setPosition(0, 195);
                     bgLayer.addChild(spShark, 10);
 
-                    let boxAnimation = GUIFunctions.getAnimation(ReferenceName.LoadingIconAnim, 0.03);
+                    let boxAnimation = GUIFunctions.getAnimation(ReferenceName.LoadingIconAnim, 0.01);
                     spShark.runAction(boxAnimation.repeatForever());
                 });
             });
