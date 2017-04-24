@@ -28,6 +28,9 @@ const ReferenceName = {
     LoadingIconAnim: "LoadingIcon_",
     LoadingIcon_00000: "#LoadingIcon_00000.png",
 
+    //Free round
+    FreeRoundExplosionEffect : "FREffect_",
+
     //Lobby
     LobbyBackground : "#LobbyBG1.png",
     ScrollArrow : "#Arrow.png",//

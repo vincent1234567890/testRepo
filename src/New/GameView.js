@@ -246,6 +246,13 @@ const GameView = function () {
         }
     }
 
+    function setFreeRound(type){
+        console.log("setFreeRound");
+        if (type === 'clearing_for_free_shooting_game') {
+            _effectsManager.showFreeRoundEffect();
+        }
+    }
+
     return {
         initialise: initialise,
         // parentNode : _parentNode,
@@ -263,6 +270,7 @@ const GameView = function () {
         updateMultiplayerState: updateMultiplayerState,
         updateArena: updateArena,
         caughtFishAnimationEnd: caughtFishAnimationEnd,
+        setFreeRound :setFreeRound,
 
         //???
         getMyPlayerSlot: ()=> _playerSlot,
