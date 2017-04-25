@@ -27,10 +27,12 @@ var SeatSelectionScene = cc.Scene.extend({
             GameManager.exitToLobby();
         });
         this.addChild(btnBack);
-        btnBack.setPosition(50, cc.visibleRect.top.y - 60);
+        btnBack.setPosition(50, cc.visibleRect.top.y - 65);
 
         //info panel
-
+        let spPlayerInfo = new PlayerInfoWidget();
+        this.addChild(spPlayerInfo);
+        spPlayerInfo.setPosition(120, cc.visibleRect.top.y - 65);
 
         //context menu
 
@@ -38,7 +40,7 @@ var SeatSelectionScene = cc.Scene.extend({
         //jackpot panel
         let pnJackpot = new JackpotFloatPanel();
         this.addChild(pnJackpot);
-        pnJackpot.setPosition(683, 666);
+        pnJackpot.setPosition(cc.visibleRect.center.x, cc.visibleRect.top.y - 85);
 
         //title
         let spNotificationBar = new cc.Sprite(ReferenceName.SeatNotificationBar);
