@@ -1,8 +1,10 @@
 
 var JackpotPanel = cc.LayerColor.extend({ //gradient
-    _selectedIndex: 0,
+    _isPlaying: null,
     _jackpotResult: null,
+
     _unselectedBoxes: null,
+    _selectedIndex: 0,
     _selectedMedals: null,
     _pnAward: null,
     _spBackground: null,
@@ -18,7 +20,10 @@ var JackpotPanel = cc.LayerColor.extend({ //gradient
     _eventListener: null,
 
     ctor: function (isPlaying, jackpotRewardObject) {
-        cc.LayerColor.prototype.ctor.call(this, new cc.Color(10,10,10,196));
+        this._isPlaying = isPlaying;
+        this._jackpotResult = jackpotRewardObject;
+
+        cc.LayerColor.prototype.ctor.call(this, new cc.Color(10, 10, 10, 196));
 
         this._unselectedBoxes = [];
         this._selectedMedals = [];
@@ -107,7 +112,12 @@ var JackpotPanel = cc.LayerColor.extend({ //gradient
         //    }).catch(console.error);
         //}
 
-        selfPoint._jackpotResult = jackpotRewardObject;
+        //load the jackpot prize pool value
+        ClientServerConnect.getCurrentJackpotValues().then(jackpotValues => {
+            //show the jackpot list
+            if (jackpotValues["status"] === 200)
+                selfPoint._showJackpotPrizeValues(jackpotValues["data"]);
+        }).catch(console.error);
 
         //Treasure Box
         let boxStartPoint = cc.p(215, 100), boxPadding = new cc.Size(180, 120), spTreasureBox;
@@ -191,7 +201,7 @@ var JackpotPanel = cc.LayerColor.extend({ //gradient
             onTouchBegan: function (touch, event) {
                 let target = event.getCurrentTarget();
                 return (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
-                        target.convertToNodeSpace(touch.getLocation())));
+                    target.convertToNodeSpace(touch.getLocation())));
             },
             onTouchEnded: function (touch, event) {
                 let target = event.getCurrentTarget();
@@ -484,6 +494,9 @@ var JackpotPanel = cc.LayerColor.extend({ //gradient
         //show the award panel.
         this.runAction(cc.sequence(cc.delayTime(delay), cc.callFunc(function () {
             let result = this._jackpotResult;
+            if (this._isPlaying) {
+                ClientServerConnect.collectJackpot(result._id);
+            }
             let pnAward = new JackpotAwardPanel(result["level"], result["rewardValue"]);
             pnAward.setPosition(101, 74);
             this.addChild(pnAward);

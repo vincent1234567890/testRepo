@@ -26,7 +26,6 @@ const FreeRoundView = (function () {
         GameView.addView(_parent,11);
 
         this.show = function () {
-
             _parent.setVisible(true);
             effects.runAction(_animationSequence.clone());
             FRTitle.runAction(_titleSequence.clone());
@@ -35,7 +34,6 @@ const FreeRoundView = (function () {
         };
 
         function onExplosionAnimationEnd() {
-
         }
 
         function onTitleAnimationEnd(){
@@ -45,11 +43,8 @@ const FreeRoundView = (function () {
         }
 
         function dismissCallback() {
-
-
         }
     };
-
 
     return FreeRoundView;
 }());

@@ -39,6 +39,7 @@ const GameManager = function () {
 
     //Callback to AppManager
     let _goToLobbyCallback;
+    let _gameSelectedCallback;
 
     function initialiseLogin(parent, loginData) {
         console.log("initialise");
@@ -62,6 +63,18 @@ const GameManager = function () {
         BlockingManager.destroyView();
 
         GameView.goToGame(_currentScene);
+    };
+
+    const enterSeatSelectionScene = function(parent){
+        GameView.goToSeatSelection(parent);
+
+        _floatingMenuManager.reattach();
+        _jackpotManager.reattach();
+
+        if(_floatingMenuManager){
+            _floatingMenuManager.hideAll();
+        }
+        BlockingManager.destroyView();
     };
 
     const shootTo = function (playerId, gunId, angle, bulletId) {
@@ -127,8 +140,9 @@ const GameManager = function () {
         return _gameConfig;
     };
 
-    function goToLobby(goToLobbyCallback) {
+    function goToLobby(goToLobbyCallback, gameSelectedCallback) {
         _goToLobbyCallback = goToLobbyCallback;
+        _gameSelectedCallback = gameSelectedCallback;
         // GameView.initialise();
         _loggedIn = true;
 
@@ -153,29 +167,15 @@ const GameManager = function () {
             }
         ).catch(console.error);
 
-        // createLobby();
-
         // These are things we should do immediately after logging in:
         // Listen for a creditChangeEvent (e.g. caused by an external /recharge request, gift from grandma, etc.)
         ClientServerConnect.listenForEvent('creditChangeEvent', data => {
-            //assertEqual(typeof data.scoreChange, 'number');
             _playerData.playerState.score += data.amount;
-            // Now we want to update the view
-            // We need to update this label in the LobbyView: new cc.LabelTTF(formatWithCommas(playerData.playerState.score), fontDef);
-            // This would probably be a nice solution:
             LobbyManager.updatePlayerData(_playerData);
-            // But for now:
-            // createLobby();
-            // We could also notify the player, either with an alert box, or just some flashing / bouncing / animation on the score label
         });
     }
 
     function onLeaveArena() {
-        // Promise.resolve().then(
-        //     () => ClientServerConnect.leaveGame()
-        // ).then(
-        //     () => showPostGameStats()
-        // ).catch(console.error);
         ClientServerConnect.leaveGame();
         exitToLobby();
     }
@@ -205,11 +205,7 @@ const GameManager = function () {
         _jackpotManager.unattach();
         destroyArena();
         ClientServerConnect.getCurrentJackpotValues();
-
         _goToLobbyCallback();
-
-
-        // _lobbyManager.displayView(_playerData, onGameSelected);
     }
 
     function showPostGameStats () { // used to be for post game stats but feature has been removed
@@ -218,7 +214,7 @@ const GameManager = function () {
         //         goToScoreboard(stats);
         //     }
         // ).catch(console.error);
-        exitToLobby();
+        // exitToLobby();
     }
 
     function goToScoreboard(stats) {
@@ -241,9 +237,6 @@ const GameManager = function () {
     }
 
     function resetArena(){
-        // if (_optionsManager) {
-        //     _optionsManager.destroyView();
-        // }
         if (_fishManager) {
             _fishManager.destroyView();
         }
@@ -262,13 +255,14 @@ const GameManager = function () {
         _fishLockOnCallback = undefined;
     }
 
-    // function onSettingsButton(){
-    //     _optionsManager.showSettings();
-    // }
-
     function onGameSelected(chosenScene){
         _currentScene = chosenScene;
-        ClientServerConnect.joinGame(_currentScene.gameName).catch(
+        _gameSelectedCallback(chosenScene.gameName);
+    }
+
+    function seatSelected(type, seat){
+        console.log("seatSelected:",seat);
+        ClientServerConnect.joinGame(_currentScene.gameName, seat, type).catch(
             function (error) {
                 _lobbyManager.resetView();
                 console.log(error);
@@ -278,9 +272,6 @@ const GameManager = function () {
 
     function isCurrentPlayer (playerId) {
         return playerId === _playerId;
-    }
-
-    function onRequestShowProfile(){
     }
 
     function resetLobby (){
@@ -366,6 +357,11 @@ const GameManager = function () {
         showPostGameStats: showPostGameStats,
         unsetLockForFishId : unsetLockForFishId,
         getPlayerData: getPlayerData,
+        enterSeatSelectionScene : enterSeatSelectionScene,
+        seatSelected : seatSelected,
+
+        //should be private but exposed for SeatSelectionScene
+        exitToLobby : exitToLobby,
 
         //Misc
         isCurrentPlayer: isCurrentPlayer,
