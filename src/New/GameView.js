@@ -6,7 +6,7 @@ const GameView = function () {
     "use strict";
 
     let _parentNode;
-    let _curretBKG;
+    let _currentBKG;
     let _touchLayer;
     let _isRotated = false;
     let _gameConfig;
@@ -32,12 +32,8 @@ const GameView = function () {
             _lockOnCallback = lockOnCallback;
 
             if (_gameConfig.cannonPositions[_playerSlot][1] > cc.view.getDesignResolutionSize().height / 2) {
-                // console.log(_gameConfig.cannonPositions[_playerSlot]);
-                // console.log("player" + _playerSlot);
-                // cc._canvas.rotate(180);
                 _isRotated = true;
             }
-            // console.log("initialised");
             for (let i = 0; i < _gameConfig.maxPlayers; i++) {
                 const index = getPlayerSlot(i);
                 _playerViews[index] = new PlayerViewManager(_gameConfig, index, i === _playerSlot, changeSeatRequest, lockOnRequest, fishLockStatus);
@@ -53,7 +49,6 @@ const GameView = function () {
     }
 
     function initialiseParent(parent) {
-        // cc.spriteFrameCache.addSpriteFrames(res.GameUIPlist);
         const plists = ResourceLoader.getPlists("Game");
         for (let list in plists) {
             cc.spriteFrameCache.addSpriteFrames(plists[list]);
@@ -71,25 +66,20 @@ const GameView = function () {
         // Or we could set a different initial background for each game type:
         //setBackgroundTo(choice ? choice.gameId : 0);
 
-        //Request to remove frame
-        const frame = new cc.Sprite(res.GameFrame2);
-        frame.setPosition(cc.view.getDesignResolutionSize().width / 2, cc.view.getDesignResolutionSize().height / 2);
-        _parentNode.addChild(frame, 99);
-
         initialiseTouch(touchAt);
     }
 
     function setBackgroundTo(choice) {
-        if (_curretBKG) {
-            _parentNode.removeChild(_curretBKG);
+        if (_currentBKG) {
+            _parentNode.removeChild(_currentBKG);
         }
 
-        _curretBKG = new cc.Sprite(res['GameBackground' + (choice % 4).toString()]);
+        _currentBKG = new cc.Sprite(res['GameBackground' + (choice % 4).toString()]);
         // Fallback:
         //_curretBKG = new cc.Sprite(res.GameBackground1);
 
-        _curretBKG.setPosition(cc.view.getDesignResolutionSize().width / 2, cc.view.getDesignResolutionSize().height / 2);
-        _parentNode.addChild(_curretBKG, -5);
+        _currentBKG.setPosition(cc.view.getDesignResolutionSize().width / 2, cc.view.getDesignResolutionSize().height / 2);
+        _parentNode.addChild(_currentBKG, -5);
     }
 
     function addView(view, depth) {

@@ -13,7 +13,7 @@ const AppManager = (function () {
         _currentScene = new cc.Scene();
         cc.director.runScene(_currentScene);
         GameManager.initialiseLogin(_currentScene, loginData);
-        GameManager.goToLobby(goBackToLobby);
+        GameManager.goToLobby(goBackToLobby,goToSeatSelection);
     }
 
     function goToGame(fishGameArena){
@@ -29,6 +29,12 @@ const AppManager = (function () {
         _currentScene.addChild(_gameTicker);
         GameManager.initialiseGame(_currentScene, fishGameArena);
         _gameTicker.unpauseTicker();
+    }
+
+    function goToSeatSelection(){
+        _currentScene = new SeatSelectionScene();
+        cc.director.pushScene(_currentScene);
+        GameManager.enterSeatSelectionScene(_currentScene);
     }
 
     function goBackToLobby(){
