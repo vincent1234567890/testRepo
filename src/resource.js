@@ -7,6 +7,8 @@ var res = {
 
     LobbyJackpotPng: "res/CompanyA/Lobby/Jackpot.png",
     LobbyJackpotPlist: "res/CompanyA/Lobby/Jackpot.plist",
+    MenuPng: "res/CompanyA/Lobby/Menu.png",
+    MenuPlist: "res/CompanyA/Lobby/Menu.plist",
 
     //jackpot
     JackpotMiniGamePng: "res/CompanyA/Jackpot/JPminigame.png",
