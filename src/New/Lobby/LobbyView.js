@@ -83,8 +83,6 @@ const LobbyView = (function () {
         this.updatePlayerData(playerData);
     };
 
-
-
     // function onProfileclick(touch) {
     //     // console.log(touch,profileArea);
     //     if(cc.rectContainsPoint(profileArea,touch)){
