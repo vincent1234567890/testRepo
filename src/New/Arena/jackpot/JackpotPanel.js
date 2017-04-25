@@ -114,8 +114,15 @@ let JackpotPanel = cc.LayerColor.extend({ //gradient
         //load the jackpot prize pool value
         ClientServerConnect.getCurrentJackpotValues().then(jackpotValues => {
             //show the jackpot list
-            if (jackpotValues["status"] === 200)
-                selfPoint._showJackpotPrizeValues(jackpotValues["data"]);
+            if (jackpotValues["status"] === 200) {
+                // We have already collected the player's reward and reset the jackpot, but that looks strange.
+                // So we display the current jackpot value at the value that the player is about to win.
+                const poolToWin = jackpotValues.data[jackpotRewardObject.level];
+                if (poolToWin) {
+                    poolToWin.value = jackpotRewardObject.rewardValue;
+                }
+                selfPoint._showJackpotPrizeValues(jackpotValues.data);
+            }
         }).catch(console.error);
 
         //Treasure Box
