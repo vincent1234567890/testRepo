@@ -101,20 +101,20 @@ let JackpotPanel = cc.LayerColor.extend({ //gradient
         //        return ClientServerConnect.getCurrentJackpotValues()
         //    }).then(jackpotValues => {
         //        //show the jackpot list
-        //        if (jackpotValues["status"] === 200)
-        //            selfPoint._showJackpotPrizeValues(jackpotValues["data"]);
+        //        if (jackpotValues.status === 200)
+        //            selfPoint._showJackpotPrizeValues(jackpotValues.data);
         //        return ClientServerConnect.listUncollectedJackpots();
         //    }).then(jackpotObject => {
         //        console.log(jackpotObject);
-        //        if (jackpotObject["status"] === 200)
-        //            selfPoint._jackpotResult = jackpotObject["data"][0];
+        //        if (jackpotObject.status === 200)
+        //            selfPoint._jackpotResult = jackpotObject.data[0];
         //    }).catch(console.error);
         //}
 
         //load the jackpot prize pool value
         ClientServerConnect.getCurrentJackpotValues().then(jackpotValues => {
             //show the jackpot list
-            if (jackpotValues["status"] === 200) {
+            if (jackpotValues.status === 200) {
                 // We have already collected the player's reward and reset the jackpot, but that looks strange.
                 // So we display the current jackpot value at the value that the player is about to win.
                 const poolToWin = jackpotValues.data[jackpotRewardObject.level];
@@ -354,18 +354,18 @@ let JackpotPanel = cc.LayerColor.extend({ //gradient
     _showJackpotPrizeValues: function (prizeValues) {
         if (!prizeValues)
             return;
-        let prizeValue = prizeValues["Level_1"];
+        let prizeValue = prizeValues.Level_1;
         if (prizeValue)
-            this._lbPrize1Value.setString(Math.round(prizeValue["value"]));
-        prizeValue = prizeValues["Level_2"];
+            this._lbPrize1Value.setString(Math.round(prizeValue.value));
+        prizeValue = prizeValues.Level_2;
         if (prizeValue)
-            this._lbPrize2Value.setString(Math.round(prizeValue["value"]));
-        prizeValue = prizeValues["Level_3"];
+            this._lbPrize2Value.setString(Math.round(prizeValue.value));
+        prizeValue = prizeValues.Level_3;
         if (prizeValue)
-            this._lbPrize3Value.setString(Math.round(prizeValue["value"]));
-        prizeValue = prizeValues["Level_4"];
+            this._lbPrize3Value.setString(Math.round(prizeValue.value));
+        prizeValue = prizeValues.Level_4;
         if (prizeValue)
-            this._lbPrize4Value.setString(Math.round(prizeValue["value"]));
+            this._lbPrize4Value.setString(Math.round(prizeValue.value));
     },
 
     _getBoxNumber: function (treasureBox) {
@@ -453,7 +453,7 @@ let JackpotPanel = cc.LayerColor.extend({ //gradient
     },
 
     _getTypeFromPattern: function () {
-        const pattern = this._jackpotResult["lotteryPattern"];
+        const pattern = this._jackpotResult.lotteryPattern;
         return pattern[this._selectedIndex];
     },
 
@@ -493,7 +493,7 @@ let JackpotPanel = cc.LayerColor.extend({ //gradient
             if (this._isPlaying) {
                 ClientServerConnect.collectJackpot(result._id);
             }
-            const pnAward = new JackpotAwardPanel(result["level"], result["rewardValue"]);
+            const pnAward = new JackpotAwardPanel(result.level, result.rewardValue);
             pnAward.setPosition(101, 74);
             this.addChild(pnAward);
             this._stopTimer();
