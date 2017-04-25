@@ -345,8 +345,8 @@ const ClientServerConnect = function () {
         );
     }
 
-    function joinGame (chosenScene) {
-        const joinPrefs = {scene: chosenScene, preferredSeat: 0};
+    function joinGame (chosenScene, seat, type) {
+        const joinPrefs = {scene: chosenScene, preferredSeat: seat, singlePlay: type === TableType.SINGLE};
 
         console.log(`Requesting suitable game server from master server...`);
 
