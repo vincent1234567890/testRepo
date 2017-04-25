@@ -23,7 +23,7 @@ var JackpotPanel = cc.LayerColor.extend({ //gradient
         this._isPlaying = isPlaying;
         this._jackpotResult = jackpotRewardObject;
 
-        cc.LayerColor.prototype.ctor.call(this, new cc.Color(10,10,10,196));
+        cc.LayerColor.prototype.ctor.call(this, new cc.Color(10, 10, 10, 196));
 
         this._unselectedBoxes = [];
         this._selectedMedals = [];
@@ -112,6 +112,13 @@ var JackpotPanel = cc.LayerColor.extend({ //gradient
         //    }).catch(console.error);
         //}
 
+        //load the jackpot prize pool value
+        ClientServerConnect.getCurrentJackpotValues().then(jackpotValues => {
+            //show the jackpot list
+            if (jackpotValues["status"] === 200)
+                selfPoint._showJackpotPrizeValues(jackpotValues["data"]);
+        }).catch(console.error);
+
         //Treasure Box
         let boxStartPoint = cc.p(215, 100), boxPadding = new cc.Size(180, 120), spTreasureBox;
         for (let row = 2; row >= 0; row--) {
@@ -194,7 +201,7 @@ var JackpotPanel = cc.LayerColor.extend({ //gradient
             onTouchBegan: function (touch, event) {
                 let target = event.getCurrentTarget();
                 return (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
-                        target.convertToNodeSpace(touch.getLocation())));
+                    target.convertToNodeSpace(touch.getLocation())));
             },
             onTouchEnded: function (touch, event) {
                 let target = event.getCurrentTarget();
