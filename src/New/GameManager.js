@@ -66,7 +66,7 @@ const GameManager = function () {
     };
 
     const enterSeatSelectionScene = function(parent){
-        GameView.initialise(parent);
+        GameView.goToSeatSelection(parent);
 
         _floatingMenuManager.reattach();
         _jackpotManager.reattach();

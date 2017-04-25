@@ -48,6 +48,10 @@ const GameView = function () {
         }
     }
 
+    function goToSeatSelection(parent){
+        _parentNode = parent;
+    }
+
     function initialiseParent(parent) {
         const plists = ResourceLoader.getPlists("Game");
         for (let list in plists) {
@@ -260,7 +264,9 @@ const GameView = function () {
         updateMultiplayerState: updateMultiplayerState,
         updateArena: updateArena,
         caughtFishAnimationEnd: caughtFishAnimationEnd,
-        setFreeRound :setFreeRound,
+        setFreeRound: setFreeRound,
+
+        goToSeatSelection: goToSeatSelection,
 
         //???
         getMyPlayerSlot: ()=> _playerSlot,
