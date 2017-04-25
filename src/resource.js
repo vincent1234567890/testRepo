@@ -1,7 +1,7 @@
 var res = {
     LoadingLogo: "res/loadingLogo.jpg",
-
-
+    LoadingIconPng: "res/CompanyA/Loading/LoadingIcon.png",
+    LoadingIconPlist: "res/CompanyA/Loading/LoadingIcon.plist",
 
     ParticlePlist: "res/particle.plist",
 
@@ -21,6 +21,11 @@ var res = {
     //Lobby
     LobbyUI2Png: "res/CompanyA/Lobby/LobbyUI2.png",
     LobbyUI2Plist: "res/CompanyA/Lobby/LobbyUI2.plist",
+    LobbyUIPng: "res/CompanyA/Lobby/LobbyUI.png",
+    LobbyUIPlist: "res/CompanyA/Lobby/LobbyUI.plist",
+
+    SeatSelectionPng: "res/CompanyA/Lobby/SitSelection.png",
+    SeatSelectionPlist: "res/CompanyA/Lobby/SitSelection.plist",
 
     //testing
     testingEffect: "res/CompanyA/Game/FREffect.plist",
@@ -44,6 +49,8 @@ var res = {
     GameBackground2: "res/CompanyA/Game BG/Game BG 3.png",
     GameBackground3: "res/CompanyA/Game BG/Game BG 4.png",
 
+    //FreeRound
+    FreeRoundTitle : "res/CompanyA/Game/FreeRoundTitle.png",
 
     // GoldenNumbersPlist : "res/New/Fonts/GoldNumber.plist",
     // GoldNumberPng : "res/New/Fonts/GoldNumber.png",

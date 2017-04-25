@@ -14,6 +14,10 @@ const FishView = (function () {
     let debugReported = false;
 
     const FishView = function (parent, fishClass, fishType, onFishClickedCallback) {
+        if(!parent){
+            console.warn("parent = null", fishClass, fishType);
+            return;
+        }
         this._parent = new cc.Node();
 
         const touchEvent = (sender, type) => {

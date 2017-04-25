@@ -19,7 +19,7 @@ var cocos2dApp = cc.game.onStart = function() {
 
     //load resources
     // var scene = LogoScene.scene();
-    ClientServerConnect.connectToMasterServer().then(
+    ClientServerConnect.doInitialConnect().then(
         data => {
             const themeConfig = data.themeConfig;
             console.log(themeConfig);
@@ -43,7 +43,7 @@ var cocos2dApp = cc.game.onStart = function() {
             cc.LoadingScreen.preload(ResourceLoader.getResourceList(), function () {
                 // cc.director.runScene(new LogoScene());
                 //cc.director.runScene(new TestScene());
-                // cc.director.runScene(new StartMenuLayer());
+                // cc.director.runScene(new SeatSelectionScene());
 
                 AppManager.goToLobby(data.player);
                 FishAnimationData.setData(themeConfig.FishRawData);
@@ -53,5 +53,5 @@ var cocos2dApp = cc.game.onStart = function() {
 };
 
 cc.game.run();
-console.log("version: 1.3.417b");
+console.log("version: 1.3.424b");
 

@@ -22,7 +22,7 @@ const CaptureCoinEffectManager = (function () {
 
     const CaptureCoinEffectManager = function () {
         this._parent = new cc.Node();
-        GameView.addView(this._parent,10);
+        GameView.addView(this._parent,3);
         _coinViewPool = new ObjectPool(SpinningCoinView);
         _prizeLabelPool = new ObjectPool(PrizeLabelObject);
 
@@ -191,7 +191,7 @@ const CaptureCoinEffectManager = (function () {
                     yLength = target[1] - this.y;
                 }
 
-                const endingElapsed = (Date.now() - endingStartTime) / 100;
+                const endingElapsed = (Date.now() - endingStartTime) / 100 - delay;
                 if (endingElapsed > collectLifetime) {
                     //handle callback
                     callback(viewObject);

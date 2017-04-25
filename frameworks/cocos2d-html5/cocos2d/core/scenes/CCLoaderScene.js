@@ -64,7 +64,7 @@ cc.LoaderScene = cc.Scene.extend({
             lblHeight = -logoHeight / 2 - 10;
         }
         //loading percent
-        var label = self._label = new cc.LabelTTF("Loading... 0%", "Arial", fontSize);
+        var label = self._label = new cc.LabelTTF("资源加载中... 0%", "Arial", fontSize);
         label.setPosition(cc.pAdd(cc.visibleRect.center, cc.p(0, lblHeight)));
         label.setColor(cc.color(180, 180, 180));
         bgLayer.addChild(this._label, 10);
@@ -95,8 +95,7 @@ cc.LoaderScene = cc.Scene.extend({
      */
     onExit: function () {
         cc.Node.prototype.onExit.call(this);
-        var tmpStr = "Loading... 0%";
-        this._label.setString(tmpStr);
+        this._label.setString("Loading... 0%");
     },
 
     /**
@@ -119,13 +118,17 @@ cc.LoaderScene = cc.Scene.extend({
         var res = self.resources;
         cc.loader.load(res,
             function (result, count, loadedCount) {
-                var percent = (loadedCount / count * 100) | 0;
-                percent = Math.min(percent, 100);
-                self._label.setString("Loading... " + percent + "%");
+                self.loadingCallback(result, count, loadedCount);
             }, function () {
                 if (self.cb)
                     self.cb.call(self.target);
             });
+    },
+
+    loadingCallback: function(result, count, loadedCount){
+        var percent = (loadedCount / count * 100) | 0;
+        percent = Math.min(percent, 100);
+        self._label.setString("资源加载中... " + percent + "%");
     },
 
     _updateTransform: function(){

@@ -25,6 +25,12 @@ const ReferenceName = {
     BackButtonOnPress : "BackDW.png",
     BackButtonText : "#BackChinese.png",
 
+    LoadingIconAnim: "LoadingIcon_",
+    LoadingIcon_00000: "#LoadingIcon_00000.png",
+
+    //Free round
+    FreeRoundExplosionEffect : "FREffect_",
+
     //Lobby
     LobbyBackground : "#LobbyBG1.png",
     ScrollArrow : "#Arrow.png",//
@@ -42,6 +48,24 @@ const ReferenceName = {
     ProfileImage : "#Profile Image.png",
     LobbySettingsButton : "#Lobby Setting.png",
     TopBg : "#Top Base.png",
+
+    //SeatSelectionScene
+    SeatBackgroundBottom: "#SSBTMBG.png",
+    SeatBackBtn:"SSBack.png",
+    SeatBackBtnSelected: "SSBackRO.png",
+    SeatNotificationBar: "#SSnotificationBar.png",
+    Seat1X: "#SS1X.png",
+    Seat10X: "#SS10X.png",
+    Seat100X: "#SS100X.png",
+    SeatWoodBackground: "#SSWoodBG.png",
+    SeatSoloChinese: "#SSSoloChinese.png",
+    SeatMultiPlayerChinese: "#SSMultiplayerChinese.png",
+    SeatTable: "#SSTable.png",
+    SeatSoloPic: "#SSSoloPic.png",
+    SeatMultiPlayerPic: "#SSMutiplayerPic.png",
+    SeatChair: "#SSChair_00000.png",
+    SeatChairGlow: "#SSChairGlow.png",
+    SeatArrow: "#SSArrow.png",
 
     JackpotPopBase: "#JPPOPBase.png",
     JackpotPopFrame: "#JPPOPFrame.png",
@@ -72,7 +96,6 @@ const ReferenceName = {
 
     CrownIcon : "#Crown.png",
 
-
     //Floating menu shared
     FloatingTitleBackground : "#TitleBase2.png",
     FloatingBottomLeftDeco : "#Pattern1.png",
@@ -92,6 +115,11 @@ const ReferenceName = {
     //Leaderboard
     LeaderboardTextBackground : "#TextBG2.png",
     LeaderboardTitleChinese : "#RankingChineseTitle.png",
+    LeaderboardTitlePlayerNameChinese : "#PlayernameChinese.png",
+    LeaderboardTitleOnlineTimeChinese : "#OnlineTimeChinese.png",
+    LeaderboardTitleScoreChinese : "#TodayScoreChinese.png",
+    LeaderboardItemBackground : "#TextBG7.png",
+    LeaderboardItemRankBackground : "#RankBase.png",
 
     //FAQ
     FAQTextBackground : "#TextBG3.png",
@@ -130,7 +158,7 @@ const ReferenceName = {
     ProfileTitleChinese : "#InfoChineseTitle.png",
     ProfileUserTextBackground : "#TextBG6.png",
     ProfileNicknameTitleChinese : "#NicknameChinese.png",
-    ProfileInputBackground : "InputBox.png",
+    ProfileInputBackground : "#InputBox.png",
     ProfileEditButton : "EditButton.png",
     ProfileUsernameTitleChinese : "#UsernameChinese.png",
     ProfileIconBackground : "#SymbolBG.png",
@@ -173,11 +201,6 @@ const ReferenceName = {
     GameLogTotalProfitTitleChinese : "#ProfitPointChinese.png",
     GameLogStartTimeTitleChinese : "#StartTimeChinese.png",
     GameLogEndTimeTitleChinese : "#EndTimeChinese.png",
-
-    //Profile OLD
-    ProfileBackground : "#Profile POut BG.png",
-    ProfileFishBackground : "#Profile POut Fish Box.png",
-    ProfileFishStatsBackground : "#Profile POut Fish Detail.png",
 
     //Scoreboard
     ScoreboardBG : "#SummaryBase.png",
