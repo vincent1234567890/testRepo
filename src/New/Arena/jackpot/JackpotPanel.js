@@ -172,12 +172,7 @@ let JackpotPanel = cc.LayerColor.extend({ //gradient
                         const target = event.getCurrentTarget();
                         if (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
                                 target.convertToNodeSpace(touch.getLocation()))) {
-                            const boxNumber = selfPoint._getBoxNumber(target);
-                            ClientServerConnect.getServerInformer().shareJackpotBoxOpened(boxNumber);
-
-                            selfPoint._removeBoxFromArray(target);
-
-                            const medalCount = selfPoint._animateClickedBox(target);
+                            const medalCount = selfPoint._manualOpenBox(target);
 
                             if (medalCount < 3) {
                                 selfPoint._resetTimeCounter();
@@ -213,50 +208,14 @@ let JackpotPanel = cc.LayerColor.extend({ //gradient
         });
     },
 
-    _animateClickedBox: function (target) {
-        const selfPoint = this;
-        const spBackground = this._spBackground;
-
-        const boxAnimation = GUIFunctions.getAnimation(ReferenceName.JackpotTreasureBoxOpenAnm, 0.03);
-        target.runAction(cc.sequence(boxAnimation, cc.callFunc(function () {
-            this.removeFromParent(true);
-        }, target)));
-
-        const spMedalGlow = selfPoint._createMedalGlowSprite(); //glow first.
-        const spMedal = selfPoint._createMedalSprite();
-
-        spMedalGlow.setOpacity(0);
-        spMedalGlow.setVisible(false);
-        spBackground.addChild(spMedal);
-        spMedal.setPosition(target.getPosition());
-        spMedal.setScale(0.05);
-        spMedal.addChild(spMedalGlow, -1, 1);  //tag = 1
-        spMedal.runAction(cc.sequence(cc.delayTime(0.4), cc.scaleTo(0.5, 1).easing(cc.easeBounceOut())));
-
-        spMedalGlow.setPosition(spMedal.width * 0.55, spMedal.height * 0.45);
-
-        const medalCount = selfPoint._glowSameMedals(spMedal);
-
-        if (medalCount >= 3) {
-            //show all the
-            selfPoint.showRemainBoxes();
-        }
-
-        return medalCount;
-    },
-
-    showBoxOpening: function (boxNumber) {
-        const boxes = this._unselectedBoxes;
-        const boxToOpen = boxes[boxNumber];
-        this._removeBoxFromArray(boxToOpen);
-
-        this._animateClickedBox(boxToOpen);
-    },
-
     _resetTimeCounter: function () {
         this._lbTimeCounter.setUserData(10);
         this._lbTimeCounter.setString("10");
         this._lbTimeCounter.setColor(new cc.Color(255, 255, 255, 255));
+    },
+
+    _manualOpenBox: function (box) {
+        return this._openBox(box);
     },
 
     _autoOpenBox: function () {
@@ -269,12 +228,42 @@ let JackpotPanel = cc.LayerColor.extend({ //gradient
         this._resetTimeCounter();
 
         const selBox = this._unselectedBoxes[0];
-        this._unselectedBoxes.splice(0, 1);
-        //animation
+
+        this._openBox(selBox);
+
+        //remove the event listener
+        cc.eventManager.removeListeners(selBox);
+    },
+
+    // This gets called on clients who are viewing another player opening boxes
+    showBoxOpening: function (boxNumber) {
+        const boxes = this._unselectedBoxes;
+        const boxToOpen = boxes[boxNumber];
+        this._openBox(boxToOpen);
+    },
+
+    _openBox: function (box) {
+        if (this._isPlaying) {
+            const boxNumber = this._getBoxNumber(box);
+            ClientServerConnect.getServerInformer().shareJackpotBoxOpened(boxNumber);
+        }
+
+        this._removeBoxFromArray(box);
+
+        const medalCount = this._animateOpenBox(box);
+
+        if (medalCount >= 3) {
+            this.showRemainBoxes();
+        }
+
+        return medalCount;
+    },
+
+    _animateOpenBox: function (box) {
         const boxAnimation = GUIFunctions.getAnimation(ReferenceName.JackpotTreasureBoxOpenAnm, 0.03);
-        selBox.runAction(cc.sequence(boxAnimation, cc.callFunc(function () {
+        box.runAction(cc.sequence(boxAnimation, cc.callFunc(function () {
             this.removeFromParent(true);
-        }, selBox)));
+        }, box)));
 
         const spMedalGlow = this._createMedalGlowSprite(); //glow first.
         const spMedal = this._createMedalSprite();
@@ -282,7 +271,7 @@ let JackpotPanel = cc.LayerColor.extend({ //gradient
         spMedalGlow.setOpacity(0);
         spMedalGlow.setVisible(false);
         this._spBackground.addChild(spMedal);
-        spMedal.setPosition(selBox.getPosition());
+        spMedal.setPosition(box.getPosition());
         spMedal.setScale(0.05);
         spMedal.addChild(spMedalGlow, -1, 1);  //tag = 1
         spMedal.runAction(cc.sequence(cc.delayTime(0.4), cc.scaleTo(0.5, 1).easing(cc.easeBounceOut())));
@@ -290,12 +279,7 @@ let JackpotPanel = cc.LayerColor.extend({ //gradient
         spMedalGlow.setPosition(spMedal.width * 0.55, spMedal.height * 0.45);
         const medalCount = this._glowSameMedals(spMedal);
 
-        if (medalCount >= 3) {
-            this.showRemainBoxes();
-        }
-
-        //remove the event listener
-        cc.eventManager.removeListeners(selBox);
+        return medalCount;
     },
 
     _createPrizeListFrame: function () {
