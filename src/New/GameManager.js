@@ -205,9 +205,7 @@ const GameManager = function () {
         _jackpotManager.unattach();
         destroyArena();
         ClientServerConnect.getCurrentJackpotValues();
-
         _goToLobbyCallback();
-
     }
 
     function showPostGameStats () { // used to be for post game stats but feature has been removed
@@ -239,9 +237,6 @@ const GameManager = function () {
     }
 
     function resetArena(){
-        // if (_optionsManager) {
-        //     _optionsManager.destroyView();
-        // }
         if (_fishManager) {
             _fishManager.destroyView();
         }
@@ -262,14 +257,17 @@ const GameManager = function () {
 
     function onGameSelected(chosenScene){
         _currentScene = chosenScene;
-        _gameSelectedCallback();
-        // ClientServerConnect.joinGame(_currentScene.gameName).catch(
-        //     function (error) {
-        //         _lobbyManager.resetView();
-        //         console.log(error);
-        //     }
-        // );
+        _gameSelectedCallback(chosenScene.gameName);
+    }
 
+    function seatSelected(type, seat){
+        console.log("seatSelected:",seat);
+        ClientServerConnect.joinGame(_currentScene.gameName, seat, type).catch(
+            function (error) {
+                _lobbyManager.resetView();
+                console.log(error);
+            }
+        );
     }
 
     function isCurrentPlayer (playerId) {
@@ -360,6 +358,10 @@ const GameManager = function () {
         unsetLockForFishId : unsetLockForFishId,
         getPlayerData: getPlayerData,
         enterSeatSelectionScene : enterSeatSelectionScene,
+        seatSelected : seatSelected,
+
+        //should be private but exposed for SeatSelectionScene
+        exitToLobby : exitToLobby,
 
         //Misc
         isCurrentPlayer: isCurrentPlayer,

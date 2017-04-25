@@ -1,6 +1,6 @@
 var SeatSelectionScene = cc.Scene.extend({
     _lobbyType: null,
-    ctor: function(lobbyType){
+    ctor: function(lobbyType, goToGameCallback){
         cc.Scene.prototype.ctor.call(this);
 
         this._lobbyType = lobbyType || 1;
@@ -24,6 +24,7 @@ var SeatSelectionScene = cc.Scene.extend({
             //back to Lobby
             console.log("click button");
             //GameManager.goToLobby();
+            GameManager.exitToLobby();
         });
         this.addChild(btnBack);
         btnBack.setPosition(50, cc.visibleRect.top.y - 60);
@@ -49,12 +50,12 @@ var SeatSelectionScene = cc.Scene.extend({
         spLobbyType.setPosition(notificationSize.width * 0.5, notificationSize.height * 0.5);
 
         //multiple
-        let pnMultipleTable = new TableSeatPanel(this._lobbyType, TableType.MULTIPLE);
+        let pnMultipleTable = new TableSeatPanel(this._lobbyType, TableType.MULTIPLE, goToGameCallback);
         pnMultipleTable.setPosition(0, 0);
         this.addChild(pnMultipleTable);
 
         //solo
-        let pnSoleTable = new TableSeatPanel(this._lobbyType, TableType.SINGLE);
+        let pnSoleTable = new TableSeatPanel(this._lobbyType, TableType.SINGLE, goToGameCallback);
         pnSoleTable.setPosition(cc.visibleRect.center.x, 0);
         this.addChild(pnSoleTable);
     },
@@ -85,7 +86,7 @@ const TableSeatPanel = cc.Layer.extend({
     _spSeatBtmRight: null,
     _spSeatRight: null,
 
-    ctor: function(lobbyType, tableType){
+    ctor: function(lobbyType, tableType, goToGameCallback){
         cc.Layer.prototype.ctor.call(this);
         this._className = "TableSeatPanel";
         this._lobbyType = lobbyType;
@@ -100,15 +101,19 @@ const TableSeatPanel = cc.Layer.extend({
         spWood.addChild(spTitle);
         spTitle.setPosition(woodSize.width * 0.5, woodSize.height * 0.5);
 
+        this.onSeatSelectedCallback = function(seatNumber){
+            goToGameCallback(this._tableType, seatNumber)
+        };
+
         //seat Left
-        let spSeatLeft = this._spSeatLeft = new SeatSprite();
+        let spSeatLeft = this._spSeatLeft = new SeatSprite(this.onSeatSelectedCallback);
         spSeatLeft.setSeatPosition(SeatPosition.LEFT);
         spSeatLeft.setPosition(72, 195);
         spSeatLeft.setTableType(this._tableType);
         this.addChild(spSeatLeft);
 
         //seat right
-        let spSeatRight = this._spSeatRight = new SeatSprite();
+        let spSeatRight = this._spSeatRight = new SeatSprite(this.onSeatSelectedCallback);
         spSeatRight.setSeatPosition(SeatPosition.RIGHT);
         spSeatRight.setPosition(596, 195);
         spSeatRight.setTableType(this._tableType);
@@ -123,14 +128,14 @@ const TableSeatPanel = cc.Layer.extend({
         spTablePicture.setPosition(292, 348);
 
         //seat Bottom Left
-        let spSeatBtmLeft = this._spSeatBtmLeft = new SeatSprite();
+        let spSeatBtmLeft = this._spSeatBtmLeft = new SeatSprite(this.onSeatSelectedCallback);
         spSeatBtmLeft.setSeatPosition(SeatPosition.BOTTOM_LEFT);
         spSeatBtmLeft.setPosition(230, 60);
         spSeatBtmLeft.setTableType(this._tableType);
         this.addChild(spSeatBtmLeft);
 
         //seat Bottom Right
-        let spSeatBtmRight = this._spSeatBtmRight = new SeatSprite();
+        let spSeatBtmRight = this._spSeatBtmRight = new SeatSprite(this.onSeatSelectedCallback);
         spSeatBtmRight.setSeatPosition(SeatPosition.BOTTOM_RIGHT);
         spSeatBtmRight.setPosition(450, 60);
         spSeatBtmRight.setTableType(this._tableType);
@@ -142,6 +147,8 @@ const TableSeatPanel = cc.Layer.extend({
             spSeatLeft.setPositionX(99);
             spSeatRight.setPositionX(625);
         }
+
+
     },
 
     _createTablePicture: function(){
@@ -163,7 +170,7 @@ var SeatSprite = cc.Sprite.extend({
     _spArrow: null,
     _eventListener: null,
 
-    ctor: function(){
+    ctor: function(goToGameCallback){
         cc.Sprite.prototype.ctor.call(this, ReferenceName.SeatChair);
         this._className = "SeatSprite";
 
@@ -209,7 +216,7 @@ var SeatSprite = cc.Sprite.extend({
 
                 if (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
                         target.convertToNodeSpace(touch.getLocation()))) {
-
+                    goToGameCallback(target.getSeatPosition());
                 }
                 target._hideSelectedStatus();
             }

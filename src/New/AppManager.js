@@ -31,10 +31,14 @@ const AppManager = (function () {
         _gameTicker.unpauseTicker();
     }
 
-    function goToSeatSelection(){
-        _currentScene = new SeatSelectionScene();
+    function goToSeatSelection(gameSelection){
+        _currentScene = new SeatSelectionScene(gameSelection, onSeatSelected);
         cc.director.pushScene(_currentScene);
         GameManager.enterSeatSelectionScene(_currentScene);
+    }
+
+    function onSeatSelected(type,seat){
+        GameManager.seatSelected(type,seat);
     }
 
     function goBackToLobby(){
@@ -50,7 +54,6 @@ const AppManager = (function () {
         GameManager.initialiseLogin(cc.director.getRunningScene());
         GameManager.resetLobby();
     }
-
 
     return{
         goToLobby : goToLobby,
