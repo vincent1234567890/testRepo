@@ -494,8 +494,8 @@ const ClientServerConnect = function () {
         return _gameWSClient.callAPIOnce('player', 'getGameSummaries', {hours: numDays * 24});
     }
 
-    function getConsumptionLog (playerGameNumber, roundNumber) {
-        return _gameWSClient.callAPIOnce('player', 'getConsumptionLog', {playerGameNumber: playerGameNumber, roundNumber: roundNumber});
+    function getConsumptionLog (playerGameNumber, roundNumber, index, limit) { // index is pagination
+        return _gameWSClient.callAPIOnce('player', 'getConsumptionLog', {playerGameNumber: playerGameNumber, roundNumber: roundNumber, index : index, limit:limit});
     }
 
     function getRechargeLog (numDays) {

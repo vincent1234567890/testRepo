@@ -48,6 +48,7 @@ const ReferenceName = {
     ProfileImage : "#Profile Image.png",
     LobbySettingsButton : "#Lobby Setting.png",
     TopBg : "#Top Base.png",
+    LobbyCaustics : "Caustic_",
 
     //SeatSelectionScene
     SeatBackgroundBottom: "#SSBTMBG.png",

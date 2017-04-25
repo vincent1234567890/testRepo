@@ -14,7 +14,6 @@ const LobbyManager = (function () {
             cc.spriteFrameCache.addSpriteFrames(plists[list]);
         }
         this._parent = parent;
-        // _profileManager = new ProfileManager();
         this.displayView(playerData, loginData, onGameSelectedCallback);
     };
 
@@ -22,15 +21,10 @@ const LobbyManager = (function () {
 
     proto.displayView = function(playerData, loginData, onGameSelectedCallback){
         if (this._view){
-            // this._parent.removeChild(this._view);
             this._view.destroyView();
         }
         this._view = new LobbyView(playerData, loginData, _lobbyTheme, onGameSelectedCallback);
     };
-
-    // function onRequestShowProfile(){
-    //     _profileManager.displayView();
-    // }
 
     proto.resetView = function(){
         this._view.resetView();
