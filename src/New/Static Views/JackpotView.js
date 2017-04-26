@@ -97,20 +97,12 @@ const JackpotView = (function () {
         cc.eventManager.addListener(barFrameTouchListener, barFrame);
 
         _parent.setPosition(683,666);
-
-        let fontDef = new cc.FontDefinition();
-        fontDef.fontName = "Impact";
-        fontDef.fontWeight = "bold";
-        fontDef.fontSize = 30;
-        fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
-        fontDef.fillStyle = new cc.Color(255, 255, 255, 255);
-
-        _label = new cc.LabelTTF("", fontDef);
-        // this._label = new cc.LabelBMFont("",res.TestFont);
+        const size = barFrame.getContentSize();
+        _label = new cc.LabelTTF("0", "Impact", 30);
+        _label._setFontWeight("bold");
         _label.enableStroke(new cc.Color(0, 0, 0, 255), 2);
-        _label.setContentSize(bar.getContentSize());
-        _label.setPosition(0,-22);
-        _parent.addChild(_label);
+        _label.setPosition(size.width * 0.5, size.height * 0.5);
+        barFrame.addChild(_label);
 
 
     }
