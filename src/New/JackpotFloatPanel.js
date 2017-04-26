@@ -63,7 +63,7 @@ var JackpotFloatPanel = cc.Node.extend({
         let lbJackpotValue = this._lbJackpotValue = new cc.LabelTTF("9,888,999.88", "Impact", 30);
         spBarFrame.addChild(lbJackpotValue, -1);
         lbJackpotValue.setPosition(barSize.width * 0.5, barSize.height * 0.5);
-        lbJackpotValue.fontWeight = "bold";
+        lbJackpotValue._setFontWeight("bold");
         lbJackpotValue.setFontFillColor(new cc.Color(255,255,255,255));
         lbJackpotValue.enableStroke(new cc.Color(0, 0, 0, 255), 2);
         //lbJackpotValue.setDimensions(barSize);

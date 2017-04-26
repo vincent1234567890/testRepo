@@ -37,35 +37,23 @@ const LobbyView = (function () {
         NameBG.setPosition(100,550);
         bg.addChild(NameBG,1);
 
-        let fontDef = new cc.FontDefinition();
-        fontDef.fontName = "Arial";
-        fontDef.fontSize = 22;
-        fontDef.textAlign = cc.TEXT_ALIGNMENT_CENTER;
-        fontDef.fontWeight = "bold";
-        fontDef.fillStyle = new cc.Color(255,255,255,255);
-
-        let label = new cc.LabelTTF(loginData.displayName , fontDef);
+        let label = new cc.LabelTTF(loginData.displayName , "Arial", 22);
+        label._setFontWeight("bold");
         label.enableStroke(new cc.Color(0, 0, 0, 255), 2);
         label.setAnchorPoint(0.5, 0.5);
 
         NameBG.addChild(label);
-        label.setPosition(NameBG.getContentSize().width/2,NameBG.getContentSize().height/2);
-        label.setDimensions(cc.size(150,25));
+        label.setPosition(NameBG.width/2,NameBG.height/2);
+        //label.setDimensions(cc.size(150,25));
 
         const LobbyCoinsBG = new cc.Sprite(ReferenceName.LobbyCoinsBG);
         LobbyCoinsBG.setPosition(320,550);
         bg.addChild(LobbyCoinsBG,2);
 
-        fontDef = new cc.FontDefinition();
-        fontDef.fontName = "Arial";
-        fontDef.fontWeight = "bold";
-        fontDef.fontSize = 30;
-        fontDef.fillStyle = new cc.Color(255,205,60,255);
-        fontDef.textAlign = cc.TEXT_ALIGNMENT_CENTER;
-
-
-        _goldLabel = new cc.LabelTTF("", fontDef);
+        _goldLabel = new cc.LabelTTF(" ", "Arial", 30);
+        _goldLabel.setFontFillColor(new cc.Color(255,205,60,255));
         LobbyCoinsBG.addChild(_goldLabel);
+        _goldLabel._setFontWeight("bold");
         _goldLabel.enableStroke(new cc.Color(90, 24, 8, 255), 3);
         _goldLabel.setPosition(120,27);
 
@@ -75,8 +63,6 @@ const LobbyView = (function () {
         function onAnimationEnd() {
 
         }
-
-
 
         const target = new cc.Sprite();
         // target.setScale(1);
