@@ -65,7 +65,7 @@ const FAQView = (function () {
         cannonInfo.addChild(cannonInfoButtonText);
         jackpotInfo.addChild(jackpotInfoButtonText);
 
-        textBG.setPosition(new cc.p(420,310));
+        textBG.setPosition(new cc.p(420,350));
         title.setPosition(new cc.p(560,705));
 
         _popup.getBackground().addChild(textBG);

@@ -53,33 +53,6 @@ const GUIFunctions = function () {
         return new cc.Animate(new cc.Animation(animationArray, animationSpeed));
     }
 
-    // function getReverseAnimation(name, animationSpeed) {
-    //     let animationArray = [];
-    //     let count = 0;
-    //     while (true) {
-    //         let frameCount = String(count);
-    //         while (frameCount.length < padding) {
-    //             frameCount = '0' + frameCount;
-    //         }
-    //         const frame = cc.spriteFrameCache.getSpriteFrame(name + frameCount + ".png");
-    //         if (!frame) {
-    //             break;
-    //         }
-    //         count++;
-    //     }
-    //     while (count >= 0) {
-    //         let frameCount = String(count);
-    //         while (frameCount.length < padding) {
-    //             frameCount = '0' + frameCount;
-    //         }
-    //         const frame = cc.spriteFrameCache.getSpriteFrame(name + frameCount + ".png");
-    //         animationArray.push(frame);
-    //         count--;
-    //     }
-    //
-    //     return new cc.Animate(new cc.Animation(animationArray, animationSpeed));
-    // }
-
     function setPadding(value){
         padding = value;
     }

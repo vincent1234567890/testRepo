@@ -7,7 +7,6 @@ const CannonView = (function () {
 
 
     const CannonView = function (gameConfig, slot) {
-
         this._gameConfig = gameConfig;
         this._cannonNode = new cc.Node();
 
