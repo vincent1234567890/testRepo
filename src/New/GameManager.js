@@ -69,7 +69,7 @@ const GameManager = function () {
         GameView.goToSeatSelection(parent);
 
         _floatingMenuManager.reattach();
-        _jackpotManager.reattach();
+        //_jackpotManager.reattach();
 
         if(_floatingMenuManager){
             _floatingMenuManager.hideAll();
@@ -311,7 +311,7 @@ const GameManager = function () {
 
     function requestConsumptionLogHandle(playerGameNumber, roundNumber) {
         console.log(playerGameNumber, roundNumber);
-        ClientServerConnect.getConsumptionLog(playerGameNumber, roundNumber).then(
+        ClientServerConnect.getConsumptionLog(playerGameNumber, roundNumber, undefined, 99999).then(
             consumptionData => {
                 console.log(consumptionData);
                 _floatingMenuManager.setConsumptionLogData(consumptionData);
@@ -325,10 +325,7 @@ const GameManager = function () {
 
     //dev for dev scene
     function development(parent) {
-        // _optionsManager = new OptionsManager(onSettingsButton);
-
     }
-
 
     return {
         initialiseLogin: initialiseLogin,
@@ -360,7 +357,6 @@ const GameManager = function () {
         enterSeatSelectionScene : enterSeatSelectionScene,
         seatSelected : seatSelected,
 
-        //should be private but exposed for SeatSelectionScene
         exitToLobby : exitToLobby,
 
         //Misc

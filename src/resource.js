@@ -1,56 +1,58 @@
 var res = {
-    LoadingLogo: "res/loadingLogo.jpg",
-    LoadingIconPng: "res/CompanyA/Loading/LoadingIcon.png",
-    LoadingIconPlist: "res/CompanyA/Loading/LoadingIcon.plist",
+    LoadingLogo: "loadingLogo.png",
+    LoadingIconPng: "Loading/LoadingIcon.png",
+    LoadingIconPlist: "Loading/LoadingIcon.plist",
 
-    ParticlePlist: "res/particle.plist",
+    ParticlePlist: "particle.plist",
 
-    LobbyJackpotPng: "res/CompanyA/Lobby/Jackpot.png",
-    LobbyJackpotPlist: "res/CompanyA/Lobby/Jackpot.plist",
+    LobbyJackpotPng: "Lobby/Jackpot.png",
+    LobbyJackpotPlist: "Lobby/Jackpot.plist",
+    MenuPng: "Lobby/Menu.png",
+    MenuPlist: "Lobby/Menu.plist",
 
     //jackpot
-    JackpotMiniGamePng: "res/CompanyA/Jackpot/JPminigame.png",
-    JackpotMiniGamePlist: "res/CompanyA/Jackpot/JPminigame.plist",
-    JackpotMiniGame2Png: "res/CompanyA/Jackpot/JPminigame2.png",
-    JackpotMiniGame2Plist: "res/CompanyA/Jackpot/JPminigame2.plist",
-    JackpotCoinAnimationPng: "res/CompanyA/Jackpot/JPCoinAnimation.png",
-    JackpotCoinAnimationPlist: "res/CompanyA/Jackpot/JPCoinAnimation.plist",
-    JackpotGoldTextPng: "res/CompanyA/Jackpot/GoldCoinText-export.png",
-    JackpotGoldTextFont: "res/CompanyA/Jackpot/GoldCoinText-export.fnt",
+    JackpotMiniGamePng: "Jackpot/JPminigame.png",
+    JackpotMiniGamePlist: "Jackpot/JPminigame.plist",
+    JackpotMiniGame2Png: "Jackpot/JPminigame2.png",
+    JackpotMiniGame2Plist: "Jackpot/JPminigame2.plist",
+    JackpotCoinAnimationPng: "Jackpot/JPCoinAnimation.png",
+    JackpotCoinAnimationPlist: "Jackpot/JPCoinAnimation.plist",
+    JackpotGoldTextPng: "Jackpot/GoldCoinText-export.png",
+    JackpotGoldTextFont: "Jackpot/GoldCoinText-export.fnt",
 
     //Lobby
-    LobbyUI2Png: "res/CompanyA/Lobby/LobbyUI2.png",
-    LobbyUI2Plist: "res/CompanyA/Lobby/LobbyUI2.plist",
-    LobbyUIPng: "res/CompanyA/Lobby/LobbyUI.png",
-    LobbyUIPlist: "res/CompanyA/Lobby/LobbyUI.plist",
+    LobbyUI2Png: "Lobby/LobbyUI2.png",
+    LobbyUI2Plist: "Lobby/LobbyUI2.plist",
+    LobbyUIPng: "Lobby/LobbyUI.png",
+    LobbyUIPlist: "Lobby/LobbyUI.plist",
 
-    SeatSelectionPng: "res/CompanyA/Lobby/SitSelection.png",
-    SeatSelectionPlist: "res/CompanyA/Lobby/SitSelection.plist",
+    SeatSelectionPng: "Lobby/SitSelection.png",
+    SeatSelectionPlist: "Lobby/SitSelection.plist",
 
     //testing
-    testingEffect: "res/CompanyA/Game/FREffect.plist",
+    testingEffect: "Game/FREffect.plist",
 
-    WaterCausticAnimation : "res/CompanyA/Lobby/Caustic.plist",
+    WaterCausticAnimation : "Lobby/Caustic.plist",
 
-    // WaterCaustic0 : "res/CompanyA/Lobby/Caustic1.png",
-    // WaterCaustic1 : "res/CompanyA/Lobby/Caustic2.png",
-    // WaterCaustic2 : "res/CompanyA/Lobby/Caustic3.png",
-    // WaterCaustic3 : "res/CompanyA/Lobby/Caustic4.png",
-    // WaterCaustic4 : "res/CompanyA/Lobby/Caustic5.png",
-    // WaterCaustic5 : "res/CompanyA/Lobby/Caustic masking 1_00000.png",
+    // WaterCaustic0 : "Lobby/Caustic1.png",
+    // WaterCaustic1 : "Lobby/Caustic2.png",
+    // WaterCaustic2 : "Lobby/Caustic3.png",
+    // WaterCaustic3 : "Lobby/Caustic4.png",
+    // WaterCaustic4 : "Lobby/Caustic5.png",
+    // WaterCaustic5 : "Lobby/Caustic masking 1_00000.png",
 
     //GameFrame
     // GameFrame: "res/New/InGameFrame.png",
     // GameFrame2: "res/New/InGameFrame2.png",
 
     //GameBackgrounds
-    GameBackground0: "res/CompanyA/Game BG/Game BG 1.png",
-    GameBackground1: "res/CompanyA/Game BG/Game BG 2.png",
-    GameBackground2: "res/CompanyA/Game BG/Game BG 3.png",
-    GameBackground3: "res/CompanyA/Game BG/Game BG 4.png",
+    GameBackground0: "Game BG/Game BG 1.png",
+    GameBackground1: "Game BG/Game BG 2.png",
+    GameBackground2: "Game BG/Game BG 3.png",
+    GameBackground3: "Game BG/Game BG 4.png",
 
     //FreeRound
-    FreeRoundTitle : "res/CompanyA/Game/FreeRoundTitle.png",
+    FreeRoundTitle : "Game/FreeRoundTitle.png",
 
     // GoldenNumbersPlist : "res/New/Fonts/GoldNumber.plist",
     // GoldNumberPng : "res/New/Fonts/GoldNumber.png",
@@ -58,11 +60,11 @@ var res = {
     // TestFont : "res/New/Fonts/test-export.fnt",
     // TestFontPNG : "res/New/Fonts/test-export.png",
 
-    GunCockSound : "res/CompanyA/Sound/gun-cocking-01.mp3",
-    GunShotSound : "res/CompanyA/Sound/gun-gunshot-01.mp3",
+    GunCockSound : "Sound/gun-cocking-01.mp3",
+    GunShotSound : "Sound/gun-gunshot-01.mp3",
 
     //debug
-    DebugCircle: "res/CompanyA/Testing/circle.png",
+    DebugCircle: "Testing/circle.png",
 };
 
 const ResourceLoader = (function () {
@@ -75,7 +77,8 @@ const ResourceLoader = (function () {
     }
 
     function addResource(company, type, name) {
-        const constructedName = "res/" + company + "/" + type + "/" + name;
+        //const constructedName = "res/" + company + "/" + type + "/" + name;
+        const constructedName = type + "/" + name;
         g_resources.push(constructedName + ".png");
         plists[type] = plists[type] || [];
         plists[type].push(constructedName + ".plist");

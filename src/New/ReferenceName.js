@@ -48,6 +48,7 @@ const ReferenceName = {
     ProfileImage : "#Profile Image.png",
     LobbySettingsButton : "#Lobby Setting.png",
     TopBg : "#Top Base.png",
+    LobbyCaustics : "Caustic_",
 
     //SeatSelectionScene
     SeatBackgroundBottom: "#SSBTMBG.png",
@@ -102,7 +103,7 @@ const ReferenceName = {
     JackpotShadow : "#JackpotDropShadow.png",
     JackpotBar : "#JackpotBar.png",
     JackpotBarFrame : "#JackpotBarFrame.png",
-    JackpotLight : "#JackpotLigthray.png",
+    JackpotLight : "#JackpotLightray.png",
     JackpotTitleChinese : "#JackpotChineseTitle.png",
 
     JackpotPopBase: "#JPPOPBase.png",
@@ -114,6 +115,10 @@ const ReferenceName = {
 
     JackpotWaterCaustic00000: "#Caustic_00000.png",
     JackpotWaterCausticAnim: "Caustic_",
+
+    JackpotLensFlareSmall : "#Lensflare3.png",
+    JackpotLensFlareMedium : "#Lensflare2.png",
+    JackpotLensFlareLarge : "#Lensflare1.png",
 
     //Leaderboard
     LeaderboardTextBackground : "#TextBG2.png",

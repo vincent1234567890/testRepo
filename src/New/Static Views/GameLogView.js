@@ -329,7 +329,7 @@ const GameLogView = (function () {
         });
 
         function onMouseScroll(mouseData) {
-            const touch = new cc.Touch(0, mouseData.getScrollY() / 100);
+            const touch = new cc.Touch(0, -mouseData.getScrollY() / 100);
             touch._setPrevPoint(0, 0);
             listView.onTouchMoved(touch);
             const end = new cc.Touch(0, 0);
@@ -370,7 +370,12 @@ const GameLogView = (function () {
                 fontDef.fillStyle = new cc.Color(0, 0, 0, 255);
 
                 const date = new Date(itemData.startTime);
-                const roundIdText = itemData.id + "-" + (1900 + date.getYear()) + date.getMonth() + date.getDate();
+                const roundIdText = itemData.id + "-"
+                    + (date.getYear()-100).toLocaleString('en-US', {minimumIntegerDigits: 2})
+                    + (date.getMonth()+1).toLocaleString('en-US', {minimumIntegerDigits: 2})
+                    + date.getDate().toLocaleString('en-US', {minimumIntegerDigits: 2})
+                    + date.getHours().toLocaleString('en-US', {minimumIntegerDigits: 2})
+                    + date.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2});
 
                 let roundId = new cc.LabelTTF(roundIdText, fontDef);
 
@@ -434,7 +439,6 @@ const GameLogView = (function () {
 
         const data = gameSummaryData.data;
         for (let i = 0; i < data.length; i++) {
-            console.log(data[i]);
             const listItemPrefab = new gameLogListItemPrefab({
                 id: data[i]._id.sceneName,
                 totalSpent: data[i].totalConsumption,
@@ -445,7 +449,6 @@ const GameLogView = (function () {
                 roundNumber: data[i]._id.roundNumber,
             }, onItemSelected);
             const content = listItemPrefab.getContent();
-            // console.log(content);
 
             listView.pushBackCustomItem(content);
         }
@@ -456,8 +459,6 @@ const GameLogView = (function () {
     function setupConsumptionLogList(scrollBackground, consumptionLogData) {
         let scrollTitle = setupConsumptionTitle();
         scrollTitle.setPosition(0, _scrollTitleBackground.getContentSize().height / 2);
-
-        console.log("setupConsumptionLogList", consumptionLogData);
 
         const listSize = scrollBackground.getContentSize();
 
@@ -473,7 +474,7 @@ const GameLogView = (function () {
         });
 
         function onMouseScroll(mouseData) {
-            const touch = new cc.Touch(0, mouseData.getScrollY() / 100);
+            const touch = new cc.Touch(0, -mouseData.getScrollY() / 100);
             touch._setPrevPoint(0, 0);
             listView.onTouchMoved(touch);
             const end = new cc.Touch(0, 0);
@@ -520,15 +521,16 @@ const GameLogView = (function () {
                 fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
                 fontDef.fillStyle = new cc.Color(0, 0, 0, 255);
 
-                const fishAmount = new cc.LabelTTF(count[fish], fontDef);
-                fishAmount.enableStroke(new cc.Color(255, 255, 255, 255), 2);
+                if (count[fish] > 1) {
+                    const fishAmount = new cc.LabelTTF("x"+count[fish], fontDef);
+                    fishAmount.enableStroke(new cc.Color(255, 255, 255, 255), 2);
+                    wrapper.addChild(fishAmount);
+                    fishAmount.setPosition(size.width / 2, size.height / 2);
+                }
 
                 const size = fishSprite.getContentSize();
-
                 wrapper.addChild(fishSprite);
-                wrapper.addChild(fishAmount);
                 fishSprite.setPosition(size.width / 2, size.height / 2);
-                fishAmount.setPosition(size.width / 2, size.height / 2);
 
                 wrapper.setContentSize(size);
 
@@ -671,7 +673,6 @@ const GameLogView = (function () {
 
         const data = consumptionLogData.data;
         for (let i = 0; i < data.length; i++) {
-            // console.log(data[i]);
             const listItemPrefab = new consumptionLogListItemPrefab({
                 id: i+1,
                 totalSpend: data[i].consumptionCredit,
@@ -716,8 +717,6 @@ const GameLogView = (function () {
         let scrollTitle = setupRechargeLogTitle();
         scrollTitle.setPosition(0, _scrollTitleBackground.getContentSize().height / 2);
 
-        console.log("setupRechargeLogList", rechargeData);
-
         const listSize = scrollBackground.getContentSize();
 
         const listView = new ccui.ListView();
@@ -732,7 +731,7 @@ const GameLogView = (function () {
         });
 
         function onMouseScroll(mouseData) {
-            const touch = new cc.Touch(0, mouseData.getScrollY() / 100);
+            const touch = new cc.Touch(0, -mouseData.getScrollY() / 100);
             touch._setPrevPoint(0, 0);
             listView.onTouchMoved(touch);
             const end = new cc.Touch(0, 0);

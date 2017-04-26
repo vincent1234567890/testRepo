@@ -3,10 +3,20 @@ var cocos2dApp = cc.game.onStart = function() {
     //     document.body.removeChild(document.getElementById("cocosLoading"));
 
     // Pass true to enable retina display, on Android disabled by default to improve performance
-    cc.view.enableRetina(cc.sys.os === cc.sys.OS_IOS ? true : false);
+    cc.view.enableRetina(cc.sys.os === cc.sys.OS_IOS);
 
     // Adjust viewport meta
     cc.view.adjustViewPort(true);
+
+    if(cc.sys.isMobile){
+        //normal resources
+        cc.loader.resPath = "res/CompanyA/";
+        //cc.loader.audioPath = "res/CompanyA/";
+    } else {
+        //HD resources
+        cc.loader.resPath = "res/CompanyAHD/";
+        //cc.loader.audioPath = "res/CompanyAHD/";
+    }
 
     // Uncomment the following line to set a fixed orientation for your game
     // cc.view.setOrientation(cc.ORIENTATION_PORTRAIT);
@@ -18,22 +28,18 @@ var cocos2dApp = cc.game.onStart = function() {
     cc.view.resizeWithBrowserSize(true);
 
     //load resources
-    // var scene = LogoScene.scene();
     ClientServerConnect.doInitialConnect().then(
         data => {
             const themeConfig = data.themeConfig;
             console.log(themeConfig);
             for (let i = 0; i < themeConfig.resourceList.length; i++) {
                 for (let j = 0; j < themeConfig[themeConfig.resourceList[i]].length; j++) {
-                    // console.log("themeConfig.resourceList.length:", themeConfig.resourceList.length, "themeConfig[themeConfig.resourceList[i]].length", themeConfig[themeConfig.resourceList[i]].length,i,j,themeConfig[themeConfig.resourceList[i]], themeConfig[themeConfig.resourceList[i]][j]);
                     ResourceLoader.addResource(themeConfig.folderName, themeConfig.resourceList[i], themeConfig[themeConfig.resourceList[i]][j]);
                 }
             }
 
             for (let i = 0; i < themeConfig.resourceList.length; i++) {
-                // for (let j = 0; j < themeConfig[themeConfig.resourceList[i]].length; j++) {
                 for (let j in themeConfig[themeConfig.themeList[i]] ){
-                    // console.log(i,j,themeConfig.themeList[i],themeConfig[themeConfig.themeList[i]],themeConfig[themeConfig.themeList[i]][j]);
                     ThemeDataManager.setThemeData(themeConfig.themeList[i],themeConfig[themeConfig.themeList[i]]);
                 }
             }
@@ -43,7 +49,7 @@ var cocos2dApp = cc.game.onStart = function() {
             cc.LoadingScreen.preload(ResourceLoader.getResourceList(), function () {
                 // cc.director.runScene(new LogoScene());
                 //cc.director.runScene(new TestScene());
-                // cc.director.runScene(new SeatSelectionScene());
+                //cc.director.runScene(new SeatSelectionScene());
 
                 AppManager.goToLobby(data.player);
                 FishAnimationData.setData(themeConfig.FishRawData);
