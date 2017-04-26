@@ -521,15 +521,16 @@ const GameLogView = (function () {
                 fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
                 fontDef.fillStyle = new cc.Color(0, 0, 0, 255);
 
-                const fishAmount = new cc.LabelTTF(count[fish], fontDef);
-                fishAmount.enableStroke(new cc.Color(255, 255, 255, 255), 2);
+                if (count[fish] > 1) {
+                    const fishAmount = new cc.LabelTTF("x"+count[fish], fontDef);
+                    fishAmount.enableStroke(new cc.Color(255, 255, 255, 255), 2);
+                    wrapper.addChild(fishAmount);
+                    fishAmount.setPosition(size.width / 2, size.height / 2);
+                }
 
                 const size = fishSprite.getContentSize();
-
                 wrapper.addChild(fishSprite);
-                wrapper.addChild(fishAmount);
                 fishSprite.setPosition(size.width / 2, size.height / 2);
-                fishAmount.setPosition(size.width / 2, size.height / 2);
 
                 wrapper.setContentSize(size);
 

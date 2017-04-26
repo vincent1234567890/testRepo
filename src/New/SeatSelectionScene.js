@@ -3,7 +3,7 @@ var SeatSelectionScene = cc.Scene.extend({
     ctor: function(lobbyType, goToGameCallback){
         cc.Scene.prototype.ctor.call(this);
 
-        this._lobbyType = lobbyType || 1;
+        this._lobbyType = lobbyType || '1X';
 
         cc.spriteFrameCache.addSpriteFrames(res.LobbyUI2Plist);
         cc.spriteFrameCache.addSpriteFrames(res.LobbyUIPlist);
@@ -65,9 +65,9 @@ var SeatSelectionScene = cc.Scene.extend({
     },
 
     _createLobbyTypeSprite: function() {
-        if (this._lobbyType === 100)
+        if (this._lobbyType === '100X')
             return new cc.Sprite(ReferenceName.Seat100X);
-        else if (this._lobbyType === 10)
+        else if (this._lobbyType === '10X')
             return new cc.Sprite(ReferenceName.Seat10X);
         else
             return new cc.Sprite(ReferenceName.Seat1X);
