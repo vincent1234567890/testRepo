@@ -4,7 +4,7 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>100_1_00000.png</key>
+            <key>10_5_00000.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -19,7 +19,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>100_1_00001.png</key>
+            <key>10_5_00001.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -34,7 +34,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>100_1_00002.png</key>
+            <key>10_5_00002.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -49,7 +49,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>100_1_00003.png</key>
+            <key>10_5_00003.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -64,7 +64,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>100_1_00004.png</key>
+            <key>10_5_00004.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -79,7 +79,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>100_1_00005.png</key>
+            <key>10_5_00005.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -94,7 +94,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>100_1_00006.png</key>
+            <key>10_5_00006.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -109,7 +109,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>100_1_00007.png</key>
+            <key>10_5_00007.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -124,7 +124,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>100_1_00008.png</key>
+            <key>10_5_00008.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -139,7 +139,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>100_1_00009.png</key>
+            <key>10_5_00009.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -154,7 +154,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>100_1_00010.png</key>
+            <key>10_5_00010.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -169,7 +169,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>100_1_00011.png</key>
+            <key>10_5_00011.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -184,7 +184,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>100_1_00012.png</key>
+            <key>10_5_00012.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -199,7 +199,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>100_1_00013.png</key>
+            <key>10_5_00013.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -214,7 +214,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>100_1_00014.png</key>
+            <key>10_5_00014.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -229,7 +229,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>100_1_00015.png</key>
+            <key>10_5_00015.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -244,7 +244,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>100_1_00016.png</key>
+            <key>10_5_00016.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -259,7 +259,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>100_1_00017.png</key>
+            <key>10_5_00017.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -274,7 +274,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>100_1_00018.png</key>
+            <key>10_5_00018.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -289,7 +289,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>100_1_00019.png</key>
+            <key>10_5_00019.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -304,7 +304,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>100_1_00020.png</key>
+            <key>10_5_00020.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -319,7 +319,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>100_1_00021.png</key>
+            <key>10_5_00021.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -334,7 +334,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>100_1_00022.png</key>
+            <key>10_5_00022.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -349,7 +349,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>100_1_00023.png</key>
+            <key>10_5_00023.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -364,7 +364,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>100_1_00024.png</key>
+            <key>10_5_00024.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -379,7 +379,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>100_1_00025.png</key>
+            <key>10_5_00025.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -394,7 +394,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>100_1_00026.png</key>
+            <key>10_5_00026.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -409,7 +409,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>100_1_00027.png</key>
+            <key>10_5_00027.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -424,7 +424,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>100_1_00028.png</key>
+            <key>10_5_00028.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -439,7 +439,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>100_1_00029.png</key>
+            <key>10_5_00029.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -468,7 +468,7 @@
             <key>size</key>
             <string>{174,174}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:51d6b9c8c1da961a562b632f0c57e8c9:10099d63e83bc3ce0a1361abc99abd30:b0d52877909a0f55acd241271059c40a$</string>
+            <string>$TexturePacker:SmartUpdate:de1afd71dace69bd03b90c515d4e3efb:10099d63e83bc3ce0a1361abc99abd30:b0d52877909a0f55acd241271059c40a$</string>
             <key>textureFileName</key>
             <string>10_5.png</string>
         </dict>
