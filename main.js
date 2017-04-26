@@ -1,4 +1,6 @@
 var cocos2dApp = cc.game.onStart = function() {
+    "use strict";
+
     // if (!cc.sys.isNative && document.getElementById("cocosLoading")) //If referenced loading.js, please remove it
     //     document.body.removeChild(document.getElementById("cocosLoading"));
 
@@ -26,6 +28,7 @@ var cocos2dApp = cc.game.onStart = function() {
 
     // The game will be resized when browser size change
     cc.view.resizeWithBrowserSize(true);
+
 
     //load resources
     ClientServerConnect.doInitialConnect().then(
