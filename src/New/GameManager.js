@@ -310,7 +310,7 @@ const GameManager = function () {
     }
 
     function requestConsumptionLogHandle(playerGameNumber, roundNumber) {
-        console.log(playerGameNumber, roundNumber);
+        // console.log(playerGameNumber, roundNumber);
         ClientServerConnect.getConsumptionLog(playerGameNumber, roundNumber, undefined, 99999).then(
             consumptionData => {
                 console.log(consumptionData);
