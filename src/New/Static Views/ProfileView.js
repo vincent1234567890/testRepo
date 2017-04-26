@@ -1,6 +1,3 @@
-/**
- * Created by eugeneseah on 10/4/17.
- */
 
 const ProfileView = (function () {
     "use strict";
@@ -9,12 +6,13 @@ const ProfileView = (function () {
     const LeftColumn = 275;
     const RightColumn = 625;
     const Spacing = 100;
-    const _parent = new cc.Node();
+    let _parent = null;   //can't initialize at here
 
     let _playerData;
     const ProfileView = function (playerData, loginData) {
         _playerData = playerData;
-
+        _parent = new cc.Node();
+        
         const _background = new cc.Sprite(ReferenceName.SettingsBackground);
         const _closeButton = new CloseButtonPrefab(dismiss);
 
