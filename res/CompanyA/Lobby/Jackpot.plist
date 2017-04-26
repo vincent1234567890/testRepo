@@ -184,7 +184,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>JackpotLigthray.png</key>
+            <key>JackpotLightray.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -199,7 +199,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Lensfare1.png</key>
+            <key>Lensflare1.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -214,7 +214,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>Lensfare2.png</key>
+            <key>Lensflare2.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -229,7 +229,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Lensfare3.png</key>
+            <key>Lensflare3.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -258,7 +258,7 @@
             <key>size</key>
             <string>{780,780}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:f09c9218836dc3624028e1bd64ea0b4c:3498f1d8dd6a2d0ebfa7a82f026daebd:8cec78be4de0ab7598c4003c942b161d$</string>
+            <string>$TexturePacker:SmartUpdate:da75770d73c98ee73220c6c44adab27e:3498f1d8dd6a2d0ebfa7a82f026daebd:8cec78be4de0ab7598c4003c942b161d$</string>
             <key>textureFileName</key>
             <string>Jackpot.png</string>
         </dict>
