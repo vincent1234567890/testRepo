@@ -40,18 +40,13 @@ const PlayerViewStaticPrefab = (function () {
         this._otherPlayerIcon.setVisible(false);
         base.addChild(this._otherPlayerIcon);
 
-        const fontDef = new cc.FontDefinition();
-        fontDef.fontName = "Arial";
-        fontDef.fontSize = 20;
-        fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
-
-        this._playerName = new cc.LabelTTF('', fontDef);
-        this._playerName.setDimensions(cc.size(themeData.PlayerName[1][0],themeData.PlayerName[1][1]));
+        this._playerName = new cc.LabelTTF(' ', "Arial", 20);
+        //this._playerName.setDimensions(cc.size(themeData.PlayerName[1][0],themeData.PlayerName[1][1]));
         this._playerName.setAnchorPoint(0,0.5);
         base.addChild(this._playerName,1);
 
-        this._gold = new cc.LabelTTF('', fontDef);
-        this._gold.setDimensions(cc.size(themeData.Gold[1][0],themeData.Gold[1][1]));
+        this._gold = new cc.LabelTTF('', "Arial", 20);
+        //this._gold.setDimensions(cc.size(themeData.Gold[1][0],themeData.Gold[1][1]));
         this._gold.setAnchorPoint(0,0.5);
         base.addChild(this._gold,1);
 
@@ -69,6 +64,7 @@ const PlayerViewStaticPrefab = (function () {
                     // console.log(sender);
                     changeSeatCallback(slot);
                 // selectedCallBack(sender);
+                    break;
                 case ccui.Widget.TOUCH_CANCELED: // fallthrough intended
                     // label.runAction(new cc.ScaleTo(0.01,originalSize));
                     // label.setScale(originalSize);
@@ -83,7 +79,7 @@ const PlayerViewStaticPrefab = (function () {
         this._changeSlotbutton.addTouchEventListener(changeSlot);
         base.addChild(this._changeSlotbutton,5);
 
-        this._slotLabel = new cc.LabelTTF('点击换座',fontDef);
+        this._slotLabel = new cc.LabelTTF('点击换座',"Arial", 20);
         this._slotLabel.setPosition(55,10);
         this._changeSlotbutton.addChild(this._slotLabel);
 

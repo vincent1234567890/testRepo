@@ -1,7 +1,4 @@
-/**
- * Created by eugeneseah on 31/3/17.
- */
-
+//add mouse and touch event listener to a widget.
 const RolloverEffectItem = (function () {
     const RolloverEffectItem = function (widget, onSelectedCallback, onUnselectedCallback, onHoverCallback, onUnhoverCallback) {
         let isMouseDown = false;
