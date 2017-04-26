@@ -40,11 +40,6 @@ const PlayerViewStaticPrefab = (function () {
         this._otherPlayerIcon.setVisible(false);
         base.addChild(this._otherPlayerIcon);
 
-        const fontDef = new cc.FontDefinition();
-        fontDef.fontName = "Arial";
-        fontDef.fontSize = 20;
-        fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
-
         this._playerName = new cc.LabelTTF(' ', "Arial", 20);
         //this._playerName.setDimensions(cc.size(themeData.PlayerName[1][0],themeData.PlayerName[1][1]));
         this._playerName.setAnchorPoint(0,0.5);
