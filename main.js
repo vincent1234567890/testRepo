@@ -28,22 +28,18 @@ var cocos2dApp = cc.game.onStart = function() {
     cc.view.resizeWithBrowserSize(true);
 
     //load resources
-    // var scene = LogoScene.scene();
     ClientServerConnect.doInitialConnect().then(
         data => {
             const themeConfig = data.themeConfig;
             console.log(themeConfig);
             for (let i = 0; i < themeConfig.resourceList.length; i++) {
                 for (let j = 0; j < themeConfig[themeConfig.resourceList[i]].length; j++) {
-                    // console.log("themeConfig.resourceList.length:", themeConfig.resourceList.length, "themeConfig[themeConfig.resourceList[i]].length", themeConfig[themeConfig.resourceList[i]].length,i,j,themeConfig[themeConfig.resourceList[i]], themeConfig[themeConfig.resourceList[i]][j]);
                     ResourceLoader.addResource(themeConfig.folderName, themeConfig.resourceList[i], themeConfig[themeConfig.resourceList[i]][j]);
                 }
             }
 
             for (let i = 0; i < themeConfig.resourceList.length; i++) {
-                // for (let j = 0; j < themeConfig[themeConfig.resourceList[i]].length; j++) {
                 for (let j in themeConfig[themeConfig.themeList[i]] ){
-                    // console.log(i,j,themeConfig.themeList[i],themeConfig[themeConfig.themeList[i]],themeConfig[themeConfig.themeList[i]][j]);
                     ThemeDataManager.setThemeData(themeConfig.themeList[i],themeConfig[themeConfig.themeList[i]]);
                 }
             }

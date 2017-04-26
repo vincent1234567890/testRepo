@@ -17,12 +17,10 @@ const LobbyView = (function () {
     const LobbyView = function (playerData, loginData, theme, onGameSelectedCallback) {
         // this.gameSelected = false;
 
-        this._parent = new cc.Node();
-        GameView.addView(this._parent);
+        const _parent = new cc.Node();
+        GameView.addView(_parent);
 
         _theme = theme;
-
-        let size;
 
         _onGameSelectedCallback = onGameSelectedCallback;
 
@@ -33,7 +31,7 @@ const LobbyView = (function () {
 
         const bg = new cc.Sprite(ReferenceName.LobbyBackground);
         bg.setPosition(length / 2, height / 2 + 70);
-        this._parent.addChild(bg, -5);
+        _parent.addChild(bg, -5);
 
         const NameBG = new cc.Sprite(ReferenceName.NameBG);
         NameBG.setPosition(100,550);
@@ -55,7 +53,6 @@ const LobbyView = (function () {
         label.setDimensions(cc.size(150,25));
 
         const LobbyCoinsBG = new cc.Sprite(ReferenceName.LobbyCoinsBG);
-        size = LobbyCoinsBG.getContentSize();
         LobbyCoinsBG.setPosition(320,550);
         bg.addChild(LobbyCoinsBG,2);
 
@@ -73,44 +70,36 @@ const LobbyView = (function () {
         _goldLabel.setPosition(120,27);
 
         const gameList = setupGameList();
-        this._parent.addChild(gameList, 2);
+        _parent.addChild(gameList, 2);
 
         function onAnimationEnd() {
 
         }
 
 
+
+        const target = new cc.Sprite();
+        // target.setScale(1);
+        target.setBlendFunc(cc.ONE, cc.ONE);
+        // const mask = new cc.Sprite(ReferenceName.JackpotBar);
+        // mask.setScale(100);
+        //
+        // const maskedFill = new cc.ClippingNode(mask);
+        // maskedFill.setAlphaThreshold(0.9);
+        //
+        // // maskedFill.addChild(color,1);
+        // maskedFill.addChild(target);
+        // maskedFill.setPosition(length/2,400);
+        // _parent.addChild(maskedFill);
+
+        const causticAnimation = GUIFunctions.getAnimation(ReferenceName.LobbyCaustics,0.05);
+        target.runAction(new cc.repeatForever(causticAnimation));
+        target.setPosition(length/2,height/2);
+        _parent.addChild(target,-10);
+
+
         this.updatePlayerData(playerData);
     };
-
-    // function onProfileclick(touch) {
-    //     // console.log(touch,profileArea);
-    //     if(cc.rectContainsPoint(profileArea,touch)){
-    //         //profileview
-    //         // console.log("profile");
-    //         _profileCallback();
-    //     }
-    // }
-
-    // function setupGameScroll(parent) {
-    //     const arrow = new cc.Sprite(ReferenceName.ScrollArrow);
-    //     const arrowDown = new cc.Sprite(ReferenceName.ScrollArrow);
-    //     const rightArrow = new cc.Sprite(ReferenceName.ScrollArrow);
-    //     rightArrow.flippedX = true;
-    //     const rightArrowDown = new cc.Sprite(ReferenceName.ScrollArrow);
-    //     rightArrowDown.flippedX = true;
-    //
-    //     const menuLeft = new cc.MenuItemSprite(arrow, arrowDown, undefined, scrollLeft);
-    //     const menuRight = new cc.MenuItemSprite(rightArrow,rightArrowDown, undefined, scrollRight);
-    //
-    //
-    //     const menu = new cc.Menu(menuLeft, menuRight);
-    //     menuLeft.setPosition(cc.pAdd(cc.p(menu.getContentSize().width / 2, menuLeft.getContentSize().height / 2), cc.p(-630, 0)));
-    //     menuRight.setPosition(cc.pAdd(cc.p(menu.getContentSize().width / 2, menuRight.getContentSize().height / 2), cc.p(630, 0)));
-    //     parent.addChild(menu,2);
-    //     menu.setPosition(0,300);
-    //
-    // };
 
     function setupGameList() {
         const width = cc.winSize.width;  //cc.view.getDesignResolutionSize().width;
@@ -122,11 +111,8 @@ const LobbyView = (function () {
         listView.setDirection(ccui.ScrollView.DIR_HORIZONTAL);
         listView.setTouchEnabled(true);
         listView.setBounceEnabled(true);
-        // listView.setBackGroundImage(res.HelloWorld_png);
         listView.setContentSize(cc.size(width, height));
-        // listView.setInnerContainerSize(200,200)
         listView.setAnchorPoint(cc.p(0.5, 0.5));
-        // listView.setPosition(width / 2, height / 2);
         listView.setPosition(width / 2 , height / 2 - 70);
 
         const gameList = _theme.GameList;
@@ -150,8 +136,6 @@ const LobbyView = (function () {
 
     function gameSelected(sender) {
         _onGameSelectedCallback(sender.getGameData());
-        // sender.disableContent();
-        // _gameButtonsForReset.push(sender);
         for (let button in gameControlList){
             gameControlList[button].disableContent();
         }
