@@ -26,7 +26,7 @@ cc.LoadingScreen = cc.LoaderScene.extend({
 
         //add a logo
         if (res.LoadingLogo) {
-            cc.loader.loadImg(res.LoadingLogo, {isCrossOrigin: false}, function (err, img) {
+            cc.loader.loadImg(cc.loader.resPath + res.LoadingLogo, {isCrossOrigin: false}, function (err, img) {
                 let spLogo = new cc.Sprite(res.LoadingLogo);
                 spLogo.setPosition(cc.visibleRect.center.x, cc.visibleRect.top.y - 200);
                 bgLayer.addChild(spLogo, 10);
@@ -35,7 +35,7 @@ cc.LoadingScreen = cc.LoaderScene.extend({
 
         if (res.LoadingIconPng) {
             //loading logo
-            cc.loader.loadImg(res.LoadingIconPng, {isCrossOrigin: false}, function (err, img) {
+            cc.loader.loadImg(cc.loader.resPath + res.LoadingIconPng, {isCrossOrigin: false}, function (err, img) {
                 cc.loader.load(res.LoadingIconPlist, function (err, img) {
                     cc.spriteFrameCache.addSpriteFrames(res.LoadingIconPlist);
                     //logoWidth = img.width;

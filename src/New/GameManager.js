@@ -69,7 +69,7 @@ const GameManager = function () {
         GameView.goToSeatSelection(parent);
 
         _floatingMenuManager.reattach();
-        _jackpotManager.reattach();
+        //_jackpotManager.reattach();
 
         if(_floatingMenuManager){
             _floatingMenuManager.hideAll();
