@@ -1,5 +1,5 @@
 cc.LoadingScreen = cc.LoaderScene.extend({
-    _spShark: null,
+    _pgLoadingIcon: null,
 
     init : function() {
         let self = this;
@@ -33,23 +33,23 @@ cc.LoadingScreen = cc.LoaderScene.extend({
             });
         }
 
-        if (res.LoadingIconPng) {
-            //loading logo
-            cc.loader.loadImg(cc.loader.resPath + res.LoadingIconPng, {isCrossOrigin: false}, function (err, img) {
-                cc.loader.load(res.LoadingIconPlist, function (err, img) {
-                    cc.spriteFrameCache.addSpriteFrames(res.LoadingIconPlist);
-                    //logoWidth = img.width;
-                    //logoHeight = img.height;
-                    //self._initStage(img, cc.visibleRect.center);
-                    let spShark = self._spShark = new cc.Sprite(ReferenceName.LoadingIcon_00000);
-                    spShark.setPosition(0, 195);
-                    bgLayer.addChild(spShark, 10);
-
-                    let boxAnimation = GUIFunctions.getAnimation(ReferenceName.LoadingIconAnim, 0.01);
-                    spShark.runAction(boxAnimation.repeatForever());
-                });
-            });
+        //loading icon
+        const imgLoadingFrame = document.getElementById("imgLoadingIconFrame"),
+            imgLoadingIcon = document.getElementById("imgLoadingIcon");
+        if(imgLoadingFrame && imgLoadingIcon){
+            let spLoadingFrame = new cc.Sprite(imgLoadingFrame);
+            bgLayer.addChild(spLoadingFrame);
+            spLoadingFrame.setPosition(cc.visibleRect.center.x, cc.visibleRect.center.y - 98);
+            
+            const spLoadingIcon = this._spLoadingIcon = new cc.Sprite(imgLoadingIcon);
+            const pgLoadingIcon = this._pgLoadingIcon = new cc.ProgressTimer(spLoadingIcon);
+            bgLayer.addChild(pgLoadingIcon);
+            pgLoadingIcon.setPosition(cc.visibleRect.center.x, cc.visibleRect.center.y - 98);
+            pgLoadingIcon.setType(cc.ProgressTimer.TYPE_BAR);
+            pgLoadingIcon.setMidpoint(cc.p(0, 0));
+            pgLoadingIcon.setBarChangeRate(cc.p(1, 0));
         }
+
         //loading percent
         let label = self._label = new cc.LabelTTF("加载资源中... 0%", "Arial", 24);
         label.setPosition(cc.visibleRect.center.x, 120);
@@ -63,8 +63,8 @@ cc.LoadingScreen = cc.LoaderScene.extend({
         let percent = (loadedCount / count * 100) | 0;
         percent = Math.min(percent, 100);
         this._label.setString("资源加载中... " + percent + "% (已加载" + loadedCount + "/" + count + ")");
-        if(this._spShark){
-            this._spShark.setPositionX((cc.winSize.width - 190) * (loadedCount / count));
+        if(this._spLoadingIcon){
+            this._pgLoadingIcon.setPercentage(percent);
         }
     },
 

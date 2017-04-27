@@ -1,8 +1,5 @@
 var res = {
     LoadingLogo: "loadingLogo.png",
-    LoadingIconPng: "Loading/LoadingIcon.png",
-    LoadingIconPlist: "Loading/LoadingIcon.plist",
-
     ParticlePlist: "particle.plist",
 
     LobbyJackpotPng: "Lobby/Jackpot.png",
@@ -33,13 +30,6 @@ var res = {
     testingEffect: "Game/FREffect.plist",
 
     WaterCausticAnimation : "Lobby/Caustic.plist",
-
-    // WaterCaustic0 : "Lobby/Caustic1.png",
-    // WaterCaustic1 : "Lobby/Caustic2.png",
-    // WaterCaustic2 : "Lobby/Caustic3.png",
-    // WaterCaustic3 : "Lobby/Caustic4.png",
-    // WaterCaustic4 : "Lobby/Caustic5.png",
-    // WaterCaustic5 : "Lobby/Caustic masking 1_00000.png",
 
     //GameFrame
     // GameFrame: "res/New/InGameFrame.png",
