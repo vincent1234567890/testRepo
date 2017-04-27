@@ -1,6 +1,6 @@
 var SeatSelectionScene = cc.Scene.extend({
     _lobbyType: null,
-    ctor: function(lobbyType, goToGameCallback){
+    ctor: function(lobbyType, playerData, goToGameCallback){
         cc.Scene.prototype.ctor.call(this);
 
         this._lobbyType = lobbyType || '1X';
@@ -30,7 +30,7 @@ var SeatSelectionScene = cc.Scene.extend({
         btnBack.setPosition(50, cc.visibleRect.top.y - 85);
 
         //info panel
-        let spPlayerInfo = new PlayerInfoWidget();
+        let spPlayerInfo = new PlayerInfoWidget(playerData);
         this.addChild(spPlayerInfo);
         spPlayerInfo.setPosition(120, cc.visibleRect.top.y - 85);
 

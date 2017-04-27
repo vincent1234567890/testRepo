@@ -12,7 +12,7 @@ const AppManager = (function () {
         // cc.director.popScene();
         _currentScene = new cc.Scene();
         cc.director.runScene(_currentScene);
-        GameManager.initialiseLogin(_currentScene, loginData);
+        GameManager.initialiseLogin(_currentScene);
         GameManager.goToLobby(goBackToLobby,goToSeatSelection);
     }
 
@@ -31,8 +31,8 @@ const AppManager = (function () {
         _gameTicker.unpauseTicker();
     }
 
-    function goToSeatSelection(gameSelection){
-        _currentScene = new SeatSelectionScene(gameSelection, onSeatSelected);
+    function goToSeatSelection(gameSelection, playerData){
+        _currentScene = new SeatSelectionScene(gameSelection, playerData, onSeatSelected);
         cc.director.pushScene(_currentScene);
         GameManager.enterSeatSelectionScene(_currentScene);
     }

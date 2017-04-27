@@ -27,6 +27,7 @@ const FreeRoundView = (function () {
 
         this.show = function () {
             _parent.setVisible(true);
+            effects.setVisible(true);
             effects.runAction(_animationSequence.clone());
             FRTitle.runAction(_titleSequence.clone());
 
@@ -34,6 +35,7 @@ const FreeRoundView = (function () {
         };
 
         function onExplosionAnimationEnd() {
+            effects.setVisible(false);
         }
 
         function onTitleAnimationEnd(){

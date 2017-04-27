@@ -105,10 +105,13 @@ const JackpotView = (function () {
 
         _parent.setPosition(683,666);
         const size = barFrame.getContentSize();
-        _label = new cc.LabelTTF("0", "Impact", 30);
-        _label._setFontWeight("bold");
-        _label.enableStroke(new cc.Color(0, 0, 0, 255), 2);
-        _label.setPosition(size.width * 0.5, size.height * 0.5);
+        // _label = new cc.LabelTTF("0", "Impact", 30);
+        // _label._setFontWeight("bold");
+        // _label.enableStroke(new cc.Color(0, 0, 0, 255), 2);
+        _label = new cc.LabelBMFont("0", res.WhiteFontFile);
+        _label.setPosition(size.width * 0.5, 3);
+        _label.setAnchorPoint(0.5,0);
+        _label.setScale(0.9);
         barFrame.addChild(_label);
 
         const lensFlareSmall = new cc.Sprite(ReferenceName.JackpotLensFlareSmall);

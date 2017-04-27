@@ -124,6 +124,21 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
+            <key>GameSelectionBase.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{750,600}</string>
+                <key>spriteSourceSize</key>
+                <string>{750,600}</string>
+                <key>textureRect</key>
+                <string>{{1369,1},{750,600}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
             <key>GameSelectionBase_00000.png</key>
             <dict>
                 <key>aliases</key>
@@ -618,7 +633,7 @@
             <key>size</key>
             <string>{4062,4062}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:eb862d8320615eb96c64fd2554eba712:decdedfdbf74f2da832c077ca10079fb:f5da007c8eb38d8c8fca0a4e0e07b9e9$</string>
+            <string>$TexturePacker:SmartUpdate:eba7bfea35d9dfe3cc36c3a85051e186:13d9ac91c5ed356ff84e77bfb3bf134c:f5da007c8eb38d8c8fca0a4e0e07b9e9$</string>
             <key>textureFileName</key>
             <string>LobbyUI.png</string>
         </dict>

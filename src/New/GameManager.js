@@ -13,7 +13,6 @@ const GameManager = function () {
     //GameState
     let _gameConfig;
     let _playerData;
-    let _loginData;
     let _currentScene;
     let _isFishLockOn = false;
     let _fishLockOnCallback;  //terribly messy should have a gameViewModel class eventually
@@ -41,10 +40,9 @@ const GameManager = function () {
     let _goToLobbyCallback;
     let _gameSelectedCallback;
 
-    function initialiseLogin(parent, loginData) {
+    function initialiseLogin(parent) {
         console.log("initialise");
         GameView.initialise(parent);
-        _loginData = loginData;
 
         // _loginManager = new LoginManager();
     }
@@ -153,7 +151,7 @@ const GameManager = function () {
 
         ClientServerConnect.requestMyData().then(
             stats => {
-                console.log(stats);
+                console.log("requestMyData",stats);
                 _playerData = stats.data;
                 return ClientServerConnect.getGameSummaries(7);
             }
@@ -182,9 +180,9 @@ const GameManager = function () {
 
     function createLobby() {
         if (!_lobbyManager) {
-            _lobbyManager = new LobbyManager(_playerData, _loginData, onGameSelected);
+            _lobbyManager = new LobbyManager(_playerData, onGameSelected);
             _lobbyWaterCausticsManager = new LobbyWaterCaustics();
-            _floatingMenuManager = new FloatingMenu(_playerData, _loginData, requestConsumptionLogHandle);
+            _floatingMenuManager = new FloatingMenu(_playerData, requestConsumptionLogHandle);
             _jackpotManager = new JackpotManager();
             // _jackpotManager.updateJackpot(999999999);
             ClientServerConnect.getCurrentJackpotValues().then(
@@ -266,7 +264,7 @@ const GameManager = function () {
 
     function onGameSelected(chosenScene){
         _currentScene = chosenScene;
-        _gameSelectedCallback(chosenScene.gameName);
+        _gameSelectedCallback(chosenScene.gameName, _playerData);
     }
 
     function seatSelected(type, seat){
