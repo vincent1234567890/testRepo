@@ -1,8 +1,5 @@
 var res = {
     LoadingLogo: "loadingLogo.png",
-    LoadingIconPng: "Loading/LoadingIcon.png",
-    LoadingIconPlist: "Loading/LoadingIcon.plist",
-
     ParticlePlist: "particle.plist",
 
     LobbyJackpotPng: "Lobby/Jackpot.png",

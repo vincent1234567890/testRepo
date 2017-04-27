@@ -174,3 +174,7 @@ let FloatMenuItem = cc.Node.extend({
             cc.eventManager.addListener(this._mouseEventListener, this._btnItem);
     }
 });
+
+let WaitingPanel = cc.LayerColor.extend({
+
+});
