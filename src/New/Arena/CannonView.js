@@ -88,7 +88,7 @@ const CannonView = (function () {
     };
 
     proto.updateCannonPowerLabel = function (cannonPower) {
-        this._cannonPowerLabel.setString(String(cannonPower * 100));
+        this._cannonPowerLabel.setString(String(cannonPower));
         this._cannonPowerLabel.setScale(1,2);
         cc.audioEngine.playEffect(res.GunCockSound);
         this.setCannonSprite(cannonPower);

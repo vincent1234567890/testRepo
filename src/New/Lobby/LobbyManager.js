@@ -6,7 +6,7 @@ const LobbyManager = (function () {
 
     let _lobbyTheme;
 
-    const LobbyManager = function (playerData, loginData,  onGameSelectedCallback) {
+    const LobbyManager = function (playerData,  onGameSelectedCallback) {
         _lobbyTheme = ThemeDataManager.getThemeDataList("LobbyData");
 
         const plists = ResourceLoader.getPlists("Lobby");
@@ -14,16 +14,16 @@ const LobbyManager = (function () {
             cc.spriteFrameCache.addSpriteFrames(plists[list]);
         }
         this._parent = parent;
-        this.displayView(playerData, loginData, onGameSelectedCallback);
+        this.displayView(playerData, onGameSelectedCallback);
     };
 
     const proto = LobbyManager.prototype;
 
-    proto.displayView = function(playerData, loginData, onGameSelectedCallback){
+    proto.displayView = function(playerData, onGameSelectedCallback){
         if (this._view){
             this._view.destroyView();
         }
-        this._view = new LobbyView(playerData, loginData, _lobbyTheme, onGameSelectedCallback);
+        this._view = new LobbyView(playerData, _lobbyTheme, onGameSelectedCallback);
     };
 
     proto.resetView = function(){

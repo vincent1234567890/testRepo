@@ -11,7 +11,6 @@ const FloatingMenu = (function () {
 
     //playerData
     let _playerData;
-    let _loginData;
     let _consumptionData;
     let _gameSummaryData;
 
@@ -25,12 +24,11 @@ const FloatingMenu = (function () {
     //callbacks
     let _requestConsumptionLogCallback;
 
-    const FloatingMenu = function (playerData, loginData, requestConsumptionLogCallback) {
+    const FloatingMenu = function (playerData, requestConsumptionLogCallback) {
         _parent = new cc.Node();
         GameView.addView(_parent);
 
         _playerData = playerData;
-        _loginData = loginData;
         _requestConsumptionLogCallback = requestConsumptionLogCallback;
 
         _theme = ThemeDataManager.getThemeDataList("FloatingMenu");
@@ -152,7 +150,7 @@ const FloatingMenu = (function () {
         if (_profileView) {
             _profileView.show();
         } else {
-            _profileView = new ProfileView(_playerData, _loginData);
+            _profileView = new ProfileView(_playerData);
         }
     }
 
