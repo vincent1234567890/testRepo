@@ -13,11 +13,12 @@ let PlayerInfoWidget = cc.Node.extend({
 
         //register event listener to update player info
         //(bg size = 190 x 48)
+
         const spPlayerNameBg = new cc.Sprite(ReferenceName.NameBG);
         spPlayerNameBg.setPosition(95, 0);
         this.addChild(spPlayerNameBg);
 
-        const lbPlayerName = this._lbPlayerName = new cc.LabelTTF("Guest001", "Arial", 22);
+        const lbPlayerName = this._lbPlayerName = new cc.LabelTTF(playerInfo.playerState.displayName, "Arial", 22);
         lbPlayerName._setFontWeight("bold");
         lbPlayerName.enableStroke(new cc.Color(0, 0, 0, 255), 2);
         spPlayerNameBg.addChild(lbPlayerName);
@@ -28,12 +29,14 @@ let PlayerInfoWidget = cc.Node.extend({
         spPlayerCreditBg.setPosition(315, 0);
         this.addChild(spPlayerCreditBg);
 
-        const lbPlayerCredit = this._lbPlayerCredit = new cc.LabelTTF("2,500", "Arial", 30);
+        const lbPlayerCredit = this._lbPlayerCredit = new cc.LabelTTF("0", "Arial", 30);
         lbPlayerCredit._setFontWeight("bold");
         lbPlayerCredit.setFontFillColor(new cc.Color(255, 205, 60, 255));
         lbPlayerCredit.enableStroke(new cc.Color(90, 24, 8, 255), 3);
         spPlayerCreditBg.addChild(lbPlayerCredit);
         lbPlayerCredit.setPosition(119, 24);
+
+        this.updatePlayerCredit(playerInfo.playerState.score);
     },
 
     updatePlayerCredit: function(playerCredit){

@@ -9,7 +9,7 @@ const ProfileView = (function () {
     let _parent = null;   //can't initialize at here
 
     let _playerData;
-    const ProfileView = function (playerData, loginData) {
+    const ProfileView = function (playerData) {
         _playerData = playerData;
         _parent = new cc.Node();
         
@@ -50,8 +50,8 @@ const ProfileView = (function () {
 
         const nickTextBox = new cc.EditBox(cc.size(160,30), profilebgdummy);
         // nickTextBox.setPlaceHolder("Nickname");
-        console.log(loginData.displayName);
-        nickTextBox.setString(playerData.displayName);
+        console.log(playerData.playerState.displayName);
+        nickTextBox.setString(playerData.playerState.displayName);
         nickTextBox.setFontName("Microsoft YaHei");
         nickTextBox.setFontColor(new cc.Color(72, 21, 0, 255));
         bg.addChild(nickTitle);
