@@ -77,17 +77,20 @@ const CaptureCoinEffectManager = (function () {
             //prize amount font def
             if (!this._label) {
 
-                let fontDef = new cc.FontDefinition();
-                fontDef.fontName = "Impact";
-                fontDef.fontWeight = "bold";
-                fontDef.fontSize = "32";
-                fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
-                fontDef.fillStyle = new cc.Color(255, 192, 0, 255);
+                // let fontDef = new cc.FontDefinition();
+                // fontDef.fontName = "Impact";
+                // fontDef.fontWeight = "bold";
+                // fontDef.fontSize = "32";
+                // fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
+                // fontDef.fillStyle = new cc.Color(255, 192, 0, 255);
+                //
+                // this._label = new cc.LabelTTF("", fontDef);
 
-                this._label = new cc.LabelTTF("", fontDef);
+                this._label = new cc.LabelBMFont(value,res.InGameLightGoldFontFile);
+                this._label.setScale(0.5);
                 // this._label = new cc.LabelBMFont("", res.GoldenNumbersPlist);
                 // this._label = new cc.LabelBMFont("",res.TestFont);
-                this._label.enableStroke(new cc.Color(96, 64, 0, 255), 2);
+                // this._label.enableStroke(new cc.Color(96, 64, 0, 255), 2);
 
 
                 // this._label._explodeLifeTime = explodeLifetime * 10;
@@ -171,40 +174,47 @@ const CaptureCoinEffectManager = (function () {
         let xLength = undefined;
         let yLength = undefined;
 
-        viewTarget.update = function (dt) {
+        // viewTarget.update = function (dt) {
+        //     const elapsed = (Date.now() - startTime ) / 100 - delay;
+        //     if (elapsed < 0){
+        //         return;
+        //     }
+        //     if (elapsed <= explodeLifetime) {
+        //         this.x = pos.x + velocity * elapsed * Math.cos(angle);
+        //         this.y = pos.y + velocity * elapsed * Math.sin(angle) - gravity / 2 * Math.pow(elapsed, 2);
+        //     } else if (elapsed <= explodeLifetime + collectDelay) {
+        //         return;
+        //     }else{// animate move to player
+        //         if (endingStartTime === undefined) {
+        //             endingStartTime = Date.now();
+        //             endingStartX = this.x;
+        //             endingStartY = this.y;
+        //             xLength = target[0] - this.x;
+        //             yLength = target[1] - this.y;
+        //         }
+        //
+        //         const endingElapsed = (Date.now() - endingStartTime) / 100;
+        //         if (endingElapsed > collectLifetime) {
+        //             //handle callback
+        //             callback(viewObject);
+        //             return;
+        //         }
+        //         const endingPercentage = endingElapsed / collectLifetime;
+        //         console.log(endingPercentage);
+        //         // console.log(xLength, yLength, endingPercentage, endingElapsed);
+        //         if (endingPercentage <= 1) {
+        //             this.x = endingStartX + endingPercentage * (xLength) * elapsed / 5;
+        //         }else{
+        //             this.x = target[0];
+        //         }
+        //
+        //         this.y = endingStartY + endingPercentage * (yLength) * elapsed / 5;
+        //         // console.log(thisCoinSprite.x, thisCoinSprite.y, Date.now(), endingStartTime, endingElapsed,
+        //         //     endingPercentage, endingPercentage * (xLength), endingPercentage * (yLength));
+        //     }
+        // };
 
-            const elapsed = (Date.now() - startTime ) / 100 - delay;
-            if (elapsed < 0){
-                return;
-            }
-            if (elapsed <= explodeLifetime) {
-                this.x = pos.x + velocity * elapsed * Math.cos(angle);
-                this.y = pos.y + velocity * elapsed * Math.sin(angle) - gravity / 2 * Math.pow(elapsed, 2);
-            } else if (elapsed <= explodeLifetime + collectDelay) {
-                return;
-            }else{// animate move to player
-                if (endingStartTime === undefined) {
-                    endingStartTime = Date.now();
-                    endingStartX = this.x;
-                    endingStartY = this.y;
-                    xLength = target[0] - this.x;
-                    yLength = target[1] - this.y;
-                }
-
-                const endingElapsed = (Date.now() - endingStartTime) / 100 - delay;
-                if (endingElapsed > collectLifetime) {
-                    //handle callback
-                    callback(viewObject);
-                    return;
-                }
-                const endingPercentage = endingElapsed / collectLifetime;
-                // console.log(xLength, yLength, endingPercentage, endingElapsed);
-                this.x = endingStartX + endingPercentage * (xLength) * elapsed/5;
-                this.y = endingStartY + endingPercentage * (yLength) * elapsed/5;
-                // console.log(thisCoinSprite.x, thisCoinSprite.y, Date.now(), endingStartTime, endingElapsed,
-                //     endingPercentage, endingPercentage * (xLength), endingPercentage * (yLength));
-            }
-        };
+        const movement = new cc.Sequence(new cc.DelayTime(delay), new cc.JumpTo(explodeLifetime, cc.p(300, 0), 50, 4))
 
         viewTarget.scheduleUpdate();
         if (animation) {

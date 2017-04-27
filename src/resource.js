@@ -29,21 +29,15 @@ var res = {
     SeatSelectionPng: "Lobby/SitSelection.png",
     SeatSelectionPlist: "Lobby/SitSelection.plist",
 
-    //testing
-    testingEffect: "Game/FREffect.plist",
+    //Fonts
+    WhiteFontFile : "Fonts/BWtext.fnt",
+    WhiteFontPng : "Fonts/BWtext.png",
+    GoldCoinFontFile : "Fonts/GoldCoinText-export.fnt",
+    GoldCoinFontPng : "Fonts/GoldCoinText-export.png",
+    InGameLightGoldFontFile : "Fonts/LightGoldText.fnt",
+    InGameLightGoldFontPng : "Fonts/LightGoldText.png",
 
     WaterCausticAnimation : "Lobby/Caustic.plist",
-
-    // WaterCaustic0 : "Lobby/Caustic1.png",
-    // WaterCaustic1 : "Lobby/Caustic2.png",
-    // WaterCaustic2 : "Lobby/Caustic3.png",
-    // WaterCaustic3 : "Lobby/Caustic4.png",
-    // WaterCaustic4 : "Lobby/Caustic5.png",
-    // WaterCaustic5 : "Lobby/Caustic masking 1_00000.png",
-
-    //GameFrame
-    // GameFrame: "res/New/InGameFrame.png",
-    // GameFrame2: "res/New/InGameFrame2.png",
 
     //GameBackgrounds
     GameBackground0: "Game BG/Game BG 1.png",
@@ -53,12 +47,6 @@ var res = {
 
     //FreeRound
     FreeRoundTitle : "Game/FreeRoundTitle.png",
-
-    // GoldenNumbersPlist : "res/New/Fonts/GoldNumber.plist",
-    // GoldNumberPng : "res/New/Fonts/GoldNumber.png",
-    //
-    // TestFont : "res/New/Fonts/test-export.fnt",
-    // TestFontPNG : "res/New/Fonts/test-export.png",
 
     GunCockSound : "Sound/gun-cocking-01.mp3",
     GunShotSound : "Sound/gun-gunshot-01.mp3",

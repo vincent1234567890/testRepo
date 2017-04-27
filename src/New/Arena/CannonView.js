@@ -36,7 +36,7 @@ const CannonView = (function () {
 
         const cannonLabelFontDef = new cc.FontDefinition();
         cannonLabelFontDef.fontName = "Arial";
-        cannonLabelFontDef.fontSize = "12";
+        cannonLabelFontDef.fontSize = "24";
         cannonLabelFontDef.fillStyle = new cc.color(this._theme["CannonLabelColour"][0], this._theme["CannonLabelColour"][1], this._theme["CannonLabelColour"][2]);
         cannonLabelFontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
 
@@ -89,7 +89,6 @@ const CannonView = (function () {
 
     proto.updateCannonPowerLabel = function (cannonPower) {
         this._cannonPowerLabel.setString(String(cannonPower));
-        this._cannonPowerLabel.setScale(1,2);
         cc.audioEngine.playEffect(res.GunCockSound);
         this.setCannonSprite(cannonPower);
     };
