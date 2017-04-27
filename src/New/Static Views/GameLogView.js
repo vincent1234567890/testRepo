@@ -4,6 +4,7 @@
 const GameLogView = (function () {
     "use strict";
     const ZORDER = 10;
+    const scrollMultiplier = -2;
     let _parent;
     let _popup;
     const tabHeight = 600;
@@ -329,7 +330,7 @@ const GameLogView = (function () {
         });
 
         function onMouseScroll(mouseData) {
-            const touch = new cc.Touch(0, -mouseData.getScrollY() / 100);
+            const touch = new cc.Touch(0, scrollMultiplier * mouseData.getScrollY() / 100);
             touch._setPrevPoint(0, 0);
             listView.onTouchMoved(touch);
             const end = new cc.Touch(0, 0);
@@ -474,7 +475,7 @@ const GameLogView = (function () {
         });
 
         function onMouseScroll(mouseData) {
-            const touch = new cc.Touch(0, -mouseData.getScrollY() / 100);
+            const touch = new cc.Touch(0, scrollMultiplier * mouseData.getScrollY() / 100);
             touch._setPrevPoint(0, 0);
             listView.onTouchMoved(touch);
             const end = new cc.Touch(0, 0);
@@ -731,7 +732,7 @@ const GameLogView = (function () {
         });
 
         function onMouseScroll(mouseData) {
-            const touch = new cc.Touch(0, -mouseData.getScrollY() / 100);
+            const touch = new cc.Touch(0, scrollMultiplier * mouseData.getScrollY() / 100);
             touch._setPrevPoint(0, 0);
             listView.onTouchMoved(touch);
             const end = new cc.Touch(0, 0);

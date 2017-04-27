@@ -5,6 +5,13 @@ const JackpotView = (function () {
     "use strict";
     let _parent;
     let _label;
+
+    const lensFlareHeight = 0;
+    const lensFlareStart = -90;
+    const lensFlareEnd = 90;
+    const smallMultiplier = 2;
+    const lensFlareTime = 3;
+
     function JackpotView() {
         const bg = new cc.Sprite(ReferenceName.JackpotBackground);
         const shadow = new cc.Sprite(ReferenceName.JackpotShadow);
@@ -104,7 +111,30 @@ const JackpotView = (function () {
         _label.setPosition(size.width * 0.5, size.height * 0.5);
         barFrame.addChild(_label);
 
+        const lensFlareSmall = new cc.Sprite(ReferenceName.JackpotLensFlareSmall);
+        const lensFlareMedium = new cc.Sprite(ReferenceName.JackpotLensFlareMedium);
+        const lensFlareLarge = new cc.Sprite(ReferenceName.JackpotLensFlareLarge);
 
+        _parent.addChild(lensFlareSmall);
+        _parent.addChild(lensFlareMedium);
+        _parent.addChild(lensFlareLarge);
+
+
+        lensFlareSmall.setPosition(lensFlareStart * smallMultiplier,lensFlareHeight);
+        lensFlareMedium.setPosition(lensFlareStart,lensFlareHeight);
+        lensFlareLarge.setPosition(lensFlareEnd,lensFlareHeight);
+
+        const moveLeft = new cc.MoveTo(lensFlareTime,lensFlareEnd,lensFlareHeight);
+        const moveRight = new cc.MoveTo(lensFlareTime,lensFlareStart,lensFlareHeight);
+
+        const lensFlareMediumSequence = new cc.RepeatForever( new cc.Sequence(moveLeft.clone(),moveRight.clone()));
+        const lensFlareLargeSequence = new cc.RepeatForever(new cc.Sequence(moveRight.clone(),moveLeft.clone()));
+        const lensFlareSmallSequence = new cc.RepeatForever( new cc.Sequence (new cc.MoveTo(lensFlareTime,lensFlareEnd * smallMultiplier,lensFlareHeight),
+                                                                            new cc.MoveTo(lensFlareTime,lensFlareStart * smallMultiplier,lensFlareHeight)));
+
+        lensFlareMedium.runAction(lensFlareMediumSequence);
+        lensFlareLarge.runAction(lensFlareLargeSequence);
+        lensFlareSmall.runAction(lensFlareSmallSequence);
     }
 
     const proto = JackpotView.prototype;
@@ -116,7 +146,6 @@ const JackpotView = (function () {
     };
 
     proto.updateJackpot = function(value){
-        // let prize = (value).toLocaleString('en-US', {maximumFractionDigits: 2});
         let prize = Math.round(value).toLocaleString('en-US', {maximumFractionDigits: 2});
         if (prize.length > 13) {
             prize = prize.substring(0,10) + "..";

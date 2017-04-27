@@ -186,8 +186,13 @@ const GameManager = function () {
             _lobbyWaterCausticsManager = new LobbyWaterCaustics();
             _floatingMenuManager = new FloatingMenu(_playerData, _loginData, requestConsumptionLogHandle);
             _jackpotManager = new JackpotManager();
-            _jackpotManager.updateJackpot(999999999);
-            ClientServerConnect.getCurrentJackpotValues();
+            // _jackpotManager.updateJackpot(999999999);
+            ClientServerConnect.getCurrentJackpotValues().then(
+                values => {
+                    _jackpotManager.updateJackpot(values);
+                }
+            );
+
         }else {
             _lobbyManager.displayView(_playerData, onGameSelected);
         }
@@ -204,7 +209,11 @@ const GameManager = function () {
         _floatingMenuManager.unattach();
         _jackpotManager.unattach();
         destroyArena();
-        ClientServerConnect.getCurrentJackpotValues();
+        ClientServerConnect.getCurrentJackpotValues().then(
+            values => {
+                _jackpotManager.updateJackpot(values);
+            }
+        );
         _goToLobbyCallback();
     }
 

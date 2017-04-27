@@ -459,8 +459,8 @@ const ClientServerConnect = function () {
         return _gameWSClient.callAPIOnce('game', 'getCurrentJackpotValues', {}).then(
             jackpotValueResponse => {
                 console.log('jackpotValueResponse:', jackpotValueResponse);
-                const total = Object_values(jackpotValueResponse.data).map(level => level.value).reduce((a, b) => a + b, 0);
-                console.log('jackpotValueResponse:total:', total);
+                // const total = Object_values(jackpotValueResponse.data).map(level => level.value).reduce((a, b) => a + b, 0);
+                // console.log('jackpotValueResponse:total:', total);
                 //GameManager.updateJackpotPool(total);
                 return jackpotValueResponse;
             }
