@@ -1,5 +1,5 @@
 cc.LoadingScreen = cc.LoaderScene.extend({
-    _spShark: null,
+    _pgLoadingIcon: null,
 
     init : function() {
         let self = this;
@@ -33,23 +33,39 @@ cc.LoadingScreen = cc.LoaderScene.extend({
             });
         }
 
-        if (res.LoadingIconPng) {
-            //loading logo
-            cc.loader.loadImg(cc.loader.resPath + res.LoadingIconPng, {isCrossOrigin: false}, function (err, img) {
-                cc.loader.load(res.LoadingIconPlist, function (err, img) {
-                    cc.spriteFrameCache.addSpriteFrames(res.LoadingIconPlist);
-                    //logoWidth = img.width;
-                    //logoHeight = img.height;
-                    //self._initStage(img, cc.visibleRect.center);
-                    let spShark = self._spShark = new cc.Sprite(ReferenceName.LoadingIcon_00000);
-                    spShark.setPosition(0, 195);
-                    bgLayer.addChild(spShark, 10);
+        //loading icon
+        /*const imgLoadingFrame = document.getElementById("imgLoadingIconFrame"),
+            imgLoadingIcon = document.getElementById("imgLoadingIcon");
+        if(imgLoadingFrame && imgLoadingIcon){
+            let spLoadingFrame = new cc.Sprite(imgLoadingFrame);
+            bgLayer.addChild(spLoadingFrame);
+            spLoadingFrame.setPosition(cc.visibleRect.center.x, cc.visibleRect.center.y - 98);
+            
+            const spLoadingIcon = this._spLoadingIcon = new cc.Sprite(imgLoadingIcon);
+            const pgLoadingIcon = this._pgLoadingIcon = new cc.ProgressTimer(spLoadingIcon);
+            bgLayer.addChild(pgLoadingIcon);
+            pgLoadingIcon.setPosition(cc.visibleRect.center.x, cc.visibleRect.center.y - 98);
+            pgLoadingIcon.setType(cc.ProgressTimer.TYPE_BAR);
+            pgLoadingIcon.setMidpoint(cc.p(0, 0));
+            pgLoadingIcon.setBarChangeRate(cc.p(1, 0));
+        }*/
 
-                    let boxAnimation = GUIFunctions.getAnimation(ReferenceName.LoadingIconAnim, 0.01);
-                    spShark.runAction(boxAnimation.repeatForever());
-                });
-            });
-        }
+        cc.loader.loadImg(cc.loader.resPath + "Loading/LoadingBarBase.png", {isCrossOrigin: false}, function (err, img) {
+            const spLoadingFrame = new ccui.Scale9Sprite("Loading/LoadingBarBase.png");
+            spLoadingFrame.setCapInsets(new cc.Rect(25, 16, 76, 7));
+            spLoadingFrame.setPreferredSize(new cc.Size(500, 50));
+            bgLayer.addChild(spLoadingFrame);
+            spLoadingFrame.setPosition(cc.visibleRect.center.x, 180);
+        });
+        cc.loader.loadImg(cc.loader.resPath + "Loading/LoadingBar.png", {isCrossOrigin: false}, function (err, img) {
+            const spLoadingBar = self._spLoadingIcon = new ccui.Scale9Sprite("Loading/LoadingBar.png");
+            spLoadingBar.setCapInsets(new cc.Rect(25, 12, 69, 5));
+            spLoadingBar.setContentSize(new cc.Size(62, 38));
+            spLoadingBar.setAnchorPoint(0, 0.5);
+            bgLayer.addChild(spLoadingBar, 9);
+            spLoadingBar.setPosition(cc.visibleRect.center.x - 245, 180);
+        });
+
         //loading percent
         let label = self._label = new cc.LabelTTF("加载资源中... 0%", "Arial", 24);
         label.setPosition(cc.visibleRect.center.x, 120);
@@ -63,8 +79,9 @@ cc.LoadingScreen = cc.LoaderScene.extend({
         let percent = (loadedCount / count * 100) | 0;
         percent = Math.min(percent, 100);
         this._label.setString("资源加载中... " + percent + "% (已加载" + loadedCount + "/" + count + ")");
-        if(this._spShark){
-            this._spShark.setPositionX((cc.winSize.width - 190) * (loadedCount / count));
+        if(this._spLoadingIcon){
+            const width = 0|(62 +  (490 - 62) * (loadedCount / count));
+            this._spLoadingIcon.setPreferredSize(new cc.Size(width, 38));
         }
     },
 
