@@ -176,35 +176,23 @@ let FloatMenuItem = cc.Node.extend({
 });
 
 let WaitingPanel = cc.LayerColor.extend({
+    _touchEventListener:null,
+    _spCircles: null,
+
     ctor: function(){
         cc.LayerColor.prototype.ctor.call(this, new cc.Color(10, 10, 10, 190));
 
-        const radius = 50, duration = 0.6;
+        let circleArr = this._spCircles = [];
+        const radius = 50;
         for(let i = 0; i < 12; i++) {
             const pAngle = cc.pForAngle(cc.degreesToRadians(i * -30));
             const spCircle = new cc.Sprite(res.LoadingCircle);
             spCircle.setPosition(cc.visibleRect.center.x + pAngle.x * radius,
                 cc.visibleRect.center.y + pAngle.y * radius);
             spCircle.setOpacity(188);
+            circleArr.push(spCircle);
             this.addChild(spCircle);
-            if (i === 0) {
-                spCircle.runAction(cc.sequence(
-                    cc.spawn(cc.scaleTo(duration / 2, 1.5).easing(cc.easeBackInOut()), cc.fadeTo(duration / 2, 255)),
-                    cc.spawn(cc.scaleTo(duration / 2, 1).easing(cc.easeBackInOut()), cc.fadeTo(duration / 2, 188)),
-                    cc.delayTime((11 - i) * duration)).repeatForever());
-            } else if (i === 11) {
-                spCircle.runAction(cc.sequence(
-                    cc.delayTime(i * duration),
-                    cc.spawn(cc.scaleTo(duration / 2, 1.5).easing(cc.easeBackInOut()), cc.fadeTo(duration / 2, 255)),
-                    cc.spawn(cc.scaleTo(duration / 2, 1).easing(cc.easeBackInOut()), cc.fadeTo(duration / 2, 188))).repeatForever());
-            } else {
-                spCircle.runAction(cc.sequence(
-                    cc.delayTime(i * duration),
-                    cc.spawn(cc.scaleTo(duration / 2, 1.5).easing(cc.easeBackInOut()), cc.fadeTo(duration / 2, 255)),
-                    cc.spawn(cc.scaleTo(duration / 2, 1).easing(cc.easeBackInOut()), cc.fadeTo(duration / 2, 188)),
-                    cc.delayTime((11 - i) * duration)).repeatForever());
-            }
-
+            this._setupAction(spCircle, i);
         }
             //add event listener
         const touchEventListener = cc.EventListener.create({
@@ -222,7 +210,40 @@ let WaitingPanel = cc.LayerColor.extend({
                     //do nothing. block.
                 }
             }
-        })
+        });
+    },
+
+    _setupAction: function(spCircle, i){
+        const duration = 0.6;
+        if (i === 0) {
+            spCircle.runAction(cc.sequence(
+                cc.spawn(cc.scaleTo(duration / 2, 1.5).easing(cc.easeBackInOut()), cc.fadeTo(duration / 2, 255)),
+                cc.spawn(cc.scaleTo(duration / 2, 1).easing(cc.easeBackInOut()), cc.fadeTo(duration / 2, 188)),
+                cc.delayTime((11 - i) * duration)).repeatForever());
+        } else if (i === 11) {
+            spCircle.runAction(cc.sequence(
+                cc.delayTime(i * duration),
+                cc.spawn(cc.scaleTo(duration / 2, 1.5).easing(cc.easeBackInOut()), cc.fadeTo(duration / 2, 255)),
+                cc.spawn(cc.scaleTo(duration / 2, 1).easing(cc.easeBackInOut()), cc.fadeTo(duration / 2, 188))).repeatForever());
+        } else {
+            spCircle.runAction(cc.sequence(
+                cc.delayTime(i * duration),
+                cc.spawn(cc.scaleTo(duration / 2, 1.5).easing(cc.easeBackInOut()), cc.fadeTo(duration / 2, 255)),
+                cc.spawn(cc.scaleTo(duration / 2, 1).easing(cc.easeBackInOut()), cc.fadeTo(duration / 2, 188)),
+                cc.delayTime((11 - i) * duration)).repeatForever());
+        }
+    },
+
+    onEnter: function() {
+        cc.LayerColor.prototype.onEnter.call(this);
+        if (this._touchEventListener && !this._touchEventListener._isRegistered())
+            cc.eventManager.addListener(this._touchEventListener, this);
+        const spCircles = this._spCircles;
+        for (let i = 0; i < spCircles.length; i++) {
+            const selCircle = spCircles[i];
+            selCircle.stopAllActions();
+            selCircle._setupAction(selCircle, i);
+        }
     }
 });
 
