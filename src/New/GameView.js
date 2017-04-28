@@ -92,10 +92,7 @@ const GameView = function () {
 
     function destroyView(view) {
         _parentNode.removeChild(view);
-        const plists = ResourceLoader.getPlists("Game");
-        for (let list in plists) {
-            cc.spriteFrameCache.removeSpriteFrameByName(plists[list]);
-        }
+
     }
 
     const initialiseTouch = function (touchAt) {
@@ -151,6 +148,10 @@ const GameView = function () {
             delete _playerViews[i];
         }
         _fishGameArena = null;
+        const plists = ResourceLoader.getPlists("Game");
+        for (let list in plists) {
+            cc.spriteFrameCache.removeSpriteFrameByName(plists[list]);
+        }
     }
 
     function getPlayerSlot(slot) {
