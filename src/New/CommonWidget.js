@@ -180,18 +180,49 @@ let WaitingPanel = cc.LayerColor.extend({
         cc.LayerColor.prototype.ctor.call(this, new cc.Color(10, 10, 10, 190));
 
         const radius = 50, duration = 0.6;
-        for(let i = 0; i < 12; i++){
+        for(let i = 0; i < 12; i++) {
             const pAngle = cc.pForAngle(cc.degreesToRadians(i * -30));
             const spCircle = new cc.Sprite(res.LoadingCircle);
             spCircle.setPosition(cc.visibleRect.center.x + pAngle.x * radius,
                 cc.visibleRect.center.y + pAngle.y * radius);
             spCircle.setOpacity(188);
             this.addChild(spCircle);
-            spCircle.runAction(cc.sequence(cc.delayTime(i * duration),
-                cc.spawn(cc.scaleTo(duration/2, 1.5).easing(cc.easeBackInOut()), cc.fadeTo(duration/2, 255)),
-                cc.spawn(cc.scaleTo(duration/2, 1).easing(cc.easeBackInOut()), cc.fadeTo(duration/2, 188)),
-                cc.delayTime((11 - i) * duration)).repeatForever());
+            if (i === 0) {
+                spCircle.runAction(cc.sequence(
+                    cc.spawn(cc.scaleTo(duration / 2, 1.5).easing(cc.easeBackInOut()), cc.fadeTo(duration / 2, 255)),
+                    cc.spawn(cc.scaleTo(duration / 2, 1).easing(cc.easeBackInOut()), cc.fadeTo(duration / 2, 188)),
+                    cc.delayTime((11 - i) * duration)).repeatForever());
+            } else if (i === 11) {
+                spCircle.runAction(cc.sequence(
+                    cc.delayTime(i * duration),
+                    cc.spawn(cc.scaleTo(duration / 2, 1.5).easing(cc.easeBackInOut()), cc.fadeTo(duration / 2, 255)),
+                    cc.spawn(cc.scaleTo(duration / 2, 1).easing(cc.easeBackInOut()), cc.fadeTo(duration / 2, 188))).repeatForever());
+            } else {
+                spCircle.runAction(cc.sequence(
+                    cc.delayTime(i * duration),
+                    cc.spawn(cc.scaleTo(duration / 2, 1.5).easing(cc.easeBackInOut()), cc.fadeTo(duration / 2, 255)),
+                    cc.spawn(cc.scaleTo(duration / 2, 1).easing(cc.easeBackInOut()), cc.fadeTo(duration / 2, 188)),
+                    cc.delayTime((11 - i) * duration)).repeatForever());
+            }
+
         }
+            //add event listener
+        const touchEventListener = cc.EventListener.create({
+            event:cc.EventListener.TOUCH_ONE_BY_ONE,
+            swallowTouches: true,
+            onTouchBegan: function(touch, event) {
+                let target = event.getCurrentTarget();
+                return (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
+                    target.convertToNodeSpace(touch.getLocation())));
+            },
+            onTouchEnded: function(touch, event){
+                let target = event.getCurrentTarget();
+                if (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
+                        target.convertToNodeSpace(touch.getLocation()))) {
+                    //do nothing. block.
+                }
+            }
+        })
     }
 });
 
