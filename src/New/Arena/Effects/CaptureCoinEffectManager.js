@@ -104,7 +104,6 @@ const CaptureCoinEffectManager = (function () {
     }());
 
     function setupView(viewObject, viewTarget, pos, angle, target, animation, delay, collectDelay, callback) {
-        console.log(collectDelay);
         viewTarget.setPosition(pos);
 
         const movement = new cc.Sequence(
