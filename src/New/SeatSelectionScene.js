@@ -75,8 +75,6 @@ var SeatSelectionScene = cc.Scene.extend({
 
     cleanup: function(){
         cc.spriteFrameCache.removeSpriteFramesFromFile(res.SeatSelectionPlist);
-        cc.spriteFrameCache.removeSpriteFramesFromFile(res.LobbyUIPlist);
-        cc.spriteFrameCache.removeSpriteFramesFromFile(res.LobbyUI2Plist);
 
         cc.Scene.prototype.cleanup.call(this);
     }

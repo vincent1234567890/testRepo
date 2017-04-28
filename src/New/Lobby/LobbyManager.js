@@ -20,10 +20,9 @@ const LobbyManager = (function () {
     const proto = LobbyManager.prototype;
 
     proto.displayView = function(playerData, onGameSelectedCallback){
-        if (this._view){
-            this._view.destroyView();
+        if(!this._view) {
+            this._view = new LobbyView(playerData, _lobbyTheme, onGameSelectedCallback);
         }
-        this._view = new LobbyView(playerData, _lobbyTheme, onGameSelectedCallback);
     };
 
     proto.resetView = function(){
