@@ -191,9 +191,10 @@ const GameManager = function () {
                 }
             );
 
-        }else {
-            _lobbyManager.displayView(_playerData, onGameSelected);
         }
+        // else {
+        //     _lobbyManager.displayView(_playerData, onGameSelected);
+        // }
     }
 
     function exitToLobby() {
@@ -224,19 +225,19 @@ const GameManager = function () {
         // exitToLobby();
     }
 
-    function goToScoreboard(stats) {
-        if (!_scoreboardManager) {
-            _scoreboardManager = new ScoreboardManager(stats.data.recentGames[0], exitToLobby, goToNewRoom);
-        } else {
-            _scoreboardManager.destroyView();
-            _scoreboardManager.displayView(stats.data.recentGames[0]);
-        }
-    }
+    // function goToScoreboard(stats) {
+    //     if (!_scoreboardManager) {
+    //         _scoreboardManager = new ScoreboardManager(stats.data.recentGames[0], exitToLobby, goToNewRoom);
+    //     } else {
+    //         _scoreboardManager.destroyView();
+    //         _scoreboardManager.displayView(stats.data.recentGames[0]);
+    //     }
+    // }
 
-    function goToNewRoom() {
-        resetArena();
-        ClientServerConnect.joinGame(_currentScene.gameName).catch(console.error);
-    }
+    // function goToNewRoom() {
+    //     resetArena();
+    //     ClientServerConnect.joinGame(_currentScene.gameName).catch(console.error);
+    // }
 
     function destroyArena(){
         resetArena();

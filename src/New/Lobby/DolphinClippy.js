@@ -1,5 +1,3 @@
-
-
 const DolphinClippy = (function () {
     "use strict";
     
