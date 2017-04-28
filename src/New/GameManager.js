@@ -171,6 +171,11 @@ const GameManager = function () {
             _playerData.playerState.score += data.amount;
             LobbyManager.updatePlayerData(_playerData);
         });
+        ClientServerConnect.listenForEvent('jpVals', jpVals => {
+            if (_jackpotManager) {
+                _jackpotManager.updateJackpot({data: jpVals});
+            }
+        });
     }
 
     function onLeaveArena() {
