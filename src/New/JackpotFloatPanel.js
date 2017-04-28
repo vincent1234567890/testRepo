@@ -114,17 +114,17 @@ let JackpotFloatPanel = cc.Node.extend({
         const lensFlareSmall = new cc.Sprite(ReferenceName.JackpotLensFlareSmall);
         this.addChild(lensFlareSmall);
         lensFlareSmall.setPosition(-180,0);
-        lensFlareSmall.runAction(cc.sequence(cc.moveTo(3, 90, 0), cc.moveTo(3, -90, 0)).repeatForever());
+        lensFlareSmall.runAction(cc.sequence(cc.moveTo(3, 180, 0), cc.moveTo(3, -180, 0)).repeatForever());
 
         const lensFlareMedium = new cc.Sprite(ReferenceName.JackpotLensFlareMedium);
         this.addChild(lensFlareMedium);
         lensFlareMedium.setPosition(-90,0);
-        lensFlareMedium.runAction(cc.sequence(cc.moveTo(3, 180, 0), cc.moveTo(3, -180, 0)).repeatForever());
+        lensFlareMedium.runAction(cc.sequence(cc.moveTo(3, 90, 0), cc.moveTo(3, -90, 0)).repeatForever());
 
         const lensFlareLarge = new cc.Sprite(ReferenceName.JackpotLensFlareLarge);
         this.addChild(lensFlareLarge);
         lensFlareLarge.setPosition(90,0);
-        lensFlareLarge.runAction(cc.sequence(cc.moveTo(3, 90, 0), cc.moveTo(3, -90, 0)).repeatForever());
+        lensFlareLarge.runAction(cc.sequence(cc.moveTo(3, -90, 0), cc.moveTo(3, 90, 0)).repeatForever());
     },
 
     onEnter: function(){
