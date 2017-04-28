@@ -176,7 +176,23 @@ let FloatMenuItem = cc.Node.extend({
 });
 
 let WaitingPanel = cc.LayerColor.extend({
+    ctor: function(){
+        cc.LayerColor.prototype.ctor.call(this, new cc.Color(10, 10, 10, 190));
 
+        const radius = 50, duration = 0.6;
+        for(let i = 0; i < 12; i++){
+            const pAngle = cc.pForAngle(cc.degreesToRadians(i * -30));
+            const spCircle = new cc.Sprite(res.LoadingCircle);
+            spCircle.setPosition(cc.visibleRect.center.x + pAngle.x * radius,
+                cc.visibleRect.center.y + pAngle.y * radius);
+            spCircle.setOpacity(188);
+            this.addChild(spCircle);
+            spCircle.runAction(cc.sequence(cc.delayTime(i * duration),
+                cc.spawn(cc.scaleTo(duration/2, 1.5).easing(cc.easeBackInOut()), cc.fadeTo(duration/2, 255)),
+                cc.spawn(cc.scaleTo(duration/2, 1).easing(cc.easeBackInOut()), cc.fadeTo(duration/2, 188)),
+                cc.delayTime((11 - i) * duration)).repeatForever());
+        }
+    }
 });
 
 //

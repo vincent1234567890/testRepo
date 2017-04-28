@@ -2,6 +2,8 @@ var res = {
     LoadingLogo: "loadingLogo.png",
     ParticlePlist: "particle.plist",
 
+    LoadingCircle: "Loading/LoadingCircle.png",
+
     LobbyJackpotPng: "Lobby/Jackpot.png",
     LobbyJackpotPlist: "Lobby/Jackpot.plist",
     MenuPng: "Lobby/Menu.png",
