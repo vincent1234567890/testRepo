@@ -1,4 +1,4 @@
-var JackpotFloatPanel = cc.Node.extend({
+let JackpotFloatPanel = cc.Node.extend({
     _lbJackpotValue: null,
     _barFrameEventListener: null,
     _spBarFrame: null,
@@ -66,7 +66,6 @@ var JackpotFloatPanel = cc.Node.extend({
         lbJackpotValue._setFontWeight("bold");
         lbJackpotValue.setFontFillColor(new cc.Color(255,255,255,255));
         lbJackpotValue.enableStroke(new cc.Color(0, 0, 0, 255), 2);
-        //lbJackpotValue.setDimensions(barSize);
 
         //add the event listener
         this._barFrameEventListener = cc.EventListener.create({
@@ -111,12 +110,35 @@ var JackpotFloatPanel = cc.Node.extend({
                 }
             }
         });
+
+        const lensFlareSmall = new cc.Sprite(ReferenceName.JackpotLensFlareSmall);
+        this.addChild(lensFlareSmall);
+        lensFlareSmall.setPosition(-180,0);
+        lensFlareSmall.runAction(cc.sequence(cc.moveTo(3, 90, 0), cc.moveTo(3, -90, 0)).repeatForever());
+
+        const lensFlareMedium = new cc.Sprite(ReferenceName.JackpotLensFlareMedium);
+        this.addChild(lensFlareMedium);
+        lensFlareMedium.setPosition(-90,0);
+        lensFlareMedium.runAction(cc.sequence(cc.moveTo(3, 180, 0), cc.moveTo(3, -180, 0)).repeatForever());
+
+        const lensFlareLarge = new cc.Sprite(ReferenceName.JackpotLensFlareLarge);
+        this.addChild(lensFlareLarge);
+        lensFlareLarge.setPosition(90,0);
+        lensFlareLarge.runAction(cc.sequence(cc.moveTo(3, 90, 0), cc.moveTo(3, -90, 0)).repeatForever());
     },
 
     onEnter: function(){
        cc.Node.prototype.onEnter.call(this);
         if (this._barFrameEventListener && !this._barFrameEventListener._isRegistered())
             cc.eventManager.addListener(this._barFrameEventListener, this._spBarFrame);
+        //reload the value.  should update the data by event.
+        const self = this;
+        ClientServerConnect.getCurrentJackpotValues().then(values=>{
+            const total = Object.keys(values["data"]).map(key => values["data"][key]).map(level => level.value).reduce((a, b) => a + b, 0);
+            self._lbJackpotValue.setString(Math.round(total).toLocaleString('en-US', {maximumFractionDigits: 2}));
+        })
+        //load user info
+
     },
 
     cleanup: function(){
@@ -126,7 +148,7 @@ var JackpotFloatPanel = cc.Node.extend({
     }
 });
 
-var JackpotDetailPanel = cc.LayerColor.extend({
+let JackpotDetailPanel = cc.LayerColor.extend({
     _spJackpotPopBase: null,
     _lbPrize1Value: null,
     _lbPrize2Value: null,
