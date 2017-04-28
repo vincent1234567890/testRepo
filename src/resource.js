@@ -7,6 +7,9 @@ var res = {
     MenuPng: "Lobby/Menu.png",
     MenuPlist: "Lobby/Menu.plist",
 
+    GameUIPng: "Game/GameUI.png",
+    GameUIPlist: "Game/GameUI.plist",
+
     //jackpot
     JackpotMiniGamePng: "Jackpot/JPminigame.png",
     JackpotMiniGamePlist: "Jackpot/JPminigame.plist",

@@ -178,3 +178,65 @@ let FloatMenuItem = cc.Node.extend({
 let WaitingPanel = cc.LayerColor.extend({
 
 });
+
+//
+let WaveTransition = cc.Node.extend({
+    _spWave: null,
+    _pgOriginBackground: null,
+    _pgTargetBackground: null,
+
+    ctor: function(originBackground){
+        cc.Node.prototype.ctor.call(this);
+
+        let sfWave = cc.spriteFrameCache.getSpriteFrame("wave.png");
+        if(!sfWave){
+            cc.spriteFrameCache.addSpriteFrames(res.GameUIPlist);
+            sfWave = cc.spriteFrameCache.getSpriteFrame("wave.png");
+        }
+
+        const spWave = this._spWave = new cc.Sprite(sfWave);
+        const waveSize = spWave.getContentSize();
+        spWave.setPosition(cc.visibleRect.left.x, cc.visibleRect.center.y);
+        spWave.setAnchorPoint(1, 0.5);
+        spWave.setVisible(false);
+        this.addChild(spWave, 9);
+        spWave.setScale(cc.visibleRect.top.y /  waveSize.height);
+
+        const pgOriginBackground = this._pgOriginBackground = new cc.ProgressTimer(new cc.Sprite(originBackground));
+        this.addChild(pgOriginBackground);
+        pgOriginBackground.setPosition(cc.visibleRect.center);
+        pgOriginBackground.setType(cc.ProgressTimer.TYPE_BAR);
+        pgOriginBackground.setMidpoint(cc.p(0, 1));
+        pgOriginBackground.setBarChangeRate(cc.p(1, 0));
+        pgOriginBackground.setPercentage(100);
+    },
+
+    transition: function(targetBackground) {
+        const spWave = this._spWave, duration = 4;
+        spWave.setVisible(true);
+        const waveSize = spWave.getContentSize();
+        spWave.setPosition(cc.visibleRect.left.x, cc.visibleRect.center.y);
+        spWave.runAction(cc.moveTo(duration, cc.visibleRect.right.x + waveSize.width, cc.visibleRect.center.y));
+        const delayTime = (waveSize.width / (cc.visibleRect.right.x + waveSize.width)) * duration * 0.5;
+
+        const pgOriginBackground = this._pgOriginBackground;
+        pgOriginBackground.setMidpoint(cc.p(1, 0));
+        pgOriginBackground.setBarChangeRate(cc.p(1, 0));
+        pgOriginBackground.runAction(cc.sequence(cc.delayTime(delayTime), cc.progressFromTo(duration - delayTime * 2, 100, 0)));
+
+        const pgTargetBackground = this._pgTargetBackground = new cc.ProgressTimer(new cc.Sprite(targetBackground));
+        this.addChild(pgTargetBackground);
+        pgTargetBackground.setPosition(cc.visibleRect.center);
+        pgTargetBackground.setType(cc.ProgressTimer.TYPE_BAR);
+        pgTargetBackground.setMidpoint(cc.p(0, 1));
+        pgTargetBackground.setBarChangeRate(cc.p(1, 0));
+        pgTargetBackground.runAction(cc.sequence(cc.delayTime(delayTime), cc.progressFromTo(duration - delayTime * 2, 0, 100)));
+
+        this.runAction(cc.sequence(cc.delayTime(duration), cc.callFunc(function () {
+            this._spWave.setVisible(false);
+            this._pgOriginBackground.removeFromParent(true);
+            this._pgOriginBackground = this._pgTargetBackground;
+            this._pgTargetBackground = null;
+        }, this)));
+    }
+});

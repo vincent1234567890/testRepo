@@ -21,7 +21,11 @@ var TestScene = cc.Scene.extend({
         //const waterCausticsLayer = new WaterCausticsLayer();
         //this.addChild(waterCausticsLayer,999);
 
-        let jackpotPanel = new JackpotDetailPanel();
-        this.addChild(jackpotPanel);
+        //let jackpotPanel = new JackpotDetailPanel();
+        //this.addChild(jackpotPanel);
+
+        let waveTransition = new WaveTransition(res.GameBackground0);
+        this.addChild(waveTransition);
+        waveTransition.transition(res.GameBackground1);
     }
 });
