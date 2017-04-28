@@ -20,13 +20,22 @@ const GameView = function () {
     //UIManagers
     let _playerViews = [];
     let _effectsManager;
+    let _waveTransitionView;
 
     let _lobbyNode;
     let _lockOnCallback;
 
+    let _screenShakeNode;
+
     function initialise(parentNode, gameConfig, fishGameArena, lockOnCallback, fishLockStatus) {
+        console.log("GameView:initialise");
         if (gameConfig) { // going into game
             initialiseParent(parentNode);
+
+            _screenShakeNode = new cc.Node();
+            addView(_screenShakeNode);
+            console.log("GameView:initialise:_screenShakeNode",_screenShakeNode);
+
             _fishGameArena = fishGameArena;
             _gameConfig = gameConfig;
             _lockOnCallback = lockOnCallback;
@@ -38,17 +47,16 @@ const GameView = function () {
                 const index = getPlayerSlot(i);
                 _playerViews[index] = new PlayerViewManager(_gameConfig, index, i === _playerSlot, changeSeatRequest, lockOnRequest, fishLockStatus);
             }
-
-            _effectsManager = new EffectsManager();
-        }else if (!_lobbyNode){ // first time initialisation
+            _effectsManager = new EffectsManager(_screenShakeNode);
+        } else if (!_lobbyNode) { // first time initialisation
             initialiseParent(parentNode);
             _lobbyNode = _parentNode;
-        }else{ // reuse lobby node
+        } else { // reuse lobby node
             _parentNode = _lobbyNode;
         }
     }
 
-    function goToSeatSelection(parent){
+    function goToSeatSelection(parent) {
         _parentNode = parent;
     }
 
@@ -66,33 +74,30 @@ const GameView = function () {
     }
 
     function goToGame(choice) {
-        setBackgroundTo(0);
-        // Or we could set a different initial background for each game type:
-        //setBackgroundTo(choice ? choice.gameId : 0);
-
+        if(_waveTransitionView) {
+            setBackgroundTo(choice ? choice.gameId : 0);
+        }else {
+            _waveTransitionView = new WaveTransition(res['GameBackground' + ((choice ? choice.gameId : 0) % 4).toString()]);
+            _screenShakeNode.addChild(_waveTransitionView);
+        }
         initialiseTouch(touchAt);
     }
 
     function setBackgroundTo(choice) {
-        if (_currentBKG) {
-            _parentNode.removeChild(_currentBKG);
-        }
-
-        _currentBKG = new cc.Sprite(res['GameBackground' + (choice % 4).toString()]);
-        // Fallback:
-        //_curretBKG = new cc.Sprite(res.GameBackground1);
-
-        _currentBKG.setPosition(cc.view.getDesignResolutionSize().width / 2, cc.view.getDesignResolutionSize().height / 2);
-        _parentNode.addChild(_currentBKG, -5);
+        _waveTransitionView.transition(res['GameBackground' + (choice % 4).toString()]);
     }
 
-    function addView(view, depth) {
-        _parentNode.addChild(view, depth);
+    function addView(view, depth, isScreenShake) {
+        if (isScreenShake && _screenShakeNode){
+            _screenShakeNode.addChild(view);
+            console.log("addView",_screenShakeNode);
+        }else {
+            _parentNode.addChild(view, depth);
+        }
     }
 
     function destroyView(view) {
         _parentNode.removeChild(view);
-
     }
 
     const initialiseTouch = function (touchAt) {
@@ -108,7 +113,6 @@ const GameView = function () {
         let y;
         let rot = 0;
         if (_isRotated && _gameConfig.isUsingOldCannonPositions) {
-            // console.log("isrotate");
             if (position) {
                 x = cc.view.getDesignResolutionSize().width - position[0];
                 y = cc.view.getDesignResolutionSize().height - position[1];
@@ -135,7 +139,8 @@ const GameView = function () {
                 clearPlayerState(i);
             }
         }
-        _lastShotTime = -Infinity
+        _lastShotTime = -Infinity;
+        _screenShakeNode = undefined;
     }
 
     function destroyArena() {
@@ -152,6 +157,7 @@ const GameView = function () {
         for (let list in plists) {
             cc.spriteFrameCache.removeSpriteFrameByName(plists[list]);
         }
+        _screenShakeNode = undefined;
     }
 
     function getPlayerSlot(slot) {
@@ -166,7 +172,6 @@ const GameView = function () {
             const now = _fishGameArena.getGameTime();
             const timeSinceLastShot = now - _lastShotTime;
             if (timeSinceLastShot < _gameConfig.shootInterval) {
-                // console.log("TOO FAST!");
                 return;
             }
 
@@ -176,7 +181,6 @@ const GameView = function () {
 
             const direction = cc.pNormalize(cc.pSub(pos, new cc.p(_gameConfig.cannonPositions[slot][0], _gameConfig.cannonPositions[slot][1])));
             const rot = Math.atan2(direction.x, direction.y);
-            // _playerViews[slot].shootTo(rot * 180 / Math.PI);
             let info = getRotatedView(undefined, rot);
 
             const bulletId = _playerId + ':' + getPlayerBulletId();
@@ -186,7 +190,6 @@ const GameView = function () {
             _touchedPos = null;
         }
     }
-
 
     const getPlayerBulletId = function () {
         return _playerViews[0].getNextBulletId(); //currently bulletId is static no need to convert player slot
@@ -231,7 +234,7 @@ const GameView = function () {
         ClientServerConnect.changeSeatRequest(slot);
     }
 
-    function lockOnRequest(state){
+    function lockOnRequest(state) {
         _lockOnCallback(state);
     }
 
@@ -241,7 +244,7 @@ const GameView = function () {
         }
     }
 
-    function setFreeRound(type){
+    function setFreeRound(type) {
         console.log("setFreeRound");
         if (type === 'clearing_for_free_shooting_game') {
             _effectsManager.showFreeRoundEffect();
@@ -250,7 +253,6 @@ const GameView = function () {
 
     return {
         initialise: initialise,
-        // parentNode : _parentNode,
         clearPlayerState: clearPlayerState,
         goToGame: goToGame,
         setBackgroundTo: setBackgroundTo,
@@ -268,9 +270,6 @@ const GameView = function () {
         setFreeRound: setFreeRound,
 
         goToSeatSelection: goToSeatSelection,
-
-        //???
-        getMyPlayerSlot: ()=> _playerSlot,
     }
 
 

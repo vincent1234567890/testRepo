@@ -216,14 +216,14 @@ const GameManager = function () {
         _goToLobbyCallback();
     }
 
-    function showPostGameStats () { // used to be for post game stats but feature has been removed
-        // ClientServerConnect.requestStats().then(
-        //     stats => {
-        //         goToScoreboard(stats);
-        //     }
-        // ).catch(console.error);
-        // exitToLobby();
-    }
+    // function showPostGameStats () { // used to be for post game stats but feature has been removed
+    //     // ClientServerConnect.requestStats().then(
+    //     //     stats => {
+    //     //         goToScoreboard(stats);
+    //     //     }
+    //     // ).catch(console.error);
+    //     // exitToLobby();
+    // }
 
     // function goToScoreboard(stats) {
     //     if (!_scoreboardManager) {
@@ -359,7 +359,7 @@ const GameManager = function () {
         removeFish: removeFish,
         caughtFish: caughtFish,
         updateEverything: updateEverything,
-        showPostGameStats: showPostGameStats,
+        // showPostGameStats: showPostGameStats,
         unsetLockForFishId : unsetLockForFishId,
         getPlayerData: getPlayerData,
         enterSeatSelectionScene : enterSeatSelectionScene,

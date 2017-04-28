@@ -52,8 +52,8 @@ const CaptureCoinEffectManager = (function () {
         for (let i = 0; i < fish.coinsShown; i++) {
             const coin = _coinViewPool.alloc(this._parent, this.animation.clone());
             setupView(coin, coin.getTargetNode(), pos, 2 * Math.PI / (fish.coinsShown) * (i + 1),
-                target, this.animation.clone(), collectLifetime * (i + 1) / fish.coinsShown * getRandom(),
-                collectDelay * 10 * (fish.coinsShown - i) * offsetPerCoin * getRandom(), collectCoins);
+                target, this.animation.clone(), collectLifetime * (i + 1) / fish.coinsShown * parseFloat(getRandom()),
+                collectDelay * 10 * (fish.coinsShown - i) * offsetPerCoin * parseFloat(getRandom()), collectCoins);
         }
     };
 
