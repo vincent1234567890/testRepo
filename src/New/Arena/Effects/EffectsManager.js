@@ -52,7 +52,7 @@ const EffectsManager = (function () {
         const coinEffect = new cc.Sprite();
         if (fish.tier === 3){
             const explosionSequence = new cc.Sequence(GUIFunctions.getAnimation(ReferenceName.ExplosionEffect,0.1),cc.callFunc(onExplosionEffectEnd));
-            const coinExplosionSequence = new cc.Sequence(GUIFunctions.getAnimation(ReferenceName.CoinExplosionEffect,0.1), cc.callFunc(onExplosionEffectEnd));
+            const coinExplosionSequence = new cc.Sequence(GUIFunctions.getAnimation(ReferenceName.CoinExplosionEffect,0.1), cc.callFunc(onCoinExplosionEffectEnd));
             GameView.addView(effectSprite);
             GameView.addView(coinEffect);
             effectSprite.runAction(explosionSequence);
