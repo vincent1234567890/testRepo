@@ -29,7 +29,7 @@ var cocos2dApp = cc.game.onStart = function() {
     // The game will be resized when browser size change
     cc.view.resizeWithBrowserSize(true);
 
-
+    //if the we can't connect server, should be give a friendly UI.
     //load resources
     ClientServerConnect.doInitialConnect().then(
         data => {
@@ -62,5 +62,5 @@ var cocos2dApp = cc.game.onStart = function() {
 };
 
 cc.game.run();
-console.log("version: 1.3.426b");
+console.log("version: 1.3.428b");
 

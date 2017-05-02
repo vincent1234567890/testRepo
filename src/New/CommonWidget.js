@@ -138,7 +138,6 @@ let FloatMenuItem = cc.Node.extend({
         btnItem.addChild(spItemTitle);
         spItemTitle.setTag(9);
 
-        let self = this;
         //add mouse event
         this._mouseEventListener = cc.EventListener.create({
             event: cc.EventListener.MOUSE,
