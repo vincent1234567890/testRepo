@@ -4,6 +4,7 @@
 const CoinStackCoinView = (function () {
     "use strict";
 
+    //no need. what does this use?
     const CoinStackCoinView = function (parent, positionInArray) {
         if (!this._coinSprite) {
             this._coinSprite = new cc.Sprite(ReferenceName.CoinStackCoin);

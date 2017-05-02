@@ -19,7 +19,6 @@ const FishView = (function () {
             return;
         }
         this._parent = new cc.Node();
-
         const touchEvent = (sender, type) => {
             // console.log("touch",sender,type);
             switch (type) {

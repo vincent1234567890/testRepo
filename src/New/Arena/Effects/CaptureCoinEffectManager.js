@@ -20,7 +20,7 @@ const CaptureCoinEffectManager = (function () {
     const randomMin = 0.5;
     const CaptureCoinEffectManager = function () {
         this._parent = new cc.Node();
-        GameView.addView(this._parent, 3);
+        GameView.addView(this._parent, 3);   //使用GameView来代替scene的作用
         _coinViewPool = new ObjectPool(SpinningCoinView);
         _prizeLabelPool = new ObjectPool(PrizeLabelObject);
 

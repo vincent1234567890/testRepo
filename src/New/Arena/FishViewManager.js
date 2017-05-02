@@ -45,6 +45,7 @@ const FishViewManager = (function(){
 
     const proto = FishViewManager.prototype;
 
+    //使用FishManager 来添加或管理鱼
     proto.addFish = function(fishId, fishType){
         this._fishes[fishId] = new FishView(this._parent, this._gameConfig.fishClasses[fishType], fishType, this._onFishClicked);
         return this._fishes[fishId];

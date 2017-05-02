@@ -8,13 +8,12 @@ const BulletView = (function () {  //the bullet class define.
     const BulletView = function (parent, gunId) {
         this._parent = parent;
         if (this.gunId !== gunId) {
-            this.gunId = gunId;
+            this.gunId = gunId;  //gunType?
 
             if (this._particle) {
                 this._view.removeChild(this._particle, false);
             }
             if (this._view) {
-                // this._parent.addChild(this._view);
                 this._parent.removeChild(this._view);
             }
             this._view = new cc.Sprite("#Bullet" + (gunId + 1) + ".png");
@@ -33,6 +32,7 @@ const BulletView = (function () {  //the bullet class define.
 
         if (GameManager.debug && !this.debugCircle) {
             this.debugCircle = new cc.Sprite(res.DebugCircle);
+
             this.debugCircle.setAnchorPoint(0.5, 0.5);
             this._parent.addChild(this.debugCircle, 1);
         }
@@ -44,6 +44,7 @@ const BulletView = (function () {  //the bullet class define.
 
     const proto = BulletView.prototype;
 
+    //这里很多函数都是中转了Sprite的函数，可以直接继承自sprite.
     proto.setPosition = function (x, y) {
         this._view.setPosition(x, y);
         if (this.debugCircle) {

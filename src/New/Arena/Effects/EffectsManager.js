@@ -22,13 +22,11 @@ const EffectsManager = (function () {
 
     let originalPosition;
 
-    const EffectsManager = function (shakeableNode) {
+    const EffectsManager = function (shakeableNode) {//总的效果控制器
         _shakeableNode = shakeableNode;
         originalPosition = shakeableNode.getPosition();
         coinEffectsManager = new CaptureCoinEffectManager();
         freeRoundEffectView = new FreeRoundView();
-
-
     };
 
     const proto = EffectsManager.prototype;
@@ -58,7 +56,7 @@ const EffectsManager = (function () {
             effectSprite.runAction(explosionSequence);
             coinEffect.runAction(coinExplosionSequence);
         }else if (fish.tier == 2){
-            
+
         }
 
         function onExplosionEffectEnd(){

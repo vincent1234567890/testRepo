@@ -4,11 +4,8 @@
 
 const SpinningCoinView = (function () {
 
-
-
     //@params lifetime in 0.1 seconds
     //@params collectionLifetime in 0.1 seconds
-
     const SpinningCoinView = function (parent, animation, velocity, lifetime, collectionLifetime) {
         // this._lifetime = lifetime; //  per .1 sec, 10 = 1 sec
         // this._gravity = 0.9;
@@ -22,7 +19,6 @@ const SpinningCoinView = (function () {
         this._parent = parent;
         this._parent.addChild(this.coinSprite);
         this.coinSprite.setVisible(true);
-
     };
 
     const proto = SpinningCoinView.prototype;
@@ -93,7 +89,6 @@ const SpinningCoinView = (function () {
         this.coinSprite.runAction( cc.repeatForever(this._sequence));
     };
 
-
     proto.reclaimView = function () {
     //     console.log("cleanup!",this.coinSprite);
 
@@ -110,9 +105,6 @@ const SpinningCoinView = (function () {
         }
         this._parent.removeChild(this.coinSprite);
     };
-
-
-
 
     return SpinningCoinView;
 

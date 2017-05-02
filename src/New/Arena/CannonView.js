@@ -5,7 +5,6 @@ const CannonView = (function () {
     "use strict";
     const padding = 5;
 
-
     const CannonView = function (gameConfig, slot) {
         this._gameConfig = gameConfig;
         this._cannonNode = new cc.Node();
@@ -23,9 +22,8 @@ const CannonView = (function () {
         this.pos = [];
         let markerPos;
 
+        //create by config.
         this._theme = ThemeDataManager.getThemeDataList("CannonMenuPositions");
-
-
         if (this._gameConfig.isUsingOldCannonPositions) {
             this.pos = this._gameConfig.oldCannonPositions[slot];
             markerPos = this._gameConfig.oldCannonPositions[0];
@@ -46,7 +44,6 @@ const CannonView = (function () {
 
         this._cannonPowerBG = new cc.Sprite(ReferenceName.SideMenuBG);
         this._cannonNode.addChild(this._cannonPowerBG, 27);
-
         if (this.pos[1] > markerPos[1]) {
             let multiplier = 1;
             if (this.pos[0] > markerPos[0]) {
@@ -58,6 +55,7 @@ const CannonView = (function () {
         this._cannonPowerBG.y = this.pos[1];
     };
 
+    //initialize cannon animation.
     proto.getCannonAnimation = function (cannonPower) {
         let animationArray = [];
         let count = 0;
@@ -119,7 +117,6 @@ const CannonView = (function () {
         this._cannonSprite.addChild(this._cannonPowerLabel, 29);
 
         const size = this._cannonSprite.getContentSize();
-
         const cannonLabelPos = new cc.p(size.width / 2 + this._theme["CannonLabelPosition"][0], size.height / 2 + this._theme["CannonLabelPosition"][1]);
         this._cannonPowerLabel.setAnchorPoint(0.5, 0.5);
         this._cannonPowerLabel.setPosition(cannonLabelPos);
@@ -144,10 +141,8 @@ const CannonView = (function () {
 
     proto.shootTo = function (angle) {
         let modifiedAngle = (GameView.getRotatedView(undefined, angle)).rotation - 90;
-
         this._cannonSprite.setRotation(modifiedAngle);
         // this._spriteDown.setRotation(modifiedAngle);
-
         this.animateShootTo();
     };
 
@@ -161,14 +156,12 @@ const CannonView = (function () {
         this._isAnimating = true;
         this._cannonSprite.runAction(this._sequence);
 
-        // cc.audioEngine.playEffect(res.GunCockSound);
         // this._sparkSprite.runAction(this._sparkSequence);
     };
 
     proto.onAnimateShootEnd = function () {
         this._isAnimating = false;
         // this._sparkSprite.setVisible(false);
-
     };
 
     proto.setupCannonChangeMenu = function (cannonManager, gameConfig, slot, callbackCannonDown, callbackCannonUp) {
@@ -181,7 +174,6 @@ const CannonView = (function () {
         menuLeft.setPosition(pMenuLeft);
         menuRight.setPosition(pMenuRight);
         this._cannonPowerBG.addChild(this._menu, 50);
-
 
         this._menu.x = this._theme["MenuOffset"][0];
         this._menu.y = this._theme["MenuOffset"][1];
