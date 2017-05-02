@@ -28,6 +28,9 @@ const ReferenceName = {
     LoadingIconAnim: "LoadingIcon_",
     LoadingIcon_00000: "#LoadingIcon_00000.png",
 
+    CoinExplosionEffect : "CoinExplosion1_",
+    ExplosionEffect : "Explosion_",
+
     //Free round
     FreeRoundExplosionEffect : "FREffect_",
 
@@ -277,22 +280,12 @@ const ReferenceName = {
     JackpotTurtleMedalGlow: "#JPTurtleMedalGlow.png",
     JackpotButterflyFishMedalGlow: "#JPButterflyFishMedalGlow.png",
 
-
     //OptionsMenu
     OptionsBG : "#Setting BG.png",
     OptionBarBG : "#Setting Bar Full.png",
     OptionsBarNegative : "#Setting Bar Empty.png",
     FishSliderButton : "#Setting Slider Button.png",
 
-    FishPlaceholder : "#Fish Paceholder.png",
-
-    //Cannon/nets
-    // Cannon1 : "#Cannon 1.png",
-    Net1 : "#Net1.png",
-    // Bullet1 : "#Bullet1.png",
-    // CannonDown1 : "#Cannon 1 DW.png",
-
-    // Cannon1Animated : "#Cannon1",
 
     //------------
     //Localisable

@@ -43,6 +43,7 @@ const LeaderboardView = (function () {
         _parent.addChild(_popup.getParent());
         ClientServerConnect.getLeaderboard().then(
             leaderboardData => {
+                console.log(leaderboardData);
                 _listView = doList(leaderboardData);
                 _popup.getBackground().addChild(_listView,10);
                 _listView.setPosition(new cc.p(185, 0));
@@ -125,6 +126,7 @@ const LeaderboardView = (function () {
         _parent.setVisible(true);
         ClientServerConnect.getLeaderboard().then(
             leaderboardData => {
+                console.log(leaderboardData);
                 _listView = doList(leaderboardData);
                 _popup.getBackground().addChild(_listView,1);
                 _listView.setPosition(new cc.p(185, 0));

@@ -37,7 +37,7 @@ const JackpotView = (function () {
         _parent.addChild(title);
         title.setPosition(0,22);
 
-        GameView.addView(_parent);
+        GameView.addView(_parent,1,true);
 
         const target = new cc.Sprite();
         target.setScale(0.2);
@@ -160,7 +160,7 @@ const JackpotView = (function () {
         if (_parent.getParent()) {
             _parent.getParent().removeChild(_parent, false);
         }
-        GameView.addView(_parent);
+        GameView.addView(_parent,1, true);
     };
 
     return JackpotView;

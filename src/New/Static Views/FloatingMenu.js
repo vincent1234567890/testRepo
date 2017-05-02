@@ -26,7 +26,7 @@ const FloatingMenu = (function () {
 
     const FloatingMenu = function (playerData, requestConsumptionLogCallback) {
         _parent = new cc.Node();
-        GameView.addView(_parent);
+        GameView.addView(_parent,undefined,true);
 
         _playerData = playerData;
         _requestConsumptionLogCallback = requestConsumptionLogCallback;
@@ -216,7 +216,7 @@ const FloatingMenu = (function () {
         if (_faqView){
             _faqView.reattach();
         }
-        GameView.addView(_parent);
+        GameView.addView(_parent,1,true);
     };
 
     proto.hideAll = function () {
