@@ -24,6 +24,7 @@ const OptionsMenuViewBottom = (function (){
 
     let thisParent;
 
+    //不再使用
     function OptionsMenuViewBottom(settingsCallback, fishListCallback, exitCallback) {
         thisParent = this._parent = new cc.Node();
         GameView.addView(this._parent, 10);
@@ -58,13 +59,10 @@ const OptionsMenuViewBottom = (function (){
 
         _isAnimating = _isShowing = false;
 
-
-
         // const initial = new cc.FadeTo(0, 0);
         // _menu.runAction(new cc.Sequence(initial));
 
         // parent.addChild(this._parent,10);
-
     }
 
     function setupSideMenu() {
@@ -78,12 +76,9 @@ const OptionsMenuViewBottom = (function (){
         const exitButton = new cc.MenuItemSprite(exit, undefined, undefined, onExitEvent);
 
         const menu = new cc.Menu( settingsButton, fishListButton, exitButton);
-
         settingsButton.setPosition(-150, cc.view.getDesignResolutionSize().height / 2);
         fishListButton.setPosition(0, cc.view.getDesignResolutionSize().height / 2);
         exitButton.setPosition(150, cc.view.getDesignResolutionSize().height / 2);
-
-
         return menu;
     }
 
@@ -168,8 +163,6 @@ const OptionsMenuViewBottom = (function (){
         GameView.destroyView(thisParent);
         thisParent = this._parent = null;
     };
-
-
 
     return OptionsMenuViewBottom;
 })();

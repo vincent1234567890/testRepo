@@ -5,7 +5,7 @@
 //use for manage cannon.
 const CannonManager = (function () {
     "use strict";
-    let _gameConfig;
+    let _gameConfig;  //reference to game config.
 
     function CannonManager(gameConfig, index, isPlayer) {
         _gameConfig = gameConfig;
@@ -22,7 +22,6 @@ const CannonManager = (function () {
         }else{
             this.forceClearGun();
         }
-
     }
 
     let proto = CannonManager.prototype;
