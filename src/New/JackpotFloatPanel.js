@@ -60,12 +60,10 @@ let JackpotFloatPanel = cc.Node.extend({
 
         //jackpot value label
         let barSize = spBarFrame.getContentSize();
-        let lbJackpotValue = this._lbJackpotValue = new cc.LabelTTF("9,888,999.88", "Impact", 30);
+        let lbJackpotValue = this._lbJackpotValue = new cc.LabelBMFont("9,888,999.88", res.WhiteFontFile);
         spBarFrame.addChild(lbJackpotValue, -1);
-        lbJackpotValue.setPosition(barSize.width * 0.5, barSize.height * 0.5);
-        lbJackpotValue._setFontWeight("bold");
-        lbJackpotValue.setFontFillColor(new cc.Color(255,255,255,255));
-        lbJackpotValue.enableStroke(new cc.Color(0, 0, 0, 255), 2);
+        lbJackpotValue.setPosition(barSize.width * 0.5, 38);
+        lbJackpotValue.setScale(0.8);
 
         //add the event listener
         this._barFrameEventListener = cc.EventListener.create({
