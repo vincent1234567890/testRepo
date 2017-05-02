@@ -168,6 +168,7 @@ const ClientServerConnect = function () {
                         // Start the game!
                         // AppManager.goToLobby();
                         // console.log(client);
+                        GameManager.setupPostLoginListeners();
                         resolve(loginData);
                     });
 
