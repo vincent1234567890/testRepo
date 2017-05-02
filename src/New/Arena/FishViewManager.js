@@ -58,21 +58,25 @@ const FishViewManager = (function(){
     proto.caughtFish = function (id, playerSlot) {
         // console.log("caughtFish : id", id);
         if (!this._fishes[id]) {
-            console.warn("Could not find fishActor for fish " + id + ".  Perhaps scene was not initialised.")
+            console.warn("Could not find fishActor for fish " + id + ".  Perhaps scene was not initialised.");
+            return;
         }
         this._fishes[id].killFish(this, this.removeFish, id, playerSlot);
     };
 
     proto.removeFish = function (reference, data) {
-        if (!this._parent){
-            console.warn("parent has already been destroyed. Possible invisible fish or out of order destruction.");
+        if (!this._parent) {
+            console.warn("Parent has already been destroyed.  Possible invisible fish or out of order destruction.");
             return;
         }
         // console.log("removeFish: ", reference, "id", id);
         if (!this._fishes[data.id]) {
-            console.warn("Could not find fishActor for fish " + data.id + ".  Perhaps scene was not initialised.")
+            console.warn("Could not find fishActor for fish " + data.id + ".  Perhaps scene was not initialised.");
+            return;
         }
-        this._fishes[data.id].destroyView(this._parent);
+        if (this._fishes[data.id]) {
+            this._fishes[data.id].destroyView(this._parent);
+        }
         if(data.type && data.position && (data.playerSlot!=null)) {
             this._onAnimationEndEvent(data);
         }
