@@ -2,7 +2,7 @@
  * Created by eugeneseah on 21/2/17.
  */
 
-const EffectsManager = (function () {
+const EffectsManager = (function () {//总的效果控制器
     let coinEffectsManager;
     let freeRoundEffectView;
     const EffectsManager = function () {
@@ -19,7 +19,6 @@ const EffectsManager = (function () {
     proto.showFreeRoundEffect = function () {
         console.log("showFreeRoundEffect");
         freeRoundEffectView.show();
-
     };
 
     return EffectsManager;

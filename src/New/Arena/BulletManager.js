@@ -4,7 +4,6 @@
 
 /*
 currently does not conform to new structure of GameManaager -> GameView -> GameView.addView
-@TODO : refactor to include BulletManagerView
  */
 
 const BulletManager = (function(){

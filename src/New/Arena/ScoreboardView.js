@@ -8,7 +8,6 @@ const ScoreboardView = (function() {
     let _goToLobby;
     let _goToNewRoom;
     function ScoreboardView(target, data, goToLobby, goToNewRoom) {
-
         console.log(data);
 
         _goToLobby = goToLobby;

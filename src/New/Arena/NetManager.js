@@ -3,7 +3,7 @@
  */
 
 //
-const NetManager = (function (){
+const NetManager = (function (){  //there only has one function.
         "use strict";
 
     function NetManager (){

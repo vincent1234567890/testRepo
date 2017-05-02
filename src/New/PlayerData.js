@@ -5,6 +5,7 @@
 const PlayerData = (function () {
     "use strict";
 
+    //no need.
     let score;
 
     function updateScore(amount){

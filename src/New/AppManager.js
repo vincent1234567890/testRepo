@@ -2,6 +2,7 @@
  * Created by eugeneseah on 6/2/17.
  */
 
+//what is the different of AppManager and GameManager?
 const AppManager = (function () {
     "use strict";
 

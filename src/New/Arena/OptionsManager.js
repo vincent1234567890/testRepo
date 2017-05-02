@@ -3,7 +3,6 @@
  */
 
 const OptionsManager = (function (){
-
     let _settingsCallback;
     let _fishListCallBack;
     let _exitCallBack;
@@ -73,8 +72,6 @@ const OptionsManager = (function (){
             this._view = new OptionsMenuViewBottom(onSettings, onFishList, onExitButton);
         }
     };
-
-
 
     return OptionsManager;
 })();
