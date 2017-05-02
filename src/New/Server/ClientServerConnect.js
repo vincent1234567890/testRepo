@@ -1,8 +1,13 @@
+/**
+ * Created by eugeneseah on 15/11/16.
+ */
 //connector of the game server.
 const ClientServerConnect = function () {
     "use strict";
 
-    const masterServerUrl = 'ws://' + document.location.hostname + ':8089';   //it should be load by config file.
+    const masterServerUrl = 'ws://' + document.location.hostname + ':8089';
+
+    // This is optional.  It is a fallback in case other servers do not work.
     const defaultGameAPIServerAddress = document.location.hostname + ':8088';
 
     let _masterServerSocket = null;
