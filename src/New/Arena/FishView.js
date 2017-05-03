@@ -74,7 +74,12 @@ const FishView = (function () {
             if (this._currentAnimationAction) {
                 this._sprite.stopAction(this._currentAnimationAction);
             }
-            const data = FishAnimationData[this.type][fishAnimationEnum];
+            const animationData = FishAnimationData[this.type];
+            if (!animationData) {
+                console.warn("FishAnimationData['" + this.type + "'] is undefined!");
+                return;
+            }
+            const data = animationData[fishAnimationEnum];
             if (data.pivot) {
                 this._sprite.setAnchorPoint(data.pivot);
             }
