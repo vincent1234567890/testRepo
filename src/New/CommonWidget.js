@@ -138,7 +138,6 @@ let FloatMenuItem = cc.Node.extend({
         btnItem.addChild(spItemTitle);
         spItemTitle.setTag(9);
 
-        let self = this;
         //add mouse event
         this._mouseEventListener = cc.EventListener.create({
             event: cc.EventListener.MOUSE,
@@ -189,13 +188,13 @@ let WaitingPanel = cc.LayerColor.extend({
             const spCircle = new cc.Sprite(res.LoadingCircle);
             spCircle.setPosition(cc.visibleRect.center.x + pAngle.x * radius,
                 cc.visibleRect.center.y + pAngle.y * radius);
-            spCircle.setOpacity(188);
+            spCircle.setScale(0.5);
             circleArr.push(spCircle);
             this.addChild(spCircle);
             this._setupAction(spCircle, i);
         }
             //add event listener
-        const touchEventListener = cc.EventListener.create({
+        this._touchEventListener = cc.EventListener.create({
             event:cc.EventListener.TOUCH_ONE_BY_ONE,
             swallowTouches: true,
             onTouchBegan: function(touch, event) {
@@ -213,24 +212,24 @@ let WaitingPanel = cc.LayerColor.extend({
         });
     },
 
-    _setupAction: function(spCircle, i){
-        const duration = 0.6;
+    _setupAction: function(spCircle, i) {
+        const duration = 0.6, offset = 0.2, count = 12, delay = offset * count - duration;
         if (i === 0) {
-            spCircle.runAction(cc.sequence(
-                cc.spawn(cc.scaleTo(duration / 2, 1.5).easing(cc.easeBackInOut()), cc.fadeTo(duration / 2, 255)),
-                cc.spawn(cc.scaleTo(duration / 2, 1).easing(cc.easeBackInOut()), cc.fadeTo(duration / 2, 188)),
-                cc.delayTime((11 - i) * duration)).repeatForever());
-        } else if (i === 11) {
-            spCircle.runAction(cc.sequence(
-                cc.delayTime(i * duration),
-                cc.spawn(cc.scaleTo(duration / 2, 1.5).easing(cc.easeBackInOut()), cc.fadeTo(duration / 2, 255)),
-                cc.spawn(cc.scaleTo(duration / 2, 1).easing(cc.easeBackInOut()), cc.fadeTo(duration / 2, 188))).repeatForever());
+            spCircle.runAction(
+                cc.sequence(
+                    cc.scaleTo(duration / 2, 1),
+                    cc.delayTime(delay),
+                    cc.scaleTo(duration / 2, 0.5)).repeatForever());
         } else {
-            spCircle.runAction(cc.sequence(
-                cc.delayTime(i * duration),
-                cc.spawn(cc.scaleTo(duration / 2, 1.5).easing(cc.easeBackInOut()), cc.fadeTo(duration / 2, 255)),
-                cc.spawn(cc.scaleTo(duration / 2, 1).easing(cc.easeBackInOut()), cc.fadeTo(duration / 2, 188)),
-                cc.delayTime((11 - i) * duration)).repeatForever());
+
+            spCircle.runAction(
+                cc.sequence(cc.delayTime(offset * i), cc.callFunc(function () {
+                    this.runAction(
+                        cc.sequence(
+                            cc.scaleTo(duration / 2, 1),
+                            cc.delayTime(delay),
+                            cc.scaleTo(duration / 2, 0.5)).repeatForever());
+                }, spCircle)));
         }
     },
 
@@ -242,7 +241,8 @@ let WaitingPanel = cc.LayerColor.extend({
         for (let i = 0; i < spCircles.length; i++) {
             const selCircle = spCircles[i];
             selCircle.stopAllActions();
-            selCircle._setupAction(selCircle, i);
+            selCircle.setScale(0.5);
+            this._setupAction(selCircle, i);
         }
     }
 });
@@ -252,6 +252,7 @@ let WaveTransition = cc.Node.extend({
     _spWave: null,
     _pgOriginBackground: null,
     _pgTargetBackground: null,
+    _spCaustic: null,
 
     ctor: function(originBackground){
         cc.Node.prototype.ctor.call(this);
@@ -260,6 +261,11 @@ let WaveTransition = cc.Node.extend({
         if(!sfWave){
             cc.spriteFrameCache.addSpriteFrames(res.GameUIPlist);
             sfWave = cc.spriteFrameCache.getSpriteFrame("wave.png");
+        }
+        let sfCaustic = cc.spriteFrameCache.getSpriteFrame("Caustic_00000.png");
+        if(!sfCaustic){
+            cc.spriteFrameCache.addSpriteFrames(res.CausticPlist);
+            sfCaustic = cc.spriteFrameCache.getSpriteFrame("Caustic_00000.png")
         }
 
         const spWave = this._spWave = new cc.Sprite(sfWave);
@@ -277,9 +283,29 @@ let WaveTransition = cc.Node.extend({
         pgOriginBackground.setMidpoint(cc.p(0, 1));
         pgOriginBackground.setBarChangeRate(cc.p(1, 0));
         pgOriginBackground.setPercentage(100);
+
+        const spCaustic = this._spCaustic = new cc.Sprite(sfCaustic);
+        spCaustic.setPosition(cc.visibleRect.center.x, cc.visibleRect.center.y);
+        spCaustic.setBlendFunc(cc.ONE, cc.ONE);
+        spCaustic.setOpacity(51);
+        this.addChild(spCaustic, 8);
+        const animCaustic = GUIFunctions.getAnimation("Caustic_", 0.08);
+        if(animCaustic)
+            spCaustic.runAction(animCaustic.repeatForever());
     },
 
     transition: function(targetBackground) {
+        //hide caustic
+        const spCaustic = this._spCaustic, duration = 4;
+        spCaustic.runAction(cc.fadeTo(duration, 0));
+
+        this.runAction(cc.sequence(cc.delayTime(duration), cc.callFunc(function(){ this._runTransition(targetBackground); }, this)));
+
+        //show caustic
+        spCaustic.runAction(cc.sequence(cc.delayTime(4 + duration), cc.fadeTo(duration, 51)));
+    },
+
+    _runTransition: function(targetBackground){
         const spWave = this._spWave, duration = 4;
         spWave.setVisible(true);
         const waveSize = spWave.getContentSize();

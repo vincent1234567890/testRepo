@@ -73,6 +73,9 @@ const GUIFunctions = function () {
         return button;
     }
 
+    function getLengthOfNumber(number){
+        return (Math.log(Math.abs(number + 1)) * 0.43429448190325176 | 0) + 1;
+    }
 
     return {
         getHitBox: getHitBox,
@@ -81,5 +84,6 @@ const GUIFunctions = function () {
         // getReverseAnimation: getReverseAnimation,
         setPadding : setPadding,
         createButton : createButton,
+        getLengthOfNumber : getLengthOfNumber,
     }
 }();

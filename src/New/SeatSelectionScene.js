@@ -22,7 +22,6 @@ var SeatSelectionScene = cc.Scene.extend({
         //back button
         let btnBack = GUIFunctions.createButton(ReferenceName.SeatBackBtn, ReferenceName.SeatBackBtnSelected, function(){
             //back to Lobby
-            console.log("click button");
             //GameManager.goToLobby();
             GameManager.exitToLobby();
         });
@@ -171,6 +170,8 @@ var SeatSprite = cc.Sprite.extend({
     _spGlow: null,
     _spArrow: null,
     _eventListener: null,
+    _mouseEventListener: null,
+    isMouseDown: false,
 
     ctor: function(goToGameCallback){
         cc.Sprite.prototype.ctor.call(this, ReferenceName.SeatChair);
@@ -206,7 +207,7 @@ var SeatSprite = cc.Sprite.extend({
                 if (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
                         target.convertToNodeSpace(touch.getLocation()))) {
                     if(!target._spGlow.isVisible())
-                        target._showSelectedStatus()
+                        target._showSelectedStatus();
                 } else {
                     if(target._spGlow.isVisible())
                         target._hideSelectedStatus();
@@ -221,6 +222,33 @@ var SeatSprite = cc.Sprite.extend({
                     goToGameCallback(target.getSeatPosition());
                 }
                 target._hideSelectedStatus();
+            }
+        });
+
+        this._mouseEventListener = cc.EventListener.create({
+            event: cc.EventListener.MOUSE,
+            onMouseDown: function(mouseData){
+                let target = mouseData.getCurrentTarget();
+                target.isMouseDown = true;
+            },
+            onMouseMove: function(mouseData){
+                let target = mouseData.getCurrentTarget();
+                if (!target.isMouseDown){
+                    if (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
+                            target.convertToNodeSpace(mouseData.getLocation()))) {
+                        //scale to 1.2
+                        if(!target._spGlow.isVisible())
+                            target._showSelectedStatus();
+                        return;
+                    }
+                }
+                //scale to 1.0
+                if(target._spGlow.isVisible())
+                    target._hideSelectedStatus();
+            },
+            onMouseUp: function(mouseData){
+                let target = mouseData.getCurrentTarget();
+                target.isMouseDown = false;
             }
         });
     },
@@ -252,6 +280,8 @@ var SeatSprite = cc.Sprite.extend({
         cc.Sprite.prototype.onEnter.call(this);
         if (this._eventListener && !this._eventListener._isRegistered())
             cc.eventManager.addListener(this._eventListener, this);
+        if (this._mouseEventListener && !this._mouseEventListener._isRegistered())
+            cc.eventManager.addListener(this._mouseEventListener, this);
     },
 
     setSeatPosition: function(position){

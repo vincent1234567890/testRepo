@@ -8,17 +8,17 @@ const EffectsManager = (function () {
     let freeRoundEffectView;
     let _shakeableNode;
 
-    const shakeMinX = -10;
-    const shakeMaxX = 10;
-    const shakeMinY = -50;
-    const shakeMaxY = 10;
+    const shakeMinX = -90;
+    const shakeMaxX = 30;
+    const shakeMinY = -90;
+    const shakeMaxY = 50;
 
-    const numberShakesMin = 5;
-    const numberShakesMax = 10;
+    const numberShakesMin = 6;
+    const numberShakesMax = 8;
 
-    const shakeSpeed = 1;
-    const scaleAmount = 0.75;
-    const scaleSpeed = 0.1;
+    const shakeSpeed = 0.075;
+    const scaleAmount = 1.08;
+    const scaleSpeed = 0.05;
 
     let originalPosition;
 

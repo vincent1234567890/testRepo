@@ -28,7 +28,7 @@ var TestScene = cc.Scene.extend({
         this.addChild(waveTransition);
         waveTransition.transition(res.GameBackground1);
 
-        const pnWait = new WaitingPanel();
-        this.addChild(pnWait);
+        //const pnWait = new WaitingPanel();
+        //this.addChild(pnWait);
     }
 });

@@ -27,6 +27,8 @@ var res = {
     LobbyUI2Plist: "Lobby/LobbyUI2.plist",
     LobbyUIPng: "Lobby/LobbyUI.png",
     LobbyUIPlist: "Lobby/LobbyUI.plist",
+    CausticPng: "Lobby/Caustic.png",
+    CausticPlist: "Lobby/Caustic.plist",
 
     SeatSelectionPng: "Lobby/SitSelection.png",
     SeatSelectionPlist: "Lobby/SitSelection.plist",
