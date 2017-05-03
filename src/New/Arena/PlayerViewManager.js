@@ -19,7 +19,7 @@ const PlayerViewManager = (function () {
             lockOnCallback(state);
         };
 
-        this._playerView = new PlayerView(gameConfig, index, isPlayer, changeSeat, onLockOnRequest, fishLockStatus);// not ideal : could have been parented to cannon and rotated accordingly
+        this._playerView = new PlayerView(gameConfig, index, isPlayer, changeSeat, onLockOnRequest, fishLockStatus);
     };
 
     const proto = PlayerViewManager.prototype;
@@ -57,6 +57,11 @@ const PlayerViewManager = (function () {
 
     proto.showAwardMedal = function (amount) {
         this._playerView.showAwardMedal(amount);
+    };
+
+    proto.setMultiplier = function (multiplier) {
+        this._playerView.setMultiplier(multiplier);
+        this._cannonManager.setMultiplier(multiplier);
     };
 
     return PlayerViewManager;

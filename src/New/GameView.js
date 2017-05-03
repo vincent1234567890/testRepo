@@ -6,7 +6,6 @@ const GameView = function () {
     "use strict";
 
     let _parentNode;
-    let _currentBKG;
     let _touchLayer;
     let _isRotated = false;
     let _gameConfig;
@@ -81,6 +80,7 @@ const GameView = function () {
             _screenShakeNode.addChild(_waveTransitionView);
         }
         initialiseTouch(touchAt);
+        _playerViews[_playerSlot].setMultiplier(choice.gameName.slice(0,-1)); // because scenes are 1X, 10X, 100X
     }
 
     function setBackgroundTo(choice) {
@@ -152,6 +152,7 @@ const GameView = function () {
             _playerViews[i].destroyView();
             delete _playerViews[i];
         }
+        _playerSlot = undefined;
         _fishGameArena = null;
         const plists = ResourceLoader.getPlists("Game");
         for (let list in plists) {
@@ -249,7 +250,6 @@ const GameView = function () {
     }
 
     function setFreeRound(type) {
-        console.log("setFreeRound");
         if (type === 'clearing_for_free_shooting_game') {
             _effectsManager.showFreeRoundEffect();
         }

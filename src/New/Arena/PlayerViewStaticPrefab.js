@@ -2,7 +2,6 @@
  * Created by eugeneseah on 27/10/16.
  */
 
-
 const PlayerViewStaticPrefab = (function () {
     "use strict";
 
@@ -76,10 +75,6 @@ const PlayerViewStaticPrefab = (function () {
         this._playerName.x = themeData["PlayerName"][0][0];
         this._playerName.y = themeData["PlayerName"][0][1];
 
-        // this._lockOnButton = new cc.Sprite();
-        // this._lockOnButtonAnimation = undefined;
-        // this._lockOnButtonAnimationReverse = undefined;
-
         let vector = new cc.p(0,150);
 
         const LockOnCallback = (state) =>{
@@ -101,14 +96,9 @@ const PlayerViewStaticPrefab = (function () {
             name = ReferenceName.LockOnButtonBottom;
         }
 
-        // if (isPlayer){
-            // const frame = this._lockOnButtonAnimation.getAnimation().getFrames()[0];
-            // const animate = new cc.Animate(new cc.Animation([frame.clone()], 0.1));
-            // this._lockOnButton.runAction(new cc.Sequence(animate));
         this._lockOnButton = new AnimatedButton(name,0.03,true,LockOnCallback);
         this._lockOnButton.getParent().setPosition(-170, 30);
         this._parent.addChild(this._lockOnButton.getParent());
-        // }
 
         if (pos[1] > markerPos[1]) {
             this._parent.y = pos[1]+ themeData["Base"][0];
@@ -209,15 +199,21 @@ const PlayerViewStaticPrefab = (function () {
         this._parent.addChild(coin);
         const parent = this._parent;
 
-        const label = new cc.LabelBMFont(amount, res.InGameLightGoldFontFile);
-        label.setScale(1/GUIFunctions.getLengthOfNumber(amount));
+        const label = new cc.LabelBMFont(amount * this._multiplier, res.InGameLightGoldFontFile);
+        label.setScale(0.7 + 0.3/amount.toString().length);
         coin.addChild(label);
-        label.setPosition(90,100);
+        label.setPosition(90,105);
 
         coin.setPosition(0,200);
         function onAwardMedalEffectEnd(){
             parent.removeChild(coin);
         }
+    };
+
+    proto.setMultiplier = function (multiplier) {
+        this._multiplier = multiplier;
+
+
     };
 
 

@@ -276,7 +276,7 @@ const GameManager = function () {
     }
 
     function seatSelected(type, seat){
-        console.log("seatSelected:",seat);
+        console.log("seatSelected:",type,seat);
         ClientServerConnect.joinGame(_currentScene.gameName, seat, type).catch(
             function (error) {
                 _lobbyManager.resetView();
@@ -317,7 +317,6 @@ const GameManager = function () {
     }
 
     function unsetLockForFishId(fishId) {
-        console.log(_currentFishLockOnId, fishId);
         if (fishId === _currentFishLockOnId){
             _isFishLockOn = false;
             _fishLockOnCallback(false);

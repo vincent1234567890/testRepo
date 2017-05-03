@@ -39,7 +39,9 @@ const EffectsManager = (function () {
             for (let i = 0; i < numberOfShakes; i++) {
                 const shakeX = originalPosition.x + parseFloat(getRandom(shakeMinX, shakeMaxX));
                 const shakeY = originalPosition.y + parseFloat(getRandom(shakeMinY, shakeMaxY));
-                points.push(new cc.MoveTo(shakeSpeed, cc.p(shakeX, shakeY)));
+                const action = new cc.MoveTo(shakeSpeed, cc.p(shakeX, shakeY));
+                action.easing(cc.easeBackOut());
+                points.push(action);
             }
             points.push(new cc.MoveTo(shakeSpeed, originalPosition));
             points.push(new cc.ScaleTo(scaleSpeed, 1));
@@ -59,6 +61,7 @@ const EffectsManager = (function () {
         if (fish.tier % 100 > 1) {
             const coinExplosionSequence = new cc.Sequence(GUIFunctions.getAnimation(ReferenceName.CoinExplosionEffect, 0.05), new cc.CallFunc(onCoinExplosionEffectEnd));
             coinEffect.runAction(coinExplosionSequence);
+            coinEffect.setScale(1.5);
             // console.log("CoinExplode! : ", fish, coinEffect, coinExplosionSequence);
             GameView.addView(coinEffect);
         }

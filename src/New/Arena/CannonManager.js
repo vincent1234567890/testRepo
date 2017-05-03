@@ -99,5 +99,9 @@ const CannonManager = (function () {
         this._cannon = null;
     };
 
+    proto.setMultiplier = function (multiplier) {
+        this._cannon.setMultiplier(multiplier);
+    };
+
     return CannonManager;
 }());
