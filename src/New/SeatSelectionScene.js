@@ -1,4 +1,4 @@
-var SeatSelectionScene = cc.Scene.extend({
+let SeatSelectionScene = cc.Scene.extend({
     _lobbyType: null,
     ctor: function(lobbyType, playerData, goToGameCallback){
         cc.Scene.prototype.ctor.call(this);
@@ -121,12 +121,9 @@ const TableSeatPanel = cc.Layer.extend({
         this.addChild(spSeatRight);
 
         //table
-        let spTable = new cc.Sprite(ReferenceName.SeatTable);
+        let spTable = new TableSprite();
         spTable.setPosition(348, 158);
         this.addChild(spTable);
-        let spTablePicture = this._createTablePicture();
-        spTable.addChild(spTablePicture);
-        spTablePicture.setPosition(292, 348);
 
         //seat Bottom Left
         let spSeatBtmLeft = this._spSeatBtmLeft = new SeatSprite(this.onSeatSelectedCallback);
@@ -143,18 +140,9 @@ const TableSeatPanel = cc.Layer.extend({
         this.addChild(spSeatBtmRight);
 
         if(this._tableType === TableType.SINGLE){
-            spTable.setFlippedX(true);
-            spTablePicture.setPosition(325, 348);
             spSeatLeft.setPositionX(99);
             spSeatRight.setPositionX(625);
         }
-
-
-    },
-
-    _createTablePicture: function(){
-        return new cc.Sprite(
-            this._tableType === TableType.MULTIPLE? ReferenceName.SeatMultiPlayerPic: ReferenceName.SeatSoloPic);
     },
 
     _createTitleByType: function() {
@@ -163,7 +151,38 @@ const TableSeatPanel = cc.Layer.extend({
     }
 });
 
-var SeatSprite = cc.Sprite.extend({
+let TableSprite = cc.Sprite.extend({
+    _tableType: null,
+    _touchEventListener: null,
+    _mouseEventListener: null,
+    _spGlow: null,
+    ctor: function(tableType){
+        cc.Sprite.prototype.ctor.call(this, ReferenceName.SeatTable);
+        this._tableType = tableType;
+
+        let spTablePicture = this._createTablePicture();
+        this.addChild(spTablePicture);
+
+        let spGlow = this._spGlow = new cc.Sprite("#SSTableGlow.png");
+        this.addChild(spGlow, -1);
+
+
+        if(this._tableType === TableType.SINGLE){
+            spTablePicture.setPosition(325, 348);
+            this.setFlippedX(true);
+        }else{
+            spTablePicture.setPosition(292, 348);
+        }
+
+    },
+
+    _createTablePicture: function(){
+        return new cc.Sprite(
+            this._tableType === TableType.MULTIPLE? ReferenceName.SeatMultiPlayerPic: ReferenceName.SeatSoloPic);
+    },
+});
+
+let SeatSprite = cc.Sprite.extend({
     _seatPosition: null,
     _tableType: null,
     _LobbyType: null,
