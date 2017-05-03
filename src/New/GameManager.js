@@ -164,7 +164,9 @@ const GameManager = function () {
                 // );
             }
         ).catch(console.error);
+    }
 
+    function setupPostLoginListeners () {
         // These are things we should do immediately after logging in:
         // Listen for a creditChangeEvent (e.g. caused by an external /recharge request, gift from grandma, etc.)
         ClientServerConnect.listenForEvent('creditChangeEvent', data => {
@@ -274,7 +276,7 @@ const GameManager = function () {
     }
 
     function seatSelected(type, seat){
-        console.log("seatSelected:",type,seat);
+        console.log("seatSelected:",seat);
         ClientServerConnect.joinGame(_currentScene.gameName, seat, type).catch(
             function (error) {
                 _lobbyManager.resetView();
@@ -342,6 +344,7 @@ const GameManager = function () {
 
     return {
         initialiseLogin: initialiseLogin,
+        setupPostLoginListeners: setupPostLoginListeners,
         initialiseGame: initialiseGame,
 
         //Lobby stuff
