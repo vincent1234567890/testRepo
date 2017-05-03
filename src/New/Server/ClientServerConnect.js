@@ -28,8 +28,8 @@ const ClientServerConnect = function () {
             // And that would create and endless cycle of clients fighting for the active login.
             if (_wasKickedOutByRemoteLogIn) return;
 
-            // let gameAPIServerUrl = 'ws://' + document.location.hostname + ':8088';
-            let gameAPIServerUrl = 'ws://192.168.1.14:8088';
+            let gameAPIServerUrl = 'ws://' + document.location.hostname + ':8088';
+            // let gameAPIServerUrl = 'ws://192.168.1.14:8088';
             // const useJoeysServerDuringDevelopment = false;
             // const localNames = ['localhost', '127.0.0.1', '127.0.1.1', '0.0.0.0'];
             // const doingDevelopment = (localNames.indexOf(window.location.hostname) >= 0);
