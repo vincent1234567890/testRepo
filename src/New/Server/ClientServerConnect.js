@@ -158,6 +158,7 @@ const ClientServerConnect = function () {
 
                 if (typeof document !== 'undefined') {
                     if (!_loginParams) {
+                        // We keep the login credentials in memory, so that we can log in to other gameServers later.
                         _loginParams = getCurrentOrCachedQueryParams();
                     }
                     // Players without credentials will now auto log in as trial players
@@ -251,6 +252,7 @@ const ClientServerConnect = function () {
 
     // If there are no current queryParams, then look for previous queryParams in localStorage
     // This allows us or the player to reload the page, even after the queryParams have been removed from the URL.
+    // This isn't really needed in production, but is pretty useful for development and testing.
     function getCurrentOrCachedQueryParams () {
         let searchString = document.location.search;
 
@@ -268,16 +270,7 @@ const ClientServerConnect = function () {
     // Requirement: In production environments, if a player closes their tab, and then shortly afterwards a malicious
     // user has access to that machine, that user should not be able to log in to the player's account.
     //
-    // It would be easy to just forget the token, but:
-    //
-    //   1. The player may change to a different server later.  They will need their token to auth with that server.
-    //
-    //   2. Even if we clear the token from localStorage, the malicious user can still get it back from the browser's
-    //      history (or from reopening the closed tab, and navigating back one page).
-    //
-    // @todo The solution is: to give them a new token on their first log in (or every log in).
-    //       That token can be stored in the tab's temporary memory, but won't be stored in the browser's history.
-    //
+    // To meet this requirement, we will drop the token from localStorage if the server requests it.
     function forgetCachedQueryParams () {
         if (window.localStorage) {
             localStorage['FishGame_Cached_Query_Params'] = '';

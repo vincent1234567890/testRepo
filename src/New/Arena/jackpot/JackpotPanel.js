@@ -579,8 +579,12 @@ const JackpotAwardPanel = cc.LayerColor.extend({
 
         this.runAction(cc.sequence(cc.delayTime(10), cc.callFunc(function () {
             const parent = this.getParent();
-            if (parent)
+            if (parent && parent._isPlaying) {
+                ClientServerConnect.getServerInformer().jackpotGameOver();
+            }
+            if (parent) {
                 parent.hidePanel();
+            }
         }, this)));
     },
 
