@@ -86,12 +86,26 @@ const GameListButtonPrefab = (function () {
 
         cc.eventManager.addListener(_listener, this._wrapper);
 
-        const _baseSequence = new cc.repeatForever(new cc.Sequence(getAnimationArray("GameSelectionBase")));
+        // const _baseSequence = new cc.repeatForever(new cc.Sequence(getAnimationArray("GameSelectionBase")));
 
-        const base = new cc.Sprite("#GameSelectionBase_00000.png");
+        // const base = new cc.Sprite("#GameSelectionBase_00000.png");
+        const base = new cc.Sprite("#GameSelectionBase.png");
         base.setPosition(0,0);
 
-        base.runAction(_baseSequence);
+        const leftGrass = new cc.Sprite();
+        const leftGrassSequence = new cc.repeatForever(new cc.Sequence(GUIFunctions.getAnimation(ReferenceName.LeftGrass, 0.03)));
+
+        const rightGrass = new cc.Sprite();
+        const rightGrassSequence = new cc.repeatForever(new cc.Sequence(GUIFunctions.getAnimation(ReferenceName.RightGrass, 0.03)));
+
+        base.addChild(leftGrass);
+        base.addChild(rightGrass);
+
+        leftGrass.runAction(leftGrassSequence);
+        rightGrass.runAction(rightGrassSequence);
+
+        leftGrass.setPosition(230,200);
+        rightGrass.setPosition(545,160);
 
         const content = new ccui.Widget();
         const ball = new cc.Sprite("#" + itemData.gameName + "Top_00000.png");

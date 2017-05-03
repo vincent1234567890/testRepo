@@ -90,7 +90,6 @@ const GameView = function () {
     function addView(view, depth, isScreenShake) {
         if (isScreenShake && _screenShakeNode){
             _screenShakeNode.addChild(view);
-            console.log("addView",_screenShakeNode);
         }else {
             _parentNode.addChild(view, depth);
         }
@@ -141,6 +140,7 @@ const GameView = function () {
         }
         _lastShotTime = -Infinity;
         _screenShakeNode = undefined;
+        _waveTransitionView = undefined;
     }
 
     function destroyArena() {
@@ -158,6 +158,7 @@ const GameView = function () {
             cc.spriteFrameCache.removeSpriteFrameByName(plists[list]);
         }
         _screenShakeNode = undefined;
+        _waveTransitionView = undefined;
     }
 
     function getPlayerSlot(slot) {
@@ -241,6 +242,9 @@ const GameView = function () {
     function caughtFishAnimationEnd(data) {
         if (data.playerSlot === _playerSlot) {
             _effectsManager.doCapturePrizeEffect(data.position, _gameConfig.cannonPositions[data.playerSlot], _gameConfig.fishClasses[data.type]);
+            if(_gameConfig.fishClasses[data.type].tier > 1) {
+                _playerViews[_playerSlot].showAwardMedal(_gameConfig.fishClasses[data.type].value);
+            }
         }
     }
 

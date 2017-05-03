@@ -30,6 +30,8 @@ const ReferenceName = {
 
     CoinExplosionEffect : "CoinExplosion1_",
     ExplosionEffect : "Explosion_",
+    LightEffect : "Explosion1_",
+    AwardEffect : "Rewardmedal_",
 
     //Free round
     FreeRoundExplosionEffect : "FREffect_",
@@ -52,6 +54,8 @@ const ReferenceName = {
     LobbySettingsButton : "#Lobby Setting.png",
     TopBg : "#Top Base.png",
     LobbyCaustics : "Caustic_",
+    LeftGrass : "LeftGrass_",
+    RightGrass : "RightGrass_",
 
     //SeatSelectionScene
     SeatBackgroundBottom: "#SSBTMBG.png",

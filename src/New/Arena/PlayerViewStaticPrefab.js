@@ -13,7 +13,6 @@ const PlayerViewStaticPrefab = (function () {
     const stackHeightMed = 8;
     const stackHeightHigh = 16;
     const PlayerViewStaticPrefab = function(gameConfig, slot, isPlayer, changeSeatCallback, lockOnCallback, fishLockStatus){
-        // this._slot = slot;
         this._parent = new cc.Node();
         GameView.addView(this._parent,1);
         this._parent.setPosition(300,300);
@@ -41,47 +40,24 @@ const PlayerViewStaticPrefab = (function () {
         base.addChild(this._otherPlayerIcon);
 
         this._playerName = new cc.LabelTTF(' ', "Arial", 20);
-        //this._playerName.setDimensions(cc.size(themeData.PlayerName[1][0],themeData.PlayerName[1][1]));
         this._playerName.setAnchorPoint(0,0.5);
         base.addChild(this._playerName,1);
 
         this._gold = new cc.LabelTTF('', "Arial", 20);
-        //this._gold.setDimensions(cc.size(themeData.Gold[1][0],themeData.Gold[1][1]));
         this._gold.setAnchorPoint(0,0.5);
         base.addChild(this._gold,1);
 
-        const changeSlot = (sender, type) => {
-            switch (type) {
-                // case ccui.Widget.TOUCH_MOVED:
-                //     // console.log(sender);
-                //     break;
-                // case ccui.Widget.TOUCH_BEGAN:
-                //     if (selected) return;
-                //     selected = true;
-                //     break;
-                case ccui.Widget.TOUCH_ENDED:
-                    // gameSelected(sender);
-                    // console.log(sender);
-                    changeSeatCallback(slot);
-                // selectedCallBack(sender);
-                    break;
-                case ccui.Widget.TOUCH_CANCELED: // fallthrough intended
-                    // label.runAction(new cc.ScaleTo(0.01,originalSize));
-                    // label.setScale(originalSize);
-                    break;
-            }
-        };
-        // this._changeSlotbutton = new ccui.Button(ReferenceName.ChangeSeatButton, ReferenceName.ChangeSeatButtonDown, changeSlot);
-        this._changeSlotbutton = new ccui.Button();
-        this._changeSlotbutton.setTouchEnabled(true);
-        this._changeSlotbutton.loadTextures(ReferenceName.ChangeSeatButton, ReferenceName.ChangeSeatButtonDown, undefined, ccui.Widget.PLIST_TEXTURE);
-        this._changeSlotbutton.setPosition(255,55);
-        this._changeSlotbutton.addTouchEventListener(changeSlot);
-        base.addChild(this._changeSlotbutton,5);
+        function changeSlotCallback(){
+            changeSeatCallback(slot);
+        }
+
+        this._changeSlotButton = GUIFunctions.createButton(ReferenceName.ChangeSeatButton, ReferenceName.ChangeSeatButtonDown,changeSlotCallback);
+        this._changeSlotButton.setPosition(255,55);
+        base.addChild(this._changeSlotButton,5);
 
         this._slotLabel = new cc.LabelTTF('点击换座',"Arial", 20);
         this._slotLabel.setPosition(55,10);
-        this._changeSlotbutton.addChild(this._slotLabel);
+        this._changeSlotButton.addChild(this._slotLabel);
 
         let pos;
         let markerPos;
@@ -120,11 +96,9 @@ const PlayerViewStaticPrefab = (function () {
 
         let name;
         if (pos[1] > markerPos[1]) {
-            // this._lockOnButtonAnimation = GUIFunctions.getAnimation(ReferenceName.LockOnButtonSide,0.03);
             name = ReferenceName.LockOnButtonSide;
         }else{
             name = ReferenceName.LockOnButtonBottom;
-            // this._lockOnButtonAnimation = GUIFunctions.getAnimation(ReferenceName.LockOnButtonBottom,0.03);
         }
 
         // if (isPlayer){
@@ -154,7 +128,6 @@ const PlayerViewStaticPrefab = (function () {
         this._coinStackManager = new CoinStackManager(this._parent);
 
         if(isPlayer) {
-            this._playerSlot = slot;
             this._coinIcon.setVisible(true);
             this.setPlayer(isPlayer);
             this._playerSeatIndicator =  new cc.Sprite(ReferenceName.PlayerSeatIndicator);
@@ -169,32 +142,28 @@ const PlayerViewStaticPrefab = (function () {
 
     proto.updatePlayerData = function (playerData, playerSlot) {
         let nameToShow = playerData.name;
-        if (nameToShow.length > 12) {
-            nameToShow = nameToShow.substring(0,10) + "..";
+        if (nameToShow.length > 10) {
+            nameToShow = nameToShow.substring(0,8) + "..";
         }
         this._playerName.setString(nameToShow);
-        // const goldAmount = parseFloat(this._gold.getString());
         if ( playerData.scoreChange && playerData.scoreChange > 0){
-            this.AnimateCoinStack(playerData.scoreChange);
+            this.animateCoinStack(playerData.scoreChange);
             playerData.scoreChange = 0;
         }
         let gold = Math.floor(playerData.score).toLocaleString('en-US', {maximumFractionDigits: 2});
         if (gold.length > 10) {
             gold = gold.substring(0,9) + "..";
         }
-
         this._gold.setString(gold);
         const activatePlayerIcons = this._isPlayer == null || playerData.slot == playerSlot;
         if(activatePlayerIcons){
             this._coinIcon.setVisible(true);
             this.setPlayer(playerData.slot == playerSlot);
         }
-        // this._gem.setString(0);
     };
 
     proto.clearPlayerData = function () {
-        this._playerSlot = null;
-        this._changeSlotbutton.setVisible(true);
+        this._changeSlotButton.setVisible(true);
         this._playerName.setString('');
         this._gold.setString('');
         this._playerIcon.setVisible(false);
@@ -203,14 +172,13 @@ const PlayerViewStaticPrefab = (function () {
         this._isPlayer = null;
         this._lockOnButton.setLook(false);
         this._lockOnButton.setVisible(false);
-        // this._gem.setString('');
     };
 
     proto.destroyView = function () {
         GameView.destroyView(this._parent);
     };
 
-    proto.AnimateCoinStack = function ( increase ) {
+    proto.animateCoinStack = function ( increase ) {
         if (increase >= stackValueTriggerPointHigh){
             this._coinStackManager.addStack(stackHeightHigh,increase);
         }else if (increase >= stackValueTriggerPointMedium ){
@@ -224,7 +192,7 @@ const PlayerViewStaticPrefab = (function () {
         this._isPlayer = isPlayer;
         this._playerIcon.setVisible(isPlayer);
         this._otherPlayerIcon.setVisible(!isPlayer);
-        this._changeSlotbutton.setVisible(false);
+        this._changeSlotButton.setVisible(false);
 
         if (this._lockOnButton){
             this._lockOnButton.setVisible(isPlayer);
@@ -233,6 +201,25 @@ const PlayerViewStaticPrefab = (function () {
             }
         }
     };
+
+    proto.showAwardMedal = function (amount) {
+        const coin = new cc.Sprite();
+        const awardMedalSequence = new cc.Sequence(GUIFunctions.getAnimation(ReferenceName.AwardEffect, 0.05), new cc.CallFunc(onAwardMedalEffectEnd));
+        coin.runAction(awardMedalSequence);
+        this._parent.addChild(coin);
+        const parent = this._parent;
+
+        const label = new cc.LabelBMFont(amount, res.InGameLightGoldFontFile);
+        label.setScale(0.5);
+        coin.addChild(label);
+        label.setPosition(90,100);
+
+        coin.setPosition(0,200);
+        function onAwardMedalEffectEnd(){
+            parent.removeChild(coin);
+        }
+    };
+
 
     return PlayerViewStaticPrefab;
 }());

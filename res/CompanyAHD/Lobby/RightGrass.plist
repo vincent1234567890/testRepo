@@ -4,7 +4,7 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>For cropping R_00000.png</key>
+            <key>RightGrass_00000.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -19,7 +19,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>For cropping R_00001.png</key>
+            <key>RightGrass_00001.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -34,7 +34,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>For cropping R_00002.png</key>
+            <key>RightGrass_00002.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -49,7 +49,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>For cropping R_00003.png</key>
+            <key>RightGrass_00003.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -64,7 +64,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>For cropping R_00004.png</key>
+            <key>RightGrass_00004.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -79,7 +79,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>For cropping R_00005.png</key>
+            <key>RightGrass_00005.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -94,7 +94,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>For cropping R_00006.png</key>
+            <key>RightGrass_00006.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -109,7 +109,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>For cropping R_00007.png</key>
+            <key>RightGrass_00007.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -124,7 +124,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>For cropping R_00008.png</key>
+            <key>RightGrass_00008.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -139,7 +139,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>For cropping R_00009.png</key>
+            <key>RightGrass_00009.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -154,7 +154,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>For cropping R_00010.png</key>
+            <key>RightGrass_00010.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -169,7 +169,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>For cropping R_00011.png</key>
+            <key>RightGrass_00011.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -184,7 +184,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>For cropping R_00012.png</key>
+            <key>RightGrass_00012.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -199,7 +199,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>For cropping R_00013.png</key>
+            <key>RightGrass_00013.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -214,7 +214,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>For cropping R_00014.png</key>
+            <key>RightGrass_00014.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -229,7 +229,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>For cropping R_00015.png</key>
+            <key>RightGrass_00015.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -244,7 +244,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>For cropping R_00016.png</key>
+            <key>RightGrass_00016.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -259,7 +259,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>For cropping R_00017.png</key>
+            <key>RightGrass_00017.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -274,7 +274,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>For cropping R_00018.png</key>
+            <key>RightGrass_00018.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -289,7 +289,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>For cropping R_00019.png</key>
+            <key>RightGrass_00019.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -304,7 +304,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>For cropping R_00020.png</key>
+            <key>RightGrass_00020.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -319,7 +319,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>For cropping R_00021.png</key>
+            <key>RightGrass_00021.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -334,7 +334,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>For cropping R_00022.png</key>
+            <key>RightGrass_00022.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -349,7 +349,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>For cropping R_00023.png</key>
+            <key>RightGrass_00023.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -364,7 +364,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>For cropping R_00024.png</key>
+            <key>RightGrass_00024.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -379,7 +379,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>For cropping R_00025.png</key>
+            <key>RightGrass_00025.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -394,7 +394,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>For cropping R_00026.png</key>
+            <key>RightGrass_00026.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -409,7 +409,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>For cropping R_00027.png</key>
+            <key>RightGrass_00027.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -424,7 +424,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>For cropping R_00028.png</key>
+            <key>RightGrass_00028.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -439,7 +439,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>For cropping R_00029.png</key>
+            <key>RightGrass_00029.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -454,7 +454,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>For cropping R_00030.png</key>
+            <key>RightGrass_00030.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -469,7 +469,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>For cropping R_00031.png</key>
+            <key>RightGrass_00031.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -484,7 +484,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>For cropping R_00032.png</key>
+            <key>RightGrass_00032.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -499,7 +499,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>For cropping R_00033.png</key>
+            <key>RightGrass_00033.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -514,7 +514,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>For cropping R_00034.png</key>
+            <key>RightGrass_00034.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -529,7 +529,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>For cropping R_00035.png</key>
+            <key>RightGrass_00035.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -544,7 +544,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>For cropping R_00036.png</key>
+            <key>RightGrass_00036.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -559,7 +559,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>For cropping R_00037.png</key>
+            <key>RightGrass_00037.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -574,7 +574,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>For cropping R_00038.png</key>
+            <key>RightGrass_00038.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -589,7 +589,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>For cropping R_00039.png</key>
+            <key>RightGrass_00039.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -604,7 +604,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>For cropping R_00040.png</key>
+            <key>RightGrass_00040.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -619,7 +619,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>For cropping R_00041.png</key>
+            <key>RightGrass_00041.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -634,7 +634,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>For cropping R_00042.png</key>
+            <key>RightGrass_00042.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -649,7 +649,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>For cropping R_00043.png</key>
+            <key>RightGrass_00043.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -664,7 +664,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>For cropping R_00044.png</key>
+            <key>RightGrass_00044.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -679,7 +679,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>For cropping R_00045.png</key>
+            <key>RightGrass_00045.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -694,7 +694,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>For cropping R_00046.png</key>
+            <key>RightGrass_00046.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -709,7 +709,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>For cropping R_00047.png</key>
+            <key>RightGrass_00047.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -724,7 +724,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>For cropping R_00048.png</key>
+            <key>RightGrass_00048.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -739,7 +739,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>For cropping R_00049.png</key>
+            <key>RightGrass_00049.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -754,7 +754,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>For cropping R_00050.png</key>
+            <key>RightGrass_00050.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -769,7 +769,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>For cropping R_00051.png</key>
+            <key>RightGrass_00051.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -784,7 +784,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>For cropping R_00052.png</key>
+            <key>RightGrass_00052.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -799,7 +799,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>For cropping R_00053.png</key>
+            <key>RightGrass_00053.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -814,7 +814,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>For cropping R_00054.png</key>
+            <key>RightGrass_00054.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -829,7 +829,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>For cropping R_00055.png</key>
+            <key>RightGrass_00055.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -844,7 +844,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>For cropping R_00056.png</key>
+            <key>RightGrass_00056.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -859,7 +859,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>For cropping R_00057.png</key>
+            <key>RightGrass_00057.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -874,7 +874,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>For cropping R_00058.png</key>
+            <key>RightGrass_00058.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -889,7 +889,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>For cropping R_00059.png</key>
+            <key>RightGrass_00059.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -904,7 +904,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>For cropping R_00060.png</key>
+            <key>RightGrass_00060.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -919,7 +919,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>For cropping R_00061.png</key>
+            <key>RightGrass_00061.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -934,7 +934,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>For cropping R_00062.png</key>
+            <key>RightGrass_00062.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -949,7 +949,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>For cropping R_00063.png</key>
+            <key>RightGrass_00063.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -964,7 +964,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>For cropping R_00064.png</key>
+            <key>RightGrass_00064.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -979,7 +979,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>For cropping R_00065.png</key>
+            <key>RightGrass_00065.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -994,7 +994,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>For cropping R_00066.png</key>
+            <key>RightGrass_00066.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -1009,7 +1009,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>For cropping R_00067.png</key>
+            <key>RightGrass_00067.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -1024,7 +1024,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>For cropping R_00068.png</key>
+            <key>RightGrass_00068.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -1039,7 +1039,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>For cropping R_00069.png</key>
+            <key>RightGrass_00069.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -1054,7 +1054,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>For cropping R_00070.png</key>
+            <key>RightGrass_00070.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -1079,13 +1079,13 @@
             <key>premultiplyAlpha</key>
             <false/>
             <key>realTextureFileName</key>
-            <string>RightGrass.plist.png</string>
+            <string>RightGrass.png</string>
             <key>size</key>
             <string>{1296,1296}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:2ec8e7661f375435a19bf5a581ca2b7d:6213b3b963c905e5a24c26d2507b36bb:65e2c27852e54f2ab3b848f9eb15b3de$</string>
+            <string>$TexturePacker:SmartUpdate:305949f6736eb2d010cc3bb4320820ca:6213b3b963c905e5a24c26d2507b36bb:539693b222a9556a78c44582d2089993$</string>
             <key>textureFileName</key>
-            <string>RightGrass.plist.png</string>
+            <string>RightGrass.png</string>
         </dict>
     </dict>
 </plist>

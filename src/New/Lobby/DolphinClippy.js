@@ -34,7 +34,7 @@ const DolphinClippy = (function () {
                 const newWidth = dolphinBubble.getContentSize().width;
                 dolphinBubble.setPosition(250 + (newWidth - startWidth), 600);
                 dolphinText.setPosition(dolphinBubble.getPosition().x,590);
-                if(counter>3){
+                if(counter>2){
                     counter = 0;
                 }
                 timer = 0;

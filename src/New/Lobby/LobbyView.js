@@ -15,13 +15,10 @@ const LobbyView = (function () {
     let gameControlList;
 
     const LobbyView = function (playerData, theme, onGameSelectedCallback) {
-        // this.gameSelected = false;
-
         const _parent = new cc.Node();
         GameView.addView(_parent);
 
         _theme = theme;
-
         _onGameSelectedCallback = onGameSelectedCallback;
 
         const length = cc.view.getDesignResolutionSize().width;
@@ -37,7 +34,12 @@ const LobbyView = (function () {
         NameBG.setPosition(100,550);
         bg.addChild(NameBG,1);
 
-        let label = new cc.LabelTTF(playerData.playerState.displayName , "Arial", 22);
+        let displayName = playerData.playerState.displayName;
+        if (displayName.length > 14) {
+            displayName = displayName.substring(0,12) + "..";
+        }
+
+        const label = new cc.LabelTTF(displayName , "Arial", 22);
         label._setFontWeight("bold");
         label.enableStroke(new cc.Color(0, 0, 0, 255), 2);
         label.setAnchorPoint(0.5, 0.5);
