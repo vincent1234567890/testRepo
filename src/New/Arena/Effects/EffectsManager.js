@@ -8,17 +8,17 @@ const EffectsManager = (function () {
     let freeRoundEffectView;
     let _shakeableNode;
 
-    const shakeMinX = -70;
-    const shakeMaxX = 70;
-    const shakeMinY = -70;
-    const shakeMaxY = 70;
+    const shakeMinX = -90;
+    const shakeMaxX = 30;
+    const shakeMinY = -90;
+    const shakeMaxY = 50;
 
     const numberShakesMin = 6;
     const numberShakesMax = 8;
 
     const shakeSpeed = 0.075;
-    const scaleAmount = 1.15;
-    const scaleSpeed = 0.1;
+    const scaleAmount = 1.08;
+    const scaleSpeed = 0.05;
 
     let originalPosition;
 
@@ -32,50 +32,64 @@ const EffectsManager = (function () {
     const proto = EffectsManager.prototype;
 
     proto.doCapturePrizeEffect = function (pos, target, fish) {
-        if (fish.tier >1 && _shakeableNode.getNumberOfRunningActions() === 0){//do screen shake
+        if (fish.screenShake && _shakeableNode.getNumberOfRunningActions() === 0) {//do screen shake
             const points = [];
-            points.push(new cc.ScaleTo(scaleSpeed,scaleAmount));
-            const numberOfShakes = getRandom(numberShakesMin,numberShakesMax);
-            for (let i = 0; i<numberOfShakes; i++){
-                const shakeX = originalPosition.x + parseFloat(getRandom(shakeMinX,shakeMaxX));
-                const shakeY = originalPosition.y + parseFloat(getRandom(shakeMinY,shakeMaxY));
-                points.push(new cc.MoveTo(shakeSpeed,cc.p( shakeX, shakeY)));
+            points.push(new cc.ScaleTo(scaleSpeed, scaleAmount));
+            const numberOfShakes = getRandom(numberShakesMin, numberShakesMax);
+            for (let i = 0; i < numberOfShakes; i++) {
+                const shakeX = originalPosition.x + parseFloat(getRandom(shakeMinX, shakeMaxX));
+                const shakeY = originalPosition.y + parseFloat(getRandom(shakeMinY, shakeMaxY));
+                points.push(new cc.MoveTo(shakeSpeed, cc.p(shakeX, shakeY)));
             }
-            points.push(new cc.MoveTo(shakeSpeed,originalPosition));
-            points.push(new cc.ScaleTo(scaleSpeed,1));
+            points.push(new cc.MoveTo(shakeSpeed, originalPosition));
+            points.push(new cc.ScaleTo(scaleSpeed, 1));
             const shakeSequence = new cc.Sequence(points);
             _shakeableNode.runAction(shakeSequence);
         }
-        const effectSprite = new cc.Sprite();
-        const coinEffect = new cc.Sprite();
-        if (fish.tier === 3){
-            const explosionSequence = new cc.Sequence(GUIFunctions.getAnimation(ReferenceName.ExplosionEffect,0.1),cc.callFunc(onExplosionEffectEnd));
-            const coinExplosionSequence = new cc.Sequence(GUIFunctions.getAnimation(ReferenceName.CoinExplosionEffect,0.1), cc.callFunc(onCoinExplosionEffectEnd));
-            GameView.addView(effectSprite);
-            GameView.addView(coinEffect);
-            effectSprite.runAction(explosionSequence);
-            coinEffect.runAction(coinExplosionSequence);
-        }else if (fish.tier == 2){
 
+        //We are doing it this way because there might be more than one effect triggered.
+        //Possibly refactor into NVVM sturcture.
+        const coinEffect = new cc.Sprite();
+        const effectSprite = new cc.Sprite();
+        coinEffect.setPosition(pos);
+        effectSprite.setPosition(pos);
+
+        let explosionSequence;
+
+        if (fish.tier % 100 > 1) {
+            const coinExplosionSequence = new cc.Sequence(GUIFunctions.getAnimation(ReferenceName.CoinExplosionEffect, 0.05), new cc.CallFunc(onCoinExplosionEffectEnd));
+            coinEffect.runAction(coinExplosionSequence);
+            // console.log("CoinExplode! : ", fish, coinEffect, coinExplosionSequence);
+            GameView.addView(coinEffect);
+        }
+        if (fish.tier % 100 === 3) {
+            explosionSequence = new cc.Sequence(GUIFunctions.getAnimation(ReferenceName.ExplosionEffect, 0.05), new cc.CallFunc(onExplosionEffectEnd));
+            effectSprite.runAction(explosionSequence);
+            GameView.addView(effectSprite);
+            // console.log("Explode! : ", fish, effectSprite, explosionSequence);
+        }else if (fish.tier % 100 === 2) {
+            effectSprite.setScale(2);
+            explosionSequence = new cc.Sequence(GUIFunctions.getAnimation(ReferenceName.LightEffect, 0.1), new cc.CallFunc(onExplosionEffectEnd));
+            effectSprite.runAction(explosionSequence);
+            GameView.addView(effectSprite);
         }
 
-        function onExplosionEffectEnd(){
+        function onExplosionEffectEnd() {
             GameView.destroyView(effectSprite);
         }
 
-        function onCoinExplosionEffectEnd(){
+        function onCoinExplosionEffectEnd() {
             GameView.destroyView(coinEffect);
         }
+
         coinEffectsManager.triggerCoins(pos, target, fish);
     };
-
-
 
     proto.showFreeRoundEffect = function () {
         freeRoundEffectView.show();
     };
 
-    function getRandom(randomMin,randomMax) {
+    function getRandom(randomMin, randomMax) {
         return (Math.random() * (randomMax - randomMin) + randomMin).toFixed(4);
     }
 

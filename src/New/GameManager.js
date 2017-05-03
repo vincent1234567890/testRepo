@@ -274,7 +274,7 @@ const GameManager = function () {
     }
 
     function seatSelected(type, seat){
-        console.log("seatSelected:",seat);
+        console.log("seatSelected:",type,seat);
         ClientServerConnect.joinGame(_currentScene.gameName, seat, type).catch(
             function (error) {
                 _lobbyManager.resetView();

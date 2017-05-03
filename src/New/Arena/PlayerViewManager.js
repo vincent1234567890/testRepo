@@ -55,6 +55,10 @@ const PlayerViewManager = (function () {
         this._cannonManager = null;
     };
 
+    proto.showAwardMedal = function (amount) {
+        this._playerView.showAwardMedal(amount);
+    };
+
     return PlayerViewManager;
 }());
 
