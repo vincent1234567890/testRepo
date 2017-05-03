@@ -210,7 +210,7 @@ const PlayerViewStaticPrefab = (function () {
         const parent = this._parent;
 
         const label = new cc.LabelBMFont(amount, res.InGameLightGoldFontFile);
-        label.setScale(0.5);
+        label.setScale(1/GUIFunctions.getLengthOfNumber(amount));
         coin.addChild(label);
         label.setPosition(90,100);
 
