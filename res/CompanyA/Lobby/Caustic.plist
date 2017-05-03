@@ -166,9 +166,9 @@
             <key>realTextureFileName</key>
             <string>Caustic.png</string>
             <key>size</key>
-            <string>{3506,3080}</string>
+            <string>{3506,3506}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:150ad9777746dc625e16e37f8424729b:3f91dffaf70fbda0c76c2f2bd517f533:19e4fb698935b2a7f42e46ef6ecc22a3$</string>
+            <string>$TexturePacker:SmartUpdate:f08ea2ca10a2d610a9a321a6ba9503f7:3f91dffaf70fbda0c76c2f2bd517f533:19e4fb698935b2a7f42e46ef6ecc22a3$</string>
             <key>textureFileName</key>
             <string>Caustic.png</string>
         </dict>

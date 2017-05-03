@@ -2,49 +2,10 @@
  * Created by eugeneseah on 3/11/16.
  */
 
+//use for manage fishes.
 const FishViewManager = (function(){
 
     const FishViewManager = function(fishGameArena, gameConfig, animationEndEvent, getFishLockStatus, onFishLockSelectedCallback){
-        // console.log
-
-        // cc.spriteFrameCache.addSpriteFrames(res.SquidPlist);
-        // cc.spriteFrameCache.addSpriteFrames(res.PufferfishPlist);
-        // cc.spriteFrameCache.addSpriteFrames(res.TurtlePlist);
-        // cc.spriteFrameCache.addSpriteFrames(res.PorgyPlist);
-        // cc.spriteFrameCache.addSpriteFrames(res.StingrayPlist);
-        // cc.spriteFrameCache.addSpriteFrames(res.LanternPlist);
-        // cc.spriteFrameCache.addSpriteFrames(res.ButterflyPlist);
-        // cc.spriteFrameCache.addSpriteFrames(res.GoldSharkPlist);
-        // cc.spriteFrameCache.addSpriteFrames(res.SharkPlist);
-        // cc.spriteFrameCache.addSpriteFrames(res.SmallFishPlist);
-        //
-        // cc.spriteFrameCache.addSpriteFrames(res.AmphiprionPlist);
-        // cc.spriteFrameCache.addSpriteFrames(res.AmphiprionBWPlist);
-        // cc.spriteFrameCache.addSpriteFrames(res.GrouperFishPlist);
-        // cc.spriteFrameCache.addSpriteFrames(res.MarlinsFishPlist);
-        // cc.spriteFrameCache.addSpriteFrames(res.AngelFishPlist);
-        // cc.spriteFrameCache.addSpriteFrames(res.ButterflyPlist);
-        // cc.spriteFrameCache.addSpriteFrames(res.HorseshoeCrabPlist);
-        // cc.spriteFrameCache.addSpriteFrames(res.PaddleFishPlist);
-
-
-        //new game
-
-        // cc.spriteFrameCache.addSpriteFrames(res.AnemoneFishPlist);
-        // cc.spriteFrameCache.addSpriteFrames(res.AngelFish2Plist);
-        // cc.spriteFrameCache.addSpriteFrames(res.BlackWhiteYellowFishPlist);
-        // cc.spriteFrameCache.addSpriteFrames(res.BlackYellowButterflyFishPlist);
-        // cc.spriteFrameCache.addSpriteFrames(res.BlueTang2Plist);
-        // cc.spriteFrameCache.addSpriteFrames(res.ButterflyFish2Plist);
-        // cc.spriteFrameCache.addSpriteFrames(res.BWNemoPlist);
-        // cc.spriteFrameCache.addSpriteFrames(res.DemoFishPlist);
-        // cc.spriteFrameCache.addSpriteFrames(res.KissingFishPlist);
-        // cc.spriteFrameCache.addSpriteFrames(res.Marlins2Plist);
-        // cc.spriteFrameCache.addSpriteFrames(res.SeahorsePlist);
-        // cc.spriteFrameCache.addSpriteFrames(res.Shark2Plist);
-        // cc.spriteFrameCache.addSpriteFrames(res.Turtle2Plist);
-        // cc.spriteFrameCache.addSpriteFrames(res.YellowFishPlist);
-
         const plists = ResourceLoader.getPlists("Fish");
         for ( let list in plists){
             cc.spriteFrameCache.addSpriteFrames(plists[list]);
@@ -68,13 +29,13 @@ const FishViewManager = (function(){
                 return;
             }
             let id = -1;
-            for( var fishId in this._fishes ) {
+            for( let fishId in this._fishes ) {
                 if( this._fishes[ fishId ] === fishView ) {
                     id = fishId;
                     break;
                 }
             }
-            if (targetLockUI.getParent()!= null){
+            if (targetLockUI.getParent() != null){
                 targetLockUI.getParent().removeChild(targetLockUI,false);
             }
             fishView.addTarget(targetLockUI);
@@ -84,6 +45,7 @@ const FishViewManager = (function(){
 
     const proto = FishViewManager.prototype;
 
+    //使用FishManager 来添加或管理鱼
     proto.addFish = function(fishId, fishType){
         this._fishes[fishId] = new FishView(this._parent, this._gameConfig.fishClasses[fishType], fishType, this._onFishClicked);
         return this._fishes[fishId];
@@ -102,6 +64,10 @@ const FishViewManager = (function(){
     };
 
     proto.removeFish = function (reference, data) {
+        if (!this._parent){
+            console.warn("parent has already been destroyed. Possible invisible fish or out of order destruction.");
+            return;
+        }
         // console.log("removeFish: ", reference, "id", id);
         if (!this._fishes[data.id]) {
             console.warn("Could not find fishActor for fish " + data.id + ".  Perhaps scene was not initialised.")
@@ -133,7 +99,8 @@ const FishViewManager = (function(){
                 const fishModel = this._fishGameArena.getFish(fishId);
                 if (fishModel) {
                     this._parent.removeChild(fishModel);
-                    delete fishModel;
+                    //delete fishModel;   //it is wrong.
+                    this._fishGameArena.removeFish(fishId);
                 }
             }
             GameView.destroyView(this._parent);

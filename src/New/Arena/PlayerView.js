@@ -17,18 +17,24 @@ var PlayerView = (function () {
         this._playerViewStaticPrefabInstance = new PlayerViewStaticPrefab(gameConfig, slot, isPlayer, changeSeat, onLockOnRequest, fishLockStatus);
     };
 
-    PlayerView.prototype.updateView = function(playerData, isChangeSeat){
+    const proto = PlayerView.prototype;
+
+    proto.updateView = function(playerData, isChangeSeat){
         this._playerViewStaticPrefabInstance.updatePlayerData(playerData, isChangeSeat);
     };
 
-    PlayerView.prototype.clearPlayerData = function () {
+    proto.clearPlayerData = function () {
         this._playerViewStaticPrefabInstance.clearPlayerData();
     };
 
-    PlayerView.prototype.destroyView = function () {
+    proto.destroyView = function () {
         // this._playerViewStaticPrefabInstance.parent.removeChild(this._playerViewStaticPrefabInstance);
         this._playerViewStaticPrefabInstance.destroyView();
         this._playerViewStaticPrefabInstance = null;
+    };
+
+    proto.showAwardMedal = function (amount) {
+        this._playerViewStaticPrefabInstance.showAwardMedal(amount);
     };
 
     return PlayerView;

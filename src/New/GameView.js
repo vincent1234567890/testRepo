@@ -6,7 +6,7 @@ const GameView = function () {
     "use strict";
 
     let _parentNode;
-    let _curretBKG;
+    let _currentBKG;
     let _touchLayer;
     let _isRotated = false;
     let _gameConfig;
@@ -20,40 +20,47 @@ const GameView = function () {
     //UIManagers
     let _playerViews = [];
     let _effectsManager;
+    let _waveTransitionView;
 
     let _lobbyNode;
     let _lockOnCallback;
 
+    let _screenShakeNode;
+
     function initialise(parentNode, gameConfig, fishGameArena, lockOnCallback, fishLockStatus) {
+        console.log("GameView:initialise");
         if (gameConfig) { // going into game
             initialiseParent(parentNode);
+
+            _screenShakeNode = new cc.Node();
+            addView(_screenShakeNode);
+            console.log("GameView:initialise:_screenShakeNode",_screenShakeNode);
+
             _fishGameArena = fishGameArena;
             _gameConfig = gameConfig;
             _lockOnCallback = lockOnCallback;
 
             if (_gameConfig.cannonPositions[_playerSlot][1] > cc.view.getDesignResolutionSize().height / 2) {
-                // console.log(_gameConfig.cannonPositions[_playerSlot]);
-                // console.log("player" + _playerSlot);
-                // cc._canvas.rotate(180);
                 _isRotated = true;
             }
-            // console.log("initialised");
             for (let i = 0; i < _gameConfig.maxPlayers; i++) {
                 const index = getPlayerSlot(i);
-                _playerViews[index] = new PlayerViewManager(_gameConfig, index, i == _playerSlot, changeSeatRequest, lockOnRequest, fishLockStatus);
+                _playerViews[index] = new PlayerViewManager(_gameConfig, index, i === _playerSlot, changeSeatRequest, lockOnRequest, fishLockStatus);
             }
-
-            _effectsManager = new EffectsManager();
-        }else if (!_lobbyNode){ // first time initialisation
+            _effectsManager = new EffectsManager(_screenShakeNode);
+        } else if (!_lobbyNode) { // first time initialisation
             initialiseParent(parentNode);
             _lobbyNode = _parentNode;
-        }else{ // reuse lobby node
+        } else { // reuse lobby node
             _parentNode = _lobbyNode;
         }
     }
 
+    function goToSeatSelection(parent) {
+        _parentNode = parent;
+    }
+
     function initialiseParent(parent) {
-        // cc.spriteFrameCache.addSpriteFrames(res.GameUIPlist);
         const plists = ResourceLoader.getPlists("Game");
         for (let list in plists) {
             cc.spriteFrameCache.addSpriteFrames(plists[list]);
@@ -67,36 +74,29 @@ const GameView = function () {
     }
 
     function goToGame(choice) {
-        if (_curretBKG) {
-            _parentNode.removeChild(_curretBKG);
+        if(_waveTransitionView) {
+            setBackgroundTo(choice ? choice.gameId : 0);
+        }else {
+            _waveTransitionView = new WaveTransition(res['GameBackground' + ((choice ? choice.gameId : 0) % 4).toString()]);
+            _screenShakeNode.addChild(_waveTransitionView);
         }
-        if (choice < 4) {
-            _curretBKG = new cc.Sprite(res['GameBackground' + choice.toString()]);
-        }
-        else {
-            _curretBKG = new cc.Sprite(res.GameBackground1);
-        }
-        //Request to remove frame
-        const frame = new cc.Sprite(res.GameFrame2);
-        frame.setPosition(cc.view.getDesignResolutionSize().width / 2, cc.view.getDesignResolutionSize().height / 2);
-        _parentNode.addChild(frame, 99);
-
-        _curretBKG.setPosition(cc.view.getDesignResolutionSize().width / 2, cc.view.getDesignResolutionSize().height / 2);
-        _parentNode.addChild(_curretBKG, -5);
-
         initialiseTouch(touchAt);
     }
 
-    function addView(view, depth) {
-        _parentNode.addChild(view, depth);
+    function setBackgroundTo(choice) {
+        _waveTransitionView.transition(res['GameBackground' + (choice % 4).toString()]);
+    }
+
+    function addView(view, depth, isScreenShake) {
+        if (isScreenShake && _screenShakeNode){
+            _screenShakeNode.addChild(view);
+        }else {
+            _parentNode.addChild(view, depth);
+        }
     }
 
     function destroyView(view) {
         _parentNode.removeChild(view);
-        const plists = ResourceLoader.getPlists("Game");
-        for (let list in plists) {
-            cc.spriteFrameCache.removeSpriteFrameByName(plists[list]);
-        }
     }
 
     const initialiseTouch = function (touchAt) {
@@ -112,14 +112,12 @@ const GameView = function () {
         let y;
         let rot = 0;
         if (_isRotated && _gameConfig.isUsingOldCannonPositions) {
-            // console.log("isrotate");
             if (position) {
                 x = cc.view.getDesignResolutionSize().width - position[0];
                 y = cc.view.getDesignResolutionSize().height - position[1];
             }
             if (rotation != null) {
                 rot = -(rotation * 180 / Math.PI);
-
             }
         } else {
             if (position) {
@@ -140,7 +138,9 @@ const GameView = function () {
                 clearPlayerState(i);
             }
         }
-        _lastShotTime = -Infinity
+        _lastShotTime = -Infinity;
+        _screenShakeNode = undefined;
+        _waveTransitionView = undefined;
     }
 
     function destroyArena() {
@@ -153,6 +153,12 @@ const GameView = function () {
             delete _playerViews[i];
         }
         _fishGameArena = null;
+        const plists = ResourceLoader.getPlists("Game");
+        for (let list in plists) {
+            cc.spriteFrameCache.removeSpriteFrameByName(plists[list]);
+        }
+        _screenShakeNode = undefined;
+        _waveTransitionView = undefined;
     }
 
     function getPlayerSlot(slot) {
@@ -167,7 +173,6 @@ const GameView = function () {
             const now = _fishGameArena.getGameTime();
             const timeSinceLastShot = now - _lastShotTime;
             if (timeSinceLastShot < _gameConfig.shootInterval) {
-                // console.log("TOO FAST!");
                 return;
             }
 
@@ -177,7 +182,6 @@ const GameView = function () {
 
             const direction = cc.pNormalize(cc.pSub(pos, new cc.p(_gameConfig.cannonPositions[slot][0], _gameConfig.cannonPositions[slot][1])));
             const rot = Math.atan2(direction.x, direction.y);
-            // _playerViews[slot].shootTo(rot * 180 / Math.PI);
             let info = getRotatedView(undefined, rot);
 
             const bulletId = _playerId + ':' + getPlayerBulletId();
@@ -187,7 +191,6 @@ const GameView = function () {
             _touchedPos = null;
         }
     }
-
 
     const getPlayerBulletId = function () {
         return _playerViews[0].getNextBulletId(); //currently bulletId is static no need to convert player slot
@@ -232,21 +235,31 @@ const GameView = function () {
         ClientServerConnect.changeSeatRequest(slot);
     }
 
-    function lockOnRequest(state){
+    function lockOnRequest(state) {
         _lockOnCallback(state);
     }
 
     function caughtFishAnimationEnd(data) {
         if (data.playerSlot === _playerSlot) {
             _effectsManager.doCapturePrizeEffect(data.position, _gameConfig.cannonPositions[data.playerSlot], _gameConfig.fishClasses[data.type]);
+            if(_gameConfig.fishClasses[data.type].tier > 1) {
+                _playerViews[_playerSlot].showAwardMedal(_gameConfig.fishClasses[data.type].value);
+            }
+        }
+    }
+
+    function setFreeRound(type) {
+        console.log("setFreeRound");
+        if (type === 'clearing_for_free_shooting_game') {
+            _effectsManager.showFreeRoundEffect();
         }
     }
 
     return {
         initialise: initialise,
-        // parentNode : _parentNode,
         clearPlayerState: clearPlayerState,
         goToGame: goToGame,
+        setBackgroundTo: setBackgroundTo,
         addView: addView,
         destroyView: destroyView,
         getRotatedView: getRotatedView,
@@ -258,9 +271,9 @@ const GameView = function () {
         updateMultiplayerState: updateMultiplayerState,
         updateArena: updateArena,
         caughtFishAnimationEnd: caughtFishAnimationEnd,
+        setFreeRound: setFreeRound,
 
-        //???
-        getMyPlayerSlot: ()=> _playerSlot,
+        goToSeatSelection: goToSeatSelection,
     }
 
 

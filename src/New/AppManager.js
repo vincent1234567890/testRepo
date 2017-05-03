@@ -2,18 +2,19 @@
  * Created by eugeneseah on 6/2/17.
  */
 
+//what is the different of AppManager and GameManager?
 const AppManager = (function () {
     "use strict";
 
     let _currentScene;
     let _gameTicker;
 
-    function goToLobby() {
+    function goToLobby(loginData) {
         // cc.director.popScene();
         _currentScene = new cc.Scene();
         cc.director.runScene(_currentScene);
         GameManager.initialiseLogin(_currentScene);
-        GameManager.goToLobby(goBackToLobby);
+        GameManager.goToLobby(goBackToLobby,goToSeatSelection);
     }
 
     function goToGame(fishGameArena){
@@ -31,6 +32,16 @@ const AppManager = (function () {
         _gameTicker.unpauseTicker();
     }
 
+    function goToSeatSelection(gameSelection, playerData){
+        _currentScene = new SeatSelectionScene(gameSelection, playerData, onSeatSelected);
+        cc.director.pushScene(_currentScene);
+        GameManager.enterSeatSelectionScene(_currentScene);
+    }
+
+    function onSeatSelected(type,seat){
+        GameManager.seatSelected(type,seat);
+    }
+
     function goBackToLobby(){
         if (_gameTicker) {
             _gameTicker.pauseTicker();
@@ -45,11 +56,9 @@ const AppManager = (function () {
         GameManager.resetLobby();
     }
 
-
     return{
         goToLobby : goToLobby,
         goToGame : goToGame,
         goBackToLobby : goBackToLobby,
     }
-
 }());

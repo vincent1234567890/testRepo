@@ -2,10 +2,10 @@
  * Created by eugeneseah on 26/10/16.
  */
 
-
+//use for manage cannon.
 const CannonManager = (function () {
     "use strict";
-    let _gameConfig;
+    let _gameConfig;  //reference to game config.
 
     function CannonManager(gameConfig, index, isPlayer) {
         _gameConfig = gameConfig;
@@ -22,7 +22,6 @@ const CannonManager = (function () {
         }else{
             this.forceClearGun();
         }
-
     }
 
     let proto = CannonManager.prototype;
@@ -32,9 +31,6 @@ const CannonManager = (function () {
         // return this._cannon.spawnBullet(pos);
     };
 
-    // CannonManager.prototype.turnTo = function (pos) {
-    //     return this._cannon.turnTo(pos);
-    // };
     proto.setUpCannonChangeMenu = function (gameConfig, index) {
         this._cannon.setupCannonChangeMenu(this, gameConfig, index, this.decreaseCannon, this.increaseCannon);
         // this.forceSetGun(0);
@@ -74,7 +70,7 @@ const CannonManager = (function () {
      */
     proto.forceSetGun = function (gunId) {
         const gunClass = _gameConfig.gunClasses[gunId];
-        if (this._currentGunId != gunId) {
+        if (this._currentGunId !== gunId) {
             this._cannon.updateCannonPowerLabel(gunClass.value);
         }
         this._currentGunId = gunId;

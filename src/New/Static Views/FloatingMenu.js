@@ -5,31 +5,34 @@ const FloatingMenu = (function () {
     "use strict";
     let _parent;
     let _theme;
-    let _settingsCallback;
 
     const hoverSize = 1.2;
     const originalSize = 1;
 
+    //playerData
+    let _playerData;
+    let _consumptionData;
+    let _gameSummaryData;
+
+    //views
+    let _settingsView;
+    let _gameLogView;
+    let _profileView;
     let _leaderboardView;
+    let _faqView;
 
-    const FloatingMenu = function (settingsCallback) {
+    //callbacks
+    let _requestConsumptionLogCallback;
+
+    const FloatingMenu = function (playerData, requestConsumptionLogCallback) {
         _parent = new cc.Node();
-        GameView.addView(_parent);
+        GameView.addView(_parent,undefined,true);
 
-        _settingsCallback = settingsCallback;
+        _playerData = playerData;
+        _requestConsumptionLogCallback = requestConsumptionLogCallback;
 
         _theme = ThemeDataManager.getThemeDataList("FloatingMenu");
 
-        // const listView = new ccui.ListView();
-        // listView.setDirection(ccui.ScrollView.DIR_HORIZONTAL);
-        // // listView.setTouchEnabled(true);
-        // // listView.setBounceEnabled(true);
-        // // listView.setBackGroundImage(res.HelloWorld_png);
-        // listView.setContentSize(cc.size(500, 100));
-        // // listView.setInnerContainerSize(200,200)
-        // listView.setAnchorPoint(cc.p(0.5, 0.5));
-        // // listView.setPosition(_theme["SettingsButton"][0],_theme["SettingsButton"][1]);
-        // listView.setPosition(500,500);
         const settings = doButton(ReferenceName.FloatingMenuButtonSettingsIcon,
             ReferenceName.FloatingMenuButtonBackground,
             ReferenceName.FloatingMenuButtonBackgroundDown,
@@ -44,7 +47,7 @@ const FloatingMenu = (function () {
             ReferenceName.FloatingMenuButtonBackground,
             ReferenceName.FloatingMenuButtonBackgroundDown,
             ReferenceName.FloatingMenuButtonGameLogText,
-            onAssetsSelected
+            onGameLogSelected
         );
 
         _parent.addChild(assets);
@@ -54,11 +57,11 @@ const FloatingMenu = (function () {
             ReferenceName.FloatingMenuButtonBackground,
             ReferenceName.FloatingMenuButtonBackgroundDown,
             ReferenceName.FloatingMenuButtonInfoText,
-            onInfoSelected
+            onProfileSelected
         );
 
         _parent.addChild(info);
-        info.setPosition(_theme["InfoButton"][0], _theme["InfoButton"][1]);
+        info.setPosition(_theme["ProfileButton"][0], _theme["ProfileButton"][1]);
 
         const leaderboard = doButton(ReferenceName.FloatingMenuButtonLeaderboardIcon,
             ReferenceName.FloatingMenuButtonBackground,
@@ -79,78 +82,14 @@ const FloatingMenu = (function () {
 
         _parent.addChild(FAQ);
         FAQ.setPosition(_theme["FAQButton"][0], _theme["FAQButton"][1]);
-        //
-        // listView.pushBackCustomItem(settings);
-        //
-        // _parent.addChild(listView);
 
     };
 
     function doButton(iconSprite, buttonImage, buttonSelected, labelImage, selectedCallBack) {
-        let isMouseDown = false;
-        // let selected = false;
-        const touchEvent = (sender, type) => {
-            switch (type) {
-                // case ccui.Widget.TOUCH_MOVED:
-                //     // console.log(sender);
-                //     break;
-                // case ccui.Widget.TOUCH_BEGAN:
-                //     if (selected) return;
-                //     selected = true;
-                //     break;
-                case ccui.Widget.TOUCH_ENDED:
-                    // gameSelected(sender);
-                    console.log(sender);
-                    selectedCallBack(sender);
-                case ccui.Widget.TOUCH_CANCELED: // fallthrough intended
-                    // label.runAction(new cc.ScaleTo(0.01,originalSize));
-                    label.setScale(originalSize);
-                    break;
-            }
-        };
-
-        const onMouseMove = (mouseData)=>{
-            // console.log(mouseData);
-            const pos = button.convertToWorldSpace(cc.p());
-            var rect = cc.rect(pos.x, pos.y, button.getBoundingBox().width, button.getBoundingBox().height);
-            if (!isMouseDown){
-                if(cc.rectContainsPoint(rect,mouseData.getLocation())) {
-                    // label.runAction(new cc.ScaleTo(0.01, hoverSize));
-                    label.setScale(hoverSize);
-                    touchEvent(null, ccui.Widget.TOUCH_BEGAN);
-                }else{
-                    label.setScale(originalSize);
-                    // label.runAction(new cc.ScaleTo(0.01,originalSize));
-                }
-            }
-            // else if (selected){
-            //     // touchEvent(null, ccui.Widget.TOUCH_CANCELED);
-            // }
-        };
-
-        const onMouseDown = (mouseData) =>{
-            isMouseDown = true;
-        };
-
-        const onMouseUp = (mouseData) => {
-            isMouseDown = false;
-        };
-
-        const _listener = cc.EventListener.create({
-            event: cc.EventListener.MOUSE,
-
-            onMouseDown: onMouseDown,
-            onMouseUp: onMouseUp,
-            onMouseMove: onMouseMove,
-            // onMouseScroll: null,
-        });
-
         let button = new ccui.Button();
         button.setTouchEnabled(true);
         button.loadTextures(buttonImage, buttonSelected, undefined, ccui.Widget.PLIST_TEXTURE);
         button.setPosition(button.getContentSize().width / 2 - 120, button.getContentSize().height / 2 + 120);
-        button.addTouchEventListener(touchEvent);
-
         const size = button.getContentSize();
         let icon;
         if (iconSprite) {
@@ -167,47 +106,148 @@ const FloatingMenu = (function () {
             label.setPosition(size.width / 2, 0);
         }
 
-        cc.eventManager.addListener(_listener, button);
+        const item = new RolloverEffectItem(button, onSelected, onUnselected, onHover, onUnhover);
+
+        function onSelected() {
+            selectedCallBack();
+        }
+
+        function onUnselected() {
+            label.setScale(originalSize);
+        }
+
+        function onHover() {
+            label.setScale(hoverSize);
+        }
+
+        function onUnhover() {
+            label.setScale(originalSize);
+        }
 
         return button;
     }
 
     function onSettingsSelected() {
-        if (_settingsCallback) {
-            _settingsCallback();
+        console.log("onSettingsSelected");
+        if (_settingsView){
+            _settingsView.show();
+        }else{
+            _settingsView = new SettingsView();
         }
     }
 
-    function onAssetsSelected() {
-
+    function onGameLogSelected() {
+        console.log("onGameLogSelected");
+        if (_gameLogView){
+            _gameLogView.showGameSummary(_gameSummaryData);
+        }else{
+            _gameLogView = new GameLogView(_gameSummaryData, _requestConsumptionLogCallback);
+        }
     }
 
-    function onInfoSelected() {
-
+    function onProfileSelected() {
+        console.log("onProfileSelected");
+        if (_profileView) {
+            _profileView.show();
+        } else {
+            _profileView = new ProfileView(_playerData);
+        }
     }
 
     function onLeaderboardSelected() {
         console.log("onLeaderboardSelected");
-        if (!_leaderboardView){
-            _leaderboardView = new LeaderboardView();
-        }else{
+        if (_leaderboardView) {
             _leaderboardView.show();
+        } else {
+            _leaderboardView = new LeaderboardView();
         }
     }
 
     function onFAQSelected() {
-
+        console.log("onFAQSelected");
+        if (_faqView) {
+            _faqView.show();
+        } else {
+            _faqView = new FAQView();
+        }
     }
 
     const proto = FloatingMenu.prototype;
 
+    proto.unattach = function () {
+        if (_parent.getParent()) {
+            _parent.getParent().removeChild(_parent, false);
+        }
+        if (_settingsView){
+            _settingsView.unattach();
+        }
+        if (_gameLogView){
+            _gameLogView.unattach();
+        }
+        if (_profileView){
+            _profileView.unattach();
+        }
+        if (_leaderboardView){
+            _leaderboardView.unattach();
+        }
+        if (_faqView){
+            _faqView.unattach();
+        }
 
-    proto.reattach = function () {
-        _parent.getParent().removeChild(_parent,false);
-        GameView.addView(_parent);
+
     };
 
+    proto.reattach = function () {
+        if (_parent.getParent()) {
+            _parent.getParent().removeChild(_parent, false);
+        }
+        if (_settingsView){
+            _settingsView.reattach();
+        }
+        if (_gameLogView){
+            _gameLogView.reattach();
+        }
+        if (_profileView){
+            _profileView.reattach();
+        }
+        if (_leaderboardView){
+            _leaderboardView.reattach();
+        }
+        if (_faqView){
+            _faqView.reattach();
+        }
+        GameView.addView(_parent,1,true);
+    };
+
+    proto.hideAll = function () {
+        if (_settingsView){
+            _settingsView.hide();
+        }
+        if (_gameLogView){
+            _gameLogView.hide();
+        }
+        if (_profileView){
+            _profileView.hide();
+        }
+        if (_leaderboardView){
+            _leaderboardView.hide();
+        }
+        if (_faqView){
+            _faqView.hide();
+        }
+    };
     // proto.Move
+
+    proto.setGameSummaryData = function (gameSummaryData) {
+        _gameSummaryData = gameSummaryData;
+        console.log(_gameSummaryData);
+    };
+
+    proto.setConsumptionLogData = function (consumptionData) {
+        _consumptionData = consumptionData;
+        console.log(_consumptionData);
+        _gameLogView.showConsumptionLog(consumptionData);
+    };
 
     return FloatingMenu;
 }());

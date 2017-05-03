@@ -2,7 +2,8 @@
  * Created by eugeneseah on 13/12/16.
  */
 
-const NetManager = (function (){
+//
+const NetManager = (function (){  //there only has one function.
         "use strict";
 
     function NetManager (){

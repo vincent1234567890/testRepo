@@ -4,6 +4,7 @@
 "use strict";
 const GameTicker = cc.Node.extend( {
 
+    //no need.
     _callback:null,
     _className:"GameTicker",
     _isPaused: true,

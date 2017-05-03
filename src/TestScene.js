@@ -18,9 +18,17 @@ var TestScene = cc.Scene.extend({
         // GameManager.initialise(this);
         // GameManager.development(this);
 
-        const waterCausticsLayer = new WaterCausticsLayer();
-        this.addChild(waterCausticsLayer,999);
+        //const waterCausticsLayer = new WaterCausticsLayer();
+        //this.addChild(waterCausticsLayer,999);
 
+        //let jackpotPanel = new JackpotDetailPanel();
+        //this.addChild(jackpotPanel);
 
+        let waveTransition = new WaveTransition(res.GameBackground0);
+        this.addChild(waveTransition);
+        waveTransition.transition(res.GameBackground1);
+
+        const pnWait = new WaitingPanel();
+        this.addChild(pnWait);
     }
 });

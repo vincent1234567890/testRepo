@@ -4,7 +4,6 @@
 
 /*
 currently does not conform to new structure of GameManaager -> GameView -> GameView.addView
-@TODO : refactor to include BulletManagerView
  */
 
 const BulletManager = (function(){
@@ -12,7 +11,7 @@ const BulletManager = (function(){
     let _parent;
     let _fishGameArena;
     let _bulletCache = [];
-    let _bulletPool = new ObjectPool(BulletView);
+    let _bulletPool = new ObjectPool(BulletView);  //use bullet pool.
 
     const BulletManager = function (fishGameArena) {
         _parent = new cc.Node();
@@ -24,13 +23,14 @@ const BulletManager = (function(){
     const proto = BulletManager.prototype;
 
     proto.createBullet = function (gunId, bulletId) {
-        if (gunId > 4) gunId = 4; // temp fix
+        if (gunId > 4)
+            gunId = 4; // temp fix
         // _bulletCache[bulletId] = new BulletView(_parent, "#Bullet"+(gunId+1)+".png");
         _bulletCache[bulletId] = _bulletPool.alloc(_parent, gunId);
         // console.log(_bulletCache);
     };
 
-    proto.update = function () {
+    proto.update = function () { //
         for (let bulletId in _bulletCache) {
             const bulletModel = _fishGameArena && _fishGameArena.getBullet(bulletId);
             if (!bulletModel) {
@@ -96,7 +96,7 @@ const BulletManager = (function(){
             _bulletPool.free(bullet);
             delete _bulletCache[bulletId];
         }
-    }
+    };
 
     proto.getView = function () {
         return _parent;

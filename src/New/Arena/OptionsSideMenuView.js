@@ -35,16 +35,13 @@ const OptionsSideMenuView = (function () {
         _isShowing = false;
 
         // background = new cc.Sprite(ReferenceName.SideMenuBG);
-
         // _touchLayer = new TouchLayerRefactored(dragMenu);
 
         _menu = setupSideMenu();
         _menu.setPosition(cc.view.getDesignResolutionSize().width + 15, cc.view.getDesignResolutionSize().height / 2);
 
         // this._sideMenu.setPosition(100, 140);
-
         // background.setPosition(cc.view.getDesignResolutionSize().width + 15, cc.view.getDesignResolutionSize().height / 2);
-
         // _menuPos = background.getPosition();
         _menuPos = _menu.getPosition();
 

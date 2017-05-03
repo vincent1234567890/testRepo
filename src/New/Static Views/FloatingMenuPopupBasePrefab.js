@@ -3,62 +3,76 @@
  */
 
 const FloatingMenuPopupBasePrefab = (function () {
+    "use strict";
     const ZORDER = 10;
-    let _parent;
-    let _background;
 
-    const FloatingMenuPopupBasePrefab = function () {
-
-
-        _parent = new cc.Node();
+    const FloatingMenuPopupBasePrefab = function (parentDismissCallback) {
+        this._parent = new cc.Node();
         BlockingManager.registerBlock(dismissCallback);
 
-        _background = new cc.Sprite(ReferenceName.FloatingPopupBackground);
+        this._background = new cc.Sprite(ReferenceName.FloatingPopupBackground);
         const titleBG = new cc.Sprite(ReferenceName.FloatingTitleBackground);
         const deco = new cc.Sprite(ReferenceName.FloatingBottomLeftDeco);
 
-        // const closeButton = new
+        const closeButton = new CloseButtonPrefab(dismiss);
 
-        titleBG.setPosition(new cc.p(560,689));
-        title.setPosition(new cc.p(315,60));
-        deco.setPosition(new cc.p(70,100));
+        this._parent.addChild(closeButton.getButton(),10);
+        closeButton.getButton().setPosition(new cc.p(545, 325));
 
-        _background.addChild(titleBG);
-        _background.addChild(deco,10);
+        titleBG.setPosition(new cc.p(560, 689));
+        deco.setPosition(new cc.p(70, 100));
 
-        titleBG.addChild(title);
+        this._background.addChild(titleBG);
+        this._background.addChild(deco, 10);
 
-        _parent.addChild(_background);
-        _parent.setPosition(new cc.p(683,384));
+        this._parent.addChild(this._background);
+        this._parent.setPosition(new cc.p(683, 390));
 
-        GameView.addView(_parent,ZORDER);
-    };
+        const parent = this._parent;
+        const background = this._background;
+        function dismiss() {
+            parent.setLocalZOrder(-1000);
+            background.setVisible(false);
+            closeButton.setVisible(false);
 
-    function dismissCallback(touch) {
-        if (GUIFunctions.isSpriteTouched(_background,touch)) {
-            return;
+            BlockingManager.deregisterBlock(dismissCallback);
         }
-        _parent.setLocalZOrder(-1000);
-        _background.setVisible(false);
 
-        BlockingManager.deregisterBlock(dismissCallback);
-    }
+        function dismissCallback(touch) {
+            if (GUIFunctions.isSpriteTouched(background, touch)) {
+                return;
+            }
+            parentDismissCallback();
+            dismiss();
+        }
 
-    const proto = LeaderboardView.prototype;
+        this.show = function () {
+            BlockingManager.registerBlock(dismissCallback);
+            this._parent.setLocalZOrder(ZORDER);
+            this._background.setVisible(true);
+            closeButton.setVisible(true);
+        };
 
-    proto.show = function () {
-        BlockingManager.registerBlock(dismissCallback);
-        _parent.setLocalZOrder(ZORDER);
-        _background.setVisible(true);
+        this.hide = function () {
+            dismiss();
+        };
+
+        this.turnOffDeco = function () {
+            deco.setVisible(false);
+        };
     };
 
-    proto.getParent = function(){
-        return _parent;
+    const proto = FloatingMenuPopupBasePrefab.prototype;
+
+    proto.getParent = function () {
+        return this._parent;
     };
 
     proto.getBackground = function () {
-         return _background;
+        return this._background;
     };
 
-    return LeaderboardView;
+
+
+    return FloatingMenuPopupBasePrefab;
 }());
