@@ -8,17 +8,17 @@ const EffectsManager = (function () {
     let freeRoundEffectView;
     let _shakeableNode;
 
-    const shakeMinX = -90;
-    const shakeMaxX = 30;
-    const shakeMinY = -90;
-    const shakeMaxY = 50;
+    const shakeMinX = -60;
+    const shakeMaxX = 10;
+    const shakeMinY = -60;
+    const shakeMaxY = 10;
 
-    const numberShakesMin = 6;
-    const numberShakesMax = 8;
+    const numberShakesMin = 5;
+    const numberShakesMax = 10;
 
-    const shakeSpeed = 0.075;
-    const scaleAmount = 1.08;
-    const scaleSpeed = 0.05;
+    const shakeSpeed = .032;
+    const scaleAmount = 1.06;
+    const scaleSpeed = 0.1;
 
     let originalPosition;
 
@@ -40,7 +40,8 @@ const EffectsManager = (function () {
                 const shakeX = originalPosition.x + parseFloat(getRandom(shakeMinX, shakeMaxX));
                 const shakeY = originalPosition.y + parseFloat(getRandom(shakeMinY, shakeMaxY));
                 const action = new cc.MoveTo(shakeSpeed, cc.p(shakeX, shakeY));
-                action.easing(cc.easeBackOut());
+                // action.easing(cc.easeBackOut());
+                action.easing(cc.easeExponentialInOut());
                 points.push(action);
             }
             points.push(new cc.MoveTo(shakeSpeed, originalPosition));
