@@ -160,7 +160,7 @@ const JackpotView = (function () {
         if (_parent.getParent()) {
             _parent.getParent().removeChild(_parent, false);
         }
-        GameView.addView(_parent,1, true);
+        GameView.addView(_parent,1);
     };
 
     return JackpotView;
