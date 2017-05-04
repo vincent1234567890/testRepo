@@ -1,4 +1,4 @@
-var SeatSelectionScene = cc.Scene.extend({
+let SeatSelectionScene = cc.Scene.extend({
     _lobbyType: null,
     ctor: function(lobbyType, playerData, goToGameCallback){
         cc.Scene.prototype.ctor.call(this);
@@ -121,12 +121,9 @@ const TableSeatPanel = cc.Layer.extend({
         this.addChild(spSeatRight);
 
         //table
-        let spTable = new cc.Sprite(ReferenceName.SeatTable);
+        let spTable = new TableSprite(this._tableType);
         spTable.setPosition(348, 158);
         this.addChild(spTable);
-        let spTablePicture = this._createTablePicture();
-        spTable.addChild(spTablePicture);
-        spTablePicture.setPosition(292, 348);
 
         //seat Bottom Left
         let spSeatBtmLeft = this._spSeatBtmLeft = new SeatSprite(this.onSeatSelectedCallback);
@@ -143,18 +140,9 @@ const TableSeatPanel = cc.Layer.extend({
         this.addChild(spSeatBtmRight);
 
         if(this._tableType === TableType.SINGLE){
-            spTable.setFlippedX(true);
-            spTablePicture.setPosition(325, 348);
             spSeatLeft.setPositionX(99);
             spSeatRight.setPositionX(625);
         }
-
-
-    },
-
-    _createTablePicture: function(){
-        return new cc.Sprite(
-            this._tableType === TableType.MULTIPLE? ReferenceName.SeatMultiPlayerPic: ReferenceName.SeatSoloPic);
     },
 
     _createTitleByType: function() {
@@ -163,7 +151,127 @@ const TableSeatPanel = cc.Layer.extend({
     }
 });
 
-var SeatSprite = cc.Sprite.extend({
+let TableSprite = cc.Sprite.extend({
+    _tableType: null,
+    _touchEventListener: null,
+    _mouseEventListener: null,
+    _spTablePicture: null,
+    _spGlow: null,
+    isMouseDown: false,
+
+    ctor: function(tableType) {
+        cc.Sprite.prototype.ctor.call(this, ReferenceName.SeatTable);
+        this._tableType = tableType;
+
+        const spTablePicture = this._spTablePicture = this._createTablePicture();
+        this.addChild(spTablePicture);
+
+        const spGlow = this._spGlow = new cc.Sprite("#SSTableGlow.png");
+        this.addChild(spGlow);
+        spGlow.setVisible(false);
+
+        if (this._tableType === TableType.SINGLE) {
+            spTablePicture.setPosition(325, 348);
+            spGlow.setPosition(321, 297);
+            this.setFlippedX(true);
+            spGlow.setFlippedX(true)
+        } else {
+            spTablePicture.setPosition(292, 348);
+            spGlow.setPosition(292, 297);
+        }
+
+        this._touchEventListener = cc.EventListener.create({
+            event: cc.EventListener.TOUCH_ONE_BY_ONE,
+            swallowTouches: true,
+            onTouchBegan: function(touch, event){
+                const target = event.getCurrentTarget(), parent = target.getParent();
+                if (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
+                        target.convertToNodeSpace(touch.getLocation()))) {
+                    parent._showSelectedStatus();
+                    return true;
+                }
+                return false;
+            },
+
+            onTouchMoved: function(touch, event){
+                let target = event.getCurrentTarget(), parent = target.getParent();
+                if (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
+                        target.convertToNodeSpace(touch.getLocation()))) {
+                    if(!parent._spGlow.isVisible())
+                        parent._showSelectedStatus();
+                } else {
+                    if(parent._spGlow.isVisible())
+                        parent._hideSelectedStatus();
+                }
+            },
+
+            onTouchEnded: function (touch, event) {
+                let target = event.getCurrentTarget(), parent = target.getParent();
+                if (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
+                        target.convertToNodeSpace(touch.getLocation()))) {
+                    GameManager.seatSelected(parent.getTableType());
+                }
+                parent._hideSelectedStatus();
+            }
+        });
+
+        this._mouseEventListener = cc.EventListener.create({
+            event: cc.EventListener.MOUSE,
+            onMouseDown: function(mouseData){
+                let target = mouseData.getCurrentTarget().getParent();
+                target.isMouseDown = true;
+            },
+            onMouseMove: function(mouseData){
+                let target = mouseData.getCurrentTarget(), parent = target.getParent();
+                if (!target.isMouseDown){
+                    if (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
+                            target.convertToNodeSpace(mouseData.getLocation()))) {
+                        if(!parent._spGlow.isVisible())
+                            parent._showSelectedStatus();
+                        return;
+                    }
+                }
+                if(parent._spGlow.isVisible())
+                    parent._hideSelectedStatus();
+            },
+            onMouseUp: function(mouseData){
+                let target = mouseData.getCurrentTarget().getParent();
+                target.isMouseDown = false;
+            }
+        });
+    },
+
+    getTableType: function(){
+        return this._tableType;
+    },
+
+    _createTablePicture: function(){
+        return new cc.Sprite(
+            this._tableType === TableType.MULTIPLE? ReferenceName.SeatMultiPlayerPic: ReferenceName.SeatSoloPic);
+    },
+
+    onEnter: function(){
+        cc.Sprite.prototype.onEnter.call(this);
+        if (this._touchEventListener && !this._touchEventListener._isRegistered())
+            cc.eventManager.addListener(this._touchEventListener, this._spTablePicture);
+        if (this._mouseEventListener && !this._mouseEventListener._isRegistered())
+            cc.eventManager.addListener(this._mouseEventListener, this._spTablePicture);
+    },
+
+    _showSelectedStatus: function(){
+        this._spGlow.stopAllActions();
+        this._spGlow.setVisible(true);
+        this._spGlow.setOpacity(0);
+        this._spGlow.runAction(cc.fadeIn(0.3))
+    },
+
+    _hideSelectedStatus: function(){
+        this._spGlow.stopAllActions();
+        this._spGlow.runAction(cc.sequence(cc.fadeOut(0.3), cc.hide()));
+    }
+});
+
+let SeatSprite = cc.Sprite.extend({
     _seatPosition: null,
     _tableType: null,
     _LobbyType: null,
@@ -187,7 +295,6 @@ var SeatSprite = cc.Sprite.extend({
         spArrow.setPosition(63, 125);  //125,140
         spArrow.setVisible(false);
 
-
         this._eventListener = cc.EventListener.create({
             event: cc.EventListener.TOUCH_ONE_BY_ONE,
             swallowTouches: true,
@@ -196,7 +303,6 @@ var SeatSprite = cc.Sprite.extend({
                 if (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
                         target.convertToNodeSpace(touch.getLocation()))) {
                     target._showSelectedStatus();
-                    window.selSeat = target;
                     return true;
                 }
                 return false;
@@ -219,7 +325,7 @@ var SeatSprite = cc.Sprite.extend({
 
                 if (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
                         target.convertToNodeSpace(touch.getLocation()))) {
-                    goToGameCallback(target.getSeatPosition());
+                    GameManager.seatSelected(target.getTableType(), target.getSeatPosition());
                 }
                 target._hideSelectedStatus();
             }
