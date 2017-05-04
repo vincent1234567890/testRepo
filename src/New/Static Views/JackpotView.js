@@ -95,6 +95,7 @@ const JackpotView = (function () {
                 if (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
                         target.convertToNodeSpace(touch.getLocation()))) {
                     //show the jackpot float panel
+                    cc.audioEngine.playEffect(res.JackpotViewPressedSound);
                     let jackpotPanel = new JackpotDetailPanel();
                     GameView.addView(jackpotPanel, 199);
                     jackpotPanel.showDetail();

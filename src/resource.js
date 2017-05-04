@@ -52,8 +52,25 @@ var res = {
     //FreeRound
     FreeRoundTitle : "Game/FreeRoundTitle.png",
 
-    GunCockSound : "Sound/gun-cocking-01.mp3",
-    GunShotSound : "Sound/gun-gunshot-01.mp3",
+    GunCockSound : "Sound/Sound/換炮音效-修1.mp3",
+    GunShotSound : "Sound/Sound/發炮音效-修2.mp3",
+
+    MenuButtonHoverSound : "Sound/Sound/cursor7.mp3",
+    MenuButtonPressSound : "Sound/Sound/se_maoudamashii_se_pc01.mp3",
+    JackpotViewPressedSound : "Sound/Sound/powerup10.mp3",
+    JackpotInfoPanelDismissSound : "Sound/Sound/decision15.mp3",
+    ChangeSeatButtonPressedSound : "Sound/Sound/bubble-burst1.mp3",
+
+    FishCaptureEffectExplosionSound : "Sound/Sound/爆炸音效1.mp3",
+    BigFishCaptureEffectExplosionSound : "Sound/Sound/爆炸音效2.mp3",
+    FishCaptureEffectCoinSound : "Sound/Sound/金幣音效-修1.mp3",
+
+    JackpotTriggeredSound : "Sound/Sound/Jackpot Opening-修1.mp3",
+    JackpotBoxOpeningSound : "Sound/Sound/打開寶箱-修1.mp3",
+    JackpotMedalBlingSound : "Sound/Sound/Jackpot Bling.mp3",
+    JackpotEndSound : "Sound/Sound/Jackpot ending.mp3",
+
+    FreeGameSound : "Sound/Sound/Bonus game opening.mp3",
 
     //debug
     DebugCircle: "Testing/circle.png",

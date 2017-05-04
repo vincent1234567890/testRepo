@@ -60,18 +60,21 @@ const EffectsManager = (function () {
         let explosionSequence;
 
         if (fish.tier % 100 > 1) {
-            const coinExplosionSequence = new cc.Sequence(GUIFunctions.getAnimation(ReferenceName.CoinExplosionEffect, 0.05), new cc.CallFunc(onCoinExplosionEffectEnd));
+
+            const coinExplosionSequence = new cc.Sequence(GUIFunctions.getAnimation(ReferenceName.CoinExplosionEffect, 1/15), new cc.CallFunc(onCoinExplosionEffectEnd));
             coinEffect.runAction(coinExplosionSequence);
             coinEffect.setScale(1.5);
             // console.log("CoinExplode! : ", fish, coinEffect, coinExplosionSequence);
             GameView.addView(coinEffect);
         }
-        if (fish.tier % 100 === 3) {
+        if (fish.tier % 100 === 2) {
+            cc.audioEngine.playEffect(res.FishCaptureEffectExplosionSound);
             explosionSequence = new cc.Sequence(GUIFunctions.getAnimation(ReferenceName.ExplosionEffect, 0.05), new cc.CallFunc(onExplosionEffectEnd));
             effectSprite.runAction(explosionSequence);
             GameView.addView(effectSprite);
             // console.log("Explode! : ", fish, effectSprite, explosionSequence);
-        }else if (fish.tier % 100 === 2) {
+        }else if (fish.tier % 100 === 3) {
+            cc.audioEngine.playEffect(res.BigFishCaptureEffectExplosionSound);
             effectSprite.setScale(2);
             explosionSequence = new cc.Sequence(GUIFunctions.getAnimation(ReferenceName.LightEffect, 0.1), new cc.CallFunc(onExplosionEffectEnd));
             effectSprite.runAction(explosionSequence);
@@ -90,6 +93,7 @@ const EffectsManager = (function () {
     };
 
     proto.showFreeRoundEffect = function () {
+        cc.audioEngine.playEffect(res.FreeGameSound);
         freeRoundEffectView.show();
     };
 

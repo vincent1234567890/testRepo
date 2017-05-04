@@ -50,7 +50,7 @@ const PlayerViewStaticPrefab = (function () {
             changeSeatCallback(slot);
         }
 
-        this._changeSlotButton = GUIFunctions.createButton(ReferenceName.ChangeSeatButton, ReferenceName.ChangeSeatButtonDown,changeSlotCallback);
+        this._changeSlotButton = GUIFunctions.createButton(ReferenceName.ChangeSeatButton, ReferenceName.ChangeSeatButtonDown,changeSlotCallback, res.ChangeSeatButtonPressedSound);
         this._changeSlotButton.setPosition(255,55);
         base.addChild(this._changeSlotButton,5);
 
@@ -196,20 +196,22 @@ const PlayerViewStaticPrefab = (function () {
     };
 
     proto.showAwardMedal = function (amount) {
+        const parentNode = new cc.Node();
         const coin = new cc.Sprite();
         const awardMedalSequence = new cc.Sequence(GUIFunctions.getAnimation(ReferenceName.AwardEffect, 0.05), new cc.CallFunc(onAwardMedalEffectEnd));
         coin.runAction(awardMedalSequence);
-        this._parent.addChild(coin);
+        this._parent.addChild(parentNode);
         const parent = this._parent;
 
         const label = new cc.LabelBMFont(amount * this._multiplier, res.InGameLightGoldFontFile);
         label.setScale(0.7 + 0.3/amount.toString().length);
-        coin.addChild(label);
-        label.setPosition(90,105);
+        parentNode.addChild(coin);
+        parentNode.addChild(label,1);
+        label.setPosition(0,215);
 
         coin.setPosition(0,200);
         function onAwardMedalEffectEnd(){
-            parent.removeChild(coin);
+            parent.removeChild(parentNode);
         }
     };
 

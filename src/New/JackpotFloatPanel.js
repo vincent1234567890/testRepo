@@ -102,6 +102,7 @@ let JackpotFloatPanel = cc.Node.extend({
                 if (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
                         target.convertToNodeSpace(touch.getLocation()))) {
                     //show the jackpot float panel
+                    cc.audioEngine.playEffect(res.JackpotViewPressedSound);
                     let jackpotPanel = new JackpotDetailPanel(), scene = cc.director.getRunningScene();
                     scene.addChild(jackpotPanel, 999);
                     jackpotPanel.showDetail();
@@ -171,6 +172,7 @@ let JackpotDetailPanel = cc.LayerColor.extend({
                 let target = event.getCurrentTarget();
                 if (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
                         target.convertToNodeSpace(touch.getLocation()))) {
+                    cc.audioEngine.playEffect(res.JackpotInfoPanelDismissSound);
                     let spJackpotPopBase = target._spJackpotPopBase, size = target._contentSize;
                     spJackpotPopBase.runAction(cc.sequence(
                         cc.moveTo(0.5, size.width * 0.5, size.height * 1.5).easing(cc.easeBackIn()),

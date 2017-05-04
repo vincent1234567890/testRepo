@@ -321,6 +321,7 @@ let SeatSprite = cc.Sprite.extend({
 
                 if (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
                         target.convertToNodeSpace(touch.getLocation()))) {
+                    cc.audioEngine.playEffect(res.MenuButtonPressSound);
                     GameManager.seatSelected(target.getTableType(), target.getSeatPosition());
                 }
                 target._hideSelectedStatus();
