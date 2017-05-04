@@ -1,6 +1,6 @@
-info face="D:\04 Fishing Joy\02 NewFishing Asset from comapny A\Export\Jackpot\GoldCoinText-export" size=32 bold=0 italic=0 charset="" unicode=0 stretchH=100 smooth=1 aa=1 padding=0,0,0,0 spacing=1,1
+info face="GoldCoinText-export" size=32 bold=0 italic=0 charset="" unicode=0 stretchH=100 smooth=1 aa=1 padding=0,0,0,0 spacing=1,1
 common lineHeight=80 base=26 scaleW=256 scaleH=256 pages=1 packed=0 alphaChnl=1 redChnl=0 greenChnl=0 blueChnl=0
-page id=0 file="D:\04 Fishing Joy\02 NewFishing Asset from comapny A\Export\Jackpot\GoldCoinText-export.png"
+page id=0 file="GoldCoinText-export.png"
 chars count=14
 char id=44 x=25 y=216 width=24 height=34 xoffset=0 yoffset=46 xadvance=25 page=0 chnl=0 letter=","
 char id=46 x=0 y=216 width=24 height=24 xoffset=0 yoffset=46 xadvance=25 page=0 chnl=0 letter="."

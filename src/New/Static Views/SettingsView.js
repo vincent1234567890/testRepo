@@ -72,20 +72,6 @@ const SettingsView = (function () {
         acceptText.setPosition(acceptButton.getPosition());
         cancelText.setPosition(cancelButton.getPosition());
 
-        // const touchEvent = (sender, type) => {
-        //     switch (type) {
-        //         case ccui.Widget.TOUCH_ENDED:
-        //             break;
-        //     }
-        // };
-        //
-        // const dropDownButton = new ccui.Button(ReferenceName.SettingsDropDownButton, ReferenceName.SettingsDropDownButtonOnPress, undefined, ccui.Widget.PLIST_TEXTURE);
-        // dropDownButton.setTouchEnabled(true);
-        // dropDownButton.setPosition(gameLanguageSelectionBar.getContentSize().width, gameLanguageSelectionBar.getContentSize().height / 2);
-        // dropDownButton.addTouchEventListener(touchEvent);
-        //
-        // gameLanguageSelectionBar.addChild(dropDownButton);
-
         _background.addChild(titleBackground);
         _background.addChild(title);
         _background.addChild(musicTitle);
@@ -169,43 +155,6 @@ const SettingsView = (function () {
         slider.setValue(value);
         slider.getProgressSprite().setPosition(cc.pAdd(slider.getProgressSprite().getPosition(), new cc.p(5, 0)));
         slider.addTargetWithActionForControlEvents(SettingsView, callback, cc.CONTROL_EVENT_VALUECHANGED);
-
-        //animation effects
-        // const target = new cc.Sprite();
-        // target.setBlendFunc(cc.ONE, cc.ONE);
-        //
-        // // const sliderFiller = new cc.Sprite('#' + ReferenceName.SettingsSliderFiller);
-        // // const mask = new cc.Sprite('#' + ReferenceName.SettingsSliderFiller);
-        // const mask = slider.getProgressSprite();
-        //
-        // const maskedFill = new cc.ClippingNode(mask);
-        // maskedFill.setAlphaThreshold(0.9);
-        //
-        // // slider.getProgressSprite().addChild(sliderFiller,1);
-        //
-        // maskedFill.addChild(target);
-        // // maskedFill.setPosition(0,0);
-        // slider.addChild(maskedFill,1);
-        //
-        // cc.spriteFrameCache.addSpriteFrames(res.WaterCausticAnimation);
-        // let animationArray = [];
-        // let count = 0;
-        // while (true) {
-        //     let frameCount = String(count);
-        //     while (frameCount.length < 5) {
-        //         frameCount = '0' + frameCount;
-        //     }
-        //     const frame = cc.spriteFrameCache.getSpriteFrame("Caustic_" + frameCount + ".png");
-        //     if (!frame) {
-        //         break;
-        //     }
-        //     animationArray.push(frame);
-        //     count++;
-        // }
-        // const animation = new cc.Animate(new cc.Animation(animationArray,0.05));
-        // target.runAction(new cc.repeatForever(animation));
-
-        //end animation effects
 
         return slider;
     }

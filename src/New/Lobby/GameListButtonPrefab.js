@@ -27,6 +27,7 @@ const GameListButtonPrefab = (function () {
                     ball.resume();
                     break;
                 case ccui.Widget.TOUCH_ENDED:
+                    cc.audioEngine.playEffect(res.MenuButtonPressSound);
                     selectedCallback(this);
                 case ccui.Widget.TOUCH_CANCELED: // fallthrough intended
                     // base.pause();

@@ -105,6 +105,7 @@ const GameLogView = (function () {
                         sender.setSelected(true);
                         return;
                     }
+                    cc.audioEngine.playEffect(res.MenuButtonPressSound);
                     for (let radio in radioArray) {
                         radioArray[radio].setSelected(false);
                     }

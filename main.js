@@ -5,7 +5,7 @@ var cocos2dApp = cc.game.onStart = function() {
     //     document.body.removeChild(document.getElementById("cocosLoading"));
 
     // Pass true to enable retina display, on Android disabled by default to improve performance
-    cc.view.enableRetina(cc.sys.os === cc.sys.OS_IOS);
+    cc.view.enableRetina(cc.sys.os === cc.sys.OS_IOS || cc.sys.os == cc.sys.OS_ANDROID);
 
     // Adjust viewport meta
     cc.view.adjustViewPort(true);
@@ -21,7 +21,7 @@ var cocos2dApp = cc.game.onStart = function() {
     }
 
     // Uncomment the following line to set a fixed orientation for your game
-    // cc.view.setOrientation(cc.ORIENTATION_PORTRAIT);
+    cc.view.setOrientation(cc.ORIENTATION_LANDSCAPE);
 
     // Setup the resolution policy and design resolution size
     cc.view.setDesignResolutionSize(1366, 768, cc.ResolutionPolicy.SHOW_ALL);

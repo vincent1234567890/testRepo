@@ -108,8 +108,11 @@ const FloatingMenu = (function () {
 
         const item = new RolloverEffectItem(button, onSelected, onUnselected, onHover, onUnhover);
 
+        let hasUnhover = true;
+
         function onSelected() {
             selectedCallBack();
+            cc.audioEngine.playEffect(res.MenuButtonPressSound);
         }
 
         function onUnselected() {
@@ -117,10 +120,15 @@ const FloatingMenu = (function () {
         }
 
         function onHover() {
-            label.setScale(hoverSize);
+            if (hasUnhover){
+                cc.audioEngine.playEffect(res.MenuButtonHoverSound);
+                label.setScale(hoverSize);
+                hasUnhover = false;
+            }
         }
 
         function onUnhover() {
+            hasUnhover = true;
             label.setScale(originalSize);
         }
 
