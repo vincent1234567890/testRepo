@@ -90,6 +90,7 @@ const PlayerViewStaticPrefab = (function () {
         };
 
         let name;
+        let orientation;
         if (pos[1] > markerPos[1]) {
             name = ReferenceName.LockOnButtonSide;
         }else{
@@ -114,6 +115,8 @@ const PlayerViewStaticPrefab = (function () {
         this._lockOnButton.getParent().setRotation(this._parent.getRotation() * -1);
 
         this._lockOnButton.setVisible(isPlayer);
+
+        // this._lockOnButton = new cc.Sprite()
 
         this._coinStackManager = new CoinStackManager(this._parent);
 
@@ -212,8 +215,6 @@ const PlayerViewStaticPrefab = (function () {
 
     proto.setMultiplier = function (multiplier) {
         this._multiplier = multiplier;
-
-
     };
 
 
