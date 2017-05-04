@@ -193,8 +193,6 @@ const FloatingMenu = (function () {
         if (_faqView){
             _faqView.unattach();
         }
-
-
     };
 
     proto.reattach = function () {
@@ -216,7 +214,7 @@ const FloatingMenu = (function () {
         if (_faqView){
             _faqView.reattach();
         }
-        GameView.addView(_parent,1,true);
+        GameView.addView(_parent,1);
     };
 
     proto.hideAll = function () {
