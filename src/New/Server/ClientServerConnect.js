@@ -5,10 +5,11 @@
 const ClientServerConnect = function () {
     "use strict";
 
-    const masterServerUrl = 'ws://' + document.location.hostname + ':8089';
+    const srvList = window["serverList"];
+    const masterServerUrl = srvList ? 'ws://' + srvList["masterServer"] + ':8089' : 'ws://' + document.location.hostname + ':8089';
     // const masterServerUrl = 'ws://192.168.1.14:8089';
     // This is optional.  It is a fallback in case other servers do not work.
-    const defaultGameAPIServerAddress = document.location.hostname + ':8088';
+    const defaultGameAPIServerAddress = srvList ? srvList["defaultGameServer"] + ":8088" : document.location.hostname + ':8088';
 
     let _masterServerSocket = null;
 
@@ -276,36 +277,6 @@ const ClientServerConnect = function () {
             localStorage['FishGame_Cached_Query_Params'] = '';
         }
     }
-
-    /*
-    const login = function (name, pass, onSuccess, onFailure) {
-        const client = getGameWSClient();
-
-        Promise.resolve().then(
-            () => {
-                return client.callAPIOnce('game', 'login', {
-                    email: name,
-                    password : pass,
-                });
-            }
-        ).then(
-            loginResponse => {
-                console.log("loginResponse:", loginResponse);
-                onSuccess(loginResponse.data.player);
-                // return client.callAPIOnce('game', 'joinGame', {})
-            }
-        ).catch(
-            error => {
-                console.log(error);
-                if (onFailure) {
-                    onFailure(error);
-                } else {
-                    console.error(error);
-                }
-            }
-        );
-    };
-    */
 
     function loginWithToken (token, playerId, email, onSuccess, onFailure) {
         const client = getGameWSClient();
