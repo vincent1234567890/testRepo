@@ -52,8 +52,8 @@ var res = {
     //FreeRound
     FreeRoundTitle : "Game/FreeRoundTitle.png",
 
-    GunCockSound : "Sound/換炮音效-修1.mp3",
-    GunShotSound : "Sound/發炮音效-修2.mp3",
+    GunCockSound : "Sound/Sound/換炮音效-修1.mp3",
+    GunShotSound : "Sound/Sound/發炮音效-修2.mp3",
 
     MenuButtonHoverSound : "Sound/Sound/cursor7.mp3",
     MenuButtonPressSound : "Sound/Sound/se_maoudamashii_se_pc01.mp3",
