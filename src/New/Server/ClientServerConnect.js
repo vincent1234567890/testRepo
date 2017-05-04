@@ -5,15 +5,15 @@
 const ClientServerConnect = function () {
     "use strict";
 
-    // const masterServerUrl = 'ws://' + document.location.hostname + ':8089';
-    const masterServerUrl = 'ws://192.168.1.14:8089';
+    const srvList = window["serverList"];
+    const masterServerUrl = srvList ? 'ws://' + srvList["masterServer"] + ':8089' : 'ws://' + document.location.hostname + ':8089';
     // This is optional.  It is a fallback in case other servers do not work.
-    const defaultGameAPIServerAddress = document.location.hostname + ':8088';
+    const defaultGameAPIServerAddress = srvList ? srvList["defaultGameServer"] + ":8088" : document.location.hostname + ':8088';
 
     let _masterServerSocket = null;
 
     let _currentGameServerUrl = null;
-    let _informServer ;
+    let _informServer;
     let _gameWSClient;
     let _gameIOSocket;
 
@@ -22,7 +22,7 @@ const ClientServerConnect = function () {
 
     let _loginParams = null;
 
-    function getMasterServerSocket () {
+    function getMasterServerSocket() {
         if (!_masterServerSocket) {
             const socket = io.connect(masterServerUrl + '/player');
             //socket.on('connect', function(){});
@@ -33,7 +33,7 @@ const ClientServerConnect = function () {
         return _masterServerSocket;
     }
 
-    function doInitialConnect () {
+    function doInitialConnect() {
         if (_wasKickedOutByRemoteLogIn) {
             return Promise.reject(Error("We were kicked.  Clear _wasKickedOutByRemoteLogIn if you want to reconnect."));
         }
@@ -45,7 +45,7 @@ const ClientServerConnect = function () {
         return connectToARecommendedGameServer(joinPrefs);
     }
 
-    function connectToARecommendedGameServer (joinPrefs) {
+    function connectToARecommendedGameServer(joinPrefs) {
         return socketEmitPromise(getMasterServerSocket(), 'getRecommendedServers', joinPrefs).then(recommendedServers => {
             //console.log("recommendedServers:", recommendedServers);
 
@@ -77,7 +77,7 @@ const ClientServerConnect = function () {
         });
     }
 
-    function socketEmitPromise (socket /* ...args... */) {
+    function socketEmitPromise(socket /* ...args... */) {
         const args = Array.prototype.slice.call(arguments, 1);
         return new Promise((resolve, reject) => {
             args.push(function (err, response) {
@@ -91,7 +91,7 @@ const ClientServerConnect = function () {
         });
     }
 
-    function connectToGameServer (gameAPIServerUrl) {
+    function connectToGameServer(gameAPIServerUrl) {
         return new Promise((resolve, reject) => {
             // Do not connect if we are already connected to that server
             if (_currentGameServerUrl === gameAPIServerUrl) {
@@ -165,7 +165,10 @@ const ClientServerConnect = function () {
                     //if (queryParams.token && (queryParams.playerId || queryParams.email)) {
                     loginWithToken(_loginParams.token, _loginParams.playerId, _loginParams.email, function (loginData) {
                         // If successful, remove the query parameters from the URL
-                        window.history.pushState({where: 'start', search: document.location.search}, '', document.location.pathname);
+                        window.history.pushState({
+                            where: 'start',
+                            search: document.location.search
+                        }, '', document.location.pathname);
                         // Start the game!
                         // AppManager.goToLobby();
                         // console.log(client);
@@ -226,7 +229,7 @@ const ClientServerConnect = function () {
                 }
             });
 
-            function cleanup(){
+            function cleanup() {
                 GameManager.destroyArena();
                 ClientServerConnect.postGameCleanup();
                 AppManager.goBackToLobby();
@@ -234,7 +237,7 @@ const ClientServerConnect = function () {
         });
     }
 
-    function parseQueryParams (searchString) {
+    function parseQueryParams(searchString) {
         if (searchString === undefined) {
             searchString = document.location.search;
         }
@@ -253,7 +256,7 @@ const ClientServerConnect = function () {
     // If there are no current queryParams, then look for previous queryParams in localStorage
     // This allows us or the player to reload the page, even after the queryParams have been removed from the URL.
     // This isn't really needed in production, but is pretty useful for development and testing.
-    function getCurrentOrCachedQueryParams () {
+    function getCurrentOrCachedQueryParams() {
         let searchString = document.location.search;
 
         if (window.localStorage) {
@@ -271,43 +274,43 @@ const ClientServerConnect = function () {
     // user has access to that machine, that user should not be able to log in to the player's account.
     //
     // To meet this requirement, we will drop the token from localStorage if the server requests it.
-    function forgetCachedQueryParams () {
+    function forgetCachedQueryParams() {
         if (window.localStorage) {
             localStorage['FishGame_Cached_Query_Params'] = '';
         }
     }
 
     /*
-    const login = function (name, pass, onSuccess, onFailure) {
-        const client = getGameWSClient();
+     const login = function (name, pass, onSuccess, onFailure) {
+     const client = getGameWSClient();
 
-        Promise.resolve().then(
-            () => {
-                return client.callAPIOnce('game', 'login', {
-                    email: name,
-                    password : pass,
-                });
-            }
-        ).then(
-            loginResponse => {
-                console.log("loginResponse:", loginResponse);
-                onSuccess(loginResponse.data.player);
-                // return client.callAPIOnce('game', 'joinGame', {})
-            }
-        ).catch(
-            error => {
-                console.log(error);
-                if (onFailure) {
-                    onFailure(error);
-                } else {
-                    console.error(error);
-                }
-            }
-        );
-    };
-    */
+     Promise.resolve().then(
+     () => {
+     return client.callAPIOnce('game', 'login', {
+     email: name,
+     password : pass,
+     });
+     }
+     ).then(
+     loginResponse => {
+     console.log("loginResponse:", loginResponse);
+     onSuccess(loginResponse.data.player);
+     // return client.callAPIOnce('game', 'joinGame', {})
+     }
+     ).catch(
+     error => {
+     console.log(error);
+     if (onFailure) {
+     onFailure(error);
+     } else {
+     console.error(error);
+     }
+     }
+     );
+     };
+     */
 
-    function loginWithToken (token, playerId, email, onSuccess, onFailure) {
+    function loginWithToken(token, playerId, email, onSuccess, onFailure) {
         const client = getGameWSClient();
 
         // Consider: We could provide an extra param here to say whether this is the first connect, or a reconnect.
@@ -341,7 +344,7 @@ const ClientServerConnect = function () {
         );
     }
 
-    function joinGame (chosenScene, seat, type) {
+    function joinGame(chosenScene, seat, type) {
         const joinPrefs = {scene: chosenScene, preferredSeat: seat, singlePlay: type === TableType.SINGLE};
 
         console.log(`Requesting suitable game server from master server...`);
@@ -394,13 +397,13 @@ const ClientServerConnect = function () {
         );
     }
 
-    function leaveGame () {
+    function leaveGame() {
         return _gameWSClient.callAPIOnce('game', 'leaveGame', {}).then(
             () => postGameCleanup()
         );
     }
 
-    function postGameCleanup () {
+    function postGameCleanup() {
         if (!_informServer) {
             return;
         }
@@ -411,18 +414,18 @@ const ClientServerConnect = function () {
     }
 
     function requestStats() {
-        return _gameWSClient.callAPIOnce('game','getMyGameStats', {});
+        return _gameWSClient.callAPIOnce('game', 'getMyGameStats', {});
     }
 
-    function requestMyData(){
+    function requestMyData() {
         return _gameWSClient.callAPIOnce('game', 'getMyStatus', {});
     }
 
-    function setGameWSClient (client) {
+    function setGameWSClient(client) {
         _gameWSClient = client;
     }
 
-    function getGameWSClient () {
+    function getGameWSClient() {
         return _gameWSClient;
     }
 
@@ -433,7 +436,7 @@ const ClientServerConnect = function () {
     //    return _gameIOSocket;
     //};
 
-    function setServerInformer (informer) {
+    function setServerInformer(informer) {
         _informServer = informer;
     }
 
@@ -441,7 +444,7 @@ const ClientServerConnect = function () {
         return _informServer;
     }
 
-    function listenForEvent (wsFuncName, callback) {
+    function listenForEvent(wsFuncName, callback) {
         // Listens for the specified message to be pushed from the server, without any request being made first.
         const service = _gameWSClient.getService('game');
         const wsFunc = service[wsFuncName];
@@ -451,7 +454,7 @@ const ClientServerConnect = function () {
         wsFunc.addListener(callback);
     }
 
-    function getCurrentJackpotValues(){
+    function getCurrentJackpotValues() {
         return _gameWSClient.callAPIOnce('game', 'getCurrentJackpotValues', {}).then(
             jackpotValueResponse => {
                 console.log('jackpotValueResponse:', jackpotValueResponse);
@@ -469,15 +472,15 @@ const ClientServerConnect = function () {
         _informServer.changeSeat(slot);
     };
 
-    function listUncollectedJackpots () {
+    function listUncollectedJackpots() {
         return _gameWSClient.callAPIOnce('game', 'listUncollectedJackpots', {});
     }
 
-    function collectJackpot (rewardLogObjId) {
+    function collectJackpot(rewardLogObjId) {
         return _gameWSClient.callAPIOnce('game', 'collectJackpot', {rewardLogObjId: rewardLogObjId});
     }
 
-    const setFishLockRequest = function(fishId){
+    const setFishLockRequest = function (fishId) {
         _informServer.setTargetLockOnFish(fishId);
     };
 
@@ -486,23 +489,28 @@ const ClientServerConnect = function () {
         _informServer.unsetTargetLock();
     };
 
-    function getGameSummaries (numDays) {
+    function getGameSummaries(numDays) {
         return _gameWSClient.callAPIOnce('player', 'getGameSummaries', {hours: numDays * 24});
     }
 
-    function getConsumptionLog (playerGameNumber, roundNumber, index, limit) { // index is pagination
-        return _gameWSClient.callAPIOnce('player', 'getConsumptionLog', {playerGameNumber: playerGameNumber, roundNumber: roundNumber, index : index, limit:limit});
+    function getConsumptionLog(playerGameNumber, roundNumber, index, limit) { // index is pagination
+        return _gameWSClient.callAPIOnce('player', 'getConsumptionLog', {
+            playerGameNumber: playerGameNumber,
+            roundNumber: roundNumber,
+            index: index,
+            limit: limit
+        });
     }
 
-    function getRechargeLog (numDays) {
+    function getRechargeLog(numDays) {
         return _gameWSClient.callAPIOnce('player', 'getRechargeLog', {hours: numDays * 24});
     }
 
-    function changePlayerDisplayName (newDisplayName) {
+    function changePlayerDisplayName(newDisplayName) {
         return _gameWSClient.callAPIOnce('player', 'changePlayerDisplayName', {newDisplayName: newDisplayName});
     }
 
-    function getLeaderboard(){
+    function getLeaderboard() {
         return _gameWSClient.callAPIOnce('player', 'getTopRankedPlayers');
     }
 

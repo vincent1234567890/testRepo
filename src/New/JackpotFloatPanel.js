@@ -60,7 +60,7 @@ let JackpotFloatPanel = cc.Node.extend({
 
         //jackpot value label
         let barSize = spBarFrame.getContentSize();
-        let lbJackpotValue = this._lbJackpotValue = new cc.LabelBMFont("9,888,999.88", res.WhiteFontFile);
+        let lbJackpotValue = this._lbJackpotValue = new cc.LabelBMFont("8,888,888", res.WhiteFontFile);
         spBarFrame.addChild(lbJackpotValue, -1);
         lbJackpotValue.setPosition(barSize.width * 0.5, 38);
         lbJackpotValue.setScale(0.8);
@@ -151,6 +151,7 @@ let JackpotDetailPanel = cc.LayerColor.extend({
     _lbPrize1Value: null,
     _lbPrize2Value: null,
     _lbPrize3Value: null,
+    _lbPrize4Value: null,
 
     ctor: function(){
         cc.LayerColor.prototype.ctor.call(this, new cc.Color(10, 10, 10, 196));
@@ -170,7 +171,9 @@ let JackpotDetailPanel = cc.LayerColor.extend({
                 let target = event.getCurrentTarget();
                 if (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
                         target.convertToNodeSpace(touch.getLocation()))) {
-                    target._spJackpotPopBase.runAction(cc.sequence(cc.scaleTo(0.6, 0).easing(cc.easeExponentialOut()),
+                    let spJackpotPopBase = target._spJackpotPopBase, size = target._contentSize;
+                    spJackpotPopBase.runAction(cc.sequence(
+                        cc.moveTo(0.5, size.width * 0.5, size.height * 1.5).easing(cc.easeBackIn()),
                         cc.callFunc(function(){
                             this.removeFromParent(true);
                         }, target)));
@@ -258,8 +261,8 @@ let JackpotDetailPanel = cc.LayerColor.extend({
 
     showDetail: function(){
         let spJackpotPopBase = this._spJackpotPopBase, size = this._contentSize;
-        spJackpotPopBase.setPositionY(size.height * 2);
-        spJackpotPopBase.runAction(cc.moveTo(0.3, size.width * 0.5, size.height * 0.5).easing(cc.easeBounceIn()));
+        spJackpotPopBase.setPositionY(size.height * 1.5);
+        spJackpotPopBase.runAction(cc.moveTo(0.5, size.width * 0.5, size.height * 0.5).easing(cc.easeBackIn()));
     },
 
     _showJackpotPrizeValues: function(prizeValues){
