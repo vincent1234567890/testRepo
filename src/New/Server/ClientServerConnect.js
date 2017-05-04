@@ -5,8 +5,8 @@
 const ClientServerConnect = function () {
     "use strict";
 
-    const masterServerUrl = 'ws://' + document.location.hostname + ':8089';
-
+    // const masterServerUrl = 'ws://' + document.location.hostname + ':8089';
+    const masterServerUrl = 'ws://192.168.1.14:8089';
     // This is optional.  It is a fallback in case other servers do not work.
     const defaultGameAPIServerAddress = document.location.hostname + ':8088';
 
