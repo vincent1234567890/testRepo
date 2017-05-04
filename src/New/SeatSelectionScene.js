@@ -1,6 +1,6 @@
 let SeatSelectionScene = cc.Scene.extend({
     _lobbyType: null,
-    ctor: function(lobbyType, playerData, goToGameCallback){
+    ctor: function(lobbyType, playerData){
         cc.Scene.prototype.ctor.call(this);
 
         this._lobbyType = lobbyType || '1X';
@@ -53,12 +53,12 @@ let SeatSelectionScene = cc.Scene.extend({
         spLobbyType.setPosition(notificationSize.width * 0.5, notificationSize.height * 0.5);
 
         //multiple
-        let pnMultipleTable = new TableSeatPanel(this._lobbyType, TableType.MULTIPLE, goToGameCallback);
+        let pnMultipleTable = new TableSeatPanel(this._lobbyType, TableType.MULTIPLE);
         pnMultipleTable.setPosition(0, 0);
         this.addChild(pnMultipleTable);
 
         //solo
-        let pnSoleTable = new TableSeatPanel(this._lobbyType, TableType.SINGLE, goToGameCallback);
+        let pnSoleTable = new TableSeatPanel(this._lobbyType, TableType.SINGLE);
         pnSoleTable.setPosition(cc.visibleRect.center.x, 0);
         this.addChild(pnSoleTable);
     },
@@ -87,7 +87,7 @@ const TableSeatPanel = cc.Layer.extend({
     _spSeatBtmRight: null,
     _spSeatRight: null,
 
-    ctor: function(lobbyType, tableType, goToGameCallback){
+    ctor: function(lobbyType, tableType){
         cc.Layer.prototype.ctor.call(this);
         this._className = "TableSeatPanel";
         this._lobbyType = lobbyType;
@@ -102,19 +102,15 @@ const TableSeatPanel = cc.Layer.extend({
         spWood.addChild(spTitle);
         spTitle.setPosition(woodSize.width * 0.5, woodSize.height * 0.5);
 
-        this.onSeatSelectedCallback = function(seatNumber){
-            goToGameCallback(this._tableType, seatNumber)
-        };
-
         //seat Left
-        let spSeatLeft = this._spSeatLeft = new SeatSprite(this.onSeatSelectedCallback);
+        let spSeatLeft = this._spSeatLeft = new SeatSprite();
         spSeatLeft.setSeatPosition(SeatPosition.LEFT);
         spSeatLeft.setPosition(72, 195);
         spSeatLeft.setTableType(this._tableType);
         this.addChild(spSeatLeft);
 
         //seat right
-        let spSeatRight = this._spSeatRight = new SeatSprite(this.onSeatSelectedCallback);
+        let spSeatRight = this._spSeatRight = new SeatSprite();
         spSeatRight.setSeatPosition(SeatPosition.RIGHT);
         spSeatRight.setPosition(596, 195);
         spSeatRight.setTableType(this._tableType);
@@ -126,14 +122,14 @@ const TableSeatPanel = cc.Layer.extend({
         this.addChild(spTable);
 
         //seat Bottom Left
-        let spSeatBtmLeft = this._spSeatBtmLeft = new SeatSprite(this.onSeatSelectedCallback);
+        let spSeatBtmLeft = this._spSeatBtmLeft = new SeatSprite();
         spSeatBtmLeft.setSeatPosition(SeatPosition.BOTTOM_LEFT);
         spSeatBtmLeft.setPosition(230, 60);
         spSeatBtmLeft.setTableType(this._tableType);
         this.addChild(spSeatBtmLeft);
 
         //seat Bottom Right
-        let spSeatBtmRight = this._spSeatBtmRight = new SeatSprite(this.onSeatSelectedCallback);
+        let spSeatBtmRight = this._spSeatBtmRight = new SeatSprite();
         spSeatBtmRight.setSeatPosition(SeatPosition.BOTTOM_RIGHT);
         spSeatBtmRight.setPosition(450, 60);
         spSeatBtmRight.setTableType(this._tableType);
@@ -281,7 +277,7 @@ let SeatSprite = cc.Sprite.extend({
     _mouseEventListener: null,
     isMouseDown: false,
 
-    ctor: function(goToGameCallback){
+    ctor: function(){
         cc.Sprite.prototype.ctor.call(this, ReferenceName.SeatChair);
         this._className = "SeatSprite";
 
