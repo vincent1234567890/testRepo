@@ -26,6 +26,8 @@ const GameView = function () {
 
     let _screenShakeNode;
 
+    const NUMBER_OF_BACKGROUNDS = 5;
+
     function initialise(parentNode, gameConfig, fishGameArena, lockOnCallback, fishLockStatus) {
         console.log("GameView:initialise");
         if (gameConfig) { // going into game
@@ -76,7 +78,7 @@ const GameView = function () {
         if(_waveTransitionView) {
             setBackgroundTo(choice ? choice.gameId : 0);
         }else {
-            _waveTransitionView = new WaveTransition(res['GameBackground' + ((choice ? choice.gameId : 0) % 4).toString()]);
+            _waveTransitionView = new WaveTransition(res['GameBackground' + ((choice ? choice.gameId : 0) % (NUMBER_OF_BACKGROUNDS-1)).toString()]);
             _screenShakeNode.addChild(_waveTransitionView);
         }
         initialiseTouch(touchAt);
@@ -84,7 +86,7 @@ const GameView = function () {
     }
 
     function setBackgroundTo(choice) {
-        _waveTransitionView.transition(res['GameBackground' + (choice % 4).toString()]);
+        _waveTransitionView.transition(res['GameBackground' + (choice % (NUMBER_OF_BACKGROUNDS-1)).toString()]);
     }
 
     function addView(view, depth, isScreenShake) {
@@ -241,7 +243,7 @@ const GameView = function () {
     }
 
     function caughtFishAnimationEnd(data) {
-        if (data.playerSlot === _playerSlot) {
+        if (data.playerSlot === _playerSlot && _gameConfig.fishClasses[data.type].tier > 1) {
             _effectsManager.doCapturePrizeEffect(data.position, _gameConfig.cannonPositions[data.playerSlot], _gameConfig.fishClasses[data.type]);
             if(_gameConfig.fishClasses[data.type].tier > 1) {
                 _playerViews[_playerSlot].showAwardMedal(_gameConfig.fishClasses[data.type].value);
