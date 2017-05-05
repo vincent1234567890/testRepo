@@ -33,6 +33,8 @@ let JackpotPanel = cc.LayerColor.extend({ //gradient
         cc.spriteFrameCache.addSpriteFrames(res.LobbyUI2Plist);
         //buzz effect
 
+        cc.audioEngine.playEffect(res.JackpotTriggeredSound);
+
         const spBackground = new cc.Sprite(ReferenceName.JackpotBase);
         this._spBackground = spBackground;
         spBackground.setPosition(cc.winSize.width * 0.5, cc.winSize.height * 0.5);
@@ -480,7 +482,9 @@ let JackpotPanel = cc.LayerColor.extend({ //gradient
             spGrayMedal.runAction(cc.sequence(cc.delayTime(delay), cc.scaleTo(0.4, 1)));
 
             const boxAnimation = GUIFunctions.getAnimation(ReferenceName.JackpotTreasureBoxOpenAnm, 0.02);
-            selBox.runAction(cc.sequence(cc.delayTime(delay), boxAnimation, cc.callFunc(function () {
+            selBox.runAction(cc.sequence(cc.callFunc(function () {
+                cc.audioEngine.playEffect(res.JackpotBoxOpeningSound);
+            }, selBox),cc.delayTime(delay), boxAnimation, cc.callFunc(function () {
                 this.removeFromParent(true);
                 selfPoint._removeBoxFromArray(this);
             }, selBox)));
@@ -522,6 +526,7 @@ let JackpotPanel = cc.LayerColor.extend({ //gradient
     },
 
     hidePanel: function () {
+        cc.audioEngine.playEffect(res.JackpotEndSound);
         this.runAction(cc.sequence(cc.scaleTo(1, 0).easing(cc.easeOut(3)), cc.callFunc(function () {
             this.removeFromParent();
         }, this)));

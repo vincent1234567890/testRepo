@@ -46,6 +46,7 @@ const CaptureCoinEffectManager = (function () {
 
     proto.triggerCoins = function (pos, target, fish) {
         // console.log(pos);
+        cc.audioEngine.playEffect(res.FishCaptureEffectCoinSound);
         const label = _prizeLabelPool.alloc(this._parent, fish.value);
         setupView(label, label.getTargetNode(), pos, Math.PI / 2, target, undefined, collectLifetime/10,
             collectDelay * 10 * fish.coinsShown * offsetPerCoin * randomMax, collectLabel);

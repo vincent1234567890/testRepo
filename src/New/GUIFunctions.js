@@ -6,6 +6,8 @@ const GUIFunctions = function () {
     "use strict";
 
     let padding = 5;
+    const DEFAULT_BUTTON_PRESS_SOUND = res.MenuButtonPressSound;
+
     function getHitBox(sprite) {
         let screenPos = sprite.convertToWorldSpace(cc.p());
         // var locViewSize = this._viewSize;
@@ -53,15 +55,20 @@ const GUIFunctions = function () {
         return new cc.Animate(new cc.Animation(animationArray, animationSpeed));
     }
 
-    function setPadding(value){
+    function setPadding(value) {
         padding = value;
     }
 
-    function createButton(buttonImage,buttonSelected,selectedCallBack){
+    function createButton(buttonImage, buttonSelected, selectedCallBack, sound) {
         const touchEvent = (sender, type) => {
             switch (type) {
                 case ccui.Widget.TOUCH_ENDED:
                     selectedCallBack(sender);
+                    if (sound) {
+                        cc.audioEngine.playEffect(sound);
+                    } else {
+                        cc.audioEngine.playEffect(res.MenuButtonPressSound);
+                    }
                     break;
             }
         };
@@ -73,7 +80,7 @@ const GUIFunctions = function () {
         return button;
     }
 
-    function getLengthOfNumber(number){
+    function getLengthOfNumber(number) {
         return (Math.log(Math.abs(number + 1)) * 0.43429448190325176 | 0) + 1;
     }
 
@@ -82,8 +89,8 @@ const GUIFunctions = function () {
         isSpriteTouched: isSpriteTouched,
         getAnimation: getAnimation,
         // getReverseAnimation: getReverseAnimation,
-        setPadding : setPadding,
-        createButton : createButton,
-        getLengthOfNumber : getLengthOfNumber,
+        setPadding: setPadding,
+        createButton: createButton,
+        getLengthOfNumber: getLengthOfNumber,
     }
 }();
