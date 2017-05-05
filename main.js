@@ -62,5 +62,5 @@ var cocos2dApp = cc.game.onStart = function() {
 };
 
 cc.game.run();
-console.log("version: 1.3.503b");
+console.log("version: 1.3.505b");
 
