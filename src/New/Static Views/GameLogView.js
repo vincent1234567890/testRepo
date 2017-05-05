@@ -240,6 +240,12 @@ const GameLogView = (function () {
             _displayTitle = items.scrollTitle;
             _scrollTitleBackground.addChild(_displayTitle);
             scrollBackground.addChild(_displayList);
+
+            //remove the wait panel.
+            const curScene = cc.director.getRunningScene();
+            const waitPanel = curScene.getChildByTag(998);
+            if(waitPanel)
+                waitPanel.removeFromParent(true);
         };
 
         onGameLogTabPressed();
@@ -433,6 +439,9 @@ const GameLogView = (function () {
         }());
 
         const onItemSelected = function (data) {
+            //show the wait panel.
+            const scene = cc.director.getRunningScene();
+            scene.addChild(new WaitingPanel(), 999, 998);
             if (_requestConsumptionLogCallback) {
                 _requestConsumptionLogCallback(data.playerGameNumber, data.roundNumber)
             }
