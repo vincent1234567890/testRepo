@@ -1,4 +1,4 @@
 var serverList = {
-        masterServer: "localhost",
-        defaultGameServer:"localhost"
+        masterServer: "192.168.1.14",
+        defaultGameServer:"192.168.1.14"
     };
