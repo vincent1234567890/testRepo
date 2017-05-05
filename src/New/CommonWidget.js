@@ -22,7 +22,7 @@ let PlayerInfoWidget = cc.Node.extend({
         lbPlayerName._setFontWeight("bold");
         lbPlayerName.enableStroke(new cc.Color(0, 0, 0, 255), 2);
         spPlayerNameBg.addChild(lbPlayerName);
-        lbPlayerName.setPosition(95, 24);
+        lbPlayerName.setPosition(95, 26);
 
         //bg size (237 x 48)
         const spPlayerCreditBg = new cc.Sprite(ReferenceName.LobbyCoinsBG);
@@ -34,7 +34,7 @@ let PlayerInfoWidget = cc.Node.extend({
         lbPlayerCredit.setFontFillColor(new cc.Color(255, 205, 60, 255));
         lbPlayerCredit.enableStroke(new cc.Color(90, 24, 8, 255), 3);
         spPlayerCreditBg.addChild(lbPlayerCredit);
-        lbPlayerCredit.setPosition(119, 24);
+        lbPlayerCredit.setPosition(119, 26);
 
         this.updatePlayerCredit(playerInfo.playerState.score);
     },
