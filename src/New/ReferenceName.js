@@ -169,6 +169,8 @@ const ReferenceName = {
     FAQJackpotDisplay : "#jackpot-screenshot.png",
     FAQFreeRoundDisplay : "#bonus-screenshot.png",
     FAQJackpotBackground : "#background-bonus.png",
+    FAQJackpotSubtitleText : "#jackpot-subtitle.png",
+    FAQFreeGameSubtitleText : "#bonus-subtitle.png",
 
     //Settings
     SettingsBackground : "#PopupBase1.png",

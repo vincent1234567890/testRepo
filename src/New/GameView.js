@@ -248,7 +248,7 @@ const GameView = function () {
     }
 
     function caughtFishAnimationEnd(data) {
-        if (data.playerSlot === _playerSlot && _gameConfig.fishClasses[data.type].tier %100 > 1) {
+        if (data.playerSlot === _playerSlot || _gameConfig.fishClasses[data.type].tier%100 > 1) {
             _effectsManager.doCapturePrizeEffect(data.position, _gameConfig.cannonPositions[data.playerSlot], _gameConfig.fishClasses[data.type]);
             if(_gameConfig.fishClasses[data.type].tier %100 > 1 ) {
                 _playerViews[_playerSlot].showAwardMedal(data.type,_gameConfig.fishClasses[data.type].value);

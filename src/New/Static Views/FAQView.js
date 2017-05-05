@@ -115,6 +115,8 @@ const FAQView = (function () {
             widget.stopAllActions();
             widget.setRotation(0);
         }
+
+        onGameRulesClicked();
     };
 
     function onUserAgreementTabClicked (){
@@ -242,11 +244,19 @@ const FAQView = (function () {
 
             const jackpotBackground = new cc.Sprite(ReferenceName.FAQJackpotBackground);
             _jackpotInfo.addChild(jackpotBackground);
-            jackpotBackground.setPosition(545,450);
+            jackpotBackground.setPosition(535,435);
 
             const freeGameBackground = new cc.Sprite(ReferenceName.FAQJackpotBackground);
             _jackpotInfo.addChild(freeGameBackground);
-            freeGameBackground.setPosition(545,250);
+            freeGameBackground.setPosition(535,235);
+
+            const jackpotTitle = new cc.Sprite(ReferenceName.FAQJackpotSubtitleText);
+            jackpotBackground.addChild(jackpotTitle);
+            jackpotTitle.setPosition(165,165);
+
+            const freeGameTitle = new cc.Sprite(ReferenceName.FAQFreeGameSubtitleText);
+            freeGameBackground.addChild(freeGameTitle);
+            freeGameTitle.setPosition(165,165);
 
             const title = new cc.Sprite(ReferenceName.FAQJackpotInfoButtonText);
             title.setPosition(titleX, titleY);
@@ -254,27 +264,26 @@ const FAQView = (function () {
 
             const jackpotDisplay = new cc.Sprite(ReferenceName.FAQJackpotDisplay);
             _jackpotInfo.addChild(jackpotDisplay);
-            jackpotDisplay.setPosition(275, 460);
+            jackpotDisplay.setPosition(265, 445);
 
             const freeRoundDisplay = new cc.Sprite(ReferenceName.FAQFreeRoundDisplay);
             _jackpotInfo.addChild(freeRoundDisplay);
-            freeRoundDisplay.setPosition(275, 260);
+            freeRoundDisplay.setPosition(265, 245);
 
             const jackpotInfo = new cc.LabelTTF('eFISH累积奖池是将所有玩家所发出的每一发炮弹进行相应金额累积。' +
                 '任何玩家随时有机会触发宝箱游戏，赢取累积奖金。' +
                 '宝箱游戏中设有12个小宝箱，各自隐藏了图案，玩家可任意开启宝箱，首先集满三个同款图案宝箱即可获得相对应奖金，完成游戏。' +
                 '奖金项目共分为一等奖、二等奖、三等奖及四等奖。无论在哪个倍场，使用哪种类型的炮弹，玩家都有机会捕获各个等级的累积奖金。',
-                'Microsoft YaHei', 15, cc.size(275,200));
-            jackpotInfo.setPosition(250,50);
+                'Microsoft YaHei', 13, cc.size(290,275));
+            jackpotInfo.setPosition(260,10);
             jackpotBackground.addChild(jackpotInfo);
 
             const freeGameInfo = new cc.LabelTTF('易博捕鱼游戏在进行中，随时有机会触发免费游戏。' +
                 '玩家在有效时间内任发炮弹不计费，免费游戏中使用的炮弹类型将会是触发游戏前所使用的炮弹类型，不得更换。' +
                 '所有捕获的鱼彩金都会自动存入到玩家的账号。把握时间为自己赢取更多彩金，祝您好运！',
-                'Microsoft YaHei', 15, cc.size(250,200));
-            freeGameInfo.setPosition(250,75);
+                'Microsoft YaHei', 13, cc.size(290,275));
+            freeGameInfo.setPosition(260,10);
             freeGameBackground.addChild(freeGameInfo);
-
         }
         if (_jackpotInfo && !_jackpotInfo.getParent()) {
             clearAllViews();
