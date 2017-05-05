@@ -34,7 +34,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>GLionFish2Name Chinese.png</key>
+            <key>GLionFish2NameChinese.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -184,7 +184,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>LionFish2Name Chinese.png</key>
+            <key>LionFish2NameChinese.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>

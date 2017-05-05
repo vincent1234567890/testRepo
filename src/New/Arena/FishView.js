@@ -141,6 +141,10 @@ const FishView = (function () {
     proto.addTarget = function(target){
         this._parent.addChild(target);
     };
+    
+    proto.removeTarget = function (target) {
+        this._parent.removeChild(target,false);
+    };
 
     return FishView;
 })();
