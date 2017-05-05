@@ -1,3 +1,4 @@
+/* If you want a custom configuration, then copy this file to ServerList.js and edit it.  (Do not add it to Git.) */
 var serverList = {
         masterServer: "localhost",
         defaultGameServer:"localhost"
