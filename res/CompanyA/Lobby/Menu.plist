@@ -2373,7 +2373,7 @@
             <key>size</key>
             <string>{2048,2048}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:12b6e37fd3b44d09d460f9e4fc007d0a:740be8fe1a98cebfe8ddf2168f373a8f:474a9a58f742d06d2866a4a6eac25590$</string>
+            <string>$TexturePacker:SmartUpdate:93aafd3bf2da274150f8a8b3f6416bcc:8a5fe4a099735f1e459601a970133a01:474a9a58f742d06d2866a4a6eac25590$</string>
             <key>textureFileName</key>
             <string>Menu.png</string>
         </dict>
