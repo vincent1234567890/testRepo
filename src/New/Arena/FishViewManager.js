@@ -24,7 +24,8 @@ const FishViewManager = (function(){
         // this.rotationFunction = rotationFunction;
         GameView.addView(this._parent);
 
-        proto._onFishClicked = (fishView) =>{
+        let fishViewTarget;
+        this._onFishClicked = (fishView) =>{
             if (!getFishLockStatus()){
                 return;
             }
@@ -39,7 +40,12 @@ const FishViewManager = (function(){
                 targetLockUI.getParent().removeChild(targetLockUI,false);
             }
             fishView.addTarget(targetLockUI);
+            fishViewTarget = fishView;
             onFishLockSelectedCallback(id);
+        };
+
+        this.unsetLock = () =>{
+            fishViewTarget.removeTarget(targetLockUI);
         }
     };
 

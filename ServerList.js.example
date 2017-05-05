@@ -1,0 +1,11 @@
+/* If you want a custom configuration, then copy this file to ServerList.js and edit it.  (Do not add it to Git.) */
+
+var serverList = {
+
+    // This is the address that the client will connect to at startup.  The masterServer will then recommend a gameServer to join.
+    masterServer: "localhost:8089",
+
+    // This is a fallback gameServer that will be used if the masterServer is down.  Set this to your most powerful gameServer.
+    defaultGameServer: "localhost:8088"
+
+};

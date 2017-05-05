@@ -193,6 +193,10 @@ let WaitingPanel = cc.LayerColor.extend({
             this.addChild(spCircle);
             this._setupAction(spCircle, i);
         }
+
+        const lbLoading = new cc.LabelTTF("Loading...", "Arial", 18);
+        this.addChild(lbLoading);
+        lbLoading.setPosition(cc.visibleRect.center);
             //add event listener
         this._touchEventListener = cc.EventListener.create({
             event:cc.EventListener.TOUCH_ONE_BY_ONE,
@@ -296,7 +300,7 @@ let WaveTransition = cc.Node.extend({
 
     transition: function(targetBackground) {
         //hide caustic
-        const spCaustic = this._spCaustic, duration = 4;
+        const spCaustic = this._spCaustic, duration = 1;
         spCaustic.runAction(cc.fadeTo(duration, 0));
 
         this.runAction(cc.sequence(cc.delayTime(duration), cc.callFunc(function(){ this._runTransition(targetBackground); }, this)));

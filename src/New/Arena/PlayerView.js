@@ -33,8 +33,8 @@ var PlayerView = (function () {
         this._playerViewStaticPrefabInstance = null;
     };
 
-    proto.showAwardMedal = function (amount) {
-        this._playerViewStaticPrefabInstance.showAwardMedal(amount);
+    proto.showAwardMedal = function (type, amount) {
+        this._playerViewStaticPrefabInstance.showAwardMedal(type, amount);
     };
 
     proto.setMultiplier = function (amount) {

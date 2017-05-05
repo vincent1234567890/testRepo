@@ -275,8 +275,11 @@ const GameManager = function () {
         _gameSelectedCallback(chosenScene.gameName, _playerData);
     }
 
-    function seatSelected(type, seat){
-        console.log("seatSelected:",type,seat);
+    function seatSelected(type, seat) {
+        console.log("seatSelected:", type, seat);
+        const scene = cc.director.getRunningScene();
+        scene.addChild(new WaitingPanel(), 999, 998);  //tag=998,  wait panel
+
         ClientServerConnect.joinGame(_currentScene.gameName, seat, type).catch(
             function (error) {
                 _lobbyManager.resetView();
@@ -320,6 +323,7 @@ const GameManager = function () {
         if (fishId === _currentFishLockOnId){
             _isFishLockOn = false;
             _fishLockOnCallback(false);
+            _fishManager.unsetLock();
         }
     }
 

@@ -48,6 +48,7 @@ var res = {
     GameBackground1: "Game BG/Game BG 2.png",
     GameBackground2: "Game BG/Game BG 3.png",
     GameBackground3: "Game BG/Game BG 4.png",
+    GameBackground4: "Game BG/Game BG 5.png",
 
     //FreeRound
     FreeRoundTitle : "Game/FreeRoundTitle.png",
