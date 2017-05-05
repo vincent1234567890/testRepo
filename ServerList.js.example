@@ -3,9 +3,9 @@
 var serverList = {
 
     // This is the address that the client will connect to at startup.  The masterServer will then recommend a gameServer to join.
-    masterServer: "localhost",
+    masterServer: "localhost:8089",
 
     // This is a fallback gameServer that will be used if the masterServer is down.  Set this to your most powerful gameServer.
-    defaultGameServer: "localhost"
+    defaultGameServer: "localhost:8088"
 
 };

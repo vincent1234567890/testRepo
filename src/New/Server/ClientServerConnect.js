@@ -6,10 +6,9 @@ const ClientServerConnect = function () {
     "use strict";
 
     const srvList = window["serverList"];
-    const masterServerUrl = srvList ? 'ws://' + srvList["masterServer"] + ':8089' : 'ws://' + document.location.hostname + ':8089';
-    // const masterServerUrl = 'ws://192.168.1.14:8089';
+    const masterServerUrl = srvList ? 'ws://' + srvList["masterServer"] : 'ws://' + document.location.hostname + ':8089';
     // This is optional.  It is a fallback in case other servers do not work.
-    const defaultGameAPIServerAddress = srvList ? srvList["defaultGameServer"] + ":8088" : document.location.hostname + ':8088';
+    const defaultGameAPIServerAddress = srvList ? srvList["defaultGameServer"] : document.location.hostname + ':8088';
 
     let _masterServerSocket = null;
 
