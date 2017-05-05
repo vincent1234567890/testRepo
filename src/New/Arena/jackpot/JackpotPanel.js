@@ -525,10 +525,13 @@ let JackpotPanel = cc.LayerColor.extend({ //gradient
         cc.Layer.prototype.cleanup.call(this);
     },
 
-    hidePanel: function () {
+    hidePanel: function (callback) {
         cc.audioEngine.playEffect(res.JackpotEndSound);
         this.runAction(cc.sequence(cc.scaleTo(1, 0).easing(cc.easeOut(3)), cc.callFunc(function () {
             this.removeFromParent();
+            if (callback) {
+                callback();
+            }
         }, this)));
     },
 });
@@ -584,11 +587,12 @@ const JackpotAwardPanel = cc.LayerColor.extend({
 
         this.runAction(cc.sequence(cc.delayTime(10), cc.callFunc(function () {
             const parent = this.getParent();
-            if (parent && parent._isPlaying) {
-                ClientServerConnect.getServerInformer().jackpotGameOver();
-            }
             if (parent) {
-                parent.hidePanel();
+                parent.hidePanel(() => {
+                    if (parent._isPlaying) {
+                        ClientServerConnect.getServerInformer().jackpotGameOver();
+                    }
+                });
             }
         }, this)));
     },
