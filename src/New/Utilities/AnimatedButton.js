@@ -1,7 +1,4 @@
-/**
- * Created by eugeneseah on 3/4/17.
- */
-
+//need delete.
 const AnimatedButton = (function () {
     "use strict";
     const AnimatedButton = function (animationName, animationSpeed, isToggle, callback) {
@@ -9,16 +6,13 @@ const AnimatedButton = (function () {
         const _wrapper = new ccui.Widget();
 
         const animation = GUIFunctions.getAnimation(animationName, animationSpeed);
-
         const _animationSequence = new cc.Sequence(animation, cc.callFunc(onAnimationEnd));
         const _spriteTarget = new cc.Sprite();
-
         const frame = animation.getAnimation().getFrames()[0];
         const animate = new cc.Animate(new cc.Animation([frame.clone()], 0.01));
         _spriteTarget.runAction(new cc.Sequence(animate));
 
-        var isOn = false;
-
+        let isOn = false;
         const touchEvent = (sender, type) => {
             // console.log("touch",sender,type);
             switch (type) {

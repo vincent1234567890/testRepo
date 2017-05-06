@@ -5,7 +5,7 @@ var cocos2dApp = cc.game.onStart = function() {
     //     document.body.removeChild(document.getElementById("cocosLoading"));
 
     // Pass true to enable retina display, on Android disabled by default to improve performance
-    cc.view.enableRetina(cc.sys.os === cc.sys.OS_IOS || cc.sys.os == cc.sys.OS_ANDROID);
+    cc.view.enableRetina(cc.sys.os === cc.sys.OS_IOS || cc.sys.os === cc.sys.OS_ANDROID);
 
     // Adjust viewport meta
     cc.view.adjustViewPort(true);
@@ -13,11 +13,9 @@ var cocos2dApp = cc.game.onStart = function() {
     if(cc.sys.isMobile){
         //normal resources
         cc.loader.resPath = "res/CompanyA/";
-        //cc.loader.audioPath = "res/CompanyA/";
     } else {
         //HD resources
         cc.loader.resPath = "res/CompanyAHD/";
-        //cc.loader.audioPath = "res/CompanyAHD/";
     }
 
     // Uncomment the following line to set a fixed orientation for your game
@@ -33,7 +31,8 @@ var cocos2dApp = cc.game.onStart = function() {
     //load resources
     ClientServerConnect.doInitialConnect().then(
         data => {
-            const themeConfig = data.themeConfig;
+            const themeConfig = data["themeConfig"];
+            //set as
             console.log(themeConfig);
             for (let i = 0; i < themeConfig.resourceList.length; i++) {
                 for (let j = 0; j < themeConfig[themeConfig.resourceList[i]].length; j++) {
@@ -48,17 +47,15 @@ var cocos2dApp = cc.game.onStart = function() {
             }
 
             ResourceLoader.finaliseResources();
-
             cc.LoadingScreen.preload(ResourceLoader.getResourceList(), function () {
                 // cc.director.runScene(new LogoScene());
                 //cc.director.runScene(new TestScene());
-                //cc.director.runScene(new SeatSelectionScene());
 
                 AppManager.goToLobby(data.player);
                 FishAnimationData.setData(themeConfig.FishRawData);
             }, this);
         }
-    ).catch(console.error.bind(console));
+    ).catch(console.error.bind(console));   //should show a friendly UI to tell user, can't connect to game server.
 };
 
 cc.game.run();

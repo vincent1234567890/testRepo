@@ -1,7 +1,4 @@
-/**
- * Created by eugeneseah on 16/2/17.
- */
-
+//Manage theme data.
 const ThemeDataManager = (function () {
     "use strict";
     const _themeData = {};

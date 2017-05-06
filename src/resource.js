@@ -78,13 +78,14 @@ var res = {
 
 const ResourceLoader = (function () {
     "use strict";
-    var plists = {};
-    var g_resources = [];
+    let plists = {};
+    let g_resources = [];
 
     function getResourceList() {
         return g_resources;
     }
 
+    //resource by company.
     function addResource(company, type, name) {
         //const constructedName = "res/" + company + "/" + type + "/" + name;
         const constructedName = type + "/" + name;
