@@ -190,8 +190,7 @@ const PlayerViewStaticPrefab = (function () {
         }
     };
 
-    proto.showAwardMedal = function (amount) {
-        //show the award medal
+    proto.showAwardMedal = function (type, amount) {
         const parentNode = new cc.Node();
         const coin = new cc.Sprite();
         const awardMedalSequence = new cc.Sequence(
@@ -204,9 +203,16 @@ const PlayerViewStaticPrefab = (function () {
         label.setScale(0.7 + 0.3/amount.toString().length);
         parentNode.addChild(coin);
         parentNode.addChild(label,1);
-        label.setPosition(0,215);
 
+        label.setPosition(0,215);
         coin.setPosition(0,200);
+
+        console.log("#" + type + "NameChinese");
+
+        const fishName = new cc.Sprite("#" + type + "NameChinese.png");
+        parentNode.addChild(fishName);
+        fishName.setPosition(0,158);
+
         function onAwardMedalEffectEnd(){
             parent.removeChild(parentNode);
         }

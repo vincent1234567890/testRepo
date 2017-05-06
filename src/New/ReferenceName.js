@@ -161,6 +161,17 @@ const ReferenceName = {
     FAQCannonInfoButtonText :"#CannonInfoChinese.png",
     FAQJackpotInfoButtonText : "#JackpotInfoChinese.png",
 
+    FAQGreenBackground: "#background-bonus.png",
+    FAQCannonInfoDisplay : "#Cannon-screenshot.png",
+    FAQFishDisplay : "#fish.png",
+    FAQLightGreenBackground : "#background-fish.png",
+    FAQUiFaqDisplay : "#interface-screenshot.png",
+    FAQJackpotDisplay : "#jackpot-screenshot.png",
+    FAQFreeRoundDisplay : "#bonus-screenshot.png",
+    FAQJackpotBackground : "#background-bonus.png",
+    FAQJackpotSubtitleText : "#jackpot-subtitle.png",
+    FAQFreeGameSubtitleText : "#bonus-subtitle.png",
+
     //Settings
     SettingsBackground : "#PopupBase1.png",
     SettingsTitleChinese : "#SettingChineseTitle.png",

@@ -300,7 +300,7 @@ let WaveTransition = cc.Node.extend({
 
     transition: function(targetBackground) {
         //hide caustic
-        const spCaustic = this._spCaustic, duration = 4;
+        const spCaustic = this._spCaustic, duration = 1;
         spCaustic.runAction(cc.fadeTo(duration, 0));
 
         this.runAction(cc.sequence(cc.delayTime(duration), cc.callFunc(function(){ this._runTransition(targetBackground); }, this)));

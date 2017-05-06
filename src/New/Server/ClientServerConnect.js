@@ -227,9 +227,10 @@ const ClientServerConnect = function () {
             });
 
             function cleanup(){
-                GameManager.destroyArena();
+                // GameManager.destroyArena();
+                GameManager.exitToLobby();
                 ClientServerConnect.postGameCleanup();
-                AppManager.goBackToLobby();
+                // AppManager.goBackToLobby();
             }
         });
     }

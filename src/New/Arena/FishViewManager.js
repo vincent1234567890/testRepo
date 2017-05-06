@@ -1,15 +1,10 @@
+/**
+ * Created by eugeneseah on 3/11/16.
+ */
+
 //use for manage fishes.
 const FishViewManager = (function(){
 
-    /**
-     * Fish Layer manager
-     * @param fishGameArena
-     * @param gameConfig
-     * @param animationEndEvent
-     * @param {function} getFishLockStatus
-     * @param onFishLockSelectedCallback  notification fish lock status change call back.
-     * @constructor
-     */
     const FishViewManager = function(fishGameArena, gameConfig, animationEndEvent, getFishLockStatus, onFishLockSelectedCallback){
         const plists = ResourceLoader.getPlists("Fish");
         for ( let list in plists){
@@ -29,7 +24,8 @@ const FishViewManager = (function(){
         // this.rotationFunction = rotationFunction;
         GameView.addView(this._parent);
 
-        proto._onFishClicked = (fishView) =>{ //when a fish clicked, call the callback.
+        let fishViewTarget;
+        this._onFishClicked = (fishView) =>{
             if (!getFishLockStatus()){
                 return;
             }
@@ -43,6 +39,16 @@ const FishViewManager = (function(){
             targetLockUI.removeFromParent(false);
             fishView.addTarget(targetLockUI);  //add lock icon to a fish.
             onFishLockSelectedCallback(id);    //locked fish callback.
+            if (targetLockUI.getParent() != null){
+                targetLockUI.getParent().removeChild(targetLockUI,false);
+            }
+            fishView.addTarget(targetLockUI);
+            fishViewTarget = fishView;
+            onFishLockSelectedCallback(id);
+        };
+
+        this.unsetLock = () =>{
+            fishViewTarget.removeTarget(targetLockUI);
         }
     };
 
