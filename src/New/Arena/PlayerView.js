@@ -1,7 +1,4 @@
-/**
- * Created by eugeneseah on 26/10/16.
- */
-
+//Player view
 var PlayerView = (function () {
     "use strict";
     var PlayerView = function (gameConfig, slot, isPlayer, changeSeatCallback, lockOnCallback, fishLockStatus) {
@@ -14,7 +11,8 @@ var PlayerView = (function () {
             lockOnCallback(state);
         };
 
-        this._playerViewStaticPrefabInstance = new PlayerViewStaticPrefab(gameConfig, slot, isPlayer, changeSeat, onLockOnRequest, fishLockStatus);
+        this._playerViewStaticPrefabInstance = new PlayerViewStaticPrefab(gameConfig, slot, isPlayer,
+            changeSeat, onLockOnRequest, fishLockStatus);
     };
 
     const proto = PlayerView.prototype;

@@ -6,8 +6,6 @@ const NetPrefab = (function () {
     const NetPrefab = function (scale, x,y, resource) {
         this._parent = new cc.Node();
         GameView.addView(this._parent);
-        // this._parent = parent;
-        // this._parent.addChild(this.node);
         this._netParent = new cc.Node();
         this._parent.addChild(this._netParent);
 

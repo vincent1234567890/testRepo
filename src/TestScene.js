@@ -30,5 +30,12 @@ var TestScene = cc.Scene.extend({
 
         //const pnWait = new WaitingPanel();
         //this.addChild(pnWait);
+        let spButton = new LockFishButton(PlayerSeatDirection.HORIZONTAL);
+        this.addChild(spButton);
+        spButton.setPosition(cc.visibleRect.center);
+
+        let spButton1 = new LockFishButton(PlayerSeatDirection.VERTICAL);
+        this.addChild(spButton1);
+        spButton1.setPosition(cc.visibleRect.center.x, cc.visibleRect.center.y + 100);
     }
 });

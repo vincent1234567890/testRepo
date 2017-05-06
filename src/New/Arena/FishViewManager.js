@@ -36,9 +36,10 @@ const FishViewManager = (function(){
                     break;
                 }
             }
-            if (targetLockUI.getParent() != null){
-                targetLockUI.getParent().removeChild(targetLockUI,false);
-            }
+            targetLockUI.removeFromParent(false);
+            fishView.addTarget(targetLockUI);  //add lock icon to a fish.
+            onFishLockSelectedCallback(id);    //locked fish callback.
+            targetLockUI.removeFromParent(false);
             fishView.addTarget(targetLockUI);
             fishViewTarget = fishView;
             onFishLockSelectedCallback(id);

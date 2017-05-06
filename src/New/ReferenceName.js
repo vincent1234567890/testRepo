@@ -311,7 +311,6 @@ const ReferenceName = {
     OptionsBarNegative : "#Setting Bar Empty.png",
     FishSliderButton : "#Setting Slider Button.png",
 
-
     //------------
     //Localisable
     //------------
