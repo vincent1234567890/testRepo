@@ -13,8 +13,13 @@ const ThemeDataManager = (function () {
         return _themeData[type];
     }
 
+    function loadFishesResources(){
+
+    }
+
     return {
         setThemeData : setThemeData,
         getThemeDataList : getThemeDataList,
+        loadFishesResources: loadFishesResources
     }
 })();

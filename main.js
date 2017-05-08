@@ -27,20 +27,20 @@ var cocos2dApp = cc.game.onStart = function() {
     // The game will be resized when browser size change
     cc.view.resizeWithBrowserSize(true);
 
-    //if the we can't connect server, should be give a friendly UI.
     //load resources
     ClientServerConnect.doInitialConnect().then(
         data => {
             const themeConfig = data["themeConfig"];
-            //set as
+            //should we load resources by server config?
             console.log(themeConfig);
-            for (let i = 0; i < themeConfig.resourceList.length; i++) {
-                for (let j = 0; j < themeConfig[themeConfig.resourceList[i]].length; j++) {
-                    ResourceLoader.addResource(themeConfig.folderName, themeConfig.resourceList[i], themeConfig[themeConfig.resourceList[i]][j]);
+            const resourceList = themeConfig["resourceList"];
+            for (let i = 0; i < resourceList.length; i++) {
+                for (let j = 0; j < themeConfig[resourceList[i]].length; j++) {
+                    ResourceLoader.addResource(themeConfig["folderName"], resourceList[i], themeConfig[resourceList[i]][j]);
                 }
             }
 
-            for (let i = 0; i < themeConfig.resourceList.length; i++) {
+            for (let i = 0; i < themeConfig.resourceList.length; i++) {   //?
                 for (let j in themeConfig[themeConfig.themeList[i]] ){
                     ThemeDataManager.setThemeData(themeConfig.themeList[i],themeConfig[themeConfig.themeList[i]]);
                 }
@@ -55,7 +55,10 @@ var cocos2dApp = cc.game.onStart = function() {
                 FishAnimationData.setData(themeConfig.FishRawData);
             }, this);
         }
-    ).catch(console.error.bind(console));   //should show a friendly UI to tell user, can't connect to game server.
+     //).catch(console.error.bind(console));   //should show a friendly UI to tell user, can't connect to game server.
+    ).catch(msg => {
+        //show messages on error panel.
+    });
 };
 
 cc.game.run();
