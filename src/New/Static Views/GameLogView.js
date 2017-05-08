@@ -136,6 +136,7 @@ const GameLogView = (function () {
 
         _parent.addChild(_popup.getParent());
 
+        //gameLog click event handler.
         function onGameLogTabPressed() {
             for (let radio in radioArray) {
                 radioArray[radio].setEnabled(true);
@@ -155,6 +156,8 @@ const GameLogView = (function () {
                 }
             }
 
+            //event
+            WaitingPanel.showPanel();
             ClientServerConnect.getGameSummaries(length).then(
                 gameSummaries => {
                     console.log(length, gameSummaries);
@@ -165,11 +168,16 @@ const GameLogView = (function () {
                     _displayTitle = items.scrollTitle;
                     _scrollTitleBackground.addChild(_displayTitle);
                     scrollBackground.addChild(_displayList);
+                    WaitingPanel.hidePanel();
                 }
-            );
+            ).catch(function(message){
+                WaitingPanel.hidePanel();
+                //show the error message
+            });
             _currentTab = onGameLogTabPressed;
         }
 
+        //Recharge log click event handler.
         function onRechargeLogTabPressed() {
             for (let radio in radioArray) {
                 radioArray[radio].setEnabled(true);
@@ -189,6 +197,7 @@ const GameLogView = (function () {
                 }
             }
 
+            WaitingPanel.showPanel();
             ClientServerConnect.getRechargeLog(length).then(
                 rechargeLogData => {
                     console.log(length, rechargeLogData);
@@ -198,8 +207,11 @@ const GameLogView = (function () {
                     _displayTitle = items.scrollTitle;
                     _scrollTitleBackground.addChild(_displayTitle);
                     scrollBackground.addChild(_displayList);
+                    WaitingPanel.hidePanel();
                 }
-            );
+            ).catch(function(errorMsg){
+                WaitingPanel.hidePanel();
+            });
             _currentTab = onRechargeLogTabPressed;
         }
 
@@ -243,10 +255,7 @@ const GameLogView = (function () {
             scrollBackground.addChild(_displayList);
 
             //remove the wait panel.
-            const curScene = cc.director.getRunningScene();
-            const waitPanel = curScene.getChildByTag(998);
-            if(waitPanel)
-                waitPanel.removeFromParent(true);
+            WaitingPanel.hidePanel();
         };
 
         onGameLogTabPressed();
@@ -441,8 +450,7 @@ const GameLogView = (function () {
 
         const onItemSelected = function (data) {
             //show the wait panel.
-            const scene = cc.director.getRunningScene();
-            scene.addChild(new WaitingPanel(), 999, 998);
+            WaitingPanel.showPanel()
             if (_requestConsumptionLogCallback) {
                 _requestConsumptionLogCallback(data.playerGameNumber, data.roundNumber)
             }

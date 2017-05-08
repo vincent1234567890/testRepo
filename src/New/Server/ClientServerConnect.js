@@ -1,6 +1,3 @@
-/**
- * Created by eugeneseah on 15/11/16.
- */
 //connector of the game server.
 const ClientServerConnect = function () {
     "use strict";
