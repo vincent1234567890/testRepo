@@ -32,13 +32,6 @@ const CannonView = (function () {
             markerPos = this._gameConfig.cannonPositions[0]
         }
 
-        // const cannonLabelFontDef = new cc.FontDefinition();
-        // cannonLabelFontDef.fontName = "Arial";
-        // cannonLabelFontDef.fontSize = "24";
-        // cannonLabelFontDef.fillStyle = new cc.color(this._theme["CannonLabelColour"][0], this._theme["CannonLabelColour"][1], this._theme["CannonLabelColour"][2]);
-        // cannonLabelFontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
-        //
-        // this._cannonPowerLabel = new cc.LabelTTF('', cannonLabelFontDef);
         this._cannonPowerLabel = new cc.LabelTTF('' , "Arial", 24);
         this._cannonPowerLabel._setFontWeight("bold");
         this._cannonPowerLabel.setFontFillColor(new cc.Color(0,0,0,255));
@@ -201,7 +194,7 @@ const CannonView = (function () {
     proto.setMultiplier = function (multiplier) { // only happens once at initialisation
         this._multiplier = multiplier;
         if(this._cannonPowerLabel){
-            if(this._cannonPowerLabel.getString() !== undefined && this._cannonPowerLabel.getString() !== NaN){
+            if(this._cannonPowerLabel.getString() !== undefined && !isNaN(this._cannonPowerLabel.getString())){
                 this._cannonPowerLabel.setString(parseInt(this._cannonPowerLabel.getString()) * multiplier);
             }
         }

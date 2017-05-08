@@ -251,6 +251,22 @@ let WaitingPanel = cc.LayerColor.extend({
     }
 });
 
+WaitingPanel.showPanel = function(){
+    const scene = cc.director.getRunningScene();
+    if(scene){
+        scene.addChild(new WaitingPanel(), 998, 998);  //panel's z-order 998, tag 998
+    }
+};
+
+WaitingPanel.hidePanel = function(){
+    const scene = cc.director.getRunningScene();
+    if(scene){
+        const panel = scene.getChildByTag(998);
+        if(panel)
+            panel.removeFromParent(true);
+    }
+};
+
 //
 let WaveTransition = cc.Node.extend({
     _spWave: null,

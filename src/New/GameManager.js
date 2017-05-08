@@ -277,9 +277,7 @@ const GameManager = function () {
 
     function seatSelected(type, seat) {
         console.log("seatSelected:", type, seat);
-        const scene = cc.director.getRunningScene();
-        scene.addChild(new WaitingPanel(), 999, 998);  //tag=998,  wait panel
-
+        WaitingPanel.showPanel();
         ClientServerConnect.joinGame(_currentScene.gameName, seat, type).catch(
             function (error) {
                 _lobbyManager.resetView();

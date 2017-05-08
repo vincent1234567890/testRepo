@@ -1,7 +1,4 @@
-/**
- * Created by eugeneseah on 16/2/17.
- */
-
+//Manage theme data.
 const ThemeDataManager = (function () {
     "use strict";
     const _themeData = {};
@@ -16,8 +13,13 @@ const ThemeDataManager = (function () {
         return _themeData[type];
     }
 
+    function loadFishesResources(){
+
+    }
+
     return {
         setThemeData : setThemeData,
         getThemeDataList : getThemeDataList,
+        loadFishesResources: loadFishesResources
     }
 })();
