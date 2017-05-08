@@ -36,6 +36,7 @@ const FishViewManager = (function(){
                     break;
                 }
             }
+            // Do we really need to do the same thing twice here?
             targetLockUI.removeFromParent(false);
             fishView.addTarget(targetLockUI);  //add lock icon to a fish.
             onFishLockSelectedCallback(id);    //locked fish callback.
