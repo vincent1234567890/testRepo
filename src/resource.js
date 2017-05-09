@@ -53,25 +53,25 @@ var res = {
     //FreeRound
     FreeRoundTitle : "Game/FreeRoundTitle.png",
 
-    GunCockSound : "Sound/Sound/換炮音效-修1.mp3",
-    GunShotSound : "Sound/Sound/發炮音效-修2.mp3",
+    GunCockSound : "Sound/Sound/ChangeCannonFX.mp3",
+    GunShotSound : "Sound/Sound/FirringFX.mp3",
 
     MenuButtonHoverSound : "Sound/Sound/cursor7.mp3",
-    MenuButtonPressSound : "Sound/Sound/se_maoudamashii_se_pc01.mp3",
-    JackpotViewPressedSound : "Sound/Sound/powerup10.mp3",
-    JackpotInfoPanelDismissSound : "Sound/Sound/decision15.mp3",
-    ChangeSeatButtonPressedSound : "Sound/Sound/bubble-burst1.mp3",
+    MenuButtonPressSound : "Sound/Sound/UIButton.mp3",
+    JackpotViewPressedSound : "Sound/Sound/JP.mp3",
+    JackpotInfoPanelDismissSound : "Sound/Sound/JPPopUP.mp3",
+    ChangeSeatButtonPressedSound : "Sound/Sound/ChangeSit.mp3",
 
-    FishCaptureEffectExplosionSound : "Sound/Sound/爆炸音效1.mp3",
-    BigFishCaptureEffectExplosionSound : "Sound/Sound/爆炸音效2.mp3",
-    FishCaptureEffectCoinSound : "Sound/Sound/金幣音效-修1.mp3",
+    FishCaptureEffectExplosionSound : "Sound/Sound/CoinExplosionFX1.mp3",
+    BigFishCaptureEffectExplosionSound : "Sound/Sound/CoinExplosionFX2.mp3",
+    FishCaptureEffectCoinSound : "Sound/Sound/CoinFX.mp3",
 
-    JackpotTriggeredSound : "Sound/Sound/JackpotOpening-修1.mp3",
-    JackpotBoxOpeningSound : "Sound/Sound/打開寶箱-修1.mp3",
-    JackpotMedalBlingSound : "Sound/Sound/JackpotBling.mp3",
-    JackpotEndSound : "Sound/Sound/Jackpotending.mp3",
+    JackpotTriggeredSound : "Sound/Sound/JPOperning.mp3",
+    JackpotBoxOpeningSound : "Sound/Sound/JPOpenChest.mp3",
+    JackpotMedalBlingSound : "Sound/Sound/JPBlink.mp3",
+    JackpotEndSound : "Sound/Sound/JPwinning.mp3",
 
-    FreeGameSound : "Sound/Sound/Bonusgameopening.mp3",
+    FreeGameSound : "Sound/Sound/BonusGameFX.mp3",
 
     //BGM
     FreeGameBGM: "Sound/Music/FreeGameBGM.mp3",

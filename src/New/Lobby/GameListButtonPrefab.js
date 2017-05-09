@@ -155,7 +155,7 @@ const GameListButtonPrefab = (function () {
             animationArray.push(frame);
             count++;
         }
-        return new cc.Animate(new cc.Animation(animationArray, 2 / animationArray.length));
+        return new cc.Animate(new cc.Animation(animationArray, 6 / animationArray.length));
     }
 
     const proto = GameListButtonPrefab.prototype;
