@@ -25,7 +25,7 @@ const FishViewManager = (function(){
         GameView.addView(this._parent);
 
         let fishViewTarget;
-        this._onFishClicked = (fishView) =>{
+        this._onFishClicked = (fishView) => {
             if (!getFishLockStatus()){
                 return;
             }
@@ -36,6 +36,7 @@ const FishViewManager = (function(){
                     break;
                 }
             }
+            // Do we really need to do the same thing twice here?
             targetLockUI.removeFromParent(false);
             fishView.addTarget(targetLockUI);  //add lock icon to a fish.
             onFishLockSelectedCallback(id);    //locked fish callback.
@@ -45,15 +46,15 @@ const FishViewManager = (function(){
             onFishLockSelectedCallback(id);
         };
 
-        this.unsetLock = () =>{
+        this.unsetLock = () => {
             fishViewTarget.removeTarget(targetLockUI);
-        }
+        };
     };
 
     const proto = FishViewManager.prototype;
 
     //使用FishManager 来添加或管理鱼
-    proto.addFish = function(fishId, fishType){
+    proto.addFish = function (fishId, fishType) {
         this._fishes[fishId] = new FishView(this._parent, this._gameConfig.fishClasses[fishType], fishType, this._onFishClicked);
         return this._fishes[fishId];
     };
