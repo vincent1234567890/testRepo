@@ -212,8 +212,12 @@ const GameManager = function () {
                 _lobbyManager.updateView(_playerData);
             }
         ).catch(console.error);
-        _floatingMenuManager.unattach();
-        _jackpotManager.unattach();
+        if (_floatingMenuManager) {
+            _floatingMenuManager.unattach();
+        }
+        if (_jackpotManager) {
+            _jackpotManager.unattach();
+        }
         destroyArena();
         ClientServerConnect.getCurrentJackpotValues().then(
             values => {
