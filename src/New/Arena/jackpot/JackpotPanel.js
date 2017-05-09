@@ -516,6 +516,12 @@ let JackpotPanel = cc.LayerColor.extend({ //gradient
         cc.LayerColor.prototype.onEnter.call(this);
         if (this._eventListener && !this._eventListener._isRegistered())
             cc.eventManager.addListener(this._eventListener, this);
+        cc.audioEngine.playMusic(res.JackpotBGM, true);
+    },
+
+    onExit: function() {
+        cc.LayerColor.prototype.onExit.call(this);
+        cc.audioEngine.playMusic(res.ArenaGameBGM, true);
     },
 
     cleanup: function () {
