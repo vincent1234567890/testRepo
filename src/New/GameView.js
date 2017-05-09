@@ -225,7 +225,10 @@ const GameView = function () {
                 _playerSlot = slot;
             }
         }
-        _playerViews[slot].updatePlayerData(playerData, oldSlot != null ? _playerSlot : undefined);
+        const playerView = _playerViews[slot];
+        if (playerView) {
+            playerView.updatePlayerData(playerData, oldSlot != null ? _playerSlot : undefined);
+        }
     }
 
     function clearPlayerState(slot) {
