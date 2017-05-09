@@ -66,12 +66,18 @@ var res = {
     BigFishCaptureEffectExplosionSound : "Sound/Sound/爆炸音效2.mp3",
     FishCaptureEffectCoinSound : "Sound/Sound/金幣音效-修1.mp3",
 
-    JackpotTriggeredSound : "Sound/Sound/Jackpot Opening-修1.mp3",
+    JackpotTriggeredSound : "Sound/Sound/JackpotOpening-修1.mp3",
     JackpotBoxOpeningSound : "Sound/Sound/打開寶箱-修1.mp3",
-    JackpotMedalBlingSound : "Sound/Sound/Jackpot Bling.mp3",
-    JackpotEndSound : "Sound/Sound/Jackpot ending.mp3",
+    JackpotMedalBlingSound : "Sound/Sound/JackpotBling.mp3",
+    JackpotEndSound : "Sound/Sound/Jackpotending.mp3",
 
-    FreeGameSound : "Sound/Sound/Bonus game opening.mp3",
+    FreeGameSound : "Sound/Sound/Bonusgameopening.mp3",
+
+    //BGM
+    FreeGameBGM: "Sound/Music/FreeGameBGM.mp3",
+    ArenaGameBGM: "Sound/Music/InGameBGM.mp3",
+    JackpotBGM: "Sound/Music/JPBGM.mp3",
+    LobbyBGM: "Sound/Music/LobbyBGM.mp3",
 
     //debug
     DebugCircle: "Testing/circle.png",
