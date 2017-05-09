@@ -63,6 +63,16 @@ let SeatSelectionScene = cc.Scene.extend({
         this.addChild(pnSoleTable);
     },
 
+    onEnter: function(){
+        cc.Scene.prototype.onEnter.call(this);
+        cc.audioEngine.playMusic(res.LobbyBGM, true);
+    },
+
+    //onExit: function(){
+    //    cc.Scene.prototype.onExit.call(this);
+        //cc.audioEngine.stopMusic(false);
+    //},
+
     _createLobbyTypeSprite: function() {
         if (this._lobbyType === '100X')
             return new cc.Sprite(ReferenceName.Seat100X);

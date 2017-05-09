@@ -58,8 +58,10 @@ const SettingsView = (function () {
         let label = new cc.LabelTTF("中文", fontDef);
         label.setPosition(300, gameLanguageSelectionHeight);
 
-        const acceptButton = GUIFunctions.createButton(ReferenceName.SettingsButtonBackground, ReferenceName.SettingsButtonBackgroundOnPress, dismiss);
-        const cancelButton = GUIFunctions.createButton(ReferenceName.SettingsButtonBackground, ReferenceName.SettingsButtonBackgroundOnPress, cancel);
+        const acceptButton = GUIFunctions.createButton(ReferenceName.SettingsButtonBackground,
+            ReferenceName.SettingsButtonBackgroundOnPress, dismiss);
+        const cancelButton = GUIFunctions.createButton(ReferenceName.SettingsButtonBackground,
+            ReferenceName.SettingsButtonBackgroundOnPress, cancel);
 
         const buttonLevel = 80;
 
@@ -146,7 +148,8 @@ const SettingsView = (function () {
     };
 
     function createSlider(parent, callback, value) {
-        let slider = new cc.ControlSlider(ReferenceName.SettingsSliderBackground, ReferenceName.SettingsSliderFiller, ReferenceName.SettingsSliderIndicator);
+        let slider = new cc.ControlSlider(ReferenceName.SettingsSliderBackground,
+            ReferenceName.SettingsSliderFiller, ReferenceName.SettingsSliderIndicator);
         slider.setMinimumAllowedValue(STARTOFFSET);
 
         slider.setMaximumValue(1 + STARTOFFSET + ENDOFFSET);

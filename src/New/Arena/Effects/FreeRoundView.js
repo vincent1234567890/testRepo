@@ -32,6 +32,8 @@ const FreeRoundView = (function () {
             FRTitle.runAction(_titleSequence.clone());
 
             BlockingManager.registerBlock(dismissCallback);
+
+            cc.audioEngine.playMusic(res.FreeGameBGM, true);
         };
 
         function onExplosionAnimationEnd() {
@@ -45,6 +47,8 @@ const FreeRoundView = (function () {
         }
 
         function dismissCallback() {
+            //play game music
+            cc.audioEngine.playMusic(res.ArenaGameBGM, true);
         }
     };
 

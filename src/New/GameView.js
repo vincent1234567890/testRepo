@@ -88,6 +88,7 @@ const GameView = function () {
             }
         }
 
+        cc.audioEngine.playMusic(res.ArenaGameBGM, true);
     }
 
     function setBackgroundTo(choice) {
@@ -167,6 +168,8 @@ const GameView = function () {
         }
         _screenShakeNode = undefined;
         _waveTransitionView = undefined;
+
+        cc.audioEngine.stopMusic();
     }
 
     function getPlayerSlot(slot) {

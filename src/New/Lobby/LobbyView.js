@@ -69,6 +69,8 @@ const LobbyView = (function () {
         _parent.addChild(target,-10);
 
         this.updatePlayerData(playerData);
+
+        cc.audioEngine.playMusic(res.LobbyBGM, true);
     };
 
     function setupGameList() {
@@ -111,6 +113,7 @@ const LobbyView = (function () {
         for (let button in gameControlList){
             gameControlList[button].resetView();
         }
+        cc.audioEngine.playMusic(res.LobbyBGM, true);
     };
 
     proto.updatePlayerData = function (playerData) {
