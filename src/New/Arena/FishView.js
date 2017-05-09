@@ -92,7 +92,7 @@ const FishView = (function () {
     proto.killFish = function (target, callback, id, playerSlot) {
         //console.log("killFish:", this.type, FishAnimationData[this.type], FishAnimationData[this.type][FishAnimationEnum.death],
         // FishAnimationData[this.type][FishAnimationEnum.death]&&FishAnimationData[this.type][FishAnimationEnum.death].length);
-        let deathAnimation = FishAnimationData[this.type][FishAnimationEnum.death];
+        let deathAnimation = FishAnimationData[this.type] && FishAnimationData[this.type][FishAnimationEnum.death];
         if (deathAnimation && deathAnimation.animation && deathAnimation.animation._animation
             && deathAnimation.animation._animation._frames && deathAnimation.animation._animation._frames.length > 0) {//lulwut? maybe need to find a better way
             this.doAnimation(FishAnimationEnum.death);
