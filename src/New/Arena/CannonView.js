@@ -90,6 +90,8 @@ const CannonView = (function () {
     proto.setCannonSprite = function (cannonPower) {
         if (cannonPower > 5) {
             cannonPower = 5;
+        }else if(cannonPower === 5){
+            cannonPower = 4;
         } else if (cannonPower < 1) {
             cannonPower = 1;
         }
