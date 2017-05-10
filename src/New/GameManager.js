@@ -312,7 +312,9 @@ const GameManager = function () {
         _isFishLockOn = state.state;
         _fishLockOnCallback = state.callback;
         if (!_isFishLockOn){
+            //release the locked fish.
             ClientServerConnect.unsetFishLockRequest();
+            unsetLockForFishId(_currentFishLockOnId);  //unlock on client directly.
         }
     }
 
@@ -326,6 +328,7 @@ const GameManager = function () {
             _isFishLockOn = false;
             _fishLockOnCallback(false);
             _fishManager.unsetLock();
+            _currentFishLockOnId = null;
         }
     }
 
