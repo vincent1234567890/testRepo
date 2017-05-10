@@ -178,7 +178,7 @@ const FAQView = (function () {
             _fishInfo.addChild(display);
             display.setPosition(410, 310);
 
-            const info = new cc.LabelTTF('此为1倍场的赔率，10和100倍场的赔率为该倍场的乘数。', 'Microsoft YaHei', 15);
+            const info = new cc.LabelTTF('此为1倍场的倍率，10和100倍场的倍率为该倍场的乘数。', 'Microsoft YaHei', 15);
             info.setFontFillColor(new cc.Color(0,0,0,255));
 
             // const angelFishLabel = new cc.LabelTTF('1.1', 'Microsoft YaHei', 17);
@@ -270,7 +270,7 @@ const FAQView = (function () {
             _jackpotInfo.addChild(freeRoundDisplay);
             freeRoundDisplay.setPosition(265, 245);
 
-            const jackpotInfo = new cc.LabelTTF('eFISH累积奖池是将所有玩家所发出的每一发炮弹进行相应金额累积。' +
+            const jackpotInfo = new cc.LabelTTF('游戏的累积奖池是将所有玩家所发出的每一发炮弹进行相应金额累积。' +
                 '任何玩家随时有机会触发宝箱游戏，赢取累积奖金。' +
                 '宝箱游戏中设有12个小宝箱，各自隐藏了图案，玩家可任意开启宝箱，首先集满三个同款图案宝箱即可获得相对应奖金，完成游戏。' +
                 '奖金项目共分为一等奖、二等奖、三等奖及四等奖。无论在哪个倍场，使用哪种类型的炮弹，玩家都有机会捕获各个等级的累积奖金。',
@@ -278,7 +278,7 @@ const FAQView = (function () {
             jackpotInfo.setPosition(260,10);
             jackpotBackground.addChild(jackpotInfo);
 
-            const freeGameInfo = new cc.LabelTTF('易博捕鱼游戏在进行中，随时有机会触发免费游戏。' +
+            const freeGameInfo = new cc.LabelTTF('本款捕鱼游戏在进行中，随时有机会触发免费游戏。' +
                 '玩家在有效时间内任发炮弹不计费，免费游戏中使用的炮弹类型将会是触发游戏前所使用的炮弹类型，不得更换。' +
                 '所有捕获的鱼彩金都会自动存入到玩家的账号。把握时间为自己赢取更多彩金，祝您好运！',
                 'Microsoft YaHei', 13, cc.size(290,275));
