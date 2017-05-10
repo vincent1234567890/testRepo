@@ -10,6 +10,16 @@ const PlayerViewStaticPrefab = (function () {
     const stackHeightMed = 8;
     const stackHeightHigh = 16;
 
+    /**
+     * Player view static information panel
+     * @param {Object} gameConfig
+     * @param {Number} slot  Seat position
+     * @param {Boolean} isPlayer is current player
+     * @param {function} changeSeatCallback the callback when Player change seat.
+     * @param {function} lockOnCallback lock/release button callback.
+     * @param {function} fishLockStatus get fish lock status.
+     * @constructor
+     */
     const PlayerViewStaticPrefab = function(gameConfig, slot, isPlayer, changeSeatCallback, lockOnCallback, fishLockStatus){
         this._parent = new cc.Node();
         GameView.addView(this._parent,1);

@@ -1,10 +1,17 @@
-/**
- * Created by eugeneseah on 27/10/16.
- */
 const PlayerViewManager = (function () {
     "use strict";
     let _bulletId;
 
+    /**
+     * Player View manager
+     * @param {Object} gameConfig game config from the Server.
+     * @param {Number} index
+     * @param {Boolean} isPlayer
+     * @param {function} changeSeatCallback the callback, when player change seat.
+     * @param lockOnCallback
+     * @param fishLockStatus
+     * @constructor
+     */
     const PlayerViewManager = function (gameConfig, index, isPlayer, changeSeatCallback, lockOnCallback, fishLockStatus) {
         _bulletId = 0;
         this._cannonManager = new CannonManager(gameConfig, index, isPlayer);
