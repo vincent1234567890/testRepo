@@ -18,7 +18,7 @@ let PlayerInfoWidget = cc.Node.extend({
         spPlayerNameBg.setPosition(95, 0);
         this.addChild(spPlayerNameBg);
 
-        const lbPlayerName = this._lbPlayerName = new cc.LabelTTF(playerInfo.playerState.displayName, "Arial", 22);
+        const lbPlayerName = this._lbPlayerName = new cc.LabelTTF(limitStringLength(playerInfo.playerState.displayName, 14), "Arial", 22);
         lbPlayerName._setFontWeight("bold");
         lbPlayerName.enableStroke(new cc.Color(0, 0, 0, 255), 2);
         spPlayerNameBg.addChild(lbPlayerName);
@@ -52,6 +52,14 @@ let PlayerInfoWidget = cc.Node.extend({
     }
 });
 
+let limitStringLength = function(str, limitLen){
+    if(!str)
+        return "";
+    if (str.length > limitLen) {
+        return str.substring(0,limitLen - 2) + "..";
+    }
+    return str;
+};
 
 //Floating Menu
 let GameFloatingMenu = cc.Node.extend({
