@@ -34,12 +34,7 @@ const LobbyView = (function () {
         NameBG.setPosition(100,550);
         bg.addChild(NameBG,1);
 
-        let displayName = playerData.playerState.displayName;
-        if (displayName.length > 14) {
-            displayName = displayName.substring(0,12) + "..";
-        }
-
-        const label = new cc.LabelTTF(displayName , "Arial", 22);
+        const label = new cc.LabelTTF(limitStringLength(playerData.playerState.displayName, 14) , "Arial", 22);
         label._setFontWeight("bold");
         label.enableStroke(new cc.Color(0, 0, 0, 255), 2);
         label.setAnchorPoint(0.5, 0.5);
