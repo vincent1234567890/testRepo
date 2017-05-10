@@ -47,7 +47,8 @@ const FishViewManager = (function(){
         };
 
         this.unsetLock = () => {
-            fishViewTarget.removeTarget(targetLockUI);
+            if(fishViewTarget)
+                fishViewTarget.removeTarget(targetLockUI);
         };
     };
 
