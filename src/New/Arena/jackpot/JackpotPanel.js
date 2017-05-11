@@ -123,6 +123,10 @@ let JackpotPanel = cc.LayerColor.extend({ //gradient
                 if (poolToWin) {
                     poolToWin.value = jackpotRewardObject.rewardValue;
                 }
+                //show player display name
+                if(jackpotRewardObject["playerDisplayName"])
+                    selfPoint._lbPlayer.setString("中奖玩家: " + limitStringLength(jackpotRewardObject["playerDisplayName"], 14));
+
                 selfPoint._showJackpotPrizeValues(jackpotValues.data);
             }
         }).catch(console.error);
@@ -235,9 +239,7 @@ let JackpotPanel = cc.LayerColor.extend({ //gradient
         }
 
         this._resetTimeCounter();
-
         const selBox = this._unselectedBoxes[0];
-
         this._openBox(selBox);
 
         //remove the event listener
@@ -258,9 +260,7 @@ let JackpotPanel = cc.LayerColor.extend({ //gradient
         }
 
         this._removeBoxFromArray(box);
-
         const medalCount = this._animateOpenBox(box);
-
         if (medalCount >= 3) {
             this.showRemainBoxes();
         }
