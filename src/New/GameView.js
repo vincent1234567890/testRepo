@@ -267,6 +267,9 @@ const GameView = function () {
     function setFreeRound(type) {
         if (type === 'clearing_for_free_shooting_game') {
             _effectsManager.showFreeRoundEffect();
+            cc.audioEngine.playMusic(res.FreeGameBGM, true);
+        } else if(type === "normal"){  //free round end
+            cc.audioEngine.playMusic(res.ArenaGameBGM, true);
         }
     }
 
