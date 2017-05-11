@@ -162,7 +162,7 @@ const PlayerViewStaticPrefab = (function () {
         this._playerName.setString('');
         this._gold.setString('');
         this._playerIcon.setVisible(false);
-        this._otherPlayerIcon.setVisible(false);
+        this._otherPlayerIcon.setVisible(false);gcd
         this._coinIcon.setVisible(false);
         this._isPlayer = null;
         this._lockOnButton.switchToRelease();
