@@ -181,7 +181,8 @@ const GameView = function () {
     }
 
     function touchAt(pos, touchType) {
-        if (touchType === TouchType.Began || touchType === TouchType.Moved) {
+        //if (touchType === TouchType.Began || touchType === TouchType.Moved) {
+        if (touchType === TouchType.Began) {
             _touchedPos = pos;
             const now = _fishGameArena.getGameTime();
             const timeSinceLastShot = now - _lastShotTime;
@@ -241,7 +242,7 @@ const GameView = function () {
 
     function updateArena() {
         if (_touchedPos != null) {
-            touchAt(_touchedPos, TouchType.Moved);
+            touchAt(_touchedPos, TouchType.Began);
         }
 
         _fishGameArena.updateEverything();
