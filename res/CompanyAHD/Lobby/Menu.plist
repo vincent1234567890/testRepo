@@ -484,6 +484,126 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
+            <key>FAL-X2.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{27,27}</string>
+                <key>spriteSourceSize</key>
+                <string>{27,27}</string>
+                <key>textureRect</key>
+                <string>{{1703,1573},{27,27}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>FAL-X3.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{27,27}</string>
+                <key>spriteSourceSize</key>
+                <string>{27,27}</string>
+                <key>textureRect</key>
+                <string>{{1577,1627},{27,27}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>FAL-X4.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{27,27}</string>
+                <key>spriteSourceSize</key>
+                <string>{27,27}</string>
+                <key>textureRect</key>
+                <string>{{1606,1627},{27,27}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>FAL-X5.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{27,27}</string>
+                <key>spriteSourceSize</key>
+                <string>{27,27}</string>
+                <key>textureRect</key>
+                <string>{{1635,1626},{27,27}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>FAL-X6.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{27,27}</string>
+                <key>spriteSourceSize</key>
+                <string>{27,27}</string>
+                <key>textureRect</key>
+                <string>{{1702,1606},{27,27}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>FAL-X7.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{27,27}</string>
+                <key>spriteSourceSize</key>
+                <string>{27,27}</string>
+                <key>textureRect</key>
+                <string>{{1756,1613},{27,27}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>FAL-X8.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{27,27}</string>
+                <key>spriteSourceSize</key>
+                <string>{27,27}</string>
+                <key>textureRect</key>
+                <string>{{1664,1638},{27,27}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>FAL-X9.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{27,27}</string>
+                <key>spriteSourceSize</key>
+                <string>{27,27}</string>
+                <key>textureRect</key>
+                <string>{{1547,1658},{27,27}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
             <key>FishChinese.png</key>
             <dict>
                 <key>aliases</key>
@@ -1545,9 +1665,9 @@
                 <key>spriteSourceSize</key>
                 <string>{31,30}</string>
                 <key>textureRect</key>
-                <string>{{1756,1582},{29,30}}</string>
+                <string>{{1732,1582},{29,30}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>NumberChinese.png</key>
             <dict>
@@ -2373,7 +2493,7 @@
             <key>size</key>
             <string>{2048,2048}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:c830b7b1f0756c5cbc63ab82d62a5e1c:e4d37023717416311c6dd9e1baf681ec:474a9a58f742d06d2866a4a6eac25590$</string>
+            <string>$TexturePacker:SmartUpdate:7f9a20085c6e995d3cffa346ba653581:59a81cb457a64fe47024ffa1c32d4e7f:474a9a58f742d06d2866a4a6eac25590$</string>
             <key>textureFileName</key>
             <string>Menu.png</string>
         </dict>
