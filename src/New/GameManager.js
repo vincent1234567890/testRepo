@@ -170,8 +170,12 @@ const GameManager = function () {
         // These are things we should do immediately after logging in:
         // Listen for a creditChangeEvent (e.g. caused by an external /recharge request, gift from grandma, etc.)
         ClientServerConnect.listenForEvent('creditChangeEvent', data => {
-            _playerData.playerState.score += data.amount;
-            LobbyManager.updatePlayerData(_playerData);
+            if (_playerData) {
+                _playerData.playerState.score += data.amount;
+                if (_lobbyManager) {
+                    _lobbyManager.updateView(_playerData);
+                }
+            }
         });
         ClientServerConnect.listenForEvent('jpVals', jpVals => {
             if (_jackpotManager) {
