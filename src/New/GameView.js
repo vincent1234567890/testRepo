@@ -247,6 +247,10 @@ const GameView = function () {
         _fishGameArena.updateEverything();
     }
 
+    function stopAutoFiring() {
+        _touchedPos = null;
+    }
+
     function changeSeatRequest(slot) {
         ClientServerConnect.changeSeatRequest(slot);
     }
@@ -288,11 +292,10 @@ const GameView = function () {
         shootTo: shootTo,
         updateMultiplayerState: updateMultiplayerState,
         updateArena: updateArena,
+        stopAutoFiring: stopAutoFiring,
         caughtFishAnimationEnd: caughtFishAnimationEnd,
         setFreeRound: setFreeRound,
 
         goToSeatSelection: goToSeatSelection,
-    }
-
-
+    };
 }();
