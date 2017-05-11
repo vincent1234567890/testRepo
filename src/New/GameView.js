@@ -13,7 +13,8 @@ const GameView = function () {
     let _playerSlot;
 
     let _fishGameArena;
-    let _touchedPos;
+    let _latestTouchPos = null;
+    let _autoFiring = false;
     let _lastShotTime = -Infinity;
 
     //UIManagers
@@ -181,9 +182,20 @@ const GameView = function () {
     }
 
     function touchAt(pos, touchType) {
-        //if (touchType === TouchType.Began || touchType === TouchType.Moved) {
+        if (touchType === TouchType.Moved || touchType === TouchType.Began) {
+            _latestTouchPos = pos;
+        } else {
+            _latestTouchPos = null;
+            _autoFiring = false;
+        }
         if (touchType === TouchType.Began) {
-            _touchedPos = pos;
+            _autoFiring = true;
+            fireBulletAt(pos);
+        }
+    }
+
+    function fireBulletAt(pos) {
+        if (pos) {
             const now = _fishGameArena.getGameTime();
             const timeSinceLastShot = now - _lastShotTime;
             if (timeSinceLastShot < _gameConfig.shootInterval) {
@@ -201,8 +213,6 @@ const GameView = function () {
             const bulletId = _playerId + ':' + getPlayerBulletId();
 
             ClientServerConnect.getServerInformer().bulletFired(bulletId, (info.rotation - 90) / 180 * Math.PI);
-        } else {
-            _touchedPos = null;
         }
     }
 
@@ -241,15 +251,16 @@ const GameView = function () {
     }
 
     function updateArena() {
-        if (_touchedPos != null) {
-            touchAt(_touchedPos, TouchType.Began);
+        if (_autoFiring) {
+            fireBulletAt(_latestTouchPos);
         }
 
         _fishGameArena.updateEverything();
     }
 
     function stopAutoFiring() {
-        _touchedPos = null;
+        _autoFiring = false;
+        _latestTouchPos = null;
     }
 
     function changeSeatRequest(slot) {
