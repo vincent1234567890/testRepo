@@ -82,6 +82,8 @@ const CannonView = (function () {
     };
 
     proto.updateCannonPowerLabel = function (cannonPower) {
+        if(cannonPower == null || isNaN(cannonPower))
+            cannonPower = 1;
         this._cannonPowerLabel.setString(String(cannonPower * (this._multiplier === undefined ? 1 : this._multiplier)));
         cc.audioEngine.playEffect(res.GunCockSound);
         this.setCannonSprite(cannonPower);
@@ -133,7 +135,7 @@ const CannonView = (function () {
     // };
 
     proto.clearCannonPowerLabel = function () {
-        this._cannonPowerLabel.setString('');
+        this._cannonPowerLabel.setString('1');
         this.setCannonSprite(1);
     };
 
@@ -195,10 +197,12 @@ const CannonView = (function () {
 
     proto.setMultiplier = function (multiplier) { // only happens once at initialisation
         this._multiplier = multiplier;
-        if(this._cannonPowerLabel){
-            if(this._cannonPowerLabel.getString() !== undefined && !isNaN(this._cannonPowerLabel.getString())){
-                this._cannonPowerLabel.setString(parseInt(this._cannonPowerLabel.getString()) * multiplier);
-            }
+        let power = parseInt(this._cannonPowerLabel.getString());
+        if (isNaN(power))
+            power = 1;
+
+        if (this._cannonPowerLabel) {
+            this._cannonPowerLabel.setString(power * multiplier);
         }
     };
 

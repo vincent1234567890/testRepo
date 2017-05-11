@@ -59,7 +59,7 @@ const LobbyView = (function () {
         const target = new cc.Sprite();
         target.setBlendFunc(cc.ONE, cc.ONE);
         const causticAnimation = GUIFunctions.getAnimation(ReferenceName.LobbyCaustics,0.05);
-        target.runAction(new cc.repeatForever(causticAnimation));
+        target.runAction(causticAnimation.repeatForever());
         target.setPosition(length/2,height/2);
         _parent.addChild(target,-10);
 
