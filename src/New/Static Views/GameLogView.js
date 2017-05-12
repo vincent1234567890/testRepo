@@ -1,6 +1,3 @@
-/**
- * Created by eugeneseah on 11/4/17.
- */
 const GameLogView = (function () {
     "use strict";
     const ZORDER = 10;
@@ -20,7 +17,6 @@ const GameLogView = (function () {
     let _displayTitle;
 
     let _currentTab;
-
 
     let _gameSummaryData;
     let _consumptionData;
@@ -383,7 +379,7 @@ const GameLogView = (function () {
                 // fontDef.fontName = "Arial Unicode MS";
                 fontDef.fontSize = "20";
                 fontDef.fontStyle = "bold";
-                fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
+                //fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
                 fontDef.fillStyle = new cc.Color(0, 0, 0, 255);
 
                 const date = new Date(itemData.startTime);
@@ -397,9 +393,10 @@ const GameLogView = (function () {
                 let roundId = new cc.LabelTTF(roundIdText, fontDef);
 
                 fontDef.textAlign = cc.TEXT_ALIGNMENT_CENTER;
-                let totalSpend = new cc.LabelTTF(itemData.totalSpent, fontDef);
-                let totalRevenue = new cc.LabelTTF(itemData.totalRevenue, fontDef);
-                let totalProfit = new cc.LabelTTF(parseFloat(itemData.totalRevenue) - parseFloat(itemData.totalSpent), fontDef);
+                let totalSpend = new cc.LabelTTF(itemData.totalSpent.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}), fontDef);
+                let totalRevenue = new cc.LabelTTF(itemData.totalRevenue.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}), fontDef);
+                let totalProfit = new cc.LabelTTF((parseFloat(itemData.totalRevenue) - parseFloat(itemData.totalSpent)).toLocaleString(
+                    'en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}), fontDef);
 
                 const endDate = new Date(itemData.endTime);
                 fontDef.fontSize = "16";
@@ -595,15 +592,18 @@ const GameLogView = (function () {
                 fontDef.fontName = "Microsoft YaHei";
                 fontDef.fontSize = "20";
                 fontDef.fontStyle = "bold";
-                fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
+                //fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
                 fontDef.fillStyle = new cc.Color(0, 0, 0, 255);
 
 
                 let bulletId = new cc.LabelTTF(itemData.id, fontDef);
 
                 fontDef.textAlign = cc.TEXT_ALIGNMENT_CENTER;
-                let totalSpend = new cc.LabelTTF(itemData.totalSpend, fontDef);
-                let totalProfit = new cc.LabelTTF(parseFloat(itemData.totalRevenue) - parseFloat(itemData.totalSpend), fontDef);
+                let totalSpend = new cc.LabelTTF(
+                    itemData.totalSpend.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}), fontDef);
+                let totalProfit = new cc.LabelTTF(
+                    (parseFloat(itemData.totalRevenue) - parseFloat(itemData.totalSpend)).toLocaleString('en-US',
+                        {minimumFractionDigits: 2, maximumFractionDigits: 2}), fontDef);
                 let sceneName = new cc.LabelTTF(itemData.sceneName, fontDef);
 
                 let uncaught;
@@ -785,17 +785,15 @@ const GameLogView = (function () {
                 fontDef.fontName = "Microsoft YaHei";
                 fontDef.fontSize = "20";
                 fontDef.fontStyle = "bold";
-                fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
+                //fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
                 fontDef.fillStyle = new cc.Color(0, 0, 0, 255);
 
                 const date = new Date(itemData.date);
-
-                let dateText = new cc.LabelTTF(date.toLocaleDateString("en-GB") , fontDef);
+                let dateText = new cc.LabelTTF(date.toLocaleDateString("en-GB") + "\n" + date.toLocaleTimeString("en-GB"), fontDef);
 
                 fontDef.textAlign = cc.TEXT_ALIGNMENT_CENTER;
 
                 let typeText;
-
                 switch (itemData.type) {
                     case 'transferIn':
                         typeText = "转入";
@@ -810,8 +808,8 @@ const GameLogView = (function () {
 
                 const transferType = new cc.LabelTTF(typeText, fontDef);
                 const transferId = new cc.LabelTTF(itemData.id, fontDef);
-                const transferAmount = new cc.LabelTTF((itemData.amount).toLocaleString('en-US', {maximumFractionDigits: 2}), fontDef);
-                const totalAmount = new cc.LabelTTF((itemData.total).toLocaleString('en-US', {maximumFractionDigits: 2}), fontDef);
+                const transferAmount = new cc.LabelTTF((itemData.amount).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}), fontDef);
+                const totalAmount = new cc.LabelTTF((itemData.total).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}), fontDef);
 
                 dateText.setPosition(125, listEntryPos.y);
                 transferType.setPosition(325, listEntryPos.y);
