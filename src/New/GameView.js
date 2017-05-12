@@ -85,6 +85,7 @@ const GameView = function () {
             _screenShakeNode.addChild(_waveTransitionView);
         }
         initialiseTouch(touchAt);
+        ef.gameController.setCurrentMultiple(parseInt(choice.gameName));
         if (_gameConfig) {
             for (let i = 0; i < _gameConfig.maxPlayers; i++) {
                 _playerViews[i].setMultiplier(choice.gameName.slice(0,-1)); // because scenes are 1X, 10X, 100X

@@ -1,6 +1,3 @@
-/**
- * Created by eugeneseah on 21/2/17.
- */
 const CaptureCoinEffectManager = (function () {
     "use strict";
     const padding = 7;
@@ -47,7 +44,7 @@ const CaptureCoinEffectManager = (function () {
     proto.triggerCoins = function (pos, target, fish) {
         // console.log(pos);
         cc.audioEngine.playEffect(res.FishCaptureEffectCoinSound);
-        const label = _prizeLabelPool.alloc(this._parent, fish.value);
+        const label = _prizeLabelPool.alloc(this._parent, fish.value);  //should be * multiple
         setupView(label, label.getTargetNode(), pos, Math.PI / 2, target, undefined, collectLifetime/10,
             collectDelay * 10 * fish.coinsShown * offsetPerCoin * randomMax, collectLabel);
         for (let i = 0; i < fish.coinsShown; i++) {
@@ -76,16 +73,18 @@ const CaptureCoinEffectManager = (function () {
     const PrizeLabelObject = (function () {
         // const _gravity = 9;
         function PrizeLabelObject(parent, value) {
+            let fishValue = ef.gameController.getCurrentMultiple() * value,
+              strValue = fishValue.toLocaleString('en-US', {maximumFractionDigits: 2});
             //prize amount font def
             if (!this._label) {
-                this._label = new cc.LabelBMFont(value, res.InGameLightGoldFontFile);
+                this._label = new cc.LabelBMFont(strValue, res.InGameLightGoldFontFile);
                 this._label.setScale(0.5);
             }
 
             this._parent = parent;
             this._parent.addChild(this._label, 1);
 
-            this._label.setString(value);
+            this._label.setString(strValue);
             this._label.setVisible(true);
         }
 

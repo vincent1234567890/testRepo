@@ -1,7 +1,3 @@
-/**
- * Created by eugeneseah on 21/2/17.
- */
-
 const EffectsManager = (function () {
     "use strict";
     let coinEffectsManager;

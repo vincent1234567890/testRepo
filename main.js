@@ -48,6 +48,7 @@ var cocos2dApp = cc.game.onStart = function() {
 
             ResourceLoader.finaliseResources();
             cc.LoadingScreen.preload(ResourceLoader.getResourceList(), function () {
+                ef.gameController = new GameController();
                 // cc.director.runScene(new LogoScene());
                 //cc.director.runScene(new TestScene());
 
