@@ -1,6 +1,3 @@
-/**
- * Created by eugeneseah on 28/2/17.
- */
 //Candidate for refactor
 const CoinStackEffect = (function () {
     "use strict";
@@ -28,14 +25,9 @@ const CoinStackEffect = (function () {
 
         if (!this._parent) {
             this._parent = new cc.Node();
-            let fontDef = new cc.FontDefinition();
-            fontDef.fontName = "Arial";
-            //fontDef.fontWeight = "bold";
-            fontDef.fontSize = 15;
-            fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
-            fontDef.fillStyle = new cc.Color(255, 192, 0, 255);
 
-            this._coinValueLabel = new cc.LabelTTF("", fontDef);
+            this._coinValueLabel = new cc.LabelTTF("", "Arial", 15);
+            this._coinValueLabel.setFontFillColor(new cc.Color(255, 192, 0, 255));
 
             this._coinValueLabel.enableStroke(new cc.Color(96, 64, 0, 255),2);
             this._parent.addChild(this._coinValueLabel,1);
@@ -43,7 +35,7 @@ const CoinStackEffect = (function () {
             this._coinValueLabel.setOpacity(0);
         }
         const coinValueLabel = this._coinValueLabel;
-        this._coinValueLabel.setString(valueToDisplay.toFixed(1));
+        this._coinValueLabel.setString(valueToDisplay.toLocaleString('en-US', {maximumFractionDigits: 2}));
         const parentNode = this._parent;
 
         parentNode.update = function (dt) {

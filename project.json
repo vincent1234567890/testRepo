@@ -18,6 +18,8 @@
         "src/New/ThemeDataManager.js",
         "src/resource.js",
 
+        "src/controller/GameController.js",
+
         "src/New/Utilities/Queue.js",
         "src/New/CommonWidget.js",
 

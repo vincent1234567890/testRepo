@@ -732,7 +732,6 @@ const GameLogView = (function () {
     }
 
     function setupRechargeLogList(scrollBackground, rechargeData){
-
         let scrollTitle = setupRechargeLogTitle();
         scrollTitle.setPosition(0, _scrollTitleBackground.getContentSize().height / 2);
 
@@ -789,7 +788,7 @@ const GameLogView = (function () {
                 fontDef.fillStyle = new cc.Color(0, 0, 0, 255);
 
                 const date = new Date(itemData.date);
-                let dateText = new cc.LabelTTF(date.toLocaleDateString("en-GB") + "\n" + date.toLocaleTimeString("en-GB"), fontDef);
+                let dateText = new cc.LabelTTF(date.toLocaleDateString("en-GB") + " " + date.toLocaleTimeString("en-GB"), fontDef);
 
                 fontDef.textAlign = cc.TEXT_ALIGNMENT_CENTER;
 
