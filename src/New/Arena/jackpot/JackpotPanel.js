@@ -19,7 +19,9 @@ let JackpotPanel = cc.LayerColor.extend({ //gradient
     _lbPrize4Value: null,
     _eventListener: null,
 
-    ctor: function (isPlaying, jackpotRewardObject) {
+    _onFinishCallback: null,
+
+    ctor: function (isPlaying, jackpotRewardObject, onFinishCallback) {
         this._isPlaying = isPlaying;
         this._jackpotResult = jackpotRewardObject;
 
@@ -523,6 +525,13 @@ let JackpotPanel = cc.LayerColor.extend({ //gradient
         this._lbTimeCounter.setColor(new cc.Color(255, 255, 255, 255));
     },
 
+    // This will be called if the player who was playing this jackpot game leaves the game before it is completed
+    playerHasLeft: function () {
+        // @todo Instead of hiding the panel we should auto-play the rest of the game
+        // If the game has ended and the celebration animation is playing, then we should do nothing.
+        this.hidePanel();
+    },
+
     onEnter: function () {
         cc.LayerColor.prototype.onEnter.call(this);
         if (this._eventListener && !this._eventListener._isRegistered())
@@ -548,6 +557,9 @@ let JackpotPanel = cc.LayerColor.extend({ //gradient
             this.removeFromParent();
             if (callback) {
                 callback();
+            }
+            if (this._onFinishCallback) {
+                this._onFinishCallback();
             }
         }, this)));
     },
@@ -602,16 +614,18 @@ const JackpotAwardPanel = cc.LayerColor.extend({
         const coinsAnimation2 = GUIFunctions.getAnimation(ReferenceName.JackpotCoinAnimation, 0.03);
         spCoins2.runAction(cc.sequence(cc.delayTime(0.5), cc.show(), coinsAnimation2, cc.hide()).repeatForever());
 
-        this.runAction(cc.sequence(cc.delayTime(10), cc.callFunc(function () {
-            const parent = this.getParent();
-            if (parent) {
-                parent.hidePanel(() => {
-                    if (parent._isPlaying) {
-                        ClientServerConnect.getServerInformer().jackpotGameOver();
-                    }
-                });
-            }
-        }, this)));
+        this.runAction(cc.sequence(cc.delayTime(10), cc.callFunc(this.closePanel, this)));
+    },
+
+    closePanel: function () {
+        const parent = this.getParent();
+        if (parent) {
+            parent.hidePanel(() => {
+                if (parent._isPlaying) {
+                    ClientServerConnect.getServerInformer().jackpotGameOver();
+                }
+            });
+        }
     },
 
     cleanup: function () {
