@@ -42,7 +42,7 @@ let PlayerInfoWidget = cc.Node.extend({
     updatePlayerCredit: function(playerCredit){
         if(!playerCredit)
             playerCredit = 0;
-        this._lbPlayerCredit.setString(playerCredit.toLocaleString('en-US', {maximumFractionDigits: 2}));
+        this._lbPlayerCredit.setString(playerCredit.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}));
     },
 
     updatePlayerName: function(playerName){

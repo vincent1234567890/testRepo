@@ -145,7 +145,7 @@ const PlayerViewStaticPrefab = (function () {
             this.animateCoinStack(playerData.scoreChange);
             playerData.scoreChange = 0;
         }
-        let gold = Math.floor(playerData.score).toLocaleString('en-US', {maximumFractionDigits: 2});
+        let gold = playerData.score.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
         if (gold.length > 10) {
             gold = gold.substring(0,9) + "..";
         }

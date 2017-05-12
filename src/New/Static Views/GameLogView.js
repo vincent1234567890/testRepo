@@ -783,7 +783,6 @@ const GameLogView = (function () {
 
                 let fontDef = new cc.FontDefinition();
                 fontDef.fontName = "Microsoft YaHei";
-                // fontDef.fontName = "Arial Unicode MS";
                 fontDef.fontSize = "20";
                 fontDef.fontStyle = "bold";
                 fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
