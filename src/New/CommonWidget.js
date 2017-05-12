@@ -61,6 +61,16 @@ let limitStringLength = function(str, limitLen){
     return str;
 };
 
+const transferMinutesToString = function(minutes){
+    const hours = 0|(minutes / 60);
+    const mins = 0|(minutes % 60);
+    const secs = (minutes - (0|minutes)) * 60;
+    let strHours = hours.toFixed(0), strMin = mins.toFixed(0), strSecs = secs.toFixed(0);
+    return strHours.length === 1?("0"+ strHours):strHours + ":" +
+    strMin.length === 1?("0"+ strMin):strMin + ":" +
+    strSecs.length === 1?("0"+ strSecs):strSecs;
+};
+
 //Floating Menu
 let GameFloatingMenu = cc.Node.extend({
     _btnSetting: null,
