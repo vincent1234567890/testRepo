@@ -1,7 +1,3 @@
-/**
- * Created by eugeneseah on 30/3/17.
- */
-
 const LeaderboardView = (function () {
     "use strict";
     const ZORDER = 10;
@@ -60,7 +56,6 @@ const LeaderboardView = (function () {
         // listView.setBounceEnabled(true);
         listView.setItemsMargin(-30);
 
-
         let fontDef = new cc.FontDefinition();
         fontDef.fontName = "Microsoft YaHei";
         // fontDef.fontName = "Arial Unicode MS";
@@ -68,11 +63,12 @@ const LeaderboardView = (function () {
         fontDef.fontStyle = "bold";
         fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
 
-
         const data = leaderboardData.data;
 
         for (let i = 0; i < data.length; i++) {
-            console.log(data[i]);
+            if(data[i].val < 0)
+                continue;
+            //console.log(data[i]);
             const item = new ccui.Widget();
 
             const background = new cc.Sprite(ReferenceName.LeaderboardItemBackground);
@@ -82,8 +78,8 @@ const LeaderboardView = (function () {
             let rank = new cc.LabelTTF(i+1 , fontDef);
             fontDef.fillStyle = new cc.Color(0, 0, 0, 255);
             let name = new cc.LabelTTF(data[i].name , fontDef);
-            let time = new cc.LabelTTF(data[i].minutesPlayed.toFixed(0) , fontDef);
-            let score = new cc.LabelTTF(data[i].val , fontDef);
+            let time = new cc.LabelTTF(transferMinutesToString(data[i].minutesPlayed) , fontDef);
+            let score = new cc.LabelTTF(data[i].toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) , fontDef);
 
             item.setContentSize(background.getContentSize().width+100, rankingBackground.getContentSize().height );
             const size = item.getContentSize();
@@ -107,7 +103,6 @@ const LeaderboardView = (function () {
         }
 
         listView.setContentSize(1000,600);
-
         return listView;
     }
 

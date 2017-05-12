@@ -1,6 +1,3 @@
-/**
- * Created by eugeneseah on 6/4/17.
- */
 const SettingsView = (function () {
     "use strict";
     const STARTOFFSET = 0.03;
@@ -48,14 +45,8 @@ const SettingsView = (function () {
         gameLanguageSelectionTitle.setPosition(STARTING_ALIGNMENT, gameLanguageSelectionHeight);
         gameLanguageSelectionBar.setPosition(400, gameLanguageSelectionHeight);
 
-        let fontDef = new cc.FontDefinition();
-        fontDef.fontName = "Microsoft YaHei";
-        // fontDef.fontName = "Arial Unicode MS";
-        fontDef.fontSize = "20";
-        fontDef.fontStyle = "bold";
-        fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
-        fontDef.fillStyle = new cc.Color(255, 255, 255, 255);
-        let label = new cc.LabelTTF("中文", fontDef);
+        let label = new cc.LabelTTF("中文", "Microsoft YaHei", 20);
+        label._setFontWeight("bold");
         label.setPosition(300, gameLanguageSelectionHeight);
 
         const acceptButton = GUIFunctions.createButton(ReferenceName.SettingsButtonBackground,

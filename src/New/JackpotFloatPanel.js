@@ -60,7 +60,7 @@ let JackpotFloatPanel = cc.Node.extend({
 
         //jackpot value label
         let barSize = spBarFrame.getContentSize();
-        let lbJackpotValue = this._lbJackpotValue = new cc.LabelBMFont("8,888,888", res.WhiteFontFile);
+        let lbJackpotValue = this._lbJackpotValue = new cc.LabelBMFont(" ", res.WhiteFontFile);
         spBarFrame.addChild(lbJackpotValue, -1);
         lbJackpotValue.setPosition(barSize.width * 0.5, 33);
         lbJackpotValue.setScale(0.6);
