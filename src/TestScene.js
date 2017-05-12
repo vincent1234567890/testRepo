@@ -21,15 +21,16 @@ var TestScene = cc.Scene.extend({
         //const waterCausticsLayer = new WaterCausticsLayer();
         //this.addChild(waterCausticsLayer,999);
 
+        let waveTransition = new WaveTransition(res.GameBackground0);
+        this.addChild(waveTransition);
+        //waveTransition.transition(res.GameBackground1);
+
         //let jackpotPanel = new JackpotDetailPanel();
         //this.addChild(jackpotPanel);
 
-        let waveTransition = new WaveTransition(res.GameBackground0);
-        this.addChild(waveTransition);
-        waveTransition.transition(res.GameBackground1);
-
         //const pnWait = new WaitingPanel();
         //this.addChild(pnWait);
+        /**
         let spButton = new LockFishButton(PlayerSeatDirection.HORIZONTAL);
         this.addChild(spButton);
         spButton.setPosition(cc.visibleRect.center);
@@ -37,5 +38,9 @@ var TestScene = cc.Scene.extend({
         let spButton1 = new LockFishButton(PlayerSeatDirection.VERTICAL);
         this.addChild(spButton1);
         spButton1.setPosition(cc.visibleRect.center.x, cc.visibleRect.center.y + 100);
+         **/
+        
+        //let jackpotPanel = new JackpotPanel(true, {});
+        //this.addChild(jackpotPanel);
     }
 });
