@@ -82,7 +82,7 @@ const LeaderboardView = (function () {
             let rank = new cc.LabelTTF(i+1 , fontDef);
             fontDef.fillStyle = new cc.Color(0, 0, 0, 255);
             let name = new cc.LabelTTF(data[i].name , fontDef);
-            let time = new cc.LabelTTF(data[i].minutesPlayed.toLocaleString('en-US', {maximumFractionDigits: 2}) , fontDef);
+            let time = new cc.LabelTTF(data[i].minutesPlayed.toFixed(0) , fontDef);
             let score = new cc.LabelTTF(data[i].val , fontDef);
 
             item.setContentSize(background.getContentSize().width+100, rankingBackground.getContentSize().height );

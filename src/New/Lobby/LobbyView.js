@@ -112,13 +112,14 @@ const LobbyView = (function () {
     };
 
     proto.updatePlayerData = function (playerData) {
-        let gold = Math.floor(playerData.playerState.score).toLocaleString('en-US', {maximumFractionDigits: 2});
+        if (!playerData || !playerData["playerState"])
+            return;
+        let gold = playerData.playerState.score.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
         if (gold.length > 14) {
-            gold = gold.substring(0,13) + "..";
+            gold = gold.substring(0, 13) + "..";
         }
-        if(gold != _goldLabel.getString()) {
-            _goldLabel.setString(gold);
-        }
+
+        _goldLabel.setString(gold);
     };
 
     return LobbyView;
