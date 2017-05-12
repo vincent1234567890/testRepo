@@ -52,7 +52,6 @@ const CannonManager = (function () {
         //if (!getArena().canSwitchGun()) {
         //    return;
         //}
-
         const nextGunClass = _gameConfig.gunClasses[nextGunId];
 
         if (!nextGunClass) {
