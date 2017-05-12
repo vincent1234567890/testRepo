@@ -2,6 +2,7 @@ let JackpotPanel = cc.LayerColor.extend({ //gradient
     _isPlaying: null,
     _jackpotResult: null,
 
+    _pnContent: null,
     _unselectedBoxes: null,
     _selectedIndex: 0,
     _selectedMedals: null,
@@ -22,7 +23,12 @@ let JackpotPanel = cc.LayerColor.extend({ //gradient
         this._isPlaying = isPlaying;
         this._jackpotResult = jackpotRewardObject;
 
-        cc.LayerColor.prototype.ctor.call(this, new cc.Color(10, 10, 10, 196));
+        cc.LayerColor.prototype.ctor.call(this, new cc.Color(10, 10, 10, 0));
+        this.setCascadeOpacityEnabled(false);
+
+        let pnContent = this._pnContent = new cc.Layer();
+        this.addChild(pnContent);
+        pnContent.setVisible(false);
 
         this._unselectedBoxes = [];
         this._selectedMedals = [];
@@ -38,7 +44,7 @@ let JackpotPanel = cc.LayerColor.extend({ //gradient
         const spBackground = new cc.Sprite(ReferenceName.JackpotBase);
         this._spBackground = spBackground;
         spBackground.setPosition(cc.winSize.width * 0.5, cc.winSize.height * 0.5);
-        this.addChild(spBackground);
+        pnContent.addChild(spBackground);
         const panelSize = spBackground.getContentSize();
         this._spBackground = spBackground;
 
@@ -96,22 +102,6 @@ let JackpotPanel = cc.LayerColor.extend({ //gradient
         this._createPrizeListFrame();
 
         const selfPoint = this;
-
-        //if (isPlaying) {
-        //    ClientServerConnect.requestMyData().then(stats => {
-        //        console.log(stats.data);
-        //        return ClientServerConnect.getCurrentJackpotValues()
-        //    }).then(jackpotValues => {
-        //        //show the jackpot list
-        //        if (jackpotValues.status === 200)
-        //            selfPoint._showJackpotPrizeValues(jackpotValues.data);
-        //        return ClientServerConnect.listUncollectedJackpots();
-        //    }).then(jackpotObject => {
-        //        console.log(jackpotObject);
-        //        if (jackpotObject.status === 200)
-        //            selfPoint._jackpotResult = jackpotObject.data[0];
-        //    }).catch(console.error);
-        //}
 
         //load the jackpot prize pool value
         ClientServerConnect.getCurrentJackpotValues().then(jackpotValues => {
@@ -219,6 +209,29 @@ let JackpotPanel = cc.LayerColor.extend({ //gradient
                 }
             }
         });
+
+        this._addLight();
+    },
+
+    _addLight: function(){
+        let sfLight = cc.spriteFrameCache.getSpriteFrame("JPLobbylight.png");
+        if(!sfLight){
+            cc.spriteFrameCache.addSpriteFrames(res.LobbyJackpotPlist);
+            sfLight = cc.spriteFrameCache.getSpriteFrame("JPLobbylight.png");
+        }
+        let spLight = new cc.Sprite(sfLight);
+        spLight.setPosition(cc.visibleRect.center.x, cc.visibleRect.top.y - 105);
+        this.addChild(spLight);
+        spLight.setScale(0.1);
+        spLight.runAction(cc.sequence(cc.scaleTo(0.3, 0.5), cc.scaleTo(0.2, 1.8, 0.3), cc.scaleTo(0.1, 0), cc.callFunc(function(){
+            this.removeFromParent(true);
+        }, spLight)));
+        this.runAction(cc.sequence(cc.delayTime(0.5), cc.fadeTo(0.3, 192)));
+        const pnContent = this._pnContent;
+        pnContent.setScale(0);
+        pnContent.setVisible(true);
+        pnContent.setAnchorPoint(0.5, spLight.y / cc.visibleRect.height);
+        pnContent.runAction(cc.sequence(cc.delayTime(0.6), cc.scaleTo(0.6, 1).easing(cc.easeBounceOut())));
     },
 
     _resetTimeCounter: function () {
@@ -286,9 +299,7 @@ let JackpotPanel = cc.LayerColor.extend({ //gradient
         spMedal.runAction(cc.sequence(cc.delayTime(0.4), cc.scaleTo(0.5, 1).easing(cc.easeBounceOut())));
 
         spMedalGlow.setPosition(spMedal.width * 0.55, spMedal.height * 0.45);
-        const medalCount = this._glowSameMedals(spMedal);
-
-        return medalCount;
+        return this._glowSameMedals(spMedal);
     },
 
     _createPrizeListFrame: function () {
