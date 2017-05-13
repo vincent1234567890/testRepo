@@ -3,8 +3,8 @@ var ef = ef || {};
 let GameController = (function(){
     let GameController = cc.Class.extend({
         _currentMultiple: 0,
-        _soundVolume: 1,
-        _musicVolume: 1,
+        _soundVolume: 0.5,
+        _musicVolume: 0.5,
         _currentSeat: 0,
         _isInFocus: true,
         _isInGame: false,
@@ -21,7 +21,7 @@ let GameController = (function(){
                 this._soundVolume = 0.5;
                 cc.sys.localStorage.setItem("music_volume", 0.5);
             } else
-                this._soundVolume = cc.sys.localStorage.getItem("music_volume");
+                this._musicVolume = cc.sys.localStorage.getItem("music_volume");
 
             cc.audioEngine.setMusicVolume(this._musicVolume);
             cc.audioEngine.setEffectsVolume(this._soundVolume);
@@ -80,6 +80,8 @@ let GameController = (function(){
         setSoundVolume: function(soundVolume){
             if(soundVolume === null)
                 return;
+            if(soundVolume < 0)
+                soundVolume = 0;
             this._soundVolume = soundVolume;
             cc.sys.localStorage.setItem("sound_volume", soundVolume.toFixed(2));
             cc.audioEngine.setEffectsVolume(soundVolume);
@@ -92,6 +94,8 @@ let GameController = (function(){
         setMusicVolume: function(musicVolume){
             if(musicVolume === null)
                 return ;
+            if(musicVolume < 0)
+                musicVolume = 0;
             this._musicVolume = musicVolume;
             cc.sys.localStorage.setItem("music_volume", musicVolume.toFixed(2));
             cc.audioEngine.setMusicVolume(musicVolume);
