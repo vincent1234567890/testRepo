@@ -121,6 +121,10 @@ const SettingsView = (function () {
             _soundSlider.setEnabled(false);
             _closeButton.setVisible(false);
 
+            //save to localstorage.
+            ef.gameController.setMusicVolume(_musicSlider.getValue() - STARTOFFSET);
+            ef.gameController.setSoundVolume(_soundSlider.getValue() - STARTOFFSET);
+
             previousMusic = -1;
             previousSound = -1;
             BlockingManager.deregisterBlock(dismissCallback);
@@ -154,15 +158,11 @@ const SettingsView = (function () {
     }
 
     function musicValueChangedEvent(sender, controlEvent) {
-        // console.log(sender.getValue());
-        PlayerPreferences.setMusicVolume(sender.getValue());
-        cc.audioEngine.setMusicVolume(sender.getValue().toFixed(2) - STARTOFFSET);
+        cc.audioEngine.setMusicVolume(sender.getValue() - STARTOFFSET);
     }
 
     function soundValueChangedEvent(sender, controlEvent) {
-        // console.log(sender.getValue());
-        PlayerPreferences.setSoundVolume(sender.getValue());
-        cc.audioEngine.setEffectsVolume(sender.getValue().toFixed(2) - STARTOFFSET);
+        cc.audioEngine.setEffectsVolume(sender.getValue() - STARTOFFSET);
     }
 
 
