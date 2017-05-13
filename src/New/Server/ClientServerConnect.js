@@ -10,7 +10,7 @@ const ClientServerConnect = function () {
     let _masterServerSocket = null;
 
     let _currentGameServerUrl = null;
-    let _informServer ;
+    let _serverInformer;
     let _gameWSClient;
     let _gameIOSocket;
 
@@ -18,6 +18,8 @@ const ClientServerConnect = function () {
     let _wasKickedOutByRemoteLogIn = false;
 
     let _loginParams = null;
+
+    let _sendHeartbeatToGameServerIntervalId = null;
 
     function getMasterServerSocket () {
         if (!_masterServerSocket) {
@@ -110,8 +112,9 @@ const ClientServerConnect = function () {
             const oldClient = getGameWSClient();
             if (oldClient) {
                 console.log(`Disconnecting from old gameServer`);
+                _currentGameServerUrl = null;
+                clearServerInformer();
                 try {
-                    _currentGameServerUrl = null;
                     oldClient.disconnect();
                     // When that disconnect event is fired, do not take too much notice of it
                     // @todo Perhaps this variable should be specific to the oldClient that expects it
@@ -146,12 +149,8 @@ const ClientServerConnect = function () {
             client.addEventListener('open', function () {
                 _currentGameServerUrl = gameAPIServerUrl;
 
-                //client.callAPIOnce('game', 'requestServer', {}).then(
-                //    (serverList) => {
-                //        console.log("serverList:", serverList);
-                //        // Future: Maybe ping the servers here, then connect to the closest one
-                //    }
-                //).catch(console.error.bind(console));
+                clearInterval(_sendHeartbeatToGameServerIntervalId);
+                _sendHeartbeatToGameServerIntervalId = setInterval(sendHeartbeatToGameServer, 15 * 1000);
 
                 if (typeof document !== 'undefined') {
                     if (!_loginParams) {
@@ -230,6 +229,23 @@ const ClientServerConnect = function () {
                 // AppManager.goBackToLobby();
             }
         });
+    }
+
+    function sendHeartbeatToGameServer () {
+        try {
+            // This will only work when we are in a game
+            if (ClientServerConnect.getServerInformer()) {
+                ClientServerConnect.getServerInformer().sendHeartbeat();
+            }
+            // The socket bug can happen even when we are outside a game
+            //const client = getGameWSClient();
+            //if (client) {
+            //    const message = {service: 'game', functionName: 'heartbeat', data: {}};
+            //    client._connection.send(JSON.stringify(message));
+            //}
+        } catch (e) {
+            console.log("Could not send heartbeat to server: " + e);
+        }
     }
 
     function parseQueryParams (searchString) {
@@ -369,13 +385,13 @@ const ClientServerConnect = function () {
     }
 
     function postGameCleanup () {
-        if (!_informServer) {
+        if (!_serverInformer) {
             return;
         }
 
         socketUtils.disengageIOSocketFromClient(_gameIOSocket, _gameWSClient);
 
-        _informServer = undefined;
+        clearServerInformer();
     }
 
     function requestStats() {
@@ -401,12 +417,16 @@ const ClientServerConnect = function () {
     //    return _gameIOSocket;
     //};
 
+    function clearServerInformer () {
+        _serverInformer = null;
+    }
+
     function setServerInformer (informer) {
-        _informServer = informer;
+        _serverInformer = informer;
     }
 
     function getServerInformer() {
-        return _informServer;
+        return _serverInformer;
     }
 
     function listenForEvent (wsFuncName, callback) {
@@ -434,7 +454,7 @@ const ClientServerConnect = function () {
     const Object_values = (obj) => Object.keys(obj).map(key => obj[key]);
 
     const changeSeatRequest = function (slot) {
-        _informServer.changeSeat(slot);
+        _serverInformer.changeSeat(slot);
     };
 
     function listUncollectedJackpots () {
@@ -446,12 +466,12 @@ const ClientServerConnect = function () {
     }
 
     const setFishLockRequest = function(fishId){
-        _informServer.setTargetLockOnFish(fishId);
+        _serverInformer.setTargetLockOnFish(fishId);
     };
 
     const unsetFishLockRequest = function () {
         console.log("unsetTargetLock");
-        _informServer.unsetTargetLock();
+        _serverInformer.unsetTargetLock();
     };
 
     function getGameSummaries (numDays) {
