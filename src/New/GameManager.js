@@ -327,11 +327,12 @@ const GameManager = function () {
     function onFishLockSelected (fishId){
         _currentFishLockOnId = fishId;
         ClientServerConnect.setFishLockRequest(fishId);
+        _fishLockOnCallback(true);
     }
 
     function unsetLockForFishId(fishId) {
         if (fishId === _currentFishLockOnId){
-            _isFishLockOn = false;
+            //_isFishLockOn = false;
             _fishLockOnCallback(false);
             _fishManager.unsetLock();
             _currentFishLockOnId = null;
