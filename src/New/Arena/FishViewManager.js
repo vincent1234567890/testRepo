@@ -1,7 +1,3 @@
-/**
- * Created by eugeneseah on 3/11/16.
- */
-
 //use for manage fishes.
 const FishViewManager = (function(){
 
@@ -37,9 +33,9 @@ const FishViewManager = (function(){
                 }
             }
             // Do we really need to do the same thing twice here?
-            targetLockUI.removeFromParent(false);
-            fishView.addTarget(targetLockUI);  //add lock icon to a fish.
-            onFishLockSelectedCallback(id);    //locked fish callback.
+            //targetLockUI.removeFromParent(false);
+            //fishView.addTarget(targetLockUI);  //add lock icon to a fish.
+            //onFishLockSelectedCallback(id);    //locked fish callback.
             targetLockUI.removeFromParent(false);
             fishView.addTarget(targetLockUI);
             fishViewTarget = fishView;

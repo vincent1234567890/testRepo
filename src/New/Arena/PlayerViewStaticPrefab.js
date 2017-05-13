@@ -98,7 +98,7 @@ const PlayerViewStaticPrefab = (function () {
             if (state) {
                 this._lockOnButton.switchToLocked();
             }else{
-                this._lockOnButton.switchToRelease();
+                this._lockOnButton.switchTargetRelease();  //only user click release.
             }
         };
 
@@ -368,6 +368,18 @@ let LockFishButton = cc.Sprite.extend({
                     this._spLabel.setSpriteFrame("LOLockWhiteV.png");
                     this._lockStatus = LockFishStatus.RELEASE;
                 }, this)));
+            }
+        }
+    },
+
+    switchTargetRelease: function(){
+        if(this._lockStatus === LockFishStatus.LOCKED){
+            this._lockStatus = LockFishStatus.LOCK;
+            this._spIcon.setSpriteFrame("LOIconWhite.png");
+            if (this._direction === PlayerSeatDirection.HORIZONTAL) {
+                this._spLabel.setSpriteFrame("LOReleaseWhiteH.png");
+            }else{
+                this._spLabel.setSpriteFrame("LOReleaseWhiteV.png");
             }
         }
     },
