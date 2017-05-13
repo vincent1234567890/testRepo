@@ -27,6 +27,8 @@ var cocos2dApp = cc.game.onStart = function() {
     // The game will be resized when browser size change
     cc.view.resizeWithBrowserSize(true);
 
+    ef.gameController = new GameController();
+
     //load resources
     ClientServerConnect.doInitialConnect().then(
         data => {
@@ -48,7 +50,6 @@ var cocos2dApp = cc.game.onStart = function() {
 
             ResourceLoader.finaliseResources();
             cc.LoadingScreen.preload(ResourceLoader.getResourceList(), function () {
-                ef.gameController = new GameController();
                 // cc.director.runScene(new LogoScene());
                 //cc.director.runScene(new TestScene());
 
