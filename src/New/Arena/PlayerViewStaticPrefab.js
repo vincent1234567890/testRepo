@@ -24,6 +24,8 @@ const PlayerViewStaticPrefab = (function () {
         this._parent = new cc.Node();
         GameView.addView(this._parent,1);
         this._parent.setPosition(300,300);
+        if(isPlayer)
+            ef.gameController.setCurrentSeat(slot);
 
         this._fishLockStatus = fishLockStatus;
 
@@ -56,6 +58,7 @@ const PlayerViewStaticPrefab = (function () {
         base.addChild(this._gold,1);
 
         function changeSlotCallback(){
+            ef.gameController.setCurrentSeat(slot);
             changeSeatCallback(slot);
         }
 
