@@ -110,6 +110,6 @@ let GameController = (function(){
         }
     });
 
-
+    cc.EventHelper.prototype.apply(GameController.prototype);
     return GameController;
 })();
