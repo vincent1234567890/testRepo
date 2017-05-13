@@ -61,6 +61,7 @@ const GameManager = function () {
         BlockingManager.destroyView();
 
         GameView.goToGame(_currentScene);
+        ef.gameController.enterGame();
     };
 
     const enterSeatSelectionScene = function(parent){
@@ -209,6 +210,7 @@ const GameManager = function () {
     }
 
     function exitToLobby() {
+        ef.gameController.leaveGame();
         ClientServerConnect.requestMyData().then(
             stats => {
                 console.log(stats);

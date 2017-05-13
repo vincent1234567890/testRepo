@@ -1,7 +1,3 @@
-/**
- * Created by eugeneseah on 24/11/16.
- */
-
 const PlayerPreferences = (function () {
     "use strict";
 
@@ -19,7 +15,6 @@ const PlayerPreferences = (function () {
     }
 
     function getLoginDetails(){
-
         if (cc.sys.localStorage) {
             let old_username = cc.sys.localStorage.getItem(userName);
             let old_password = cc.sys.localStorage.getItem(pass);
