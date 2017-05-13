@@ -128,7 +128,7 @@ const GameView = function () {
                 x = cc.view.getDesignResolutionSize().width - position[0];
                 y = cc.view.getDesignResolutionSize().height - position[1];
             }
-            if (rotation != null) {
+            if (rotation !== null) {
                 rot = -(rotation * 180 / Math.PI);
             }
         } else {
@@ -136,7 +136,7 @@ const GameView = function () {
                 x = position[0];
                 y = position[1];
             }
-            if (rotation != null) {
+            if (rotation !== null) {
                 rot = 180 - rotation * 180 / Math.PI;
             }
         }
@@ -206,14 +206,26 @@ const GameView = function () {
             _lastShotTime = now;
 
             let slot = getPlayerSlot(_playerSlot);
-
             const direction = cc.pNormalize(cc.pSub(pos, new cc.p(_gameConfig.cannonPositions[slot][0], _gameConfig.cannonPositions[slot][1])));
             const rot = Math.atan2(direction.x, direction.y);
             let info = getRotatedView(undefined, rot);
 
-            const bulletId = _playerId + ':' + getPlayerBulletId();
+            const bulletId = _playerId + ':' + getPlayerBulletId(), rotation = info.rotation - 90;
+            const currentSeat = ef.gameController.getCurrentSeat();
+            let transRotation = rotation;
+            if (currentSeat === 2) {
+                transRotation += 90;
+                if(transRotation > 250)
+                    transRotation = transRotation - 360;
+            } else if (currentSeat === 3) {
+                transRotation -= 90;
+                if(transRotation < -80)
+                    transRotation = transRotation + 360;
+            }
+            if (transRotation < -8 || transRotation > 188)  //limit the fire rotation degree from 0 to 180
+                return;
 
-            ClientServerConnect.getServerInformer().bulletFired(bulletId, (info.rotation - 90) / 180 * Math.PI);
+            ClientServerConnect.getServerInformer().bulletFired(bulletId, cc.degreesToRadians(rotation));
         }
     }
 
