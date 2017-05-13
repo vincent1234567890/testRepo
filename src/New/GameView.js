@@ -248,13 +248,20 @@ const GameView = function () {
 
     function updateMultiplayerState(playerData, oldSlot) {
         const slot = getPlayerSlot(playerData.slot);
-        if (oldSlot != null) {
+        let oldPlayerView = null;
+        if (oldSlot !== null) {
+            oldPlayerView = _playerViews[oldSlot];
             if (oldSlot === _playerSlot) {
                 _playerSlot = slot;
             }
         }
+
         const playerView = _playerViews[slot];
         if (playerView) {
+            if(oldPlayerView){
+                playerView.isPlayer = oldPlayerView.isPlayer;
+                oldPlayerView.isPlayer = false;
+            }
             playerView.updatePlayerData(playerData, oldSlot != null ? _playerSlot : undefined);
         }
     }

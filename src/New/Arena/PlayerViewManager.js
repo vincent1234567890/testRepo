@@ -14,8 +14,8 @@ const PlayerViewManager = (function () {
      */
     const PlayerViewManager = function (gameConfig, index, isPlayer, changeSeatCallback, lockOnCallback, fishLockStatus) {
         _bulletId = 0;
+        this.isPlayer = isPlayer;
         this._cannonManager = new CannonManager(gameConfig, index, isPlayer);
-
         this._gameConfig = gameConfig;
 
         const changeSeat = (slot) =>{
@@ -42,7 +42,7 @@ const PlayerViewManager = (function () {
     proto.updatePlayerData = function (playerData, isChangeSeat) {
         this._playerView.updateView(playerData, isChangeSeat);
         this._cannonManager.showGun();
-        if (isChangeSeat != null){
+        if (isChangeSeat !== null && this.isPlayer){
             this._cannonManager.setUpCannonChangeMenu(this._gameConfig, playerData.slot);
         }
         if (typeof playerData.gunId === 'number') {
