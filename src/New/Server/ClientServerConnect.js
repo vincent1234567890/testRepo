@@ -10,7 +10,7 @@ const ClientServerConnect = function () {
     let _masterServerSocket = null;
 
     let _currentGameServerUrl = null;
-    let _informServer ;
+    let _serverInformer;
     let _gameWSClient;
     let _gameIOSocket;
 
@@ -392,7 +392,7 @@ const ClientServerConnect = function () {
     }
 
     function postGameCleanup () {
-        if (!_informServer) {
+        if (!_serverInformer) {
             return;
         }
 
@@ -425,15 +425,15 @@ const ClientServerConnect = function () {
     //};
 
     function clearServerInformer () {
-        _informServer = null;
+        _serverInformer = null;
     }
 
     function setServerInformer (informer) {
-        _informServer = informer;
+        _serverInformer = informer;
     }
 
     function getServerInformer() {
-        return _informServer;
+        return _serverInformer;
     }
 
     function listenForEvent (wsFuncName, callback) {
@@ -461,7 +461,7 @@ const ClientServerConnect = function () {
     const Object_values = (obj) => Object.keys(obj).map(key => obj[key]);
 
     const changeSeatRequest = function (slot) {
-        _informServer.changeSeat(slot);
+        _serverInformer.changeSeat(slot);
     };
 
     function listUncollectedJackpots () {
@@ -473,12 +473,12 @@ const ClientServerConnect = function () {
     }
 
     const setFishLockRequest = function(fishId){
-        _informServer.setTargetLockOnFish(fishId);
+        _serverInformer.setTargetLockOnFish(fishId);
     };
 
     const unsetFishLockRequest = function () {
         console.log("unsetTargetLock");
-        _informServer.unsetTargetLock();
+        _serverInformer.unsetTargetLock();
     };
 
     function getGameSummaries (numDays) {
