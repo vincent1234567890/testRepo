@@ -152,13 +152,6 @@ const ClientServerConnect = function () {
                 clearInterval(_sendHeartbeatToGameServerIntervalId);
                 _sendHeartbeatToGameServerIntervalId = setInterval(sendHeartbeatToGameServer, 15 * 1000);
 
-                //client.callAPIOnce('game', 'requestServer', {}).then(
-                //    (serverList) => {
-                //        console.log("serverList:", serverList);
-                //        // Future: Maybe ping the servers here, then connect to the closest one
-                //    }
-                //).catch(console.error.bind(console));
-
                 if (typeof document !== 'undefined') {
                     if (!_loginParams) {
                         // We keep the login credentials in memory, so that we can log in to other gameServers later.
