@@ -183,6 +183,8 @@ const GameView = function () {
     }
 
     function touchAt(pos, touchType) {
+        if(ef.gameController.isLockMode())
+            return;
         if (touchType === TouchType.Moved || touchType === TouchType.Began) {
             _latestTouchPos = pos;
         } else {

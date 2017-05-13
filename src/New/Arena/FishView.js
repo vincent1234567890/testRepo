@@ -1,7 +1,4 @@
-/**
- * Created by eugeneseah on 3/11/16.
- */
-
+//todo refactor this soon
 const FishView = (function () {
     "use strict";
     const deathScaleSmall = new cc.ScaleTo(0.3, 0.3);
@@ -43,18 +40,18 @@ const FishView = (function () {
         // GameView.addView(this._parent);
         parent.addChild(this._parent, -1);
 
+        //need refactor.
         const _wrapper = new ccui.Widget();
         _wrapper.setContentSize(fishClass.length * 2, fishClass.breadth * 2);
         _wrapper.setTouchEnabled(true);
         _wrapper.setSwallowTouches(false);
         _wrapper.addTouchEventListener(touchEvent);
-
+        //const _wrapper = new FishSprite(fishClass, this, onFishClickedCallback);
         this._parent.addChild(_wrapper);
 
         // const testLayer = new cc.LayerColor();
         // testLayer.setBlendFunc()
         if (GameManager.debug) {
-
             const debugCircle = new cc.Sprite(res.DebugCircle);
 
             debugCircle.setScaleX(fishClass.length * 2 / 100); // radius
@@ -148,3 +145,46 @@ const FishView = (function () {
 
     return FishView;
 })();
+
+
+const FishSprite = cc.Node.extend({
+    _fishConfig: null,
+    _fishObj: null,
+    _callback: null,
+    _touchEventListener: null,
+    ctor: function (fishConfig, fishObj, callback) {
+        cc.Node.prototype.ctor.call(this);
+        this._fishConfig = fishConfig;
+        this._fishObj = fishObj;
+        this._callback = callback;
+
+        this.setContentSize(fishConfig.length * 2, fishConfig.breadth * 2);
+
+        this._touchEventListener = cc.EventListener.create({
+            event:cc.EventListener.TOUCH_ONE_BY_ONE,
+            swallowTouches: true,
+            onTouchBegan: function(touch, event) {
+                //if is not lockMode, return false directly.
+                if(!ef.gameController.isLockMode())
+                    return false;
+                let target = event.getCurrentTarget();
+                return (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
+                    target.convertToNodeSpace(touch.getLocation())));
+            },
+            onTouchEnded: function(touch, event){
+                let target = event.getCurrentTarget();
+                if (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
+                        target.convertToNodeSpace(touch.getLocation()))) {
+                    if (target._callback)
+                        target._callback(target._fishObj);
+                }
+            }
+        });
+    },
+
+    onEnter: function(){
+        cc.Node.prototype.onEnter.call(this);
+        if (this._touchEventListener && !this._touchEventListener._isRegistered())
+            cc.eventManager.addListener(this._touchEventListener, this);
+    }
+});
