@@ -1,6 +1,3 @@
-/**
- * Created by eugeneseah on 15/11/16.
- */
 const LobbyView = (function () {
     "use strict";
 

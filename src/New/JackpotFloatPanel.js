@@ -193,7 +193,7 @@ let JackpotDetailPanel = cc.LayerColor.extend({
         spJackpotPopFrame1.setPreferredSize(new cc.Size(371, 125));
         spJackpotPopBase.addChild(spJackpotPopFrame1);
         spJackpotPopFrame1.setPosition(258, 332);
-        let lbPrize1Value = this._lbPrize1Value = new cc.LabelBMFont("16,000,000", res.JackpotGoldTextFont);
+        let lbPrize1Value = this._lbPrize1Value = new cc.LabelBMFont("", res.JackpotGoldTextFont);
         spJackpotPopFrame1.addChild(lbPrize1Value);
         lbPrize1Value.setPosition(186, 64);
         lbPrize1Value.setScale(0.75);
@@ -209,7 +209,7 @@ let JackpotDetailPanel = cc.LayerColor.extend({
         spJackpotPopFrame2.setPreferredSize(new cc.Size(260, 92));
         spJackpotPopBase.addChild(spJackpotPopFrame2);
         spJackpotPopFrame2.setPosition(258, 180);
-        let lbPrize2Value = this._lbPrize2Value = new cc.LabelBMFont("80,000", res.JackpotGoldTextFont);
+        let lbPrize2Value = this._lbPrize2Value = new cc.LabelBMFont("", res.JackpotGoldTextFont);
         spJackpotPopFrame2.addChild(lbPrize2Value);
         lbPrize2Value.setPosition(130, 46);
         lbPrize2Value.setScale(0.6);
@@ -225,7 +225,7 @@ let JackpotDetailPanel = cc.LayerColor.extend({
         spJackpotPopFrame3.setPreferredSize(new cc.Size(166, 72));
         spJackpotPopBase.addChild(spJackpotPopFrame3);
         spJackpotPopFrame3.setPosition(163, 48);
-        let lbPrize3Value = this._lbPrize3Value = new cc.LabelBMFont("2,000", res.JackpotGoldTextFont);
+        let lbPrize3Value = this._lbPrize3Value = new cc.LabelBMFont("", res.JackpotGoldTextFont);
         spJackpotPopFrame3.addChild(lbPrize3Value);
         lbPrize3Value.setPosition(83, 36);
         lbPrize3Value.setScale(0.4);
@@ -241,7 +241,7 @@ let JackpotDetailPanel = cc.LayerColor.extend({
         spJackpotPopFrame4.setPreferredSize(new cc.Size(166, 72));
         spJackpotPopBase.addChild(spJackpotPopFrame4);
         spJackpotPopFrame4.setPosition(358, 48);
-        let lbPrize4Value = this._lbPrize4Value = new cc.LabelBMFont("500", res.JackpotGoldTextFont);
+        let lbPrize4Value = this._lbPrize4Value = new cc.LabelBMFont("", res.JackpotGoldTextFont);
         spJackpotPopFrame4.addChild(lbPrize4Value);
         lbPrize4Value.setPosition(83, 36);
         lbPrize4Value.setScale(0.4);

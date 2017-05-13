@@ -210,9 +210,9 @@ const PlayerViewStaticPrefab = (function () {
             GUIFunctions.getAnimation(ReferenceName.AwardEffect, 0.05), new cc.CallFunc(onAwardMedalEffectEnd));
         coin.runAction(awardMedalSequence);
         this._parent.addChild(parentNode);
-        const parent = this._parent;
+        const parent = this._parent, strAmount = (amount * this._multiplier).toLocaleString('en-US', {maximumFractionDigits: 2});
 
-        const label = new cc.LabelBMFont(amount * this._multiplier, res.InGameLightGoldFontFile);
+        const label = new cc.LabelBMFont(strAmount, res.InGameLightGoldFontFile);
         label.setScale(0.7 + 0.3/amount.toString().length);
         parentNode.addChild(coin);
         parentNode.addChild(label,1);
@@ -318,6 +318,7 @@ let LockFishButton = cc.Sprite.extend({
                     this._spLabel.setSpriteFrame("LOReleaseWhiteH.png");
                     this._touchEventListener.setEnabled(true);
                     this._lockStatus = LockFishStatus.LOCK;
+                    ef.gameController.setLockMode(true);
                 }, this)));
             } else {
                 this._spLabel.setSpriteFrame("LOLockGreenV.png");
@@ -325,6 +326,7 @@ let LockFishButton = cc.Sprite.extend({
                     this._spLabel.setSpriteFrame("LOReleaseWhiteV.png");
                     this._touchEventListener.setEnabled(true);
                     this._lockStatus = LockFishStatus.LOCK;
+                    ef.gameController.setLockMode(true);
                 }, this)));
             }
         } else if (status === LockFishStatus.LOCK || status === LockFishStatus.LOCKED) {
@@ -336,15 +338,19 @@ let LockFishButton = cc.Sprite.extend({
                 this._spLabel.setSpriteFrame("LOReleaseGreenH.png");
                 this.runAction(cc.sequence(cc.delayTime(duration), cc.callFunc(function(){
                     this._spLabel.setSpriteFrame("LOLockWhiteH.png");
+                    this._spIcon.setSpriteFrame("LOIconWhite.png");
                     this._touchEventListener.setEnabled(true);
                     this._lockStatus = LockFishStatus.RELEASE;
+                    ef.gameController.setLockMode(false);
                 }, this)));
             } else {
                 this._spLabel.setSpriteFrame("LOReleaseGreenV.png");
                 this.runAction(cc.sequence(cc.delayTime(duration), cc.callFunc(function(){
                     this._spLabel.setSpriteFrame("LOLockWhiteV.png");
+                    this._spIcon.setSpriteFrame("LOIconWhite.png");
                     this._touchEventListener.setEnabled(true);
                     this._lockStatus = LockFishStatus.RELEASE;
+                    ef.gameController.setLockMode(false);
                 }, this)));
             }
         }

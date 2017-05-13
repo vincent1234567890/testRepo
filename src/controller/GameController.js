@@ -8,6 +8,7 @@ let GameController = (function(){
         _currentSeat: 0,
         _isInFocus: true,
         _isInGame: false,
+        _isLockMode: false,
         _leaveGameTimeout: null,
         ctor: function() {
             this._currentMultiple = 1;
@@ -63,6 +64,15 @@ let GameController = (function(){
 
         leaveGame: function(){
             this._isInGame = false;
+            this._isLockMode = false;  //leave game, lockMode auto set to false
+        },
+
+        isLockMode: function(){
+            return this._isLockMode;
+        },
+
+        setLockMode: function(lock){
+            this._isLockMode = lock;
         },
 
         getCurrentMultiple: function(){
