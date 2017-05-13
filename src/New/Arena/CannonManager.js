@@ -1,7 +1,3 @@
-/**
- * Created by eugeneseah on 26/10/16.
- */
-
 //use for manage cannon.
 const CannonManager = (function () {
     "use strict";

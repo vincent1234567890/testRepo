@@ -195,7 +195,7 @@ const PlayerViewStaticPrefab = (function () {
         if (this._lockOnButton){
             this._lockOnButton.setVisible(isPlayer);
             if(isPlayer){
-                if(this._fishLockStatus())
+                if(ef.gameController.isLockMode())
                     this._lockOnButton.switchToLocked();
                 else
                     this._lockOnButton.switchToRelease();
