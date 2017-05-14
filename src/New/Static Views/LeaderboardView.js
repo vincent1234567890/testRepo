@@ -56,30 +56,32 @@ const LeaderboardView = (function () {
         // listView.setBounceEnabled(true);
         listView.setItemsMargin(-30);
 
-        let fontDef = new cc.FontDefinition();
-        fontDef.fontName = "Microsoft YaHei";
-        // fontDef.fontName = "Arial Unicode MS";
-        fontDef.fontSize = "20";
-        fontDef.fontStyle = "bold";
-        fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
-
         const data = leaderboardData.data;
 
         for (let i = 0; i < data.length; i++) {
             if(data[i].val < 0)
                 continue;
-            //console.log(data[i]);
             const item = new ccui.Widget();
 
             const background = new cc.Sprite(ReferenceName.LeaderboardItemBackground);
             const rankingBackground = new cc.Sprite(ReferenceName.LeaderboardItemRankBackground);
             // const rankingLabel= new
-            fontDef.fillStyle = new cc.Color(255, 255, 255, 255);
-            let rank = new cc.LabelTTF(i+1 , fontDef);
-            fontDef.fillStyle = new cc.Color(0, 0, 0, 255);
-            let name = new cc.LabelTTF(data[i].name , fontDef);
-            let time = new cc.LabelTTF(transferMinutesToString(data[i].minutesPlayed) , fontDef);
-            let score = new cc.LabelTTF(data[i].toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) , fontDef);
+            let rank = new cc.LabelTTF(i+1 , "Microsoft YaHei", 20);
+            rank._setFontWeight("bold");
+            rank.setFontFillColor(new cc.Color(255, 255, 255, 255));
+
+            let name = new cc.LabelTTF(data[i].name , "Microsoft YaHei", 20);
+            name._setFontWeight("bold");
+            name.setFontFillColor(new cc.Color(0, 0, 0, 255));
+
+            let time = new cc.LabelTTF(transferMinutesToString(data[i].minutesPlayed) , "Microsoft YaHei", 20);
+            time._setFontWeight("bold");
+            time.setFontFillColor(new cc.Color(0, 0, 0, 255));
+
+            let score = new cc.LabelTTF(data[i].toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) ,
+                "Microsoft YaHei", 20);
+            score._setFontWeight("bold");
+            score.setFontFillColor(new cc.Color(0, 0, 0, 255));
 
             item.setContentSize(background.getContentSize().width+100, rankingBackground.getContentSize().height );
             const size = item.getContentSize();
@@ -88,10 +90,10 @@ const LeaderboardView = (function () {
             rankingBackground.setPosition(10,background.getContentSize().height/2);
 
             const itemHeight = background.getContentSize().height/2;
-            rank.setPosition(new cc.p(10, itemHeight));
-            name.setPosition(new cc.p(220, itemHeight));
-            time.setPosition(new cc.p(420, itemHeight));
-            score.setPosition(new cc.p(620,itemHeight));
+            rank.setPosition(10, itemHeight);
+            name.setPosition(220, itemHeight);
+            time.setPosition(420, itemHeight);
+            score.setPosition(620,itemHeight);
 
             item.addChild(background);
             background.addChild(rankingBackground);
