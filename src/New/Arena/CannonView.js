@@ -165,8 +165,12 @@ const CannonView = (function () {
     };
 
     proto.setupCannonChangeMenu = function (cannonManager, gameConfig, slot, callbackCannonDown, callbackCannonUp) {
-        let menuLeft = new cc.MenuItemSprite(new cc.Sprite(ReferenceName.DecreaseCannon), new cc.Sprite(ReferenceName.DecreaseCannon_Down), callbackCannonDown, cannonManager);
-        let menuRight = new cc.MenuItemSprite(new cc.Sprite(ReferenceName.IncreaseCannon), new cc.Sprite(ReferenceName.IncreaseCannon_Down), callbackCannonUp, cannonManager);
+        if(this._menu)
+            return;
+        let menuLeft = new cc.MenuItemSprite(new cc.Sprite(ReferenceName.DecreaseCannon),
+            new cc.Sprite(ReferenceName.DecreaseCannon_Down), callbackCannonDown, cannonManager);
+        let menuRight = new cc.MenuItemSprite(new cc.Sprite(ReferenceName.IncreaseCannon),
+            new cc.Sprite(ReferenceName.IncreaseCannon_Down), callbackCannonUp, cannonManager);
 
         this._menu = new cc.Menu(menuLeft, menuRight);
         const pMenuLeft = new cc.p(this._theme["MenuLeft"][0], this._theme["MenuLeft"][1]);
@@ -186,13 +190,16 @@ const CannonView = (function () {
     proto.hideView = function () {
         this._cannonNode.setVisible(false);
         if (this._menu){
-            this._cannonPowerBG.removeChild(this._menu);
+            this._menu.removeFromParent(true);
+            //this._cannonPowerBG.removeChild(this._menu);
             this._menu = null;
+            console.log("_cannonPowerBG.children:", this._cannonPowerBG._children.length);
         }
     };
 
     proto.showView = function () {
         this._cannonNode.setVisible(true);
+        console.log("_cannonPowerBG.children:", this._cannonPowerBG._children.length);
     };
 
     proto.setMultiplier = function (multiplier) { // only happens once at initialisation
