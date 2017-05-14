@@ -193,13 +193,11 @@ const CannonView = (function () {
             this._menu.removeFromParent(true);
             //this._cannonPowerBG.removeChild(this._menu);
             this._menu = null;
-            console.log("_cannonPowerBG.children:", this._cannonPowerBG._children.length);
         }
     };
 
     proto.showView = function () {
         this._cannonNode.setVisible(true);
-        console.log("_cannonPowerBG.children:", this._cannonPowerBG._children.length);
     };
 
     proto.setMultiplier = function (multiplier) { // only happens once at initialisation
