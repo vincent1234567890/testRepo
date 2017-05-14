@@ -374,14 +374,6 @@ const GameLogView = (function () {
 
                 // console.log("ListItemPrefab",wrapper,highlight.getContentSize());
 
-                let fontDef = new cc.FontDefinition();
-                fontDef.fontName = "Microsoft YaHei";
-                // fontDef.fontName = "Arial Unicode MS";
-                fontDef.fontSize = "20";
-                fontDef.fontStyle = "bold";
-                //fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
-                fontDef.fillStyle = new cc.Color(0, 0, 0, 255);
-
                 const date = new Date(itemData.startTime);
                 const roundIdText = itemData.id + "-"
                     + (date.getYear()-100).toLocaleString('en-US', {minimumIntegerDigits: 2})
@@ -390,18 +382,36 @@ const GameLogView = (function () {
                     + date.getHours().toLocaleString('en-US', {minimumIntegerDigits: 2})
                     + date.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2});
 
-                let roundId = new cc.LabelTTF(roundIdText, fontDef);
+                let roundId = new cc.LabelTTF(roundIdText, "Microsoft YaHei", 20);
+                roundId._setFontWeight("bold");
+                roundId.setFontFillColor(new cc.Color(0, 0, 0, 255));
 
-                fontDef.textAlign = cc.TEXT_ALIGNMENT_CENTER;
-                let totalSpend = new cc.LabelTTF(itemData.totalSpent.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}), fontDef);
-                let totalRevenue = new cc.LabelTTF(itemData.totalRevenue.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}), fontDef);
+                let totalSpend = new cc.LabelTTF(
+                    itemData.totalSpent.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}), "Microsoft YaHei", 20);
+                totalSpend._setFontWeight("bold");
+                totalSpend.setFontFillColor(new cc.Color(0, 0, 0, 255));
+
+                let totalRevenue = new cc.LabelTTF(
+                    itemData.totalRevenue.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}), "Microsoft YaHei", 20);
+                totalRevenue._setFontWeight("bold");
+                totalRevenue.setFontFillColor(new cc.Color(0, 0, 0, 255));
+
                 let totalProfit = new cc.LabelTTF((parseFloat(itemData.totalRevenue) - parseFloat(itemData.totalSpent)).toLocaleString(
-                    'en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}), fontDef);
+                    'en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}), "Microsoft YaHei", 20);
+                totalProfit._setFontWeight("bold");
+                totalProfit.setFontFillColor(new cc.Color(0, 0, 0, 255));
 
                 const endDate = new Date(itemData.endTime);
-                fontDef.fontSize = "16";
-                let startTime = new cc.LabelTTF(date.toLocaleDateString("en-GB") + "\n" + date.toLocaleTimeString("en-GB"), fontDef);
-                let endTime = new cc.LabelTTF(endDate.toLocaleDateString("en-GB") + "\n" + endDate.toLocaleTimeString("en-GB"), fontDef);
+                let startTime = new cc.LabelTTF(date.toLocaleDateString("en-GB") + "\n" + date.toLocaleTimeString("en-GB"),
+                    "Microsoft YaHei", 16);
+                startTime._setFontWeight("bold");
+                startTime.setFontFillColor(new cc.Color(0, 0, 0, 255));
+                startTime.setHorizontalAlignment(cc.TEXT_ALIGNMENT_CENTER);
+;                let endTime = new cc.LabelTTF(endDate.toLocaleDateString("en-GB") + "\n" + endDate.toLocaleTimeString("en-GB"),
+                    "Microsoft YaHei", 16);
+                endTime._setFontWeight("bold");
+                endTime.setFontFillColor(new cc.Color(0, 0, 0, 255));
+                endTime.setHorizontalAlignment(cc.TEXT_ALIGNMENT_CENTER);
 
                 roundId.setAnchorPoint(0, 0.5);
 
@@ -420,7 +430,6 @@ const GameLogView = (function () {
                 wrapper.addChild(endTime);
 
                 const item = new RolloverEffectItem(wrapper, onSelected, onUnselected, onHover, onUnhover);
-
                 function onSelected(item) {
                     onSelectedCallback(itemData);
                 }
@@ -441,13 +450,12 @@ const GameLogView = (function () {
                 };
             }
 
-
             return gameLogListItemPrefab;
         }());
 
         const onItemSelected = function (data) {
             //show the wait panel.
-            WaitingPanel.showPanel()
+            WaitingPanel.showPanel();
             if (_requestConsumptionLogCallback) {
                 _requestConsumptionLogCallback(data.playerGameNumber, data.roundNumber)
             }
@@ -530,32 +538,23 @@ const GameLogView = (function () {
                 const fishSprite = new cc.Sprite("#GL" + fish + ".png");
                 const size = fishSprite.getContentSize();
 
-                let fontDef = new cc.FontDefinition();
-                fontDef.fontName = "Microsoft YaHei";
-                // fontDef.fontName = "Arial Unicode MS";
-                fontDef.fontSize = "20";
-                fontDef.fontStyle = "bold";
-                fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
-                fontDef.fillStyle = new cc.Color(0, 0, 0, 255);
-
                 wrapper.addChild(fishSprite);
                 fishSprite.setPosition(size.width / 2, size.height / 2);
-
                 if (count[fish] > 1) {
-                    const fishAmount = new cc.LabelTTF("x"+count[fish], fontDef);
+                    const fishAmount = new cc.LabelTTF("x"+count[fish], "Microsoft YaHei", 20);
                     fishAmount.enableStroke(new cc.Color(255, 255, 255, 255), 2);
+                    fishAmount.setFontFillColor(new cc.Color(0, 0, 0, 255));
+                    fishAmount._setFontWeight("bold");
                     wrapper.addChild(fishAmount);
                     fishAmount.setPosition(size.width / 2, size.height / 2);
                 }
 
                 wrapper.setContentSize(size);
-
                 if (contentSize.y < size.height) {
                     contentSize.y = size.height;
                 }
 
                 contentSize.x += size.width;
-
                 fishList.pushBackCustomItem(wrapper);
             }
             const pos = new cc.p(400, 50);
@@ -588,23 +587,25 @@ const GameLogView = (function () {
 
                 highlight.setVisible(false);
 
-                let fontDef = new cc.FontDefinition();
-                fontDef.fontName = "Microsoft YaHei";
-                fontDef.fontSize = "20";
-                fontDef.fontStyle = "bold";
-                //fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
-                fontDef.fillStyle = new cc.Color(0, 0, 0, 255);
+                let bulletId = new cc.LabelTTF(itemData.id, "Microsoft YaHei", 20);
+                bulletId._setFontWeight("bold");
+                bulletId.setFontFillColor(new cc.Color(0, 0, 0, 255));
 
-
-                let bulletId = new cc.LabelTTF(itemData.id, fontDef);
-
-                fontDef.textAlign = cc.TEXT_ALIGNMENT_CENTER;
                 let totalSpend = new cc.LabelTTF(
-                    itemData.totalSpend.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}), fontDef);
+                    itemData.totalSpend.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}),
+                    "Microsoft YaHei", 20);
+                totalSpend._setFontWeight("bold");
+                totalSpend.setFontFillColor(new cc.Color(0, 0, 0, 255));
+
                 let totalProfit = new cc.LabelTTF(
                     (parseFloat(itemData.totalRevenue) - parseFloat(itemData.totalSpend)).toLocaleString('en-US',
-                        {minimumFractionDigits: 2, maximumFractionDigits: 2}), fontDef);
-                let sceneName = new cc.LabelTTF(itemData.sceneName, fontDef);
+                        {minimumFractionDigits: 2, maximumFractionDigits: 2}), "Microsoft YaHei", 20);
+                totalProfit._setFontWeight("bold");
+                totalProfit.setFontFillColor(new cc.Color(0, 0, 0, 255));
+
+                let sceneName = new cc.LabelTTF(itemData.sceneName, "Microsoft YaHei", 20);
+                sceneName._setFontWeight("bold");
+                sceneName.setFontFillColor(new cc.Color(0, 0, 0, 255));
 
                 let uncaught;
                 let uncaughtIndicator;
@@ -780,17 +781,11 @@ const GameLogView = (function () {
                 highlight.setPosition(listSize.width / 2, listEntryPos.y);
                 separator.setPosition(listSize.width / 2, 0);
 
-                let fontDef = new cc.FontDefinition();
-                fontDef.fontName = "Microsoft YaHei";
-                fontDef.fontSize = "20";
-                fontDef.fontStyle = "bold";
-                //fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
-                fontDef.fillStyle = new cc.Color(0, 0, 0, 255);
-
                 const date = new Date(itemData.date);
-                let dateText = new cc.LabelTTF(date.toLocaleDateString("en-GB") + " " + date.toLocaleTimeString("en-GB"), fontDef);
-
-                fontDef.textAlign = cc.TEXT_ALIGNMENT_CENTER;
+                let dateText = new cc.LabelTTF(date.toLocaleDateString("en-GB") + " " + date.toLocaleTimeString("en-GB"),
+                    "Microsoft YaHei", 20);
+                dateText.setFontFillColor(new cc.Color(0, 0, 0, 255));
+                dateText._setFontWeight("bold");
 
                 let typeText;
                 switch (itemData.type) {
@@ -805,10 +800,24 @@ const GameLogView = (function () {
                         break;
                 }
 
-                const transferType = new cc.LabelTTF(typeText, fontDef);
-                const transferId = new cc.LabelTTF(itemData.id, fontDef);
-                const transferAmount = new cc.LabelTTF((itemData.amount).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}), fontDef);
-                const totalAmount = new cc.LabelTTF((itemData.total).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}), fontDef);
+                const transferType = new cc.LabelTTF(typeText, "Microsoft YaHei", 20);
+                transferType.setFontFillColor(new cc.Color(0, 0, 0, 255));
+                transferType._setFontWeight("bold");
+
+                const transferId = new cc.LabelTTF(itemData.id, "Microsoft YaHei", 20);
+                transferId.setFontFillColor(new cc.Color(0, 0, 0, 255));
+                transferId._setFontWeight("bold");
+
+                const transferAmount = new cc.LabelTTF(
+                    (itemData.amount).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}),
+                    "Microsoft YaHei", 20);
+                transferAmount.setFontFillColor(new cc.Color(0, 0, 0, 255));
+                transferAmount._setFontWeight("bold");
+                const totalAmount = new cc.LabelTTF(
+                    (itemData.total).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}),
+                    "Microsoft YaHei", 20);
+                totalAmount.setFontFillColor(new cc.Color(0, 0, 0, 255));
+                totalAmount._setFontWeight("bold");
 
                 dateText.setPosition(125, listEntryPos.y);
                 transferType.setPosition(325, listEntryPos.y);

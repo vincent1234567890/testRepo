@@ -1,7 +1,3 @@
-/**
- * Created by eugeneseah on 23/11/16.
- */
-
 const OptionsView = (function () {
     "use strict";
     const ENDOFFSET = 0.05;
@@ -46,20 +42,15 @@ const OptionsView = (function () {
         slider.setMaximumValue(1+ENDOFFSET); // Sets the max value of range
         slider.setRotation(180);
 
-        let fontDef = new cc.FontDefinition();
-        fontDef.fontName = "Arial";
-        fontDef.fontSize = "30";
-        fontDef.fontStyle = "bold";
-        fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
-        fontDef.fillStyle = new cc.Color(0,0,0,255);
-        let label = new cc.LabelTTF(labelText, fontDef);
+        let label = new cc.LabelTTF(labelText, "Arial", 30);
+        label._setFontWeight("bold");
+        label.setFontFillColor(new cc.Color(0,0,0,255));
         label.setPosition(slider.getContentSize().width +130, slider.getContentSize().height/2);
         label.setAnchorPoint(0,0.5);
         label.setRotation(180);
 
         slider.addChild(label);
         slider.addTargetWithActionForControlEvents(OptionsView, callback, cc.CONTROL_EVENT_VALUECHANGED);
-
         slider.setScaleX(1.01);
 
         return slider;

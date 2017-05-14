@@ -69,14 +69,9 @@ const ProfileView = (function () {
         bg.setPosition(LeftColumn - 35, startHeight);
         _background.addChild(bg);
 
-        let fontDef = new cc.FontDefinition();
-        fontDef.fontName = "Microsoft YaHei";
-        // fontDef.fontName = "Arial Unicode MS";
-        fontDef.fontSize = "20";
-        fontDef.fontStyle = "bold";
-        fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
-        fontDef.fillStyle = new cc.Color(72, 21, 0, 255);
-        let userNameLabel = new cc.LabelTTF(_playerData.playerState.name, fontDef);
+        let userNameLabel = new cc.LabelTTF(_playerData.playerState.name, "Microsoft YaHei", 20);
+        userNameLabel._setFontWeight("bold");
+        userNameLabel.setFontFillColor(new cc.Color(72, 21, 0, 255));
 
         const userbg = new cc.Sprite(ReferenceName.ProfileUserTextBackground);
         const userTitle = new cc.Sprite(ReferenceName.ProfileUsernameTitleChinese);
@@ -137,7 +132,6 @@ const ProfileView = (function () {
         function onEditNicknameCallback(){
             ClientServerConnect.changePlayerDisplayName(nickTextBox.getString());
         }
-
     };
 
     function createDisplay(spriteIcon, titleText, infoText){
@@ -151,20 +145,17 @@ const ProfileView = (function () {
         icon.setPosition(iconPos);
 
         // const soundTitle = new cc.Sprite(ReferenceName.SettingsSoundTitleChinese);
-        let fontDef = new cc.FontDefinition();
-        fontDef.fontName = "Microsoft YaHei";
-        // fontDef.fontName = "Arial Unicode MS";
-        fontDef.fontSize = "20";
-        fontDef.fontStyle = "bold";
-        fontDef.textAlign = cc.TEXT_ALIGNMENT_LEFT;
-        fontDef.fillStyle = new cc.Color(0, 0, 0, 255);
-        let titleLabel = new cc.LabelTTF(titleText, fontDef);
+        let titleLabel = new cc.LabelTTF(titleText, "Microsoft YaHei", 20);
+        titleLabel._setFontWeight("bold");
+        titleLabel.setFontFillColor(new cc.Color(0, 0, 0, 255));
 
         titleLabel.setPosition(15, bgPos.y + 20);
         titleLabel.setAnchorPoint(0,0.5);
 
-        fontDef.fillStyle = new cc.Color(255, 255, 255, 255);
-        let infoLabel = new cc.LabelTTF(infoText, fontDef);
+        let infoLabel = new cc.LabelTTF(infoText, "Microsoft YaHei", 20);
+        titleLabel._setFontWeight("bold");
+        titleLabel.setFontFillColor(new cc.Color(255, 255, 255, 255));
+
         infoLabel.setPosition(15, bgPos.y - 20);
         infoLabel.setAnchorPoint(0,0.5);
 
@@ -175,8 +166,6 @@ const ProfileView = (function () {
 
         return background;
     }
-
-
 
     const proto = ProfileView.prototype;
 

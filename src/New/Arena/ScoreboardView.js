@@ -1,7 +1,3 @@
-/**
- * Created by eugeneseah on 16/11/16.
- */
-
 const ScoreboardView = (function() {
     "use strict";
 
@@ -80,14 +76,8 @@ const ScoreboardView = (function() {
     }
 
     function createGridObject(labelText, spriteName, data){
-        let fontDef = new cc.FontDefinition();
-        fontDef.fontName = "Arial";
-        //fontDef.fontWeight = "bold";
-        fontDef.fontSize = "26";
-        fontDef.textAlign = cc.TEXT_ALIGNMENT_CENTER;
-        fontDef.fillStyle = new cc.Color(0,0,0,255);
-
-        let label = new cc.LabelTTF(labelText, fontDef);
+        let label = new cc.LabelTTF(labelText, "Arial", 26);
+        label.setFontFillColor(new cc.Color(0,0,0,255));
         label.setAnchorPoint(0, 0.5);
 
         fontDef.fontSize = "36";
@@ -96,15 +86,13 @@ const ScoreboardView = (function() {
         fontDef.fontName = "Impact";
         let info;
         if (cc.isNumber(data) || data === undefined) {
-            info = new cc.LabelTTF(data && (data * 1.5).toFixed(2).replace(/[.,]00$/, "") || 0, fontDef);
-        }else{
-            info = new cc.LabelTTF(data, fontDef);
+            info = new cc.LabelTTF(data && (data * 1.5).toFixed(2).replace(/[.,]00$/, "") || 0, "Impact", 36);
+        }else {
+            info = new cc.LabelTTF(data, "Impact", 36);
         }
-
+        info.setFontFillColor(new cc.Color(0,0,0,255));
 
         let icon = new cc.Sprite(spriteName);
-
-
         let bg = new cc.Sprite(ReferenceName.InfoSlotBG);
 
         bg.addChild(label);
@@ -130,7 +118,6 @@ const ScoreboardView = (function() {
         return hh + ':' + mm + ':' + ss;
     }
 
-
     function setupScoreboardMenu(target) {
         let lobby = new cc.Sprite(ReferenceName.LobbyButton);
         let play = new cc.Sprite(ReferenceName.PlayButton);
@@ -138,20 +125,17 @@ const ScoreboardView = (function() {
         let lobbyButton = new cc.MenuItemSprite(lobby, undefined, undefined, localGoToLobby, target);
         let playButton = new cc.MenuItemSprite(play, undefined, undefined, localGoToNewRoom, target);
 
-        let fontDef = new cc.FontDefinition();
-        fontDef.fontName = "Arial";
-        fontDef.fontSize = "50";
-        fontDef.fontWeight = "bold";
-        fontDef.fillStyle = new cc.Color(0,0,0,255);
-
-        let lobbyLabel = new cc.LabelTTF(ReferenceName.GoToLobby, fontDef);
+        let lobbyLabel = new cc.LabelTTF(ReferenceName.GoToLobby, "Arial", 50);
+        lobbyLabel._setFontWeight("bold");
+        lobbyLabel.setFontFillColor(new cc.Color(0, 0, 0, 255));
         lobbyButton.addChild(lobbyLabel);
         lobbyLabel.setPosition(lobbyButton.getContentSize().width / 2, lobbyButton.getContentSize().height/2);
 
-        let playLabel = new cc.LabelTTF(ReferenceName.GoToNewGame, fontDef);
+        let playLabel = new cc.LabelTTF(ReferenceName.GoToNewGame, "Arial", 50);
+        playLabel._setFontWeight("bold");
+        playLabel.setFontFillColor(new cc.Color(0, 0, 0, 255));
         playButton.addChild(playLabel);
         playLabel.setPosition(lobbyButton.getContentSize().width / 2, lobbyButton.getContentSize().height/2);
-
 
         let menu = new cc.Menu(lobbyButton, playButton);
         lobbyButton.setPosition(cc.pAdd(cc.p(menu.getContentSize().width / 2, lobbyButton.getContentSize().height / 2), cc.p(-150, -20)));
