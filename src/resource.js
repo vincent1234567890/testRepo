@@ -44,11 +44,11 @@ var res = {
     WaterCausticAnimation : "Lobby/Caustic.plist",
 
     //GameBackgrounds
-    GameBackground0: "Game BG/Game BG 1.png",
-    GameBackground1: "Game BG/Game BG 2.png",
-    GameBackground2: "Game BG/Game BG 3.png",
-    GameBackground3: "Game BG/Game BG 4.png",
-    GameBackground4: "Game BG/Game BG 5.png",
+    GameBackground0: "Game BG/Game BG 1.jpg",
+    GameBackground1: "Game BG/Game BG 2.jpg",
+    GameBackground2: "Game BG/Game BG 3.jpg",
+    GameBackground3: "Game BG/Game BG 4.jpg",
+    GameBackground4: "Game BG/Game BG 5.jpg",
 
     //FreeRound
     FreeRoundTitle : "Game/FreeRoundTitle.png",
