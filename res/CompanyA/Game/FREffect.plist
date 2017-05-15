@@ -15,7 +15,7 @@
                 <key>spriteSourceSize</key>
                 <string>{683,384}</string>
                 <key>textureRect</key>
-                <string>{{1,1},{683,384}}</string>
+                <string>{{644,1},{683,384}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -30,7 +30,7 @@
                 <key>spriteSourceSize</key>
                 <string>{683,384}</string>
                 <key>textureRect</key>
-                <string>{{686,1},{683,384}}</string>
+                <string>{{1329,1},{683,384}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -45,7 +45,7 @@
                 <key>spriteSourceSize</key>
                 <string>{683,384}</string>
                 <key>textureRect</key>
-                <string>{{1371,1},{683,384}}</string>
+                <string>{{2014,1},{683,384}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -60,7 +60,7 @@
                 <key>spriteSourceSize</key>
                 <string>{683,384}</string>
                 <key>textureRect</key>
-                <string>{{2056,1},{683,384}}</string>
+                <string>{{2699,1},{683,384}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -75,7 +75,7 @@
                 <key>spriteSourceSize</key>
                 <string>{683,384}</string>
                 <key>textureRect</key>
-                <string>{{2741,1},{683,384}}</string>
+                <string>{{1,387},{683,384}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -90,101 +90,11 @@
                 <key>spriteSourceSize</key>
                 <string>{683,384}</string>
                 <key>textureRect</key>
-                <string>{{3426,369},{683,384}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>FREffect_00006.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{683,384}</string>
-                <key>spriteSourceSize</key>
-                <string>{683,384}</string>
-                <key>textureRect</key>
-                <string>{{1,1054},{683,384}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>FREffect_00007.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{683,384}</string>
-                <key>spriteSourceSize</key>
-                <string>{683,384}</string>
-                <key>textureRect</key>
-                <string>{{1,387},{683,384}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>FREffect_00008.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{683,384}</string>
-                <key>spriteSourceSize</key>
-                <string>{683,384}</string>
-                <key>textureRect</key>
-                <string>{{1,1739},{683,384}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>FREffect_00009.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{683,384}</string>
-                <key>spriteSourceSize</key>
-                <string>{683,384}</string>
-                <key>textureRect</key>
-                <string>{{1,2424},{683,384}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>FREffect_00010.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{683,384}</string>
-                <key>spriteSourceSize</key>
-                <string>{683,384}</string>
-                <key>textureRect</key>
-                <string>{{1,3109},{683,384}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>FREffect_00011.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{683,384}</string>
-                <key>spriteSourceSize</key>
-                <string>{683,384}</string>
-                <key>textureRect</key>
                 <string>{{686,387},{683,384}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>FREffect_00012.png</key>
+            <key>FREffect_00006.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -199,7 +109,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>FREffect_00013.png</key>
+            <key>FREffect_00007.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -214,7 +124,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>FREffect_00014.png</key>
+            <key>FREffect_00008.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -229,6 +139,96 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
+            <key>FREffect_00009.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{683,384}</string>
+                <key>spriteSourceSize</key>
+                <string>{683,384}</string>
+                <key>textureRect</key>
+                <string>{{1,773},{683,384}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>FREffect_00010.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{683,384}</string>
+                <key>spriteSourceSize</key>
+                <string>{683,384}</string>
+                <key>textureRect</key>
+                <string>{{686,773},{683,384}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>FREffect_00011.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{683,384}</string>
+                <key>spriteSourceSize</key>
+                <string>{683,384}</string>
+                <key>textureRect</key>
+                <string>{{1371,773},{683,384}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>FREffect_00012.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{683,384}</string>
+                <key>spriteSourceSize</key>
+                <string>{683,384}</string>
+                <key>textureRect</key>
+                <string>{{2056,773},{683,384}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>FREffect_00013.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{683,384}</string>
+                <key>spriteSourceSize</key>
+                <string>{683,384}</string>
+                <key>textureRect</key>
+                <string>{{2741,773},{683,384}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>FREffect_00014.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{683,384}</string>
+                <key>spriteSourceSize</key>
+                <string>{683,384}</string>
+                <key>textureRect</key>
+                <string>{{1,1159},{683,384}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
             <key>FREffect_00015.png</key>
             <dict>
                 <key>aliases</key>
@@ -240,7 +240,7 @@
                 <key>spriteSourceSize</key>
                 <string>{683,384}</string>
                 <key>textureRect</key>
-                <string>{{387,773},{683,384}}</string>
+                <string>{{686,1159},{683,384}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -255,7 +255,7 @@
                 <key>spriteSourceSize</key>
                 <string>{683,384}</string>
                 <key>textureRect</key>
-                <string>{{1072,773},{683,384}}</string>
+                <string>{{1371,1159},{683,384}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -270,7 +270,7 @@
                 <key>spriteSourceSize</key>
                 <string>{683,384}</string>
                 <key>textureRect</key>
-                <string>{{1757,773},{683,384}}</string>
+                <string>{{2056,1159},{683,384}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -285,7 +285,7 @@
                 <key>spriteSourceSize</key>
                 <string>{683,384}</string>
                 <key>textureRect</key>
-                <string>{{2442,773},{683,384}}</string>
+                <string>{{2741,1159},{683,384}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -300,7 +300,7 @@
                 <key>spriteSourceSize</key>
                 <string>{683,384}</string>
                 <key>textureRect</key>
-                <string>{{3127,1054},{683,384}}</string>
+                <string>{{1,1545},{683,384}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -315,9 +315,9 @@
                 <key>spriteSourceSize</key>
                 <string>{683,384}</string>
                 <key>textureRect</key>
-                <string>{{387,1440},{683,384}}</string>
+                <string>{{686,1545},{683,384}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>FREffect_00021.png</key>
             <dict>
@@ -330,9 +330,9 @@
                 <key>spriteSourceSize</key>
                 <string>{683,384}</string>
                 <key>textureRect</key>
-                <string>{{387,2125},{683,384}}</string>
+                <string>{{1371,1545},{683,384}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>FREffect_00022.png</key>
             <dict>
@@ -345,9 +345,9 @@
                 <key>spriteSourceSize</key>
                 <string>{683,384}</string>
                 <key>textureRect</key>
-                <string>{{387,2810},{683,384}}</string>
+                <string>{{2056,1545},{683,384}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>FREffect_00023.png</key>
             <dict>
@@ -360,7 +360,7 @@
                 <key>spriteSourceSize</key>
                 <string>{683,384}</string>
                 <key>textureRect</key>
-                <string>{{387,3495},{683,384}}</string>
+                <string>{{2741,1545},{683,384}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -375,7 +375,7 @@
                 <key>spriteSourceSize</key>
                 <string>{683,384}</string>
                 <key>textureRect</key>
-                <string>{{1072,1159},{683,384}}</string>
+                <string>{{1,1931},{683,384}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -390,7 +390,7 @@
                 <key>spriteSourceSize</key>
                 <string>{683,384}</string>
                 <key>textureRect</key>
-                <string>{{1757,1159},{683,384}}</string>
+                <string>{{686,1931},{683,384}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -405,7 +405,7 @@
                 <key>spriteSourceSize</key>
                 <string>{683,384}</string>
                 <key>textureRect</key>
-                <string>{{2442,1159},{683,384}}</string>
+                <string>{{1371,1931},{683,384}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -420,7 +420,7 @@
                 <key>spriteSourceSize</key>
                 <string>{683,384}</string>
                 <key>textureRect</key>
-                <string>{{3127,1440},{683,384}}</string>
+                <string>{{2056,1931},{683,384}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -435,9 +435,9 @@
                 <key>spriteSourceSize</key>
                 <string>{683,384}</string>
                 <key>textureRect</key>
-                <string>{{773,1826},{683,384}}</string>
+                <string>{{2741,1931},{683,384}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>FREffect_00029.png</key>
             <dict>
@@ -450,7 +450,7 @@
                 <key>spriteSourceSize</key>
                 <string>{683,384}</string>
                 <key>textureRect</key>
-                <string>{{3426,1},{641,366}}</string>
+                <string>{{1,1},{641,366}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -466,9 +466,9 @@
             <key>realTextureFileName</key>
             <string>FREffect.png</string>
             <key>size</key>
-            <string>{4096,4096}</string>
+            <string>{3425,2316}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:aae989bce905113854921a7038676986:d2aebb50a2b1dca9794d8d7d46c616ad:b847fd71fe39b91c073d3d285bc25305$</string>
+            <string>$TexturePacker:SmartUpdate:5f4ec3a5687488482b62b91da7b79080:d2aebb50a2b1dca9794d8d7d46c616ad:018af7f32b259349554a58e6ad5bbd7e$</string>
             <key>textureFileName</key>
             <string>FREffect.png</string>
         </dict>
