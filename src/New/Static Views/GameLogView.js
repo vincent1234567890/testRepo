@@ -34,8 +34,10 @@ const GameLogView = (function () {
 
         const title = new cc.Sprite(ReferenceName.GameLogTitleChinese);
 
-        const gameLogTab = GUIFunctions.createButton(ReferenceName.FAQTabBackground, ReferenceName.FAQTabBackgroundOnPress, onGameLogTabPressed);
-        const consumptionLogTab = GUIFunctions.createButton(ReferenceName.FAQTabBackground, ReferenceName.FAQTabBackgroundOnPress, onRechargeLogTabPressed);
+        const gameLogTab = GUIFunctions.createButton(ReferenceName.FAQTabBackground,
+            ReferenceName.FAQTabBackgroundOnPress, onGameLogTabPressed);
+        const consumptionLogTab = GUIFunctions.createButton(ReferenceName.FAQTabBackground,
+            ReferenceName.FAQTabBackgroundOnPress, onRechargeLogTabPressed);
 
         const gameLogTabTitleText = new cc.Sprite(ReferenceName.GameLogRecordTabChinese);
         const consumptionLogTabTitleText = new cc.Sprite(ReferenceName.GameLogConsumptionTabChinese);
@@ -66,7 +68,8 @@ const GameLogView = (function () {
         gameLogTab.setPosition(130, tabHeight);
         consumptionLogTab.setPosition(310, tabHeight);
 
-        const checkBoxShort = new ccui.CheckBox(ReferenceName.GameLogRadioButton, undefined, ReferenceName.GameLogRadioButtonSelected, undefined, undefined, ccui.Widget.PLIST_TEXTURE);
+        const checkBoxShort = new ccui.CheckBox(ReferenceName.GameLogRadioButton, undefined,
+            ReferenceName.GameLogRadioButtonSelected, undefined, undefined, ccui.Widget.PLIST_TEXTURE);
         const checkBoxShortText = new cc.Sprite(ReferenceName.GameLogRadioTextPeriodShortChinese);
         checkBoxShort.addChild(checkBoxShortText);
         checkBoxShortText.setAnchorPoint(0, 0.5);
@@ -76,7 +79,8 @@ const GameLogView = (function () {
 
         checkBoxShort.setSelected(true);
 
-        const checkBoxMedium = new ccui.CheckBox(ReferenceName.GameLogRadioButton, undefined, ReferenceName.GameLogRadioButtonSelected, undefined, undefined, ccui.Widget.PLIST_TEXTURE);
+        const checkBoxMedium = new ccui.CheckBox(ReferenceName.GameLogRadioButton, undefined,
+            ReferenceName.GameLogRadioButtonSelected, undefined, undefined, ccui.Widget.PLIST_TEXTURE);
         const checkBoxMediumText = new cc.Sprite(ReferenceName.GameLogRadioTextPeriodMediumChinese);
         checkBoxMedium.addChild(checkBoxMediumText);
         checkBoxMediumText.setAnchorPoint(0, 0.5);
@@ -84,7 +88,8 @@ const GameLogView = (function () {
         checkBoxMedium.setPosition(825, tabHeight);
         checkBoxMedium.itemData = timePeriodMedium;
 
-        const checkBoxLong = new ccui.CheckBox(ReferenceName.GameLogRadioButton, undefined, ReferenceName.GameLogRadioButtonSelected, undefined, undefined, ccui.Widget.PLIST_TEXTURE);
+        const checkBoxLong = new ccui.CheckBox(ReferenceName.GameLogRadioButton, undefined,
+            ReferenceName.GameLogRadioButtonSelected, undefined, undefined, ccui.Widget.PLIST_TEXTURE);
         const checkBoxLongText = new cc.Sprite(ReferenceName.GameLogRadioTextPeriodLongChinese);
         checkBoxLong.addChild(checkBoxLongText);
         checkBoxLongText.setAnchorPoint(0, 0.5);
@@ -116,19 +121,20 @@ const GameLogView = (function () {
             radioArray[radio].addEventListener(radioButtonPressEvent);
         }
 
-        title.setPosition(new cc.p(560, 705));
+        title.setPosition(560, 705);
 
-        _popup.getBackground().addChild(title);
+        const popBackground = _popup.getBackground();
+        popBackground.addChild(title);
 
-        _popup.getBackground().addChild(gameLogTab);
-        _popup.getBackground().addChild(consumptionLogTab);
+        popBackground.addChild(gameLogTab);
+        popBackground.addChild(consumptionLogTab);
 
-        _popup.getBackground().addChild(checkBoxShort);
-        _popup.getBackground().addChild(checkBoxMedium);
-        _popup.getBackground().addChild(checkBoxLong);
+        popBackground.addChild(checkBoxShort);
+        popBackground.addChild(checkBoxMedium);
+        popBackground.addChild(checkBoxLong);
 
-        _popup.getBackground().addChild(_scrollTitleBackground);
-        _popup.getBackground().addChild(scrollBackground);
+        popBackground.addChild(_scrollTitleBackground);
+        popBackground.addChild(scrollBackground);
 
         _parent.addChild(_popup.getParent());
 
@@ -214,7 +220,7 @@ const GameLogView = (function () {
         const wiggle = new cc.Sequence(cc.rotateBy(0.08, 3), cc.rotateBy(0.08, -3));
 
         function onTabHover(widget) {
-            if (widget.getNumberOfRunningActions() == 0) {
+            if (widget.getNumberOfRunningActions() === 0) {
                 widget.runAction(new cc.RepeatForever(wiggle.clone()));
             }
         }
@@ -321,14 +327,10 @@ const GameLogView = (function () {
     }
 
     function setupGameLogList(scrollBackground, gameSummaryData) {
-
         let scrollTitle = setupGameLogTitle();
         scrollTitle.setPosition(0, _scrollTitleBackground.getContentSize().height / 2);
 
-        console.log("setupGameLogList", gameSummaryData);
-
         const listSize = scrollBackground.getContentSize();
-
 
         const listView = new ccui.ListView();
         listView.setDirection(ccui.ScrollView.DIR_VERTICAL);
