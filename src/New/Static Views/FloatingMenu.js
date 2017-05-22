@@ -160,6 +160,10 @@ const FloatingMenu = (function () {
         } else {
             _profileView = new ProfileView(_playerData);
         }
+
+        ClientServerConnect.getProfileStats().then(profileStats => {
+            _profileView.showStats(profileStats);
+        });
     }
 
     function onLeaderboardSelected() {

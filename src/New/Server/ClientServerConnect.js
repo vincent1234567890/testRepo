@@ -478,6 +478,10 @@ const ClientServerConnect = function () {
         return _gameWSClient.callAPIOnce('player', 'getGameSummaries', {hours: numDays * 24});
     }
 
+    function getProfileStats () {
+        return _gameWSClient.callAPIOnce('player', 'getProfileStats').then(response => response.data);
+    }
+
     function getConsumptionLog (playerGameNumber, roundNumber, index, limit) { // index is pagination
         return _gameWSClient.callAPIOnce('player', 'getConsumptionLog', {playerGameNumber: playerGameNumber, roundNumber: roundNumber, index : index, limit:limit});
     }
@@ -510,7 +514,9 @@ const ClientServerConnect = function () {
         getCurrentJackpotValues: getCurrentJackpotValues,
         setFishLockRequest: setFishLockRequest,
         unsetFishLockRequest: unsetFishLockRequest,
+
         getGameSummaries: getGameSummaries,
+        getProfileStats: getProfileStats,
         getConsumptionLog: getConsumptionLog,
         getRechargeLog: getRechargeLog,
         changePlayerDisplayName: changePlayerDisplayName,

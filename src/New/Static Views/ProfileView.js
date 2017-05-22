@@ -12,7 +12,7 @@ const ProfileView = (function () {
     const ProfileView = function (playerData) {
         _playerData = playerData;
         _parent = new cc.Node();
-        
+
         const _background = new cc.Sprite(ReferenceName.SettingsBackground);
         const _closeButton = new CloseButtonPrefab(dismiss);
 
@@ -98,7 +98,6 @@ const ProfileView = (function () {
         GameView.addView(_parent, 10);
         BlockingManager.registerBlock(dismissCallback);
 
-
         function dismissCallback(touch) {
             if (GUIFunctions.isSpriteTouched(_background, touch)) {
                 return;
@@ -129,7 +128,26 @@ const ProfileView = (function () {
             BlockingManager.deregisterBlock(dismissCallback);
         }
 
-        function onEditNicknameCallback(){
+        this.showStats = function (stats) {
+            const timeText = (stats.todayPlayTime / 1000 / 60).toFixed(1) + ' minutes';
+            setDisplayText(timeDisplay, timeText);
+            setDisplayText(coinDisplay, numberToText(stats.todayWinnings));
+            setDisplayText(coinStackDisplay, numberToText(stats.twoWeeksWinnings));
+            setDisplayText(rankingDisplay, stats.highestRanking ? String(stats.highestRanking) : '');
+        };
+
+        function setDisplayText (displayBackground, text) {
+            const infoLabel = displayBackground.children[2];
+            infoLabel.setString(text);
+        }
+
+        function numberToText (value, maxDecimalPlaces) {
+            maxDecimalPlaces = maxDecimalPlaces || 0;
+            value = Math.round(value * Math.pow(10, maxDecimalPlaces)) / Math.pow(10, maxDecimalPlaces);
+            return value.toLocaleString('en-US', {maximumFractionDigits: maxDecimalPlaces});
+        }
+
+        function onEditNicknameCallback () {
             ClientServerConnect.changePlayerDisplayName(nickTextBox.getString());
         }
     };
