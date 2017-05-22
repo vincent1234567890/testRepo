@@ -8,6 +8,8 @@ var res = {
     LobbyJackpotPlist: "Lobby/Jackpot.plist",
     MenuPng: "Lobby/Menu.png",
     MenuPlist: "Lobby/Menu.plist",
+    MenuFAQPng: "Lobby/MenuFAQ.png",
+    MenuFAQPlist: "Lobby/MenuFAQ.plist",
 
     GameUIPng: "Game/GameUI.png",
     GameUIPlist: "Game/GameUI.plist",
