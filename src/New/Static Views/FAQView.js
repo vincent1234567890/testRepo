@@ -24,6 +24,8 @@ const FAQView = (function () {
     const FAQView = function () {
         _parent = new cc.Node();
         _popup= new FloatingMenuPopupBasePrefab(dismissCallback);
+        if(!cc.spriteFrameCache.getSpriteFrame(ReferenceName.FAQButtonBackground))
+            cc.spriteFrameCache.addSpriteFrames(res.MenuFAQPlist);
 
         const textBG = new cc.Sprite(ReferenceName.FAQTextBackground);
         const title = new cc.Sprite(ReferenceName.FAQTitleChinese);
