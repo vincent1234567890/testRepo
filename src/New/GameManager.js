@@ -60,7 +60,7 @@ const GameManager = function () {
 
         BlockingManager.destroyView();
 
-        GameView.goToGame(_currentScene);
+        GameView.goToGame(fishGameArena, _currentScene);
         ef.gameController.enterGame();
     };
 
