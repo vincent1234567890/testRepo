@@ -165,7 +165,7 @@ const FishSprite = cc.Node.extend({
             swallowTouches: true,
             onTouchBegan: function(touch, event) {
                 //if is not lockMode, return false directly.
-                if(!ef.gameController.isLockMode())
+                if (ef.gameController.getLockMode() != LockFishStatus.LOCKED)
                     return false;
                 let target = event.getCurrentTarget();
                 return (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),

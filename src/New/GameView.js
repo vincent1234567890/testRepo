@@ -183,7 +183,7 @@ const GameView = function () {
     }
 
     function touchAt(pos, touchType) {
-        if(ef.gameController.isLockMode())
+        if (ef.gameController.getLockMode() == LockFishStatus.LOCK)
             return;
         if (touchType === TouchType.Moved || touchType === TouchType.Began) {
             _latestTouchPos = pos;
