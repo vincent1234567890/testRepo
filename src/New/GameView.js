@@ -77,11 +77,11 @@ const GameView = function () {
         parent.addChild(_parentNode);
     }
 
-    function goToGame(fishGameArena, choice) {
+    function goToGame(choice) {
         if (_waveTransitionView) {
-            setBackgroundTo(fishGameArena.getRoundNumber());
+            setBackgroundTo(_fishGameArena.getRoundNumber());
         } else {
-            _waveTransitionView = new WaveTransition(res['GameBackground' + (fishGameArena.getRoundNumber() % NUMBER_OF_BACKGROUNDS).toString()]);
+            _waveTransitionView = new WaveTransition(res['GameBackground' + (_fishGameArena.getRoundNumber() % NUMBER_OF_BACKGROUNDS).toString()]);
             _screenShakeNode.addChild(_waveTransitionView);
         }
         initialiseTouch(touchAt);
