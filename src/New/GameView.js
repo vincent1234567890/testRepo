@@ -81,7 +81,7 @@ const GameView = function () {
         if(_waveTransitionView) {
             setBackgroundTo(choice ? choice.gameId : 0);
         }else {
-            _waveTransitionView = new WaveTransition(res['GameBackground' + ((choice ? choice.gameId : 0) % (NUMBER_OF_BACKGROUNDS-1)).toString()]);
+            _waveTransitionView = new WaveTransition(res['GameBackground' + ((choice ? choice.gameId : 0) % NUMBER_OF_BACKGROUNDS).toString()]);
             _screenShakeNode.addChild(_waveTransitionView);
         }
         initialiseTouch(touchAt);
@@ -96,7 +96,7 @@ const GameView = function () {
     }
 
     function setBackgroundTo(choice) {
-        _waveTransitionView.transition(res['GameBackground' + (choice % (NUMBER_OF_BACKGROUNDS-1)).toString()]);
+        _waveTransitionView.transition(res['GameBackground' + (choice % NUMBER_OF_BACKGROUNDS).toString()]);
     }
 
     function addView(view, depth, isScreenShake) {
