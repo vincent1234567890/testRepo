@@ -1,5 +1,17 @@
 //the game controller uses to manage game status and save game config, etc.
 var ef = ef || {};
+const LockFishStatus = {
+    RELEASE: 0,
+    LOCK: 1,
+    SWITCHING: 2,
+    LOCKED: 3
+};
+
+const PlayerSeatDirection = {
+    HORIZONTAL: 0,
+    VERTICAL: 1,
+    DW_VERTICAL: 2
+};
 let GameController = (function(){
     let GameController = cc.Class.extend({
         _currentMultiple: 0,
@@ -8,7 +20,7 @@ let GameController = (function(){
         _currentSeat: 0,
         _isInFocus: true,
         _isInGame: false,
-        _isLockMode: false,
+        _isLockMode: LockFishStatus.RELEASE,
         _leaveGameTimeout: null,
         ctor: function() {
             this._currentMultiple = 1;
@@ -64,10 +76,10 @@ let GameController = (function(){
 
         leaveGame: function(){
             this._isInGame = false;
-            this._isLockMode = false;  //leave game, lockMode auto set to false
+            this._isLockMode = LockFishStatus.RELEASE;  //leave game, lockMode auto set to 'RELEASE'
         },
 
-        isLockMode: function(){
+        getLockMode: function(){
             return this._isLockMode;
         },
 
