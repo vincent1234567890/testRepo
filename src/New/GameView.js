@@ -78,25 +78,26 @@ const GameView = function () {
     }
 
     function goToGame(choice) {
-        if(_waveTransitionView) {
-            setBackgroundTo(choice ? choice.gameId : 0);
-        }else {
-            _waveTransitionView = new WaveTransition(res['GameBackground' + ((choice ? choice.gameId : 0) % (NUMBER_OF_BACKGROUNDS-1)).toString()]);
+        if (_waveTransitionView) {
+            setBackgroundTo(_fishGameArena.getRoundNumber());
+        } else {
+            _waveTransitionView = new WaveTransition(res['GameBackground' + (_fishGameArena.getRoundNumber() % NUMBER_OF_BACKGROUNDS).toString()]);
             _screenShakeNode.addChild(_waveTransitionView);
         }
         initialiseTouch(touchAt);
-        ef.gameController.setCurrentMultiple(parseInt(choice.gameName));
+        const multiplier = parseInt(choice.gameName, 10); // because scenes are 1X, 10X, 100X
+        ef.gameController.setCurrentMultiple(multiplier);
         if (_gameConfig) {
             for (let i = 0; i < _gameConfig.maxPlayers; i++) {
-                _playerViews[i].setMultiplier(choice.gameName.slice(0,-1)); // because scenes are 1X, 10X, 100X
+                _playerViews[i].setMultiplier(multiplier);
             }
         }
 
         cc.audioEngine.playMusic(res.ArenaGameBGM, true);
     }
 
-    function setBackgroundTo(choice) {
-        _waveTransitionView.transition(res['GameBackground' + (choice % (NUMBER_OF_BACKGROUNDS-1)).toString()]);
+    function setBackgroundTo(roundNumber) {
+        _waveTransitionView.transition(res['GameBackground' + (roundNumber % NUMBER_OF_BACKGROUNDS).toString()]);
     }
 
     function addView(view, depth, isScreenShake) {
