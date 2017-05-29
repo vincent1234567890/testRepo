@@ -50,6 +50,10 @@ const PlayerViewManager = (function () {
         }
     };
 
+    proto.setPlayerLockStatus = function (lockStatus) {
+        this._playerView.setPlayerLockStatus(lockStatus);
+    };
+
     proto.clearPlayerData = function () {
         this._playerView.clearPlayerData();
         this._cannonManager.forceClearGun();

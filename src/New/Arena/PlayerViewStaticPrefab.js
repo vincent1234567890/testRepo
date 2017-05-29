@@ -160,6 +160,10 @@ const PlayerViewStaticPrefab = (function () {
         }
     };
 
+    proto.setPlayerLockStatus = function (lockStatus) {
+        this._lockOnButton.setLockStatusTo(lockStatus);
+    };
+
     proto.clearPlayerData = function () {
         this._changeSlotButton.setVisible(true);
         this._playerName.setString('');
@@ -168,7 +172,7 @@ const PlayerViewStaticPrefab = (function () {
         this._otherPlayerIcon.setVisible(false);
         this._coinIcon.setVisible(false);
         this._isPlayer = null;
-        this._lockOnButton.switchToRelease();
+        this._lockOnButton.setLockStatusToRelease();
         this._lockOnButton.setVisible(false);
     };
 
@@ -309,21 +313,20 @@ let LockFishButton = cc.Sprite.extend({
                 lockCallback(true);
             this._touchEventListener.setEnabled(false);
             this._spCircle.runAction(cc.moveTo(duration, contentSize.width - 22, contentSize.height * 0.5));
+            // @todo Animations like these are dangerous
+            // What if the player leaves the game, or changes seat, before the animation completes?
+            // What if a new player takes this seat before the animation completes?
             if (this._direction === PlayerSeatDirection.HORIZONTAL) {
                 this._spLabel.setSpriteFrame("LOLockGreenH.png");
                 this.runAction(cc.sequence(cc.delayTime(duration), cc.callFunc(function(){
-                    this._spLabel.setSpriteFrame("LOReleaseWhiteH.png");
                     this._touchEventListener.setEnabled(true);
-                    this._lockStatus = LockFishStatus.LOCK;
-                    ef.gameController.setLockMode(LockFishStatus.LOCK);
+                    this.setLockStatusToLock();
                 }, this)));
             } else {
                 this._spLabel.setSpriteFrame("LOLockGreenV.png");
                 this.runAction(cc.sequence(cc.delayTime(duration), cc.callFunc(function(){
-                    this._spLabel.setSpriteFrame("LOReleaseWhiteV.png");
                     this._touchEventListener.setEnabled(true);
-                    this._lockStatus = LockFishStatus.LOCK;
-                    ef.gameController.setLockMode(LockFishStatus.LOCK);
+                    this.setLockStatusToLock();
                 }, this)));
             }
         } else if (status === LockFishStatus.LOCK || status === LockFishStatus.LOCKED) {
@@ -334,22 +337,50 @@ let LockFishButton = cc.Sprite.extend({
             if (this._direction === PlayerSeatDirection.HORIZONTAL) {
                 this._spLabel.setSpriteFrame("LOReleaseGreenH.png");
                 this.runAction(cc.sequence(cc.delayTime(duration), cc.callFunc(function(){
-                    this._spLabel.setSpriteFrame("LOLockWhiteH.png");
                     this._spIcon.setSpriteFrame("LOIconWhite.png");
                     this._touchEventListener.setEnabled(true);
-                    this._lockStatus = LockFishStatus.RELEASE;
-                    ef.gameController.setLockMode(LockFishStatus.RELEASE);
+                    this.setLockStatusToRelease();
                 }, this)));
             } else {
                 this._spLabel.setSpriteFrame("LOReleaseGreenV.png");
                 this.runAction(cc.sequence(cc.delayTime(duration), cc.callFunc(function(){
-                    this._spLabel.setSpriteFrame("LOLockWhiteV.png");
                     this._spIcon.setSpriteFrame("LOIconWhite.png");
                     this._touchEventListener.setEnabled(true);
-                    this._lockStatus = LockFishStatus.RELEASE;
-                    ef.gameController.setLockMode(LockFishStatus.RELEASE);
+                    this.setLockStatusToRelease();
                 }, this)));
             }
+        }
+    },
+
+    setLockStatusTo: function (newStatus) {
+        this._lockStatus = newStatus;
+        ef.gameController.setLockMode(newStatus);
+        this.setFrameForStatus();
+    },
+
+    setLockStatusToRelease: function () {
+        this.setLockStatusTo(LockFishStatus.RELEASE);
+    },
+
+    setLockStatusToLock: function () {
+        this.setLockStatusTo(LockFishStatus.LOCK);
+    },
+
+    setFrameForStatus: function () {
+        if (this._lockStatus === LockFishStatus.RELEASE) {
+            if (this._direction === PlayerSeatDirection.HORIZONTAL) {
+                this._spLabel.setSpriteFrame("LOLockWhiteH.png");
+            } else {
+                this._spLabel.setSpriteFrame("LOLockWhiteV.png");
+            }
+        } else if (this._lockStatus === LockFishStatus.LOCKED || this._lockStatus === LockFishStatus.LOCK) {
+            if (this._direction === PlayerSeatDirection.HORIZONTAL) {
+                this._spLabel.setSpriteFrame("LOReleaseWhiteH.png");
+            } else {
+                this._spLabel.setSpriteFrame("LOReleaseWhiteV.png");
+            }
+        } else {
+            console.log(`Cannot setFrameForStatus:`, this._lockStatus);
         }
     },
 
@@ -361,26 +392,18 @@ let LockFishButton = cc.Sprite.extend({
             this._spCircle.runAction(cc.moveTo(duration, 22, szContent.height * 0.5));
             if (this._direction === PlayerSeatDirection.HORIZONTAL) {
                 this._spLabel.setSpriteFrame("LOReleaseGreenH.png");
-                this.runAction(cc.sequence(cc.delayTime(duration), cc.callFunc(function(){
-                    this._spLabel.setSpriteFrame("LOLockWhiteH.png");
-                    this._lockStatus = LockFishStatus.RELEASE;
-                    ef.gameController.setLockMode(LockFishStatus.RELEASE);
-                }, this)));
             } else {
                 this._spLabel.setSpriteFrame("LOReleaseGreenV.png");
-                this.runAction(cc.sequence(cc.delayTime(duration), cc.callFunc(function(){
-                    this._spLabel.setSpriteFrame("LOLockWhiteV.png");
-                    this._lockStatus = LockFishStatus.RELEASE;
-                    ef.gameController.setLockMode(LockFishStatus.RELEASE);
-                }, this)));
             }
+            this.runAction(cc.sequence(cc.delayTime(duration), cc.callFunc(function(){
+                this.setLockStatusToRelease();
+            }, this)));
         }
     },
 
     switchTargetRelease: function(){
         if(this._lockStatus === LockFishStatus.LOCKED){
-            this._lockStatus = LockFishStatus.LOCK;
-            ef.gameController.setLockMode(LockFishStatus.LOCK);
+            this.setLockStatusToLock();
             this._spIcon.setSpriteFrame("LOIconWhite.png");
             if (this._direction === PlayerSeatDirection.HORIZONTAL) {
                 this._spLabel.setSpriteFrame("LOReleaseWhiteH.png");
@@ -413,8 +436,7 @@ let LockFishButton = cc.Sprite.extend({
 
     switchToLocked: function () {
         if (this._lockStatus === LockFishStatus.LOCK) {
-            this._lockStatus = LockFishStatus.LOCKED;
-            ef.gameController.setLockMode(LockFishStatus.LOCKED);
+            this.setLockStatusToLock();
             this._spIcon.setSpriteFrame("LOIconGreen.png");
             if (this._direction === PlayerSeatDirection.HORIZONTAL) {
                 this._spLabel.setSpriteFrame("LOReleaseGreenH.png");

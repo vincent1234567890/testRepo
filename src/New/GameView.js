@@ -267,6 +267,13 @@ const GameView = function () {
         }
     }
 
+    function setPlayerLockStatus (slot, lockStatus) {
+        const playerView = _playerViews[slot];
+        if (playerView) {
+            playerView.setPlayerLockStatus(lockStatus);
+        }
+    }
+
     function clearPlayerState(slot) {
         if (_playerViews[slot]) {
             _playerViews[slot].clearPlayerData();
@@ -328,6 +335,7 @@ const GameView = function () {
         updateMultiplayerState: updateMultiplayerState,
         updateArena: updateArena,
         stopAutoFiring: stopAutoFiring,
+        setPlayerLockStatus: setPlayerLockStatus,
         caughtFishAnimationEnd: caughtFishAnimationEnd,
         setFreeRound: setFreeRound,
 
