@@ -104,7 +104,7 @@ const GameManager = function () {
         // console.log(JSON.stringify(config));
         _gameConfig = config;
         _playerId = playerId;
-        GameView.setMyPlayerData(playerId,playerSlot)
+        GameView.setMyPlayerData(playerId,playerSlot);
     };
 
     const updateMultiplayerState = function (playerData, oldSlot) {
@@ -112,7 +112,7 @@ const GameManager = function () {
     };
 
     const clearPlayerState = function (slot) {
-        GameView.clearPlayerState(slot)
+        GameView.clearPlayerState(slot);
     };
 
     const createFish = function (fishId, fishType) {
@@ -307,7 +307,7 @@ const GameManager = function () {
     }
 
     function updateJackpotPool(value) {
-        _jackpotManager.updateJackpot(value)
+        _jackpotManager.updateJackpot(value);
     }
 
     function getFishLockStatus(){

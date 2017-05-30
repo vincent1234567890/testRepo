@@ -25,6 +25,10 @@ var PlayerView = (function () {
         this._playerViewStaticPrefabInstance.clearPlayerData();
     };
 
+    proto.setPlayerLockStatus = function (lockStatus) {
+        this._playerViewStaticPrefabInstance.setPlayerLockStatus(lockStatus);
+    };
+
     proto.destroyView = function () {
         // this._playerViewStaticPrefabInstance.parent.removeChild(this._playerViewStaticPrefabInstance);
         this._playerViewStaticPrefabInstance.destroyView();

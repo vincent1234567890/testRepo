@@ -160,6 +160,10 @@ const PlayerViewStaticPrefab = (function () {
         }
     };
 
+    proto.setPlayerLockStatus = function (lockStatus) {
+        this._lockOnButton.setLockStatusTo(lockStatus);
+    };
+
     proto.clearPlayerData = function () {
         this._changeSlotButton.setVisible(true);
         this._playerName.setString('');
@@ -168,7 +172,9 @@ const PlayerViewStaticPrefab = (function () {
         this._otherPlayerIcon.setVisible(false);
         this._coinIcon.setVisible(false);
         this._isPlayer = null;
-        this._lockOnButton.switchToRelease();
+        // We don't call switchToRelease() because that is asynchronous (it performs actions after animation)
+        // setLockStatusToRelease() is immediate
+        this._lockOnButton.setLockStatusToRelease();
         this._lockOnButton.setVisible(false);
     };
 
@@ -195,7 +201,7 @@ const PlayerViewStaticPrefab = (function () {
         if (this._lockOnButton){
             this._lockOnButton.setVisible(isPlayer);
             if (isPlayer) {
-                this._lockOnButton.setLockIcon(ef.gameController.getLockMode());
+                this._lockOnButton.setLockSprites(ef.gameController.getLockMode());
             }
         }
     };
@@ -302,6 +308,12 @@ let LockFishButton = cc.Sprite.extend({
     },
 
     switchStatus: function() {
+        // @todo Changing state after a timeout (when these animations complete) can be complicated:
+        // - What if the player changes seat before the animation completes?  Will we be setting the correct view?
+        // - After the timeout, should we set the _current_player_ view, instead of this view?  (This view might be for the old seat.)
+        // - What if we receive a server message "Target lock off" before the animation completes?  Will we be setting the wrong state at the end of the animation?
+        // Increase duration to test these edge cases.
+
         const status = this._lockStatus, contentSize = this.getContentSize(), duration = 0.3, lockCallback = this._lockCallback;
         this._lockStatus = LockFishStatus.SWITCHING;
         if (status === LockFishStatus.RELEASE) {
@@ -309,47 +321,35 @@ let LockFishButton = cc.Sprite.extend({
                 lockCallback(true);
             this._touchEventListener.setEnabled(false);
             this._spCircle.runAction(cc.moveTo(duration, contentSize.width - 22, contentSize.height * 0.5));
+
+            // Is it really necessary to set the sprite at this moment?  Can we just leave it on what it was?
             if (this._direction === PlayerSeatDirection.HORIZONTAL) {
                 this._spLabel.setSpriteFrame("LOLockGreenH.png");
-                this.runAction(cc.sequence(cc.delayTime(duration), cc.callFunc(function(){
-                    this._spLabel.setSpriteFrame("LOReleaseWhiteH.png");
-                    this._touchEventListener.setEnabled(true);
-                    this._lockStatus = LockFishStatus.LOCK;
-                    ef.gameController.setLockMode(LockFishStatus.LOCK);
-                }, this)));
             } else {
                 this._spLabel.setSpriteFrame("LOLockGreenV.png");
-                this.runAction(cc.sequence(cc.delayTime(duration), cc.callFunc(function(){
-                    this._spLabel.setSpriteFrame("LOReleaseWhiteV.png");
-                    this._touchEventListener.setEnabled(true);
-                    this._lockStatus = LockFishStatus.LOCK;
-                    ef.gameController.setLockMode(LockFishStatus.LOCK);
-                }, this)));
             }
+
+            this.runAction(cc.sequence(cc.delayTime(duration), cc.callFunc(function(){
+                this._touchEventListener.setEnabled(true);
+                this.setLockStatusToLock();
+            }, this)));
         } else if (status === LockFishStatus.LOCK || status === LockFishStatus.LOCKED) {
             if(lockCallback)
                 lockCallback(false);
             this._touchEventListener.setEnabled(false);
             this._spCircle.runAction(cc.moveTo(duration, 22, contentSize.height * 0.5));
+
+            // Is it really necessary to set the sprite at this moment?  Can we just leave it on what it was?
             if (this._direction === PlayerSeatDirection.HORIZONTAL) {
                 this._spLabel.setSpriteFrame("LOReleaseGreenH.png");
-                this.runAction(cc.sequence(cc.delayTime(duration), cc.callFunc(function(){
-                    this._spLabel.setSpriteFrame("LOLockWhiteH.png");
-                    this._spIcon.setSpriteFrame("LOIconWhite.png");
-                    this._touchEventListener.setEnabled(true);
-                    this._lockStatus = LockFishStatus.RELEASE;
-                    ef.gameController.setLockMode(LockFishStatus.RELEASE);
-                }, this)));
             } else {
                 this._spLabel.setSpriteFrame("LOReleaseGreenV.png");
-                this.runAction(cc.sequence(cc.delayTime(duration), cc.callFunc(function(){
-                    this._spLabel.setSpriteFrame("LOLockWhiteV.png");
-                    this._spIcon.setSpriteFrame("LOIconWhite.png");
-                    this._touchEventListener.setEnabled(true);
-                    this._lockStatus = LockFishStatus.RELEASE;
-                    ef.gameController.setLockMode(LockFishStatus.RELEASE);
-                }, this)));
             }
+
+            this.runAction(cc.sequence(cc.delayTime(duration), cc.callFunc(function(){
+                this._touchEventListener.setEnabled(true);
+                this.setLockStatusToRelease();
+            }, this)));
         }
     },
 
@@ -361,50 +361,57 @@ let LockFishButton = cc.Sprite.extend({
             this._spCircle.runAction(cc.moveTo(duration, 22, szContent.height * 0.5));
             if (this._direction === PlayerSeatDirection.HORIZONTAL) {
                 this._spLabel.setSpriteFrame("LOReleaseGreenH.png");
-                this.runAction(cc.sequence(cc.delayTime(duration), cc.callFunc(function(){
-                    this._spLabel.setSpriteFrame("LOLockWhiteH.png");
-                    this._lockStatus = LockFishStatus.RELEASE;
-                    ef.gameController.setLockMode(LockFishStatus.RELEASE);
-                }, this)));
             } else {
                 this._spLabel.setSpriteFrame("LOReleaseGreenV.png");
-                this.runAction(cc.sequence(cc.delayTime(duration), cc.callFunc(function(){
-                    this._spLabel.setSpriteFrame("LOLockWhiteV.png");
-                    this._lockStatus = LockFishStatus.RELEASE;
-                    ef.gameController.setLockMode(LockFishStatus.RELEASE);
-                }, this)));
             }
+            this.runAction(cc.sequence(cc.delayTime(duration), cc.callFunc(function(){
+                this.setLockStatusToRelease();
+            }, this)));
         }
     },
 
     switchTargetRelease: function(){
         if(this._lockStatus === LockFishStatus.LOCKED){
-            this._lockStatus = LockFishStatus.LOCK;
-            ef.gameController.setLockMode(LockFishStatus.LOCK);
-            this._spIcon.setSpriteFrame("LOIconWhite.png");
-            if (this._direction === PlayerSeatDirection.HORIZONTAL) {
-                this._spLabel.setSpriteFrame("LOReleaseWhiteH.png");
-            }else{
-                this._spLabel.setSpriteFrame("LOReleaseWhiteV.png");
-            }
+            this.setLockStatusToLock();
         }
     },
 
-    setLockIcon: function (status) {
-        const szContent = this.getContentSize(), duration = 0.3;
-        let iconStr = '', labelStr = '',
-            direction = this._direction === PlayerSeatDirection.HORIZONTAL ? 'H.png' : 'V.png';
-        if (status == LockFishStatus.LOCK) {
-            iconStr = "LOIconWhite.png";
-            labelStr = "LOReleaseWhite" + direction;
+    setLockStatusToRelease: function () {
+        this.setLockStatusTo(LockFishStatus.RELEASE);
+    },
+
+    setLockStatusToLock: function () {
+        this.setLockStatusTo(LockFishStatus.LOCK);
+    },
+
+    setLockStatusToLocked: function () {
+        this.setLockStatusTo(LockFishStatus.LOCKED);
+    },
+
+    setLockStatusTo: function (newStatus) {
+        // Why do we have two places to store the same piece of information?
+        // Are they ever different?  #SSOT
+        this._lockStatus = newStatus;
+        ef.gameController.setLockMode(newStatus);
+        this.setLockSprites(this._lockStatus);
+    },
+
+    setLockSprites: function (status) {
+        const szContent = this.getContentSize();
+        const direction = this._direction === PlayerSeatDirection.HORIZONTAL ? 'H' : 'V';
+        let iconStr = '';
+        let labelStr = '';
+        if (status === LockFishStatus.LOCK) {
+            iconStr = 'LOIconWhite.png';
+            labelStr = 'LOReleaseWhite' + direction + '.png';
             this._spCircle.setPosition(szContent.width - 22, szContent.height * 0.5);
-        } else if (status == LockFishStatus.LOCKED) {
-            iconStr = "LOIconGreen.png";
-            labelStr = "LOReleaseGreen" + direction;
+        } else if (status === LockFishStatus.LOCKED) {
+            iconStr = 'LOIconGreen.png';
+            labelStr = 'LOReleaseGreen' + direction + '.png';
             this._spCircle.setPosition(szContent.width - 22, szContent.height * 0.5);
-        } else if (status == LockFishStatus.RELEASE) {
-            iconStr = "LOIconWhite.png";
-            labelStr = "LOLockWhite" + direction;
+        } else if (status === LockFishStatus.RELEASE) {
+            iconStr = 'LOIconWhite.png';
+            labelStr = 'LOLockWhite' + direction + '.png';
             this._spCircle.setPosition(22, szContent.height * 0.5);
         }
         this._spIcon.setSpriteFrame(iconStr);
@@ -413,14 +420,7 @@ let LockFishButton = cc.Sprite.extend({
 
     switchToLocked: function () {
         if (this._lockStatus === LockFishStatus.LOCK) {
-            this._lockStatus = LockFishStatus.LOCKED;
-            ef.gameController.setLockMode(LockFishStatus.LOCKED);
-            this._spIcon.setSpriteFrame("LOIconGreen.png");
-            if (this._direction === PlayerSeatDirection.HORIZONTAL) {
-                this._spLabel.setSpriteFrame("LOReleaseGreenH.png");
-            } else {
-                this._spLabel.setSpriteFrame("LOReleaseGreenV.png");
-            }
+            this.setLockStatusToLocked();
         }
     },
 
