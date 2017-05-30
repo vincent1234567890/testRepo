@@ -391,6 +391,10 @@ let LockFishButton = cc.Sprite.extend({
         this.setLockStatusTo(LockFishStatus.LOCK);
     },
 
+    setLockStatusToLocked: function () {
+        this.setLockStatusTo(LockFishStatus.LOCKED);
+    },
+
     setLockStatusTo: function (newStatus) {
         this._lockStatus = newStatus;
         ef.gameController.setLockMode(newStatus);
@@ -420,13 +424,7 @@ let LockFishButton = cc.Sprite.extend({
 
     switchToLocked: function () {
         if (this._lockStatus === LockFishStatus.LOCK) {
-            this.setLockStatusToLock();
-            this._spIcon.setSpriteFrame("LOIconGreen.png");
-            if (this._direction === PlayerSeatDirection.HORIZONTAL) {
-                this._spLabel.setSpriteFrame("LOReleaseGreenH.png");
-            } else {
-                this._spLabel.setSpriteFrame("LOReleaseGreenV.png");
-            }
+            this.setLockStatusToLocked();
         }
     },
 
