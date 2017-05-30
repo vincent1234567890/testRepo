@@ -321,39 +321,35 @@ let LockFishButton = cc.Sprite.extend({
                 lockCallback(true);
             this._touchEventListener.setEnabled(false);
             this._spCircle.runAction(cc.moveTo(duration, contentSize.width - 22, contentSize.height * 0.5));
+
+            // Is it really necessary to set the sprite at this moment?  Can we just leave it on what it was?
             if (this._direction === PlayerSeatDirection.HORIZONTAL) {
                 this._spLabel.setSpriteFrame("LOLockGreenH.png");
-                this.runAction(cc.sequence(cc.delayTime(duration), cc.callFunc(function(){
-                    this._touchEventListener.setEnabled(true);
-                    this.setLockStatusToLock();
-                }, this)));
             } else {
                 this._spLabel.setSpriteFrame("LOLockGreenV.png");
-                this.runAction(cc.sequence(cc.delayTime(duration), cc.callFunc(function(){
-                    this._touchEventListener.setEnabled(true);
-                    this.setLockStatusToLock();
-                }, this)));
             }
+
+            this.runAction(cc.sequence(cc.delayTime(duration), cc.callFunc(function(){
+                this._touchEventListener.setEnabled(true);
+                this.setLockStatusToLock();
+            }, this)));
         } else if (status === LockFishStatus.LOCK || status === LockFishStatus.LOCKED) {
             if(lockCallback)
                 lockCallback(false);
             this._touchEventListener.setEnabled(false);
             this._spCircle.runAction(cc.moveTo(duration, 22, contentSize.height * 0.5));
+
+            // Is it really necessary to set the sprite at this moment?  Can we just leave it on what it was?
             if (this._direction === PlayerSeatDirection.HORIZONTAL) {
                 this._spLabel.setSpriteFrame("LOReleaseGreenH.png");
-                this.runAction(cc.sequence(cc.delayTime(duration), cc.callFunc(function(){
-                    this._spIcon.setSpriteFrame("LOIconWhite.png");
-                    this._touchEventListener.setEnabled(true);
-                    this.setLockStatusToRelease();
-                }, this)));
             } else {
                 this._spLabel.setSpriteFrame("LOReleaseGreenV.png");
-                this.runAction(cc.sequence(cc.delayTime(duration), cc.callFunc(function(){
-                    this._spIcon.setSpriteFrame("LOIconWhite.png");
-                    this._touchEventListener.setEnabled(true);
-                    this.setLockStatusToRelease();
-                }, this)));
             }
+
+            this.runAction(cc.sequence(cc.delayTime(duration), cc.callFunc(function(){
+                this._touchEventListener.setEnabled(true);
+                this.setLockStatusToRelease();
+            }, this)));
         }
     },
 
