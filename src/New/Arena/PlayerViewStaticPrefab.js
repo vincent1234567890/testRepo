@@ -308,6 +308,12 @@ let LockFishButton = cc.Sprite.extend({
     },
 
     switchStatus: function() {
+        // @todo Changing state after a timeout (when these animations complete) can be complicated:
+        // - What if the player changes seat before the animation completes?  Will we be setting the correct view?
+        // - After the timeout, should we set the _current_player_ view, instead of this view?  (This view might be for the old seat.)
+        // - What if we receive a server message "Target lock off" before the animation completes?  Will we be setting the wrong state at the end of the animation?
+        // Increase duration to test these edge cases.
+
         const status = this._lockStatus, contentSize = this.getContentSize(), duration = 0.3, lockCallback = this._lockCallback;
         this._lockStatus = LockFishStatus.SWITCHING;
         if (status === LockFishStatus.RELEASE) {
@@ -315,9 +321,6 @@ let LockFishButton = cc.Sprite.extend({
                 lockCallback(true);
             this._touchEventListener.setEnabled(false);
             this._spCircle.runAction(cc.moveTo(duration, contentSize.width - 22, contentSize.height * 0.5));
-            // @todo Animations like these are dangerous
-            // What if the player leaves the game, or changes seat, before the animation completes?
-            // What if a new player takes this seat before the animation completes?
             if (this._direction === PlayerSeatDirection.HORIZONTAL) {
                 this._spLabel.setSpriteFrame("LOLockGreenH.png");
                 this.runAction(cc.sequence(cc.delayTime(duration), cc.callFunc(function(){
@@ -390,6 +393,8 @@ let LockFishButton = cc.Sprite.extend({
     },
 
     setLockStatusTo: function (newStatus) {
+        // Why do we have two places to store the same piece of information?
+        // Are they ever different?  #SSOT
         this._lockStatus = newStatus;
         ef.gameController.setLockMode(newStatus);
         this.setLockIcon(this._lockStatus);
