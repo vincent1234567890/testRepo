@@ -374,12 +374,6 @@ let LockFishButton = cc.Sprite.extend({
     switchTargetRelease: function(){
         if(this._lockStatus === LockFishStatus.LOCKED){
             this.setLockStatusToLock();
-            this._spIcon.setSpriteFrame("LOIconWhite.png");
-            if (this._direction === PlayerSeatDirection.HORIZONTAL) {
-                this._spLabel.setSpriteFrame("LOReleaseWhiteH.png");
-            }else{
-                this._spLabel.setSpriteFrame("LOReleaseWhiteV.png");
-            }
         }
     },
 
