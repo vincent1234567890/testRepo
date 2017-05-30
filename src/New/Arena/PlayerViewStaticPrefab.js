@@ -201,7 +201,7 @@ const PlayerViewStaticPrefab = (function () {
         if (this._lockOnButton){
             this._lockOnButton.setVisible(isPlayer);
             if (isPlayer) {
-                this._lockOnButton.setLockIcon(ef.gameController.getLockMode());
+                this._lockOnButton.setLockSprites(ef.gameController.getLockMode());
             }
         }
     };
@@ -393,24 +393,25 @@ let LockFishButton = cc.Sprite.extend({
         // Are they ever different?  #SSOT
         this._lockStatus = newStatus;
         ef.gameController.setLockMode(newStatus);
-        this.setLockIcon(this._lockStatus);
+        this.setLockSprites(this._lockStatus);
     },
 
-    setLockIcon: function (status) {
-        const szContent = this.getContentSize(), duration = 0.3;
-        let iconStr = '', labelStr = '',
-            direction = this._direction === PlayerSeatDirection.HORIZONTAL ? 'H.png' : 'V.png';
+    setLockSprites: function (status) {
+        const szContent = this.getContentSize();
+        const direction = this._direction === PlayerSeatDirection.HORIZONTAL ? 'H' : 'V';
+        let iconStr = '';
+        let labelStr = '';
         if (status === LockFishStatus.LOCK) {
-            iconStr = "LOIconWhite.png";
-            labelStr = "LOReleaseWhite" + direction;
+            iconStr = 'LOIconWhite.png';
+            labelStr = 'LOReleaseWhite' + direction + '.png';
             this._spCircle.setPosition(szContent.width - 22, szContent.height * 0.5);
         } else if (status === LockFishStatus.LOCKED) {
-            iconStr = "LOIconGreen.png";
-            labelStr = "LOReleaseGreen" + direction;
+            iconStr = 'LOIconGreen.png';
+            labelStr = 'LOReleaseGreen' + direction + '.png';
             this._spCircle.setPosition(szContent.width - 22, szContent.height * 0.5);
         } else if (status === LockFishStatus.RELEASE) {
-            iconStr = "LOIconWhite.png";
-            labelStr = "LOLockWhite" + direction;
+            iconStr = 'LOIconWhite.png';
+            labelStr = 'LOLockWhite' + direction + '.png';
             this._spCircle.setPosition(22, szContent.height * 0.5);
         }
         this._spIcon.setSpriteFrame(iconStr);
