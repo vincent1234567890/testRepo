@@ -4,6 +4,21 @@
     <dict>
         <key>frames</key>
         <dict>
+            <key>CannonLight.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,-3}</string>
+                <key>spriteSize</key>
+                <string>{365,338}</string>
+                <key>spriteSourceSize</key>
+                <string>{365,344}</string>
+                <key>textureRect</key>
+                <string>{{461,127},{365,338}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
             <key>JPCoinLight.png</key>
             <dict>
                 <key>aliases</key>
@@ -79,21 +94,6 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>cannon light.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,-3}</string>
-                <key>spriteSize</key>
-                <string>{365,338}</string>
-                <key>spriteSourceSize</key>
-                <string>{365,344}</string>
-                <key>textureRect</key>
-                <string>{{461,127},{365,338}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
             <key>notification background.png</key>
             <dict>
                 <key>aliases</key>
@@ -123,7 +123,7 @@
             <key>size</key>
             <string>{1293,1293}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:e080fd45686386592bfee5a1d2281492:2bf545d63ad0c839af23b0dfa6b161db:4d6da119fe3dd58a2c6aa206dee01ed5$</string>
+            <string>$TexturePacker:SmartUpdate:a521138349627daf1756b9a0825ab4b9:f5d61f1d9158a568b2167c7a0010e17a:4d6da119fe3dd58a2c6aa206dee01ed5$</string>
             <key>textureFileName</key>
             <string>JPminigame2.png</string>
         </dict>
