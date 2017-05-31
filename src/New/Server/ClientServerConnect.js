@@ -302,7 +302,7 @@ const ClientServerConnect = function () {
         client.callAPIOnce('game', 'login', {
             playerId: loginParams.playerId,
             // If we don't have the playerId, we can log in with channelId and username
-            channel: loginParams.channelId,
+            channelId: loginParams.channelId,
             username: loginParams.username,
             // Or with their email
             email: loginParams.email,
