@@ -159,7 +159,7 @@ const ClientServerConnect = function () {
                     }
                     // Players without credentials will now auto log in as trial players
                     //if (queryParams.token && (queryParams.playerId || queryParams.email)) {
-                    loginWithToken(_loginParams.token, _loginParams.playerId, _loginParams.email, function (loginData) {
+                    loginWithParams(_loginParams, function (loginData) {
                         // If successful, remove the query parameters from the URL
                         window.history.pushState({where: 'start', search: document.location.search}, '', document.location.pathname);
                         // Start the game!
@@ -291,7 +291,7 @@ const ClientServerConnect = function () {
         }
     }
 
-    function loginWithToken (token, playerId, email, onSuccess, onFailure) {
+    function loginWithParams (loginParams, onSuccess, onFailure) {
         const client = getGameWSClient();
 
         // Consider: We could provide an extra param here to say whether this is the first connect, or a reconnect.
@@ -300,9 +300,14 @@ const ClientServerConnect = function () {
         // the 'kickedByRemoteLogIn' event is received.
 
         client.callAPIOnce('game', 'login', {
-            id: playerId,
-            email: email,
-            token: token,
+            playerId: loginParams.playerId,
+            // If we don't have the playerId, we can log in with channelId and username
+            channel: loginParams.channelId,
+            username: loginParams.username,
+            // Or with their email
+            email: loginParams.email,
+            // But in all cases, the player needs to provide their secretAuthToken
+            token: loginParams.token,
         }).then(
             loginResponse => {
                 if (loginResponse.data && loginResponse.data.version) {
