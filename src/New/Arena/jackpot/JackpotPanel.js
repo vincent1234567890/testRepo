@@ -116,7 +116,7 @@ let JackpotPanel = cc.LayerColor.extend({ //gradient
                     poolToWin.value = jackpotRewardObject.rewardValue;
                 }
                 //show player display name
-                if(jackpotRewardObject["playerDisplayName"])
+                if (jackpotRewardObject["playerDisplayName"])
                     selfPoint._lbPlayer.setString("中奖玩家: " + limitStringLength(jackpotRewardObject["playerDisplayName"], 14));
 
                 selfPoint._showJackpotPrizeValues(jackpotValues.data);
@@ -215,9 +215,9 @@ let JackpotPanel = cc.LayerColor.extend({ //gradient
         this._addLight();
     },
 
-    _addLight: function(){
+    _addLight: function () {
         let sfLight = cc.spriteFrameCache.getSpriteFrame("JPLobbylight.png");
-        if(!sfLight){
+        if (!sfLight) {
             cc.spriteFrameCache.addSpriteFrames(res.LobbyJackpotPlist);
             sfLight = cc.spriteFrameCache.getSpriteFrame("JPLobbylight.png");
         }
@@ -225,7 +225,7 @@ let JackpotPanel = cc.LayerColor.extend({ //gradient
         spLight.setPosition(cc.visibleRect.center.x, cc.visibleRect.top.y - 105);
         this.addChild(spLight);
         spLight.setScale(0.1);
-        spLight.runAction(cc.sequence(cc.scaleTo(0.3, 0.5), cc.scaleTo(0.2, 1.8, 0.3), cc.scaleTo(0.1, 0), cc.callFunc(function(){
+        spLight.runAction(cc.sequence(cc.scaleTo(0.3, 0.5), cc.scaleTo(0.2, 1.8, 0.3), cc.scaleTo(0.1, 0), cc.callFunc(function () {
             this.removeFromParent(true);
         }, spLight)));
         this.runAction(cc.sequence(cc.delayTime(0.5), cc.fadeTo(0.3, 192)));
@@ -301,6 +301,17 @@ let JackpotPanel = cc.LayerColor.extend({ //gradient
         spMedal.runAction(cc.sequence(cc.delayTime(0.4), cc.scaleTo(0.5, 1).easing(cc.easeBounceOut())));
 
         spMedalGlow.setPosition(spMedal.width * 0.55, spMedal.height * 0.45);
+
+        box.runAction(cc.sequence(
+            cc.callFunc(function () {
+                cc.audioEngine.playEffect(res.JackpotBoxOpeningSound);
+            }),
+            cc.delayTime(1),
+            cc.callFunc(function () {
+                cc.audioEngine.playEffect(res.JackpotMedalBlingSound);
+            })
+        ))
+
         return this._glowSameMedals(spMedal);
     },
 
@@ -492,7 +503,13 @@ let JackpotPanel = cc.LayerColor.extend({ //gradient
             this._spBackground.addChild(spGrayMedal);
             spGrayMedal.setPosition(selBox.getPosition());
             spGrayMedal.setScale(0.05);
-            spGrayMedal.runAction(cc.sequence(cc.delayTime(delay), cc.scaleTo(0.4, 1)));
+            spGrayMedal.runAction(
+                cc.sequence(
+                    cc.delayTime(delay),
+                    cc.callFunc(function () {
+                        cc.audioEngine.playEffect(res.JackpotBoxOpeningSound);
+                    }),
+                    cc.scaleTo(0.4, 1)));
 
             const boxAnimation = GUIFunctions.getAnimation(ReferenceName.JackpotTreasureBoxOpenAnm, 0.02);
             selBox.runAction(cc.sequence(cc.callFunc(function () {
@@ -506,15 +523,24 @@ let JackpotPanel = cc.LayerColor.extend({ //gradient
         delay += ins;
         //show the award panel.
         this.runAction(cc.sequence(cc.delayTime(delay), cc.callFunc(function () {
-            const result = this._jackpotResult;
-            if (this._isPlaying) {
-                ClientServerConnect.collectJackpot(result._id);
-            }
-            const pnAward = new JackpotAwardPanel(result.level, result.rewardValue);
-            pnAward.setPosition(101, 74);
-            this.addChild(pnAward);
-            this._stopTimer();
-        }, this)));
+                const result = this._jackpotResult;
+                if (this._isPlaying) {
+                    ClientServerConnect.collectJackpot(result._id);
+                }
+                const pnAward = new JackpotAwardPanel(result.level, result.rewardValue);
+                pnAward.setPosition(101, 74);
+                this.addChild(pnAward);
+                this._stopTimer();
+            }, this),
+            cc.callFunc(function () {
+                cc.audioEngine.playEffect(res.JackpotEndSound);
+            }), cc.delayTime(5),
+            cc.callFunc(function () {
+                cc.audioEngine.playEffect(res.JackpotEndSound);
+            }), cc.delayTime(5),
+            cc.callFunc(function () {
+                cc.audioEngine.playEffect(res.JackpotEndSound);
+            }), cc.delayTime(5)));
     },
 
     _stopTimer: function () {
@@ -539,7 +565,7 @@ let JackpotPanel = cc.LayerColor.extend({ //gradient
         cc.audioEngine.playMusic(res.JackpotBGM, true);
     },
 
-    onExit: function() {
+    onExit: function () {
         cc.LayerColor.prototype.onExit.call(this);
         cc.audioEngine.playMusic(res.ArenaGameBGM, true);
     },
@@ -552,7 +578,6 @@ let JackpotPanel = cc.LayerColor.extend({ //gradient
     },
 
     hidePanel: function (callback) {
-        cc.audioEngine.playEffect(res.JackpotEndSound);
         this.runAction(cc.sequence(cc.scaleTo(1, 0).easing(cc.easeOut(3)), cc.callFunc(function () {
             this.removeFromParent();
             if (callback) {
