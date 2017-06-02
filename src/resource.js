@@ -80,6 +80,7 @@ var res = {
     ArenaGameBGM: "Sound/Music/InGameBGM.mp3",
     JackpotBGM: "Sound/Music/JPBGM.mp3",
     LobbyBGM: "Sound/Music/LobbyBGM.mp3",
+    MermaidFX: "Sound/Music/MermaidFX.mp3",
 
     //debug
     DebugCircle: "Testing/circle.png",

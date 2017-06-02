@@ -53,13 +53,16 @@ const FishViewManager = (function(){
     //使用FishManager 来添加或管理鱼
     proto.addFish = function (fishId, fishType) {
         this._fishes[fishId] = new FishView(this._parent, this._gameConfig.fishClasses[fishType], fishType, this._onFishClicked);
+        if (fishType === 'Mermaid' || fishType === 'GMermaid') {
+            cc.audioEngine.playMusic(res.MermaidFX)
+        }
         return this._fishes[fishId];
     };
 
     proto.getFish = function(id){
         return this._fishes[id];
     };
-    
+
     proto.caughtFish = function (id, playerSlot) {
         // console.log("caughtFish : id", id);
         if (!this._fishes[id]) {
