@@ -44,6 +44,10 @@ const ClientServerConnect = function () {
         return connectToARecommendedGameServer(joinPrefs);
     }
 
+    function getListOfRoomsByServer () {
+        return socketEmitPromise(getMasterServerSocket(), 'getListOfRoomsByServer', {});
+    }
+
     function connectToARecommendedGameServer (joinPrefs) {
         return socketEmitPromise(getMasterServerSocket(), 'getRecommendedServers', joinPrefs).then(recommendedServers => {
             //console.log("recommendedServers:", recommendedServers);
@@ -505,6 +509,7 @@ const ClientServerConnect = function () {
 
     return {
         doInitialConnect: doInitialConnect,
+        getListOfRoomsByServer: getListOfRoomsByServer,
         joinGame: joinGame,
         getServerInformer: getServerInformer,
         leaveGame: leaveGame,
