@@ -32,10 +32,20 @@ const AppManager = (function () {
         _gameTicker.unpauseTicker();
     }
 
+    // @todo Change this into goToRoomSelection() ?
     function goToSeatSelection(gameSelection, playerData){
+        // Original seat selection code:
         _currentScene = new SeatSelectionScene(gameSelection, playerData, onSeatSelected);
         cc.director.pushScene(_currentScene);
         GameManager.enterSeatSelectionScene(_currentScene);
+
+        // New code for room selection:
+        //GameManager.enterRoomSelectionScene(_currentScene);
+        ClientServerConnect.getListOfRoomsByServer().then(listOfRoomsByServer => {
+            console.log("listOfRoomsByServer:", listOfRoomsByServer);
+            // Display the rooms
+            // ...
+        }).catch(console.error);
     }
 
     function onSeatSelected(type,seat){
