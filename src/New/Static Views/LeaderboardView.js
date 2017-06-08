@@ -56,7 +56,7 @@ const LeaderboardView = (function () {
         // listView.setBounceEnabled(true);
         listView.setItemsMargin(-30);
 
-        const data = leaderboardData.data;
+        const data = leaderboardData.data || [];
 
         for (let i = 0; i < data.length; i++) {
             if(data[i].val < 0)
