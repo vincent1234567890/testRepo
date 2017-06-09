@@ -309,11 +309,11 @@ const GameLogView = (function () {
         //
         // console.log(gameRules,gameRules.getContentSize(),pos);
         //
-        roundIdTitleText.setPosition(100, 0);
-        totalSpendTitleText.setPosition(300, 0);
-        totalRevenueTitleText.setPosition(450, 0);
-        totalProfitTitleText.setPosition(600, 0);
-        startTimeTitleText.setPosition(750, 0);
+        roundIdTitleText.setPosition(150, 0);
+        totalSpendTitleText.setPosition(350, 0);
+        totalRevenueTitleText.setPosition(500, 0);
+        totalProfitTitleText.setPosition(650, 0);
+        startTimeTitleText.setPosition(800, 0);
         endTimeTitleText.setPosition(950, 0);
 
         parent.addChild(roundIdTitleText);
@@ -418,10 +418,10 @@ const GameLogView = (function () {
                 roundId.setAnchorPoint(0, 0.5);
 
                 roundId.setPosition(50, listEntryPos.y);
-                totalSpend.setPosition(300, listEntryPos.y);
-                totalRevenue.setPosition(450, listEntryPos.y);
-                totalProfit.setPosition(600, listEntryPos.y);
-                startTime.setPosition(750, listEntryPos.y);
+                totalSpend.setPosition(350, listEntryPos.y);
+                totalRevenue.setPosition(500, listEntryPos.y);
+                totalProfit.setPosition(650, listEntryPos.y);
+                startTime.setPosition(800, listEntryPos.y);
                 endTime.setPosition(950, listEntryPos.y);
 
                 wrapper.addChild(roundId);
