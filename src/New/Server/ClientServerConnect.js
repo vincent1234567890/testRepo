@@ -334,6 +334,7 @@ const ClientServerConnect = function () {
         );
     }
 
+    /* Old method, for joining an existing or a new room, according to preferences */
     function joinGame (chosenScene, seat, type) {
         const joinPrefs = {scene: chosenScene, preferredSeat: seat, singlePlay: type === TableType.SINGLE};
 
@@ -343,48 +344,59 @@ const ClientServerConnect = function () {
             loginResponseData => {
                 console.log("loginResponseData:", loginResponseData);
             }
-        ).then(
-            () => {
-                const client = getGameWSClient();
+        ).then(() => {
+            return postConnectJoinGame(joinPrefs);
+        });
+    }
 
-                if (getServerInformer()) {
-                    //registered events triggering multiple times are source of error.
-                    throw Error("You are already in a game!");
-                }
+    /* New method, for joining a chosen room */
+    function joinGameInSpecificRoom (serverUrl, roomId, seat) {
+        const joinPrefs = {roomId: roomId, preferredSeat: seat};
 
-                console.log("Joining game");
-                // self._connection.readyState != WebSocket.OPEN
-                if (!client.isOpen()) {
-                    throw Error("Socket is closed");
-                }
-                return client.callAPIOnce('game', 'joinGame', joinPrefs);
+        return connectToGameServer(serverUrl).then(() => {
+            return postConnectJoinGame(joinPrefs);
+        });
+    }
+
+    function postConnectJoinGame (joinPrefs) {
+        return Promise.resolve().then(() => {
+            const client = getGameWSClient();
+
+            if (getServerInformer()) {
+                //registered events triggering multiple times are source of error.
+                throw Error("You are already in a game!");
             }
-        ).then(
-            joinResponse => {
-                console.log("joinResponse:", joinResponse);
 
-                const client = getGameWSClient();
-
-                // Wrapper which listens for game events
-                // This object has on() and off() functions for receiving messages, and send() for sending them.
-                const ioSocket = socketUtils.getIOSocketFromClient(client);
-
-                AppManager.debugSimulateLag = true;
-                AppManager.debugGhosts = false;
-
-                if (AppManager.debugSimulateLag) {
-                    socketUtils.simulateNetworkLatency(ioSocket, 100);
-                }
-
-                const receiver = clientReceiver(ioSocket);
-
-                if (AppManager.debugGhosts) {
-                    receiver.setupGhostingForSocket(ioSocket, 2000);
-                }
-
-                setServerInformer(serverInformer(ioSocket));
+            console.log("Joining game");
+            // self._connection.readyState != WebSocket.OPEN
+            if (!client.isOpen()) {
+                throw Error("Socket is closed");
             }
-        );
+            return client.callAPIOnce('game', 'joinGame', joinPrefs);
+        }).then(joinResponse => {
+            console.log("joinResponse:", joinResponse);
+
+            const client = getGameWSClient();
+
+            // Wrapper which listens for game events
+            // This object has on() and off() functions for receiving messages, and send() for sending them.
+            const ioSocket = socketUtils.getIOSocketFromClient(client);
+
+            AppManager.debugSimulateLag = true;
+            AppManager.debugGhosts = false;
+
+            if (AppManager.debugSimulateLag) {
+                socketUtils.simulateNetworkLatency(ioSocket, 100);
+            }
+
+            const receiver = clientReceiver(ioSocket);
+
+            if (AppManager.debugGhosts) {
+                receiver.setupGhostingForSocket(ioSocket, 2000);
+            }
+
+            setServerInformer(serverInformer(ioSocket));
+        });
     }
 
     function leaveGame () {
@@ -511,6 +523,7 @@ const ClientServerConnect = function () {
         doInitialConnect: doInitialConnect,
         getListOfRoomsByServer: getListOfRoomsByServer,
         joinGame: joinGame,
+        joinGameInSpecificRoom: joinGameInSpecificRoom,
         getServerInformer: getServerInformer,
         leaveGame: leaveGame,
         requestStats: requestStats,
