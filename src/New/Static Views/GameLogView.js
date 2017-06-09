@@ -384,32 +384,32 @@ const GameLogView = (function () {
                     + date.getHours().toLocaleString('en-US', {minimumIntegerDigits: 2})
                     + date.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2});
 
-                let roundId = new cc.LabelTTF(roundIdText, "Microsoft YaHei", 20);
+                const roundId = new cc.LabelTTF(roundIdText, "Microsoft YaHei", 20);
                 roundId._setFontWeight("bold");
                 roundId.setFontFillColor(new cc.Color(0, 0, 0, 255));
 
-                let totalSpend = new cc.LabelTTF(
+                const totalSpend = new cc.LabelTTF(
                     itemData.totalSpent.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}), "Microsoft YaHei", 20);
                 totalSpend._setFontWeight("bold");
                 totalSpend.setFontFillColor(new cc.Color(0, 0, 0, 255));
 
-                let totalRevenue = new cc.LabelTTF(
+                const totalRevenue = new cc.LabelTTF(
                     itemData.totalRevenue.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}), "Microsoft YaHei", 20);
                 totalRevenue._setFontWeight("bold");
                 totalRevenue.setFontFillColor(new cc.Color(0, 0, 0, 255));
 
-                let totalProfit = new cc.LabelTTF((parseFloat(itemData.totalRevenue) - parseFloat(itemData.totalSpent)).toLocaleString(
+                const totalProfit = new cc.LabelTTF((parseFloat(itemData.totalRevenue) - parseFloat(itemData.totalSpent)).toLocaleString(
                     'en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}), "Microsoft YaHei", 20);
                 totalProfit._setFontWeight("bold");
                 totalProfit.setFontFillColor(new cc.Color(0, 0, 0, 255));
 
                 const endDate = new Date(itemData.endTime);
-                let startTime = new cc.LabelTTF(date.toLocaleDateString("en-GB") + "\n" + date.toLocaleTimeString("en-GB"),
+                const startTime = new cc.LabelTTF(date.toLocaleDateString("en-GB") + "\n" + date.toLocaleTimeString("en-GB"),
                     "Microsoft YaHei", 16);
                 startTime._setFontWeight("bold");
                 startTime.setFontFillColor(new cc.Color(0, 0, 0, 255));
                 startTime.setHorizontalAlignment(cc.TEXT_ALIGNMENT_CENTER);
-;                let endTime = new cc.LabelTTF(endDate.toLocaleDateString("en-GB") + "\n" + endDate.toLocaleTimeString("en-GB"),
+                const endTime = new cc.LabelTTF(endDate.toLocaleDateString("en-GB") + "\n" + endDate.toLocaleTimeString("en-GB"),
                     "Microsoft YaHei", 16);
                 endTime._setFontWeight("bold");
                 endTime.setFontFillColor(new cc.Color(0, 0, 0, 255));
