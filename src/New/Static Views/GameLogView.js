@@ -616,7 +616,7 @@ const GameLogView = (function () {
                     wrapper.addChild(uncaughtIndicator);
 
                     uncaught.setPosition(fishPosition, 0);
-                    uncaughtIndicator.setPosition(925, uncaught.getContentSize().height / 2);
+                    uncaughtIndicator.setPosition(960, uncaught.getContentSize().height / 2);
                 }
 
                 let captured;
@@ -628,7 +628,7 @@ const GameLogView = (function () {
                     wrapper.addChild(indicator);
 
                     captured.setPosition(fishPosition, 0);
-                    indicator.setPosition(925, captured.getContentSize().height / 2);
+                    indicator.setPosition(960, captured.getContentSize().height / 2);
                 }
 
                 if (itemData.fishUncaught.length > 0 || itemData.fishCaught.length > 0) { // ugly could improve
