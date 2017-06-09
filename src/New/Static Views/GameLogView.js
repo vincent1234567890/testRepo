@@ -466,7 +466,7 @@ const GameLogView = (function () {
         const data = gameSummaryData.data;
         for (let i = 0; i < data.length; i++) {
             const listItemPrefab = new gameLogListItemPrefab({
-                id: data[i]._id.sceneName,
+                id: data[i]._id.roomTitle,
                 totalSpent: data[i].totalConsumption,
                 totalRevenue: data[i].totalBonus,
                 startTime: data[i].startTime,
