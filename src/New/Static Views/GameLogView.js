@@ -459,7 +459,7 @@ const GameLogView = (function () {
             //show the wait panel.
             WaitingPanel.showPanel();
             if (_requestConsumptionLogCallback) {
-                _requestConsumptionLogCallback(data.playerGameNumber, data.roundNumber)
+                _requestConsumptionLogCallback(data.playerGameNumber, data.roundNumber);
             }
         };
 
@@ -479,7 +479,7 @@ const GameLogView = (function () {
             listView.pushBackCustomItem(content);
         }
 
-        return {scrollTitle: scrollTitle, listView: listView}
+        return {scrollTitle: scrollTitle, listView: listView};
     }
 
     function setupConsumptionLogList(scrollBackground, consumptionLogData) {
@@ -525,9 +525,7 @@ const GameLogView = (function () {
             fishView.setBounceEnabled(true);
 
             const count = fishArray
-                .map((fish) => {
-                    return {type: fish.type, count: 1}
-                })
+                .map((fish) => ({type: fish.type, count: 1}))
                 .reduce((a, b) => {
                     a[b.type] = (a[b.type] || 0) + b.count;
                     return a;
