@@ -357,6 +357,7 @@ const TableType = {
 
             //reserve time.
 
+
             this._isMouseOverIn = false;
 
             //mouse event handler
@@ -406,8 +407,10 @@ const TableType = {
 
         _playerInfo: null,
 
+        _seatStatus: null,
+
         ctor: function(playerInfo){
-            //SS_YellowSit
+            //SS_YellowSit,  SS_BlueSit
             cc.Sprite.prototype.ctor.call(this, "#SS_YellowSit.png");
 
             this._playerInfo = playerInfo;
@@ -416,11 +419,15 @@ const TableType = {
             //SS_NameBase
             const spPlayerBase = this._spPlayerBase = new cc.Sprite("#SS_NameBase.png");
             spPlayerBase.setPosition(szContent.width * 0.5, szContent.height * 0.5);
-            //this.addChild(spPlayerBase);
+            this.addChild(spPlayerBase);
 
             const lbPlayerName = this._lbPlayerName = new cc.LabelTTF("playerName", "Arial", 15);
             lbPlayerName.setPosition(szContent.width * 0.5, szContent.height * 0.5);
-            //this.addChild(lbPlayerName);
+            this.addChild(lbPlayerName);
+        },
+
+        setSeatStatus: function(seatStatus){
+
         }
     });
 
