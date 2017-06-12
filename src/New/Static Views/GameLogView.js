@@ -309,12 +309,12 @@ const GameLogView = (function () {
         //
         // console.log(gameRules,gameRules.getContentSize(),pos);
         //
-        roundIdTitleText.setPosition(100, 0);
-        totalSpendTitleText.setPosition(300, 0);
-        totalRevenueTitleText.setPosition(450, 0);
-        totalProfitTitleText.setPosition(600, 0);
-        startTimeTitleText.setPosition(750, 0);
-        endTimeTitleText.setPosition(950, 0);
+        roundIdTitleText.setPosition(140, 0);
+        totalSpendTitleText.setPosition(320, 0);
+        totalRevenueTitleText.setPosition(480, 0);
+        totalProfitTitleText.setPosition(630, 0);
+        startTimeTitleText.setPosition(790, 0);
+        endTimeTitleText.setPosition(940, 0);
 
         parent.addChild(roundIdTitleText);
         parent.addChild(totalSpendTitleText);
@@ -360,6 +360,8 @@ const GameLogView = (function () {
                 const highlight = new cc.Sprite(ReferenceName.GameLogItemHighLight);
                 const separator = new cc.Sprite(ReferenceName.GameLogListSeparator);
 
+                const rowHeight = highlight.getContentSize().height;
+
                 wrapper.addChild(highlight);
                 wrapper.addChild(separator);
                 wrapper.itemData = itemData;
@@ -376,6 +378,10 @@ const GameLogView = (function () {
 
                 // console.log("ListItemPrefab",wrapper,highlight.getContentSize());
 
+                function currencyString (num) {
+                    return num.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                }
+
                 const date = new Date(itemData.startTime);
                 const roundIdText = itemData.id + "-"
                     + (date.getYear()-100).toLocaleString('en-US', {minimumIntegerDigits: 2})
@@ -384,45 +390,51 @@ const GameLogView = (function () {
                     + date.getHours().toLocaleString('en-US', {minimumIntegerDigits: 2})
                     + date.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2});
 
-                let roundId = new cc.LabelTTF(roundIdText, "Microsoft YaHei", 20);
+                const roundId = new cc.LabelTTF(roundIdText, "Microsoft YaHei", 20, cc.size(200, rowHeight), cc.TEXT_ALIGNMENT_RIGHT);
                 roundId._setFontWeight("bold");
                 roundId.setFontFillColor(new cc.Color(0, 0, 0, 255));
+                roundId.setVerticalAlignment(cc.VERTICAL_TEXT_ALIGNMENT_CENTER);
 
-                let totalSpend = new cc.LabelTTF(
-                    itemData.totalSpent.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}), "Microsoft YaHei", 20);
+                const totalSpend = new cc.LabelTTF(currencyString(itemData.totalSpent), "Microsoft YaHei", 20, cc.size(150, rowHeight), cc.TEXT_ALIGNMENT_RIGHT);
                 totalSpend._setFontWeight("bold");
                 totalSpend.setFontFillColor(new cc.Color(0, 0, 0, 255));
+                totalSpend.setHorizontalAlignment(cc.TEXT_ALIGNMENT_RIGHT);
+                totalSpend.setVerticalAlignment(cc.VERTICAL_TEXT_ALIGNMENT_CENTER);
 
-                let totalRevenue = new cc.LabelTTF(
-                    itemData.totalRevenue.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}), "Microsoft YaHei", 20);
+                const totalRevenue = new cc.LabelTTF(currencyString(itemData.totalRevenue), "Microsoft YaHei", 20, cc.size(150, rowHeight), cc.TEXT_ALIGNMENT_RIGHT);
                 totalRevenue._setFontWeight("bold");
                 totalRevenue.setFontFillColor(new cc.Color(0, 0, 0, 255));
+                totalRevenue.setHorizontalAlignment(cc.TEXT_ALIGNMENT_RIGHT);
+                totalRevenue.setVerticalAlignment(cc.VERTICAL_TEXT_ALIGNMENT_CENTER);
 
-                let totalProfit = new cc.LabelTTF((parseFloat(itemData.totalRevenue) - parseFloat(itemData.totalSpent)).toLocaleString(
-                    'en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}), "Microsoft YaHei", 20);
+                const totalProfit = new cc.LabelTTF(currencyString(itemData.totalRevenue - itemData.totalSpent), "Microsoft YaHei", 20, cc.size(150, rowHeight), cc.TEXT_ALIGNMENT_RIGHT);
                 totalProfit._setFontWeight("bold");
                 totalProfit.setFontFillColor(new cc.Color(0, 0, 0, 255));
+                totalProfit.setHorizontalAlignment(cc.TEXT_ALIGNMENT_RIGHT);
+                totalProfit.setVerticalAlignment(cc.VERTICAL_TEXT_ALIGNMENT_CENTER);
 
                 const endDate = new Date(itemData.endTime);
-                let startTime = new cc.LabelTTF(date.toLocaleDateString("en-GB") + "\n" + date.toLocaleTimeString("en-GB"),
+                const startTime = new cc.LabelTTF(date.toLocaleDateString("en-GB") + "\n" + date.toLocaleTimeString("en-GB"),
                     "Microsoft YaHei", 16);
                 startTime._setFontWeight("bold");
                 startTime.setFontFillColor(new cc.Color(0, 0, 0, 255));
                 startTime.setHorizontalAlignment(cc.TEXT_ALIGNMENT_CENTER);
-;                let endTime = new cc.LabelTTF(endDate.toLocaleDateString("en-GB") + "\n" + endDate.toLocaleTimeString("en-GB"),
+                startTime.setVerticalAlignment(cc.VERTICAL_TEXT_ALIGNMENT_CENTER);
+                const endTime = new cc.LabelTTF(endDate.toLocaleDateString("en-GB") + "\n" + endDate.toLocaleTimeString("en-GB"),
                     "Microsoft YaHei", 16);
                 endTime._setFontWeight("bold");
                 endTime.setFontFillColor(new cc.Color(0, 0, 0, 255));
                 endTime.setHorizontalAlignment(cc.TEXT_ALIGNMENT_CENTER);
+                endTime.setVerticalAlignment(cc.VERTICAL_TEXT_ALIGNMENT_CENTER);
 
                 roundId.setAnchorPoint(0, 0.5);
 
-                roundId.setPosition(50, listEntryPos.y);
+                roundId.setPosition(15, listEntryPos.y);
                 totalSpend.setPosition(300, listEntryPos.y);
                 totalRevenue.setPosition(450, listEntryPos.y);
                 totalProfit.setPosition(600, listEntryPos.y);
-                startTime.setPosition(750, listEntryPos.y);
-                endTime.setPosition(950, listEntryPos.y);
+                startTime.setPosition(790, listEntryPos.y);
+                endTime.setPosition(940, listEntryPos.y);
 
                 wrapper.addChild(roundId);
                 wrapper.addChild(totalSpend);
@@ -459,14 +471,14 @@ const GameLogView = (function () {
             //show the wait panel.
             WaitingPanel.showPanel();
             if (_requestConsumptionLogCallback) {
-                _requestConsumptionLogCallback(data.playerGameNumber, data.roundNumber)
+                _requestConsumptionLogCallback(data.playerGameNumber, data.roundNumber);
             }
         };
 
         const data = gameSummaryData.data;
         for (let i = 0; i < data.length; i++) {
             const listItemPrefab = new gameLogListItemPrefab({
-                id: data[i]._id.sceneName,
+                id: data[i]._id.roomTitle,
                 totalSpent: data[i].totalConsumption,
                 totalRevenue: data[i].totalBonus,
                 startTime: data[i].startTime,
@@ -479,7 +491,7 @@ const GameLogView = (function () {
             listView.pushBackCustomItem(content);
         }
 
-        return {scrollTitle: scrollTitle, listView: listView}
+        return {scrollTitle: scrollTitle, listView: listView};
     }
 
     function setupConsumptionLogList(scrollBackground, consumptionLogData) {
@@ -525,9 +537,7 @@ const GameLogView = (function () {
             fishView.setBounceEnabled(true);
 
             const count = fishArray
-                .map((fish) => {
-                    return {type: fish.type, count: 1}
-                })
+                .map((fish) => ({type: fish.type, count: 1}))
                 .reduce((a, b) => {
                     a[b.type] = (a[b.type] || 0) + b.count;
                     return a;
@@ -618,7 +628,7 @@ const GameLogView = (function () {
                     wrapper.addChild(uncaughtIndicator);
 
                     uncaught.setPosition(fishPosition, 0);
-                    uncaughtIndicator.setPosition(925, uncaught.getContentSize().height / 2);
+                    uncaughtIndicator.setPosition(960, uncaught.getContentSize().height / 2);
                 }
 
                 let captured;
@@ -630,7 +640,7 @@ const GameLogView = (function () {
                     wrapper.addChild(indicator);
 
                     captured.setPosition(fishPosition, 0);
-                    indicator.setPosition(925, captured.getContentSize().height / 2);
+                    indicator.setPosition(960, captured.getContentSize().height / 2);
                 }
 
                 if (itemData.fishUncaught.length > 0 || itemData.fishCaught.length > 0) { // ugly could improve
