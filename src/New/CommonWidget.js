@@ -72,6 +72,18 @@ const transferMinutesToString = function(minutes) {
         (strSecs.length === 1 ? ("0" + strSecs) : strSecs);
 };
 
+const transferSecondsToString = function(seconds) {
+    seconds = seconds || 0;
+
+    const hours = 0|(seconds / 3600);
+    const mins = 0|((seconds - (hours * 3600)) / 60);
+    const secs = 0|(seconds % 60);
+    let strHours = hours.toFixed(0), strMin = mins.toFixed(0), strSecs = secs.toFixed(0);
+    return (strHours.length === 1 ? ("0" + strHours) : strHours) + ":" +
+        (strMin.length === 1 ? ("0" + strMin) : strMin) + ":" +
+        (strSecs.length === 1 ? ("0" + strSecs) : strSecs);
+};
+
 //Floating Menu
 let GameFloatingMenu = cc.Node.extend({
     _btnSetting: null,
