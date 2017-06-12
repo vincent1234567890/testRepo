@@ -53,10 +53,10 @@ var cocos2dApp = cc.game.onStart = function() {
             cc.LoadingScreen.preload(ResourceLoader.getResourceList(), function () {
                 // cc.director.runScene(new LogoScene());
                 //cc.director.runScene(new TestScene());
-                cc.director.runScene(new ef.TableSelectionScene("1X", data.player));
+                //cc.director.runScene(new ef.TableSelectionScene("1X", data.player));
 
-                //AppManager.goToLobby(data.player);
-                //FishAnimationData.setData(themeConfig.FishRawData);
+                AppManager.goToLobby(data.player);
+                FishAnimationData.setData(themeConfig.FishRawData);
             }, this);
         }
      //).catch(console.error.bind(console));   //should show a friendly UI to tell user, can't connect to game server.
@@ -66,5 +66,5 @@ var cocos2dApp = cc.game.onStart = function() {
 };
 
 cc.game.run();
-console.log("version: 1.3.522b");
+console.log("version: 1.4.612b");
 
