@@ -1,5 +1,7 @@
 //the game controller uses to manage game status and save game config, etc.
 var ef = ef || {};
+
+ef.DEFAULT_FONT = "Arial";
 const LockFishStatus = {
     RELEASE: 0,
     LOCK: 1,

@@ -72,9 +72,9 @@ const ReferenceName = {
     SeatBackBtn:"SSBack.png",
     SeatBackBtnSelected: "SSBackRO.png",
     SeatNotificationBar: "#SSnotificationBar.png",
-    Seat1X: "#SS1X.png",
-    Seat10X: "#SS10X.png",
-    Seat100X: "#SS100X.png",
+    Seat1X: "#SS_1X.png",
+    Seat10X: "#SS_10X.png",
+    Seat100X: "#SS_100X.png",
     SeatWoodBackground: "#SSWoodBG.png",
     SeatSoloChinese: "#SSSoloChinese.png",
     SeatMultiPlayerChinese: "#SSMultiplayerChinese.png",
@@ -84,6 +84,8 @@ const ReferenceName = {
     SeatChair: "#SSChair_00000.png",
     SeatChairGlow: "#SSChairGlow.png",
     SeatArrow: "#SSArrow.png",
+
+    NotificationIcon: "#SS_NotificationIcon.png",
 
     //Dolphin
     DolphinIcon : "#FishIcon.png",

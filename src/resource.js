@@ -45,6 +45,10 @@ var res = {
 
     WaterCausticAnimation : "Lobby/Caustic.plist",
 
+    //language
+    ChinesePng: "Language/Chinese.png",
+    ChinesePlist: "Language/Chinese.plist",
+
     //GameBackgrounds
     GameBackground0: "Game BG/Game BG 1.jpg",
     GameBackground1: "Game BG/Game BG 2.jpg",

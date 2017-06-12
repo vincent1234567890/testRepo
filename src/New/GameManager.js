@@ -193,20 +193,15 @@ const GameManager = function () {
     function createLobby() {
         if (!_lobbyManager) {
             _lobbyManager = new LobbyManager(_playerData, onGameSelected);
-            _lobbyWaterCausticsManager = new LobbyWaterCaustics();
+            _lobbyWaterCausticsManager = new LobbyWaterCaustics();   //todo need delete
             _floatingMenuManager = new FloatingMenu(_playerData, requestConsumptionLogHandle);
             _jackpotManager = new JackpotManager();
-            // _jackpotManager.updateJackpot(999999999);
             ClientServerConnect.getCurrentJackpotValues().then(
                 values => {
                     _jackpotManager.updateJackpot(values);
                 }
             );
-
         }
-        // else {
-        //     _lobbyManager.displayView(_playerData, onGameSelected);
-        // }
     }
 
     function exitToLobby() {
