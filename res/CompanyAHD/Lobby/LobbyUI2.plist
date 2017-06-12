@@ -15,9 +15,24 @@
                 <key>spriteSourceSize</key>
                 <string>{984,50}</string>
                 <key>textureRect</key>
-                <string>{{1,376},{984,50}}</string>
+                <string>{{1,52},{984,50}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
+            </dict>
+            <key>LR_NotificationBase.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{1196,318}</string>
+                <key>spriteSourceSize</key>
+                <string>{1196,318}</string>
+                <key>textureRect</key>
+                <string>{{1,104},{1196,318}}</string>
+                <key>textureRotated</key>
+                <false/>
             </dict>
             <key>NotificationBackground.png</key>
             <dict>
@@ -30,22 +45,7 @@
                 <key>spriteSourceSize</key>
                 <string>{618,49}</string>
                 <key>textureRect</key>
-                <string>{{108,1213},{618,49}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>SSArrow.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{56,61}</string>
-                <key>spriteSourceSize</key>
-                <string>{56,61}</string>
-                <key>textureRect</key>
-                <string>{{53,1287},{56,61}}</string>
+                <string>{{522,1},{618,49}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -60,7 +60,7 @@
                 <key>spriteSourceSize</key>
                 <string>{1366,373}</string>
                 <key>textureRect</key>
-                <string>{{1,1},{1366,373}}</string>
+                <string>{{1,424},{1366,373}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -75,9 +75,9 @@
                 <key>spriteSourceSize</key>
                 <string>{74,59}</string>
                 <key>textureRect</key>
-                <string>{{53,1137},{74,55}}</string>
+                <string>{{1216,1},{74,55}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>SSBackRO.png</key>
             <dict>
@@ -90,39 +90,24 @@
                 <key>spriteSourceSize</key>
                 <string>{72,53}</string>
                 <key>textureRect</key>
-                <string>{{53,1213},{72,53}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>SSTable.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{3,-8}</string>
-                <key>spriteSize</key>
-                <string>{607,412}</string>
-                <key>spriteSourceSize</key>
-                <string>{613,474}</string>
-                <key>textureRect</key>
-                <string>{{728,376},{607,412}}</string>
+                <string>{{1142,1},{72,53}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>SSnotificationBar.png</key>
+            <key>SS_NameBase.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{759,86}</string>
+                <string>{132,30}</string>
                 <key>spriteSourceSize</key>
-                <string>{759,86}</string>
+                <string>{132,30}</string>
                 <key>textureRect</key>
-                <string>{{53,376},{759,86}}</string>
+                <string>{{1,1},{132,30}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>TimerBackground.png</key>
             <dict>
@@ -135,7 +120,7 @@
                 <key>spriteSourceSize</key>
                 <string>{385,48}</string>
                 <key>textureRect</key>
-                <string>{{110,1137},{385,48}}</string>
+                <string>{{135,1},{385,48}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -153,7 +138,7 @@
             <key>size</key>
             <string>{1368,1368}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:ae1ff2c6fa6ca51881d8c3375c7c9f75:a0e7a5b5a85c88c5ea7ab54b43752ca8:94163f642743ebc20a54c1c8cbe99d40$</string>
+            <string>$TexturePacker:SmartUpdate:bc6d8836890b4208c0ad81f62e9796d3:ac28f707c179d24f6c7d2cfcdc580074:94163f642743ebc20a54c1c8cbe99d40$</string>
             <key>textureFileName</key>
             <string>LobbyUI2.png</string>
         </dict>

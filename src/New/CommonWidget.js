@@ -5,6 +5,7 @@ let PlayerInfoWidget = cc.Node.extend({
     _lbPlayerCredit: null,
     ctor: function(playerInfo){
         cc.Node.prototype.ctor.call(this);
+        this._className= 'PlayerInfoWidget';
 
         //load spriteFrame
         if(!cc.spriteFrameCache.getSpriteFrame(ReferenceName.NameBG)){
@@ -18,7 +19,7 @@ let PlayerInfoWidget = cc.Node.extend({
         spPlayerNameBg.setPosition(95, 0);
         this.addChild(spPlayerNameBg);
 
-        const lbPlayerName = this._lbPlayerName = new cc.LabelTTF(limitStringLength(playerInfo.playerState.displayName, 14), "Arial", 22);
+        const lbPlayerName = this._lbPlayerName = new cc.LabelTTF(limitStringLength(playerInfo.displayName, 14), "Arial", 22);
         lbPlayerName._setFontWeight("bold");
         lbPlayerName.enableStroke(new cc.Color(0, 0, 0, 255), 2);
         spPlayerNameBg.addChild(lbPlayerName);
@@ -36,7 +37,7 @@ let PlayerInfoWidget = cc.Node.extend({
         spPlayerCreditBg.addChild(lbPlayerCredit);
         lbPlayerCredit.setPosition(119, 26);
 
-        this.updatePlayerCredit(playerInfo.playerState.score);
+        this.updatePlayerCredit(playerInfo.score);
     },
 
     updatePlayerCredit: function(playerCredit){
@@ -81,9 +82,10 @@ let GameFloatingMenu = cc.Node.extend({
 
     ctor: function(){
         cc.Node.prototype.ctor.call(this);
+        this._className = "GameFloatingMenu";
 
         //padding = 120
-        let paddingWidth = 70;
+        let paddingWidth = 90;
         //load menu sprite frame
         if(!cc.spriteFrameCache.getSpriteFrame(ReferenceName.FloatingMenuButtonSettingsIcon))
             cc.spriteFrameCache.addSpriteFrames(res.MenuPlist);
@@ -372,3 +374,333 @@ let WaveTransition = cc.Node.extend({
         }, this)));
     }
 });
+
+(function(ef) {
+    const IGNORE_DIST = new cc.Point(8, 8);
+    ef.SpriteClickHandler = cc._EventListenerTouchOneByOne.extend({
+        _startPoint: null,
+        _ignoreTouch: false,
+
+        ctor: function () {
+            cc._EventListenerTouchOneByOne.prototype.ctor.call(this);
+            this._startPoint = new cc.Point(0, 0);
+            this._ignoreTouch = false;
+            this.setSwallowTouches(true);
+        },
+
+        onTouchBegan: function (touch, event) {
+            const target = event.getCurrentTarget();
+            const location = touch.getLocation();
+            this._startPoint.x = location.x;
+            this._startPoint.y = location.y;
+            const hit = target.hitTest(location);
+            if (hit) {
+                target.setStatus(ef.BUTTONSTATE.SELECTED);
+            }
+            return hit;
+        },
+
+        onTouchMoved: function (touch, event) {
+            const target = event.getCurrentTarget();
+            const hit = target.hitTest(touch.getLocation());
+            if (hit)
+                target.setStatus(ef.BUTTONSTATE.SELECTED);
+            else
+                target.setStatus(ef.BUTTONSTATE.NORMAL);
+        },
+
+        onTouchEnded: function (touch, event) {
+            const target = event.getCurrentTarget();
+            const lastLocation = touch.getLocation();
+            if (target.hitTest(touch.getLocation())) {
+                target.setStatus(ef.BUTTONSTATE.NORMAL);
+                if (this._ignoreTouch) {
+                    let startPoint = this._startPoint;
+                    const xMove = Math.abs(lastLocation.x - startPoint.x);
+                    const yMove = Math.abs(lastLocation.y - startPoint.y);
+                    if (xMove < IGNORE_DIST.x && yMove < IGNORE_DIST.y){
+                        if(target.executeClickCallback)
+                            target.executeClickCallback(touch, event);
+                    }
+                } else {
+                    if(target.executeClickCallback)
+                        target.executeClickCallback(touch, event);
+                }
+            }
+        },
+
+        setIgonreTouchWhenMove: function (ignore) {
+            if (this._ignoreTouch === ignore)
+                return;
+            this._ignoreTouch = ignore;
+            if (ignore) {
+                this.setSwallowTouches(false);
+            } else {
+                this.setSwallowTouches(true);
+            }
+        }
+    });
+
+    ef.MouseOverEventListener = cc._EventListenerMouse.extend({
+        _mouseDown: null,
+        ctor: function(){
+            cc._EventListenerMouse.prototype.ctor.call(this);
+            this._mouseDown = false;
+        },
+        onMouseDown: function(mouseData){
+            this._mouseDown = true;
+        },
+        onMouseMove: function(mouseData){
+            const target = mouseData.getCurrentTarget();
+            if (!target.isMouseDown){
+                if (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
+                        target.convertToNodeSpace(mouseData.getLocation()))) {
+                    if(target.onMouseOverIn)
+                        target.onMouseOverIn(mouseData);
+                }else{
+                    if(target.onMouseOverOut)
+                        target.onMouseOverOut(mouseData);
+                }
+            }
+        },
+        onMouseUp: function(mouseData){
+            this._mouseDown = false;
+        }
+    });
+
+    ef.BUTTONSTATE = {NORMAL: 0, SELECTED: 1};
+
+    ef.ButtonSprite = cc.Sprite.extend({
+        _normalSprite: null,
+        _selectedSprite: null,
+        _status: null,
+        _lbTitle: null,
+
+        //sprite frame;
+        _touchEventListener: null,
+
+        _clickCallback: null,
+        _clickTarget: null,
+
+        ctor: function (normalSprite, selectedSprite, title) {
+            cc.Sprite.prototype.ctor.call(this, normalSprite);
+
+            this._normalSprite = normalSprite;
+            this._selectedSprite = selectedSprite;
+
+            this._status = ef.BUTTONSTATE.NORMAL;
+
+            const contentSize = this._contentSize;
+            if (typeof(title) === "string")
+                this._lbTitle = new cc.LabelTTF(title, ef.DEFAULT_FONT, 12);
+            else
+                this._lbTitle = title;
+
+            if (this._lbTitle) {
+                this._lbTitle.setPosition(contentSize.width >> 1, contentSize.height >> 1);
+                this.addChild(this._lbTitle);
+            }
+
+            this._touchEventListener = new ef.SpriteClickHandler();
+        },
+
+        getTitle: function () {
+            if (!this._lbTitle) {
+                let lbTitle = this._lbTitle = new cc.LabelTTF(" ", ef.DEFAULT_FONT, 12);
+                const contentSize = this._contentSize;
+                lbTitle.setPosition(contentSize.width >> 1, contentSize.height >> 1);
+                this.addChild(lbTitle);
+            }
+            return this._lbTitle
+        },
+
+        hitTest: function (point) {
+            return cc.rectContainsPoint(cc.rect(0, 0, this._contentSize.width, this._contentSize.height),
+                this.convertToNodeSpace(point));
+        },
+
+        setStatus: function (status) {
+            if (this._status === status)
+                return;
+
+            this._status = status;
+            if (typeof (this._normalSprite) === 'string') {
+                if (this._normalSprite[0] === '#') {
+                    const spriteFrame = cc.spriteFrameCache.getSpriteFrame(
+                        (this._status === ef.BUTTONSTATE.NORMAL) ? this._normalSprite.substr(1) : this._selectedSprite.substr(1));
+                    if(spriteFrame)
+                        this.setSpriteFrame(spriteFrame);
+                } else {
+                    const texture = cc.textureCache.addImage(
+                        (this._status === ef.BUTTONSTATE.NORMAL) ? this._normalSprite : this._selectedSprite);
+                    this.setTexture(texture);
+                }
+            } else {
+                const texture = (this._status === ef.BUTTONSTATE.NORMAL) ? this._normalSprite : this._selectedSprite;
+                this.setSpriteFrame(texture);
+            }
+        },
+
+        setClickHandler: function (callback, target) {
+            this._clickCallback = callback;
+            this._clickTarget = target;
+        },
+
+        executeClickCallback: function (touch, event) {
+            if (this._clickCallback)
+                this._clickCallback.call(this._clickTarget, touch, event);
+        },
+
+        onEnter: function () {
+            cc.Sprite.prototype.onEnter.call(this);
+            if (this._touchEventListener && !this._touchEventListener._isRegistered())
+                cc.eventManager.addListener(this._touchEventListener, this);
+        },
+
+        setTouchEnabled: function (enable) {
+            this._touchEventListener.setEnabled(enable);
+        },
+
+        setIgonreTouchWhenMove: function (enable) {
+            this._touchEventListener.setIgonreTouchWhenMove(enable);
+        }
+    });
+
+    ef.ButtonSprite.createSpriteButton = function(normalSpriteName, selectedSpriteName, titleSpriteName){
+        return new ef.ButtonSprite(normalSpriteName, selectedSpriteName, new cc.Sprite(titleSpriteName));
+    };
+
+    ef.ButtonSprite.createLabelButton = function(normalSpriteName, selectedSpriteName, labelString){
+        return new ef.ButtonSprite(normalSpriteName, selectedSpriteName, labelString);
+    };
+
+    //
+    ef.LayerColorButton = cc.LayerColor.extend({
+        _spButton: null,
+
+        _touchEventListener: null,
+
+        _clickCallback: null,
+        _clickTarget: null,
+        _status: null,
+        _defaultOpacity: 140,
+
+        ctor: function (buttonSprite, width, height) {
+            cc.LayerColor.prototype.ctor.call(this, new cc.Color(0, 0, 0, 0), width, height);
+
+            if (!buttonSprite)
+                throw "invalid parameters";
+
+            if (typeof(buttonSprite) === "string") {
+                this._spButton = new cc.Sprite(buttonSprite);
+            } else {
+                this._spButton = buttonSprite;
+            }
+
+            this._spButton.setPosition(width * 0.5, height * 0.5);
+            this.addChild(this._spButton);
+            this._spButton.setScale(0.8);
+            this._touchEventListener = new ef.SpriteClickHandler();
+            this._status = ef.BUTTONSTATE.NORMAL;
+        },
+
+        onEnter: function () {
+            cc.Sprite.prototype.onEnter.call(this);
+            if (this._touchEventListener && !this._touchEventListener._isRegistered())
+                cc.eventManager.addListener(this._touchEventListener, this);
+        },
+
+        hitTest: function (point) {
+            return cc.rectContainsPoint(cc.rect(0, 0, this._contentSize.width, this._contentSize.height),
+                this.convertToNodeSpace(point));
+        },
+
+        setStatus: function (status) {
+            if (this._status === status)
+                return;
+
+            this._status = status;
+            if (this._status === ef.BUTTONSTATE.NORMAL) {
+                this.setOpacity(0);
+            } else {
+                this.setOpacity(this._defaultOpacity);
+            }
+        },
+
+        getStatus: function(){
+            return this._status;
+        },
+
+        setClickHandler: function (callback, target) {
+            this._clickCallback = callback;
+            this._clickTarget = target;
+        },
+
+        executeClickCallback: function (touch, event) {
+            if (this._clickCallback)
+                this._clickCallback.call(this._clickTarget, touch, event);
+        },
+
+        setTouchEnabled: function (enable) {
+            this._touchEventListener.setEnabled(enable);
+        },
+
+        setIgonreTouchWhenMove: function (enable) {
+            this._touchEventListener.setIgonreTouchWhenMove(enable);
+        }
+    });
+
+    ef.NotificationPanel = cc.Node.extend({
+        _spNotificationIcon: null,
+        _cpClippingNode: null,
+        _lbNotification: null,
+        _szSize: null,
+        _duration: 6,
+        ctor: function(width, height) {
+            cc.Node.prototype.ctor.call(this);
+            this._className = "NotificationPanel";
+
+            const szSize = this._szSize = new cc.Size(width || 100, height || 30);
+
+            const dnStencil = new cc.DrawNode();
+            const rectangle = [cc.p(0, 0), cc.p(szSize.width, 0), cc.p(szSize.width, szSize.height),
+                cc.p(0, szSize.height)], green = new cc.Color(0, 255, 0, 255);
+            dnStencil.drawPoly(rectangle, green, 3, green);
+
+            const cpClippingNode = this._cpClippingNode = new cc.ClippingNode(dnStencil);
+            cpClippingNode.setPosition(36, 0);
+            this.addChild(cpClippingNode);
+
+            //const testLayer = new cc.LayerColor(new cc.Color(255, 0, 0, 255));
+            //cpClippingNode.addChild(testLayer);
+
+            const lbNotification = this._lbNotification = new cc.LabelTTF("test notification", "Arial", 18);
+            lbNotification.setPosition(szSize.width * 0.5, szSize.height * 0.5);
+            cpClippingNode.addChild(lbNotification);
+
+            const spNotificationIcon = this._spNotificationIcon = new cc.Sprite(ReferenceName.NotificationIcon);
+            spNotificationIcon.setPosition(18, 18);
+            this.addChild(spNotificationIcon);
+        },
+
+        showNotification: function(message, callback, target) {
+            const lbNotification = this._lbNotification;
+            if (!message) {
+                lbNotification.setString("");
+                if (callback)
+                    callback.call(target);
+                return;
+            }
+
+            const szSize = this._szSize;
+            lbNotification.setString(message);
+            const contentSize = this._lbNotification.getContentSize();
+            lbNotification.setPosition(szSize.width + contentSize.width * 0.5, szSize.height * 0.5);
+            lbNotification.runAction(cc.sequence(cc.moveBy(this._duration, -(szSize.width + contentSize.width), 0),
+                cc.callFunc(function () {
+                    if (callback)
+                        callback.call(target);
+                })));
+        }
+    });
+})(ef);

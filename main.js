@@ -23,6 +23,7 @@ var cocos2dApp = cc.game.onStart = function() {
 
     // Setup the resolution policy and design resolution size
     cc.view.setDesignResolutionSize(1366, 768, cc.ResolutionPolicy.SHOW_ALL);
+    //cc.view.setDesignResolutionSize(1280, 768, cc.ResolutionPolicy.SHOW_ALL);
 
     // The game will be resized when browser size change
     cc.view.resizeWithBrowserSize(true);
@@ -52,6 +53,7 @@ var cocos2dApp = cc.game.onStart = function() {
             cc.LoadingScreen.preload(ResourceLoader.getResourceList(), function () {
                 // cc.director.runScene(new LogoScene());
                 //cc.director.runScene(new TestScene());
+                //cc.director.runScene(new ef.TableSelectionScene("1X", data.player));
 
                 AppManager.goToLobby(data.player);
                 FishAnimationData.setData(themeConfig.FishRawData);
@@ -64,5 +66,5 @@ var cocos2dApp = cc.game.onStart = function() {
 };
 
 cc.game.run();
-console.log("version: 1.3.522b");
+console.log("version: 1.4.612b");
 

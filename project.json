@@ -38,7 +38,7 @@
         "src/New/GUIFunctions.js",
         "src/New/BlockingManager.js",
         "src/New/BlockingView.js",
-        "src/New/SeatSelectionScene.js",
+        "src/New/TableSelectionScene.js",
 
         "src/New/Static Views/FloatingMenu.js",
         "src/New/Static Views/CloseButtonPrefab.js",

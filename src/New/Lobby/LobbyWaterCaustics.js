@@ -74,7 +74,8 @@ const LobbyWaterCaustics = (function () {
         const scale = getRandomInt(0,10)/10 * (scaleMax-scaleMin) + scaleMin;
 
 
-        return _pools[type].alloc(_parent, type, pos, rotation, timingIn, timingPause, timingOut, new cc.p(xMovement,yMovement), scale, onAnimationEnd);
+        return _pools[type].alloc(_parent, type, pos, rotation, timingIn, timingPause, timingOut,
+            new cc.p(xMovement,yMovement), scale, onAnimationEnd);
     }
     
     function onAnimationEnd(instance, type) {

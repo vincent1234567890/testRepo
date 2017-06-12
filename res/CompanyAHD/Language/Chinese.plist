@@ -4,125 +4,155 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>AnnouncementBox.png</key>
+            <key>SSMultiplayerChinese.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{984,50}</string>
+                <string>{77,45}</string>
                 <key>spriteSourceSize</key>
-                <string>{984,50}</string>
+                <string>{79,45}</string>
                 <key>textureRect</key>
-                <string>{{1,52},{984,50}}</string>
+                <string>{{161,75},{77,45}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
-            <key>LR_NotificationBase.png</key>
+            <key>SSSoloChinese.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{1196,318}</string>
+                <string>{78,45}</string>
                 <key>spriteSourceSize</key>
-                <string>{1196,318}</string>
+                <string>{80,45}</string>
                 <key>textureRect</key>
-                <string>{{1,104},{1196,318}}</string>
+                <string>{{117,28},{78,45}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>NotificationBackground.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{618,49}</string>
-                <key>spriteSourceSize</key>
-                <string>{618,49}</string>
-                <key>textureRect</key>
-                <string>{{522,1},{618,49}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>SSBTMBG.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{1366,373}</string>
-                <key>spriteSourceSize</key>
-                <string>{1366,373}</string>
-                <key>textureRect</key>
-                <string>{{1,424},{1366,373}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>SSBack.png</key>
+            <key>SS_100X.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,-1}</string>
                 <key>spriteSize</key>
-                <string>{74,55}</string>
+                <string>{145,42}</string>
                 <key>spriteSourceSize</key>
-                <string>{74,59}</string>
+                <string>{149,44}</string>
                 <key>textureRect</key>
-                <string>{{1216,1},{74,55}}</string>
+                <string>{{1,28},{145,42}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
-            <key>SSBackRO.png</key>
+            <key>SS_10X.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,-1}</string>
+                <key>spriteSize</key>
+                <string>{123,42}</string>
+                <key>spriteSourceSize</key>
+                <string>{127,44}</string>
+                <key>textureRect</key>
+                <string>{{117,75},{123,42}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>SS_1X.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,-1}</string>
+                <key>spriteSize</key>
+                <string>{101,42}</string>
+                <key>spriteSourceSize</key>
+                <string>{105,44}</string>
+                <key>textureRect</key>
+                <string>{{45,66},{101,42}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>SS_BackChinese.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{72,53}</string>
+                <string>{53,26}</string>
                 <key>spriteSourceSize</key>
-                <string>{72,53}</string>
+                <string>{53,30}</string>
                 <key>textureRect</key>
-                <string>{{1142,1},{72,53}}</string>
+                <string>{{89,66},{53,26}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
-            <key>SS_NameBase.png</key>
+            <key>SS_ContinueChinese.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{132,30}</string>
+                <string>{186,25}</string>
                 <key>spriteSourceSize</key>
-                <string>{132,30}</string>
+                <string>{186,25}</string>
                 <key>textureRect</key>
-                <string>{{1,1},{132,30}}</string>
+                <string>{{1,1},{186,25}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>TimerBackground.png</key>
+            <key>SS_ExpressChinese.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-2,1}</string>
+                <key>spriteSize</key>
+                <string>{114,29}</string>
+                <key>spriteSourceSize</key>
+                <string>{130,43}</string>
+                <key>textureRect</key>
+                <string>{{1,175},{114,29}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SS_KeepChinese.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{385,48}</string>
+                <string>{59,36}</string>
                 <key>spriteSourceSize</key>
-                <string>{385,48}</string>
+                <string>{59,36}</string>
                 <key>textureRect</key>
-                <string>{{135,1},{385,48}}</string>
+                <string>{{45,28},{59,36}}</string>
                 <key>textureRotated</key>
                 <false/>
+            </dict>
+            <key>SS_SpectateChinese.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,1}</string>
+                <key>spriteSize</key>
+                <string>{53,28}</string>
+                <key>spriteSourceSize</key>
+                <string>{53,30}</string>
+                <key>textureRect</key>
+                <string>{{161,154},{53,28}}</string>
+                <key>textureRotated</key>
+                <true/>
             </dict>
         </dict>
         <key>metadata</key>
@@ -134,13 +164,13 @@
             <key>premultiplyAlpha</key>
             <false/>
             <key>realTextureFileName</key>
-            <string>LobbyUI2.png</string>
+            <string>Chinese.png</string>
             <key>size</key>
-            <string>{1368,1368}</string>
+            <string>{208,208}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:bc6d8836890b4208c0ad81f62e9796d3:ac28f707c179d24f6c7d2cfcdc580074:94163f642743ebc20a54c1c8cbe99d40$</string>
+            <string>$TexturePacker:SmartUpdate:713569c208a94a491a48e272c7e4a6a9:14da239a6cf3b8074b2753dafa201e85:e781c8d05fd59b40e34f63e21930acc8$</string>
             <key>textureFileName</key>
-            <string>LobbyUI2.png</string>
+            <string>Chinese.png</string>
         </dict>
     </dict>
 </plist>

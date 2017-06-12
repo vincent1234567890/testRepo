@@ -422,14 +422,3 @@ let SeatSprite = cc.Sprite.extend({
     }
 });
 
-const SeatPosition = {
-    LEFT: 2,
-    BOTTOM_LEFT: 0,
-    BOTTOM_RIGHT: 1,
-    RIGHT: 3
-};
-
-const TableType = {
-    MULTIPLE: 0,    //多人
-    SINGLE: 1       //包桌
-};
