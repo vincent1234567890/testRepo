@@ -35,7 +35,10 @@ const AppManager = (function () {
     // @todo Change this into goToRoomSelection() ?
     function goToSeatSelection(gameSelection, playerData){
         // Original seat selection code:
-        _currentScene = new SeatSelectionScene(gameSelection, playerData, onSeatSelected);
+        //_currentScene = new SeatSelectionScene(gameSelection, playerData, onSeatSelected);
+
+        // New table selection code:
+        _currentScene = new ef.TableSelectionScene(gameSelection, playerData, onSeatSelected);
         cc.director.pushScene(_currentScene);
         GameManager.enterSeatSelectionScene(_currentScene);
 
