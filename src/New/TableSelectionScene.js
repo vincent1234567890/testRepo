@@ -10,7 +10,7 @@ const TableType = {
     SINGLE: 1       //包桌
 };
 
-(function(ef) {
+(function (ef) {
     ef.TableSelectionScene = cc.Scene.extend({
         _lobbyType: null,
         _pnNotification: null,
@@ -243,7 +243,7 @@ const TableType = {
     });
 
     const PageIndicatorPanel = cc.Layer.extend({
-        ctor: function(){
+        ctor: function () {
             cc.Layer.prototype.ctor.call(this);
 
         }
@@ -259,7 +259,7 @@ const TableType = {
         _touchEventListener: null,
         _mouseEventListener: null,
 
-        ctor: function(lobbyType, tableType){
+        ctor: function (lobbyType, tableType) {
             cc.Layer.prototype.ctor.call(this);
 
             this._lobbyType = lobbyType || "1X";
@@ -272,14 +272,14 @@ const TableType = {
             //this.addChild(pnLayerColor);
 
             //row 1
-            for(let i = 0; i < 4; i++){
+            for (let i = 0; i < 4; i++) {
                 const tableSprite = new ef.TableSprite();
                 tableSprite.setPosition(157 + i * 328, 310);
                 this.addChild(tableSprite);
             }
 
             //row 2
-            for(let i = 0; i < 4; i++){
+            for (let i = 0; i < 4; i++) {
                 const tableSprite = new ef.TableSprite();
                 tableSprite.setPosition(157 + i * 328, 95);
                 this.addChild(tableSprite);
@@ -290,11 +290,11 @@ const TableType = {
 
         },
 
-        setLobbyType: function(lobbyType){
+        setLobbyType: function (lobbyType) {
             this._lobbyType = lobbyType;
         },
 
-        setTableType: function(tableType){
+        setTableType: function (tableType) {
             this._tableType = tableType;
         }
     });
@@ -318,7 +318,7 @@ const TableType = {
         _mouseEventListener: null,
         _touchEventListener: null,
 
-        ctor: function(tableObj){
+        ctor: function (tableObj) {
             cc.Sprite.prototype.ctor.call(this, "#SS_Table.png");
 
             this._tableObj = tableObj;
@@ -365,7 +365,7 @@ const TableType = {
             this._touchEventListener = new ef.SpriteClickHandler();
         },
 
-        onEnter: function(){
+        onEnter: function () {
             cc.Sprite.prototype.onEnter.call(this);
             if (this._touchEventListener && !this._touchEventListener._isRegistered())
                 cc.eventManager.addListener(this._touchEventListener, this);
@@ -373,28 +373,28 @@ const TableType = {
                 cc.eventManager.addListener(this._mouseEventListener, this);
         },
 
-        setStatus: function(status){
+        setStatus: function (status) {
 
         },
 
-        hitTest: function(point){
+        hitTest: function (point) {
             return cc.rectContainsPoint(cc.rect(0, 0, this._contentSize.width, this._contentSize.height),
                 this.convertToNodeSpace(point));
         },
 
-        executeClickCallback: function(touch, event){
+        executeClickCallback: function (touch, event) {
 
         },
 
-        onMouseOverIn: function(mouseData){
-            if(!this._isMouseOverIn){
+        onMouseOverIn: function (mouseData) {
+            if (!this._isMouseOverIn) {
                 this._isMouseOverIn = true;
                 this._spGlow.setVisible(true);
             }
         },
 
-        onMouseOverOut: function(mouseData){
-            if(this._isMouseOverIn){
+        onMouseOverOut: function (mouseData) {
+            if (this._isMouseOverIn) {
                 this._isMouseOverIn = false;
                 this._spGlow.setVisible(false);
             }
@@ -409,7 +409,7 @@ const TableType = {
 
         _seatStatus: null,
 
-        ctor: function(playerInfo){
+        ctor: function (playerInfo) {
             //SS_YellowSit,  SS_BlueSit
             cc.Sprite.prototype.ctor.call(this, "#SS_YellowSit.png");
 
@@ -426,7 +426,7 @@ const TableType = {
             this.addChild(lbPlayerName);
         },
 
-        setSeatStatus: function(seatStatus){
+        setSeatStatus: function (seatStatus) {
 
         }
     });
