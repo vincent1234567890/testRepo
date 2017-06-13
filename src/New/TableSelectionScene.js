@@ -459,7 +459,9 @@ const TableType = {
         },
 
         setTableState: function (roomState) {
-            this._lbTitle.setString(roomState.roomTitle);
+            // We only want to show the room number, so we will remove the '100X-' prefix from the room title
+            const roomTitleForDisplay = roomState.roomTitle.replace(/^[^-]*-/, '');
+            this._lbTitle.setString(roomTitleForDisplay);
             for (let i = 0; i < 4; i++) {
                 const seatSprite = this['_spSeat' + (i + 1)];
                 seatSprite.setSeatPlayerState(roomState.playersBySlot[i]);
@@ -522,7 +524,14 @@ const TableType = {
         setSeatPlayerState: function (seatState) {
             this._playerInfo = seatState;
             if (seatState && seatState.name) {
-                this._lbPlayerName.setString(seatState.name);
+                // Shorten really long names
+                // @todo Can we get cocos to truncate the name for us?
+                // The maximum length really depends on the size of the chars.  E.g. 'MMMM' is wider than versus 'llll'
+                let nameToShow = seatState.name;
+                if (nameToShow.length > 14) {
+                    nameToShow = nameToShow.substring(0, 12) + "..";
+                }
+                this._lbPlayerName.setString(nameToShow);
                 this.setVisible(true);
             } else {
                 this._lbPlayerName.setString('-');
