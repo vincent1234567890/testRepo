@@ -384,11 +384,13 @@ const GameLogView = (function () {
 
                 const date = new Date(itemData.startTime);
                 const roundIdText = itemData.id + "-"
-                    + (date.getYear()-100).toLocaleString('en-US', {minimumIntegerDigits: 2})
+                    + (date.getYear() % 100).toLocaleString('en-US', {minimumIntegerDigits: 2})
                     + (date.getMonth()+1).toLocaleString('en-US', {minimumIntegerDigits: 2})
                     + date.getDate().toLocaleString('en-US', {minimumIntegerDigits: 2})
+                    + "-"
                     + date.getHours().toLocaleString('en-US', {minimumIntegerDigits: 2})
-                    + date.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2});
+                    + date.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2})
+                    + date.getSeconds().toLocaleString('en-US', {minimumIntegerDigits: 2});
 
                 const roundId = new cc.LabelTTF(roundIdText, "Microsoft YaHei", 20, cc.size(200, rowHeight), cc.TEXT_ALIGNMENT_RIGHT);
                 roundId._setFontWeight("bold");
