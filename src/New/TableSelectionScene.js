@@ -351,7 +351,7 @@ const TableType = {
             const roomStatesToShow = roomStates.filter(roomHasCorrectType);
 
             // Sort rooms into ascending numerical order
-            const getRoomNum = room => Number(room.roomTitle.split('-')[1]);
+            const getRoomNum = room => Number(room.roomTitle.replace(/^.*-[SMsm]?/, ''));
             const sortRooms = (a, b) => {
                 return getRoomNum(a) - getRoomNum(b);
             };
