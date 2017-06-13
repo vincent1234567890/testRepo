@@ -521,10 +521,12 @@ const TableType = {
 
         setSeatPlayerState: function (seatState) {
             this._playerInfo = seatState;
-            if (seatState) {
+            if (seatState && seatState.name) {
                 this._lbPlayerName.setString(seatState.name);
+                this.setVisible(true);
             } else {
                 this._lbPlayerName.setString('-');
+                this.setVisible(false);
             }
         }
     });
