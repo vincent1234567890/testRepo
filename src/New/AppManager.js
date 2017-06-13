@@ -32,12 +32,11 @@ const AppManager = (function () {
         _gameTicker.unpauseTicker();
     }
 
-    // @todo Change this into goToTableSelection() ?
     function goToSeatSelection(gameSelection, playerData){
         // Original seat selection code:
         //_currentScene = new SeatSelectionScene(gameSelection, playerData, onSeatSelected);
 
-        // New table selection code:
+        // New table + seat selection code:
         const lobbyType = gameSelection;
         const selectionMadeCallback = (joinPrefs) => {
             joinPrefs.scene = lobbyType;
@@ -48,6 +47,7 @@ const AppManager = (function () {
         cc.director.pushScene(_currentScene);
         GameManager.enterSeatSelectionScene(_currentScene);
 
+        // @todo We should update the list regularly, until the callback is called, or the selection scene is abandoned (btnBack calls exitToLobby)
         ClientServerConnect.getListOfRoomsByServer().then(listOfRoomsByServer => {
             console.log("listOfRoomsByServer:", listOfRoomsByServer);
             // Prepare the rooms for passing to TableSelectionScene
@@ -60,7 +60,6 @@ const AppManager = (function () {
                     }
                 });
             });
-            // @todo: allRoomStates.sort(...);
             if (_currentScene instanceof ef.TableSelectionScene) {
                 _currentScene.updateRoomStates(allRoomStates);
             }
