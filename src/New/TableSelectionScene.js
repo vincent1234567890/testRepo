@@ -454,8 +454,9 @@ const TableType = {
                 cc.eventManager.addListener(this._mouseEventListener, this);
         },
 
-        setStatus: function (status) {
-            console.warn(`I do not yet know how to set status ${status} of TableSprite...`);
+        hitTest: function (point) {
+            return cc.rectContainsPoint(cc.rect(0, 0, this._contentSize.width, this._contentSize.height),
+                this.convertToNodeSpace(point));
         },
 
         setTableState: function (roomState) {
@@ -468,13 +469,12 @@ const TableType = {
             }
         },
 
-        hitTest: function (point) {
-            return cc.rectContainsPoint(cc.rect(0, 0, this._contentSize.width, this._contentSize.height),
-                this.convertToNodeSpace(point));
+        setStatus: function (status) {
+            console.warn(`[TableSprite:setStatus] status=${status}`);
         },
 
         executeClickCallback: function (touch, event) {
-
+            console.warn(`[TableSprite:executeClickCallback] touch:`, touch, `event:`, event);
         },
 
         onMouseOverIn: function (mouseData) {
@@ -515,10 +515,26 @@ const TableType = {
             const lbPlayerName = this._lbPlayerName = new cc.LabelTTF("playerName", "Arial", 15);
             lbPlayerName.setPosition(szContent.width * 0.5, szContent.height * 0.5);
             this.addChild(lbPlayerName);
+
+            // @todo This and hitTest and onEnter seem like common code.
+            //       Can we move them into MouseOverEventListener and SpriteClickHandler()?
+
+            //mouse event handler
+            this._mouseEventListener = new ef.MouseOverEventListener();
+            this._touchEventListener = new ef.SpriteClickHandler();
         },
 
-        setSeatStatus: function (seatStatus) {
+        onEnter: function () {
+            cc.Sprite.prototype.onEnter.call(this);
+            if (this._touchEventListener && !this._touchEventListener._isRegistered())
+                cc.eventManager.addListener(this._touchEventListener, this);
+            if (this._mouseEventListener && !this._mouseEventListener._isRegistered())
+                cc.eventManager.addListener(this._mouseEventListener, this);
+        },
 
+        hitTest: function (point) {
+            return cc.rectContainsPoint(cc.rect(0, 0, this._contentSize.width, this._contentSize.height),
+                this.convertToNodeSpace(point));
         },
 
         setSeatPlayerState: function (seatState) {
@@ -537,7 +553,15 @@ const TableType = {
                 this._lbPlayerName.setString('-');
                 this.setVisible(false);
             }
-        }
+        },
+
+        setStatus: function (status) {
+            console.warn(`[TableSeatSprite:setStatus] status=${status}`);
+        },
+
+        executeClickCallback: function (touch, event) {
+            console.warn(`[TableSeatSprite:executeClickCallback] touch:`, touch, `event:`, event);
+        },
     });
 
 })(ef);
