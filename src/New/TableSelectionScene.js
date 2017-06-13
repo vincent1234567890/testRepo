@@ -103,6 +103,8 @@ const TableType = {
         _pnTableList: null,
         _pnPageIndicator: null,
 
+        _roomStates: null,
+
         ctor: function (lobbyType) {
             cc.Layer.prototype.ctor.call(this);
 
@@ -158,6 +160,15 @@ const TableType = {
             this.addChild(pnPageIndicator);
         },
 
+        _createLobbyTypeSprite: function () {
+            if (this._lobbyType === '100X')
+                return new cc.Sprite(ReferenceName.Seat100X);
+            else if (this._lobbyType === '10X')
+                return new cc.Sprite(ReferenceName.Seat10X);
+            else
+                return new cc.Sprite(ReferenceName.Seat1X);
+        },
+
         tableTypeClick: function (touch, event) {
             const target = event.getCurrentTarget();
             if (target === this._btnMultiple) {
@@ -166,6 +177,7 @@ const TableType = {
                     this._btnSolo.setStatus(ef.BUTTONSTATE.NORMAL);
 
                     //load the multiple table list
+                    this._rerenderRooms();
                 }
             } else {
                 if (target.getStatus() === ef.BUTTONSTATE.NORMAL) {
@@ -173,21 +185,34 @@ const TableType = {
                     this._btnSolo.setStatus(ef.BUTTONSTATE.SELECTED);
 
                     //load the solo table list
+                    this._rerenderRooms();
                 }
             }
         },
 
-        updateRoomStates: function (roomStates) {
-            this._pnTableList.updateRoomStates(roomStates);
+        getSelectedTableType: function () {
+            if (this._btnMultiple.getStatus() === ef.BUTTONSTATE.SELECTED) {
+                return 'multiple';
+            } else {
+                return 'single';
+            }
         },
 
-        _createLobbyTypeSprite: function () {
-            if (this._lobbyType === '100X')
-                return new cc.Sprite(ReferenceName.Seat100X);
-            else if (this._lobbyType === '10X')
-                return new cc.Sprite(ReferenceName.Seat10X);
-            else
-                return new cc.Sprite(ReferenceName.Seat1X);
+        updateRoomStates: function (roomStates) {
+            this._roomStates = roomStates;
+            this._askTableListToUpdateRoomStates();
+        },
+
+        _rerenderRooms: function () {
+            this._pnTableList.clearAllTables();
+            this._askTableListToUpdateRoomStates();
+        },
+
+        _askTableListToUpdateRoomStates: function () {
+            if (this._roomStates) {
+                const tableType = this.getSelectedTableType();
+                this._pnTableList.updateRoomStates(this._roomStates, tableType);
+            }
         },
     });
 
@@ -307,8 +332,24 @@ const TableType = {
             this._tableType = tableType;
         },
 
-        updateRoomStates: function (roomStates) {
-            roomStates.forEach(roomState => {
+        clearAllTables: function () {
+            Object.values(this._tableSpritesMap).forEach(tableSprite => {
+                this.removeChild(tableSprite);
+            });
+            this._tableSpritesMap = {};
+        },
+
+        updateRoomStates: function (roomStates, tableType) {
+            // Select only those rooms we should display for this tab
+            const roomHasCorrectType = roomState => {
+                if (tableType === 'single') {
+                    return roomState.singlePlay;
+                } else {
+                    return !roomState.singlePlay;
+                }
+            };
+            const roomStatesToShow = roomStates.filter(roomHasCorrectType);
+            roomStatesToShow.forEach(roomState => {
                 const roomTitle = roomState.roomTitle;
                 if (!this._tableSpritesMap[roomTitle]) {
                     const newTableSprite = new ef.TableSprite();
