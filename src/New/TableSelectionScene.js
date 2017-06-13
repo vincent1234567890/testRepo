@@ -349,6 +349,14 @@ const TableType = {
                 }
             };
             const roomStatesToShow = roomStates.filter(roomHasCorrectType);
+
+            // Sort rooms into ascending numerical order
+            const getRoomNum = room => Number(room.roomTitle.split('-')[1]);
+            const sortRooms = (a, b) => {
+                return getRoomNum(a) - getRoomNum(b);
+            };
+            roomStatesToShow.sort(sortRooms);
+
             roomStatesToShow.forEach(roomState => {
                 const roomTitle = roomState.roomTitle;
                 if (!this._tableSpritesMap[roomTitle]) {
