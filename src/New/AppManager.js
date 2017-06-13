@@ -32,24 +32,46 @@ const AppManager = (function () {
         _gameTicker.unpauseTicker();
     }
 
-    // @todo Change this into goToRoomSelection() ?
     function goToSeatSelection(gameSelection, playerData){
         // Original seat selection code:
-        _currentScene = new SeatSelectionScene(gameSelection, playerData, onSeatSelected);
+        //_currentScene = new SeatSelectionScene(gameSelection, playerData, onSeatSelected);
+
+        // New table + seat selection code:
+        const lobbyType = gameSelection;
+        const selectionMadeCallback = (joinPrefs) => {
+            joinPrefs.scene = lobbyType;
+            onRoomSelected(joinPrefs);
+        };
+
+        _currentScene = new ef.TableSelectionScene(gameSelection, playerData, selectionMadeCallback);
         cc.director.pushScene(_currentScene);
         GameManager.enterSeatSelectionScene(_currentScene);
 
-        // New code for room selection:
-        //GameManager.enterRoomSelectionScene(_currentScene);
+        // @todo We should update the list regularly, until the callback is called, or the selection scene is abandoned (btnBack calls exitToLobby)
         ClientServerConnect.getListOfRoomsByServer().then(listOfRoomsByServer => {
             console.log("listOfRoomsByServer:", listOfRoomsByServer);
-            // Display the rooms
-            // ...
+            // Prepare the rooms for passing to TableSelectionScene
+            const allRoomStates = [];
+            listOfRoomsByServer.forEach(server => {
+                server.rooms.forEach(room => {
+                    if (room.sceneName === lobbyType) {
+                        room.server = server;
+                        allRoomStates.push(room);
+                    }
+                });
+            });
+            if (_currentScene instanceof ef.TableSelectionScene) {
+                _currentScene.updateRoomStates(allRoomStates);
+            }
         }).catch(console.error);
     }
 
     function onSeatSelected(type,seat){
         GameManager.seatSelected(type,seat);
+    }
+
+    function onRoomSelected (joinPrefs) {
+        GameManager.roomSelected(joinPrefs);
     }
 
     function goBackToLobby(){
