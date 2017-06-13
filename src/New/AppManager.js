@@ -32,7 +32,7 @@ const AppManager = (function () {
         _gameTicker.unpauseTicker();
     }
 
-    // @todo Change this into goToRoomSelection() ?
+    // @todo Change this into goToTableSelection() ?
     function goToSeatSelection(gameSelection, playerData){
         // Original seat selection code:
         //_currentScene = new SeatSelectionScene(gameSelection, playerData, onSeatSelected);
@@ -42,12 +42,23 @@ const AppManager = (function () {
         cc.director.pushScene(_currentScene);
         GameManager.enterSeatSelectionScene(_currentScene);
 
-        // New code for room selection:
-        //GameManager.enterRoomSelectionScene(_currentScene);
         ClientServerConnect.getListOfRoomsByServer().then(listOfRoomsByServer => {
             console.log("listOfRoomsByServer:", listOfRoomsByServer);
-            // Display the rooms
-            // ...
+            // Prepare the rooms for passing to TableSelectionScene
+            const lobbyType = gameSelection;
+            const allRoomStates = [];
+            listOfRoomsByServer.forEach(server => {
+                server.rooms.forEach(room => {
+                    if (room.sceneName === lobbyType) {
+                        room.server = server;
+                        allRoomStates.push(room);
+                    }
+                });
+            });
+            // @todo: allRoomStates.sort(...);
+            if (_currentScene instanceof ef.TableSelectionScene) {
+                _currentScene.updateRoomStates(allRoomStates);
+            }
         }).catch(console.error);
     }
 

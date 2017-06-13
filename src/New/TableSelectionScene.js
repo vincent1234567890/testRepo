@@ -14,6 +14,7 @@ const TableType = {
     ef.TableSelectionScene = cc.Scene.extend({
         _lobbyType: null,
         _pnNotification: null,
+        _pnTableListPanel: null,
 
         ctor: function (lobbyType, playerData) {
             cc.Scene.prototype.ctor.call(this);
@@ -74,7 +75,7 @@ const TableType = {
             pnJackpot.setPosition(cc.visibleRect.center.x, cc.visibleRect.top.y - 102);
 
             //table list layer.
-            const tableListPanel = new ef.TableListLayer();
+            const tableListPanel = this._pnTableListPanel = new ef.TableListLayer();
             this.addChild(tableListPanel);
 
             //notification panel.
@@ -82,7 +83,11 @@ const TableType = {
             pnNotification.setPosition(cc.visibleRect.center.x + 226, cc.visibleRect.top.y - 218);
             this.addChild(pnNotification);
             pnNotification.showNotification("Hello, this is an Elsa's message for testing notification................");
-        }
+        },
+
+        updateRoomStates: function (roomStates) {
+            this._pnTableListPanel.updateRoomStates(roomStates);
+        },
     });
 
     ef.TableListLayer = cc.Layer.extend({
@@ -172,6 +177,10 @@ const TableType = {
             }
         },
 
+        updateRoomStates: function (roomStates) {
+            this._pnTableList.updateRoomStates(roomStates);
+        },
+
         _createLobbyTypeSprite: function () {
             if (this._lobbyType === '100X')
                 return new cc.Sprite(ReferenceName.Seat100X);
@@ -254,7 +263,7 @@ const TableType = {
         _tableType: null,
 
         _tableObjectsArray: null,
-        _tableSpritesArray: null,
+        _tableSpritesMap: null,
 
         _touchEventListener: null,
         _mouseEventListener: null,
@@ -266,24 +275,24 @@ const TableType = {
             this._tableType = tableType || TableType.MULTIPLE;
 
             this._tableObjectsArray = [];
-            this._tableSpritesArray = [];
+            this._tableSpritesMap = {};
 
             //const pnLayerColor = new cc.LayerColor(new cc.Color(200, 0, 0, 128));
             //this.addChild(pnLayerColor);
 
-            //row 1
-            for (let i = 0; i < 4; i++) {
-                const tableSprite = new ef.TableSprite();
-                tableSprite.setPosition(157 + i * 328, 310);
-                this.addChild(tableSprite);
-            }
-
-            //row 2
-            for (let i = 0; i < 4; i++) {
-                const tableSprite = new ef.TableSprite();
-                tableSprite.setPosition(157 + i * 328, 95);
-                this.addChild(tableSprite);
-            }
+            ////row 1
+            //for (let i = 0; i < 4; i++) {
+            //    const tableSprite = new ef.TableSprite();
+            //    tableSprite.setPosition(157 + i * 328, 310);
+            //    this.addChild(tableSprite);
+            //}
+            //
+            ////row 2
+            //for (let i = 0; i < 4; i++) {
+            //    const tableSprite = new ef.TableSprite();
+            //    tableSprite.setPosition(157 + i * 328, 95);
+            //    this.addChild(tableSprite);
+            //}
 
             // @todo touch event handler
 
@@ -296,7 +305,30 @@ const TableType = {
 
         setTableType: function (tableType) {
             this._tableType = tableType;
-        }
+        },
+
+        updateRoomStates: function (roomStates) {
+            roomStates.forEach(roomState => {
+                const roomTitle = roomState.roomTitle;
+                if (!this._tableSpritesMap[roomTitle]) {
+                    const newTableSprite = new ef.TableSprite();
+                    const tableNumber = Object.keys(this._tableSpritesMap).length;
+                    this.positionTableSprite(newTableSprite, tableNumber);
+                    this.addChild(newTableSprite);
+                    this._tableSpritesMap[roomTitle] = newTableSprite;
+                }
+                const tableSprite = this._tableSpritesMap[roomTitle];
+                tableSprite.setTableState(roomState);
+            });
+        },
+
+        positionTableSprite: function (tableSprite, tableNumber) {
+            const page = Math.floor(tableNumber / 8);
+            const tableNumberOnPage = tableNumber % 8;
+            const row = Math.floor(tableNumberOnPage / 4);
+            const i = tableNumberOnPage % 4;
+            tableSprite.setPosition(157 + 1366 * page + 328 * i, 310 - 215 * row);
+        },
     });
 
     ef.TableSprite = cc.Sprite.extend({
@@ -374,7 +406,15 @@ const TableType = {
         },
 
         setStatus: function (status) {
+            console.warn(`I do not yet know how to set status ${status} of TableSprite...`);
+        },
 
+        setTableState: function (roomState) {
+            this._lbTitle.setString(roomState.roomTitle);
+            for (let i = 0; i < 4; i++) {
+                const seatSprite = this['_spSeat' + (i + 1)];
+                seatSprite.setSeatPlayerState(roomState.playersBySlot[i]);
+            }
         },
 
         hitTest: function (point) {
@@ -428,6 +468,15 @@ const TableType = {
 
         setSeatStatus: function (seatStatus) {
 
+        },
+
+        setSeatPlayerState: function (seatState) {
+            this._playerInfo = seatState;
+            if (seatState) {
+                this._lbPlayerName.setString(seatState.name);
+            } else {
+                this._lbPlayerName.setString('-');
+            }
         }
     });
 
