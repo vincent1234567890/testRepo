@@ -459,6 +459,20 @@ const TableType = {
                 this.convertToNodeSpace(point));
         },
 
+        onMouseOverIn: function (mouseData) {
+            if (!this._isMouseOverIn) {
+                this._isMouseOverIn = true;
+                this._spGlow.setVisible(true);
+            }
+        },
+
+        onMouseOverOut: function (mouseData) {
+            if (this._isMouseOverIn) {
+                this._isMouseOverIn = false;
+                this._spGlow.setVisible(false);
+            }
+        },
+
         setTableState: function (roomState) {
             // We only want to show the room number, so we will remove the '100X-' prefix from the room title
             const roomTitleForDisplay = roomState.roomTitle.replace(/^[^-]*-/, '');
@@ -476,20 +490,6 @@ const TableType = {
         executeClickCallback: function (touch, event) {
             console.warn(`[TableSprite:executeClickCallback] touch:`, touch, `event:`, event);
         },
-
-        onMouseOverIn: function (mouseData) {
-            if (!this._isMouseOverIn) {
-                this._isMouseOverIn = true;
-                this._spGlow.setVisible(true);
-            }
-        },
-
-        onMouseOverOut: function (mouseData) {
-            if (this._isMouseOverIn) {
-                this._isMouseOverIn = false;
-                this._spGlow.setVisible(false);
-            }
-        }
     });
 
     ef.TableSeatSprite = cc.Sprite.extend({
@@ -516,7 +516,7 @@ const TableType = {
             lbPlayerName.setPosition(szContent.width * 0.5, szContent.height * 0.5);
             this.addChild(lbPlayerName);
 
-            // @todo This and hitTest and onEnter seem like common code.
+            // @todo This and hitTest and onEnter and onMouseOverIn/Out seem like common code.
             //       Can we move them into MouseOverEventListener and SpriteClickHandler()?
 
             //mouse event handler
@@ -535,6 +535,18 @@ const TableType = {
         hitTest: function (point) {
             return cc.rectContainsPoint(cc.rect(0, 0, this._contentSize.width, this._contentSize.height),
                 this.convertToNodeSpace(point));
+        },
+
+        onMouseOverIn: function (mouseData) {
+            if (!this._isMouseOverIn) {
+                this._isMouseOverIn = true;
+            }
+        },
+
+        onMouseOverOut: function (mouseData) {
+            if (this._isMouseOverIn) {
+                this._isMouseOverIn = false;
+            }
         },
 
         setSeatPlayerState: function (seatState) {
