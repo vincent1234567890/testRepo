@@ -45,13 +45,13 @@ const TableType = {
             this.addChild(spBackground);
             spBackground.setAnchorPoint(0.5, 1);
             spBackground.setPosition(cc.visibleRect.center.x, cc.visibleRect.top.y);
-            let spBtmBackground = new cc.Sprite(ReferenceName.SeatBackgroundBottom);
+            const spBtmBackground = new cc.Sprite(ReferenceName.SeatBackgroundBottom);
             this.addChild(spBtmBackground);
             spBtmBackground.setAnchorPoint(0.5, 0);
             spBtmBackground.setPosition(cc.visibleRect.center.x, cc.visibleRect.bottom.y);
 
             //back button
-            let btnBack = GUIFunctions.createButton(ReferenceName.SeatBackBtn, ReferenceName.SeatBackBtnSelected, function () {
+            const btnBack = GUIFunctions.createButton(ReferenceName.SeatBackBtn, ReferenceName.SeatBackBtnSelected, function () {
                 //back to Lobby
                 GameManager.exitToLobby();
             });
@@ -59,17 +59,17 @@ const TableType = {
             btnBack.setPosition(50, cc.visibleRect.top.y - 78);
 
             //info panel
-            let spPlayerInfo = new PlayerInfoWidget(playerData);
+            const spPlayerInfo = new PlayerInfoWidget(playerData);
             this.addChild(spPlayerInfo);
             spPlayerInfo.setPosition(120, cc.visibleRect.top.y - 78);
 
             //context menu
-            let mmContextMenu = new GameFloatingMenu();
+            const mmContextMenu = new GameFloatingMenu();
             mmContextMenu.setPosition(cc.visibleRect.center.x + 237, cc.visibleRect.top.y - 85);
             this.addChild(mmContextMenu);
 
             //jackpot panel
-            let pnJackpot = new JackpotFloatPanel();
+            const pnJackpot = new JackpotFloatPanel();
             this.addChild(pnJackpot);
             pnJackpot.setPosition(cc.visibleRect.center.x, cc.visibleRect.top.y - 102);
 
@@ -182,7 +182,7 @@ const TableType = {
         },
     });
 
-    let SpectateButton = cc.Sprite.extend({
+    const SpectateButton = cc.Sprite.extend({
         _normalName: "SS_BlueButton.png",
         _selectedName: "SS_BlueHover.png",
 
@@ -242,7 +242,7 @@ const TableType = {
         }
     });
 
-    let PageIndicatorPanel = cc.Layer.extend({
+    const PageIndicatorPanel = cc.Layer.extend({
         ctor: function(){
             cc.Layer.prototype.ctor.call(this);
 
@@ -285,7 +285,7 @@ const TableType = {
                 this.addChild(tableSprite);
             }
 
-            //touch event handler
+            // @todo touch event handler
 
 
         },
