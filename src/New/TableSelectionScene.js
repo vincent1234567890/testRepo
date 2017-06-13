@@ -16,7 +16,7 @@ const TableType = {
         _pnNotification: null,
         _pnTableListPanel: null,
 
-        ctor: function (lobbyType, playerData) {
+        ctor: function (lobbyType, playerData, selectionMadeCallback) {
             cc.Scene.prototype.ctor.call(this);
             this._className = "TableSelectionScene";
 
@@ -75,7 +75,7 @@ const TableType = {
             pnJackpot.setPosition(cc.visibleRect.center.x, cc.visibleRect.top.y - 102);
 
             //table list layer.
-            const tableListPanel = this._pnTableListPanel = new ef.TableListLayer();
+            const tableListPanel = this._pnTableListPanel = new ef.TableListLayer(lobbyType, selectionMadeCallback);
             this.addChild(tableListPanel);
 
             //notification panel.
@@ -105,7 +105,7 @@ const TableType = {
 
         _roomStates: null,
 
-        ctor: function (lobbyType) {
+        ctor: function (lobbyType, selectionMadeCallback) {
             cc.Layer.prototype.ctor.call(this);
 
             this._lobbyType = lobbyType || "1X";
@@ -144,6 +144,8 @@ const TableType = {
                 "#SS_YellowHover.png", "#SS_ExpressChinese.png");
             btnExpress.setPosition(90, szTableListBg.height - 35);
             pnTableListBg.addChild(btnExpress);
+            const expressButtonClicked = () => selectionMadeCallback({});
+            btnExpress.setClickHandler(expressButtonClicked, this);
 
             //onlookers button
             const btnSpectate = this._btnSpectate = new SpectateButton();
@@ -151,7 +153,7 @@ const TableType = {
             pnTableListBg.addChild(btnSpectate);
 
             //table list panel
-            const pnTableList = this._pnTableList = new ef.TableListPanel(this._lobbyType, this._tableType);
+            const pnTableList = this._pnTableList = new ef.TableListPanel(this._lobbyType, this._tableType, selectionMadeCallback);
             pnTableListBg.addChild(pnTableList);
             pnTableList.setPosition(20, 15);
 
@@ -192,9 +194,9 @@ const TableType = {
 
         getSelectedTableType: function () {
             if (this._btnMultiple.getStatus() === ef.BUTTONSTATE.SELECTED) {
-                return 'multiple';
+                return TableType.MULTIPLE;
             } else {
-                return 'single';
+                return TableType.SINGLE;
             }
         },
 
@@ -286,6 +288,7 @@ const TableType = {
     ef.TableListPanel = cc.Layer.extend({
         _lobbyType: null,
         _tableType: null,
+        _selectionMadeCallback: null,
 
         _tableObjectsArray: null,
         _tableSpritesMap: null,
@@ -293,11 +296,12 @@ const TableType = {
         _touchEventListener: null,
         _mouseEventListener: null,
 
-        ctor: function (lobbyType, tableType) {
+        ctor: function (lobbyType, tableType, selectionMadeCallback) {
             cc.Layer.prototype.ctor.call(this);
 
             this._lobbyType = lobbyType || "1X";
             this._tableType = tableType || TableType.MULTIPLE;
+            this._selectionMadeCallback = selectionMadeCallback;
 
             this._tableObjectsArray = [];
             this._tableSpritesMap = {};
@@ -342,7 +346,7 @@ const TableType = {
         updateRoomStates: function (roomStates, tableType) {
             // Select only those rooms we should display for this tab
             const roomHasCorrectType = roomState => {
-                if (tableType === 'single') {
+                if (tableType === TableType.SINGLE) {
                     return roomState.singlePlay;
                 } else {
                     return !roomState.singlePlay;
@@ -358,15 +362,16 @@ const TableType = {
             roomStatesToShow.sort(sortRooms);
 
             roomStatesToShow.forEach(roomState => {
-                const roomTitle = roomState.roomTitle;
-                if (!this._tableSpritesMap[roomTitle]) {
-                    const newTableSprite = new ef.TableSprite();
+                //const roomTitle = roomState.roomTitle;
+                const roomId = roomState.roomId;
+                if (!this._tableSpritesMap[roomId]) {
+                    const newTableSprite = new ef.TableSprite(this._selectionMadeCallback, roomId);
                     const tableNumber = Object.keys(this._tableSpritesMap).length;
                     this.positionTableSprite(newTableSprite, tableNumber);
                     this.addChild(newTableSprite);
-                    this._tableSpritesMap[roomTitle] = newTableSprite;
+                    this._tableSpritesMap[roomId] = newTableSprite;
                 }
-                const tableSprite = this._tableSpritesMap[roomTitle];
+                const tableSprite = this._tableSpritesMap[roomId];
                 tableSprite.setTableState(roomState);
             });
         },
@@ -382,10 +387,13 @@ const TableType = {
 
     ef.TableSprite = cc.Sprite.extend({
         //SS_Table.png
-        _tableObj: null,
         _spGlow: null,
         _lbTitle: null,
         _lbReserveTime: null,
+        _selectionMadeCallback: null,
+        _roomId: null,
+
+        _roomState: null,
 
         _spSeat1: null,
         _spSeat2: null,
@@ -399,10 +407,11 @@ const TableType = {
         _mouseEventListener: null,
         _touchEventListener: null,
 
-        ctor: function (tableObj) {
+        ctor: function (selectionMadeCallback, roomId) {
             cc.Sprite.prototype.ctor.call(this, "#SS_Table.png");
 
-            this._tableObj = tableObj;
+            this._selectionMadeCallback = selectionMadeCallback;
+            this._roomId = roomId;
 
             const szContent = this._contentSize;
             //glow
@@ -416,23 +425,27 @@ const TableType = {
             this.addChild(lbTitle);
             lbTitle.setPosition(szContent.width * 0.5, szContent.height - 38);
 
+            const seatSelectedCallback = (seatNumber) => {
+                selectionMadeCallback({roomId: roomId, serverUrl: 'ws://' + this._roomState.server.ipAddress, slot: seatNumber, singlePlay: this._roomState.singlePlay});
+            };
+
             //seat1
-            const spSeat1 = this._spSeat1 = new ef.TableSeatSprite();
+            const spSeat1 = this._spSeat1 = new ef.TableSeatSprite(seatSelectedCallback, 0);
             spSeat1.setPosition(91, 40);
             this.addChild(spSeat1);
 
             //seat2
-            const spSeat2 = this._spSeat2 = new ef.TableSeatSprite();
+            const spSeat2 = this._spSeat2 = new ef.TableSeatSprite(seatSelectedCallback, 1);
             spSeat2.setPosition(189, 40);
             this.addChild(spSeat2);
 
             //seat3
-            const spSeat3 = this._spSeat3 = new ef.TableSeatSprite();
+            const spSeat3 = this._spSeat3 = new ef.TableSeatSprite(seatSelectedCallback, 2);
             spSeat3.setPosition(36, 105);
             this.addChild(spSeat3);
 
             //seat4
-            const spSeat4 = this._spSeat4 = new ef.TableSeatSprite();
+            const spSeat4 = this._spSeat4 = new ef.TableSeatSprite(seatSelectedCallback, 3);
             spSeat4.setPosition(250, 105);
             this.addChild(spSeat4);
 
@@ -474,9 +487,14 @@ const TableType = {
         },
 
         setTableState: function (roomState) {
+            this._roomState = roomState;
+
             // We only want to show the room number, so we will remove the '100X-' prefix from the room title
             const roomTitleForDisplay = roomState.roomTitle.replace(/^[^-]*-/, '');
             this._lbTitle.setString(roomTitleForDisplay);
+
+            // @todo Apply room locked/unlocked state
+
             for (let i = 0; i < 4; i++) {
                 const seatSprite = this['_spSeat' + (i + 1)];
                 seatSprite.setSeatPlayerState(roomState.playersBySlot[i]);
@@ -484,11 +502,12 @@ const TableType = {
         },
 
         setStatus: function (status) {
-            console.warn(`[TableSprite:setStatus] status=${status}`);
+            //console.warn(`[TableSprite:setStatus] status=${status}`);
         },
 
         executeClickCallback: function (touch, event) {
-            console.warn(`[TableSprite:executeClickCallback] touch:`, touch, `event:`, event);
+            //console.warn(`[TableSprite:executeClickCallback] touch:`, touch, `event:`, event);
+            this._selectionMadeCallback({roomId: this._roomId, serverUrl: 'ws://' + this._roomState.server.ipAddress, singlePlay: this._roomState.singlePlay});
         },
     });
 
@@ -500,11 +519,15 @@ const TableType = {
 
         _seatStatus: null,
 
-        ctor: function (playerInfo) {
+        _seatSelectedCallback: null,
+        _seatNumber: null,
+
+        ctor: function (seatSelectedCallback, seatNumber) {
             //SS_YellowSit,  SS_BlueSit
             cc.Sprite.prototype.ctor.call(this, "#SS_YellowSit.png");
 
-            this._playerInfo = playerInfo;
+            this._seatSelectedCallback = seatSelectedCallback;
+            this._seatNumber = seatNumber;
 
             const szContent = this._contentSize;
             //SS_NameBase
@@ -568,11 +591,12 @@ const TableType = {
         },
 
         setStatus: function (status) {
-            console.warn(`[TableSeatSprite:setStatus] status=${status}`);
+            //console.warn(`[TableSeatSprite:setStatus] status=${status}`);
         },
 
         executeClickCallback: function (touch, event) {
-            console.warn(`[TableSeatSprite:executeClickCallback] touch:`, touch, `event:`, event);
+            //console.warn(`[TableSeatSprite:executeClickCallback] touch:`, touch, `event:`, event);
+            this._seatSelectedCallback(this._seatNumber);
         },
     });
 

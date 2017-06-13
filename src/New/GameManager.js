@@ -291,6 +291,23 @@ const GameManager = function () {
         );
     }
 
+    function roomSelected (joinPrefs) {
+        console.log("roomSelected:", joinPrefs);
+        WaitingPanel.showPanel();
+        let prom = null;
+        if (!joinPrefs.serverUrl || !joinPrefs.roomId) {
+            // Treat this as an express join
+            prom = ClientServerConnect.joinGame(_currentScene.gameName, null, joinPrefs.singlePlay ? TableType.SINGLE : TableType.MULTIPLE);
+        } else {
+            // Server and room were specified
+            prom = ClientServerConnect.joinGameInSpecificRoom(joinPrefs.serverUrl, joinPrefs.roomId, joinPrefs.slot);
+        }
+        prom.catch(error => {
+            _lobbyManager.resetView();
+            console.log(error);
+        });
+    }
+
     function isCurrentPlayer (playerId) {
         return playerId === _playerId;
     }
@@ -382,6 +399,7 @@ const GameManager = function () {
         getPlayerData: getPlayerData,
         enterSeatSelectionScene : enterSeatSelectionScene,
         seatSelected : seatSelected,
+        roomSelected: roomSelected,
 
         exitToLobby : exitToLobby,
 

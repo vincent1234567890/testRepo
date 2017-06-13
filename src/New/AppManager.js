@@ -38,14 +38,19 @@ const AppManager = (function () {
         //_currentScene = new SeatSelectionScene(gameSelection, playerData, onSeatSelected);
 
         // New table selection code:
-        _currentScene = new ef.TableSelectionScene(gameSelection, playerData, onSeatSelected);
+        const lobbyType = gameSelection;
+        const selectionMadeCallback = (joinPrefs) => {
+            joinPrefs.scene = lobbyType;
+            onRoomSelected(joinPrefs);
+        };
+
+        _currentScene = new ef.TableSelectionScene(gameSelection, playerData, selectionMadeCallback);
         cc.director.pushScene(_currentScene);
         GameManager.enterSeatSelectionScene(_currentScene);
 
         ClientServerConnect.getListOfRoomsByServer().then(listOfRoomsByServer => {
             console.log("listOfRoomsByServer:", listOfRoomsByServer);
             // Prepare the rooms for passing to TableSelectionScene
-            const lobbyType = gameSelection;
             const allRoomStates = [];
             listOfRoomsByServer.forEach(server => {
                 server.rooms.forEach(room => {
@@ -64,6 +69,10 @@ const AppManager = (function () {
 
     function onSeatSelected(type,seat){
         GameManager.seatSelected(type,seat);
+    }
+
+    function onRoomSelected (joinPrefs) {
+        GameManager.roomSelected(joinPrefs);
     }
 
     function goBackToLobby(){
