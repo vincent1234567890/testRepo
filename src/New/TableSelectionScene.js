@@ -134,7 +134,7 @@ const TableType = {
             pnTableListBg.addChild(spLobbyType);
 
             //remain seats
-            const lbRemainSeats = this._lbRemainSeats = new cc.LabelTTF("剩余88个吉位", "Arial", 22);
+            const lbRemainSeats = this._lbRemainSeats = new cc.LabelTTF("", "Arial", 22);
             lbRemainSeats.setAnchorPoint(1, 0.5);
             pnTableListBg.addChild(lbRemainSeats);
             lbRemainSeats.setPosition(szTableListBg.width - 38, szTableListBg.height - 35);
@@ -239,7 +239,7 @@ const TableType = {
 
                 // Count free seats (of correct type)
                 const freeSeats = getFreeSeatsCount(roomStatesToShow);
-                this._lbRemainSeats.setString(String(freeSeats));
+                this._lbRemainSeats.setString("剩余" + String(freeSeats) + "个吉位");
 
                 // Update the state of existing room sprites (and append new sprites if needed)
                 this._pnTableList.updateRoomStates(roomStatesToShow);
