@@ -16,6 +16,8 @@ const TableType = {
         _pnNotification: null,
         _pnTableListPanel: null,
 
+        _updateIntervalId: null,
+
         ctor: function (lobbyType, playerData, selectionMadeCallback) {
             cc.Scene.prototype.ctor.call(this);
             this._className = "TableSelectionScene";
@@ -52,8 +54,9 @@ const TableType = {
             spBtmBackground.setPosition(cc.visibleRect.center.x, cc.visibleRect.bottom.y);
 
             //back button
-            const btnBack = GUIFunctions.createButton(ReferenceName.SeatBackBtn, ReferenceName.SeatBackBtnSelected, function () {
+            const btnBack = GUIFunctions.createButton(ReferenceName.SeatBackBtn, ReferenceName.SeatBackBtnSelected, () => {
                 //back to Lobby
+                // No need to call stopUpdateInterval() here, because exitToLobby() calls popToSceneStackLevel() which calls cleanup().
                 GameManager.exitToLobby();
             });
             this.addChild(btnBack);
@@ -74,8 +77,19 @@ const TableType = {
             this.addChild(pnJackpot);
             pnJackpot.setPosition(cc.visibleRect.center.x, cc.visibleRect.top.y - 102);
 
+            const selectionMadeCallbackForChildren = (joinPrefs) => {
+                this.stopUpdateInterval();
+                // Or we could do this, but that will briefly display the lobby while we are connecting while we are connecting to the game.
+                //cc.director.popToSceneStackLevel(1);
+
+                selectionMadeCallback(joinPrefs);
+
+                // @todo We might fail to join the selected room, e.g. because another player took the seat just 1ms before us.
+                // In that case, we should probably return to the TableSelectionScene so the player can try again.
+            };
+
             //table list layer.
-            const tableListPanel = this._pnTableListPanel = new ef.TableListLayer(lobbyType, selectionMadeCallback);
+            const tableListPanel = this._pnTableListPanel = new ef.TableListLayer(lobbyType, selectionMadeCallbackForChildren);
             this.addChild(tableListPanel);
 
             //notification panel.
@@ -83,6 +97,38 @@ const TableType = {
             pnNotification.setPosition(cc.visibleRect.center.x + 226, cc.visibleRect.top.y - 218);
             this.addChild(pnNotification);
             pnNotification.showNotification("Hello, this is an Elsa's message for testing notification................");
+
+            this.fetchUpdate();
+            this.startUpdateInterval();
+        },
+
+        fetchUpdate: function () {
+            ClientServerConnect.getListOfRoomsByServer().then(listOfRoomsByServer => {
+                //console.log("listOfRoomsByServer:", listOfRoomsByServer);
+                // Prepare and flatten the room data before passing it to the TableListLayer
+                const allRoomStates = [];
+                listOfRoomsByServer.forEach(server => {
+                    server.rooms.forEach(room => {
+                        room.server = server;
+                        allRoomStates.push(room);
+                    });
+                });
+                this.updateRoomStates(allRoomStates);
+            }).catch(console.error);
+        },
+
+        startUpdateInterval: function () {
+            this._updateIntervalId = setInterval(this.fetchUpdate.bind(this), 2000);
+        },
+
+        stopUpdateInterval: function () {
+            clearInterval(this._updateIntervalId);
+        },
+
+        cleanup: function () {
+            console.log(`Cleaning up TableSelectionScene`);
+            this._super();
+            this.stopUpdateInterval();
         },
 
         updateRoomStates: function (roomStates) {

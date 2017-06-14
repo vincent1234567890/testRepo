@@ -46,22 +46,6 @@ const AppManager = (function () {
         _currentScene = new ef.TableSelectionScene(gameSelection, playerData, selectionMadeCallback);
         cc.director.pushScene(_currentScene);
         GameManager.enterSeatSelectionScene(_currentScene);
-
-        // @todo We should update the list regularly, until the callback is called, or the selection scene is abandoned (btnBack calls exitToLobby)
-        ClientServerConnect.getListOfRoomsByServer().then(listOfRoomsByServer => {
-            console.log("listOfRoomsByServer:", listOfRoomsByServer);
-            // Prepare the rooms for passing to TableSelectionScene
-            const allRoomStates = [];
-            listOfRoomsByServer.forEach(server => {
-                server.rooms.forEach(room => {
-                    room.server = server;
-                    allRoomStates.push(room);
-                });
-            });
-            if (_currentScene instanceof ef.TableSelectionScene) {
-                _currentScene.updateRoomStates(allRoomStates);
-            }
-        }).catch(console.error);
     }
 
     function onSeatSelected(type,seat){
