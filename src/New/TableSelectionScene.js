@@ -426,7 +426,7 @@ const TableType = {
             lbTitle.setPosition(szContent.width * 0.5, szContent.height - 38);
 
             const seatSelectedCallback = (seatNumber) => {
-                selectionMadeCallback({roomId: roomId, serverUrl: 'ws://' + this._roomState.server.ipAddress, slot: seatNumber, singlePlay: this._roomState.singlePlay});
+                this.makeSelection({slot: seatNumber});
             };
 
             //seat1
@@ -507,7 +507,16 @@ const TableType = {
 
         executeClickCallback: function (touch, event) {
             //console.warn(`[TableSprite:executeClickCallback] touch:`, touch, `event:`, event);
-            this._selectionMadeCallback({roomId: this._roomId, serverUrl: 'ws://' + this._roomState.server.ipAddress, singlePlay: this._roomState.singlePlay});
+            this.makeSelection({});
+        },
+
+        makeSelection: function (joinPrefs) {
+            joinPrefs = Object.assign({}, joinPrefs, {
+                roomId: this._roomId,
+                serverUrl: 'ws://' + this._roomState.server.ipAddress,
+                singlePlay: this._roomState.singlePlay
+            });
+            this._selectionMadeCallback(joinPrefs);
         },
     });
 
