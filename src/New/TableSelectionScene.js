@@ -205,18 +205,33 @@ const TableType = {
 
         updateRoomStates: function (roomStates) {
             this._roomStates = roomStates;
-            this._askTableListToUpdateRoomStates();
+            this._updateView();
         },
 
         _rerenderRooms: function () {
             this._pnTableList.clearAllTables();
-            this._askTableListToUpdateRoomStates();
+            this._updateView();
         },
 
-        _askTableListToUpdateRoomStates: function () {
+        _updateView: function () {
             if (this._roomStates) {
+                // Select only those rooms we should display for this tab
                 const tableType = this.getSelectedTableType();
-                this._pnTableList.updateRoomStates(this._roomStates, tableType);
+                const roomHasCorrectType = roomState => {
+                    if (tableType === TableType.SINGLE) {
+                        return roomState.singlePlay;
+                    } else {
+                        return !roomState.singlePlay;
+                    }
+                };
+                const roomStatesToShow = this._roomStates.filter(roomHasCorrectType);
+
+                // Count free seats (of correct type)
+                const freeSeats = getFreeSeatsCount(roomStatesToShow);
+                this._lbRemainSeats.setString(String(freeSeats));
+
+                // Update the state of existing room sprites (and append new sprites if needed)
+                this._pnTableList.updateRoomStates(roomStatesToShow);
             }
         },
     });
@@ -340,31 +355,21 @@ const TableType = {
         },
 
         clearAllTables: function () {
-            Object.values(this._tableSpritesMap).forEach(tableSprite => {
+            Object_values(this._tableSpritesMap).forEach(tableSprite => {
                 this.removeChild(tableSprite);
             });
             this._tableSpritesMap = {};
         },
 
-        updateRoomStates: function (roomStates, tableType) {
-            // Select only those rooms we should display for this tab
-            const roomHasCorrectType = roomState => {
-                if (tableType === TableType.SINGLE) {
-                    return roomState.singlePlay;
-                } else {
-                    return !roomState.singlePlay;
-                }
-            };
-            const roomStatesToShow = roomStates.filter(roomHasCorrectType);
-
+        updateRoomStates: function (roomStates) {
             // Sort rooms into ascending numerical order
             const getRoomNum = room => Number(room.roomTitle.replace(/^.*-[SMsm]?/, ''));
             const sortRooms = (a, b) => {
                 return getRoomNum(a) - getRoomNum(b);
             };
-            roomStatesToShow.sort(sortRooms);
+            roomStates.sort(sortRooms);
 
-            roomStatesToShow.forEach(roomState => {
+            roomStates.forEach(roomState => {
                 //const roomTitle = roomState.roomTitle;
                 const roomId = roomState.roomId;
                 if (!this._tableSpritesMap[roomId]) {
@@ -478,7 +483,7 @@ const TableType = {
         onMouseOverIn: function (mouseData) {
             if (!this._isMouseOverIn) {
                 this._isMouseOverIn = true;
-                if (!this.isFull()) {
+                if (!roomIsFull(this._roomState)) {
                     this._spGlow.setVisible(true);
                 }
             }
@@ -503,18 +508,7 @@ const TableType = {
             for (let i = 0; i < 4; i++) {
                 const seatState = roomState.playersBySlot[i];
                 const seatSprite = this['_spSeat' + (i + 1)];
-                seatSprite.setSeatPlayerState(this, seatState);
-            }
-        },
-
-        isFull: function () {
-            const roomState = this._roomState;
-
-            const playerCount = roomState.playersBySlot.filter(p => p != null).length;
-            if (roomState.singlePlay) {
-                return playerCount > 0;
-            } else {
-                return playerCount >= 4;
+                seatSprite.setSeatPlayerState(roomState, seatState);
             }
         },
 
@@ -528,7 +522,7 @@ const TableType = {
         },
 
         makeSelection: function (joinPrefs) {
-            if (this.isFull()) {
+            if (roomIsFull(this._roomState)) {
                 // Cannot join this room
                 return;
             }
@@ -604,8 +598,8 @@ const TableType = {
             }
         },
 
-        setSeatPlayerState: function (tableSprite, seatState) {
-            const tableIsFull = tableSprite.isFull();
+        setSeatPlayerState: function (roomState, seatState) {
+            const tableIsFull = roomIsFull(roomState);
             this._playerInfo = seatState;
             if (seatState && seatState.name) {
                 // Shorten really long names
@@ -636,6 +630,34 @@ const TableType = {
             this._seatSelectedCallback(this._seatNumber);
         },
     });
+
+
+    // === Library functions === //
+
+    const Object_values = (obj) => Object.keys(obj).map(key => obj[key]);
+
+    function roomIsFull (roomState) {
+        const playerCount = roomState.playersBySlot.filter(p => p != null).length;
+        if (roomState.singlePlay) {
+            return playerCount > 0;
+        } else {
+            return playerCount >= 4;
+        }
+    }
+
+    function getFreeSeatsCount (roomStates) {
+        let count = 0;
+        roomStates.forEach(roomState => {
+            if (!roomIsFull(roomState)) {
+                for (let i = 0; i < 4; i++) {
+                    if (roomState.playersBySlot[i] == null) {
+                        count++;
+                    }
+                }
+            }
+        });
+        return count;
+    }
 
 })(ef);
 
