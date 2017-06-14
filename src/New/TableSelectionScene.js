@@ -218,6 +218,9 @@ const TableType = {
                 // Select only those rooms we should display for this tab
                 const tableType = this.getSelectedTableType();
                 const roomHasCorrectType = roomState => {
+                    if (roomState.sceneName !== this._lobbyType) {
+                        return false;
+                    }
                     if (tableType === TableType.SINGLE) {
                         return roomState.singlePlay;
                     } else {

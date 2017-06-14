@@ -54,10 +54,8 @@ const AppManager = (function () {
             const allRoomStates = [];
             listOfRoomsByServer.forEach(server => {
                 server.rooms.forEach(room => {
-                    if (room.sceneName === lobbyType) {
-                        room.server = server;
-                        allRoomStates.push(room);
-                    }
+                    room.server = server;
+                    allRoomStates.push(room);
                 });
             });
             if (_currentScene instanceof ef.TableSelectionScene) {
