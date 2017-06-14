@@ -204,7 +204,15 @@ const TableType = {
         },
 
         updateRoomStates: function (roomStates) {
+            // Sort rooms into ascending numerical order
+            const getRoomNum = room => Number(room.roomTitle.replace(/^.*-[SMsm]?/, ''));
+            const sortRooms = (a, b) => {
+                return getRoomNum(a) - getRoomNum(b);
+            };
+            roomStates.sort(sortRooms);
+
             this._roomStates = roomStates;
+
             this._updateView();
         },
 
@@ -349,13 +357,13 @@ const TableType = {
 
         },
 
-        setLobbyType: function (lobbyType) {
-            this._lobbyType = lobbyType;
-        },
-
-        setTableType: function (tableType) {
-            this._tableType = tableType;
-        },
+        //setLobbyType: function (lobbyType) {
+        //    this._lobbyType = lobbyType;
+        //},
+        //
+        //setTableType: function (tableType) {
+        //    this._tableType = tableType;
+        //},
 
         clearAllTables: function () {
             Object_values(this._tableSpritesMap).forEach(tableSprite => {
@@ -365,15 +373,7 @@ const TableType = {
         },
 
         updateRoomStates: function (roomStates) {
-            // Sort rooms into ascending numerical order
-            const getRoomNum = room => Number(room.roomTitle.replace(/^.*-[SMsm]?/, ''));
-            const sortRooms = (a, b) => {
-                return getRoomNum(a) - getRoomNum(b);
-            };
-            roomStates.sort(sortRooms);
-
             roomStates.forEach(roomState => {
-                //const roomTitle = roomState.roomTitle;
                 const roomId = roomState.roomId;
                 if (!this._tableSpritesMap[roomId]) {
                     const newTableSprite = new ef.TableSprite(this._selectionMadeCallback, roomId);
