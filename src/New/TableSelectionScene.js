@@ -144,7 +144,10 @@ const TableType = {
                 "#SS_YellowHover.png", "#SS_ExpressChinese.png");
             btnExpress.setPosition(90, szTableListBg.height - 35);
             pnTableListBg.addChild(btnExpress);
-            const expressButtonClicked = () => selectionMadeCallback({});
+            const expressButtonClicked = () => {
+                const singlePlay = this.getSelectedTableType === TableType.SINGLE;
+                selectionMadeCallback({singlePlay});
+            };
             btnExpress.setClickHandler(expressButtonClicked, this);
 
             //onlookers button
