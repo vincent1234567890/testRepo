@@ -475,7 +475,9 @@ const TableType = {
         onMouseOverIn: function (mouseData) {
             if (!this._isMouseOverIn) {
                 this._isMouseOverIn = true;
-                this._spGlow.setVisible(true);
+                if (!this.isFull()) {
+                    this._spGlow.setVisible(true);
+                }
             }
         },
 
@@ -496,8 +498,20 @@ const TableType = {
             // @todo Apply room locked/unlocked state
 
             for (let i = 0; i < 4; i++) {
+                const seatState = roomState.playersBySlot[i];
                 const seatSprite = this['_spSeat' + (i + 1)];
-                seatSprite.setSeatPlayerState(roomState.playersBySlot[i]);
+                seatSprite.setSeatPlayerState(this, seatState);
+            }
+        },
+
+        isFull: function () {
+            const roomState = this._roomState;
+
+            const playerCount = roomState.playersBySlot.filter(p => p != null).length;
+            if (roomState.singlePlay) {
+                return playerCount > 0;
+            } else {
+                return playerCount >= 4;
             }
         },
 
@@ -507,14 +521,20 @@ const TableType = {
 
         executeClickCallback: function (touch, event) {
             //console.warn(`[TableSprite:executeClickCallback] touch:`, touch, `event:`, event);
-            this.makeSelection({});
+            this.makeSelection();
         },
 
         makeSelection: function (joinPrefs) {
+            if (this.isFull()) {
+                // Cannot join this room
+                return;
+            }
+            const roomState = this._roomState;
             joinPrefs = Object.assign({}, joinPrefs, {
-                roomId: this._roomId,
-                serverUrl: 'ws://' + this._roomState.server.ipAddress,
-                singlePlay: this._roomState.singlePlay
+                roomId: roomState.roomId,
+                serverUrl: 'ws://' + roomState.server.ipAddress,
+                // This is redundant, since we are selecting the specific room by roomId
+                //singlePlay: roomState.singlePlay
             });
             this._selectionMadeCallback(joinPrefs);
         },
@@ -581,7 +601,8 @@ const TableType = {
             }
         },
 
-        setSeatPlayerState: function (seatState) {
+        setSeatPlayerState: function (tableSprite, seatState) {
+            const tableIsFull = tableSprite.isFull();
             this._playerInfo = seatState;
             if (seatState && seatState.name) {
                 // Shorten really long names
