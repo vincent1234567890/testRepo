@@ -607,16 +607,20 @@ const TableType = {
             if (seatState && seatState.name) {
                 // Shorten really long names
                 // @todo Can we get cocos to truncate the name for us?
-                // The maximum length really depends on the size of the chars.  E.g. 'MMMM' is wider than versus 'llll'
+                // The maximum length really depends on the size of the chars.  E.g. 'MMMM' is wider than 'llll'
                 let nameToShow = seatState.name;
                 if (nameToShow.length > 14) {
                     nameToShow = nameToShow.substring(0, 12) + "..";
                 }
-                this._lbPlayerName.setString(nameToShow);
                 this.setVisible(true);
+                this._spPlayerBase.setVisible(true);
+                this._lbPlayerName.setVisible(true);
+                this._lbPlayerName.setString(nameToShow);
             } else {
+                this.setVisible(tableIsFull);
                 this._lbPlayerName.setString('-');
-                this.setVisible(false);
+                this._spPlayerBase.setVisible(false);
+                this._lbPlayerName.setVisible(false);
             }
         },
 
