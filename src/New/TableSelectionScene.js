@@ -83,9 +83,6 @@ const TableType = {
                 //cc.director.popToSceneStackLevel(1);
 
                 selectionMadeCallback(joinPrefs);
-
-                // @todo We might fail to join the selected room, e.g. because another player took the seat just 1ms before us.
-                // In that case, we should probably return to the TableSelectionScene so the player can try again.
             };
 
             //table list layer.

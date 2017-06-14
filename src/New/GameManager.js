@@ -302,9 +302,9 @@ const GameManager = function () {
             // Server and room were specified
             prom = ClientServerConnect.joinGameInSpecificRoom(joinPrefs.serverUrl, joinPrefs.roomId, joinPrefs.slot);
         }
-        prom.catch(error => {
+        return prom.catch(error => {
             _lobbyManager.resetView();
-            console.log(error);
+            throw error;
         });
     }
 

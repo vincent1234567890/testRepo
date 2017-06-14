@@ -40,7 +40,15 @@ const AppManager = (function () {
         const lobbyType = gameSelection;
         const selectionMadeCallback = (joinPrefs) => {
             joinPrefs.scene = lobbyType;
-            onRoomSelected(joinPrefs);
+            onRoomSelected(joinPrefs).catch(error => {
+                // Sometimes even in healthy conditions we can fail to join the selected game,
+                // e.g. because another player took the seat just 1ms before us.
+                console.error("Failed to join game:", error);
+                // Offer the seat selection screen again:
+                console.log("Showing seat selection scene again");
+                cc.director.popToSceneStackLevel(1);
+                goToSeatSelection(gameSelection, playerData);
+            }).catch(console.error);
         };
 
         _currentScene = new ef.TableSelectionScene(gameSelection, playerData, selectionMadeCallback);
@@ -53,7 +61,7 @@ const AppManager = (function () {
     }
 
     function onRoomSelected (joinPrefs) {
-        GameManager.roomSelected(joinPrefs);
+        return GameManager.roomSelected(joinPrefs);
     }
 
     function goBackToLobby(){
