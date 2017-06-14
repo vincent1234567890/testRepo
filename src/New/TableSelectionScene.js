@@ -636,8 +636,12 @@ const TableType = {
 
     const Object_values = (obj) => Object.keys(obj).map(key => obj[key]);
 
+    function countPlayersInRoom (roomState) {
+        return roomState.playersBySlot.filter(p => p != null).length;
+    }
+
     function roomIsFull (roomState) {
-        const playerCount = roomState.playersBySlot.filter(p => p != null).length;
+        const playerCount = countPlayersInRoom(roomState);
         if (roomState.singlePlay) {
             return playerCount > 0;
         } else {
@@ -649,10 +653,11 @@ const TableType = {
         let count = 0;
         roomStates.forEach(roomState => {
             if (!roomIsFull(roomState)) {
-                for (let i = 0; i < 4; i++) {
-                    if (roomState.playersBySlot[i] == null) {
-                        count++;
-                    }
+                if (roomState.singlePlay) {
+                    count++;
+                } else {
+                    const freeSeatsInRoom = 4 - countPlayersInRoom(roomState);
+                    count += freeSeatsInRoom;
                 }
             }
         });
