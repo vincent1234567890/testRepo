@@ -202,7 +202,9 @@ const GameView = function () {
         if (pos) {
             const now = _fishGameArena.getGameTime();
             const timeSinceLastShot = now - _lastShotTime;
-            if (timeSinceLastShot < _gameConfig.shootInterval) {
+            // When auto-firing, we add a small delay so that we won't receive so many "Your gun is still reloading" messages from the server.
+            const lagBuffer = _autoFiring ? 40 : 0;
+            if (timeSinceLastShot < _gameConfig.shootInterval + lagBuffer) {
                 return;
             }
 
