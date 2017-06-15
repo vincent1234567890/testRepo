@@ -14,7 +14,7 @@ const AppManager = (function () {
         _currentScene = new cc.Scene();
         cc.director.runScene(_currentScene);
         GameManager.initialiseLogin(_currentScene);
-        GameManager.goToLobby(goBackToLobby,goToSeatSelection);
+        GameManager.goToLobby(goBackToLobby, goToSeatSelection);
     }
 
     function goToGame(fishGameArena){
@@ -40,30 +40,20 @@ const AppManager = (function () {
         const lobbyType = gameSelection;
         const selectionMadeCallback = (joinPrefs) => {
             joinPrefs.scene = lobbyType;
-            onRoomSelected(joinPrefs);
+            onRoomSelected(joinPrefs).catch(error => {
+                // Sometimes even in healthy conditions we can fail to join the selected game,
+                // e.g. because another player took the seat just 1ms before us.
+                console.error("Failed to join game:", error);
+                // Offer the seat selection screen again:
+                console.log("Showing seat selection scene again");
+                cc.director.popToSceneStackLevel(1);
+                goToSeatSelection(gameSelection, playerData);
+            }).catch(console.error);
         };
 
-        _currentScene = new ef.TableSelectionScene(gameSelection, playerData, selectionMadeCallback);
+        _currentScene = new ef.TableSelectionScene(gameSelection, playerData, GameManager.getChannelType(), selectionMadeCallback);
         cc.director.pushScene(_currentScene);
         GameManager.enterSeatSelectionScene(_currentScene);
-
-        // @todo We should update the list regularly, until the callback is called, or the selection scene is abandoned (btnBack calls exitToLobby)
-        ClientServerConnect.getListOfRoomsByServer().then(listOfRoomsByServer => {
-            console.log("listOfRoomsByServer:", listOfRoomsByServer);
-            // Prepare the rooms for passing to TableSelectionScene
-            const allRoomStates = [];
-            listOfRoomsByServer.forEach(server => {
-                server.rooms.forEach(room => {
-                    if (room.sceneName === lobbyType) {
-                        room.server = server;
-                        allRoomStates.push(room);
-                    }
-                });
-            });
-            if (_currentScene instanceof ef.TableSelectionScene) {
-                _currentScene.updateRoomStates(allRoomStates);
-            }
-        }).catch(console.error);
     }
 
     function onSeatSelected(type,seat){
@@ -71,7 +61,7 @@ const AppManager = (function () {
     }
 
     function onRoomSelected (joinPrefs) {
-        GameManager.roomSelected(joinPrefs);
+        return GameManager.roomSelected(joinPrefs);
     }
 
     function goBackToLobby(){

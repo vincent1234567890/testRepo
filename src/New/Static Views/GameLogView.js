@@ -383,14 +383,14 @@ const GameLogView = (function () {
                 }
 
                 const date = new Date(itemData.startTime);
-                const roundIdText = itemData.id + "-"
+                const roundIdText = itemData.roomTitle.replace(/^[^:]*:/, '') + "-"
                     + (date.getYear()-100).toLocaleString('en-US', {minimumIntegerDigits: 2})
                     + (date.getMonth()+1).toLocaleString('en-US', {minimumIntegerDigits: 2})
                     + date.getDate().toLocaleString('en-US', {minimumIntegerDigits: 2})
                     + date.getHours().toLocaleString('en-US', {minimumIntegerDigits: 2})
                     + date.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2});
 
-                const roundId = new cc.LabelTTF(roundIdText, "Microsoft YaHei", 20, cc.size(200, rowHeight), cc.TEXT_ALIGNMENT_RIGHT);
+                const roundId = new cc.LabelTTF(roundIdText, "Microsoft YaHei", 20, cc.size(220, rowHeight), cc.TEXT_ALIGNMENT_RIGHT);
                 roundId._setFontWeight("bold");
                 roundId.setFontFillColor(new cc.Color(0, 0, 0, 255));
                 roundId.setVerticalAlignment(cc.VERTICAL_TEXT_ALIGNMENT_CENTER);
@@ -429,7 +429,7 @@ const GameLogView = (function () {
 
                 roundId.setAnchorPoint(0, 0.5);
 
-                roundId.setPosition(15, listEntryPos.y);
+                roundId.setPosition(5, listEntryPos.y);
                 totalSpend.setPosition(300, listEntryPos.y);
                 totalRevenue.setPosition(450, listEntryPos.y);
                 totalProfit.setPosition(600, listEntryPos.y);
@@ -478,7 +478,7 @@ const GameLogView = (function () {
         const data = gameSummaryData.data;
         for (let i = 0; i < data.length; i++) {
             const listItemPrefab = new gameLogListItemPrefab({
-                id: data[i]._id.roomTitle,
+                roomTitle: data[i]._id.roomTitle,
                 totalSpent: data[i].totalConsumption,
                 totalRevenue: data[i].totalBonus,
                 startTime: data[i].startTime,

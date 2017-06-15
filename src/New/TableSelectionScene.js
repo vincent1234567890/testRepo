@@ -16,7 +16,9 @@ const TableType = {
         _pnNotification: null,
         _pnTableListPanel: null,
 
-        ctor: function (lobbyType, playerData, selectionMadeCallback) {
+        _updateIntervalId: null,
+
+        ctor: function (lobbyType, playerData, channelType, selectionMadeCallback) {
             cc.Scene.prototype.ctor.call(this);
             this._className = "TableSelectionScene";
 
@@ -52,8 +54,9 @@ const TableType = {
             spBtmBackground.setPosition(cc.visibleRect.center.x, cc.visibleRect.bottom.y);
 
             //back button
-            const btnBack = GUIFunctions.createButton(ReferenceName.SeatBackBtn, ReferenceName.SeatBackBtnSelected, function () {
+            const btnBack = GUIFunctions.createButton(ReferenceName.SeatBackBtn, ReferenceName.SeatBackBtnSelected, () => {
                 //back to Lobby
+                // No need to call stopUpdateInterval() here, because exitToLobby() calls popToSceneStackLevel() which calls cleanup().
                 GameManager.exitToLobby();
             });
             this.addChild(btnBack);
@@ -74,8 +77,16 @@ const TableType = {
             this.addChild(pnJackpot);
             pnJackpot.setPosition(cc.visibleRect.center.x, cc.visibleRect.top.y - 102);
 
+            const selectionMadeCallbackForChildren = (joinPrefs) => {
+                this.stopUpdateInterval();
+                // Or we could do this, but that will briefly display the lobby while we are connecting while we are connecting to the game.
+                //cc.director.popToSceneStackLevel(1);
+
+                selectionMadeCallback(joinPrefs);
+            };
+
             //table list layer.
-            const tableListPanel = this._pnTableListPanel = new ef.TableListLayer(lobbyType, selectionMadeCallback);
+            const tableListPanel = this._pnTableListPanel = new ef.TableListLayer(lobbyType, channelType, selectionMadeCallbackForChildren);
             this.addChild(tableListPanel);
 
             //notification panel.
@@ -83,6 +94,38 @@ const TableType = {
             pnNotification.setPosition(cc.visibleRect.center.x + 226, cc.visibleRect.top.y - 218);
             this.addChild(pnNotification);
             pnNotification.showNotification("Hello, this is an Elsa's message for testing notification................");
+
+            this.fetchUpdate();
+            this.startUpdateInterval();
+        },
+
+        fetchUpdate: function () {
+            ClientServerConnect.getListOfRoomsByServer().then(listOfRoomsByServer => {
+                //console.log("listOfRoomsByServer:", listOfRoomsByServer);
+                // Prepare and flatten the room data before passing it to the TableListLayer
+                const allRoomStates = [];
+                listOfRoomsByServer.forEach(server => {
+                    server.rooms.forEach(room => {
+                        room.server = server;
+                        allRoomStates.push(room);
+                    });
+                });
+                this.updateRoomStates(allRoomStates);
+            }).catch(console.error);
+        },
+
+        startUpdateInterval: function () {
+            this._updateIntervalId = setInterval(this.fetchUpdate.bind(this), 2000);
+        },
+
+        stopUpdateInterval: function () {
+            clearInterval(this._updateIntervalId);
+        },
+
+        cleanup: function () {
+            console.log(`Cleaning up TableSelectionScene`);
+            this._super();
+            this.stopUpdateInterval();
         },
 
         updateRoomStates: function (roomStates) {
@@ -92,6 +135,8 @@ const TableType = {
 
     ef.TableListLayer = cc.Layer.extend({
         _lobbyType: null,
+        _playerChannelType: null,
+
         _btnMultiple: null,
         _btnSolo: null,
         _lbRemainSeats: null,
@@ -105,10 +150,12 @@ const TableType = {
 
         _roomStates: null,
 
-        ctor: function (lobbyType, selectionMadeCallback) {
+        ctor: function (lobbyType, channelType, selectionMadeCallback) {
             cc.Layer.prototype.ctor.call(this);
 
-            this._lobbyType = lobbyType || "1X";
+            this._lobbyType = lobbyType || '1X';
+            this._playerChannelType = channelType || '';
+
             //button
             const btnMultiple = this._btnMultiple = new ef.LayerColorButton("#SSMultiplayerChinese.png", 220, 55);
             this.addChild(btnMultiple);
@@ -134,7 +181,7 @@ const TableType = {
             pnTableListBg.addChild(spLobbyType);
 
             //remain seats
-            const lbRemainSeats = this._lbRemainSeats = new cc.LabelTTF("剩余88个吉位", "Arial", 22);
+            const lbRemainSeats = this._lbRemainSeats = new cc.LabelTTF("", "Arial", 22);
             lbRemainSeats.setAnchorPoint(1, 0.5);
             pnTableListBg.addChild(lbRemainSeats);
             lbRemainSeats.setPosition(szTableListBg.width - 38, szTableListBg.height - 35);
@@ -144,13 +191,18 @@ const TableType = {
                 "#SS_YellowHover.png", "#SS_ExpressChinese.png");
             btnExpress.setPosition(90, szTableListBg.height - 35);
             pnTableListBg.addChild(btnExpress);
-            const expressButtonClicked = () => selectionMadeCallback({});
+            const expressButtonClicked = () => {
+                const singlePlay = this.getSelectedTableType === TableType.SINGLE;
+                selectionMadeCallback({singlePlay});
+            };
             btnExpress.setClickHandler(expressButtonClicked, this);
 
             //onlookers button
             const btnSpectate = this._btnSpectate = new SpectateButton();
             btnSpectate.setPosition(220, szTableListBg.height - 35);
             pnTableListBg.addChild(btnSpectate);
+
+            // @todo We need to make the TableListPanel scrollable somehow
 
             //table list panel
             const pnTableList = this._pnTableList = new ef.TableListPanel(this._lobbyType, this._tableType, selectionMadeCallback);
@@ -201,19 +253,50 @@ const TableType = {
         },
 
         updateRoomStates: function (roomStates) {
+            // Sort rooms into ascending numerical order
+            const getRoomNum = room => Number(room.roomTitle.replace(/^.*-[SMsm]?/, ''));
+            const sortRooms = (a, b) => {
+                return getRoomNum(a) - getRoomNum(b);
+            };
+            roomStates.sort(sortRooms);
+
             this._roomStates = roomStates;
-            this._askTableListToUpdateRoomStates();
+
+            this._updateView();
         },
 
         _rerenderRooms: function () {
             this._pnTableList.clearAllTables();
-            this._askTableListToUpdateRoomStates();
+            this._updateView();
         },
 
-        _askTableListToUpdateRoomStates: function () {
+        _updateView: function () {
             if (this._roomStates) {
+                // Select only those rooms we should display for this tab
                 const tableType = this.getSelectedTableType();
-                this._pnTableList.updateRoomStates(this._roomStates, tableType);
+                const roomHasCorrectType = roomState => {
+                    if (roomState.sceneName !== this._lobbyType) {
+                        return false;
+                    }
+                    const roomChannelType = roomState.roomTitle.split(':')[0];
+                    //console.log("roomTitle, roomChannelType, _playerChannelType:", roomState.roomTitle, roomChannelType, this._playerChannelType);
+                    if (roomChannelType !== this._playerChannelType) {
+                        return false;
+                    }
+                    if (tableType === TableType.SINGLE) {
+                        return roomState.singlePlay;
+                    } else {
+                        return !roomState.singlePlay;
+                    }
+                };
+                const roomStatesToShow = this._roomStates.filter(roomHasCorrectType);
+
+                // Count free seats (of correct type)
+                const freeSeats = getFreeSeatsCount(roomStatesToShow);
+                this._lbRemainSeats.setString("剩余" + String(freeSeats) + "个吉位");
+
+                // Update the state of existing room sprites (and append new sprites if needed)
+                this._pnTableList.updateRoomStates(roomStatesToShow);
             }
         },
     });
@@ -328,41 +411,23 @@ const TableType = {
 
         },
 
-        setLobbyType: function (lobbyType) {
-            this._lobbyType = lobbyType;
-        },
-
-        setTableType: function (tableType) {
-            this._tableType = tableType;
-        },
+        //setLobbyType: function (lobbyType) {
+        //    this._lobbyType = lobbyType;
+        //},
+        //
+        //setTableType: function (tableType) {
+        //    this._tableType = tableType;
+        //},
 
         clearAllTables: function () {
-            Object.values(this._tableSpritesMap).forEach(tableSprite => {
+            Object_values(this._tableSpritesMap).forEach(tableSprite => {
                 this.removeChild(tableSprite);
             });
             this._tableSpritesMap = {};
         },
 
-        updateRoomStates: function (roomStates, tableType) {
-            // Select only those rooms we should display for this tab
-            const roomHasCorrectType = roomState => {
-                if (tableType === TableType.SINGLE) {
-                    return roomState.singlePlay;
-                } else {
-                    return !roomState.singlePlay;
-                }
-            };
-            const roomStatesToShow = roomStates.filter(roomHasCorrectType);
-
-            // Sort rooms into ascending numerical order
-            const getRoomNum = room => Number(room.roomTitle.replace(/^.*-[SMsm]?/, ''));
-            const sortRooms = (a, b) => {
-                return getRoomNum(a) - getRoomNum(b);
-            };
-            roomStatesToShow.sort(sortRooms);
-
-            roomStatesToShow.forEach(roomState => {
-                //const roomTitle = roomState.roomTitle;
+        updateRoomStates: function (roomStates) {
+            roomStates.forEach(roomState => {
                 const roomId = roomState.roomId;
                 if (!this._tableSpritesMap[roomId]) {
                     const newTableSprite = new ef.TableSprite(this._selectionMadeCallback, roomId);
@@ -426,7 +491,7 @@ const TableType = {
             lbTitle.setPosition(szContent.width * 0.5, szContent.height - 38);
 
             const seatSelectedCallback = (seatNumber) => {
-                selectionMadeCallback({roomId: roomId, serverUrl: 'ws://' + this._roomState.server.ipAddress, slot: seatNumber, singlePlay: this._roomState.singlePlay});
+                this.makeSelection({slot: seatNumber});
             };
 
             //seat1
@@ -475,7 +540,9 @@ const TableType = {
         onMouseOverIn: function (mouseData) {
             if (!this._isMouseOverIn) {
                 this._isMouseOverIn = true;
-                this._spGlow.setVisible(true);
+                if (!roomIsFull(this._roomState)) {
+                    this._spGlow.setVisible(true);
+                }
             }
         },
 
@@ -490,14 +557,16 @@ const TableType = {
             this._roomState = roomState;
 
             // We only want to show the room number, so we will remove the '100X-' prefix from the room title
+            //const roomTitleForDisplay = roomState.roomTitle;
             const roomTitleForDisplay = roomState.roomTitle.replace(/^[^-]*-/, '');
             this._lbTitle.setString(roomTitleForDisplay);
 
             // @todo Apply room locked/unlocked state
 
             for (let i = 0; i < 4; i++) {
+                const seatState = roomState.playersBySlot[i];
                 const seatSprite = this['_spSeat' + (i + 1)];
-                seatSprite.setSeatPlayerState(roomState.playersBySlot[i]);
+                seatSprite.setSeatPlayerState(roomState, seatState);
             }
         },
 
@@ -507,7 +576,22 @@ const TableType = {
 
         executeClickCallback: function (touch, event) {
             //console.warn(`[TableSprite:executeClickCallback] touch:`, touch, `event:`, event);
-            this._selectionMadeCallback({roomId: this._roomId, serverUrl: 'ws://' + this._roomState.server.ipAddress, singlePlay: this._roomState.singlePlay});
+            this.makeSelection();
+        },
+
+        makeSelection: function (joinPrefs) {
+            if (roomIsFull(this._roomState)) {
+                // Cannot join this room
+                return;
+            }
+            const roomState = this._roomState;
+            joinPrefs = Object.assign({}, joinPrefs, {
+                roomId: roomState.roomId,
+                serverUrl: 'ws://' + roomState.server.ipAddress,
+                // This is redundant, since we are selecting the specific room by roomId
+                //singlePlay: roomState.singlePlay
+            });
+            this._selectionMadeCallback(joinPrefs);
         },
     });
 
@@ -572,21 +656,26 @@ const TableType = {
             }
         },
 
-        setSeatPlayerState: function (seatState) {
+        setSeatPlayerState: function (roomState, seatState) {
+            const tableIsFull = roomIsFull(roomState);
             this._playerInfo = seatState;
             if (seatState && seatState.name) {
                 // Shorten really long names
                 // @todo Can we get cocos to truncate the name for us?
-                // The maximum length really depends on the size of the chars.  E.g. 'MMMM' is wider than versus 'llll'
+                // The maximum length really depends on the size of the chars.  E.g. 'MMMM' is wider than 'llll'
                 let nameToShow = seatState.name;
                 if (nameToShow.length > 14) {
                     nameToShow = nameToShow.substring(0, 12) + "..";
                 }
-                this._lbPlayerName.setString(nameToShow);
                 this.setVisible(true);
+                this._spPlayerBase.setVisible(true);
+                this._lbPlayerName.setVisible(true);
+                this._lbPlayerName.setString(nameToShow);
             } else {
+                this.setVisible(tableIsFull);
                 this._lbPlayerName.setString('-');
-                this.setVisible(false);
+                this._spPlayerBase.setVisible(false);
+                this._lbPlayerName.setVisible(false);
             }
         },
 
@@ -599,6 +688,39 @@ const TableType = {
             this._seatSelectedCallback(this._seatNumber);
         },
     });
+
+
+    // === Library functions === //
+
+    const Object_values = (obj) => Object.keys(obj).map(key => obj[key]);
+
+    function countPlayersInRoom (roomState) {
+        return roomState.playersBySlot.filter(p => p != null).length;
+    }
+
+    function roomIsFull (roomState) {
+        const playerCount = countPlayersInRoom(roomState);
+        if (roomState.singlePlay) {
+            return playerCount > 0;
+        } else {
+            return playerCount >= 4;
+        }
+    }
+
+    function getFreeSeatsCount (roomStates) {
+        let count = 0;
+        roomStates.forEach(roomState => {
+            if (!roomIsFull(roomState)) {
+                if (roomState.singlePlay) {
+                    count++;
+                } else {
+                    const freeSeatsInRoom = 4 - countPlayersInRoom(roomState);
+                    count += freeSeatsInRoom;
+                }
+            }
+        });
+        return count;
+    }
 
 })(ef);
 
