@@ -13,6 +13,7 @@ const GameManager = function () {
     //GameState
     let _gameConfig;
     let _playerData;
+    let _channelType;
     let _currentScene;
     let _isFishLockOn = false;
     let _fishLockOnCallback;  //terribly messy should have a gameViewModel class eventually
@@ -397,6 +398,8 @@ const GameManager = function () {
         // showPostGameStats: showPostGameStats,
         unsetLockForFishId : unsetLockForFishId,
         getPlayerData: getPlayerData,
+        setChannelType: channelType => _channelType = channelType,
+        getChannelType: () => _channelType,
         enterSeatSelectionScene : enterSeatSelectionScene,
         seatSelected : seatSelected,
         roomSelected: roomSelected,

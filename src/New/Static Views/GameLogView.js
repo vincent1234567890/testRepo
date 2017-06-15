@@ -383,7 +383,7 @@ const GameLogView = (function () {
                 }
 
                 const date = new Date(itemData.startTime);
-                const roundIdText = itemData.id + "-"
+                const roundIdText = itemData.roomTitle.replace(/^[^:]*:/, '') + "-"
                     + (date.getYear()-100).toLocaleString('en-US', {minimumIntegerDigits: 2})
                     + (date.getMonth()+1).toLocaleString('en-US', {minimumIntegerDigits: 2})
                     + date.getDate().toLocaleString('en-US', {minimumIntegerDigits: 2})
@@ -478,7 +478,7 @@ const GameLogView = (function () {
         const data = gameSummaryData.data;
         for (let i = 0; i < data.length; i++) {
             const listItemPrefab = new gameLogListItemPrefab({
-                id: data[i]._id.roomTitle,
+                roomTitle: data[i]._id.roomTitle,
                 totalSpent: data[i].totalConsumption,
                 totalRevenue: data[i].totalBonus,
                 startTime: data[i].startTime,

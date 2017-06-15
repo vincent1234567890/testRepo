@@ -14,7 +14,7 @@ const AppManager = (function () {
         _currentScene = new cc.Scene();
         cc.director.runScene(_currentScene);
         GameManager.initialiseLogin(_currentScene);
-        GameManager.goToLobby(goBackToLobby,goToSeatSelection);
+        GameManager.goToLobby(goBackToLobby, goToSeatSelection);
     }
 
     function goToGame(fishGameArena){
@@ -51,7 +51,7 @@ const AppManager = (function () {
             }).catch(console.error);
         };
 
-        _currentScene = new ef.TableSelectionScene(gameSelection, playerData, selectionMadeCallback);
+        _currentScene = new ef.TableSelectionScene(gameSelection, playerData, GameManager.getChannelType(), selectionMadeCallback);
         cc.director.pushScene(_currentScene);
         GameManager.enterSeatSelectionScene(_currentScene);
     }

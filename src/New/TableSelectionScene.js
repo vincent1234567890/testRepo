@@ -18,7 +18,7 @@ const TableType = {
 
         _updateIntervalId: null,
 
-        ctor: function (lobbyType, playerData, selectionMadeCallback) {
+        ctor: function (lobbyType, playerData, channelType, selectionMadeCallback) {
             cc.Scene.prototype.ctor.call(this);
             this._className = "TableSelectionScene";
 
@@ -86,7 +86,7 @@ const TableType = {
             };
 
             //table list layer.
-            const tableListPanel = this._pnTableListPanel = new ef.TableListLayer(lobbyType, selectionMadeCallbackForChildren);
+            const tableListPanel = this._pnTableListPanel = new ef.TableListLayer(lobbyType, channelType, selectionMadeCallbackForChildren);
             this.addChild(tableListPanel);
 
             //notification panel.
@@ -135,6 +135,8 @@ const TableType = {
 
     ef.TableListLayer = cc.Layer.extend({
         _lobbyType: null,
+        _playerChannelType: null,
+
         _btnMultiple: null,
         _btnSolo: null,
         _lbRemainSeats: null,
@@ -148,10 +150,12 @@ const TableType = {
 
         _roomStates: null,
 
-        ctor: function (lobbyType, selectionMadeCallback) {
+        ctor: function (lobbyType, channelType, selectionMadeCallback) {
             cc.Layer.prototype.ctor.call(this);
 
-            this._lobbyType = lobbyType || "1X";
+            this._lobbyType = lobbyType || '1X';
+            this._playerChannelType = channelType || '';
+
             //button
             const btnMultiple = this._btnMultiple = new ef.LayerColorButton("#SSMultiplayerChinese.png", 220, 55);
             this.addChild(btnMultiple);
@@ -272,6 +276,11 @@ const TableType = {
                 const tableType = this.getSelectedTableType();
                 const roomHasCorrectType = roomState => {
                     if (roomState.sceneName !== this._lobbyType) {
+                        return false;
+                    }
+                    const roomChannelType = roomState.roomTitle.split(':')[0];
+                    //console.log("roomTitle, roomChannelType, _playerChannelType:", roomState.roomTitle, roomChannelType, this._playerChannelType);
+                    if (roomChannelType !== this._playerChannelType) {
                         return false;
                     }
                     if (tableType === TableType.SINGLE) {
@@ -548,6 +557,7 @@ const TableType = {
             this._roomState = roomState;
 
             // We only want to show the room number, so we will remove the '100X-' prefix from the room title
+            //const roomTitleForDisplay = roomState.roomTitle;
             const roomTitleForDisplay = roomState.roomTitle.replace(/^[^-]*-/, '');
             this._lbTitle.setString(roomTitleForDisplay);
 

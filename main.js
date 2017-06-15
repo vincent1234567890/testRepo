@@ -49,6 +49,8 @@ var cocos2dApp = cc.game.onStart = function() {
                 }
             }
 
+            GameManager.setChannelType(data["channelType"]);
+
             ResourceLoader.finaliseResources();
             cc.LoadingScreen.preload(ResourceLoader.getResourceList(), function () {
                 // cc.director.runScene(new LogoScene());
