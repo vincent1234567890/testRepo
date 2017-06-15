@@ -397,7 +397,7 @@ const GameLogView = (function () {
                     + date.getHours().toLocaleString('en-US', {minimumIntegerDigits: 2})
                     + date.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2});
 
-                const roundId = new cc.LabelTTF(roundIdText, GAME_LOG_VIEW_FONT, GAME_LOG_VIEW_FONT_SIZE, cc.size(220, rowHeight), cc.TEXT_ALIGNMENT_RIGHT);
+                const roundId = new cc.LabelTTF(roundIdText, GAME_LOG_VIEW_FONT, GAME_LOG_VIEW_FONT_SIZE, cc.size(230, rowHeight), cc.TEXT_ALIGNMENT_RIGHT);
                 roundId._setFontWeight("bold");
                 roundId.setFontFillColor(new cc.Color(0, 0, 0, 255));
                 roundId.setVerticalAlignment(cc.VERTICAL_TEXT_ALIGNMENT_CENTER);
@@ -436,7 +436,7 @@ const GameLogView = (function () {
 
                 roundId.setAnchorPoint(0, 0.5);
 
-                roundId.setPosition(5, listEntryPos.y);
+                roundId.setPosition(0, listEntryPos.y);
                 totalSpend.setPosition(300, listEntryPos.y);
                 totalRevenue.setPosition(450, listEntryPos.y);
                 totalProfit.setPosition(600, listEntryPos.y);
