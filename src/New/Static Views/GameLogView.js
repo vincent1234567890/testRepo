@@ -390,7 +390,7 @@ const GameLogView = (function () {
                     + date.getHours().toLocaleString('en-US', {minimumIntegerDigits: 2})
                     + date.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2});
 
-                const roundId = new cc.LabelTTF(roundIdText, "Microsoft YaHei", 20, cc.size(200, rowHeight), cc.TEXT_ALIGNMENT_RIGHT);
+                const roundId = new cc.LabelTTF(roundIdText, "Microsoft YaHei", 20, cc.size(220, rowHeight), cc.TEXT_ALIGNMENT_RIGHT);
                 roundId._setFontWeight("bold");
                 roundId.setFontFillColor(new cc.Color(0, 0, 0, 255));
                 roundId.setVerticalAlignment(cc.VERTICAL_TEXT_ALIGNMENT_CENTER);
@@ -429,7 +429,7 @@ const GameLogView = (function () {
 
                 roundId.setAnchorPoint(0, 0.5);
 
-                roundId.setPosition(15, listEntryPos.y);
+                roundId.setPosition(5, listEntryPos.y);
                 totalSpend.setPosition(300, listEntryPos.y);
                 totalRevenue.setPosition(450, listEntryPos.y);
                 totalProfit.setPosition(600, listEntryPos.y);
