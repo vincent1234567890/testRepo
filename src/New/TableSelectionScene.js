@@ -198,6 +198,8 @@ const TableType = {
             btnSpectate.setPosition(220, szTableListBg.height - 35);
             pnTableListBg.addChild(btnSpectate);
 
+            // @todo We need to make the TableListPanel scrollable somehow
+
             //table list panel
             const pnTableList = this._pnTableList = new ef.TableListPanel(this._lobbyType, this._tableType, selectionMadeCallback);
             pnTableListBg.addChild(pnTableList);
