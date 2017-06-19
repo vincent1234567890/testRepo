@@ -1,15 +1,22 @@
 const GameLogView = (function () {
     "use strict";
     const ZORDER = 10;
+
+    //const GAME_LOG_VIEW_FONT = 'Microsoft YaHei';
+    //const GAME_LOG_VIEW_FONT_SIZE = 20;
+    const GAME_LOG_VIEW_FONT = 'Arial';
+    const GAME_LOG_VIEW_FONT_SIZE = 22;
+
     const scrollMultiplier = -2;
-    let _parent;
-    let _popup;
     const tabHeight = 600;
     const fishPosition = 500;
 
     const timePeriodShort = 1;
     const timePeriodMedium = 3;
     const timePeriodLong = 14;
+
+    let _parent;
+    let _popup;
 
     let _scrollTitleBackground;
 
@@ -390,24 +397,24 @@ const GameLogView = (function () {
                     + date.getHours().toLocaleString('en-US', {minimumIntegerDigits: 2})
                     + date.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2});
 
-                const roundId = new cc.LabelTTF(roundIdText, "Microsoft YaHei", 20, cc.size(220, rowHeight), cc.TEXT_ALIGNMENT_RIGHT);
+                const roundId = new cc.LabelTTF(roundIdText, GAME_LOG_VIEW_FONT, GAME_LOG_VIEW_FONT_SIZE, cc.size(230, rowHeight), cc.TEXT_ALIGNMENT_RIGHT);
                 roundId._setFontWeight("bold");
                 roundId.setFontFillColor(new cc.Color(0, 0, 0, 255));
                 roundId.setVerticalAlignment(cc.VERTICAL_TEXT_ALIGNMENT_CENTER);
 
-                const totalSpend = new cc.LabelTTF(currencyString(itemData.totalSpent), "Microsoft YaHei", 20, cc.size(150, rowHeight), cc.TEXT_ALIGNMENT_RIGHT);
+                const totalSpend = new cc.LabelTTF(currencyString(itemData.totalSpent), GAME_LOG_VIEW_FONT, GAME_LOG_VIEW_FONT_SIZE, cc.size(150, rowHeight), cc.TEXT_ALIGNMENT_RIGHT);
                 totalSpend._setFontWeight("bold");
                 totalSpend.setFontFillColor(new cc.Color(0, 0, 0, 255));
                 totalSpend.setHorizontalAlignment(cc.TEXT_ALIGNMENT_RIGHT);
                 totalSpend.setVerticalAlignment(cc.VERTICAL_TEXT_ALIGNMENT_CENTER);
 
-                const totalRevenue = new cc.LabelTTF(currencyString(itemData.totalRevenue), "Microsoft YaHei", 20, cc.size(150, rowHeight), cc.TEXT_ALIGNMENT_RIGHT);
+                const totalRevenue = new cc.LabelTTF(currencyString(itemData.totalRevenue), GAME_LOG_VIEW_FONT, GAME_LOG_VIEW_FONT_SIZE, cc.size(150, rowHeight), cc.TEXT_ALIGNMENT_RIGHT);
                 totalRevenue._setFontWeight("bold");
                 totalRevenue.setFontFillColor(new cc.Color(0, 0, 0, 255));
                 totalRevenue.setHorizontalAlignment(cc.TEXT_ALIGNMENT_RIGHT);
                 totalRevenue.setVerticalAlignment(cc.VERTICAL_TEXT_ALIGNMENT_CENTER);
 
-                const totalProfit = new cc.LabelTTF(currencyString(itemData.totalRevenue - itemData.totalSpent), "Microsoft YaHei", 20, cc.size(150, rowHeight), cc.TEXT_ALIGNMENT_RIGHT);
+                const totalProfit = new cc.LabelTTF(currencyString(itemData.totalRevenue - itemData.totalSpent), GAME_LOG_VIEW_FONT, GAME_LOG_VIEW_FONT_SIZE, cc.size(150, rowHeight), cc.TEXT_ALIGNMENT_RIGHT);
                 totalProfit._setFontWeight("bold");
                 totalProfit.setFontFillColor(new cc.Color(0, 0, 0, 255));
                 totalProfit.setHorizontalAlignment(cc.TEXT_ALIGNMENT_RIGHT);
@@ -415,13 +422,13 @@ const GameLogView = (function () {
 
                 const endDate = new Date(itemData.endTime);
                 const startTime = new cc.LabelTTF(date.toLocaleDateString("en-GB") + "\n" + date.toLocaleTimeString("en-GB"),
-                    "Microsoft YaHei", 16);
+                    GAME_LOG_VIEW_FONT, GAME_LOG_VIEW_FONT_SIZE - 4);
                 startTime._setFontWeight("bold");
                 startTime.setFontFillColor(new cc.Color(0, 0, 0, 255));
                 startTime.setHorizontalAlignment(cc.TEXT_ALIGNMENT_CENTER);
                 startTime.setVerticalAlignment(cc.VERTICAL_TEXT_ALIGNMENT_CENTER);
                 const endTime = new cc.LabelTTF(endDate.toLocaleDateString("en-GB") + "\n" + endDate.toLocaleTimeString("en-GB"),
-                    "Microsoft YaHei", 16);
+                    GAME_LOG_VIEW_FONT, GAME_LOG_VIEW_FONT_SIZE - 4);
                 endTime._setFontWeight("bold");
                 endTime.setFontFillColor(new cc.Color(0, 0, 0, 255));
                 endTime.setHorizontalAlignment(cc.TEXT_ALIGNMENT_CENTER);
@@ -429,7 +436,7 @@ const GameLogView = (function () {
 
                 roundId.setAnchorPoint(0, 0.5);
 
-                roundId.setPosition(5, listEntryPos.y);
+                roundId.setPosition(0, listEntryPos.y);
                 totalSpend.setPosition(300, listEntryPos.y);
                 totalRevenue.setPosition(450, listEntryPos.y);
                 totalProfit.setPosition(600, listEntryPos.y);
@@ -553,7 +560,7 @@ const GameLogView = (function () {
                 wrapper.addChild(fishSprite);
                 fishSprite.setPosition(size.width / 2, size.height / 2);
                 if (count[fish] > 1) {
-                    const fishAmount = new cc.LabelTTF("x"+count[fish], "Microsoft YaHei", 20);
+                    const fishAmount = new cc.LabelTTF("x"+count[fish], GAME_LOG_VIEW_FONT, GAME_LOG_VIEW_FONT_SIZE);
                     fishAmount.enableStroke(new cc.Color(255, 255, 255, 255), 2);
                     fishAmount.setFontFillColor(new cc.Color(0, 0, 0, 255));
                     fishAmount._setFontWeight("bold");
@@ -599,23 +606,23 @@ const GameLogView = (function () {
 
                 highlight.setVisible(false);
 
-                let bulletId = new cc.LabelTTF(itemData.id, "Microsoft YaHei", 20);
+                let bulletId = new cc.LabelTTF(itemData.id, GAME_LOG_VIEW_FONT, GAME_LOG_VIEW_FONT_SIZE);
                 bulletId._setFontWeight("bold");
                 bulletId.setFontFillColor(new cc.Color(0, 0, 0, 255));
 
                 let totalSpend = new cc.LabelTTF(
                     itemData.totalSpend.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}),
-                    "Microsoft YaHei", 20);
+                    GAME_LOG_VIEW_FONT, GAME_LOG_VIEW_FONT_SIZE);
                 totalSpend._setFontWeight("bold");
                 totalSpend.setFontFillColor(new cc.Color(0, 0, 0, 255));
 
                 let totalProfit = new cc.LabelTTF(
                     (parseFloat(itemData.totalRevenue) - parseFloat(itemData.totalSpend)).toLocaleString('en-US',
-                        {minimumFractionDigits: 2, maximumFractionDigits: 2}), "Microsoft YaHei", 20);
+                        {minimumFractionDigits: 2, maximumFractionDigits: 2}), GAME_LOG_VIEW_FONT, GAME_LOG_VIEW_FONT_SIZE);
                 totalProfit._setFontWeight("bold");
                 totalProfit.setFontFillColor(new cc.Color(0, 0, 0, 255));
 
-                let sceneName = new cc.LabelTTF(itemData.sceneName, "Microsoft YaHei", 20);
+                let sceneName = new cc.LabelTTF(itemData.sceneName, GAME_LOG_VIEW_FONT, GAME_LOG_VIEW_FONT_SIZE);
                 sceneName._setFontWeight("bold");
                 sceneName.setFontFillColor(new cc.Color(0, 0, 0, 255));
 
@@ -795,7 +802,7 @@ const GameLogView = (function () {
 
                 const date = new Date(itemData.date);
                 let dateText = new cc.LabelTTF(date.toLocaleDateString("en-GB") + " " + date.toLocaleTimeString("en-GB"),
-                    "Microsoft YaHei", 20);
+                    GAME_LOG_VIEW_FONT, GAME_LOG_VIEW_FONT_SIZE);
                 dateText.setFontFillColor(new cc.Color(0, 0, 0, 255));
                 dateText._setFontWeight("bold");
 
@@ -812,22 +819,22 @@ const GameLogView = (function () {
                         break;
                 }
 
-                const transferType = new cc.LabelTTF(typeText, "Microsoft YaHei", 20);
+                const transferType = new cc.LabelTTF(typeText, GAME_LOG_VIEW_FONT, GAME_LOG_VIEW_FONT_SIZE);
                 transferType.setFontFillColor(new cc.Color(0, 0, 0, 255));
                 transferType._setFontWeight("bold");
 
-                const transferId = new cc.LabelTTF(itemData.id, "Microsoft YaHei", 20);
+                const transferId = new cc.LabelTTF(itemData.id, GAME_LOG_VIEW_FONT, GAME_LOG_VIEW_FONT_SIZE);
                 transferId.setFontFillColor(new cc.Color(0, 0, 0, 255));
                 transferId._setFontWeight("bold");
 
                 const transferAmount = new cc.LabelTTF(
                     (itemData.amount).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}),
-                    "Microsoft YaHei", 20);
+                    GAME_LOG_VIEW_FONT, GAME_LOG_VIEW_FONT_SIZE);
                 transferAmount.setFontFillColor(new cc.Color(0, 0, 0, 255));
                 transferAmount._setFontWeight("bold");
                 const totalAmount = new cc.LabelTTF(
                     (itemData.total).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}),
-                    "Microsoft YaHei", 20);
+                    GAME_LOG_VIEW_FONT, GAME_LOG_VIEW_FONT_SIZE);
                 totalAmount.setFontFillColor(new cc.Color(0, 0, 0, 255));
                 totalAmount._setFontWeight("bold");
 
