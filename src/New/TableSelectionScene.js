@@ -420,13 +420,30 @@ const TableType = {
         //},
 
         clearAllTables: function () {
-            Object_values(this._tableSpritesMap).forEach(tableSprite => {
-                this.removeChild(tableSprite);
+            Object.keys(this._tableSpritesMap).forEach(roomId => {
+                this.removeTableSprite(roomId);
             });
             this._tableSpritesMap = {};
         },
 
         updateRoomStates: function (roomStates) {
+            // Remove any existing tables which are no longer alive
+            const roomIdsInUpdate = {};
+            roomStates.forEach(roomState => {
+                roomIdsInUpdate[roomState.roomId] = true;
+            });
+            Object.keys(this._tableSpritesMap).forEach(roomId => {
+                if (!roomIdsInUpdate[roomId]) {
+                    this.removeTableSprite(roomId);
+                }
+            });
+
+            // Reposition existing sprites (in case any were removed)
+            Object_values(this._tableSpritesMap).forEach((tableSprite, index) => {
+                this.positionTableSprite(tableSprite, index);
+            });
+
+            // Update existing rooms with latest data, and add new rooms if needed
             roomStates.forEach(roomState => {
                 const roomId = roomState.roomId;
                 if (!this._tableSpritesMap[roomId]) {
@@ -447,6 +464,14 @@ const TableType = {
             const row = Math.floor(tableNumberOnPage / 4);
             const i = tableNumberOnPage % 4;
             tableSprite.setPosition(157 + 1366 * page + 328 * i, 310 - 215 * row);
+        },
+
+        removeTableSprite: function (roomId) {
+            const tableSprite = this._tableSpritesMap[roomId];
+            delete this._tableSpritesMap[roomId];
+            if (tableSprite) {
+                this.removeChild(tableSprite);
+            }
         },
     });
 
