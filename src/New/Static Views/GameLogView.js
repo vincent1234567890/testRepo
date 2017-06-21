@@ -390,12 +390,15 @@ const GameLogView = (function () {
                 }
 
                 const date = new Date(itemData.startTime);
-                const roundIdText = itemData.roomTitle.replace(/^[^:]*:/, '') + "-"
-                    + (date.getYear()-100).toLocaleString('en-US', {minimumIntegerDigits: 2})
-                    + (date.getMonth()+1).toLocaleString('en-US', {minimumIntegerDigits: 2})
-                    + date.getDate().toLocaleString('en-US', {minimumIntegerDigits: 2})
-                    + date.getHours().toLocaleString('en-US', {minimumIntegerDigits: 2})
-                    + date.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2});
+
+                //const roundIdText = itemData.roomTitle.replace(/^[^:]*:/, '') + "-"
+                //    + (date.getYear()-100).toLocaleString('en-US', {minimumIntegerDigits: 2})
+                //    + (date.getMonth()+1).toLocaleString('en-US', {minimumIntegerDigits: 2})
+                //    + date.getDate().toLocaleString('en-US', {minimumIntegerDigits: 2})
+                //    + date.getHours().toLocaleString('en-US', {minimumIntegerDigits: 2})
+                //    + date.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2});
+
+                const roundIdText = itemData.roundNo;
 
                 const roundId = new cc.LabelTTF(roundIdText, GAME_LOG_VIEW_FONT, GAME_LOG_VIEW_FONT_SIZE, cc.size(230, rowHeight), cc.TEXT_ALIGNMENT_RIGHT);
                 roundId._setFontWeight("bold");
@@ -492,6 +495,7 @@ const GameLogView = (function () {
                 endTime: data[i].endTime,
                 playerGameNumber: data[i]._id.playerGameNumber,
                 roundNumber: data[i]._id.roundNumber,
+                roundNo: data[i]._id.roundNo,
             }, onItemSelected);
             const content = listItemPrefab.getContent();
 
