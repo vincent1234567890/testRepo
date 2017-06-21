@@ -400,7 +400,7 @@ const GameLogView = (function () {
 
                 const roundIdText = itemData.roundNo;
 
-                const roundId = new cc.LabelTTF(roundIdText, GAME_LOG_VIEW_FONT, GAME_LOG_VIEW_FONT_SIZE, cc.size(230, rowHeight), cc.TEXT_ALIGNMENT_RIGHT);
+                const roundId = new cc.LabelTTF(roundIdText, GAME_LOG_VIEW_FONT, GAME_LOG_VIEW_FONT_SIZE, cc.size(235, rowHeight), cc.TEXT_ALIGNMENT_RIGHT);
                 roundId._setFontWeight("bold");
                 roundId.setFontFillColor(new cc.Color(0, 0, 0, 255));
                 roundId.setVerticalAlignment(cc.VERTICAL_TEXT_ALIGNMENT_CENTER);
