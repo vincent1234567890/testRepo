@@ -12,6 +12,8 @@ let PlayerInfoWidget = cc.Node.extend({
             cc.spriteFrameCache.addSpriteFrames(res.LobbyUIPlist);
         }
 
+        const player = playerInfo || ef.gameController.getCurrentPlayer();
+
         //register event listener to update player info
         //(bg size = 190 x 48)
 
@@ -19,7 +21,7 @@ let PlayerInfoWidget = cc.Node.extend({
         spPlayerNameBg.setPosition(95, 0);
         this.addChild(spPlayerNameBg);
 
-        const lbPlayerName = this._lbPlayerName = new cc.LabelTTF(limitStringLength(playerInfo.displayName, 14), "Arial", 22);
+        const lbPlayerName = this._lbPlayerName = new cc.LabelTTF(limitStringLength(player.displayName, 14), "Arial", 22);
         lbPlayerName._setFontWeight("bold");
         lbPlayerName.enableStroke(new cc.Color(0, 0, 0, 255), 2);
         spPlayerNameBg.addChild(lbPlayerName);
@@ -37,7 +39,7 @@ let PlayerInfoWidget = cc.Node.extend({
         spPlayerCreditBg.addChild(lbPlayerCredit);
         lbPlayerCredit.setPosition(119, 26);
 
-        this.updatePlayerCredit(playerInfo.score);
+        this.updatePlayerCredit(player.score);
     },
 
     updatePlayerCredit: function(playerCredit){
