@@ -28,22 +28,6 @@ const TableType = {
             cc.spriteFrameCache.addSpriteFrames(res.CausticPlist);
             cc.spriteFrameCache.addSpriteFrames(res.ChinesePlist);
 
-            //background
-            /*
-             const bkglayer = new cc.LayerGradient(new cc.Color(0,0,0,0), new cc.Color(0,0,0,0), cc.p(0, -1),
-             [{p:0.9, color: new cc.Color(10,105,166,255)},
-             {p:1, color: new cc.Color(20,145,224,255)}]
-             );
-             this.addChild(bkglayer);
-
-             const target = new cc.Sprite("#Caustic_00000.png");
-             target.setBlendFunc(cc.ONE, cc.ONE);
-             const causticAnimation = GUIFunctions.getAnimation(ReferenceName.LobbyCaustics,0.05);
-             target.runAction(causticAnimation.repeatForever());
-             target.setPosition(cc.visibleRect.width * 0.5, cc.visibleRect.height * 0.5);
-             this.addChild(target);
-             */
-
             const spBackground = new cc.Sprite(ReferenceName.LobbyBackground);
             this.addChild(spBackground);
             spBackground.setAnchorPoint(0.5, 1);
@@ -68,9 +52,9 @@ const TableType = {
             spPlayerInfo.setPosition(120, cc.visibleRect.top.y - 78);
 
             //context menu
-            const mmContextMenu = new GameFloatingMenu();
-            mmContextMenu.setPosition(cc.visibleRect.center.x + 237, cc.visibleRect.top.y - 85);
-            this.addChild(mmContextMenu);
+            //const mmContextMenu = new GameFloatingMenu();
+            //mmContextMenu.setPosition(cc.visibleRect.center.x + 237, cc.visibleRect.top.y - 85);
+            //this.addChild(mmContextMenu);
 
             //jackpot panel
             const pnJackpot = new JackpotFloatPanel();
@@ -149,6 +133,7 @@ const TableType = {
         _pnPageIndicator: null,
 
         _roomStates: null,
+        _cnClippingNode: null,
 
         ctor: function (lobbyType, channelType, selectionMadeCallback) {
             cc.Layer.prototype.ctor.call(this);
@@ -204,10 +189,20 @@ const TableType = {
 
             // @todo We need to make the TableListPanel scrollable somehow
 
+            const szClippingNode = new cc.Size(cc.visibleRect.width - 64, cc.visibleRect.height - 348);
+            const dnStencil = new cc.DrawNode();
+            const rectangle = [cc.p(0, 0), cc.p(szClippingNode.width, 0), cc.p(szClippingNode.width, szClippingNode.height),
+                cc.p(0, szClippingNode.height)], green = new cc.Color(0, 255, 0, 255);
+            dnStencil.drawPoly(rectangle, green, 3, green);
+
+            const cnClippingNode = this._cnClippingNode = new cc.ClippingNode(dnStencil);
+            cnClippingNode.setPosition(20, 15);
+            pnTableListBg.addChild(cnClippingNode);
+
             //table list panel
             const pnTableList = this._pnTableList = new ef.TableListPanel(this._lobbyType, this._tableType, selectionMadeCallback);
-            pnTableListBg.addChild(pnTableList);
-            pnTableList.setPosition(20, 15);
+            cnClippingNode.addChild(pnTableList);
+            //pnTableList.setPosition(20, 15);
 
             //scroll button
             const pnPageIndicator = this._pnPageIndicator = new PageIndicatorPanel();
@@ -379,8 +374,14 @@ const TableType = {
         _touchEventListener: null,
         _mouseEventListener: null,
 
+        startPoint: null,
+        OFFSET_DIST: 150,
+
         ctor: function (lobbyType, tableType, selectionMadeCallback) {
             cc.Layer.prototype.ctor.call(this);
+
+            const szClippingNode = new cc.Size(cc.visibleRect.width - 64, cc.visibleRect.height - 348);
+            this.setContentSize(szClippingNode);
 
             this._lobbyType = lobbyType || "1X";
             this._tableType = tableType || TableType.MULTIPLE;
@@ -392,23 +393,76 @@ const TableType = {
             //const pnLayerColor = new cc.LayerColor(new cc.Color(200, 0, 0, 128));
             //this.addChild(pnLayerColor);
 
-            ////row 1
-            //for (let i = 0; i < 4; i++) {
-            //    const tableSprite = new ef.TableSprite();
-            //    tableSprite.setPosition(157 + i * 328, 310);
-            //    this.addChild(tableSprite);
-            //}
-            //
-            ////row 2
-            //for (let i = 0; i < 4; i++) {
-            //    const tableSprite = new ef.TableSprite();
-            //    tableSprite.setPosition(157 + i * 328, 95);
-            //    this.addChild(tableSprite);
-            //}
-
             // @todo touch event handler
+            this._touchEventListener = cc.EventListener.create({
+                event: cc.EventListener.TOUCH_ONE_BY_ONE,
+                swallowTouches: true,
 
+                onTouchBegan: function(touch, event){
+                    const target = event.getCurrentTarget();
+                    target.startPoint = touch.getLocation();
+                    return target.hitTest(target.startPoint);
+                },
 
+                onTouchMoved: function(touch, event){
+                    const target = event.getCurrentTarget();
+                    const pos = touch.getLocation();
+                    const offset = target.startPoint.x - pos.x;
+                    target.setPosition(-offset, 0);
+                },
+
+                onTouchEnded: function(touch, event){
+                    const target = event.getCurrentTarget();
+                    const endPoint = touch.getLocation();
+                    const offset = target.startPoint.x - endPoint.x;
+                    if(Math.abs(offset) > target.OFFSET_DIST){
+                        //load next
+                        if(offset > 0){
+                            //next
+                            target.switchNextPage();
+                        }else{
+                            //previous
+                            target.switchPrevPage();
+                        }
+                        //target.runAction(cc.moveTo(0.3, 0, 0).easing(cc.easeExponentialOut()));
+                    }else{
+                        target.runAction(cc.moveTo(0.3, 0, 0).easing(cc.easeExponentialOut()));
+                    }
+                }
+            });
+        },
+
+        switchNextPage: function(){
+            const contentSize = this.getContentSize();
+            this.runAction(cc.sequence(
+                cc.moveTo(0.3, -contentSize.width, 0).easing(cc.easeExponentialOut()),
+                cc.callFunc(function(){
+                    this.setPosition(contentSize.width, 0);
+                }, this),
+                cc.moveTo(0.3, 0, 0).easing(cc.easeExponentialOut())
+            ));
+        },
+
+        switchPrevPage: function(){
+            const contentSize = this.getContentSize();
+            this.runAction(cc.sequence(
+                cc.moveTo(0.3, contentSize.width, 0).easing(cc.easeExponentialOut()),
+                cc.callFunc(function(){
+                    this.setPosition(-contentSize.width, 0);
+                }, this),
+                cc.moveTo(0.3, 0, 0).easing(cc.easeExponentialOut())
+            ));
+        },
+
+        onEnter: function(){
+            cc.Layer.prototype.onEnter.call(this);
+            if (this._touchEventListener && !this._touchEventListener._isRegistered())
+                cc.eventManager.addListener(this._touchEventListener, this);
+        },
+
+        hitTest: function (point) {
+            return cc.rectContainsPoint(cc.rect(0, 0, this._contentSize.width, this._contentSize.height),
+                this.convertToNodeSpace(point));
         },
 
         //setLobbyType: function (lobbyType) {
