@@ -58,6 +58,7 @@ var cocos2dApp = cc.game.onStart = function() {
                 //cc.director.runScene(new ef.TableSelectionScene("1X", data.player));
 
                 AppManager.goToLobby(data.player);
+                ef.gameController.setCurrentPlayer(data.player);
                 FishAnimationData.setData(themeConfig.FishRawData);
             }, this);
         }
