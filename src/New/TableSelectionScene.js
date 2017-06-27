@@ -408,28 +408,28 @@ const TableType = {
                     const target = event.getCurrentTarget();
                     const pos = touch.getLocation();
                     const offset = target.startPoint.x - pos.x;
-                    target.setPosition(-offset, 0);
+                    target.setPosition(-ef.gameController.getCurLobbyPage() * 1366-offset, 0);
                 },
 
                 onTouchEnded: function(touch, event){
                     const target = event.getCurrentTarget();
                     const endPoint = touch.getLocation();
                     const offset = target.startPoint.x - endPoint.x;
-                    if(Math.abs(offset) > target.OFFSET_DIST){
+                    if (Math.abs(offset) > target.OFFSET_DIST) {
                         //load next
-                        if(offset > 0){
+                        if (offset > 0) {
                             //next
-                            let curPage = ef.gameController.getCurLobbyPage();
-                            let nextPage = ef.gameController.setCurLobbyPage('next');
+                            const curPage = ef.gameController.getCurLobbyPage();
+                            const nextPage = ef.gameController.setCurLobbyPage('next');
                             target.switchNextPage(curPage, nextPage);
-                        }else{
+                        } else {
                             //previous
-                            let curPage = ef.gameController.getCurLobbyPage();
-                            let nextPage = ef.gameController.setCurLobbyPage('prev');
+                            const curPage = ef.gameController.getCurLobbyPage();
+                            const nextPage = ef.gameController.setCurLobbyPage('prev');
                             target.switchPrevPage(curPage, nextPage);
                         }
                         //target.runAction(cc.moveTo(0.3, 0, 0).easing(cc.easeExponentialOut()));
-                    }else{
+                    } else {
                         target.runAction(cc.moveTo(0.3, 0, 0).easing(cc.easeExponentialOut()));
                     }
                 }
@@ -440,9 +440,9 @@ const TableType = {
             const contentSize = this.getContentSize();
             this.runAction(cc.sequence(
                 // cc.moveTo(0.3, -curPage * 1366, 0).easing(cc.easeExponentialOut()),
-                cc.callFunc(function () {
-                    this.setPosition(-curPage * 1366, 0);
-                }, this),
+                // cc.callFunc(function () {
+                //     this.setPosition(-curPage * 1366, 0);
+                // }, this),
                 cc.moveTo(0.3, -nextPage * 1366, 0).easing(cc.easeExponentialOut())
             ));
         },
@@ -451,9 +451,9 @@ const TableType = {
             const contentSize = this.getContentSize();
             this.runAction(cc.sequence(
                 // cc.moveTo(0.3, contentSize.width, 0).easing(cc.easeExponentialOut()),
-                cc.callFunc(function () {
-                    this.setPosition(-curPage * 1366, 0);
-                }, this),
+                // cc.callFunc(function () {
+                //     this.setPosition(-curPage * 1366, 0);
+                // }, this),
                 cc.moveTo(0.3, -nextPage * 1366, 0).easing(cc.easeExponentialOut())
             ));
         },
