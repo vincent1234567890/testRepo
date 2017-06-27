@@ -514,7 +514,7 @@ const TableType = {
                 const tableSprite = this._tableSpritesMap[roomId];
                 tableSprite.setTableState(roomState);
             });
-            ef.gameController.setTotalLobbyPage(Object.keys(this._tableSpritesMap).length);
+            ef.gameController.setTotalLobbyPage(Math.ceil(Object.keys(this._tableSpritesMap).length / 8));
         },
 
         positionTableSprite: function (tableSprite, tableNumber) {

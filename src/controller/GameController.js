@@ -151,7 +151,7 @@ let GameController = (function(){
         setCurLobbyPage: function (type) {
             switch (type) {
                 case 'next':
-                    this._lobbyPageNum = Math.min(this._lobbyPageTotal, this._lobbyPageNum + 1);
+                    this._lobbyPageNum = Math.min(this._lobbyPageTotal - 1, this._lobbyPageNum + 1);
                     break;
                 case 'prev':
                     this._lobbyPageNum = Math.max(0, this._lobbyPageNum - 1);
