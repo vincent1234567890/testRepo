@@ -24,6 +24,8 @@ let GameController = (function(){
         _isInGame: false,
         _isLockMode: LockFishStatus.RELEASE,
         _leaveGameTimeout: null,
+        _lobbyPageNum: 0,
+        _lobbyPageTotal: 0,
         ctor: function() {
             this._currentMultiple = 1;
             if (cc.sys.localStorage.getItem("sound_volume") === null) {
@@ -131,6 +133,29 @@ let GameController = (function(){
 
         getCurrentSeat: function(){
             return this._currentSeat;
+        },
+
+        getCurLobbyPage: function () {
+            return this._lobbyPageNum;
+        },
+        setCurLobbyPage: function (type) {
+            switch (type) {
+                case 'next':
+                    this._lobbyPageNum = Math.min(this._lobbyPageTotal, this._lobbyPageNum + 1);
+                    break;
+                case 'prev':
+                    this._lobbyPageNum = Math.max(0, this._lobbyPageNum - 1);
+                    break;
+                default:
+                    this._lobbyPageNum = type;
+            }
+            return this._lobbyPageNum;
+        },
+        getTotalLobbyPage: function () {
+            return this._lobbyPageTotal;
+        },
+        setTotalLobbyPage: function (num) {
+            this._lobbyPageTotal = num;
         }
     });
 
