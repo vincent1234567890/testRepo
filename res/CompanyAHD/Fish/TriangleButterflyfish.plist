@@ -4,7 +4,7 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>ButterflyFish2_00000.png</key>
+            <key>TriangleButterflyfish_00000.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -19,7 +19,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>ButterflyFish2_00001.png</key>
+            <key>TriangleButterflyfish_00001.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -34,7 +34,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>ButterflyFish2_00002.png</key>
+            <key>TriangleButterflyfish_00002.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -49,7 +49,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>ButterflyFish2_00003.png</key>
+            <key>TriangleButterflyfish_00003.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -64,7 +64,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>ButterflyFish2_00004.png</key>
+            <key>TriangleButterflyfish_00004.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -79,7 +79,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>ButterflyFish2_00005.png</key>
+            <key>TriangleButterflyfish_00005.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -94,7 +94,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>ButterflyFish2_00006.png</key>
+            <key>TriangleButterflyfish_00006.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -109,7 +109,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>ButterflyFish2_00007.png</key>
+            <key>TriangleButterflyfish_00007.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -124,7 +124,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>ButterflyFish2_00008.png</key>
+            <key>TriangleButterflyfish_00008.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -139,7 +139,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>ButterflyFish2_00009.png</key>
+            <key>TriangleButterflyfish_00009.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -154,7 +154,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>ButterflyFish2_00010.png</key>
+            <key>TriangleButterflyfish_00010.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -169,7 +169,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>ButterflyFish2_00011.png</key>
+            <key>TriangleButterflyfish_00011.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -184,7 +184,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>ButterflyFish2_00012.png</key>
+            <key>TriangleButterflyfish_00012.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -199,7 +199,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>ButterflyFish2_00013.png</key>
+            <key>TriangleButterflyfish_00013.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -214,7 +214,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>ButterflyFish2_00014.png</key>
+            <key>TriangleButterflyfish_00014.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -229,7 +229,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>ButterflyFish2_00015.png</key>
+            <key>TriangleButterflyfish_00015.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -244,7 +244,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>ButterflyFish2_00016.png</key>
+            <key>TriangleButterflyfish_00016.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -259,7 +259,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>ButterflyFish2_00017.png</key>
+            <key>TriangleButterflyfish_00017.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -274,7 +274,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>ButterflyFish2_00018.png</key>
+            <key>TriangleButterflyfish_00018.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -289,7 +289,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>ButterflyFish2_00019.png</key>
+            <key>TriangleButterflyfish_00019.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -304,7 +304,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>ButterflyFish2_00020.png</key>
+            <key>TriangleButterflyfish_00020.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -319,7 +319,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>ButterflyFish2_00021.png</key>
+            <key>TriangleButterflyfish_00021.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -334,7 +334,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>ButterflyFish2_00022.png</key>
+            <key>TriangleButterflyfish_00022.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -349,7 +349,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>ButterflyFish2_00023.png</key>
+            <key>TriangleButterflyfish_00023.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -364,7 +364,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>ButterflyFish2_00024.png</key>
+            <key>TriangleButterflyfish_00024.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -379,7 +379,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>ButterflyFish2_00025.png</key>
+            <key>TriangleButterflyfish_00025.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -394,7 +394,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>ButterflyFish2_00026.png</key>
+            <key>TriangleButterflyfish_00026.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -419,13 +419,13 @@
             <key>premultiplyAlpha</key>
             <false/>
             <key>realTextureFileName</key>
-            <string>ButterflyFish2.png</string>
+            <string>TriangleButterflyfish.png</string>
             <key>size</key>
             <string>{470,470}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:4d2d214e4176f0738d5c4ec92a1c1e62:d8f7a2daf6143f9bcd76885e8fffb695:c1755b042896905183f08d0207ff7eb9$</string>
+            <string>$TexturePacker:SmartUpdate:64d243b57143ea66321401ef679b1885:d8f7a2daf6143f9bcd76885e8fffb695:681886ee02c9a8f675bfb3ce3860751f$</string>
             <key>textureFileName</key>
-            <string>ButterflyFish2.png</string>
+            <string>TriangleButterflyfish.png</string>
         </dict>
     </dict>
 </plist>
