@@ -24,6 +24,7 @@ let GameController = (function(){
         _isInGame: false,
         _isLockMode: LockFishStatus.RELEASE,
         _leaveGameTimeout: null,
+        _currentPlayer: null,
         _lobbyPageNum: 0,
         _lobbyPageTotal: 0,
         ctor: function() {
@@ -64,6 +65,15 @@ let GameController = (function(){
                 if (!cc.audioEngine.isMusicPlaying())
                     cc.audioEngine.resumeMusic();
             });
+        },
+
+        setCurrentPlayer: function(player){
+            //remove the player event
+            this._currentPlayer = player;
+        },
+
+        getCurrentPlayer: function(){
+            return this._currentPlayer;
         },
 
         isInFocus: function(){

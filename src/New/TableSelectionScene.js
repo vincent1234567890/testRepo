@@ -47,7 +47,7 @@ const TableType = {
             btnBack.setPosition(50, cc.visibleRect.top.y - 78);
 
             //info panel
-            const spPlayerInfo = new PlayerInfoWidget(playerData);
+            const spPlayerInfo = new PlayerInfoWidget();
             this.addChild(spPlayerInfo);
             spPlayerInfo.setPosition(120, cc.visibleRect.top.y - 78);
 
