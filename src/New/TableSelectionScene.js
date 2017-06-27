@@ -288,7 +288,7 @@ const TableType = {
 
                 // Count free seats (of correct type)
                 const freeSeats = getFreeSeatsCount(roomStatesToShow);
-                this._lbRemainSeats.setString("剩余" + String(freeSeats) + "个吉位");
+                this._lbRemainSeats.setString("剩余" + String(freeSeats) + "个座位");
 
                 // Update the state of existing room sprites (and append new sprites if needed)
                 this._pnTableList.updateRoomStates(roomStatesToShow);
@@ -419,10 +419,14 @@ const TableType = {
                         //load next
                         if(offset > 0){
                             //next
-                            target.switchNextPage();
+                            let curPage = ef.gameController.getCurLobbyPage();
+                            let nextPage = ef.gameController.setCurLobbyPage('next');
+                            target.switchNextPage(curPage, nextPage);
                         }else{
                             //previous
-                            target.switchPrevPage();
+                            let curPage = ef.gameController.getCurLobbyPage();
+                            let nextPage = ef.gameController.setCurLobbyPage('prev');
+                            target.switchPrevPage(curPage, nextPage);
                         }
                         //target.runAction(cc.moveTo(0.3, 0, 0).easing(cc.easeExponentialOut()));
                     }else{
@@ -432,25 +436,25 @@ const TableType = {
             });
         },
 
-        switchNextPage: function(){
+        switchNextPage: function (curPage, nextPage) {
             const contentSize = this.getContentSize();
             this.runAction(cc.sequence(
-                cc.moveTo(0.3, -contentSize.width, 0).easing(cc.easeExponentialOut()),
-                cc.callFunc(function(){
-                    this.setPosition(contentSize.width, 0);
+                // cc.moveTo(0.3, -curPage * 1366, 0).easing(cc.easeExponentialOut()),
+                cc.callFunc(function () {
+                    this.setPosition(-curPage * 1366, 0);
                 }, this),
-                cc.moveTo(0.3, 0, 0).easing(cc.easeExponentialOut())
+                cc.moveTo(0.3, -nextPage * 1366, 0).easing(cc.easeExponentialOut())
             ));
         },
 
-        switchPrevPage: function(){
+        switchPrevPage: function (curPage, nextPage) {
             const contentSize = this.getContentSize();
             this.runAction(cc.sequence(
-                cc.moveTo(0.3, contentSize.width, 0).easing(cc.easeExponentialOut()),
-                cc.callFunc(function(){
-                    this.setPosition(-contentSize.width, 0);
+                // cc.moveTo(0.3, contentSize.width, 0).easing(cc.easeExponentialOut()),
+                cc.callFunc(function () {
+                    this.setPosition(-curPage * 1366, 0);
                 }, this),
-                cc.moveTo(0.3, 0, 0).easing(cc.easeExponentialOut())
+                cc.moveTo(0.3, -nextPage * 1366, 0).easing(cc.easeExponentialOut())
             ));
         },
 
@@ -461,7 +465,7 @@ const TableType = {
         },
 
         hitTest: function (point) {
-            return cc.rectContainsPoint(cc.rect(0, 0, this._contentSize.width, this._contentSize.height),
+            return cc.rectContainsPoint(cc.rect(ef.gameController.getCurLobbyPage() * 1366, 0, this._contentSize.width, this._contentSize.height),
                 this.convertToNodeSpace(point));
         },
 
@@ -510,6 +514,7 @@ const TableType = {
                 const tableSprite = this._tableSpritesMap[roomId];
                 tableSprite.setTableState(roomState);
             });
+            ef.gameController.setTotalLobbyPage(Math.ceil(Object.keys(this._tableSpritesMap).length / 8));
         },
 
         positionTableSprite: function (tableSprite, tableNumber) {
