@@ -687,8 +687,11 @@ const TableType = {
 
         hitTest: function (point) {
             const margin = 40;
-            return cc.rectContainsPoint(cc.rect(margin, margin, this._contentSize.width - 2 * margin, this._contentSize.height - margin),
-                this.convertToNodeSpace(point));
+            return cc.rectContainsPoint(cc.rect(margin, margin, this._contentSize.width - 2 * margin, this._contentSize.height - margin), this.convertToNodeSpace(point))
+                || this._spSeat1.hitTest(point)
+                || this._spSeat2.hitTest(point)
+                || this._spSeat3.hitTest(point)
+                || this._spSeat4.hitTest(point);
         },
 
         onMouseOverIn: function (mouseData) {
