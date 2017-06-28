@@ -547,22 +547,24 @@ const GameLogView = (function () {
             fishView.setTouchEnabled(true);
             fishView.setBounceEnabled(true);
 
-            const count = {};
+            const countsByFishType = {};
             fishArray.forEach(fish => {
-                count[fish.type] = (count[fish.type] || 0) + 1;
+                countsByFishType[fish.type] = (countsByFishType[fish.type] || 0) + 1;
             });
 
             let contentSize = new cc.p();
 
-            for (let fish in count) {
+            for (let fishType in countsByFishType) {
+                const count = countsByFishType[fishType];
+
                 const wrapper = new ccui.Widget();
-                const fishSprite = new cc.Sprite("#GL" + fish + ".png");
+                const fishSprite = new cc.Sprite("#GL" + fishType + ".png");
                 const size = fishSprite.getContentSize();
 
                 wrapper.addChild(fishSprite);
                 fishSprite.setPosition(size.width / 2, size.height / 2);
-                if (count[fish] > 1) {
-                    const fishAmount = new cc.LabelTTF("x"+count[fish], GAME_LOG_VIEW_FONT, GAME_LOG_VIEW_FONT_SIZE);
+                if (count > 1) {
+                    const fishAmount = new cc.LabelTTF("x" + count, GAME_LOG_VIEW_FONT, GAME_LOG_VIEW_FONT_SIZE);
                     fishAmount.enableStroke(new cc.Color(255, 255, 255, 255), 2);
                     fishAmount.setFontFillColor(new cc.Color(0, 0, 0, 255));
                     fishAmount._setFontWeight("bold");
