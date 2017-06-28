@@ -75,7 +75,7 @@ const TableType = {
 
             //notification panel.
             const pnNotification = new ef.NotificationPanel(400, 32);
-            pnNotification.setPosition(cc.visibleRect.center.x + 226, cc.visibleRect.top.y - 218);
+            pnNotification.setPosition(cc.visibleRect.center.x + 226, cc.visibleRect.top.y - 200);
             this.addChild(pnNotification);
             pnNotification.showNotification("Hello, this is an Elsa's message for testing notification................");
 
@@ -130,7 +130,6 @@ const TableType = {
         _btnSpectate: null,
 
         _pnTableList: null,
-        _pnPageIndicator: null,
 
         _roomStates: null,
         _cnClippingNode: null,
@@ -144,21 +143,22 @@ const TableType = {
             //button
             const btnMultiple = this._btnMultiple = new ef.LayerColorButton("#SSMultiplayerChinese.png", 220, 55);
             this.addChild(btnMultiple);
-            btnMultiple.setPosition(12, cc.visibleRect.top.y - 225);
+            btnMultiple.setPosition(12, cc.visibleRect.top.y - 205);
             btnMultiple.setStatus(ef.BUTTONSTATE.SELECTED);
             btnMultiple.setClickHandler(this.tableTypeClick, this);
 
             const btnSolo = this._btnSolo = new ef.LayerColorButton("#SSSoloChinese.png", 220, 55);
             this.addChild(btnSolo);
-            btnSolo.setPosition(233, cc.visibleRect.top.y - 225);
+            btnSolo.setPosition(233, cc.visibleRect.top.y - 205);
             btnSolo.setStatus(ef.BUTTONSTATE.NORMAL);
             btnSolo.setClickHandler(this.tableTypeClick, this);
 
             //table panel
             const szTableListBg = new cc.Size(cc.visibleRect.width - 24, cc.visibleRect.height - 265);
             const pnTableListBg = new cc.LayerColor(new cc.Color(0, 0, 0, 140), szTableListBg.width, szTableListBg.height);
-            pnTableListBg.setPosition(12, 40);
+            pnTableListBg.setPosition(12, 60);
             this.addChild(pnTableListBg);
+            ef.gameController.setTablePanel(pnTableListBg);
 
             //lobby type
             const spLobbyType = this._createLobbyTypeSprite();
@@ -205,8 +205,8 @@ const TableType = {
             //pnTableList.setPosition(20, 15);
 
             //scroll button
-            const pnPageIndicator = this._pnPageIndicator = new PageIndicatorPanel();
-            this.addChild(pnPageIndicator);
+            // const pnPageIndicator = this._pnPageIndicator = new PageIndicatorPanel();
+            // this.addChild(pnPageIndicator);
         },
 
         _createLobbyTypeSprite: function () {
@@ -356,12 +356,12 @@ const TableType = {
         }
     });
 
-    const PageIndicatorPanel = cc.Layer.extend({
-        ctor: function () {
-            cc.Layer.prototype.ctor.call(this);
-
-        }
-    });
+    // const PageIndicatorPanel = cc.Layer.extend({
+    //     ctor: function () {
+    //         cc.Layer.prototype.ctor.call(this);
+    //
+    //     }
+    // });
 
     ef.TableListPanel = cc.Layer.extend({
         _lobbyType: null,
@@ -379,6 +379,9 @@ const TableType = {
 
         ctor: function (lobbyType, tableType, selectionMadeCallback) {
             cc.Layer.prototype.ctor.call(this);
+
+            this._PageIndicatorPanel = new cc.Layer();
+            ef.gameController.getTablePanel().addChild(this._PageIndicatorPanel);
 
             const szClippingNode = new cc.Size(cc.visibleRect.width - 64, cc.visibleRect.height - 348);
             this.setContentSize(szClippingNode);
@@ -436,6 +439,28 @@ const TableType = {
             });
         },
 
+        updatePageIndicator: function () {
+            let pageIndicator = this._PageIndicatorPanel;
+            pageIndicator.removeAllChildren();
+            const totalPage = ef.gameController.getTotalLobbyPage();
+            const curPage = ef.gameController.getCurLobbyPage();
+            const sectionWidth = totalPage * 60 + 10;
+            const szClippingNode = new cc.Size(sectionWidth, 70);
+            pageIndicator.setContentSize(szClippingNode);
+            pageIndicator.setPosition(cc.visibleRect.width / 2 - sectionWidth / 2, -40);
+            for (let i = 0; i < totalPage; i++) {
+                const pageNumLabel = new cc.LabelTTF(i + 1, "Arial", 22);
+                let LobbyCoinsBG = (i === curPage)
+                    ? new cc.Sprite('#SS_PageIndicatorYellow.png')
+                    : new cc.Sprite('#SS_PageIndicatorBlue.png');
+                LobbyCoinsBG.addChild(pageNumLabel);
+                const pageContent = LobbyCoinsBG.getContentSize();
+                pageNumLabel.setPosition(pageContent.width / 2, pageContent.height / 2);
+                LobbyCoinsBG.setPosition(i * 60, 10);
+                pageIndicator.addChild(LobbyCoinsBG, 2);
+            }
+        },
+
         switchNextPage: function (curPage, nextPage) {
             const contentSize = this.getContentSize();
             this.runAction(cc.sequence(
@@ -445,17 +470,19 @@ const TableType = {
                 // }, this),
                 cc.moveTo(0.3, -nextPage * 1366, 0).easing(cc.easeExponentialOut())
             ));
+            this.updatePageIndicator();
         },
 
         switchPrevPage: function (curPage, nextPage) {
             const contentSize = this.getContentSize();
             this.runAction(cc.sequence(
-                // cc.moveTo(0.3, contentSize.width, 0).easing(cc.easeExponentialOut()),
+                // cc.moveTo(0.3, -curPage * 1366, 0).easing(cc.easeExponentialOut()),
                 // cc.callFunc(function () {
                 //     this.setPosition(-curPage * 1366, 0);
                 // }, this),
                 cc.moveTo(0.3, -nextPage * 1366, 0).easing(cc.easeExponentialOut())
             ));
+            this.updatePageIndicator();
         },
 
         onEnter: function(){
@@ -465,7 +492,7 @@ const TableType = {
         },
 
         hitTest: function (point) {
-            return cc.rectContainsPoint(cc.rect(ef.gameController.getCurLobbyPage() * 1366, 0, this._contentSize.width, this._contentSize.height),
+            return cc.rectContainsPoint(cc.rect(0, 0, ef.gameController.getTotalLobbyPage() * 1366, this._contentSize.height),
                 this.convertToNodeSpace(point));
         },
 
@@ -515,6 +542,7 @@ const TableType = {
                 tableSprite.setTableState(roomState);
             });
             ef.gameController.setTotalLobbyPage(Math.ceil(Object.keys(this._tableSpritesMap).length / 8));
+            this.updatePageIndicator();
         },
 
         positionTableSprite: function (tableSprite, tableNumber) {

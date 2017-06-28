@@ -166,7 +166,14 @@ let GameController = (function(){
         },
         setTotalLobbyPage: function (num) {
             this._lobbyPageTotal = num;
-        }
+        },
+        setTablePanel: function (panel) {
+            this._tablePanel = panel;
+        },
+        getTablePanel: function () {
+            return this._tablePanel
+        },
+
     });
 
     cc.EventHelper.prototype.apply(GameController.prototype);
