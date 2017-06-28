@@ -686,8 +686,12 @@ const TableType = {
         },
 
         hitTest: function (point) {
-            return cc.rectContainsPoint(cc.rect(0, 0, this._contentSize.width, this._contentSize.height),
-                this.convertToNodeSpace(point));
+            const margin = 40;
+            return cc.rectContainsPoint(cc.rect(margin, margin, this._contentSize.width - 2 * margin, this._contentSize.height - margin), this.convertToNodeSpace(point))
+                || this._spSeat1.hitTest(point)
+                || this._spSeat2.hitTest(point)
+                || this._spSeat3.hitTest(point)
+                || this._spSeat4.hitTest(point);
         },
 
         onMouseOverIn: function (mouseData) {
@@ -847,11 +851,11 @@ const TableType = {
 
     const Object_values = (obj) => Object.keys(obj).map(key => obj[key]);
 
-    function countPlayersInRoom(roomState) {
+    function countPlayersInRoom (roomState) {
         return roomState.playersBySlot.filter(p => p != null).length;
     }
 
-    function roomIsFull(roomState) {
+    function roomIsFull (roomState) {
         const playerCount = countPlayersInRoom(roomState);
         if (roomState.singlePlay) {
             return playerCount > 0;
@@ -860,7 +864,7 @@ const TableType = {
         }
     }
 
-    function getFreeSeatsCount(roomStates) {
+    function getFreeSeatsCount (roomStates) {
         let count = 0;
         roomStates.forEach(roomState => {
             if (!roomIsFull(roomState)) {
