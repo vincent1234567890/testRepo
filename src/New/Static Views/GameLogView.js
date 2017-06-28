@@ -398,7 +398,7 @@ const GameLogView = (function () {
                 //    + date.getHours().toLocaleString('en-US', {minimumIntegerDigits: 2})
                 //    + date.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2});
 
-                const roundIdText = itemData.roundNo;
+                const roundIdText = itemData.roundId;
 
                 const roundIdLabel = new cc.LabelTTF(roundIdText, GAME_LOG_VIEW_FONT, GAME_LOG_VIEW_FONT_SIZE, cc.size(235, rowHeight), cc.TEXT_ALIGNMENT_RIGHT);
                 roundIdLabel._setFontWeight("bold");
@@ -495,7 +495,7 @@ const GameLogView = (function () {
                 endTime: data[i].endTime,
                 playerGameNumber: data[i]._id.playerGameNumber,
                 roundNumber: data[i]._id.roundNumber,
-                roundNo: data[i]._id.roundNo,
+                roundId: data[i]._id.roundId,
             }, onItemSelected);
             const content = listItemPrefab.getContent();
 
