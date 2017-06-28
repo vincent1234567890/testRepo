@@ -401,20 +401,20 @@ const TableType = {
                 event: cc.EventListener.TOUCH_ONE_BY_ONE,
                 swallowTouches: true,
 
-                onTouchBegan: function(touch, event){
+                onTouchBegan: function (touch, event) {
                     const target = event.getCurrentTarget();
                     target.startPoint = touch.getLocation();
                     return target.hitTest(target.startPoint);
                 },
 
-                onTouchMoved: function(touch, event){
+                onTouchMoved: function (touch, event) {
                     const target = event.getCurrentTarget();
                     const pos = touch.getLocation();
                     const offset = target.startPoint.x - pos.x;
-                    target.setPosition(-ef.gameController.getCurLobbyPage() * 1366-offset, 0);
+                    target.setPosition(-ef.gameController.getCurLobbyPage() * 1366 - offset, 0);
                 },
 
-                onTouchEnded: function(touch, event){
+                onTouchEnded: function (touch, event) {
                     const target = event.getCurrentTarget();
                     const endPoint = touch.getLocation();
                     const offset = target.startPoint.x - endPoint.x;
@@ -437,11 +437,47 @@ const TableType = {
                     }
                 }
             });
+            // page event
+            let clickEvent = cc._EventListenerMouse.extend({
+                ctor: function () {
+                    cc._EventListenerMouse.prototype.ctor.call(this);
+                },
+                onMouseDown: function (event) {
+                    let target = event.getCurrentTarget();
+
+                    if (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
+                            target.convertToNodeSpace(event.getLocation()))) {
+                        const curPage = ef.gameController.getCurLobbyPage();
+                        const nextPage = ef.gameController.setCurLobbyPage(this._node._pageNum - 1);
+                        const parent = this._node._parentNode;
+                        if (curPage < nextPage) {
+                            parent.switchNextPage(curPage, nextPage)
+                        } else if (curPage > nextPage) {
+                            parent.switchPrevPage(curPage, nextPage)
+                        }
+                    }
+                }
+            });
+            this._pageIndicatorClickEventListener = new clickEvent();
+
         },
 
-        updatePageIndicator: function () {
-            let pageIndicator = this._PageIndicatorPanel;
-            pageIndicator.removeAllChildren();
+        updatePageIndicator: function (parentPanel) {
+            // clear existing nodes
+            const pageIndicatorNode = this._PageIndicatorPanel;
+            if (pageIndicatorNode) {
+                ef.gameController.getTablePanel().removeChild(pageIndicatorNode);
+            }
+
+            delete this._PageIndicatorPanel;
+
+            //add new set
+            let pageIndicator = new cc.Layer();
+            if (!ef.gameController.getTablePanel()) {
+                return
+            }
+            ef.gameController.getTablePanel().addChild(pageIndicator);
+
             const totalPage = ef.gameController.getTotalLobbyPage();
             const curPage = ef.gameController.getCurLobbyPage();
             const sectionWidth = totalPage * 60 + 10;
@@ -450,15 +486,20 @@ const TableType = {
             pageIndicator.setPosition(cc.visibleRect.width / 2 - sectionWidth / 2, -40);
             for (let i = 0; i < totalPage; i++) {
                 const pageNumLabel = new cc.LabelTTF(i + 1, "Arial", 22);
-                let LobbyCoinsBG = (i === curPage)
+                let pageIndicatorNum = (i === curPage)
                     ? new cc.Sprite('#SS_PageIndicatorYellow.png')
                     : new cc.Sprite('#SS_PageIndicatorBlue.png');
-                LobbyCoinsBG.addChild(pageNumLabel);
-                const pageContent = LobbyCoinsBG.getContentSize();
+                const pageContent = pageIndicatorNum.getContentSize();
                 pageNumLabel.setPosition(pageContent.width / 2, pageContent.height / 2);
-                LobbyCoinsBG.setPosition(i * 60, 10);
-                pageIndicator.addChild(LobbyCoinsBG, 2);
+                pageIndicatorNum.setPosition(i * 60, 10);
+                pageIndicatorNum.addChild(pageNumLabel);
+                pageIndicatorNum._pageNum = i + 1;
+                pageIndicatorNum._parentNode = parentPanel;
+                pageIndicator.addChild(pageIndicatorNum, 2);
+
+                cc.eventManager.addListener(this._pageIndicatorClickEventListener.clone(), pageIndicatorNum);
             }
+            this._PageIndicatorPanel = pageIndicator;
         },
 
         switchNextPage: function (curPage, nextPage) {
@@ -470,7 +511,7 @@ const TableType = {
                 // }, this),
                 cc.moveTo(0.3, -nextPage * 1366, 0).easing(cc.easeExponentialOut())
             ));
-            this.updatePageIndicator();
+            this.updatePageIndicator(this);
         },
 
         switchPrevPage: function (curPage, nextPage) {
@@ -482,10 +523,10 @@ const TableType = {
                 // }, this),
                 cc.moveTo(0.3, -nextPage * 1366, 0).easing(cc.easeExponentialOut())
             ));
-            this.updatePageIndicator();
+            this.updatePageIndicator(this);
         },
 
-        onEnter: function(){
+        onEnter: function () {
             cc.Layer.prototype.onEnter.call(this);
             if (this._touchEventListener && !this._touchEventListener._isRegistered())
                 cc.eventManager.addListener(this._touchEventListener, this);
@@ -542,7 +583,7 @@ const TableType = {
                 tableSprite.setTableState(roomState);
             });
             ef.gameController.setTotalLobbyPage(Math.ceil(Object.keys(this._tableSpritesMap).length / 8));
-            this.updatePageIndicator();
+            this.updatePageIndicator(this);
         },
 
         positionTableSprite: function (tableSprite, tableNumber) {
@@ -806,11 +847,11 @@ const TableType = {
 
     const Object_values = (obj) => Object.keys(obj).map(key => obj[key]);
 
-    function countPlayersInRoom (roomState) {
+    function countPlayersInRoom(roomState) {
         return roomState.playersBySlot.filter(p => p != null).length;
     }
 
-    function roomIsFull (roomState) {
+    function roomIsFull(roomState) {
         const playerCount = countPlayersInRoom(roomState);
         if (roomState.singlePlay) {
             return playerCount > 0;
@@ -819,7 +860,7 @@ const TableType = {
         }
     }
 
-    function getFreeSeatsCount (roomStates) {
+    function getFreeSeatsCount(roomStates) {
         let count = 0;
         roomStates.forEach(roomState => {
             if (!roomIsFull(roomState)) {
