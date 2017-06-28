@@ -467,8 +467,11 @@ let WaveTransition = cc.Node.extend({
         onMouseMove: function(mouseData){
             const target = mouseData.getCurrentTarget();
             if (!target.isMouseDown){
-                if (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
-                        target.convertToNodeSpace(mouseData.getLocation()))) {
+                // Use the target's collision detection if it has custom detection
+                const hit = target.hitTest
+                    ? target.hitTest(mouseData.getLocation())
+                    : cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height), target.convertToNodeSpace(mouseData.getLocation()));
+                if (hit) {
                     if(target.onMouseOverIn)
                         target.onMouseOverIn(mouseData);
                 }else{
