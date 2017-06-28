@@ -686,7 +686,8 @@ const TableType = {
         },
 
         hitTest: function (point) {
-            return cc.rectContainsPoint(cc.rect(0, 0, this._contentSize.width, this._contentSize.height),
+            const margin = 40;
+            return cc.rectContainsPoint(cc.rect(margin, margin, this._contentSize.width - 2 * margin, this._contentSize.height - margin),
                 this.convertToNodeSpace(point));
         },
 
