@@ -847,11 +847,11 @@ const TableType = {
 
     const Object_values = (obj) => Object.keys(obj).map(key => obj[key]);
 
-    function countPlayersInRoom(roomState) {
+    function countPlayersInRoom (roomState) {
         return roomState.playersBySlot.filter(p => p != null).length;
     }
 
-    function roomIsFull(roomState) {
+    function roomIsFull (roomState) {
         const playerCount = countPlayersInRoom(roomState);
         if (roomState.singlePlay) {
             return playerCount > 0;
@@ -860,7 +860,7 @@ const TableType = {
         }
     }
 
-    function getFreeSeatsCount(roomStates) {
+    function getFreeSeatsCount (roomStates) {
         let count = 0;
         roomStates.forEach(roomState => {
             if (!roomIsFull(roomState)) {

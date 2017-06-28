@@ -171,7 +171,7 @@ let GameController = (function(){
             this._tablePanel = panel;
         },
         getTablePanel: function () {
-            return this._tablePanel
+            return this._tablePanel;
         },
 
     });
