@@ -547,12 +547,10 @@ const GameLogView = (function () {
             fishView.setTouchEnabled(true);
             fishView.setBounceEnabled(true);
 
-            const count = fishArray
-                .map((fish) => ({type: fish.type, count: 1}))
-                .reduce((a, b) => {
-                    a[b.type] = (a[b.type] || 0) + b.count;
-                    return a;
-                }, {});
+            const count = {};
+            fishArray.forEach(fish => {
+                count[fish.type] = (count[fish.type] || 0) + 1;
+            });
 
             let contentSize = new cc.p();
 
