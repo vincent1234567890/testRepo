@@ -168,8 +168,13 @@ const TableType = {
             //remain seats
             const lbRemainSeats = this._lbRemainSeats = new cc.LabelTTF("", "Arial", 22);
             lbRemainSeats.setAnchorPoint(1, 0.5);
-            pnTableListBg.addChild(lbRemainSeats);
+            pnTableListBg.addChild(lbRemainSeats, 2);
             lbRemainSeats.setPosition(szTableListBg.width - 38, szTableListBg.height - 35);
+
+            const lbRemainSeatsBG = new cc.Sprite("#SS_RoundConerBar.png");
+            lbRemainSeatsBG.setAnchorPoint(1, 0.5);
+            pnTableListBg.addChild(lbRemainSeatsBG, 1);
+            lbRemainSeatsBG.setPosition(szTableListBg.width - 13 - lbRemainSeats.width, szTableListBg.height - 35);
 
             //express button
             const btnExpress = this._btnExpress = ef.ButtonSprite.createSpriteButton("#SS_YellowButton.png",
