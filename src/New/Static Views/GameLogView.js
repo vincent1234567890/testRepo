@@ -400,58 +400,58 @@ const GameLogView = (function () {
 
                 const roundIdText = itemData.roundNo;
 
-                const roundId = new cc.LabelTTF(roundIdText, GAME_LOG_VIEW_FONT, GAME_LOG_VIEW_FONT_SIZE, cc.size(235, rowHeight), cc.TEXT_ALIGNMENT_RIGHT);
-                roundId._setFontWeight("bold");
-                roundId.setFontFillColor(new cc.Color(0, 0, 0, 255));
-                roundId.setVerticalAlignment(cc.VERTICAL_TEXT_ALIGNMENT_CENTER);
+                const roundIdLabel = new cc.LabelTTF(roundIdText, GAME_LOG_VIEW_FONT, GAME_LOG_VIEW_FONT_SIZE, cc.size(235, rowHeight), cc.TEXT_ALIGNMENT_RIGHT);
+                roundIdLabel._setFontWeight("bold");
+                roundIdLabel.setFontFillColor(new cc.Color(0, 0, 0, 255));
+                roundIdLabel.setVerticalAlignment(cc.VERTICAL_TEXT_ALIGNMENT_CENTER);
 
-                const totalSpend = new cc.LabelTTF(currencyString(itemData.totalSpent), GAME_LOG_VIEW_FONT, GAME_LOG_VIEW_FONT_SIZE, cc.size(150, rowHeight), cc.TEXT_ALIGNMENT_RIGHT);
-                totalSpend._setFontWeight("bold");
-                totalSpend.setFontFillColor(new cc.Color(0, 0, 0, 255));
-                totalSpend.setHorizontalAlignment(cc.TEXT_ALIGNMENT_RIGHT);
-                totalSpend.setVerticalAlignment(cc.VERTICAL_TEXT_ALIGNMENT_CENTER);
+                const totalSpendLabel = new cc.LabelTTF(currencyString(itemData.totalSpent), GAME_LOG_VIEW_FONT, GAME_LOG_VIEW_FONT_SIZE, cc.size(150, rowHeight), cc.TEXT_ALIGNMENT_RIGHT);
+                totalSpendLabel._setFontWeight("bold");
+                totalSpendLabel.setFontFillColor(new cc.Color(0, 0, 0, 255));
+                totalSpendLabel.setHorizontalAlignment(cc.TEXT_ALIGNMENT_RIGHT);
+                totalSpendLabel.setVerticalAlignment(cc.VERTICAL_TEXT_ALIGNMENT_CENTER);
 
-                const totalRevenue = new cc.LabelTTF(currencyString(itemData.totalRevenue), GAME_LOG_VIEW_FONT, GAME_LOG_VIEW_FONT_SIZE, cc.size(150, rowHeight), cc.TEXT_ALIGNMENT_RIGHT);
-                totalRevenue._setFontWeight("bold");
-                totalRevenue.setFontFillColor(new cc.Color(0, 0, 0, 255));
-                totalRevenue.setHorizontalAlignment(cc.TEXT_ALIGNMENT_RIGHT);
-                totalRevenue.setVerticalAlignment(cc.VERTICAL_TEXT_ALIGNMENT_CENTER);
+                const totalRevenueLabel = new cc.LabelTTF(currencyString(itemData.totalRevenue), GAME_LOG_VIEW_FONT, GAME_LOG_VIEW_FONT_SIZE, cc.size(150, rowHeight), cc.TEXT_ALIGNMENT_RIGHT);
+                totalRevenueLabel._setFontWeight("bold");
+                totalRevenueLabel.setFontFillColor(new cc.Color(0, 0, 0, 255));
+                totalRevenueLabel.setHorizontalAlignment(cc.TEXT_ALIGNMENT_RIGHT);
+                totalRevenueLabel.setVerticalAlignment(cc.VERTICAL_TEXT_ALIGNMENT_CENTER);
 
-                const totalProfit = new cc.LabelTTF(currencyString(itemData.totalRevenue - itemData.totalSpent), GAME_LOG_VIEW_FONT, GAME_LOG_VIEW_FONT_SIZE, cc.size(150, rowHeight), cc.TEXT_ALIGNMENT_RIGHT);
-                totalProfit._setFontWeight("bold");
-                totalProfit.setFontFillColor(new cc.Color(0, 0, 0, 255));
-                totalProfit.setHorizontalAlignment(cc.TEXT_ALIGNMENT_RIGHT);
-                totalProfit.setVerticalAlignment(cc.VERTICAL_TEXT_ALIGNMENT_CENTER);
+                const totalProfitLabel = new cc.LabelTTF(currencyString(itemData.totalRevenue - itemData.totalSpent), GAME_LOG_VIEW_FONT, GAME_LOG_VIEW_FONT_SIZE, cc.size(150, rowHeight), cc.TEXT_ALIGNMENT_RIGHT);
+                totalProfitLabel._setFontWeight("bold");
+                totalProfitLabel.setFontFillColor(new cc.Color(0, 0, 0, 255));
+                totalProfitLabel.setHorizontalAlignment(cc.TEXT_ALIGNMENT_RIGHT);
+                totalProfitLabel.setVerticalAlignment(cc.VERTICAL_TEXT_ALIGNMENT_CENTER);
 
                 const endDate = new Date(itemData.endTime);
-                const startTime = new cc.LabelTTF(date.toLocaleDateString("en-GB") + "\n" + date.toLocaleTimeString("en-GB"),
+                const startTimeLabel = new cc.LabelTTF(date.toLocaleDateString("en-GB") + "\n" + date.toLocaleTimeString("en-GB"),
                     GAME_LOG_VIEW_FONT, GAME_LOG_VIEW_FONT_SIZE - 4);
-                startTime._setFontWeight("bold");
-                startTime.setFontFillColor(new cc.Color(0, 0, 0, 255));
-                startTime.setHorizontalAlignment(cc.TEXT_ALIGNMENT_CENTER);
-                startTime.setVerticalAlignment(cc.VERTICAL_TEXT_ALIGNMENT_CENTER);
-                const endTime = new cc.LabelTTF(endDate.toLocaleDateString("en-GB") + "\n" + endDate.toLocaleTimeString("en-GB"),
+                startTimeLabel._setFontWeight("bold");
+                startTimeLabel.setFontFillColor(new cc.Color(0, 0, 0, 255));
+                startTimeLabel.setHorizontalAlignment(cc.TEXT_ALIGNMENT_CENTER);
+                startTimeLabel.setVerticalAlignment(cc.VERTICAL_TEXT_ALIGNMENT_CENTER);
+                const endTimeLabel = new cc.LabelTTF(endDate.toLocaleDateString("en-GB") + "\n" + endDate.toLocaleTimeString("en-GB"),
                     GAME_LOG_VIEW_FONT, GAME_LOG_VIEW_FONT_SIZE - 4);
-                endTime._setFontWeight("bold");
-                endTime.setFontFillColor(new cc.Color(0, 0, 0, 255));
-                endTime.setHorizontalAlignment(cc.TEXT_ALIGNMENT_CENTER);
-                endTime.setVerticalAlignment(cc.VERTICAL_TEXT_ALIGNMENT_CENTER);
+                endTimeLabel._setFontWeight("bold");
+                endTimeLabel.setFontFillColor(new cc.Color(0, 0, 0, 255));
+                endTimeLabel.setHorizontalAlignment(cc.TEXT_ALIGNMENT_CENTER);
+                endTimeLabel.setVerticalAlignment(cc.VERTICAL_TEXT_ALIGNMENT_CENTER);
 
-                roundId.setAnchorPoint(0, 0.5);
+                roundIdLabel.setAnchorPoint(0, 0.5);
 
-                roundId.setPosition(0, listEntryPos.y);
-                totalSpend.setPosition(300, listEntryPos.y);
-                totalRevenue.setPosition(450, listEntryPos.y);
-                totalProfit.setPosition(600, listEntryPos.y);
-                startTime.setPosition(790, listEntryPos.y);
-                endTime.setPosition(940, listEntryPos.y);
+                roundIdLabel.setPosition(0, listEntryPos.y);
+                totalSpendLabel.setPosition(300, listEntryPos.y);
+                totalRevenueLabel.setPosition(450, listEntryPos.y);
+                totalProfitLabel.setPosition(600, listEntryPos.y);
+                startTimeLabel.setPosition(790, listEntryPos.y);
+                endTimeLabel.setPosition(940, listEntryPos.y);
 
-                wrapper.addChild(roundId);
-                wrapper.addChild(totalSpend);
-                wrapper.addChild(totalRevenue);
-                wrapper.addChild(totalProfit);
-                wrapper.addChild(startTime);
-                wrapper.addChild(endTime);
+                wrapper.addChild(roundIdLabel);
+                wrapper.addChild(totalSpendLabel);
+                wrapper.addChild(totalRevenueLabel);
+                wrapper.addChild(totalProfitLabel);
+                wrapper.addChild(startTimeLabel);
+                wrapper.addChild(endTimeLabel);
 
                 const item = new RolloverEffectItem(wrapper, onSelected, onUnselected, onHover, onUnhover);
                 function onSelected(item) {
