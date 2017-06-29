@@ -89,28 +89,24 @@ const transferSecondsToString = function (seconds) {
         (strSecs.length === 1 ? ("0" + strSecs) : strSecs);
 };
 
-const setNodewithChildrenforProperty = function (rootNode, conditionCallback, callback) {
-    function setProp(obj) {
+const setNodeWithChildrenForProperty = function (rootNode, conditionCallback, callback) {
+    function setProp (obj) {
         callback(obj);
         if (obj.childrenCount) {
-            obj.children.forEach(item => {
-                setProp(item);
-            })
+            obj.children.forEach(setProp);
         }
     }
 
-    function lookforNode(obj) {
+    function lookforNode (obj) {
         if (conditionCallback(obj)) {
             setProp(obj);
         } else if (obj.childrenCount) {
-            obj.children.forEach(item => {
-                lookforNode(item);
-            })
+            obj.children.forEach(lookforNode);
         }
     }
 
     lookforNode(rootNode);
-}
+};
 
 //Floating Menu
 let GameFloatingMenu = cc.Node.extend({
