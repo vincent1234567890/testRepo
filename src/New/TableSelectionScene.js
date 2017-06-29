@@ -375,6 +375,7 @@ const TableType = {
 
         executeClickCallback: function (touch, event) {
             this._isSpectating = !this._isSpectating;
+            ef.gameController.setGlobalProp('spectating', this._isSpectating);
             this.updateBtnText();
             let tablePanel = ef.gameController.getTablePanel();
             let self = this;
@@ -662,6 +663,8 @@ const TableType = {
         //SS_Table.png
         _spGlow: null,
         _lbTitle: null,
+        _spSpecText: null,
+
         _lbReserveTime: null,
         _selectionMadeCallback: null,
         _roomId: null,
@@ -692,6 +695,12 @@ const TableType = {
             this.addChild(spGlow);
             spGlow.setPosition(szContent.width * 0.5, szContent.height * 0.5);
             spGlow.setVisible(false);
+
+            //spectate text
+            const spSpecText = this._spSpecText = new cc.Sprite("#SS_SpectateChinese.png");
+            this.addChild(spSpecText);
+            spSpecText.setPosition(szContent.width * 0.5, szContent.height * 0.5);
+            spSpecText.setVisible(false);
 
             //title
             const lbTitle = this._lbTitle = new cc.LabelTTF("018", "Arial", 22);
@@ -755,6 +764,10 @@ const TableType = {
                 if (!roomIsFull(this._roomState)) {
                     this._spGlow.setVisible(true);
                 }
+                if (ef.gameController.getGlobalProp('spectating')) {
+                    this._spSpecText.setVisible(true);
+                }
+
             }
         },
 
@@ -762,6 +775,7 @@ const TableType = {
             if (this._isMouseOverIn) {
                 this._isMouseOverIn = false;
                 this._spGlow.setVisible(false);
+                this._spSpecText.setVisible(false);
             }
         },
 

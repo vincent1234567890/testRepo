@@ -174,6 +174,13 @@ let GameController = (function(){
             return this._tablePanel;
         },
 
+        setGlobalProp: function (prop, val) {
+            this[prop] = val;
+            return val;
+        },
+        getGlobalProp: function (prop) {
+            return this[prop];
+        }
     });
 
     cc.EventHelper.prototype.apply(GameController.prototype);
