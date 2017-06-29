@@ -377,8 +377,19 @@ const TableType = {
             this._isSpectating = !this._isSpectating;
             this.updateBtnText();
             let tablePanel = ef.gameController.getTablePanel();
+            let self = this;
             if (tablePanel) {
-                setNodewithChildrenforProperty(tablePanel.getParent(), '_goOpaqueWhenSpectating', true, 'opacity', this._isSpectating ? 120 : 255);
+                setNodewithChildrenforProperty(tablePanel.getParent(), function (node) {
+                    return node && node._goOpaqueWhenSpectating === true
+                }, function (obj) {
+                    if (obj) {
+                        if (obj.opacity === 255 && self._isSpectating) {
+                            obj.opacity = 120;
+                        } else if (obj.opacity === 120 && !self._isSpectating) {
+                            obj.opacity = 255;
+                        }
+                    }
+                });
             }
 
             if (this._clickCallback)
