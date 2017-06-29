@@ -146,12 +146,14 @@ const TableType = {
             btnMultiple.setPosition(12, cc.visibleRect.top.y - 205);
             btnMultiple.setStatus(ef.BUTTONSTATE.SELECTED);
             btnMultiple.setClickHandler(this.tableTypeClick, this);
+            btnMultiple._goOpaqueWhenSpectating = true;
 
             const btnSolo = this._btnSolo = new ef.LayerColorButton("#SSSoloChinese.png", 220, 55);
             this.addChild(btnSolo);
             btnSolo.setPosition(233, cc.visibleRect.top.y - 205);
             btnSolo.setStatus(ef.BUTTONSTATE.NORMAL);
             btnSolo.setClickHandler(this.tableTypeClick, this);
+            btnSolo._goOpaqueWhenSpectating = true;
 
             //table panel
             const szTableListBg = new cc.Size(cc.visibleRect.width - 24, cc.visibleRect.height - 265);
@@ -179,6 +181,7 @@ const TableType = {
             //express button
             const btnExpress = this._btnExpress = ef.ButtonSprite.createSpriteButton("#SS_YellowButton.png",
                 "#SS_YellowHover.png", "#SS_ExpressChinese.png");
+            btnExpress._goOpaqueWhenSpectating = true;
             btnExpress.setPosition(90, szTableListBg.height - 35);
             pnTableListBg.addChild(btnExpress);
             const expressButtonClicked = () => {
@@ -293,7 +296,7 @@ const TableType = {
 
                 // Count free seats (of correct type)
                 const freeSeats = getFreeSeatsCount(roomStatesToShow);
-                this._lbRemainSeats.setString("剩余" + String(freeSeats) + "个座位");
+                this._lbRemainSeats.setString("剩余" + String(freeSeats) + "个吉位");
 
                 // Update the state of existing room sprites (and append new sprites if needed)
                 this._pnTableList.updateRoomStates(roomStatesToShow);
@@ -307,6 +310,8 @@ const TableType = {
 
         _spIcon: null,
         _spTitle: null,
+
+        _isSpectating: false,
 
         _touchEventListener: null,
         _mouseoverEventListener: null,
@@ -369,8 +374,29 @@ const TableType = {
         },
 
         executeClickCallback: function (touch, event) {
+            this._isSpectating = !this._isSpectating;
+            this.updateBtnText();
+            let tablePanel = ef.gameController.getTablePanel();
+            if (tablePanel) {
+                setNodewithChildrenforProperty(tablePanel.getParent(), '_goOpaqueWhenSpectating', true, 'opacity', this._isSpectating ? 120 : 255);
+            }
+
             if (this._clickCallback)
                 this._clickCallback.call(this._clickTarget, touch, event);
+        },
+
+        updateBtnText: function () {
+            //update icon
+            const inconStr = this._isSpectating ? "SS_SpectateBackIcon.png" : "SS_SpectateIcon.png";
+            const iconSprite = cc.spriteFrameCache.getSpriteFrame(inconStr);
+            if (iconSprite)
+                this._spIcon.setSpriteFrame(iconSprite);
+
+            //update text
+            const textStr = this._isSpectating ? "SS_BackChinese.png" : "SS_SpectateChinese.png";
+            const textSprite = cc.spriteFrameCache.getSpriteFrame(textStr);
+            if (textSprite)
+                this._spTitle.setSpriteFrame(textSprite);
         }
     });
 
