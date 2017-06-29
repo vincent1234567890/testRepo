@@ -619,7 +619,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>GLBlackWhiteyellow.png</key>
+            <key>GLBlackwhiteyellow.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -694,7 +694,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>GLGBlackWhiteyellow.png</key>
+            <key>GLGBlackwhiteyellow.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -2193,7 +2193,7 @@
             <key>size</key>
             <string>{1571,1571}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:ea2358e4dfd5f5f3820b4f8ad7103ba6:c3a3f27960e226f1fc3df9e86948cbc3:474a9a58f742d06d2866a4a6eac25590$</string>
+            <string>$TexturePacker:SmartUpdate:39929ab06384a6ee039c41ef5da8d91c:c3a3f27960e226f1fc3df9e86948cbc3:474a9a58f742d06d2866a4a6eac25590$</string>
             <key>textureFileName</key>
             <string>Menu.png</string>
         </dict>
