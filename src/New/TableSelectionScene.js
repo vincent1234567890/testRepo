@@ -309,6 +309,7 @@ const TableType = {
         _spTitle: null,
 
         _touchEventListener: null,
+        _mouseoverEventListener: null,
 
         ctor: function () {
             //129 x 42
@@ -325,6 +326,7 @@ const TableType = {
             spTitle.setPosition(90, 22);
 
             this._touchEventListener = new ef.SpriteClickHandler();
+            this._mouseoverEventListener = new ef.MouseOverEventListener();
         },
 
         hitTest: function (point) {
@@ -336,6 +338,8 @@ const TableType = {
             cc.Sprite.prototype.onEnter.call(this);
             if (this._touchEventListener && !this._touchEventListener._isRegistered())
                 cc.eventManager.addListener(this._touchEventListener, this);
+            if (this._mouseoverEventListener && !this._mouseoverEventListener._isRegistered())
+                cc.eventManager.addListener(this._mouseoverEventListener, this);
         },
 
         setStatus: function (status) {
@@ -347,9 +351,18 @@ const TableType = {
                 (this._status === ef.BUTTONSTATE.NORMAL) ? this._normalName : this._selectedName);
             if (spriteFrame)
                 this.setSpriteFrame(spriteFrame);
-
         },
 
+        onMouseOverIn: function () {
+            const spriteFrame = cc.spriteFrameCache.getSpriteFrame(this._selectedName);
+            if (spriteFrame)
+                this.setSpriteFrame(spriteFrame);
+        },
+        onMouseOverOut: function () {
+            const spriteFrame = cc.spriteFrameCache.getSpriteFrame(this._normalName);
+            if (spriteFrame)
+                this.setSpriteFrame(spriteFrame);
+        },
         setClickHandler: function (callback, target) {
             this._clickCallback = callback;
             this._clickTarget = target;
@@ -856,11 +869,11 @@ const TableType = {
 
     const Object_values = (obj) => Object.keys(obj).map(key => obj[key]);
 
-    function countPlayersInRoom (roomState) {
+    function countPlayersInRoom(roomState) {
         return roomState.playersBySlot.filter(p => p != null).length;
     }
 
-    function roomIsFull (roomState) {
+    function roomIsFull(roomState) {
         const playerCount = countPlayersInRoom(roomState);
         if (roomState.singlePlay) {
             return playerCount > 0;
@@ -869,7 +882,7 @@ const TableType = {
         }
     }
 
-    function getFreeSeatsCount (roomStates) {
+    function getFreeSeatsCount(roomStates) {
         let count = 0;
         roomStates.forEach(roomState => {
             if (!roomIsFull(roomState)) {
