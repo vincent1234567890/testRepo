@@ -89,9 +89,9 @@ const transferSecondsToString = function (seconds) {
         (strSecs.length === 1 ? ("0" + strSecs) : strSecs);
 };
 
-const setNodewithChildrenforProperty = function (rootNode, flag, flagVal, prop, propVal) {
+const setNodewithChildrenforProperty = function (rootNode, conditionCallback, callback) {
     function setProp(obj) {
-        obj[prop] = propVal;
+        callback(obj);
         if (obj.childrenCount) {
             obj.children.forEach(item => {
                 setProp(item);
@@ -99,17 +99,17 @@ const setNodewithChildrenforProperty = function (rootNode, flag, flagVal, prop, 
         }
     }
 
-    function lookforOpactity(obj) {
-        if (obj && obj[flag] === flagVal) {
+    function lookforNode(obj) {
+        if (conditionCallback(obj)) {
             setProp(obj);
         } else if (obj.childrenCount) {
             obj.children.forEach(item => {
-                lookforOpactity(item);
+                lookforNode(item);
             })
         }
     }
 
-    lookforOpactity(rootNode);
+    lookforNode(rootNode);
 }
 
 //Floating Menu
