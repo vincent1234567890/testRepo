@@ -89,6 +89,29 @@ const transferSecondsToString = function (seconds) {
         (strSecs.length === 1 ? ("0" + strSecs) : strSecs);
 };
 
+const setNodewithChildrenforProperty = function (rootNode, flag, flagVal, prop, propVal) {
+    function setProp(obj) {
+        obj[prop] = propVal;
+        if (obj.childrenCount) {
+            obj.children.forEach(item => {
+                setProp(item);
+            })
+        }
+    }
+
+    function lookforOpactity(obj) {
+        if (obj && obj[flag] === flagVal) {
+            setProp(obj);
+        } else if (obj.childrenCount) {
+            obj.children.forEach(item => {
+                lookforOpactity(item);
+            })
+        }
+    }
+
+    lookforOpactity(rootNode);
+}
+
 //Floating Menu
 let GameFloatingMenu = cc.Node.extend({
     _btnSetting: null,
