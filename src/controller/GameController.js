@@ -25,6 +25,7 @@ let GameController = (function(){
         _isLockMode: LockFishStatus.RELEASE,
         _leaveGameTimeout: null,
         _currentPlayer: null,
+
         _lobbyPageNum: 0,
         _lobbyPageTotal: 0,
         ctor: function() {
@@ -172,7 +173,7 @@ let GameController = (function(){
         },
         getTablePanel: function () {
             return this._tablePanel;
-        },
+        }
 
     });
 

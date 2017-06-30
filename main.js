@@ -30,6 +30,8 @@ var cocos2dApp = cc.game.onStart = function() {
 
     ef.gameController = new GameController();
 
+    //todo --refactor code.  shows connection server first. and then show loading bar.
+
     //load resources
     ClientServerConnect.doInitialConnect().then(
         data => {
