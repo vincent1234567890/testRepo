@@ -185,11 +185,31 @@ const TableType = {
             btnExpress.setPosition(90, szTableListBg.height - 35);
             pnTableListBg.addChild(btnExpress);
             const expressButtonClicked = () => {
+                if (ef.gameController.getGlobalProp('spectating')) {
+                    return
+                }
                 const singlePlay = this.getSelectedTableType === TableType.SINGLE;
                 selectionMadeCallback({singlePlay});
             };
             btnExpress.setClickHandler(expressButtonClicked, this);
 
+            //overwrite the default mouse moving handler by checking spectating status
+            btnExpress.onMouseOverIn = function () {
+                if (ef.gameController.getGlobalProp('spectating')) {
+                    return
+                }
+                const spriteFrame = cc.spriteFrameCache.getSpriteFrame(this._selectedSprite.substr(1));
+                if (spriteFrame)
+                    this.setSpriteFrame(spriteFrame);
+            };
+            btnExpress.onMouseOverOut = function () {
+                if (ef.gameController.getGlobalProp('spectating')) {
+                    return
+                }
+                const spriteFrame = cc.spriteFrameCache.getSpriteFrame(this._normalSprite.substr(1));
+                if (spriteFrame)
+                    this.setSpriteFrame(spriteFrame);
+            };
             //onlookers button
             const btnSpectate = this._btnSpectate = new SpectateButton();
             btnSpectate.setPosition(220, szTableListBg.height - 35);
@@ -628,6 +648,10 @@ const TableType = {
                     this._tableSpritesMap[roomId] = newTableSprite;
                 }
                 const tableSprite = this._tableSpritesMap[roomId];
+
+                //testing code for occupied seats, can be removed
+                //roomState.roomLockStatus = Date.now() % 2 == 0 ? [] : ['p'];
+
                 tableSprite.setTableState(roomState);
             });
             ef.gameController.setTotalLobbyPage(Math.ceil(Object.keys(this._tableSpritesMap).length / 8));
@@ -827,7 +851,12 @@ const TableType = {
         ctor: function (seatSelectedCallback, seatNumber) {
             //SS_YellowSit,  SS_BlueSit
             cc.Sprite.prototype.ctor.call(this, "#SS_YellowSit.png");
-
+            if (!cc.spriteFrameCache.getSpriteFrame("SS_YellowSit.png")) {
+                cc.spriteFrameCache.addSpriteFrames("#SS_YellowSit.png");
+            }
+            if (!cc.spriteFrameCache.getSpriteFrame("SS_BlueSit.png")) {
+                cc.spriteFrameCache.addSpriteFrames("#SS_BlueSit.png");
+            }
             this._seatSelectedCallback = seatSelectedCallback;
             this._seatNumber = seatNumber;
 
@@ -894,6 +923,17 @@ const TableType = {
                 this._lbPlayerName.setString('-');
                 this._spPlayerBase.setVisible(false);
                 this._lbPlayerName.setVisible(false);
+            }
+            let spriteStr = null;
+            if (roomState && roomState.roomLockStatus && roomState.roomLockStatus[0]) {
+                this.setVisible(true);
+                spriteStr = "SS_BlueSit.png";
+            } else {
+                spriteStr = "SS_YellowSit.png";
+            }
+            const spriteFrame = cc.spriteFrameCache.getSpriteFrame(spriteStr);
+            if (spriteFrame) {
+                this.setSpriteFrame(spriteFrame);
             }
         },
 
