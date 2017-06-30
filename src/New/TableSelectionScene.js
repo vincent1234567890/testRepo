@@ -185,11 +185,31 @@ const TableType = {
             btnExpress.setPosition(90, szTableListBg.height - 35);
             pnTableListBg.addChild(btnExpress);
             const expressButtonClicked = () => {
+                if (ef.gameController.getGlobalProp('spectating')) {
+                    return
+                }
                 const singlePlay = this.getSelectedTableType === TableType.SINGLE;
                 selectionMadeCallback({singlePlay});
             };
             btnExpress.setClickHandler(expressButtonClicked, this);
 
+            //overwrite the default mouse moving handler by checking spectating status
+            btnExpress.onMouseOverIn = function () {
+                if (ef.gameController.getGlobalProp('spectating')) {
+                    return
+                }
+                const spriteFrame = cc.spriteFrameCache.getSpriteFrame(this._selectedSprite.substr(1));
+                if (spriteFrame)
+                    this.setSpriteFrame(spriteFrame);
+            };
+            btnExpress.onMouseOverOut = function () {
+                if (ef.gameController.getGlobalProp('spectating')) {
+                    return
+                }
+                const spriteFrame = cc.spriteFrameCache.getSpriteFrame(this._normalSprite.substr(1));
+                if (spriteFrame)
+                    this.setSpriteFrame(spriteFrame);
+            };
             //onlookers button
             const btnSpectate = this._btnSpectate = new SpectateButton();
             btnSpectate.setPosition(220, szTableListBg.height - 35);
