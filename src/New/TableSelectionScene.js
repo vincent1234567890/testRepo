@@ -826,12 +826,13 @@ const TableType = {
                 // Cannot join this room
                 return;
             }
-            //check if spectating
+
+            // Check if spectating
             if (ef.gameController.getGlobalProp('spectating')) {
 
             }
 
-            //check if solo
+            // If this is a single play room, check the player has enough credit to join
             if (this._roomState && this._roomState.singlePlay === true) {
                 const curPlayer = ef.gameController.getCurrentPlayer();
 
@@ -842,17 +843,20 @@ const TableType = {
                 };
                 const multiplier = multiObj[this._roomState.sceneName] || 1;
 
-                if (curPlayer.score < 5000 * multiplier) {
-                    console.log('invalid score');
-                }
+                // @todo const creditRequiredToJoinRoom = // Can be obtained from lobbyConfig
+                const creditRequiredToJoinRoom = 5000 * multiplier;
 
-                const newErrorPanel = new ef.ErrorMsgDialog(600, 400, 'not enough credit');
-                const tablePanel = ef.gameController.getTablePanel();
-                const content = tablePanel.getContentSize();
-                newErrorPanel.setPosition(content.width / 2, content.height * 2 / 3);
-                tablePanel.getParent().addChild(newErrorPanel, 100);
-                return;
+                if (curPlayer.score < creditRequiredToJoinRoom) {
+                    console.log('Not enough credit to join room');
+                    const newErrorPanel = new ef.ErrorMsgDialog(600, 400, `You need at least ${creditRequiredToJoinRoom} credit to join a single player room`);
+                    const tablePanel = ef.gameController.getTablePanel();
+                    const content = tablePanel.getContentSize();
+                    newErrorPanel.setPosition(content.width / 2, content.height * 2 / 3);
+                    tablePanel.getParent().addChild(newErrorPanel, 100);
+                    return;
+                }
             }
+
             const roomState = this._roomState;
             joinPrefs = Object.assign({}, joinPrefs, {
                 roomId: roomState.roomId,
@@ -952,9 +956,11 @@ const TableType = {
                 this._lbPlayerName.setVisible(false);
             }
             let spriteStr = null;
-            if (roomState && roomState.roomLockStatus && roomState.roomLockStatus[0]) {
+            if (roomState && roomState.roomLockStatus) {
                 this.setVisible(true);
                 spriteStr = "SS_BlueSit.png";
+                const isMyLockedRoom = roomState.roomLockStatus.players[0].playerId === ef.gameController.getCurrentPlayer().id;
+                // @todo ... ?
             } else {
                 spriteStr = "SS_YellowSit.png";
             }
