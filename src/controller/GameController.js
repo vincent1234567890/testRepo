@@ -14,7 +14,7 @@ const PlayerSeatDirection = {
     VERTICAL: 1,
     DW_VERTICAL: 2
 };
-let GameController = (function(){
+let GameController = (function () {
     let GameController = cc.Class.extend({
         _currentMultiple: 0,
         _soundVolume: 0.5,
@@ -28,7 +28,7 @@ let GameController = (function(){
 
         _lobbyPageNum: 0,
         _lobbyPageTotal: 0,
-        ctor: function() {
+        ctor: function () {
             this._currentMultiple = 1;
             if (cc.sys.localStorage.getItem("sound_volume") === null) {
                 this._soundVolume = 0.5;
@@ -68,81 +68,81 @@ let GameController = (function(){
             });
         },
 
-        setCurrentPlayer: function(player){
+        setCurrentPlayer: function (player) {
             //remove the player event
             this._currentPlayer = player;
         },
 
-        getCurrentPlayer: function(){
+        getCurrentPlayer: function () {
             return this._currentPlayer;
         },
 
-        isInFocus: function(){
+        isInFocus: function () {
             return this._isInFocus;
         },
 
-        isInGame: function(){
+        isInGame: function () {
             return this._isInGame;
         },
 
-        enterGame: function(){
+        enterGame: function () {
             this._isInGame = true;
         },
 
-        leaveGame: function(){
+        leaveGame: function () {
             this._isInGame = false;
             this._isLockMode = LockFishStatus.RELEASE;  //leave game, lockMode auto set to 'RELEASE'
         },
 
-        getLockMode: function(){
+        getLockMode: function () {
             return this._isLockMode;
         },
 
-        setLockMode: function(lock){
+        setLockMode: function (lock) {
             this._isLockMode = lock;
         },
 
-        getCurrentMultiple: function(){
+        getCurrentMultiple: function () {
             return this._currentMultiple;
         },
 
-        setCurrentMultiple: function(multiple){
+        setCurrentMultiple: function (multiple) {
             this._currentMultiple = multiple;
         },
 
-        getSoundVolume: function(){
+        getSoundVolume: function () {
             return this._soundVolume;
         },
 
-        setSoundVolume: function(soundVolume){
-            if(soundVolume === null)
+        setSoundVolume: function (soundVolume) {
+            if (soundVolume === null)
                 return;
-            if(soundVolume < 0)
+            if (soundVolume < 0)
                 soundVolume = 0;
             this._soundVolume = soundVolume;
             cc.sys.localStorage.setItem("sound_volume", soundVolume.toFixed(2));
             cc.audioEngine.setEffectsVolume(soundVolume);
         },
 
-        getMusicVolume: function(){
+        getMusicVolume: function () {
             return this._musicVolume;
         },
 
-        setMusicVolume: function(musicVolume){
-            if(musicVolume === null)
-                return ;
-            if(musicVolume < 0)
+        setMusicVolume: function (musicVolume) {
+            if (musicVolume === null)
+                return;
+            if (musicVolume < 0)
                 musicVolume = 0;
             this._musicVolume = musicVolume;
             cc.sys.localStorage.setItem("music_volume", musicVolume.toFixed(2));
             cc.audioEngine.setMusicVolume(musicVolume);
         },
 
-        setCurrentSeat: function(seat){
+        setCurrentSeat: function (seat) {
             this._currentSeat = seat;
         },
 
-        getCurrentSeat: function(){
+        getCurrentSeat: function () {
             return this._currentSeat;
         },
 
@@ -175,6 +175,13 @@ let GameController = (function(){
             return this._tablePanel;
         }
 
+        setGlobalProp: function (prop, val) {
+            this[prop] = val;
+            return val;
+        },
+        getGlobalProp: function (prop) {
+            return this[prop];
+        }
     });
 
     cc.EventHelper.prototype.apply(GameController.prototype);

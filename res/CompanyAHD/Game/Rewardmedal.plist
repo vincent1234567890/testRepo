@@ -4,6 +4,36 @@
     <dict>
         <key>frames</key>
         <dict>
+            <key>BatoidsNameChinese.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{84,27}</string>
+                <key>spriteSourceSize</key>
+                <string>{90,27}</string>
+                <key>textureRect</key>
+                <string>{{333,1013},{84,27}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>GBatoidsNameChinese.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{84,27}</string>
+                <key>spriteSourceSize</key>
+                <string>{90,27}</string>
+                <key>textureRect</key>
+                <string>{{333,1013},{84,27}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
             <key>GJellyFishNameChinese.png</key>
             <dict>
                 <key>aliases</key>
@@ -19,7 +49,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>GLantern2NameChinese.png</key>
+            <key>GLanternfishNameChinese.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -30,11 +60,11 @@
                 <key>spriteSourceSize</key>
                 <string>{90,27}</string>
                 <key>textureRect</key>
-                <string>{{333,1013},{84,27}}</string>
+                <string>{{365,1122},{84,27}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
-            <key>GLionFish2NameChinese.png</key>
+            <key>GLionfishName Chinese.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -49,21 +79,6 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>GMarlins2NameChinese.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-2,0}</string>
-                <key>spriteSize</key>
-                <string>{56,27}</string>
-                <key>spriteSourceSize</key>
-                <string>{90,27}</string>
-                <key>textureRect</key>
-                <string>{{515,1003},{56,27}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
             <key>GMermaidNameChinese.png</key>
             <dict>
                 <key>aliases</key>
@@ -75,7 +90,7 @@
                 <key>spriteSourceSize</key>
                 <string>{90,27}</string>
                 <key>textureRect</key>
-                <string>{{365,1122},{84,27}}</string>
+                <string>{{394,1122},{84,27}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -90,11 +105,11 @@
                 <key>spriteSourceSize</key>
                 <string>{90,27}</string>
                 <key>textureRect</key>
-                <string>{{573,1003},{56,27}}</string>
+                <string>{{515,1003},{56,27}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>GPaddleFish2NameChinese.png</key>
+            <key>GPaddlefishNameChinese.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -105,26 +120,26 @@
                 <key>spriteSourceSize</key>
                 <string>{90,27}</string>
                 <key>textureRect</key>
-                <string>{{394,1122},{84,27}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>GRay2NameChinese.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{84,27}</string>
-                <key>spriteSourceSize</key>
-                <string>{90,27}</string>
-                <key>textureRect</key>
                 <string>{{423,1122},{84,27}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>GShark2NameChinese.png</key>
+            <key>GSeaTurtleNameChinese.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-1,0}</string>
+                <key>spriteSize</key>
+                <string>{56,27}</string>
+                <key>spriteSourceSize</key>
+                <string>{90,27}</string>
+                <key>textureRect</key>
+                <string>{{573,1003},{56,27}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>GSharkNameChinese.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -139,12 +154,12 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>GTurtle2NameChinese.png</key>
+            <key>GSwordfishNameChinese.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-1,0}</string>
+                <string>{-2,0}</string>
                 <key>spriteSize</key>
                 <string>{56,27}</string>
                 <key>spriteSourceSize</key>
@@ -169,7 +184,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Lantern2NameChinese.png</key>
+            <key>LanternfishNameChinese.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -180,11 +195,11 @@
                 <key>spriteSourceSize</key>
                 <string>{90,27}</string>
                 <key>textureRect</key>
-                <string>{{333,1013},{84,27}}</string>
+                <string>{{365,1122},{84,27}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
-            <key>LionFish2NameChinese.png</key>
+            <key>LionfishName Chinese.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -199,21 +214,6 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>Marlins2NameChinese.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-2,0}</string>
-                <key>spriteSize</key>
-                <string>{56,27}</string>
-                <key>spriteSourceSize</key>
-                <string>{90,27}</string>
-                <key>textureRect</key>
-                <string>{{515,1003},{56,27}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
             <key>MermaidNameChinese.png</key>
             <dict>
                 <key>aliases</key>
@@ -225,7 +225,7 @@
                 <key>spriteSourceSize</key>
                 <string>{90,27}</string>
                 <key>textureRect</key>
-                <string>{{365,1122},{84,27}}</string>
+                <string>{{394,1122},{84,27}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -240,31 +240,16 @@
                 <key>spriteSourceSize</key>
                 <string>{90,27}</string>
                 <key>textureRect</key>
-                <string>{{573,1003},{56,27}}</string>
+                <string>{{515,1003},{56,27}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>PaddleFish2NameChinese.png</key>
+            <key>PaddlefishNameChinese.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{1,0}</string>
-                <key>spriteSize</key>
-                <string>{84,27}</string>
-                <key>spriteSourceSize</key>
-                <string>{90,27}</string>
-                <key>textureRect</key>
-                <string>{{394,1122},{84,27}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>Ray2NameChinese.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
                 <key>spriteSize</key>
                 <string>{84,27}</string>
                 <key>spriteSourceSize</key>
@@ -1024,7 +1009,22 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Shark2NameChinese.png</key>
+            <key>SeaTurtleNameChinese.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-1,0}</string>
+                <key>spriteSize</key>
+                <string>{56,27}</string>
+                <key>spriteSourceSize</key>
+                <string>{90,27}</string>
+                <key>textureRect</key>
+                <string>{{573,1003},{56,27}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>SharkNameChinese.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -1039,12 +1039,12 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Turtle2NameChinese.png</key>
+            <key>SwordfishNameChinese.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-1,0}</string>
+                <string>{-2,0}</string>
                 <key>spriteSize</key>
                 <string>{56,27}</string>
                 <key>spriteSourceSize</key>
@@ -1068,7 +1068,7 @@
             <key>size</key>
             <string>{1238,1238}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:d790d14924124d151945b26dcacdd368:6b7e55cb3196acab7c948eff8ebf0f0f:d78ffb308dcc167eeb3381fa1a88437d$</string>
+            <string>$TexturePacker:SmartUpdate:8f98491de347800b3991fd0d037c236f:c8d1f4b944a2c24ab21ac1c009595d57:d78ffb308dcc167eeb3381fa1a88437d$</string>
             <key>textureFileName</key>
             <string>Rewardmedal.png</string>
         </dict>

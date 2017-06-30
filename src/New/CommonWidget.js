@@ -3,12 +3,12 @@
 let PlayerInfoWidget = cc.Node.extend({
     _lbPlayerName: null,
     _lbPlayerCredit: null,
-    ctor: function(playerInfo){
+    ctor: function (playerInfo) {
         cc.Node.prototype.ctor.call(this);
-        this._className= 'PlayerInfoWidget';
+        this._className = 'PlayerInfoWidget';
 
         //load spriteFrame
-        if(!cc.spriteFrameCache.getSpriteFrame(ReferenceName.NameBG)){
+        if (!cc.spriteFrameCache.getSpriteFrame(ReferenceName.NameBG)) {
             cc.spriteFrameCache.addSpriteFrames(res.LobbyUIPlist);
         }
 
@@ -42,29 +42,32 @@ let PlayerInfoWidget = cc.Node.extend({
         this.updatePlayerCredit(player.score);
     },
 
-    updatePlayerCredit: function(playerCredit){
-        if(!playerCredit)
+    updatePlayerCredit: function (playerCredit) {
+        if (!playerCredit)
             playerCredit = 0;
-        this._lbPlayerCredit.setString(playerCredit.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}));
+        this._lbPlayerCredit.setString(playerCredit.toLocaleString('en-US', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }));
     },
 
-    updatePlayerName: function(playerName){
-        if(!playerName)
+    updatePlayerName: function (playerName) {
+        if (!playerName)
             return;
         this._lbPlayerName.setString(playerName);
     }
 });
 
-let limitStringLength = function(str, limitLen){
-    if(!str)
+let limitStringLength = function (str, limitLen) {
+    if (!str)
         return "";
     if (str.length > limitLen) {
-        return str.substring(0,limitLen - 2) + "..";
+        return str.substring(0, limitLen - 2) + "..";
     }
     return str;
 };
 
-const transferMinutesToString = function(minutes) {
+const transferMinutesToString = function (minutes) {
     const hours = 0 | (minutes / 60);
     const mins = 0 | (minutes % 60);
     const secs = (minutes - (0 | minutes)) * 60;
@@ -74,16 +77,35 @@ const transferMinutesToString = function(minutes) {
         (strSecs.length === 1 ? ("0" + strSecs) : strSecs);
 };
 
-const transferSecondsToString = function(seconds) {
+const transferSecondsToString = function (seconds) {
     seconds = seconds || 0;
 
-    const hours = 0|(seconds / 3600);
-    const mins = 0|((seconds - (hours * 3600)) / 60);
-    const secs = 0|(seconds % 60);
+    const hours = 0 | (seconds / 3600);
+    const mins = 0 | ((seconds - (hours * 3600)) / 60);
+    const secs = 0 | (seconds % 60);
     let strHours = hours.toFixed(0), strMin = mins.toFixed(0), strSecs = secs.toFixed(0);
     return (strHours.length === 1 ? ("0" + strHours) : strHours) + ":" +
         (strMin.length === 1 ? ("0" + strMin) : strMin) + ":" +
         (strSecs.length === 1 ? ("0" + strSecs) : strSecs);
+};
+
+const setNodeWithChildrenForProperty = function (rootNode, conditionCallback, callback) {
+    function setProp (obj) {
+        callback(obj);
+        if (obj.childrenCount) {
+            obj.children.forEach(setProp);
+        }
+    }
+
+    function lookforNode (obj) {
+        if (conditionCallback(obj)) {
+            setProp(obj);
+        } else if (obj.childrenCount) {
+            obj.children.forEach(lookforNode);
+        }
+    }
+
+    lookforNode(rootNode);
 };
 
 //Floating Menu
@@ -94,20 +116,20 @@ let GameFloatingMenu = cc.Node.extend({
     _btnLeaderBoard: null,
     _btnFAQ: null,
 
-    ctor: function(){
+    ctor: function () {
         cc.Node.prototype.ctor.call(this);
         this._className = "GameFloatingMenu";
 
         //padding = 120
         let paddingWidth = 90;
         //load menu sprite frame
-        if(!cc.spriteFrameCache.getSpriteFrame(ReferenceName.FloatingMenuButtonSettingsIcon))
+        if (!cc.spriteFrameCache.getSpriteFrame(ReferenceName.FloatingMenuButtonSettingsIcon))
             cc.spriteFrameCache.addSpriteFrames(res.MenuPlist);
 
         let btnSetting = this._btnSetting = new FloatMenuItem(ReferenceName.FloatingMenuButtonSettingsIcon,
             ReferenceName.FloatingMenuButtonBackground, ReferenceName.FloatingMenuButtonBackgroundDown,
             ReferenceName.FloatingMenuButtonSettingsText,
-            function(){
+            function () {
                 //show setting panel
             });
         btnSetting.setPosition(0, 0);
@@ -116,7 +138,7 @@ let GameFloatingMenu = cc.Node.extend({
         let btnAssets = this._btnAssets = new FloatMenuItem(ReferenceName.FloatingMenuButtonGameLogIcon,
             ReferenceName.FloatingMenuButtonBackground, ReferenceName.FloatingMenuButtonBackgroundDown,
             ReferenceName.FloatingMenuButtonGameLogText,
-            function(){
+            function () {
                 //show assets panel
             });
         btnAssets.setPosition(paddingWidth, 0);
@@ -124,7 +146,7 @@ let GameFloatingMenu = cc.Node.extend({
 
         let btnProfile = this._btnProfile = new FloatMenuItem(ReferenceName.FloatingMenuButtonInfoIcon,
             ReferenceName.FloatingMenuButtonBackground, ReferenceName.FloatingMenuButtonBackgroundDown,
-            ReferenceName.FloatingMenuButtonInfoText, function(){
+            ReferenceName.FloatingMenuButtonInfoText, function () {
 
             });
         btnProfile.setPosition(paddingWidth * 2, 0);
@@ -132,7 +154,7 @@ let GameFloatingMenu = cc.Node.extend({
 
         let btnLeaderBoard = this._btnLeaderBoard = new FloatMenuItem(ReferenceName.FloatingMenuButtonLeaderboardIcon,
             ReferenceName.FloatingMenuButtonBackground, ReferenceName.FloatingMenuButtonBackgroundDown,
-            ReferenceName.FloatingMenuButtonLeaderboardText, function(){
+            ReferenceName.FloatingMenuButtonLeaderboardText, function () {
                 //show the
             });
         btnLeaderBoard.setPosition(paddingWidth * 3, 0);
@@ -140,7 +162,7 @@ let GameFloatingMenu = cc.Node.extend({
 
         let btnFAQ = this._btnFAQ = new FloatMenuItem(ReferenceName.FloatingMenuButtonFAQIcon,
             ReferenceName.FloatingMenuButtonBackground, ReferenceName.FloatingMenuButtonBackgroundDown,
-            ReferenceName.FloatingMenuButtonFAQText, function(){
+            ReferenceName.FloatingMenuButtonFAQText, function () {
                 //show the faq
             });
         btnFAQ.setPosition(paddingWidth * 4, 0);
@@ -154,7 +176,7 @@ let FloatMenuItem = cc.Node.extend({
     _mouseEventListener: null,
     isMouseDown: false,
 
-    ctor: function(iconSprite, buttonImg, selectedImg, labelImg, clickCallback){
+    ctor: function (iconSprite, buttonImg, selectedImg, labelImg, clickCallback) {
         cc.Node.prototype.ctor.call(this);
 
         let btnItem = this._btnItem = new ccui.Button(buttonImg, selectedImg, undefined, ccui.Widget.PLIST_TEXTURE);
@@ -175,15 +197,15 @@ let FloatMenuItem = cc.Node.extend({
         //add mouse event
         this._mouseEventListener = cc.EventListener.create({
             event: cc.EventListener.MOUSE,
-            onMouseDown: function(mouseData){
+            onMouseDown: function (mouseData) {
                 let target = mouseData.getCurrentTarget();
                 target.isMouseDown = true;
             },
-            onMouseMove: function(mouseData){
+            onMouseMove: function (mouseData) {
                 let target = mouseData.getCurrentTarget(), spTitle = target.getChildByTag(9);
-                if(!spTitle)
+                if (!spTitle)
                     return;
-                if (!target.isMouseDown){
+                if (!target.isMouseDown) {
                     if (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
                             target.convertToNodeSpace(mouseData.getLocation()))) {
                         //scale to 1.2
@@ -194,14 +216,14 @@ let FloatMenuItem = cc.Node.extend({
                 //scale to 1.0
                 spTitle.setScale(1);
             },
-            onMouseUp: function(mouseData){
+            onMouseUp: function (mouseData) {
                 let target = mouseData.getCurrentTarget();
                 target.isMouseDown = false;
             }
         });
     },
 
-    onEnter: function(){
+    onEnter: function () {
         cc.Node.prototype.onEnter.call(this);
         if (this._mouseEventListener && !this._mouseEventListener._isRegistered())
             cc.eventManager.addListener(this._mouseEventListener, this._btnItem);
@@ -209,15 +231,15 @@ let FloatMenuItem = cc.Node.extend({
 });
 
 let WaitingPanel = cc.LayerColor.extend({
-    _touchEventListener:null,
+    _touchEventListener: null,
     _spCircles: null,
 
-    ctor: function(){
+    ctor: function () {
         cc.LayerColor.prototype.ctor.call(this, new cc.Color(10, 10, 10, 190));
 
         let circleArr = this._spCircles = [];
         const radius = 50;
-        for(let i = 0; i < 12; i++) {
+        for (let i = 0; i < 12; i++) {
             const pAngle = cc.pForAngle(cc.degreesToRadians(i * -30));
             const spCircle = new cc.Sprite(res.LoadingCircle);
             spCircle.setPosition(cc.visibleRect.center.x + pAngle.x * radius,
@@ -231,16 +253,16 @@ let WaitingPanel = cc.LayerColor.extend({
         const lbLoading = new cc.LabelTTF("Loading...", "Arial", 18);
         this.addChild(lbLoading);
         lbLoading.setPosition(cc.visibleRect.center);
-            //add event listener
+        //add event listener
         this._touchEventListener = cc.EventListener.create({
-            event:cc.EventListener.TOUCH_ONE_BY_ONE,
+            event: cc.EventListener.TOUCH_ONE_BY_ONE,
             swallowTouches: true,
-            onTouchBegan: function(touch, event) {
+            onTouchBegan: function (touch, event) {
                 let target = event.getCurrentTarget();
                 return (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
                     target.convertToNodeSpace(touch.getLocation())));
             },
-            onTouchEnded: function(touch, event){
+            onTouchEnded: function (touch, event) {
                 let target = event.getCurrentTarget();
                 if (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
                         target.convertToNodeSpace(touch.getLocation()))) {
@@ -250,7 +272,7 @@ let WaitingPanel = cc.LayerColor.extend({
         });
     },
 
-    _setupAction: function(spCircle, i) {
+    _setupAction: function (spCircle, i) {
         const duration = 0.6, offset = 0.2, count = 12, delay = offset * count - duration;
         if (i === 0) {
             spCircle.runAction(
@@ -271,7 +293,7 @@ let WaitingPanel = cc.LayerColor.extend({
         }
     },
 
-    onEnter: function() {
+    onEnter: function () {
         cc.LayerColor.prototype.onEnter.call(this);
         if (this._touchEventListener && !this._touchEventListener._isRegistered())
             cc.eventManager.addListener(this._touchEventListener, this);
@@ -285,18 +307,18 @@ let WaitingPanel = cc.LayerColor.extend({
     }
 });
 
-WaitingPanel.showPanel = function(){
+WaitingPanel.showPanel = function () {
     const scene = cc.director.getRunningScene();
-    if(scene){
+    if (scene) {
         scene.addChild(new WaitingPanel(), 998, 998);  //panel's z-order 998, tag 998
     }
 };
 
-WaitingPanel.hidePanel = function(){
+WaitingPanel.hidePanel = function () {
     const scene = cc.director.getRunningScene();
-    if(scene){
+    if (scene) {
         const panel = scene.getChildByTag(998);
-        if(panel)
+        if (panel)
             panel.removeFromParent(true);
     }
 };
@@ -308,16 +330,16 @@ let WaveTransition = cc.Node.extend({
     _pgTargetBackground: null,
     _spCaustic: null,
 
-    ctor: function(originBackground){
+    ctor: function (originBackground) {
         cc.Node.prototype.ctor.call(this);
 
         let sfWave = cc.spriteFrameCache.getSpriteFrame("wave.png");
-        if(!sfWave){
+        if (!sfWave) {
             cc.spriteFrameCache.addSpriteFrames(res.GameUIPlist);
             sfWave = cc.spriteFrameCache.getSpriteFrame("wave.png");
         }
         let sfCaustic = cc.spriteFrameCache.getSpriteFrame("Caustic_00000.png");
-        if(!sfCaustic){
+        if (!sfCaustic) {
             cc.spriteFrameCache.addSpriteFrames(res.CausticPlist);
             sfCaustic = cc.spriteFrameCache.getSpriteFrame("Caustic_00000.png")
         }
@@ -328,7 +350,7 @@ let WaveTransition = cc.Node.extend({
         spWave.setAnchorPoint(1, 0.5);
         spWave.setVisible(false);
         this.addChild(spWave, 9);
-        spWave.setScale(cc.visibleRect.top.y /  waveSize.height);
+        spWave.setScale(cc.visibleRect.top.y / waveSize.height);
 
         const pgOriginBackground = this._pgOriginBackground = new cc.ProgressTimer(new cc.Sprite(originBackground));
         this.addChild(pgOriginBackground);
@@ -344,22 +366,24 @@ let WaveTransition = cc.Node.extend({
         spCaustic.setOpacity(51);
         this.addChild(spCaustic, 8);
         const animCaustic = GUIFunctions.getAnimation("Caustic_", 0.08);
-        if(animCaustic)
+        if (animCaustic)
             spCaustic.runAction(animCaustic.repeatForever());
     },
 
-    transition: function(targetBackground) {
+    transition: function (targetBackground) {
         //hide caustic
         const spCaustic = this._spCaustic, duration = 1;
         spCaustic.runAction(cc.fadeTo(duration, 0));
 
-        this.runAction(cc.sequence(cc.delayTime(duration), cc.callFunc(function(){ this._runTransition(targetBackground); }, this)));
+        this.runAction(cc.sequence(cc.delayTime(duration), cc.callFunc(function () {
+            this._runTransition(targetBackground);
+        }, this)));
 
         //show caustic
         spCaustic.runAction(cc.sequence(cc.delayTime(4 + duration), cc.fadeTo(duration, 51)));
     },
 
-    _runTransition: function(targetBackground){
+    _runTransition: function (targetBackground) {
         const spWave = this._spWave, duration = 4;
         spWave.setVisible(true);
         const waveSize = spWave.getContentSize();
@@ -389,7 +413,7 @@ let WaveTransition = cc.Node.extend({
     }
 });
 
-(function(ef) {
+(function (ef) {
     const IGNORE_DIST = new cc.Point(8, 8);
     ef.SpriteClickHandler = cc._EventListenerTouchOneByOne.extend({
         _startPoint: null,
@@ -432,12 +456,12 @@ let WaveTransition = cc.Node.extend({
                     let startPoint = this._startPoint;
                     const xMove = Math.abs(lastLocation.x - startPoint.x);
                     const yMove = Math.abs(lastLocation.y - startPoint.y);
-                    if (xMove < IGNORE_DIST.x && yMove < IGNORE_DIST.y){
-                        if(target.executeClickCallback)
+                    if (xMove < IGNORE_DIST.x && yMove < IGNORE_DIST.y) {
+                        if (target.executeClickCallback)
                             target.executeClickCallback(touch, event);
                     }
                 } else {
-                    if(target.executeClickCallback)
+                    if (target.executeClickCallback)
                         target.executeClickCallback(touch, event);
                 }
             }
@@ -457,30 +481,30 @@ let WaveTransition = cc.Node.extend({
 
     ef.MouseOverEventListener = cc._EventListenerMouse.extend({
         _mouseDown: null,
-        ctor: function(){
+        ctor: function () {
             cc._EventListenerMouse.prototype.ctor.call(this);
             this._mouseDown = false;
         },
-        onMouseDown: function(mouseData){
+        onMouseDown: function (mouseData) {
             this._mouseDown = true;
         },
-        onMouseMove: function(mouseData){
+        onMouseMove: function (mouseData) {
             const target = mouseData.getCurrentTarget();
-            if (!target.isMouseDown){
+            if (!target.isMouseDown) {
                 // Use the target's collision detection if it has custom detection
                 const hit = target.hitTest
                     ? target.hitTest(mouseData.getLocation())
                     : cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height), target.convertToNodeSpace(mouseData.getLocation()));
                 if (hit) {
-                    if(target.onMouseOverIn)
+                    if (target.onMouseOverIn)
                         target.onMouseOverIn(mouseData);
-                }else{
-                    if(target.onMouseOverOut)
+                } else {
+                    if (target.onMouseOverOut)
                         target.onMouseOverOut(mouseData);
                 }
             }
         },
-        onMouseUp: function(mouseData){
+        onMouseUp: function (mouseData) {
             this._mouseDown = false;
         }
     });
@@ -495,6 +519,7 @@ let WaveTransition = cc.Node.extend({
 
         //sprite frame;
         _touchEventListener: null,
+        _mouseoverEventListener: null,
 
         _clickCallback: null,
         _clickTarget: null,
@@ -519,6 +544,7 @@ let WaveTransition = cc.Node.extend({
             }
 
             this._touchEventListener = new ef.SpriteClickHandler();
+            this._mouseoverEventListener = new ef.MouseOverEventListener();
         },
 
         getTitle: function () {
@@ -545,7 +571,7 @@ let WaveTransition = cc.Node.extend({
                 if (this._normalSprite[0] === '#') {
                     const spriteFrame = cc.spriteFrameCache.getSpriteFrame(
                         (this._status === ef.BUTTONSTATE.NORMAL) ? this._normalSprite.substr(1) : this._selectedSprite.substr(1));
-                    if(spriteFrame)
+                    if (spriteFrame)
                         this.setSpriteFrame(spriteFrame);
                 } else {
                     const texture = cc.textureCache.addImage(
@@ -572,6 +598,19 @@ let WaveTransition = cc.Node.extend({
             cc.Sprite.prototype.onEnter.call(this);
             if (this._touchEventListener && !this._touchEventListener._isRegistered())
                 cc.eventManager.addListener(this._touchEventListener, this);
+            if (this._mouseoverEventListener && !this._mouseoverEventListener._isRegistered())
+                cc.eventManager.addListener(this._mouseoverEventListener, this);
+        },
+
+        onMouseOverIn: function () {
+            const spriteFrame = cc.spriteFrameCache.getSpriteFrame(this._selectedSprite.substr(1));
+            if (spriteFrame)
+                this.setSpriteFrame(spriteFrame);
+        },
+        onMouseOverOut: function () {
+            const spriteFrame = cc.spriteFrameCache.getSpriteFrame(this._normalSprite.substr(1));
+            if (spriteFrame)
+                this.setSpriteFrame(spriteFrame);
         },
 
         setTouchEnabled: function (enable) {
@@ -583,11 +622,11 @@ let WaveTransition = cc.Node.extend({
         }
     });
 
-    ef.ButtonSprite.createSpriteButton = function(normalSpriteName, selectedSpriteName, titleSpriteName){
+    ef.ButtonSprite.createSpriteButton = function (normalSpriteName, selectedSpriteName, titleSpriteName) {
         return new ef.ButtonSprite(normalSpriteName, selectedSpriteName, new cc.Sprite(titleSpriteName));
     };
 
-    ef.ButtonSprite.createLabelButton = function(normalSpriteName, selectedSpriteName, labelString){
+    ef.ButtonSprite.createLabelButton = function (normalSpriteName, selectedSpriteName, labelString) {
         return new ef.ButtonSprite(normalSpriteName, selectedSpriteName, labelString);
     };
 
@@ -644,7 +683,7 @@ let WaveTransition = cc.Node.extend({
             }
         },
 
-        getStatus: function(){
+        getStatus: function () {
             return this._status;
         },
 
@@ -673,7 +712,7 @@ let WaveTransition = cc.Node.extend({
         _lbNotification: null,
         _szSize: null,
         _duration: 6,
-        ctor: function(width, height) {
+        ctor: function (width, height) {
             cc.Node.prototype.ctor.call(this);
             this._className = "NotificationPanel";
 
@@ -700,7 +739,7 @@ let WaveTransition = cc.Node.extend({
             this.addChild(spNotificationIcon);
         },
 
-        showNotification: function(message, callback, target) {
+        showNotification: function (message, callback, target) {
             const lbNotification = this._lbNotification;
             if (!message) {
                 lbNotification.setString("");

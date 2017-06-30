@@ -146,12 +146,14 @@ const TableType = {
             btnMultiple.setPosition(12, cc.visibleRect.top.y - 205);
             btnMultiple.setStatus(ef.BUTTONSTATE.SELECTED);
             btnMultiple.setClickHandler(this.tableTypeClick, this);
+            btnMultiple._goOpaqueWhenSpectating = true;
 
             const btnSolo = this._btnSolo = new ef.LayerColorButton("#SSSoloChinese.png", 220, 55);
             this.addChild(btnSolo);
             btnSolo.setPosition(233, cc.visibleRect.top.y - 205);
             btnSolo.setStatus(ef.BUTTONSTATE.NORMAL);
             btnSolo.setClickHandler(this.tableTypeClick, this);
+            btnSolo._goOpaqueWhenSpectating = true;
 
             //table panel
             const szTableListBg = new cc.Size(cc.visibleRect.width - 24, cc.visibleRect.height - 265);
@@ -179,6 +181,7 @@ const TableType = {
             //express button
             const btnExpress = this._btnExpress = ef.ButtonSprite.createSpriteButton("#SS_YellowButton.png",
                 "#SS_YellowHover.png", "#SS_ExpressChinese.png");
+            btnExpress._goOpaqueWhenSpectating = true;
             btnExpress.setPosition(90, szTableListBg.height - 35);
             pnTableListBg.addChild(btnExpress);
             const expressButtonClicked = () => {
@@ -293,7 +296,7 @@ const TableType = {
 
                 // Count free seats (of correct type)
                 const freeSeats = getFreeSeatsCount(roomStatesToShow);
-                this._lbRemainSeats.setString("剩余" + String(freeSeats) + "个座位");
+                this._lbRemainSeats.setString("剩余" + String(freeSeats) + "个吉位");
 
                 // Update the state of existing room sprites (and append new sprites if needed)
                 this._pnTableList.updateRoomStates(roomStatesToShow);
@@ -308,7 +311,10 @@ const TableType = {
         _spIcon: null,
         _spTitle: null,
 
+        _isSpectating: false,
+
         _touchEventListener: null,
+        _mouseoverEventListener: null,
 
         ctor: function () {
             //129 x 42
@@ -325,6 +331,7 @@ const TableType = {
             spTitle.setPosition(90, 22);
 
             this._touchEventListener = new ef.SpriteClickHandler();
+            this._mouseoverEventListener = new ef.MouseOverEventListener();
         },
 
         hitTest: function (point) {
@@ -336,6 +343,8 @@ const TableType = {
             cc.Sprite.prototype.onEnter.call(this);
             if (this._touchEventListener && !this._touchEventListener._isRegistered())
                 cc.eventManager.addListener(this._touchEventListener, this);
+            if (this._mouseoverEventListener && !this._mouseoverEventListener._isRegistered())
+                cc.eventManager.addListener(this._mouseoverEventListener, this);
         },
 
         setStatus: function (status) {
@@ -347,17 +356,51 @@ const TableType = {
                 (this._status === ef.BUTTONSTATE.NORMAL) ? this._normalName : this._selectedName);
             if (spriteFrame)
                 this.setSpriteFrame(spriteFrame);
-
         },
 
+        onMouseOverIn: function () {
+            const spriteFrame = cc.spriteFrameCache.getSpriteFrame(this._selectedName);
+            if (spriteFrame)
+                this.setSpriteFrame(spriteFrame);
+        },
+        onMouseOverOut: function () {
+            const spriteFrame = cc.spriteFrameCache.getSpriteFrame(this._normalName);
+            if (spriteFrame)
+                this.setSpriteFrame(spriteFrame);
+        },
         setClickHandler: function (callback, target) {
             this._clickCallback = callback;
             this._clickTarget = target;
         },
 
         executeClickCallback: function (touch, event) {
+            this._isSpectating = !this._isSpectating;
+            ef.gameController.setGlobalProp('spectating', this._isSpectating);
+            this.updateBtnText();
+            let tablePanel = ef.gameController.getTablePanel();
+            if (tablePanel) {
+                setNodeWithChildrenForProperty(tablePanel.getParent(),
+                    node => node._goOpaqueWhenSpectating,
+                    obj => obj.opacity = this._isSpectating ? 120 : 255
+                );
+            }
+
             if (this._clickCallback)
                 this._clickCallback.call(this._clickTarget, touch, event);
+        },
+
+        updateBtnText: function () {
+            //update icon
+            const inconStr = this._isSpectating ? "SS_SpectateBackIcon.png" : "SS_SpectateIcon.png";
+            const iconSprite = cc.spriteFrameCache.getSpriteFrame(inconStr);
+            if (iconSprite)
+                this._spIcon.setSpriteFrame(iconSprite);
+
+            //update text
+            const textStr = this._isSpectating ? "SS_BackChinese.png" : "SS_SpectateChinese.png";
+            const textSprite = cc.spriteFrameCache.getSpriteFrame(textStr);
+            if (textSprite)
+                this._spTitle.setSpriteFrame(textSprite);
         }
     });
 
@@ -612,6 +655,8 @@ const TableType = {
         //SS_Table.png
         _spGlow: null,
         _lbTitle: null,
+        _spSpecText: null,
+
         _lbReserveTime: null,
         _selectionMadeCallback: null,
         _roomId: null,
@@ -642,6 +687,12 @@ const TableType = {
             this.addChild(spGlow);
             spGlow.setPosition(szContent.width * 0.5, szContent.height * 0.5);
             spGlow.setVisible(false);
+
+            //spectate text
+            const spSpecText = this._spSpecText = new cc.Sprite("#SS_SpectateChinese.png");
+            this.addChild(spSpecText);
+            spSpecText.setPosition(szContent.width * 0.5, szContent.height * 0.5);
+            spSpecText.setVisible(false);
 
             //title
             const lbTitle = this._lbTitle = new cc.LabelTTF("018", "Arial", 22);
@@ -705,6 +756,10 @@ const TableType = {
                 if (!roomIsFull(this._roomState)) {
                     this._spGlow.setVisible(true);
                 }
+                if (ef.gameController.getGlobalProp('spectating')) {
+                    this._spSpecText.setVisible(true);
+                }
+
             }
         },
 
@@ -712,6 +767,7 @@ const TableType = {
             if (this._isMouseOverIn) {
                 this._isMouseOverIn = false;
                 this._spGlow.setVisible(false);
+                this._spSpecText.setVisible(false);
             }
         },
 
@@ -856,11 +912,11 @@ const TableType = {
 
     const Object_values = (obj) => Object.keys(obj).map(key => obj[key]);
 
-    function countPlayersInRoom (roomState) {
+    function countPlayersInRoom(roomState) {
         return roomState.playersBySlot.filter(p => p != null).length;
     }
 
-    function roomIsFull (roomState) {
+    function roomIsFull(roomState) {
         const playerCount = countPlayersInRoom(roomState);
         if (roomState.singlePlay) {
             return playerCount > 0;
@@ -869,7 +925,7 @@ const TableType = {
         }
     }
 
-    function getFreeSeatsCount (roomStates) {
+    function getFreeSeatsCount(roomStates) {
         let count = 0;
         roomStates.forEach(roomState => {
             if (!roomIsFull(roomState)) {
