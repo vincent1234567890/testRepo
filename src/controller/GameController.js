@@ -25,6 +25,7 @@ let GameController = (function () {
         _isLockMode: LockFishStatus.RELEASE,
         _leaveGameTimeout: null,
         _currentPlayer: null,
+
         _lobbyPageNum: 0,
         _lobbyPageTotal: 0,
         ctor: function () {
@@ -174,7 +175,7 @@ let GameController = (function () {
             return this._tablePanel;
         },
 
-        setGlobalProp: function (prop, val) {
+        setGlobalProp: function (prop, val) {   //todo it should be save in a variable, not save in "this".
             this[prop] = val;
             return val;
         },

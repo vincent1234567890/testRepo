@@ -10,17 +10,14 @@ const ClientServerConnect = function () {
     let _masterServerSocket = null;
 
     let _currentGameServerUrl = null;
-    let _serverInformer;
-    let _gameWSClient;
-    let _gameIOSocket;
+    let _serverInformer, _gameWSClient, _gameIOSocket;
 
-    let _nextDisconnectIsExpected = false;
-    let _wasKickedOutByRemoteLogIn = false;
+    let _nextDisconnectIsExpected = false, _wasKickedOutByRemoteLogIn = false;
 
     let _loginParams = null;
-
     let _sendHeartbeatToGameServerIntervalId = null;
 
+    //get the Master server socket connection.
     function getMasterServerSocket () {
         if (!_masterServerSocket) {
             const socket = io.connect(masterServerUrl + '/player');
@@ -34,6 +31,7 @@ const ClientServerConnect = function () {
 
     function doInitialConnect () {
         if (_wasKickedOutByRemoteLogIn) {
+            //show the message on ui.
             return Promise.reject(Error("We were kicked.  Clear _wasKickedOutByRemoteLogIn if you want to reconnect."));
         }
 
@@ -50,8 +48,6 @@ const ClientServerConnect = function () {
 
     function connectToARecommendedGameServer (joinPrefs) {
         return socketEmitPromise(getMasterServerSocket(), 'getRecommendedServers', joinPrefs).then(recommendedServers => {
-            //console.log("recommendedServers:", recommendedServers);
-
             // In case none of the recommended servers work, add the default server as a fallback
             recommendedServers.push(defaultGameAPIServerAddress);
 
@@ -74,6 +70,7 @@ const ClientServerConnect = function () {
             return tryNextGameServer();
         }, error => {
             // We arrive here if the master server did not respond, or was not awake.
+            //TODO should display an error panel on game.
             console.warn(`Problem getting recommended server from the master server:`, error);
             console.warn(`So falling back to default: ${defaultGameAPIServerAddress}`);
             return connectToGameServer('ws://' + defaultGameAPIServerAddress);
