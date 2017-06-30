@@ -628,6 +628,10 @@ const TableType = {
                     this._tableSpritesMap[roomId] = newTableSprite;
                 }
                 const tableSprite = this._tableSpritesMap[roomId];
+
+                //testing code for occupied seats, can be removed
+                //roomState.roomLockStatus = Date.now() % 2 == 0 ? [] : ['p'];
+
                 tableSprite.setTableState(roomState);
             });
             ef.gameController.setTotalLobbyPage(Math.ceil(Object.keys(this._tableSpritesMap).length / 8));
@@ -827,7 +831,12 @@ const TableType = {
         ctor: function (seatSelectedCallback, seatNumber) {
             //SS_YellowSit,  SS_BlueSit
             cc.Sprite.prototype.ctor.call(this, "#SS_YellowSit.png");
-
+            if (!cc.spriteFrameCache.getSpriteFrame("SS_YellowSit.png")) {
+                cc.spriteFrameCache.addSpriteFrames("#SS_YellowSit.png");
+            }
+            if (!cc.spriteFrameCache.getSpriteFrame("SS_BlueSit.png")) {
+                cc.spriteFrameCache.addSpriteFrames("#SS_BlueSit.png");
+            }
             this._seatSelectedCallback = seatSelectedCallback;
             this._seatNumber = seatNumber;
 
@@ -894,6 +903,17 @@ const TableType = {
                 this._lbPlayerName.setString('-');
                 this._spPlayerBase.setVisible(false);
                 this._lbPlayerName.setVisible(false);
+            }
+            let spriteStr = null;
+            if (roomState && roomState.roomLockStatus && roomState.roomLockStatus[0]) {
+                this.setVisible(true);
+                spriteStr = "SS_BlueSit.png";
+            } else {
+                spriteStr = "SS_YellowSit.png";
+            }
+            const spriteFrame = cc.spriteFrameCache.getSpriteFrame(spriteStr);
+            if (spriteFrame) {
+                this.setSpriteFrame(spriteFrame);
             }
         },
 
