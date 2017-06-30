@@ -188,7 +188,7 @@ const TableType = {
                 if (ef.gameController.getGlobalProp('spectating')) {
                     return
                 }
-                const singlePlay = this.getSelectedTableType === TableType.SINGLE;
+                const singlePlay = this.getSelectedTableType() === TableType.SINGLE;
                 selectionMadeCallback({singlePlay});
             };
             btnExpress.setClickHandler(expressButtonClicked, this);
