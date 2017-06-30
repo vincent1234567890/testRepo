@@ -173,9 +173,9 @@ let GameController = (function () {
         },
         getTablePanel: function () {
             return this._tablePanel;
-        }
+        },
 
-        setGlobalProp: function (prop, val) {
+        setGlobalProp: function (prop, val) {   //todo it should be save in a variable, not save in "this".
             this[prop] = val;
             return val;
         },
