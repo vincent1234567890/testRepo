@@ -146,14 +146,14 @@ const TableType = {
             btnMultiple.setPosition(12, cc.visibleRect.top.y - 205);
             btnMultiple.setStatus(ef.BUTTONSTATE.SELECTED);
             btnMultiple.setClickHandler(this.tableTypeClick, this);
-            btnMultiple._goOpaqueWhenSpectating = true;
+            btnMultiple._spButton._goOpaqueWhenSpectating = true;
 
             const btnSolo = this._btnSolo = new ef.LayerColorButton("#SSSoloChinese.png", 220, 55);
             this.addChild(btnSolo);
             btnSolo.setPosition(233, cc.visibleRect.top.y - 205);
             btnSolo.setStatus(ef.BUTTONSTATE.NORMAL);
             btnSolo.setClickHandler(this.tableTypeClick, this);
-            btnSolo._goOpaqueWhenSpectating = true;
+            btnSolo._spButton._goOpaqueWhenSpectating = true;
 
             //table panel
             const szTableListBg = new cc.Size(cc.visibleRect.width - 24, cc.visibleRect.height - 265);
@@ -188,7 +188,7 @@ const TableType = {
                 if (ef.gameController.getGlobalProp('spectating')) {
                     return
                 }
-                const singlePlay = this.getSelectedTableType === TableType.SINGLE;
+                const singlePlay = this.getSelectedTableType() === TableType.SINGLE;
                 selectionMadeCallback({singlePlay});
             };
             btnExpress.setClickHandler(expressButtonClicked, this);
