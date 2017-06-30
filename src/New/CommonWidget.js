@@ -90,14 +90,14 @@ const transferSecondsToString = function (seconds) {
 };
 
 const setNodeWithChildrenForProperty = function (rootNode, conditionCallback, callback) {
-    function setProp (obj) {
+    function setProp(obj) {
         callback(obj);
         if (obj.childrenCount) {
             obj.children.forEach(setProp);
         }
     }
 
-    function lookforNode (obj) {
+    function lookforNode(obj) {
         if (conditionCallback(obj)) {
             setProp(obj);
         } else if (obj.childrenCount) {
@@ -757,6 +757,67 @@ let WaveTransition = cc.Node.extend({
                     if (callback)
                         callback.call(target);
                 })));
+        }
+    });
+
+    ef.ErrorMsgDialog = cc.Layer.extend({
+        _text: null,
+        _confirmBtn: null,
+        _baseBG: null,
+        _btnListener: null,
+        ctor: function (width, height, text) {
+            cc.Layer.prototype.ctor.call(this);
+
+            width = width || 1000;
+            height = height || 300;
+            //bg
+            const szSize = this._szSize = new cc.Size(width, height);
+            this.setContentSize(width, height);
+            // this.addChild(layer);
+            const spBase = this._baseBG = new cc.Sprite("#SS_ErrorMsgBase.png");
+            spBase.setScaleX(szSize.width / spBase.getContentSize().width);
+            spBase.setScaleY(szSize.height / spBase.getContentSize().height);
+            spBase.setPosition(0, 0);
+
+            this.addChild(spBase);
+
+            //error text
+            if (typeof(text) === "string")
+                this._lbTitle = new cc.LabelTTF(text, ef.DEFAULT_FONT, 40);
+            else
+                this._lbTitle = text;
+
+            if (this._lbTitle) {
+                this._lbTitle.setPosition(0, height / 4);
+                this.addChild(this._lbTitle, 2);
+            }
+
+            //confirmBtn
+            const spConfirmBtn = this._confirmBtn = new cc.Sprite("#SS_ComfirmBase.png");
+            this._confirmBtn.setPosition(0, -height / 4);
+            this.addChild(spConfirmBtn, 2);
+
+            //btn text
+            const btnText = new cc.LabelTTF("确定", ef.DEFAULT_FONT, 20);
+            btnText.setPosition(spConfirmBtn.getContentSize().width / 2, 25);
+            spConfirmBtn.addChild(btnText);
+
+            let self = this;
+            this._btnListener = cc.EventListener.create({
+                event: cc.EventListener.TOUCH_ONE_BY_ONE,
+                swallowTouches: true,
+                onTouchBegan: function (touch, event) {
+                    const target = event.getCurrentTarget(), parent = target.getParent();
+                    if (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
+                            target.convertToNodeSpace(touch.getLocation()))) {
+                        self.removeFromParent();
+                        return false;
+                    }
+                },
+            });
+
+            if (this._btnListener && !this._btnListener._isRegistered())
+                cc.eventManager.addListener(this._btnListener, this._confirmBtn);
         }
     });
 })(ef);

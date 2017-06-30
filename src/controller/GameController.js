@@ -28,6 +28,8 @@ let GameController = (function () {
 
         _lobbyPageNum: 0,
         _lobbyPageTotal: 0,
+        _globalVal: {},
+
         ctor: function () {
             this._currentMultiple = 1;
             if (cc.sys.localStorage.getItem("sound_volume") === null) {
@@ -175,12 +177,12 @@ let GameController = (function () {
             return this._tablePanel;
         },
 
-        setGlobalProp: function (prop, val) {   //todo it should be save in a variable, not save in "this".
-            this[prop] = val;
+        setGlobalProp: function (prop, val) {
+            this._globalVal[prop] = val;
             return val;
         },
         getGlobalProp: function (prop) {
-            return this[prop];
+            return this._globalVal[prop];
         }
     });
 

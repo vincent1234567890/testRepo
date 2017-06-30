@@ -826,6 +826,33 @@ const TableType = {
                 // Cannot join this room
                 return;
             }
+            //check if spectating
+            if (ef.gameController.getGlobalProp('spectating')) {
+
+            }
+
+            //check if solo
+            if (this._roomState && this._roomState.singlePlay === true) {
+                const curPlayer = ef.gameController.getCurrentPlayer();
+
+                const multiObj = {
+                    '1X': 1,
+                    '10X': 10,
+                    '100X': 100
+                };
+                const multiplier = multiObj[this._roomState.sceneName] || 1;
+
+                if (curPlayer.score < 5000 * multiplier) {
+                    console.log('invalid score');
+                }
+
+                const newErrorPanel = new ef.ErrorMsgDialog(600, 400, 'not enough credit');
+                const tablePanel = ef.gameController.getTablePanel();
+                const content = tablePanel.getContentSize();
+                newErrorPanel.setPosition(content.width / 2, content.height * 2 / 3);
+                tablePanel.getParent().addChild(newErrorPanel, 100);
+                return;
+            }
             const roomState = this._roomState;
             joinPrefs = Object.assign({}, joinPrefs, {
                 roomId: roomState.roomId,
