@@ -140,7 +140,7 @@ const ReferenceName = {
     JackpotLensFlareLarge : "#Lensflare1.png",
 
     JackpotCannonLight : "#CannonLight.png",
-    JackpotNotificationBackground : "#notification background.png",
+    JackpotPlayerNotificationBackground : "#NotificationBackground2.png",
 
     //Leaderboard
     LeaderboardTextBackground : "#TextBG2.png",
@@ -281,7 +281,7 @@ const ReferenceName = {
     JackpotSharkIcon:"#SharkIcon.png",
     JackpotTurtleIcon: "#TurtleIcon.png",
     JackpotButterflyFishIcon: "#ButterflyfishIcon.png",
-    // JackpotNotificationBackground: "#NotificationBackground.png",
+    JackpotNotificationBackground: "#NotificationBackground.png",
     JackpotTreasureBoxOpen_00000: "#TreasureBoxOpen_00000.png",
     JackpotTreasureBoxOpenAnm: "TreasureBoxOpen_",
     JackpotButterflyFishMedal_00000: "#JPButterflyFishMedal_00000.png",
