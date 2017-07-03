@@ -723,6 +723,10 @@ const TableType = {
             this.addChild(lbTitle);
             lbTitle.setPosition(szContent.width * 0.5, szContent.height - 38);
 
+            const lbReserveTime = this._lbReserveTime = new cc.LabelTTF("00:00:00", "Arial", 22);
+            this.addChild(lbReserveTime);
+            lbReserveTime.setPosition(szContent.width * 0.5, szContent.height * 0.5 + 10);
+
             const seatSelectedCallback = (seatNumber) => {
                 this.makeSelection({slot: seatNumber});
             };
@@ -803,7 +807,19 @@ const TableType = {
             const roomTitleForDisplay = roomState.roomTitle.replace(/^[^-]*-/, '');
             this._lbTitle.setString(roomTitleForDisplay);
 
-            // @todo Apply room locked/unlocked state
+            // Change display if room is locked
+            if (roomState.roomLockStatus) {
+                this._lbReserveTime.setVisible(true);
+                let secondsLeft = (roomState.roomLockStatus.expiryTime - Date.now()) / 1000;
+                if (secondsLeft < 0) {
+                    secondsLeft = 0;
+                }
+                const countdownString = getHHMMSSFromSeconds(secondsLeft);
+                this._lbReserveTime.setString(countdownString);
+            } else {
+                this._lbReserveTime.setVisible(false);
+                this._lbReserveTime.setString('--:--:--');
+            }
 
             for (let i = 0; i < 4; i++) {
                 const seatState = roomState.playersBySlot[i];
@@ -939,12 +955,9 @@ const TableType = {
             this._playerInfo = seatState;
             if (seatState && seatState.name) {
                 // Shorten really long names
-                // @todo Can we get cocos to truncate the name for us?
+                // Perhaps we could get cocos to truncate the name for us?
                 // The maximum length really depends on the size of the chars.  E.g. 'MMMM' is wider than 'llll'
-                let nameToShow = seatState.name;
-                if (nameToShow.length > 14) {
-                    nameToShow = nameToShow.substring(0, 12) + "..";
-                }
+                const nameToShow = shortenedString(seatState.name, 14);
                 this.setVisible(true);
                 this._spPlayerBase.setVisible(true);
                 this._lbPlayerName.setVisible(true);
@@ -956,11 +969,24 @@ const TableType = {
                 this._lbPlayerName.setVisible(false);
             }
             let spriteStr = null;
-            if (roomState && roomState.roomLockStatus) {
+            if (roomState.roomLockStatus) {
+                /*
+                // Display the name of the player who locked this room
+                const fullName = roomState.roomLockStatus.allowedPlayers[0].playerName;
+                const nameToShow = shortenedString(fullName, 14);
                 this.setVisible(true);
-                spriteStr = "SS_BlueSit.png";
-                const isMyLockedRoom = roomState.roomLockStatus.allowedPlayers[0].playerId === ef.gameController.getCurrentPlayer().id;
-                // @todo Different display and different click behaviour if this room is my room
+                this._spPlayerBase.setVisible(true);
+                this._lbPlayerName.setVisible(true);
+                this._lbPlayerName.setString(nameToShow);
+                */
+                const isLockedByThisPlayer = roomBelongsToCurrentPlayer(roomState);
+                if (isLockedByThisPlayer) {
+                    // ?? this.setVisible(true);
+                    spriteStr = "SS_YellowSit.png";
+                } else {
+                    this.setVisible(true);
+                    spriteStr = "SS_BlueSit.png";
+                }
             } else {
                 spriteStr = "SS_YellowSit.png";
             }
@@ -998,6 +1024,11 @@ const TableType = {
         }
     }
 
+    function roomBelongsToCurrentPlayer(roomState) {
+        const currentPlayerId = ef.gameController.getCurrentPlayer().id;
+        return roomState.roomLockStatus.allowedPlayers.some(allowedPlayer => allowedPlayer.playerId === currentPlayerId);
+    }
+
     function getFreeSeatsCount(roomStates) {
         let count = 0;
         roomStates.forEach(roomState => {
@@ -1011,6 +1042,24 @@ const TableType = {
             }
         });
         return count;
+    }
+
+    function shortenedString(str, maxLen) {
+        if (str.length > maxLen) {
+            str = str.substring(0, maxLen - 2) + "..";
+        }
+        return str;
+    }
+
+    function getHHMMSSFromSeconds(seconds) {
+        const hh = pad2(Math.floor(seconds / 60 / 60));
+        const mm = pad2(Math.floor(seconds / 60 % 60));
+        const ss = pad2(Math.floor(seconds % 60));
+        return hh + ':' + mm + ':' + ss;
+    }
+
+    function pad2 (n) {
+        return n < 10 ? '0' + n.toString(10) : n.toString(10);
     }
 
 })(ef);
