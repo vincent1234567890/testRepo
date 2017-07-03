@@ -959,8 +959,8 @@ const TableType = {
             if (roomState && roomState.roomLockStatus) {
                 this.setVisible(true);
                 spriteStr = "SS_BlueSit.png";
-                const isMyLockedRoom = roomState.roomLockStatus.players[0].playerId === ef.gameController.getCurrentPlayer().id;
-                // @todo ... ?
+                const isMyLockedRoom = roomState.roomLockStatus.allowedPlayers[0].playerId === ef.gameController.getCurrentPlayer().id;
+                // @todo Different display and different click behaviour if this room is my room
             } else {
                 spriteStr = "SS_YellowSit.png";
             }
