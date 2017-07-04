@@ -855,7 +855,7 @@ let WaveTransition = cc.Node.extend({
             noLayer.setContentSize(cc.size(400, 100));
 
             const noBtn = this._noBtn = new cc.Sprite(ReferenceName.Lockingroom_No);
-            noLayer.setPosition(100, -100);
+            noLayer.setPosition(60, -50);
             noLayer.addChild(noBtn, 2);
 
             const noBtnText = new cc.LabelTTF("不需要", ef.DEFAULT_FONT, 20);
@@ -871,7 +871,7 @@ let WaveTransition = cc.Node.extend({
             yesLayer.setContentSize(cc.size(400, 100));
 
             const yesBtn = this._yesBtn = new cc.Sprite(ReferenceName.Lockingroom_Yes);
-            yesLayer.setPosition(-100, -100);
+            yesLayer.setPosition(-100, -50);
             yesLayer.addChild(yesBtn, 2);
 
             const yesBtnText = new cc.LabelTTF("需要", ef.DEFAULT_FONT, 20);
@@ -898,8 +898,8 @@ let WaveTransition = cc.Node.extend({
 
             if (this._eventListener && !this._eventListener._isRegistered()) {
                 cc.eventManager.addListener(this._eventListener, noBtnText);
-                cc.eventManager.addListener(new ef.SpriteClickHandler(), yesBtn);
-                cc.eventManager.addListener(new ef.SpriteClickHandler(), noBtnText);
+                cc.eventManager.addListener(new ef.SpriteClickHandler(), noBtn);
+                cc.eventManager.addListener(new ef.SpriteClickHandler(), yesBtnText);
                 cc.eventManager.addListener(new ef.SpriteClickHandler(), yesBtn);
             }
         }
