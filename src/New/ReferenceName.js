@@ -85,6 +85,11 @@ const ReferenceName = {
     SeatChairGlow: "#SSChairGlow.png",
     SeatArrow: "#SSArrow.png",
 
+    //Locking room pic
+    Lockingroom_Yes: "#LR_Yes.png",
+    Lockingroom_No: "#LR_No.png",
+    Lockingroom_Background: "#LR_NotificationBase.png",
+
     NotificationIcon: "#SS_NotificationIcon.png",
 
     //Dolphin
