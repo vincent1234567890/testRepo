@@ -56,6 +56,9 @@ const BulletManager = (function(){
                 // console.log(JSON.stringify(model));
                 bulletView.setPosition(model.position[0], model.position[1]);
                 bulletView.setRotation(180 - model.rotation);
+
+                const angDeg = 90 + model.rotation;
+                bulletView._particle.setAngle(angDeg);
             }
 
             //for particle
