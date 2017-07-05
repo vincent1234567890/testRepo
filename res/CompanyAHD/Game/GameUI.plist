@@ -30,7 +30,7 @@
                 <key>spriteSourceSize</key>
                 <string>{45,24}</string>
                 <key>textureRect</key>
-                <string>{{418,116},{43,24}}</string>
+                <string>{{424,143},{43,24}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -197,7 +197,7 @@
                 <key>textureRect</key>
                 <string>{{420,62},{43,25}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>LOLockGreenV.png</key>
             <dict>
@@ -225,7 +225,7 @@
                 <key>spriteSourceSize</key>
                 <string>{43,25}</string>
                 <key>textureRect</key>
-                <string>{{465,62},{43,25}}</string>
+                <string>{{447,62},{43,25}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -255,7 +255,7 @@
                 <key>spriteSourceSize</key>
                 <string>{43,25}</string>
                 <key>textureRect</key>
-                <string>{{420,89},{43,25}}</string>
+                <string>{{447,89},{43,25}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -285,7 +285,7 @@
                 <key>spriteSourceSize</key>
                 <string>{43,25}</string>
                 <key>textureRect</key>
-                <string>{{465,89},{43,25}}</string>
+                <string>{{424,116},{43,25}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -375,9 +375,9 @@
                 <key>spriteSourceSize</key>
                 <string>{33,26}</string>
                 <key>textureRect</key>
-                <string>{{383,108},{33,26}}</string>
+                <string>{{396,137},{33,26}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>PlusDw.png</key>
             <dict>
@@ -393,6 +393,81 @@
                 <string>{{381,709},{54,31}}</string>
                 <key>textureRotated</key>
                 <true/>
+            </dict>
+            <key>Signal1.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{39,27}</string>
+                <key>spriteSourceSize</key>
+                <string>{39,27}</string>
+                <key>textureRect</key>
+                <string>{{383,108},{39,27}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>Signal2.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{39,27}</string>
+                <key>spriteSourceSize</key>
+                <string>{39,27}</string>
+                <key>textureRect</key>
+                <string>{{492,62},{39,27}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>Signal3.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{39,27}</string>
+                <key>spriteSourceSize</key>
+                <string>{39,27}</string>
+                <key>textureRect</key>
+                <string>{{492,103},{39,27}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>Signal4.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{39,27}</string>
+                <key>spriteSourceSize</key>
+                <string>{39,27}</string>
+                <key>textureRect</key>
+                <string>{{521,139},{39,27}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>Signal5.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{39,27}</string>
+                <key>spriteSourceSize</key>
+                <string>{39,27}</string>
+                <key>textureRect</key>
+                <string>{{469,144},{39,27}}</string>
+                <key>textureRotated</key>
+                <false/>
             </dict>
             <key>YouAreHere.png</key>
             <dict>
@@ -453,7 +528,7 @@
             <key>size</key>
             <string>{770,770}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:633fba144bb2388bfa86e17d25b91fb4:366bb359d1d7bcf13a035592cf96a4e4:2531ce2a050ca5e2ac51e04161e77adb$</string>
+            <string>$TexturePacker:SmartUpdate:40d31c0876226f8ec342d3857c44e0c5:5b7edefe35dbda90623e2f977a8a42a9:2531ce2a050ca5e2ac51e04161e77adb$</string>
             <key>textureFileName</key>
             <string>GameUI.png</string>
         </dict>
