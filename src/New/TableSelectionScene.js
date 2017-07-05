@@ -858,6 +858,7 @@ const TableType = {
 
             // Change display if room is locked
             if (roomState.roomLockStatus) {
+                roomState.roomLockStatus.allowedPlayers[0].slot = roomState.roomLockStatus.allowedPlayers[0].slot || 0;
                 this._lbReserveTime.setVisible(true);
                 let secondsLeft = (roomState.roomLockStatus.expiryTime - Date.now()) / 1000;
                 if (secondsLeft < 0) {
@@ -874,6 +875,7 @@ const TableType = {
             } else {
                 this._lbReserveTime.setVisible(false);
                 this._lbReserveTime.setString('--:--:--');
+                this._spGlow.setVisible(false);
             }
 
             for (let i = 0; i < 4; i++) {
@@ -1035,8 +1037,15 @@ const TableType = {
                  this._lbPlayerName.setString(nameToShow);
                  */
                 const isLockedByThisPlayer = roomBelongsToCurrentPlayer(roomState);
+                if (this._seatNumber === roomState.roomLockStatus.allowedPlayers[0].slot) {
+                    this._lbPlayerName.setVisible(true);
+                    this._spPlayerBase.setVisible(true);
+                    this._lbPlayerName.setString(roomState.roomLockStatus.allowedPlayers[0].playerName);
+                } else {
+                    this._spPlayerBase.setVisible(false);
+                }
                 if (isLockedByThisPlayer) {
-                    // ?? this.setVisible(true);
+                    this.setVisible(true);
                     spriteStr = "SS_YellowSit.png";
                 } else {
                     this.setVisible(true);
