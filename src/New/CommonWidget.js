@@ -486,7 +486,7 @@ let WaveTransition = cc.Node.extend({
                 node.convertToNodeSpace(point));
         };
         node.setStatus = function (status) {
-            node._btnStatus = status;
+            //node._btnStatus = status;
         };
         node.executeClickCallback = clickHandler;
         return node;
