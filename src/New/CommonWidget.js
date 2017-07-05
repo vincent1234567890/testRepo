@@ -847,6 +847,7 @@ let WaveTransition = cc.Node.extend({
             const str = cost > 0
                 ? 'You can now lock this room! It will cost ' + cost + ' coins for ' + duration + ' minutes. Do you want to lock the room?'
                 : 'Room locking now available! Do you want to lock this room for ' + duration + ' minutes?';
+
             const lockRoomText = new cc.LabelTTF(str, ef.DEFAULT_FONT, 20);
             lockRoomText.setPosition(0, 50);
             this.addChild(lockRoomText);
