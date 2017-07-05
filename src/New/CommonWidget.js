@@ -479,6 +479,18 @@ let WaveTransition = cc.Node.extend({
         }
     });
 
+    ef.initListener = function (node, clickHandler) {
+        node.hitTest = function (point) {
+            return cc.rectContainsPoint(cc.rect(0, 0, node._contentSize.width, node._contentSize.height),
+                node.convertToNodeSpace(point));
+        }
+        node.setStatus = function (status) {
+            node._btnStatus = status;
+        }
+        node.executeClickCallback = clickHandler;
+        return node;
+    }
+
     ef.MouseOverEventListener = cc._EventListenerMouse.extend({
         _mouseDown: null,
         ctor: function () {
@@ -820,4 +832,77 @@ let WaveTransition = cc.Node.extend({
                 cc.eventManager.addListener(this._btnListener, this._confirmBtn);
         }
     });
+    ef.LockingRoomDialog = cc.Layer.extend({
+        _text: null,
+        _yesBtn: null,
+        _noBtn: null,
+        _btnListener: null,
+        ctor: function (cost, duration, callback) {
+            cc.Layer.prototype.ctor.call(this);
+
+            const spBase = this._baseBG = new cc.Sprite(ReferenceName.Lockingroom_Background);
+            spBase.setPosition(0, 0);
+
+            this.addChild(spBase);
+
+            const str = 'You can now lock this room! It will cost ' + cost + ' for ' + duration + ' minutes. Do you want to lock the room?';
+            const lockRoomText = new cc.LabelTTF(str, ef.DEFAULT_FONT, 20);
+            lockRoomText.setPosition(0, 50);
+            this.addChild(lockRoomText);
+
+            //no
+            let noLayer = new cc.Layer(400, 100);
+            noLayer.setContentSize(cc.size(400, 100));
+
+            const noBtn = this._noBtn = new cc.Sprite(ReferenceName.Lockingroom_No);
+            noLayer.setPosition(60, -50);
+            noLayer.addChild(noBtn, 2);
+
+            const noBtnText = new cc.LabelTTF("不需要", ef.DEFAULT_FONT, 20);
+            noBtnText.setPosition(60, 0);
+            noLayer.addChild(noBtnText);
+            noBtnText.confirmResult = false;
+            noBtn.confirmResult = false;
+
+            this.addChild(noLayer);
+
+            //yes
+            let yesLayer = new cc.Layer(400, 100);
+            yesLayer.setContentSize(cc.size(400, 100));
+
+            const yesBtn = this._yesBtn = new cc.Sprite(ReferenceName.Lockingroom_Yes);
+            yesLayer.setPosition(-100, -50);
+            yesLayer.addChild(yesBtn, 2);
+
+            const yesBtnText = new cc.LabelTTF("需要", ef.DEFAULT_FONT, 20);
+            yesBtnText.setPosition(60, 0);
+            yesLayer.addChild(yesBtnText);
+            yesBtnText.confirmResult = true;
+            yesBtn.confirmResult = true;
+
+            this.addChild(yesLayer);
+
+            this._eventListener = new ef.SpriteClickHandler();
+
+            let self = this;
+
+            function clickResult(touch, event) {
+                self.removeFromParent();
+                callback(event.getCurrentTarget().confirmResult);
+            }
+
+            ef.initListener(noBtnText, clickResult);
+            ef.initListener(noBtn, clickResult);
+            ef.initListener(yesBtnText, clickResult);
+            ef.initListener(yesBtn, clickResult);
+
+            if (this._eventListener && !this._eventListener._isRegistered()) {
+                cc.eventManager.addListener(this._eventListener, noBtnText);
+                cc.eventManager.addListener(new ef.SpriteClickHandler(), noBtn);
+                cc.eventManager.addListener(new ef.SpriteClickHandler(), yesBtnText);
+                cc.eventManager.addListener(new ef.SpriteClickHandler(), yesBtn);
+            }
+        }
+    });
+
 })(ef);
