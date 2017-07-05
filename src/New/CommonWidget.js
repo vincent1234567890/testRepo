@@ -483,13 +483,13 @@ let WaveTransition = cc.Node.extend({
         node.hitTest = function (point) {
             return cc.rectContainsPoint(cc.rect(0, 0, node._contentSize.width, node._contentSize.height),
                 node.convertToNodeSpace(point));
-        }
+        };
         node.setStatus = function (status) {
             node._btnStatus = status;
-        }
+        };
         node.executeClickCallback = clickHandler;
         return node;
-    }
+    };
 
     ef.MouseOverEventListener = cc._EventListenerMouse.extend({
         _mouseDown: null,
@@ -832,6 +832,7 @@ let WaveTransition = cc.Node.extend({
                 cc.eventManager.addListener(this._btnListener, this._confirmBtn);
         }
     });
+
     ef.LockingRoomDialog = cc.Layer.extend({
         _text: null,
         _yesBtn: null,
@@ -854,40 +855,40 @@ let WaveTransition = cc.Node.extend({
             this.addChild(lockRoomText);
 
             //no
-            let noLayer = new cc.Layer(400, 100);
+            const noLayer = new cc.Layer(400, 100);
             noLayer.setContentSize(cc.size(400, 100));
+            noLayer.setPosition(60, -50);
 
             const noBtn = this._noBtn = new cc.Sprite(ReferenceName.Lockingroom_No);
-            noLayer.setPosition(60, -50);
             noLayer.addChild(noBtn, 2);
 
             const noBtnText = new cc.LabelTTF("不需要", ef.DEFAULT_FONT, 20);
             noBtnText.setPosition(60, 0);
             noLayer.addChild(noBtnText);
-            noBtnText.confirmResult = false;
-            noBtn.confirmResult = false;
+
+            noBtn.confirmResult = noBtnText.confirmResult = false;
 
             this.addChild(noLayer);
 
             //yes
-            let yesLayer = new cc.Layer(400, 100);
+            const yesLayer = new cc.Layer(400, 100);
             yesLayer.setContentSize(cc.size(400, 100));
+            yesLayer.setPosition(-100, -50);
 
             const yesBtn = this._yesBtn = new cc.Sprite(ReferenceName.Lockingroom_Yes);
-            yesLayer.setPosition(-100, -50);
             yesLayer.addChild(yesBtn, 2);
 
             const yesBtnText = new cc.LabelTTF("需要", ef.DEFAULT_FONT, 20);
             yesBtnText.setPosition(60, 0);
             yesLayer.addChild(yesBtnText);
-            yesBtnText.confirmResult = true;
-            yesBtn.confirmResult = true;
+
+            yesBtn.confirmResult = yesBtnText.confirmResult = true;
 
             this.addChild(yesLayer);
 
             this._eventListener = new ef.SpriteClickHandler();
 
-            let self = this;
+            const self = this;
 
             function clickResult(touch, event) {
                 self.removeFromParent();
