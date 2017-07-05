@@ -835,14 +835,10 @@ let WaveTransition = cc.Node.extend({
     });
 
     ef.LockingRoomDialog = cc.Layer.extend({
-        _text: null,
-        _yesBtn: null,
-        _noBtn: null,
-        _btnListener: null,
         ctor: function (cost, duration, callback) {
             cc.Layer.prototype.ctor.call(this);
 
-            const spBase = this._baseBG = new cc.Sprite(ReferenceName.Lockingroom_Background);
+            const spBase = new cc.Sprite(ReferenceName.Lockingroom_Background);
             spBase.setPosition(0, 0);
 
             this.addChild(spBase);
@@ -860,7 +856,7 @@ let WaveTransition = cc.Node.extend({
             noLayer.setContentSize(cc.size(400, 100));
             noLayer.setPosition(60, -50);
 
-            const noBtn = this._noBtn = new cc.Sprite(ReferenceName.Lockingroom_No);
+            const noBtn = new cc.Sprite(ReferenceName.Lockingroom_No);
             noLayer.addChild(noBtn, 2);
 
             const noBtnText = new cc.LabelTTF("不需要", ef.DEFAULT_FONT, 20);
@@ -876,7 +872,7 @@ let WaveTransition = cc.Node.extend({
             yesLayer.setContentSize(cc.size(400, 100));
             yesLayer.setPosition(-100, -50);
 
-            const yesBtn = this._yesBtn = new cc.Sprite(ReferenceName.Lockingroom_Yes);
+            const yesBtn = new cc.Sprite(ReferenceName.Lockingroom_Yes);
             yesLayer.addChild(yesBtn, 2);
 
             const yesBtnText = new cc.LabelTTF("需要", ef.DEFAULT_FONT, 20);
