@@ -858,14 +858,16 @@ let WaveTransition = cc.Node.extend({
                 lockingRoomDialog.removeFromParent();
                 callback(true);
             });
-            yesLayer.setPosition(-100, -50);
-            this.addChild(yesLayer);
 
             const noLayer = createButtonWithSpriteAndText(ReferenceName.Lockingroom_No, "不需要", () => {
                 lockingRoomDialog.removeFromParent();
                 callback(false);
             });
+
+            yesLayer.setPosition(-100, -50);
             noLayer.setPosition(60, -50);
+
+            this.addChild(yesLayer);
             this.addChild(noLayer);
         }
     });
