@@ -851,50 +851,39 @@ let WaveTransition = cc.Node.extend({
             lockRoomText.setPosition(0, 50);
             this.addChild(lockRoomText);
 
-            //no
-            const noLayer = new cc.Layer(400, 100);
-            noLayer.setContentSize(cc.size(400, 100));
-            noLayer.setPosition(60, -50);
+            const lockingRoomDialog = this;
 
-            const noBtn = new cc.Sprite(ReferenceName.Lockingroom_No);
-            noLayer.addChild(noBtn, 2);
-
-            const noBtnText = new cc.LabelTTF("不需要", ef.DEFAULT_FONT, 20);
-            noBtnText.setPosition(60, 0);
-            noLayer.addChild(noBtnText);
-
-            noBtn.confirmResult = noBtnText.confirmResult = false;
-
-            this.addChild(noLayer);
-
-            //yes
-            const yesLayer = new cc.Layer(400, 100);
-            yesLayer.setContentSize(cc.size(400, 100));
+            const yesLayer = createButtonWithSpriteAndText(ReferenceName.Lockingroom_Yes, "需要", () => {
+                lockingRoomDialog.removeFromParent();
+                callback(true);
+            });
             yesLayer.setPosition(-100, -50);
-
-            const yesBtn = new cc.Sprite(ReferenceName.Lockingroom_Yes);
-            yesLayer.addChild(yesBtn, 2);
-
-            const yesBtnText = new cc.LabelTTF("需要", ef.DEFAULT_FONT, 20);
-            yesBtnText.setPosition(60, 0);
-            yesLayer.addChild(yesBtnText);
-
-            yesBtn.confirmResult = yesBtnText.confirmResult = true;
-
             this.addChild(yesLayer);
 
-            ef.initClickListener(noBtnText, clickResult);
-            ef.initClickListener(noBtn, clickResult);
-            ef.initClickListener(yesBtnText, clickResult);
-            ef.initClickListener(yesBtn, clickResult);
-
-            const self = this;
-
-            function clickResult(touch, event) {
-                self.removeFromParent();
-                callback(event.getCurrentTarget().confirmResult);
-            }
+            const noLayer = createButtonWithSpriteAndText(ReferenceName.Lockingroom_No, "不需要", () => {
+                lockingRoomDialog.removeFromParent();
+                callback(false);
+            });
+            noLayer.setPosition(60, -50);
+            this.addChild(noLayer);
         }
     });
+
+    function createButtonWithSpriteAndText (spriteRef, text, callback) {
+        const layer = new cc.Layer(400, 100);
+        layer.setContentSize(cc.size(400, 100));
+
+        const button = new cc.Sprite(spriteRef);
+        layer.addChild(button, 2);
+
+        const label = new cc.LabelTTF(text, ef.DEFAULT_FONT, 20);
+        label.setPosition(60, 0);
+        layer.addChild(label);
+
+        ef.initClickListener(button, callback);
+        ef.initClickListener(label, callback);
+
+        return layer;
+    }
 
 })(ef);
