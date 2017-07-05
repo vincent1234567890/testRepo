@@ -479,7 +479,8 @@ let WaveTransition = cc.Node.extend({
         }
     });
 
-    ef.initListener = function (node, clickHandler) {
+    ef.initClickListener = function (node, clickHandler) {
+        cc.eventManager.addListener(new ef.SpriteClickHandler(), node);
         node.hitTest = function (point) {
             return cc.rectContainsPoint(cc.rect(0, 0, node._contentSize.width, node._contentSize.height),
                 node.convertToNodeSpace(point));
@@ -886,25 +887,16 @@ let WaveTransition = cc.Node.extend({
 
             this.addChild(yesLayer);
 
-            this._eventListener = new ef.SpriteClickHandler();
+            ef.initClickListener(noBtnText, clickResult);
+            ef.initClickListener(noBtn, clickResult);
+            ef.initClickListener(yesBtnText, clickResult);
+            ef.initClickListener(yesBtn, clickResult);
 
             const self = this;
 
             function clickResult(touch, event) {
                 self.removeFromParent();
                 callback(event.getCurrentTarget().confirmResult);
-            }
-
-            ef.initListener(noBtnText, clickResult);
-            ef.initListener(noBtn, clickResult);
-            ef.initListener(yesBtnText, clickResult);
-            ef.initListener(yesBtn, clickResult);
-
-            if (this._eventListener && !this._eventListener._isRegistered()) {
-                cc.eventManager.addListener(this._eventListener, noBtnText);
-                cc.eventManager.addListener(new ef.SpriteClickHandler(), noBtn);
-                cc.eventManager.addListener(new ef.SpriteClickHandler(), yesBtnText);
-                cc.eventManager.addListener(new ef.SpriteClickHandler(), yesBtn);
             }
         }
     });
