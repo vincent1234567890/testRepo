@@ -906,10 +906,6 @@ const TableType = {
                     return;
                 }
             }
-            // Check if spectating
-            if (ef.gameController.getGlobalProp('spectating')) {
-
-            }
 
             // If this is a single play room, check the player has enough credit to join
             if (this._roomState && this._roomState.singlePlay === true) {
@@ -939,6 +935,7 @@ const TableType = {
             joinPrefs = Object.assign({}, joinPrefs, {
                 roomId: roomState.roomId,
                 serverUrl: 'ws://' + roomState.server.ipAddress,
+                spectate: ef.gameController.getGlobalProp('spectating'),
                 // This is redundant, since we are selecting the specific room by roomId
                 //singlePlay: roomState.singlePlay
             });

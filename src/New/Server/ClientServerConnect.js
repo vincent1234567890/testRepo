@@ -331,9 +331,9 @@ const ClientServerConnect = function () {
         );
     }
 
-    /* Old method, for joining an existing or a new room, according to preferences */
-    function joinGame (chosenScene, seat, type) {
-        const joinPrefs = {scene: chosenScene, preferredSeat: seat, singlePlay: type === TableType.SINGLE};
+    /* Express join, no specific room */
+    function joinGame (chosenScene, seat, type, spectate) {
+        const joinPrefs = {scene: chosenScene, preferredSeat: seat, singlePlay: type === TableType.SINGLE, spectate: spectate};
 
         console.log(`Requesting suitable game server from master server...`);
 
@@ -347,8 +347,8 @@ const ClientServerConnect = function () {
     }
 
     /* New method, for joining a chosen room */
-    function joinGameInSpecificRoom (serverUrl, roomId, seat) {
-        const joinPrefs = {roomId: roomId, preferredSeat: seat};
+    function joinGameInSpecificRoom (serverUrl, roomId, seat, spectate) {
+        const joinPrefs = {roomId: roomId, preferredSeat: seat, spectate: spectate};
 
         return connectToGameServer(serverUrl).then(() => {
             return postConnectJoinGame(joinPrefs);
