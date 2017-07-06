@@ -186,7 +186,7 @@ const TableType = {
             pnTableListBg.addChild(btnExpress);
             const expressButtonClicked = () => {
                 if (ef.gameController.getGlobalProp('spectating')) {
-                    return
+                    return;
                 }
                 const singlePlay = this.getSelectedTableType() === TableType.SINGLE;
                 selectionMadeCallback({singlePlay});
@@ -196,7 +196,7 @@ const TableType = {
             //overwrite the default mouse moving handler by checking spectating status
             btnExpress.onMouseOverIn = function () {
                 if (ef.gameController.getGlobalProp('spectating')) {
-                    return
+                    return;
                 }
                 const spriteFrame = cc.spriteFrameCache.getSpriteFrame(this._selectedSprite.substr(1));
                 if (spriteFrame)
@@ -204,7 +204,7 @@ const TableType = {
             };
             btnExpress.onMouseOverOut = function () {
                 if (ef.gameController.getGlobalProp('spectating')) {
-                    return
+                    return;
                 }
                 const spriteFrame = cc.spriteFrameCache.getSpriteFrame(this._normalSprite.substr(1));
                 if (spriteFrame)
@@ -561,9 +561,9 @@ const TableType = {
                         const nextPage = ef.gameController.setCurLobbyPage(this._node._pageNum - 1);
                         const parent = this._node._parentNode;
                         if (curPage < nextPage) {
-                            parent.switchNextPage(curPage, nextPage)
+                            parent.switchNextPage(curPage, nextPage);
                         } else if (curPage > nextPage) {
-                            parent.switchPrevPage(curPage, nextPage)
+                            parent.switchPrevPage(curPage, nextPage);
                         }
                     }
                 }
@@ -584,7 +584,7 @@ const TableType = {
             //add new set
             let pageIndicator = new cc.Layer();
             if (!ef.gameController.getTablePanel()) {
-                return
+                return;
             }
             ef.gameController.getTablePanel().addChild(pageIndicator);
 
