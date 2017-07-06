@@ -822,6 +822,7 @@ const GameLogView = (function () {
                         typeText = "中奖";
                         break;
                 }
+                // Jeff thinks they will want another type of entry here: 'freeRound': '奖励鱼池'
 
                 const transferType = new cc.LabelTTF(typeText, GAME_LOG_VIEW_FONT, GAME_LOG_VIEW_FONT_SIZE);
                 transferType.setFontFillColor(new cc.Color(0, 0, 0, 255));
