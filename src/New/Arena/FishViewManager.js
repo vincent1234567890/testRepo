@@ -55,7 +55,10 @@ const FishViewManager = (function(){
         this._fishes[fishId] = new FishView(this._parent, this._gameConfig.fishClasses[fishType], fishType, this._onFishClicked);
         if (fishType === 'Mermaid' || fishType === 'GMermaid') {
             cc.audioEngine.playMusic(res.MermaidFX)
+        } else if (!cc.audioEngine.isMusicPlaying()) {
+            cc.audioEngine.playMusic(res.ArenaGameBGM);
         }
+
         return this._fishes[fishId];
     };
 
@@ -69,10 +72,16 @@ const FishViewManager = (function(){
             console.warn("Could not find fishActor for fish " + id + ".  Perhaps scene was not initialised.");
             return;
         }
+        if (this._fishes[id].type === 'Mermaid' || this._fishes[id].type === 'GMermaid') {
+            cc.audioEngine.playMusic(res.ArenaGameBGM);
+        }
         this._fishes[id].killFish(this, this.removeFish, id, playerSlot);
     };
 
     proto.removeFish = function (reference, data) {
+        if (data.type === 'Mermaid' || data.type === 'GMermaid') {
+            cc.audioEngine.playMusic(res.ArenaGameBGM);
+        }
         if (!this._parent) {
             console.warn("Parent has already been destroyed.  Possible invisible fish or out of order destruction.");
             return;
