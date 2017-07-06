@@ -215,6 +215,55 @@ const TableType = {
             btnSpectate.setPosition(220, szTableListBg.height - 35);
             pnTableListBg.addChild(btnSpectate);
 
+
+            //btn continue
+            const btnContinue = this._btnContinue = ef.ButtonSprite.createSpriteButton("#SS_PinkButton.png",
+                "#SS_PinkHover.png", "#SS_ContinueChinese.png");
+            btnContinue._goOpaqueWhenSpectating = true;
+            btnContinue.setPosition(385, szTableListBg.height - 35);
+            btnContinue.setVisible(false);
+            pnTableListBg.addChild(btnContinue);
+            const continueButtonClicked = () => {
+                if (ef.gameController.getGlobalProp('spectating')) {
+                    return
+                }
+                selectionMadeCallback({singlePlay});
+            };
+            btnContinue.setClickHandler(continueButtonClicked, this);
+
+            btnContinue.setEnable = function (allRooms) {
+                let self = this;
+                const thisPlayer = ef.gameController.getCurrentPlayer();
+                if (allRooms && allRooms.length > 0) {
+                    const thisPlayerLocked = allRooms.some(roomState => {
+                        if (roomState && roomState.roomLockStatus && roomState.roomLockStatus.allowedPlayers) {
+                            const lockedPlayers = roomState.roomLockStatus.allowedPlayers[0];
+                            if (lockedPlayers.playerName === thisPlayer.name && lockedPlayers.playerId === thisPlayer.id) {
+                                return true;
+                            }
+                        }
+                    });
+                    self.setVisible(thisPlayerLocked);
+                }
+            }
+            //overwrite the default mouse moving handler by checking spectating status
+            btnContinue.onMouseOverIn = function () {
+                if (ef.gameController.getGlobalProp('spectating')) {
+                    return
+                }
+                const spriteFrame = cc.spriteFrameCache.getSpriteFrame(this._selectedSprite.substr(1));
+                if (spriteFrame)
+                    this.setSpriteFrame(spriteFrame);
+            };
+            btnContinue.onMouseOverOut = function () {
+                if (ef.gameController.getGlobalProp('spectating')) {
+                    return
+                }
+                const spriteFrame = cc.spriteFrameCache.getSpriteFrame(this._normalSprite.substr(1));
+                if (spriteFrame)
+                    this.setSpriteFrame(spriteFrame);
+            };
+
             // @todo We need to make the TableListPanel scrollable somehow
 
             const szClippingNode = new cc.Size(cc.visibleRect.width - 64, cc.visibleRect.height - 348);
@@ -313,6 +362,7 @@ const TableType = {
                     }
                 };
                 const roomStatesToShow = this._roomStates.filter(roomHasCorrectType);
+                this._btnContinue.setEnable(roomStatesToShow);
 
                 // Count free seats (of correct type)
                 const freeSeats = getFreeSeatsCount(roomStatesToShow);
@@ -787,7 +837,6 @@ const TableType = {
                 if (ef.gameController.getGlobalProp('spectating')) {
                     this._spSpecText.setVisible(true);
                 }
-
             }
         },
 
@@ -809,6 +858,7 @@ const TableType = {
 
             // Change display if room is locked
             if (roomState.roomLockStatus) {
+                roomState.roomLockStatus.allowedPlayers[0].slot = roomState.roomLockStatus.allowedPlayers[0].slot || 0;
                 this._lbReserveTime.setVisible(true);
                 let secondsLeft = (roomState.roomLockStatus.expiryTime - Date.now()) / 1000;
                 if (secondsLeft < 0) {
@@ -816,9 +866,16 @@ const TableType = {
                 }
                 const countdownString = getHHMMSSFromSeconds(secondsLeft);
                 this._lbReserveTime.setString(countdownString);
+
+                //set glowing of the reserved table
+                this._spGlow.setVisible(true);
+                const sequence = cc.sequence(cc.fadeIn(1), cc.fadeOut(1));
+                const repeat = cc.repeatForever(sequence);
+                this._spGlow.runAction(repeat);
             } else {
                 this._lbReserveTime.setVisible(false);
                 this._lbReserveTime.setString('--:--:--');
+                this._spGlow.setVisible(false);
             }
 
             for (let i = 0; i < 4; i++) {
@@ -971,17 +1028,24 @@ const TableType = {
             let spriteStr = null;
             if (roomState.roomLockStatus) {
                 /*
-                // Display the name of the player who locked this room
-                const fullName = roomState.roomLockStatus.allowedPlayers[0].playerName;
-                const nameToShow = shortenedString(fullName, 14);
-                this.setVisible(true);
-                this._spPlayerBase.setVisible(true);
-                this._lbPlayerName.setVisible(true);
-                this._lbPlayerName.setString(nameToShow);
-                */
+                 // Display the name of the player who locked this room
+                 const fullName = roomState.roomLockStatus.allowedPlayers[0].playerName;
+                 const nameToShow = shortenedString(fullName, 14);
+                 this.setVisible(true);
+                 this._spPlayerBase.setVisible(true);
+                 this._lbPlayerName.setVisible(true);
+                 this._lbPlayerName.setString(nameToShow);
+                 */
                 const isLockedByThisPlayer = roomBelongsToCurrentPlayer(roomState);
+                if (this._seatNumber === roomState.roomLockStatus.allowedPlayers[0].slot) {
+                    this._lbPlayerName.setVisible(true);
+                    this._spPlayerBase.setVisible(true);
+                    this._lbPlayerName.setString(roomState.roomLockStatus.allowedPlayers[0].playerName);
+                } else {
+                    this._spPlayerBase.setVisible(false);
+                }
                 if (isLockedByThisPlayer) {
-                    // ?? this.setVisible(true);
+                    this.setVisible(true);
                     spriteStr = "SS_YellowSit.png";
                 } else {
                     this.setVisible(true);
@@ -1058,7 +1122,7 @@ const TableType = {
         return hh + ':' + mm + ':' + ss;
     }
 
-    function pad2 (n) {
+    function pad2(n) {
         return n < 10 ? '0' + n.toString(10) : n.toString(10);
     }
 
