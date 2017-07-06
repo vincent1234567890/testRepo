@@ -1,9 +1,9 @@
 //use for manage fishes.
-const FishViewManager = (function(){
+const FishViewManager = (function () {
 
-    const FishViewManager = function(fishGameArena, gameConfig, animationEndEvent, getFishLockStatus, onFishLockSelectedCallback){
+    const FishViewManager = function (fishGameArena, gameConfig, animationEndEvent, getFishLockStatus, onFishLockSelectedCallback) {
         const plists = ResourceLoader.getPlists("Fish");
-        for ( let list in plists){
+        for (let list in plists) {
             cc.spriteFrameCache.addSpriteFrames(plists[list]);
         }
 
@@ -22,12 +22,12 @@ const FishViewManager = (function(){
 
         let fishViewTarget;
         this._onFishClicked = (fishView) => {
-            if (!getFishLockStatus()){
+            if (!getFishLockStatus()) {
                 return;
             }
             let id = -1;
-            for( let fishId in this._fishes ) {
-                if( this._fishes[ fishId ] === fishView ) {
+            for (let fishId in this._fishes) {
+                if (this._fishes[fishId] === fishView) {
                     id = fishId;
                     break;
                 }
@@ -43,7 +43,7 @@ const FishViewManager = (function(){
         };
 
         this.unsetLock = () => {
-            if(fishViewTarget)
+            if (fishViewTarget)
                 fishViewTarget.removeTarget(targetLockUI);
         };
     };
@@ -62,7 +62,7 @@ const FishViewManager = (function(){
         return this._fishes[fishId];
     };
 
-    proto.getFish = function(id){
+    proto.getFish = function (id) {
         return this._fishes[id];
     };
 
@@ -94,28 +94,28 @@ const FishViewManager = (function(){
         if (this._fishes[data.id]) {
             this._fishes[data.id].destroyView(this._parent);
         }
-        if(data.type && data.position && (data.playerSlot!=null)) {
+        if (data.type && data.position && (data.playerSlot != null)) {
             this._onAnimationEndEvent(data);
         }
         delete this._fishes[data.id];
     };
 
     proto.update = function () {
-        for ( let fishId in this._fishes){
+        for (let fishId in this._fishes) {
             const fishModel = this._fishGameArena.getFish(fishId);
             if (fishModel) {
                 //console.log(`Moving fish ${this.FishID} to ${fishModel.position}`);
 
                 // const model = this.rotationFunction(fishModel.position, fishModel.angle);
                 const model = GameView.getRotatedView(fishModel.position, fishModel.angle);
-                this._fishes[fishId].updateView(cc.p(model.position[0],model.position[1]), model.rotation);
+                this._fishes[fishId].updateView(cc.p(model.position[0], model.position[1]), model.rotation);
                 // this._fishes[fishId].setRotation(model.rotation);
             }
         }
     };
 
-    proto.destroyView = function(){
-        if(this._parent) {
+    proto.destroyView = function () {
+        if (this._parent) {
             for (let fishId in this._fishes) {
                 const fishModel = this._fishGameArena.getFish(fishId);
                 if (fishModel) {
