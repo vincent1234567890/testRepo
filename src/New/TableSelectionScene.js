@@ -232,9 +232,11 @@ const TableType = {
                 if (!thisPlayersLockedRoom) {
                     return;
                 }
+                const lockedPlayer = thisPlayersLockedRoom.roomLockStatus.allowedPlayers[0];
                 selectionMadeCallback({
                     roomId: thisPlayersLockedRoom.roomId,
                     serverUrl: 'ws://' + thisPlayersLockedRoom.server.ipAddress,
+                    slot: lockedPlayer.slot || 0,
                 });
             };
             btnContinue.setClickHandler(continueButtonClicked, this);
@@ -769,6 +771,7 @@ const TableType = {
             lbTitle.setPosition(szContent.width * 0.5, szContent.height - 38);
 
             const lbReserveTime = this._lbReserveTime = new cc.LabelTTF("00:00:00", "Arial", 22);
+            this._lbReserveTime._goOpaqueWhenSpectating = true;
             this.addChild(lbReserveTime);
             lbReserveTime.setPosition(szContent.width * 0.5, szContent.height * 0.5 + 10);
 
@@ -853,6 +856,7 @@ const TableType = {
 
             // Change display if room is locked
             if (roomState.roomLockStatus) {
+                this._lbTitle.setString('保留');
                 roomState.roomLockStatus.allowedPlayers[0].slot = roomState.roomLockStatus.allowedPlayers[0].slot || 0;
                 this._lbReserveTime.setVisible(true);
                 let secondsLeft = (roomState.roomLockStatus.expiryTime - Date.now()) / 1000;
@@ -890,11 +894,18 @@ const TableType = {
         },
 
         makeSelection: function (joinPrefs) {
+            const curPlayer = ef.gameController.getCurrentPlayer();
             if (roomIsFull(this._roomState)) {
                 // Cannot join this room
                 return;
             }
 
+            if (this._roomState && this._roomState.roomLockStatus) {
+                //disable players from entering the room other than owner.
+                if (this._roomState.roomLockStatus.allowedPlayers[0].playerId !== curPlayer.id) {
+                    return
+                }
+            }
             // Check if spectating
             if (ef.gameController.getGlobalProp('spectating')) {
 
@@ -902,7 +913,6 @@ const TableType = {
 
             // If this is a single play room, check the player has enough credit to join
             if (this._roomState && this._roomState.singlePlay === true) {
-                const curPlayer = ef.gameController.getCurrentPlayer();
 
                 const multiObj = {
                     '1X': 1,
