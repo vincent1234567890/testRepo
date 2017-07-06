@@ -227,7 +227,8 @@ const TableType = {
                 if (ef.gameController.getGlobalProp('spectating')) {
                     return
                 }
-                selectionMadeCallback({singlePlay});
+                const info = btnContinue.roomInfo;
+                ClientServerConnect.joinGameInSpecificRoom(info.ipAddress, info.roomId, info.slot);
             };
             btnContinue.setClickHandler(continueButtonClicked, this);
 
@@ -237,13 +238,18 @@ const TableType = {
                 if (allRooms && allRooms.length > 0) {
                     const thisPlayerLocked = allRooms.some(roomState => {
                         if (roomState && roomState.roomLockStatus && roomState.roomLockStatus.allowedPlayers) {
-                            const lockedPlayers = roomState.roomLockStatus.allowedPlayers[0];
-                            if (lockedPlayers.playerName === thisPlayer.name && lockedPlayers.playerId === thisPlayer.id) {
+                            const lockedPlayer = roomState.roomLockStatus.allowedPlayers[0];
+                            if (lockedPlayer.playerName === thisPlayer.name && lockedPlayer.playerId === thisPlayer.id) {
+                                btnContinue.roomInfo = {
+                                    ipAddress: 'ws://' + roomState.server.ipAddress,
+                                    roomId: roomState.roomId,
+                                    slot: lockedPlayer.slot || 0,
+                                };
                                 return true;
                             }
                         }
                     });
-                    self.setVisible(thisPlayerLocked);
+                    btnContinue.setVisible(thisPlayerLocked);
                 }
             }
             //overwrite the default mouse moving handler by checking spectating status
@@ -774,6 +780,7 @@ const TableType = {
             lbTitle.setPosition(szContent.width * 0.5, szContent.height - 38);
 
             const lbReserveTime = this._lbReserveTime = new cc.LabelTTF("00:00:00", "Arial", 22);
+            this._lbReserveTime._goOpaqueWhenSpectating = true;
             this.addChild(lbReserveTime);
             lbReserveTime.setPosition(szContent.width * 0.5, szContent.height * 0.5 + 10);
 
@@ -858,6 +865,7 @@ const TableType = {
 
             // Change display if room is locked
             if (roomState.roomLockStatus) {
+                this._lbTitle.setString('保留');
                 roomState.roomLockStatus.allowedPlayers[0].slot = roomState.roomLockStatus.allowedPlayers[0].slot || 0;
                 this._lbReserveTime.setVisible(true);
                 let secondsLeft = (roomState.roomLockStatus.expiryTime - Date.now()) / 1000;
