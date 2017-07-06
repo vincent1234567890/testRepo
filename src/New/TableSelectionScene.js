@@ -903,11 +903,18 @@ const TableType = {
         },
 
         makeSelection: function (joinPrefs) {
+            const curPlayer = ef.gameController.getCurrentPlayer();
             if (roomIsFull(this._roomState)) {
                 // Cannot join this room
                 return;
             }
 
+            if (this._roomState && this._roomState.roomLockStatus) {
+                //disable players from entering the room other than owner.
+                if (this._roomState.roomLockStatus.allowedPlayers[0].playerId !== curPlayer.id) {
+                    return
+                }
+            }
             // Check if spectating
             if (ef.gameController.getGlobalProp('spectating')) {
 
@@ -915,7 +922,6 @@ const TableType = {
 
             // If this is a single play room, check the player has enough credit to join
             if (this._roomState && this._roomState.singlePlay === true) {
-                const curPlayer = ef.gameController.getCurrentPlayer();
 
                 const multiObj = {
                     '1X': 1,
