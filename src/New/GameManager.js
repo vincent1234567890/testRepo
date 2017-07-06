@@ -298,10 +298,10 @@ const GameManager = function () {
         let prom = null;
         if (!joinPrefs.serverUrl || !joinPrefs.roomId) {
             // Treat this as an express join
-            prom = ClientServerConnect.joinGame(_currentScene.gameName, null, joinPrefs.singlePlay ? TableType.SINGLE : TableType.MULTIPLE);
+            prom = ClientServerConnect.joinGame(_currentScene.gameName, null, joinPrefs.singlePlay ? TableType.SINGLE : TableType.MULTIPLE, joinPrefs.spectate);
         } else {
             // Server and room were specified
-            prom = ClientServerConnect.joinGameInSpecificRoom(joinPrefs.serverUrl, joinPrefs.roomId, joinPrefs.slot);
+            prom = ClientServerConnect.joinGameInSpecificRoom(joinPrefs.serverUrl, joinPrefs.roomId, joinPrefs.slot, joinPrefs.spectate);
         }
         return prom.catch(error => {
             _lobbyManager.resetView();
