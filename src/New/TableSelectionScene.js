@@ -186,7 +186,7 @@ const TableType = {
             pnTableListBg.addChild(btnExpress);
             const expressButtonClicked = () => {
                 if (ef.gameController.getGlobalProp('spectating')) {
-                    return
+                    return;
                 }
                 const singlePlay = this.getSelectedTableType() === TableType.SINGLE;
                 selectionMadeCallback({singlePlay});
@@ -196,7 +196,7 @@ const TableType = {
             //overwrite the default mouse moving handler by checking spectating status
             btnExpress.onMouseOverIn = function () {
                 if (ef.gameController.getGlobalProp('spectating')) {
-                    return
+                    return;
                 }
                 const spriteFrame = cc.spriteFrameCache.getSpriteFrame(this._selectedSprite.substr(1));
                 if (spriteFrame)
@@ -204,7 +204,7 @@ const TableType = {
             };
             btnExpress.onMouseOverOut = function () {
                 if (ef.gameController.getGlobalProp('spectating')) {
-                    return
+                    return;
                 }
                 const spriteFrame = cc.spriteFrameCache.getSpriteFrame(this._normalSprite.substr(1));
                 if (spriteFrame)
@@ -217,6 +217,8 @@ const TableType = {
 
 
             //btn continue
+            let thisPlayersLockedRoom = null;
+
             const btnContinue = this._btnContinue = ef.ButtonSprite.createSpriteButton("#SS_PinkButton.png",
                 "#SS_PinkHover.png", "#SS_ContinueChinese.png");
             btnContinue._goOpaqueWhenSpectating = true;
@@ -225,31 +227,26 @@ const TableType = {
             pnTableListBg.addChild(btnContinue);
             const continueButtonClicked = () => {
                 if (ef.gameController.getGlobalProp('spectating')) {
-                    return
+                    return;
                 }
-                selectionMadeCallback({singlePlay});
+                if (!thisPlayersLockedRoom) {
+                    return;
+                }
+                selectionMadeCallback({
+                    roomId: thisPlayersLockedRoom.roomId,
+                    serverUrl: 'ws://' + thisPlayersLockedRoom.server.ipAddress,
+                });
             };
             btnContinue.setClickHandler(continueButtonClicked, this);
 
-            btnContinue.setEnable = function (allRooms) {
-                let self = this;
-                const thisPlayer = ef.gameController.getCurrentPlayer();
-                if (allRooms && allRooms.length > 0) {
-                    const thisPlayerLocked = allRooms.some(roomState => {
-                        if (roomState && roomState.roomLockStatus && roomState.roomLockStatus.allowedPlayers) {
-                            const lockedPlayers = roomState.roomLockStatus.allowedPlayers[0];
-                            if (lockedPlayers.playerName === thisPlayer.name && lockedPlayers.playerId === thisPlayer.id) {
-                                return true;
-                            }
-                        }
-                    });
-                    self.setVisible(thisPlayerLocked);
-                }
-            }
+            btnContinue.checkRooms = function (allRooms) {
+                thisPlayersLockedRoom = allRooms.find(roomBelongsToCurrentPlayer);
+                btnContinue.setVisible(Boolean(thisPlayersLockedRoom));
+            };
             //overwrite the default mouse moving handler by checking spectating status
             btnContinue.onMouseOverIn = function () {
                 if (ef.gameController.getGlobalProp('spectating')) {
-                    return
+                    return;
                 }
                 const spriteFrame = cc.spriteFrameCache.getSpriteFrame(this._selectedSprite.substr(1));
                 if (spriteFrame)
@@ -257,14 +254,12 @@ const TableType = {
             };
             btnContinue.onMouseOverOut = function () {
                 if (ef.gameController.getGlobalProp('spectating')) {
-                    return
+                    return;
                 }
                 const spriteFrame = cc.spriteFrameCache.getSpriteFrame(this._normalSprite.substr(1));
                 if (spriteFrame)
                     this.setSpriteFrame(spriteFrame);
             };
-
-            // @todo We need to make the TableListPanel scrollable somehow
 
             const szClippingNode = new cc.Size(cc.visibleRect.width - 64, cc.visibleRect.height - 348);
             const dnStencil = new cc.DrawNode();
@@ -362,7 +357,7 @@ const TableType = {
                     }
                 };
                 const roomStatesToShow = this._roomStates.filter(roomHasCorrectType);
-                this._btnContinue.setEnable(roomStatesToShow);
+                this._btnContinue.checkRooms(roomStatesToShow);
 
                 // Count free seats (of correct type)
                 const freeSeats = getFreeSeatsCount(roomStatesToShow);
@@ -569,9 +564,9 @@ const TableType = {
                         const nextPage = ef.gameController.setCurLobbyPage(this._node._pageNum - 1);
                         const parent = this._node._parentNode;
                         if (curPage < nextPage) {
-                            parent.switchNextPage(curPage, nextPage)
+                            parent.switchNextPage(curPage, nextPage);
                         } else if (curPage > nextPage) {
-                            parent.switchPrevPage(curPage, nextPage)
+                            parent.switchPrevPage(curPage, nextPage);
                         }
                     }
                 }
@@ -592,7 +587,7 @@ const TableType = {
             //add new set
             let pageIndicator = new cc.Layer();
             if (!ef.gameController.getTablePanel()) {
-                return
+                return;
             }
             ef.gameController.getTablePanel().addChild(pageIndicator);
 
@@ -1090,7 +1085,7 @@ const TableType = {
 
     function roomBelongsToCurrentPlayer(roomState) {
         const currentPlayerId = ef.gameController.getCurrentPlayer().id;
-        return roomState.roomLockStatus.allowedPlayers.some(allowedPlayer => allowedPlayer.playerId === currentPlayerId);
+        return roomState.roomLockStatus && roomState.roomLockStatus.allowedPlayers.some(allowedPlayer => allowedPlayer.playerId === currentPlayerId);
     }
 
     function getFreeSeatsCount(roomStates) {
