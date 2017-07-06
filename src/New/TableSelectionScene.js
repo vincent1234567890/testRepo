@@ -232,7 +232,10 @@ const TableType = {
                 if (!thisPlayersLockedRoom) {
                     return;
                 }
-                selectionMadeCallback({singlePlay: true, roomId: thisPlayersLockedRoom.roomId});
+                selectionMadeCallback({
+                    roomId: thisPlayersLockedRoom.roomId,
+                    serverUrl: 'ws://' + thisPlayersLockedRoom.server.ipAddress,
+                });
             };
             btnContinue.setClickHandler(continueButtonClicked, this);
 
