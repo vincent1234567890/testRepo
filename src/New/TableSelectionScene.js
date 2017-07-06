@@ -902,8 +902,8 @@ const TableType = {
 
             if (this._roomState && this._roomState.roomLockStatus) {
                 //disable players from entering the room other than owner.
-                if (this._roomState.roomLockStatus.allowedPlayers[0].playerId !== curPlayer.id) {
-                    return
+                if (!roomBelongsToCurrentPlayer()) {
+                    return;
                 }
             }
             // Check if spectating
