@@ -141,7 +141,7 @@ const GameView = function () {
                 rot = 180 - rotation * 180 / Math.PI;
             }
         }
-        return {position: [x, y], rotation: rot}
+        return {position: [x, y], rotation: rot};
     }
 
     function resetArena() {
