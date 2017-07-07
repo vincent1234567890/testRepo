@@ -188,6 +188,11 @@ const TableType = {
                 if (ef.gameController.getGlobalProp('spectating')) {
                     return;
                 }
+                // If player has a locked room already, rejoin that (like the continue button)
+                if (thisPlayersLockedRoom) {
+                    continueButtonClicked();
+                    return;
+                }
                 const singlePlay = this.getSelectedTableType() === TableType.SINGLE;
                 selectionMadeCallback({singlePlay});
             };
@@ -895,7 +900,7 @@ const TableType = {
 
         makeSelection: function (joinPrefs) {
             const curPlayer = ef.gameController.getCurrentPlayer();
-            if (roomIsFull(this._roomState)) {
+            if (roomIsFull(this._roomState) && !ef.gameController.getGlobalProp('spectating')) {
                 // Cannot join this room
                 return;
             }
