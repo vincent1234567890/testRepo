@@ -50,6 +50,7 @@ const TableType = {
             const spPlayerInfo = new PlayerInfoWidget();
             this.addChild(spPlayerInfo);
             spPlayerInfo.setPosition(120, cc.visibleRect.top.y - 78);
+            GameManager.setPlayerInfoWidget(spPlayerInfo);
 
             //context menu
             //const mmContextMenu = new GameFloatingMenu();

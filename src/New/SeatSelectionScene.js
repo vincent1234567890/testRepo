@@ -32,6 +32,7 @@ let SeatSelectionScene = cc.Scene.extend({
         let spPlayerInfo = new PlayerInfoWidget(playerData);
         this.addChild(spPlayerInfo);
         spPlayerInfo.setPosition(120, cc.visibleRect.top.y - 78);
+        GameManager.setPlayerInfoWidget(spPlayerInfo);
 
         //context menu
         //let mmContextMenu = new GameFloatingMenu();
