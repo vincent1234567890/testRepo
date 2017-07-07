@@ -42,7 +42,7 @@ const GameView = function () {
             _gameConfig = gameConfig;
             _lockOnCallback = lockOnCallback;
 
-            if (_gameConfig.cannonPositions[_playerSlot][1] > cc.view.getDesignResolutionSize().height / 2) {
+            if (GameManager.isPlayer && _gameConfig.cannonPositions[_playerSlot][1] > cc.view.getDesignResolutionSize().height / 2) {
                 _isRotated = true;
             }
 
@@ -141,7 +141,7 @@ const GameView = function () {
                 rot = 180 - rotation * 180 / Math.PI;
             }
         }
-        return {position: [x, y], rotation: rot}
+        return {position: [x, y], rotation: rot};
     }
 
     function resetArena() {
