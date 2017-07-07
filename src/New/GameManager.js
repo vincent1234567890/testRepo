@@ -177,6 +177,9 @@ const GameManager = function () {
                 if (_lobbyManager) {
                     _lobbyManager.updateView(_playerData);
                 }
+                let curPlayer = ef.gameController.getCurrentPlayer();
+                curPlayer.score=_playerData.playerState.score;
+                ef.gameController.setCurrentPlayer(curPlayer);
             }
         });
         ClientServerConnect.listenForEvent('jpVals', jpVals => {

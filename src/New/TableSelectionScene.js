@@ -85,13 +85,13 @@ const TableType = {
 
         fetchUpdate: function () {
             const curPlayer = ef.gameController.getCurrentPlayer();
-            ClientServerConnect.getPlayerInfo({id: curPlayer.id}).then(playerData => {
-                if (playerData) {
-                    this._spPlayerInfo.updatePlayerCredit(playerData.score);
-                    this._spPlayerInfo.updatePlayerName(playerData.displayName);
-                    ef.gameController.setCurrentPlayer(playerData);
-                }
-            })
+            // ClientServerConnect.getPlayerInfo({id: curPlayer.id}).then(playerData => {
+            //     if (playerData) {
+            //         this._spPlayerInfo.updatePlayerCredit(playerData.score);
+            //         this._spPlayerInfo.updatePlayerName(playerData.displayName);
+            //         ef.gameController.setCurrentPlayer(playerData);
+            //     }
+            // })
             ClientServerConnect.getListOfRoomsByServer().then(listOfRoomsByServer => {
                 //console.log("listOfRoomsByServer:", listOfRoomsByServer);
                 // Prepare and flatten the room data before passing it to the TableListLayer
