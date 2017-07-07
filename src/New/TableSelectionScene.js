@@ -900,7 +900,7 @@ const TableType = {
 
         makeSelection: function (joinPrefs) {
             const curPlayer = ef.gameController.getCurrentPlayer();
-            if (roomIsFull(this._roomState)) {
+            if (roomIsFull(this._roomState) && !ef.gameController.getGlobalProp('spectating')) {
                 // Cannot join this room
                 return;
             }
