@@ -63,13 +63,15 @@ const PlayerViewStaticPrefab = (function () {
         }
 
         this._changeSlotButton = GUIFunctions.createButton(ReferenceName.ChangeSeatButton,
-            ReferenceName.ChangeSeatButtonDown,changeSlotCallback, res.ChangeSeatButtonPressedSound);
-        this._changeSlotButton.setPosition(255,55);
-        base.addChild(this._changeSlotButton,5);
+            ReferenceName.ChangeSeatButtonDown, changeSlotCallback, res.ChangeSeatButtonPressedSound);
+        this._changeSlotButton.setPosition(255, 55);
+        base.addChild(this._changeSlotButton, 5);
 
-        this._slotLabel = new cc.LabelTTF('点击换座',"Arial", 20);
-        this._slotLabel.setPosition(55,10);
+        this._slotLabel = new cc.LabelTTF('点击换座', "Arial", 20);
+        this._slotLabel.setPosition(55, 10);
         this._changeSlotButton.addChild(this._slotLabel);
+
+        this._changeSlotButton.setVisible(GameManager.isPlayer);
 
         let pos;
         let markerPos;   //the direction determine by position.
@@ -165,7 +167,7 @@ const PlayerViewStaticPrefab = (function () {
     };
 
     proto.clearPlayerData = function () {
-        this._changeSlotButton.setVisible(true);
+        this._changeSlotButton.setVisible(GameManager.isPlayer);
         this._playerName.setString('');
         this._gold.setString('');
         this._playerIcon.setVisible(false);
