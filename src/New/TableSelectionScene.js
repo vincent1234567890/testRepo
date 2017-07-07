@@ -1053,6 +1053,7 @@ const TableType = {
                     this._lbPlayerName.setString(roomState.roomLockStatus.allowedPlayers[0].playerName);
                 } else {
                     this._spPlayerBase.setVisible(false);
+                    this._lbPlayerName.setVisible(false);
                 }
                 if (isLockedByThisPlayer) {
                     this.setVisible(true);
