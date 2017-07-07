@@ -14,17 +14,17 @@ const PlayerViewStaticPrefab = (function () {
      * Player view static information panel
      * @param {Object} gameConfig
      * @param {Number} slot  Seat position
-     * @param {Boolean} isPlayer is current player
+     * @param {Boolean} isCurrentPlayer is current player
      * @param {function} changeSeatCallback the callback when Player change seat.
      * @param {function} lockOnCallback lock/release button callback.
      * @param {function} fishLockStatus get fish lock status.
      * @constructor
      */
-    const PlayerViewStaticPrefab = function(gameConfig, slot, isPlayer, changeSeatCallback, lockOnCallback, fishLockStatus){
+    const PlayerViewStaticPrefab = function(gameConfig, slot, isCurrentPlayer, changeSeatCallback, lockOnCallback, fishLockStatus){
         this._parent = new cc.Node();
         GameView.addView(this._parent,1);
         this._parent.setPosition(300,300);
-        if(isPlayer)
+        if(isCurrentPlayer)
             ef.gameController.setCurrentSeat(slot);
 
         this._fishLockStatus = fishLockStatus;
@@ -41,7 +41,7 @@ const PlayerViewStaticPrefab = (function () {
 
         this._playerIcon = new cc.Sprite(ReferenceName.PlayerIcon);
         this._playerIcon.setPosition(themeData.PlayerIcon[0],themeData.PlayerIcon[1]);
-        this._playerIcon.setVisible(isPlayer);
+        this._playerIcon.setVisible(isCurrentPlayer);
         base.addChild(this._playerIcon);
 
         this._otherPlayerIcon = new cc.Sprite(ReferenceName.OtherPlayerIcon);
@@ -124,12 +124,12 @@ const PlayerViewStaticPrefab = (function () {
         lockButton.setPosition(-170, 30);
         this._parent.addChild(this._lockOnButton);
 
-        this._lockOnButton.setVisible(isPlayer);
+        this._lockOnButton.setVisible(isCurrentPlayer);
         this._coinStackManager = new CoinStackManager(this._parent);
 
-        if(isPlayer) {
+        if(isCurrentPlayer) {
             this._coinIcon.setVisible(true);
-            this.setPlayer(isPlayer);
+            this.setPlayer(isCurrentPlayer);
             this._playerSeatIndicator =  new cc.Sprite(ReferenceName.PlayerSeatIndicator);
             this._parent.addChild(this._playerSeatIndicator,50);
             this._playerSeatIndicator.setPosition(0,-50);
@@ -155,7 +155,7 @@ const PlayerViewStaticPrefab = (function () {
             gold = gold.substring(0,9) + "..";
         }
         this._gold.setString(gold);
-        const activatePlayerIcons = this._isPlayer == null || playerData.slot == playerSlot;
+        const activatePlayerIcons = this._isCurrentPlayer == null || playerData.slot == playerSlot;
         if(activatePlayerIcons){
             this._coinIcon.setVisible(true);
             this.setPlayer(playerData.slot == playerSlot);
@@ -173,7 +173,7 @@ const PlayerViewStaticPrefab = (function () {
         this._playerIcon.setVisible(false);
         this._otherPlayerIcon.setVisible(false);
         this._coinIcon.setVisible(false);
-        this._isPlayer = null;
+        this._isCurrentPlayer = null;
         // We don't call switchToRelease() because that is asynchronous (it performs actions after animation)
         // setLockStatusToRelease() is immediate
         this._lockOnButton.setLockStatusToRelease();
@@ -194,15 +194,15 @@ const PlayerViewStaticPrefab = (function () {
         }
     };
 
-    proto.setPlayer = function (isPlayer) {
-        this._isPlayer = isPlayer;
-        this._playerIcon.setVisible(isPlayer);
-        this._otherPlayerIcon.setVisible(!isPlayer);
+    proto.setPlayer = function (isCurrentPlayer) {
+        this._isCurrentPlayer = isCurrentPlayer;
+        this._playerIcon.setVisible(isCurrentPlayer);
+        this._otherPlayerIcon.setVisible(!isCurrentPlayer);
         this._changeSlotButton.setVisible(false);
 
         if (this._lockOnButton){
-            this._lockOnButton.setVisible(isPlayer);
-            if (isPlayer) {
+            this._lockOnButton.setVisible(isCurrentPlayer);
+            if (isCurrentPlayer) {
                 this._lockOnButton.setLockSprites(ef.gameController.getLockMode());
             }
         }

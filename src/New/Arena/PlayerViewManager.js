@@ -6,16 +6,16 @@ const PlayerViewManager = (function () {
      * Player View manager
      * @param {Object} gameConfig game config from the Server.
      * @param {Number} index
-     * @param {Boolean} isPlayer
+     * @param {Boolean} isCurrentPlayer
      * @param {function} changeSeatCallback the callback, when player change seat.
      * @param lockOnCallback
      * @param fishLockStatus
      * @constructor
      */
-    const PlayerViewManager = function (gameConfig, index, isPlayer, changeSeatCallback, lockOnCallback, fishLockStatus) {
+    const PlayerViewManager = function (gameConfig, index, isCurrentPlayer, changeSeatCallback, lockOnCallback, fishLockStatus) {
         _bulletId = 0;
-        this.isPlayer = isPlayer;
-        this._cannonManager = new CannonManager(gameConfig, index, isPlayer);
+        this.isCurrentPlayer = isCurrentPlayer;
+        this._cannonManager = new CannonManager(gameConfig, index, isCurrentPlayer);
         this._gameConfig = gameConfig;
 
         const changeSeat = (slot) =>{
@@ -26,7 +26,7 @@ const PlayerViewManager = (function () {
             lockOnCallback(state);
         };
 
-        this._playerView = new PlayerView(gameConfig, index, isPlayer, changeSeat, onLockOnRequest, fishLockStatus);
+        this._playerView = new PlayerView(gameConfig, index, isCurrentPlayer, changeSeat, onLockOnRequest, fishLockStatus);
     };
 
     const proto = PlayerViewManager.prototype;
@@ -42,7 +42,7 @@ const PlayerViewManager = (function () {
     proto.updatePlayerData = function (playerData, isChangeSeat) {
         this._playerView.updateView(playerData, isChangeSeat);
         this._cannonManager.showGun();
-        if (isChangeSeat !== null && this.isPlayer){
+        if (isChangeSeat !== null && this.isCurrentPlayer){
             this._cannonManager.setUpCannonChangeMenu(this._gameConfig, playerData.slot);
         }
         if (typeof playerData.gunId === 'number') {

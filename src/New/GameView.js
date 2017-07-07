@@ -264,8 +264,8 @@ const GameView = function () {
         const playerView = _playerViews[slot];
         if (playerView) {
             if(oldPlayerView){
-                playerView.isPlayer = oldPlayerView.isPlayer;
-                oldPlayerView.isPlayer = false;
+                playerView.isCurrentPlayer = oldPlayerView.isCurrentPlayer;
+                oldPlayerView.isCurrentPlayer = false;
             }
             playerView.updatePlayerData(playerData, oldSlot != null ? _playerSlot : undefined);
         }
