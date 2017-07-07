@@ -879,7 +879,9 @@ const TableType = {
             } else {
                 this._lbReserveTime.setVisible(false);
                 this._lbReserveTime.setString('--:--:--');
-                this._spGlow.setVisible(false);
+                // This will remove glow from mouse hover, even if mouse is still hovered.
+                // It's not really needed since glow is set invisible when sprite is first created.
+                //this._spGlow.setVisible(false);
             }
 
             for (let i = 0; i < 4; i++) {
