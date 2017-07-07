@@ -84,7 +84,9 @@ const GameView = function () {
             _waveTransitionView = new WaveTransition(res['GameBackground' + (_fishGameArena.getRoundNumber() % NUMBER_OF_BACKGROUNDS).toString()]);
             _screenShakeNode.addChild(_waveTransitionView);
         }
-        initialiseTouch(touchAt);
+        if (GameManager.isPlayer) {
+            initialiseTouch(touchAt);
+        }
         const multiplier = parseInt(choice.gameName, 10); // because scenes are 1X, 10X, 100X
         ef.gameController.setCurrentMultiple(multiplier);
         if (_gameConfig) {
