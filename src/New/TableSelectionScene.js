@@ -47,7 +47,7 @@ const TableType = {
             btnBack.setPosition(50, cc.visibleRect.top.y - 78);
 
             //info panel
-            const spPlayerInfo = new PlayerInfoWidget();
+            const spPlayerInfo = this._spPlayerInfo = new PlayerInfoWidget();
             this.addChild(spPlayerInfo);
             spPlayerInfo.setPosition(120, cc.visibleRect.top.y - 78);
 
@@ -84,6 +84,14 @@ const TableType = {
         },
 
         fetchUpdate: function () {
+            const curPlayer = ef.gameController.getCurrentPlayer();
+            ClientServerConnect.getPlayerInfo({id: curPlayer.id}).then(playerData => {
+                if (playerData) {
+                    this._spPlayerInfo.updatePlayerCredit(playerData.score);
+                    this._spPlayerInfo.updatePlayerName(playerData.displayName);
+                    ef.gameController.setCurrentPlayer(playerData);
+                }
+            })
             ClientServerConnect.getListOfRoomsByServer().then(listOfRoomsByServer => {
                 //console.log("listOfRoomsByServer:", listOfRoomsByServer);
                 // Prepare and flatten the room data before passing it to the TableListLayer
@@ -762,7 +770,7 @@ const TableType = {
             //spectate text
             const spSpecText = this._spSpecText = new cc.Sprite("#SS_SpectateChinese.png");
             this.addChild(spSpecText);
-            spSpecText.setPosition(szContent.width * 0.5, szContent.height * 0.5);
+            spSpecText.setPosition(szContent.width * 0.5, szContent.height * 0.5 + 10);
             spSpecText.setVisible(false);
 
             //title
