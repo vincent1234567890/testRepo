@@ -188,6 +188,11 @@ const TableType = {
                 if (ef.gameController.getGlobalProp('spectating')) {
                     return;
                 }
+                // If player has a locked room already, rejoin that (like the continue button)
+                if (thisPlayersLockedRoom) {
+                    continueButtonClicked();
+                    return;
+                }
                 const singlePlay = this.getSelectedTableType() === TableType.SINGLE;
                 selectionMadeCallback({singlePlay});
             };
