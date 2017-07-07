@@ -872,6 +872,7 @@ let WaveTransition = cc.Node.extend({
         }
     });
 
+    // See also: GUIFunctions.createButton
     function createButtonWithSpriteAndText (spriteRef, text, callback) {
         const layer = new cc.Layer(400, 100);
         layer.setContentSize(cc.size(400, 100));

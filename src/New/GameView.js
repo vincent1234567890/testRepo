@@ -84,7 +84,9 @@ const GameView = function () {
             _waveTransitionView = new WaveTransition(res['GameBackground' + (_fishGameArena.getRoundNumber() % NUMBER_OF_BACKGROUNDS).toString()]);
             _screenShakeNode.addChild(_waveTransitionView);
         }
-        initialiseTouch(touchAt);
+        if (GameManager.isPlayer) {
+            initialiseTouch(touchAt);
+        }
         const multiplier = parseInt(choice.gameName, 10); // because scenes are 1X, 10X, 100X
         ef.gameController.setCurrentMultiple(multiplier);
         if (_gameConfig) {
@@ -262,8 +264,8 @@ const GameView = function () {
         const playerView = _playerViews[slot];
         if (playerView) {
             if(oldPlayerView){
-                playerView.isPlayer = oldPlayerView.isPlayer;
-                oldPlayerView.isPlayer = false;
+                playerView.isCurrentPlayer = oldPlayerView.isCurrentPlayer;
+                oldPlayerView.isCurrentPlayer = false;
             }
             playerView.updatePlayerData(playerData, oldSlot != null ? _playerSlot : undefined);
         }

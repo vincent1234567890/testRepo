@@ -3,7 +3,7 @@ const CannonManager = (function () {
     "use strict";
     let _gameConfig;  //reference to game config.
 
-    function CannonManager(gameConfig, index, isPlayer) {
+    function CannonManager(gameConfig, index, isCurrentPlayer) {
         _gameConfig = gameConfig;
         // cc.spriteFrameCache.addSpriteFrames(res.Cannon1Plist);
         const plists = ResourceLoader.getPlists("Weapons");
@@ -11,7 +11,7 @@ const CannonManager = (function () {
             cc.spriteFrameCache.addSpriteFrames(plists[list]);
         }
         this._cannon = new CannonView(gameConfig, index);
-        if (isPlayer) {
+        if (isCurrentPlayer) {
             this.setUpCannonChangeMenu(gameConfig, index);
             // this._cannon.setupCannonChangeMenu(this, gameConfig, index, this.decreaseCannon, this.increaseCannon);
             this.forceSetGun(0);
