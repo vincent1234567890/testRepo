@@ -411,6 +411,7 @@ const GameManager = function () {
 
         //Misc
         isCurrentPlayer: isCurrentPlayer,
+        getJackpotManager: () => _jackpotManager,
 
         //current only used to reset
         destroyArena : destroyArena,

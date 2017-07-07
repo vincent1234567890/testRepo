@@ -60,6 +60,7 @@ const TableType = {
             const pnJackpot = new JackpotFloatPanel();
             this.addChild(pnJackpot);
             pnJackpot.setPosition(cc.visibleRect.center.x, cc.visibleRect.top.y - 102);
+            GameManager.getJackpotManager().setJackpotFloatPanel(pnJackpot);
 
             const selectionMadeCallbackForChildren = (joinPrefs) => {
                 this.stopUpdateInterval();
