@@ -282,7 +282,7 @@ const GameManager = function () {
     }
 
     function seatSelected(type, seat) {
-        console.log("seatSelected:", type, seat);
+        //console.log("seatSelected:", type, seat);
         WaitingPanel.showPanel();
         ClientServerConnect.joinGame(_currentScene.gameName, seat, type).catch(
             function (error) {
@@ -293,7 +293,7 @@ const GameManager = function () {
     }
 
     function roomSelected (joinPrefs) {
-        console.log("roomSelected:", joinPrefs);
+        //console.log("roomSelected:", joinPrefs);
         WaitingPanel.showPanel();
         let prom = null;
         if (!joinPrefs.serverUrl || !joinPrefs.roomId) {
@@ -371,6 +371,9 @@ const GameManager = function () {
     }
 
     return {
+        isPlayer: null,
+        isSpectator: null,
+
         initialiseLogin: initialiseLogin,
         setupPostLoginListeners: setupPostLoginListeners,
         initialiseGame: initialiseGame,
