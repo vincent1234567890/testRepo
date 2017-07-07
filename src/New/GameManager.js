@@ -26,6 +26,7 @@ const GameManager = function () {
     // let _loginManager;
     let _fishManager;
     let _lobbyManager;
+    let _playerInfoWidget;
     let _floatingMenuManager;
     let _jackpotManager;
     let _scoreboardManager;
@@ -176,6 +177,9 @@ const GameManager = function () {
                 _playerData.playerState.score += data.amount;
                 if (_lobbyManager) {
                     _lobbyManager.updateView(_playerData);
+                }
+                if (_playerInfoWidget) {
+                    _playerInfoWidget.updatePlayerCredit(_playerData.playerState.score);
                 }
             }
         });
@@ -411,6 +415,8 @@ const GameManager = function () {
 
         //Misc
         isCurrentPlayer: isCurrentPlayer,
+        setPlayerInfoWidget: playerInfoWidget => _playerInfoWidget = playerInfoWidget,
+        getJackpotManager: () => _jackpotManager,
 
         //current only used to reset
         destroyArena : destroyArena,

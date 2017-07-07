@@ -50,6 +50,7 @@ const TableType = {
             const spPlayerInfo = new PlayerInfoWidget();
             this.addChild(spPlayerInfo);
             spPlayerInfo.setPosition(120, cc.visibleRect.top.y - 78);
+            GameManager.setPlayerInfoWidget(spPlayerInfo);
 
             //context menu
             //const mmContextMenu = new GameFloatingMenu();
@@ -60,6 +61,7 @@ const TableType = {
             const pnJackpot = new JackpotFloatPanel();
             this.addChild(pnJackpot);
             pnJackpot.setPosition(cc.visibleRect.center.x, cc.visibleRect.top.y - 102);
+            GameManager.getJackpotManager().setJackpotFloatPanel(pnJackpot);
 
             const selectionMadeCallbackForChildren = (joinPrefs) => {
                 this.stopUpdateInterval();
@@ -879,7 +881,9 @@ const TableType = {
             } else {
                 this._lbReserveTime.setVisible(false);
                 this._lbReserveTime.setString('--:--:--');
-                this._spGlow.setVisible(false);
+                // This will remove glow from mouse hover, even if mouse is still hovered.
+                // It's not really needed since glow is set invisible when sprite is first created.
+                //this._spGlow.setVisible(false);
             }
 
             for (let i = 0; i < 4; i++) {
