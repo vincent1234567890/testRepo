@@ -371,6 +371,9 @@ const GameManager = function () {
     }
 
     return {
+        isPlayer: null,
+        isSpectator: null,
+
         initialiseLogin: initialiseLogin,
         setupPostLoginListeners: setupPostLoginListeners,
         initialiseGame: initialiseGame,
