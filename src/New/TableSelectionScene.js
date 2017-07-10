@@ -449,6 +449,7 @@ const TableType = {
                 this.setSpriteFrame(spriteFrame);
         },
 
+        /*
         onMouseOverIn: function () {
             const spriteFrame = cc.spriteFrameCache.getSpriteFrame(this._selectedName);
             if (spriteFrame)
@@ -463,6 +464,7 @@ const TableType = {
             this._clickCallback = callback;
             this._clickTarget = target;
         },
+        */
 
         executeClickCallback: function (touch, event) {
             const isSpectating = !ef.gameController.getGlobalProp('spectating');
@@ -471,8 +473,10 @@ const TableType = {
             const tableListLayer = this.getParent().getParent();
             tableListLayer.updateButtonStates();
 
+            /*
             if (this._clickCallback)
                 this._clickCallback.call(this._clickTarget, touch, event);
+            */
         },
 
         updateBtnText: function () {
