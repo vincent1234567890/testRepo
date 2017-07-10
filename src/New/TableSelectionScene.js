@@ -296,6 +296,8 @@ const TableType = {
             //scroll button
             // const pnPageIndicator = this._pnPageIndicator = new PageIndicatorPanel();
             // this.addChild(pnPageIndicator);
+
+            this.updateButtonStates();
         },
 
         _createLobbyTypeSprite: function () {
@@ -391,6 +393,7 @@ const TableType = {
                 node => node._goOpaqueWhenSpectating,
                 obj => obj.opacity = isSpectating ? 120 : 255
             );
+            this._btnSpectate.updateBtnText();
         },
     });
 
@@ -400,8 +403,6 @@ const TableType = {
 
         _spIcon: null,
         _spTitle: null,
-
-        _isSpectating: false,
 
         _touchEventListener: null,
         _mouseoverEventListener: null,
@@ -464,9 +465,8 @@ const TableType = {
         },
 
         executeClickCallback: function (touch, event) {
-            this._isSpectating = !ef.gameController.getGlobalProp('spectating');
-            ef.gameController.setGlobalProp('spectating', this._isSpectating);
-            this.updateBtnText();
+            const isSpectating = !ef.gameController.getGlobalProp('spectating');
+            ef.gameController.setGlobalProp('spectating', isSpectating);
 
             const tableListLayer = this.getParent().getParent();
             tableListLayer.updateButtonStates();
@@ -476,17 +476,17 @@ const TableType = {
         },
 
         updateBtnText: function () {
+            const isSpectating = ef.gameController.getGlobalProp('spectating');
+
             //update icon
-            const inconStr = this._isSpectating ? "SS_SpectateBackIcon.png" : "SS_SpectateIcon.png";
+            const inconStr = isSpectating ? "SS_SpectateBackIcon.png" : "SS_SpectateIcon.png";
             const iconSprite = cc.spriteFrameCache.getSpriteFrame(inconStr);
-            if (iconSprite)
-                this._spIcon.setSpriteFrame(iconSprite);
+            this._spIcon.setSpriteFrame(iconSprite);
 
             //update text
-            const textStr = this._isSpectating ? "SS_BackChinese.png" : "SS_SpectateChinese.png";
+            const textStr = isSpectating ? "SS_BackChinese.png" : "SS_SpectateChinese.png";
             const textSprite = cc.spriteFrameCache.getSpriteFrame(textStr);
-            if (textSprite)
-                this._spTitle.setSpriteFrame(textSprite);
+            this._spTitle.setSpriteFrame(textSprite);
         }
     });
 
