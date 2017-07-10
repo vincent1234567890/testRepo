@@ -228,6 +228,7 @@ const TableType = {
             //onlookers button
             const btnSpectate = this._btnSpectate = new SpectateButton();
             btnSpectate.setPosition(220, szTableListBg.height - 35);
+            btnSpectate.setStatus(ef.gameController.getGlobalProp('spectating') ? ef.BUTTONSTATE.SELECTED : ef.BUTTONSTATE.NORMAL);
             pnTableListBg.addChild(btnSpectate);
 
 
@@ -439,6 +440,7 @@ const TableType = {
         },
 
         setStatus: function (status) {
+            console.log("Setting status", status, `(was ${this._status})`);
             if (this._status === status)
                 return;
 
@@ -467,7 +469,8 @@ const TableType = {
         */
 
         executeClickCallback: function (touch, event) {
-            const isSpectating = !ef.gameController.getGlobalProp('spectating');
+            //const isSpectating = !ef.gameController.getGlobalProp('spectating');
+            const isSpectating = this._status === ef.BUTTONSTATE.SELECTED;
             ef.gameController.setGlobalProp('spectating', isSpectating);
 
             const tableListLayer = this.getParent().getParent();
