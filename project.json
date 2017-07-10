@@ -90,6 +90,7 @@
         "src/New/GameManager.js",
         "src/New/GameView.js",
         "src/New/GameTicker.js",
+        "src/New/ConnectionSignal.js",
 
         "src/New/AppManager.js",
 
