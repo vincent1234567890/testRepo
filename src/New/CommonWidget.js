@@ -720,16 +720,25 @@ let WaveTransition = cc.Node.extend({
     });
 
     ef.NotificationPanel = cc.Node.extend({
+        _spNotificationBase: null,
         _spNotificationIcon: null,
         _cpClippingNode: null,
         _lbNotification: null,
         _szSize: null,
         _duration: 6,
-        ctor: function (width, height) {
+        ctor: function (width, height, withBackground) {
             cc.Node.prototype.ctor.call(this);
             this._className = "NotificationPanel";
 
             const szSize = this._szSize = new cc.Size(width || 100, height || 30);
+
+            if (withBackground) {
+                const spNotificationBase = this._spNotificationBase = new cc.Sprite("#LR_NotificationBase.png");
+                const spNotificationSize = spNotificationBase.getContentSize();
+                spNotificationBase.setPosition(szSize.width * 0.5, szSize.height * 0.5);
+                spNotificationBase.setScale(szSize.width / spNotificationSize.width, szSize.height / spNotificationSize.height);
+                this.addChild(spNotificationBase);
+            }
 
             const dnStencil = new cc.DrawNode();
             const rectangle = [cc.p(0, 0), cc.p(szSize.width, 0), cc.p(szSize.width, szSize.height),
