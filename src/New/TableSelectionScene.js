@@ -384,6 +384,14 @@ const TableType = {
                 this._pnTableList.updateRoomStates(roomStatesToShow);
             }
         },
+
+        updateButtonStates: function () {
+            const isSpectating = ef.gameController.getGlobalProp('spectating');
+            setNodeWithChildrenForProperty(this,
+                node => node._goOpaqueWhenSpectating,
+                obj => obj.opacity = isSpectating ? 120 : 255
+            );
+        },
     });
 
     const SpectateButton = cc.Sprite.extend({
@@ -456,16 +464,12 @@ const TableType = {
         },
 
         executeClickCallback: function (touch, event) {
-            this._isSpectating = !this._isSpectating;
+            this._isSpectating = !ef.gameController.getGlobalProp('spectating');
             ef.gameController.setGlobalProp('spectating', this._isSpectating);
             this.updateBtnText();
-            let tablePanel = ef.gameController.getTablePanel();
-            if (tablePanel) {
-                setNodeWithChildrenForProperty(tablePanel.getParent(),
-                    node => node._goOpaqueWhenSpectating,
-                    obj => obj.opacity = this._isSpectating ? 120 : 255
-                );
-            }
+
+            const tableListLayer = this.getParent().getParent();
+            tableListLayer.updateButtonStates();
 
             if (this._clickCallback)
                 this._clickCallback.call(this._clickTarget, touch, event);
