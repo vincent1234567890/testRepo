@@ -45,6 +45,7 @@
         "src/New/Static Views/FloatingMenuPopupBasePrefab.js",
         "src/New/Static Views/JackpotView.js",
         "src/New/Static Views/JackpotManager.js",
+        "src/New/Static Views/NotificationManager.js",
         "src/New/Static Views/NotificationPanel.js",
         "src/New/Static Views/SettingsView.js",
         "src/New/Static Views/GameLogView.js",
