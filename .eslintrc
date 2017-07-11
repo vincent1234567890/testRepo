@@ -11,6 +11,8 @@
         }
     },
     "rules": {
+        "no-undef": 0,
+        "no-unused-vars": 0,
         "semi": 1,
         "comma-dangle": 0,
         "no-console": 0,
