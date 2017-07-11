@@ -8,8 +8,11 @@ const JackpotManager = (function () {
     let _view;
     let _jackpotFloatPanel;
 
+    let _notificationsPanel;
+
     const JackpotManager = function (data) {
         _view = new JackpotView();
+        placeNotificationsPanelBelowJackpotPanel(_view.getJackpotPanel());
     };
 
     const proto = JackpotManager.prototype;
@@ -28,11 +31,46 @@ const JackpotManager = (function () {
 
     proto.reattach = function () {
         _view.reattach();
+        placeNotificationsPanelBelowJackpotPanel(_view.getJackpotPanel());
     };
 
     proto.setJackpotFloatPanel = function (jackpotFloatPanel) {
         _jackpotFloatPanel = jackpotFloatPanel;
+        placeNotificationsPanelBelowJackpotPanel(_jackpotFloatPanel);
     };
+
+    // Perhaps the notification panel should have its own manager
+
+    function createNewNotificationPanel () {
+        const pnNotification = new ef.NotificationPanel(400, 32);
+        GameManager.setGlobalNotificationPanel(pnNotification);
+        return pnNotification;
+    }
+
+    function placeNotificationsPanelBelowJackpotPanel (jackpotPanel) {
+        if (!jackpotPanel) {
+            console.warn("No jackpotPanel to add to!");
+            return;
+        }
+
+        _notificationsPanel = _notificationsPanel || createNewNotificationPanel();
+
+        const notificationsPanel = _notificationsPanel;
+
+        const oldContainer = notificationsPanel.getParent();
+        if (oldContainer) {
+            oldContainer.removeChild(notificationsPanel);
+        }
+
+        const newContainer = jackpotPanel.getParent();
+        console.log("notificationsPanel.getContentSize():", notificationsPanel.getContentSize());
+        notificationsPanel.setPosition(jackpotPanel.getPositionX() - notificationsPanel._szSize.width / 2, jackpotPanel.getPositionY() - 100);
+        newContainer.addChild(notificationsPanel);
+        notificationsPanel.removeChild(notificationsPanel._spNotificationIcon);
+        notificationsPanel._spNotificationIcon.setPosition(18, 18);
+        notificationsPanel.addChild(notificationsPanel._spNotificationIcon);
+        notificationsPanel.showNotification("Hello, this is an Elsa's message for testing notification................");
+    }
 
     return JackpotManager;
 }());

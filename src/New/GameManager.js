@@ -27,6 +27,7 @@ const GameManager = function () {
     let _fishManager;
     let _lobbyManager;
     let _playerInfoWidget;
+    let _pnNotificationsWidget;
     let _floatingMenuManager;
     let _jackpotManager;
     let _scoreboardManager;
@@ -419,6 +420,8 @@ const GameManager = function () {
         //Misc
         isCurrentPlayer: isCurrentPlayer,
         setPlayerInfoWidget: playerInfoWidget => _playerInfoWidget = playerInfoWidget,
+        setGlobalNotificationPanel: pnNotifications => _pnNotificationsWidget = pnNotifications,
+        getGlobalNotificationPanel: () => _pnNotificationsWidget,
         getJackpotManager: () => _jackpotManager,
 
         //current only used to reset

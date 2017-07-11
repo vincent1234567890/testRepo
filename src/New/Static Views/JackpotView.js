@@ -164,5 +164,9 @@ const JackpotView = (function () {
         GameView.addView(_parent,1);
     };
 
+    proto.getJackpotPanel = function () {
+        return _parent;
+    };
+
     return JackpotView;
 }());

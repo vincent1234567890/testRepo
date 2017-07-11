@@ -733,7 +733,10 @@ let WaveTransition = cc.Node.extend({
             const szSize = this._szSize = new cc.Size(width || 100, height || 30);
 
             if (withBackground) {
+                // Works:
                 const spNotificationBase = this._spNotificationBase = new cc.Sprite("#LR_NotificationBase.png");
+                // @todo Does not work!
+                //const spNotificationBase = this._spNotificationBase = new cc.Sprite("#NotificationBackground.png");
                 const spNotificationSize = spNotificationBase.getContentSize();
                 spNotificationBase.setPosition(szSize.width * 0.5, szSize.height * 0.5);
                 spNotificationBase.setScale(szSize.width / spNotificationSize.width, szSize.height / spNotificationSize.height);
