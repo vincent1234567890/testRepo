@@ -67,9 +67,9 @@ const JackpotManager = (function () {
         console.log("notificationsPanel.getContentSize():", notificationsPanel.getContentSize());
         notificationsPanel.setPosition(jackpotPanel.getPositionX() - notificationsPanel._szSize.width / 2, jackpotPanel.getPositionY() - 100);
         newContainer.addChild(notificationsPanel);
-        notificationsPanel.removeChild(notificationsPanel._spNotificationIcon);
-        notificationsPanel._spNotificationIcon.setPosition(18, 18);
-        notificationsPanel.addChild(notificationsPanel._spNotificationIcon);
+        //notificationsPanel.removeChild(notificationsPanel._spNotificationIcon);
+        //notificationsPanel._spNotificationIcon.setPosition(18, 18);
+        //notificationsPanel.addChild(notificationsPanel._spNotificationIcon);
         notificationsPanel.showNotification("Hello, this is an Elsa's message for testing notification................");
     }
 
