@@ -178,6 +178,9 @@ const GameManager = function () {
                 if (_lobbyManager) {
                     _lobbyManager.updateView(_playerData);
                 }
+                let curPlayer = ef.gameController.getCurrentPlayer();
+                curPlayer.score=_playerData.playerState.score;
+                ef.gameController.setCurrentPlayer(curPlayer);
                 if (_playerInfoWidget) {
                     _playerInfoWidget.updatePlayerCredit(_playerData.playerState.score);
                 }

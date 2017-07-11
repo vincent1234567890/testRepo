@@ -4,12 +4,13 @@ const SettingsView = (function () {
     const ENDOFFSET = 0.05;
     const ZORDER = 10;
     const STARTING_ALIGNMENT = 175;
+    let langDropdownPanelShow = false;
     const SettingsView = function () {
         const parent = new cc.Node();
         const _background = new cc.Sprite(ReferenceName.SettingsBackground);
         const _closeButton = new CloseButtonPrefab(dismiss);
 
-        parent.addChild(_closeButton.getButton(),10);
+        parent.addChild(_closeButton.getButton(), 10);
         _closeButton.getButton().setPosition(new cc.p(350, 220));
 
         parent.setPosition(683, 384);
@@ -33,6 +34,7 @@ const SettingsView = (function () {
         const soundTitle = new cc.Sprite(ReferenceName.SettingsSoundTitleChinese);
         const gameLanguageSelectionTitle = new cc.Sprite(ReferenceName.SettingsGameLanguageSelectionTitleChinese);
         const gameLanguageSelectionBar = new cc.Sprite(ReferenceName.SettingsGameLanguageSelectionBar);
+        const gameLanguageSelectionDropdownPanel = new cc.Sprite(ReferenceName.SettingsDropDownPanel);
 
         const titlePosition = new cc.p(400, 450);
         title.setPosition(titlePosition);
@@ -43,11 +45,42 @@ const SettingsView = (function () {
         soundTitle.setPosition(STARTING_ALIGNMENT, soundSliderHeight);
 
         gameLanguageSelectionTitle.setPosition(STARTING_ALIGNMENT, gameLanguageSelectionHeight);
+
+        const languageDropdownButton = GUIFunctions.createButton(ReferenceName.SettingsDropDownButton,
+            ReferenceName.SettingsDropDownButtonOnPress, toggleLanguageDropdown);
+        const barContent = gameLanguageSelectionBar.getContentSize();
+        const languageDropdownContent = languageDropdownButton.getContentSize();
+
+        languageDropdownButton.setPosition(400 + barContent.width / 2 - languageDropdownContent.width / 2, gameLanguageSelectionHeight);
+        gameLanguageSelectionDropdownPanel.setPosition(400, gameLanguageSelectionHeight - barContent.height * 3);
+        gameLanguageSelectionDropdownPanel.setVisible(false);
         gameLanguageSelectionBar.setPosition(400, gameLanguageSelectionHeight);
+        ef.initClickListener(gameLanguageSelectionBar, toggleLanguageDropdown);
 
         let label = new cc.LabelTTF("中文", "Microsoft YaHei", 20);
         label._setFontWeight("bold");
-        label.setPosition(300, gameLanguageSelectionHeight);
+        label.setAnchorPoint(0, 0.5);
+        label.setPosition(280, gameLanguageSelectionHeight);
+
+        //add language panel content
+        const langArr = ['中文', 'English'];
+        const panelContent = gameLanguageSelectionDropdownPanel.getContentSize();
+        let langLabel = [];
+        langArr.forEach((lang, index) => {
+            let newLabel = new cc.LabelTTF(lang, "Microsoft YaHei", 20);
+            newLabel.setPosition(10, panelContent.height - (index + 0.5) * 55);
+            newLabel.setAnchorPoint(0, 1);
+            newLabel.setLang = lang;
+            ef.initClickListener(newLabel, chooseLang);
+            gameLanguageSelectionDropdownPanel.addChild(newLabel, 2);
+        });
+
+        function chooseLang(event, point) {
+            const node = point.getCurrentTarget();
+            console.log(node.setLang);
+            label.setString(node.setLang);
+            toggleLanguageDropdown();
+        }
 
         const acceptButton = GUIFunctions.createButton(ReferenceName.SettingsButtonBackground,
             ReferenceName.SettingsButtonBackgroundOnPress, dismiss);
@@ -71,6 +104,8 @@ const SettingsView = (function () {
         _background.addChild(soundTitle);
         _background.addChild(gameLanguageSelectionTitle);
         _background.addChild(gameLanguageSelectionBar);
+        _background.addChild(languageDropdownButton);
+        _background.addChild(gameLanguageSelectionDropdownPanel, 4);
         _background.addChild(label);
         _background.addChild(acceptButton);
         _background.addChild(cancelButton);
@@ -104,9 +139,13 @@ const SettingsView = (function () {
             BlockingManager.registerBlock(dismissCallback);
         };
 
-        this.hide = function(){
+        this.hide = function () {
             dismiss();
         };
+        function toggleLanguageDropdown() {
+            langDropdownPanelShow = !langDropdownPanelShow;
+            gameLanguageSelectionDropdownPanel.setVisible(langDropdownPanelShow);
+        }
 
         function cancel() {
             _musicSlider.setValue(previousMusic);
