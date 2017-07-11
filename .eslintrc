@@ -1,0 +1,24 @@
+{
+    "extends": "eslint:recommended",
+    "env": {
+        "browser": true,
+        "es6": true,
+    },
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+        }
+    },
+    "rules": {
+        "semi": 1,
+        "comma-dangle": 0,
+        "no-console": 0,
+        "eqeqeq": ["error", "always", {"null": "ignore"}],
+        "array-callback-return": "error"
+    },
+    "globals": {
+        "cc": true,
+        "ccui": true
+    }
+}
