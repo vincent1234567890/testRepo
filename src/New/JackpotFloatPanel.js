@@ -257,6 +257,22 @@ let JackpotDetailPanel = cc.LayerColor.extend({
         spButterflyFishMedal.setScale(0.53);
         spJackpotPopBlue.addChild(spButterflyFishMedal);
 
+        let jackpotLevelName1 = new cc.Sprite('#JPPOP1prizeChinese.png');
+        spJackpotPopGold.addChild(jackpotLevelName1, 4);
+        jackpotLevelName1.setPosition(122, 23);
+
+        let jackpotLevelName2 = new cc.Sprite('#JPPOP2prizeChinese.png');
+        spJackpotPopSilver.addChild(jackpotLevelName2, 4);
+        jackpotLevelName2.setPosition(112, 23);
+
+        let jackpotLevelName3 = new cc.Sprite('#JPPOP3prizeChinese.png');
+        spJackpotPopGreen.addChild(jackpotLevelName3, 4);
+        jackpotLevelName3.setPosition(83, 18);
+
+        let jackpotLevelName4 = new cc.Sprite('#JPPOP4prizeChinese.png');
+        spJackpotPopBlue.addChild(jackpotLevelName4, 4);
+        jackpotLevelName4.setPosition(83, 18);
+
         let selfPoint = this;
         ClientServerConnect.getCurrentJackpotValues().then(jackpotValues => {
             //show the jackpot list

@@ -26,7 +26,6 @@ const TableType = {
             cc.spriteFrameCache.addSpriteFrames(res.LobbyUIPlist);
             cc.spriteFrameCache.addSpriteFrames(res.SeatSelectionPlist);
             cc.spriteFrameCache.addSpriteFrames(res.CausticPlist);
-            cc.spriteFrameCache.addSpriteFrames(res.ChinesePlist);
 
             const spBackground = new cc.Sprite(ReferenceName.LobbyBackground);
             this.addChild(spBackground);

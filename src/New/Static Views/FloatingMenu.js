@@ -26,6 +26,7 @@ const FloatingMenu = (function () {
 
     const FloatingMenu = function (playerData, requestConsumptionLogCallback) {
         _parent = new cc.Node();
+        cc.spriteFrameCache.addSpriteFrames(res.ChinesePlist);
         GameView.addView(_parent,undefined,true);
 
         _playerData = playerData;
@@ -94,14 +95,14 @@ const FloatingMenu = (function () {
         let icon;
         if (iconSprite) {
             icon = new cc.Sprite(iconSprite);
-            button.addChild(icon);
+            button.addChild(icon,3);
             icon.setPosition(size.width / 2, size.height / 2 - 10);
         }
 
         let label;
         if (labelImage) {
             label = new cc.Sprite(labelImage);
-            button.addChild(label);
+            button.addChild(label,3);
             // label.setAnchorPoint(0.5,0.5);
             label.setPosition(size.width / 2, 0);
         }
