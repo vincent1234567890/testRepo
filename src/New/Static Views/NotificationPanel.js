@@ -6,6 +6,8 @@ const NotificationPanel = cc.Node.extend({
     _szSize: null,
     _duration: 6,
 
+    isScrolling: false,
+
     ctor: function (width, height) {
         cc.Node.prototype.ctor.call(this);
         this._className = "NotificationPanel";
@@ -53,15 +55,20 @@ const NotificationPanel = cc.Node.extend({
             return;
         }
 
+        this.isScrolling = true;
         const szSize = this._szSize;
         lbNotification.setString(message);
         const contentSize = this._lbNotification.getContentSize();
         lbNotification.setPosition(szSize.width + contentSize.width * 0.5, szSize.height * 0.5);
-        lbNotification.runAction(cc.sequence(cc.moveBy(this._duration, -(szSize.width + contentSize.width), 0),
-            cc.callFunc(function () {
+        lbNotification.runAction(cc.sequence(
+            cc.moveBy(this._duration, -(szSize.width + contentSize.width), 0),
+            cc.callFunc(() => {
+                this.isScrolling = false;
                 if (callback)
                     callback.call(target);
-            })));
+                }
+            )
+        ));
     },
 
     styleForScreen: function (currentScreen) {
@@ -69,5 +76,15 @@ const NotificationPanel = cc.Node.extend({
         const showIcon = currentScreen === 'TableSelection';
         this._spNotificationBase.setVisible(showBackground);
         this._spNotificationIcon.setVisible(showIcon);
+    },
+
+    fadeOut: function () {
+        this._spNotificationBase.stopAllActions();
+        this._spNotificationBase.runAction(cc.sequence(cc.fadeOut(1)));
+    },
+
+    fadeIn: function () {
+        this._spNotificationBase.stopAllActions();
+        this._spNotificationBase.runAction(cc.sequence(cc.fadeIn(1)));
     },
 });

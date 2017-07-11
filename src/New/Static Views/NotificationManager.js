@@ -1,14 +1,30 @@
 const NotificationManager = (function () {
     "use strict";
 
-    let notificationPanel;
+    let _notificationPanel;
 
-    // Perhaps the notification panel should have its own manager
+    const queue = [];
 
     function createNewNotificationPanel () {
         const pnNotification = new NotificationPanel(440, 32);
         GameManager.setGlobalNotificationPanel(pnNotification);
+
+        // Testing
+        const addOneNotification = () => {
+            queueNewNotification({
+                priority: 1,
+                message: "TEST NOTIFICATION test notification TEST NOTIFICATION",
+            });
+            setTimeout(addOneNotification, 5000 + 10000 * Math.random());
+        };
+        setTimeout(addOneNotification, 5000);
+
         return pnNotification;
+    }
+
+    function getNotificationPanel () {
+        _notificationPanel = _notificationPanel || createNewNotificationPanel();
+        return _notificationPanel;
     }
 
     function placeNotificationPanelBelowJackpotPanel (jackpotPanel, currentScreen) {
@@ -17,7 +33,7 @@ const NotificationManager = (function () {
             return;
         }
 
-        notificationPanel = notificationPanel || createNewNotificationPanel();
+        const notificationPanel = getNotificationPanel();
 
         const oldContainer = notificationPanel.getParent();
         if (oldContainer) {
@@ -33,9 +49,35 @@ const NotificationManager = (function () {
         notificationPanel.showNotification("Hello, this is an Elsa's message for testing notification................");
     }
 
+    function queueNewNotification (notificationObj) {
+        queue.push(notificationObj);
+        // @todo Check priority; maybe jump queue
+        // @todo Check queue length; ignore if too large
+
+        const notificationPanel = getNotificationPanel();
+        if (!notificationPanel.isScrolling) {
+            showNextNotification();
+        }
+    }
+
+    function showNextNotification () {
+        //console.log(`queue length:`, queue.length);
+        const nextNotification = queue.shift();
+        const notificationPanel = getNotificationPanel();
+        if (!nextNotification) {
+            notificationPanel.fadeOut();
+            return;
+        }
+        if (!notificationPanel.isScrolling) {
+            notificationPanel.fadeIn();
+        }
+        notificationPanel.showNotification(nextNotification.message, showNextNotification);
+    }
+
     const NotificationManager = {
         //createNewNotificationPanel,
         placeNotificationPanelBelowJackpotPanel: placeNotificationPanelBelowJackpotPanel,
+        queueNewNotification: queueNewNotification,
     };
 
     return NotificationManager;
