@@ -80,13 +80,10 @@ const TableType = {
             //const pnNotification = new ef.NotificationPanel(400, 32);
             // Or reuse the existing one:
             const pnNotification = GameManager.getGlobalNotificationPanel();
-            const oldContainer = pnNotification.getParent();
-            if (oldContainer) {
-                oldContainer.removeChild(pnNotification);
-            }
+            pnNotification.removeFromParent();
             pnNotification.setPosition(cc.visibleRect.center.x + 236, cc.visibleRect.top.y - 200);
             this.addChild(pnNotification);
-            pnNotification.showNotification("Hello, this is an Elsa's message for testing notification................");
+            //pnNotification.showNotification("Hello, this is an Elsa's message for testing notification................");
 
             this.fetchUpdate();
             this.startUpdateInterval();

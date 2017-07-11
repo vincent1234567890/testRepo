@@ -37,13 +37,16 @@ const NotificationPanel = cc.Node.extend({
         //const testLayer = new cc.LayerColor(new cc.Color(255, 0, 0, 255));
         //cpClippingNode.addChild(testLayer);
 
-        const lbNotification = this._lbNotification = new cc.LabelTTF("test notification", "Arial", 18);
+        const lbNotification = this._lbNotification = new cc.LabelTTF("", "Arial", 18);
         lbNotification.setPosition(szSize.width * 0.5, szSize.height * 0.5);
         cpClippingNode.addChild(lbNotification);
 
         const spNotificationIcon = this._spNotificationIcon = new cc.Sprite(ReferenceName.NotificationIcon);
         spNotificationIcon.setPosition(18, 18);
         this.addChild(spNotificationIcon);
+
+        // Initial state
+        this.setInitialFade();
     },
 
     showNotification: function (message, callback, target) {
@@ -78,13 +81,17 @@ const NotificationPanel = cc.Node.extend({
         this._spNotificationIcon.setVisible(showIcon);
     },
 
-    fadeOut: function () {
-        this._spNotificationBase.stopAllActions();
-        this._spNotificationBase.runAction(cc.sequence(cc.fadeOut(1)));
+    setInitialFade: function () {
+        this._spNotificationBase.setOpacity(0);
     },
 
     fadeIn: function () {
         this._spNotificationBase.stopAllActions();
         this._spNotificationBase.runAction(cc.sequence(cc.fadeIn(1)));
+    },
+
+    fadeOut: function () {
+        this._spNotificationBase.stopAllActions();
+        this._spNotificationBase.runAction(cc.sequence(cc.fadeOut(1)));
     },
 });

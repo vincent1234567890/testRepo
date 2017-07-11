@@ -17,7 +17,7 @@ const NotificationManager = (function () {
             });
             setTimeout(addOneNotification, 5000 + 10000 * Math.random());
         };
-        setTimeout(addOneNotification, 5000);
+        //setTimeout(addOneNotification, 5000);
 
         return pnNotification;
     }
@@ -46,7 +46,7 @@ const NotificationManager = (function () {
 
         notificationPanel.styleForScreen(currentScreen);
 
-        notificationPanel.showNotification("Hello, this is an Elsa's message for testing notification................");
+        //notificationPanel.showNotification("Hello, this is an Elsa's message for testing notification................");
     }
 
     function queueNewNotification (notificationObj) {
