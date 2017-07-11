@@ -1,7 +1,7 @@
 const NotificationManager = (function () {
     "use strict";
 
-    let _notificationsPanel;
+    let notificationPanel;
 
     // Perhaps the notification panel should have its own manager
 
@@ -11,33 +11,31 @@ const NotificationManager = (function () {
         return pnNotification;
     }
 
-    function placeNotificationsPanelBelowJackpotPanel (jackpotPanel, currentScreen) {
+    function placeNotificationPanelBelowJackpotPanel (jackpotPanel, currentScreen) {
         if (!jackpotPanel) {
             console.warn("No jackpotPanel to add to!");
             return;
         }
 
-        _notificationsPanel = _notificationsPanel || createNewNotificationPanel();
+        notificationPanel = notificationPanel || createNewNotificationPanel();
 
-        const notificationsPanel = _notificationsPanel;
-
-        const oldContainer = notificationsPanel.getParent();
+        const oldContainer = notificationPanel.getParent();
         if (oldContainer) {
-            oldContainer.removeChild(notificationsPanel);
+            oldContainer.removeChild(notificationPanel);
         }
 
         const newContainer = jackpotPanel.getParent();
-        notificationsPanel.setPosition(jackpotPanel.getPositionX() - notificationsPanel._szSize.width / 2, jackpotPanel.getPositionY() - 120);
-        newContainer.addChild(notificationsPanel);
+        notificationPanel.setPosition(jackpotPanel.getPositionX() - notificationPanel._szSize.width / 2, jackpotPanel.getPositionY() - 120);
+        newContainer.addChild(notificationPanel);
 
-        notificationsPanel.styleForScreen(currentScreen);
+        notificationPanel.styleForScreen(currentScreen);
 
-        notificationsPanel.showNotification("Hello, this is an Elsa's message for testing notification................");
+        notificationPanel.showNotification("Hello, this is an Elsa's message for testing notification................");
     }
 
     const NotificationManager = {
         //createNewNotificationPanel,
-        placeNotificationsPanelBelowJackpotPanel: placeNotificationsPanelBelowJackpotPanel,
+        placeNotificationPanelBelowJackpotPanel: placeNotificationPanelBelowJackpotPanel,
     };
 
     return NotificationManager;
