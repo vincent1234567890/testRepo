@@ -46,9 +46,11 @@ const ClientServerConnect = function () {
         return socketEmitPromise(getMasterServerSocket(), 'getListOfRoomsByServer', {});
     }
 
+    /*
     function getPlayerInfo (query) {
         return socketEmitPromise(getMasterServerSocket(), 'getPlayerInfo', query);
     }
+    */
 
     function connectToARecommendedGameServer (joinPrefs) {
         return socketEmitPromise(getMasterServerSocket(), 'getRecommendedServers', joinPrefs).then(recommendedServers => {
@@ -538,7 +540,7 @@ const ClientServerConnect = function () {
         getCurrentJackpotValues: getCurrentJackpotValues,
         setFishLockRequest: setFishLockRequest,
         unsetFishLockRequest: unsetFishLockRequest,
-        getPlayerInfo: getPlayerInfo,
+        //getPlayerInfo: getPlayerInfo,
 
         getGameSummaries: getGameSummaries,
         getProfileStats: getProfileStats,
