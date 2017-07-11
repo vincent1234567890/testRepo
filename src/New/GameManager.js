@@ -192,6 +192,13 @@ const GameManager = function () {
                 _jackpotManager.updateJackpot({data: jpVals});
             }
         });
+        ClientServerConnect.listenForEvent("someoneWonAJackpot", jackpotData => {
+            console.log(`Someone has won a jackpot!`, jackpotData);
+            NotificationManager.queueNewNotification({
+                priority: 1,
+                message: `${jackpotData.playerName} has won the ${jackpotData.jackpotName} jackpot worth ${Math.floor(jackpotData.value)}!`,
+            });
+        });
     }
 
     function onLeaveArena() {
