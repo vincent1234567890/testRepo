@@ -15,7 +15,7 @@
                 <key>spriteSourceSize</key>
                 <string>{984,50}</string>
                 <key>textureRect</key>
-                <string>{{1,52},{984,50}}</string>
+                <string>{{1,321},{984,50}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -30,7 +30,7 @@
                 <key>spriteSourceSize</key>
                 <string>{1196,318}</string>
                 <key>textureRect</key>
-                <string>{{1,104},{1196,318}}</string>
+                <string>{{1,1},{1196,318}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -45,24 +45,9 @@
                 <key>spriteSourceSize</key>
                 <string>{618,49}</string>
                 <key>textureRect</key>
-                <string>{{522,1},{618,49}}</string>
+                <string>{{1087,433},{618,49}}</string>
                 <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>SSBTMBG.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{1366,373}</string>
-                <key>spriteSourceSize</key>
-                <string>{1366,373}</string>
-                <key>textureRect</key>
-                <string>{{1,424},{1366,373}}</string>
-                <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>SSBack.png</key>
             <dict>
@@ -75,7 +60,7 @@
                 <key>spriteSourceSize</key>
                 <string>{74,59}</string>
                 <key>textureRect</key>
-                <string>{{1216,1},{74,55}}</string>
+                <string>{{1087,321},{74,55}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -90,7 +75,7 @@
                 <key>spriteSourceSize</key>
                 <string>{72,53}</string>
                 <key>textureRect</key>
-                <string>{{1142,1},{72,53}}</string>
+                <string>{{1087,378},{72,53}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -101,13 +86,13 @@
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{132,30}</string>
+                <string>{417,98}</string>
                 <key>spriteSourceSize</key>
-                <string>{132,30}</string>
+                <string>{417,98}</string>
                 <key>textureRect</key>
-                <string>{{1,1},{132,30}}</string>
+                <string>{{987,321},{417,98}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>TimerBackground.png</key>
             <dict>
@@ -120,9 +105,9 @@
                 <key>spriteSourceSize</key>
                 <string>{385,48}</string>
                 <key>textureRect</key>
-                <string>{{135,1},{385,48}}</string>
+                <string>{{1138,433},{385,48}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
         </dict>
         <key>metadata</key>
@@ -136,9 +121,9 @@
             <key>realTextureFileName</key>
             <string>LobbyUI2.png</string>
             <key>size</key>
-            <string>{1368,1368}</string>
+            <string>{1198,1198}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:bc6d8836890b4208c0ad81f62e9796d3:ac28f707c179d24f6c7d2cfcdc580074:94163f642743ebc20a54c1c8cbe99d40$</string>
+            <string>$TexturePacker:SmartUpdate:4a3b5aa0ca7dae37a2c225609b1f381d:057b2b18df0f922c43792629b727c9df:94163f642743ebc20a54c1c8cbe99d40$</string>
             <key>textureFileName</key>
             <string>LobbyUI2.png</string>
         </dict>

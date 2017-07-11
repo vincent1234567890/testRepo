@@ -15,7 +15,7 @@
                 <key>spriteSourceSize</key>
                 <string>{125,67}</string>
                 <key>textureRect</key>
-                <string>{{56,1233},{125,67}}</string>
+                <string>{{1,1233},{125,67}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -30,7 +30,7 @@
                 <key>spriteSourceSize</key>
                 <string>{237,48}</string>
                 <key>textureRect</key>
-                <string>{{314,1233},{237,48}}</string>
+                <string>{{235,1233},{237,48}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -45,7 +45,7 @@
                 <key>spriteSourceSize</key>
                 <string>{45,42}</string>
                 <key>textureRect</key>
-                <string>{{506,1283},{45,42}}</string>
+                <string>{{427,1283},{45,42}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -60,54 +60,9 @@
                 <key>spriteSourceSize</key>
                 <string>{163,114}</string>
                 <key>textureRect</key>
-                <string>{{125,1233},{163,114}}</string>
+                <string>{{70,1233},{163,114}}</string>
                 <key>textureRotated</key>
                 <false/>
-            </dict>
-            <key>FishText1.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{113,22}</string>
-                <key>spriteSourceSize</key>
-                <string>{113,22}</string>
-                <key>textureRect</key>
-                <string>{{290,1233},{113,22}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>FishText2.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{133,26}</string>
-                <key>spriteSourceSize</key>
-                <string>{135,26}</string>
-                <key>textureRect</key>
-                <string>{{28,1233},{133,26}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>FishText3.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{134,25}</string>
-                <key>spriteSourceSize</key>
-                <string>{134,25}</string>
-                <key>textureRect</key>
-                <string>{{1,1233},{134,25}}</string>
-                <key>textureRotated</key>
-                <true/>
             </dict>
             <key>GameSelectionBase.png</key>
             <dict>
@@ -150,7 +105,7 @@
                 <key>spriteSourceSize</key>
                 <string>{190,48}</string>
                 <key>textureRect</key>
-                <string>{{314,1283},{190,48}}</string>
+                <string>{{235,1283},{190,48}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -168,7 +123,7 @@
             <key>size</key>
             <string>{1368,1368}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:d7977d60429d933c72b2b295ec4cf615:c504bfb53ccf1453be8859700d5daa03:f5da007c8eb38d8c8fca0a4e0e07b9e9$</string>
+            <string>$TexturePacker:SmartUpdate:f37465a8216afdcbd08c46fc526c6b3d:ed30ee384f0149cce55e41b267eb04f3:f5da007c8eb38d8c8fca0a4e0e07b9e9$</string>
             <key>textureFileName</key>
             <string>LobbyUI.png</string>
         </dict>
