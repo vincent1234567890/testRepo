@@ -26,6 +26,7 @@ const GameManager = function () {
     // let _loginManager;
     let _fishManager;
     let _lobbyManager;
+    let _playerInfoWidget;
     let _floatingMenuManager;
     let _jackpotManager;
     let _scoreboardManager;
@@ -180,6 +181,9 @@ const GameManager = function () {
                 let curPlayer = ef.gameController.getCurrentPlayer();
                 curPlayer.score=_playerData.playerState.score;
                 ef.gameController.setCurrentPlayer(curPlayer);
+                if (_playerInfoWidget) {
+                    _playerInfoWidget.updatePlayerCredit(_playerData.playerState.score);
+                }
             }
         });
         ClientServerConnect.listenForEvent('jpVals', jpVals => {
@@ -414,6 +418,8 @@ const GameManager = function () {
 
         //Misc
         isCurrentPlayer: isCurrentPlayer,
+        setPlayerInfoWidget: playerInfoWidget => _playerInfoWidget = playerInfoWidget,
+        getJackpotManager: () => _jackpotManager,
 
         //current only used to reset
         destroyArena : destroyArena,

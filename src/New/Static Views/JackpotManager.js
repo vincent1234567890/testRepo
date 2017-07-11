@@ -6,6 +6,8 @@ const JackpotManager = (function () {
     "use strict";
 
     let _view;
+    let _jackpotFloatPanel;
+
     const JackpotManager = function (data) {
         _view = new JackpotView();
     };
@@ -19,10 +21,17 @@ const JackpotManager = (function () {
     proto.updateJackpot = function (jackpotValueResponse) {
         const total = Object.keys(jackpotValueResponse.data).map(key => jackpotValueResponse.data[key]).map(level => level.value).reduce((a, b) => a + b, 0);
         _view.updateJackpot(total);
+        if (_jackpotFloatPanel) {
+            _jackpotFloatPanel.updateJackpot(total);
+        }
     };
 
     proto.reattach = function () {
         _view.reattach();
+    };
+
+    proto.setJackpotFloatPanel = function (jackpotFloatPanel) {
+        _jackpotFloatPanel = jackpotFloatPanel;
     };
 
     return JackpotManager;

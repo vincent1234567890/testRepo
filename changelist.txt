@@ -72,3 +72,43 @@
 3. 修正开炮就退出房间后，报表出错的bug.
 4. 加入心跳包检测，玩家非正常退出房间/断线时，将玩家踢出房间.
 
+-----------------v1.4.629b 修改日志--------------------
+后端
+1.修复目标锁定bug.
+2. Login现在可以使用channelId + username而不是playerId登录
+3. 实施新的sit selection。
+4.添加方法加入特定的服务器和房间。
+5.如果游戏加入失败，重试座位选择。
+6.座位数量。
+7. 快速加入
+8. 每一局游戏开始将记录日期
+9. 新的 round ID编号
+10. Added scroll event to table list panel
+11. 改变鱼的命名
+12. 全局重命名: roundNo -> roundId
+13. 代码清理; version bump
+14. 修正 Bug
+
+前端
+1. 音频更新
+2. 更新桌座sprite.
+3. 更新 GameLogView
+4. 实施单桌
+5. 大奖触发动画
+6. 添加分页 (座位选择)
+
+-----------------v1.4.77b 修改日志--------------------
+1.锁桌功能.
+2.Bots现在将确保桌子已满，然后再打开另一张桌子
+3.确保“live_default”的gameConfig，具有默认设置
+4.使慢查询更快
+5.在用户界面中显示应用程序版本号
+6.初始服务器支持观众
+7.Bots模拟没有时间限制
+8.channel.enableIpChecking;对于/requesttoken 和 /createuser不需要玩家密码
+9.给Bots大量额度
+10.删除前面的默认cocos加载屏幕
+11.美人鱼死亡，BGM将改为游戏BGM
+12.FGMT Round tab添加了免费回合，JP，Total PLayer，RTP％
+13.FCMT 创建统计API和topUp / fundTransfer控制器和DB功能
+14.修正 Bug

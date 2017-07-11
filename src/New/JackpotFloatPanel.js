@@ -131,13 +131,17 @@ let JackpotFloatPanel = cc.Node.extend({
         if (this._barFrameEventListener && !this._barFrameEventListener._isRegistered())
             cc.eventManager.addListener(this._barFrameEventListener, this._spBarFrame);
         //reload the value.  should update the data by event.
-        const self = this;
-        ClientServerConnect.getCurrentJackpotValues().then(values=>{
+        ClientServerConnect.getCurrentJackpotValues().then(values => {
             const total = Object.keys(values["data"]).map(key => values["data"][key]).map(level => level.value).reduce((a, b) => a + b, 0);
-            self._lbJackpotValue.setString(Math.round(total).toLocaleString('en-US', {maximumFractionDigits: 2}));
-        })
-        //load user info
+            this.updateJackpot(total);
+        });
+        // @todo load user info
+        // ...
 
+    },
+
+    updateJackpot: function(value) {
+        this._lbJackpotValue.setString(Math.round(value).toLocaleString('en-US', {maximumFractionDigits: 2}));
     },
 
     cleanup: function(){
