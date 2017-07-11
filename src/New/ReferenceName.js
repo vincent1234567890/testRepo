@@ -321,6 +321,12 @@ const ReferenceName = {
     OptionsBarNegative : "#Setting Bar Empty.png",
     FishSliderButton : "#Setting Slider Button.png",
 
+    Signal1 : "#Signal1.png",
+    Signal2 : "#Signal2.png",
+    Signal3 : "#Signal3.png",
+    Signal4 : "#Signal4.png",
+    Signal5 : "#Signal5.png",
+
     //------------
     //Localisable
     //------------

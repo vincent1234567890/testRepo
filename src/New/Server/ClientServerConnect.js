@@ -17,6 +17,10 @@ const ClientServerConnect = function () {
     let _loginParams = null;
     let _sendHeartbeatToGameServerIntervalId = null;
 
+    let _averageLatency = 0;
+    let _lastRequestTime = 0;
+    let _lastResponseTime = 0;
+
     //get the Master server socket connection.
     function getMasterServerSocket () {
         if (!_masterServerSocket) {
@@ -522,6 +526,45 @@ const ClientServerConnect = function () {
         return _gameWSClient.callAPIOnce('player', 'getTopRankedPlayers');
     }
 
+    function checkLatency(latencyPackageCount){
+        let current = Date.now();
+        let diffWithLastRequest = current - _lastRequestTime;
+        let diffWithLastResponse = current - _lastResponseTime;
+
+        if (diffWithLastResponse <= diffWithLastRequest) {
+            sendLatencyRequest();
+        }
+        else {
+            let latency = diffWithLastRequest;
+            _averageLatency += (latency - _averageLatency) / latencyPackageCount;
+            //console.info(new Date().toISOString() + "Laaag Latency:" + getLatency());
+            sendLatencyRequest();
+        }
+
+        _lastRequestTime = current;
+    }
+
+    function sendLatencyRequest() {
+        return _gameWSClient.callAPIOnce('game', 'checkLatency', {clientStamp: Date.now()}).then(
+            response => {
+                if (response.status === 200) {
+                    let current = Date.now();
+                    _lastResponseTime = current;
+                    //let requestTime = response.message.serverStamp - response.message.clientStamp;
+                    let requestTime = response.message.serverStamp - _lastRequestTime;
+                    let responseTime = current - response.message.serverStamp;
+                    let latency = (requestTime + responseTime) / 2;
+                    _averageLatency += (latency - _averageLatency) / latencyPackageCount;
+                    //console.info(new Date().toISOString() + "Latency:" + getLatency());
+                }
+            }
+        );
+    }
+
+    function getLatency() {
+        return Math.round(_averageLatency);
+    }
+
     return {
         doInitialConnect: doInitialConnect,
         getListOfRoomsByServer: getListOfRoomsByServer,
@@ -548,5 +591,7 @@ const ClientServerConnect = function () {
         getRechargeLog: getRechargeLog,
         changePlayerDisplayName: changePlayerDisplayName,
         getLeaderboard: getLeaderboard,
+        checkLatency: checkLatency,
+        getLatency: getLatency,
     };
 }();

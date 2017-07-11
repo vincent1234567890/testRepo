@@ -27,6 +27,8 @@ const GameView = function () {
 
     let _screenShakeNode;
 
+    let _connectionSignal;
+
     const NUMBER_OF_BACKGROUNDS = 5;
 
     function initialise(parentNode, gameConfig, fishGameArena, lockOnCallback, fishLockStatus) {
@@ -45,6 +47,9 @@ const GameView = function () {
             if (GameManager.isPlayer && _gameConfig.cannonPositions[_playerSlot][1] > cc.view.getDesignResolutionSize().height / 2) {
                 _isRotated = true;
             }
+
+            _connectionSignal = new ConnectionSignal();
+            addView(_connectionSignal, 1);
 
             //create the player view.
             for (let i = 0; i < _gameConfig.maxPlayers; i++) {
