@@ -6,12 +6,12 @@ const NotificationManager = (function () {
     // Perhaps the notification panel should have its own manager
 
     function createNewNotificationPanel () {
-        const pnNotification = new NotificationPanel(440, 32, true);
+        const pnNotification = new NotificationPanel(440, 32);
         GameManager.setGlobalNotificationPanel(pnNotification);
         return pnNotification;
     }
 
-    function placeNotificationsPanelBelowJackpotPanel (jackpotPanel) {
+    function placeNotificationsPanelBelowJackpotPanel (jackpotPanel, currentScreen) {
         if (!jackpotPanel) {
             console.warn("No jackpotPanel to add to!");
             return;
@@ -27,18 +27,17 @@ const NotificationManager = (function () {
         }
 
         const newContainer = jackpotPanel.getParent();
-        console.log("notificationsPanel.getContentSize():", notificationsPanel.getContentSize());
-        notificationsPanel.setPosition(jackpotPanel.getPositionX() - notificationsPanel._szSize.width / 2, jackpotPanel.getPositionY() - 100);
+        notificationsPanel.setPosition(jackpotPanel.getPositionX() - notificationsPanel._szSize.width / 2, jackpotPanel.getPositionY() - 120);
         newContainer.addChild(notificationsPanel);
-        //notificationsPanel.removeChild(notificationsPanel._spNotificationIcon);
-        //notificationsPanel._spNotificationIcon.setPosition(18, 18);
-        //notificationsPanel.addChild(notificationsPanel._spNotificationIcon);
+
+        notificationsPanel.styleForScreen(currentScreen);
+
         notificationsPanel.showNotification("Hello, this is an Elsa's message for testing notification................");
     }
 
     const NotificationManager = {
         //createNewNotificationPanel,
-        placeNotificationsPanelBelowJackpotPanel,
+        placeNotificationsPanelBelowJackpotPanel: placeNotificationsPanelBelowJackpotPanel,
     };
 
     return NotificationManager;

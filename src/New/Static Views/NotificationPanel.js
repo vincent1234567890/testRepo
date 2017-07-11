@@ -6,22 +6,20 @@ const NotificationPanel = cc.Node.extend({
     _szSize: null,
     _duration: 6,
 
-    ctor: function (width, height, withBackground) {
+    ctor: function (width, height) {
         cc.Node.prototype.ctor.call(this);
         this._className = "NotificationPanel";
 
         const szSize = this._szSize = new cc.Size(width || 100, height || 30);
 
-        if (withBackground) {
-            // Works:
-            const spNotificationBase = this._spNotificationBase = new cc.Sprite("#LR_NotificationBase.png");
-            // @todo Does not work!
-            //const spNotificationBase = this._spNotificationBase = new cc.Sprite("#NotificationBackground.png");
-            const spNotificationSize = spNotificationBase.getContentSize();
-            spNotificationBase.setPosition(szSize.width * 0.5, szSize.height * 0.5);
-            spNotificationBase.setScale(szSize.width / spNotificationSize.width, szSize.height / spNotificationSize.height);
-            this.addChild(spNotificationBase);
-        }
+        // Background (works):
+        const spNotificationBase = this._spNotificationBase = new cc.Sprite("#LR_NotificationBase.png");
+        // Background (@todo does not work!):
+        //const spNotificationBase = this._spNotificationBase = new cc.Sprite("#NotificationBackground.png");
+        const spNotificationSize = spNotificationBase.getContentSize();
+        spNotificationBase.setPosition(szSize.width * 0.5, szSize.height * 0.5);
+        spNotificationBase.setScale(szSize.width / spNotificationSize.width, szSize.height / spNotificationSize.height);
+        this.addChild(spNotificationBase);
 
         const padding = 36;
 
@@ -64,5 +62,12 @@ const NotificationPanel = cc.Node.extend({
                 if (callback)
                     callback.call(target);
             })));
-    }
+    },
+
+    styleForScreen: function (currentScreen) {
+        const showBackground = currentScreen !== 'TableSelection';
+        const showIcon = currentScreen === 'TableSelection';
+        this._spNotificationBase.setVisible(showBackground);
+        this._spNotificationIcon.setVisible(showIcon);
+    },
 });

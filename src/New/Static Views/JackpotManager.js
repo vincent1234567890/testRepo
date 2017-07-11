@@ -30,12 +30,12 @@ const JackpotManager = (function () {
 
     proto.reattach = function () {
         _view.reattach();
-        NotificationManager.placeNotificationsPanelBelowJackpotPanel(_view.getJackpotPanel());
+        NotificationManager.placeNotificationsPanelBelowJackpotPanel(_view.getJackpotPanel(), '');
     };
 
     proto.setJackpotFloatPanel = function (jackpotFloatPanel) {
         _jackpotFloatPanel = jackpotFloatPanel;
-        NotificationManager.placeNotificationsPanelBelowJackpotPanel(_jackpotFloatPanel);
+        NotificationManager.placeNotificationsPanelBelowJackpotPanel(_jackpotFloatPanel, 'TableSelection');
     };
 
     return JackpotManager;
