@@ -743,13 +743,15 @@ let WaveTransition = cc.Node.extend({
                 this.addChild(spNotificationBase);
             }
 
+            const padding = 36;
+
             const dnStencil = new cc.DrawNode();
-            const rectangle = [cc.p(0, 0), cc.p(szSize.width, 0), cc.p(szSize.width, szSize.height),
+            const rectangle = [cc.p(0, 0), cc.p(szSize.width - 2 * padding, 0), cc.p(szSize.width - 2 * padding, szSize.height),
                 cc.p(0, szSize.height)], green = new cc.Color(0, 255, 0, 255);
             dnStencil.drawPoly(rectangle, green, 3, green);
 
             const cpClippingNode = this._cpClippingNode = new cc.ClippingNode(dnStencil);
-            cpClippingNode.setPosition(36, 0);
+            cpClippingNode.setPosition(padding, 0);
             this.addChild(cpClippingNode);
 
             //const testLayer = new cc.LayerColor(new cc.Color(255, 0, 0, 255));

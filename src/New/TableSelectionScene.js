@@ -84,7 +84,7 @@ const TableType = {
             if (oldContainer) {
                 oldContainer.removeChild(pnNotification);
             }
-            pnNotification.setPosition(cc.visibleRect.center.x + 226, cc.visibleRect.top.y - 200);
+            pnNotification.setPosition(cc.visibleRect.center.x + 236, cc.visibleRect.top.y - 200);
             this.addChild(pnNotification);
             pnNotification.showNotification("Hello, this is an Elsa's message for testing notification................");
 

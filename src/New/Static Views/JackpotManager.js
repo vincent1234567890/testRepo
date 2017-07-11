@@ -43,7 +43,7 @@ const JackpotManager = (function () {
     // Perhaps the notification panel should have its own manager
 
     function createNewNotificationPanel () {
-        const pnNotification = new ef.NotificationPanel(400, 32);
+        const pnNotification = new ef.NotificationPanel(440, 32, true);
         GameManager.setGlobalNotificationPanel(pnNotification);
         return pnNotification;
     }
