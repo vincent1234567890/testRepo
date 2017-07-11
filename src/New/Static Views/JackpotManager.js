@@ -12,7 +12,8 @@ const JackpotManager = (function () {
 
     const JackpotManager = function (data) {
         _view = new JackpotView();
-        placeNotificationsPanelBelowJackpotPanel(_view.getJackpotPanel());
+        // If I add the first created JackpotView to the welcome page, it loses its icon forever.
+        //placeNotificationsPanelBelowJackpotPanel(_view.getJackpotPanel());
     };
 
     const proto = JackpotManager.prototype;
