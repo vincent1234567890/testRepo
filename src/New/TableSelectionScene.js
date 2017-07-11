@@ -76,10 +76,14 @@ const TableType = {
             this.addChild(tableListPanel);
 
             //notification panel.
-            const pnNotification = new ef.NotificationPanel(400, 32);
-            pnNotification.setPosition(cc.visibleRect.center.x + 226, cc.visibleRect.top.y - 200);
+            // Create a new one:
+            //const pnNotification = new ef.NotificationPanel(400, 32);
+            // Or reuse the existing one:
+            const pnNotification = GameManager.getGlobalNotificationPanel();
+            pnNotification.removeFromParent();
+            pnNotification.setPosition(cc.visibleRect.center.x + 236, cc.visibleRect.top.y - 200);
             this.addChild(pnNotification);
-            pnNotification.showNotification("Hello, this is an Elsa's message for testing notification................");
+            //pnNotification.showNotification("Hello, this is an Elsa's message for testing notification................");
 
             this.fetchUpdate();
             this.startUpdateInterval();
@@ -296,6 +300,8 @@ const TableType = {
             //scroll button
             // const pnPageIndicator = this._pnPageIndicator = new PageIndicatorPanel();
             // this.addChild(pnPageIndicator);
+
+            this.updateButtonStates();
         },
 
         _createLobbyTypeSprite: function () {
@@ -384,6 +390,15 @@ const TableType = {
                 this._pnTableList.updateRoomStates(roomStatesToShow);
             }
         },
+
+        updateButtonStates: function () {
+            const isSpectating = ef.gameController.getGlobalProp('spectating');
+            setNodeWithChildrenForProperty(this,
+                node => node._goOpaqueWhenSpectating,
+                obj => obj.opacity = isSpectating ? 120 : 255
+            );
+            this._btnSpectate.updateBtnText();
+        },
     });
 
     const SpectateButton = cc.Sprite.extend({
@@ -392,8 +407,6 @@ const TableType = {
 
         _spIcon: null,
         _spTitle: null,
-
-        _isSpectating: false,
 
         _touchEventListener: null,
         _mouseoverEventListener: null,
@@ -440,6 +453,7 @@ const TableType = {
                 this.setSpriteFrame(spriteFrame);
         },
 
+        /*
         onMouseOverIn: function () {
             const spriteFrame = cc.spriteFrameCache.getSpriteFrame(this._selectedName);
             if (spriteFrame)
@@ -454,35 +468,33 @@ const TableType = {
             this._clickCallback = callback;
             this._clickTarget = target;
         },
+        */
 
         executeClickCallback: function (touch, event) {
-            this._isSpectating = !this._isSpectating;
-            ef.gameController.setGlobalProp('spectating', this._isSpectating);
-            this.updateBtnText();
-            let tablePanel = ef.gameController.getTablePanel();
-            if (tablePanel) {
-                setNodeWithChildrenForProperty(tablePanel.getParent(),
-                    node => node._goOpaqueWhenSpectating,
-                    obj => obj.opacity = this._isSpectating ? 120 : 255
-                );
-            }
+            const isSpectating = !ef.gameController.getGlobalProp('spectating');
+            ef.gameController.setGlobalProp('spectating', isSpectating);
 
+            const tableListLayer = this.getParent().getParent();
+            tableListLayer.updateButtonStates();
+
+            /*
             if (this._clickCallback)
                 this._clickCallback.call(this._clickTarget, touch, event);
+            */
         },
 
         updateBtnText: function () {
+            const isSpectating = ef.gameController.getGlobalProp('spectating');
+
             //update icon
-            const inconStr = this._isSpectating ? "SS_SpectateBackIcon.png" : "SS_SpectateIcon.png";
+            const inconStr = isSpectating ? "SS_SpectateBackIcon.png" : "SS_SpectateIcon.png";
             const iconSprite = cc.spriteFrameCache.getSpriteFrame(inconStr);
-            if (iconSprite)
-                this._spIcon.setSpriteFrame(iconSprite);
+            this._spIcon.setSpriteFrame(iconSprite);
 
             //update text
-            const textStr = this._isSpectating ? "SS_BackChinese.png" : "SS_SpectateChinese.png";
+            const textStr = isSpectating ? "SS_BackChinese.png" : "SS_SpectateChinese.png";
             const textSprite = cc.spriteFrameCache.getSpriteFrame(textStr);
-            if (textSprite)
-                this._spTitle.setSpriteFrame(textSprite);
+            this._spTitle.setSpriteFrame(textSprite);
         }
     });
 

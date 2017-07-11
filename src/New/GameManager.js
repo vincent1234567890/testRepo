@@ -27,6 +27,7 @@ const GameManager = function () {
     let _fishManager;
     let _lobbyManager;
     let _playerInfoWidget;
+    let _pnNotificationsWidget;
     let _floatingMenuManager;
     let _jackpotManager;
     let _scoreboardManager;
@@ -190,6 +191,13 @@ const GameManager = function () {
             if (_jackpotManager) {
                 _jackpotManager.updateJackpot({data: jpVals});
             }
+        });
+        ClientServerConnect.listenForEvent("someoneWonAJackpot", jackpotData => {
+            console.log(`Someone has won a jackpot!`, jackpotData);
+            NotificationManager.queueNewNotification({
+                priority: 1,
+                message: `${jackpotData.playerName} has won the ${jackpotData.jackpotName} jackpot worth ${Math.floor(jackpotData.value)}!`,
+            });
         });
     }
 
@@ -419,6 +427,8 @@ const GameManager = function () {
         //Misc
         isCurrentPlayer: isCurrentPlayer,
         setPlayerInfoWidget: playerInfoWidget => _playerInfoWidget = playerInfoWidget,
+        setGlobalNotificationPanel: pnNotifications => _pnNotificationsWidget = pnNotifications,
+        getGlobalNotificationPanel: () => _pnNotificationsWidget,
         getJackpotManager: () => _jackpotManager,
 
         //current only used to reset
