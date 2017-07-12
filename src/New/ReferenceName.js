@@ -195,6 +195,7 @@ const ReferenceName = {
     SettingsSoundTitleChinese : "#MusicFxChinese.png",
     SettingsGameLanguageSelectionTitleChinese : "#GameLangChinese.png",
     SettingsGameLanguageSelectionBar : "#BarBase2.png",
+    SettingsDropDownPanel : "#BarBase3.png",
     SettingsDropDownButton : "DropDWIdle.png",
     SettingsDropDownButtonOnPress : "DropDWOnPress.png",
     SettingsConfirmButtonTextChinese : "#ConfirmChinese.png",

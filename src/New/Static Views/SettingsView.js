@@ -68,7 +68,7 @@ const SettingsView = (function () {
         let langLabel = [];
         langArr.forEach((lang, index) => {
             let newLabel = new cc.LabelTTF(lang, "Microsoft YaHei", 20);
-            newLabel.setPosition(10, panelContent.height - (index + 0.5) * 55);
+            newLabel.setPosition(10, panelContent.height - (index + 0.5) * 30);
             newLabel.setAnchorPoint(0, 1);
             newLabel.setLang = lang;
             ef.initClickListener(newLabel, chooseLang);
