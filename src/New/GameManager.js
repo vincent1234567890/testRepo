@@ -199,6 +199,12 @@ const GameManager = function () {
                 message: `${jackpotData.playerName} has won the ${jackpotData.jackpotName} jackpot worth ${Math.floor(jackpotData.value)}!`,
             });
         });
+        ClientServerConnect.listenForEvent('broadcastAnnouncement', data => {
+            NotificationManager.queueNewNotification({
+                priority: data.priority || 5,
+                message: data.message,
+            });
+        });
     }
 
     function onLeaveArena() {
