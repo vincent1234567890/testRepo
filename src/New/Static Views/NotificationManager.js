@@ -35,10 +35,11 @@ const NotificationManager = (function () {
 
         const notificationPanel = getNotificationPanel();
 
-        const oldContainer = notificationPanel.getParent();
-        if (oldContainer) {
-            oldContainer.removeChild(notificationPanel);
-        }
+        //const oldContainer = notificationPanel.getParent();
+        //if (oldContainer) {
+        //    oldContainer.removeChild(notificationPanel, false);
+        //}
+        notificationPanel.removeFromParent(false);
 
         const newContainer = jackpotPanel.getParent();
         notificationPanel.setPosition(jackpotPanel.getPositionX() - notificationPanel._szSize.width / 2, jackpotPanel.getPositionY() - 120);
@@ -47,6 +48,7 @@ const NotificationManager = (function () {
         notificationPanel.styleForScreen(currentScreen);
 
         //notificationPanel.showNotification("Hello, this is an Elsa's message for testing notification................");
+        notificationPanel.resumeScrolling();
     }
 
     function queueNewNotification (notificationObj) {
