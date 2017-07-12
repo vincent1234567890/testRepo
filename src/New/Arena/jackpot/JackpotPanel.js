@@ -39,6 +39,8 @@ let JackpotPanel = cc.LayerColor.extend({ //gradient
         cc.spriteFrameCache.addSpriteFrames(res.JackpotMiniGamePlist);
         cc.spriteFrameCache.addSpriteFrames(res.JackpotMiniGame2Plist);
         cc.spriteFrameCache.addSpriteFrames(res.LobbyUI2Plist);
+        cc.spriteFrameCache.addSpriteFrames(res.ChinesePlist);
+
         //buzz effect
 
         cc.audioEngine.playEffect(res.JackpotTriggeredSound);
@@ -90,6 +92,11 @@ let JackpotPanel = cc.LayerColor.extend({ //gradient
         const spTitle = new cc.Sprite(ReferenceName.JackpotTitle);
         spBackground.addChild(spTitle);
         spTitle.setPosition(panelSize.width * 0.5, panelSize.height * 0.90);
+
+        let spTextTitle = new cc.Sprite(ReferenceName.JackpotTitleChinese);
+        const contentSpTitle = spTitle.getContentSize();
+        spTitle.addChild(spTextTitle);
+        spTextTitle.setPosition(contentSpTitle.width / 2, contentSpTitle.height / 2);
 
         //notification bg
         const spNotificationBg = new cc.Sprite(ReferenceName.JackpotNotificationBackground);
@@ -322,9 +329,9 @@ let JackpotPanel = cc.LayerColor.extend({ //gradient
         const spPrizeListFrame1 = new cc.Sprite(ReferenceName.JackpotPrizeListFrame);
         spBackground.addChild(spPrizeListFrame1);
         spPrizeListFrame1.setPosition(panelSize.width * 0.83, panelSize.height * 0.76);
-        const lbPrizeTitle1 = new cc.LabelTTF("1", "Arial", 18);
+        const lbPrizeTitle1 = new cc.Sprite("#PL1.png");
         spPrizeListFrame1.addChild(lbPrizeTitle1);
-        lbPrizeTitle1.setPosition(165, 82);
+        lbPrizeTitle1.setPosition(185, 82);
         const spMermaidIcon = new cc.Sprite(ReferenceName.JackpotMermaidIcon);
         spPrizeListFrame1.addChild(spMermaidIcon);
         spMermaidIcon.setPosition(55, 50);
@@ -337,9 +344,9 @@ let JackpotPanel = cc.LayerColor.extend({ //gradient
         const spPrizeListFrame2 = new cc.Sprite(ReferenceName.JackpotPrizeListFrame);
         spBackground.addChild(spPrizeListFrame2);
         spPrizeListFrame2.setPosition(panelSize.width * 0.83, panelSize.height * 0.59);
-        const lbPrizeTitle2 = new cc.LabelTTF("2", "Arial", 18);
+        const lbPrizeTitle2 = new cc.Sprite("#PL2.png");
         spPrizeListFrame2.addChild(lbPrizeTitle2);
-        lbPrizeTitle2.setPosition(165, 82);
+        lbPrizeTitle2.setPosition(185, 82);
         const spSharkIcon = new cc.Sprite(ReferenceName.JackpotSharkIcon);
         spPrizeListFrame2.addChild(spSharkIcon);
         spSharkIcon.setPosition(55, 50);
@@ -351,9 +358,9 @@ let JackpotPanel = cc.LayerColor.extend({ //gradient
         const spPrizeListFrame3 = new cc.Sprite(ReferenceName.JackpotPrizeListFrame);
         spBackground.addChild(spPrizeListFrame3);
         spPrizeListFrame3.setPosition(panelSize.width * 0.83, panelSize.height * 0.42);
-        const lbPrizeTitle3 = new cc.LabelTTF("3", "Arial", 18);
+        const lbPrizeTitle3 = new cc.Sprite("#PL3.png");
         spPrizeListFrame3.addChild(lbPrizeTitle3);
-        lbPrizeTitle3.setPosition(165, 82);
+        lbPrizeTitle3.setPosition(185, 82);
         const spTurtleIcon = new cc.Sprite(ReferenceName.JackpotTurtleIcon);
         spPrizeListFrame3.addChild(spTurtleIcon);
         spTurtleIcon.setPosition(55, 50);
@@ -365,9 +372,9 @@ let JackpotPanel = cc.LayerColor.extend({ //gradient
         const spPrizeListFrame4 = new cc.Sprite(ReferenceName.JackpotPrizeListFrame);
         spBackground.addChild(spPrizeListFrame4);
         spPrizeListFrame4.setPosition(panelSize.width * 0.83, panelSize.height * 0.25);
-        const lbPrizeTitle4 = new cc.LabelTTF("4", "Arial", 18);
+        const lbPrizeTitle4 = new cc.Sprite("#PL4.png");
         spPrizeListFrame4.addChild(lbPrizeTitle4);
-        lbPrizeTitle4.setPosition(165, 82);
+        lbPrizeTitle4.setPosition(185, 82);
         const spButterflyFishIcon = new cc.Sprite(ReferenceName.JackpotButterflyFishIcon);
         spPrizeListFrame4.addChild(spButterflyFishIcon);
         spButterflyFishIcon.setPosition(55, 50);
@@ -514,7 +521,7 @@ let JackpotPanel = cc.LayerColor.extend({ //gradient
             const boxAnimation = GUIFunctions.getAnimation(ReferenceName.JackpotTreasureBoxOpenAnm, 0.02);
             selBox.runAction(cc.sequence(cc.callFunc(function () {
                 cc.audioEngine.playEffect(res.JackpotBoxOpeningSound);
-            }, selBox),cc.delayTime(delay), boxAnimation, cc.callFunc(function () {
+            }, selBox), cc.delayTime(delay), boxAnimation, cc.callFunc(function () {
                 this.removeFromParent(true);
                 selfPoint._removeBoxFromArray(this);
             }, selBox)));

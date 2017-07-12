@@ -208,6 +208,7 @@ const GameManager = function () {
 
     function createLobby() {
         if (!_lobbyManager) {
+            cc.spriteFrameCache.addSpriteFrames(res.ChinesePlist);
             _lobbyManager = new LobbyManager(_playerData, onGameSelected);
             _lobbyWaterCausticsManager = new LobbyWaterCaustics();   //todo need delete
             _floatingMenuManager = new FloatingMenu(_playerData, requestConsumptionLogHandle);

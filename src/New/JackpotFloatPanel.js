@@ -9,6 +9,7 @@ let JackpotFloatPanel = cc.Node.extend({
 
         cc.spriteFrameCache.addSpriteFrames(res.LobbyJackpotPlist);
         cc.spriteFrameCache.addSpriteFrames(res.WaterCausticAnimation);
+        cc.spriteFrameCache.addSpriteFrames(res.ChinesePlist);
 
         //shadow
         let spShadow = new cc.Sprite(ReferenceName.JackpotShadow);

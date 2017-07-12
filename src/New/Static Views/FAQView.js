@@ -230,9 +230,27 @@ const FAQView = (function () {
             title.setPosition(titleX, titleY);
             _cannonInfo.addChild(title);
 
-            const display = new cc.Sprite(ReferenceName.FAQCannonInfoDisplay);
-            _cannonInfo.addChild(display);
-            display.setPosition(410, 320);
+            // const display = new cc.Sprite(ReferenceName.FAQCannonInfoDisplay);
+            // _cannonInfo.addChild(display);
+            // display.setPosition(410, 320);
+
+            const cannonPic = new cc.Sprite("#Cannon-Info-Cannon.png");
+            const cannonLevel = new cc.Sprite("#Cannon-Info-Lvl.png");
+            const cannonLobby = new cc.Sprite("#Cannon-Info-Multiplier.png");
+            const cannonData = new cc.Sprite("#Cannon-Info-DMG.png");
+
+            cannonPic.setPosition(titleX + 300, titleY - 150);
+            _cannonInfo.addChild(cannonPic);
+
+            cannonLevel.setPosition(titleX + 250, titleY - 270);
+            _cannonInfo.addChild(cannonLevel);
+
+            cannonLobby.setPosition(titleX - 10, titleY - 380);
+            _cannonInfo.addChild(cannonLobby);
+
+            cannonData.setPosition(titleX + 300, titleY - 380);
+            _cannonInfo.addChild(cannonData);
+
         }
         if (_cannonInfo && !_cannonInfo.getParent()) {
             clearAllViews();
