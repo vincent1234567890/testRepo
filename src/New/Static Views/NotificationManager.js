@@ -52,9 +52,9 @@ const NotificationManager = (function () {
     }
 
     function queueNewNotification (notificationObj) {
-        queue.push(notificationObj);
         // @todo Check priority; maybe jump queue
-        // @todo Check queue length; ignore if too large
+        // @todo Check queue length; ignore new notification if queue is too large
+        queue.push(notificationObj);
 
         const notificationPanel = getNotificationPanel();
         if (!notificationPanel.isScrolling) {
