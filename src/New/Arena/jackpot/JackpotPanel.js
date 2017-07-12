@@ -611,7 +611,7 @@ const JackpotAwardPanel = cc.LayerColor.extend({
         spAwardPanel.setScale(0.3);
         const spAwardLevel = this._createAwardLevelSprite(awardLv);
         spAwardPanel.addChild(spAwardLevel);
-        spAwardLevel.setPosition(200, 200);
+        spAwardLevel.setPosition(270, 200);
         const lbAwardMoney = new cc.LabelBMFont(Math.round(awardMoney), res.JackpotGoldTextFont);
         lbAwardMoney.setPosition(270, 90);
         spAwardPanel.addChild(lbAwardMoney);
