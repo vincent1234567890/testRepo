@@ -65,7 +65,7 @@ const TableType = {
 
             const selectionMadeCallbackForChildren = (joinPrefs) => {
                 this.stopUpdateInterval();
-                // Or we could do this, but that will briefly display the lobby while we are connecting while we are connecting to the game.
+                // Or we could do this, but that will briefly display the lobby while we are connecting to the game.
                 //cc.director.popToSceneStackLevel(1);
 
                 selectionMadeCallback(joinPrefs);
@@ -75,15 +75,12 @@ const TableType = {
             const tableListPanel = this._pnTableListPanel = new ef.TableListLayer(lobbyType, channelType, selectionMadeCallbackForChildren);
             this.addChild(tableListPanel);
 
-            //notification panel.
-            // Create a new one:
-            //const pnNotification = new ef.NotificationPanel(400, 32);
-            // Or reuse the existing one:
+            // Use the global panel:
             const pnNotification = GameManager.getGlobalNotificationPanel();
-            pnNotification.removeFromParent();
+            pnNotification.removeFromParent(false);
             pnNotification.setPosition(cc.visibleRect.center.x + 236, cc.visibleRect.top.y - 200);
             this.addChild(pnNotification);
-            //pnNotification.showNotification("Hello, this is an Elsa's message for testing notification................");
+            pnNotification.resumeScrolling();
 
             this.fetchUpdate();
             this.startUpdateInterval();

@@ -7,6 +7,8 @@ const NotificationPanel = cc.Node.extend({
     _duration: 6,
 
     isScrolling: false,
+    // If a message is currently scrolling, its details will be stored here
+    _currentNotification: null,
 
     ctor: function (width, height) {
         cc.Node.prototype.ctor.call(this);
@@ -59,7 +61,10 @@ const NotificationPanel = cc.Node.extend({
         }
 
         this.isScrolling = true;
+        this._currentNotification = {message, callback, target};
+
         const szSize = this._szSize;
+        lbNotification.stopAllActions();
         lbNotification.setString(message);
         const contentSize = this._lbNotification.getContentSize();
         lbNotification.setPosition(szSize.width + contentSize.width * 0.5, szSize.height * 0.5);
@@ -67,11 +72,31 @@ const NotificationPanel = cc.Node.extend({
             cc.moveBy(this._duration, -(szSize.width + contentSize.width), 0),
             cc.callFunc(() => {
                 this.isScrolling = false;
+                this._currentNotification = null;
                 if (callback)
                     callback.call(target);
                 }
             )
         ));
+    },
+
+    /**
+     * When we move the notificationPanel to a new parent, its current scrolling animation stops.
+     * This is especially problematic when we are waiting for the animations callback!
+     * It happens even if we set cleanup=false and try to resume like this:
+     *
+     *     notificationPanel.removeFromParent(false);
+     *     newContainer.addChild(notificationPanel);
+     *     notificationPanel.lbNotification.resume();
+     *
+     * So after moving the panel to its new parent, you should call notificationPanel.resumeScrolling() to restart
+     * the currently playing message, and ensure the callback will eventually get called.
+     */
+    resumeScrolling: function () {
+        const n = this._currentNotification;
+        if (n) {
+            this.showNotification(n.message, n.callback, n.target);
+        }
     },
 
     styleForScreen: function (currentScreen) {
