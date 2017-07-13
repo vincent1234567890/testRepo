@@ -79,6 +79,18 @@ const SettingsView = (function () {
             const node = point.getCurrentTarget();
             console.log(node.setLang);
             label.setString(node.setLang);
+            const oldLang = ResourceLoader.getCurLang();
+
+            if (node.setLang === "中文") {
+                ResourceLoader.setLang('CN');
+            } else if (node.setLang === "English") {
+                ResourceLoader.setLang('EN');
+            }
+            const newLang = ResourceLoader.getCurLang();
+            if (oldLang !== newLang) {
+                cc.spriteFrameCache.removeSpriteFramesFromFile(oldLang);
+                cc.spriteFrameCache.addSpriteFrame(newLang);
+            }
             toggleLanguageDropdown();
         }
 

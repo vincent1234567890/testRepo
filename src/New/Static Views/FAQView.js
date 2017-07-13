@@ -141,8 +141,9 @@ const FAQView = (function () {
             bkg.setPosition(410, 325);
             _gameRules.addChild(bkg);
 
-            const title = new cc.Sprite(ReferenceName.FAQGameRulesButtonText);
-            title.setPosition(titleX, titleY);
+            const title = new cc.Sprite(ReferenceName.FAQGameRulesButtonTextV2);
+            title.setAnchorPoint(0,0.5);
+            title.setPosition(titleX - 50, titleY);
             _gameRules.addChild(title);
             const text = new cc.LabelTTF('“这是一款结合街机与老虎机元素的娱乐休闲游戏。\n\n' +
                 '游戏大厅设有1倍场、10倍场与100倍场；五款射击炮提供威力倍数1、2、3、5、10的炮弹；四十余种鱼类任捕赢取相对倍数奖金。' +
@@ -172,8 +173,9 @@ const FAQView = (function () {
             bkg.setPosition(410, 320);
             _fishInfo.addChild(bkg);
 
-            const title = new cc.Sprite(ReferenceName.FAQFishInfoButtonText);
-            title.setPosition(titleX, titleY);
+            const title = new cc.Sprite(ReferenceName.FAQFishInfoButtonTextV2);
+            title.setAnchorPoint(0,0.5);
+            title.setPosition(titleX - 50, titleY);
             _fishInfo.addChild(title);
 
             const display = new cc.Sprite(ReferenceName.FAQFishDisplay);
@@ -207,8 +209,9 @@ const FAQView = (function () {
         if(!_uiFaq) {
             _uiFaq = new cc.Node();
 
-            const title = new cc.Sprite(ReferenceName.FAQUIFaqButtonText);
-            title.setPosition(titleX, titleY);
+            const title = new cc.Sprite(ReferenceName.FAQUIFaqButtonTextV2);
+            title.setAnchorPoint(0,0.5);
+            title.setPosition(titleX - 50, titleY);
             _uiFaq.addChild(title);
 
             const display = new cc.Sprite(ReferenceName.FAQUiFaqDisplay);
@@ -226,8 +229,9 @@ const FAQView = (function () {
         if(!_cannonInfo) {
             _cannonInfo = new cc.Node();
 
-            const title = new cc.Sprite(ReferenceName.FAQCannonInfoButtonText);
-            title.setPosition(titleX, titleY);
+            const title = new cc.Sprite(ReferenceName.FAQCannonInfoButtonTextV2);
+            title.setAnchorPoint(0,0.5);
+            title.setPosition(titleX - 50, titleY);
             _cannonInfo.addChild(title);
 
             // const display = new cc.Sprite(ReferenceName.FAQCannonInfoDisplay);
@@ -278,8 +282,9 @@ const FAQView = (function () {
             freeGameBackground.addChild(freeGameTitle);
             freeGameTitle.setPosition(165,165);
 
-            const title = new cc.Sprite(ReferenceName.FAQJackpotInfoButtonText);
-            title.setPosition(titleX, titleY);
+            const title = new cc.Sprite(ReferenceName.FAQJackpotInfoButtonTextV2);
+            title.setAnchorPoint(0,0.5);
+            title.setPosition(titleX - 50, titleY);
             _jackpotInfo.addChild(title);
 
             const jackpotDisplay = new cc.Sprite(ReferenceName.FAQJackpotDisplay);

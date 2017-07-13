@@ -39,7 +39,7 @@ let JackpotPanel = cc.LayerColor.extend({ //gradient
         cc.spriteFrameCache.addSpriteFrames(res.JackpotMiniGamePlist);
         cc.spriteFrameCache.addSpriteFrames(res.JackpotMiniGame2Plist);
         cc.spriteFrameCache.addSpriteFrames(res.LobbyUI2Plist);
-        cc.spriteFrameCache.addSpriteFrames(res.ChinesePlist);
+        cc.spriteFrameCache.addSpriteFrames(ResourceLoader.getCurLang());
 
         //buzz effect
 
