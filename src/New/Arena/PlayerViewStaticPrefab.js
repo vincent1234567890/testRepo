@@ -20,11 +20,11 @@ const PlayerViewStaticPrefab = (function () {
      * @param {function} fishLockStatus get fish lock status.
      * @constructor
      */
-    const PlayerViewStaticPrefab = function(gameConfig, slot, isCurrentPlayer, changeSeatCallback, lockOnCallback, fishLockStatus){
+    const PlayerViewStaticPrefab = function (gameConfig, slot, isCurrentPlayer, changeSeatCallback, lockOnCallback, fishLockStatus) {
         this._parent = new cc.Node();
-        GameView.addView(this._parent,1);
-        this._parent.setPosition(300,300);
-        if(isCurrentPlayer)
+        GameView.addView(this._parent, 1);
+        this._parent.setPosition(300, 300);
+        if (isCurrentPlayer)
             ef.gameController.setCurrentSeat(slot);
 
         this._fishLockStatus = fishLockStatus;
@@ -35,29 +35,29 @@ const PlayerViewStaticPrefab = (function () {
         this._parent.addChild(base);
 
         this._coinIcon = new cc.Sprite(ReferenceName.CoinIcon);
-        this._coinIcon.setPosition(themeData.CoinIcon[0],themeData.CoinIcon[1]);
+        this._coinIcon.setPosition(themeData.CoinIcon[0], themeData.CoinIcon[1]);
         this._coinIcon.setVisible(false);
         base.addChild(this._coinIcon);
 
         this._playerIcon = new cc.Sprite(ReferenceName.PlayerIcon);
-        this._playerIcon.setPosition(themeData.PlayerIcon[0],themeData.PlayerIcon[1]);
+        this._playerIcon.setPosition(themeData.PlayerIcon[0], themeData.PlayerIcon[1]);
         this._playerIcon.setVisible(isCurrentPlayer);
         base.addChild(this._playerIcon);
 
         this._otherPlayerIcon = new cc.Sprite(ReferenceName.OtherPlayerIcon);
-        this._otherPlayerIcon.setPosition(themeData.PlayerIcon[0],themeData.PlayerIcon[1]);
+        this._otherPlayerIcon.setPosition(themeData.PlayerIcon[0], themeData.PlayerIcon[1]);
         this._otherPlayerIcon.setVisible(false);
         base.addChild(this._otherPlayerIcon);
 
         this._playerName = new cc.LabelTTF(' ', "Arial", 20);   //player name
-        this._playerName.setAnchorPoint(0,0.5);
-        base.addChild(this._playerName,1);
+        this._playerName.setAnchorPoint(0, 0.5);
+        base.addChild(this._playerName, 1);
 
         this._gold = new cc.LabelTTF('', "Arial", 20);   //player credit
-        this._gold.setAnchorPoint(0,0.5);
-        base.addChild(this._gold,1);
+        this._gold.setAnchorPoint(0, 0.5);
+        base.addChild(this._gold, 1);
 
-        function changeSlotCallback(){
+        function changeSlotCallback() {
             ef.gameController.setCurrentSeat(slot);
             changeSeatCallback(slot);
         }
@@ -78,45 +78,45 @@ const PlayerViewStaticPrefab = (function () {
         if (gameConfig.isUsingOldCannonPositions) {
             pos = gameConfig.oldCannonPositions[slot];
             markerPos = gameConfig.oldCannonPositions[0];
-        }else{
+        } else {
             pos = gameConfig.cannonPositions[slot];
             markerPos = gameConfig.cannonPositions[0]
         }
 
         //should we change this position on server?
-        this._parent.x = pos[0]+ themeData["Base"][0];
-        this._parent.y = pos[1]+ themeData["Base"][1];
+        this._parent.x = pos[0] + themeData["Base"][0];
+        this._parent.y = pos[1] + themeData["Base"][1];
         this._gold.x = themeData["Gold"][0][0];
         this._gold.y = themeData["Gold"][0][1];
         this._playerName.x = themeData["PlayerName"][0][0];
         this._playerName.y = themeData["PlayerName"][0][1];
 
-        let vector = new cc.p(0,150);
-        const LockOnCallback = (state) =>{   //state => bool, true: locked, false: release
-            lockOnCallback({state :state, callback: setCallback});
+        let vector = new cc.p(0, 150);
+        const LockOnCallback = (state) => {   //state => bool, true: locked, false: release
+            lockOnCallback({state: state, callback: setCallback});
         };
 
         const setCallback = (state) => {
             if (state) {
                 this._lockOnButton.switchToLocked();
-            }else{
+            } else {
                 this._lockOnButton.switchTargetRelease();  //only user click release.
             }
         };
 
         let direction;
         if (pos[1] > markerPos[1]) {
-            this._parent.y = pos[1]+ themeData["Base"][0];
-            if (pos[0] > markerPos[0]){
-                this._parent.x = pos[0]- themeData["Base"][1];
+            this._parent.y = pos[1] + themeData["Base"][0];
+            if (pos[0] > markerPos[0]) {
+                this._parent.x = pos[0] - themeData["Base"][1];
                 this._parent.setRotation(-90);
                 direction = PlayerSeatDirection.VERTICAL;
-            }else {
+            } else {
                 this._parent.setRotation(90);
-                this._parent.x = pos[0]+ themeData["Base"][1];
+                this._parent.x = pos[0] + themeData["Base"][1];
                 direction = PlayerSeatDirection.DW_VERTICAL;
             }
-        }else{
+        } else {
             direction = PlayerSeatDirection.HORIZONTAL;
         }
 
@@ -127,7 +127,7 @@ const PlayerViewStaticPrefab = (function () {
         this._lockOnButton.setVisible(isCurrentPlayer);
         this._coinStackManager = new CoinStackManager(this._parent);
 
-        if(isCurrentPlayer) {
+        if (isCurrentPlayer) {
             this._coinIcon.setVisible(true);
             this.setPlayer(isCurrentPlayer);
             this._playerSeatIndicator = new cc.Sprite(ReferenceName.PlayerSeatIndicator);
@@ -147,20 +147,20 @@ const PlayerViewStaticPrefab = (function () {
     proto.updatePlayerData = function (playerData, playerSlot) {
         let nameToShow = playerData.name;
         if (nameToShow.length > 10) {
-            nameToShow = nameToShow.substring(0,8) + "..";
+            nameToShow = nameToShow.substring(0, 8) + "..";
         }
         this._playerName.setString(nameToShow);
-        if ( playerData.scoreChange && playerData.scoreChange > 0){
+        if (playerData.scoreChange && playerData.scoreChange > 0) {
             this.animateCoinStack(playerData.scoreChange);
             playerData.scoreChange = 0;
         }
         let gold = playerData.score.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
         if (gold.length > 10) {
-            gold = gold.substring(0,9) + "..";
+            gold = gold.substring(0, 9) + "..";
         }
         this._gold.setString(gold);
         const activatePlayerIcons = this._isCurrentPlayer == null || playerData.slot == playerSlot;
-        if(activatePlayerIcons){
+        if (activatePlayerIcons) {
             this._coinIcon.setVisible(true);
             this.setPlayer(playerData.slot == playerSlot);
         }
@@ -188,12 +188,12 @@ const PlayerViewStaticPrefab = (function () {
         GameView.destroyView(this._parent);
     };
 
-    proto.animateCoinStack = function ( increase ) {
-        if (increase >= stackValueTriggerPointHigh){
-            this._coinStackManager.addStack(stackHeightHigh,increase);
-        }else if (increase >= stackValueTriggerPointMedium ){
+    proto.animateCoinStack = function (increase) {
+        if (increase >= stackValueTriggerPointHigh) {
+            this._coinStackManager.addStack(stackHeightHigh, increase);
+        } else if (increase >= stackValueTriggerPointMedium) {
             this._coinStackManager.addStack(stackHeightMed, increase);
-        }else{
+        } else {
             this._coinStackManager.addStack(stackHeightLow, increase);
         }
     };
@@ -204,7 +204,7 @@ const PlayerViewStaticPrefab = (function () {
         this._otherPlayerIcon.setVisible(!isCurrentPlayer);
         this._changeSlotButton.setVisible(false);
 
-        if (this._lockOnButton){
+        if (this._lockOnButton) {
             this._lockOnButton.setVisible(isCurrentPlayer);
             if (isCurrentPlayer) {
                 this._lockOnButton.setLockSprites(ef.gameController.getLockMode());
@@ -219,23 +219,24 @@ const PlayerViewStaticPrefab = (function () {
             GUIFunctions.getAnimation(ReferenceName.AwardEffect, 0.05), new cc.CallFunc(onAwardMedalEffectEnd));
         coin.runAction(awardMedalSequence);
         this._parent.addChild(parentNode);
-        const parent = this._parent, strAmount = (amount * this._multiplier).toLocaleString('en-US', {maximumFractionDigits: 2});
+        const parent = this._parent,
+            strAmount = (amount * this._multiplier).toLocaleString('en-US', {maximumFractionDigits: 2});
 
         const label = new cc.LabelBMFont(strAmount, res.InGameLightGoldFontFile);
-        label.setScale(0.7 + 0.3/amount.toString().length);
+        label.setScale(0.7 + 0.3 / amount.toString().length);
         parentNode.addChild(coin);
-        parentNode.addChild(label,1);
+        parentNode.addChild(label, 1);
 
-        label.setPosition(0,215);
-        coin.setPosition(0,200);
+        label.setPosition(0, 215);
+        coin.setPosition(0, 200);
 
         console.log("#" + type + "NameChinese");
 
         const fishName = new cc.Sprite("#" + type + "NameChinese.png");
         parentNode.addChild(fishName);
-        fishName.setPosition(0,158);
+        fishName.setPosition(0, 158);
 
-        function onAwardMedalEffectEnd(){
+        function onAwardMedalEffectEnd() {
             parent.removeChild(parentNode);
         }
     };
@@ -259,7 +260,7 @@ let LockFishButton = cc.Sprite.extend({
     _lockCallback: null,
     _touchEventListener: null,
 
-    ctor: function(direction, lockCallback) {
+    ctor: function (direction, lockCallback) {
         let sfLockBase = cc.spriteFrameCache.getSpriteFrame("LOBase.png");
         if (!sfLockBase) {
             cc.spriteFrameCache.addSpriteFrames(res.GameUIPlist);
@@ -279,7 +280,7 @@ let LockFishButton = cc.Sprite.extend({
         this.addChild(spCircle, 3);
 
         const spIcon = this._spIcon = new cc.Sprite("#LOIconWhite.png");
-        spIcon.setPosition(26,18);
+        spIcon.setPosition(26, 18);
         spCircle.addChild(spIcon);
         if (this._direction === PlayerSeatDirection.HORIZONTAL) {
             spLabel = this._spLabel = new cc.Sprite("#LOLockWhiteH.png");
@@ -297,13 +298,13 @@ let LockFishButton = cc.Sprite.extend({
         this._touchEventListener = cc.EventListener.create({
             event: cc.EventListener.TOUCH_ONE_BY_ONE,
             swallowTouches: true,
-            onTouchBegan: function(touch, event){
+            onTouchBegan: function (touch, event) {
                 const target = event.getCurrentTarget();
                 return (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
                     target.convertToNodeSpace(touch.getLocation())));
             },
 
-            onTouchEnded: function(touch, event){
+            onTouchEnded: function (touch, event) {
                 const target = event.getCurrentTarget();
                 if (cc.rectContainsPoint(cc.rect(0, 0, target._contentSize.width, target._contentSize.height),
                         target.convertToNodeSpace(touch.getLocation()))) {
@@ -313,17 +314,18 @@ let LockFishButton = cc.Sprite.extend({
         });
     },
 
-    switchStatus: function() {
+    switchStatus: function () {
         // @todo Changing state after a timeout (when these animations complete) can be complicated:
         // - What if the player changes seat before the animation completes?  Will we be setting the correct view?
         // - After the timeout, should we set the _current_player_ view, instead of this view?  (This view might be for the old seat.)
         // - What if we receive a server message "Target lock off" before the animation completes?  Will we be setting the wrong state at the end of the animation?
         // Increase duration to test these edge cases.
 
-        const status = this._lockStatus, contentSize = this.getContentSize(), duration = 0.3, lockCallback = this._lockCallback;
+        const status = this._lockStatus, contentSize = this.getContentSize(), duration = 0.3,
+            lockCallback = this._lockCallback;
         this._lockStatus = LockFishStatus.SWITCHING;
         if (status === LockFishStatus.RELEASE) {
-            if(lockCallback)
+            if (lockCallback)
                 lockCallback(true);
             this._touchEventListener.setEnabled(false);
             this._spCircle.runAction(cc.moveTo(duration, contentSize.width - 22, contentSize.height * 0.5));
@@ -335,12 +337,12 @@ let LockFishButton = cc.Sprite.extend({
                 this._spLabel.setSpriteFrame("LOLockGreenV.png");
             }
 
-            this.runAction(cc.sequence(cc.delayTime(duration), cc.callFunc(function(){
+            this.runAction(cc.sequence(cc.delayTime(duration), cc.callFunc(function () {
                 this._touchEventListener.setEnabled(true);
                 this.setLockStatusToLock();
             }, this)));
         } else if (status === LockFishStatus.LOCK || status === LockFishStatus.LOCKED) {
-            if(lockCallback)
+            if (lockCallback)
                 lockCallback(false);
             this._touchEventListener.setEnabled(false);
             this._spCircle.runAction(cc.moveTo(duration, 22, contentSize.height * 0.5));
@@ -352,15 +354,15 @@ let LockFishButton = cc.Sprite.extend({
                 this._spLabel.setSpriteFrame("LOReleaseGreenV.png");
             }
 
-            this.runAction(cc.sequence(cc.delayTime(duration), cc.callFunc(function(){
+            this.runAction(cc.sequence(cc.delayTime(duration), cc.callFunc(function () {
                 this._touchEventListener.setEnabled(true);
                 this.setLockStatusToRelease();
             }, this)));
         }
     },
 
-    switchToRelease: function(){
-        if(this._lockStatus === LockFishStatus.LOCK || this._lockStatus === LockFishStatus.LOCKED){
+    switchToRelease: function () {
+        if (this._lockStatus === LockFishStatus.LOCK || this._lockStatus === LockFishStatus.LOCKED) {
             this._lockStatus = LockFishStatus.SWITCHING;
             const szContent = this.getContentSize(), duration = 0.3;
             this._spIcon.setSpriteFrame("LOIconWhite.png");
@@ -370,14 +372,14 @@ let LockFishButton = cc.Sprite.extend({
             } else {
                 this._spLabel.setSpriteFrame("LOReleaseGreenV.png");
             }
-            this.runAction(cc.sequence(cc.delayTime(duration), cc.callFunc(function(){
+            this.runAction(cc.sequence(cc.delayTime(duration), cc.callFunc(function () {
                 this.setLockStatusToRelease();
             }, this)));
         }
     },
 
-    switchTargetRelease: function(){
-        if(this._lockStatus === LockFishStatus.LOCKED){
+    switchTargetRelease: function () {
+        if (this._lockStatus === LockFishStatus.LOCKED) {
             this.setLockStatusToLock();
         }
     },
@@ -430,26 +432,26 @@ let LockFishButton = cc.Sprite.extend({
         }
     },
 
-    getDirection: function(){
+    getDirection: function () {
         return this._direction;
     },
 
-    setDirection: function(direction){
+    setDirection: function (direction) {
         //todo
-        if(this._direction !== direction){
+        if (this._direction !== direction) {
             this._direction = direction;
 
             if (this._direction === PlayerSeatDirection.HORIZONTAL) {
                 //this.setRotation(0);
                 //this._spLabel.setRotation(0);
-            }else{
+            } else {
                 //this.setRotation(90);
                 //this._spLabel.setRotation(-90);
             }
         }
     },
 
-    onEnter: function(){
+    onEnter: function () {
         cc.Sprite.prototype.onEnter.call(this);
         if (this._touchEventListener && !this._touchEventListener._isRegistered())
             cc.eventManager.addListener(this._touchEventListener, this);
