@@ -17,6 +17,7 @@ const ReferenceName = {
     ChangeSeatButton : "ChangeSitUP.png",
     ChangeSeatButtonDown : "ChangeSitDW.png",
     PlayerSeatIndicator : "#YouAreHere.png",
+    PlayerSeatIndicatorText : "#YouAreHereText.png",
     LockOnButtonSide : "LockOnSide_",
     LockOnButtonBottom : "LockOnBtm_",
     LockOnButtonBackground : "#LOBase.png",

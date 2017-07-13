@@ -130,10 +130,14 @@ const PlayerViewStaticPrefab = (function () {
         if(isCurrentPlayer) {
             this._coinIcon.setVisible(true);
             this.setPlayer(isCurrentPlayer);
-            this._playerSeatIndicator =  new cc.Sprite(ReferenceName.PlayerSeatIndicator);
-            this._parent.addChild(this._playerSeatIndicator,50);
-            this._playerSeatIndicator.setPosition(0,-50);
-            this._playerSeatIndicator.runAction(new cc.Sequence(new cc.MoveTo(0.5,vector), new cc.Blink(1,3), new cc.MoveTo(0.5,cc.pMult(vector,-1))));
+            this._playerSeatIndicator = new cc.Sprite(ReferenceName.PlayerSeatIndicator);
+            const youareheretext = new cc.Sprite(ReferenceName.PlayerSeatIndicatorText);
+            const bgContent = this._playerSeatIndicator.getContentSize();
+            youareheretext.setPosition(bgContent.width / 2, bgContent.height / 2);
+            this._playerSeatIndicator.addChild(youareheretext);
+            this._parent.addChild(this._playerSeatIndicator, 50);
+            this._playerSeatIndicator.setPosition(0, -50);
+            this._playerSeatIndicator.runAction(new cc.Sequence(new cc.MoveTo(0.5, vector), new cc.Blink(1, 3), new cc.MoveTo(0.5, cc.pMult(vector, -1))));
             this._playerSeatIndicator.runAction(new cc.Sequence(new cc.DelayTime(1.5), new cc.FadeOut(0.5)));
         }
     };
