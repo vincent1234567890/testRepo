@@ -4,21 +4,6 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>10XChinese.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{75,27}</string>
-                <key>spriteSourceSize</key>
-                <string>{75,27}</string>
-                <key>textureRect</key>
-                <string>{{2430,1},{75,27}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
             <key>10XTop_00000.png</key>
             <dict>
                 <key>aliases</key>
@@ -933,7 +918,7 @@
             <key>size</key>
             <string>{2629,2629}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:988e90943c36b373d8f13ef833085e7d:d5a57fdcf59b7bb32248d529de9f8c82:bfe81efc994fa928f8a8842517ef7429$</string>
+            <string>$TexturePacker:SmartUpdate:2d4ea15a3fed68ab847e3a6b763183e6:9e13773920284f6432a8bd18bcd086e5:bfe81efc994fa928f8a8842517ef7429$</string>
             <key>textureFileName</key>
             <string>10X.png</string>
         </dict>

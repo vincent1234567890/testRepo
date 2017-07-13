@@ -15,7 +15,7 @@
                 <key>spriteSourceSize</key>
                 <string>{305,88}</string>
                 <key>textureRect</key>
-                <string>{{1,1080},{305,88}}</string>
+                <string>{{1,950},{305,88}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -30,24 +30,39 @@
                 <key>spriteSourceSize</key>
                 <string>{305,88}</string>
                 <key>textureRect</key>
-                <string>{{1,1170},{305,88}}</string>
+                <string>{{308,950},{305,88}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Cannon-screenshot.png</key>
+            <key>Cannon-Info-Cannon.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,-13}</string>
+                <string>{-3,5}</string>
                 <key>spriteSize</key>
-                <string>{605,375}</string>
+                <string>{453,139}</string>
                 <key>spriteSourceSize</key>
-                <string>{621,401}</string>
+                <string>{501,201}</string>
                 <key>textureRect</key>
-                <string>{{572,691},{605,375}}</string>
+                <string>{{767,458},{453,139}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
+            </dict>
+            <key>Cannon-Info-DMG.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-23,-3}</string>
+                <key>spriteSize</key>
+                <string>{455,140}</string>
+                <key>spriteSourceSize</key>
+                <string>{501,150}</string>
+                <key>textureRect</key>
+                <string>{{669,1},{455,140}}</string>
+                <key>textureRotated</key>
+                <true/>
             </dict>
             <key>TextBG3.png</key>
             <dict>
@@ -75,7 +90,7 @@
                 <key>spriteSourceSize</key>
                 <string>{414,186}</string>
                 <key>textureRect</key>
-                <string>{{1058,1},{414,186}}</string>
+                <string>{{579,502},{414,186}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -90,7 +105,7 @@
                 <key>spriteSourceSize</key>
                 <string>{646,121}</string>
                 <key>textureRect</key>
-                <string>{{449,502},{646,121}}</string>
+                <string>{{908,334},{646,121}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -105,9 +120,9 @@
                 <key>spriteSourceSize</key>
                 <string>{331,186}</string>
                 <key>textureRect</key>
-                <string>{{572,1068},{331,186}}</string>
+                <string>{{811,1},{331,186}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>fish.png</key>
             <dict>
@@ -121,36 +136,6 @@
                 <string>{640,528}</string>
                 <key>textureRect</key>
                 <string>{{1,502},{576,446}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>interface-screenshot.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{688,387}</string>
-                <key>spriteSourceSize</key>
-                <string>{688,387}</string>
-                <key>textureRect</key>
-                <string>{{669,1},{688,387}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>jackpot-screenshot.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{331,186}</string>
-                <key>spriteSourceSize</key>
-                <string>{331,186}</string>
-                <key>textureRect</key>
-                <string>{{905,1068},{331,186}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -166,9 +151,9 @@
             <key>realTextureFileName</key>
             <string>MenuFAQ.png</string>
             <key>size</key>
-            <string>{1259,1259}</string>
+            <string>{1039,1039}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:56b69790b4a6ab791c8a124f547e0fa4:c98b02017da307607deb359da3517b6c:fbc90d928ff50afae38bef5c50bb294f$</string>
+            <string>$TexturePacker:SmartUpdate:5ea0e2779794bd0a47cb29d732479213:405470d4e33ab838c2e533db9a0411cc:fbc90d928ff50afae38bef5c50bb294f$</string>
             <key>textureFileName</key>
             <string>MenuFAQ.png</string>
         </dict>
