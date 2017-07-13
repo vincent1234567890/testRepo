@@ -225,7 +225,7 @@
                 <key>spriteSourceSize</key>
                 <string>{33,26}</string>
                 <key>textureRect</key>
-                <string>{{360,139},{33,26}}</string>
+                <string>{{348,103},{33,26}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -240,7 +240,7 @@
                 <key>spriteSourceSize</key>
                 <string>{33,26}</string>
                 <key>textureRect</key>
-                <string>{{348,62},{33,26}}</string>
+                <string>{{376,103},{33,26}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -258,6 +258,81 @@
                 <string>{{381,709},{54,31}}</string>
                 <key>textureRotated</key>
                 <true/>
+            </dict>
+            <key>Signal1.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{39,27}</string>
+                <key>spriteSourceSize</key>
+                <string>{39,27}</string>
+                <key>textureRect</key>
+                <string>{{360,139},{39,27}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>Signal2.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{39,27}</string>
+                <key>spriteSourceSize</key>
+                <string>{39,27}</string>
+                <key>textureRect</key>
+                <string>{{348,62},{39,27}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>Signal3.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{39,27}</string>
+                <key>spriteSourceSize</key>
+                <string>{39,27}</string>
+                <key>textureRect</key>
+                <string>{{377,62},{39,27}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>Signal4.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{39,27}</string>
+                <key>spriteSourceSize</key>
+                <string>{39,27}</string>
+                <key>textureRect</key>
+                <string>{{414,62},{39,27}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>Signal5.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{39,27}</string>
+                <key>spriteSourceSize</key>
+                <string>{39,27}</string>
+                <key>textureRect</key>
+                <string>{{455,62},{39,27}}</string>
+                <key>textureRotated</key>
+                <false/>
             </dict>
             <key>YouAreHere.png</key>
             <dict>
@@ -318,7 +393,7 @@
             <key>size</key>
             <string>{770,770}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:f5c8d823474f9ba9b855af9721188946:13f837d2d6721cd0c2e161359932a07e:2531ce2a050ca5e2ac51e04161e77adb$</string>
+            <string>$TexturePacker:SmartUpdate:2ca1c89c284d7b27a49c9bbd36582ce1:f73bee1950e3dd0dc557aa146e5637c0:2531ce2a050ca5e2ac51e04161e77adb$</string>
             <key>textureFileName</key>
             <string>GameUI.png</string>
         </dict>

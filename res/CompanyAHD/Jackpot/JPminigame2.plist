@@ -34,66 +34,6 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>JPWin1.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-8,0}</string>
-                <key>spriteSize</key>
-                <string>{81,97}</string>
-                <key>spriteSourceSize</key>
-                <string>{97,97}</string>
-                <key>textureRect</key>
-                <string>{{96,977},{81,97}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>JPWin2.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-2,0}</string>
-                <key>spriteSize</key>
-                <string>{93,97}</string>
-                <key>spriteSourceSize</key>
-                <string>{97,97}</string>
-                <key>textureRect</key>
-                <string>{{1,977},{93,97}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>JPWin3.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-2,0}</string>
-                <key>spriteSize</key>
-                <string>{93,97}</string>
-                <key>spriteSourceSize</key>
-                <string>{97,97}</string>
-                <key>textureRect</key>
-                <string>{{1,1076},{93,97}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>JPWin4.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-2,0}</string>
-                <key>spriteSize</key>
-                <string>{93,97}</string>
-                <key>spriteSourceSize</key>
-                <string>{97,97}</string>
-                <key>textureRect</key>
-                <string>{{1,1175},{93,97}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
             <key>NotificationBackground2.png</key>
             <dict>
                 <key>aliases</key>
@@ -123,7 +63,7 @@
             <key>size</key>
             <string>{1293,1293}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:4c55962fe5566ee650729b507f193ad2:f5d61f1d9158a568b2167c7a0010e17a:4d6da119fe3dd58a2c6aa206dee01ed5$</string>
+            <string>$TexturePacker:SmartUpdate:c71f13270f93ce31d158d2c67379f0df:f805402d15cd4eb726ee0dfa3ebe865c:4d6da119fe3dd58a2c6aa206dee01ed5$</string>
             <key>textureFileName</key>
             <string>JPminigame2.png</string>
         </dict>

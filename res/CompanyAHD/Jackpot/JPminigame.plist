@@ -244,66 +244,6 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>PL1.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{6,15}</string>
-                <key>spriteSourceSize</key>
-                <string>{6,19}</string>
-                <key>textureRect</key>
-                <string>{{115,1299},{6,15}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>PL2.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{9,16}</string>
-                <key>spriteSourceSize</key>
-                <string>{9,18}</string>
-                <key>textureRect</key>
-                <string>{{1400,1},{9,16}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>PL3.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{9,16}</string>
-                <key>spriteSourceSize</key>
-                <string>{9,18}</string>
-                <key>textureRect</key>
-                <string>{{1400,19},{9,16}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>PL4.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{11,17}</string>
-                <key>spriteSourceSize</key>
-                <string>{11,19}</string>
-                <key>textureRect</key>
-                <string>{{1063,1258},{11,17}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
             <key>PrizeListFrame.png</key>
             <dict>
                 <key>aliases</key>
@@ -1008,7 +948,7 @@
             <key>size</key>
             <string>{1410,1410}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:80e8812094b45cd866271476f4fcb06c:47dbcb36130b4dd6e776236cffa796bf:0a85bd5f4af13766f78642409eed76d8$</string>
+            <string>$TexturePacker:SmartUpdate:0feb56b4867de6935db77807e51df4e3:e023285224d60dacf9e2a51910f697e1:0a85bd5f4af13766f78642409eed76d8$</string>
             <key>textureFileName</key>
             <string>JPminigame.png</string>
         </dict>
