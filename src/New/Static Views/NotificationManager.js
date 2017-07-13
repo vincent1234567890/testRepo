@@ -9,14 +9,14 @@ const NotificationManager = (function () {
         const pnNotification = new NotificationPanel(440, 32);
         GameManager.setGlobalNotificationPanel(pnNotification);
 
-        // Testing
-        const addOneNotification = () => {
-            queueNewNotification({
-                priority: 1,
-                message: "TEST NOTIFICATION test notification TEST NOTIFICATION",
-            });
-            setTimeout(addOneNotification, 5000 + 10000 * Math.random());
-        };
+        // For testing, sends random notifications to the panel:
+        //const addOneNotification = () => {
+        //    queueNewNotification({
+        //        priority: 1,
+        //        message: "TEST NOTIFICATION at " + new Date(),
+        //    });
+        //    setTimeout(addOneNotification, 5000 + 10000 * Math.random());
+        //};
         //setTimeout(addOneNotification, 5000);
 
         return pnNotification;
@@ -35,10 +35,7 @@ const NotificationManager = (function () {
 
         const notificationPanel = getNotificationPanel();
 
-        const oldContainer = notificationPanel.getParent();
-        if (oldContainer) {
-            oldContainer.removeChild(notificationPanel);
-        }
+        notificationPanel.removeFromParent(false);
 
         const newContainer = jackpotPanel.getParent();
         notificationPanel.setPosition(jackpotPanel.getPositionX() - notificationPanel._szSize.width / 2, jackpotPanel.getPositionY() - 120);
@@ -46,13 +43,13 @@ const NotificationManager = (function () {
 
         notificationPanel.styleForScreen(currentScreen);
 
-        //notificationPanel.showNotification("Hello, this is an Elsa's message for testing notification................");
+        notificationPanel.resumeScrolling();
     }
 
     function queueNewNotification (notificationObj) {
-        queue.push(notificationObj);
         // @todo Check priority; maybe jump queue
-        // @todo Check queue length; ignore if too large
+        // @todo Check queue length; ignore new notification if queue is too large
+        queue.push(notificationObj);
 
         const notificationPanel = getNotificationPanel();
         if (!notificationPanel.isScrolling) {
