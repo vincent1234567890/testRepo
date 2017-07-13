@@ -1,9 +1,9 @@
 /*
  Current structure :
  GameManager    -> GameView
-                -> x PlayerViewManager  -> CannonManager -> CannonView
-                -> PlayerView -> PlayerViewStaticPrefab
-                etc
+ -> x PlayerViewManager  -> CannonManager -> CannonView
+ -> PlayerView -> PlayerViewStaticPrefab
+ etc
  */
 
 const GameManager = function () {
@@ -54,7 +54,7 @@ const GameManager = function () {
         // _lobbyManager.resetView();
         GameView.initialise(parent, _gameConfig, fishGameArena, onFishLockButtonPress, getFishLockStatus);
 
-        _fishManager = new FishViewManager(fishGameArena, _gameConfig, GameView.caughtFishAnimationEnd , getFishLockStatus, onFishLockSelected);
+        _fishManager = new FishViewManager(fishGameArena, _gameConfig, GameView.caughtFishAnimationEnd, getFishLockStatus, onFishLockSelected);
         new BackToLobbyButton(onLeaveArena);
         _bulletManager = new BulletManager(fishGameArena);
         _netManager = new NetManager();
@@ -67,13 +67,13 @@ const GameManager = function () {
         ef.gameController.enterGame();
     };
 
-    const enterSeatSelectionScene = function(parent){
+    const enterSeatSelectionScene = function (parent) {
         GameView.goToSeatSelection(parent);
 
         _floatingMenuManager.reattach();
         //_jackpotManager.reattach();
 
-        if(_floatingMenuManager){
+        if (_floatingMenuManager) {
             _floatingMenuManager.hideAll();
         }
         BlockingManager.destroyView();
@@ -84,14 +84,14 @@ const GameManager = function () {
         return _bulletManager.createBullet(gunId, bulletId);
     };
 
-    const explodeBullet = function(bulletId){
+    const explodeBullet = function (bulletId) {
         const bulletData = _bulletManager.explodeBullet(bulletId);
         if (bulletData) {
-            _netManager.explodeAt(_gameConfig,bulletData);
+            _netManager.explodeAt(_gameConfig, bulletData);
         }
     };
 
-    const removeBullet = function(bulletId){
+    const removeBullet = function (bulletId) {
         _bulletManager.removeBullet(bulletId);
     };
 
@@ -107,7 +107,7 @@ const GameManager = function () {
         // console.log(JSON.stringify(config));
         _gameConfig = config;
         _playerId = playerId;
-        GameView.setMyPlayerData(playerId,playerSlot);
+        GameView.setMyPlayerData(playerId, playerSlot);
     };
 
     const updateMultiplayerState = function (playerData, oldSlot) {
@@ -122,7 +122,7 @@ const GameManager = function () {
         return _fishManager.addFish(fishId, fishType);
     };
 
-    const caughtFish = function (playerSlot,fishId){
+    const caughtFish = function (playerSlot, fishId) {
         // console.log("caught fish :" ,fishId);
         _fishManager.caughtFish(fishId, playerSlot);
 
@@ -155,7 +155,7 @@ const GameManager = function () {
 
         ClientServerConnect.requestMyData().then(
             stats => {
-                console.log("requestMyData",stats);
+                console.log("requestMyData", stats);
                 _playerData = stats.data;
                 return ClientServerConnect.getGameSummaries(7);
             }
@@ -170,7 +170,7 @@ const GameManager = function () {
         ).catch(console.error);
     }
 
-    function setupPostLoginListeners () {
+    function setupPostLoginListeners() {
         // These are things we should do immediately after logging in:
         // Listen for a creditChangeEvent (e.g. caused by an external /recharge request, gift from grandma, etc.)
         ClientServerConnect.listenForEvent('creditChangeEvent', data => {
@@ -180,7 +180,7 @@ const GameManager = function () {
                     _lobbyManager.updateView(_playerData);
                 }
                 let curPlayer = ef.gameController.getCurrentPlayer();
-                curPlayer.score=_playerData.playerState.score;
+                curPlayer.score = _playerData.playerState.score;
                 ef.gameController.setCurrentPlayer(curPlayer);
                 if (_playerInfoWidget) {
                     _playerInfoWidget.updatePlayerCredit(_playerData.playerState.score);
@@ -214,7 +214,7 @@ const GameManager = function () {
 
     function createLobby() {
         if (!_lobbyManager) {
-            cc.spriteFrameCache.addSpriteFrames(res.ChinesePlist);
+            cc.spriteFrameCache.addSpriteFrames(ResourceLoader.getCurLang());
             _lobbyManager = new LobbyManager(_playerData, onGameSelected);
             _lobbyWaterCausticsManager = new LobbyWaterCaustics();   //todo need delete
             _floatingMenuManager = new FloatingMenu(_playerData, requestConsumptionLogHandle);
@@ -274,12 +274,12 @@ const GameManager = function () {
     //     ClientServerConnect.joinGame(_currentScene.gameName).catch(console.error);
     // }
 
-    function destroyArena(){
+    function destroyArena() {
         resetArena();
         GameView.destroyArena();
     }
 
-    function resetArena(){
+    function resetArena() {
         if (_fishManager) {
             _fishManager.destroyView();
         }
@@ -289,7 +289,7 @@ const GameManager = function () {
         if (_scoreboardManager) {
             _scoreboardManager.destroyView();
         }
-        if(_floatingMenuManager){
+        if (_floatingMenuManager) {
             _floatingMenuManager.hideAll();
         }
         BlockingManager.destroyView();
@@ -298,7 +298,7 @@ const GameManager = function () {
         _fishLockOnCallback = undefined;
     }
 
-    function onGameSelected(chosenScene){
+    function onGameSelected(chosenScene) {
         _currentScene = chosenScene;
         _gameSelectedCallback(chosenScene.gameName, _playerData);
     }
@@ -314,7 +314,7 @@ const GameManager = function () {
         );
     }
 
-    function roomSelected (joinPrefs) {
+    function roomSelected(joinPrefs) {
         //console.log("roomSelected:", joinPrefs);
         WaitingPanel.showPanel();
         let prom = null;
@@ -331,11 +331,11 @@ const GameManager = function () {
         });
     }
 
-    function isCurrentPlayer (playerId) {
+    function isCurrentPlayer(playerId) {
         return playerId === _playerId;
     }
 
-    function resetLobby (){
+    function resetLobby() {
         _jackpotManager.reattach();
         _floatingMenuManager.reattach();
         _lobbyManager.resetView();
@@ -345,28 +345,28 @@ const GameManager = function () {
         _jackpotManager.updateJackpot(value);
     }
 
-    function getFishLockStatus(){
+    function getFishLockStatus() {
         return _isFishLockOn;
     }
 
-    function onFishLockButtonPress(state){
+    function onFishLockButtonPress(state) {
         _isFishLockOn = state.state;
         _fishLockOnCallback = state.callback;
-        if (!_isFishLockOn){
+        if (!_isFishLockOn) {
             //release the locked fish.
             ClientServerConnect.unsetFishLockRequest();
             unsetLockForFishId(_currentFishLockOnId);  //unlock on client directly.
         }
     }
 
-    function onFishLockSelected (fishId){
+    function onFishLockSelected(fishId) {
         _currentFishLockOnId = fishId;
         ClientServerConnect.setFishLockRequest(fishId);
         _fishLockOnCallback(true);
     }
 
     function unsetLockForFishId(fishId) {
-        if (fishId === _currentFishLockOnId){
+        if (fishId === _currentFishLockOnId) {
             //_isFishLockOn = false;
             _fishLockOnCallback(false);
             _fishManager.unsetLock();
@@ -384,7 +384,7 @@ const GameManager = function () {
         );
     }
 
-    function getPlayerData(){
+    function getPlayerData() {
         return _playerData;
     }
 
@@ -402,10 +402,10 @@ const GameManager = function () {
 
         //Lobby stuff
         goToLobby: goToLobby,
-        resetLobby : resetLobby,
+        resetLobby: resetLobby,
 
         //Menu stuff
-        updateJackpotPool : updateJackpotPool,
+        updateJackpotPool: updateJackpotPool,
         // setGameLogData : setGameLogData,
         // setConsumptionLogData : setConsumptionLogData,
 
@@ -421,15 +421,15 @@ const GameManager = function () {
         caughtFish: caughtFish,
         updateEverything: updateEverything,
         // showPostGameStats: showPostGameStats,
-        unsetLockForFishId : unsetLockForFishId,
+        unsetLockForFishId: unsetLockForFishId,
         getPlayerData: getPlayerData,
         setChannelType: channelType => _channelType = channelType,
         getChannelType: () => _channelType,
-        enterSeatSelectionScene : enterSeatSelectionScene,
-        seatSelected : seatSelected,
+        enterSeatSelectionScene: enterSeatSelectionScene,
+        seatSelected: seatSelected,
         roomSelected: roomSelected,
 
-        exitToLobby : exitToLobby,
+        exitToLobby: exitToLobby,
 
         //Misc
         isCurrentPlayer: isCurrentPlayer,
@@ -439,7 +439,7 @@ const GameManager = function () {
         getJackpotManager: () => _jackpotManager,
 
         //current only used to reset
-        destroyArena : destroyArena,
+        destroyArena: destroyArena,
 
         //debug
         debug: debug,

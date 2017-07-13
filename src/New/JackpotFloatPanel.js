@@ -9,7 +9,7 @@ let JackpotFloatPanel = cc.Node.extend({
 
         cc.spriteFrameCache.addSpriteFrames(res.LobbyJackpotPlist);
         cc.spriteFrameCache.addSpriteFrames(res.WaterCausticAnimation);
-        cc.spriteFrameCache.addSpriteFrames(res.ChinesePlist);
+        cc.spriteFrameCache.addSpriteFrames(ResourceLoader.getCurLang());
 
         //shadow
         let spShadow = new cc.Sprite(ReferenceName.JackpotShadow);
@@ -128,7 +128,7 @@ let JackpotFloatPanel = cc.Node.extend({
     },
 
     onEnter: function(){
-       cc.Node.prototype.onEnter.call(this);
+        cc.Node.prototype.onEnter.call(this);
         if (this._barFrameEventListener && !this._barFrameEventListener._isRegistered())
             cc.eventManager.addListener(this._barFrameEventListener, this._spBarFrame);
         //reload the value.  should update the data by event.

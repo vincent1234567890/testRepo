@@ -36,18 +36,20 @@ var res = {
     SeatSelectionPlist: "Lobby/SitSelection.plist",
 
     //Fonts
-    WhiteFontFile : "Fonts/BWtext.fnt",
-    WhiteFontPng : "Fonts/BWtext.png",
-    GoldCoinFontFile : "Fonts/GoldCoinText-export.fnt",
-    GoldCoinFontPng : "Fonts/GoldCoinText-export.png",
-    InGameLightGoldFontFile : "Fonts/LightGoldText.fnt",
-    InGameLightGoldFontPng : "Fonts/LightGoldText.png",
+    WhiteFontFile: "Fonts/BWtext.fnt",
+    WhiteFontPng: "Fonts/BWtext.png",
+    GoldCoinFontFile: "Fonts/GoldCoinText-export.fnt",
+    GoldCoinFontPng: "Fonts/GoldCoinText-export.png",
+    InGameLightGoldFontFile: "Fonts/LightGoldText.fnt",
+    InGameLightGoldFontPng: "Fonts/LightGoldText.png",
 
-    WaterCausticAnimation : "Lobby/Caustic.plist",
+    WaterCausticAnimation: "Lobby/Caustic.plist",
 
     //language
     ChinesePng: "Language/Chinese.png",
     ChinesePlist: "Language/Chinese.plist",
+    EnglishPng: "Language/English.png",
+    EnglishPlist: "Language/English.plist",
 
     //GameBackgrounds
     GameBackground0: "Game BG/Game BG 1.jpg",
@@ -57,27 +59,27 @@ var res = {
     GameBackground4: "Game BG/Game BG 5.jpg",
 
     //FreeRound
-    FreeRoundTitle : "Game/FreeRoundTitle.png",
+    FreeRoundTitle: "Game/FreeRoundTitle.png",
 
-    GunCockSound : "Sound/Sound/ChangeCannonFX.mp3",
-    GunShotSound : "Sound/Sound/FirringFX.mp3",
+    GunCockSound: "Sound/Sound/ChangeCannonFX.mp3",
+    GunShotSound: "Sound/Sound/FirringFX.mp3",
 
-    MenuButtonHoverSound : "Sound/Sound/cursor7.mp3",
-    MenuButtonPressSound : "Sound/Sound/UIButton.mp3",
-    JackpotViewPressedSound : "Sound/Sound/JP.mp3",
-    JackpotInfoPanelDismissSound : "Sound/Sound/JPPopUP.mp3",
-    ChangeSeatButtonPressedSound : "Sound/Sound/ChangeSit.mp3",
+    MenuButtonHoverSound: "Sound/Sound/cursor7.mp3",
+    MenuButtonPressSound: "Sound/Sound/UIButton.mp3",
+    JackpotViewPressedSound: "Sound/Sound/JP.mp3",
+    JackpotInfoPanelDismissSound: "Sound/Sound/JPPopUP.mp3",
+    ChangeSeatButtonPressedSound: "Sound/Sound/ChangeSit.mp3",
 
-    FishCaptureEffectExplosionSound : "Sound/Sound/CoinExplosionFX1.mp3",
-    BigFishCaptureEffectExplosionSound : "Sound/Sound/CoinExplosionFX2.mp3",
-    FishCaptureEffectCoinSound : "Sound/Sound/CoinFX.mp3",
+    FishCaptureEffectExplosionSound: "Sound/Sound/CoinExplosionFX1.mp3",
+    BigFishCaptureEffectExplosionSound: "Sound/Sound/CoinExplosionFX2.mp3",
+    FishCaptureEffectCoinSound: "Sound/Sound/CoinFX.mp3",
 
-    JackpotTriggeredSound : "Sound/Sound/JPOperning.mp3",
-    JackpotBoxOpeningSound : "Sound/Sound/JPOpenChest.mp3",
-    JackpotMedalBlingSound : "Sound/Sound/JPBlink.mp3",
-    JackpotEndSound : "Sound/Sound/JPwinning.mp3",
+    JackpotTriggeredSound: "Sound/Sound/JPOperning.mp3",
+    JackpotBoxOpeningSound: "Sound/Sound/JPOpenChest.mp3",
+    JackpotMedalBlingSound: "Sound/Sound/JPBlink.mp3",
+    JackpotEndSound: "Sound/Sound/JPwinning.mp3",
 
-    FreeGameSound : "Sound/Sound/BonusGameFX.mp3",
+    FreeGameSound: "Sound/Sound/BonusGameFX.mp3",
 
     //BGM
     FreeGameBGM: "Sound/Music/FreeGameBGM.mp3",
@@ -94,6 +96,7 @@ const ResourceLoader = (function () {
     "use strict";
     let plists = {};
     let g_resources = [];
+    let _curLang = res.ChinesePlist;
 
     function getResourceList() {
         return g_resources;
@@ -116,11 +119,28 @@ const ResourceLoader = (function () {
         for (let i in res) {
             g_resources.push(res[i]);
         }
-        for (let type in plists){
-            for (let list in plists[type]){
+        for (let type in plists) {
+            for (let list in plists[type]) {
                 g_resources.push(plists[type][list]);
             }
         }
+    }
+
+    function setLang(opt) {
+        switch (opt) {
+            case 'CN':
+                _curLang = res.ChinesePlist;
+                break;
+            case 'EN':
+                _curLang = res.EnglishPlist;
+                break;
+            default:
+                _curLang = res.EnglishPlist;
+        }
+    }
+
+    function getCurLang() {
+        return _curLang;
     }
 
     return {
@@ -128,5 +148,7 @@ const ResourceLoader = (function () {
         addResource: addResource,
         getPlists: getPlists,
         finaliseResources: finaliseResources,
+        setLang: setLang,
+        getCurLang: getCurLang,
     };
 })(); 
