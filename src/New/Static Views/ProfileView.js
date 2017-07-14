@@ -21,10 +21,10 @@ const ProfileView = (function () {
 
         _parent.setPosition(683, 384);
 
-        const timeDisplay = createDisplay(ReferenceName.ProfileTimeIcon,"今日在线时长", "0");
-        const coinDisplay = createDisplay(ReferenceName.ProfileCoinIcon,"今日获得得分数", "0");
-        const rankingDisplay = createDisplay(ReferenceName.ProfileRankingIcon,"排行榜最高名次", "0");
-        const coinStackDisplay = createDisplay(ReferenceName.ProfileCoinStackIcon,"近两周获得得分数", "0");
+        const timeDisplay = createDisplay(ReferenceName.ProfileTimeIcon,ef.gameController.getTranslatedText('onlineDurationTxt'), "0");
+        const coinDisplay = createDisplay(ReferenceName.ProfileCoinIcon,ef.gameController.getTranslatedText('pointsEarnTodayTxt'), "0");
+        const rankingDisplay = createDisplay(ReferenceName.ProfileRankingIcon,ef.gameController.getTranslatedText('bestRankingTxt'), "0");
+        const coinStackDisplay = createDisplay(ReferenceName.ProfileCoinStackIcon,ef.gameController.getTranslatedText('pointsEarn2WTxt'), "0");
 
         _background.addChild(coinDisplay);
         _background.addChild(timeDisplay);

@@ -29,6 +29,7 @@ let GameController = (function () {
         _lobbyPageNum: 0,
         _lobbyPageTotal: 0,
         _globalVal: {},
+        _curLangDictionary: {},
 
         ctor: function () {
             this._currentMultiple = 1;
@@ -183,6 +184,22 @@ let GameController = (function () {
         },
         getGlobalProp: function (prop) {
             return this._globalVal[prop];
+        },
+        setLangDictionary: function (opt) {
+            switch (opt) {
+                case 'EN':
+                case 'English':
+                    this._curLangDictionary = lang_en;
+                    break;
+                case "CN":
+                case "中文":
+                default:
+                    this._curLangDictionary = lang_cn;
+                    break;
+            }
+        },
+        getTranslatedText: function (text) {
+            return this._curLangDictionary[text]
         }
     });
 

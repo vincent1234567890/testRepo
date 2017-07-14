@@ -136,6 +136,7 @@ const ResourceLoader = (function () {
             case '中文':
                 return res.ChinesePlist;
             case 'EN':
+            case 'English':
                 return res.EnglishPlist;
             default:
                 return res.EnglishPlist;

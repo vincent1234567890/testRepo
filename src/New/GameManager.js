@@ -227,6 +227,11 @@ const GameManager = function () {
         }
     }
 
+    function redrawLobby() {
+        _lobbyManager = null;
+        createLobby();
+    }
+
     function exitToLobby() {
         ef.gameController.leaveGame();
         ClientServerConnect.requestMyData().then(
@@ -403,6 +408,7 @@ const GameManager = function () {
         //Lobby stuff
         goToLobby: goToLobby,
         resetLobby: resetLobby,
+        redrawLobby: redrawLobby,
 
         //Menu stuff
         updateJackpotPool: updateJackpotPool,

@@ -91,6 +91,7 @@ const SettingsView = (function () {
                 cc.spriteFrameCache.removeSpriteFramesFromFile(oldLang);
                 cc.spriteFrameCache.addSpriteFrame(newLang);
                 ClientServerConnect.changePlayerLanguage(node.setLang);
+                GameManager.redrawLobby();
             }
             toggleLanguageDropdown();
         }

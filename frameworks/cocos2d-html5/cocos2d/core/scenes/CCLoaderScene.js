@@ -64,7 +64,7 @@ cc.LoaderScene = cc.Scene.extend({
             lblHeight = -logoHeight / 2 - 10;
         }
         //loading percent
-        var label = self._label = new cc.LabelTTF("资源加载中... 0%", "Arial", fontSize);
+        var label = self._label = new cc.LabelTTF(ef.gameController.getTranslatedText('loadingTxt') + "... 0%", "Arial", fontSize);
         label.setPosition(cc.pAdd(cc.visibleRect.center, cc.p(0, lblHeight)));
         label.setColor(cc.color(180, 180, 180));
         bgLayer.addChild(this._label, 10);
@@ -128,7 +128,7 @@ cc.LoaderScene = cc.Scene.extend({
     loadingCallback: function(result, count, loadedCount){
         var percent = (loadedCount / count * 100) | 0;
         percent = Math.min(percent, 100);
-        self._label.setString("资源加载中... " + percent + "%");
+        self._label.setString(ef.gameController.getTranslatedText('loadingTxt') + "... " + percent + "%");
     },
 
     _updateTransform: function(){

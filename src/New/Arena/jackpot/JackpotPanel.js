@@ -57,7 +57,7 @@ let JackpotPanel = cc.LayerColor.extend({ //gradient
         spTimerBackground.setAnchorPoint(0, 0.5);
         spTimerBackground.setPosition(25, panelSize.height * 0.90);
 
-        const lbPlayer = this._lbPlayer = new cc.LabelTTF("中奖玩家: ", "Arial", 20);
+        const lbPlayer = this._lbPlayer = new cc.LabelTTF(ef.gameController.getTranslatedText('jpWinnerTxt') + ": ", "Arial", 20);
         lbPlayer.setAnchorPoint(0, 0.5);
         lbPlayer.setPosition(18, 24);
         spTimerBackground.addChild(lbPlayer);
@@ -124,7 +124,7 @@ let JackpotPanel = cc.LayerColor.extend({ //gradient
                 }
                 //show player display name
                 if (jackpotRewardObject["playerDisplayName"])
-                    selfPoint._lbPlayer.setString("中奖玩家: " + limitStringLength(jackpotRewardObject["playerDisplayName"], 14));
+                    selfPoint._lbPlayer.setString(ef.gameController.getTranslatedText('jpWinnerTxt') + ": " + limitStringLength(jackpotRewardObject["playerDisplayName"], 14));
 
                 selfPoint._showJackpotPrizeValues(jackpotValues.data);
             }

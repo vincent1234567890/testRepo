@@ -52,7 +52,10 @@ var cocos2dApp = cc.game.onStart = function() {
             }
 
             GameManager.setChannelType(data["channelType"]);
-            if(data.player){ResourceLoader.setLang(data.player.language);}
+            if (data.player) {
+                ResourceLoader.setLang(data.player.language);
+                ef.gameController.setLangDictionary(data.player.language);
+            }
             ResourceLoader.finaliseResources();
             cc.LoadingScreen.preload(ResourceLoader.getResourceList(), function () {
                 // cc.director.runScene(new LogoScene());

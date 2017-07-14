@@ -67,7 +67,7 @@ const PlayerViewStaticPrefab = (function () {
         this._changeSlotButton.setPosition(255, 55);
         base.addChild(this._changeSlotButton, 5);
 
-        this._slotLabel = new cc.LabelTTF('点击换座', "Arial", 20);
+        this._slotLabel = new cc.LabelTTF(ef.gameController.getTranslatedText('changeSeatTxt'), "Arial", 20);
         this._slotLabel.setPosition(55, 10);
         this._changeSlotButton.addChild(this._slotLabel);
 

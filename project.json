@@ -107,7 +107,10 @@
         "lib/fishgamelogic/FishGameArena.js",
 
 
-        "src/TestScene.js"
+        "src/TestScene.js",
+
+        "src/New/Language/cn.js",
+        "src/New/Language/en.js"
 
     ]
 }
