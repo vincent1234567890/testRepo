@@ -522,6 +522,10 @@ const ClientServerConnect = function () {
         return _gameWSClient.callAPIOnce('player', 'changePlayerDisplayName', {newDisplayName: newDisplayName});
     }
 
+    function changePlayerLanguage (newLang) {
+        return _gameWSClient.callAPIOnce('player', 'changePlayerLanguage', {language: newLang});
+    }
+
     function getLeaderboard(){
         return _gameWSClient.callAPIOnce('player', 'getTopRankedPlayers');
     }
@@ -590,6 +594,7 @@ const ClientServerConnect = function () {
         getConsumptionLog: getConsumptionLog,
         getRechargeLog: getRechargeLog,
         changePlayerDisplayName: changePlayerDisplayName,
+        changePlayerLanguage: changePlayerLanguage,
         getLeaderboard: getLeaderboard,
         checkLatency: checkLatency,
         getLatency: getLatency,

@@ -57,7 +57,7 @@ const SettingsView = (function () {
         gameLanguageSelectionBar.setPosition(400, gameLanguageSelectionHeight);
         ef.initClickListener(gameLanguageSelectionBar, toggleLanguageDropdown);
 
-        let label = new cc.LabelTTF("中文", "Microsoft YaHei", 20);
+        let label = new cc.LabelTTF(ef.gameController.getCurrentPlayer().language || 'English', "Microsoft YaHei", 20);
         label._setFontWeight("bold");
         label.setAnchorPoint(0, 0.5);
         label.setPosition(280, gameLanguageSelectionHeight);
@@ -79,17 +79,18 @@ const SettingsView = (function () {
             const node = point.getCurrentTarget();
             console.log(node.setLang);
             label.setString(node.setLang);
-            const oldLang = ResourceLoader.getCurLang();
+            const oldLang = ResourceLoader.getCurLangPlist();
 
             if (node.setLang === "中文") {
                 ResourceLoader.setLang('CN');
             } else if (node.setLang === "English") {
                 ResourceLoader.setLang('EN');
             }
-            const newLang = ResourceLoader.getCurLang();
+            const newLang = ResourceLoader.getCurLangPlist();
             if (oldLang !== newLang) {
                 cc.spriteFrameCache.removeSpriteFramesFromFile(oldLang);
                 cc.spriteFrameCache.addSpriteFrame(newLang);
+                ClientServerConnect.changePlayerLanguage(node.setLang);
             }
             toggleLanguageDropdown();
         }

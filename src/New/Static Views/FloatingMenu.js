@@ -26,7 +26,7 @@ const FloatingMenu = (function () {
 
     const FloatingMenu = function (playerData, requestConsumptionLogCallback) {
         _parent = new cc.Node();
-        cc.spriteFrameCache.addSpriteFrames(ResourceLoader.getCurLang());
+        cc.spriteFrameCache.addSpriteFrames(ResourceLoader.getCurLangPlist());
         GameView.addView(_parent,undefined,true);
 
         _playerData = playerData;
