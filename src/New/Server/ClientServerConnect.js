@@ -7,7 +7,7 @@ const ClientServerConnect = function () {
     // This is optional.  It is a fallback in case other servers do not work.
     const defaultGameAPIServerAddress = srvList ? srvList["defaultGameServer"] : document.location.hostname + ':8088';
 
-    let _masterServerSocket = null;
+    let _masterServerSocketProm = null;
 
     let _currentGameServerUrl = null;
     let _serverInformer, _gameWSClient, _gameIOSocket;
@@ -23,14 +23,27 @@ const ClientServerConnect = function () {
 
     //get the Master server socket connection.
     function getMasterServerSocket () {
-        if (!_masterServerSocket) {
+        if (!_masterServerSocketProm) {
             const socket = io.connect(masterServerUrl + '/player');
             //socket.on('connect', function(){});
             //socket.on('event', function(data){});
             //socket.on('disconnect', function(){});
-            _masterServerSocket = socket;
+            //_masterServerSocket = socket;
+
+            // We will log in as soon as possible.
+            // Callers will only be able to use the socket after the login has succeeded.
+            if (!_loginParams) {
+                // We keep the login credentials in memory, so that we can log in to other gameServers later.
+                _loginParams = getCurrentOrCachedQueryParams();
+            }
+            // Players without credentials will now auto log in as trial players
+            //if (queryParams.token && (queryParams.playerId || queryParams.email)) {
+            _masterServerSocketProm = socketEmitPromise(socket, 'login', _loginParams).then(() => {
+                // @todo If a new trial player was created, we should use his credentials/params on all subsequent logins (to game servers).
+                return socket;
+            });
         }
-        return _masterServerSocket;
+        return _masterServerSocketProm;
     }
 
     function doInitialConnect () {
@@ -87,17 +100,20 @@ const ClientServerConnect = function () {
         });
     }
 
-    function socketEmitPromise (socket /* ...args... */) {
+    function socketEmitPromise (socketProm /* ...args... */) {
         const args = Array.prototype.slice.call(arguments, 1);
-        return new Promise((resolve, reject) => {
-            args.push(function (err, response) {
-                if (err) return reject(err);
-                resolve(response);
+        // socket might be a promise of a socket
+        return Promise.resolve(socketProm).then(socket => {
+            return new Promise((resolve, reject) => {
+                args.push(function (err, response) {
+                    if (err) return reject(Error(JSON.stringify(err)));
+                    resolve(response);
+                });
+                socket.emit.apply(socket, args);
+                setTimeout(() => {
+                    reject(Error(`Socket call (${JSON.stringify(args.slice(0, args.length - 1))}) timed out`));
+                }, 15000);
             });
-            socket.emit.apply(socket, args);
-            setTimeout(() => {
-                reject(Error(`Socket call (${JSON.stringify(args.slice(0, args.length - 1))}) timed out`));
-            }, 15000);
         });
     }
 
