@@ -52,7 +52,7 @@ var cocos2dApp = cc.game.onStart = function() {
             }
 
             GameManager.setChannelType(data["channelType"]);
-
+            if(data.player){ResourceLoader.setLang(data.player.language);}
             ResourceLoader.finaliseResources();
             cc.LoadingScreen.preload(ResourceLoader.getResourceList(), function () {
                 // cc.director.runScene(new LogoScene());
@@ -64,7 +64,7 @@ var cocos2dApp = cc.game.onStart = function() {
                 FishAnimationData.setData(themeConfig.FishRawData);
             }, this);
         }
-     //).catch(console.error.bind(console));   //should show a friendly UI to tell user, can't connect to game server.
+        //).catch(console.error.bind(console));   //should show a friendly UI to tell user, can't connect to game server.
     ).catch(msg => {
         //show messages on error panel.
     });

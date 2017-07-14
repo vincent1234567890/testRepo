@@ -96,7 +96,7 @@ const ResourceLoader = (function () {
     "use strict";
     let plists = {};
     let g_resources = [];
-    let _curLang = res.ChinesePlist;
+    let _curLang = 'EN';
 
     function getResourceList() {
         return g_resources;
@@ -127,20 +127,19 @@ const ResourceLoader = (function () {
     }
 
     function setLang(opt) {
-        switch (opt) {
-            case 'CN':
-                _curLang = res.ChinesePlist;
-                break;
-            case 'EN':
-                _curLang = res.EnglishPlist;
-                break;
-            default:
-                _curLang = res.EnglishPlist;
-        }
+        _curLang = opt;
     }
 
-    function getCurLang() {
-        return _curLang;
+    function getCurLangPlist() {
+        switch (_curLang) {
+            case 'CN':
+            case '中文':
+                return res.ChinesePlist;
+            case 'EN':
+                return res.EnglishPlist;
+            default:
+                return res.EnglishPlist;
+        }
     }
 
     return {
@@ -149,6 +148,6 @@ const ResourceLoader = (function () {
         getPlists: getPlists,
         finaliseResources: finaliseResources,
         setLang: setLang,
-        getCurLang: getCurLang,
+        getCurLangPlist: getCurLangPlist,
     };
 })(); 
