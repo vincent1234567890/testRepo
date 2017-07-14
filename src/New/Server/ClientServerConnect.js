@@ -36,11 +36,21 @@ const ClientServerConnect = function () {
                 // We keep the login credentials in memory, so that we can log in to other gameServers later.
                 _loginParams = getCurrentOrCachedQueryParams();
             }
-            // Players without credentials will now auto log in as trial players
-            //if (queryParams.token && (queryParams.playerId || queryParams.email)) {
-            _masterServerSocketProm = socketEmitPromise(socket, 'login', _loginParams).then(() => {
-                // @todo If a new trial player was created, we should use his credentials/params on all subsequent logins (to game servers).
-                return socket;
+            _masterServerSocketProm = new Promise((resolve, reject) => {
+                //console.log(`Logging in to masterServer with credentials:`, _loginParams);
+                // It is not enough to just call 'login' once when we create the socket
+                // We will also need to login again if we reconnect to the master server
+                socket.on('connect', function () {
+                    // Players without credentials will now auto log in as trial players
+                    socketEmitPromise(socket, 'login', _loginParams).then(response => {
+                        if (response.isNewPlayer) {
+                            // We have just registered as a new trial player
+                            // Keep hold of the credentials, so we can use them to log in to other servers.
+                            _loginParams = response.loginCredentials;
+                        }
+                        return socket;
+                    }).then(resolve).catch(reject);
+                });
             });
         }
         return _masterServerSocketProm;
@@ -282,6 +292,9 @@ const ClientServerConnect = function () {
         var queryParams = {};
         searchString.substring(1).split('&').forEach(
             pair => {
+                if (!pair) {
+                    return;
+                }
                 var splitPair = pair.split('=');
                 var key = decodeURIComponent(splitPair[0]);
                 var val = decodeURIComponent(splitPair[1]);
@@ -326,6 +339,7 @@ const ClientServerConnect = function () {
         // playing on another client.  This would solve the concern of a socket being closed before
         // the 'kickedByRemoteLogIn' event is received.
 
+        //console.log(`Logging in to gameServer with credentials:`, loginParams);
         client.callAPIOnce('game', 'login', {
             playerId: loginParams.playerId,
             // If we don't have the playerId, we can log in with channelId and username
