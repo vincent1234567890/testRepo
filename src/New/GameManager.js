@@ -212,12 +212,12 @@ const GameManager = function () {
         exitToLobby();
     }
 
-    function createLobby() {
+    function createLobby(forceRedraw) {
         if (!_lobbyManager) {
             cc.spriteFrameCache.addSpriteFrames(ResourceLoader.getCurLangPlist());
             _lobbyManager = new LobbyManager(_playerData, onGameSelected);
             _lobbyWaterCausticsManager = new LobbyWaterCaustics();   //todo need delete
-            _floatingMenuManager = new FloatingMenu(_playerData, requestConsumptionLogHandle);
+            _floatingMenuManager = new FloatingMenu(_playerData, requestConsumptionLogHandle, forceRedraw);
             _jackpotManager = new JackpotManager();
             ClientServerConnect.getCurrentJackpotValues().then(
                 values => {
@@ -229,7 +229,7 @@ const GameManager = function () {
 
     function redrawLobby() {
         _lobbyManager = null;
-        createLobby();
+        createLobby(true);
     }
 
     function exitToLobby() {

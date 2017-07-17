@@ -21,7 +21,19 @@ const FAQView = (function () {
     let _cannonInfo;
     let _jackpotInfo;
 
-    const FAQView = function () {
+    let _forceRedraw = false;
+
+    const FAQView = function (forceRedraw) {
+        _forceRedraw = forceRedraw;
+        if (forceRedraw) {
+            GameView.destroyView(_parent);
+            _gameRules = null;
+            _gameRules = null;
+            _uiFaq = null;
+            _fishInfo = null;
+            _cannonInfo = null;
+            _jackpotInfo = null;
+        }
         _parent = new cc.Node();
         _popup= new FloatingMenuPopupBasePrefab(dismissCallback);
         if(!cc.spriteFrameCache.getSpriteFrame(ReferenceName.FAQButtonBackground))

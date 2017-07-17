@@ -23,11 +23,13 @@ const FloatingMenu = (function () {
 
     //callbacks
     let _requestConsumptionLogCallback;
+    let _forceRedraw = false;
 
-    const FloatingMenu = function (playerData, requestConsumptionLogCallback) {
+    const FloatingMenu = function (playerData, requestConsumptionLogCallback, forceRedraw) {
         _parent = new cc.Node();
         cc.spriteFrameCache.addSpriteFrames(ResourceLoader.getCurLangPlist());
-        GameView.addView(_parent,undefined,true);
+        GameView.addView(_parent, undefined, true);
+        _forceRedraw = forceRedraw;
 
         _playerData = playerData;
         _requestConsumptionLogCallback = requestConsumptionLogCallback;
@@ -138,25 +140,25 @@ const FloatingMenu = (function () {
 
     function onSettingsSelected() {
         console.log("onSettingsSelected");
-        if (_settingsView){
+        if (!_forceRedraw && _settingsView) {
             _settingsView.show();
-        }else{
+        } else {
             _settingsView = new SettingsView();
         }
     }
 
     function onGameLogSelected() {
         console.log("onGameLogSelected");
-        if (_gameLogView){
+        if (!_forceRedraw && _gameLogView) {
             _gameLogView.showGameSummary(_gameSummaryData);
-        }else{
+        } else {
             _gameLogView = new GameLogView(_gameSummaryData, _requestConsumptionLogCallback);
         }
     }
 
     function onProfileSelected() {
         console.log("onProfileSelected");
-        if (_profileView) {
+        if (!_forceRedraw && _profileView) {
             _profileView.show();
         } else {
             _profileView = new ProfileView(_playerData);
@@ -169,7 +171,7 @@ const FloatingMenu = (function () {
 
     function onLeaderboardSelected() {
         console.log("onLeaderboardSelected");
-        if (_leaderboardView) {
+        if (!_forceRedraw && _leaderboardView) {
             _leaderboardView.show();
         } else {
             _leaderboardView = new LeaderboardView();
@@ -178,10 +180,10 @@ const FloatingMenu = (function () {
 
     function onFAQSelected() {
         console.log("onFAQSelected");
-        if (_faqView) {
+        if (!_forceRedraw && _faqView) {
             _faqView.show();
         } else {
-            _faqView = new FAQView();
+            _faqView = new FAQView(true);
         }
     }
 
