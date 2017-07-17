@@ -57,15 +57,14 @@ const SettingsView = (function () {
         gameLanguageSelectionBar.setPosition(400, gameLanguageSelectionHeight);
         ef.initClickListener(gameLanguageSelectionBar, toggleLanguageDropdown);
 
-        let label = new cc.LabelTTF(ef.gameController.getCurrentPlayer().language || 'English', "Microsoft YaHei", 20);
-        label._setFontWeight("bold");
-        label.setAnchorPoint(0, 0.5);
-        label.setPosition(280, gameLanguageSelectionHeight);
+        let langLabel = new cc.LabelTTF(ef.gameController.getCurrentPlayer().language || 'English', "Microsoft YaHei", 20);
+        langLabel._setFontWeight("bold");
+        langLabel.setAnchorPoint(0, 0.5);
+        langLabel.setPosition(280, gameLanguageSelectionHeight);
 
         //add language panel content
         const langArr = ['中文', 'English'];
         const panelContent = gameLanguageSelectionDropdownPanel.getContentSize();
-        let langLabel = [];
         langArr.forEach((lang, index) => {
             let newLabel = new cc.LabelTTF(lang, "Microsoft YaHei", 20);
             newLabel.setPosition(10, panelContent.height - (index + 0.5) * 30);
@@ -78,21 +77,11 @@ const SettingsView = (function () {
         function chooseLang(event, point) {
             const node = point.getCurrentTarget();
             console.log(node.setLang);
-            label.setString(node.setLang);
-            const oldLang = ResourceLoader.getCurLangPlist();
+            langLabel.oldLang = langLabel.getString();
+            langLabel.oldLangPlist = ResourceLoader.getCurLangPlist();
+            langLabel.setString(node.setLang);
+            langLabel.newLang = node.setLang;
 
-            if (node.setLang === "中文") {
-                ResourceLoader.setLang('CN');
-            } else if (node.setLang === "English") {
-                ResourceLoader.setLang('EN');
-            }
-            const newLang = ResourceLoader.getCurLangPlist();
-            if (oldLang !== newLang) {
-                cc.spriteFrameCache.removeSpriteFramesFromFile(oldLang);
-                cc.spriteFrameCache.addSpriteFrame(newLang);
-                ClientServerConnect.changePlayerLanguage(node.setLang);
-                GameManager.redrawLobby();
-            }
             toggleLanguageDropdown();
         }
 
@@ -120,7 +109,7 @@ const SettingsView = (function () {
         _background.addChild(gameLanguageSelectionBar);
         _background.addChild(languageDropdownButton);
         _background.addChild(gameLanguageSelectionDropdownPanel, 4);
-        _background.addChild(label);
+        _background.addChild(langLabel);
         _background.addChild(acceptButton);
         _background.addChild(cancelButton);
         _background.addChild(acceptText);
@@ -180,6 +169,24 @@ const SettingsView = (function () {
 
             previousMusic = -1;
             previousSound = -1;
+
+            //language
+            if (langLabel.oldLang !== langLabel.newLang) {
+                langLabel.newLangPlist = ResourceLoader.getCurLangPlist();
+
+                let langStr = '';
+                if (langLabel.newLang === "中文") {
+                    langStr = 'CN';
+                } else if (langLabel.newLang === "English") {
+                    langStr = 'EN';
+                }
+                ResourceLoader.setLang(langStr);
+                cc.spriteFrameCache.removeSpriteFramesFromFile(langLabel.oldLangPlist);
+                cc.spriteFrameCache.addSpriteFrame(langLabel.newLangPlist);
+                ClientServerConnect.changePlayerLanguage(langStr);
+                GameManager.redrawLobby();
+            }
+
             BlockingManager.deregisterBlock(dismissCallback);
         }
 
