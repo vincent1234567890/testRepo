@@ -48,7 +48,7 @@ const ProfileView = (function () {
 
         profilebg.setAnchorPoint(0.0,0.0);
 
-        const nickTextBox = new cc.EditBox(cc.size(160,30), profilebgdummy);
+        let nickTextBox = new cc.EditBox(cc.size(160,30), profilebgdummy);
         // nickTextBox.setPlaceHolder("Nickname");
         console.log(playerData.playerState.displayName);
         nickTextBox.setString(playerData.playerState.displayName);
@@ -117,6 +117,10 @@ const ProfileView = (function () {
             dismiss();
         };
 
+        this.updatePlayerNickName = function () {
+            let playerData = ef.gameController.getCurrentPlayer();
+            nickTextBox.setString(playerData.displayName);
+        };
         function cancel() {
             dismissCallback();
         }
@@ -147,8 +151,11 @@ const ProfileView = (function () {
             return value.toLocaleString('en-US', {maximumFractionDigits: maxDecimalPlaces});
         }
 
-        function onEditNicknameCallback () {
+        function onEditNicknameCallback() {
             ClientServerConnect.changePlayerDisplayName(nickTextBox.getString());
+            let playerData = ef.gameController.getCurrentPlayer();
+            playerData.displayName=nickTextBox.getString();
+            ef.gameController.setCurrentPlayer(playerData);
         }
     };
 

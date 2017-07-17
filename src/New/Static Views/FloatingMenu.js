@@ -160,6 +160,7 @@ const FloatingMenu = (function () {
         console.log("onProfileSelected");
         if (!_forceRedraw && _profileView) {
             _profileView.show();
+            _profileView.updatePlayerNickName();
         } else {
             _profileView = new ProfileView(_playerData);
         }

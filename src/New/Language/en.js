@@ -7,7 +7,7 @@ const lang_en = {
     onlineDurationTxt: "Online Duration (today)",
     bestRankingTxt: "Best Ranking",
     pointsEarnTodayTxt: "Points earned today",
-    pointsEarn2WTxt: "Points earned in the past 2 weeks",
+    pointsEarn2WTxt: "Points earned (2 weeks)",
 
     //instruction
     gameRuleTxt: "This is a leisure game that combined elements of Arcade Game and Slot Games. \n\nIt provides 3 different kinds of game rooms which based on value of  1x multiplier, 10x multiplier and 100x multiplier. Also, 5 types of cannons offer bombs in powers multiple of 1,2,3,5 and 10 to help players catch more than 40 species of fish. The costs of bombs, winnings of fish and health points of fish are depend on chosen room. Players may choose single player table or multiplayer table. Players may choose their own seat upon availbility.   \n\nEnter Lobby - Select Room & Seat - Select Cannons - Game Starts Players may reselect cannon during the game. The more powerful cannon being used, the higher chance to catch a fish. Hitting the same fish with same cannon constantly can increase the chance of catching it or players can utilize target function to hit target fish automatically.  Different game room may affects winnings of fish.  \n\nPlayers' account will be deducted immediately once bomb is out, and bonus will be deposit into players' account immediately when a fish is caught. The bomb will keep bouncing within game frame until a fish is hit. We also offers Jackpot and Free Rounds! For any failed detection of game sever that caused by internet connection problems, we will not deduct the cost of bomb but return it to player’s account. ",
