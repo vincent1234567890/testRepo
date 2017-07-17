@@ -2,7 +2,7 @@ const LobbyView = (function () {
     "use strict";
 
     const numberOfLobbyButtonsShown = 3;
-
+    let _parent = null;
     let _theme;
 
     let _onGameSelectedCallback;
@@ -11,8 +11,11 @@ const LobbyView = (function () {
 
     let gameControlList;
 
-    const LobbyView = function (playerData, theme, onGameSelectedCallback) {
-        const _parent = new cc.Node();
+    const LobbyView = function (playerData, theme, onGameSelectedCallback, forceRedraw) {
+        if(forceRedraw){
+            GameView.destroyView(_parent);
+        }
+        _parent = new cc.Node();
         GameView.addView(_parent);
 
         _theme = theme;
@@ -68,7 +71,7 @@ const LobbyView = (function () {
     function setupGameList() {
         const width = cc.winSize.width;  //cc.view.getDesignResolutionSize().width;
         const height = cc.winSize.height; //cc.view.getDesignResolutionSize().height;
-        
+
         gameControlList = [];
 
         const listView = new ccui.ListView();
@@ -113,8 +116,8 @@ const LobbyView = (function () {
         if (!playerData || !playerData["playerState"])
             return;
         let gold = playerData.playerState.score.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-        if (gold.length > 14) {
-            gold = gold.substring(0, 13) + "..";
+        if (gold.length > 13) {
+            gold = gold.substring(0, 12) + "..";
         }
 
         _goldLabel.setString(gold);

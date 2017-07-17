@@ -186,7 +186,7 @@ const FAQView = (function () {
             _fishInfo.addChild(display);
             display.setPosition(410, 310);
 
-            const info = new cc.LabelTTF(ef.gameController.getTranslatedText('fishInfoTxt'), 'Microsoft YaHei', 15);
+            const info = new cc.LabelTTF(ef.gameController.getTranslatedText('fishInfoTxt'), 'Microsoft YaHei', 15, cc.size(380, 50));
             info.setFontFillColor(new cc.Color(0, 0, 0, 255));
 
             // const angelFishLabel = new cc.LabelTTF('1.1', 'Microsoft YaHei', 17);

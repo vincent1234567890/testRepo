@@ -189,12 +189,14 @@ let GameController = (function () {
             switch (opt) {
                 case 'EN':
                 case 'English':
+                    this._globalVal['curLang'] = "EN";
                     this._curLangDictionary = lang_en;
                     break;
                 case "CN":
                 case "中文":
                 default:
                     this._curLangDictionary = lang_cn;
+                    this._globalVal['curLang'] = "CN";
                     break;
             }
         },

@@ -67,7 +67,8 @@ const PlayerViewStaticPrefab = (function () {
         this._changeSlotButton.setPosition(255, 55);
         base.addChild(this._changeSlotButton, 5);
 
-        this._slotLabel = new cc.LabelTTF(ef.gameController.getTranslatedText('changeSeatTxt'), "Arial", 20);
+        const curLang = ef.gameController.getGlobalProp('curLang');
+        this._slotLabel = new cc.LabelTTF(ef.gameController.getTranslatedText('changeSeatTxt'), "Arial", curLang === 'EN' ? 16 : 20);
         this._slotLabel.setPosition(55, 10);
         this._changeSlotButton.addChild(this._slotLabel);
 

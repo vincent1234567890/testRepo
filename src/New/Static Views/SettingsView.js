@@ -57,11 +57,10 @@ const SettingsView = (function () {
         gameLanguageSelectionBar.setPosition(400, gameLanguageSelectionHeight);
         ef.initClickListener(gameLanguageSelectionBar, toggleLanguageDropdown);
 
-        const lang = ef.gameController.getCurrentPlayer().language;
-        let langLabelTxt = '';
-        if (lang === 'EN') {
+        let langLabelTxt = ef.gameController.getGlobalProp('curLang');
+        if (langLabelTxt === 'EN') {
             langLabelTxt = 'English'
-        } else if (lang === 'CN') {
+        } else if (langLabelTxt === 'CN') {
             langLabelTxt = '中文';
         }
         let langLabel = new cc.LabelTTF(langLabelTxt, "Microsoft YaHei", 20);
@@ -179,7 +178,6 @@ const SettingsView = (function () {
 
             //language
             if (langLabel.oldLang !== langLabel.newLang) {
-                langLabel.newLangPlist = ResourceLoader.getCurLangPlist();
 
                 let langStr = '';
                 if (langLabel.newLang === "中文") {
@@ -188,6 +186,7 @@ const SettingsView = (function () {
                     langStr = 'EN';
                 }
                 ResourceLoader.setLang(langStr);
+                langLabel.newLangPlist = ResourceLoader.getCurLangPlist();
                 cc.spriteFrameCache.removeSpriteFramesFromFile(langLabel.oldLangPlist);
                 cc.spriteFrameCache.addSpriteFrame(langLabel.newLangPlist);
                 ClientServerConnect.changePlayerLanguage(langStr);
