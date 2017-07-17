@@ -216,7 +216,7 @@ const GameManager = function () {
         if (!_lobbyManager) {
             cc.spriteFrameCache.addSpriteFrames(ResourceLoader.getCurLangPlist());
             _lobbyManager = new LobbyManager(_playerData, onGameSelected, forceRedraw);
-            _lobbyWaterCausticsManager = new LobbyWaterCaustics();   //todo need delete
+            _lobbyWaterCausticsManager = new LobbyWaterCaustics(forceRedraw);   //todo need delete
             _floatingMenuManager = new FloatingMenu(_playerData, requestConsumptionLogHandle, forceRedraw);
             _jackpotManager = new JackpotManager();
             ClientServerConnect.getCurrentJackpotValues().then(

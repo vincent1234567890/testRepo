@@ -190,6 +190,7 @@ const SettingsView = (function () {
                 cc.spriteFrameCache.removeSpriteFramesFromFile(langLabel.oldLangPlist);
                 cc.spriteFrameCache.addSpriteFrame(langLabel.newLangPlist);
                 ClientServerConnect.changePlayerLanguage(langStr);
+                langLabel.oldLang = langLabel.newLang;
                 GameManager.redrawLobby();
             }
 
