@@ -35,36 +35,36 @@ const FAQView = (function () {
             _jackpotInfo = null;
         }
         _parent = new cc.Node();
-        _popup= new FloatingMenuPopupBasePrefab(dismissCallback);
-        if(!cc.spriteFrameCache.getSpriteFrame(ReferenceName.FAQButtonBackground))
+        _popup = new FloatingMenuPopupBasePrefab(dismissCallback);
+        if (!cc.spriteFrameCache.getSpriteFrame(ReferenceName.FAQButtonBackground))
             cc.spriteFrameCache.addSpriteFrames(res.MenuFAQPlist);
 
         const textBG = new cc.Sprite(ReferenceName.FAQTextBackground);
         const title = new cc.Sprite(ReferenceName.FAQTitleChinese);
 
-        const userAgreementTab = GUIFunctions.createButton(ReferenceName.FAQTabBackground,ReferenceName.FAQTabBackgroundOnPress,onUserAgreementTabClicked);
-        const faqTab = GUIFunctions.createButton(ReferenceName.FAQTabBackground,ReferenceName.FAQTabBackgroundOnPress,onFAQTabClicked);
+        const userAgreementTab = GUIFunctions.createButton(ReferenceName.FAQTabBackground, ReferenceName.FAQTabBackgroundOnPress, onUserAgreementTabClicked);
+        const faqTab = GUIFunctions.createButton(ReferenceName.FAQTabBackground, ReferenceName.FAQTabBackgroundOnPress, onFAQTabClicked);
 
         const userAgreementTabTitleText = new cc.Sprite(ReferenceName.FAQUserAgreementTitleChinese);
         const faqTabTitleText = new cc.Sprite(ReferenceName.FAQTabTitleChinese);
 
-        userAgreementTabTitleText.setAnchorPoint(0,0);
-        faqTabTitleText.setAnchorPoint(0,0);
+        userAgreementTabTitleText.setAnchorPoint(0, 0);
+        faqTabTitleText.setAnchorPoint(0, 0);
 
         userAgreementTab.addChild(userAgreementTabTitleText);
         faqTab.addChild(faqTabTitleText);
 
-        userAgreementTab.setAnchorPoint(0.2,0.5);
-        faqTab.setAnchorPoint(0.2,0.5);
+        userAgreementTab.setAnchorPoint(0.2, 0.5);
+        faqTab.setAnchorPoint(0.2, 0.5);
 
-        const userAgreementRollover = new RolloverEffectItem(userAgreementTab,undefined,undefined,onTabHover,onTabUnhover);
-        const faqRollover = new RolloverEffectItem(faqTab,undefined,undefined,onTabHover,onTabUnhover);
+        const userAgreementRollover = new RolloverEffectItem(userAgreementTab, undefined, undefined, onTabHover, onTabUnhover);
+        const faqRollover = new RolloverEffectItem(faqTab, undefined, undefined, onTabHover, onTabUnhover);
 
-        const gameRules = GUIFunctions.createButton(ReferenceName.FAQButtonBackground,ReferenceName.FAQButtonBackgroundOnPress,onGameRulesClicked);
-        const uiFAQ = GUIFunctions.createButton(ReferenceName.FAQButtonBackground,ReferenceName.FAQButtonBackgroundOnPress,onUiFaqClicked);
-        const fishInfo = GUIFunctions.createButton(ReferenceName.FAQButtonBackground,ReferenceName.FAQButtonBackgroundOnPress,onFishInfoClicked);
-        const cannonInfo = GUIFunctions.createButton(ReferenceName.FAQButtonBackground,ReferenceName.FAQButtonBackgroundOnPress,onCannonInfoClicked);
-        const jackpotInfo = GUIFunctions.createButton(ReferenceName.FAQButtonBackground,ReferenceName.FAQButtonBackgroundOnPress,onJackpotInfoClicked);
+        const gameRules = GUIFunctions.createButton(ReferenceName.FAQButtonBackground, ReferenceName.FAQButtonBackgroundOnPress, onGameRulesClicked);
+        const uiFAQ = GUIFunctions.createButton(ReferenceName.FAQButtonBackground, ReferenceName.FAQButtonBackgroundOnPress, onUiFaqClicked);
+        const fishInfo = GUIFunctions.createButton(ReferenceName.FAQButtonBackground, ReferenceName.FAQButtonBackgroundOnPress, onFishInfoClicked);
+        const cannonInfo = GUIFunctions.createButton(ReferenceName.FAQButtonBackground, ReferenceName.FAQButtonBackgroundOnPress, onCannonInfoClicked);
+        const jackpotInfo = GUIFunctions.createButton(ReferenceName.FAQButtonBackground, ReferenceName.FAQButtonBackgroundOnPress, onJackpotInfoClicked);
 
         const gameRulesButtonText = new cc.Sprite(ReferenceName.FAQGameRulesButtonText);
         const uiFAQButtonText = new cc.Sprite(ReferenceName.FAQUIFaqButtonText);
@@ -72,9 +72,9 @@ const FAQView = (function () {
         const cannonInfoButtonText = new cc.Sprite(ReferenceName.FAQCannonInfoButtonText);
         const jackpotInfoButtonText = new cc.Sprite(ReferenceName.FAQJackpotInfoButtonText);
 
-        const pos = new cc.p(gameRules.getContentSize().width/2, gameRules.getContentSize().height/2);
+        const pos = new cc.p(gameRules.getContentSize().width / 2, gameRules.getContentSize().height / 2);
 
-        console.log(gameRules,gameRules.getContentSize(),pos);
+        console.log(gameRules, gameRules.getContentSize(), pos);
 
         gameRulesButtonText.setPosition(pos);
         uiFAQButtonText.setPosition(pos);
@@ -88,9 +88,9 @@ const FAQView = (function () {
         cannonInfo.addChild(cannonInfoButtonText);
         jackpotInfo.addChild(jackpotInfoButtonText);
 
-        textBG.setPosition(new cc.p(420,350));
+        textBG.setPosition(new cc.p(420, 350));
         textBG.setScaleY(1.05);
-        title.setPosition(new cc.p(560,705));
+        title.setPosition(new cc.p(560, 705));
 
         _popup.getBackground().addChild(textBG);
         _popup.getBackground().addChild(title);
@@ -104,8 +104,8 @@ const FAQView = (function () {
         _popup.getBackground().addChild(cannonInfo);
         _popup.getBackground().addChild(jackpotInfo);
 
-        userAgreementTab.setPosition(130,tabHeight);
-        faqTab.setPosition(310,tabHeight);
+        userAgreementTab.setPosition(130, tabHeight);
+        faqTab.setPosition(310, tabHeight);
 
         gameRules.setPosition(sideButtonX, sideStart);
         uiFAQ.setPosition(sideButtonX, sideStart - sideSpacing);
@@ -115,12 +115,12 @@ const FAQView = (function () {
 
         _parent.addChild(_popup.getParent());
 
-        GameView.addView(_parent,ZORDER);
+        GameView.addView(_parent, ZORDER);
 
         const wiggle = new cc.Sequence(cc.rotateBy(0.08, 3), cc.rotateBy(0.08, -3));
 
-        function onTabHover(widget){
-            if (widget.getNumberOfRunningActions()==0) {
+        function onTabHover(widget) {
+            if (widget.getNumberOfRunningActions() == 0) {
                 widget.runAction(new cc.RepeatForever(wiggle.clone()));
             }
         }
@@ -133,11 +133,11 @@ const FAQView = (function () {
         onGameRulesClicked();
     };
 
-    function onUserAgreementTabClicked (){
+    function onUserAgreementTabClicked() {
 
     }
 
-    function onFAQTabClicked(){
+    function onFAQTabClicked() {
 
     }
 
@@ -149,12 +149,12 @@ const FAQView = (function () {
             _gameRules = new cc.Node();
 
             const bkg = new cc.Sprite(ReferenceName.FAQGreenBackground);
-            bkg.setScale(685/414, 440/186);
+            bkg.setScale(685 / 414, 440 / 186);
             bkg.setPosition(410, 325);
             _gameRules.addChild(bkg);
 
             const title = new cc.Sprite(ReferenceName.FAQGameRulesButtonTextV2);
-            title.setAnchorPoint(0,0.5);
+            title.setAnchorPoint(0, 0.5);
             title.setPosition(titleX - 50, titleY);
             _gameRules.addChild(title);
             const text = new cc.LabelTTF(ef.gameController.getTranslatedText('gameRuleTxt'), "Microsoft YaHei", 16, cc.size(575, 370));
@@ -169,7 +169,7 @@ const FAQView = (function () {
     }
 
     function onFishInfoClicked() {
-        if(!_fishInfo) {
+        if (!_fishInfo) {
             _fishInfo = new cc.Node();
 
             const bkg = new cc.Sprite(ReferenceName.FAQLightGreenBackground);
@@ -178,7 +178,7 @@ const FAQView = (function () {
             _fishInfo.addChild(bkg);
 
             const title = new cc.Sprite(ReferenceName.FAQFishInfoButtonTextV2);
-            title.setAnchorPoint(0,0.5);
+            title.setAnchorPoint(0, 0.5);
             title.setPosition(titleX - 50, titleY);
             _fishInfo.addChild(title);
 
@@ -187,7 +187,7 @@ const FAQView = (function () {
             display.setPosition(410, 310);
 
             const info = new cc.LabelTTF(ef.gameController.getTranslatedText('fishInfoTxt'), 'Microsoft YaHei', 15);
-            info.setFontFillColor(new cc.Color(0,0,0,255));
+            info.setFontFillColor(new cc.Color(0, 0, 0, 255));
 
             // const angelFishLabel = new cc.LabelTTF('1.1', 'Microsoft YaHei', 17);
 
@@ -210,11 +210,11 @@ const FAQView = (function () {
     }
 
     function onUiFaqClicked() {
-        if(!_uiFaq) {
+        if (!_uiFaq) {
             _uiFaq = new cc.Node();
 
             const title = new cc.Sprite(ReferenceName.FAQUIFaqButtonTextV2);
-            title.setAnchorPoint(0,0.5);
+            title.setAnchorPoint(0, 0.5);
             title.setPosition(titleX - 50, titleY);
             _uiFaq.addChild(title);
 
@@ -230,11 +230,11 @@ const FAQView = (function () {
     }
 
     function onCannonInfoClicked() {
-        if(!_cannonInfo) {
+        if (!_cannonInfo) {
             _cannonInfo = new cc.Node();
 
             const title = new cc.Sprite(ReferenceName.FAQCannonInfoButtonTextV2);
-            title.setAnchorPoint(0,0.5);
+            title.setAnchorPoint(0, 0.5);
             title.setPosition(titleX - 50, titleY);
             _cannonInfo.addChild(title);
 
@@ -266,28 +266,28 @@ const FAQView = (function () {
         }
     }
 
-    function onJackpotInfoClicked(){
-        if(!_jackpotInfo) {
+    function onJackpotInfoClicked() {
+        if (!_jackpotInfo) {
             _jackpotInfo = new cc.Node();
 
             const jackpotBackground = new cc.Sprite(ReferenceName.FAQJackpotBackground);
             _jackpotInfo.addChild(jackpotBackground);
-            jackpotBackground.setPosition(535,435);
+            jackpotBackground.setPosition(535, 435);
 
             const freeGameBackground = new cc.Sprite(ReferenceName.FAQJackpotBackground);
             _jackpotInfo.addChild(freeGameBackground);
-            freeGameBackground.setPosition(535,235);
+            freeGameBackground.setPosition(535, 235);
 
             const jackpotTitle = new cc.Sprite(ReferenceName.FAQJackpotSubtitleText);
             jackpotBackground.addChild(jackpotTitle);
-            jackpotTitle.setPosition(165,165);
+            jackpotTitle.setPosition(165, 165);
 
             const freeGameTitle = new cc.Sprite(ReferenceName.FAQFreeGameSubtitleText);
             freeGameBackground.addChild(freeGameTitle);
-            freeGameTitle.setPosition(165,165);
+            freeGameTitle.setPosition(165, 165);
 
             const title = new cc.Sprite(ReferenceName.FAQJackpotInfoButtonTextV2);
-            title.setAnchorPoint(0,0.5);
+            title.setAnchorPoint(0, 0.5);
             title.setPosition(titleX - 50, titleY);
             _jackpotInfo.addChild(title);
 
@@ -300,13 +300,13 @@ const FAQView = (function () {
             freeRoundDisplay.setPosition(265, 245);
 
             const jackpotInfo = new cc.LabelTTF(ef.gameController.getTranslatedText('jackpotInfoTxt'),
-                'Microsoft YaHei', 13, cc.size(290,275));
-            jackpotInfo.setPosition(260,10);
+                'Microsoft YaHei', 13, cc.size(290, 275));
+            jackpotInfo.setPosition(260, 10);
             jackpotBackground.addChild(jackpotInfo);
 
             const freeGameInfo = new cc.LabelTTF(ef.gameController.getTranslatedText('freeGameInfoTxt'),
-                'Microsoft YaHei', 13, cc.size(290,275));
-            freeGameInfo.setPosition(260,10);
+                'Microsoft YaHei', 13, cc.size(290, 275));
+            freeGameInfo.setPosition(260, 10);
             freeGameBackground.addChild(freeGameInfo);
         }
         if (_jackpotInfo && !_jackpotInfo.getParent()) {
@@ -315,12 +315,12 @@ const FAQView = (function () {
         }
     }
 
-    function clearAllViews(){
-        _popup.getBackground().removeChild(_gameRules,false);
-        _popup.getBackground().removeChild(_uiFaq,false);
-        _popup.getBackground().removeChild(_fishInfo,false);
-        _popup.getBackground().removeChild(_cannonInfo,false);
-        _popup.getBackground().removeChild(_jackpotInfo,false);
+    function clearAllViews() {
+        _popup.getBackground().removeChild(_gameRules, false);
+        _popup.getBackground().removeChild(_uiFaq, false);
+        _popup.getBackground().removeChild(_fishInfo, false);
+        _popup.getBackground().removeChild(_cannonInfo, false);
+        _popup.getBackground().removeChild(_jackpotInfo, false);
     }
 
     function dismissCallback(touch) {

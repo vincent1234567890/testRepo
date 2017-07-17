@@ -97,14 +97,14 @@ const FloatingMenu = (function () {
         let icon;
         if (iconSprite) {
             icon = new cc.Sprite(iconSprite);
-            button.addChild(icon,3);
+            button.addChild(icon, 3);
             icon.setPosition(size.width / 2, size.height / 2 - 10);
         }
 
         let label;
         if (labelImage) {
             label = new cc.Sprite(labelImage);
-            button.addChild(label,3);
+            button.addChild(label, 3);
             // label.setAnchorPoint(0.5,0.5);
             label.setPosition(size.width / 2, 0);
         }
@@ -123,7 +123,7 @@ const FloatingMenu = (function () {
         }
 
         function onHover() {
-            if (hasUnhover){
+            if (hasUnhover) {
                 cc.audioEngine.playEffect(res.MenuButtonHoverSound);
                 label.setScale(hoverSize);
                 hasUnhover = false;
@@ -193,19 +193,19 @@ const FloatingMenu = (function () {
         if (_parent.getParent()) {
             _parent.getParent().removeChild(_parent, false);
         }
-        if (_settingsView){
+        if (_settingsView) {
             _settingsView.unattach();
         }
-        if (_gameLogView){
+        if (_gameLogView) {
             _gameLogView.unattach();
         }
-        if (_profileView){
+        if (_profileView) {
             _profileView.unattach();
         }
-        if (_leaderboardView){
+        if (_leaderboardView) {
             _leaderboardView.unattach();
         }
-        if (_faqView){
+        if (_faqView) {
             _faqView.unattach();
         }
     };
@@ -214,38 +214,38 @@ const FloatingMenu = (function () {
         if (_parent.getParent()) {
             _parent.getParent().removeChild(_parent, false);
         }
-        if (_settingsView){
+        if (_settingsView) {
             _settingsView.reattach();
         }
-        if (_gameLogView){
+        if (_gameLogView) {
             _gameLogView.reattach();
         }
-        if (_profileView){
+        if (_profileView) {
             _profileView.reattach();
         }
-        if (_leaderboardView){
+        if (_leaderboardView) {
             _leaderboardView.reattach();
         }
-        if (_faqView){
+        if (_faqView) {
             _faqView.reattach();
         }
-        GameView.addView(_parent,1);
+        GameView.addView(_parent, 1);
     };
 
     proto.hideAll = function () {
-        if (_settingsView){
+        if (_settingsView) {
             _settingsView.hide();
         }
-        if (_gameLogView){
+        if (_gameLogView) {
             _gameLogView.hide();
         }
-        if (_profileView){
+        if (_profileView) {
             _profileView.hide();
         }
-        if (_leaderboardView){
+        if (_leaderboardView) {
             _leaderboardView.hide();
         }
-        if (_faqView){
+        if (_faqView) {
             _faqView.hide();
         }
     };
