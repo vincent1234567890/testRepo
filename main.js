@@ -1,6 +1,6 @@
 var cocos2dApp = cc.game.onStart = function() {
     "use strict";
-
+//test
     // if (!cc.sys.isNative && document.getElementById("cocosLoading")) //If referenced loading.js, please remove it
     //     document.body.removeChild(document.getElementById("cocosLoading"));
 
